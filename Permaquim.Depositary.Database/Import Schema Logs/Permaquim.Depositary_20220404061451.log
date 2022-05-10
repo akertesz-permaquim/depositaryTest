@@ -1,0 +1,87 @@
+4/4/2022 15:14:51	This log contains information about the import schema operation into project 'Permaquim.Depositary.Database' on computer 'NB000180' by user 'ccespon'.
+4/4/2022 15:14:51	Import of database schema has started.
+4/4/2022 15:14:58	Gathering database credentials
+4/4/2022 15:14:58	Gathering database options
+4/4/2022 15:14:58	Gathering generic database scoped configuration option
+4/4/2022 15:14:58	Gathering users
+4/4/2022 15:14:58	Gathering roles
+4/4/2022 15:14:58	Gathering application roles
+4/4/2022 15:14:58	Gathering role memberships
+4/4/2022 15:14:58	Gathering filegroups
+4/4/2022 15:14:58	Gathering full-text catalogs
+4/4/2022 15:14:58	Gathering assemblies
+4/4/2022 15:14:58	Gathering certificates
+4/4/2022 15:14:58	Gathering asymmetric keys
+4/4/2022 15:14:58	Gathering symmetric keys
+4/4/2022 15:14:58	Gathering encrypted symmetric keys
+4/4/2022 15:14:58	Gathering schemas
+4/4/2022 15:14:58	Gathering XML schema collections
+4/4/2022 15:14:58	Gathering user-defined data types
+4/4/2022 15:14:58	Gathering user-defined types
+4/4/2022 15:14:58	Gathering table types
+4/4/2022 15:14:58	Gathering unique keys for table types
+4/4/2022 15:14:58	Gathering primary keys for table types
+4/4/2022 15:14:59	Gathering indexes for table types
+4/4/2022 15:14:59	Gathering check constraints for table types
+4/4/2022 15:14:59	Gathering default constraints for table types
+4/4/2022 15:14:59	Gathering partition functions
+4/4/2022 15:14:59	Gathering partition schemes
+4/4/2022 15:14:59	Gathering functions
+4/4/2022 15:14:59	Gathering encrypted functions
+4/4/2022 15:14:59	Gathering aggregates
+4/4/2022 15:14:59	Gathering procedures
+4/4/2022 15:14:59	Gathering encrypted procedures
+4/4/2022 15:14:59	Gathering tables
+4/4/2022 15:14:59	Gathering primary keys
+4/4/2022 15:14:59	Gathering unique constraints
+4/4/2022 15:14:59	Gathering foreign keys
+4/4/2022 15:14:59	Gathering default constraints
+4/4/2022 15:14:59	Gathering check constraints
+4/4/2022 15:14:59	Gathering views
+4/4/2022 15:14:59	Gathering encrypted views
+4/4/2022 15:14:59	Gathering indexes
+4/4/2022 15:14:59	Gathering statistics
+4/4/2022 15:14:59	Gathering full-text index stoplists
+4/4/2022 15:14:59	Gathering search property lists
+4/4/2022 15:14:59	Gathering search properties
+4/4/2022 15:14:59	Gathering full-text indexes
+4/4/2022 15:14:59	Gathering column store indexes
+4/4/2022 15:14:59	Gathering spatial indexes
+4/4/2022 15:14:59	Gathering XML indexes
+4/4/2022 15:14:59	Gathering Selective XML indexes
+4/4/2022 15:14:59	Gathering encrypted triggers
+4/4/2022 15:14:59	Gathering triggers
+4/4/2022 15:14:59	Gathering encrypted and clr ddl triggers
+4/4/2022 15:14:59	Gathering ddl triggers
+4/4/2022 15:14:59	Creating edge constraints
+4/4/2022 15:14:59	Gathering synonyms
+4/4/2022 15:14:59	Gathering defaults
+4/4/2022 15:14:59	Gathering data constraint uddt bindings
+4/4/2022 15:14:59	Gathering rules
+4/4/2022 15:14:59	Gathering data constraint uddt bindings
+4/4/2022 15:14:59	Gathering message types
+4/4/2022 15:14:59	Gathering queues
+4/4/2022 15:14:59	Gathering contracts
+4/4/2022 15:14:59	Gathering services
+4/4/2022 15:14:59	Gathering event notifications
+4/4/2022 15:14:59	Gathering remote service bindings
+4/4/2022 15:14:59	Gathering broker priorities
+4/4/2022 15:14:59	Gathering signatures
+4/4/2022 15:14:59	Gathering data compression options
+4/4/2022 15:14:59	Gathering sequence types
+4/4/2022 15:14:59	Gathering security policies
+4/4/2022 15:14:59	Gather column encryption keys
+4/4/2022 15:14:59	Gathering column master keys
+4/4/2022 15:14:59	Gathering external data sources
+4/4/2022 15:14:59	Gathering external file formats
+4/4/2022 15:14:59	Gathering external tables
+4/4/2022 15:14:59	Gathering extended properties
+4/4/2022 15:14:59	Gathering assemblies
+4/4/2022 15:14:59	Gathering credentials
+4/4/2022 15:14:59	Gathering logins
+4/4/2022 15:14:59	Gathering server audits
+4/4/2022 15:15:00	Scanning project for duplicate elements
+4/4/2022 15:15:00	Finished duplicate element processing
+4/4/2022 15:15:02	Finished importing database.
+4/4/2022 15:15:02	A summary of the import was saved to the following location: \\FileSRV\SISTEMAS\Desarrollo\Permaquim.Depositary\Permaquim.Depositary.Database\Import Schema Logs\Permaquim.Depositary_20220404061451.log
+4/4/2022 15:15:02	Click Finish to continue...

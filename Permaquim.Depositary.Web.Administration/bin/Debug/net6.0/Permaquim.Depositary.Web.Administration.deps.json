@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Permaquim.Depositary.Web.Administration/1.0.0": {
+        "runtime": {
+          "Permaquim.Depositary.Web.Administration.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Permaquim.Depositary.Web.Administration/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

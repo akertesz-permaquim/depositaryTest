@@ -1,0 +1,126 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj": {}
+  },
+  "projects": {
+    "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj",
+        "projectName": "Permaquim.Depositary.Device",
+        "projectPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj",
+        "packagesPath": "C:\\Users\\ccespon\\.nuget\\packages\\",
+        "outputPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\ccespon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj": {
+                "projectPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.IO.Ports": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
+        "projectName": "Permaquim.Depositary.Interfaces",
+        "projectPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
+        "packagesPath": "C:\\Users\\ccespon\\.nuget\\packages\\",
+        "outputPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\ccespon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

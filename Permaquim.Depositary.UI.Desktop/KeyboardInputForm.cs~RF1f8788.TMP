@@ -1,0 +1,19 @@
+using System.Configuration;
+
+namespace Permaquim.Depositary.UI.Desktop
+{
+    public partial class KeyboardInputForm : System.Windows.Forms.Form
+    {
+        public KeyboardInputForm()
+        {
+            InitializeComponent();
+            Loadlogo();
+        }
+        private void Loadlogo()
+        {
+            LoginPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            LoginPictureBox.Load(ConfigurationManager.AppSettings["ResourcePath"] + @"\Images\Login.png");
+
+        }
+    }
+}
