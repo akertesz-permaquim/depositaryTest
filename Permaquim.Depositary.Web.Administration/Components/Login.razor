@@ -1,0 +1,28 @@
+﻿<div class="col-xl-6 d-flex">
+    <RadzenCard Style="width: 100%;">
+        <h2 class="mb-4">Login Administrador Web</h2>
+        <RadzenTemplateForm Data=@("SimpleLogin") Action="http://www.google.com">
+            <RadzenLogin AutoComplete="true" AllowRegister="false" AllowResetPassword="true" ResetPasswordText="Olvide mi contraseña" Login=@(args => OnLogin(args, "Simple login")) />
+        </RadzenTemplateForm>
+    </RadzenCard>
+</div>
+
+@code {
+    string userName = "admin";
+    string password = "admin";
+
+    void OnLogin(LoginArgs args, string name)
+    {
+        //console.Log($"{name} -> Username: {args.Username} and password: {args.Password}");
+    }
+
+    void OnRegister(string name)
+    {
+        //console.Log($"{name} -> Register");
+    }
+
+    void OnResetPassword(string value, string name)
+    {
+        //console.Log($"{name} -> ResetPassword for user: {value}");
+    }
+}
