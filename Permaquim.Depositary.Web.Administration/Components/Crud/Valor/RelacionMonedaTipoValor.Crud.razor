@@ -1,0 +1,407 @@
+@page "/ValorRelacionMonedaTipoValorCrud"
+@inject NotificationService NotificationService
+ 
+@if (RelacionMonedaTipoValor_entities == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+}
+else
+{
+    switch (crudMode)
+    {
+        case CrudMode.Add:
+            <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Ingrese los datos de RelacionMonedaTipoValor</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Delete:
+            <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
+                <ChildContent>
+                    <h4 style="color:white;">Confirma eliminar el RelacionMonedaTipoValor ?</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+            case CrudMode.Edit:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Modificación de datos de RelacionMonedaTipoValor</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;         
+            case CrudMode.List:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <div>
+                        <h4 style="color:white;">Administración de RelacionMonedaTipoValor</h4>
+                    </div>
+                </ChildContent>
+            </RadzenBadge>
+            break;  
+    }
+ <hr>
+    if (crudMode == CrudMode.List)
+    {
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        Data="@RelacionMonedaTipoValor_entities" TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+       <EmptyTemplate>
+            <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+        </EmptyTemplate>        
+        <Columns>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px" >
+             <HeaderTemplate>
+                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text ="Nuevo" Click="Add">
+                 </RadzenButton>
+                 </HeaderTemplate>
+                 <Template Context="element">
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                </Template>
+             </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Title="MonedaId" Property="MonedaId" Width="100px" >
+                <Template>
+                    @if(Moneda_entities.FirstOrDefault( c => c.Id == @context.MonedaId) != null){
+                       <RadzenLabel Text="@Moneda_entities.FirstOrDefault( c => c.Id == @context.MonedaId).Nombre" Component="MonedaId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="MonedaId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Title="TipoValorId" Property="TipoValorId" Width="100px" >
+                <Template>
+                    @if(Tipo_entities.FirstOrDefault( c => c.Id == @context.TipoValorId) != null){
+                       <RadzenLabel Text="@Tipo_entities.FirstOrDefault( c => c.Id == @context.TipoValorId).Nombre" Component="TipoValorId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="TipoValorId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+        </Columns>
+        </RadzenDataGrid>
+ <hr>
+    }
+ 
+    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+    {
+         <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor" Data="@RelacionMonedaTipoValor_entity"  @bind-Value="RelacionMonedaTipoValor_entity" Submit ="Save" Visible ="@(RelacionMonedaTipoValor_entity != null)">
+          <ChildContent>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaTipoValor_entity.Id)" Name="Id" Disabled="true">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="MonedaId" Component="MonedaId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@Moneda_entities.Count > 0 && @Moneda_entities.FirstOrDefault( c => c.Id == @RelacionMonedaTipoValor_entity.MonedaId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@RelacionMonedaTipoValor_entity.MonedaId"
+                                    Data=@Moneda_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectMonedaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Moneda_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectMonedaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="TipoValorId" Component="TipoValorId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@Tipo_entities.Count > 0 && @Tipo_entities.FirstOrDefault( c => c.Id == @RelacionMonedaTipoValor_entity.TipoValorId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@RelacionMonedaTipoValor_entity.TipoValorId"
+                                    Data=@Tipo_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Tipo_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaTipoValor_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(RelacionMonedaTipoValor_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaTipoValor_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(RelacionMonedaTipoValor_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text="Cancelar" Click="Cancel">
+                </RadzenButton>
+              </div>
+            </div>
+           </ChildContent>
+         </RadzenTemplateForm>
+ <hr>
+    }
+ 
+    <RadzenNotification /> 
+}
+ 
+@code {
+    /// <summary>
+    /// Crud Mode Enum
+    /// </summary>
+    private enum CrudMode
+    {
+        List,
+        Add,
+        Edit,
+        Delete
+    }
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValor_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor> RelacionMonedaTipoValor_entities = null;
+ 
+    /// <summary>
+    /// Variables to handle Relation between RelacionMonedaTipoValor.MonedaId and Moneda.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Valor.Moneda Moneda_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Valor.Moneda>? Moneda_entities;
+ 
+    /// <summary>
+    /// Variables to handle Relation between RelacionMonedaTipoValor.TipoValorId and Tipo.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Valor.Tipo Tipo_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Valor.Tipo>? Tipo_entities;
+ 
+    /// <summary>
+    ///  Page crud mode {List,Add,Edit,Delete}
+    /// </summary>
+    private CrudMode crudMode = CrudMode.List;
+ 
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
+    }
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        DepositarioAdminWeb.Business.Tables.Valor.RelacionMonedaTipoValor entity = new();
+        RelacionMonedaTipoValor_entities = entity.Items();
+    }
+    /// <summary>
+    /// Loads Type Tables data
+    /// </summary>
+    private void LoadTypesData()
+    {
+        DepositarioAdminWeb.Business.Tables.Valor.Moneda Moneda_local = new();
+        Moneda_entities = Moneda_local.Items();
+ 
+        DepositarioAdminWeb.Business.Tables.Valor.Tipo Tipo_local = new();
+        Tipo_entities = Tipo_local.Items();
+ 
+    }
+ 
+    #endregion
+ 
+    /// <summary>
+    /// Initializations for adding a new entity
+    /// </summary>
+    private void Add()
+    {
+        //Main entity initialization
+        RelacionMonedaTipoValor_entity = new();
+        //Relations entities initialization
+        Moneda_entity = new(); 
+        Tipo_entity = new(); 
+        crudMode = CrudMode.Add;
+    }
+    /// <summary>
+    /// <summary>
+    /// Initializations for editing an entity
+    /// </summary>
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Valor.RelacionMonedaTipoValor item, bool delete)
+    {
+             RelacionMonedaTipoValor_entity = item;
+            Moneda_entity = new() { 
+            Id = Moneda_entities.FirstOrDefault(c => c.Id == RelacionMonedaTipoValor_entity.MonedaId).Id, 
+            Nombre = Moneda_entities.FirstOrDefault(c => c.Id == RelacionMonedaTipoValor_entity.MonedaId).Nombre
+            };
+            Tipo_entity = new() { 
+            Id = Tipo_entities.FirstOrDefault(c => c.Id == RelacionMonedaTipoValor_entity.TipoValorId).Id, 
+            Nombre = Tipo_entities.FirstOrDefault(c => c.Id == RelacionMonedaTipoValor_entity.TipoValorId).Nombre
+            };
+        if (delete)
+            crudMode = CrudMode.Delete;
+        else
+            crudMode = CrudMode.Edit;
+    }
+    /// <summary>
+    /// Operation depending on Crud mode
+    /// </summary>
+    private async Task Save()
+    {
+        string actionInformation = string.Empty;
+        DepositarioAdminWeb.Business.Tables.Valor.RelacionMonedaTipoValor crud = new();
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                crud.Add(RelacionMonedaTipoValor_entity);
+                actionInformation = "agregado.";
+                break;
+            case CrudMode.Edit:
+                crud.Update(RelacionMonedaTipoValor_entity);
+                actionInformation = "modificado.";
+                break;
+            case CrudMode.Delete:
+                crud.Delete(RelacionMonedaTipoValor_entity);
+                actionInformation = "eliminado.";
+                break;
+        }
+ 
+        // Sets Crud mode to List
+        crudMode = CrudMode.List;
+ 
+        ShowNotification(new NotificationMessage { 
+            Severity = NotificationSeverity.Success, 
+            Summary = "El registro ha sido ", 
+            Detail = actionInformation, 
+            Duration = 4000 });
+       
+            await Task.Run(LoadMainEntityData);
+    }
+    /// <summary>
+    /// Crud mode cancellation and default mode
+    /// </summary>
+    private void Cancel()
+    {
+        crudMode = CrudMode.List;  
+        LoadMainEntityData();
+    }
+    /// <summary>
+    /// Sets detail panel title - TODO: Implement Multilanguage
+    /// </summary>
+    /// <returns></returns>
+    private string GetDialogTitle()
+    {
+        string retValue = string.Empty;
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                retValue = "Nuevo...";
+                break;
+            case CrudMode.Edit:
+                retValue = "Editar...";
+                break;
+            case CrudMode.Delete:
+                retValue = "Borrar...";
+                break;
+        }
+        return retValue;
+    }
+    #region Notifications
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+ 
+    }
+ 
+    #endregion
+    #region Selection events
+    /// <summary>
+    /// Moneda value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectMonedaValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Tipo value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectTipoValueChanged(object item)
+    {
+    }
+ 
+    #endregion
+ 
+    #region Export
+ 
+    #endregion
+ 
+}

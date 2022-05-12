@@ -34,3 +34,15 @@ D:\Permaquim.Depositary\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaqu
 D:\Permaquim.Depositary\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\refint\Permaquim.Depositary.Interfaces.dll
 D:\Permaquim.Depositary\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.pdb
 D:\Permaquim.Depositary\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\ref\Permaquim.Depositary.Interfaces.dll
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\bin\Debug\net6.0\Permaquim.Depositary.Interfaces.deps.json
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\bin\Debug\net6.0\Permaquim.Depositary.Interfaces.dll
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\bin\Debug\net6.0\Permaquim.Depositary.Interfaces.pdb
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.csproj.AssemblyReference.cache
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.AssemblyInfoInputs.cache
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.AssemblyInfo.cs
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.csproj.CoreCompileInputs.cache
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.dll
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\refint\Permaquim.Depositary.Interfaces.dll
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.pdb
+C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\ref\Permaquim.Depositary.Interfaces.dll

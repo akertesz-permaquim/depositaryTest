@@ -1,0 +1,483 @@
+@page "/ValorDenominacionCrud"
+@inject NotificationService NotificationService
+ 
+@if (Denominacion_entities == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+}
+else
+{
+    switch (crudMode)
+    {
+        case CrudMode.Add:
+            <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Ingrese los datos de Denominacion</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Delete:
+            <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
+                <ChildContent>
+                    <h4 style="color:white;">Confirma eliminar el Denominacion ?</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+            case CrudMode.Edit:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Modificación de datos de Denominacion</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;         
+            case CrudMode.List:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <div>
+                        <h4 style="color:white;">Administración de Denominacion</h4>
+                    </div>
+                </ChildContent>
+            </RadzenBadge>
+            break;  
+    }
+ <hr>
+    if (crudMode == CrudMode.List)
+    {
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        Data="@Denominacion_entities" TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+       <EmptyTemplate>
+            <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+        </EmptyTemplate>        
+        <Columns>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px" >
+             <HeaderTemplate>
+                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text ="Nuevo" Click="Add">
+                 </RadzenButton>
+                 </HeaderTemplate>
+                 <Template Context="element">
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                </Template>
+             </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="Nombre" Filterable="false" Title="Nombre" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Title="TipoValorId" Property="TipoValorId" Width="100px" >
+                <Template>
+                    @if(Tipo_entities.FirstOrDefault( c => c.Id == @context.TipoValorId) != null){
+                       <RadzenLabel Text="@Tipo_entities.FirstOrDefault( c => c.Id == @context.TipoValorId).Nombre" Component="TipoValorId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="TipoValorId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Title="MonedaId" Property="MonedaId" Width="100px" >
+                <Template>
+                    @if(Moneda_entities.FirstOrDefault( c => c.Id == @context.MonedaId) != null){
+                       <RadzenLabel Text="@Moneda_entities.FirstOrDefault( c => c.Id == @context.MonedaId).Nombre" Component="MonedaId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="MonedaId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="Unidades" Filterable="false" Title="Unidades" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="Imagen" Filterable="false" Title="Imagen" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="CodigoCcTalk" Filterable="false" Title="CodigoCcTalk" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+        </Columns>
+        </RadzenDataGrid>
+ <hr>
+    }
+ 
+    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+    {
+         <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Valor.Denominacion" Data="@Denominacion_entity"  @bind-Value="Denominacion_entity" Submit ="Save" Visible ="@(Denominacion_entity != null)">
+          <ChildContent>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Denominacion_entity.Id)" Name="Id" Disabled="true">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Nombre" Component="Nombre" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(Denominacion_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenTextBox>
+                     <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenRequiredValidator>
+                 </div>
+               </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="TipoValorId" Component="TipoValorId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@Tipo_entities.Count > 0 && @Tipo_entities.FirstOrDefault( c => c.Id == @Denominacion_entity.TipoValorId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@Denominacion_entity.TipoValorId"
+                                    Data=@Tipo_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Tipo_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="MonedaId" Component="MonedaId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@Moneda_entities.Count > 0 && @Moneda_entities.FirstOrDefault( c => c.Id == @Denominacion_entity.MonedaId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@Denominacion_entity.MonedaId"
+                                    Data=@Moneda_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectMonedaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Moneda_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectMonedaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Unidades" Component="Unidades" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="decimal" style="display: block; width: 100%" @bind-Value="@(Denominacion_entity.Unidades)" Name="Unidades" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Imagen" Component="Imagen" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(Denominacion_entity.Imagen)" Name="Imagen" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenTextBox>
+                     <RadzenRequiredValidator Component="Imagen" Text="Imagen is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenRequiredValidator>
+                 </div>
+               </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="CodigoCcTalk" Component="CodigoCcTalk" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(Denominacion_entity.CodigoCcTalk)" Name="CodigoCcTalk" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenTextBox>
+                     <RadzenRequiredValidator Component="CodigoCcTalk" Text="CodigoCcTalk is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenRequiredValidator>
+                 </div>
+               </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@Denominacion_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Denominacion_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Denominacion_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Denominacion_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Denominacion_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Denominacion_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text="Cancelar" Click="Cancel">
+                </RadzenButton>
+              </div>
+            </div>
+           </ChildContent>
+         </RadzenTemplateForm>
+ <hr>
+    }
+ 
+    <RadzenNotification /> 
+}
+ 
+@code {
+    /// <summary>
+    /// Crud Mode Enum
+    /// </summary>
+    private enum CrudMode
+    {
+        List,
+        Add,
+        Edit,
+        Delete
+    }
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Valor.Denominacion Denominacion_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Valor.Denominacion> Denominacion_entities = null;
+ 
+    /// <summary>
+    /// Variables to handle Relation between Denominacion.TipoValorId and Tipo.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Valor.Tipo Tipo_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Valor.Tipo>? Tipo_entities;
+ 
+    /// <summary>
+    /// Variables to handle Relation between Denominacion.MonedaId and Moneda.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Valor.Moneda Moneda_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Valor.Moneda>? Moneda_entities;
+ 
+    /// <summary>
+    ///  Page crud mode {List,Add,Edit,Delete}
+    /// </summary>
+    private CrudMode crudMode = CrudMode.List;
+ 
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
+    }
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        DepositarioAdminWeb.Business.Tables.Valor.Denominacion entity = new();
+        Denominacion_entities = entity.Items();
+    }
+    /// <summary>
+    /// Loads Type Tables data
+    /// </summary>
+    private void LoadTypesData()
+    {
+        DepositarioAdminWeb.Business.Tables.Valor.Tipo Tipo_local = new();
+        Tipo_entities = Tipo_local.Items();
+ 
+        DepositarioAdminWeb.Business.Tables.Valor.Moneda Moneda_local = new();
+        Moneda_entities = Moneda_local.Items();
+ 
+    }
+ 
+    #endregion
+ 
+    /// <summary>
+    /// Initializations for adding a new entity
+    /// </summary>
+    private void Add()
+    {
+        //Main entity initialization
+        Denominacion_entity = new();
+        //Relations entities initialization
+        Tipo_entity = new(); 
+        Moneda_entity = new(); 
+        crudMode = CrudMode.Add;
+    }
+    /// <summary>
+    /// <summary>
+    /// Initializations for editing an entity
+    /// </summary>
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Valor.Denominacion item, bool delete)
+    {
+             Denominacion_entity = item;
+            Tipo_entity = new() { 
+            Id = Tipo_entities.FirstOrDefault(c => c.Id == Denominacion_entity.TipoValorId).Id, 
+            Nombre = Tipo_entities.FirstOrDefault(c => c.Id == Denominacion_entity.TipoValorId).Nombre
+            };
+            Moneda_entity = new() { 
+            Id = Moneda_entities.FirstOrDefault(c => c.Id == Denominacion_entity.MonedaId).Id, 
+            Nombre = Moneda_entities.FirstOrDefault(c => c.Id == Denominacion_entity.MonedaId).Nombre
+            };
+        if (delete)
+            crudMode = CrudMode.Delete;
+        else
+            crudMode = CrudMode.Edit;
+    }
+    /// <summary>
+    /// Operation depending on Crud mode
+    /// </summary>
+    private async Task Save()
+    {
+        string actionInformation = string.Empty;
+        DepositarioAdminWeb.Business.Tables.Valor.Denominacion crud = new();
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                crud.Add(Denominacion_entity);
+                actionInformation = "agregado.";
+                break;
+            case CrudMode.Edit:
+                crud.Update(Denominacion_entity);
+                actionInformation = "modificado.";
+                break;
+            case CrudMode.Delete:
+                crud.Delete(Denominacion_entity);
+                actionInformation = "eliminado.";
+                break;
+        }
+ 
+        // Sets Crud mode to List
+        crudMode = CrudMode.List;
+ 
+        ShowNotification(new NotificationMessage { 
+            Severity = NotificationSeverity.Success, 
+            Summary = "El registro ha sido ", 
+            Detail = actionInformation, 
+            Duration = 4000 });
+       
+            await Task.Run(LoadMainEntityData);
+    }
+    /// <summary>
+    /// Crud mode cancellation and default mode
+    /// </summary>
+    private void Cancel()
+    {
+        crudMode = CrudMode.List;  
+        LoadMainEntityData();
+    }
+    /// <summary>
+    /// Sets detail panel title - TODO: Implement Multilanguage
+    /// </summary>
+    /// <returns></returns>
+    private string GetDialogTitle()
+    {
+        string retValue = string.Empty;
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                retValue = "Nuevo...";
+                break;
+            case CrudMode.Edit:
+                retValue = "Editar...";
+                break;
+            case CrudMode.Delete:
+                retValue = "Borrar...";
+                break;
+        }
+        return retValue;
+    }
+    #region Notifications
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+ 
+    }
+ 
+    #endregion
+    #region Selection events
+    /// <summary>
+    /// Tipo value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectTipoValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Moneda value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectMonedaValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value,DepositarioAdminWeb.Entities.Tables.Valor.Denominacion item)
+    {
+         Denominacion_entity = item;
+    }
+    #endregion
+ 
+    #region Export
+ 
+    #endregion
+ 
+}

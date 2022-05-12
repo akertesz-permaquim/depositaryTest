@@ -1,19 +1,64 @@
-﻿@inherits LayoutComponentBase
+﻿@inherits RadzenCrm.Layouts.MainLayoutComponent
+@using Radzen
+@using Radzen.Blazor
+@using Microsoft.AspNetCore.Identity;
+@using Permaquim.Depositary.Web.Administration.Components
 
-<PageTitle>Permaquim.Depositary.Web.Administration</PageTitle>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+<RadzenHeader>
+    <ChildContent>
+        <div class="row justify-content-start align-items-center">
+            <div class="col-6 d-flex align-items-center">
+                <RadzenSidebarToggle Click="@SidebarToggle0Click">
+                </RadzenSidebarToggle>
+                <RadzenLabel Text="Administrador Depositario">
+                </RadzenLabel>
+            </div>
+            <div class="col-6 text-right">
+                <RadzenProfileMenu Visible="true" Click="@Profilemenu0Click">
+                    <ChildContent>
+                        <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" Visible="true">
+                        </RadzenProfileMenuItem>
+                        <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" Visible="true">
+                        </RadzenProfileMenuItem>
+                        <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" Visible="true">
+                        </RadzenProfileMenuItem>
+                        <RadzenProfileMenuItem Text="Logout" Value="Logout" Icon="power_settings_new">
+                        </RadzenProfileMenuItem>
+                    </ChildContent>
+                    <Template>
+                        <RadzenLabel Text="Germán">
+                        </RadzenLabel>
+                        <RadzenLabel Text="Sivit">
+                        </RadzenLabel>
+                        <RadzenImage Path="profile" style="border-radius: 16px; height: 32px; width: 32px">
+                        </RadzenImage>
+                    </Template>
+                </RadzenProfileMenu>
+            </div>
         </div>
-
-        <article class="content px-4">
+    </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0">
+    <ChildContent>
+        <RadzenContentContainer Name="main">
             @Body
-        </article>
-    </main>
-</div>
+        </RadzenContentContainer>
+    </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0">
+    <ChildContent>
+        <SideMenu></SideMenu>
+    </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+    <ChildContent>
+        <RadzenLabel Text="Permaquim S.A., Copyright Ⓒ 2021">
+        </RadzenLabel>
+    </ChildContent>
+</RadzenFooter>

@@ -1686,19 +1686,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ccespon\\.nuget\\packages\\": {}
+    "C:\\Users\\gsivit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Permaquim.Depositary\\Permaquim.Depositary.ApplicationStatusMonitor\\Permaquim.Depositary.ApplicationStatusMonitor.csproj",
+      "projectUniqueName": "C:\\Dev\\depositario\\Permaquim.Depositary.ApplicationStatusMonitor\\Permaquim.Depositary.ApplicationStatusMonitor.csproj",
       "projectName": "Permaquim.Depositary.ApplicationStatusMonitor",
-      "projectPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.ApplicationStatusMonitor\\Permaquim.Depositary.ApplicationStatusMonitor.csproj",
-      "packagesPath": "C:\\Users\\ccespon\\.nuget\\packages\\",
-      "outputPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.ApplicationStatusMonitor\\obj\\",
+      "projectPath": "C:\\Dev\\depositario\\Permaquim.Depositary.ApplicationStatusMonitor\\Permaquim.Depositary.ApplicationStatusMonitor.csproj",
+      "packagesPath": "C:\\Users\\gsivit\\.nuget\\packages\\",
+      "outputPath": "C:\\Dev\\depositario\\Permaquim.Depositary.ApplicationStatusMonitor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ccespon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\gsivit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

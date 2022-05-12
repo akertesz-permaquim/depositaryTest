@@ -1,0 +1,719 @@
+@page "/DispositivoDepositarioPlacaCrud"
+@inject NotificationService NotificationService
+ 
+@if (DepositarioPlaca_entities == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+}
+else
+{
+    switch (crudMode)
+    {
+        case CrudMode.Add:
+            <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Ingrese los datos de DepositarioPlaca</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Delete:
+            <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
+                <ChildContent>
+                    <h4 style="color:white;">Confirma eliminar el DepositarioPlaca ?</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+            case CrudMode.Edit:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Modificación de datos de DepositarioPlaca</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;         
+            case CrudMode.List:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <div>
+                        <h4 style="color:white;">Administración de DepositarioPlaca</h4>
+                    </div>
+                </ChildContent>
+            </RadzenBadge>
+            break;  
+    }
+ <hr>
+    if (crudMode == CrudMode.List)
+    {
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        Data="@DepositarioPlaca_entities" TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+       <EmptyTemplate>
+            <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+        </EmptyTemplate>        
+        <Columns>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px" >
+             <HeaderTemplate>
+                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text ="Nuevo" Click="Add">
+                 </RadzenButton>
+                 </HeaderTemplate>
+                 <Template Context="element">
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                </Template>
+             </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Title="DepositarioId" Property="DepositarioId" Width="100px" >
+                <Template>
+                    @if(Depositario_entities.FirstOrDefault( c => c.Id == @context.DepositarioId) != null){
+                       <RadzenLabel Text="@Depositario_entities.FirstOrDefault( c => c.Id == @context.DepositarioId).Nombre" Component="DepositarioId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="DepositarioId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Title="PlacaId" Property="PlacaId" Width="100px" >
+                <Template>
+                    @if(TipoPlaca_entities.FirstOrDefault( c => c.Id == @context.PlacaId) != null){
+                       <RadzenLabel Text="@TipoPlaca_entities.FirstOrDefault( c => c.Id == @context.PlacaId).Nombre" Component="PlacaId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="PlacaId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="PortName" Filterable="false" Title="PortName" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="Parity" Filterable="false" Title="Parity" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="DataBits" Filterable="false" Title="DataBits" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="ReadBufferSize" Filterable="false" Title="ReadBufferSize" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="StopBits" Filterable="false" Title="StopBits" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="ReadTimeout" Filterable="false" Title="ReadTimeout" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="Handshake" Filterable="false" Title="Handshake" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="BaudRate" Filterable="false" Title="BaudRate" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="RtsEnable" Filterable="false" Title="RtsEnable" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.RtsEnable Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="SensorA" Filterable="false" Title="SensorA" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.SensorA Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="BitSensorA" Filterable="false" Title="BitSensorA" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="SensorB" Filterable="false" Title="SensorB" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.SensorB Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="BitSensorB" Filterable="false" Title="BitSensorB" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="SensorC" Filterable="false" Title="SensorC" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.SensorC Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="BitSensorC" Filterable="false" Title="BitSensorC" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="SensorD" Filterable="false" Title="SensorD" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.SensorD Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="BitSensorD" Filterable="false" Title="BitSensorD" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="SensorL" Filterable="false" Title="SensorL" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.SensorL Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="BitSensorL" Filterable="false" Title="BitSensorL" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+        </Columns>
+        </RadzenDataGrid>
+ <hr>
+    }
+ 
+    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+    {
+         <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Data="@DepositarioPlaca_entity"  @bind-Value="DepositarioPlaca_entity" Submit ="Save" Visible ="@(DepositarioPlaca_entity != null)">
+          <ChildContent>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.Id)" Name="Id" Disabled="true">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="DepositarioId" Component="DepositarioId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@Depositario_entities.Count > 0 && @Depositario_entities.FirstOrDefault( c => c.Id == @DepositarioPlaca_entity.DepositarioId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@DepositarioPlaca_entity.DepositarioId"
+                                    Data=@Depositario_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectDepositarioValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Depositario_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectDepositarioValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="PlacaId" Component="PlacaId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@TipoPlaca_entities.Count > 0 && @TipoPlaca_entities.FirstOrDefault( c => c.Id == @DepositarioPlaca_entity.PlacaId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@DepositarioPlaca_entity.PlacaId"
+                                    Data=@TipoPlaca_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoPlacaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@TipoPlaca_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoPlacaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="PortName" Component="PortName" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioPlaca_entity.PortName)" Name="PortName" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenTextBox>
+                     <RadzenRequiredValidator Component="PortName" Text="PortName is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenRequiredValidator>
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Parity" Component="Parity" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="DataBits" Component="DataBits" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="ReadBufferSize" Component="ReadBufferSize" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="StopBits" Component="StopBits" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="ReadTimeout" Component="ReadTimeout" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Handshake" Component="Handshake" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="BaudRate" Component="BaudRate" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="RtsEnable" Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.RtsEnable  Name="RtsEnableCheckBox" TValue="bool" Change=@(args => RtsEnableChange(args, @DepositarioPlaca_entity)) />
+                 </div>
+               </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="SensorA" Component="SensorA" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorA  Name="SensorACheckBox" TValue="bool" Change=@(args => SensorAChange(args, @DepositarioPlaca_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="BitSensorA" Component="BitSensorA" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorA)" Name="BitSensorA" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="SensorB" Component="SensorB" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorB  Name="SensorBCheckBox" TValue="bool" Change=@(args => SensorBChange(args, @DepositarioPlaca_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="BitSensorB" Component="BitSensorB" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorB)" Name="BitSensorB" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="SensorC" Component="SensorC" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorC  Name="SensorCCheckBox" TValue="bool" Change=@(args => SensorCChange(args, @DepositarioPlaca_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="BitSensorC" Component="BitSensorC" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorC)" Name="BitSensorC" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="SensorD" Component="SensorD" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorD  Name="SensorDCheckBox" TValue="bool" Change=@(args => SensorDChange(args, @DepositarioPlaca_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="BitSensorD" Component="BitSensorD" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorD)" Name="BitSensorD" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="SensorL" Component="SensorL" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorL  Name="SensorLCheckBox" TValue="bool" Change=@(args => SensorLChange(args, @DepositarioPlaca_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="BitSensorL" Component="BitSensorL" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorL)" Name="BitSensorL" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @DepositarioPlaca_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(DepositarioPlaca_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(DepositarioPlaca_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text="Cancelar" Click="Cancel">
+                </RadzenButton>
+              </div>
+            </div>
+           </ChildContent>
+         </RadzenTemplateForm>
+ <hr>
+    }
+ 
+    <RadzenNotification /> 
+}
+ 
+@code {
+    /// <summary>
+    /// Crud Mode Enum
+    /// </summary>
+    private enum CrudMode
+    {
+        List,
+        Add,
+        Edit,
+        Delete
+    }
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca DepositarioPlaca_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca> DepositarioPlaca_entities = null;
+ 
+    /// <summary>
+    /// Variables to handle Relation between DepositarioPlaca.DepositarioId and Depositario.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Dispositivo.Depositario Depositario_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.Depositario>? Depositario_entities;
+ 
+    /// <summary>
+    /// Variables to handle Relation between DepositarioPlaca.PlacaId and TipoPlaca.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca TipoPlaca_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca>? TipoPlaca_entities;
+ 
+    /// <summary>
+    ///  Page crud mode {List,Add,Edit,Delete}
+    /// </summary>
+    private CrudMode crudMode = CrudMode.List;
+ 
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
+    }
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        DepositarioAdminWeb.Business.Tables.Dispositivo.DepositarioPlaca entity = new();
+        DepositarioPlaca_entities = entity.Items();
+    }
+    /// <summary>
+    /// Loads Type Tables data
+    /// </summary>
+    private void LoadTypesData()
+    {
+        DepositarioAdminWeb.Business.Tables.Dispositivo.Depositario Depositario_local = new();
+        Depositario_entities = Depositario_local.Items();
+ 
+        DepositarioAdminWeb.Business.Tables.Dispositivo.TipoPlaca TipoPlaca_local = new();
+        TipoPlaca_entities = TipoPlaca_local.Items();
+ 
+    }
+ 
+    #endregion
+ 
+    /// <summary>
+    /// Initializations for adding a new entity
+    /// </summary>
+    private void Add()
+    {
+        //Main entity initialization
+        DepositarioPlaca_entity = new();
+        //Relations entities initialization
+        Depositario_entity = new(); 
+        TipoPlaca_entity = new(); 
+        crudMode = CrudMode.Add;
+    }
+    /// <summary>
+    /// <summary>
+    /// Initializations for editing an entity
+    /// </summary>
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item, bool delete)
+    {
+             DepositarioPlaca_entity = item;
+            Depositario_entity = new() { 
+            Id = Depositario_entities.FirstOrDefault(c => c.Id == DepositarioPlaca_entity.DepositarioId).Id, 
+            Nombre = Depositario_entities.FirstOrDefault(c => c.Id == DepositarioPlaca_entity.DepositarioId).Nombre
+            };
+            TipoPlaca_entity = new() { 
+            Id = TipoPlaca_entities.FirstOrDefault(c => c.Id == DepositarioPlaca_entity.PlacaId).Id, 
+            Nombre = TipoPlaca_entities.FirstOrDefault(c => c.Id == DepositarioPlaca_entity.PlacaId).Nombre
+            };
+        if (delete)
+            crudMode = CrudMode.Delete;
+        else
+            crudMode = CrudMode.Edit;
+    }
+    /// <summary>
+    /// Operation depending on Crud mode
+    /// </summary>
+    private async Task Save()
+    {
+        string actionInformation = string.Empty;
+        DepositarioAdminWeb.Business.Tables.Dispositivo.DepositarioPlaca crud = new();
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                crud.Add(DepositarioPlaca_entity);
+                actionInformation = "agregado.";
+                break;
+            case CrudMode.Edit:
+                crud.Update(DepositarioPlaca_entity);
+                actionInformation = "modificado.";
+                break;
+            case CrudMode.Delete:
+                crud.Delete(DepositarioPlaca_entity);
+                actionInformation = "eliminado.";
+                break;
+        }
+ 
+        // Sets Crud mode to List
+        crudMode = CrudMode.List;
+ 
+        ShowNotification(new NotificationMessage { 
+            Severity = NotificationSeverity.Success, 
+            Summary = "El registro ha sido ", 
+            Detail = actionInformation, 
+            Duration = 4000 });
+       
+            await Task.Run(LoadMainEntityData);
+    }
+    /// <summary>
+    /// Crud mode cancellation and default mode
+    /// </summary>
+    private void Cancel()
+    {
+        crudMode = CrudMode.List;  
+        LoadMainEntityData();
+    }
+    /// <summary>
+    /// Sets detail panel title - TODO: Implement Multilanguage
+    /// </summary>
+    /// <returns></returns>
+    private string GetDialogTitle()
+    {
+        string retValue = string.Empty;
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                retValue = "Nuevo...";
+                break;
+            case CrudMode.Edit:
+                retValue = "Editar...";
+                break;
+            case CrudMode.Delete:
+                retValue = "Borrar...";
+                break;
+        }
+        return retValue;
+    }
+    #region Notifications
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+ 
+    }
+ 
+    #endregion
+    #region Selection events
+    /// <summary>
+    /// Depositario value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectDepositarioValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// TipoPlaca value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectTipoPlacaValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void RtsEnableChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item)
+    {
+         DepositarioPlaca_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void SensorAChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item)
+    {
+         DepositarioPlaca_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void SensorBChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item)
+    {
+         DepositarioPlaca_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void SensorCChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item)
+    {
+         DepositarioPlaca_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void SensorDChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item)
+    {
+         DepositarioPlaca_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void SensorLChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item)
+    {
+         DepositarioPlaca_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca item)
+    {
+         DepositarioPlaca_entity = item;
+    }
+    #endregion
+ 
+    #region Export
+ 
+    #endregion
+ 
+}

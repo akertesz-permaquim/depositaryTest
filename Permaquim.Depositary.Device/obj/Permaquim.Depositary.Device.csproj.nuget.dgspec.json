@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj": {}
+    "C:\\Dev\\depositario\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj": {}
   },
   "projects": {
-    "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj": {
+    "C:\\Dev\\depositario\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj",
+        "projectUniqueName": "C:\\Dev\\depositario\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj",
         "projectName": "Permaquim.Depositary.Device",
-        "projectPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj",
-        "packagesPath": "C:\\Users\\ccespon\\.nuget\\packages\\",
-        "outputPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Device\\obj\\",
+        "projectPath": "C:\\Dev\\depositario\\Permaquim.Depositary.Device\\Permaquim.Depositary.Device.csproj",
+        "packagesPath": "C:\\Users\\gsivit\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\depositario\\Permaquim.Depositary.Device\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ccespon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gsivit\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj": {
-                "projectPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj"
+              "C:\\Dev\\depositario\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj": {
+                "projectPath": "C:\\Dev\\depositario\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj"
               }
             }
           }
@@ -68,17 +68,17 @@
         }
       }
     },
-    "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj": {
+    "C:\\Dev\\depositario\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
+        "projectUniqueName": "C:\\Dev\\depositario\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
         "projectName": "Permaquim.Depositary.Interfaces",
-        "projectPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
-        "packagesPath": "C:\\Users\\ccespon\\.nuget\\packages\\",
-        "outputPath": "D:\\Permaquim.Depositary\\Permaquim.Depositary.Interfaces\\obj\\",
+        "projectPath": "C:\\Dev\\depositario\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
+        "packagesPath": "C:\\Users\\gsivit\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\depositario\\Permaquim.Depositary.Interfaces\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ccespon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gsivit\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

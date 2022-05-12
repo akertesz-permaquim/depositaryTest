@@ -1,0 +1,563 @@
+@page "/DispositivoDepositarioContadoraCrud"
+@inject NotificationService NotificationService
+ 
+@if (DepositarioContadora_entities == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+}
+else
+{
+    switch (crudMode)
+    {
+        case CrudMode.Add:
+            <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Ingrese los datos de DepositarioContadora</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Delete:
+            <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
+                <ChildContent>
+                    <h4 style="color:white;">Confirma eliminar el DepositarioContadora ?</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+            case CrudMode.Edit:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <h4 style="color:white;">Modificación de datos de DepositarioContadora</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;         
+            case CrudMode.List:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
+                <ChildContent>
+                    <div>
+                        <h4 style="color:white;">Administración de DepositarioContadora</h4>
+                    </div>
+                </ChildContent>
+            </RadzenBadge>
+            break;  
+    }
+ <hr>
+    if (crudMode == CrudMode.List)
+    {
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        Data="@DepositarioContadora_entities" TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+       <EmptyTemplate>
+            <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+        </EmptyTemplate>        
+        <Columns>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px" >
+             <HeaderTemplate>
+                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text ="Nuevo" Click="Add">
+                 </RadzenButton>
+                 </HeaderTemplate>
+                 <Template Context="element">
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                </Template>
+             </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Title="ContadoraId" Property="ContadoraId" Width="100px" >
+                <Template>
+                    @if(TipoContadora_entities.FirstOrDefault( c => c.Id == @context.ContadoraId) != null){
+                       <RadzenLabel Text="@TipoContadora_entities.FirstOrDefault( c => c.Id == @context.ContadoraId).Nombre" Component="ContadoraId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="ContadoraId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Title="DepositarioId" Property="DepositarioId" Width="100px" >
+                <Template>
+                    @if(Depositario_entities.FirstOrDefault( c => c.Id == @context.DepositarioId) != null){
+                       <RadzenLabel Text="@Depositario_entities.FirstOrDefault( c => c.Id == @context.DepositarioId).Nombre" Component="DepositarioId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="DepositarioId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="NumeroSerie" Filterable="false" Title="NumeroSerie" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="PortName" Filterable="false" Title="PortName" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="Parity" Filterable="false" Title="Parity" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="DataBits" Filterable="false" Title="DataBits" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="ReadBufferSize" Filterable="false" Title="ReadBufferSize" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="StopBits" Filterable="false" Title="StopBits" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="ReadTimeout" Filterable="false" Title="ReadTimeout" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="Handshake" Filterable="false" Title="Handshake" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="BaudRate" Filterable="false" Title="BaudRate" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="RtsEnable" Filterable="false" Title="RtsEnable" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.RtsEnable Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <Template Context="data">
+                <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
+                </RadzenCheckBox>
+            </Template>
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+    </RadzenDataGridColumn>
+        </Columns>
+        </RadzenDataGrid>
+ <hr>
+    }
+ 
+    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+    {
+         <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Data="@DepositarioContadora_entity"  @bind-Value="DepositarioContadora_entity" Submit ="Save" Visible ="@(DepositarioContadora_entity != null)">
+          <ChildContent>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Id)" Name="Id" Disabled="true">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="ContadoraId" Component="ContadoraId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@TipoContadora_entities.Count > 0 && @TipoContadora_entities.FirstOrDefault( c => c.Id == @DepositarioContadora_entity.ContadoraId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@DepositarioContadora_entity.ContadoraId"
+                                    Data=@TipoContadora_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoContadoraValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@TipoContadora_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoContadoraValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="DepositarioId" Component="DepositarioId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if(@Depositario_entities.Count > 0 && @Depositario_entities.FirstOrDefault( c => c.Id == @DepositarioContadora_entity.DepositarioId) != null)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@DepositarioContadora_entity.DepositarioId"
+                                    Data=@Depositario_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectDepositarioValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Depositario_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectDepositarioValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="NumeroSerie" Component="NumeroSerie" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioContadora_entity.NumeroSerie)" Name="NumeroSerie" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenTextBox>
+                     <RadzenRequiredValidator Component="NumeroSerie" Text="NumeroSerie is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenRequiredValidator>
+                 </div>
+               </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="PortName" Component="PortName" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioContadora_entity.PortName)" Name="PortName" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenTextBox>
+                     <RadzenRequiredValidator Component="PortName" Text="PortName is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
+                     </RadzenRequiredValidator>
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Parity" Component="Parity" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="DataBits" Component="DataBits" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="ReadBufferSize" Component="ReadBufferSize" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="StopBits" Component="StopBits" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="ReadTimeout" Component="ReadTimeout" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="Handshake" Component="Handshake" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="BaudRate" Component="BaudRate" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="RtsEnable" Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioContadora_entity.RtsEnable  Name="RtsEnableCheckBox" TValue="bool" Change=@(args => RtsEnableChange(args, @DepositarioContadora_entity)) />
+                 </div>
+               </div>
+              <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                 </div>
+                 <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@DepositarioContadora_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @DepositarioContadora_entity)) />
+                 </div>
+               </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(DepositarioContadora_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+          <div style="margin-bottom: 1rem" class="row">
+             <div class="col-md-3">
+                 <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                 </RadzenLabel>
+             </div>
+             <div class="col-md-9">
+                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                </RadzenNumeric>
+             </div>
+         </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(DepositarioContadora_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                </RadzenDatePicker>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text="Cancelar" Click="Cancel">
+                </RadzenButton>
+              </div>
+            </div>
+           </ChildContent>
+         </RadzenTemplateForm>
+ <hr>
+    }
+ 
+    <RadzenNotification /> 
+}
+ 
+@code {
+    /// <summary>
+    /// Crud Mode Enum
+    /// </summary>
+    private enum CrudMode
+    {
+        List,
+        Add,
+        Edit,
+        Delete
+    }
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora DepositarioContadora_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora> DepositarioContadora_entities = null;
+ 
+    /// <summary>
+    /// Variables to handle Relation between DepositarioContadora.ContadoraId and TipoContadora.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoContadora TipoContadora_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoContadora>? TipoContadora_entities;
+ 
+    /// <summary>
+    /// Variables to handle Relation between DepositarioContadora.DepositarioId and Depositario.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Dispositivo.Depositario Depositario_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.Depositario>? Depositario_entities;
+ 
+    /// <summary>
+    ///  Page crud mode {List,Add,Edit,Delete}
+    /// </summary>
+    private CrudMode crudMode = CrudMode.List;
+ 
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
+    }
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        DepositarioAdminWeb.Business.Tables.Dispositivo.DepositarioContadora entity = new();
+        DepositarioContadora_entities = entity.Items();
+    }
+    /// <summary>
+    /// Loads Type Tables data
+    /// </summary>
+    private void LoadTypesData()
+    {
+        DepositarioAdminWeb.Business.Tables.Dispositivo.TipoContadora TipoContadora_local = new();
+        TipoContadora_entities = TipoContadora_local.Items();
+ 
+        DepositarioAdminWeb.Business.Tables.Dispositivo.Depositario Depositario_local = new();
+        Depositario_entities = Depositario_local.Items();
+ 
+    }
+ 
+    #endregion
+ 
+    /// <summary>
+    /// Initializations for adding a new entity
+    /// </summary>
+    private void Add()
+    {
+        //Main entity initialization
+        DepositarioContadora_entity = new();
+        //Relations entities initialization
+        TipoContadora_entity = new(); 
+        Depositario_entity = new(); 
+        crudMode = CrudMode.Add;
+    }
+    /// <summary>
+    /// <summary>
+    /// Initializations for editing an entity
+    /// </summary>
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora item, bool delete)
+    {
+             DepositarioContadora_entity = item;
+            TipoContadora_entity = new() { 
+            Id = TipoContadora_entities.FirstOrDefault(c => c.Id == DepositarioContadora_entity.ContadoraId).Id, 
+            Nombre = TipoContadora_entities.FirstOrDefault(c => c.Id == DepositarioContadora_entity.ContadoraId).Nombre
+            };
+            Depositario_entity = new() { 
+            Id = Depositario_entities.FirstOrDefault(c => c.Id == DepositarioContadora_entity.DepositarioId).Id, 
+            Nombre = Depositario_entities.FirstOrDefault(c => c.Id == DepositarioContadora_entity.DepositarioId).Nombre
+            };
+        if (delete)
+            crudMode = CrudMode.Delete;
+        else
+            crudMode = CrudMode.Edit;
+    }
+    /// <summary>
+    /// Operation depending on Crud mode
+    /// </summary>
+    private async Task Save()
+    {
+        string actionInformation = string.Empty;
+        DepositarioAdminWeb.Business.Tables.Dispositivo.DepositarioContadora crud = new();
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                crud.Add(DepositarioContadora_entity);
+                actionInformation = "agregado.";
+                break;
+            case CrudMode.Edit:
+                crud.Update(DepositarioContadora_entity);
+                actionInformation = "modificado.";
+                break;
+            case CrudMode.Delete:
+                crud.Delete(DepositarioContadora_entity);
+                actionInformation = "eliminado.";
+                break;
+        }
+ 
+        // Sets Crud mode to List
+        crudMode = CrudMode.List;
+ 
+        ShowNotification(new NotificationMessage { 
+            Severity = NotificationSeverity.Success, 
+            Summary = "El registro ha sido ", 
+            Detail = actionInformation, 
+            Duration = 4000 });
+       
+            await Task.Run(LoadMainEntityData);
+    }
+    /// <summary>
+    /// Crud mode cancellation and default mode
+    /// </summary>
+    private void Cancel()
+    {
+        crudMode = CrudMode.List;  
+        LoadMainEntityData();
+    }
+    /// <summary>
+    /// Sets detail panel title - TODO: Implement Multilanguage
+    /// </summary>
+    /// <returns></returns>
+    private string GetDialogTitle()
+    {
+        string retValue = string.Empty;
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                retValue = "Nuevo...";
+                break;
+            case CrudMode.Edit:
+                retValue = "Editar...";
+                break;
+            case CrudMode.Delete:
+                retValue = "Borrar...";
+                break;
+        }
+        return retValue;
+    }
+    #region Notifications
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+ 
+    }
+ 
+    #endregion
+    #region Selection events
+    /// <summary>
+    /// TipoContadora value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectTipoContadoraValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Depositario value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectDepositarioValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void RtsEnableChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora item)
+    {
+         DepositarioContadora_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value,DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora item)
+    {
+         DepositarioContadora_entity = item;
+    }
+    #endregion
+ 
+    #region Export
+ 
+    #endregion
+ 
+}

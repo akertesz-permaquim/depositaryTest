@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Permaquim.Depositary.Web.Administration",
+    "\\Permaquim.Depositary.Web.Administration\\Components",
+    "\\Permaquim.Depositary.Web.Administration\\Dal"
   ],
-  "SelectedNode": "\\Permaquim.Depositary.sln",
+  "SelectedNode": "\\Permaquim.Depositary.Web.Administration\\Components\\SideMenu.razor",
   "PreviewInSolutionExplorer": false
 }

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-16"?>
+<GenerationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NetVersion>NetCore</NetVersion>
+  <SupportedCharacters> .</SupportedCharacters>
+  <ConnectionStringName>ConnectionString</ConnectionStringName>
+  <ChildrenPrefix>ListOf_</ChildrenPrefix>
+  <EntityDisplayName>Nombre</EntityDisplayName>
+  <DisableNamespaceSchema>false</DisableNamespaceSchema>
+  <MultiQuery>true</MultiQuery>
+  <UseWithNolock>false</UseWithNolock>
+  <IncludeGenerationInformation>false</IncludeGenerationInformation>
+  <SerializeEntitiesClases>true</SerializeEntitiesClases>
+  <Namespace>DepositarioAdminWeb</Namespace>
+  <ShowSystemData>false</ShowSystemData>
+  <BuildRelations>true</BuildRelations>
+  <ForceNullableDatetime>false</ForceNullableDatetime>
+  <OverrideEntityDisplayName>false</OverrideEntityDisplayName>
+  <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
+  <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
+  <DbDriver>SQL</DbDriver>
+  <ConnectionString>Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Persist Security Info=False;User ID="";Initial Catalog=Depositario;Data Source=localhost;Initial File Name="";Server SPN="";Authentication="";Access Token=""</ConnectionString>
+  <SelectedViews>
+    <string>Operacion.VistaTransaccion</string>
+    <string>Valor.VistaDenominacion</string>
+  </SelectedViews>
+  <SelectedStoredProcedures />
+  <UnselectedStoredProcedures>
+    <string>dbo.fn_diagramobjects</string>
+    <string>dbo.sp_alterdiagram</string>
+    <string>dbo.sp_creatediagram</string>
+    <string>dbo.sp_dropdiagram</string>
+    <string>dbo.sp_helpdiagramdefinition</string>
+    <string>dbo.sp_helpdiagrams</string>
+    <string>dbo.sp_renamediagram</string>
+    <string>dbo.sp_upgraddiagrams</string>
+    <string>Desarrollo.ActualizarLenguajeItem</string>
+    <string>Desarrollo.GenerarTablaModelo</string>
+    <string>Desarrollo.GenerarTablaTipoModelo</string>
+  </UnselectedStoredProcedures>
+  <MappedStoredProcedures />
+  <SelectedTables>
+    <string>Aplicacion.Configuracion</string>
+    <string>Auditoria.Log</string>
+    <string>Auditoria.TipoLog</string>
+    <string>Banca.Banco</string>
+    <string>Banca.Cuenta</string>
+    <string>Banca.UsuarioCuenta</string>
+    <string>Biometria.HuellaDactilar</string>
+    <string>Directorio.Empresa</string>
+    <string>Directorio.Grupo</string>
+    <string>Directorio.IdentificadorUsuario</string>
+    <string>Directorio.RolFuncion</string>
+    <string>Directorio.Sector</string>
+    <string>Directorio.Sucursal</string>
+    <string>Directorio.TipoIdentificador</string>
+    <string>Dispositivo.ComandoContadora</string>
+    <string>Dispositivo.ComandoPlaca</string>
+    <string>Dispositivo.ConfiguracionDepositario</string>
+    <string>Dispositivo.Depositario</string>
+    <string>Dispositivo.DepositarioContadora</string>
+    <string>Dispositivo.DepositarioEstado</string>
+    <string>Dispositivo.DepositarioPlaca</string>
+    <string>Dispositivo.DepositarioValor</string>
+    <string>Dispositivo.Marca</string>
+    <string>Dispositivo.Modelo</string>
+    <string>Dispositivo.TipoConfiguracionDepositario</string>
+    <string>Dispositivo.TipoContadora</string>
+    <string>Dispositivo.TipoPlaca</string>
+    <string>Estilo.Esquema</string>
+    <string>Estilo.EsquemaDetalle</string>
+    <string>Estilo.EsquemaDetalleValor</string>
+    <string>Geografia.Ciudad</string>
+    <string>Geografia.CodigoPostal</string>
+    <string>Geografia.Pais</string>
+    <string>Geografia.Provincia</string>
+    <string>Geografia.Zona</string>
+    <string>Operacion.CierreDiario</string>
+    <string>Operacion.Contenedor</string>
+    <string>Operacion.Evento</string>
+    <string>Operacion.Sesion</string>
+    <string>Operacion.TipoContenedor</string>
+    <string>Operacion.TipoEvento</string>
+    <string>Operacion.TipoTransaccion</string>
+    <string>Operacion.Transaccion</string>
+    <string>Operacion.TransaccionDetalle</string>
+    <string>Operacion.TransaccionSobre</string>
+    <string>Operacion.TransaccionSobreDetalle</string>
+    <string>Operacion.Turno</string>
+    <string>Operacion.TurnoUsuario</string>
+    <string>Regionalizacion.Lenguaje</string>
+    <string>Regionalizacion.LenguajeItem</string>
+    <string>Seguridad.Aplicacion</string>
+    <string>Seguridad.AplicacionParametro</string>
+    <string>Seguridad.AplicacionParametroValor</string>
+    <string>Seguridad.Funcion</string>
+    <string>Seguridad.Menu</string>
+    <string>Seguridad.Rol</string>
+    <string>Seguridad.RolFuncion</string>
+    <string>Seguridad.TipoAplicacion</string>
+    <string>Seguridad.TipoFuncion</string>
+    <string>Seguridad.TipoMenu</string>
+    <string>Seguridad.Usuario</string>
+    <string>Seguridad.UsuarioRol</string>
+    <string>Seguridad.UsuarioSector</string>
+    <string>Sincronizacion.Configuracion</string>
+    <string>Sincronizacion.Entidad</string>
+    <string>Sincronizacion.EntidadCabecera</string>
+    <string>Sincronizacion.EntidadDetalle</string>
+    <string>Turno.Agenda</string>
+    <string>Turno.Esquema</string>
+    <string>Turno.EsquemaDetalle</string>
+    <string>Valor.Denominacion</string>
+    <string>Valor.Moneda</string>
+    <string>Valor.RelacionMonedaTipoValor</string>
+    <string>Valor.Tipo</string>
+    <string>Visualizacion.Perfil</string>
+    <string>Visualizacion.PerfilItem</string>
+    <string>Visualizacion.PerfilTipo</string>
+  </SelectedTables>
+  <SelectedDatabase>Depositario</SelectedDatabase>
+  <SelectedTemplates>
+    <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
+    <string>353e226c-6bf1-4079-a822-ba12163b71c9</string>
+  </SelectedTemplates>
+  <Location>\</Location>
+  <DatasourceServer />
+  <TemplateConfigurationEntries>
+    <TemplateConfigurationEntry>
+      <Template>WebServiceBuilder Template</Template>
+      <Name>Base Web Service</Name>
+      <Value>System.Web.Services.WebService</Value>
+    </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>Syncfusion Js CrudBuilder</Template>
+      <Name>Resource Url</Name>
+      <Value />
+    </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>MudBlazor CrudBuilder</Template>
+      <Name>MudBlazor Generation folder</Name>
+      <Value />
+    </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>RadzenBlazor CrudBuilder</Template>
+      <Name>Radzen Blazor Generation folder</Name>
+      <Value />
+    </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>RadzenBlazor CrudBuilder</Template>
+      <Name>Radzen Blazor Treat Field as Image</Name>
+      <Value />
+    </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>RadzenBlazor Left Menu Builder</Template>
+      <Name>Radzen Blazor Generation folder</Name>
+      <Value />
+    </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>RadzenBlazor View ReportBuilder</Template>
+      <Name>Radzen Blazor Generation folder</Name>
+      <Value />
+    </TemplateConfigurationEntry>
+  </TemplateConfigurationEntries>
+</GenerationProject>
