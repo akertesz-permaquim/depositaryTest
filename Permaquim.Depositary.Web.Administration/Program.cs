@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Permaquim.Depositary.Web.Administration.Data;
+using Microsoft.AspNetCore.Identity;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,12 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddLocalization();
 builder.Services.AddScoped<Radzen.NotificationService>();
 builder.Services.AddScoped<Radzen.DialogService>();
 builder.Services.AddScoped<Radzen.TooltipService>();
 builder.Services.AddScoped<Radzen.ContextMenuService>();
-
 
 var app = builder.Build();
 
@@ -25,11 +24,25 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+var supportedCulture = new System.Globalization.CultureInfo("es-AR");
+supportedCulture.NumberFormat.NumberDecimalSeparator = ",";
+supportedCulture.NumberFormat.CurrencyDecimalSeparator = ",";
+supportedCulture.NumberFormat.CurrencyGroupSeparator = ".";
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(supportedCulture)
+});
+
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

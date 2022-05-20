@@ -7,7 +7,7 @@
   <EntityDisplayName>Nombre</EntityDisplayName>
   <DisableNamespaceSchema>false</DisableNamespaceSchema>
   <MultiQuery>true</MultiQuery>
-  <UseWithNolock>false</UseWithNolock>
+  <UseWithNolock>true</UseWithNolock>
   <IncludeGenerationInformation>false</IncludeGenerationInformation>
   <SerializeEntitiesClases>true</SerializeEntitiesClases>
   <Namespace>DepositarioAdminWeb</Namespace>
@@ -18,12 +18,19 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Persist Security Info=False;User ID="";Initial Catalog=Depositario;Data Source=localhost;Initial File Name="";Server SPN="";Authentication="";Access Token=""</ConnectionString>
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=NB000101</ConnectionString>
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
     <string>Valor.VistaDenominacion</string>
   </SelectedViews>
-  <SelectedStoredProcedures />
+  <SelectedStoredProcedures>
+    <string>Dispositivo.ObtenerDepositarios</string>
+    <string>Operacion.ObtenerDetalleTransaccion</string>
+    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
+    <string>Operacion.ObtenerEventosPorDepositario</string>
+    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
+    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
+  </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
     <string>dbo.fn_diagramobjects</string>
     <string>dbo.sp_alterdiagram</string>

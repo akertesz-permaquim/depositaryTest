@@ -10,7 +10,7 @@ using Radzen.Blazor;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.JSInterop;
 
-namespace RadzenCrm.Layouts
+namespace Permaquim.Depositary.Web.Administration.Layouts
 {
     public partial class MainLayoutComponent : LayoutComponentBase
     {

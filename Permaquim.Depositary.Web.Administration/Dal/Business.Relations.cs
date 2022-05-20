@@ -15101,7 +15101,7 @@ using System.Text;
                 {
 					Id,
 					SobreId,
-					RelacioMonedaTipovalorId,
+					RelacionMonedaTipoValorId,
 					CantidadDeclarada,
 					Fecha
 				}
@@ -15143,13 +15143,13 @@ using System.Text;
          /// TransaccionSobreDetalle Add Method
          /// </summary>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId'></param>
-         /// <param name='DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacioMonedaTipovalorId'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId'></param>
          /// <param name='CantidadDeclarada'></param>
          /// <param name='Fecha'></param>
          /// <returns>Entities.Relations.Operacion.TransaccionSobreDetalle</returns>
-			public Entities.Relations.Operacion.TransaccionSobreDetalle Add(DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId,DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacioMonedaTipovalorId,Int64 CantidadDeclarada,DateTime Fecha) 
+			public Entities.Relations.Operacion.TransaccionSobreDetalle Add(DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId,DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId,Int64 CantidadDeclarada,DateTime Fecha) 
 			{
-			  return (Entities.Relations.Operacion.TransaccionSobreDetalle)base.Add(new Entities.Relations.Operacion.TransaccionSobreDetalle(SobreId,RelacioMonedaTipovalorId,CantidadDeclarada,Fecha));
+			  return (Entities.Relations.Operacion.TransaccionSobreDetalle)base.Add(new Entities.Relations.Operacion.TransaccionSobreDetalle(SobreId,RelacionMonedaTipoValorId,CantidadDeclarada,Fecha));
 			}
             public new List<Entities.Relations.Operacion.TransaccionSobreDetalle> Items()
             {
@@ -15183,11 +15183,11 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="SobreId"></param>
-            /// <param name="RelacioMonedaTipovalorId"></param>
+            /// <param name="RelacionMonedaTipoValorId"></param>
             /// <param name="CantidadDeclarada"></param>
             /// <param name="Fecha"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Operacion.TransaccionSobreDetalle> Items(Int64? Id,Int64? SobreId,Int64? RelacioMonedaTipovalorId,Int64? CantidadDeclarada,DateTime? Fecha)
+            public List<Entities.Relations.Operacion.TransaccionSobreDetalle> Items(Int64? Id,Int64? SobreId,Int64? RelacionMonedaTipoValorId,Int64? CantidadDeclarada,DateTime? Fecha)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -15214,15 +15214,15 @@ using System.Text;
                     }
                    
                 }
-                if (RelacioMonedaTipovalorId != null)
+                if (RelacionMonedaTipoValorId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.RelacioMonedaTipovalorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RelacioMonedaTipovalorId);
+                        this.Where.Add(ColumnEnum.RelacionMonedaTipoValorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RelacionMonedaTipoValorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.RelacioMonedaTipovalorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RelacioMonedaTipovalorId);
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.RelacionMonedaTipoValorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RelacionMonedaTipoValorId);
                     }
                    
                 }
@@ -15273,16 +15273,16 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="SobreId"></param>
-            /// <param name="RelacioMonedaTipovalorId"></param>
+            /// <param name="RelacionMonedaTipoValorId"></param>
             /// <param name="CantidadDeclarada"></param>
             /// <param name="Fecha"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 SobreId,Int64 RelacioMonedaTipovalorId,Int64 CantidadDeclarada,DateTime Fecha)
+            public Int64 Update(Int64 Id,Int64 SobreId,Int64 RelacionMonedaTipoValorId,Int64 CantidadDeclarada,DateTime Fecha)
             {
                  Entities.Tables.Operacion.TransaccionSobreDetalle item = new Entities.Tables.Operacion.TransaccionSobreDetalle();
                  item.Id = Id;
                  item.SobreId = SobreId;
-                 item.RelacioMonedaTipovalorId = RelacioMonedaTipovalorId;
+                 item.RelacionMonedaTipoValorId = RelacionMonedaTipoValorId;
                  item.CantidadDeclarada = CantidadDeclarada;
                  item.Fecha = Fecha;
 

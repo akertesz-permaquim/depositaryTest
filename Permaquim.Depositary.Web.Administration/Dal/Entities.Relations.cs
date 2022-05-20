@@ -40,7 +40,7 @@ using System.Text;
                 public Configuracion()
                 {
                 }
-                public  Configuracion(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Configuracion(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.AplicacionId = AplicacionId;
@@ -83,9 +83,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class Configuracion 
 } //namespace DepositarioAdminWeb.Entities.Relations.Aplicacion
@@ -227,7 +227,7 @@ using System.Text;
                 public TipoLog()
                 {
                 }
-                public  TipoLog(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoLog(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -253,9 +253,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Log that have this TipoId value.
                  /// </summary>
@@ -313,7 +313,7 @@ using System.Text;
                 public Banco()
                 {
                 }
-                public  Banco(String Nombre,String Descripcion,String Codigo,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Banco(String Nombre,String Descripcion,String Codigo,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -360,9 +360,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Cuenta that have this BancoId value.
                  /// </summary>
@@ -422,7 +422,7 @@ using System.Text;
                 public Cuenta()
                 {
                 }
-                public  Cuenta(Int64 TipoId,String Nombre,String Numero,DepositarioAdminWeb.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Cuenta(Int64 TipoId,String Nombre,String Numero,DepositarioAdminWeb.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -472,9 +472,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of UsuarioCuenta that have this CuentaId value.
                  /// </summary>
@@ -528,7 +528,7 @@ using System.Text;
                 public UsuarioCuenta()
                 {
                 }
-                public  UsuarioCuenta(Int64 UsuarioId,DepositarioAdminWeb.Entities.Relations.Banca.Cuenta CuentaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  UsuarioCuenta(Int64 UsuarioId,DepositarioAdminWeb.Entities.Relations.Banca.Cuenta CuentaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.UsuarioId = UsuarioId;
@@ -568,9 +568,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Transaccion that have this UsuarioCuentaId value.
                  /// </summary>
@@ -624,7 +624,7 @@ using System.Text;
                 public HuellaDactilar()
                 {
                 }
-                public  HuellaDactilar(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  HuellaDactilar(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.UsuarioId = UsuarioId;
@@ -652,9 +652,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class HuellaDactilar 
 } //namespace DepositarioAdminWeb.Entities.Relations.Biometria
@@ -704,7 +704,7 @@ using System.Text;
                 public Empresa()
                 {
                 }
-                public  Empresa(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Empresa(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -760,9 +760,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Sucursal that have this EmpresaId value.
                  /// </summary>
@@ -830,7 +830,7 @@ using System.Text;
                 public Grupo()
                 {
                 }
-                public  Grupo(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Grupo(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -859,9 +859,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Empresa that have this GrupoId value.
                  /// </summary>
@@ -917,7 +917,7 @@ using System.Text;
                 public IdentificadorUsuario()
                 {
                 }
-                public  IdentificadorUsuario(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  IdentificadorUsuario(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -945,9 +945,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class IdentificadorUsuario 
 } //namespace DepositarioAdminWeb.Entities.Relations.Directorio
@@ -989,7 +989,7 @@ using System.Text;
                 public RolFuncion()
                 {
                 }
-                public  RolFuncion(DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  RolFuncion(DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.FuncionId = FuncionId;
@@ -1047,9 +1047,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class RolFuncion 
 } //namespace DepositarioAdminWeb.Entities.Relations.Directorio
@@ -1091,7 +1091,7 @@ using System.Text;
                 public Sector()
                 {
                 }
-                public  Sector(DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Sector(DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.SucursalId = SucursalId;
@@ -1135,9 +1135,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Depositario that have this SectorId value.
                  /// </summary>
@@ -1225,7 +1225,7 @@ using System.Text;
                 public Sucursal()
                 {
                 }
-                public  Sucursal(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,String CodigoExterno,String Direccion,DepositarioAdminWeb.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Int64 ZonaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Sucursal(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,String CodigoExterno,String Direccion,DepositarioAdminWeb.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Int64 ZonaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -1296,9 +1296,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Sector that have this SucursalId value.
                  /// </summary>
@@ -1366,7 +1366,7 @@ using System.Text;
                 public TipoIdentificador()
                 {
                 }
-                public  TipoIdentificador(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoIdentificador(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -1395,9 +1395,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -1447,7 +1447,7 @@ using System.Text;
                 public ComandoContadora()
                 {
                 }
-                public  ComandoContadora(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  ComandoContadora(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.ContadoraId = ContadoraId;
@@ -1500,9 +1500,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -1552,7 +1552,7 @@ using System.Text;
                 public ComandoPlaca()
                 {
                 }
-                public  ComandoPlaca(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  ComandoPlaca(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoPlacaId = TipoPlacaId;
@@ -1605,9 +1605,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -1651,7 +1651,7 @@ using System.Text;
                 public ConfiguracionDepositario()
                 {
                 }
-                public  ConfiguracionDepositario(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoConfiguracionDepositario TipoId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  ConfiguracionDepositario(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoConfiguracionDepositario TipoId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -1709,9 +1709,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class ConfiguracionDepositario 
 } //namespace DepositarioAdminWeb.Entities.Relations.Dispositivo
@@ -1759,7 +1759,7 @@ using System.Text;
                 public Depositario()
                 {
                 }
-                public  Depositario(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Depositario(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -1827,9 +1827,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of ConfiguracionDepositario that have this DepositarioId value.
                  /// </summary>
@@ -1963,7 +1963,7 @@ using System.Text;
                 public DepositarioContadora()
                 {
                 }
-                public  DepositarioContadora(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  DepositarioContadora(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.ContadoraId = ContadoraId;
@@ -2048,9 +2048,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class DepositarioContadora 
 } //namespace DepositarioAdminWeb.Entities.Relations.Dispositivo
@@ -2098,7 +2098,7 @@ using System.Text;
                 public DepositarioEstado()
                 {
                 }
-                public  DepositarioEstado(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,DateTime FechaModificacion)
+                public  DepositarioEstado(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.DepositarioId = DepositarioId;
@@ -2152,7 +2152,7 @@ using System.Text;
              [DataItemAttributeFieldName("Observaciones","Observaciones")]
              public String Observaciones { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class DepositarioEstado 
 } //namespace DepositarioAdminWeb.Entities.Relations.Dispositivo
@@ -2230,7 +2230,7 @@ using System.Text;
                 public DepositarioPlaca()
                 {
                 }
-                public  DepositarioPlaca(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca PlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  DepositarioPlaca(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca PlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.DepositarioId = DepositarioId;
@@ -2342,9 +2342,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class DepositarioPlaca 
 } //namespace DepositarioAdminWeb.Entities.Relations.Dispositivo
@@ -2384,7 +2384,7 @@ using System.Text;
                 public DepositarioValor()
                 {
                 }
-                public  DepositarioValor(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda ValorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  DepositarioValor(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda ValorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.DepositarioId = DepositarioId;
@@ -2439,9 +2439,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class DepositarioValor 
 } //namespace DepositarioAdminWeb.Entities.Relations.Dispositivo
@@ -2481,7 +2481,7 @@ using System.Text;
                 public Marca()
                 {
                 }
-                public  Marca(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Marca(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -2507,9 +2507,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Modelo that have this MarcaId value.
                  /// </summary>
@@ -2565,7 +2565,7 @@ using System.Text;
                 public Modelo()
                 {
                 }
-                public  Modelo(DepositarioAdminWeb.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Modelo(DepositarioAdminWeb.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.MarcaId = MarcaId;
@@ -2609,9 +2609,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Depositario that have this ModeloId value.
                  /// </summary>
@@ -2691,7 +2691,7 @@ using System.Text;
                 public TipoConfiguracionDepositario()
                 {
                 }
-                public  TipoConfiguracionDepositario(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoConfiguracionDepositario(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Clave = Clave;
@@ -2720,9 +2720,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of ConfiguracionDepositario that have this TipoId value.
                  /// </summary>
@@ -2796,7 +2796,7 @@ using System.Text;
                 public TipoContadora()
                 {
                 }
-                public  TipoContadora(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoContadora(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.ModeloId = ModeloId;
@@ -2867,9 +2867,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of ComandoContadora that have this ContadoraId value.
                  /// </summary>
@@ -2975,7 +2975,7 @@ using System.Text;
                 public TipoPlaca()
                 {
                 }
-                public  TipoPlaca(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoPlaca(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.ModeloId = ModeloId;
@@ -3076,9 +3076,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of ComandoPlaca that have this TipoPlacaId value.
                  /// </summary>
@@ -3144,7 +3144,7 @@ using System.Text;
                 public Esquema()
                 {
                 }
-                public  Esquema(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Esquema(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3170,9 +3170,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of EsquemaDetalle that have this EsquemaId value.
                  /// </summary>
@@ -3228,7 +3228,7 @@ using System.Text;
                 public EsquemaDetalle()
                 {
                 }
-                public  EsquemaDetalle(DepositarioAdminWeb.Entities.Relations.Estilo.Esquema EsquemaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  EsquemaDetalle(DepositarioAdminWeb.Entities.Relations.Estilo.Esquema EsquemaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EsquemaId = EsquemaId;
@@ -3272,9 +3272,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of EsquemaDetalleValor that have this EsquemaDetalleId value.
                  /// </summary>
@@ -3340,7 +3340,7 @@ using System.Text;
                 public EsquemaDetalleValor()
                 {
                 }
-                public  EsquemaDetalleValor(DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  EsquemaDetalleValor(DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EsquemaDetalleId = EsquemaDetalleId;
@@ -3380,9 +3380,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class EsquemaDetalleValor 
 } //namespace DepositarioAdminWeb.Entities.Relations.Estilo
@@ -3426,7 +3426,7 @@ using System.Text;
                 public Ciudad()
                 {
                 }
-                public  Ciudad(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Provincia ProvinciaId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Ciudad(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Provincia ProvinciaId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3473,9 +3473,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of CodigoPostal that have this CiudadId value.
                  /// </summary>
@@ -3533,7 +3533,7 @@ using System.Text;
                 public CodigoPostal()
                 {
                 }
-                public  CodigoPostal(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Ciudad CiudadId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  CodigoPostal(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Ciudad CiudadId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3580,9 +3580,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Sucursal that have this CodigoPostalId value.
                  /// </summary>
@@ -3640,7 +3640,7 @@ using System.Text;
                 public Pais()
                 {
                 }
-                public  Pais(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Pais(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3672,9 +3672,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Banco that have this PaisId value.
                  /// </summary>
@@ -3744,7 +3744,7 @@ using System.Text;
                 public Provincia()
                 {
                 }
-                public  Provincia(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Provincia(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3791,9 +3791,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Ciudad that have this ProvinciaId value.
                  /// </summary>
@@ -3849,7 +3849,7 @@ using System.Text;
                 public Zona()
                 {
                 }
-                public  Zona(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Zona(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3878,9 +3878,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -3922,7 +3922,7 @@ using System.Text;
                 public CierreDiario()
                 {
                 }
-                public  CierreDiario(String Nombre,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Operacion.Sesion SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  CierreDiario(String Nombre,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Operacion.Sesion SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3963,9 +3963,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Transaccion that have this CierreDiarioId value.
                  /// </summary>
@@ -4037,7 +4037,7 @@ using System.Text;
                 public Contenedor()
                 {
                 }
-                public  Contenedor(String Nombre,DepositarioAdminWeb.Entities.Relations.Operacion.TipoContenedor TipoId,String Identificador,DateTime FechaApertura,DateTime? FechaCierre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Contenedor(String Nombre,DepositarioAdminWeb.Entities.Relations.Operacion.TipoContenedor TipoId,String Identificador,DateTime FechaApertura,DateTime? FechaCierre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -4087,9 +4087,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Transaccion that have this ContenedorId value.
                  /// </summary>
@@ -4298,7 +4298,7 @@ using System.Text;
                 public TipoContenedor()
                 {
                 }
-                public  TipoContenedor(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoContenedor(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -4327,9 +4327,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Contenedor that have this TipoId value.
                  /// </summary>
@@ -4385,7 +4385,7 @@ using System.Text;
                 public TipoEvento()
                 {
                 }
-                public  TipoEvento(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoEvento(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -4414,9 +4414,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Evento that have this TipoId value.
                  /// </summary>
@@ -4470,7 +4470,7 @@ using System.Text;
                 public TipoTransaccion()
                 {
                 }
-                public  TipoTransaccion(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoTransaccion(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -4496,9 +4496,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Transaccion that have this TipoId value.
                  /// </summary>
@@ -4915,7 +4915,7 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string SobreId = "SobreId";
-					public const string RelacioMonedaTipovalorId = "RelacioMonedaTipovalorId";
+					public const string RelacionMonedaTipoValorId = "RelacionMonedaTipoValorId";
 					public const string CantidadDeclarada = "CantidadDeclarada";
 					public const string Fecha = "Fecha";
 				}
@@ -4923,7 +4923,7 @@ using System.Text;
                 {
 					Id,
 					SobreId,
-					RelacioMonedaTipovalorId,
+					RelacionMonedaTipoValorId,
 					CantidadDeclarada,
 					Fecha
 				}
@@ -4933,11 +4933,11 @@ using System.Text;
                 public TransaccionSobreDetalle()
                 {
                 }
-                public  TransaccionSobreDetalle(DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId,DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacioMonedaTipovalorId,Int64 CantidadDeclarada,DateTime Fecha)
+                public  TransaccionSobreDetalle(DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId,DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId,Int64 CantidadDeclarada,DateTime Fecha)
                 {
                     this.Id = Id;
                     this.SobreId = SobreId;
-                    this.RelacioMonedaTipovalorId = RelacioMonedaTipovalorId;
+                    this.RelacionMonedaTipoValorId = RelacionMonedaTipoValorId;
                     this.CantidadDeclarada = CantidadDeclarada;
                     this.Fecha = Fecha;
                 }
@@ -4961,23 +4961,23 @@ using System.Text;
                  set {SobreId_  =  value;}
              }
              static DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId_ = null;
-             [DataItemAttributeFieldName("RelacioMonedaTipovalorId","RelacioMonedaTipovalorId")]
+             [DataItemAttributeFieldName("RelacionMonedaTipoValorId","RelacionMonedaTipoValorId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _RelacioMonedaTipovalorId { get; set; }
+             internal Int64 _RelacionMonedaTipoValorId { get; set; }
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("RelacionMonedaTipoValor")]// Object name in Database
-             public DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacioMonedaTipovalorId
+             public DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId
              {
                  get {
-                     if (RelacioMonedaTipovalorId_ == null || RelacioMonedaTipovalorId_.Id != _RelacioMonedaTipovalorId)
+                     if (RelacionMonedaTipoValorId_ == null || RelacionMonedaTipoValorId_.Id != _RelacionMonedaTipoValorId)
                          {
-                             RelacioMonedaTipovalorId = new DepositarioAdminWeb.Business.Relations.Valor.RelacionMonedaTipoValor().Items(this._RelacioMonedaTipovalorId).FirstOrDefault();
+                             RelacionMonedaTipoValorId = new DepositarioAdminWeb.Business.Relations.Valor.RelacionMonedaTipoValor().Items(this._RelacionMonedaTipoValorId).FirstOrDefault();
                          }
-                     return RelacioMonedaTipovalorId_;
+                     return RelacionMonedaTipoValorId_;
                      }
-                 set {RelacioMonedaTipovalorId_  =  value;}
+                 set {RelacionMonedaTipoValorId_  =  value;}
              }
-             static DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacioMonedaTipovalorId_ = null;
+             static DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId_ = null;
              [DataItemAttributeFieldName("CantidadDeclarada","CantidadDeclarada")]
              public Int64 CantidadDeclarada { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
@@ -5035,7 +5035,7 @@ using System.Text;
                 public Turno()
                 {
                 }
-                public  Turno(Int64 TurnoDepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,DateTime? FechaApertura,DateTime? FechaCierre,DateTime? Fecha,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Operacion.CierreDiario CierreDiarioId,String Observaciones,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado)
+                public  Turno(Int64 TurnoDepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,DateTime? FechaApertura,DateTime? FechaCierre,DateTime? Fecha,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Operacion.CierreDiario CierreDiarioId,String Observaciones,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
                 {
                     this.Id = Id;
                     this.TurnoDepositarioId = TurnoDepositarioId;
@@ -5109,9 +5109,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
 				
@@ -5153,7 +5153,7 @@ using System.Text;
                 public TurnoUsuario()
                 {
                 }
-                public  TurnoUsuario(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TurnoUsuario(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.UsuarioId = UsuarioId;
@@ -5178,9 +5178,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class TurnoUsuario 
 } //namespace DepositarioAdminWeb.Entities.Relations.Operacion
@@ -5220,7 +5220,7 @@ using System.Text;
                 public Lenguaje()
                 {
                 }
-                public  Lenguaje(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Lenguaje(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -5246,9 +5246,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of LenguajeItem that have this LenguajeId value.
                  /// </summary>
@@ -5304,7 +5304,7 @@ using System.Text;
                 public LenguajeItem()
                 {
                 }
-                public  LenguajeItem(DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  LenguajeItem(DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.LenguajeId = LenguajeId;
@@ -5347,9 +5347,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class LenguajeItem 
 } //namespace DepositarioAdminWeb.Entities.Relations.Regionalizacion
@@ -5391,7 +5391,7 @@ using System.Text;
                 public Aplicacion()
                 {
                 }
-                public  Aplicacion(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoAplicacion TipoId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Aplicacion(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoAplicacion TipoId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -5435,9 +5435,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Configuracion that have this AplicacionId value.
                  /// </summary>
@@ -5539,7 +5539,7 @@ using System.Text;
                 public AplicacionParametro()
                 {
                 }
-                public  AplicacionParametro(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  AplicacionParametro(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.AplicacionId = AplicacionId;
@@ -5580,9 +5580,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -5626,7 +5626,7 @@ using System.Text;
                 public AplicacionParametroValor()
                 {
                 }
-                public  AplicacionParametroValor(Int64 AplicacionId,Int64 ParametroId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  AplicacionParametroValor(Int64 AplicacionId,Int64 ParametroId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.AplicacionId = AplicacionId;
@@ -5654,9 +5654,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class AplicacionParametroValor 
 } //namespace DepositarioAdminWeb.Entities.Relations.Seguridad
@@ -5702,7 +5702,7 @@ using System.Text;
                 public Funcion()
                 {
                 }
-                public  Funcion(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.TipoFuncion TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Funcion(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.TipoFuncion TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.AplicacionId = AplicacionId;
@@ -5767,9 +5767,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Menu that have this FuncionId value.
                  /// </summary>
@@ -5843,7 +5843,7 @@ using System.Text;
                 public Menu()
                 {
                 }
-                public  Menu(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,DepositarioAdminWeb.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Menu(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,DepositarioAdminWeb.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -5926,9 +5926,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -5972,7 +5972,7 @@ using System.Text;
                 public Rol()
                 {
                 }
-                public  Rol(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Rol(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -6016,9 +6016,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of RolFuncion that have this RolId value.
                  /// </summary>
@@ -6086,7 +6086,7 @@ using System.Text;
                 public RolFuncion()
                 {
                 }
-                public  RolFuncion(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  RolFuncion(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.FuncionId = FuncionId;
@@ -6114,9 +6114,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class RolFuncion 
 } //namespace DepositarioAdminWeb.Entities.Relations.Seguridad
@@ -6156,7 +6156,7 @@ using System.Text;
                 public TipoAplicacion()
                 {
                 }
-                public  TipoAplicacion(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoAplicacion(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -6182,9 +6182,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Aplicacion that have this TipoId value.
                  /// </summary>
@@ -6238,7 +6238,7 @@ using System.Text;
                 public TipoFuncion()
                 {
                 }
-                public  TipoFuncion(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoFuncion(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -6264,9 +6264,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Funcion that have this TipoId value.
                  /// </summary>
@@ -6320,7 +6320,7 @@ using System.Text;
                 public TipoMenu()
                 {
                 }
-                public  TipoMenu(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  TipoMenu(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -6346,9 +6346,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Menu that have this TipoId value.
                  /// </summary>
@@ -6422,7 +6422,7 @@ using System.Text;
                 public Usuario()
                 {
                 }
-                public  Usuario(DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Usuario(DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EmpresaId = EmpresaId;
@@ -6493,9 +6493,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of UsuarioRol that have this UsuarioId value.
                  /// </summary>
@@ -6551,7 +6551,7 @@ using System.Text;
                 public UsuarioRol()
                 {
                 }
-                public  UsuarioRol(DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioId,DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  UsuarioRol(DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioId,DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.UsuarioId = UsuarioId;
@@ -6624,9 +6624,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class UsuarioRol 
 } //namespace DepositarioAdminWeb.Entities.Relations.Seguridad
@@ -6666,7 +6666,7 @@ using System.Text;
                 public UsuarioSector()
                 {
                 }
-                public  UsuarioSector(Int64 UsuarioId,Int64 SectorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  UsuarioSector(Int64 UsuarioId,Int64 SectorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.UsuarioId = UsuarioId;
@@ -6691,9 +6691,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class UsuarioSector 
 } //namespace DepositarioAdminWeb.Entities.Relations.Seguridad
@@ -6733,7 +6733,7 @@ using System.Text;
                 public Configuracion()
                 {
                 }
-                public  Configuracion(Int64 EntidadId,Int64 Segundos,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Configuracion(Int64 EntidadId,Int64 Segundos,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EntidadId = EntidadId;
@@ -6758,9 +6758,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class Configuracion 
 } //namespace DepositarioAdminWeb.Entities.Relations.Sincronizacion
@@ -6798,7 +6798,7 @@ using System.Text;
                 public Entidad()
                 {
                 }
-                public  Entidad(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado)
+                public  Entidad(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -6819,9 +6819,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
                  /// <summary>
@@ -7009,7 +7009,7 @@ using System.Text;
                 public Agenda()
                 {
                 }
-                public  Agenda(Int64 Id,String Nombre,DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado)
+                public  Agenda(Int64 Id,String Nombre,DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7072,9 +7072,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
@@ -7114,7 +7114,7 @@ using System.Text;
                 public Esquema()
                 {
                 }
-                public  Esquema(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Esquema(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7134,9 +7134,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -7178,7 +7178,7 @@ using System.Text;
                 public EsquemaDetalle()
                 {
                 }
-                public  EsquemaDetalle(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  EsquemaDetalle(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EsquemaTurnoId = EsquemaTurnoId;
@@ -7204,9 +7204,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -7256,7 +7256,7 @@ using System.Text;
                 public Denominacion()
                 {
                 }
-                public  Denominacion(String Nombre,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Denominacion(String Nombre,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7324,9 +7324,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of TransaccionDetalle that have this DenominacionId value.
                  /// </summary>
@@ -7382,7 +7382,7 @@ using System.Text;
                 public Moneda()
                 {
                 }
-                public  Moneda(String Nombre,Int64 PaisId,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Moneda(String Nombre,Int64 PaisId,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7411,9 +7411,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of DepositarioValor that have this ValorId value.
                  /// </summary>
@@ -7489,7 +7489,7 @@ using System.Text;
                 public RelacionMonedaTipoValor()
                 {
                 }
-                public  RelacionMonedaTipoValor(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  RelacionMonedaTipoValor(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.MonedaId = MonedaId;
@@ -7541,18 +7541,18 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
-                 ///  Represents the child collection of TransaccionSobreDetalle that have this RelacioMonedaTipovalorId value.
+                 ///  Represents the child collection of TransaccionSobreDetalle that have this RelacionMonedaTipoValorId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobreDetalle> ListOf_TransaccionSobreDetalle_RelacioMonedaTipovalorId
+                 public List<DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobreDetalle> ListOf_TransaccionSobreDetalle_RelacionMonedaTipoValorId
                 {
                      get {
                              DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle entities = new DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.RelacioMonedaTipovalorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.RelacionMonedaTipoValorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -7595,7 +7595,7 @@ using System.Text;
                 public Tipo()
                 {
                 }
-                public  Tipo(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Tipo(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7621,9 +7621,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Denominacion that have this TipoValorId value.
                  /// </summary>
@@ -7691,7 +7691,7 @@ using System.Text;
                 public Perfil()
                 {
                 }
-                public  Perfil(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  Perfil(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7735,9 +7735,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of PerfilItem that have this PerfilId value.
                  /// </summary>
@@ -7791,7 +7791,7 @@ using System.Text;
                 public PerfilItem()
                 {
                 }
-                public  PerfilItem(DepositarioAdminWeb.Entities.Relations.Visualizacion.Perfil PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  PerfilItem(DepositarioAdminWeb.Entities.Relations.Visualizacion.Perfil PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.PerfilId = PerfilId;
@@ -7831,9 +7831,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class PerfilItem 
 } //namespace DepositarioAdminWeb.Entities.Relations.Visualizacion
@@ -7875,7 +7875,7 @@ using System.Text;
                 public PerfilTipo()
                 {
                 }
-                public  PerfilTipo(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+                public  PerfilTipo(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7904,9 +7904,9 @@ using System.Text;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64 UsuarioModificacion { get; set; }
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime FechaModificacion { get; set; }
+             public DateTime? FechaModificacion { get; set; }
                  /// <summary>
                  ///  Represents the child collection of Perfil that have this PerfilTipoId value.
                  /// </summary>

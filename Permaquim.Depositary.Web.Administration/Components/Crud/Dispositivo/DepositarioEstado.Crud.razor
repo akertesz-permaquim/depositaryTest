@@ -108,25 +108,15 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioEstado" Data="@DepositarioEstado_entity"  @bind-Value="DepositarioEstado_entity" Submit ="Save" Visible ="@(DepositarioEstado_entity != null)">
           <ChildContent>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="Id" Component="Id" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioEstado_entity.Id)" Name="Id" Disabled="true">
-                </RadzenNumeric>
-             </div>
-         </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Text="DepositarioId" Component="DepositarioId" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                  @if(@Depositario_entities.Count > 0 && @Depositario_entities.FirstOrDefault( c => c.Id == @DepositarioEstado_entity.DepositarioId) != null)
+                  @if((@Depositario_entities.Count > 0 && @Depositario_entities.FirstOrDefault( c => c.Id == @DepositarioEstado_entity.DepositarioId) != null) || crudMode != CrudMode.Delete)
                   {
-                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@DepositarioEstado_entity.DepositarioId"
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioEstado_entity.DepositarioId)"
                                     Data=@Depositario_entities TextProperty = "Nombre" ValueProperty = "Id"
                                     Change=@(args => SelectDepositarioValueChanged(args))
                                     Disabled="@(crudMode==CrudMode.Delete)" />
@@ -140,26 +130,6 @@ else
                   }
               </div>
             </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="SectorId" Component="SectorId" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioEstado_entity.SectorId)" Name="SectorId" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="SucursalId" Component="SucursalId" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioEstado_entity.SucursalId)" Name="SucursalId" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                      <RadzenLabel Text="ContadoraA" Component="ContadoraA" style="width: 100%">
@@ -168,8 +138,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioEstado_entity.ContadoraA)" Name="ContadoraA" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="ContadoraA" Text="ContadoraA is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="ContadoraA" Text="ContadoraA is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -180,8 +153,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioEstado_entity.ContadoraB)" Name="ContadoraB" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="ContadoraB" Text="ContadoraB is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="ContadoraB" Text="ContadoraB is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -192,8 +168,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioEstado_entity.Placa)" Name="Placa" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Placa" Text="Placa is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Placa" Text="Placa is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -204,8 +183,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioEstado_entity.Puerta)" Name="Puerta" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Puerta" Text="Puerta is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Puerta" Text="Puerta is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -216,8 +198,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioEstado_entity.Contenedor)" Name="Contenedor" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Contenedor" Text="Contenedor is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Contenedor" Text="Contenedor is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -236,20 +221,26 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(DepositarioEstado_entity.Observaciones)" Name="Observaciones" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Observaciones" Text="Observaciones is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Observaciones" Text="Observaciones is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
-                </RadzenLabel>
-              </div>
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
               <div class="col-md-9">
-                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(DepositarioEstado_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
-                </RadzenDatePicker>
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(DepositarioEstado_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true" >
+                 </RadzenDatePicker>
               </div>
             </div>
+         }
             <div class="row">
               <div class="col offset-sm-3">
                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
@@ -353,20 +344,71 @@ else
     private async Task Save()
     {
         string actionInformation = string.Empty;
+        NotificationSeverity severityType = NotificationSeverity.Error;
+        string summary = string.Empty;
         DepositarioAdminWeb.Business.Tables.Dispositivo.DepositarioEstado crud = new();
+        foreach(var property in DepositarioEstado_entity.GetType().GetProperties())
+        {
+             switch(property.Name)
+             {
+                 case "FechaModificacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     DepositarioEstado_entity.FechaModificacion=null;
+                 }
+                 else
+                 {
+                     DepositarioEstado_entity.FechaModificacion=DateTime.Now;
+                 }
+                 break;
+             }
+        }
         switch (crudMode)
         {
             case CrudMode.Add:
-                crud.Add(DepositarioEstado_entity);
-                actionInformation = "agregado.";
-                break;
+                try
+                {
+                     crud.Add(DepositarioEstado_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "agregado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
+            break;
             case CrudMode.Edit:
-                crud.Update(DepositarioEstado_entity);
-                actionInformation = "modificado.";
-                break;
+                try
+                {
+                     crud.Update(DepositarioEstado_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "modificado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
+            break;
             case CrudMode.Delete:
-                crud.Delete(DepositarioEstado_entity);
-                actionInformation = "eliminado.";
+                try
+                {
+                     crud.Delete(DepositarioEstado_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "eliminado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
                 break;
         }
  
@@ -374,8 +416,8 @@ else
         crudMode = CrudMode.List;
  
         ShowNotification(new NotificationMessage { 
-            Severity = NotificationSeverity.Success, 
-            Summary = "El registro ha sido ", 
+            Severity = severityType, 
+            Summary = summary, 
             Detail = actionInformation, 
             Duration = 4000 });
        

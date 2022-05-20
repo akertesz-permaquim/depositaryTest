@@ -103,6 +103,7 @@ public class DataHandler : DataHandlerBase
             _commandText += GetFieldList(true);
             _commandText += Constants.SQL_FROM ;
             _commandText += GetFullDataEntityName();
+            _commandText += " WITH (NOLOCK) ";
             _commandText += WhereParameter.ToString();
             _commandText += GroupByParameter.ToString();
             BuildParameterValuesList(WhereParameter);

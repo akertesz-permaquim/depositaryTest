@@ -40,13 +40,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[6.0.5, )"
             },
             "Radzen.Blazor": {
               "target": "Package",
-              "version": "[3.18.8, )"
+              "version": "[3.18.9, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",

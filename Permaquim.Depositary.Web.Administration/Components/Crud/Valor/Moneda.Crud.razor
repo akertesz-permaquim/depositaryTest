@@ -91,16 +91,6 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Data="@Moneda_entity"  @bind-Value="Moneda_entity" Submit ="Save" Visible ="@(Moneda_entity != null)">
           <ChildContent>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="Id" Component="Id" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.Id)" Name="Id" Disabled="true">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                      <RadzenLabel Text="Nombre" Component="Nombre" style="width: 100%">
@@ -109,20 +99,13 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(Moneda_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="PaisId" Component="PaisId" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.PaisId)" Name="PaisId" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                      <RadzenLabel Text="Codigo" Component="Codigo" style="width: 100%">
@@ -131,8 +114,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(Moneda_entity.Codigo)" Name="Codigo" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Codigo" Text="Codigo is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Codigo" Text="Codigo is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -143,46 +129,58 @@ else
                 <RadzenCheckBox @bind-Value=@Moneda_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Moneda_entity)) />
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
-                 </RadzenLabel>
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="true">
+                 </RadzenNumeric>
+                 </div>
              </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
-                </RadzenLabel>
-              </div>
+         }
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
               <div class="col-md-9">
-                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Moneda_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
-                </RadzenDatePicker>
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Moneda_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true" >
+                 </RadzenDatePicker>
               </div>
             </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
-                 </RadzenLabel>
+         }
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="true">
+                 </RadzenNumeric>
+                 </div>
              </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
-                </RadzenLabel>
-              </div>
+         }
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
               <div class="col-md-9">
-                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Moneda_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
-                </RadzenDatePicker>
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Moneda_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true" >
+                 </RadzenDatePicker>
               </div>
             </div>
+         }
             <div class="row">
               <div class="col offset-sm-3">
                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
@@ -272,20 +270,93 @@ else
     private async Task Save()
     {
         string actionInformation = string.Empty;
+        NotificationSeverity severityType = NotificationSeverity.Error;
+        string summary = string.Empty;
         DepositarioAdminWeb.Business.Tables.Valor.Moneda crud = new();
+        foreach(var property in Moneda_entity.GetType().GetProperties())
+        {
+             switch(property.Name)
+             {
+                 case "FechaModificacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     Moneda_entity.FechaModificacion=null;
+                 }
+                 else
+                 {
+                     Moneda_entity.FechaModificacion=DateTime.Now;
+                 }
+                 break;
+                 case "FechaCreacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     Moneda_entity.FechaCreacion=DateTime.Now;
+                 }
+                 break;
+                 case "UsuarioCreacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     Moneda_entity.UsuarioCreacion=1;
+                 }
+                 break;
+                 case "UsuarioModificacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     Moneda_entity.UsuarioModificacion=null;
+                 }
+                 else
+                 {
+                     Moneda_entity.UsuarioModificacion=1;
+                 }
+                 break;
+             }
+        }
         switch (crudMode)
         {
             case CrudMode.Add:
-                crud.Add(Moneda_entity);
-                actionInformation = "agregado.";
-                break;
+                try
+                {
+                     crud.Add(Moneda_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "agregado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
+            break;
             case CrudMode.Edit:
-                crud.Update(Moneda_entity);
-                actionInformation = "modificado.";
-                break;
+                try
+                {
+                     crud.Update(Moneda_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "modificado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
+            break;
             case CrudMode.Delete:
-                crud.Delete(Moneda_entity);
-                actionInformation = "eliminado.";
+                try
+                {
+                     crud.Delete(Moneda_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "eliminado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
                 break;
         }
  
@@ -293,8 +364,8 @@ else
         crudMode = CrudMode.List;
  
         ShowNotification(new NotificationMessage { 
-            Severity = NotificationSeverity.Success, 
-            Summary = "El registro ha sido ", 
+            Severity = severityType, 
+            Summary = summary, 
             Detail = actionInformation, 
             Duration = 4000 });
        

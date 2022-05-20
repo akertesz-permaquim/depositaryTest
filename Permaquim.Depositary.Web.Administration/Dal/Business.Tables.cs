@@ -69,7 +69,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Aplicacion.Configuracion</returns>
-			public Entities.Tables.Aplicacion.Configuracion Add(Int64 AplicacionId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Aplicacion.Configuracion Add(Int64 AplicacionId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Aplicacion.Configuracion)base.Add(new Entities.Tables.Aplicacion.Configuracion(AplicacionId,Clave,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -273,7 +273,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 aplicacionid,String clave,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 aplicacionid,String clave,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Aplicacion.Configuracion {Id = id,AplicacionId = aplicacionid,Clave = clave,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -775,7 +775,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Auditoria.TipoLog</returns>
-			public Entities.Tables.Auditoria.TipoLog Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Auditoria.TipoLog Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Auditoria.TipoLog)base.Add(new Entities.Tables.Auditoria.TipoLog(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -965,7 +965,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Auditoria.TipoLog {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -1117,7 +1117,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Banca.Banco</returns>
-			public Entities.Tables.Banca.Banco Add(String Nombre,String Descripcion,String Codigo,Int64 PaisId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Banca.Banco Add(String Nombre,String Descripcion,String Codigo,Int64 PaisId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Banca.Banco)base.Add(new Entities.Tables.Banca.Banco(Nombre,Descripcion,Codigo,PaisId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -1335,7 +1335,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,String codigo,Int64 paisid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,String codigo,Int64 paisid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Banca.Banco {Id = id,Nombre = nombre,Descripcion = descripcion,Codigo = codigo,PaisId = paisid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -1489,7 +1489,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Banca.Cuenta</returns>
-			public Entities.Tables.Banca.Cuenta Add(Int64 TipoId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Banca.Cuenta Add(Int64 TipoId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Banca.Cuenta)base.Add(new Entities.Tables.Banca.Cuenta(TipoId,Nombre,Numero,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -1721,7 +1721,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String numero,Int64 bancoid,String sucursalbancaria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String numero,Int64 bancoid,String sucursalbancaria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Banca.Cuenta {Id = id,TipoId = tipoid,Nombre = nombre,Numero = numero,BancoId = bancoid,SucursalBancaria = sucursalbancaria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -1869,7 +1869,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Banca.UsuarioCuenta</returns>
-			public Entities.Tables.Banca.UsuarioCuenta Add(Int64 UsuarioId,Int64 CuentaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Banca.UsuarioCuenta Add(Int64 UsuarioId,Int64 CuentaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Banca.UsuarioCuenta)base.Add(new Entities.Tables.Banca.UsuarioCuenta(UsuarioId,CuentaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2059,7 +2059,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 usuarioid,Int64 cuentaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 usuarioid,Int64 cuentaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Banca.UsuarioCuenta {Id = id,UsuarioId = usuarioid,CuentaId = cuentaid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -2209,7 +2209,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Biometria.HuellaDactilar</returns>
-			public Entities.Tables.Biometria.HuellaDactilar Add(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Biometria.HuellaDactilar Add(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Biometria.HuellaDactilar)base.Add(new Entities.Tables.Biometria.HuellaDactilar(UsuarioId,Dedo,Huella,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2413,7 +2413,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 usuarioid,Byte dedo,String huella,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 usuarioid,Byte dedo,String huella,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Biometria.HuellaDactilar {Id = id,UsuarioId = usuarioid,Dedo = dedo,Huella = huella,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -2571,7 +2571,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.Empresa</returns>
-			public Entities.Tables.Directorio.Empresa Add(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Directorio.Empresa Add(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Directorio.Empresa)base.Add(new Entities.Tables.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2831,7 +2831,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 grupoid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 estiloesquemaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 grupoid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 estiloesquemaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Directorio.Empresa {Id = id,Nombre = nombre,Descripcion = descripcion,GrupoId = grupoid,CodigoExterno = codigoexterno,Direccion = direccion,CodigoPostalId = codigopostalid,EstiloEsquemaId = estiloesquemaid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -2981,7 +2981,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.Grupo</returns>
-			public Entities.Tables.Directorio.Grupo Add(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Directorio.Grupo Add(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Directorio.Grupo)base.Add(new Entities.Tables.Directorio.Grupo(Nombre,Descripcion,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3185,7 +3185,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Directorio.Grupo {Id = id,Nombre = nombre,Descripcion = descripcion,CodigoExterno = codigoexterno,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -3335,7 +3335,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.IdentificadorUsuario</returns>
-			public Entities.Tables.Directorio.IdentificadorUsuario Add(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Directorio.IdentificadorUsuario Add(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Directorio.IdentificadorUsuario)base.Add(new Entities.Tables.Directorio.IdentificadorUsuario(TipoId,UsuarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3539,7 +3539,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 usuarioid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 usuarioid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Directorio.IdentificadorUsuario {Id = id,TipoId = tipoid,UsuarioId = usuarioid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -3689,7 +3689,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.RolFuncion</returns>
-			public Entities.Tables.Directorio.RolFuncion Add(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Directorio.RolFuncion Add(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Directorio.RolFuncion)base.Add(new Entities.Tables.Directorio.RolFuncion(FuncionId,RolId,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3893,7 +3893,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int16 id,Int64 funcionid,Int64 rolid,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int16 id,Int64 funcionid,Int64 rolid,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Directorio.RolFuncion {Id = id,FuncionId = funcionid,RolId = rolid,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -4043,7 +4043,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.Sector</returns>
-			public Entities.Tables.Directorio.Sector Add(Int64 SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Directorio.Sector Add(Int64 SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Directorio.Sector)base.Add(new Entities.Tables.Directorio.Sector(SucursalId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -4247,7 +4247,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 sucursalid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 sucursalid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Directorio.Sector {Id = id,SucursalId = sucursalid,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -4405,7 +4405,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.Sucursal</returns>
-			public Entities.Tables.Directorio.Sucursal Add(String Nombre,String Descripcion,Int64 EmpresaId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 ZonaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Directorio.Sucursal Add(String Nombre,String Descripcion,Int64 EmpresaId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 ZonaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Directorio.Sucursal)base.Add(new Entities.Tables.Directorio.Sucursal(Nombre,Descripcion,EmpresaId,CodigoExterno,Direccion,CodigoPostalId,ZonaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -4665,7 +4665,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 empresaid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 zonaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 empresaid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 zonaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Directorio.Sucursal {Id = id,Nombre = nombre,Descripcion = descripcion,EmpresaId = empresaid,CodigoExterno = codigoexterno,Direccion = direccion,CodigoPostalId = codigopostalid,ZonaId = zonaid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -4815,7 +4815,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.TipoIdentificador</returns>
-			public Entities.Tables.Directorio.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Directorio.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Directorio.TipoIdentificador)base.Add(new Entities.Tables.Directorio.TipoIdentificador(Nombre,Descripcion,Mascara,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5019,7 +5019,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,String mascara,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,String mascara,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Directorio.TipoIdentificador {Id = id,Nombre = nombre,Descripcion = descripcion,Mascara = mascara,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -5175,7 +5175,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.ComandoContadora</returns>
-			public Entities.Tables.Dispositivo.ComandoContadora Add(Int64 ContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.ComandoContadora Add(Int64 ContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.ComandoContadora)base.Add(new Entities.Tables.Dispositivo.ComandoContadora(ContadoraId,Nombre,Descripcion,Comando,TiempoDetencion,Respuesta,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5421,7 +5421,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 contadoraid,String nombre,String descripcion,String comando,Int64 tiempodetencion,String respuesta,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 contadoraid,String nombre,String descripcion,String comando,Int64 tiempodetencion,String respuesta,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.ComandoContadora {Id = id,ContadoraId = contadoraid,Nombre = nombre,Descripcion = descripcion,Comando = comando,TiempoDetencion = tiempodetencion,Respuesta = respuesta,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -5577,7 +5577,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.ComandoPlaca</returns>
-			public Entities.Tables.Dispositivo.ComandoPlaca Add(Int64 TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.ComandoPlaca Add(Int64 TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.ComandoPlaca)base.Add(new Entities.Tables.Dispositivo.ComandoPlaca(TipoPlacaId,Nombre,Descripcion,Comando,TiempoDetencion,Respuesta,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5823,7 +5823,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoplacaid,String nombre,String descripcion,String comando,Int64 tiempodetencion,String respuesta,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoplacaid,String nombre,String descripcion,String comando,Int64 tiempodetencion,String respuesta,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.ComandoPlaca {Id = id,TipoPlacaId = tipoplacaid,Nombre = nombre,Descripcion = descripcion,Comando = comando,TiempoDetencion = tiempodetencion,Respuesta = respuesta,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -5973,7 +5973,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.ConfiguracionDepositario</returns>
-			public Entities.Tables.Dispositivo.ConfiguracionDepositario Add(Int64 TipoId,Int64 DepositarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.ConfiguracionDepositario Add(Int64 TipoId,Int64 DepositarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.ConfiguracionDepositario)base.Add(new Entities.Tables.Dispositivo.ConfiguracionDepositario(TipoId,DepositarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -6177,7 +6177,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.ConfiguracionDepositario {Id = id,TipoId = tipoid,DepositarioId = depositarioid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -6333,7 +6333,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.Depositario</returns>
-			public Entities.Tables.Dispositivo.Depositario Add(String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.Depositario Add(String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.Depositario)base.Add(new Entities.Tables.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -6579,7 +6579,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 sectorid,String numeroserie,String codigoexterno,Int64 modeloid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 sectorid,String numeroserie,String codigoexterno,Int64 modeloid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.Depositario {Id = id,Nombre = nombre,Descripcion = descripcion,SectorId = sectorid,NumeroSerie = numeroserie,CodigoExterno = codigoexterno,ModeloId = modeloid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -6747,7 +6747,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.DepositarioContadora</returns>
-			public Entities.Tables.Dispositivo.DepositarioContadora Add(Int64 ContadoraId,Int64 DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.DepositarioContadora Add(Int64 ContadoraId,Int64 DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.DepositarioContadora)base.Add(new Entities.Tables.Dispositivo.DepositarioContadora(ContadoraId,DepositarioId,NumeroSerie,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -7077,7 +7077,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 contadoraid,Int64 depositarioid,String numeroserie,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 contadoraid,Int64 depositarioid,String numeroserie,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioContadora {Id = id,ContadoraId = contadoraid,DepositarioId = depositarioid,NumeroSerie = numeroserie,PortName = portname,Parity = parity,DataBits = databits,ReadBufferSize = readbuffersize,StopBits = stopbits,ReadTimeout = readtimeout,Handshake = handshake,BaudRate = baudrate,RtsEnable = rtsenable,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -7233,7 +7233,7 @@ using System.Text;
          /// <param name='Observaciones'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.DepositarioEstado</returns>
-			public Entities.Tables.Dispositivo.DepositarioEstado Add(Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.DepositarioEstado Add(Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.DepositarioEstado)base.Add(new Entities.Tables.Dispositivo.DepositarioEstado(DepositarioId,SectorId,SucursalId,ContadoraA,ContadoraB,Placa,Puerta,Contenedor,FueraDeServicio,Observaciones,FechaModificacion));
 			}
@@ -7479,7 +7479,7 @@ using System.Text;
             /// <param name="Observaciones"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,String contadoraa,String contadorab,String placa,String puerta,String contenedor,Boolean fueradeservicio,String observaciones,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,String contadoraa,String contadorab,String placa,String puerta,String contenedor,Boolean fueradeservicio,String observaciones,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioEstado {Id = id,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,ContadoraA = contadoraa,ContadoraB = contadorab,Placa = placa,Puerta = puerta,Contenedor = contenedor,FueraDeServicio = fueradeservicio,Observaciones = observaciones,FechaModificacion = fechamodificacion});
             }
@@ -7665,7 +7665,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.DepositarioPlaca</returns>
-			public Entities.Tables.Dispositivo.DepositarioPlaca Add(Int64 DepositarioId,Int64 PlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.DepositarioPlaca Add(Int64 DepositarioId,Int64 PlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.DepositarioPlaca)base.Add(new Entities.Tables.Dispositivo.DepositarioPlaca(DepositarioId,PlacaId,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,SensorA,BitSensorA,SensorB,BitSensorB,SensorC,BitSensorC,SensorD,BitSensorD,SensorL,BitSensorL,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -8121,7 +8121,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 depositarioid,Int64 placaid,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean sensora,Int16 bitsensora,Boolean sensorb,Int16 bitsensorb,Boolean sensorc,Int16 bitsensorc,Boolean sensord,Int16 bitsensord,Boolean sensorl,Int16 bitsensorl,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 depositarioid,Int64 placaid,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean sensora,Int16 bitsensora,Boolean sensorb,Int16 bitsensorb,Boolean sensorc,Int16 bitsensorc,Boolean sensord,Int16 bitsensord,Boolean sensorl,Int16 bitsensorl,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioPlaca {Id = id,DepositarioId = depositarioid,PlacaId = placaid,PortName = portname,Parity = parity,DataBits = databits,ReadBufferSize = readbuffersize,StopBits = stopbits,ReadTimeout = readtimeout,Handshake = handshake,BaudRate = baudrate,RtsEnable = rtsenable,SensorA = sensora,BitSensorA = bitsensora,SensorB = sensorb,BitSensorB = bitsensorb,SensorC = sensorc,BitSensorC = bitsensorc,SensorD = sensord,BitSensorD = bitsensord,SensorL = sensorl,BitSensorL = bitsensorl,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -8269,7 +8269,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.DepositarioValor</returns>
-			public Entities.Tables.Dispositivo.DepositarioValor Add(Int64 DepositarioId,Int64 ValorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.DepositarioValor Add(Int64 DepositarioId,Int64 ValorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.DepositarioValor)base.Add(new Entities.Tables.Dispositivo.DepositarioValor(DepositarioId,ValorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -8459,7 +8459,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 depositarioid,Int64 valorid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 depositarioid,Int64 valorid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioValor {Id = id,DepositarioId = depositarioid,ValorId = valorid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -8607,7 +8607,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.Marca</returns>
-			public Entities.Tables.Dispositivo.Marca Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.Marca Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.Marca)base.Add(new Entities.Tables.Dispositivo.Marca(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -8797,7 +8797,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.Marca {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -8947,7 +8947,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.Modelo</returns>
-			public Entities.Tables.Dispositivo.Modelo Add(Int64 MarcaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.Modelo Add(Int64 MarcaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.Modelo)base.Add(new Entities.Tables.Dispositivo.Modelo(MarcaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9151,7 +9151,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 marcaid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 marcaid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.Modelo {Id = id,MarcaId = marcaid,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -9301,7 +9301,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.TipoConfiguracionDepositario</returns>
-			public Entities.Tables.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.TipoConfiguracionDepositario)base.Add(new Entities.Tables.Dispositivo.TipoConfiguracionDepositario(Clave,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9505,7 +9505,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String clave,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String clave,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.TipoConfiguracionDepositario {Id = id,Clave = clave,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -9673,7 +9673,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.TipoContadora</returns>
-			public Entities.Tables.Dispositivo.TipoContadora Add(Int64 ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.TipoContadora Add(Int64 ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.TipoContadora)base.Add(new Entities.Tables.Dispositivo.TipoContadora(ModeloId,Nombre,Descripcion,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10003,7 +10003,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 modeloid,String nombre,String descripcion,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 modeloid,String nombre,String descripcion,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.TipoContadora {Id = id,ModeloId = modeloid,Nombre = nombre,Descripcion = descripcion,PortName = portname,Parity = parity,DataBits = databits,ReadBufferSize = readbuffersize,StopBits = stopbits,ReadTimeout = readtimeout,Handshake = handshake,BaudRate = baudrate,RtsEnable = rtsenable,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -10191,7 +10191,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.TipoPlaca</returns>
-			public Entities.Tables.Dispositivo.TipoPlaca Add(Int64 ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Dispositivo.TipoPlaca Add(Int64 ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Dispositivo.TipoPlaca)base.Add(new Entities.Tables.Dispositivo.TipoPlaca(ModeloId,Nombre,Descripcion,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,SensorA,BitSensorA,SensorB,BitSensorB,SensorC,BitSensorC,SensorD,BitSensorD,SensorL,BitSensorL,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10661,7 +10661,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 modeloid,String nombre,String descripcion,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean sensora,Int16 bitsensora,Boolean sensorb,Int16 bitsensorb,Boolean sensorc,Int16 bitsensorc,Boolean sensord,Int16 bitsensord,Boolean sensorl,Int16 bitsensorl,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 modeloid,String nombre,String descripcion,String portname,Int32 parity,Int32 databits,Int32 readbuffersize,Int32 stopbits,Int32 readtimeout,Int32 handshake,Int32 baudrate,Boolean rtsenable,Boolean sensora,Int16 bitsensora,Boolean sensorb,Int16 bitsensorb,Boolean sensorc,Int16 bitsensorc,Boolean sensord,Int16 bitsensord,Boolean sensorl,Int16 bitsensorl,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Dispositivo.TipoPlaca {Id = id,ModeloId = modeloid,Nombre = nombre,Descripcion = descripcion,PortName = portname,Parity = parity,DataBits = databits,ReadBufferSize = readbuffersize,StopBits = stopbits,ReadTimeout = readtimeout,Handshake = handshake,BaudRate = baudrate,RtsEnable = rtsenable,SensorA = sensora,BitSensorA = bitsensora,SensorB = sensorb,BitSensorB = bitsensorb,SensorC = sensorc,BitSensorC = bitsensorc,SensorD = sensord,BitSensorD = bitsensord,SensorL = sensorl,BitSensorL = bitsensorl,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -10809,7 +10809,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Estilo.Esquema</returns>
-			public Entities.Tables.Estilo.Esquema Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Estilo.Esquema Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Estilo.Esquema)base.Add(new Entities.Tables.Estilo.Esquema(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10999,7 +10999,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Estilo.Esquema {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -11149,7 +11149,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Estilo.EsquemaDetalle</returns>
-			public Entities.Tables.Estilo.EsquemaDetalle Add(Int64 EsquemaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Estilo.EsquemaDetalle Add(Int64 EsquemaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Estilo.EsquemaDetalle)base.Add(new Entities.Tables.Estilo.EsquemaDetalle(EsquemaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -11353,7 +11353,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 esquemaid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 esquemaid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Estilo.EsquemaDetalle {Id = id,EsquemaId = esquemaid,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -11501,7 +11501,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Estilo.EsquemaDetalleValor</returns>
-			public Entities.Tables.Estilo.EsquemaDetalleValor Add(Int64 EsquemaDetalleId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Estilo.EsquemaDetalleValor Add(Int64 EsquemaDetalleId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Estilo.EsquemaDetalleValor)base.Add(new Entities.Tables.Estilo.EsquemaDetalleValor(EsquemaDetalleId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -11691,7 +11691,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 esquemadetalleid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 esquemadetalleid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Estilo.EsquemaDetalleValor {Id = id,EsquemaDetalleId = esquemadetalleid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -11843,7 +11843,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Geografia.Ciudad</returns>
-			public Entities.Tables.Geografia.Ciudad Add(String Nombre,String Descripcion,Int64 ProvinciaId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Geografia.Ciudad Add(String Nombre,String Descripcion,Int64 ProvinciaId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Geografia.Ciudad)base.Add(new Entities.Tables.Geografia.Ciudad(Nombre,Descripcion,ProvinciaId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12061,7 +12061,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 provinciaid,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 provinciaid,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Geografia.Ciudad {Id = id,Nombre = nombre,Descripcion = descripcion,ProvinciaId = provinciaid,CodigoExterno = codigoexterno,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -12213,7 +12213,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Geografia.CodigoPostal</returns>
-			public Entities.Tables.Geografia.CodigoPostal Add(String Nombre,String Descripcion,Int64 CiudadId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Geografia.CodigoPostal Add(String Nombre,String Descripcion,Int64 CiudadId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Geografia.CodigoPostal)base.Add(new Entities.Tables.Geografia.CodigoPostal(Nombre,Descripcion,CiudadId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12431,7 +12431,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 ciudadid,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 ciudadid,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Geografia.CodigoPostal {Id = id,Nombre = nombre,Descripcion = descripcion,CiudadId = ciudadid,CodigoExterno = codigoexterno,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -12583,7 +12583,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Geografia.Pais</returns>
-			public Entities.Tables.Geografia.Pais Add(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Geografia.Pais Add(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Geografia.Pais)base.Add(new Entities.Tables.Geografia.Pais(Nombre,Descripcion,Codigo,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12801,7 +12801,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,String codigo,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,String codigo,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Geografia.Pais {Id = id,Nombre = nombre,Descripcion = descripcion,Codigo = codigo,CodigoExterno = codigoexterno,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -12953,7 +12953,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Geografia.Provincia</returns>
-			public Entities.Tables.Geografia.Provincia Add(String Nombre,String Descripcion,Int64 PaisId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Geografia.Provincia Add(String Nombre,String Descripcion,Int64 PaisId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Geografia.Provincia)base.Add(new Entities.Tables.Geografia.Provincia(Nombre,Descripcion,PaisId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -13171,7 +13171,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 paisid,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 paisid,String codigoexterno,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Geografia.Provincia {Id = id,Nombre = nombre,Descripcion = descripcion,PaisId = paisid,CodigoExterno = codigoexterno,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -13321,7 +13321,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Geografia.Zona</returns>
-			public Entities.Tables.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Geografia.Zona)base.Add(new Entities.Tables.Geografia.Zona(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -13525,7 +13525,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,String codigo,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,String codigo,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Geografia.Zona {Id = id,Nombre = nombre,Descripcion = descripcion,Codigo = codigo,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -13673,7 +13673,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.CierreDiario</returns>
-			public Entities.Tables.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.CierreDiario)base.Add(new Entities.Tables.Operacion.CierreDiario(Nombre,Fecha,SesionId,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -13863,7 +13863,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,DateTime fecha,Int64 sesionid,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,DateTime fecha,Int64 sesionid,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.CierreDiario {Id = id,Nombre = nombre,Fecha = fecha,SesionId = sesionid,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -14017,7 +14017,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.Contenedor</returns>
-			public Entities.Tables.Operacion.Contenedor Add(String Nombre,Int64 TipoId,String Identificador,DateTime FechaApertura,DateTime? FechaCierre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Operacion.Contenedor Add(String Nombre,Int64 TipoId,String Identificador,DateTime FechaApertura,DateTime? FechaCierre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.Contenedor)base.Add(new Entities.Tables.Operacion.Contenedor(Nombre,TipoId,Identificador,FechaApertura,FechaCierre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14249,7 +14249,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 tipoid,String identificador,DateTime fechaapertura,DateTime? fechacierre,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Int64 tipoid,String identificador,DateTime fechaapertura,DateTime? fechacierre,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.Contenedor {Id = id,Nombre = nombre,TipoId = tipoid,Identificador = identificador,FechaApertura = fechaapertura,FechaCierre = fechacierre,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -15011,7 +15011,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.TipoContenedor</returns>
-			public Entities.Tables.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.TipoContenedor)base.Add(new Entities.Tables.Operacion.TipoContenedor(Nombre,Descripcion,Capacidad,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -15215,7 +15215,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int32 capacidad,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int32 capacidad,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.TipoContenedor {Id = id,Nombre = nombre,Descripcion = descripcion,Capacidad = capacidad,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -15365,7 +15365,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.TipoEvento</returns>
-			public Entities.Tables.Operacion.TipoEvento Add(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Operacion.TipoEvento Add(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.TipoEvento)base.Add(new Entities.Tables.Operacion.TipoEvento(Nombre,Descripcion,EsBloqueante,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -15569,7 +15569,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean esbloqueante,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean esbloqueante,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.TipoEvento {Id = id,Nombre = nombre,Descripcion = descripcion,EsBloqueante = esbloqueante,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -15717,7 +15717,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.TipoTransaccion</returns>
-			public Entities.Tables.Operacion.TipoTransaccion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Operacion.TipoTransaccion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.TipoTransaccion)base.Add(new Entities.Tables.Operacion.TipoTransaccion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -15907,7 +15907,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.TipoTransaccion {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -17014,7 +17014,7 @@ using System.Text;
                 {
 					Id,
 					SobreId,
-					RelacioMonedaTipovalorId,
+					RelacionMonedaTipoValorId,
 					CantidadDeclarada,
 					Fecha
 				}
@@ -17059,13 +17059,13 @@ using System.Text;
          /// TransaccionSobreDetalle Add Method
          /// </summary>
          /// <param name='SobreId'></param>
-         /// <param name='RelacioMonedaTipovalorId'></param>
+         /// <param name='RelacionMonedaTipoValorId'></param>
          /// <param name='CantidadDeclarada'></param>
          /// <param name='Fecha'></param>
          /// <returns>Entities.Tables.Operacion.TransaccionSobreDetalle</returns>
-			public Entities.Tables.Operacion.TransaccionSobreDetalle Add(Int64 SobreId,Int64 RelacioMonedaTipovalorId,Int64 CantidadDeclarada,DateTime Fecha) 
+			public Entities.Tables.Operacion.TransaccionSobreDetalle Add(Int64 SobreId,Int64 RelacionMonedaTipoValorId,Int64 CantidadDeclarada,DateTime Fecha) 
 			{
-			  return (Entities.Tables.Operacion.TransaccionSobreDetalle)base.Add(new Entities.Tables.Operacion.TransaccionSobreDetalle(SobreId,RelacioMonedaTipovalorId,CantidadDeclarada,Fecha));
+			  return (Entities.Tables.Operacion.TransaccionSobreDetalle)base.Add(new Entities.Tables.Operacion.TransaccionSobreDetalle(SobreId,RelacionMonedaTipoValorId,CantidadDeclarada,Fecha));
 			}
             public new List<Entities.Tables.Operacion.TransaccionSobreDetalle> Items()
             {
@@ -17099,11 +17099,11 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="SobreId"></param>
-            /// <param name="RelacioMonedaTipovalorId"></param>
+            /// <param name="RelacionMonedaTipoValorId"></param>
             /// <param name="CantidadDeclarada"></param>
             /// <param name="Fecha"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Operacion.TransaccionSobreDetalle> Items(Int64? Id,Int64? SobreId,Int64? RelacioMonedaTipovalorId,Int64? CantidadDeclarada,DateTime? Fecha)
+            public List<Entities.Tables.Operacion.TransaccionSobreDetalle> Items(Int64? Id,Int64? SobreId,Int64? RelacionMonedaTipoValorId,Int64? CantidadDeclarada,DateTime? Fecha)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -17130,15 +17130,15 @@ using System.Text;
                     }
                    
                 }
-                if (RelacioMonedaTipovalorId != null)
+                if (RelacionMonedaTipoValorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.RelacioMonedaTipovalorId, sqlEnum.OperandEnum.Equal, RelacioMonedaTipovalorId);
+                        this.Where.Add(ColumnEnum.RelacionMonedaTipoValorId, sqlEnum.OperandEnum.Equal, RelacionMonedaTipoValorId);
                     }
                     else
                     {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.RelacioMonedaTipovalorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RelacioMonedaTipovalorId);
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.RelacionMonedaTipoValorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RelacionMonedaTipoValorId);
                     }
                    
                 }
@@ -17207,13 +17207,13 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="SobreId"></param>
-            /// <param name="RelacioMonedaTipovalorId"></param>
+            /// <param name="RelacionMonedaTipoValorId"></param>
             /// <param name="CantidadDeclarada"></param>
             /// <param name="Fecha"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 sobreid,Int64 relaciomonedatipovalorid,Int64 cantidaddeclarada,DateTime fecha)
+            public Int64 Update(Int64 id,Int64 sobreid,Int64 relacionmonedatipovalorid,Int64 cantidaddeclarada,DateTime fecha)
             {
-                return base.Update((IDataItem) new Entities.Tables.Operacion.TransaccionSobreDetalle {Id = id,SobreId = sobreid,RelacioMonedaTipovalorId = relaciomonedatipovalorid,CantidadDeclarada = cantidaddeclarada,Fecha = fecha});
+                return base.Update((IDataItem) new Entities.Tables.Operacion.TransaccionSobreDetalle {Id = id,SobreId = sobreid,RelacionMonedaTipoValorId = relacionmonedatipovalorid,CantidadDeclarada = cantidaddeclarada,Fecha = fecha});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Operacion.TransaccionSobreDetalle
@@ -17373,7 +17373,7 @@ using System.Text;
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Tables.Operacion.Turno</returns>
-			public Entities.Tables.Operacion.Turno Add(Int64 TurnoDepositarioId,Int64 DepositarioId,Int64 SectorId,DateTime? FechaApertura,DateTime? FechaCierre,DateTime? Fecha,Int32 Secuencia,Int64? CierreDiarioId,String Observaciones,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Tables.Operacion.Turno Add(Int64 TurnoDepositarioId,Int64 DepositarioId,Int64 SectorId,DateTime? FechaApertura,DateTime? FechaCierre,DateTime? Fecha,Int32 Secuencia,Int64? CierreDiarioId,String Observaciones,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Tables.Operacion.Turno)base.Add(new Entities.Tables.Operacion.Turno(TurnoDepositarioId,DepositarioId,SectorId,FechaApertura,FechaCierre,Fecha,Secuencia,CierreDiarioId,Observaciones,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -17661,7 +17661,7 @@ using System.Text;
             /// <param name="FechaModificacion"></param>
             /// <param name="Habilitado"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 turnodepositarioid,Int64 depositarioid,Int64 sectorid,DateTime? fechaapertura,DateTime? fechacierre,DateTime? fecha,Int32 secuencia,Int64? cierrediarioid,String observaciones,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion,Boolean habilitado)
+            public Int64 Update(Int64 id,Int64 turnodepositarioid,Int64 depositarioid,Int64 sectorid,DateTime? fechaapertura,DateTime? fechacierre,DateTime? fecha,Int32 secuencia,Int64? cierrediarioid,String observaciones,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion,Boolean habilitado)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.Turno {Id = id,TurnoDepositarioId = turnodepositarioid,DepositarioId = depositarioid,SectorId = sectorid,FechaApertura = fechaapertura,FechaCierre = fechacierre,Fecha = fecha,Secuencia = secuencia,CierreDiarioId = cierrediarioid,Observaciones = observaciones,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion,Habilitado = habilitado});
             }
@@ -17809,7 +17809,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.TurnoUsuario</returns>
-			public Entities.Tables.Operacion.TurnoUsuario Add(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Operacion.TurnoUsuario Add(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.TurnoUsuario)base.Add(new Entities.Tables.Operacion.TurnoUsuario(UsuarioId,TurnoId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -17999,7 +17999,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 usuarioid,Int64 turnoid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 usuarioid,Int64 turnoid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.TurnoUsuario {Id = id,UsuarioId = usuarioid,TurnoId = turnoid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -18147,7 +18147,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Regionalizacion.Lenguaje</returns>
-			public Entities.Tables.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Regionalizacion.Lenguaje)base.Add(new Entities.Tables.Regionalizacion.Lenguaje(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -18337,7 +18337,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Regionalizacion.Lenguaje {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -18487,7 +18487,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Regionalizacion.LenguajeItem</returns>
-			public Entities.Tables.Regionalizacion.LenguajeItem Add(Int64 LenguajeId,String Clave,String Texto,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Regionalizacion.LenguajeItem Add(Int64 LenguajeId,String Clave,String Texto,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Regionalizacion.LenguajeItem)base.Add(new Entities.Tables.Regionalizacion.LenguajeItem(LenguajeId,Clave,Texto,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -18691,7 +18691,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 lenguajeid,String clave,String texto,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 lenguajeid,String clave,String texto,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Regionalizacion.LenguajeItem {Id = id,LenguajeId = lenguajeid,Clave = clave,Texto = texto,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -18841,7 +18841,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Aplicacion</returns>
-			public Entities.Tables.Seguridad.Aplicacion Add(Int64 TipoId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.Aplicacion Add(Int64 TipoId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.Aplicacion)base.Add(new Entities.Tables.Seguridad.Aplicacion(TipoId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19045,7 +19045,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.Aplicacion {Id = id,TipoId = tipoid,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -19193,7 +19193,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.AplicacionParametro</returns>
-			public Entities.Tables.Seguridad.AplicacionParametro Add(Int64 AplicacionId,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.AplicacionParametro Add(Int64 AplicacionId,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.AplicacionParametro)base.Add(new Entities.Tables.Seguridad.AplicacionParametro(AplicacionId,Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19383,7 +19383,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 aplicacionid,String nombre,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 aplicacionid,String nombre,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.AplicacionParametro {Id = id,AplicacionId = aplicacionid,Nombre = nombre,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -19533,7 +19533,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.AplicacionParametroValor</returns>
-			public Entities.Tables.Seguridad.AplicacionParametroValor Add(Int64 AplicacionId,Int64 ParametroId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.AplicacionParametroValor Add(Int64 AplicacionId,Int64 ParametroId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.AplicacionParametroValor)base.Add(new Entities.Tables.Seguridad.AplicacionParametroValor(AplicacionId,ParametroId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19737,7 +19737,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 aplicacionid,Int64 parametroid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 aplicacionid,Int64 parametroid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.AplicacionParametroValor {Id = id,AplicacionId = aplicacionid,ParametroId = parametroid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -19891,7 +19891,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Funcion</returns>
-			public Entities.Tables.Seguridad.Funcion Add(Int64 AplicacionId,Int64 TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.Funcion Add(Int64 AplicacionId,Int64 TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.Funcion)base.Add(new Entities.Tables.Seguridad.Funcion(AplicacionId,TipoId,Nombre,Descripcion,Referencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -20123,7 +20123,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 aplicacionid,Int64 tipoid,String nombre,String descripcion,String referencia,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 aplicacionid,Int64 tipoid,String nombre,String descripcion,String referencia,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.Funcion {Id = id,AplicacionId = aplicacionid,TipoId = tipoid,Nombre = nombre,Descripcion = descripcion,Referencia = referencia,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -20279,7 +20279,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Menu</returns>
-			public Entities.Tables.Seguridad.Menu Add(Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64? DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.Menu Add(Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64? DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.Menu)base.Add(new Entities.Tables.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -20525,7 +20525,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String descripcion,Int64 funcionid,String imagen,Int64? dependede,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String descripcion,Int64 funcionid,String imagen,Int64? dependede,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.Menu {Id = id,TipoId = tipoid,Nombre = nombre,Descripcion = descripcion,FuncionId = funcionid,Imagen = imagen,DependeDe = dependede,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -20675,7 +20675,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Rol</returns>
-			public Entities.Tables.Seguridad.Rol Add(String Nombre,String Descripcion,Int64? DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.Rol Add(String Nombre,String Descripcion,Int64? DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.Rol)base.Add(new Entities.Tables.Seguridad.Rol(Nombre,Descripcion,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -20879,7 +20879,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64? dependede,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64? dependede,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.Rol {Id = id,Nombre = nombre,Descripcion = descripcion,DependeDe = dependede,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -21029,7 +21029,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.RolFuncion</returns>
-			public Entities.Tables.Seguridad.RolFuncion Add(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.RolFuncion Add(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.RolFuncion)base.Add(new Entities.Tables.Seguridad.RolFuncion(FuncionId,RolId,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -21233,7 +21233,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int16 id,Int64 funcionid,Int64 rolid,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int16 id,Int64 funcionid,Int64 rolid,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.RolFuncion {Id = id,FuncionId = funcionid,RolId = rolid,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -21381,7 +21381,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.TipoAplicacion</returns>
-			public Entities.Tables.Seguridad.TipoAplicacion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.TipoAplicacion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.TipoAplicacion)base.Add(new Entities.Tables.Seguridad.TipoAplicacion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -21571,7 +21571,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.TipoAplicacion {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -21719,7 +21719,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.TipoFuncion</returns>
-			public Entities.Tables.Seguridad.TipoFuncion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.TipoFuncion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.TipoFuncion)base.Add(new Entities.Tables.Seguridad.TipoFuncion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -21909,7 +21909,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.TipoFuncion {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -22057,7 +22057,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.TipoMenu</returns>
-			public Entities.Tables.Seguridad.TipoMenu Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.TipoMenu Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.TipoMenu)base.Add(new Entities.Tables.Seguridad.TipoMenu(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -22247,7 +22247,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.TipoMenu {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -22415,7 +22415,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Usuario</returns>
-			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.Usuario)base.Add(new Entities.Tables.Seguridad.Usuario(EmpresaId,Nombre,Apellido,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -22745,7 +22745,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 empresaid,String nombre,String apellido,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 empresaid,String nombre,String apellido,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.Usuario {Id = id,EmpresaId = empresaid,Nombre = nombre,Apellido = apellido,Legajo = legajo,Mail = mail,FechaIngreso = fechaingreso,NickName = nickname,Password = password,Token = token,Avatar = avatar,FechaUltimoLogin = fechaultimologin,DebeCambiarPassword = debecambiarpassword,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -22895,7 +22895,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.UsuarioRol</returns>
-			public Entities.Tables.Seguridad.UsuarioRol Add(Int64 UsuarioId,Int64 AplicacionId,Int64 RolId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.UsuarioRol Add(Int64 UsuarioId,Int64 AplicacionId,Int64 RolId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.UsuarioRol)base.Add(new Entities.Tables.Seguridad.UsuarioRol(UsuarioId,AplicacionId,RolId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -23099,7 +23099,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 usuarioid,Int64 aplicacionid,Int64 rolid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 usuarioid,Int64 aplicacionid,Int64 rolid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.UsuarioRol {Id = id,UsuarioId = usuarioid,AplicacionId = aplicacionid,RolId = rolid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -23247,7 +23247,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.UsuarioSector</returns>
-			public Entities.Tables.Seguridad.UsuarioSector Add(Int64 UsuarioId,Int64 SectorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Seguridad.UsuarioSector Add(Int64 UsuarioId,Int64 SectorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Seguridad.UsuarioSector)base.Add(new Entities.Tables.Seguridad.UsuarioSector(UsuarioId,SectorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -23437,7 +23437,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 usuarioid,Int64 sectorid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 usuarioid,Int64 sectorid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.UsuarioSector {Id = id,UsuarioId = usuarioid,SectorId = sectorid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -23585,7 +23585,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Sincronizacion.Configuracion</returns>
-			public Entities.Tables.Sincronizacion.Configuracion Add(Int64 EntidadId,Int64 Segundos,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Sincronizacion.Configuracion Add(Int64 EntidadId,Int64 Segundos,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Sincronizacion.Configuracion)base.Add(new Entities.Tables.Sincronizacion.Configuracion(EntidadId,Segundos,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -23775,7 +23775,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 entidadid,Int64 segundos,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 entidadid,Int64 segundos,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Sincronizacion.Configuracion {Id = id,EntidadId = entidadid,Segundos = segundos,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -23921,7 +23921,7 @@ using System.Text;
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Tables.Sincronizacion.Entidad</returns>
-			public Entities.Tables.Sincronizacion.Entidad Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Tables.Sincronizacion.Entidad Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Tables.Sincronizacion.Entidad)base.Add(new Entities.Tables.Sincronizacion.Entidad(Nombre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -24097,7 +24097,7 @@ using System.Text;
             /// <param name="FechaModificacion"></param>
             /// <param name="Habilitado"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion,Boolean habilitado)
+            public Int64 Update(Int64 id,String nombre,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion,Boolean habilitado)
             {
                 return base.Update((IDataItem) new Entities.Tables.Sincronizacion.Entidad {Id = id,Nombre = nombre,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion,Habilitado = habilitado});
             }
@@ -24816,7 +24816,7 @@ using System.Text;
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Tables.Turno.Agenda</returns>
-			public Entities.Tables.Turno.Agenda Add(Int64 Id,String Nombre,Int64 EsquemaDetalleId,DateTime Fecha,Int64 SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Tables.Turno.Agenda Add(Int64 Id,String Nombre,Int64 EsquemaDetalleId,DateTime Fecha,Int64 SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Tables.Turno.Agenda)base.Add(new Entities.Tables.Turno.Agenda(Id,Nombre,EsquemaDetalleId,Fecha,SectorId,Secuencia,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -25048,7 +25048,7 @@ using System.Text;
             /// <param name="FechaModificacion"></param>
             /// <param name="Habilitado"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 esquemadetalleid,DateTime fecha,Int64 sectorid,Int32 secuencia,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion,Boolean habilitado)
+            public Int64 Update(Int64 id,String nombre,Int64 esquemadetalleid,DateTime fecha,Int64 sectorid,Int32 secuencia,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion,Boolean habilitado)
             {
                 return base.Update((IDataItem) new Entities.Tables.Turno.Agenda {Id = id,Nombre = nombre,EsquemaDetalleId = esquemadetalleid,Fecha = fecha,SectorId = sectorid,Secuencia = secuencia,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion,Habilitado = habilitado});
             }
@@ -25192,7 +25192,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Turno.Esquema</returns>
-			public Entities.Tables.Turno.Esquema Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Turno.Esquema Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Turno.Esquema)base.Add(new Entities.Tables.Turno.Esquema(Nombre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -25354,7 +25354,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Turno.Esquema {Id = id,Nombre = nombre,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -25502,7 +25502,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Turno.EsquemaDetalle</returns>
-			public Entities.Tables.Turno.EsquemaDetalle Add(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Turno.EsquemaDetalle Add(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Turno.EsquemaDetalle)base.Add(new Entities.Tables.Turno.EsquemaDetalle(EsquemaTurnoId,Nombre,Secuencia,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -25692,7 +25692,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 esquematurnoid,String nombre,Int32 secuencia,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 esquematurnoid,String nombre,Int32 secuencia,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Turno.EsquemaDetalle {Id = id,EsquemaTurnoId = esquematurnoid,Nombre = nombre,Secuencia = secuencia,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -25848,7 +25848,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Valor.Denominacion</returns>
-			public Entities.Tables.Valor.Denominacion Add(String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Valor.Denominacion Add(String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Valor.Denominacion)base.Add(new Entities.Tables.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -26094,7 +26094,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 tipovalorid,Int64 monedaid,Decimal unidades,String imagen,String codigocctalk,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Int64 tipovalorid,Int64 monedaid,Decimal unidades,String imagen,String codigocctalk,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Valor.Denominacion {Id = id,Nombre = nombre,TipoValorId = tipovalorid,MonedaId = monedaid,Unidades = unidades,Imagen = imagen,CodigoCcTalk = codigocctalk,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -26244,7 +26244,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Valor.Moneda</returns>
-			public Entities.Tables.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Valor.Moneda)base.Add(new Entities.Tables.Valor.Moneda(Nombre,PaisId,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -26448,7 +26448,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 paisid,String codigo,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Int64 paisid,String codigo,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Valor.Moneda {Id = id,Nombre = nombre,PaisId = paisid,Codigo = codigo,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -26594,7 +26594,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Valor.RelacionMonedaTipoValor</returns>
-			public Entities.Tables.Valor.RelacionMonedaTipoValor Add(Int64 MonedaId,Int64 TipoValorId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Valor.RelacionMonedaTipoValor Add(Int64 MonedaId,Int64 TipoValorId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Valor.RelacionMonedaTipoValor)base.Add(new Entities.Tables.Valor.RelacionMonedaTipoValor(MonedaId,TipoValorId,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -26770,7 +26770,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 monedaid,Int64 tipovalorid,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 monedaid,Int64 tipovalorid,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Valor.RelacionMonedaTipoValor {Id = id,MonedaId = monedaid,TipoValorId = tipovalorid,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -26918,7 +26918,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Valor.Tipo</returns>
-			public Entities.Tables.Valor.Tipo Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Valor.Tipo Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Valor.Tipo)base.Add(new Entities.Tables.Valor.Tipo(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -27108,7 +27108,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Valor.Tipo {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -27258,7 +27258,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Visualizacion.Perfil</returns>
-			public Entities.Tables.Visualizacion.Perfil Add(String Nombre,String Descripcion,Int64 PerfilTipoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Visualizacion.Perfil Add(String Nombre,String Descripcion,Int64 PerfilTipoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Visualizacion.Perfil)base.Add(new Entities.Tables.Visualizacion.Perfil(Nombre,Descripcion,PerfilTipoId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -27462,7 +27462,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 perfiltipoid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 perfiltipoid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Visualizacion.Perfil {Id = id,Nombre = nombre,Descripcion = descripcion,PerfilTipoId = perfiltipoid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -27610,7 +27610,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Visualizacion.PerfilItem</returns>
-			public Entities.Tables.Visualizacion.PerfilItem Add(Int64 PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Visualizacion.PerfilItem Add(Int64 PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Visualizacion.PerfilItem)base.Add(new Entities.Tables.Visualizacion.PerfilItem(PerfilId,IdTablaReferencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -27800,7 +27800,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 perfilid,Int64 idtablareferencia,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,Int64 perfilid,Int64 idtablareferencia,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Visualizacion.PerfilItem {Id = id,PerfilId = perfilid,IdTablaReferencia = idtablareferencia,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -27950,7 +27950,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Visualizacion.PerfilTipo</returns>
-			public Entities.Tables.Visualizacion.PerfilTipo Add(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Tables.Visualizacion.PerfilTipo Add(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Visualizacion.PerfilTipo)base.Add(new Entities.Tables.Visualizacion.PerfilTipo(Nombre,Descripcion,EsAdministrador,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -28154,7 +28154,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean esadministrador,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64 usuariomodificacion,DateTime fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean esadministrador,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Visualizacion.PerfilTipo {Id = id,Nombre = nombre,Descripcion = descripcion,EsAdministrador = esadministrador,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }

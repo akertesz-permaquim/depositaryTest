@@ -164,25 +164,15 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Data="@TipoPlaca_entity"  @bind-Value="TipoPlaca_entity" Submit ="Save" Visible ="@(TipoPlaca_entity != null)">
           <ChildContent>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="Id" Component="Id" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Id)" Name="Id" Disabled="true">
-                </RadzenNumeric>
-             </div>
-         </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Text="ModeloId" Component="ModeloId" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                  @if(@Modelo_entities.Count > 0 && @Modelo_entities.FirstOrDefault( c => c.Id == @TipoPlaca_entity.ModeloId) != null)
+                  @if((@Modelo_entities.Count > 0 && @Modelo_entities.FirstOrDefault( c => c.Id == @TipoPlaca_entity.ModeloId) != null) || crudMode != CrudMode.Delete)
                   {
-                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@TipoPlaca_entity.ModeloId"
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(TipoPlaca_entity.ModeloId)"
                                     Data=@Modelo_entities TextProperty = "Nombre" ValueProperty = "Id"
                                     Change=@(args => SelectModeloValueChanged(args))
                                     Disabled="@(crudMode==CrudMode.Delete)" />
@@ -204,8 +194,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -216,8 +209,11 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
@@ -228,80 +224,13 @@ else
                  <div class="col-md-9">
                      <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.PortName)" Name="PortName" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
-                     <RadzenRequiredValidator Component="PortName" Text="PortName is required" Style="position: absolute" Disabled="@(crudMode==CrudMode.Delete)">
-                     </RadzenRequiredValidator>
+                     @if(@crudMode!=CrudMode.Delete)
+                     {
+                         <RadzenRequiredValidator Component="PortName" Text="PortName is required" Style="position: absolute">
+                         </RadzenRequiredValidator>
+                     }
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="Parity" Component="Parity" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="DataBits" Component="DataBits" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="ReadBufferSize" Component="ReadBufferSize" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="StopBits" Component="StopBits" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="ReadTimeout" Component="ReadTimeout" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="Handshake" Component="Handshake" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="BaudRate" Component="BaudRate" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="RtsEnable" Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
@@ -318,16 +247,6 @@ else
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorA  Name="SensorACheckBox" TValue="bool" Change=@(args => SensorAChange(args, @TipoPlaca_entity)) />
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="BitSensorA" Component="BitSensorA" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorA)" Name="BitSensorA" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorB" Component="SensorB" Style="margin-left: 0px; vertical-align: middle;" />
@@ -336,16 +255,6 @@ else
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorB  Name="SensorBCheckBox" TValue="bool" Change=@(args => SensorBChange(args, @TipoPlaca_entity)) />
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="BitSensorB" Component="BitSensorB" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorB)" Name="BitSensorB" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorC" Component="SensorC" Style="margin-left: 0px; vertical-align: middle;" />
@@ -354,16 +263,6 @@ else
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorC  Name="SensorCCheckBox" TValue="bool" Change=@(args => SensorCChange(args, @TipoPlaca_entity)) />
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="BitSensorC" Component="BitSensorC" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorC)" Name="BitSensorC" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorD" Component="SensorD" Style="margin-left: 0px; vertical-align: middle;" />
@@ -372,16 +271,6 @@ else
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorD  Name="SensorDCheckBox" TValue="bool" Change=@(args => SensorDChange(args, @TipoPlaca_entity)) />
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="BitSensorD" Component="BitSensorD" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorD)" Name="BitSensorD" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorL" Component="SensorL" Style="margin-left: 0px; vertical-align: middle;" />
@@ -390,16 +279,6 @@ else
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorL  Name="SensorLCheckBox" TValue="bool" Change=@(args => SensorLChange(args, @TipoPlaca_entity)) />
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="BitSensorL" Component="BitSensorL" style="width: 100%">
-                 </RadzenLabel>
-             </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorL)" Name="BitSensorL" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
@@ -408,46 +287,58 @@ else
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @TipoPlaca_entity)) />
                  </div>
                </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
-                 </RadzenLabel>
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="true">
+                 </RadzenNumeric>
+                 </div>
              </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
-                </RadzenLabel>
-              </div>
+         }
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
               <div class="col-md-9">
-                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
-                </RadzenDatePicker>
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true" >
+                 </RadzenDatePicker>
               </div>
             </div>
-          <div style="margin-bottom: 1rem" class="row">
-             <div class="col-md-3">
-                 <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
-                 </RadzenLabel>
+         }
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="true">
+                 </RadzenNumeric>
+                 </div>
              </div>
-             <div class="col-md-9">
-                 <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
-                </RadzenNumeric>
-             </div>
-         </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
-                </RadzenLabel>
-              </div>
+         }
+         @if(crudMode!=CrudMode.Add)
+         {
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
               <div class="col-md-9">
-                <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
-                </RadzenDatePicker>
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true" >
+                 </RadzenDatePicker>
               </div>
             </div>
+         }
             <div class="row">
               <div class="col offset-sm-3">
                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
@@ -551,20 +442,93 @@ else
     private async Task Save()
     {
         string actionInformation = string.Empty;
+        NotificationSeverity severityType = NotificationSeverity.Error;
+        string summary = string.Empty;
         DepositarioAdminWeb.Business.Tables.Dispositivo.TipoPlaca crud = new();
+        foreach(var property in TipoPlaca_entity.GetType().GetProperties())
+        {
+             switch(property.Name)
+             {
+                 case "FechaModificacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     TipoPlaca_entity.FechaModificacion=null;
+                 }
+                 else
+                 {
+                     TipoPlaca_entity.FechaModificacion=DateTime.Now;
+                 }
+                 break;
+                 case "FechaCreacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     TipoPlaca_entity.FechaCreacion=DateTime.Now;
+                 }
+                 break;
+                 case "UsuarioCreacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     TipoPlaca_entity.UsuarioCreacion=1;
+                 }
+                 break;
+                 case "UsuarioModificacion":
+                 if(crudMode == CrudMode.Add)
+                 {
+                     TipoPlaca_entity.UsuarioModificacion=null;
+                 }
+                 else
+                 {
+                     TipoPlaca_entity.UsuarioModificacion=1;
+                 }
+                 break;
+             }
+        }
         switch (crudMode)
         {
             case CrudMode.Add:
-                crud.Add(TipoPlaca_entity);
-                actionInformation = "agregado.";
-                break;
+                try
+                {
+                     crud.Add(TipoPlaca_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "agregado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
+            break;
             case CrudMode.Edit:
-                crud.Update(TipoPlaca_entity);
-                actionInformation = "modificado.";
-                break;
+                try
+                {
+                     crud.Update(TipoPlaca_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "modificado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
+            break;
             case CrudMode.Delete:
-                crud.Delete(TipoPlaca_entity);
-                actionInformation = "eliminado.";
+                try
+                {
+                     crud.Delete(TipoPlaca_entity);
+                     summary = "El registro se ha ";
+                     actionInformation = "eliminado.";
+                     severityType = NotificationSeverity.Success;
+                }
+                catch(Exception ex)
+                {
+                     summary = "Error al procesar.";
+                     actionInformation = ex.Message;
+                     severityType = NotificationSeverity.Error;
+                }
                 break;
         }
  
@@ -572,8 +536,8 @@ else
         crudMode = CrudMode.List;
  
         ShowNotification(new NotificationMessage { 
-            Severity = NotificationSeverity.Success, 
-            Summary = "El registro ha sido ", 
+            Severity = severityType, 
+            Summary = summary, 
             Detail = actionInformation, 
             Duration = 4000 });
        

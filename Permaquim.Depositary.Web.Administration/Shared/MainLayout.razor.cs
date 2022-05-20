@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Radzen;
 using Radzen.Blazor;
 
-namespace RadzenCrm.Layouts
+namespace Permaquim.Depositary.Web.Administration.Layouts
 {
     public partial class MainLayoutComponent
     {

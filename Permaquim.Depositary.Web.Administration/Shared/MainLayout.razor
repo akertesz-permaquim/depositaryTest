@@ -1,8 +1,9 @@
-﻿@inherits RadzenCrm.Layouts.MainLayoutComponent
+﻿@inherits Permaquim.Depositary.Web.Administration.Layouts.MainLayoutComponent
 @using Radzen
 @using Radzen.Blazor
 @using Microsoft.AspNetCore.Identity;
 @using Permaquim.Depositary.Web.Administration.Components
+@inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> L
 
 
 <RadzenDialog />
@@ -58,7 +59,7 @@
 </RadzenSidebar>
 <RadzenFooter>
     <ChildContent>
-        <RadzenLabel Text="Permaquim S.A., Copyright Ⓒ 2021">
+        <RadzenLabel Text="Permaquim S.A., Copyright Ⓒ 2022">
         </RadzenLabel>
     </ChildContent>
 </RadzenFooter>
