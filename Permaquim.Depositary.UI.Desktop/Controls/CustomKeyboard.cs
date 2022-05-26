@@ -13,6 +13,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
     public partial class CustomKeyboard : UserControl
     {
 
+        public delegate void KeyboardDataReceived(object sender, EventArgs args);
+
+        public event KeyboardDataReceived KeyboardEvent;
+
         private Color _buttonsBackgroundColor;
         private CustomTextBox _activeTextbox;
         public CustomKeyboard()
@@ -25,6 +29,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             _activeTextbox.Focus();
             SendKeys.Send(((CustomButton)sender).Tag.ToString());
+
+            //Raises event for counter
+            if (KeyboardEvent != null)
+            {
+
+                KeyboardEventArgs args = new()
+                {
+                    KeyPressed = ((CustomButton)sender).Tag.ToString(),
+                    UserText = UsernameTextBox.Texts,
+                    PasswordText = PasswordTexbox.Texts
+                };
+
+                // Raise the event.
+                KeyboardEvent(this, args);
+            }
         }
         private void Delete(object sender, EventArgs e)
         {
@@ -41,5 +60,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             _activeTextbox = (CustomTextBox)sender;
         }
+    }
+    public class KeyboardEventArgs : EventArgs
+    {
+        // The Key pressed
+        public string KeyPressed = string.Empty;
+
+        // The UserText
+        public string UserText = string.Empty;
+
+        // The PasswordText
+        public string PasswordText = string.Empty;
     }
 }

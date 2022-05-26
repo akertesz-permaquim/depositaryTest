@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CvcPFmxzMrXQEjh66S+jS1hzqcqCKQSzbm6Wb+MkmFYpTWwHIUcsV5WUwRJhccdGtHd2E0VvtMfdJELDB8F6cg==",
+  "dgSpecHash": "Sh4gTysFgvsXaoj8ZI595O0K6ZRa2zZDtioOod2Uv7T/cLIc5LLR7R7FHx+iDfXRFfCX1d/EAcNhtlMVtVb7hQ==",
   "success": true,
-  "projectFilePath": "C:\\Dev\\depositario\\Permaquim.Depositary.Sincronization.Console\\Permaquim.Depositary.Sincronization.Console.csproj",
+  "projectFilePath": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.Sincronization.Console\\Permaquim.Depositary.Sincronization.Console.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

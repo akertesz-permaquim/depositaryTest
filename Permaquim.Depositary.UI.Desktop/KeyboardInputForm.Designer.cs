@@ -30,7 +30,7 @@
         {
             this.TitleLabel = new System.Windows.Forms.Label();
             this.LoginPictureBox = new System.Windows.Forms.PictureBox();
-            this.customKeyboard1 = new Permaquim.Depositary.UI.Desktop.Controls.CustomKeyboard();
+            this.MainKeyboard = new Permaquim.Depositary.UI.Desktop.Controls.CustomKeyboard();
             ((System.ComponentModel.ISupportInitialize)(this.LoginPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,14 +55,14 @@
             this.LoginPictureBox.TabIndex = 2;
             this.LoginPictureBox.TabStop = false;
             // 
-            // customKeyboard1
+            // MainKeyboard
             // 
-            this.customKeyboard1.AutoSize = true;
-            this.customKeyboard1.BackColor = System.Drawing.Color.Transparent;
-            this.customKeyboard1.Location = new System.Drawing.Point(12, 44);
-            this.customKeyboard1.Name = "customKeyboard1";
-            this.customKeyboard1.Size = new System.Drawing.Size(713, 425);
-            this.customKeyboard1.TabIndex = 3;
+            this.MainKeyboard.AutoSize = true;
+            this.MainKeyboard.BackColor = System.Drawing.Color.Transparent;
+            this.MainKeyboard.Location = new System.Drawing.Point(12, 44);
+            this.MainKeyboard.Name = "MainKeyboard";
+            this.MainKeyboard.Size = new System.Drawing.Size(713, 425);
+            this.MainKeyboard.TabIndex = 3;
             // 
             // KeyboardInputForm
             // 
@@ -72,7 +72,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.LoginPictureBox);
             this.Controls.Add(this.TitleLabel);
-            this.Controls.Add(this.customKeyboard1);
+            this.Controls.Add(this.MainKeyboard);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "KeyboardInputForm";
@@ -87,6 +87,6 @@
         #endregion
         private Label TitleLabel;
         private PictureBox LoginPictureBox;
-        private Controls.CustomKeyboard customKeyboard1;
+        private Controls.CustomKeyboard MainKeyboard;
     }
 }

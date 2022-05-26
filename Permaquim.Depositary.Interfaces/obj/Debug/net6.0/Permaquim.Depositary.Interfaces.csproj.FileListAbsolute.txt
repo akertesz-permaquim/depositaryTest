@@ -46,3 +46,15 @@ C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.De
 C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\refint\Permaquim.Depositary.Interfaces.dll
 C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.pdb
 C:\Dev\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\ref\Permaquim.Depositary.Interfaces.dll
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\bin\Debug\net6.0\Permaquim.Depositary.Interfaces.deps.json
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\bin\Debug\net6.0\Permaquim.Depositary.Interfaces.dll
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\bin\Debug\net6.0\Permaquim.Depositary.Interfaces.pdb
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.csproj.AssemblyReference.cache
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.AssemblyInfoInputs.cache
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.AssemblyInfo.cs
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.csproj.CoreCompileInputs.cache
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.dll
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\refint\Permaquim.Depositary.Interfaces.dll
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\Permaquim.Depositary.Interfaces.pdb
+C:\Users\ccespon\Source\Repos\depositario\Permaquim.Depositary.Interfaces\obj\Debug\net6.0\ref\Permaquim.Depositary.Interfaces.dll

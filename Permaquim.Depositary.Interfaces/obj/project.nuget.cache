@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "f10GzkWbs0osz7nu/NgpZLIHejIB01vwWRWJD56vBLy4qEmz3ANfvhvd9qjE7fGoZAZ0H5vrFfuLgMn5UfCpew==",
+  "dgSpecHash": "1FC/kcgmfTMhY7nTnW9XNKwvt5hbM8XvdTVTcB1cyt+CttH0nd9/KU9O2s74zZGW/ubcmXx2tt/m0B9YWlkFZg==",
   "success": true,
-  "projectFilePath": "C:\\Dev\\depositario\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
+  "projectFilePath": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.Interfaces\\Permaquim.Depositary.Interfaces.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

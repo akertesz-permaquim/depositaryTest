@@ -4,14 +4,23 @@
     <_LastSelectedProfileId>D:\Permaquim.Depositary\Permaquim.Depositary.UI.Desktop\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="BillDepositForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Controls\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Controls\CustomKeyboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Controls\CustomListview.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Controls\CustomTextBox.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="StackerFullDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="KeyboardInputForm.cs">
       <SubType>Form</SubType>
