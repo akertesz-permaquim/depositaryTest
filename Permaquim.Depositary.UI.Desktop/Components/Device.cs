@@ -582,6 +582,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 return StateResultProperty;
             }
         }
+        /// <summary>
+        /// Consulta el buffer de denominaciones detectadas
+        /// </summary>
+        /// <returns></returns>
         public StatesResult CountingDataRequest()
         {
             if (_counterPort.IsOpen)

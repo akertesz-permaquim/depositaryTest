@@ -66,6 +66,7 @@
             this.BillResumeListview.TabIndex = 0;
             this.BillResumeListview.UseCompatibleStateImageBehavior = false;
             this.BillResumeListview.View = System.Windows.Forms.View.Details;
+            this.BillResumeListview.Visible = false;
             // 
             // Denominacion
             // 
@@ -103,6 +104,7 @@
             this.CancelDepositButton.Text = "Cancelar";
             this.CancelDepositButton.TextColor = System.Drawing.Color.White;
             this.CancelDepositButton.UseVisualStyleBackColor = false;
+            this.CancelDepositButton.Visible = false;
             this.CancelDepositButton.Click += new System.EventHandler(this.CancelDepositButton_Click);
             // 
             // BackButton
@@ -124,6 +126,7 @@
             this.BackButton.Text = "Volver";
             this.BackButton.TextColor = System.Drawing.Color.White;
             this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Visible = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // ConfirmAndExitDepositButton
@@ -145,6 +148,7 @@
             this.ConfirmAndExitDepositButton.Text = "Confirmar ";
             this.ConfirmAndExitDepositButton.TextColor = System.Drawing.Color.White;
             this.ConfirmAndExitDepositButton.UseVisualStyleBackColor = false;
+            this.ConfirmAndExitDepositButton.Visible = false;
             this.ConfirmAndExitDepositButton.Click += new System.EventHandler(this.ConfirmAndExitDepositButton_Click);
             // 
             // MonitorGroupBox
