@@ -31,11 +31,13 @@
             this.BillResumeListview = new Permaquim.Depositary.UI.Desktop.Controls.CustomListview();
             this.Denominacion = new System.Windows.Forms.ColumnHeader();
             this.Cantidad = new System.Windows.Forms.ColumnHeader();
+            this.Total = new System.Windows.Forms.ColumnHeader();
             this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
-            this.DenominationsLabel = new System.Windows.Forms.Label();
+            this.JammingCheckBox = new System.Windows.Forms.CheckBox();
+            this.CountingErrorCheckBox = new System.Windows.Forms.CheckBox();
             this.DepositFinishedCheckbox = new System.Windows.Forms.CheckBox();
             this.HopperBillPresentCheckBox = new System.Windows.Forms.CheckBox();
             this.EscrowBillPresentCheckBox = new System.Windows.Forms.CheckBox();
@@ -45,7 +47,6 @@
             this.StackerFullCheckBox = new System.Windows.Forms.CheckBox();
             this.DeviceModeLabel = new System.Windows.Forms.Label();
             this.GeneralStatusLabel = new System.Windows.Forms.Label();
-            this.TotalLabel = new System.Windows.Forms.Label();
             this.MonitorGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,12 +56,13 @@
             this.BillResumeListview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BillResumeListview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Denominacion,
-            this.Cantidad});
+            this.Cantidad,
+            this.Total});
             this.BillResumeListview.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BillResumeListview.ForeColor = System.Drawing.Color.SteelBlue;
             this.BillResumeListview.Location = new System.Drawing.Point(16, 24);
             this.BillResumeListview.Name = "BillResumeListview";
-            this.BillResumeListview.Size = new System.Drawing.Size(560, 272);
+            this.BillResumeListview.Size = new System.Drawing.Size(560, 304);
             this.BillResumeListview.TabIndex = 0;
             this.BillResumeListview.UseCompatibleStateImageBehavior = false;
             this.BillResumeListview.View = System.Windows.Forms.View.Details;
@@ -68,12 +70,19 @@
             // Denominacion
             // 
             this.Denominacion.Text = "Denominación";
-            this.Denominacion.Width = 250;
+            this.Denominacion.Width = 150;
             // 
             // Cantidad
             // 
             this.Cantidad.Text = "Cantidad";
-            this.Cantidad.Width = 200;
+            this.Cantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Cantidad.Width = 80;
+            // 
+            // Total
+            // 
+            this.Total.Text = "Total";
+            this.Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Total.Width = 80;
             // 
             // CancelDepositButton
             // 
@@ -86,7 +95,7 @@
             this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelDepositButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
-            this.CancelDepositButton.Location = new System.Drawing.Point(240, 312);
+            this.CancelDepositButton.Location = new System.Drawing.Point(240, 360);
             this.CancelDepositButton.Name = "CancelDepositButton";
             this.CancelDepositButton.Size = new System.Drawing.Size(152, 55);
             this.CancelDepositButton.TabIndex = 93;
@@ -107,7 +116,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(592, 312);
+            this.BackButton.Location = new System.Drawing.Point(592, 360);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(193, 55);
             this.BackButton.TabIndex = 95;
@@ -128,7 +137,7 @@
             this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(408, 312);
+            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(408, 360);
             this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
             this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(152, 55);
             this.ConfirmAndExitDepositButton.TabIndex = 98;
@@ -141,7 +150,8 @@
             // MonitorGroupBox
             // 
             this.MonitorGroupBox.BackColor = System.Drawing.Color.White;
-            this.MonitorGroupBox.Controls.Add(this.DenominationsLabel);
+            this.MonitorGroupBox.Controls.Add(this.JammingCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.CountingErrorCheckBox);
             this.MonitorGroupBox.Controls.Add(this.DepositFinishedCheckbox);
             this.MonitorGroupBox.Controls.Add(this.HopperBillPresentCheckBox);
             this.MonitorGroupBox.Controls.Add(this.EscrowBillPresentCheckBox);
@@ -153,22 +163,36 @@
             this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
             this.MonitorGroupBox.Location = new System.Drawing.Point(592, 24);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
-            this.MonitorGroupBox.Size = new System.Drawing.Size(200, 288);
+            this.MonitorGroupBox.Size = new System.Drawing.Size(200, 304);
             this.MonitorGroupBox.TabIndex = 99;
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
             // 
-            // DenominationsLabel
+            // JammingCheckBox
             // 
-            this.DenominationsLabel.AutoSize = true;
-            this.DenominationsLabel.BackColor = System.Drawing.Color.White;
-            this.DenominationsLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DenominationsLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.DenominationsLabel.Location = new System.Drawing.Point(32, 256);
-            this.DenominationsLabel.Name = "DenominationsLabel";
-            this.DenominationsLabel.Size = new System.Drawing.Size(94, 15);
-            this.DenominationsLabel.TabIndex = 34;
-            this.DenominationsLabel.Text = "Denominations:";
+            this.JammingCheckBox.AutoSize = true;
+            this.JammingCheckBox.BackColor = System.Drawing.Color.White;
+            this.JammingCheckBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.JammingCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.JammingCheckBox.Location = new System.Drawing.Point(30, 280);
+            this.JammingCheckBox.Name = "JammingCheckBox";
+            this.JammingCheckBox.Size = new System.Drawing.Size(76, 19);
+            this.JammingCheckBox.TabIndex = 35;
+            this.JammingCheckBox.Text = "Jamming";
+            this.JammingCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // CountingErrorCheckBox
+            // 
+            this.CountingErrorCheckBox.AutoSize = true;
+            this.CountingErrorCheckBox.BackColor = System.Drawing.Color.White;
+            this.CountingErrorCheckBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CountingErrorCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.CountingErrorCheckBox.Location = new System.Drawing.Point(30, 256);
+            this.CountingErrorCheckBox.Name = "CountingErrorCheckBox";
+            this.CountingErrorCheckBox.Size = new System.Drawing.Size(107, 19);
+            this.CountingErrorCheckBox.TabIndex = 34;
+            this.CountingErrorCheckBox.Text = "Counting Error";
+            this.CountingErrorCheckBox.UseVisualStyleBackColor = false;
             // 
             // DepositFinishedCheckbox
             // 
@@ -285,18 +309,6 @@
             this.GeneralStatusLabel.TabIndex = 25;
             this.GeneralStatusLabel.Text = "GeneralStatus";
             // 
-            // TotalLabel
-            // 
-            this.TotalLabel.AutoSize = true;
-            this.TotalLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.TotalLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.TotalLabel.ForeColor = System.Drawing.Color.White;
-            this.TotalLabel.Location = new System.Drawing.Point(640, 392);
-            this.TotalLabel.Name = "TotalLabel";
-            this.TotalLabel.Size = new System.Drawing.Size(65, 25);
-            this.TotalLabel.TabIndex = 100;
-            this.TotalLabel.Text = "Total :";
-            // 
             // BillDepositForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -304,7 +316,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 485);
             this.ControlBox = false;
-            this.Controls.Add(this.TotalLabel);
             this.Controls.Add(this.MonitorGroupBox);
             this.Controls.Add(this.ConfirmAndExitDepositButton);
             this.Controls.Add(this.BackButton);
@@ -318,7 +329,6 @@
             this.MonitorGroupBox.ResumeLayout(false);
             this.MonitorGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -339,7 +349,8 @@
         private Label DeviceModeLabel;
         private Label GeneralStatusLabel;
         private CheckBox DepositFinishedCheckbox;
-        private Label TotalLabel;
-        private Label DenominationsLabel;
+        private CheckBox CountingErrorCheckBox;
+        private CheckBox JammingCheckBox;
+        private ColumnHeader Total;
     }
 }

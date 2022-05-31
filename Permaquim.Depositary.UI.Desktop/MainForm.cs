@@ -2,7 +2,7 @@
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 
-namespace Permaquim.Depositary.UI.Desktop
+namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
@@ -28,7 +28,7 @@ namespace Permaquim.Depositary.UI.Desktop
             this.Size = new Size(screen.Width, screen.Height);
             _poolingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = 200,
+                Interval = 100,
                 Enabled = true
             };
             _poolingTimer.Tick += PoolingTimer_Tick;
@@ -65,26 +65,42 @@ namespace Permaquim.Depositary.UI.Desktop
             // Ejecuto la primera consulta al dispositivo. 
             // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
             // Operación anterior.
-            _device.Sense();
-
-            // Setea el estado de la contadora previo al inicio del pooling 
-            _device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
-
-
-            // Si el escrow está abierto se debe cerrar
-            if (_device.StateResultProperty.StatusInformation.OperatingState ==
-                    StatusInformation.State.EscrowOpen ||
-                    _device.StateResultProperty.StatusInformation.OperatingState ==
-                    StatusInformation.State.PQWaitingTocloseEscrow)
-
-            _device.CloseEscrow();
-
-            // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-            if (_device.StateResultProperty.ModeStateInformation.ModeState ==  ModeStateInformation.Mode.DepositMode)
+            try
             {
-                _device.RemoteCancel();
+                if (_device.CounterConnected)
+                {
+                    _device.PreviousState = _device.Sense().StatusInformation.OperatingState;
+
+                    // Setea el estado de la contadora previo al inicio del pooling 
+                    //_device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
+
+
+                    // Si el escrow está abierto se debe cerrar
+                    if (_device.StateResultProperty.StatusInformation.OperatingState ==
+                            StatusInformation.State.EscrowOpen ||
+                            _device.StateResultProperty.StatusInformation.OperatingState ==
+                            StatusInformation.State.PQWaitingTocloseEscrow)
+
+                        _device.CloseEscrow();
+
+                    // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
+                    if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                    {
+                        _device.RemoteCancel();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El dispositivo contador no está conectado!","No conectado.",MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,MessageBoxDefaultButton.Button1);
+                }
             }
-                    
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
         }
         private void PoolingTimer_Tick(object? sender, EventArgs e)
         {
@@ -92,6 +108,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
             _device.Sense();
             _device.Status();
+            // Consulta el buffer de denominaciones etectadas
+            //_device.CountingDataRequest();
+
 
             if (_device.CounterConnected)
             {

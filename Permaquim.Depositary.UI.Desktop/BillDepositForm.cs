@@ -8,8 +8,6 @@ namespace Permaquim.Depositary.UI.Desktop
     public partial class BillDepositForm : Form
     {
 
-  
-
         /// <summary>
         /// Instancia del dispositivo
         /// </summary>
@@ -44,10 +42,12 @@ namespace Permaquim.Depositary.UI.Desktop
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
             _poolingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = 250,
+                Interval = 100,
                 Enabled = true
             };
             _poolingTimer.Tick += PoolTimer_Tick;
+
+            _operationStatus = new();
 
             if (_device.StateResultProperty != null)
             {
@@ -65,63 +65,145 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PoolTimer_Tick(object? sender, EventArgs e)
         {
+ 
+            // muestra el estado del hardware
             ShowHardwareMonitorData();
+            // Procesa los estados 
             ProcessDeviceStatus();
         }
 
         /// <summary>
         /// 
         /// </summary>
+        /* private void ProcessDeviceStatus()
+         {
+             // Marca en la máquina de estado que se detectó el máximo de billetes
+             // en el escrow, ya que esto modifica el comportamiento de la aplicación
+             // en base al comportamiento de la contadora cuendo esto sucede
+             if (_device.StateResultProperty.DeviceStateInformation.StackerFull)
+                 _operationStatus.StackerFull = true;
+
+             // Esto le indica al sistema que en el proximo ciclo debe salir a la pantalla anterior 
+             if (_device.StateResultProperty.EndInformation.StoreEnd == true)
+                 _operationStatus.DepositEnded = true;
+
+             if (
+                     _operationStatus.DepositEnded && 
+                     _device.StateResultProperty.StatusInformation.OperatingState
+                     == StatusInformation.State.Waiting &&
+                     _operationStatus.CurrentTransactionId == 0 
+                 )
+             {
+                 ExitBillDepositForm();
+             }
+
+             if (_device.CurrentStatus == StatusInformation.State.BeingSet
+                 || _device.CurrentStatus == StatusInformation.State.BeingReset)
+             {
+                 if (BillResumeListview.Items.Count > 0 && CancelDepositButton.Visible == false)
+                 {
+                      CancelDepositButton.Visible = true;
+                     BackButton.Visible = true;
+                 }
+
+                 if(!_operationStatus.DepositEnded)
+                     // Comando para que cuente el dinero presente en el hopper
+                     _device.BatchDataTransmission();
+             }
+
+
+
+             // Si se canceló la operación, debe esperar a que el operador quite el dinero del escrow
+             if (
+                 _device.PreviousState == StatusInformation.State.PQWaitingToRemoveBankNotes &&
+                 (_device.CurrentStatus != StatusInformation.State.PQWaitingTocloseEscrow
+                 || _device.CurrentStatus != StatusInformation.State.PQClosingEscrow)
+                 && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
+                 )
+             {
+                 WaitEmptyEscrow();
+             }
+             else
+             {
+                 if(_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false)
+                     _device.CloseEscrow();
+             }
+             if(_device.DenominationResultProperty.DenominationArray.Length > 0)
+                 LoadDetectedBills();
+
+             EnableOrdisableButtons();
+         }*/
         private void ProcessDeviceStatus()
         {
-            // Marca en la máquina de estado que se detectó el máximo de billetes
-            // en el escrow, ya que esto modifica el comportamiento de la aplicación
-            // en base al comportamiento de la contadora cuendo esto sucede
-            if (_device.StateResultProperty.DeviceStateInformation.StackerFull)
-                _operationStatus.StackerFull = true;
+            //// Consulta el buffer de denominaciones etectadas
+            _device.CountingDataRequest();
 
-            // Esto le indica al sistema que en el proximo ciclo debe salir a la pantalla anterior 
-            if (_device.StateResultProperty.EndInformation.StoreEnd == true)
-                _operationStatus.DepositEnded = true;
-
-            if (_operationStatus.DepositEnded && _device.StateResultProperty.StatusInformation.OperatingState
-                == StatusInformation.State.Waiting)
+            // Se evalúa si se debe grabar en base de datos cuando finaliza la operación
+            if (
+                _operationStatus.DepositConfirmed &&
+                !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                )
             {
                 ExitBillDepositForm();
+                _operationStatus.DepositEnded = true;
             }
 
-            if (_device.CurrentStatus == StatusInformation.State.BeingSet
-                || _device.CurrentStatus == StatusInformation.State.BeingReset)
+
+            StatusInformation.State generalStatus = _device.CurrentStatus;
+
+            if (generalStatus == StatusInformation.State.BeingSet
+                || generalStatus == StatusInformation.State.BeingReset)
             {
-                if (BillResumeListview.Items.Count > 0 && CancelDepositButton.Visible == false)
+                if (BillResumeListview.Items.Count > 0 && CancelDepositButton.Enabled == false)
                 {
-                    BillResumeListview.Items.Clear();
-                    CancelDepositButton.Visible = true;
-                    BackButton.Visible = true;
+                    CancelDepositButton.Enabled = true;
+                    BackButton.Enabled = true;
                 }
-
-                if(!_operationStatus.DepositEnded)
-                    // Comando para que cuente el dinero presente en el hopper
-                    _device.BatchDataTransmission();
+                // Comando para que cuente el dinero presente en el hopper
+                _device.BatchDataTransmission();
             }
 
+            // Si el estado pasa de Contando a BeingReset, se pone en modo Neutral y sale de la pantalla
+            if (_device.PreviousState == StatusInformation.State.PQCounting &&
+                generalStatus != StatusInformation.State.PQCounting)
+            {
+                _device.RemoteCancel();
+
+                _device.PreviousState = StatusInformation.State.Waiting;
+                AppController.OpenChildForm(new OperationForm(), _device);
+                this.Close();
+            }
 
             // Si se canceló la operación, debe esperar a que el operador quite el dinero del escrow
             if (
                 _device.PreviousState == StatusInformation.State.PQWaitingToRemoveBankNotes &&
-                (_device.CurrentStatus != StatusInformation.State.PQWaitingTocloseEscrow
-                || _device.CurrentStatus != StatusInformation.State.PQClosingEscrow)
+                (generalStatus != StatusInformation.State.PQWaitingTocloseEscrow
+                || generalStatus != StatusInformation.State.PQClosingEscrow)
                 && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
                 )
             {
-                WaitEmptyEscrow();
+                _poolingTimer.Enabled = false;
+                // Cambia el estado 
+                _device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
+                _device.RemoteCancel();
+                _device.CloseEscrow();
+                CleanDetectedBills();
+
+                _device.DepositMode();
+                _poolingTimer.Enabled = true;
             }
 
             // si existen denominaciones leídas carga el Listview
-            if (_device.DenominationResultProperty.Denominations.Count > 0)
+            if (_device.DenominationResultProperty.DenominationArray.Length > 0)
                 LoadDetectedBills();
 
-            EnableOrdisableButtons();
+            //Solo se habilita el botón de volver si no hay dinero en el escrow
+            BackButton.Enabled = !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
+
+            ConfirmAndExitDepositButton.Enabled = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
+                && !_device.StateResultProperty.DeviceStateInformation.HopperBillPresent;
+            CancelDepositButton.Enabled = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
         }
 
         private void ResolveStackerFullCondition()
@@ -177,11 +259,20 @@ namespace Permaquim.Depositary.UI.Desktop
             //Solo se habilita el botón de volver si no hay dinero en el escrow
             BackButton.Visible = !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
 
-            ConfirmAndExitDepositButton.Visible = 
+            // Se habilita el boton de confirmar depósito cuando hay billetes en el escrow, pero no
+            // en el reject
+            ConfirmAndExitDepositButton.Visible =
                 _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent;
-
-            CancelDepositButton.Visible = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
+                && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
+                && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQCounting
+                && _device.StateResultProperty.DoorStateInformation.Escrow == true
+                && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQWaitingToRemoveBankNotes;
+            // Se habiita cancelar, una vez que haya terminado la lectura de billetes 
+            // y esten los mismos en el escrow 
+            CancelDepositButton.Visible =
+                _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQCounting
+                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQWaitingToRemoveBankNotes; ;
         }
 
         private void WaitEmptyEscrow()
@@ -201,7 +292,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CleanDetectedBills()
         {
             _device.DenominationResultProperty.Denominations = new Dictionary<string, int>();
-            LoadDetectedBills();
+   
         }
 
         private void ShowHardwareMonitorData()
@@ -220,68 +311,93 @@ namespace Permaquim.Depositary.UI.Desktop
             EscrowBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
             HopperBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.HopperBillPresent;
             DepositFinishedCheckbox.Checked = _device.StateResultProperty.EndInformation.StoreEnd;
-            DenominationsLabel.Text = _device.DenominationResultProperty.BillCount().ToString();
+            CountingErrorCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.CountingError;
+            JammingCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.Jamming;
 
         }
         private void LoadDetectedBills()
         {
-
-            if (_device.DenominationResultProperty.DenominationArray != null)
+            if (_device.DenominationResultProperty.DenominationArray != null 
+                && _device.DenominationResultProperty.DenominationArray.Length == 96)
             {
                 _denominacionesDetectadas = new List<DenominationItem>();
-
                 foreach (var item in _denominaciones)
                 {
-                    var readQuantity = string.Join<char>("", 
-                        (IEnumerable<char>)Encoding.ASCII.GetChars(new byte[3]
-                     {
+                    var readQuantity = string.Join<char>("",
+                       (IEnumerable<char>)Encoding.ASCII.GetChars(new byte[3]
+                    {
                         _device.DenominationResultProperty.DenominationArray[item.Posicion],
                         _device.DenominationResultProperty.DenominationArray[item.Posicion + 1],
                         _device.DenominationResultProperty.DenominationArray[item.Posicion + 2]
-                     }));
+                    }));
+                    int value = 0;
+                    int.TryParse(readQuantity, out value);
 
                     _denominacionesDetectadas.Add(new DenominationItem()
                     {
                         Id = item.Id,
                         Nombre = item.Nombre,
                         Unidades = item.Unidades,
-                        CantidadDetectada = Convert.ToInt32(readQuantity)
+                        CantidadDetectada = value
                     });
                 }
-                Decimal amount = 0;
-                BillResumeListview.Items.Clear();
-                BillResumeListview.SmallImageList = _imageList;
-                    foreach (var denomination in _denominacionesDetectadas)
-                    {
-                        ListViewItem item = new();
-                        item.ImageIndex = (int)denomination.Id;
-                        item.Text = denomination.Nombre;
-                        item.SubItems.Add(denomination.CantidadDetectada.ToString());
-                        amount += Convert.ToInt32(denomination.Unidades) * denomination.CantidadDetectada;
-
-                        BillResumeListview.Items.Add(item);
-
-                    }
-
-                    TotalLabel.Text = "Total: $" + amount.ToString();
-                    CancelDepositButton.Visible = true;
             }
+
+            Decimal amount = 0;
+            int quantity = 0;
+
+            if (_denominacionesDetectadas.Count > 0)
+            {
+                // Actualiza las denominaciones con el valor detectado 
+                foreach (var denomination in _denominacionesDetectadas)
+                {
+                    if (BillResumeListview.Items.Count > 0)
+                    {
+                        BillResumeListview.Items[(int)denomination.Id]
+                            .SubItems[1].Text = denomination.CantidadDetectada.ToString();
+                        BillResumeListview.Items[(int)denomination.Id]
+                            .SubItems[2].Text = (denomination.CantidadDetectada * Convert.ToInt32(denomination.Unidades)).ToString();
+          
+                        amount += Convert.ToInt32(denomination.Unidades) * denomination.CantidadDetectada;
+                        quantity += denomination.CantidadDetectada;
+                    }
+                }
+                
+                //Totales
+                if (BillResumeListview.Items.Count > 0)
+                {
+                    BillResumeListview.Items[BillResumeListview.Items.Count - 1]
+                    .SubItems[1].Text = quantity.ToString();
+                    BillResumeListview.Items[BillResumeListview.Items.Count - 1]
+                        .SubItems[2].Text = amount.ToString();
+                }
+            }
+            else
+            {
+                foreach (ListViewItem item in BillResumeListview.Items)
+                {
+                    item.SubItems[1].Text = "0";
+                }
+                amount = 0;
+            }
+
+            CancelDepositButton.Visible = true;
         }
         private void CancelDepositButton_Click(object sender, EventArgs e)
         {
             CancelDeposit();
-
         }
 
         private void CancelDeposit()
         {
+            _operationStatus.Initialize();
             _device.OpenEscrow();
             _device.PreviousState = StatusInformation.State.PQWaitingToRemoveBankNotes;
-            BillResumeListview.Items.Clear();
         }
 
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
+            _operationStatus.DepositConfirmed = true;
             ConfirmDeposit();
         }
 
@@ -290,7 +406,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CancelDepositButton.Visible = false;
             BackButton.Visible = false;
             _device.StoringStart();
-            CleanDetectedBills();
+
             _device.PreviousState = StatusInformation.State.PQStoring;
         }
 
@@ -309,13 +425,17 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private void ExitBillDepositForm()
         {
+            // Ya que se debe salir del form, se 
+            _poolingTimer.Enabled = false;
+
             DisableControls();
 
             SaveTransaction();
+
             _device.RemoteCancel();
             _operationStatus.DepositEnded = false;
             CleanDetectedBills();
-            _poolingTimer.Enabled = false;
+ 
             this.Close();
             AppController.OpenChildForm(new OperationForm(), _device);
         }
@@ -324,7 +444,6 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DisableControls();
             SaveTransaction();
-
         }
 
         private void DisableControls()
@@ -344,6 +463,26 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
 
                 );
+
+        }
+        private void LoadBillListview()
+        {
+            BillResumeListview.SmallImageList = _imageList;
+            foreach (var denomination in _denominaciones)
+            {
+                ListViewItem item = new();
+                item.ImageIndex = (int)denomination.Id;
+                item.Text = denomination.Nombre;
+                item.SubItems.Add("0");
+                item.SubItems.Add("0");
+                BillResumeListview.Items.Add(item);
+
+            }
+            ListViewItem totalItem = new();
+            totalItem.Text = "Totales";
+            totalItem.SubItems.Add("0");
+            totalItem.SubItems.Add("0");
+            BillResumeListview.Items.Add(totalItem);
 
         }
 
@@ -368,11 +507,12 @@ namespace Permaquim.Depositary.UI.Desktop
                     _imageList.Images.Add(Image.FromStream(ms));
                 }
             }
-
-
+            LoadBillListview();
         }
 
-
+        /// <summary>
+        /// Graba el depósito en base de datos
+        /// </summary>
         private void SaveTransaction()
         {
             Double amount = 0;
@@ -439,10 +579,30 @@ namespace Permaquim.Depositary.UI.Desktop
 
     public class Operationstatus
     {
+        /// <summary>
+        /// Estados que informa la contadora
+        /// </summary>
         public StatesResult OperationDeviceStatesResult { get; set; }
+        /// <summary>
+        /// Ya que el estado de transacción finalizada es volátil,
+        /// Se almacena si la contadora considera fnalizado el depósito
+        /// </summary>
         public  bool DepositEnded { get; set; } = false;
+        /// <summary>
+        /// Indica que el usuario confirmó el depósito
+        /// </summary>
+        public bool DepositConfirmed { get; set; }
+        /// <summary>
+        /// Indica que la contadora detectó un escrow lleno, y esto
+        /// provoca que la contadora siga contando luego de enviar 
+        /// el dinero en escrow al contenedor, detecte o no  billetes 
+        /// (sensor del hopper)
+        /// </summary>
         public bool StackerFull { get; set; }
-
+        /// <summary>
+        /// Id de transacción necesaria para asociar detalles de distintas 
+        /// operaciones de conteo a un mismo depósito (caso escrow lleno) 
+        /// </summary>
         public long CurrentTransactionId { get; set; }
 
         public void Initialize()
@@ -451,6 +611,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DepositEnded = false;
             StackerFull = false;
             CurrentTransactionId = 0;
+            DepositConfirmed = false;
         }
     }
 

@@ -22,8 +22,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private DE50Device _device = null;
 
         public StatusInformation.State PreviousState { get; set; }
-        public StatusInformation.State CurrentStatus 
-        { 
+        public StatusInformation.State CurrentStatus
+        {
             get
             {
                 return this.StateResultProperty.StatusInformation.OperatingState;
@@ -51,11 +51,11 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         public event DeviceDataReceivedEventHandler CounterDeviceDataReceived;
         public event DeviceDataReceivedEventHandler IOboardDeviceDataReceived;
-        
+
         #endregion
 
         #region Constants
-        
+
         public const string NULL = "[NULL]";
         public const string START_OF_HEADING = "[START OF HEADING]";
         public const string START_OF_TEXT = "[START OF TEXT]";
@@ -92,8 +92,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         const byte ENQ = 0x05; // ENQUIRY
         const byte ACK = 0x06; // ACKNOWLEDGE
         const byte BEL = 0x07; // ALERT
-        const byte BS =  0x08;  // BACKSPACE
-        const byte HT =  0x09;  // CHARACTER TABULATION
+        const byte BS = 0x08;  // BACKSPACE
+        const byte HT = 0x09;  // CHARACTER TABULATION
         const byte DLE = 0x10; // DATA LINK ESCAPE
         const byte DC1 = 0x11; // DEVICE CONTROL 1
         const byte DC2 = 0x12; // DEVICE CONTROL 2 
@@ -104,7 +104,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         const byte ETB = 0x17; // END OF TRANSMISSION BLOCK
         const byte CAN = 0x18; // CANCEL
         const byte EOM = 0x19; // END OF MEDIUM
-        const byte SP =  0x20;  // SPACE
+        const byte SP = 0x20;  // SPACE
         #endregion
 
         #region Constructors
@@ -163,7 +163,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     };
                     _ioboardPort.Open();
 
-                    DiscardBuffer(_ioboardPort); 
+                    DiscardBuffer(_ioboardPort);
 
                     Log("FUNCTION: Port " + device.IOboardComPort.PortName + " should be open.");
                 }
@@ -294,7 +294,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             //Raises event for counter
             if (CounterDeviceDataReceived != null && _readbuffer.Contains('\u0017'))
             {
-                _readbuffer =string.Empty;
+                _readbuffer = string.Empty;
                 // Instantiates the DeviceDataReceivedEventArgs object.
                 DeviceDataReceivedEventArgs args = new()
                 {
@@ -343,7 +343,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private void IoboardPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var dataReceived = ((SerialPort)sender).ReadExisting();
-  
+
             //Raises event for counter
             if (IOboardDeviceDataReceived != null)
             {
@@ -372,23 +372,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         #endregion
 
         #region Commands
-        /// <summary>
-        /// Writes command as byte array to Counter serial Comm
-        /// </summary>
-        /// <param name="counterCommand"></param>
-        private void WriteCounterCommand(byte[] counterCommand)
-        {
-            DiscardBuffer(_counterPort);
-            byte[] bcc = GetBCC(counterCommand);
-            _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
-        }
 
         public void OpenEscrow()
         {
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: OpenEscrow");
-                WriteCounterCommand(_device.OpenEscrow);
+                WriteBytes(_device.OpenEscrow);
             }
             else
             {
@@ -401,7 +391,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: CloseEscrow");
-                WriteCounterCommand(_device.CloseEscrow);
+                WriteBytes(_device.CloseEscrow);
             }
             else
             {
@@ -414,17 +404,30 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: Sense");
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.Sense);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
-                WriteCounterCommand(_device.Sense);
+                List<byte> _buffer = ReadCounterResponse();
 
-                return ReadCounterResponse(() => true);
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+                if (_buffer.Count > 100)
+                    DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
+
+
+                _buffer.Clear();
+
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: Sense. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
+
 
 
         public StatesResult StopCounting()
@@ -432,13 +435,24 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: StopCounting");
-                WriteCounterCommand(_device.StopCounting);
-                return ReadCounterResponse(() => true);
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.StopCounting);
+
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: StopCounting. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
         public StatesResult StoringStart()
@@ -446,14 +460,23 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: StoringStart");
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.StoringStart);
 
-                WriteCounterCommand(_device.StoringStart);
-                return ReadCounterResponse(() => true);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterSimpleResponse();
+
+                _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return _stateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: StoringStart. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
 
@@ -462,19 +485,26 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: BatchDataTransmission");
-                WriteCounterCommand(_device.BatchDataTransmission);
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.BatchDataTransmission);
 
-                return  ReadCounterResponse(()=> 
-                    StateResultProperty.StatusInformation.OperatingState == 
-                    StatusInformation.State.PQCounting);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterResponse2();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: BatchDataTransmission. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
-        
+
 
         public StatesResult DenominationDataRequest()
         {
@@ -482,13 +512,23 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             {
                 Log("COMMAND: DenominationDataRequest");
                 DiscardBuffer(_counterPort);
-                WriteCounterCommand(_device.DenominationDataRequest);
-                return ReadCounterResponse(() => true);
+                byte[] bcc = GetBCC(_device.DenominationDataRequest);
+
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: DenominationDataRequest. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
 
@@ -497,14 +537,24 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: ManualDepositMode");
-                WriteCounterCommand(_device.ManualDepositMode);
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.ManualDepositMode);
 
-                return ReadCounterResponse(() => true);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: ManualDepositMode. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
         public StatesResult DepositMode()
@@ -512,14 +562,24 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: DepositMode");
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.DepositMode);
 
-                WriteCounterCommand(_device.DepositMode);
-                return ReadCounterResponse(() => true);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: DepositMode. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
         public StatesResult CountingDataRequest()
@@ -527,46 +587,74 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: CountingDataRequest");
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.CountingDataRequest);
 
-                WriteCounterCommand(_device.CountingDataRequest);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
-                return ReadCounterResponse(() => true);
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 100)
+                   this.DenominationResultProperty.DenominationArray  = ParseDenomination(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: CountingDataRequest. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
-          public StatesResult DeviceReset()
+        public StatesResult DeviceReset()
         {
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: DeviceReset");
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.DeviceReset);
 
-                WriteCounterCommand(_device.DeviceReset);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
-                return ReadCounterResponse(() => true);
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: DeviceReset. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
-         public StatesResult RemoteCancel()
+        public StatesResult RemoteCancel()
         {
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: RemoteCancel");
-                Thread.Sleep(150);
-                WriteCounterCommand(_device.RemoteCancel);
-                return ReadCounterResponse(() => true);
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.RemoteCancel);
+
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterSimpleResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: RemoteCancel. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
 
@@ -576,14 +664,24 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: CollectMode");
-                WriteCounterCommand(_device.CollectMode);
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.CollectMode);
 
-                return ReadCounterResponse(() => true);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: CollectMode. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
 
@@ -592,15 +690,24 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: NormalErrorRecoveryMode");
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.NormalErrorRecoveryMode);
 
-                WriteCounterCommand(_device.NormalErrorRecoveryMode);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
-                return ReadCounterResponse(() => true);
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: NormalErrorRecoveryMode. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
         public StatesResult StoringErrorRecoveryMode()
@@ -608,29 +715,119 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (_counterPort.IsOpen)
             {
                 Log("COMMAND: StoringErrorRecoveryMode");
+                DiscardBuffer(_counterPort);
+                byte[] bcc = GetBCC(_device.StoringErrorRecoveryMode);
 
-                WriteCounterCommand(_device.StoringErrorRecoveryMode);
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
-                return ReadCounterResponse(() => true); ;
+                List<byte> _buffer = ReadCounterResponse();
+
+                if (_buffer.Count > 20)
+                    _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return StateResultProperty;
             }
             else
             {
                 Log("COMMAND NOT SENT: StoringErrorRecoveryMode. Port is closed.");
-                return new StatesResult();
+                return StateResultProperty;
             }
         }
-
-        private StatesResult ReadCounterResponse(Func<Boolean> condition)
+        private List<byte> ReadCounterResponse()
         {
             List<byte> _buffer = new();
             Thread.Sleep(150);
-            while (condition())
+            while (true)
+            {
+                if (_counterPort.IsOpen)
+                {
+                    var bytes = _counterPort.BytesToRead;
+                    if (bytes > 0)
+                    {
+                        byte[] buffer = new byte[bytes];
+                        var countBytes = _counterPort.BaseStream.Read(buffer, 0, bytes);
+                        _buffer.AddRange(buffer);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    return _buffer;
+                }
+
+            }
+
+            if (CounterDeviceDataReceived != null)
+            {
+                _readbuffer = string.Empty;
+                // Instantiates the DeviceDataReceivedEventArgs object.
+                DeviceDataReceivedEventArgs args = new()
+                {
+                    ComPort = _device.CounterComPort.PortName,
+                    Message = Encoding.Default.GetString(_buffer.ToArray<byte>())
+                };
+                CounterDeviceDataReceived(this, args);
+            }
+            return _buffer;
+        }
+
+        private List<byte> ReadCounterSimpleResponse()
+        {
+            List<byte> _buffer = new();
+            Thread.Sleep(150);
+            while (true)
+            {
+                if (_counterPort.IsOpen)
+                {
+                    var bytes = _counterPort.BytesToRead;
+                    if (bytes > 0)
+                    {
+                        byte[] buffer = new byte[bytes];
+                        var countBytes = _counterPort.BaseStream.Read(buffer, 0, bytes);
+                        _buffer.AddRange(buffer);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    return _buffer;
+                }
+
+            }
+
+            if (CounterDeviceDataReceived != null)
+            {
+                _readbuffer = string.Empty;
+                // Instantiates the DeviceDataReceivedEventArgs object.
+                DeviceDataReceivedEventArgs args = new()
+                {
+                    ComPort = _device.CounterComPort.PortName,
+                    Message = Encoding.Default.GetString(_buffer.ToArray<byte>())
+                };
+                CounterDeviceDataReceived(this, args);
+            }
+            return _buffer;
+        }
+
+        private List<byte> ReadCounterResponse2()
+        {
+            List<byte> _buffer = new();
+            Thread.Sleep(150);
+            while (this.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQCounting)
             {
                 var bytes = _counterPort.BytesToRead;
                 if (bytes > 0)
                 {
                     byte[] buffer = new byte[bytes];
-                    _counterPort.BaseStream.Read(buffer, 0, bytes);
+                    var countBytes = _counterPort.BaseStream.Read(buffer, 0, bytes);
                     _buffer.AddRange(buffer);
                 }
                 else
@@ -650,17 +847,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 };
                 CounterDeviceDataReceived(this, args);
             }
-
-            if (_buffer.Count > 20)
-                _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
-            if (_buffer.Count > 100)
-                DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
-
-            _buffer.Clear();
-
-            return _stateResultProperty;
-
-
+            return _buffer;
         }
 
         private string ReadIoBoardResponse()
@@ -673,7 +860,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (bytes > 0)
                 {
                     byte[] buffer = new byte[bytes];
-                    _ioboardPort.BaseStream.Read(buffer, 0, bytes);
+                    var countBytes = _ioboardPort.BaseStream.Read(buffer, 0, bytes);
                     _buffer.AddRange(buffer);
                 }
                 else
@@ -699,11 +886,33 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             return data;
         }
 
-        
-         #endregion
+
+        #endregion
 
         #region Local methods
+        private void WriteBytes(byte[] data)
+        {
+            try
+            {
+                if (_counterPort.IsOpen)
+                {
+                    Log("FUNCTION: WriteResponselessBytes");
+                    DiscardBuffer(_counterPort);
 
+                    byte[] bcc = GetBCC(data);
+                    _counterPort.Write(bcc, 0, bcc.Length);
+                    ReadCounterResponse();
+                }
+                else
+                {
+                    Log("FUNCTION NOT SENT: Sense. Port is closed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(ex);
+            }
+        }
         /// <summary>
         /// Calculate Block Check Character
         /// </summary>
@@ -711,8 +920,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         /// <returns></returns>
         private static byte[] GetBCC(byte[] inputStream)
         {
-            
-            
+
+
             byte num = 0;
             if (inputStream != null && (uint)inputStream.Length > 0U)
             {
@@ -770,7 +979,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 this._ioboardPort.Write(_device.Open);
                 Thread.Sleep(millisecondsTimeout);
                 bool retValue = ((IEnumerable<string>)this._ioboardPort.
-                    ReadExisting().Split(new char[2] { '\n', '\r' }, 
+                    ReadExisting().Split(new char[2] { '\n', '\r' },
                     StringSplitOptions.RemoveEmptyEntries)).Last<string>().ToUpper().Trim() == "OPEN";
                 return retValue;
             }
@@ -789,7 +998,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 this._ioboardPort.Write(_device.Close);
                 Thread.Sleep(millisecondsTimeout);
                 return ((IEnumerable<string>)this._ioboardPort.
-                    ReadExisting().Split(new char[2]{'\n','\r'}, 
+                    ReadExisting().Split(new char[2] { '\n', '\r' },
                     StringSplitOptions.RemoveEmptyEntries)).Last<string>().ToUpper().Trim() == "CLOSED";
             }
             catch (Exception ex)
@@ -813,7 +1022,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 Thread.Sleep(millisecondsTimeout);
                 string Lectura = this._ioboardPort.ReadExisting();
                 Thread.Sleep(500);
-                string[] strArray = Lectura.Split(new char[2]{'\r','\n'}, 
+                string[] strArray = Lectura.Split(new char[2] { '\r', '\n' },
                     StringSplitOptions.RemoveEmptyEntries);
 
 
@@ -855,7 +1064,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 this.DiscardBuffer(_ioboardPort);
                 this._ioboardPort.Write(_device.Status);
                 Thread.Sleep(millisecondsTimeout);
-                string[] strArray = this._ioboardPort.ReadExisting().Split(new char[2] {'\r','\n' }, 
+                string[] strArray = this._ioboardPort.ReadExisting().Split(new char[2] { '\r', '\n' },
                     StringSplitOptions.RemoveEmptyEntries);
                 List<string[]> strArrayList = this.TranslateStatus(strArray[0]);
                 this.TranslateStatus(strArray[1]);
@@ -957,7 +1166,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         #region Log
         public void Log(System.Exception ex)
         {
-            AppendToLogFile("MESSAGE: "+ ex.Message + " STACK TRACE: "+ ex.StackTrace);
+            AppendToLogFile("MESSAGE: " + ex.Message + " STACK TRACE: " + ex.StackTrace);
         }
         private void Log(string message)
         {
@@ -969,7 +1178,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
 
-            string filename = logDirectory + _device.DeviceName + "." 
+            string filename = logDirectory + _device.DeviceName + "."
                 + DateTime.Now.ToString("yyyy.MM.dd") + ".log";
 
             System.IO.StreamWriter file = new(filename, true);
@@ -990,7 +1199,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (_counterPort.IsOpen)
                     _counterPort.Close();
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
                 Log(ex);
             }
@@ -1033,7 +1242,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                     statesResult.StatusInformation.OperatingState = (StatusInformation.State)BinaryToDecimal(StateInput);
 
-                    BitArray EndInformationBitArray = new (new byte[1]{numArray[5]});
+                    BitArray EndInformationBitArray = new(new byte[1] { numArray[5] });
                     statesResult.EndInformation.CollectEnd = EndInformationBitArray[5];
                     statesResult.EndInformation.StoreEnd = EndInformationBitArray[4];
                     statesResult.EndInformation.RestorationEnd = EndInformationBitArray[3];
@@ -1041,7 +1250,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     statesResult.EndInformation.AbnormalEnd = EndInformationBitArray[1];
                     statesResult.EndInformation.CountEnd = EndInformationBitArray[0];
 
-                    BitArray DeviceStateInformationBitArray = new (new byte[1]{numArray[6]});
+                    BitArray DeviceStateInformationBitArray = new(new byte[1] { numArray[6] });
                     statesResult.DeviceStateInformation.RejectFull = DeviceStateInformationBitArray[5];
                     statesResult.DeviceStateInformation.StackerFull = DeviceStateInformationBitArray[4];
                     statesResult.DeviceStateInformation.DischargingFailure = DeviceStateInformationBitArray[3];
@@ -1049,14 +1258,14 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     statesResult.DeviceStateInformation.EscrowBillPresent = DeviceStateInformationBitArray[1];
                     statesResult.DeviceStateInformation.HopperBillPresent = DeviceStateInformationBitArray[0];
 
-                    BitArray ErrorStateInformationBitArray = new (new byte[1]{numArray[7]});
+                    BitArray ErrorStateInformationBitArray = new(new byte[1] { numArray[7] });
 
                     statesResult.ErrorStateInformation.AbnormalStorage = ErrorStateInformationBitArray[3];
                     statesResult.ErrorStateInformation.AbnormalDevice = ErrorStateInformationBitArray[2];
                     statesResult.ErrorStateInformation.CountingError = ErrorStateInformationBitArray[1];
                     statesResult.ErrorStateInformation.Jamming = ErrorStateInformationBitArray[0];
 
-                    BitArray ModeStateInformationBitArray = new (new byte[1]{numArray[8]});
+                    BitArray ModeStateInformationBitArray = new(new byte[1] { numArray[8] });
                     string ModeInput = (ModeStateInformationBitArray[5] ? 1 : 0).ToString() + (object)(ModeStateInformationBitArray[4] ? 1 : 0) + (object)(ModeStateInformationBitArray[3] ? 1 : 0) + (object)(ModeStateInformationBitArray[2] ? 1 : 0) + (object)(ModeStateInformationBitArray[1] ? 1 : 0) + (object)(ModeStateInformationBitArray[0] ? 1 : 0);
                     statesResult.ModeStateInformation.ModeState = (ModeStateInformation.Mode)BinaryToDecimal(ModeInput);
 
@@ -1064,34 +1273,34 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     statesResult.DoorStateInformation.Escrow = DoorStateInformationBitArray[5];
                     statesResult.DoorStateInformation.CassetteFull = DoorStateInformationBitArray[2];
 
-                    BitArray CountryCodeBitArray = new (new byte[1]{numArray[10]});
+                    BitArray CountryCodeBitArray = new(new byte[1] { numArray[10] });
                     string CurrencyInput = (CountryCodeBitArray[0] ? 1 : 0).ToString() + (object)(CountryCodeBitArray[1] ? 1 : 0) + (object)(CountryCodeBitArray[2] ? 1 : 0);
                     statesResult.CountryCode.CurrencyStateInformation = (CountryCode.Currency)BinaryToDecimal(CurrencyInput);
-                    
-                    if (statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming)
-                    {
-                        // ISSUE: reference to a compiler-generated field
-                        ECError((object)_counterPort, new ECErrorArgs()
-                        {
-                            Errorcode = 8
-                        });
-                    }
-                    if (statesResult.ErrorStateInformation.AbnormalStorage)
-                    {
-                        // ISSUE: reference to a compiler-generated field
-                        ECError((object)_counterPort, new ECErrorArgs()
-                        {
-                            Errorcode = 1
-                        });
-                    }
-                    if (statesResult.ErrorStateInformation.CountingError)
-                    {
-                        // ISSUE: reference to a compiler-generated field
-                        ECError((object)_counterPort, new ECErrorArgs()
-                        {
-                            Errorcode = 3
-                        });
-                    }
+
+                    //if (statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming)
+                    //{
+                    //    // ISSUE: reference to a compiler-generated field
+                    //    ECError((object)_counterPort, new ECErrorArgs()
+                    //    {
+                    //        Errorcode = 8
+                    //    });
+                    //}
+                    //if (statesResult.ErrorStateInformation.AbnormalStorage)
+                    //{
+                    //    // ISSUE: reference to a compiler-generated field
+                    //    ECError((object)_counterPort, new ECErrorArgs()
+                    //    {
+                    //        Errorcode = 1
+                    //    });
+                    //}
+                    //if (statesResult.ErrorStateInformation.CountingError)
+                    //{
+                    //    // ISSUE: reference to a compiler-generated field
+                    //    ECError((object)_counterPort, new ECErrorArgs()
+                    //    {
+                    //        Errorcode = 3
+                    //    });
+                    //}
 
                 }
                 return statesResult;
@@ -1107,7 +1316,6 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         {
             try
             {
-                
                 DenominationResult denominationResult = new DenominationResult();
                 byte[] numArray = new byte[0];
                 List<byte> source = new List<byte>();
@@ -1122,7 +1330,6 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                 byte[] array = source.ToArray<byte>();
 
-                denominationResult.DenominationArray = source.ToArray<byte>();
                 try
                 {
                     string s6 = string.Join<char>("", (IEnumerable<char>)Encoding.ASCII.GetChars(new byte[3]
@@ -1197,6 +1404,22 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
         }
 
+        private byte[] ParseDenomination(byte[] Qarray)
+        {
+            List<byte> source = new List<byte>();
+            int num1 = 0;
+            foreach (byte num2 in Qarray)
+            {
+                if (num1 > 7 && num1 < 104)
+                    source.Add(num2);
+                ++num1;
+            }
+
+            return source.ToArray<byte>();
+
+
+        }
+
         #endregion
 
 
@@ -1245,17 +1468,18 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         #endregion
 
         #region Public Properties
-        
+
 
         public bool CounterConnected
         {
-            get {
+            get
+            {
                 if (_counterPort != null)
                     return _counterPort.IsOpen;
                 else
                     return false;
             }
-          
+
         }
 
         public bool IoBoardConnected
@@ -1533,14 +1757,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
     public class DenominationResult
     {
 
-    public Dictionary<string, int> Denominations { get; set; } = new Dictionary<string, int>();
+        public Dictionary<string, int> Denominations { get; set; } = new Dictionary<string, int>();
 
         public DenominationResult()
         {
             Denominations = new Dictionary<string, int>();
 
         }
-        public byte[] DenominationArray { get; set; }
 
         public bool AddDenomination(string key, int cantidad)
         {
@@ -1557,23 +1780,85 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 Denominations[key] = cantidad;
             }
 
-            
-
             return false;
         }
-
         public int BillCount()
         {
             int count = 0;
             foreach (var denomination in this.Denominations)
             {
-               if(denomination.Value > 0)
-                count += Convert.ToInt32(denomination.Key.Replace("ARS", "")) * denomination.Value;
+                if (denomination.Value > 0)
+                    count += Convert.ToInt32(denomination.Key.Replace("ARS", "")) * denomination.Value;
 
             }
             return count;
         }
-  
+        public byte[] DenominationArray { get; set; } = new byte[0];
+        //public int DiezARS { get; set; }
+        //public int VeinteARS { get; set; }
+
+        //public int Mil { get; set; }
+
+        //public int DosMil { get; set; }
+
+        //public int CincoMil { get; set; }
+
+        //public int DiezMil { get; set; }
+
+        //public int VeinteMil { get; set; }
+
+        //public long GetTotalPesos()
+        //{
+        //    return GetTotalDiezARS() + GetTotalVeinteARS() + GetTotalMil() + GetTotalDosMil() + GetTotalCincoMil() + GetTotalDiezMil() + GetTotalVeinteMil();
+        //}
+
+        //public long GetTotalContado()
+        //{
+        //    return (long)(DiezARS + VeinteARS + Mil + DosMil + CincoMil + DiezMil + VeinteMil);
+        //}
+
+        //public long GetTotalDiezARS()
+        //{
+        //    return (long)(DiezARS * 10);
+        //}
+
+        //public long GetTotalVeinteARS()
+        //{
+        //    return (long)(VeinteARS * 20);
+        //}
+
+
+        //public long GetTotalMil()
+        //{
+        //    return (long)(Mil * 50);
+        //}
+
+        //public long GetTotalDosMil()
+        //{
+        //    return (long)(DosMil * 100);
+        //}
+
+        //public long GetTotalCincoMil()
+        //{
+        //    return (long)(CincoMil * 200);
+        //}
+
+        //public long GetTotalDiezMil()
+        //{
+        //    return (long)(DiezMil * 500);
+        //}
+
+        //public long GetTotalVeinteMil()
+        //{
+        //    return (long)(VeinteMil * 1000);
+        //}
+
+        //public string PrintCLPDenominationResult()
+        //{
+        //    return "" + "$1.000 x " + (object)Mil + "\n" + "$2.000 x " + (object)DosMil + "\n" + "$5.000 x " + (object)CincoMil + "\n" + "$10.000 x " + (object)DiezMil + "\n" + "$20.000 x " + (object)VeinteMil + "\n" + "Total Billetes Contados = " + (object)GetTotalContado() + "\n" + "Total Pesos = $" + GetTotalPesos().ToString("n", (IFormatProvider)CultureInfo.CurrentCulture) + "\n";
+        //}
+
+
     }
 
     public class CountryCode
