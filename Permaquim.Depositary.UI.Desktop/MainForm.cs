@@ -28,7 +28,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             this.Size = new Size(screen.Width, screen.Height);
             _poolingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = 100,
+                Interval = 200,
                 Enabled = true
             };
             _poolingTimer.Tick += PoolingTimer_Tick;

@@ -643,7 +643,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 Log("COMMAND: RemoteCancel");
                 DiscardBuffer(_counterPort);
                 byte[] bcc = GetBCC(_device.RemoteCancel);
-
+                Thread.Sleep(150);
                 _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
                 List<byte> _buffer = ReadCounterSimpleResponse();
