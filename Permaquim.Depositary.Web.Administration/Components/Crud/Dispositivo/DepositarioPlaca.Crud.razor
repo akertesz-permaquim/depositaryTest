@@ -1,5 +1,7 @@
 @page "/DispositivoDepositarioPlacaCrud"
 @inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
  
 @if (DepositarioPlaca_entities == null)
 {
@@ -173,6 +175,16 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioPlaca" Data="@DepositarioPlaca_entity"  @bind-Value="DepositarioPlaca_entity" Submit ="Save" Visible ="@(DepositarioPlaca_entity != null)">
           <ChildContent>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Text="DepositarioId" Component="DepositarioId" style="width: 100%">
@@ -232,6 +244,76 @@ else
                      }
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Parity" Component="Parity" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="DataBits" Component="DataBits" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="ReadBufferSize" Component="ReadBufferSize" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="StopBits" Component="StopBits" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="ReadTimeout" Component="ReadTimeout" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Handshake" Component="Handshake" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="BaudRate" Component="BaudRate" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="RtsEnable" Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
@@ -248,6 +330,16 @@ else
                 <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorA  Name="SensorACheckBox" TValue="bool" Change=@(args => SensorAChange(args, @DepositarioPlaca_entity)) />
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="BitSensorA" Component="BitSensorA" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorA)" Name="BitSensorA" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorB" Component="SensorB" Style="margin-left: 0px; vertical-align: middle;" />
@@ -256,6 +348,16 @@ else
                 <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorB  Name="SensorBCheckBox" TValue="bool" Change=@(args => SensorBChange(args, @DepositarioPlaca_entity)) />
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="BitSensorB" Component="BitSensorB" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorB)" Name="BitSensorB" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorC" Component="SensorC" Style="margin-left: 0px; vertical-align: middle;" />
@@ -264,6 +366,16 @@ else
                 <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorC  Name="SensorCCheckBox" TValue="bool" Change=@(args => SensorCChange(args, @DepositarioPlaca_entity)) />
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="BitSensorC" Component="BitSensorC" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorC)" Name="BitSensorC" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorD" Component="SensorD" Style="margin-left: 0px; vertical-align: middle;" />
@@ -272,6 +384,16 @@ else
                 <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorD  Name="SensorDCheckBox" TValue="bool" Change=@(args => SensorDChange(args, @DepositarioPlaca_entity)) />
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="BitSensorD" Component="BitSensorD" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorD)" Name="BitSensorD" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="SensorL" Component="SensorL" Style="margin-left: 0px; vertical-align: middle;" />
@@ -280,6 +402,16 @@ else
                 <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorL  Name="SensorLCheckBox" TValue="bool" Change=@(args => SensorLChange(args, @DepositarioPlaca_entity)) />
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="BitSensorL" Component="BitSensorL" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(DepositarioPlaca_entity.BitSensorL)" Name="BitSensorL" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
@@ -390,10 +522,18 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
  
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+ 
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+             NavManager.NavigateTo("/ login", true);
     }
     #region Loading entities data
     /// <summary>
@@ -483,7 +623,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     DepositarioPlaca_entity.UsuarioCreacion=1;
+                     DepositarioPlaca_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -493,7 +633,7 @@ else
                  }
                  else
                  {
-                     DepositarioPlaca_entity.UsuarioModificacion=1;
+                     DepositarioPlaca_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }

@@ -1,5 +1,7 @@
 @page "/EstiloEsquemaDetalleValorCrud"
 @inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
  
 @if (EsquemaDetalleValor_entities == null)
 {
@@ -100,6 +102,16 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalleValor" Data="@EsquemaDetalleValor_entity"  @bind-Value="EsquemaDetalleValor_entity" Submit ="Save" Visible ="@(EsquemaDetalleValor_entity != null)">
           <ChildContent>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(EsquemaDetalleValor_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Text="EsquemaDetalleId" Component="EsquemaDetalleId" style="width: 100%">
@@ -241,10 +253,18 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
  
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+ 
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+             NavManager.NavigateTo("/ login", true);
     }
     #region Loading entities data
     /// <summary>
@@ -326,7 +346,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     EsquemaDetalleValor_entity.UsuarioCreacion=1;
+                     EsquemaDetalleValor_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -336,7 +356,7 @@ else
                  }
                  else
                  {
-                     EsquemaDetalleValor_entity.UsuarioModificacion=1;
+                     EsquemaDetalleValor_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }

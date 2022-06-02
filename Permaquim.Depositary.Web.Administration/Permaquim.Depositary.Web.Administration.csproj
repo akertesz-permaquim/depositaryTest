@@ -7,14 +7,81 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
-    <PackageReference Include="Radzen.Blazor" Version="3.18.9" />
+    <PackageReference Include="Radzen.Blazor" Version="3.18.12" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Dal\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Crud\Banca\Banco.Crud.razor" />
+    <None Include="Components\Crud\Banca\Cuenta.Crud.razor" />
+    <None Include="Components\Crud\Banca\UsuarioCuenta.Crud.razor" />
+    <None Include="Components\Crud\Directorio\Empresa.Crud.razor" />
+    <None Include="Components\Crud\Directorio\Grupo.Crud.razor" />
+    <None Include="Components\Crud\Directorio\IdentificadorUsuario.Crud.razor" />
+    <None Include="Components\Crud\Directorio\RolFuncion.Crud.razor" />
+    <None Include="Components\Crud\Directorio\Sector.Crud.razor" />
+    <None Include="Components\Crud\Directorio\Sucursal.Crud.razor" />
+    <None Include="Components\Crud\Directorio\TipoIdentificador.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\ComandoContadora.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\ComandoPlaca.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\ConfiguracionDepositario.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\Depositario.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\DepositarioContadora.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\DepositarioEstado.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\DepositarioPlaca.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\Marca.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\Modelo.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\TipoConfiguracionDepositario.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\TipoContadora.Crud.razor" />
+    <None Include="Components\Crud\Dispositivo\TipoPlaca.Crud.razor" />
+    <None Include="Components\Crud\Estilo\Esquema.Crud.razor" />
+    <None Include="Components\Crud\Estilo\EsquemaDetalle.Crud.razor" />
+    <None Include="Components\Crud\Estilo\EsquemaDetalleValor.Crud.razor" />
+    <None Include="Components\Crud\Geografia\Ciudad.Crud.razor" />
+    <None Include="Components\Crud\Geografia\CodigoPostal.Crud.razor" />
+    <None Include="Components\Crud\Geografia\Pais.Crud.razor" />
+    <None Include="Components\Crud\Geografia\Provincia.Crud.razor" />
+    <None Include="Components\Crud\Geografia\Zona.Crud.razor" />
+    <None Include="Components\Crud\Operacion\Contenedor.Crud.razor" />
+    <None Include="Components\Crud\Operacion\TipoContenedor.Crud.razor" />
+    <None Include="Components\Crud\Operacion\TipoEvento.Crud.razor" />
+    <None Include="Components\Crud\Operacion\TipoTransaccion.Crud.razor" />
+    <None Include="Components\Crud\Operacion\Turno.Crud.razor" />
+    <None Include="Components\Crud\Operacion\TurnoUsuario.Crud.razor" />
+    <None Include="Components\Crud\Regionalizacion\Lenguaje.Crud.razor" />
+    <None Include="Components\Crud\Regionalizacion\LenguajeItem.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\Aplicacion.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\AplicacionParametro.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\AplicacionParametroValor.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\Funcion.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\Menu.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\Rol.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\RolFuncion.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\TipoAplicacion.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\TipoFuncion.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\TipoMenu.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\Usuario.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\UsuarioRol.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\UsuarioSector.Crud.razor" />
+    <None Include="Components\Crud\Sincronizacion\Configuracion.Crud.razor" />
+    <None Include="Components\Crud\Sincronizacion\Entidad.Crud.razor" />
+    <None Include="Components\Crud\Turno\Agenda.Crud.razor" />
+    <None Include="Components\Crud\Turno\Esquema.Crud.razor" />
+    <None Include="Components\Crud\Turno\EsquemaDetalle.Crud.razor" />
+    <None Include="Components\Crud\Valor\Denominacion.Crud.razor" />
+    <None Include="Components\Crud\Valor\Moneda.Crud.razor" />
+    <None Include="Components\Crud\Valor\RelacionMonedaTipoValor.Crud.razor" />
+    <None Include="Components\Crud\Valor\Tipo.Crud.razor" />
+    <None Include="Components\Crud\Visualizacion\Perfil.Crud.razor" />
+    <None Include="Components\Crud\Visualizacion\PerfilItem.Crud.razor" />
+    <None Include="Components\Crud\Visualizacion\PerfilTipo.Crud.razor" />
   </ItemGroup>
 
 </Project>

@@ -121,3 +121,4 @@ C:\Dev\depositario\Permaquim.Depositary.Web.Administration\bin\Debug\net6.0\Micr
 C:\Dev\depositario\Permaquim.Depositary.Web.Administration\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Dev\depositario\Permaquim.Depositary.Web.Administration\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Dev\depositario\Permaquim.Depositary.Web.Administration\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Dev\depositario\Permaquim.Depositary.Web.Administration\bin\Debug\net6.0\Blazored.SessionStorage.dll

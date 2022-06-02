@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Radzen;
+using Blazored.SessionStorage;
+using Permaquim.Depositary.Web.Administration.Managers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,8 @@ builder.Services.AddScoped<Radzen.NotificationService>();
 builder.Services.AddScoped<Radzen.DialogService>();
 builder.Services.AddScoped<Radzen.TooltipService>();
 builder.Services.AddScoped<Radzen.ContextMenuService>();
+builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddScoped<SessionStorageManager>();
 
 var app = builder.Build();
 

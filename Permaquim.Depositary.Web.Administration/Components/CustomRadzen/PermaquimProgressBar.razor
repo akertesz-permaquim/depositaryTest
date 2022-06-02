@@ -1,0 +1,14 @@
+﻿@inherits RadzenComponent
+@using Radzen
+@using Radzen.Blazor.Rendering;
+@if (Visible)
+{
+        <div style="@Style" aria-valuemax="@Max" aria-valuemin="0" role="progressbar" @attributes="Attributes" class="@GetCssClass()"
+        aria-valuenow="@Value" id="@GetId()">
+        <div class="rz-progressbar-value rz-progressbar-value-animate" style="@($"width: {Math.Min(Value / Max * 100, 100).ToInvariantString()}%; background-color: {BarColor};")"></div>
+        @if (ShowValue)
+        {
+            <div class="rz-progressbar-label">@Value@Unit</div>
+        }
+        </div>
+}

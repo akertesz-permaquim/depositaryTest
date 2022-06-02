@@ -22,6 +22,12 @@ namespace Permaquim.Depositary.Web.Administration.Components
             InvokeAsync(StateHasChanged);
         }
 
+        public class LoginForm
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
+
         //public void OnPropertyChanged(PropertyChangedEventArgs args)
         //{
         //}
@@ -54,7 +60,7 @@ namespace Permaquim.Depositary.Web.Administration.Components
 
             if (!string.IsNullOrEmpty(error))
             {
-                NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error,Summary = $"Error",Detail = $"{error}" });
+                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = $"Error", Detail = $"{error}" });
             }
         }
     }

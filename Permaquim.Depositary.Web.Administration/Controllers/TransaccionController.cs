@@ -49,6 +49,32 @@
 
         #endregion
 
+        #region Existencias
+        public static List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado> ObtenerExistenciasPorDepositario(Int64 pDepositarioID)
+        {
+            List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado> resultado = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado>();
+            DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerExistenciasPorDepositario oSP = new DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerExistenciasPorDepositario();
+
+            oSP.Items(pDepositarioID);
+
+            resultado = oSP.MappedResultSet.Resultado;
+
+            return resultado;
+        }
+        public static List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado> ObtenerExistenciasAValidarPorDepositario(Int64 pDepositarioID)
+        {
+            List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado> resultado = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>();
+            DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario oSP = new DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario();
+
+            oSP.Items(pDepositarioID);
+
+            resultado = oSP.MappedResultSet.Resultado;
+
+            return resultado;
+        }
+
+        #endregion
+
         #region Eventos
         public static List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario> ObtenerEventosPorDepositario(Int64 pDepositarioID)
         {
@@ -60,5 +86,22 @@
             return resultado;
         }
         #endregion
+
+        #region Totales generales
+
+        public static List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> ObtenerTotalesGeneralesPorMonedaDepositario(Int64 pDepositarioID)
+        {
+            List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> resultado = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>();
+            DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario oSP = new DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario();
+
+            oSP.Items(pDepositarioID);
+
+            resultado = oSP.MappedResultSet.Resultado;
+
+            return resultado;
+        }
+
+        #endregion
+
     }
 }

@@ -2512,6 +2512,7 @@ using System.Text;
 					Direccion,
 					CodigoPostalId,
 					EstiloEsquemaId,
+					LenguajeId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -2565,15 +2566,16 @@ using System.Text;
          /// <param name='Direccion'></param>
          /// <param name='CodigoPostalId'></param>
          /// <param name='EstiloEsquemaId'></param>
+         /// <param name='LenguajeId'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.Empresa</returns>
-			public Entities.Tables.Directorio.Empresa Add(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Directorio.Empresa Add(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Int64 LenguajeId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Directorio.Empresa)base.Add(new Entities.Tables.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Directorio.Empresa)base.Add(new Entities.Tables.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,LenguajeId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Directorio.Empresa> Items()
             {
@@ -2613,13 +2615,14 @@ using System.Text;
             /// <param name="Direccion"></param>
             /// <param name="CodigoPostalId"></param>
             /// <param name="EstiloEsquemaId"></param>
+            /// <param name="LenguajeId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Directorio.Empresa> Items(Int64? Id,String Nombre,String Descripcion,Int64? GrupoId,String CodigoExterno,String Direccion,Int64? CodigoPostalId,Int64? EstiloEsquemaId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Directorio.Empresa> Items(Int64? Id,String Nombre,String Descripcion,Int64? GrupoId,String CodigoExterno,String Direccion,Int64? CodigoPostalId,Int64? EstiloEsquemaId,Int64? LenguajeId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -2715,6 +2718,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EstiloEsquemaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, EstiloEsquemaId);
+                    }
+                   
+                }
+                if (LenguajeId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.LenguajeId, sqlEnum.OperandEnum.Equal, LenguajeId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.LenguajeId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, LenguajeId);
                     }
                    
                 }
@@ -2825,15 +2840,16 @@ using System.Text;
             /// <param name="Direccion"></param>
             /// <param name="CodigoPostalId"></param>
             /// <param name="EstiloEsquemaId"></param>
+            /// <param name="LenguajeId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 grupoid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 estiloesquemaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 grupoid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 estiloesquemaid,Int64 lenguajeid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Directorio.Empresa {Id = id,Nombre = nombre,Descripcion = descripcion,GrupoId = grupoid,CodigoExterno = codigoexterno,Direccion = direccion,CodigoPostalId = codigopostalid,EstiloEsquemaId = estiloesquemaid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Directorio.Empresa {Id = id,Nombre = nombre,Descripcion = descripcion,GrupoId = grupoid,CodigoExterno = codigoexterno,Direccion = direccion,CodigoPostalId = codigopostalid,EstiloEsquemaId = estiloesquemaid,LenguajeId = lenguajeid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Directorio.Empresa
@@ -3621,6 +3637,274 @@ using System.Text;
                  }
             }
         } // class IdentificadorUsuario
+	} //namespace DepositarioAdminWeb.Business.Tables.Directorio
+	namespace DepositarioAdminWeb.Business.Tables.Directorio {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class RelacionMonedaSucursal : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					MonedaId,
+					SucursalId,
+					esDefault
+				}
+         protected List<Entities.Tables.Directorio.RelacionMonedaSucursal> _entities = new List<Entities.Tables.Directorio.RelacionMonedaSucursal>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public RelacionMonedaSucursal() : base()
+            {
+                base._dataItem = new Entities.Tables.Directorio.RelacionMonedaSucursal();
+            }
+            public RelacionMonedaSucursal(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Directorio.RelacionMonedaSucursal();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Directorio.RelacionMonedaSucursal item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// RelacionMonedaSucursal Add Method
+         /// </summary>
+         /// <param name='MonedaId'></param>
+         /// <param name='SucursalId'></param>
+         /// <param name='esDefault'></param>
+         /// <returns>Entities.Tables.Directorio.RelacionMonedaSucursal</returns>
+			public Entities.Tables.Directorio.RelacionMonedaSucursal Add(Int64 MonedaId,Int64 SucursalId,Boolean esDefault) 
+			{
+			  return (Entities.Tables.Directorio.RelacionMonedaSucursal)base.Add(new Entities.Tables.Directorio.RelacionMonedaSucursal(MonedaId,SucursalId,esDefault));
+			}
+            public new List<Entities.Tables.Directorio.RelacionMonedaSucursal> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Directorio.RelacionMonedaSucursal>().ToList<Entities.Tables.Directorio.RelacionMonedaSucursal>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Directorio.RelacionMonedaSucursal items by Pk
+            /// </summary>
+            /// <param name="MonedaId"></param>
+            /// <param name="SucursalId"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Directorio.RelacionMonedaSucursal> Items(Int64 MonedaId,Int64 SucursalId)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Directorio.RelacionMonedaSucursal items with parameters.
+            /// </summary>
+            /// <param name="MonedaId"></param>
+            /// <param name="SucursalId"></param>
+            /// <param name="esDefault"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Directorio.RelacionMonedaSucursal> Items(Int64? MonedaId,Int64? SucursalId,Boolean? esDefault)
+            {
+                this.Where.Clear();
+                if (MonedaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.MonedaId, sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                   
+                }
+                if (SucursalId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, SucursalId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
+                    }
+                   
+                }
+                if (esDefault != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.esDefault, sqlEnum.OperandEnum.Equal, esDefault);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.esDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, esDefault);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Directorio.RelacionMonedaSucursal
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Directorio.RelacionMonedaSucursal Add(Entities.Tables.Directorio.RelacionMonedaSucursal item)
+            {
+                return (Entities.Tables.Directorio.RelacionMonedaSucursal)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Directorio.RelacionMonedaSucursal
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Directorio.RelacionMonedaSucursal AddOrUpdate(Entities.Tables.Directorio.RelacionMonedaSucursal item)
+            {
+                 if (Items(item.MonedaId,item.SucursalId).Count == 0)
+                 {
+                     return (Entities.Tables.Directorio.RelacionMonedaSucursal)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Directorio.RelacionMonedaSucursal
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Directorio.RelacionMonedaSucursal item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Directorio.RelacionMonedaSucursal with parameters
+            /// </summary>
+            /// <param name="MonedaId"></param>
+            /// <param name="SucursalId"></param>
+            /// <param name="esDefault"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 monedaid,Int64 sucursalid,Boolean esdefault)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Directorio.RelacionMonedaSucursal {MonedaId = monedaid,SucursalId = sucursalid,esDefault = esdefault});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Directorio.RelacionMonedaSucursal
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Directorio.RelacionMonedaSucursal item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Directorio.RelacionMonedaSucursal with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 monedaid,Int64 sucursalid)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Directorio.RelacionMonedaSucursal {MonedaId = monedaid,SucursalId = sucursalid});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Directorio.RelacionMonedaSucursal> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class RelacionMonedaSucursal
 	} //namespace DepositarioAdminWeb.Business.Tables.Directorio
 	namespace DepositarioAdminWeb.Business.Tables.Directorio {
 	    /// <summary>
@@ -22340,6 +22624,7 @@ using System.Text;
                 {
 					Id,
 					EmpresaId,
+					LenguajeId,
 					Nombre,
 					Apellido,
 					Legajo,
@@ -22398,6 +22683,7 @@ using System.Text;
          /// Usuario Add Method
          /// </summary>
          /// <param name='EmpresaId'></param>
+         /// <param name='LenguajeId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Apellido'></param>
          /// <param name='Legajo'></param>
@@ -22415,9 +22701,9 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Usuario</returns>
-			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,Int64 LenguajeId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Seguridad.Usuario)base.Add(new Entities.Tables.Seguridad.Usuario(EmpresaId,Nombre,Apellido,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Seguridad.Usuario)base.Add(new Entities.Tables.Seguridad.Usuario(EmpresaId,LenguajeId,Nombre,Apellido,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Seguridad.Usuario> Items()
             {
@@ -22451,6 +22737,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EmpresaId"></param>
+            /// <param name="LenguajeId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Apellido"></param>
             /// <param name="Legajo"></param>
@@ -22468,7 +22755,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,String Nombre,String Apellido,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -22492,6 +22779,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EmpresaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                   
+                }
+                if (LenguajeId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.LenguajeId, sqlEnum.OperandEnum.Equal, LenguajeId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.LenguajeId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, LenguajeId);
                     }
                    
                 }
@@ -22728,6 +23027,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EmpresaId"></param>
+            /// <param name="LenguajeId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Apellido"></param>
             /// <param name="Legajo"></param>
@@ -22745,9 +23045,9 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 empresaid,String nombre,String apellido,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 empresaid,Int64 lenguajeid,String nombre,String apellido,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Seguridad.Usuario {Id = id,EmpresaId = empresaid,Nombre = nombre,Apellido = apellido,Legajo = legajo,Mail = mail,FechaIngreso = fechaingreso,NickName = nickname,Password = password,Token = token,Avatar = avatar,FechaUltimoLogin = fechaultimologin,DebeCambiarPassword = debecambiarpassword,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Seguridad.Usuario {Id = id,EmpresaId = empresaid,LenguajeId = lenguajeid,Nombre = nombre,Apellido = apellido,Legajo = legajo,Mail = mail,FechaIngreso = fechaingreso,NickName = nickname,Password = password,Token = token,Avatar = avatar,FechaUltimoLogin = fechaultimologin,DebeCambiarPassword = debecambiarpassword,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Seguridad.Usuario

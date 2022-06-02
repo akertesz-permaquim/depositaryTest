@@ -551,6 +551,7 @@ using System.Text;
 					public const string Direccion = "Direccion";
 					public const string CodigoPostalId = "CodigoPostalId";
 					public const string EstiloEsquemaId = "EstiloEsquemaId";
+					public const string LenguajeId = "LenguajeId";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -567,6 +568,7 @@ using System.Text;
 					Direccion,
 					CodigoPostalId,
 					EstiloEsquemaId,
+					LenguajeId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -579,7 +581,7 @@ using System.Text;
                 public Empresa()
                 {
                 }
-                public  Empresa(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Empresa(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Int64 LenguajeId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -589,6 +591,7 @@ using System.Text;
                     this.Direccion = Direccion;
                     this.CodigoPostalId = CodigoPostalId;
                     this.EstiloEsquemaId = EstiloEsquemaId;
+                    this.LenguajeId = LenguajeId;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -616,6 +619,10 @@ using System.Text;
              public Int64 CodigoPostalId { get; set; }
              [DataItemAttributeFieldName("EstiloEsquemaId","EstiloEsquemaId")]
              public Int64 EstiloEsquemaId { get; set; }
+             [DataItemAttributeFieldName("LenguajeId","LenguajeId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Lenguaje")]// Object name in Database
+             public Int64 LenguajeId { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -775,6 +782,49 @@ using System.Text;
              public DateTime? FechaModificacion { get; set; }
 				
 			} //Class IdentificadorUsuario 
+} //namespace DepositarioAdminWeb.Entities.Tables.Directorio
+		namespace DepositarioAdminWeb.Entities.Tables.Directorio {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Directorio")]  // Database Schema Name
+			[DataItemAttributeObjectName("RelacionMonedaSucursal","RelacionMonedaSucursal")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class RelacionMonedaSucursal : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string MonedaId = "MonedaId";
+					public const string SucursalId = "SucursalId";
+					public const string esDefault = "esDefault";
+				}
+				public enum FieldEnum : int
+                {
+					MonedaId,
+					SucursalId,
+					esDefault
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public RelacionMonedaSucursal()
+                {
+                }
+                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean esDefault)
+                {
+                    this.MonedaId = MonedaId;
+                    this.SucursalId = SucursalId;
+                    this.esDefault = esDefault;
+                }
+             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 MonedaId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("esDefault","esDefault")]
+             public Boolean esDefault { get; set; }
+				
+			} //Class RelacionMonedaSucursal 
 } //namespace DepositarioAdminWeb.Entities.Tables.Directorio
 		namespace DepositarioAdminWeb.Entities.Tables.Directorio {
 			[Serializable()]                         //
@@ -4885,6 +4935,7 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string EmpresaId = "EmpresaId";
+					public const string LenguajeId = "LenguajeId";
 					public const string Nombre = "Nombre";
 					public const string Apellido = "Apellido";
 					public const string Legajo = "Legajo";
@@ -4906,6 +4957,7 @@ using System.Text;
                 {
 					Id,
 					EmpresaId,
+					LenguajeId,
 					Nombre,
 					Apellido,
 					Legajo,
@@ -4929,10 +4981,11 @@ using System.Text;
                 public Usuario()
                 {
                 }
-                public  Usuario(Int64 EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Usuario(Int64 EmpresaId,Int64 LenguajeId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EmpresaId = EmpresaId;
+                    this.LenguajeId = LenguajeId;
                     this.Nombre = Nombre;
                     this.Apellido = Apellido;
                     this.Legajo = Legajo;
@@ -4958,6 +5011,10 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Empresa")]// Object name in Database
              public Int64 EmpresaId { get; set; }
+             [DataItemAttributeFieldName("LenguajeId","LenguajeId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Lenguaje")]// Object name in Database
+             public Int64 LenguajeId { get; set; }
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }

@@ -1,9 +1,13 @@
 ﻿@inherits Permaquim.Depositary.Web.Administration.Layouts.MainLayoutComponent
+
 @using Radzen
 @using Radzen.Blazor
 @using Microsoft.AspNetCore.Identity;
 @using Permaquim.Depositary.Web.Administration.Components
+
 @inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> L
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
 
 
 <RadzenDialog />
@@ -11,7 +15,7 @@
 <RadzenTooltip />
 <RadzenContextMenu />
 
-<RadzenHeader>
+<RadzenHeader Style="z-index:3;"> 
     <ChildContent>
         <div class="row justify-content-start align-items-center">
             <div class="col-6 d-flex align-items-center">
@@ -23,21 +27,21 @@
             <div class="col-6 text-right">
                 <RadzenProfileMenu Visible="true" Click="@Profilemenu0Click">
                     <ChildContent>
-                        <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" Visible="true">
+@*                        <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" Visible="true">
                         </RadzenProfileMenuItem>
                         <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" Visible="true">
                         </RadzenProfileMenuItem>
                         <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" Visible="true">
-                        </RadzenProfileMenuItem>
-                        <RadzenProfileMenuItem Text="Logout" Value="Logout" Icon="power_settings_new">
+                        </RadzenProfileMenuItem>*@
+                        <RadzenProfileMenuItem Text="Logout" Path="/logout" Value="Logout" Icon="power_settings_new">
                         </RadzenProfileMenuItem>
                     </ChildContent>
                     <Template>
-                        <RadzenLabel Text="Germán">
+                        <RadzenLabel Text="@nombreUsuario">
                         </RadzenLabel>
-                        <RadzenLabel Text="Sivit">
+                        <RadzenLabel Text="@apellidoUsuario">
                         </RadzenLabel>
-                        <RadzenImage Path="profile" style="border-radius: 16px; height: 32px; width: 32px">
+                        <RadzenImage Path="@avatarUsuario" style="border-radius: 16px; height: 32px; width: 32px">
                         </RadzenImage>
                     </Template>
                 </RadzenProfileMenu>
@@ -63,3 +67,28 @@
         </RadzenLabel>
     </ChildContent>
 </RadzenFooter>
+
+@code
+{
+    private string nombreUsuario;
+    private string apellidoUsuario;
+    private string avatarUsuario;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+            if (userId == null)
+            {
+                NavManager.NavigateTo("/login", true);
+            }
+            else
+            {
+                nombreUsuario = await sessionStorage.GetItemAsync<string>("NombreUsuario");
+                apellidoUsuario = await sessionStorage.GetItemAsync<string>("ApellidoUsuario");
+                avatarUsuario = await sessionStorage.GetItemAsync<string>("AvatarUsuario");
+                StateHasChanged();
+            }
+        }
+    }
+}

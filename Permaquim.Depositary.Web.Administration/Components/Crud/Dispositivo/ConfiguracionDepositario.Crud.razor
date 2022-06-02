@@ -1,5 +1,7 @@
 @page "/DispositivoConfiguracionDepositarioCrud"
 @inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
  
 @if (ConfiguracionDepositario_entities == null)
 {
@@ -113,6 +115,16 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.ConfiguracionDepositario" Data="@ConfiguracionDepositario_entity"  @bind-Value="ConfiguracionDepositario_entity" Submit ="Save" Visible ="@(ConfiguracionDepositario_entity != null)">
           <ChildContent>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(ConfiguracionDepositario_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Text="TipoId" Component="TipoId" style="width: 100%">
@@ -282,10 +294,18 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
  
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+ 
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+             NavManager.NavigateTo("/ login", true);
     }
     #region Loading entities data
     /// <summary>
@@ -375,7 +395,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     ConfiguracionDepositario_entity.UsuarioCreacion=1;
+                     ConfiguracionDepositario_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -385,7 +405,7 @@ else
                  }
                  else
                  {
-                     ConfiguracionDepositario_entity.UsuarioModificacion=1;
+                     ConfiguracionDepositario_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }

@@ -1,5 +1,7 @@
 @page "/DispositivoDepositarioContadoraCrud"
 @inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
  
 @if (DepositarioContadora_entities == null)
 {
@@ -135,6 +137,16 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.DepositarioContadora" Data="@DepositarioContadora_entity"  @bind-Value="DepositarioContadora_entity" Submit ="Save" Visible ="@(DepositarioContadora_entity != null)">
           <ChildContent>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Text="ContadoraId" Component="ContadoraId" style="width: 100%">
@@ -209,6 +221,76 @@ else
                      }
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Parity" Component="Parity" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="DataBits" Component="DataBits" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="ReadBufferSize" Component="ReadBufferSize" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="StopBits" Component="StopBits" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="ReadTimeout" Component="ReadTimeout" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Handshake" Component="Handshake" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="BaudRate" Component="BaudRate" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="RtsEnable" Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
@@ -327,10 +409,18 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
  
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+ 
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+             NavManager.NavigateTo("/ login", true);
     }
     #region Loading entities data
     /// <summary>
@@ -420,7 +510,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     DepositarioContadora_entity.UsuarioCreacion=1;
+                     DepositarioContadora_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -430,7 +520,7 @@ else
                  }
                  else
                  {
-                     DepositarioContadora_entity.UsuarioModificacion=1;
+                     DepositarioContadora_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }

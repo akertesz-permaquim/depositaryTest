@@ -1,5 +1,7 @@
 @page "/DirectorioEmpresaCrud"
 @inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
  
 @if (Empresa_entities == null)
 {
@@ -87,6 +89,19 @@ else
     </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.Empresa" Property="EstiloEsquemaId" Filterable="false" Title="EstiloEsquemaId" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.Empresa" Title="LenguajeId" Property="LenguajeId" Width="100px" >
+                <Template>
+                    @if(Lenguaje_entities.FirstOrDefault( c => c.Id == @context.LenguajeId) != null){
+                       <RadzenLabel Text="@Lenguaje_entities.FirstOrDefault( c => c.Id == @context.LenguajeId).Nombre" Component="LenguajeId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="LenguajeId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.Empresa" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
@@ -110,6 +125,16 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Directorio.Empresa" Data="@Empresa_entity"  @bind-Value="Empresa_entity" Submit ="Save" Visible ="@(Empresa_entity != null)">
           <ChildContent>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Empresa_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                      <RadzenLabel Text="Nombre" Component="Nombre" style="width: 100%">
@@ -192,6 +217,48 @@ else
                      }
                  </div>
                </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="CodigoPostalId" Component="CodigoPostalId" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Empresa_entity.CodigoPostalId)" Name="CodigoPostalId" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="EstiloEsquemaId" Component="EstiloEsquemaId" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Empresa_entity.EstiloEsquemaId)" Name="EstiloEsquemaId" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="LenguajeId" Component="LenguajeId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if((@Lenguaje_entities.Count > 0 && @Lenguaje_entities.FirstOrDefault( c => c.Id == @Empresa_entity.LenguajeId) != null) || crudMode != CrudMode.Delete)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.LenguajeId)"
+                                    Data=@Lenguaje_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectLenguajeValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Lenguaje_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectLenguajeValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
@@ -292,14 +359,28 @@ else
     private List<DepositarioAdminWeb.Entities.Tables.Directorio.Grupo>? Grupo_entities;
  
     /// <summary>
+    /// Variables to handle Relation between Empresa.LenguajeId and Lenguaje.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Regionalizacion.Lenguaje Lenguaje_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Regionalizacion.Lenguaje>? Lenguaje_entities;
+ 
+    /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
+ 
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
  
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+             NavManager.NavigateTo("/ login", true);
     }
     #region Loading entities data
     /// <summary>
@@ -318,6 +399,9 @@ else
         DepositarioAdminWeb.Business.Tables.Directorio.Grupo Grupo_local = new();
         Grupo_entities = Grupo_local.Items();
  
+        DepositarioAdminWeb.Business.Tables.Regionalizacion.Lenguaje Lenguaje_local = new();
+        Lenguaje_entities = Lenguaje_local.Items();
+ 
     }
  
     #endregion
@@ -331,6 +415,7 @@ else
         Empresa_entity = new();
         //Relations entities initialization
         Grupo_entity = new(); 
+        Lenguaje_entity = new(); 
         crudMode = CrudMode.Add;
     }
     /// <summary>
@@ -343,6 +428,10 @@ else
             Grupo_entity = new() { 
             Id = Grupo_entities.FirstOrDefault(c => c.Id == Empresa_entity.GrupoId).Id, 
             Nombre = Grupo_entities.FirstOrDefault(c => c.Id == Empresa_entity.GrupoId).Nombre
+            };
+            Lenguaje_entity = new() { 
+            Id = Lenguaje_entities.FirstOrDefault(c => c.Id == Empresa_entity.LenguajeId).Id, 
+            Nombre = Lenguaje_entities.FirstOrDefault(c => c.Id == Empresa_entity.LenguajeId).Nombre
             };
         if (delete)
             crudMode = CrudMode.Delete;
@@ -381,7 +470,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     Empresa_entity.UsuarioCreacion=1;
+                     Empresa_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -391,7 +480,7 @@ else
                  }
                  else
                  {
-                     Empresa_entity.UsuarioModificacion=1;
+                     Empresa_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }
@@ -499,6 +588,14 @@ else
     /// </summary>
     /// <param name="item"></param>
     private void SelectGrupoValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Lenguaje value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectLenguajeValueChanged(object item)
     {
     }
  

@@ -1,0 +1,16 @@
+﻿@page "/logout"
+
+@inject NavigationManager NavManager
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Login> L
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await sessionStorage.ClearAsync();
+            NavManager.NavigateTo("/login", true);
+        }
+    }
+}

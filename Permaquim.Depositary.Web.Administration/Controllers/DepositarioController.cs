@@ -11,5 +11,17 @@
 
             return resultado;
         }
+
+        public static DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado ObtenerInformacionDepositario(Int64 pDepositarioId)
+        {
+            DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado resultado = new DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado();
+            DepositarioAdminWeb.Business.Procedures.Dispositivo.ObtenerInformacionDepositario oSP = new DepositarioAdminWeb.Business.Procedures.Dispositivo.ObtenerInformacionDepositario();
+
+            oSP.Items(pDepositarioId);
+
+            resultado = oSP.MappedResultSet.Resultado.FirstOrDefault();
+
+            return resultado;
+        }
     }
 }

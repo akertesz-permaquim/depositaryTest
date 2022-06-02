@@ -1,5 +1,7 @@
 @page "/DirectorioIdentificadorUsuarioCrud"
 @inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
  
 @if (IdentificadorUsuario_entities == null)
 {
@@ -91,6 +93,36 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Directorio.IdentificadorUsuario" Data="@IdentificadorUsuario_entity"  @bind-Value="IdentificadorUsuario_entity" Submit ="Save" Visible ="@(IdentificadorUsuario_entity != null)">
           <ChildContent>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(IdentificadorUsuario_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="TipoId" Component="TipoId" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(IdentificadorUsuario_entity.TipoId)" Name="TipoId" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="UsuarioId" Component="UsuarioId" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(IdentificadorUsuario_entity.UsuarioId)" Name="UsuarioId" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                      <RadzenLabel Text="Valor" Component="Valor" style="width: 100%">
@@ -204,10 +236,18 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
  
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+ 
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+             NavManager.NavigateTo("/ login", true);
     }
     #region Loading entities data
     /// <summary>
@@ -281,7 +321,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     IdentificadorUsuario_entity.UsuarioCreacion=1;
+                     IdentificadorUsuario_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -291,7 +331,7 @@ else
                  }
                  else
                  {
-                     IdentificadorUsuario_entity.UsuarioModificacion=1;
+                     IdentificadorUsuario_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }

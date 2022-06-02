@@ -676,6 +676,7 @@ using System.Text;
 					public const string Direccion = "Direccion";
 					public const string CodigoPostalId = "CodigoPostalId";
 					public const string EstiloEsquemaId = "EstiloEsquemaId";
+					public const string LenguajeId = "LenguajeId";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -692,6 +693,7 @@ using System.Text;
 					Direccion,
 					CodigoPostalId,
 					EstiloEsquemaId,
+					LenguajeId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -704,7 +706,7 @@ using System.Text;
                 public Empresa()
                 {
                 }
-                public  Empresa(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Empresa(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -714,6 +716,7 @@ using System.Text;
                     this.Direccion = Direccion;
                     this.CodigoPostalId = CodigoPostalId;
                     this.EstiloEsquemaId = EstiloEsquemaId;
+                    this.LenguajeId = LenguajeId;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -753,6 +756,23 @@ using System.Text;
              public Int64 CodigoPostalId { get; set; }
              [DataItemAttributeFieldName("EstiloEsquemaId","EstiloEsquemaId")]
              public Int64 EstiloEsquemaId { get; set; }
+             [DataItemAttributeFieldName("LenguajeId","LenguajeId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _LenguajeId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Lenguaje")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId
+             {
+                 get {
+                     if (LenguajeId_ == null || LenguajeId_.Id != _LenguajeId)
+                         {
+                             LenguajeId = new DepositarioAdminWeb.Business.Relations.Regionalizacion.Lenguaje().Items(this._LenguajeId).FirstOrDefault();
+                         }
+                     return LenguajeId_;
+                     }
+                 set {LenguajeId_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId_ = null;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -950,6 +970,49 @@ using System.Text;
              public DateTime? FechaModificacion { get; set; }
 				
 			} //Class IdentificadorUsuario 
+} //namespace DepositarioAdminWeb.Entities.Relations.Directorio
+		namespace DepositarioAdminWeb.Entities.Relations.Directorio {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Directorio")]  // Database Schema Name
+			[DataItemAttributeObjectName("RelacionMonedaSucursal","RelacionMonedaSucursal")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class RelacionMonedaSucursal : IRelationsDataITem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string MonedaId = "MonedaId";
+					public const string SucursalId = "SucursalId";
+					public const string esDefault = "esDefault";
+				}
+				public enum FieldEnum : int
+                {
+					MonedaId,
+					SucursalId,
+					esDefault
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public RelacionMonedaSucursal()
+                {
+                }
+                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean esDefault)
+                {
+                    this.MonedaId = MonedaId;
+                    this.SucursalId = SucursalId;
+                    this.esDefault = esDefault;
+                }
+             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 MonedaId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("esDefault","esDefault")]
+             public Boolean esDefault { get; set; }
+				
+			} //Class RelacionMonedaSucursal 
 } //namespace DepositarioAdminWeb.Entities.Relations.Directorio
 		namespace DepositarioAdminWeb.Entities.Relations.Directorio {
 			[Serializable()]                         //
@@ -1299,6 +1362,18 @@ using System.Text;
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of RelacionMonedaSucursal that have this SucursalId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Directorio.RelacionMonedaSucursal> ListOf_RelacionMonedaSucursal_SucursalId
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Directorio.RelacionMonedaSucursal entities = new DepositarioAdminWeb.Business.Relations.Directorio.RelacionMonedaSucursal();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
                  /// <summary>
                  ///  Represents the child collection of Sector that have this SucursalId value.
                  /// </summary>
@@ -5250,6 +5325,18 @@ using System.Text;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
+                 ///  Represents the child collection of Empresa that have this LenguajeId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Directorio.Empresa> ListOf_Empresa_LenguajeId
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Directorio.Empresa entities = new DepositarioAdminWeb.Business.Relations.Directorio.Empresa();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Directorio.Empresa.ColumnEnum.LenguajeId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
                  ///  Represents the child collection of LenguajeItem that have this LenguajeId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -5258,6 +5345,18 @@ using System.Text;
                      get {
                              DepositarioAdminWeb.Business.Relations.Regionalizacion.LenguajeItem entities = new DepositarioAdminWeb.Business.Relations.Regionalizacion.LenguajeItem();
                              entities.Where.Add(DepositarioAdminWeb.Business.Relations.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Usuario that have this LenguajeId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario> ListOf_Usuario_LenguajeId
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Seguridad.Usuario entities = new DepositarioAdminWeb.Business.Relations.Seguridad.Usuario();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.Usuario.ColumnEnum.LenguajeId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -6378,6 +6477,7 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string EmpresaId = "EmpresaId";
+					public const string LenguajeId = "LenguajeId";
 					public const string Nombre = "Nombre";
 					public const string Apellido = "Apellido";
 					public const string Legajo = "Legajo";
@@ -6399,6 +6499,7 @@ using System.Text;
                 {
 					Id,
 					EmpresaId,
+					LenguajeId,
 					Nombre,
 					Apellido,
 					Legajo,
@@ -6422,10 +6523,11 @@ using System.Text;
                 public Usuario()
                 {
                 }
-                public  Usuario(DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Usuario(DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EmpresaId = EmpresaId;
+                    this.LenguajeId = LenguajeId;
                     this.Nombre = Nombre;
                     this.Apellido = Apellido;
                     this.Legajo = Legajo;
@@ -6463,6 +6565,23 @@ using System.Text;
                  set {EmpresaId_  =  value;}
              }
              static DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId_ = null;
+             [DataItemAttributeFieldName("LenguajeId","LenguajeId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _LenguajeId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Lenguaje")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId
+             {
+                 get {
+                     if (LenguajeId_ == null || LenguajeId_.Id != _LenguajeId)
+                         {
+                             LenguajeId = new DepositarioAdminWeb.Business.Relations.Regionalizacion.Lenguaje().Items(this._LenguajeId).FirstOrDefault();
+                         }
+                     return LenguajeId_;
+                     }
+                 set {LenguajeId_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId_ = null;
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
@@ -7414,6 +7533,18 @@ using System.Text;
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of RelacionMonedaSucursal that have this MonedaId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Directorio.RelacionMonedaSucursal> ListOf_RelacionMonedaSucursal_MonedaId
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Directorio.RelacionMonedaSucursal entities = new DepositarioAdminWeb.Business.Relations.Directorio.RelacionMonedaSucursal();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
                  /// <summary>
                  ///  Represents the child collection of DepositarioValor that have this ValorId value.
                  /// </summary>

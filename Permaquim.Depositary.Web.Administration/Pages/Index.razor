@@ -1,10 +1,13 @@
 ﻿@page "/"
 
 @inject NavigationManager NavManager
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 @code {
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        
+        Int64? userId=await sessionStorage.GetItemAsync<Int64?>("Id");
+        if(userId==null)
+            NavManager.NavigateTo("/login", true);
     }
 }

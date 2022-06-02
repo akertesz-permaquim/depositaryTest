@@ -6,6 +6,69 @@
 @using Radzen.Blazor
 @using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Authorization
+@using Permaquim.Depositary.Web.Administration.Controllers;
 
-
+@inject NavigationManager NavManager
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> L
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+
+<RadzenContent Container="main">
+    <ChildContent>
+        <RadzenTemplateForm TItem="LoginForm" Data="@loginForm" Submit="@LoginUser">
+            <ChildContent>
+                <RadzenLabel Component="Username" style="display: block; margin-top: 16px" Text="Username">
+                </RadzenLabel>
+                <RadzenTextBox @bind-Value="@(loginForm.Username)" style="width: 100%" Name="Username">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Username" Text="Username is required">
+                </RadzenRequiredValidator>
+                <RadzenLabel Component="Password" style="display: block; margin-top: 16px" Text="Password">
+                </RadzenLabel>
+                <RadzenPassword @bind-Value="@(loginForm.Password)" style="width: 100%" Name="Password">
+                </RadzenPassword>
+                <RadzenRequiredValidator Component="Password" Text="Password is required">
+                </RadzenRequiredValidator>
+                <RadzenButton ButtonType="ButtonType.Submit" style="display: block; margin-top: 16px; width: 100%; background-color: #4158ff" Text="Login">
+                </RadzenButton>
+            </ChildContent>
+        </RadzenTemplateForm>
+    </ChildContent>
+</RadzenContent>
+
+@code
+{
+    private LoginForm loginForm = new LoginForm();
+    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+
+    //Datasets
+    private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario dataUsuario = new DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario();
+
+    protected async void LoginUser()
+    {
+        dataUsuario = SeguridadController.ObtenerUsuario(loginForm.Username, loginForm.Password);
+        if (dataUsuario.NickName == null)
+        {
+            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = "Error al intentar loguear", Detail = "Usuario o contraseña incorrectos." });
+        }
+        else
+        {
+            dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
+            await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
+            await sessionStorage.SetItemAsync("Nickname", dataUsuario.NickName);
+            await sessionStorage.SetItemAsync("NombreUsuario", dataUsuario.Nombre);
+            await sessionStorage.SetItemAsync("ApellidoUsuario", dataUsuario.Apellido);
+            await sessionStorage.SetItemAsync("AvatarUsuario", dataUsuario.Avatar);
+            await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
+            await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
+
+            //SessionStorageManager.SetUsuarioId(dataUsuario.Id);
+            //SessionStorageManager.SetNickName(dataUsuario.NickName);
+            //SessionStorageManager.SetNombreUsuario(dataUsuario.Nombre);
+            //SessionStorageManager.SetApellidoUsuario(dataUsuario.Apellido);
+            //SessionStorageManager.SetLenguajeId(dataUsuario.LenguajeId);
+            //SessionStorageManager.SetDataLenguaje(dataLenguaje);
+
+            NavManager.NavigateTo("/Monitor", true);
+        }
+    }
+}

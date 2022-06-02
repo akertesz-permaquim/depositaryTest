@@ -1,5 +1,7 @@
 @page "/VisualizacionPerfilItemCrud"
 @inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
  
 @if (PerfilItem_entities == null)
 {
@@ -100,6 +102,16 @@ else
     {
          <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Data="@PerfilItem_entity"  @bind-Value="PerfilItem_entity" Submit ="Save" Visible ="@(PerfilItem_entity != null)">
           <ChildContent>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(PerfilItem_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
                 <RadzenLabel Text="PerfilId" Component="PerfilId" style="width: 100%">
@@ -122,6 +134,16 @@ else
                   }
               </div>
             </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                     <RadzenLabel Text="IdTablaReferencia" Component="IdTablaReferencia" style="width: 100%">
+                     </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(PerfilItem_entity.IdTablaReferencia)" Name="IdTablaReferencia" Disabled="@(crudMode==CrudMode.Delete)" >
+                 </RadzenNumeric>
+                 </div>
+             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                 <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
@@ -226,10 +248,18 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
  
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+ 
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+             NavManager.NavigateTo("/ login", true);
     }
     #region Loading entities data
     /// <summary>
@@ -311,7 +341,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     PerfilItem_entity.UsuarioCreacion=1;
+                     PerfilItem_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -321,7 +351,7 @@ else
                  }
                  else
                  {
-                     PerfilItem_entity.UsuarioModificacion=1;
+                     PerfilItem_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }

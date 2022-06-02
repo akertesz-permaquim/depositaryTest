@@ -1,226 +1,342 @@
 ﻿@page "/Monitor"
 @layout MainLayout
+
 @using Permaquim.Depositary.Web.Administration.Controllers;
+@using System;
+@using System.Timers;
+@using Permaquim.Depositary.Web.Administration.Managers;
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Monitor> L
-<RadzenContent Container="main">
-    <ChildContent>
-        <h1>Monitor</h1>
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
 
-        Agrupar depositarios
-        <RadzenCheckBox TValue="bool"
+@if (dataLenguaje != null)
+{
+    <RadzenContent Container="main">
+        <ChildContent>
+            <h1>Monitor</h1>
+
+            Agrupar depositarios
+            <RadzenCheckBox TValue="bool"
                         Name="ChkAgruparDepositarios"
                         Change="@changeChkAgruparDepositarios">
-        </RadzenCheckBox>
-        <br />
-        <br />
-
-        <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios"
+            </RadzenCheckBox>
+            <br />
+            <br />
+            <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios"
                         @ref="@gridDepositarios"
+                        IsLoading="@estaCargandoGridDepositarios"
                         AllowFiltering="true"
                         AllowPaging="true"
-                        ExpandMode="DataGridExpandMode.Single"
+                        ExpandMode="DataGridExpandMode.Multiple"
                         Data="@dataDepositarios"
                         RowExpand="@expandirDepositario"
+                        RowCollapse="@colapsarDepositario"
+                        RowRender="@depositarioRowRender"
                         AllowGrouping="true">
-            <Columns>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="DepositarioID" Title="ID" Width="2%" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Empresa" Title="Empresa" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sucursal" Title="Sucursal" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sector" Title="Sector" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Nombre" Title="Nombre" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Modelo" Title="Modelo" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="CantidadDepositoUltimoCierre" Width="10%" TextAlign="TextAlign.Right" Title="Cant. ult. cierre" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOnline" Title="Online" Width="6%" TextAlign="TextAlign.Center">
-                    <Template Context="depositario">
-                        @switch (depositario.SemaforoOnline)
-                        {
-                            case "Verde":
-                                <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                            case "Amarillo":
-                                <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                            case "Rojo":
-                                <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOcupacionBolsa" Width="6%" Title="% bolsa" TextAlign="TextAlign.Center">
-                    <Template Context="depositario">
-                        @switch (depositario.SemaforoOcupacionBolsa)
-                        {
-                            case "Verde":
-                                <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                            case "Amarillo":
-                                <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                            case "Rojo":
-                                <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoAnomalia" Title="Anomalias" Width="6%" TextAlign="TextAlign.Center">
-                    <Template Context="depositario">
-                        @switch (depositario.SemaforoAnomalia)
-                        {
-                            case "Verde":
-                                <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                            case "Amarillo":
-                                <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                            case "Rojo":
-                                <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                break;
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="Descripcion" Title="Descripcion" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="NumeroSerie" Title="N° Serie" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="CodigoExterno" Title="Cod. Externo" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="UsuarioCreacion" Title="Usuario creación" Width="10%" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="FechaCreacion" Title="Fecha creación" Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="UsuarioModificacion" Title="Usuario mod." Width="10%" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="FechaModificacion" Title="Fecha mod." Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="Habilitado" Title="Habilitado" />
-            </Columns>
-            <Template Context="depositario">
-                <RadzenCard Style="background-color:azure; margin-bottom:20px">
-                    <ChildContent>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <RadzenImage Path="../images/de-50.jpeg" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-4" style="font-size: medium; text-align:center;">
-                                            <b>Numero de serie:</b> @depositario.NumeroSerie
-                                        </div>
-                                        <div class="col-md-4" style="font-size: medium; text-align:center;">
-                                            <b>Numero de bolsa:</b> 2322
-                                        </div>
-                                        <div class="col-md-4" style="font-size: medium; text-align:center;">
-                                            <b>Fecha ultima sincronización:</b> @DateTime.Now
+                <Columns>
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="DepositarioId" Title="ID" Width="2%" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Empresa" Title="@dataLenguaje.Where(x => x.Clave == "EMPRESA" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sucursal" Title="@dataLenguaje.Where(x => x.Clave == "SUCURSAL" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sector" Title="@dataLenguaje.Where(x => x.Clave == "SECTOR" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Nombre" Title="@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Modelo" Width="9%" Title="@dataLenguaje.Where(x => x.Clave == "MODELO" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="ValorTotalEnBolsa" FormatString="{0:C2}" Width="12%" TextAlign="TextAlign.Right" Title="@dataLenguaje.Where(x => x.Clave == "VALORTOTALENBOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOnline" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROONLINE" || x.Clave=="GENERICO").FirstOrDefault().Texto" Width="9%" TextAlign="TextAlign.Center">
+                        <Template Context="depositario">
+                            @switch (depositario.SemaforoOnline)
+                            {
+                                case "Verde":
+                                    <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                                case "Amarillo":
+                                    <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                                case "Rojo":
+                                    <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                            }
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOcupacionBolsa" Width="10%" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROOCUPACIONBOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto" TextAlign="TextAlign.Center">
+                        <Template Context="depositario">
+                            @switch (depositario.SemaforoOcupacionBolsa)
+                            {
+                                case "Verde":
+                                    <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                                case "Amarillo":
+                                    <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                                case "Rojo":
+                                    <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                            }
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoAnomalia" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROANOMALIA" || x.Clave=="GENERICO").FirstOrDefault().Texto" Width="9%" TextAlign="TextAlign.Center">
+                        <Template Context="depositario">
+                            @switch (depositario.SemaforoAnomalia)
+                            {
+                                case "Verde":
+                                    <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                                case "Amarillo":
+                                    <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                                case "Rojo":
+                                    <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    break;
+                            }
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="Descripcion" Title="Descripcion" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="NumeroSerie" Title="N° Serie" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="CodigoExterno" Title="Cod. Externo" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="UsuarioCreacion" Title="Usuario creación" Width="10%" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="FechaCreacion" Title="Fecha creación" Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="UsuarioModificacion" Title="Usuario mod." Width="10%" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="FechaModificacion" Title="Fecha mod." Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="Habilitado" Title="Habilitado" />
+                </Columns>
+                <Template Context="depositario">
+                    <RadzenCard Style="background-color:azure; margin-bottom:20px">
+                        <ChildContent>
+                            @{
+                                var auxInformacionDepositario = dataInformacionDepositario.Where(x => x.DepositarioId == depositario.DepositarioId).FirstOrDefault();
+                                @if (auxInformacionDepositario != null)
+                                {
+                                    <div class="container-fluid">
+                                        <div class="row" style="margin-left: -5%;">
+                                            <div class="col-md-2" style="align-self: center;text-align: center;">
+                                                <RadzenImage Path="../images/de-50.png" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-4" style="padding-top: 1%; font-size: medium; text-align:center;">
+                                                        <b>@dataLenguaje.Where(x => x.Clave == "NUMERODESERIE" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b>
+                                                        @auxInformacionDepositario.NumeroSerie
+                                                    </div>
+                                                    <div class="col-md-4" style="padding-left: 5%; padding-top: 1%; font-size: medium; text-align:center;">
+                                                        <b>@dataLenguaje.Where(x => x.Clave == "IDDEBOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> @auxInformacionDepositario.IdentificadorBolsa
+                                                    </div>
+                                                    <div class="col-md-4" style="padding-left: 5%; padding-top: 1%; font-size: medium; text-align:center;">
+                                                        <b>@dataLenguaje.Where(x => x.Clave == "FECHAULTIMASINCRONIZACION" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> @auxInformacionDepositario.FechaUltimaSincronizacion
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROVALIDADO" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalValidado
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROAVALIDAR" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalAValidar
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROTOTAL" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.Total
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div style="padding-top: 5%; text-align:center"><b>@dataLenguaje.Where(x => x.Clave == "OCUPACIONDELABOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto</b></div>
+                                                        @if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 70 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 90)
+                                                        {
+                                                            <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                        }
+                                                        else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 90 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 100)
+                                                        {
+                                                            <PermaquimProgressBar BarColor="red" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                        }
+                                                        else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 100)
+                                                        {
+                                                            <PermaquimProgressBar BarColor="darkred" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <PermaquimProgressBar BarColor="green" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                        }
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div style="" class="row">
-                                        <div class="col-md-4">
-                                            <div style="padding-top: 5%; text-align:center">Ocupación de la bolsa</div>
-                                            <RadzenProgressBar Mode="ProgressBarMode.Determinate" Value="75" Max="100" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ChildContent>
-                </RadzenCard>
-                <RadzenTabs Change="@changeTabMonitorDepositario">
-                    <Tabs>
-                        <RadzenTabsItem Text="Depositos">
-                            <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario"
+                                }
+                            }
+                        </ChildContent>
+                    </RadzenCard>
+                    <RadzenTabs Change="@(args => changeTabMonitorDepositario(args,depositario))">
+                        <Tabs>
+                            <RadzenTabsItem Icon="local_atm" Text="@dataLenguaje.Where(x => x.Clave == "DEPOSITOS" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                                <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario"
                                             @ref="@gridTransacciones"
                                             AllowFiltering="true"
                                             AllowPaging="true"
+                                            AllowSorting="true"
+                                            AllowColumnResize="true"
+                                            IsLoading="@estaCargandoGridTransacciones"
                                             ExpandMode="DataGridExpandMode.Multiple"
                                             RowExpand="@expandirTransaccion"
-                                            Data="@dataTransaccionesDepositario">
-                                <Columns>
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Visible="false" Property="TransaccionID" Title="ID" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="FechaTransaccion" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="TipoTransaccion" Title="Tipo" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="UsuarioTransaccion" Title="Usuario T." />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="UsuarioCuenta" Title="Usuario cuenta" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="Cuenta" Title="Cuenta" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="Banco" Width="10%" Title="Banco" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="Contenedor" Title="Contenedor" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="TotalValidado" Title="TotalValidado" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="TotalAValidar" Title="TotalAValidar" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
-                                </Columns>
-                                <Template Context="transaccion">
-                                    <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion"
+                                            Data="@dataTransaccionesDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Visible="false" Property="TransaccionId" Title="ID" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="FechaTransaccion" Sortable="true" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="TipoTransaccion" Title="Tipo" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="UsuarioTransaccion" Title="Usuario T." />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="UsuarioCuenta" Title="Usuario cuenta" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="Cuenta" Title="Cuenta" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="Banco" Width="10%" Title="Banco" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="Contenedor" Title="Contenedor" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario" Property="TotalValidado" Title="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
+                                    </Columns>
+                                    <Template Context="transaccion">
+                                        <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion"
                                                     @ref="@gridTransaccionDetalles"
+                                                    IsLoading="@estaCargandoGridTransaccionDetalles"
                                                     AllowFiltering="true"
                                                     AllowPaging="true"
-                                                    Data="@dataTransaccionDetalles">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Visible="false" Property="TransaccionDetalleID" Title="ID" />
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="FechaTransaccionDetalle" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="Moneda" Title="Moneda" />
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="Denominacion" Title="Denominación" />
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="ImagenDenominacion" Title="Imagen">
-                                                <Template Context="transaccionDetalle">
-                                                    <RadzenImage Path="@transaccionDetalle.ImagenDenominacion" Style="width: 50px;" />
-                                                </Template>
-                                            </RadzenDataGridColumn>
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="CantidadUnidades" Title="Cantidad" TextAlign="TextAlign.Right" />
-                                        </Columns>
-                                    </RadzenDataGrid>
-                                </Template>
-                            </RadzenDataGrid>
-                        </RadzenTabsItem>
-                        <RadzenTabsItem Text="Depositos sobre">
-                            <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario"
+                                                    Data="@dataTransaccionDetalles.Where(x => x.TransaccionId==transaccion.TransaccionId)">
+                                            <Columns>
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Visible="false" Property="TransaccionDetalleId" Title="ID" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="FechaTransaccionDetalle" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="Moneda" Title="Moneda" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="Denominacion" Title="Denominación" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="ImagenDenominacion" Title="Imagen">
+                                                    <Template Context="transaccionDetalle">
+                                                        <div style="text-align:center">
+                                                            <RadzenImage Path="@transaccionDetalle.ImagenDenominacion" Style="width: 80px;" />
+                                                        </div>
+                                                    </Template>
+                                                </RadzenDataGridColumn>
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion" Property="CantidadUnidades" Title="Cantidad" TextAlign="TextAlign.Right" />
+                                            </Columns>
+                                        </RadzenDataGrid>
+                                    </Template>
+                                </RadzenDataGrid>
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Icon="forward_to_inbox" Text="@dataLenguaje.Where(x => x.Clave == "DEPOSITOSSOBRE" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                                <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario"
                                             @ref="@gridTransaccionesSobres"
                                             AllowFiltering="true"
                                             AllowPaging="true"
-                                            ExpandMode="DataGridExpandMode.Single"
+                                            ExpandMode="DataGridExpandMode.Multiple"
+                                            IsLoading="@estaCargandoGridTransaccionesSobres"
                                             RowExpand="@expandirTransaccionSobre"
-                                            Data="@dataTransaccionesSobreDepositario">
-                                <Columns>
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Visible="false" Property="TransaccionSobreID" Title="ID" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="FechaTransaccionSobre" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="TipoTransaccion" Title="Tipo" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="CodigoSobre" Title="Codigo sobre" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="UsuarioTransaccion" Title="Usuario T." />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="UsuarioCuenta" Title="Usuario cuenta" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="Cuenta" Title="Cuenta" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="Banco" Width="10%" Title="Banco" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="Contenedor" Title="Contenedor" />
-                                </Columns>
-                                <Template Context="transaccionSobre">
-                                    <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre"
+                                            Data="@dataTransaccionesSobreDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Visible="false" Property="TransaccionSobreId" Title="ID" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="FechaTransaccionSobre" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="TipoTransaccion" Title="Tipo" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="CodigoSobre" Title="Codigo sobre" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="UsuarioTransaccion" Title="Usuario T." />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="UsuarioCuenta" Title="Usuario cuenta" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="Cuenta" Title="Cuenta" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="Banco" Width="10%" Title="Banco" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="Contenedor" Title="Contenedor" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario" Property="TotalAValidar" Title="Total a validar" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
+                                    </Columns>
+                                    <Template Context="transaccionSobre">
+                                        <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre"
                                                     @ref="@gridTransaccionSobreDetalles"
                                                     AllowFiltering="true"
                                                     AllowPaging="true"
-                                                    Data="@dataTransaccionSobreDetalles">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Visible="false" Property="TransaccionSobreDetalleID" Title="ID" />
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Property="FechaTransaccionSobreDetalle" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Property="CantidadDeclarada" Title="Cantidad declarada" TextAlign="TextAlign.Right" />
-                                        </Columns>
-                                    </RadzenDataGrid>
-                                </Template>
-                            </RadzenDataGrid>
-                        </RadzenTabsItem>
-                        <RadzenTabsItem Text="Monedas">
-                        </RadzenTabsItem>
-                        <RadzenTabsItem Text="Anomalias">
-                            <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario"
+                                                    IsLoading="@estaCargandoGridTransaccionSobreDetalles"
+                                                    Data="@dataTransaccionSobreDetalles.Where(x => x.TransaccionSobreId==transaccionSobre.TransaccionSobreId)">
+                                            <Columns>
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Visible="false" Property="TransaccionSobreDetalleId" Title="ID" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Property="FechaTransaccionSobreDetalle" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Property="Moneda" Title="Moneda" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Property="TipoValor" Title="Tipo valor" />
+                                                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre" Property="CantidadDeclarada" Title="Cantidad declarada" TextAlign="TextAlign.Right" />
+                                            </Columns>
+                                        </RadzenDataGrid>
+                                    </Template>
+                                </RadzenDataGrid>
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Icon="archive" Text="@dataLenguaje.Where(x => x.Clave == "EXISTENCIAS" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                                <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado"
+                                            @ref="@gridExistencias"
+                                            AllowFiltering="true"
+                                            AllowPaging="true"
+                                            IsLoading="@estaCargandoGridExistencias"
+                                            Data="@dataExistenciasDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado" Property="Moneda" Title="Moneda" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado" Property="Denominacion" Title="Denominacion" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado" Property="ImagenDenominacion" Title="Imagen" TextAlign="TextAlign.Center">
+                                            <Template Context="dataExistencia">
+                                                <RadzenImage Path="@dataExistencia.ImagenDenominacion" style="width: 100px; border-radius: 8px;">
+                                                </RadzenImage>
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado" Property="CantidadValidada" TextAlign="TextAlign.Right" Title="Cantidad validada" />
+                                    </Columns>
+                                </RadzenDataGrid>
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Icon="mark_as_unread" Text="@dataLenguaje.Where(x => x.Clave == "EXISTENCIASAVALIDAR" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                                <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado"
+                                            @ref="@gridExistenciasAValidar"
+                                            AllowFiltering="true"
+                                            AllowPaging="true"
+                                            IsLoading="@estaCargandoGridExistenciasAValidar"
+                                            Data="@dataExistenciasAValidarDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado" Property="Moneda" Title="Moneda" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado" Property="TipoValor" Title="Tipo valor" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado" Property="ValorDeclarado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Valor declarado" />
+                                    </Columns>
+                                </RadzenDataGrid>
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Icon="calculate" Text="@dataLenguaje.Where(x => x.Clave == "TOTALGENERAL" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                                <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado"
+                                            @ref="@gridTotalesGenerales"
+                                            AllowFiltering="true"
+                                            AllowPaging="true"
+                                            IsLoading="@estaCargandoGridTotalesGenerales"
+                                            Data="@dataTotalesGeneralesDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado" Property="Moneda" Title="Moneda" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado" Property="TotalValidado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Total validado" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado" Property="TotalAValidar" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Total a validar" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado" Property="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Total" />
+                                    </Columns>
+                                </RadzenDataGrid>
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Icon="settings_input_component" Text="@dataLenguaje.Where(x => x.Clave == "ANOMALIAS" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                                <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario"
                                             @ref="@gridEventos"
                                             AllowFiltering="true"
                                             AllowPaging="true"
-                                            Data="@dataEventosDepositario">
-                                <Columns>
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Visible="false" Property="EventoID" Title="ID" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="FechaEvento" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="TipoEvento" Title="Tipo evento" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="Mensaje" Title="Mensaje" />
-                                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="Valor" Title="Valor" />
-                                </Columns>
-                            </RadzenDataGrid>
-                        </RadzenTabsItem>
-                    </Tabs>
-                </RadzenTabs>
-            </Template>
-
-        </RadzenDataGrid>
-    </ChildContent>
-</RadzenContent>
+                                            IsLoading="@estaCargandoGridEventos"
+                                            Data="@dataEventosDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Visible="false" Property="EventoID" Title="ID" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="FechaEvento" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="TipoEvento" Title="Tipo evento" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="Mensaje" Title="Mensaje" />
+                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario" Property="Valor" Title="Valor" />
+                                    </Columns>
+                                </RadzenDataGrid>
+                            </RadzenTabsItem>
+                        </Tabs>
+                    </RadzenTabs>
+                </Template>
+            </RadzenDataGrid>
+        </ChildContent>
+    </RadzenContent>
+}
 
 @code {
 
@@ -231,6 +347,11 @@
     private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario> dataTransaccionesSobreDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario>();
     private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre> dataTransaccionSobreDetalles = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre>();
     private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario> dataEventosDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario>();
+    private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado> dataExistenciasDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado>();
+    private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado> dataExistenciasAValidarDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>();
+    private List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado> dataInformacionDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado>();
+    private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> dataTotalesGeneralesDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>();
+    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
 
     //Variables para controles
     private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario> gridTransacciones = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario>();
@@ -239,54 +360,178 @@
     private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario> gridTransaccionesSobres = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario>();
     private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre> gridTransaccionSobreDetalles = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccionSobre>();
     private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario> gridEventos = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario>();
+    private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado> gridExistencias = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado>();
+    private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado> gridExistenciasAValidar = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>();
+    private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> gridTotalesGenerales = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>();
+    private RadzenCard cardInformacionDepositario = new RadzenCard();
+    private bool estaCargandoGridExistencias = false;
+    private bool estaCargandoGridDepositarios = false;
+    private bool estaCargandoGridTransacciones = false;
+    private bool estaCargandoGridTransaccionDetalles = false;
+    private bool estaCargandoGridTransaccionSobreDetalles = false;
+    private bool estaCargandoGridTransaccionesSobres = false;
+    private bool estaCargandoGridExistenciasAValidar = false;
+    private bool estaCargandoGridTotalesGenerales = false;
+    private bool estaCargandoGridEventos = false;
 
-    private Int64 DepositarioID_EnSeleccion;
-    private Int64 TransaccionID_EnSeleccion;
-    private Int64 TransaccionSobreID_EnSeleccion;
+    //Variables auxiliares
+    private Timer timerRecargaInformacion = new Timer();
+    private List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios> rowsDepositariosExpandidas = new List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios>();
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
+        base.OnInitialized();
+        string asd = "";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+            Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+            if (userId == null)
+                NavManager.NavigateTo("/login", true);
+            await Task.Run(obtenerDepositarios);
+            StateHasChanged();
+        }
+    }
+
+
+
+
+    private void SetTimer()
+    {
+        // Create a timer with a two second interval.
+        timerRecargaInformacion = new System.Timers.Timer(10000);
+        // Hook up the Elapsed event for the timer.
+        timerRecargaInformacion.Elapsed += new ElapsedEventHandler(recargarInformacionDepositario);
+        timerRecargaInformacion.AutoReset = true;
+        timerRecargaInformacion.Enabled = true;
+        timerRecargaInformacion.Start();
+    }
+
+    private async void recargarInformacionDepositario(Object source, ElapsedEventArgs e)
+    {
+        estaCargandoGridDepositarios = true;
         await Task.Run(obtenerDepositarios);
+        //await InvokeAsync(StateHasChanged);
+        //foreach (var item in rowsDepositariosExpandidas)
+        //{
+        //await InvokeAsync(StateHasChanged);
+        //await InvokeAsync(gridDepositarios.Reload);
+        //else
+        //    await InvokeAsync(StateHasChanged);
+        //}
     }
 
     private void obtenerDepositarios()
     {
         dataDepositarios = DepositarioController.ObtenerDepositarios();
+        estaCargandoGridDepositarios = false;
     }
 
     protected async Task expandirDepositario(DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios args)
     {
-        DepositarioID_EnSeleccion = args.DepositarioID.Value;
-        await Task.Run(obtenerTransaccionesPorDepositario);
+        //rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
+        rowsDepositariosExpandidas.Add(args);
+        await Task.Run(() => obtenerInformacionDepositario(args.DepositarioId.Value));
+        await Task.Run(() => obtenerTransaccionesPorDepositario(args.DepositarioId.Value));
     }
 
-    private void obtenerTransaccionesPorDepositario()
+    protected async Task colapsarDepositario(DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios args)
     {
-        dataTransaccionesDepositario = TransaccionController.ObtenerTransaccionesPorDepositario(DepositarioID_EnSeleccion);
+        rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
     }
 
-    private void obtenerTransaccionesSobrePorDepositario()
+    void depositarioRowRender(RowRenderEventArgs<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios> args)
     {
-        dataTransaccionesSobreDepositario = TransaccionController.ObtenerTransaccionesSobrePorDepositario(DepositarioID_EnSeleccion);
+        if (rowsDepositariosExpandidas.Where(x => x.DepositarioId == args.Data.DepositarioId).ToList().Count > 0)
+        {
+            args.Attributes.Add("class", "row-highlight");
+        }
+        else
+        {
+            args.Attributes.Add("class", "rz-datatable-even");
+        }
     }
 
-    private void obtenerEventosPorDepositario()
+    private void obtenerInformacionDepositario(Int64 pDepositarioId)
     {
-        dataEventosDepositario = TransaccionController.ObtenerEventosPorDepositario(DepositarioID_EnSeleccion);
+        dataInformacionDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
+        dataInformacionDepositario.Add(DepositarioController.ObtenerInformacionDepositario(pDepositarioId));
     }
 
-    private async Task changeTabMonitorDepositario(int index)
+    private void obtenerTransaccionesPorDepositario(Int64 pDepositarioId)
     {
+        dataTransaccionesDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
+        dataTransaccionesDepositario.AddRange(TransaccionController.ObtenerTransaccionesPorDepositario(pDepositarioId));
+        estaCargandoGridTransacciones = false;
+    }
+
+    private void obtenerTransaccionesSobrePorDepositario(Int64 pDepositarioId)
+    {
+        dataTransaccionesSobreDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
+        dataTransaccionesSobreDepositario.AddRange(TransaccionController.ObtenerTransaccionesSobrePorDepositario(pDepositarioId));
+        estaCargandoGridTransaccionesSobres = false;
+    }
+
+    private void obtenerExistenciasPorDepositario(Int64 pDepositarioId)
+    {
+        dataExistenciasDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
+        dataExistenciasDepositario.AddRange(TransaccionController.ObtenerExistenciasPorDepositario(pDepositarioId));
+        estaCargandoGridExistencias = false;
+    }
+
+    private void obtenerExistenciasAValidarPorDepositario(Int64 pDepositarioId)
+    {
+        dataExistenciasAValidarDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
+        dataExistenciasAValidarDepositario.AddRange(TransaccionController.ObtenerExistenciasAValidarPorDepositario(pDepositarioId));
+        estaCargandoGridExistenciasAValidar = false;
+    }
+
+    private void obtenerTotalesGeneralesPorDepositario(Int64 pDepositarioId)
+    {
+        dataTotalesGeneralesDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
+        dataTotalesGeneralesDepositario.AddRange(TransaccionController.ObtenerTotalesGeneralesPorMonedaDepositario(pDepositarioId));
+        estaCargandoGridTotalesGenerales = false;
+    }
+
+    private void obtenerEventosPorDepositario(Int64 pDepositarioId)
+    {
+        dataEventosDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
+        dataEventosDepositario.AddRange(TransaccionController.ObtenerEventosPorDepositario(pDepositarioId));
+        estaCargandoGridEventos = false;
+    }
+
+    private async Task changeTabMonitorDepositario(int index, DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios depositario)
+    {
+
         switch (index)
         {
             case 0:
-                await Task.Run(obtenerTransaccionesPorDepositario);
+                estaCargandoGridTransacciones = true;
+                await Task.Run(() => obtenerTransaccionesPorDepositario(depositario.DepositarioId.Value));
                 break;
             case 1:
-                await Task.Run(obtenerTransaccionesSobrePorDepositario);
+                estaCargandoGridTransaccionesSobres = true;
+                await Task.Run(() => obtenerTransaccionesSobrePorDepositario(depositario.DepositarioId.Value));
+                break;
+            case 2:
+                estaCargandoGridExistencias = true;
+                await Task.Run(() => obtenerExistenciasPorDepositario(depositario.DepositarioId.Value));
                 break;
             case 3:
-                await Task.Run(obtenerEventosPorDepositario);
+                estaCargandoGridExistenciasAValidar = true;
+                await Task.Run(() => obtenerExistenciasAValidarPorDepositario(depositario.DepositarioId.Value));
+                break;
+            case 4:
+                estaCargandoGridTotalesGenerales = true;
+                await Task.Run(() => obtenerTotalesGeneralesPorDepositario(depositario.DepositarioId.Value));
+                break;
+            case 5:
+                estaCargandoGridEventos = true;
+                await Task.Run(() => obtenerEventosPorDepositario(depositario.DepositarioId.Value));
                 break;
         }
     }
@@ -323,24 +568,35 @@
 
     protected async Task expandirTransaccion(DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario args)
     {
-        TransaccionID_EnSeleccion = args.TransaccionID.Value;
-        await Task.Run(obtenerDetalleTransaccion);
+        estaCargandoGridTransaccionDetalles = true;
+        await Task.Run(() => obtenerDetalleTransaccion(args.TransaccionId.Value));
     }
 
-    private void obtenerDetalleTransaccion()
+    private void obtenerDetalleTransaccion(Int64 pTransaccionId)
     {
-        dataTransaccionDetalles = TransaccionController.ObtenerDetalleTransaccion(TransaccionID_EnSeleccion);
+        dataTransaccionDetalles.RemoveAll(x => x.TransaccionId == pTransaccionId);
+        dataTransaccionDetalles.AddRange(TransaccionController.ObtenerDetalleTransaccion(pTransaccionId));
+        estaCargandoGridTransaccionDetalles = false;
     }
 
     protected async Task expandirTransaccionSobre(DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario args)
     {
-        TransaccionSobreID_EnSeleccion = args.TransaccionSobreID.Value;
-        await Task.Run(obtenerDetalleTransaccionSobre);
+        estaCargandoGridTransaccionSobreDetalles = true;
+        await Task.Run(() => obtenerDetalleTransaccionSobre(args.TransaccionSobreId.Value));
     }
 
-    private void obtenerDetalleTransaccionSobre()
+    private void obtenerDetalleTransaccionSobre(Int64 pTransaccionSobreId)
     {
-        dataTransaccionSobreDetalles = TransaccionController.ObtenerDetalleTransaccionSobre(TransaccionSobreID_EnSeleccion);
+        dataTransaccionSobreDetalles.RemoveAll(x => x.TransaccionSobreId == pTransaccionSobreId);
+        dataTransaccionSobreDetalles.AddRange(TransaccionController.ObtenerDetalleTransaccionSobre(pTransaccionSobreId));
+        estaCargandoGridTransaccionSobreDetalles = false;
     }
 
         }
+
+<style>
+    .row-highlight {
+        background-color: silver;
+    }
+
+</style>

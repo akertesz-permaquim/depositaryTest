@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj": {}
+    "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj": {
+    "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj",
+        "projectUniqueName": "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj",
         "projectName": "Permaquim.Depositary.Web.Administration",
-        "projectPath": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj",
-        "packagesPath": "C:\\Users\\ccespon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.Web.Administration\\obj\\",
+        "projectPath": "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\Permaquim.Depositary.Web.Administration.csproj",
+        "packagesPath": "C:\\Users\\gsivit\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ccespon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gsivit\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,13 +40,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Blazored.SessionStorage": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[6.0.5, )"
             },
             "Radzen.Blazor": {
               "target": "Package",
-              "version": "[3.18.9, )"
+              "version": "[3.18.12, )"
             },
             "System.ComponentModel.Annotations": {
               "target": "Package",
