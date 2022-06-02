@@ -13,7 +13,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
     public partial class CustomKeyboard : UserControl
     {
 
-        public delegate void KeyboardDataReceived(object sender, EventArgs args);
+        public delegate void KeyboardDataReceived(object sender, KeyboardEventArgs args);
 
         public event KeyboardDataReceived KeyboardEvent;
 
@@ -28,6 +28,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         private void Keys(object sender, EventArgs e)
         {
             _activeTextbox.Focus();
+            
             SendKeys.Send(((CustomButton)sender).Tag.ToString());
 
             //Raises event for counter

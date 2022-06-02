@@ -676,6 +676,7 @@ using System.Text;
 					public const string Direccion = "Direccion";
 					public const string CodigoPostalId = "CodigoPostalId";
 					public const string EstiloEsquemaId = "EstiloEsquemaId";
+					public const string LenguajeId = "LenguajeId";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -692,6 +693,7 @@ using System.Text;
 					Direccion,
 					CodigoPostalId,
 					EstiloEsquemaId,
+					LenguajeId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -704,7 +706,7 @@ using System.Text;
                 public Empresa()
                 {
                 }
-                public  Empresa(String Nombre,String Descripcion,PQDepositario.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Empresa(String Nombre,String Descripcion,PQDepositario.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,PQDepositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -714,6 +716,7 @@ using System.Text;
                     this.Direccion = Direccion;
                     this.CodigoPostalId = CodigoPostalId;
                     this.EstiloEsquemaId = EstiloEsquemaId;
+                    this.LenguajeId = LenguajeId;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -753,6 +756,23 @@ using System.Text;
              public Int64 CodigoPostalId { get; set; }
              [DataItemAttributeFieldName("EstiloEsquemaId","EstiloEsquemaId")]
              public Int64 EstiloEsquemaId { get; set; }
+             [DataItemAttributeFieldName("LenguajeId","LenguajeId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _LenguajeId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Lenguaje")]// Object name in Database
+             public PQDepositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId
+             {
+                 get {
+                     if (LenguajeId_ == null || LenguajeId_.Id != _LenguajeId)
+                         {
+                             LenguajeId = new PQDepositario.Business.Relations.Regionalizacion.Lenguaje().Items(this._LenguajeId).FirstOrDefault();
+                         }
+                     return LenguajeId_;
+                     }
+                 set {LenguajeId_  =  value;}
+             }
+             static PQDepositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId_ = null;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -950,6 +970,49 @@ using System.Text;
              public DateTime? FechaModificacion { get; set; }
 				
 			} //Class IdentificadorUsuario 
+} //namespace PQDepositario.Entities.Relations.Directorio
+		namespace PQDepositario.Entities.Relations.Directorio {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Directorio")]  // Database Schema Name
+			[DataItemAttributeObjectName("RelacionMonedaSucursal","RelacionMonedaSucursal")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class RelacionMonedaSucursal : IRelationsDataITem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string MonedaId = "MonedaId";
+					public const string SucursalId = "SucursalId";
+					public const string esDefault = "esDefault";
+				}
+				public enum FieldEnum : int
+                {
+					MonedaId,
+					SucursalId,
+					esDefault
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public RelacionMonedaSucursal()
+                {
+                }
+                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean esDefault)
+                {
+                    this.MonedaId = MonedaId;
+                    this.SucursalId = SucursalId;
+                    this.esDefault = esDefault;
+                }
+             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 MonedaId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("esDefault","esDefault")]
+             public Boolean esDefault { get; set; }
+				
+			} //Class RelacionMonedaSucursal 
 } //namespace PQDepositario.Entities.Relations.Directorio
 		namespace PQDepositario.Entities.Relations.Directorio {
 			[Serializable()]                         //
@@ -1299,6 +1362,18 @@ using System.Text;
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of RelacionMonedaSucursal that have this SucursalId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<PQDepositario.Entities.Relations.Directorio.RelacionMonedaSucursal> ListOf_RelacionMonedaSucursal_SucursalId
+                {
+                     get {
+                             PQDepositario.Business.Relations.Directorio.RelacionMonedaSucursal entities = new PQDepositario.Business.Relations.Directorio.RelacionMonedaSucursal();
+                             entities.Where.Add(PQDepositario.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
                  /// <summary>
                  ///  Represents the child collection of Sector that have this SucursalId value.
                  /// </summary>
@@ -1887,6 +1962,18 @@ using System.Text;
                      get {
                              PQDepositario.Business.Relations.Dispositivo.DepositarioValor entities = new PQDepositario.Business.Relations.Dispositivo.DepositarioValor();
                              entities.Where.Add(PQDepositario.Business.Relations.Dispositivo.DepositarioValor.ColumnEnum.DepositarioId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Transaccion that have this DepositarioId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<PQDepositario.Entities.Relations.Operacion.Transaccion> ListOf_Transaccion_DepositarioId
+                {
+                     get {
+                             PQDepositario.Business.Relations.Operacion.Transaccion entities = new PQDepositario.Business.Relations.Operacion.Transaccion();
+                             entities.Where.Add(PQDepositario.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -4566,7 +4653,7 @@ using System.Text;
                 public Transaccion()
                 {
                 }
-                public  Transaccion(PQDepositario.Entities.Relations.Operacion.TipoTransaccion TipoId,Int64 DepositarioId,PQDepositario.Entities.Relations.Directorio.Sector SectorId,PQDepositario.Entities.Relations.Directorio.Sucursal SucursalId,Int64 UsuarioId,PQDepositario.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,PQDepositario.Entities.Relations.Operacion.Contenedor ContenedorId,PQDepositario.Entities.Relations.Operacion.Sesion SesionId,Int64 TurnoId,PQDepositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada)
+                public  Transaccion(PQDepositario.Entities.Relations.Operacion.TipoTransaccion TipoId,PQDepositario.Entities.Relations.Dispositivo.Depositario DepositarioId,PQDepositario.Entities.Relations.Directorio.Sector SectorId,PQDepositario.Entities.Relations.Directorio.Sucursal SucursalId,Int64 UsuarioId,PQDepositario.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,PQDepositario.Entities.Relations.Operacion.Contenedor ContenedorId,PQDepositario.Entities.Relations.Operacion.Sesion SesionId,Int64 TurnoId,PQDepositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -4605,7 +4692,22 @@ using System.Text;
              }
              static PQDepositario.Entities.Relations.Operacion.TipoTransaccion TipoId_ = null;
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
-             public Int64 DepositarioId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _DepositarioId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
+             public PQDepositario.Entities.Relations.Dispositivo.Depositario DepositarioId
+             {
+                 get {
+                     if (DepositarioId_ == null || DepositarioId_.Id != _DepositarioId)
+                         {
+                             DepositarioId = new PQDepositario.Business.Relations.Dispositivo.Depositario().Items(this._DepositarioId).FirstOrDefault();
+                         }
+                     return DepositarioId_;
+                     }
+                 set {DepositarioId_  =  value;}
+             }
+             static PQDepositario.Entities.Relations.Dispositivo.Depositario DepositarioId_ = null;
              [DataItemAttributeFieldName("SectorId","SectorId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
              internal Int64 _SectorId { get; set; }
@@ -5117,6 +5219,73 @@ using System.Text;
 				
 			} //Class Turno 
 } //namespace PQDepositario.Entities.Relations.Operacion
+		namespace PQDepositario.Entities.Relations.Operacion {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
+			[DataItemAttributeObjectName("TurnoUsuario","TurnoUsuario")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class TurnoUsuario : IRelationsDataITem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string UsuarioId = "UsuarioId";
+					public const string TurnoId = "TurnoId";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					UsuarioId,
+					TurnoId,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public TurnoUsuario()
+                {
+                }
+                public  TurnoUsuario(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.UsuarioId = UsuarioId;
+                    this.TurnoId = TurnoId;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
+             public Int64 UsuarioId { get; set; }
+             [DataItemAttributeFieldName("TurnoId","TurnoId")]
+             public Int64 TurnoId { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             public Int64? UsuarioModificacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+				
+			} //Class TurnoUsuario 
+} //namespace PQDepositario.Entities.Relations.Operacion
 		namespace PQDepositario.Entities.Relations.Regionalizacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Regionalizacion")]  // Database Schema Name
@@ -5183,6 +5352,18 @@ using System.Text;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
+                 ///  Represents the child collection of Empresa that have this LenguajeId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<PQDepositario.Entities.Relations.Directorio.Empresa> ListOf_Empresa_LenguajeId
+                {
+                     get {
+                             PQDepositario.Business.Relations.Directorio.Empresa entities = new PQDepositario.Business.Relations.Directorio.Empresa();
+                             entities.Where.Add(PQDepositario.Business.Relations.Directorio.Empresa.ColumnEnum.LenguajeId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
                  ///  Represents the child collection of LenguajeItem that have this LenguajeId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -5191,6 +5372,18 @@ using System.Text;
                      get {
                              PQDepositario.Business.Relations.Regionalizacion.LenguajeItem entities = new PQDepositario.Business.Relations.Regionalizacion.LenguajeItem();
                              entities.Where.Add(PQDepositario.Business.Relations.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Usuario that have this LenguajeId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<PQDepositario.Entities.Relations.Seguridad.Usuario> ListOf_Usuario_LenguajeId
+                {
+                     get {
+                             PQDepositario.Business.Relations.Seguridad.Usuario entities = new PQDepositario.Business.Relations.Seguridad.Usuario();
+                             entities.Where.Add(PQDepositario.Business.Relations.Seguridad.Usuario.ColumnEnum.LenguajeId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -6311,6 +6504,7 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string EmpresaId = "EmpresaId";
+					public const string LenguajeId = "LenguajeId";
 					public const string Nombre = "Nombre";
 					public const string Apellido = "Apellido";
 					public const string Legajo = "Legajo";
@@ -6332,6 +6526,7 @@ using System.Text;
                 {
 					Id,
 					EmpresaId,
+					LenguajeId,
 					Nombre,
 					Apellido,
 					Legajo,
@@ -6355,10 +6550,11 @@ using System.Text;
                 public Usuario()
                 {
                 }
-                public  Usuario(PQDepositario.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Usuario(PQDepositario.Entities.Relations.Directorio.Empresa EmpresaId,PQDepositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EmpresaId = EmpresaId;
+                    this.LenguajeId = LenguajeId;
                     this.Nombre = Nombre;
                     this.Apellido = Apellido;
                     this.Legajo = Legajo;
@@ -6396,6 +6592,23 @@ using System.Text;
                  set {EmpresaId_  =  value;}
              }
              static PQDepositario.Entities.Relations.Directorio.Empresa EmpresaId_ = null;
+             [DataItemAttributeFieldName("LenguajeId","LenguajeId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _LenguajeId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Lenguaje")]// Object name in Database
+             public PQDepositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId
+             {
+                 get {
+                     if (LenguajeId_ == null || LenguajeId_.Id != _LenguajeId)
+                         {
+                             LenguajeId = new PQDepositario.Business.Relations.Regionalizacion.Lenguaje().Items(this._LenguajeId).FirstOrDefault();
+                         }
+                     return LenguajeId_;
+                     }
+                 set {LenguajeId_  =  value;}
+             }
+             static PQDepositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId_ = null;
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
@@ -7353,14 +7566,14 @@ using System.Text;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
-                 ///  Represents the child collection of Denominacion that have this MonedaId value.
+                 ///  Represents the child collection of RelacionMonedaSucursal that have this MonedaId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<PQDepositario.Entities.Relations.Valor.Denominacion> ListOf_Denominacion_MonedaId
+                 public List<PQDepositario.Entities.Relations.Directorio.RelacionMonedaSucursal> ListOf_RelacionMonedaSucursal_MonedaId
                 {
                      get {
-                             PQDepositario.Business.Relations.Valor.Denominacion entities = new PQDepositario.Business.Relations.Valor.Denominacion();
-                             entities.Where.Add(PQDepositario.Business.Relations.Valor.Denominacion.ColumnEnum.MonedaId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
+                             PQDepositario.Business.Relations.Directorio.RelacionMonedaSucursal entities = new PQDepositario.Business.Relations.Directorio.RelacionMonedaSucursal();
+                             entities.Where.Add(PQDepositario.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.MonedaId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -7373,6 +7586,18 @@ using System.Text;
                      get {
                              PQDepositario.Business.Relations.Dispositivo.DepositarioValor entities = new PQDepositario.Business.Relations.Dispositivo.DepositarioValor();
                              entities.Where.Add(PQDepositario.Business.Relations.Dispositivo.DepositarioValor.ColumnEnum.ValorId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Denominacion that have this MonedaId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<PQDepositario.Entities.Relations.Valor.Denominacion> ListOf_Denominacion_MonedaId
+                {
+                     get {
+                             PQDepositario.Business.Relations.Valor.Denominacion entities = new PQDepositario.Business.Relations.Valor.Denominacion();
+                             entities.Where.Add(PQDepositario.Business.Relations.Valor.Denominacion.ColumnEnum.MonedaId, PQDepositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }

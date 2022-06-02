@@ -31,6 +31,12 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private System.Windows.Forms.Timer _poolingTimer = new System.Windows.Forms.Timer();
 
+        // Variables que contienen los datos del conteo en curso
+        private Double currentCountingAmount = 0;
+        private int currentCountingQuantity = 0;
+
+        private const int FIRST_COLUMN = 1;
+        private const int SECOND_COLUMN = 2;
 
         private ImageList _imageList = new ImageList();
         public BillDepositForm()
@@ -106,7 +112,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private void VerifyButtonsVisibility()
         {
             //Solo se habilita el botón de volver si no hay dinero en el escrow
-            BackButton.Visible = !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
+
+            BackButton.Visible = (
+                !_device.StateResultProperty.DeviceStateInformation.HopperBillPresent
+                ||
+                !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                );
 
             ConfirmAndExitDepositButton.Visible = 
                 _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent 
@@ -299,12 +310,8 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private void VerifyLoadDetectedBills()
         {
-
-            //_operationStatus.CurrentTransactionAmount = 0;
-            //_operationStatus.CurrentTransactionQuantity = 0;
-            Double currentCountingAmount = 0;
-            int currentCountingQuantity = 0;
-
+            currentCountingAmount = 0;
+            currentCountingQuantity = 0;
 
             if (_device.DenominationResultProperty.DenominationArray != null 
                 && _device.DenominationResultProperty.DenominationArray.Length == 96)
@@ -337,12 +344,12 @@ namespace Permaquim.Depositary.UI.Desktop
                 // Actualiza las denominaciones con el valor detectado 
                 foreach (var denomination in _detectedDenominations)
                 {
-                    if (BillResumeListview.Items.Count > 0)
+                    if (BillCountingListview.Items.Count > 0)
                     {
-                        BillResumeListview.Items[(int)denomination.Id]
-                            .SubItems[1].Text = denomination.CantidadDetectada.ToString();
-                        BillResumeListview.Items[(int)denomination.Id]
-                            .SubItems[2].Text = (denomination.CantidadDetectada * Convert.ToInt32(denomination.Unidades)).ToString();
+                        BillCountingListview.Items[(int)denomination.Id]
+                            .SubItems[FIRST_COLUMN].Text = denomination.CantidadDetectada.ToString();
+                        BillCountingListview.Items[(int)denomination.Id]
+                            .SubItems[SECOND_COLUMN].Text = (denomination.CantidadDetectada * Convert.ToInt32(denomination.Unidades)).ToString();
 
                         currentCountingAmount += Convert.ToInt32(denomination.Unidades) * denomination.CantidadDetectada;
                         currentCountingQuantity += denomination.CantidadDetectada;
@@ -350,26 +357,25 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 
                 //Totales
-                if (BillResumeListview.Items.Count > 0)
+                if (BillCountingListview.Items.Count > 0)
                 {
-                    BillResumeListview.Items[BillResumeListview.Items.Count - 1]
-                    .SubItems[1].Text = currentCountingQuantity + _operationStatus.CurrentTransactionQuantity.ToString();
-                    BillResumeListview.Items[BillResumeListview.Items.Count - 1]
-                        .SubItems[2].Text = currentCountingAmount + _operationStatus.CurrentTransactionAmount.ToString();
-                
-                
+                    BillCountingListview.Items[BillCountingListview.Items.Count - 1]
+                    .SubItems[FIRST_COLUMN].Text = (currentCountingQuantity + _operationStatus.CurrentTransactionQuantity).ToString();
+                    BillCountingListview.Items[BillCountingListview.Items.Count - 1]
+                        .SubItems[SECOND_COLUMN].Text = (currentCountingAmount + _operationStatus.CurrentTransactionAmount).ToString();
                 
                 }
             }
             else
             {
-                foreach (ListViewItem item in BillResumeListview.Items)
+                foreach (ListViewItem item in BillCountingListview.Items)
                 {
-                    item.SubItems[1].Text = "0";
+                    item.SubItems[FIRST_COLUMN].Text = "0";
                 }
                 currentCountingAmount = 0;
             }
-            
+
+            SubtotalLabel.Text = "Sub Total: " + _operationStatus.CurrentTransactionAmount.ToString();
 
             CancelDepositButton.Visible = true;
         }
@@ -441,26 +447,16 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DisableControls()
         {
-            BillResumeListview.Visible = false;
+            BillCountingListview.Visible = false;
             BackButton.Visible = false;
             CancelDepositButton.Visible = false;
             ConfirmAndExitDepositButton.Visible = false;
 
         }
 
-        private void SetBackButtonEnabled()
+        private void InitializeBillCountingListview()
         {
-            BackButton.Visible = (
-                _device.StateResultProperty.DeviceStateInformation.HopperBillPresent == false
-                ||
-                _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
-
-                );
-
-        }
-        private void LoadBillListview()
-        {
-            BillResumeListview.SmallImageList = _imageList;
+            BillCountingListview.SmallImageList = _imageList;
             foreach (var denomination in _denominaciones)
             {
                 ListViewItem item = new();
@@ -468,16 +464,16 @@ namespace Permaquim.Depositary.UI.Desktop
                 item.Text = denomination.Nombre;
                 item.SubItems.Add("0");
                 item.SubItems.Add("0");
-                BillResumeListview.Items.Add(item);
+                BillCountingListview.Items.Add(item);
 
             }
             ListViewItem totalItem = new();
             totalItem.Text = "Totales";
             totalItem.SubItems.Add("0");
             totalItem.SubItems.Add("0");
-            BillResumeListview.Items.Add(totalItem);
+            BillCountingListview.Items.Add(totalItem);
 
-            BillResumeListview.Visible = true;
+            BillCountingListview.Visible = true;
 
         }
 
@@ -502,7 +498,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     _imageList.Images.Add(Image.FromStream(ms));
                 }
             }
-            LoadBillListview();
+            InitializeBillCountingListview();
         }
 
         /// <summary>
@@ -510,17 +506,14 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private void SaveTransaction()
         {
+            _operationStatus.CurrentTransactionAmount += currentCountingAmount;
 
             PQDepositario.Business.Tables.Operacion.Sesion sesiones = new();
-            sesiones.Items(null, 0, null, null,null);
+            sesiones.Items(null, DatabaseController.CurrentUser.Id, null, null,null);
 
 
             PQDepositario.Business.Tables.Operacion.Transaccion transactions = new();
             PQDepositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = new();
-
-            // Se almacena en esta variable, para el caso en que la cantidad de billetes en la
-            // pre bóveda exceda el límite. Se deben agragar los sucesivos detalles con el mismo
-            // Id de transacción
 
             if (_operationStatus.CurrentTransactionId == 0)
             {
@@ -539,7 +532,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalValidado = _operationStatus.CurrentTransactionAmount,
                     TurnoId = 0,
                     UsuarioCuentaId = 0,
-                    UsuarioId = 0
+                    UsuarioId = DatabaseController.CurrentUser.Id
 
                 };
                 transactions.Add(transaction);
@@ -573,6 +566,16 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
      
+        }
+        #endregion
+
+
+        #region Listview Owner Drawn
+        private void BillCountingListview_DrawColumnHeader(object sender,
+                                           DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.SteelBlue, e.Bounds);
+            e.DrawText();
         }
         #endregion
     }

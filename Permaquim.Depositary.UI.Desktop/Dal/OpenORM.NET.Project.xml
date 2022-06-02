@@ -42,11 +42,14 @@
     <string>Operacion.ObtenerDetalleTransaccion</string>
     <string>Operacion.ObtenerDetalleTransaccionSobre</string>
     <string>Operacion.ObtenerEventosPorDepositario</string>
+    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
     <string>Operacion.ObtenerExistenciasPorDepositario</string>
     <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
     <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
+    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
     <string>Operacion.ObtenerTransaccionesPorDepositario</string>
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
+    <string>Regionalizacion.ObtenerTextosLenguaje</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures />
   <SelectedTables>
@@ -60,6 +63,7 @@
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.IdentificadorUsuario</string>
+    <string>Directorio.RelacionMonedaSucursal</string>
     <string>Directorio.RolFuncion</string>
     <string>Directorio.Sector</string>
     <string>Directorio.Sucursal</string>
@@ -97,6 +101,7 @@
     <string>Operacion.TransaccionSobre</string>
     <string>Operacion.TransaccionSobreDetalle</string>
     <string>Operacion.Turno</string>
+    <string>Operacion.TurnoUsuario</string>
     <string>Regionalizacion.Lenguaje</string>
     <string>Regionalizacion.LenguajeItem</string>
     <string>Seguridad.Aplicacion</string>

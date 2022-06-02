@@ -1,4 +1,5 @@
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Controls;
 using System.Configuration;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -14,12 +15,28 @@ namespace Permaquim.Depositary.UI.Desktop
 
         }
 
-        private void MainKeyboard_KeyboardEvent(object sender, EventArgs args)
+        private void MainKeyboard_KeyboardEvent(object sender, KeyboardEventArgs args)
         {
-            PQDepositario.Business.Tables.Operacion.Sesion sesion = new();
-            sesion.Add(0,DateTime.Now,null,null);
-            if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals("{ENTER}"))
-                AppController.OpenChildForm(new OperationForm(), (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+
+            if (args.UserText.Trim().Equals(string.IsNullOrEmpty) ||
+                args.PasswordText.Trim().Equals(string.IsNullOrEmpty))
+            {
+
+            }
+            else
+            {
+                PQDepositario.Entities.Relations.Seguridad.Usuario currentUser =
+                    DatabaseController.Login(args.UserText.Trim(), args.PasswordText.Trim());
+
+                if (currentUser.Id != 0)
+                {
+
+                    PQDepositario.Business.Tables.Operacion.Sesion sesion = new();
+                    sesion.Add(DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
+                    if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals("{ENTER}"))
+                        AppController.OpenChildForm(new OperationForm(), (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                }
+            }
         }
 
         private void Loadlogo()
@@ -32,6 +49,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void MainKeyboard_Click(object sender, EventArgs e)
         {
+           
 
             AppController.OpenChildForm(new OperationForm(),(Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }

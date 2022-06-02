@@ -35,6 +35,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             LoadLogo();
 
+
+
             SetOwnerData();
         }
         private void MainForm_Load(object sender, EventArgs e)
@@ -54,13 +56,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             this.Tag = _device;
 
-
             // Evaluación de estado de la contadora y el ioBoard
             // Si está todo en órden, se libera la aplicación
 
             InformationPanel.SendToBack();
             MainPanel.BringToFront();
-
 
             // Ejecuto la primera consulta al dispositivo. 
             // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
@@ -73,7 +73,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                     // Setea el estado de la contadora previo al inicio del pooling 
                     //_device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
-
 
                     // Si el escrow está abierto se debe cerrar
                     if (_device.StateResultProperty.StatusInformation.OperatingState ==
@@ -106,28 +105,47 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             DateTimeLabel.Text = DateTime.Now.ToString("dd MM yyyy - HH mm ss");
 
+            // consulta el estado de la contadora
             _device.Sense();
+            // consulta el estado de la ioboard
             _device.Status();
-            // Consulta el buffer de denominaciones etectadas
-            //_device.CountingDataRequest();
 
 
             if (_device.CounterConnected)
             {
-                labelContadora.Text = "Contadora online";
-                labelContadora.ForeColor = Color.Green;
+                CounterLabel.Text = "Contadora online";
+                CounterLabel.ForeColor = Color.Green;
             }
             if (_device.IoBoardConnected)
             {
-                labelIoboard.Text = "IO board online";
-                labelIoboard.ForeColor = Color.Green;
+                IoBoardLabel.Text = "IO board online";
+                IoBoardLabel.ForeColor = Color.Green;
             }
+            LoadAvatar();
+            SetUserData();
         }
 
         private void SetOwnerData()
         {
             OwnerDataLabel.Text = "Permaquim :.: Depositario. Versión 0.1";
         }
+
+        private void SetUserData()
+        {
+            if (DatabaseController.CurrentUser != null)
+            {
+                UserLabel.Text = "Usuario: " +
+                DatabaseController.CurrentUser.Apellido + " " + DatabaseController.CurrentUser.Nombre;
+                EnterpriseLabel.Text = "Empresa: " + 
+                DatabaseController.CurrentUser.EmpresaId.Nombre;
+            }
+            else
+            {
+                UserLabel.Text = String.Empty;
+                EnterpriseLabel.Text = String.Empty;
+            }
+        }
+
         private void MainPanel_MouseClick(object sender, MouseEventArgs e)
         {
              AppController.OpenChildForm(new KeyboardInputForm(), 
@@ -141,6 +159,21 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             LogoPictureBox.Load(appPath + LOGO_IMAGE_FILE);
         }
 
+        private void LoadAvatar()
+        {
+            if (DatabaseController.CurrentUser != null)
+            {
+                byte[] bytes = Convert.FromBase64String(DatabaseController.CurrentUser.Avatar
+                    .Replace("data:image/png;base64,", String.Empty)
+                    .Replace("data:image/jpeg;base64,", String.Empty)
+                    .Replace("data:image/webp;base64,", String.Empty));
+
+                using (MemoryStream ms = new MemoryStream(bytes))
+                {
+                    AvatarPicturebox.Image = Image.FromStream(ms);
+                }
+            }
+        }
         private void ExitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();

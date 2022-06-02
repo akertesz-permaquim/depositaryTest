@@ -25,6 +25,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
 
             SetDeviceNeutralMode();
+
         }
 
         private void SetDeviceNeutralMode()
@@ -51,5 +52,6 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             SetDeviceNeutralMode();
         }
+
     }
 }
