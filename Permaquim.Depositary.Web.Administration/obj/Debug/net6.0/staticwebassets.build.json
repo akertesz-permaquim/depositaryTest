@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5Qm5w3f/ChLEjxgza9fjNa6I/6ujHKa7Qbv2q+S9oXo=",
+  "Hash": "nOr/cwnOxzhbTFRvKQk1WVGCNIusQdQlZQ1xOz7WW0g=",
   "Source": "Permaquim.Depositary.Web.Administration",
   "BasePath": "_content/Permaquim.Depositary.Web.Administration",
   "Mode": "Default",
@@ -610,6 +610,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\fonts\\SourceSansPro-SemiboldIt.woff"
+    },
+    {
+      "Identity": "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\wwwroot\\images\\de-50.jpeg",
+      "SourceId": "Permaquim.Depositary.Web.Administration",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\wwwroot\\",
+      "BasePath": "_content/Permaquim.Depositary.Web.Administration",
+      "RelativePath": "images/de-50.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\de-50.jpeg"
     },
     {
       "Identity": "C:\\Dev\\depositario\\Permaquim.Depositary.Web.Administration\\wwwroot\\images\\de-50.png",

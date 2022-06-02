@@ -981,15 +981,17 @@ using System.Text;
 				        
 				public class ColumnNames
 				{
+					public const string Id = "Id";
 					public const string MonedaId = "MonedaId";
 					public const string SucursalId = "SucursalId";
-					public const string esDefault = "esDefault";
+					public const string EsDefault = "EsDefault";
 				}
 				public enum FieldEnum : int
                 {
+					Id,
 					MonedaId,
 					SucursalId,
-					esDefault
+					EsDefault
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -997,20 +999,52 @@ using System.Text;
                 public RelacionMonedaSucursal()
                 {
                 }
-                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean esDefault)
+                public  RelacionMonedaSucursal(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,Boolean EsDefault)
                 {
+                    this.Id = Id;
                     this.MonedaId = MonedaId;
                     this.SucursalId = SucursalId;
-                    this.esDefault = esDefault;
+                    this.EsDefault = EsDefault;
                 }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 Id { get; set; }
              [DataItemAttributeFieldName("MonedaId","MonedaId")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
-             public Int64 MonedaId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _MonedaId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId
+             {
+                 get {
+                     if (MonedaId_ == null || MonedaId_.Id != _MonedaId)
+                         {
+                             MonedaId = new DepositarioAdminWeb.Business.Relations.Valor.Moneda().Items(this._MonedaId).FirstOrDefault();
+                         }
+                     return MonedaId_;
+                     }
+                 set {MonedaId_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId_ = null;
              [DataItemAttributeFieldName("SucursalId","SucursalId")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
-             public Int64 SucursalId { get; set; }
-             [DataItemAttributeFieldName("esDefault","esDefault")]
-             public Boolean esDefault { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _SucursalId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Sucursal")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId
+             {
+                 get {
+                     if (SucursalId_ == null || SucursalId_.Id != _SucursalId)
+                         {
+                             SucursalId = new DepositarioAdminWeb.Business.Relations.Directorio.Sucursal().Items(this._SucursalId).FirstOrDefault();
+                         }
+                     return SucursalId_;
+                     }
+                 set {SucursalId_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId_ = null;
+             [DataItemAttributeFieldName("EsDefault","EsDefault")]
+             public Boolean EsDefault { get; set; }
 				
 			} //Class RelacionMonedaSucursal 
 } //namespace DepositarioAdminWeb.Entities.Relations.Directorio

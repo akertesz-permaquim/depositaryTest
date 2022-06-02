@@ -3212,9 +3212,10 @@ using System.Text;
 		{
 				public enum ColumnEnum : int
                 {
+					Id,
 					MonedaId,
 					SucursalId,
-					esDefault
+					EsDefault
 				}
 			   protected List<Entities.Relations.Directorio.RelacionMonedaSucursal> _cacheItemList = new List<Entities.Relations.Directorio.RelacionMonedaSucursal>();
 			   protected List<Entities.Relations.Directorio.RelacionMonedaSucursal> _entities = null;
@@ -3253,13 +3254,13 @@ using System.Text;
          /// <summary>
          /// RelacionMonedaSucursal Add Method
          /// </summary>
-         /// <param name='MonedaId'></param>
-         /// <param name='SucursalId'></param>
-         /// <param name='esDefault'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId'></param>
+         /// <param name='EsDefault'></param>
          /// <returns>Entities.Relations.Directorio.RelacionMonedaSucursal</returns>
-			public Entities.Relations.Directorio.RelacionMonedaSucursal Add(Int64 MonedaId,Int64 SucursalId,Boolean esDefault) 
+			public Entities.Relations.Directorio.RelacionMonedaSucursal Add(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,Boolean EsDefault) 
 			{
-			  return (Entities.Relations.Directorio.RelacionMonedaSucursal)base.Add(new Entities.Relations.Directorio.RelacionMonedaSucursal(MonedaId,SucursalId,esDefault));
+			  return (Entities.Relations.Directorio.RelacionMonedaSucursal)base.Add(new Entities.Relations.Directorio.RelacionMonedaSucursal(MonedaId,SucursalId,EsDefault));
 			}
             public new List<Entities.Relations.Directorio.RelacionMonedaSucursal> Items()
             {
@@ -3273,40 +3274,44 @@ using System.Text;
             /// <summary>
             /// Gets Entities.Relations.Directorio.RelacionMonedaSucursal items by Pk
             /// </summary>
-            /// <param name="MonedaId"></param>
-            /// <param name="SucursalId"></param>
+            /// <param name="Id"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Directorio.RelacionMonedaSucursal> Items(Int64 MonedaId,Int64 SucursalId)
+            public List<Entities.Relations.Directorio.RelacionMonedaSucursal> Items(Int64 Id)
             {
                 this.Where.Clear();
                     if (this.Where.whereParameter.Count == 0)
                     {
-                         this.Where.Add(ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, MonedaId);
+                         this.Where.Add(ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                     }
                     else
                     {
-                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, MonedaId);
-                    }
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
-                    }
-                    else
-                    {
-                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
+                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                     }
                 return this.Items();
             }
             /// <summary>
             /// Gets items with all fields
             /// </summary>
+            /// <param name="Id"></param>
             /// <param name="MonedaId"></param>
             /// <param name="SucursalId"></param>
-            /// <param name="esDefault"></param>
+            /// <param name="EsDefault"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Directorio.RelacionMonedaSucursal> Items(Int64? MonedaId,Int64? SucursalId,Boolean? esDefault)
+            public List<Entities.Relations.Directorio.RelacionMonedaSucursal> Items(Int64? Id,Int64? MonedaId,Int64? SucursalId,Boolean? EsDefault)
             {
                 this.Where.whereParameter.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
                 if (MonedaId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
@@ -3331,15 +3336,15 @@ using System.Text;
                     }
                    
                 }
-                if (esDefault != null)
+                if (EsDefault != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.esDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, esDefault);
+                        this.Where.Add(ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, EsDefault);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.esDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, esDefault);
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, EsDefault);
                     }
                    
                 }
@@ -3364,16 +3369,18 @@ using System.Text;
             }
             /// Updates an instance of Entities.Relations.Directorio.RelacionMonedaSucursal with parameters
             /// </summary>
+            /// <param name="Id"></param>
             /// <param name="MonedaId"></param>
             /// <param name="SucursalId"></param>
-            /// <param name="esDefault"></param>
+            /// <param name="EsDefault"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 MonedaId,Int64 SucursalId,Boolean esDefault)
+            public Int64 Update(Int64 Id,Int64 MonedaId,Int64 SucursalId,Boolean EsDefault)
             {
                  Entities.Tables.Directorio.RelacionMonedaSucursal item = new Entities.Tables.Directorio.RelacionMonedaSucursal();
+                 item.Id = Id;
                  item.MonedaId = MonedaId;
                  item.SucursalId = SucursalId;
-                 item.esDefault = esDefault;
+                 item.EsDefault = EsDefault;
 
                 return base.Update((IDataItem)item);
             }

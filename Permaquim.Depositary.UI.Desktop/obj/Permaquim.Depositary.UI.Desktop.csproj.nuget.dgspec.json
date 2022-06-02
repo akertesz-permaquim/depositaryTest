@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj": {}
+    "C:\\Dev\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj": {
+    "C:\\Dev\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj",
+        "projectUniqueName": "C:\\Dev\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj",
         "projectName": "Permaquim.Depositary.UI.Desktop",
-        "projectPath": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj",
-        "packagesPath": "C:\\Users\\ccespon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ccespon\\source\\repos\\depositario\\Permaquim.Depositary.UI.Desktop\\obj\\",
+        "projectPath": "C:\\Dev\\depositario\\Permaquim.Depositary.UI.Desktop\\Permaquim.Depositary.UI.Desktop.csproj",
+        "packagesPath": "C:\\Users\\gsivit\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\depositario\\Permaquim.Depositary.UI.Desktop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ccespon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gsivit\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -793,15 +793,17 @@ using System.Text;
 				        
 				public class ColumnNames
 				{
+					public const string Id = "Id";
 					public const string MonedaId = "MonedaId";
 					public const string SucursalId = "SucursalId";
-					public const string esDefault = "esDefault";
+					public const string EsDefault = "EsDefault";
 				}
 				public enum FieldEnum : int
                 {
+					Id,
 					MonedaId,
 					SucursalId,
-					esDefault
+					EsDefault
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -809,20 +811,27 @@ using System.Text;
                 public RelacionMonedaSucursal()
                 {
                 }
-                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean esDefault)
+                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean EsDefault)
                 {
+                    this.Id = Id;
                     this.MonedaId = MonedaId;
                     this.SucursalId = SucursalId;
-                    this.esDefault = esDefault;
+                    this.EsDefault = EsDefault;
                 }
-             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
              public Int64 MonedaId { get; set; }
              [DataItemAttributeFieldName("SucursalId","SucursalId")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Sucursal")]// Object name in Database
              public Int64 SucursalId { get; set; }
-             [DataItemAttributeFieldName("esDefault","esDefault")]
-             public Boolean esDefault { get; set; }
+             [DataItemAttributeFieldName("EsDefault","EsDefault")]
+             public Boolean EsDefault { get; set; }
 				
 			} //Class RelacionMonedaSucursal 
 } //namespace DepositarioAdminWeb.Entities.Tables.Directorio
