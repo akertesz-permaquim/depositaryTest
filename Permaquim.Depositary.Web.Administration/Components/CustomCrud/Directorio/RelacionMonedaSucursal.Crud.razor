@@ -1,0 +1,586 @@
+@page "/DirectorioRelacionMonedaSucursalCustomCrud"
+@inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+@if (RelacionMonedaSucursal_entities == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+}
+else
+{
+    switch (crudMode)
+    {
+        case CrudMode.Add:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <h4 style="color:white;">Ingrese los datos de RelacionMonedaSucursal</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Delete:
+            <RadzenBadge BadgeStyle="BadgeStyle.Warning">
+                <ChildContent>
+                    <h4 style="color:white;">Confirma eliminar el RelacionMonedaSucursal ?</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Edit:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <h4 style="color:white;">Modificación de datos de RelacionMonedaSucursal</h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.List:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <div>
+                        <h4 style="color:white;">Administración de RelacionMonedaSucursal</h4>
+                    </div>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+    }
+    <hr>
+    if (crudMode == CrudMode.List)
+    {
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@RelacionMonedaSucursal_entities" TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+            <EmptyTemplate>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+            </EmptyTemplate>
+            <Columns>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px">
+                    <HeaderTemplate>
+                        <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text="Nuevo" Click="Add">
+                        </RadzenButton>
+                    </HeaderTemplate>
+                    <Template Context="element">
+                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                        <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Title="MonedaId" Property="MonedaId" Width="100px">
+                    <Template>
+                        @if (Moneda_entities.FirstOrDefault(c => c.Id == @context.MonedaId) != null)
+                        {
+                            <RadzenLabel Text="@Moneda_entities.FirstOrDefault( c => c.Id == @context.MonedaId).Nombre" Component="MonedaId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                            <RadzenLabel Text="No data available" Component="MonedaId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Title="SucursalId" Property="SucursalId" Width="100px">
+                    <Template>
+                        @if (Sucursal_entities.FirstOrDefault(c => c.Id == @context.SucursalId) != null)
+                        {
+                            <RadzenLabel Text="@Sucursal_entities.FirstOrDefault( c => c.Id == @context.SucursalId).Nombre" Component="SucursalId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                            <RadzenLabel Text="No data available" Component="SucursalId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="EsDefault" Filterable="false" Title="EsDefault" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                    <Template Context="data">
+                        <RadzenCheckBox TValue="bool" Value=@data.EsDefault Disabled="true">
+                        </RadzenCheckBox>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                    <Template Context="data">
+                        <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
+                        </RadzenCheckBox>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+        <hr>
+    }
+
+    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+    {
+        <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Data="@RelacionMonedaSucursal_entity" @bind-Value="RelacionMonedaSucursal_entity" Submit="Save" Visible="@(RelacionMonedaSucursal_entity != null)">
+            <ChildContent>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaSucursal_entity.Id)" Name="Id" Disabled="true">
+                        </RadzenNumeric>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="MonedaId" Component="MonedaId" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        @if ((@Moneda_entities.Count > 0 && @Moneda_entities.FirstOrDefault(c => c.Id == @RelacionMonedaSucursal_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
+                        {
+                            <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaSucursal_entity.MonedaId)"
+                                Data=@Moneda_entities TextProperty="Nombre" ValueProperty="Id"
+                                Change=@(args => SelectMonedaValueChanged(args))
+                                Disabled="@(crudMode==CrudMode.Delete)" />
+                        }
+                        else
+                        {
+                            <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                Data=@Moneda_entities TextProperty="Nombre" ValueProperty="Id"
+                                Change=@(args => SelectMonedaValueChanged(args))
+                                Disabled="@(crudMode==CrudMode.Delete)" />
+                        }
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="SucursalId" Component="SucursalId" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Value="@SucursalId"
+                                Data=@Sucursal_entities TextProperty="Nombre" ValueProperty="Id"
+                                Disabled="true" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="EsDefault" Component="EsDefault" Style="margin-left: 0px; vertical-align: middle;" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenCheckBox @bind-Value=@RelacionMonedaSucursal_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Change=@(args => EsDefaultChange(args, @RelacionMonedaSucursal_entity)) />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenCheckBox @bind-Value=@RelacionMonedaSucursal_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @RelacionMonedaSucursal_entity)) />
+                    </div>
+                </div>
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaSucursal_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="true">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(RelacionMonedaSucursal_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true">
+                            </RadzenDatePicker>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenNumeric TValue="long?" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaSucursal_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="true">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(RelacionMonedaSucursal_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true">
+                            </RadzenDatePicker>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col offset-sm-3">
+                        <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text="Cancelar" Click="Cancel">
+                        </RadzenButton>
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenTemplateForm>
+        <hr>
+    }
+
+    <RadzenNotification />
+}
+
+@code {
+    /// <summary>
+    /// Crud Mode Enum
+    /// </summary>
+    private enum CrudMode
+    {
+        List,
+        Add,
+        Edit,
+        Delete
+    }
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal RelacionMonedaSucursal_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal> RelacionMonedaSucursal_entities = null;
+
+    /// <summary>
+    /// Variables to handle Relation between RelacionMonedaSucursal.MonedaId and Moneda.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Valor.Moneda Moneda_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Valor.Moneda>? Moneda_entities;
+
+    /// <summary>
+    /// Variables to handle Relation between RelacionMonedaSucursal.SucursalId and Sucursal.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Directorio.Sucursal Sucursal_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Directorio.Sucursal>? Sucursal_entities;
+
+    /// <summary>
+    ///  Page crud mode {List,Add,Edit,Delete}
+    /// </summary>
+    private CrudMode crudMode = CrudMode.List;
+
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+
+    [Parameter]
+    public Int64 SucursalId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+            NavManager.NavigateTo("login", true);
+    }
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal entity = new DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal();
+        entity.Where.Add(DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
+        RelacionMonedaSucursal_entities = entity.Items();
+    }
+    /// <summary>
+    /// Loads Type Tables data
+    /// </summary>
+    private void LoadTypesData()
+    {
+        DepositarioAdminWeb.Business.Tables.Valor.Moneda Moneda_local = new();
+        Moneda_entities = Moneda_local.Items();
+
+        DepositarioAdminWeb.Business.Tables.Directorio.Sucursal Sucursal_local = new();
+        Sucursal_entities = Sucursal_local.Items();
+
+    }
+
+    #endregion
+
+    #region Validaciones
+
+    private bool verificarExistenciaMonedaSucursalDefault()
+    {
+        bool resultado = true;
+        DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal oMonedaSucursal = new DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal();
+        oMonedaSucursal.Where.Add(DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
+        oMonedaSucursal.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+        oMonedaSucursal.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+        oMonedaSucursal.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.NotEqual, RelacionMonedaSucursal_entity.Id);
+
+        oMonedaSucursal.Items();
+        if (oMonedaSucursal.Result.Count == 0)
+            resultado = false;
+
+        return resultado;
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Initializations for adding a new entity
+    /// </summary>
+    private void Add()
+    {
+        //Main entity initialization
+        RelacionMonedaSucursal_entity = new();
+        //Relations entities initialization
+        Moneda_entity = new();
+        Sucursal_entity = new();
+        crudMode = CrudMode.Add;
+    }
+    /// <summary>
+    /// <summary>
+    /// Initializations for editing an entity
+    /// </summary>
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal item, bool delete)
+    {
+        RelacionMonedaSucursal_entity = item;
+        Moneda_entity = new()
+            {
+                Id = Moneda_entities.FirstOrDefault(c => c.Id == RelacionMonedaSucursal_entity.MonedaId).Id,
+                Nombre = Moneda_entities.FirstOrDefault(c => c.Id == RelacionMonedaSucursal_entity.MonedaId).Nombre
+            };
+        Sucursal_entity = new()
+            {
+                Id = Sucursal_entities.FirstOrDefault(c => c.Id == RelacionMonedaSucursal_entity.SucursalId).Id,
+                Nombre = Sucursal_entities.FirstOrDefault(c => c.Id == RelacionMonedaSucursal_entity.SucursalId).Nombre
+            };
+        if (delete)
+            crudMode = CrudMode.Delete;
+        else
+            crudMode = CrudMode.Edit;
+    }
+    /// <summary>
+    /// Operation depending on Crud mode
+    /// </summary>
+    private async Task Save()
+    {
+        bool validacionesSave = false;
+        string actionInformation = string.Empty;
+        NotificationSeverity severityType = NotificationSeverity.Error;
+        string summary = string.Empty;
+        if (RelacionMonedaSucursal_entity.EsDefault && (crudMode == CrudMode.Add || crudMode == CrudMode.Edit))
+        {
+            //verifico que no exista previamente una moneda default para la sucursal.
+            if (verificarExistenciaMonedaSucursalDefault())
+            {
+                validacionesSave = false;
+                summary = "Error al procesar.";
+                actionInformation = "No se puede guardar/editar una moneda como default debido a que la sucursal ya tiene una asignada.";
+                severityType = NotificationSeverity.Error;
+            }
+            else
+                validacionesSave = true;
+        }
+        else
+            validacionesSave = true;
+
+        if (validacionesSave)
+        {
+            RelacionMonedaSucursal_entity.SucursalId = SucursalId;
+            DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal crud = new();
+            foreach (var property in RelacionMonedaSucursal_entity.GetType().GetProperties())
+            {
+                switch (property.Name)
+                {
+                    case "FechaModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            RelacionMonedaSucursal_entity.FechaModificacion = null;
+                        }
+                        else
+                        {
+                            RelacionMonedaSucursal_entity.FechaModificacion = DateTime.Now;
+                        }
+                        break;
+                    case "FechaCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            RelacionMonedaSucursal_entity.FechaCreacion = DateTime.Now;
+                        }
+                        break;
+                    case "UsuarioCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            RelacionMonedaSucursal_entity.UsuarioCreacion = userId.Value;
+                        }
+                        break;
+                    case "UsuarioModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            RelacionMonedaSucursal_entity.UsuarioModificacion = null;
+                        }
+                        else
+                        {
+                            RelacionMonedaSucursal_entity.UsuarioModificacion = userId.Value;
+                        }
+                        break;
+                }
+            }
+            switch (crudMode)
+            {
+                case CrudMode.Add:
+                    try
+                    {
+                        crud.Add(RelacionMonedaSucursal_entity);
+                        summary = "El registro se ha ";
+                        actionInformation = "agregado.";
+                        severityType = NotificationSeverity.Success;
+                    }
+                    catch (Exception ex)
+                    {
+                        summary = "Error al procesar.";
+                        actionInformation = ex.Message;
+                        severityType = NotificationSeverity.Error;
+                    }
+                    break;
+                case CrudMode.Edit:
+                    try
+                    {
+                        crud.Update(RelacionMonedaSucursal_entity);
+                        summary = "El registro se ha ";
+                        actionInformation = "modificado.";
+                        severityType = NotificationSeverity.Success;
+                    }
+                    catch (Exception ex)
+                    {
+                        summary = "Error al procesar.";
+                        actionInformation = ex.Message;
+                        severityType = NotificationSeverity.Error;
+                    }
+                    break;
+                case CrudMode.Delete:
+                    try
+                    {
+                        crud.Delete(RelacionMonedaSucursal_entity);
+                        summary = "El registro se ha ";
+                        actionInformation = "eliminado.";
+                        severityType = NotificationSeverity.Success;
+                    }
+                    catch (Exception ex)
+                    {
+                        summary = "Error al procesar.";
+                        actionInformation = ex.Message;
+                        severityType = NotificationSeverity.Error;
+                    }
+                    break;
+            }
+        }
+
+        // Sets Crud mode to List
+        crudMode = CrudMode.List;
+
+        ShowNotification(new NotificationMessage
+            {
+                Severity = severityType,
+                Summary = summary,
+                Detail = actionInformation,
+                Duration = 4000
+            });
+
+        await Task.Run(LoadMainEntityData);
+    }
+    /// <summary>
+    /// Crud mode cancellation and default mode
+    /// </summary>
+    private void Cancel()
+    {
+        crudMode = CrudMode.List;
+        LoadMainEntityData();
+    }
+    /// <summary>
+    /// Sets detail panel title - TODO: Implement Multilanguage
+    /// </summary>
+    /// <returns></returns>
+    private string GetDialogTitle()
+    {
+        string retValue = string.Empty;
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                retValue = "Nuevo...";
+                break;
+            case CrudMode.Edit:
+                retValue = "Editar...";
+                break;
+            case CrudMode.Delete:
+                retValue = "Borrar...";
+                break;
+        }
+        return retValue;
+    }
+    #region Notifications
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+
+    }
+
+    #endregion
+    #region Selection events
+    /// <summary>
+    /// Moneda value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectMonedaValueChanged(object item)
+    {
+    }
+
+    /// <summary>
+    /// Sucursal value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectSucursalValueChanged(object item)
+    {
+    }
+
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void EsDefaultChange(bool? value, DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal item)
+    {
+        RelacionMonedaSucursal_entity = item;
+    }
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value, DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal item)
+    {
+        RelacionMonedaSucursal_entity = item;
+    }
+    #endregion
+
+    #region Export
+
+    #endregion
+
+    }

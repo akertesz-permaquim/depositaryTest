@@ -17,7 +17,7 @@ builder.Services.AddScoped<Radzen.DialogService>();
 builder.Services.AddScoped<Radzen.TooltipService>();
 builder.Services.AddScoped<Radzen.ContextMenuService>();
 builder.Services.AddBlazoredSessionStorage();
-builder.Services.AddScoped<SessionStorageManager>();
+//builder.Services.AddScoped<SessionStorageManager>();
 
 var app = builder.Build();
 
@@ -38,7 +38,6 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 {
     DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(supportedCulture)
 });
-
 
 app.UseHttpsRedirection();
 

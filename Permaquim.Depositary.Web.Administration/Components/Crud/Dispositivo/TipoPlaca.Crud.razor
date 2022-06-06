@@ -14,21 +14,21 @@ else
         case CrudMode.Add:
             <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
-                    <h4 style="color:white;">Ingrese los datos de TipoPlaca</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_A_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOPLACA" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
         case CrudMode.Delete:
             <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
                 <ChildContent>
-                    <h4 style="color:white;">Confirma eliminar el TipoPlaca ?</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_D_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOPLACA" || x.Clave=="GENERIC").FirstOrDefault().Texto? </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
             case CrudMode.Edit:
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
-                    <h4 style="color:white;">Modificación de datos de TipoPlaca</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_M_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOPLACA" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                 </ChildContent>
             </RadzenBadge>
             break;         
@@ -36,7 +36,7 @@ else
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
                     <div>
-                        <h4 style="color:white;">Administración de TipoPlaca</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_L_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOPLACA" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                     </div>
                 </ChildContent>
             </RadzenBadge>
@@ -51,9 +51,9 @@ else
             <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
         </EmptyTemplate>        
         <Columns>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
              <HeaderTemplate>
-                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text ="Nuevo" Click="Add">
+                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text =@dataLenguaje.Where(x => x.Clave == "NEW_BUTTON" || x.Clave == "GENERIC").FirstOrDefault().Texto Click="Add">
                  </RadzenButton>
                  </HeaderTemplate>
                  <Template Context="element">
@@ -63,8 +63,8 @@ else
                     </RadzenButton>
                 </Template>
              </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Title="ModeloId" Property="ModeloId" Width="100px" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Title=@dataLenguaje.Where(x => x.Clave == "MODELOID" || x.Clave=="GENERIC").FirstOrDefault().Texto Property="ModeloId" Width="100px" >
                 <Template>
                     @if(Modelo_entities.FirstOrDefault( c => c.Id == @context.ModeloId) != null){
                        <RadzenLabel Text="@Modelo_entities.FirstOrDefault( c => c.Id == @context.ModeloId).Nombre" Component="ModeloId" style="width: 100%">
@@ -77,85 +77,85 @@ else
                         }
                 </Template>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Nombre" Filterable="false" Title="Nombre" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Nombre" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Descripcion" Filterable="false" Title="Descripcion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Descripcion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "DESCRIPCION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="PortName" Filterable="false" Title="PortName" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="PortName" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "PORTNAME" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Parity" Filterable="false" Title="Parity" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Parity" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "PARITY" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="DataBits" Filterable="false" Title="DataBits" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="DataBits" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "DATABITS" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="ReadBufferSize" Filterable="false" Title="ReadBufferSize" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="ReadBufferSize" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "READBUFFERSIZE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="StopBits" Filterable="false" Title="StopBits" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="StopBits" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "STOPBITS" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="ReadTimeout" Filterable="false" Title="ReadTimeout" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="ReadTimeout" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "READTIMEOUT" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Handshake" Filterable="false" Title="Handshake" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Handshake" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "HANDSHAKE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BaudRate" Filterable="false" Title="BaudRate" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BaudRate" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "BAUDRATE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="RtsEnable" Filterable="false" Title="RtsEnable" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="RtsEnable" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "RTSENABLE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.RtsEnable Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorA" Filterable="false" Title="SensorA" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorA" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "SENSORA" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.SensorA Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorA" Filterable="false" Title="BitSensorA" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorA" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "BITSENSORA" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorB" Filterable="false" Title="SensorB" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorB" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "SENSORB" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.SensorB Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorB" Filterable="false" Title="BitSensorB" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorB" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "BITSENSORB" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorC" Filterable="false" Title="SensorC" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorC" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "SENSORC" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.SensorC Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorC" Filterable="false" Title="BitSensorC" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorC" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "BITSENSORC" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorD" Filterable="false" Title="SensorD" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorD" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "SENSORD" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.SensorD Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorD" Filterable="false" Title="BitSensorD" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorD" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "BITSENSORD" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorL" Filterable="false" Title="SensorL" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="SensorL" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "SENSORL" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.SensorL Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorL" Filterable="false" Title="BitSensorL" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="BitSensorL" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "BITSENSORL" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="Habilitado" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="UsuarioCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="FechaCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="UsuarioModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca" Property="FechaModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
         </Columns>
         </RadzenDataGrid>
@@ -168,17 +168,17 @@ else
           <ChildContent>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Id" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Id)" Name="Id" Disabled="true" >
                  </RadzenNumeric>
                  </div>
              </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="ModeloId" Component="ModeloId" style="width: 100%">
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "MODELOID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component ="ModeloId" style="width: 100%">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
@@ -200,7 +200,7 @@ else
             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Nombre" Component="Nombre" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Nombre" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -215,7 +215,7 @@ else
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Descripcion" Component="Descripcion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "DESCRIPCION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Descripcion" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -230,7 +230,7 @@ else
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="PortName" Component="PortName" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "PORTNAME" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="PortName" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -245,7 +245,7 @@ else
                </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Parity" Component="Parity" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "PARITY" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Parity" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -255,7 +255,7 @@ else
              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="DataBits" Component="DataBits" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "DATABITS" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="DataBits" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -265,7 +265,7 @@ else
              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="ReadBufferSize" Component="ReadBufferSize" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "READBUFFERSIZE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="ReadBufferSize" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -275,7 +275,7 @@ else
              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="StopBits" Component="StopBits" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "STOPBITS" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="StopBits" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -285,7 +285,7 @@ else
              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="ReadTimeout" Component="ReadTimeout" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "READTIMEOUT" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="ReadTimeout" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -295,7 +295,7 @@ else
              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Handshake" Component="Handshake" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HANDSHAKE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Handshake" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -305,7 +305,7 @@ else
              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="BaudRate" Component="BaudRate" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "BAUDRATE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="BaudRate" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -315,7 +315,7 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabel Text="RtsEnable" Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "RTSENABLE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.RtsEnable  Name="RtsEnableCheckBox" TValue="bool" Change=@(args => RtsEnableChange(args, @TipoPlaca_entity)) />
@@ -323,7 +323,7 @@ else
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabel Text="SensorA" Component="SensorA" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORA" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorA" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorA  Name="SensorACheckBox" TValue="bool" Change=@(args => SensorAChange(args, @TipoPlaca_entity)) />
@@ -331,7 +331,7 @@ else
                </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="BitSensorA" Component="BitSensorA" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "BITSENSORA" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="BitSensorA" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -341,7 +341,7 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabel Text="SensorB" Component="SensorB" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORB" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorB" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorB  Name="SensorBCheckBox" TValue="bool" Change=@(args => SensorBChange(args, @TipoPlaca_entity)) />
@@ -349,7 +349,7 @@ else
                </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="BitSensorB" Component="BitSensorB" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "BITSENSORB" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="BitSensorB" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -359,7 +359,7 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabel Text="SensorC" Component="SensorC" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORC" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorC" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorC  Name="SensorCCheckBox" TValue="bool" Change=@(args => SensorCChange(args, @TipoPlaca_entity)) />
@@ -367,7 +367,7 @@ else
                </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="BitSensorC" Component="BitSensorC" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "BITSENSORC" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="BitSensorC" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -377,7 +377,7 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabel Text="SensorD" Component="SensorD" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORD" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorD" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorD  Name="SensorDCheckBox" TValue="bool" Change=@(args => SensorDChange(args, @TipoPlaca_entity)) />
@@ -385,7 +385,7 @@ else
                </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="BitSensorD" Component="BitSensorD" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "BITSENSORD" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="BitSensorD" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -395,7 +395,7 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabel Text="SensorL" Component="SensorL" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORL" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorL" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.SensorL  Name="SensorLCheckBox" TValue="bool" Change=@(args => SensorLChange(args, @TipoPlaca_entity)) />
@@ -403,7 +403,7 @@ else
                </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="BitSensorL" Component="BitSensorL" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "BITSENSORL" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="BitSensorL" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -413,7 +413,7 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
                 <RadzenCheckBox @bind-Value=@TipoPlaca_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @TipoPlaca_entity)) />
@@ -423,11 +423,11 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioCreacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="true">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
                  </RadzenNumeric>
                  </div>
              </div>
@@ -436,11 +436,11 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaCreacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
               <div class="col-md-9">
-                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true" >
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
                  </RadzenDatePicker>
               </div>
             </div>
@@ -449,11 +449,11 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioModificacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="true">
+                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
                  </RadzenNumeric>
                  </div>
              </div>
@@ -462,20 +462,20 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaModificacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
               <div class="col-md-9">
-                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true" >
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoPlaca_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
                  </RadzenDatePicker>
               </div>
             </div>
          }
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@dataLenguaje.Where(x => x.Clave == "ACCEPT_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto ButtonStyle ="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text="Cancelar" Click="Cancel">
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@dataLenguaje.Where(x => x.Clave == "CANCEL_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto Click="Cancel">
                 </RadzenButton>
               </div>
             </div>
@@ -505,6 +505,11 @@ else
     private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.TipoPlaca> TipoPlaca_entities = null;
  
     /// <summary>
+    /// Variables to multilanguaje
+    /// </summary>
+    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+ 
+    /// <summary>
     /// Variables to handle Relation between TipoPlaca.ModeloId and Modelo.Id
     /// </summary>
     private DepositarioAdminWeb.Entities.Tables.Dispositivo.Modelo Modelo_entity = new();
@@ -522,11 +527,12 @@ else
  
     protected override async Task OnInitializedAsync()
     {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");
         if (userId == null)
-             NavManager.NavigateTo("/ login", true);
+             NavManager.NavigateTo("login", true);
     }
     #region Loading entities data
     /// <summary>

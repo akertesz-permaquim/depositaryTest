@@ -15,7 +15,7 @@
     <RadzenContent Container="main">
         <ChildContent>
             <h1>Monitor</h1>
-
+            <hr>
             Agrupar depositarios
             <RadzenCheckBox TValue="bool"
                         Name="ChkAgruparDepositarios"
@@ -36,56 +36,56 @@
                         AllowGrouping="true">
                 <Columns>
                     <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Visible="false" Property="DepositarioId" Title="ID" Width="2%" />
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Empresa" Title="@dataLenguaje.Where(x => x.Clave == "EMPRESA" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sucursal" Title="@dataLenguaje.Where(x => x.Clave == "SUCURSAL" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sector" Title="@dataLenguaje.Where(x => x.Clave == "SECTOR" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Nombre" Title="@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Modelo" Width="9%" Title="@dataLenguaje.Where(x => x.Clave == "MODELO" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="ValorTotalEnBolsa" FormatString="{0:C2}" Width="12%" TextAlign="TextAlign.Right" Title="@dataLenguaje.Where(x => x.Clave == "VALORTOTALENBOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto" />
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOnline" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROONLINE" || x.Clave=="GENERICO").FirstOrDefault().Texto" Width="9%" TextAlign="TextAlign.Center">
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Empresa" Title="@dataLenguaje.Where(x => x.Clave == "EMPRESA" || x.Clave=="GENERIC").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sucursal" Title="@dataLenguaje.Where(x => x.Clave == "SUCURSAL" || x.Clave=="GENERIC").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Sector" Title="@dataLenguaje.Where(x => x.Clave == "SECTOR" || x.Clave=="GENERIC").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Nombre" Title="@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="Modelo" Width="9%" Title="@dataLenguaje.Where(x => x.Clave == "MODELO" || x.Clave=="GENERIC").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="ValorTotalEnBolsa" FormatString="{0:C2}" Width="12%" TextAlign="TextAlign.Right" Title="@dataLenguaje.Where(x => x.Clave == "VALORTOTALENBOLSA" || x.Clave=="GENERIC").FirstOrDefault().Texto" />
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOnline" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROONLINE" || x.Clave=="GENERIC").FirstOrDefault().Texto" Width="9%" TextAlign="TextAlign.Center">
                         <Template Context="depositario">
                             @switch (depositario.SemaforoOnline)
                             {
                                 case "Verde":
-                                    <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                                 case "Amarillo":
-                                    <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                                 case "Rojo":
-                                    <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                             }
                         </Template>
                     </RadzenDataGridColumn>
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOcupacionBolsa" Width="10%" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROOCUPACIONBOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto" TextAlign="TextAlign.Center">
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoOcupacionBolsa" Width="10%" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROOCUPACIONBOLSA" || x.Clave=="GENERIC").FirstOrDefault().Texto" TextAlign="TextAlign.Center">
                         <Template Context="depositario">
                             @switch (depositario.SemaforoOcupacionBolsa)
                             {
                                 case "Verde":
-                                    <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                                 case "Amarillo":
-                                    <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                                 case "Rojo":
-                                    <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                             }
                         </Template>
                     </RadzenDataGridColumn>
-                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoAnomalia" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROANOMALIA" || x.Clave=="GENERICO").FirstOrDefault().Texto" Width="9%" TextAlign="TextAlign.Center">
+                    <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios" Property="SemaforoAnomalia" Title="@dataLenguaje.Where(x => x.Clave == "SEMAFOROANOMALIA" || x.Clave=="GENERIC").FirstOrDefault().Texto" Width="9%" TextAlign="TextAlign.Center">
                         <Template Context="depositario">
                             @switch (depositario.SemaforoAnomalia)
                             {
                                 case "Verde":
-                                    <RadzenImage Path="../images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                                 case "Amarillo":
-                                    <RadzenImage Path="../images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                                 case "Rojo":
-                                    <RadzenImage Path="../images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                    <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
                                     break;
                             }
                         </Template>
@@ -109,41 +109,41 @@
                                     <div class="container-fluid">
                                         <div class="row" style="margin-left: -5%;">
                                             <div class="col-md-2" style="align-self: center;text-align: center;">
-                                                <RadzenImage Path="../images/de-50.png" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
+                                                <RadzenImage Path="images/de-50.png" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="row">
                                                     <div class="col-md-4" style="padding-top: 1%; font-size: medium; text-align:center;">
-                                                        <b>@dataLenguaje.Where(x => x.Clave == "NUMERODESERIE" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b>
+                                                        <b>@dataLenguaje.Where(x => x.Clave == "NUMERODESERIE" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b>
                                                         @auxInformacionDepositario.NumeroSerie
                                                     </div>
                                                     <div class="col-md-4" style="padding-left: 5%; padding-top: 1%; font-size: medium; text-align:center;">
-                                                        <b>@dataLenguaje.Where(x => x.Clave == "IDDEBOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> @auxInformacionDepositario.IdentificadorBolsa
+                                                        <b>@dataLenguaje.Where(x => x.Clave == "IDDEBOLSA" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.IdentificadorBolsa
                                                     </div>
                                                     <div class="col-md-4" style="padding-left: 5%; padding-top: 1%; font-size: medium; text-align:center;">
-                                                        <b>@dataLenguaje.Where(x => x.Clave == "FECHAULTIMASINCRONIZACION" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> @auxInformacionDepositario.FechaUltimaSincronizacion
+                                                        <b>@dataLenguaje.Where(x => x.Clave == "FECHAULTIMASINCRONIZACION" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.FechaUltimaSincronizacion
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROVALIDADO" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalValidado
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROVALIDADO" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalValidado
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROAVALIDAR" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalAValidar
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROAVALIDAR" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalAValidar
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROTOTAL" || x.Clave=="GENERICO").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.Total
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROTOTAL" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.Total
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <div style="padding-top: 5%; text-align:center"><b>@dataLenguaje.Where(x => x.Clave == "OCUPACIONDELABOLSA" || x.Clave=="GENERICO").FirstOrDefault().Texto</b></div>
+                                                        <div style="padding-top: 5%; text-align:center"><b>@dataLenguaje.Where(x => x.Clave == "OCUPACIONDELABOLSA" || x.Clave=="GENERIC").FirstOrDefault().Texto</b></div>
                                                         @if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 70 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 90)
                                                         {
                                                             <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
@@ -179,7 +179,7 @@
                     </RadzenCard>
                     <RadzenTabs Change="@(args => changeTabMonitorDepositario(args,depositario))">
                         <Tabs>
-                            <RadzenTabsItem Icon="local_atm" Text="@dataLenguaje.Where(x => x.Clave == "DEPOSITOS" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                            <RadzenTabsItem Icon="local_atm" Text="@dataLenguaje.Where(x => x.Clave == "DEPOSITOS" || x.Clave=="GENERIC").FirstOrDefault().Texto">
                                 <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario"
                                             @ref="@gridTransacciones"
                                             AllowFiltering="true"
@@ -226,7 +226,7 @@
                                     </Template>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
-                            <RadzenTabsItem Icon="forward_to_inbox" Text="@dataLenguaje.Where(x => x.Clave == "DEPOSITOSSOBRE" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                            <RadzenTabsItem Icon="forward_to_inbox" Text="@dataLenguaje.Where(x => x.Clave == "DEPOSITOSSOBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto">
                                 <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario"
                                             @ref="@gridTransaccionesSobres"
                                             AllowFiltering="true"
@@ -265,7 +265,7 @@
                                     </Template>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
-                            <RadzenTabsItem Icon="archive" Text="@dataLenguaje.Where(x => x.Clave == "EXISTENCIAS" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                            <RadzenTabsItem Icon="archive" Text="@dataLenguaje.Where(x => x.Clave == "EXISTENCIAS" || x.Clave=="GENERIC").FirstOrDefault().Texto">
                                 <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado"
                                             @ref="@gridExistencias"
                                             AllowFiltering="true"
@@ -285,7 +285,7 @@
                                     </Columns>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
-                            <RadzenTabsItem Icon="mark_as_unread" Text="@dataLenguaje.Where(x => x.Clave == "EXISTENCIASAVALIDAR" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                            <RadzenTabsItem Icon="mark_as_unread" Text="@dataLenguaje.Where(x => x.Clave == "EXISTENCIASAVALIDAR" || x.Clave=="GENERIC").FirstOrDefault().Texto">
                                 <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado"
                                             @ref="@gridExistenciasAValidar"
                                             AllowFiltering="true"
@@ -299,7 +299,7 @@
                                     </Columns>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
-                            <RadzenTabsItem Icon="calculate" Text="@dataLenguaje.Where(x => x.Clave == "TOTALGENERAL" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                            <RadzenTabsItem Icon="calculate" Text="@dataLenguaje.Where(x => x.Clave == "TOTALGENERAL" || x.Clave=="GENERIC").FirstOrDefault().Texto">
                                 <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado"
                                             @ref="@gridTotalesGenerales"
                                             AllowFiltering="true"
@@ -314,7 +314,7 @@
                                     </Columns>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
-                            <RadzenTabsItem Icon="settings_input_component" Text="@dataLenguaje.Where(x => x.Clave == "ANOMALIAS" || x.Clave=="GENERICO").FirstOrDefault().Texto">
+                            <RadzenTabsItem Icon="settings_input_component" Text="@dataLenguaje.Where(x => x.Clave == "ANOMALIAS" || x.Clave=="GENERIC").FirstOrDefault().Texto">
                                 <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerEventosPorDepositario"
                                             @ref="@gridEventos"
                                             AllowFiltering="true"
@@ -391,14 +391,11 @@
             dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
             Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
             if (userId == null)
-                NavManager.NavigateTo("/login", true);
+                NavManager.NavigateTo("login", true);
             await Task.Run(obtenerDepositarios);
             StateHasChanged();
         }
     }
-
-
-
 
     private void SetTimer()
     {
@@ -434,6 +431,7 @@
     protected async Task expandirDepositario(DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios args)
     {
         //rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
+        estaCargandoGridDepositarios = true;
         rowsDepositariosExpandidas.Add(args);
         await Task.Run(() => obtenerInformacionDepositario(args.DepositarioId.Value));
         await Task.Run(() => obtenerTransaccionesPorDepositario(args.DepositarioId.Value));
@@ -466,6 +464,7 @@
     {
         dataTransaccionesDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
         dataTransaccionesDepositario.AddRange(TransaccionController.ObtenerTransaccionesPorDepositario(pDepositarioId));
+        estaCargandoGridDepositarios = false;
         estaCargandoGridTransacciones = false;
     }
 
