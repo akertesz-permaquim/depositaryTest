@@ -17,6 +17,8 @@ builder.Services.AddScoped<Radzen.DialogService>();
 builder.Services.AddScoped<Radzen.TooltipService>();
 builder.Services.AddScoped<Radzen.ContextMenuService>();
 builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
+
 //builder.Services.AddScoped<SessionStorageManager>();
 
 var app = builder.Build();

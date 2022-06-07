@@ -127,17 +127,17 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROVALIDADO" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalValidado
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROVALIDADO" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.TotalValidado @auxInformacionDepositario.CodigoMoneda
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROAVALIDAR" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.TotalAValidar
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROAVALIDAR" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.TotalAValidar @auxInformacionDepositario.CodigoMoneda
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROTOTAL" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> $@auxInformacionDepositario.Total
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROTOTAL" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.Total @auxInformacionDepositario.CodigoMoneda
                                                         </div>
                                                     </div>
                                                 </div>
@@ -381,7 +381,6 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        string asd = "";
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
