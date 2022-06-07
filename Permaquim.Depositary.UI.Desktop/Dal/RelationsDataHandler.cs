@@ -3,7 +3,7 @@ using System.Data;
 using System.Collections;
 using System.Reflection;
 using System.Collections.Generic;
-using PQDepositario.Entities;
+using Permaquim.Depositario.Entities;
 public class RelationsDataHandler : DataHandler
 {
     /// <summary>

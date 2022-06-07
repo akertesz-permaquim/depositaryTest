@@ -24,7 +24,22 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             InitializeComponent();
             _activeTextbox = UsernameTextBox;
             _activeTextbox.Focus();
+            if(this.ParentForm !=null)
+                this.ParentForm.AcceptButton = this.Button_Enter;
         }
+
+        public string UserTextboxPlaceholder
+        {
+            get { return UsernameTextBox.PlaceholderText; }
+            set { UsernameTextBox.PlaceholderText = value; }
+        }
+
+        public string PasswordTextBoxPlaceholder
+        {
+            get { return PasswordTexbox.PlaceholderText; }
+            set { PasswordTexbox.PlaceholderText = value; }
+        }
+
         private void Keys(object sender, EventArgs e)
         {
             _activeTextbox.Focus();

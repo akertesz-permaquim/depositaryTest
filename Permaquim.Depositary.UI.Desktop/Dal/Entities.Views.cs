@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-		namespace PQDepositario.Entities.Views.Operacion {
+		namespace Permaquim.Depositario.Entities.Views.Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("VistaTransaccion","VistaTransaccion")]    // Object name  and alias in Database
@@ -96,9 +96,60 @@ using System.Text;
 				
 			} //Class VistaTransaccion 
 			
-} //namespace PQDepositario.Entities.Views.Operacion
+} //namespace Permaquim.Depositario.Entities.Views.Operacion
 //////////////////////////////////////////////////////////////////////////////////
-		namespace PQDepositario.Entities.Views.Valor {
+		namespace Permaquim.Depositario.Entities.Views.Operacion {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
+			[DataItemAttributeObjectName("VistaTransaccionMonedaDefaultSucursal","VistaTransaccionMonedaDefaultSucursal")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
+			public class VistaTransaccionMonedaDefaultSucursal : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string DepositarioId = "DepositarioId";
+					public const string TransaccionId = "TransaccionId";
+					public const string TotalAValidar = "TotalAValidar";
+					public const string TotalValidado = "TotalValidado";
+				}
+				public enum FieldEnum : int
+                {
+					DepositarioId,
+					TransaccionId,
+					TotalAValidar,
+					TotalValidado
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public VistaTransaccionMonedaDefaultSucursal()
+                {
+                }
+	               /// <summary>
+                /// Constructor with Parameters 
+	               /// <summary>
+                public  VistaTransaccionMonedaDefaultSucursal(Int64 DepositarioId,Int64 TransaccionId,Double TotalAValidar,Double TotalValidado)
+                {
+                    this.DepositarioId = DepositarioId;
+                    this.TransaccionId = TransaccionId;
+                    this.TotalAValidar = TotalAValidar;
+                    this.TotalValidado = TotalValidado;
+                }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
+             public Int64 TransaccionId { get; set; }
+             [DataItemAttributeFieldName("TotalAValidar","TotalAValidar")]
+             public Double TotalAValidar { get; set; }
+             [DataItemAttributeFieldName("TotalValidado","TotalValidado")]
+             public Double TotalValidado { get; set; }
+				
+			} //Class VistaTransaccionMonedaDefaultSucursal 
+			
+} //namespace Permaquim.Depositario.Entities.Views.Operacion
+//////////////////////////////////////////////////////////////////////////////////
+		namespace Permaquim.Depositario.Entities.Views.Valor {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Valor")]  // Database Schema Name
 			[DataItemAttributeObjectName("VistaDenominacion","VistaDenominacion")]    // Object name  and alias in Database
@@ -147,5 +198,5 @@ using System.Text;
 				
 			} //Class VistaDenominacion 
 			
-} //namespace PQDepositario.Entities.Views.Valor
+} //namespace Permaquim.Depositario.Entities.Views.Valor
 //////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,4 @@
-﻿using Permaquim.Depositary.UI.Desktop.Components;
-using Permaquim.Depositary.UI.Desktop.Controllers;
+﻿using Permaquim.Depositary.UI.Desktop.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,27 +11,17 @@ using System.Windows.Forms;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
-    public partial class OperationForm : Form
+    public partial class CurrencySelectorForm : Form
     {
-        private List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> _transactions = DatabaseController.GetTransactionTypes();
-
-        Device _device = null;
-        public OperationForm()
+        private List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> _currencies = DatabaseController.GetCurrencies();
+        public CurrencySelectorForm()
         {
             InitializeComponent();
-        }
-
-        private void OperationForm_Load(object sender, EventArgs e)
-        {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
-
             CenterPanel();
-            if(_device.CounterConnected)
-                SetDeviceNeutralMode();
-            LoadTransactionButtons();
+            LoadCurrencyButtons();
             LoadBackButton();
-
         }
+
         private void CenterPanel()
         {
 
@@ -42,11 +31,12 @@ namespace Permaquim.Depositary.UI.Desktop
                 Y = this.Height / 2 - MainPanel.Height / 2
             };
         }
-        private void LoadTransactionButtons()
+
+        private void LoadCurrencyButtons()
         {
 
 
-            foreach (var item in _transactions)
+            foreach (var item in _currencies)
             {
 
                 CustomButton newButton = new CustomButton();
@@ -61,31 +51,20 @@ namespace Permaquim.Depositary.UI.Desktop
                 newButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
                 newButton.ForeColor = System.Drawing.Color.White;
                 newButton.Location = new System.Drawing.Point(3, 3);
-                newButton.Name = "TransactionButton" + item.Id.ToString();
+                newButton.Name = "DepositButton" + item.Id.ToString();
                 newButton.Size = new System.Drawing.Size(293, 77);
                 newButton.TabIndex = 0;
                 newButton.Text = MultilanguangeController.GetText(item.Nombre);
                 newButton.TextColor = System.Drawing.Color.White;
                 newButton.UseVisualStyleBackColor = false;
 
-                newButton.Click += new System.EventHandler(TransactionButton_Click);
+                newButton.Click += new System.EventHandler(CurrencyButton_Click);
 
                 newButton.Tag = item;
 
                 this.MainPanel.Controls.Add(newButton);
-
+            
             }
-        }
-        private void TransactionButton_Click(object sender, EventArgs e)
-        {
-            DatabaseController.CurrentOperation = (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((CustomButton)sender).Tag;
-
-            if (DatabaseController.CurrentOperation.Id == 1)
-            {
-                AppController.OpenChildForm(new CurrencySelectorForm(),
-                (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-            }
-
         }
         private void LoadBackButton()
         {
@@ -111,37 +90,18 @@ namespace Permaquim.Depositary.UI.Desktop
 
             backButton.Click += new System.EventHandler(BackButton_Click);
         }
+        private void CurrencyButton_Click(object sender, EventArgs e)
+        {
+            DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
+                       
+            AppController.OpenChildForm(new BankAccountSelectorForm(),
+            (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+            
+        }
+
         private void BackButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void SetDeviceNeutralMode()
-        {
-            try
-            {
-                // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                if (_device.StateResultProperty.ModeStateInformation.ModeState 
-                    == ModeStateInformation.Mode.DepositMode)
-                {
-                    _device.RemoteCancel();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void BillDepositButton_Click(object sender, EventArgs e)
-        {
-            AppController.OpenChildForm(new CurrencySelectorForm()
-                , (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-        }
-
-        private void MainPanel_Paint(object sender, PaintEventArgs e)
-        {
-            //SetDeviceNeutralMode();
-        }
-
     }
 }

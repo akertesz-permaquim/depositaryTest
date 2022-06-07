@@ -10,7 +10,7 @@
   <UseWithNolock>true</UseWithNolock>
   <IncludeGenerationInformation>false</IncludeGenerationInformation>
   <SerializeEntitiesClases>true</SerializeEntitiesClases>
-  <Namespace>PQDepositario</Namespace>
+  <Namespace>Permaquim.Depositario</Namespace>
   <ShowSystemData>false</ShowSystemData>
   <BuildRelations>true</BuildRelations>
   <ForceNullableDatetime>false</ForceNullableDatetime>
@@ -21,11 +21,10 @@
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
+    <string>Operacion.VistaTransaccionMonedaDefaultSucursal</string>
     <string>Valor.VistaDenominacion</string>
   </SelectedViews>
-  <SelectedStoredProcedures>
-    <string>Dispositivo.ObtenerDepositarios</string>
-  </SelectedStoredProcedures>
+  <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
     <string>dbo.fn_diagramobjects</string>
     <string>dbo.sp_alterdiagram</string>
@@ -38,6 +37,7 @@
     <string>Desarrollo.ActualizarLenguajeItem</string>
     <string>Desarrollo.GenerarTablaModelo</string>
     <string>Desarrollo.GenerarTablaTipoModelo</string>
+    <string>Dispositivo.ObtenerDepositarios</string>
     <string>Dispositivo.ObtenerInformacionDepositario</string>
     <string>Operacion.ObtenerDetalleTransaccion</string>
     <string>Operacion.ObtenerDetalleTransaccionSobre</string>
@@ -51,7 +51,218 @@
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
     <string>Regionalizacion.ObtenerTextosLenguaje</string>
   </UnselectedStoredProcedures>
-  <MappedStoredProcedures />
+  <MappedStoredProcedures>
+    <MappedStoredProcedure>
+      <ResultSets>
+        <ResultSet>
+          <Name>Resultado</Name>
+          <ProcedureFields>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>Moneda</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>Denominacion</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Int32</DataType>
+              <Name>CantidadValidada</Name>
+              <IsNullable>true</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Int32</DataType>
+              <Name>CantidadAValidar</Name>
+              <IsNullable>true</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>ImagenDenominacion</Name>
+              <IsNullable>true</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Int64</DataType>
+              <Name>DepositarioId</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+          </ProcedureFields>
+        </ResultSet>
+      </ResultSets>
+      <ProcedureParameters>
+        <ProcedureParameter>
+          <DataType>Int64</DataType>
+          <Name>DepositarioId</Name>
+        </ProcedureParameter>
+      </ProcedureParameters>
+      <Name>Operacion.ObtenerExistenciasPorDepositario</Name>
+    </MappedStoredProcedure>
+    <MappedStoredProcedure>
+      <ResultSets>
+        <ResultSet>
+          <Name>Resultado</Name>
+          <ProcedureFields>
+            <ProcedureField>
+              <DataType>Int64</DataType>
+              <Name>DepositarioId</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>NumeroSerie</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>DateTime</DataType>
+              <Name>FechaUltimaSincronizacion</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Double</DataType>
+              <Name>PorcentajeOcupacionBolsa</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>IdentificadorBolsa</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Double</DataType>
+              <Name>TotalValidado</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Double</DataType>
+              <Name>TotalAValidar</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Double</DataType>
+              <Name>Total</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+          </ProcedureFields>
+        </ResultSet>
+      </ResultSets>
+      <ProcedureParameters>
+        <ProcedureParameter>
+          <DataType>Int64</DataType>
+          <Name>DepositarioId</Name>
+        </ProcedureParameter>
+      </ProcedureParameters>
+      <Name>Dispositivo.ObtenerInformacionDepositario</Name>
+    </MappedStoredProcedure>
+    <MappedStoredProcedure>
+      <ResultSets>
+        <ResultSet>
+          <Name>Resultado</Name>
+          <ProcedureFields>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>Moneda</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>TipoValor</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Int32</DataType>
+              <Name>ValorDeclarado</Name>
+              <IsNullable>true</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Int64</DataType>
+              <Name>DepositarioId</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+          </ProcedureFields>
+        </ResultSet>
+      </ResultSets>
+      <ProcedureParameters>
+        <ProcedureParameter>
+          <DataType>Int64</DataType>
+          <Name>DepositarioId</Name>
+        </ProcedureParameter>
+      </ProcedureParameters>
+      <Name>Operacion.ObtenerExistenciasAValidarPorDepositario</Name>
+    </MappedStoredProcedure>
+    <MappedStoredProcedure>
+      <ResultSets>
+        <ResultSet>
+          <Name>Resultado</Name>
+          <ProcedureFields>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>Moneda</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Double</DataType>
+              <Name>TotalValidado</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Double</DataType>
+              <Name>TotalAValidar</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Double</DataType>
+              <Name>Total</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>Int64</DataType>
+              <Name>DepositarioId</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+          </ProcedureFields>
+        </ResultSet>
+      </ResultSets>
+      <ProcedureParameters>
+        <ProcedureParameter>
+          <DataType>Int64</DataType>
+          <Name>DepositarioId</Name>
+        </ProcedureParameter>
+      </ProcedureParameters>
+      <Name>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</Name>
+    </MappedStoredProcedure>
+    <MappedStoredProcedure>
+      <ResultSets>
+        <ResultSet>
+          <Name>Resultado</Name>
+          <ProcedureFields>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>Clave</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>Texto</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>Lenguaje</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+          </ProcedureFields>
+        </ResultSet>
+      </ResultSets>
+      <ProcedureParameters>
+        <ProcedureParameter>
+          <DataType>Int64</DataType>
+          <Name>UsuarioId</Name>
+        </ProcedureParameter>
+      </ProcedureParameters>
+      <Name>Regionalizacion.ObtenerTextosLenguaje</Name>
+    </MappedStoredProcedure>
+  </MappedStoredProcedures>
   <SelectedTables>
     <string>Aplicacion.Configuracion</string>
     <string>Auditoria.Log</string>

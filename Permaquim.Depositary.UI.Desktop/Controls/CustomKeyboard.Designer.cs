@@ -1098,6 +1098,7 @@
             this.Controls.Add(this.Button_3);
             this.Controls.Add(this.Button_2);
             this.Controls.Add(this.Button_1);
+            this.DoubleBuffered = true;
             this.Name = "CustomKeyboard";
             this.Size = new System.Drawing.Size(726, 473);
             this.ResumeLayout(false);

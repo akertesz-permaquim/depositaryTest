@@ -11,18 +11,44 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         /// <summary>
         /// Representa el usuario registrado en el Sistema
         /// </summary>
-        public static PQDepositario.Entities.Relations.Seguridad.Usuario CurrentUser { get; private set; }
-        public static PQDepositario.Entities.Relations.Seguridad.Usuario Login(string user, string password)
+        public static Permaquim.Depositario.Entities.Relations.Seguridad.Usuario CurrentUser { get; private set; }
+
+        private static Permaquim.Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
+
+        public static Permaquim.Depositario.Entities.Relations.Valor.Moneda CurrentCurrency
+        {
+            get { return _currentCurrency; }
+            set { _currentCurrency = value; }
+        }
+
+        private static Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion _currentOperation;
+
+        public static Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion CurrentOperation
+        {
+            get { return _currentOperation; }
+            set { _currentOperation = value; }
+        }
+
+        private static Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta _currentUserBankAccount;
+
+        public static Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta CurrentUserBankAccount
+        {
+            get { return _currentUserBankAccount; }
+            set { _currentUserBankAccount = value; }
+        }
+
+
+        public static Permaquim.Depositario.Entities.Relations.Seguridad.Usuario Login(string user, string password)
         {
                 
-            PQDepositario.Entities.Relations.Seguridad.Usuario usuario = new();
+            Permaquim.Depositario.Entities.Relations.Seguridad.Usuario usuario = new();
 
             try
             {
-                PQDepositario.Business.Relations.Seguridad.Usuario usuarios = new();
-                usuarios.Where.Add(PQDepositario.Business.Relations.Seguridad.Usuario.ColumnEnum.NickName, PQDepositario.sqlEnum.OperandEnum.Equal, user);
-                usuarios.Where.Add(PQDepositario.sqlEnum.ConjunctionEnum.AND,PQDepositario.Business.Relations.Seguridad.Usuario.ColumnEnum.Password, PQDepositario.sqlEnum.OperandEnum.Equal, password);
-
+                Permaquim.Depositario.Business.Relations.Seguridad.Usuario usuarios = new();
+                usuarios.Where.Add(Permaquim.Depositario.Business.Relations.Seguridad.Usuario.ColumnEnum.NickName, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, user);
+                usuarios.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,Permaquim.Depositario.Business.Relations.Seguridad.Usuario.ColumnEnum.Password, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, password);
+                usuarios.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, Permaquim.Depositario.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
                 usuarios.Items();
                 if (usuarios.Result.Count > 0)
                 {
@@ -40,5 +66,52 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
  
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> GetTransactionTypes()
+        {
+            Permaquim.Depositario.Business.Relations.Operacion.TipoTransaccion entities = new();
+            entities.Where.Add(Permaquim.Depositario.Business.Relations.Operacion.TipoTransaccion.ColumnEnum.Habilitado,
+                Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
+
+            return entities.Items();
+        }
+
+        /// <summary>
+        /// Monedas disponibles en el sistema
+        /// </summary>
+        /// <returns></returns>
+        public static List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> GetCurrencies()
+        {
+            Permaquim.Depositario.Business.Relations.Valor.Moneda currencies = new();
+            currencies.Where.Add(Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Habilitado,
+                Permaquim.Depositario.sqlEnum.OperandEnum.Equal,true);
+            currencies.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
+                Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Id,
+        Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+            return currencies.Items();
+        }
+        /// <summary>
+        /// Cuentas bancarias del usuario registrado
+        /// </summary>
+        /// <returns></returns>
+        public static List<Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta> GetUserBankAccounts()
+        {
+            Permaquim.Depositario.Business.Relations.Banca.UsuarioCuenta entities = new();
+            entities.Where.Add(Permaquim.Depositario.Business.Relations.Banca.UsuarioCuenta.ColumnEnum.Habilitado,
+                Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
+            entities.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
+                Permaquim.Depositario.Business.Relations.Banca.UsuarioCuenta.ColumnEnum.UsuarioId,
+            Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CurrentUser.Id);
+
+            entities.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
+                Permaquim.Depositario.Business.Relations.Banca.UsuarioCuenta.ColumnEnum.Id,
+            Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+            return entities.Items();
+        }
+
     }
 }

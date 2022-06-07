@@ -31,6 +31,7 @@
             this.TopPanel = new System.Windows.Forms.Panel();
             this.OwnerDataLabel = new System.Windows.Forms.Label();
             this.HeadPanel = new System.Windows.Forms.Panel();
+            this.EnterpriseLabel = new System.Windows.Forms.Label();
             this.AvatarPicturebox = new System.Windows.Forms.PictureBox();
             this.UserLabel = new System.Windows.Forms.Label();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
@@ -41,7 +42,6 @@
             this.MainPanel = new System.Windows.Forms.Panel();
             this.InformationPanel = new System.Windows.Forms.Panel();
             this.InformationLabel = new System.Windows.Forms.Label();
-            this.EnterpriseLabel = new System.Windows.Forms.Label();
             this.TopPanel.SuspendLayout();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).BeginInit();
@@ -58,33 +58,47 @@
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(868, 42);
+            this.TopPanel.Size = new System.Drawing.Size(868, 56);
             this.TopPanel.TabIndex = 0;
             // 
             // OwnerDataLabel
             // 
             this.OwnerDataLabel.AutoSize = true;
-            this.OwnerDataLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.OwnerDataLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.OwnerDataLabel.ForeColor = System.Drawing.Color.White;
-            this.OwnerDataLabel.Location = new System.Drawing.Point(21, 14);
+            this.OwnerDataLabel.Location = new System.Drawing.Point(16, 20);
             this.OwnerDataLabel.Name = "OwnerDataLabel";
-            this.OwnerDataLabel.Size = new System.Drawing.Size(77, 15);
+            this.OwnerDataLabel.Size = new System.Drawing.Size(108, 21);
             this.OwnerDataLabel.TabIndex = 0;
             this.OwnerDataLabel.Text = "**************";
             // 
             // HeadPanel
             // 
-            this.HeadPanel.BackColor = System.Drawing.Color.Snow;
+            this.HeadPanel.BackColor = System.Drawing.Color.White;
             this.HeadPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.HeadPanel.Controls.Add(this.EnterpriseLabel);
             this.HeadPanel.Controls.Add(this.AvatarPicturebox);
             this.HeadPanel.Controls.Add(this.UserLabel);
             this.HeadPanel.Controls.Add(this.LogoPictureBox);
             this.HeadPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.HeadPanel.Location = new System.Drawing.Point(0, 42);
+            this.HeadPanel.Location = new System.Drawing.Point(0, 56);
             this.HeadPanel.Name = "HeadPanel";
             this.HeadPanel.Size = new System.Drawing.Size(868, 54);
             this.HeadPanel.TabIndex = 1;
+            // 
+            // EnterpriseLabel
+            // 
+            this.EnterpriseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EnterpriseLabel.AutoSize = true;
+            this.EnterpriseLabel.BackColor = System.Drawing.Color.White;
+            this.EnterpriseLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.EnterpriseLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.EnterpriseLabel.Location = new System.Drawing.Point(656, 32);
+            this.EnterpriseLabel.Name = "EnterpriseLabel";
+            this.EnterpriseLabel.Size = new System.Drawing.Size(37, 15);
+            this.EnterpriseLabel.TabIndex = 110;
+            this.EnterpriseLabel.Text = "------";
+            this.EnterpriseLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // AvatarPicturebox
             // 
@@ -171,12 +185,11 @@
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.White;
-            this.MainPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.MainPanel.Controls.Add(this.InformationPanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 96);
+            this.MainPanel.Location = new System.Drawing.Point(0, 110);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(868, 349);
+            this.MainPanel.Size = new System.Drawing.Size(868, 335);
             this.MainPanel.TabIndex = 3;
             this.MainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainPanel_MouseClick);
             // 
@@ -202,20 +215,6 @@
             this.InformationLabel.Size = new System.Drawing.Size(373, 32);
             this.InformationLabel.TabIndex = 0;
             this.InformationLabel.Text = "El dispositivo no está operativo";
-            // 
-            // EnterpriseLabel
-            // 
-            this.EnterpriseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.EnterpriseLabel.AutoSize = true;
-            this.EnterpriseLabel.BackColor = System.Drawing.Color.White;
-            this.EnterpriseLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.EnterpriseLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.EnterpriseLabel.Location = new System.Drawing.Point(656, 32);
-            this.EnterpriseLabel.Name = "EnterpriseLabel";
-            this.EnterpriseLabel.Size = new System.Drawing.Size(37, 15);
-            this.EnterpriseLabel.TabIndex = 110;
-            this.EnterpriseLabel.Text = "------";
-            this.EnterpriseLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainForm
             // 

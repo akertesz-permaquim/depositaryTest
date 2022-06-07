@@ -6,11 +6,16 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class KeyboardInputForm : System.Windows.Forms.Form
     {
-        private const string LOGIN_IMAGE_FILE = @"\Resources\Images\Login.png";
+ 
         public KeyboardInputForm()
         {
             InitializeComponent();
             Loadlogo();
+
+            TitleLabel.Text = MultilanguangeController.GetText("LOGIN_TITLE");
+            MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText("USERTEXTBOXPLACEHOLDER");
+            MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText("PASSWORDTEXTBOXPLACEHOLDER");
+
             MainKeyboard.KeyboardEvent += MainKeyboard_KeyboardEvent;
 
         }
@@ -25,13 +30,13 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
-                PQDepositario.Entities.Relations.Seguridad.Usuario currentUser =
+                Permaquim.Depositario.Entities.Relations.Seguridad.Usuario currentUser =
                     DatabaseController.Login(args.UserText.Trim(), args.PasswordText.Trim());
 
                 if (currentUser.Id != 0)
                 {
 
-                    PQDepositario.Business.Tables.Operacion.Sesion sesion = new();
+                    Permaquim.Depositario.Business.Tables.Operacion.Sesion sesion = new();
                     sesion.Add(DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
                     if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals("{ENTER}"))
                         AppController.OpenChildForm(new OperationForm(), (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
@@ -42,8 +47,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void Loadlogo()
         {
             LoginPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            var appPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-            LoginPictureBox.Load(appPath + LOGIN_IMAGE_FILE);
+            LoginPictureBox.Image = StyleController.GetLogin();
 
         }
 

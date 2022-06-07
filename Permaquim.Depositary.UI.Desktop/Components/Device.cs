@@ -180,6 +180,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
         }
 
+        public Device()
+        {
+        }
+
 
         #endregion
 
@@ -216,44 +220,6 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         {
             _readbuffer = ((SerialPort)sender).ReadExisting();
             string readbufferData = string.Empty;
-            //string dataReference = string.Empty;
-            //var dataReceived = ((SerialPort)sender).ReadExisting();
-
-            //foreach (var item in dataReceived)
-            //{
-
-            //    if (dataReceived.Length > 0)
-            //    {
-            //             dataReference += item  switch
-            //            {
-            //                '\u0000' => NULL,
-            //                '\u0001' => START_OF_HEADING,
-            //                '\u0002' => START_OF_TEXT,
-            //                '\u0003' => END_OF_TEXT,
-            //                '\u0004' => END_OF_TRANSMISSION,
-            //                '\u0005' => ENQUIRY,
-            //                '\u0006' => ACKNOWLEDGE,
-            //                '\u0007' => ALERT,
-            //                '\u0008' => BACKSPACE,
-            //                '\u0009' => CHARACTER_TABULATION,
-            //                '\u0010' => DATA_LINK_ESCAPE,
-            //                '\u0011' => DEVICE_CONTROL_1,
-            //                '\u0012' => DEVICE_CONTROL_2,
-            //                '\u0013' => DEVICE_CONTROL_3,
-            //                '\u0014' => DEVICE_CONTROL_4,
-            //                '\u0015' => NEGATIVE_ACKNOWLEDGE,
-            //                '\u0016' => SYNCHRONOUS_IDLE,
-            //                '\u0017' => END_OF_TRANSMISSION_BLOCK,
-            //                '\u0018' => CANCEL,
-            //                '\u0019' => END_OF_MEDIUM,
-            //                '\u0020' => SPACE,
-            //                _ => item,
-            //            };
-
-
-            //    }
-            //}
-
 
             foreach (var item in _readbuffer)
             {

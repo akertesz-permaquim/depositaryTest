@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-namespace PQDepositario {
+namespace Permaquim.Depositario {
 public class sqlEnum
 {
     public enum OperandEnum
