@@ -14,21 +14,21 @@ else
         case CrudMode.Add:
             <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
-                    <h4 style="color:white;">Ingrese los datos de EsquemaDetalle</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_A_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "ESQUEMADETALLE" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
         case CrudMode.Delete:
             <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
                 <ChildContent>
-                    <h4 style="color:white;">Confirma eliminar el EsquemaDetalle ?</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_D_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "ESQUEMADETALLE" || x.Clave=="GENERIC").FirstOrDefault().Texto? </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
             case CrudMode.Edit:
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
-                    <h4 style="color:white;">Modificación de datos de EsquemaDetalle</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_M_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "ESQUEMADETALLE" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                 </ChildContent>
             </RadzenBadge>
             break;         
@@ -36,7 +36,7 @@ else
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
                     <div>
-                        <h4 style="color:white;">Administración de EsquemaDetalle</h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_L_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "ESQUEMADETALLE" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                     </div>
                 </ChildContent>
             </RadzenBadge>
@@ -51,9 +51,9 @@ else
             <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
         </EmptyTemplate>        
         <Columns>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
              <HeaderTemplate>
-                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text ="Nuevo" Click="Add">
+                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text =@dataLenguaje.Where(x => x.Clave == "NEW_BUTTON" || x.Clave == "GENERIC").FirstOrDefault().Texto Click="Add">
                  </RadzenButton>
                  </HeaderTemplate>
                  <Template Context="element">
@@ -63,20 +63,20 @@ else
                     </RadzenButton>
                 </Template>
              </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="EsquemaTurnoId" Filterable="false" Title="EsquemaTurnoId" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="EsquemaTurnoId" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ESQUEMATURNOID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="Nombre" Filterable="false" Title="Nombre" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="Nombre" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="Secuencia" Filterable="false" Title="Secuencia" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="Secuencia" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "SECUENCIA" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="UsuarioCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="FechaCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="UsuarioModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle" Property="FechaModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
         </Columns>
         </RadzenDataGrid>
@@ -89,17 +89,17 @@ else
           <ChildContent>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Id" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(EsquemaDetalle_entity.Id)" Name="Id" Disabled="@(crudMode==CrudMode.Delete)" >
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(EsquemaDetalle_entity.Id)" Name="Id" Disabled="true" >
                  </RadzenNumeric>
                  </div>
              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="EsquemaTurnoId" Component="EsquemaTurnoId" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "ESQUEMATURNOID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="EsquemaTurnoId" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -109,7 +109,7 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Nombre" Component="Nombre" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Nombre" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -124,7 +124,7 @@ else
                </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="Secuencia" Component="Secuencia" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "SECUENCIA" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Secuencia" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
@@ -136,11 +136,11 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioCreacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(EsquemaDetalle_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="true">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(EsquemaDetalle_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
                  </RadzenNumeric>
                  </div>
              </div>
@@ -149,11 +149,11 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaCreacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
               <div class="col-md-9">
-                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(EsquemaDetalle_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true" >
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(EsquemaDetalle_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
                  </RadzenDatePicker>
               </div>
             </div>
@@ -162,11 +162,11 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioModificacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(EsquemaDetalle_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="true">
+                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(EsquemaDetalle_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
                  </RadzenNumeric>
                  </div>
              </div>
@@ -175,20 +175,20 @@ else
          {
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                     <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
+                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaModificacion" style="width: 100%">
                      </RadzenLabel>
                  </div>
               <div class="col-md-9">
-                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(EsquemaDetalle_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true" >
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(EsquemaDetalle_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
                  </RadzenDatePicker>
               </div>
             </div>
          }
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@dataLenguaje.Where(x => x.Clave == "ACCEPT_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto ButtonStyle ="ButtonStyle.Primary">
                 </RadzenButton>
-                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text="Cancelar" Click="Cancel">
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@dataLenguaje.Where(x => x.Clave == "CANCEL_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto Click="Cancel">
                 </RadzenButton>
               </div>
             </div>
@@ -218,6 +218,11 @@ else
     private List<DepositarioAdminWeb.Entities.Tables.Turno.EsquemaDetalle> EsquemaDetalle_entities = null;
  
     /// <summary>
+    /// Variables to multilanguaje
+    /// </summary>
+    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+ 
+    /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
@@ -229,11 +234,12 @@ else
  
     protected override async Task OnInitializedAsync()
     {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");
         if (userId == null)
-             NavManager.NavigateTo("/ login", true);
+             NavManager.NavigateTo("login", true);
     }
     #region Loading entities data
     /// <summary>

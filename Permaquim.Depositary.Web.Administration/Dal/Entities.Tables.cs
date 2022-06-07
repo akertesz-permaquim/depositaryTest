@@ -797,13 +797,23 @@ using System.Text;
 					public const string MonedaId = "MonedaId";
 					public const string SucursalId = "SucursalId";
 					public const string EsDefault = "EsDefault";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
 				}
 				public enum FieldEnum : int
                 {
 					Id,
 					MonedaId,
 					SucursalId,
-					EsDefault
+					EsDefault,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -811,12 +821,17 @@ using System.Text;
                 public RelacionMonedaSucursal()
                 {
                 }
-                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean EsDefault)
+                public  RelacionMonedaSucursal(Int64 MonedaId,Int64 SucursalId,Boolean EsDefault,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.MonedaId = MonedaId;
                     this.SucursalId = SucursalId;
                     this.EsDefault = EsDefault;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -832,6 +847,16 @@ using System.Text;
              public Int64 SucursalId { get; set; }
              [DataItemAttributeFieldName("EsDefault","EsDefault")]
              public Boolean EsDefault { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             public Int64? UsuarioModificacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
 				
 			} //Class RelacionMonedaSucursal 
 } //namespace DepositarioAdminWeb.Entities.Tables.Directorio
@@ -5764,6 +5789,7 @@ using System.Text;
 					public const string Nombre = "Nombre";
 					public const string PaisId = "PaisId";
 					public const string Codigo = "Codigo";
+					public const string Simbolo = "Simbolo";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -5776,6 +5802,7 @@ using System.Text;
 					Nombre,
 					PaisId,
 					Codigo,
+					Simbolo,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -5788,12 +5815,13 @@ using System.Text;
                 public Moneda()
                 {
                 }
-                public  Moneda(String Nombre,Int64 PaisId,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Moneda(String Nombre,Int64 PaisId,String Codigo,String Simbolo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
                     this.PaisId = PaisId;
                     this.Codigo = Codigo;
+                    this.Simbolo = Simbolo;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -5811,6 +5839,8 @@ using System.Text;
              public Int64 PaisId { get; set; }
              [DataItemAttributeFieldName("Codigo","Codigo")]
              public String Codigo { get; set; }
+             [DataItemAttributeFieldName("Simbolo","Simbolo")]
+             public String Simbolo { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]

@@ -26,7 +26,6 @@ using System.Text;
 					public const string FechaCreacion = "FechaCreacion";
 					public const string UsuarioModificacion = "UsuarioModificacion";
 					public const string FechaModificacion = "FechaModificacion";
-					public const string CantidadDepositoUltimoCierre = "CantidadDepositoUltimoCierre";
 					public const string ValorTotalEnBolsa = "ValorTotalEnBolsa";
 					public const string SemaforoOnline = "SemaforoOnline";
 					public const string SemaforoAnomalia = "SemaforoAnomalia";
@@ -48,7 +47,6 @@ using System.Text;
 					FechaCreacion,
 					UsuarioModificacion,
 					FechaModificacion,
-					CantidadDepositoUltimoCierre,
 					ValorTotalEnBolsa,
 					SemaforoOnline,
 					SemaforoAnomalia,
@@ -88,8 +86,6 @@ using System.Text;
              public String UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
-             [DataItemAttributeFieldName("CantidadDepositoUltimoCierre","CantidadDepositoUltimoCierre")]
-             public Int32? CantidadDepositoUltimoCierre { get; set; }
              [DataItemAttributeFieldName("ValorTotalEnBolsa","ValorTotalEnBolsa")]
              public Double? ValorTotalEnBolsa { get; set; }
              [DataItemAttributeFieldName("SemaforoOnline","SemaforoOnline")]

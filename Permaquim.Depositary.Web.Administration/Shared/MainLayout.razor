@@ -33,7 +33,7 @@
                         </RadzenProfileMenuItem>
                         <RadzenProfileMenuItem Path="application-roles" Icon="security" Text="Roles" Visible="true">
                         </RadzenProfileMenuItem>*@
-                        <RadzenProfileMenuItem Text="Logout" Path="/logout" Value="Logout" Icon="power_settings_new">
+                        <RadzenProfileMenuItem Text="Logout" Path="logout" Value="Logout" Icon="power_settings_new">
                         </RadzenProfileMenuItem>
                     </ChildContent>
                     <Template>
@@ -80,7 +80,7 @@
             Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
             if (userId == null)
             {
-                NavManager.NavigateTo("/login", true);
+                NavManager.NavigateTo("login", true);
             }
             else
             {

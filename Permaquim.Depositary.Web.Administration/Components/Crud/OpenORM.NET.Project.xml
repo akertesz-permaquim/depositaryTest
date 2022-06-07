@@ -19,7 +19,9 @@
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=NB000101</ConnectionString>
-  <SelectedViews />
+  <SelectedViews>
+    <string>Valor.VistaDenominacion</string>
+  </SelectedViews>
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
     <string>dbo.fn_diagramobjects</string>
@@ -55,10 +57,8 @@
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.IdentificadorUsuario</string>
-    <string>Directorio.RelacionMonedaSucursal</string>
     <string>Directorio.RolFuncion</string>
     <string>Directorio.Sector</string>
-    <string>Directorio.Sucursal</string>
     <string>Directorio.TipoIdentificador</string>
     <string>Dispositivo.ComandoContadora</string>
     <string>Dispositivo.ComandoPlaca</string>
@@ -117,6 +117,7 @@
   <SelectedDatabase>Depositario</SelectedDatabase>
   <SelectedTemplates>
     <string>c6884699-f5e7-506c-bc3d-480cd6d425a2</string>
+    <string>c6885891-a6g8-906c-bc3d-123cd6d452a3</string>
   </SelectedTemplates>
   <Location>\</Location>
   <DatasourceServer />

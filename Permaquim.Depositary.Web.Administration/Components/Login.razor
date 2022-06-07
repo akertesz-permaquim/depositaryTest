@@ -42,33 +42,44 @@
 
     //Datasets
     private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario dataUsuario = new DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario();
+    private List<DepositarioAdminWeb.Entities.Tables.Seguridad.UsuarioRol> dataUsuarioRol = new List<DepositarioAdminWeb.Entities.Tables.Seguridad.UsuarioRol>();
+
 
     protected async void LoginUser()
     {
         dataUsuario = SeguridadController.ObtenerUsuario(loginForm.Username, loginForm.Password);
         if (dataUsuario.NickName == null)
         {
-            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = "Error al intentar loguear", Detail = "Usuario o contraseña incorrectos." });
+            dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(-1);
+            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave=="GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_INCORRECT_USERORPASSWORD" || x.Clave=="GENERIC").FirstOrDefault().Texto, Duration = 3000 });
         }
         else
         {
+            dataUsuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
-            await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
-            await sessionStorage.SetItemAsync("Nickname", dataUsuario.NickName);
-            await sessionStorage.SetItemAsync("NombreUsuario", dataUsuario.Nombre);
-            await sessionStorage.SetItemAsync("ApellidoUsuario", dataUsuario.Apellido);
-            await sessionStorage.SetItemAsync("AvatarUsuario", dataUsuario.Avatar);
-            await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
-            await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
+            if (dataUsuarioRol.Count < 1)
+            {
+                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave=="GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_NOROLES" || x.Clave=="GENERIC").FirstOrDefault().Texto, Duration = 3000 });
+            }
+            else
+            {
+                await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
+                await sessionStorage.SetItemAsync("Nickname", dataUsuario.NickName);
+                await sessionStorage.SetItemAsync("NombreUsuario", dataUsuario.Nombre);
+                await sessionStorage.SetItemAsync("ApellidoUsuario", dataUsuario.Apellido);
+                await sessionStorage.SetItemAsync("AvatarUsuario", dataUsuario.Avatar);
+                await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
+                await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
 
-            //SessionStorageManager.SetUsuarioId(dataUsuario.Id);
-            //SessionStorageManager.SetNickName(dataUsuario.NickName);
-            //SessionStorageManager.SetNombreUsuario(dataUsuario.Nombre);
-            //SessionStorageManager.SetApellidoUsuario(dataUsuario.Apellido);
-            //SessionStorageManager.SetLenguajeId(dataUsuario.LenguajeId);
-            //SessionStorageManager.SetDataLenguaje(dataLenguaje);
+                //SessionStorageManager.SetUsuarioId(dataUsuario.Id);
+                //SessionStorageManager.SetNickName(dataUsuario.NickName);
+                //SessionStorageManager.SetNombreUsuario(dataUsuario.Nombre);
+                //SessionStorageManager.SetApellidoUsuario(dataUsuario.Apellido);
+                //SessionStorageManager.SetLenguajeId(dataUsuario.LenguajeId);
+                //SessionStorageManager.SetDataLenguaje(dataLenguaje);
 
-            NavManager.NavigateTo("/Monitor", true);
+                NavManager.NavigateTo("Monitor", true);
+            }
         }
     }
 }
