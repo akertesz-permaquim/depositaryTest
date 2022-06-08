@@ -50,6 +50,7 @@
     <string>Operacion.ObtenerTransaccionesPorDepositario</string>
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
     <string>Regionalizacion.ObtenerTextosLenguaje</string>
+    <string>Seguridad.ObtenerRolesPorUsuario</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures>
     <MappedStoredProcedure>
@@ -294,7 +295,7 @@
     <string>Dispositivo.TipoPlaca</string>
     <string>Estilo.Esquema</string>
     <string>Estilo.EsquemaDetalle</string>
-    <string>Estilo.EsquemaDetalleValor</string>
+    <string>Estilo.TipoEsquemaDetalle</string>
     <string>Geografia.Ciudad</string>
     <string>Geografia.CodigoPostal</string>
     <string>Geografia.Pais</string>

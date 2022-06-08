@@ -14,6 +14,9 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class OperationForm : Form
     {
+
+ 
+
         private List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> _transactions = DatabaseController.GetTransactionTypes();
 
         Device _device = null;
@@ -79,8 +82,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void TransactionButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CurrentOperation = (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((CustomButton)sender).Tag;
-
-            if (DatabaseController.CurrentOperation.Id == 1)
+    
+            if (DatabaseController.CurrentOperation.Id == 1
+                || DatabaseController.CurrentOperation.Id == 3)
             {
                 AppController.OpenChildForm(new CurrencySelectorForm(),
                 (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
@@ -136,6 +140,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             AppController.OpenChildForm(new CurrencySelectorForm()
                 , (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+
         }
 
         private void MainPanel_Paint(object sender, PaintEventArgs e)

@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BillCountingListview = new Permaquim.Depositary.UI.Desktop.Controls.CustomListview();
-            this.Denominacion = new System.Windows.Forms.ColumnHeader();
-            this.Cantidad = new System.Windows.Forms.ColumnHeader();
-            this.Total = new System.Windows.Forms.ColumnHeader();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
@@ -53,56 +51,14 @@
             this.InformationLabel = new System.Windows.Forms.Label();
             this.EventCheckbox = new System.Windows.Forms.CheckBox();
             this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.TotalLabel = new System.Windows.Forms.Label();
-            this.BillsQuantityLabel = new System.Windows.Forms.Label();
-            this.TotalAmountLabel = new System.Windows.Forms.Label();
-            this.VoidLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.DenominationsGridView = new System.Windows.Forms.DataGridView();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Denominacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MonitorGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // BillCountingListview
-            // 
-            this.BillCountingListview.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.BillCountingListview.BackColor = System.Drawing.Color.White;
-            this.BillCountingListview.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BillCountingListview.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Denominacion,
-            this.Cantidad,
-            this.Total});
-            this.BillCountingListview.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BillCountingListview.ForeColor = System.Drawing.Color.SteelBlue;
-            this.BillCountingListview.GridLines = true;
-            this.BillCountingListview.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.BillCountingListview.HotTracking = true;
-            this.BillCountingListview.HoverSelection = true;
-            this.BillCountingListview.Location = new System.Drawing.Point(136, 92);
-            this.BillCountingListview.Name = "BillCountingListview";
-            this.BillCountingListview.Size = new System.Drawing.Size(680, 312);
-            this.BillCountingListview.TabIndex = 0;
-            this.BillCountingListview.UseCompatibleStateImageBehavior = false;
-            this.BillCountingListview.View = System.Windows.Forms.View.Details;
-            this.BillCountingListview.Visible = false;
-            // 
-            // Denominacion
-            // 
-            this.Denominacion.Text = "Denominación";
-            this.Denominacion.Width = 300;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.Text = "Cantidad";
-            this.Cantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Cantidad.Width = 150;
-            // 
-            // Total
-            // 
-            this.Total.Text = "Total";
-            this.Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Total.Width = 150;
             // 
             // CancelDepositButton
             // 
@@ -163,7 +119,7 @@
             this.MonitorGroupBox.Controls.Add(this.DeviceModeLabel);
             this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(824, 84);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(848, 84);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
             this.MonitorGroupBox.Size = new System.Drawing.Size(152, 288);
             this.MonitorGroupBox.TabIndex = 99;
@@ -315,7 +271,7 @@
             // SubtotalLabel
             // 
             this.SubtotalLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
             this.SubtotalLabel.Location = new System.Drawing.Point(336, 36);
             this.SubtotalLabel.Name = "SubtotalLabel";
@@ -326,7 +282,7 @@
             // CurrencyLabel
             // 
             this.CurrencyLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
             this.CurrencyLabel.Location = new System.Drawing.Point(135, 36);
             this.CurrencyLabel.Name = "CurrencyLabel";
@@ -337,11 +293,11 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.SteelBlue;
-            this.label4.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(584, 36);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(234, 23);
+            this.label4.Size = new System.Drawing.Size(248, 23);
             this.label4.TabIndex = 105;
             this.label4.Text = "Tiempo restante: ";
             // 
@@ -402,99 +358,79 @@
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
-            // TotalLabel
+            // DenominationsGridView
             // 
-            this.TotalLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.TotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.TotalLabel.ForeColor = System.Drawing.Color.White;
-            this.TotalLabel.Location = new System.Drawing.Point(136, 412);
-            this.TotalLabel.Name = "TotalLabel";
-            this.TotalLabel.Size = new System.Drawing.Size(300, 23);
-            this.TotalLabel.TabIndex = 110;
-            this.TotalLabel.Text = "Total:";
-            this.TotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DenominationsGridView.AllowUserToAddRows = false;
+            this.DenominationsGridView.AllowUserToDeleteRows = false;
+            this.DenominationsGridView.AllowUserToResizeColumns = false;
+            this.DenominationsGridView.AllowUserToResizeRows = false;
+            this.DenominationsGridView.BackgroundColor = System.Drawing.Color.White;
+            this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Image,
+            this.Denominacion,
+            this.Cantidad,
+            this.Importe});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DenominationsGridView.EnableHeadersVisualStyles = false;
+            this.DenominationsGridView.Location = new System.Drawing.Point(136, 64);
+            this.DenominationsGridView.Name = "DenominationsGridView";
+            this.DenominationsGridView.RowHeadersVisible = false;
+            this.DenominationsGridView.RowTemplate.Height = 30;
+            this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DenominationsGridView.Size = new System.Drawing.Size(696, 400);
+            this.DenominationsGridView.TabIndex = 134;
+            this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             // 
-            // BillsQuantityLabel
+            // Image
             // 
-            this.BillsQuantityLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.BillsQuantityLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BillsQuantityLabel.ForeColor = System.Drawing.Color.White;
-            this.BillsQuantityLabel.Location = new System.Drawing.Point(437, 412);
-            this.BillsQuantityLabel.Name = "BillsQuantityLabel";
-            this.BillsQuantityLabel.Size = new System.Drawing.Size(149, 23);
-            this.BillsQuantityLabel.TabIndex = 111;
-            this.BillsQuantityLabel.Text = "0";
-            this.BillsQuantityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Image.DataPropertyName = "Image";
+            this.Image.Frozen = true;
+            this.Image.HeaderText = "Imágen";
+            this.Image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Image.Name = "Image";
+            this.Image.ReadOnly = true;
             // 
-            // TotalAmountLabel
+            // Denominacion
             // 
-            this.TotalAmountLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.TotalAmountLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.TotalAmountLabel.ForeColor = System.Drawing.Color.White;
-            this.TotalAmountLabel.Location = new System.Drawing.Point(587, 412);
-            this.TotalAmountLabel.Name = "TotalAmountLabel";
-            this.TotalAmountLabel.Size = new System.Drawing.Size(149, 23);
-            this.TotalAmountLabel.TabIndex = 112;
-            this.TotalAmountLabel.Text = "0";
-            this.TotalAmountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Denominacion.DataPropertyName = "Denomination";
+            this.Denominacion.HeaderText = "Denominación";
+            this.Denominacion.Name = "Denominacion";
+            this.Denominacion.ReadOnly = true;
+            this.Denominacion.Width = 250;
             // 
-            // VoidLabel
+            // Cantidad
             // 
-            this.VoidLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.VoidLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.VoidLabel.ForeColor = System.Drawing.Color.White;
-            this.VoidLabel.Location = new System.Drawing.Point(737, 412);
-            this.VoidLabel.Name = "VoidLabel";
-            this.VoidLabel.Size = new System.Drawing.Size(79, 23);
-            this.VoidLabel.TabIndex = 113;
-            this.VoidLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Cantidad.DataPropertyName = "Quantity";
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
-            // label2
+            // Importe
             // 
-            this.label2.BackColor = System.Drawing.Color.SteelBlue;
-            this.label2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(740, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 23);
-            this.label2.TabIndex = 117;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.SteelBlue;
-            this.label3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(590, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(149, 23);
-            this.label3.TabIndex = 116;
-            this.label3.Text = "Importe";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.SteelBlue;
-            this.label5.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(440, 64);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 23);
-            this.label5.TabIndex = 115;
-            this.label5.Text = "Unidades";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.SteelBlue;
-            this.label6.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(135, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(304, 23);
-            this.label6.TabIndex = 114;
-            this.label6.Text = "Denominación:";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Importe.DataPropertyName = "Amount";
+            this.Importe.HeaderText = "Importe";
+            this.Importe.Name = "Importe";
+            this.Importe.ReadOnly = true;
+            this.Importe.Width = 220;
             // 
             // BillDepositForm
             // 
@@ -503,14 +439,7 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1015, 641);
             this.ControlBox = false;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.VoidLabel);
-            this.Controls.Add(this.TotalAmountLabel);
-            this.Controls.Add(this.BillsQuantityLabel);
-            this.Controls.Add(this.TotalLabel);
+            this.Controls.Add(this.DenominationsGridView);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.EventCheckbox);
             this.Controls.Add(this.InformationLabel);
@@ -521,7 +450,6 @@
             this.Controls.Add(this.MonitorGroupBox);
             this.Controls.Add(this.ConfirmAndExitDepositButton);
             this.Controls.Add(this.CancelDepositButton);
-            this.Controls.Add(this.BillCountingListview);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BillDepositForm";
@@ -529,16 +457,14 @@
             this.Load += new System.EventHandler(this.BillDepositForm_Load);
             this.MonitorGroupBox.ResumeLayout(false);
             this.MonitorGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private ColumnHeader Denominacion;
-        private ColumnHeader Cantidad;
         private CustomButton CancelDepositButton;
-        private Controls.CustomListview BillCountingListview;
         private CustomButton ConfirmAndExitDepositButton;
         private GroupBox MonitorGroupBox;
         private CheckBox HopperBillPresentCheckBox;
@@ -552,7 +478,6 @@
         private CheckBox DepositFinishedCheckbox;
         private CheckBox CountingErrorCheckBox;
         private CheckBox JammingCheckBox;
-        private ColumnHeader Total;
         private Label SubtotalLabel;
         private Label CurrencyLabel;
         private Label label4;
@@ -560,13 +485,10 @@
         private Label InformationLabel;
         private CheckBox EventCheckbox;
         private CustomButton BackButton;
-        private Label TotalLabel;
-        private Label BillsQuantityLabel;
-        private Label TotalAmountLabel;
-        private Label VoidLabel;
-        private Label label2;
-        private Label label3;
-        private Label label5;
-        private Label label6;
+        private DataGridView DenominationsGridView;
+        private DataGridViewImageColumn Image;
+        private DataGridViewTextBoxColumn Denominacion;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Importe;
     }
 }

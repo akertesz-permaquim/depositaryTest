@@ -3347,8 +3347,10 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string EsquemaId = "EsquemaId";
+					public const string TipoEsquemaDetalleId = "TipoEsquemaDetalleId";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
+					public const string Valor = "Valor";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -3359,8 +3361,10 @@ using System.Text;
                 {
 					Id,
 					EsquemaId,
+					TipoEsquemaDetalleId,
 					Nombre,
 					Descripcion,
+					Valor,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -3373,12 +3377,14 @@ using System.Text;
                 public EsquemaDetalle()
                 {
                 }
-                public  EsquemaDetalle(Permaquim.Depositario.Entities.Relations.Estilo.Esquema EsquemaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  EsquemaDetalle(Permaquim.Depositario.Entities.Relations.Estilo.Esquema EsquemaId,Permaquim.Depositario.Entities.Relations.Estilo.TipoEsquemaDetalle TipoEsquemaDetalleId,String Nombre,String Descripcion,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EsquemaId = EsquemaId;
+                    this.TipoEsquemaDetalleId = TipoEsquemaDetalleId;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
+                    this.Valor = Valor;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -3405,11 +3411,30 @@ using System.Text;
                  set {EsquemaId_  =  value;}
              }
              static Permaquim.Depositario.Entities.Relations.Estilo.Esquema EsquemaId_ = null;
+             [DataItemAttributeFieldName("TipoEsquemaDetalleId","TipoEsquemaDetalleId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _TipoEsquemaDetalleId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("TipoEsquemaDetalle")]// Object name in Database
+             public Permaquim.Depositario.Entities.Relations.Estilo.TipoEsquemaDetalle TipoEsquemaDetalleId
+             {
+                 get {
+                     if (TipoEsquemaDetalleId_ == null || TipoEsquemaDetalleId_.Id != _TipoEsquemaDetalleId)
+                         {
+                             TipoEsquemaDetalleId = new Permaquim.Depositario.Business.Relations.Estilo.TipoEsquemaDetalle().Items(this._TipoEsquemaDetalleId).FirstOrDefault();
+                         }
+                     return TipoEsquemaDetalleId_;
+                     }
+                 set {TipoEsquemaDetalleId_  =  value;}
+             }
+             static Permaquim.Depositario.Entities.Relations.Estilo.TipoEsquemaDetalle TipoEsquemaDetalleId_ = null;
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Descripcion","Descripcion")]
              public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Valor","Valor")]
+             public String Valor { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -3420,18 +3445,6 @@ using System.Text;
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
-                 /// <summary>
-                 ///  Represents the child collection of EsquemaDetalleValor that have this EsquemaDetalleId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalleValor> ListOf_EsquemaDetalleValor_EsquemaDetalleId
-                {
-                     get {
-                             Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalleValor entities = new Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalleValor();
-                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalleValor.ColumnEnum.EsquemaDetalleId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
                  /// <summary>
                  ///  Represents the child collection of Agenda that have this EsquemaDetalleId value.
                  /// </summary>
@@ -3452,16 +3465,16 @@ using System.Text;
 		namespace Permaquim.Depositario.Entities.Relations.Estilo {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Estilo")]  // Database Schema Name
-			[DataItemAttributeObjectName("EsquemaDetalleValor","EsquemaDetalleValor")]    // Object name  and alias in Database
+			[DataItemAttributeObjectName("TipoEsquemaDetalle","TipoEsquemaDetalle")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class EsquemaDetalleValor : IRelationsDataITem
+			public class TipoEsquemaDetalle : IRelationsDataITem
 			{
 				        
 				public class ColumnNames
 				{
 					public const string Id = "Id";
-					public const string EsquemaDetalleId = "EsquemaDetalleId";
-					public const string Valor = "Valor";
+					public const string Nombre = "Nombre";
+					public const string Descripcion = "Descripcion";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -3471,8 +3484,8 @@ using System.Text;
 				public enum FieldEnum : int
                 {
 					Id,
-					EsquemaDetalleId,
-					Valor,
+					Nombre,
+					Descripcion,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -3482,14 +3495,14 @@ using System.Text;
 	               /// <summary>
                 /// Parameterless Constructor
 	               /// <summary>
-                public EsquemaDetalleValor()
+                public TipoEsquemaDetalle()
                 {
                 }
-                public  EsquemaDetalleValor(Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  TipoEsquemaDetalle(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
-                    this.EsquemaDetalleId = EsquemaDetalleId;
-                    this.Valor = Valor;
+                    this.Nombre = Nombre;
+                    this.Descripcion = Descripcion;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -3499,25 +3512,11 @@ using System.Text;
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
              public Int64 Id { get; set; }
-             [DataItemAttributeFieldName("EsquemaDetalleId","EsquemaDetalleId")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _EsquemaDetalleId { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("EsquemaDetalle")]// Object name in Database
-             public Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId
-             {
-                 get {
-                     if (EsquemaDetalleId_ == null || EsquemaDetalleId_.Id != _EsquemaDetalleId)
-                         {
-                             EsquemaDetalleId = new Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalle().Items(this._EsquemaDetalleId).FirstOrDefault();
-                         }
-                     return EsquemaDetalleId_;
-                     }
-                 set {EsquemaDetalleId_  =  value;}
-             }
-             static Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId_ = null;
-             [DataItemAttributeFieldName("Valor","Valor")]
-             public String Valor { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("Descripcion","Descripcion")]
+             public String Descripcion { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -3528,8 +3527,22 @@ using System.Text;
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of EsquemaDetalle that have this TipoEsquemaDetalleId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalle> ListOf_EsquemaDetalle_TipoEsquemaDetalleId
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalle entities = new Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalle();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.TipoEsquemaDetalleId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+             public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
+             public override string ToString() => Nombre;
 				
-			} //Class EsquemaDetalleValor 
+			} //Class TipoEsquemaDetalle 
 } //namespace Permaquim.Depositario.Entities.Relations.Estilo
 		namespace Permaquim.Depositario.Entities.Relations.Geografia {
 			[Serializable()]                         //
@@ -5470,6 +5483,7 @@ using System.Text;
 					public const string Clave = "Clave";
 					public const string Texto = "Texto";
 					public const string Habilitado = "Habilitado";
+					public const string LargoMaximo = "LargoMaximo";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
 					public const string UsuarioModificacion = "UsuarioModificacion";
@@ -5482,6 +5496,7 @@ using System.Text;
 					Clave,
 					Texto,
 					Habilitado,
+					LargoMaximo,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -5493,13 +5508,14 @@ using System.Text;
                 public LenguajeItem()
                 {
                 }
-                public  LenguajeItem(Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  LenguajeItem(Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int32 LargoMaximo,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.LenguajeId = LenguajeId;
                     this.Clave = Clave;
                     this.Texto = Texto;
                     this.Habilitado = Habilitado;
+                    this.LargoMaximo = LargoMaximo;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
                     this.UsuarioModificacion = UsuarioModificacion;
@@ -5531,6 +5547,8 @@ using System.Text;
              public String Texto { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("LargoMaximo","LargoMaximo")]
+             public Int32 LargoMaximo { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
@@ -6032,7 +6050,7 @@ using System.Text;
                 public Menu()
                 {
                 }
-                public  Menu(Int64 Id,Permaquim.Depositario.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,Permaquim.Depositario.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Menu(Permaquim.Depositario.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,Permaquim.Depositario.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;

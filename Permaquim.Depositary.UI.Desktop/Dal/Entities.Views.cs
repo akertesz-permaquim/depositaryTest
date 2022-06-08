@@ -112,13 +112,15 @@ using System.Text;
 					public const string TransaccionId = "TransaccionId";
 					public const string TotalAValidar = "TotalAValidar";
 					public const string TotalValidado = "TotalValidado";
+					public const string MonedaId = "MonedaId";
 				}
 				public enum FieldEnum : int
                 {
 					DepositarioId,
 					TransaccionId,
 					TotalAValidar,
-					TotalValidado
+					TotalValidado,
+					MonedaId
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -129,12 +131,13 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  VistaTransaccionMonedaDefaultSucursal(Int64 DepositarioId,Int64 TransaccionId,Double TotalAValidar,Double TotalValidado)
+                public  VistaTransaccionMonedaDefaultSucursal(Int64 DepositarioId,Int64 TransaccionId,Double TotalAValidar,Double TotalValidado,Int64 MonedaId)
                 {
                     this.DepositarioId = DepositarioId;
                     this.TransaccionId = TransaccionId;
                     this.TotalAValidar = TotalAValidar;
                     this.TotalValidado = TotalValidado;
+                    this.MonedaId = MonedaId;
                 }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              public Int64 DepositarioId { get; set; }
@@ -144,6 +147,8 @@ using System.Text;
              public Double TotalAValidar { get; set; }
              [DataItemAttributeFieldName("TotalValidado","TotalValidado")]
              public Double TotalValidado { get; set; }
+             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             public Int64 MonedaId { get; set; }
 				
 			} //Class VistaTransaccionMonedaDefaultSucursal 
 			

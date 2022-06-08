@@ -8,19 +8,22 @@ namespace Permaquim.Depositary.UI.Desktop
         public BankAccountSelectorForm()
         {
             InitializeComponent();
-            if (_userBankAccounts.Count > 1)
-            {
-                CenterPanel();
-                LoadBankAccountsButtons();
-                LoadBackButton();
-            }
-            else
-            {
-                DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
+
+            CenterPanel();
+            LoadBankAccountsButtons();
+            LoadBackButton();
+            ChechSingleAccount();
+        }
+
+        private void ChechSingleAccount()
+        {
+            if (_userBankAccounts.Count <= 1)
+                   DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
                 AppController.OpenChildForm(new BillDepositForm(),
                  (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-            }
+           
         }
+
         private void CenterPanel()
         {
 

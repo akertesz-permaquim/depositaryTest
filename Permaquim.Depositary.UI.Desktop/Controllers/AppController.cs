@@ -8,7 +8,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class AppController
     {
-        private static List<Form> _formList = new List<Form>();
+        private static List<Form> _formList = new();
         public static MainForm MainFormInstance { get; set; }
 
         private static Form _activeForm = null;
@@ -17,21 +17,33 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static void OpenChildForm(Form childForm,
             Permaquim.Depositary.UI.Desktop.Components.Device device)
         {
-            if (_activeForm != null) _activeForm.Close();
+
+            if (_activeForm != null)
+                _activeForm.Hide();
             _activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.None;
-            MainFormInstance.MainPanel.Controls.Add(childForm);
-            MainFormInstance.MainPanel.Tag = childForm;
-            childForm.BringToFront();
-            childForm.StartPosition = FormStartPosition.Manual;
 
-            childForm.Tag = device;
+            if (_formList.IndexOf(childForm) != -1)
+            {
+                _formList[_formList.IndexOf(childForm)].Show();
 
+            }
+            else
+            {
+                _formList.Add(childForm);
+
+                childForm.TopLevel = false;
+                childForm.FormBorderStyle = FormBorderStyle.None;
+                childForm.Dock = DockStyle.None;
+                MainFormInstance.MainPanel.Controls.Add(childForm);
+                MainFormInstance.MainPanel.Tag = childForm;
+                childForm.BringToFront();
+                childForm.StartPosition = FormStartPosition.Manual;
+
+                childForm.Tag = device;
+            }
             childForm.Show();
 
-            _formList.Add(childForm);   
+             
 
             childForm.Location = new Point()
             {
@@ -40,10 +52,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             };
         }
 
-        public static void Back(Form form)
+        public static void Back()
         {
- 
-            _activeForm = _formList[_formList.IndexOf(form) -1];
+
+            //_activeForm = _formList.LastOrDefault();
 
             _activeForm.TopLevel = false;
             _activeForm.FormBorderStyle = FormBorderStyle.None;
@@ -54,8 +66,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _activeForm.StartPosition = FormStartPosition.Manual;
             _activeForm.Show();
 
-            _formList.Remove(form);
-            _formList.LastOrDefault().Show();
+           //_formList.LastOrDefault().Show();
        
 
         }
