@@ -68,6 +68,7 @@ using System.Text;
 					public const string TotalValidado = "TotalValidado";
 					public const string TotalAValidar = "TotalAValidar";
 					public const string Total = "Total";
+					public const string CodigoMoneda = "CodigoMoneda";
 				}
 				public enum FieldEnum : int
                 {
@@ -78,7 +79,8 @@ using System.Text;
 					IdentificadorBolsa,
 					TotalValidado,
 					TotalAValidar,
-					Total
+					Total,
+					CodigoMoneda
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -101,6 +103,8 @@ using System.Text;
              public Double TotalAValidar { get; set; }
              [DataItemAttributeFieldName("Total","Total")]
              public Double Total { get; set; }
+             [DataItemAttributeFieldName("CodigoMoneda","CodigoMoneda")]
+             public String CodigoMoneda { get; set; }
      }
      }
      }

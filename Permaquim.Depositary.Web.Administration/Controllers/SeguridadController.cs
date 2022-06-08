@@ -20,14 +20,11 @@
             return resultado;
         }
 
-        public static List<DepositarioAdminWeb.Entities.Tables.Seguridad.UsuarioRol> ObtenerRolesPorUsuario(Int64 pUsuarioId)
+        public static List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> ObtenerRolesPorUsuario(Int64 pUsuarioId)
         {
-            List<DepositarioAdminWeb.Entities.Tables.Seguridad.UsuarioRol> resultado = new List<DepositarioAdminWeb.Entities.Tables.Seguridad.UsuarioRol>();
-            DepositarioAdminWeb.Business.Tables.Seguridad.UsuarioRol oTable = new DepositarioAdminWeb.Business.Tables.Seguridad.UsuarioRol();
-            oTable.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsuarioId);
-            oTable.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-
-            resultado = oTable.Items();
+            List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> resultado = new List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
+            DepositarioAdminWeb.Business.Procedures.Seguridad.ObtenerRolesPorUsuario oSP = new DepositarioAdminWeb.Business.Procedures.Seguridad.ObtenerRolesPorUsuario();
+            resultado = oSP.Items(pUsuarioId);
 
             return resultado;
         }

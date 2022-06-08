@@ -1,0 +1,70 @@
+﻿@page "/userRolViewer"
+@layout MainLayout
+
+@using Permaquim.Depositary.Web.Administration.Controllers;
+
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+<RadzenContent Container="main">
+    <ChildContent>
+        <h1>Roles</h1>
+        <hr>
+        <RadzenDataGrid AllowFiltering="true"
+                        AllowColumnResize="true"
+                        FilterMode="FilterMode.Advanced"
+                        AllowSorting="true"
+                        PageSize="10"
+                        AllowPaging="true"
+                        PagerHorizontalAlign="HorizontalAlign.Left"
+                        ShowPagingSummary="true"
+                        IsLoading="@estaCargandoGridRolesUsuario"
+                        Data="@dataRolesUsuario"
+                        TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario"
+                        LogicalFilterOperator="LogicalFilterOperator.Or">
+            <Columns>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario" Property="Rol" Title="Rol" Frozen="false" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario" Property="Aplicacion" Title="Aplicación" Frozen="false" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario" Property="DependeDe" Title="Depende de" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario" Property="UsuarioCreacion" Title="Usuario creación" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario" Property="FechaCreacion" Title="Fecha creación" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario" Property="UsuarioModificacion" Title="Usuario modificación" Frozen="false" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario" Property="FechaModificacion" Title="Fecha modificación" Frozen="false" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+            </Columns>
+        </RadzenDataGrid>
+    </ChildContent>
+</RadzenContent>
+
+@code {
+
+    //Datasets
+    private List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> dataRolesUsuario = new List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
+    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+
+    //Variables para controles
+    private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> gridTransacciones = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
+    private bool estaCargandoGridRolesUsuario = false;
+
+    Int64? userId;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+            userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+            if (userId == null)
+                NavManager.NavigateTo("login", true);
+            estaCargandoGridRolesUsuario = true;
+            await Task.Run(obtenerRolesPorUsuario);
+            StateHasChanged();
+        }
+    }
+
+    private void obtenerRolesPorUsuario()
+    {
+        dataRolesUsuario = SeguridadController.ObtenerRolesPorUsuario(userId.Value);
+        estaCargandoGridRolesUsuario = false;
+    }
+
+}

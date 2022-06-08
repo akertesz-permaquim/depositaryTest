@@ -30,6 +30,7 @@
     <string>Operacion.ObtenerEventosPorDepositario</string>
     <string>Operacion.ObtenerTransaccionesPorDepositario</string>
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
+    <string>Seguridad.ObtenerRolesPorUsuario</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
     <string>dbo.fn_diagramobjects</string>
@@ -141,6 +142,11 @@
             <ProcedureField>
               <DataType>Double</DataType>
               <Name>Total</Name>
+              <IsNullable>false</IsNullable>
+            </ProcedureField>
+            <ProcedureField>
+              <DataType>String</DataType>
+              <Name>CodigoMoneda</Name>
               <IsNullable>false</IsNullable>
             </ProcedureField>
           </ProcedureFields>

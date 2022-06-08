@@ -152,3 +152,28 @@ using System.Text;
              }
         }// class Operacion
 	} // namespace DepositarioAdminWeb.Business.Procedures.Operacion
+	namespace DepositarioAdminWeb.Business.Procedures.Seguridad {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class ObtenerRolesPorUsuario : ProcedureDataHandler
+		{
+         private List<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> _result = new List<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
+			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+            public ObtenerRolesPorUsuario() : base()
+            {
+                base._dataItem = new Entities.Procedures.Seguridad.ObtenerRolesPorUsuario();
+            }
+            public  List<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> Items(Int64? UsuarioId)
+            {
+                ProcedureDataHandler dh =  new ProcedureDataHandler(this._dataItem);
+                List<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> _entities = new List<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
+                _result = dh.Items(new List<ParameterItemValue> { new ParameterItemValue("UsuarioId", UsuarioId)}).Cast<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>().ToList<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
+                return _result;
+             }
+             public List<Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> Resultset
+             {
+                 get { return _result; }
+             }
+        }// class Seguridad
+	} // namespace DepositarioAdminWeb.Business.Procedures.Seguridad
