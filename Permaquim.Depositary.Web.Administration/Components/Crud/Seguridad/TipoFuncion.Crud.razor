@@ -133,10 +133,10 @@ else
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@TipoFuncion_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @TipoFuncion_entity)) />
+                <RadzenCheckBox @bind-Value=@TipoFuncion_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @TipoFuncion_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
          @if(crudMode!=CrudMode.Add)
@@ -370,7 +370,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                     crud.Delete(TipoFuncion_entity);
+                     TipoFuncion_entity.Habilitado=false;
+                     crud.Update(TipoFuncion_entity);
                      summary = "El registro se ha ";
                      actionInformation = "eliminado.";
                      severityType = NotificationSeverity.Success;

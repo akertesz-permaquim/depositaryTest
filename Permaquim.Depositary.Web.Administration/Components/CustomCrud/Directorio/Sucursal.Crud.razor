@@ -259,7 +259,7 @@ else
                         <RadzenLabel Text="Habilitado" Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                     </div>
                     <div class="col-md-9">
-                        <RadzenCheckBox @bind-Value=@Sucursal_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Sucursal_entity)) />
+                        <RadzenCheckBox @bind-Value=@Sucursal_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Sucursal_entity)) Disabled ="@(crudMode == CrudMode.Delete)" />
                     </div>
                 </div>
                 @if (crudMode != CrudMode.Add)
@@ -519,7 +519,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                    crud.Delete(Sucursal_entity);
+                    Sucursal_entity.Habilitado = false;
+                    crud.Update(Sucursal_entity);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;

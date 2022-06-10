@@ -127,17 +127,17 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROVALIDADO" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.TotalValidado @auxInformacionDepositario.CodigoMoneda
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROVALIDADO" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalValidado
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROAVALIDAR" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.TotalAValidar @auxInformacionDepositario.CodigoMoneda
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROAVALIDAR" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalAValidar
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROTOTAL" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.Total @auxInformacionDepositario.CodigoMoneda
+                                                            <b>@dataLenguaje.Where(x => x.Clave == "DINEROTOTAL" || x.Clave=="GENERIC").FirstOrDefault().Texto:</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.Total
                                                         </div>
                                                     </div>
                                                 </div>
@@ -339,9 +339,8 @@
 }
 
 @code {
-
     //Datasets
-    private List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios> dataDepositarios = new List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios>();
+    private List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios> dataDepositarios = new();
     private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario> dataTransaccionesDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesPorDepositario>();
     private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion> dataTransaccionDetalles = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerDetalleTransaccion>();
     private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario> dataTransaccionesSobreDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTransaccionesSobrePorDepositario>();
@@ -377,6 +376,7 @@
     //Variables auxiliares
     private Timer timerRecargaInformacion = new Timer();
     private List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios> rowsDepositariosExpandidas = new List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerDepositarios>();
+    Int64? userId;
 
     protected override void OnInitialized()
     {
@@ -388,7 +388,7 @@
         if (firstRender)
         {
             dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
-            Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+            userId = await sessionStorage.GetItemAsync<Int64?>("Id");
             if (userId == null)
                 NavManager.NavigateTo("login", true);
             await Task.Run(obtenerDepositarios);
@@ -423,7 +423,7 @@
 
     private void obtenerDepositarios()
     {
-        dataDepositarios = DepositarioController.ObtenerDepositarios();
+        dataDepositarios = DepositarioController.ObtenerDepositarios(userId.Value);
         estaCargandoGridDepositarios = false;
     }
 
@@ -591,10 +591,3 @@
     }
 
         }
-
-<style>
-    .row-highlight {
-        background-color: silver;
-    }
-
-</style>

@@ -239,10 +239,10 @@ else
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "FUERADESERVICIO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FueraDeServicio" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FUERADESERVICIO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FueraDeServicio" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioEstado_entity.FueraDeServicio  Name="FueraDeServicioCheckBox" TValue="bool" Change=@(args => FueraDeServicioChange(args, @DepositarioEstado_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioEstado_entity.FueraDeServicio  Name="FueraDeServicioCheckBox" TValue="bool" Change=@(args => FueraDeServicioChange(args, @DepositarioEstado_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">

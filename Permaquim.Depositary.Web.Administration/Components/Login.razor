@@ -43,23 +43,25 @@
     //Datasets
     private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario dataUsuario = new DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario();
     private List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> dataUsuarioRol = new List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
-
+    private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
 
     protected async void LoginUser()
     {
         dataUsuario = SeguridadController.ObtenerUsuario(loginForm.Username, loginForm.Password);
         if (dataUsuario.NickName == null)
         {
+            //Si no encontro usuario cargamos los textos default.
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(-1);
-            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave=="GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_INCORRECT_USERORPASSWORD" || x.Clave=="GENERIC").FirstOrDefault().Texto, Duration = 3000 });
+            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave == "GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_INCORRECT_USERORPASSWORD" || x.Clave == "GENERIC").FirstOrDefault().Texto, Duration = 3000 });
         }
         else
         {
             dataUsuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
+            dataEsquemaDetalle = EstiloController.ObtenerEsquemaDetalles(dataUsuario.Id);
             if (dataUsuarioRol.Count < 1)
             {
-                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave=="GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_NOROLES" || x.Clave=="GENERIC").FirstOrDefault().Texto, Duration = 3000 });
+                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave == "GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_NOROLES" || x.Clave == "GENERIC").FirstOrDefault().Texto, Duration = 3000 });
             }
             else
             {
@@ -70,6 +72,7 @@
                 await sessionStorage.SetItemAsync("AvatarUsuario", dataUsuario.Avatar);
                 await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
                 await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
+                await sessionStorage.SetItemAsync("DataEsquemaDetalle", dataEsquemaDetalle);
 
                 //SessionStorageManager.SetUsuarioId(dataUsuario.Id);
                 //SessionStorageManager.SetNickName(dataUsuario.NickName);

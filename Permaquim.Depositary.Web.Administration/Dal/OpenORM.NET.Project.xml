@@ -18,7 +18,7 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=NB000101</ConnectionString>
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
     <string>Valor.VistaDenominacion</string>
@@ -275,6 +275,7 @@
     <string>Auditoria.TipoLog</string>
     <string>Banca.Banco</string>
     <string>Banca.Cuenta</string>
+    <string>Banca.TipoCuenta</string>
     <string>Banca.UsuarioCuenta</string>
     <string>Biometria.HuellaDactilar</string>
     <string>Directorio.Empresa</string>
@@ -300,7 +301,7 @@
     <string>Dispositivo.TipoPlaca</string>
     <string>Estilo.Esquema</string>
     <string>Estilo.EsquemaDetalle</string>
-    <string>Estilo.EsquemaDetalleValor</string>
+    <string>Estilo.TipoEsquemaDetalle</string>
     <string>Geografia.Ciudad</string>
     <string>Geografia.CodigoPostal</string>
     <string>Geografia.Pais</string>

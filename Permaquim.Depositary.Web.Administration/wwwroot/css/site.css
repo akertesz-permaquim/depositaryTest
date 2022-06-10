@@ -75,6 +75,10 @@ a, .btn-link {
     position: absolute;
 }
 
+.row-highlight {
+    background-color: silver;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg)

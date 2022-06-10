@@ -316,18 +316,18 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "RTSENABLE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "RTSENABLE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="RtsEnable" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.RtsEnable  Name="RtsEnableCheckBox" TValue="bool" Change=@(args => RtsEnableChange(args, @DepositarioPlaca_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.RtsEnable  Name="RtsEnableCheckBox" TValue="bool" Change=@(args => RtsEnableChange(args, @DepositarioPlaca_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORA" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorA" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "SENSORA" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorA" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorA  Name="SensorACheckBox" TValue="bool" Change=@(args => SensorAChange(args, @DepositarioPlaca_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorA  Name="SensorACheckBox" TValue="bool" Change=@(args => SensorAChange(args, @DepositarioPlaca_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
              <div style="margin-bottom: 1rem" class="row">
@@ -342,10 +342,10 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORB" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorB" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "SENSORB" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorB" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorB  Name="SensorBCheckBox" TValue="bool" Change=@(args => SensorBChange(args, @DepositarioPlaca_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorB  Name="SensorBCheckBox" TValue="bool" Change=@(args => SensorBChange(args, @DepositarioPlaca_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
              <div style="margin-bottom: 1rem" class="row">
@@ -360,10 +360,10 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORC" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorC" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "SENSORC" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorC" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorC  Name="SensorCCheckBox" TValue="bool" Change=@(args => SensorCChange(args, @DepositarioPlaca_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorC  Name="SensorCCheckBox" TValue="bool" Change=@(args => SensorCChange(args, @DepositarioPlaca_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
              <div style="margin-bottom: 1rem" class="row">
@@ -378,10 +378,10 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORD" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorD" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "SENSORD" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorD" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorD  Name="SensorDCheckBox" TValue="bool" Change=@(args => SensorDChange(args, @DepositarioPlaca_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorD  Name="SensorDCheckBox" TValue="bool" Change=@(args => SensorDChange(args, @DepositarioPlaca_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
              <div style="margin-bottom: 1rem" class="row">
@@ -396,10 +396,10 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "SENSORL" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorL" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "SENSORL" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="SensorL" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorL  Name="SensorLCheckBox" TValue="bool" Change=@(args => SensorLChange(args, @DepositarioPlaca_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.SensorL  Name="SensorLCheckBox" TValue="bool" Change=@(args => SensorLChange(args, @DepositarioPlaca_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
              <div style="margin-bottom: 1rem" class="row">
@@ -414,10 +414,10 @@ else
              </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @DepositarioPlaca_entity)) />
+                <RadzenCheckBox @bind-Value=@DepositarioPlaca_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @DepositarioPlaca_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
          @if(crudMode!=CrudMode.Add)
@@ -679,7 +679,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                     crud.Delete(DepositarioPlaca_entity);
+                     DepositarioPlaca_entity.Habilitado=false;
+                     crud.Update(DepositarioPlaca_entity);
                      summary = "El registro se ha ";
                      actionInformation = "eliminado.";
                      severityType = NotificationSeverity.Success;

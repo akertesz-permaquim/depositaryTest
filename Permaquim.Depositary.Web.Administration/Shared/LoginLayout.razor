@@ -3,6 +3,8 @@
 @using Radzen
 @using Radzen.Blazor
 @using Microsoft.AspNetCore.Identity;
+@using Permaquim.Depositary.Web.Administration.Controllers;
+
 @inject Microsoft.Extensions.Localization.IStringLocalizer<LoginLayout> L
 <RadzenDialog />
 <RadzenNotification />
@@ -17,7 +19,7 @@
       <div class="col-xl-3 col-lg-3 col-md-5 col-sm-8" style="padding-left: 0; padding-right: 0">
         <RadzenCard style="margin-top: 0">
           <ChildContent>
-            <RadzenImage Path="images/logoPermaquim.png" style="display: block; width: 100%">
+            <RadzenImage Path="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"LogoLoginWeb")" style="display: block; width: 100%">
             </RadzenImage>
             <RadzenContentContainer Name="main">
             @Body
@@ -28,3 +30,14 @@
     </div>
   </ChildContent>
 </RadzenBody>
+
+@code
+{
+    private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        //Traemos los estilos default para el login.
+        dataEsquemaDetalle = EstiloController.ObtenerEsquemaDetalles(-1);
+    }
+}

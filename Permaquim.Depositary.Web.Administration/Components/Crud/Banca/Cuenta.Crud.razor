@@ -64,8 +64,19 @@ else
                 </Template>
              </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.Cuenta" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.Cuenta" Property="TipoId" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "TIPOID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
-    </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.Cuenta" Title=@dataLenguaje.Where(x => x.Clave == "TIPOID" || x.Clave=="GENERIC").FirstOrDefault().Texto Property="TipoId" Width="100px" >
+                <Template>
+                    @if(TipoCuenta_entities.FirstOrDefault( c => c.Id == @context.TipoId) != null){
+                       <RadzenLabel Text="@TipoCuenta_entities.FirstOrDefault( c => c.Id == @context.TipoId).Nombre" Component="TipoId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="TipoId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.Cuenta" Property="Nombre" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.Cuenta" Property="Numero" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "NUMERO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
@@ -118,16 +129,28 @@ else
                  </RadzenNumeric>
                  </div>
              </div>
-             <div style="margin-bottom: 1rem" class="row">
-                 <div class="col-md-3">
-                     <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "TIPOID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="TipoId" style="width: 100%">
-                     </RadzenLabel>
-                 </div>
-                 <div class="col-md-9">
-                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Cuenta_entity.TipoId)" Name="TipoId" Disabled="@(crudMode==CrudMode.Delete)" >
-                 </RadzenNumeric>
-                 </div>
-             </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "TIPOID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component ="TipoId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if((@TipoCuenta_entities.Count > 0 && @TipoCuenta_entities.FirstOrDefault( c => c.Id == @Cuenta_entity.TipoId) != null) || crudMode != CrudMode.Delete)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Cuenta_entity.TipoId)"
+                                    Data=@TipoCuenta_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoCuentaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@TipoCuenta_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectTipoCuentaValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                      <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Nombre" style="width: 100%">
@@ -197,10 +220,10 @@ else
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@Cuenta_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Cuenta_entity)) />
+                <RadzenCheckBox @bind-Value=@Cuenta_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Cuenta_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
          @if(crudMode!=CrudMode.Add)
@@ -294,6 +317,12 @@ else
     private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
  
     /// <summary>
+    /// Variables to handle Relation between Cuenta.TipoId and TipoCuenta.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta TipoCuenta_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta>? TipoCuenta_entities;
+ 
+    /// <summary>
     /// Variables to handle Relation between Cuenta.BancoId and Banco.Id
     /// </summary>
     private DepositarioAdminWeb.Entities.Tables.Banca.Banco Banco_entity = new();
@@ -332,6 +361,9 @@ else
     /// </summary>
     private void LoadTypesData()
     {
+        DepositarioAdminWeb.Business.Tables.Banca.TipoCuenta TipoCuenta_local = new();
+        TipoCuenta_entities = TipoCuenta_local.Items();
+ 
         DepositarioAdminWeb.Business.Tables.Banca.Banco Banco_local = new();
         Banco_entities = Banco_local.Items();
  
@@ -347,6 +379,7 @@ else
         //Main entity initialization
         Cuenta_entity = new();
         //Relations entities initialization
+        TipoCuenta_entity = new(); 
         Banco_entity = new(); 
         crudMode = CrudMode.Add;
     }
@@ -357,6 +390,10 @@ else
     private void Edit(DepositarioAdminWeb.Entities.Tables.Banca.Cuenta item, bool delete)
     {
              Cuenta_entity = item;
+            TipoCuenta_entity = new() { 
+            Id = TipoCuenta_entities.FirstOrDefault(c => c.Id == Cuenta_entity.TipoId).Id, 
+            Nombre = TipoCuenta_entities.FirstOrDefault(c => c.Id == Cuenta_entity.TipoId).Nombre
+            };
             Banco_entity = new() { 
             Id = Banco_entities.FirstOrDefault(c => c.Id == Cuenta_entity.BancoId).Id, 
             Nombre = Banco_entities.FirstOrDefault(c => c.Id == Cuenta_entity.BancoId).Nombre
@@ -448,7 +485,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                     crud.Delete(Cuenta_entity);
+                     Cuenta_entity.Habilitado=false;
+                     crud.Update(Cuenta_entity);
                      summary = "El registro se ha ";
                      actionInformation = "eliminado.";
                      severityType = NotificationSeverity.Success;
@@ -511,6 +549,14 @@ else
  
     #endregion
     #region Selection events
+    /// <summary>
+    /// TipoCuenta value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectTipoCuentaValueChanged(object item)
+    {
+    }
+ 
     /// <summary>
     /// Banco value changed
     /// </summary>

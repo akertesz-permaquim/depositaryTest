@@ -1,0 +1,539 @@
+@page "/RegionalizacionLenguajeItemCustomCrud"
+
+@using Permaquim.Depositary.Web.Administration.Controllers;
+
+@inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+@if (LenguajeItem_entities == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+}
+else
+{
+    switch (crudMode)
+    {
+        case CrudMode.Add:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_A_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "LENGUAJEITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Delete:
+            <RadzenBadge BadgeStyle="BadgeStyle.Warning">
+                <ChildContent>
+                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_D_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "LENGUAJEITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto? </h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Edit:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_M_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "LENGUAJEITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.List:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <div>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_L_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "LENGUAJEITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                    </div>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+    }
+    <hr>
+    if (crudMode == CrudMode.List)
+    {
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@LenguajeItem_entities" TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+            <EmptyTemplate>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+            </EmptyTemplate>
+            <Columns>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                    <HeaderTemplate>
+                        <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text=@dataLenguaje.Where(x => x.Clave == "NEW_BUTTON" || x.Clave == "GENERIC").FirstOrDefault().Texto Click="Add">
+                        </RadzenButton>
+                    </HeaderTemplate>
+                    <Template Context="element">
+                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                        <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Title=@dataLenguaje.Where(x => x.Clave == "LENGUAJEID" || x.Clave=="GENERIC").FirstOrDefault().Texto Property="LenguajeId" Width="100px">
+                    <Template>
+                        @if (Lenguaje_entities.FirstOrDefault(c => c.Id == @context.LenguajeId) != null)
+                        {
+                            <RadzenLabel Text="@Lenguaje_entities.FirstOrDefault( c => c.Id == @context.LenguajeId).Nombre" Component="LenguajeId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                            <RadzenLabel Text="No data available" Component="LenguajeId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="Clave" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "CLAVE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="Texto" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "TEXTO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="Habilitado" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                    <Template Context="data">
+                        <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
+                        </RadzenCheckBox>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="LargoMaximo" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "LARGOMAXIMO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="UsuarioCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="FechaCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="UsuarioModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Property="FechaModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+        <hr>
+    }
+
+    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+    {
+        <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem" Data="@LenguajeItem_entity" @bind-Value="LenguajeItem_entity" Submit="Save" Visible="@(LenguajeItem_entity != null)">
+            <ChildContent>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Id" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.Id)" Name="Id" Disabled="true">
+                        </RadzenNumeric>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "LENGUAJEID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="LenguajeId" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Value="@LenguajeId"
+                                Data=@Lenguaje_entities TextProperty="Nombre" ValueProperty="Id"
+                                Disabled="true" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "CLAVE" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Clave" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block" @bind-Value="@(LenguajeItem_entity.Clave)" Name="Clave" Disabled="@(crudMode==CrudMode.Delete)">
+                        </RadzenTextBox>
+                        @if (@crudMode != CrudMode.Delete)
+                        {
+                            <RadzenRequiredValidator Component="Clave" Text="Clave is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
+                        }
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "TEXTO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Texto" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block" @bind-Value="@(LenguajeItem_entity.Texto)" Name="Texto" Disabled="@(crudMode==CrudMode.Delete)">
+                        </RadzenTextBox>
+                        @if (@crudMode != CrudMode.Delete)
+                        {
+                            @if (LenguajeItem_entity.LargoMaximo > 0)
+                            {
+                                string textoValidacion = "El texto debe tener menos de " + LenguajeItem_entity.LargoMaximo + " caracteres";
+                                <RadzenLengthValidator Component="Texto" Max="@(LenguajeItem_entity.LargoMaximo)" Text=@textoValidacion Style="position: absolute" />
+                            }
+                            <RadzenRequiredValidator Component="Texto" Text="Texto is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
+                        }
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenCheckBox @bind-Value=@LenguajeItem_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @LenguajeItem_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "LARGOMAXIMO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="LargoMaximo" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.LargoMaximo)" Name="LargoMaximo" Disabled="@(crudMode==CrudMode.Delete)">
+                        </RadzenNumeric>
+                        @if (@crudMode != CrudMode.Delete)
+                        {
+                            <RadzenNumericRangeValidator Min="0" Component="LargoMaximo" Text="Debe indicar un largo minimo mayor a 0" Style="position: absolute">
+                            </RadzenNumericRangeValidator>
+                            <RadzenRequiredValidator Component="LargoMaximo" Text="LargoMaximo is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
+                        }
+                    </div>
+                </div>
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioCreacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaCreacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(LenguajeItem_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenDatePicker>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioModificacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenNumeric TValue="long?" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaModificacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(LenguajeItem_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenDatePicker>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col offset-sm-3">
+                        <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@dataLenguaje.Where(x => x.Clave == "ACCEPT_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto ButtonStyle="ButtonStyle.Primary">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@dataLenguaje.Where(x => x.Clave == "CANCEL_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto Click="Cancel">
+                        </RadzenButton>
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenTemplateForm>
+        <hr>
+    }
+
+    <RadzenNotification />
+}
+
+@code {
+    /// <summary>
+    /// Crud Mode Enum
+    /// </summary>
+    private enum CrudMode
+    {
+        List,
+        Add,
+        Edit,
+        Delete
+    }
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem LenguajeItem_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItem_entities = null;
+
+    /// <summary>
+    /// Variables to multilanguaje
+    /// </summary>
+    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+
+    /// <summary>
+    /// Variables to handle Relation between LenguajeItem.LenguajeId and Lenguaje.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Regionalizacion.Lenguaje Lenguaje_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Regionalizacion.Lenguaje>? Lenguaje_entities;
+
+    /// <summary>
+    ///  Page crud mode {List,Add,Edit,Delete}
+    /// </summary>
+    private CrudMode crudMode = CrudMode.List;
+
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+
+    [Parameter]
+    public Int64 LenguajeId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+            NavManager.NavigateTo("login", true);
+    }
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        DepositarioAdminWeb.Business.Tables.Regionalizacion.LenguajeItem entity = new DepositarioAdminWeb.Business.Tables.Regionalizacion.LenguajeItem();
+        entity.Where.Add(DepositarioAdminWeb.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, LenguajeId);
+        LenguajeItem_entities = entity.Items();
+    }
+    /// <summary>
+    /// Loads Type Tables data
+    /// </summary>
+    private void LoadTypesData()
+    {
+        DepositarioAdminWeb.Business.Tables.Regionalizacion.Lenguaje Lenguaje_local = new();
+        Lenguaje_entities = Lenguaje_local.Items();
+
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Initializations for adding a new entity
+    /// </summary>
+    private void Add()
+    {
+        //Main entity initialization
+        LenguajeItem_entity = new();
+        //Relations entities initialization
+        Lenguaje_entity = new();
+        crudMode = CrudMode.Add;
+    }
+    /// <summary>
+    /// <summary>
+    /// Initializations for editing an entity
+    /// </summary>
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem item, bool delete)
+    {
+        LenguajeItem_entity = item;
+        Lenguaje_entity = new()
+            {
+                Id = Lenguaje_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.LenguajeId).Id,
+                Nombre = Lenguaje_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.LenguajeId).Nombre
+            };
+        if (delete)
+            crudMode = CrudMode.Delete;
+        else
+            crudMode = CrudMode.Edit;
+    }
+    /// <summary>
+    /// Operation depending on Crud mode
+    /// </summary>
+    private async Task Save()
+    {
+        string actionInformation = string.Empty;
+        NotificationSeverity severityType = NotificationSeverity.Error;
+        string summary = string.Empty;
+        DepositarioAdminWeb.Business.Tables.Regionalizacion.LenguajeItem crud = new();
+        LenguajeItem_entity.LenguajeId = LenguajeId;
+        foreach (var property in LenguajeItem_entity.GetType().GetProperties())
+        {
+            switch (property.Name)
+            {
+                case "FechaModificacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        LenguajeItem_entity.FechaModificacion = null;
+                    }
+                    else
+                    {
+                        LenguajeItem_entity.FechaModificacion = DateTime.Now;
+                    }
+                    break;
+                case "FechaCreacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        LenguajeItem_entity.FechaCreacion = DateTime.Now;
+                    }
+                    break;
+                case "UsuarioCreacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        LenguajeItem_entity.UsuarioCreacion = userId.Value;
+                    }
+                    break;
+                case "UsuarioModificacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        LenguajeItem_entity.UsuarioModificacion = null;
+                    }
+                    else
+                    {
+                        LenguajeItem_entity.UsuarioModificacion = userId.Value;
+                    }
+                    break;
+            }
+        }
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                try
+                {
+                    crud.Add(LenguajeItem_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "agregado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+                break;
+            case CrudMode.Edit:
+                try
+                {
+                    crud.Update(LenguajeItem_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "modificado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+                break;
+            case CrudMode.Delete:
+                try
+                {
+                    LenguajeItem_entity.Habilitado = false;
+                    crud.Update(LenguajeItem_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "eliminado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+                break;
+        }
+
+        //Recargamos el set de datos del lenguaje en el session storage.
+        await sessionStorage.RemoveItemAsync("DataLenguaje");
+        dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(userId.Value);
+        await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
+        dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+
+        // Sets Crud mode to List
+        crudMode = CrudMode.List;
+
+        ShowNotification(new NotificationMessage
+            {
+                Severity = severityType,
+                Summary = summary,
+                Detail = actionInformation,
+                Duration = 4000
+            });
+
+        await Task.Run(LoadMainEntityData);
+    }
+    /// <summary>
+    /// Crud mode cancellation and default mode
+    /// </summary>
+    private void Cancel()
+    {
+        crudMode = CrudMode.List;
+        LoadMainEntityData();
+    }
+    /// <summary>
+    /// Sets detail panel title - TODO: Implement Multilanguage
+    /// </summary>
+    /// <returns></returns>
+    private string GetDialogTitle()
+    {
+        string retValue = string.Empty;
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                retValue = "Nuevo...";
+                break;
+            case CrudMode.Edit:
+                retValue = "Editar...";
+                break;
+            case CrudMode.Delete:
+                retValue = "Borrar...";
+                break;
+        }
+        return retValue;
+    }
+    #region Notifications
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+
+    }
+
+    #endregion
+    #region Selection events
+    /// <summary>
+    /// Lenguaje value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectLenguajeValueChanged(object item)
+    {
+    }
+
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value, DepositarioAdminWeb.Entities.Tables.Regionalizacion.LenguajeItem item)
+    {
+        LenguajeItem_entity = item;
+    }
+    #endregion
+
+    #region Export
+
+    #endregion
+
+}
