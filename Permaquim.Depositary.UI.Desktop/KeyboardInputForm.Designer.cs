@@ -61,8 +61,10 @@
             this.MainKeyboard.BackColor = System.Drawing.Color.Transparent;
             this.MainKeyboard.Location = new System.Drawing.Point(12, 44);
             this.MainKeyboard.Name = "MainKeyboard";
+            this.MainKeyboard.PasswordTextBoxPlaceholder = "Clave";
             this.MainKeyboard.Size = new System.Drawing.Size(713, 425);
             this.MainKeyboard.TabIndex = 3;
+            this.MainKeyboard.UserTextboxPlaceholder = "Usuario";
             // 
             // KeyboardInputForm
             // 

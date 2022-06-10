@@ -35,8 +35,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             LoadLogo();
 
-
-
             SetOwnerData();
         }
         private void MainForm_Load(object sender, EventArgs e)
@@ -55,6 +53,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             _device = new Device(device);
 
             this.Tag = _device;
+
+            LoadStyles();
 
             // Evaluación de estado de la contadora y el ioBoard
             // Si está todo en órden, se libera la aplicación
@@ -157,7 +157,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 AppController.OpenChildForm(new KeyboardInputForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
-       
+       private void LoadStyles()
+        {
+            TopPanel.BackColor = StyleController.GetColor("Cabecera");
+            HeadPanel.BackColor = StyleController.GetColor("Color2");
+            MainPanel.BackColor = StyleController.GetColor("Contenido");
+            BottomPanel.BackColor = StyleController.GetColor("Pie");
+        }
         private void LoadLogo()
         {
             LogoPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;

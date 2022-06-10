@@ -38,6 +38,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             foreach (var item in _currencies)
             {
+                // Si la moneda no está habilitada para la sucursal 
 
                 CustomButton newButton = new CustomButton();
 
@@ -93,10 +94,36 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CurrencyButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
-                       
-            AppController.OpenChildForm(new BankAccountSelectorForm(),
-            (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-            
+            if (DatabaseController.CurrentOperation.Id == 1)
+            {
+                if (DatabaseController.GetUserBankAccounts().Count == 0)
+                {
+
+                    AppController.OpenChildForm(new BillDepositForm(),
+                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                }
+                else
+                {
+                    AppController.OpenChildForm(new BankAccountSelectorForm(),
+                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                }
+            }
+            if (DatabaseController.CurrentOperation.Id == 3)
+            {
+
+                if (DatabaseController.GetUserBankAccounts().Count == 0)
+                {
+                    AppController.OpenChildForm(new EnvelopeDepositForm(),
+                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                }
+                else
+                {
+                    AppController.OpenChildForm(new BankAccountSelectorForm(),
+                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                }
+
+            }
+
         }
 
         private void BackButton_Click(object sender, EventArgs e)

@@ -53,7 +53,7 @@
             // 
             // TopPanel
             // 
-            this.TopPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.TopPanel.BackColor = System.Drawing.Color.White;
             this.TopPanel.Controls.Add(this.OwnerDataLabel);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
@@ -136,7 +136,7 @@
             // 
             // BottomPanel
             // 
-            this.BottomPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.BottomPanel.BackColor = System.Drawing.Color.White;
             this.BottomPanel.Controls.Add(this.CounterLabel);
             this.BottomPanel.Controls.Add(this.IoBoardLabel);
             this.BottomPanel.Controls.Add(this.DateTimeLabel);

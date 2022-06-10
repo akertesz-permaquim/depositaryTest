@@ -309,7 +309,8 @@ using System.Text;
 					DepositarioId,
 					TransaccionId,
 					TotalAValidar,
-					TotalValidado
+					TotalValidado,
+					MonedaId
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -353,9 +354,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal Add(Int64 DepositarioId,Int64 TransaccionId,Double TotalAValidar,Double TotalValidado) 
+			public Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal Add(Int64 DepositarioId,Int64 TransaccionId,Double TotalAValidar,Double TotalValidado,Int64 MonedaId) 
 			{
-			  return (Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal)base.Add(new Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal(DepositarioId,TransaccionId,TotalAValidar,TotalValidado));
+			  return (Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal)base.Add(new Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal(DepositarioId,TransaccionId,TotalAValidar,TotalValidado,MonedaId));
 			}
             public new List<Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal> Items()
             {
@@ -374,8 +375,9 @@ using System.Text;
             /// <param name="TransaccionId"></param>
             /// <param name="TotalAValidar"></param>
             /// <param name="TotalValidado"></param>
+            /// <param name="MonedaId"></param>
             /// <returns></returns>
-            public List<Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal> Items(Int64? DepositarioId,Int64? TransaccionId,Double? TotalAValidar,Double? TotalValidado)
+            public List<Entities.Views.Operacion.VistaTransaccionMonedaDefaultSucursal> Items(Int64? DepositarioId,Int64? TransaccionId,Double? TotalAValidar,Double? TotalValidado,Int64? MonedaId)
             {
                 this.Where.whereParameter.Clear();
                 if (DepositarioId != null)
@@ -423,6 +425,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TotalValidado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TotalValidado);
+                    }
+                   
+                }
+                if (MonedaId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.MonedaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.MonedaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, MonedaId);
                     }
                    
                 }

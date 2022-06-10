@@ -10,6 +10,7 @@ namespace Permaquim.Depositary.UI.Desktop
         public KeyboardInputForm()
         {
             InitializeComponent();
+            LoadStyles();
             Loadlogo();
 
             TitleLabel.Text = MultilanguangeController.GetText("LOGIN_TITLE");
@@ -17,6 +18,12 @@ namespace Permaquim.Depositary.UI.Desktop
             MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText("PASSWORDTEXTBOXPLACEHOLDER");
 
             MainKeyboard.KeyboardEvent += MainKeyboard_KeyboardEvent;
+
+        }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor("Color1");
+            MainKeyboard.BackColor = StyleController.GetColor("Color2");
 
         }
 
