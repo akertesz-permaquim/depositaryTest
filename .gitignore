@@ -19,3 +19,5 @@ Permaquim.Depositary.Interfaces/.vs/
 obj/
 [Rr]elease*/
 _ReSharper*/
+Permaquim.Depositary.Database/Permaquim.Depositary.Database.jfm
+Permaquim.Depositary.Database/Permaquim.Depositary.Database.dbmdl
