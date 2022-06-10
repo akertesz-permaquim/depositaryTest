@@ -25,7 +25,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Permaquim.Depositario.Business.Relations.Estilo.EsquemaDetalle entities = new();
             entities.Where.Add(Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId,
               Depositario.sqlEnum.OperandEnum.Equal,
-              DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId);
+              DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId.Id);
             entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.Nombre,
                 Depositario.sqlEnum.OperandEnum.Equal, resourceName);
@@ -45,7 +45,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             entities.Where.Add(Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId,
             Depositario.sqlEnum.OperandEnum.Equal,
-            DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId);
+            DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId.Id);
             entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.Nombre,
                 Depositario.sqlEnum.OperandEnum.Equal, colorName);

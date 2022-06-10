@@ -38,6 +38,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private Double currentCountingAmount = 0;
         private int currentCountingQuantity = 0;
 
+        private int _remainingTime = 60;
+
         private const int IMAGE_COLUMN = 0;
         private const int DENOMINATION_COLUMN = 1;
         private const int QUANTITY_COLUMN = 2;
@@ -50,6 +52,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BillDepositForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+
+            _detectedDenominations = new();
+
             _poolingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = 200,
@@ -58,12 +63,6 @@ namespace Permaquim.Depositary.UI.Desktop
             _poolingTimer.Tick += PoolTimer_Tick;
 
             _operationStatus = new();
-
-
-            if (_device != null && _device.CounterConnected && _device.StateResultProperty != null)
-            {
-                _device.DepositMode();
-            }
 
             LoadDenominations();
 
@@ -74,13 +73,29 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (_device != null && _device.CounterConnected)
             {
-                // Muestra el estado del hardware
-                ShowHardwareMonitorData();
-                // Procesa los estados 
-                ProcessDeviceStatus();
+                if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.Neutral_SettingMode)
+                {
+                    _device.DepositMode();
+                }
+                else { 
+                    // Muestra el estado del hardware
+                    ShowHardwareMonitorData();
+                    // Procesa los estados 
+                    ProcessDeviceStatus();
+                }
             }
-        }
+ 
 
+        }
+        public bool EsMultiplo(int numero,int multiplo)
+        {
+            if (numero % multiplo == 0)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
         private void ProcessDeviceStatus()
         {
             // Asigna a la máquina el valor del estado de la contadora en este ciclo
@@ -322,6 +337,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             int deviceMode = (int)_device.StateResultProperty.ModeStateInformation.ModeState;
             DeviceModeLabel.Text = Enum.GetName(typeof(ModeStateInformation.Mode), deviceMode);
+            CurrencyStatusLabel.Text = _device.StateResultProperty.CountryCode.CurrencyStateInformation.ToString();
 
             StackerFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.StackerFull;
             RejectFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectFull;
@@ -363,22 +379,24 @@ namespace Permaquim.Depositary.UI.Desktop
                         Id = item.Id,
                         Nombre = item.Nombre,
                         Unidades = item.Unidades,
-                        CantidadDetectada = value
+                        CantidadDetectada = value,
+                        Indice = _detectedDenominations.Count
                     });
                 }
             }
 
-            if (_detectedDenominations.Count > 0)
+            if (_detectedDenominations.Count > 0 && DenominationsGridView.Rows.Count > 0)
             {
+
                 // Actualiza las denominaciones con el valor detectado 
                 foreach (var denomination in _detectedDenominations)
                 {
                     if (DenominationsGridView.Rows.Count > 0)
                     {
-                        DenominationsGridView.Rows[(int)denomination.Id]
+                        DenominationsGridView.Rows[(int)denomination.Indice]
                             .Cells["Cantidad"].Value = denomination.CantidadDetectada.ToString();
-                        DenominationsGridView.Rows[(int)denomination.Id]
-                            .Cells["Importe"].Value = // DatabaseController.CurrentCurrency.Simbolo + " " +
+                        DenominationsGridView.Rows[(int)denomination.Indice]
+                            .Cells["Importe"].Value = DatabaseController.CurrentCurrency.Simbolo + " " +
                             (denomination.CantidadDetectada * Convert.ToInt32(denomination.Unidades)).ToString();
 
                         currentCountingAmount += Convert.ToInt32(denomination.Unidades) * denomination.CantidadDetectada;
@@ -386,17 +404,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                 }
 
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.BackColor = Color.SteelBlue;
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.ForeColor = Color.White;
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
-                DenominationsGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                DenominationsGridView.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-                //Totales
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Cantidad"].Value =
-                    (currentCountingQuantity + _operationStatus.CurrentTransactionQuantity).ToString();
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Importe"].Value =
-                        (currentCountingAmount + _operationStatus.CurrentTransactionAmount).ToString(); ;
+                SetTotalRowStyle();
 
 
                 //BillsQuantityLabel.Text = (currentCountingQuantity + _operationStatus.CurrentTransactionQuantity).ToString();
@@ -418,6 +426,25 @@ namespace Permaquim.Depositary.UI.Desktop
 
             CancelDepositButton.Visible = true;
         }
+
+        private void SetTotalRowStyle()
+        {
+            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.BackColor = Color.SteelBlue;
+            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.ForeColor = Color.White;
+            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
+            DenominationsGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            //Totales
+            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Cantidad"].Value =
+                (currentCountingQuantity + _operationStatus.CurrentTransactionQuantity).ToString();
+            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Importe"].Value =
+                DatabaseController.CurrentCurrency.Simbolo + " " +
+                    (currentCountingAmount + _operationStatus.CurrentTransactionAmount).ToString(); ;
+        }
+
         private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             // I suppose your check box is at column index 0
@@ -508,6 +535,8 @@ namespace Permaquim.Depositary.UI.Desktop
             Permaquim.Depositario.Business.Relations.Valor.Denominacion denominacion = new();
             denominacion.Where.Add(Permaquim.Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.MonedaId,
                 Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentCurrency.Id);
+            denominacion.OrderByParameter.Add(Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.Unidades);
+
             _denominaciones = denominacion.Items();
 
             var bitmap = new Bitmap(640, 480);
@@ -529,15 +558,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 _depositItems.Add(new DepositItem()
                 {
-                    Amount = 0,
+                    Amount = "0",
                     Denomination =item.MonedaId.Codigo + " " +  item.Nombre,
                     Quantity = 0,
                     Image = System.Drawing.Image.FromStream(new MemoryStream(bytes))
                 });
 
             }
-            _depositItems.Add(new() { Denomination = "Total",Amount = 0,Image= bitmap, Quantity=0});
+            _depositItems.Add(new() { Denomination = "Total",Amount = "0",Image= bitmap, Quantity=0});
             DenominationsGridView.DataSource = _depositItems;
+
+            SetTotalRowStyle();
         }
 
         /// <summary>
@@ -559,13 +590,13 @@ namespace Permaquim.Depositary.UI.Desktop
                 Permaquim.Depositario.Entities.Tables.Operacion.Transaccion transaction = new()
                 {
                     CierreDiarioId = 0,
-                    ContenedorId = 3,
-                    DepositarioId = 1,
+                    ContenedorId = DatabaseController.CurrentContainer.Id,
+                    DepositarioId = DatabaseController.CurrentDepositary.Id,
                     Fecha = DateTime.Now,
                     Finalizada = true,
-                    SectorId = 0,
+                    SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
                     SesionId = sesiones.Result.FirstOrDefault().Id,
-                    SucursalId = 0,
+                    SucursalId = DatabaseController.CurrentDepositary.SectorId.SucursalId.Id,
                     TipoId = 1,             // Depósito de Billete
                     TotalAValidar = 0,
                     TotalValidado = _operationStatus.CurrentTransactionAmount,
@@ -622,6 +653,11 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             MonitorGroupBox.Visible = EventCheckbox.Checked;
         }
+
+        private void MonitorGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class Operationstatus
@@ -674,11 +710,12 @@ namespace Permaquim.Depositary.UI.Desktop
     {
         public string Denomination { get; set; }
         public Int64 Quantity { get; set; }
-        public double Amount { get; set; }
+        public string Amount { get; set; }
         public Image Image { get; set; }
     }
     public class DenominationItem : Permaquim.Depositario.Entities.Tables.Valor.Denominacion
     {
         public int CantidadDetectada { get; set; }
+        public int Indice { get; set; }
     }
 }

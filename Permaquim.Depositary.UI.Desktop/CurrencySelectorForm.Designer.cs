@@ -51,6 +51,7 @@
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CurrencySelectorForm";
+            this.Load += new System.EventHandler(this.CurrencySelectorForm_Load);
             this.ResumeLayout(false);
 
         }

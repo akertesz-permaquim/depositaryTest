@@ -41,6 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             InitializeDevices();
         }
+
         private void InitializeDevices()
         {
             // TODO: Obtener de la DB
@@ -176,6 +177,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 AvatarPicturebox.Image = ImageFromBase64Helper.
                     GetImageFromBase64String(DatabaseController.CurrentUser.Avatar);
+            }
+            else
+            {
+                AvatarPicturebox.Image = null;
             }
         }
         private void ExitButton_Click(object sender, EventArgs e)

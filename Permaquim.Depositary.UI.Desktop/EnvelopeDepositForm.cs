@@ -168,7 +168,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.DepositMode();
                 _poolingTimer.Enabled = true;
                 _operationStatus.StackerFull = false;
-                _operationStatus.StackerFullTreated = false;
+                //_operationStatus.StackerFullTreated = false;
             }
         }
         /// <summary>

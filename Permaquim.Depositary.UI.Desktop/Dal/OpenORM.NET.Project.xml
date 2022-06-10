@@ -270,6 +270,7 @@
     <string>Auditoria.TipoLog</string>
     <string>Banca.Banco</string>
     <string>Banca.Cuenta</string>
+    <string>Banca.TipoCuenta</string>
     <string>Banca.UsuarioCuenta</string>
     <string>Biometria.HuellaDactilar</string>
     <string>Directorio.Empresa</string>

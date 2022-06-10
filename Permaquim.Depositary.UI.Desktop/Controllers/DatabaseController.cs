@@ -22,6 +22,22 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }  
         }
 
+
+        /// <summary>
+        /// Representa el contenedor actual
+        /// </summary>
+        public static Permaquim.Depositario.Entities.Relations.Operacion.Contenedor CurrentContainer
+        {
+            get
+            {
+                Permaquim.Depositario.Business.Relations.Operacion.Contenedor entity = new();
+                entity.Where.Add(Depositario.Business.Relations.Operacion.Contenedor.ColumnEnum.Id,
+                    Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+                return entity.Items().LastOrDefault();
+            }
+        }
+
+
         private static Permaquim.Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
 
         public static Permaquim.Depositario.Entities.Relations.Valor.Moneda CurrentCurrency
@@ -76,6 +92,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
  
         }
 
+        public static void LogOff()
+        {
+            CurrentUser = null;
+            _currentCurrency = new();
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -102,21 +125,28 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             monedasucursal.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, 
                 Permaquim.Depositario.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.Habilitado,
                 Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
+           
             monedasucursal.Items();
 
             var monedas = monedasucursal.Result.DistinctBy(x => x.MonedaId.Id).Select(x => x.MonedaId.Id).ToList();
 
             Permaquim.Depositario.Business.Relations.Valor.Moneda currencies = new();
-            currencies.Where.Add(Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Habilitado,
-                Permaquim.Depositario.sqlEnum.OperandEnum.Equal,true);
-            currencies.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
+
+            // si no existen monedas habilitadas para la sucursal, se retorna vacío.
+            if (monedas.Count > 0)
+            {
+                currencies.Where.Add(Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Habilitado,
+                    Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
+                currencies.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Id,
+                    Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+                currencies.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
                 Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Id,
-                Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
-            currencies.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
-            Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Id,
-            Permaquim.Depositario.sqlEnum.OperandEnum.In, monedas);
+                Permaquim.Depositario.sqlEnum.OperandEnum.In, monedas);
+                return currencies.Items();
+            }
             
-            return currencies.Items();
+            return currencies.Items(-1);
 
 
 

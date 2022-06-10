@@ -446,6 +446,35 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
         }
 
+        public StatesResult SwitchCurrency(long counterIndex)
+        {
+            if (_counterPort.IsOpen)
+            {
+                Log("COMMAND: StoringStart");
+                DiscardBuffer(_counterPort);
+                byte[] currencyRequest = _device.SwitchCurrency;
+                  
+                currencyRequest[5] = BitConverter.GetBytes(counterIndex)[0]; 
+
+                byte[] bcc = GetBCC(currencyRequest);
+
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterSimpleResponse();
+
+                _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return _stateResultProperty;
+            }
+            else
+            {
+                Log("COMMAND NOT SENT: StoringStart. Port is closed.");
+                return StateResultProperty;
+            }
+        }
+
         public StatesResult BatchDataTransmission()
         {
             if (_counterPort.IsOpen)
@@ -1386,7 +1415,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
 
             return source.ToArray<byte>();
-
+            //return Qarray;
 
         }
 

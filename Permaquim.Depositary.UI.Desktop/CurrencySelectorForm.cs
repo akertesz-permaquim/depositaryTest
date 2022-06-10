@@ -1,4 +1,5 @@
-﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+﻿using Permaquim.Depositary.UI.Desktop.Components;
+using Permaquim.Depositary.UI.Desktop.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,8 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class CurrencySelectorForm : Form
     {
+        public Device _device { get; set; }
+
         private List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> _currencies = DatabaseController.GetCurrencies();
         public CurrencySelectorForm()
         {
@@ -94,12 +97,14 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CurrencyButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
+            
+            _device.SwitchCurrency(DatabaseController.CurrentCurrency.IndiceEnContadora);
+
             if (DatabaseController.CurrentOperation.Id == 1)
             {
                 if (DatabaseController.GetUserBankAccounts().Count == 0)
                 {
-
-                    AppController.OpenChildForm(new BillDepositForm(),
+                     AppController.OpenChildForm(new BillDepositForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                 }
                 else
@@ -128,7 +133,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            AppController.OpenChildForm(new OperationForm(), _device);
             this.Close();
+        }
+
+        private void CurrencySelectorForm_Load(object sender, EventArgs e)
+        {
+            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
         }
     }
 }

@@ -117,22 +117,16 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
+            DatabaseController.LogOff();
             this.Close();
         }
         private void SetDeviceNeutralMode()
         {
-            try
+            // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
+            if (_device.StateResultProperty.ModeStateInformation.ModeState
+                == ModeStateInformation.Mode.DepositMode)
             {
-                // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                if (_device.StateResultProperty.ModeStateInformation.ModeState 
-                    == ModeStateInformation.Mode.DepositMode)
-                {
-                    _device.RemoteCancel();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                _device.RemoteCancel();
             }
         }
 
@@ -141,11 +135,6 @@ namespace Permaquim.Depositary.UI.Desktop
             AppController.OpenChildForm(new CurrencySelectorForm()
                 , (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
 
-        }
-
-        private void MainPanel_Paint(object sender, PaintEventArgs e)
-        {
-            //SetDeviceNeutralMode();
         }
 
     }
