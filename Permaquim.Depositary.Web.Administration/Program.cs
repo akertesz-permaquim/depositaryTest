@@ -18,6 +18,7 @@ builder.Services.AddScoped<Radzen.TooltipService>();
 builder.Services.AddScoped<Radzen.ContextMenuService>();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
+builder.Services.AddServerSideBlazor().AddHubOptions(options => { options.MaximumReceiveMessageSize = 10 * 1024 * 1024; });
 
 //builder.Services.AddScoped<SessionStorageManager>();
 

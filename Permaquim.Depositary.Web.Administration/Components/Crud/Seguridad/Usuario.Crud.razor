@@ -90,6 +90,19 @@ else
                         }
                 </Template>
             </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Title=@dataLenguaje.Where(x => x.Clave == "PERFILID" || x.Clave=="GENERIC").FirstOrDefault().Texto Property="PerfilId" Width="100px" >
+                <Template>
+                    @if(Perfil_entities.FirstOrDefault( c => c.Id == @context.PerfilId) != null){
+                       <RadzenLabel Text="@Perfil_entities.FirstOrDefault( c => c.Id == @context.PerfilId).Nombre" Component="PerfilId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                       <RadzenLabel Text="No data available" Component="PerfilId" style="width: 100%">
+                            </RadzenLabel>                        
+                        }
+                </Template>
+            </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Nombre" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Apellido" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "APELLIDO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
@@ -193,6 +206,28 @@ else
                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
                                     Data=@Lenguaje_entities TextProperty = "Nombre" ValueProperty = "Id"
                                     Change=@(args => SelectLenguajeValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "PERFILID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component ="PerfilId" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                  @if((@Perfil_entities.Count > 0 && @Perfil_entities.FirstOrDefault( c => c.Id == @Usuario_entity.PerfilId) != null) || crudMode != CrudMode.Delete)
+                  {
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.PerfilId)"
+                                    Data=@Perfil_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectPerfilValueChanged(args))
+                                    Disabled="@(crudMode==CrudMode.Delete)" />
+                  }
+                  else
+                  {
+                       <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                    Data=@Perfil_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                    Change=@(args => SelectPerfilValueChanged(args))
                                     Disabled="@(crudMode==CrudMode.Delete)" />
                   }
               </div>
@@ -332,18 +367,18 @@ else
             </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "DEBECAMBIARPASSWORD" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="DebeCambiarPassword" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "DEBECAMBIARPASSWORD" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="DebeCambiarPassword" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@Usuario_entity.DebeCambiarPassword  Name="DebeCambiarPasswordCheckBox" TValue="bool" Change=@(args => DebeCambiarPasswordChange(args, @Usuario_entity)) />
+                <RadzenCheckBox @bind-Value=@Usuario_entity.DebeCambiarPassword  Name="DebeCambiarPasswordCheckBox" TValue="bool" Change=@(args => DebeCambiarPasswordChange(args, @Usuario_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@Usuario_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Usuario_entity)) />
+                <RadzenCheckBox @bind-Value=@Usuario_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Usuario_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
          @if(crudMode!=CrudMode.Add)
@@ -449,6 +484,12 @@ else
     private List<DepositarioAdminWeb.Entities.Tables.Regionalizacion.Lenguaje>? Lenguaje_entities;
  
     /// <summary>
+    /// Variables to handle Relation between Usuario.PerfilId and Perfil.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Visualizacion.Perfil Perfil_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Visualizacion.Perfil>? Perfil_entities;
+ 
+    /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
@@ -487,6 +528,9 @@ else
         DepositarioAdminWeb.Business.Tables.Regionalizacion.Lenguaje Lenguaje_local = new();
         Lenguaje_entities = Lenguaje_local.Items();
  
+        DepositarioAdminWeb.Business.Tables.Visualizacion.Perfil Perfil_local = new();
+        Perfil_entities = Perfil_local.Items();
+ 
     }
  
     #endregion
@@ -501,6 +545,7 @@ else
         //Relations entities initialization
         Empresa_entity = new(); 
         Lenguaje_entity = new(); 
+        Perfil_entity = new(); 
         crudMode = CrudMode.Add;
     }
     /// <summary>
@@ -517,6 +562,10 @@ else
             Lenguaje_entity = new() { 
             Id = Lenguaje_entities.FirstOrDefault(c => c.Id == Usuario_entity.LenguajeId).Id, 
             Nombre = Lenguaje_entities.FirstOrDefault(c => c.Id == Usuario_entity.LenguajeId).Nombre
+            };
+            Perfil_entity = new() { 
+            Id = Perfil_entities.FirstOrDefault(c => c.Id == Usuario_entity.PerfilId).Id, 
+            Nombre = Perfil_entities.FirstOrDefault(c => c.Id == Usuario_entity.PerfilId).Nombre
             };
         if (delete)
             crudMode = CrudMode.Delete;
@@ -605,7 +654,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                     crud.Delete(Usuario_entity);
+                     Usuario_entity.Habilitado=false;
+                     crud.Update(Usuario_entity);
                      summary = "El registro se ha ";
                      actionInformation = "eliminado.";
                      severityType = NotificationSeverity.Success;
@@ -681,6 +731,14 @@ else
     /// </summary>
     /// <param name="item"></param>
     private void SelectLenguajeValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// Perfil value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectPerfilValueChanged(object item)
     {
     }
  

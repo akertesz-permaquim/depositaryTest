@@ -1808,6 +1808,344 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
+		public class TipoCuenta : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Nombre,
+					Descripcion,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Banca.TipoCuenta> _entities = new List<Entities.Tables.Banca.TipoCuenta>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public TipoCuenta() : base()
+            {
+                base._dataItem = new Entities.Tables.Banca.TipoCuenta();
+            }
+            public TipoCuenta(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Banca.TipoCuenta();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Banca.TipoCuenta item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// TipoCuenta Add Method
+         /// </summary>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Banca.TipoCuenta</returns>
+			public Entities.Tables.Banca.TipoCuenta Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Banca.TipoCuenta)base.Add(new Entities.Tables.Banca.TipoCuenta(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Banca.TipoCuenta> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Banca.TipoCuenta>().ToList<Entities.Tables.Banca.TipoCuenta>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Banca.TipoCuenta items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Banca.TipoCuenta> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Banca.TipoCuenta items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Banca.TipoCuenta> Items(Int64? Id,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Descripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Descripcion, sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Banca.TipoCuenta
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Banca.TipoCuenta Add(Entities.Tables.Banca.TipoCuenta item)
+            {
+                return (Entities.Tables.Banca.TipoCuenta)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Banca.TipoCuenta
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Banca.TipoCuenta AddOrUpdate(Entities.Tables.Banca.TipoCuenta item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Banca.TipoCuenta)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Banca.TipoCuenta
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Banca.TipoCuenta item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Banca.TipoCuenta with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Banca.TipoCuenta {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Banca.TipoCuenta
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Banca.TipoCuenta item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Banca.TipoCuenta with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Banca.TipoCuenta {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Banca.TipoCuenta> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class TipoCuenta
+	} //namespace DepositarioAdminWeb.Business.Tables.Banca
+	namespace DepositarioAdminWeb.Business.Tables.Banca {
+	    /// <summary>
+	    /// 
+	    /// </summary>
 		public class UsuarioCuenta : DataHandler
 		{
 				public enum ColumnEnum : int
@@ -2514,6 +2852,7 @@ using System.Text;
 					EstiloEsquemaId,
 					LenguajeId,
 					Habilitado,
+					EsDefault,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -2568,14 +2907,15 @@ using System.Text;
          /// <param name='EstiloEsquemaId'></param>
          /// <param name='LenguajeId'></param>
          /// <param name='Habilitado'></param>
+         /// <param name='EsDefault'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Directorio.Empresa</returns>
-			public Entities.Tables.Directorio.Empresa Add(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Int64 LenguajeId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Directorio.Empresa Add(String Nombre,String Descripcion,Int64 GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Int64 EstiloEsquemaId,Int64 LenguajeId,Boolean Habilitado,Boolean EsDefault,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Directorio.Empresa)base.Add(new Entities.Tables.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,LenguajeId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Directorio.Empresa)base.Add(new Entities.Tables.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,LenguajeId,Habilitado,EsDefault,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Directorio.Empresa> Items()
             {
@@ -2617,12 +2957,13 @@ using System.Text;
             /// <param name="EstiloEsquemaId"></param>
             /// <param name="LenguajeId"></param>
             /// <param name="Habilitado"></param>
+            /// <param name="EsDefault"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Directorio.Empresa> Items(Int64? Id,String Nombre,String Descripcion,Int64? GrupoId,String CodigoExterno,String Direccion,Int64? CodigoPostalId,Int64? EstiloEsquemaId,Int64? LenguajeId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Directorio.Empresa> Items(Int64? Id,String Nombre,String Descripcion,Int64? GrupoId,String CodigoExterno,String Direccion,Int64? CodigoPostalId,Int64? EstiloEsquemaId,Int64? LenguajeId,Boolean? Habilitado,Boolean? EsDefault,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -2745,6 +3086,18 @@ using System.Text;
                     }
                    
                 }
+                if (EsDefault != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EsDefault, sqlEnum.OperandEnum.Equal, EsDefault);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, EsDefault);
+                    }
+                   
+                }
                 if (UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
@@ -2842,14 +3195,15 @@ using System.Text;
             /// <param name="EstiloEsquemaId"></param>
             /// <param name="LenguajeId"></param>
             /// <param name="Habilitado"></param>
+            /// <param name="EsDefault"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 grupoid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 estiloesquemaid,Int64 lenguajeid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 grupoid,String codigoexterno,String direccion,Int64 codigopostalid,Int64 estiloesquemaid,Int64 lenguajeid,Boolean habilitado,Boolean esdefault,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Directorio.Empresa {Id = id,Nombre = nombre,Descripcion = descripcion,GrupoId = grupoid,CodigoExterno = codigoexterno,Direccion = direccion,CodigoPostalId = codigopostalid,EstiloEsquemaId = estiloesquemaid,LenguajeId = lenguajeid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Directorio.Empresa {Id = id,Nombre = nombre,Descripcion = descripcion,GrupoId = grupoid,CodigoExterno = codigoexterno,Direccion = direccion,CodigoPostalId = codigopostalid,EstiloEsquemaId = estiloesquemaid,LenguajeId = lenguajeid,Habilitado = habilitado,EsDefault = esdefault,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Directorio.Empresa
@@ -11462,8 +11816,10 @@ using System.Text;
                 {
 					Id,
 					EsquemaId,
+					TipoEsquemaDetalleId,
 					Nombre,
 					Descripcion,
+					Valor,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -11511,17 +11867,19 @@ using System.Text;
          /// EsquemaDetalle Add Method
          /// </summary>
          /// <param name='EsquemaId'></param>
+         /// <param name='TipoEsquemaDetalleId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Estilo.EsquemaDetalle</returns>
-			public Entities.Tables.Estilo.EsquemaDetalle Add(Int64 EsquemaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Estilo.EsquemaDetalle Add(Int64 EsquemaId,Int64 TipoEsquemaDetalleId,String Nombre,String Descripcion,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Estilo.EsquemaDetalle)base.Add(new Entities.Tables.Estilo.EsquemaDetalle(EsquemaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Estilo.EsquemaDetalle)base.Add(new Entities.Tables.Estilo.EsquemaDetalle(EsquemaId,TipoEsquemaDetalleId,Nombre,Descripcion,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Estilo.EsquemaDetalle> Items()
             {
@@ -11555,15 +11913,17 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EsquemaId"></param>
+            /// <param name="TipoEsquemaDetalleId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Valor"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Estilo.EsquemaDetalle> Items(Int64? Id,Int64? EsquemaId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Estilo.EsquemaDetalle> Items(Int64? Id,Int64? EsquemaId,Int64? TipoEsquemaDetalleId,String Nombre,String Descripcion,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -11590,6 +11950,18 @@ using System.Text;
                     }
                    
                 }
+                if (TipoEsquemaDetalleId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoEsquemaDetalleId, sqlEnum.OperandEnum.Equal, TipoEsquemaDetalleId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TipoEsquemaDetalleId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TipoEsquemaDetalleId);
+                    }
+                   
+                }
                 if (Nombre != null)
                 {
                     if (this.Where.Count == 0)
@@ -11611,6 +11983,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Valor != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Valor);
                     }
                    
                 }
@@ -11715,17 +12099,19 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EsquemaId"></param>
+            /// <param name="TipoEsquemaDetalleId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Valor"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 esquemaid,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 esquemaid,Int64 tipoesquemadetalleid,String nombre,String descripcion,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Estilo.EsquemaDetalle {Id = id,EsquemaId = esquemaid,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Estilo.EsquemaDetalle {Id = id,EsquemaId = esquemaid,TipoEsquemaDetalleId = tipoesquemadetalleid,Nombre = nombre,Descripcion = descripcion,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Estilo.EsquemaDetalle
@@ -11810,34 +12196,34 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class EsquemaDetalleValor : DataHandler
+		public class TipoEsquemaDetalle : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
 					Id,
-					EsquemaDetalleId,
-					Valor,
+					Nombre,
+					Descripcion,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
 					FechaModificacion
 				}
-         protected List<Entities.Tables.Estilo.EsquemaDetalleValor> _entities = new List<Entities.Tables.Estilo.EsquemaDetalleValor>();
+         protected List<Entities.Tables.Estilo.TipoEsquemaDetalle> _entities = new List<Entities.Tables.Estilo.TipoEsquemaDetalle>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where = new WhereCollection();
          public OrderByCollection OrderBy = new OrderByCollection();
          public GroupByCollection GroupBy = new GroupByCollection();
          public AggregateCollection Aggregate { get; set; }
-            public EsquemaDetalleValor() : base()
+            public TipoEsquemaDetalle() : base()
             {
-                base._dataItem = new Entities.Tables.Estilo.EsquemaDetalleValor();
+                base._dataItem = new Entities.Tables.Estilo.TipoEsquemaDetalle();
             }
-            public EsquemaDetalleValor(IDataHandler dataHandler)
+            public TipoEsquemaDetalle(IDataHandler dataHandler)
                 : base(dataHandler)
             {
                 base._transaction = dataHandler.GetTransaction();
-                base._dataItem = new Entities.Tables.Estilo.EsquemaDetalleValor();
+                base._dataItem = new Entities.Tables.Estilo.TipoEsquemaDetalle();
             }
             public class AggregateCollection : AggregateParameter
             {
@@ -11848,7 +12234,7 @@ using System.Text;
                      }
             }
 			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Tables.Estilo.EsquemaDetalleValor item)
+			public void AddToCache(Entities.Tables.Estilo.TipoEsquemaDetalle item)
 			{
 				_cacheItemList.Add(item);
 			}
@@ -11861,35 +12247,35 @@ using System.Text;
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
          /// <summary>
-         /// EsquemaDetalleValor Add Method
+         /// TipoEsquemaDetalle Add Method
          /// </summary>
-         /// <param name='EsquemaDetalleId'></param>
-         /// <param name='Valor'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Tables.Estilo.EsquemaDetalleValor</returns>
-			public Entities.Tables.Estilo.EsquemaDetalleValor Add(Int64 EsquemaDetalleId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+         /// <returns>Entities.Tables.Estilo.TipoEsquemaDetalle</returns>
+			public Entities.Tables.Estilo.TipoEsquemaDetalle Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Estilo.EsquemaDetalleValor)base.Add(new Entities.Tables.Estilo.EsquemaDetalleValor(EsquemaDetalleId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Estilo.TipoEsquemaDetalle)base.Add(new Entities.Tables.Estilo.TipoEsquemaDetalle(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
-            public new List<Entities.Tables.Estilo.EsquemaDetalleValor> Items()
+            public new List<Entities.Tables.Estilo.TipoEsquemaDetalle> Items()
             {
                 DataHandler dh =  new DataHandler(this._dataItem);
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
-                _entities = dh.Items().Cast<Entities.Tables.Estilo.EsquemaDetalleValor>().ToList<Entities.Tables.Estilo.EsquemaDetalleValor>();
+                _entities = dh.Items().Cast<Entities.Tables.Estilo.TipoEsquemaDetalle>().ToList<Entities.Tables.Estilo.TipoEsquemaDetalle>();
                 return _entities;
             }
             /// <summary>
-            /// Gets Entities.Tables.Estilo.EsquemaDetalleValor items by Pk
+            /// Gets Entities.Tables.Estilo.TipoEsquemaDetalle items by Pk
             /// </summary>
             /// <param name="Id"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Estilo.EsquemaDetalleValor> Items(Int64 Id)
+            public List<Entities.Tables.Estilo.TipoEsquemaDetalle> Items(Int64 Id)
             {
                 this.Where.Clear();
                     if (this.Where.Count == 0)
@@ -11903,18 +12289,18 @@ using System.Text;
                 return this.Items();
             }
             /// <summary>
-            /// Gets Entities.Tables.Estilo.EsquemaDetalleValor items with parameters.
+            /// Gets Entities.Tables.Estilo.TipoEsquemaDetalle items with parameters.
             /// </summary>
             /// <param name="Id"></param>
-            /// <param name="EsquemaDetalleId"></param>
-            /// <param name="Valor"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Estilo.EsquemaDetalleValor> Items(Int64? Id,Int64? EsquemaDetalleId,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Estilo.TipoEsquemaDetalle> Items(Int64? Id,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -11929,27 +12315,27 @@ using System.Text;
                     }
                    
                 }
-                if (EsquemaDetalleId != null)
+                if (Nombre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.EsquemaDetalleId, sqlEnum.OperandEnum.Equal, EsquemaDetalleId);
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
                     }
                     else
                     {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EsquemaDetalleId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, EsquemaDetalleId);
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Nombre);
                     }
                    
                 }
-                if (Valor != null)
+                if (Descripcion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
+                        this.Where.Add(ColumnEnum.Descripcion, sqlEnum.OperandEnum.Equal, Descripcion);
                     }
                     else
                     {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Valor);
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
                     }
                    
                 }
@@ -12016,24 +12402,24 @@ using System.Text;
                 return this.Items();
             }
             /// <summary>
-            /// Adds an instance of Entities.Tables.Estilo.EsquemaDetalleValor
+            /// Adds an instance of Entities.Tables.Estilo.TipoEsquemaDetalle
             /// </summary>
             /// <param name="item"></param>
             /// <returns></returns>
-            public Entities.Tables.Estilo.EsquemaDetalleValor Add(Entities.Tables.Estilo.EsquemaDetalleValor item)
+            public Entities.Tables.Estilo.TipoEsquemaDetalle Add(Entities.Tables.Estilo.TipoEsquemaDetalle item)
             {
-                return (Entities.Tables.Estilo.EsquemaDetalleValor)base.Add((IDataItem)item);
+                return (Entities.Tables.Estilo.TipoEsquemaDetalle)base.Add((IDataItem)item);
             }
             /// <summary>
-            /// Adds or updates an instance of Entities.Tables.Estilo.EsquemaDetalleValor
+            /// Adds or updates an instance of Entities.Tables.Estilo.TipoEsquemaDetalle
             /// </summary>
             /// <param name="item"></param>
             /// <returns></returns>
-            public Entities.Tables.Estilo.EsquemaDetalleValor AddOrUpdate(Entities.Tables.Estilo.EsquemaDetalleValor item)
+            public Entities.Tables.Estilo.TipoEsquemaDetalle AddOrUpdate(Entities.Tables.Estilo.TipoEsquemaDetalle item)
             {
                  if (Items(item.Id).Count == 0)
                  {
-                     return (Entities.Tables.Estilo.EsquemaDetalleValor)base.Add((IDataItem)item);
+                     return (Entities.Tables.Estilo.TipoEsquemaDetalle)base.Add((IDataItem)item);
                  }
                  else
                  {
@@ -12042,40 +12428,40 @@ using System.Text;
                  }
              }
             /// <summary>
-            /// Updates an instance of Entities.Tables.Estilo.EsquemaDetalleValor
+            /// Updates an instance of Entities.Tables.Estilo.TipoEsquemaDetalle
             /// </summary>
             /// <param name="item"></param>
             /// <returns><Int64/returns>
-            public Int64 Update(Entities.Tables.Estilo.EsquemaDetalleValor item)
+            public Int64 Update(Entities.Tables.Estilo.TipoEsquemaDetalle item)
             {
                 return base.Update((IDataItem)item);
             }
-            /// Updates an instance of Entities.Tables.Estilo.EsquemaDetalleValor with parameters
+            /// Updates an instance of Entities.Tables.Estilo.TipoEsquemaDetalle with parameters
             /// </summary>
             /// <param name="Id"></param>
-            /// <param name="EsquemaDetalleId"></param>
-            /// <param name="Valor"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 esquemadetalleid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Estilo.EsquemaDetalleValor {Id = id,EsquemaDetalleId = esquemadetalleid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Estilo.TipoEsquemaDetalle {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
-            /// Deletes an instance of Entities.Tables.Estilo.EsquemaDetalleValor
+            /// Deletes an instance of Entities.Tables.Estilo.TipoEsquemaDetalle
             /// </summary>
             /// <param name="item"></param>
             /// <returns></returns>
-            public Int64 Delete(Entities.Tables.Estilo.EsquemaDetalleValor item)
+            public Int64 Delete(Entities.Tables.Estilo.TipoEsquemaDetalle item)
             {
                 return base.DeleteItem((IDataItem)item);
             }
             /// <summary>
-            /// Deletes Entities.Tables.Estilo.EsquemaDetalleValor with where conditions
+            /// Deletes Entities.Tables.Estilo.TipoEsquemaDetalle with where conditions
             /// </summary>
             /// <returns></returns>
             public new Int64 Delete()
@@ -12092,13 +12478,13 @@ using System.Text;
             /// <returns></returns>
             public Int64 Delete(Int64 id)
             {
-                return base.DeleteItem((IDataItem) new Entities.Tables.Estilo.EsquemaDetalleValor {Id = id});
+                return base.DeleteItem((IDataItem) new Entities.Tables.Estilo.TipoEsquemaDetalle {Id = id});
             }
             /// <summary>
             /// Holds last Items() executed.
             /// </summary>
             /// <returns>Last Items()</returns>
-            public List<Entities.Tables.Estilo.EsquemaDetalleValor> Result
+            public List<Entities.Tables.Estilo.TipoEsquemaDetalle> Result
             {
                 get{return _entities;}
             }
@@ -12142,7 +12528,7 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-        } // class EsquemaDetalleValor
+        } // class TipoEsquemaDetalle
 	} //namespace DepositarioAdminWeb.Business.Tables.Estilo
 	namespace DepositarioAdminWeb.Business.Tables.Geografia {
 	    /// <summary>
@@ -15083,7 +15469,7 @@ using System.Text;
          /// <param name='FechaCierre'></param>
          /// <param name='EsCierreAutomatico'></param>
          /// <returns>Entities.Tables.Operacion.Sesion</returns>
-			public Entities.Tables.Operacion.Sesion Add(Int64 UsuarioId,DateTime FechaInicio,DateTime FechaCierre,Boolean EsCierreAutomatico) 
+			public Entities.Tables.Operacion.Sesion Add(Int64 UsuarioId,DateTime FechaInicio,DateTime? FechaCierre,Boolean? EsCierreAutomatico) 
 			{
 			  return (Entities.Tables.Operacion.Sesion)base.Add(new Entities.Tables.Operacion.Sesion(UsuarioId,FechaInicio,FechaCierre,EsCierreAutomatico));
 			}
@@ -15231,7 +15617,7 @@ using System.Text;
             /// <param name="FechaCierre"></param>
             /// <param name="EsCierreAutomatico"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 usuarioid,DateTime fechainicio,DateTime fechacierre,Boolean escierreautomatico)
+            public Int64 Update(Int64 id,Int64 usuarioid,DateTime fechainicio,DateTime? fechacierre,Boolean? escierreautomatico)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.Sesion {Id = id,UsuarioId = usuarioid,FechaInicio = fechainicio,FechaCierre = fechacierre,EsCierreAutomatico = escierreautomatico});
             }
@@ -18463,6 +18849,7 @@ using System.Text;
 					Id,
 					Nombre,
 					Descripcion,
+					EsDefault,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -18511,15 +18898,16 @@ using System.Text;
          /// </summary>
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='EsDefault'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Regionalizacion.Lenguaje</returns>
-			public Entities.Tables.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,Boolean EsDefault,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Regionalizacion.Lenguaje)base.Add(new Entities.Tables.Regionalizacion.Lenguaje(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Regionalizacion.Lenguaje)base.Add(new Entities.Tables.Regionalizacion.Lenguaje(Nombre,Descripcion,EsDefault,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Regionalizacion.Lenguaje> Items()
             {
@@ -18554,13 +18942,14 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="EsDefault"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Regionalizacion.Lenguaje> Items(Int64? Id,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Regionalizacion.Lenguaje> Items(Int64? Id,String Nombre,String Descripcion,Boolean? EsDefault,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -18596,6 +18985,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (EsDefault != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EsDefault, sqlEnum.OperandEnum.Equal, EsDefault);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, EsDefault);
                     }
                    
                 }
@@ -18701,15 +19102,16 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="EsDefault"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean esdefault,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Regionalizacion.Lenguaje {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Regionalizacion.Lenguaje {Id = id,Nombre = nombre,Descripcion = descripcion,EsDefault = esdefault,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Regionalizacion.Lenguaje
@@ -18803,6 +19205,7 @@ using System.Text;
 					Clave,
 					Texto,
 					Habilitado,
+					LargoMaximo,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -18852,14 +19255,15 @@ using System.Text;
          /// <param name='Clave'></param>
          /// <param name='Texto'></param>
          /// <param name='Habilitado'></param>
+         /// <param name='LargoMaximo'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Regionalizacion.LenguajeItem</returns>
-			public Entities.Tables.Regionalizacion.LenguajeItem Add(Int64 LenguajeId,String Clave,String Texto,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Regionalizacion.LenguajeItem Add(Int64 LenguajeId,String Clave,String Texto,Boolean Habilitado,Int32 LargoMaximo,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Regionalizacion.LenguajeItem)base.Add(new Entities.Tables.Regionalizacion.LenguajeItem(LenguajeId,Clave,Texto,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Regionalizacion.LenguajeItem)base.Add(new Entities.Tables.Regionalizacion.LenguajeItem(LenguajeId,Clave,Texto,Habilitado,LargoMaximo,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Regionalizacion.LenguajeItem> Items()
             {
@@ -18896,12 +19300,13 @@ using System.Text;
             /// <param name="Clave"></param>
             /// <param name="Texto"></param>
             /// <param name="Habilitado"></param>
+            /// <param name="LargoMaximo"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Regionalizacion.LenguajeItem> Items(Int64? Id,Int64? LenguajeId,String Clave,String Texto,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Regionalizacion.LenguajeItem> Items(Int64? Id,Int64? LenguajeId,String Clave,String Texto,Boolean? Habilitado,Int32? LargoMaximo,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -18961,6 +19366,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (LargoMaximo != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.LargoMaximo, sqlEnum.OperandEnum.Equal, LargoMaximo);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.LargoMaximo, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, LargoMaximo);
                     }
                    
                 }
@@ -19056,14 +19473,15 @@ using System.Text;
             /// <param name="Clave"></param>
             /// <param name="Texto"></param>
             /// <param name="Habilitado"></param>
+            /// <param name="LargoMaximo"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 lenguajeid,String clave,String texto,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 lenguajeid,String clave,String texto,Boolean habilitado,Int32 largomaximo,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Regionalizacion.LenguajeItem {Id = id,LenguajeId = lenguajeid,Clave = clave,Texto = texto,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Regionalizacion.LenguajeItem {Id = id,LenguajeId = lenguajeid,Clave = clave,Texto = texto,Habilitado = habilitado,LargoMaximo = largomaximo,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Regionalizacion.LenguajeItem
@@ -22711,6 +23129,7 @@ using System.Text;
 					Id,
 					EmpresaId,
 					LenguajeId,
+					PerfilId,
 					Nombre,
 					Apellido,
 					Legajo,
@@ -22770,6 +23189,7 @@ using System.Text;
          /// </summary>
          /// <param name='EmpresaId'></param>
          /// <param name='LenguajeId'></param>
+         /// <param name='PerfilId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Apellido'></param>
          /// <param name='Legajo'></param>
@@ -22787,9 +23207,9 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Usuario</returns>
-			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,Int64 LenguajeId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,Int64 LenguajeId,Int64 PerfilId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Seguridad.Usuario)base.Add(new Entities.Tables.Seguridad.Usuario(EmpresaId,LenguajeId,Nombre,Apellido,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Seguridad.Usuario)base.Add(new Entities.Tables.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Seguridad.Usuario> Items()
             {
@@ -22824,6 +23244,7 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="EmpresaId"></param>
             /// <param name="LenguajeId"></param>
+            /// <param name="PerfilId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Apellido"></param>
             /// <param name="Legajo"></param>
@@ -22841,7 +23262,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,String Nombre,String Apellido,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,Int64? PerfilId,String Nombre,String Apellido,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -22877,6 +23298,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.LenguajeId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, LenguajeId);
+                    }
+                   
+                }
+                if (PerfilId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PerfilId, sqlEnum.OperandEnum.Equal, PerfilId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.PerfilId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PerfilId);
                     }
                    
                 }
@@ -23114,6 +23547,7 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="EmpresaId"></param>
             /// <param name="LenguajeId"></param>
+            /// <param name="PerfilId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Apellido"></param>
             /// <param name="Legajo"></param>
@@ -23131,9 +23565,9 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 empresaid,Int64 lenguajeid,String nombre,String apellido,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 empresaid,Int64 lenguajeid,Int64 perfilid,String nombre,String apellido,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Seguridad.Usuario {Id = id,EmpresaId = empresaid,LenguajeId = lenguajeid,Nombre = nombre,Apellido = apellido,Legajo = legajo,Mail = mail,FechaIngreso = fechaingreso,NickName = nickname,Password = password,Token = token,Avatar = avatar,FechaUltimoLogin = fechaultimologin,DebeCambiarPassword = debecambiarpassword,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Seguridad.Usuario {Id = id,EmpresaId = empresaid,LenguajeId = lenguajeid,PerfilId = perfilid,Nombre = nombre,Apellido = apellido,Legajo = legajo,Mail = mail,FechaIngreso = fechaingreso,NickName = nickname,Password = password,Token = token,Avatar = avatar,FechaUltimoLogin = fechaultimologin,DebeCambiarPassword = debecambiarpassword,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Seguridad.Usuario
@@ -26176,6 +26610,7 @@ using System.Text;
 					Unidades,
 					Imagen,
 					CodigoCcTalk,
+					Posicion,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -26228,15 +26663,16 @@ using System.Text;
          /// <param name='Unidades'></param>
          /// <param name='Imagen'></param>
          /// <param name='CodigoCcTalk'></param>
+         /// <param name='Posicion'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Valor.Denominacion</returns>
-			public Entities.Tables.Valor.Denominacion Add(String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Valor.Denominacion Add(String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Valor.Denominacion)base.Add(new Entities.Tables.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Valor.Denominacion)base.Add(new Entities.Tables.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Posicion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Valor.Denominacion> Items()
             {
@@ -26275,13 +26711,14 @@ using System.Text;
             /// <param name="Unidades"></param>
             /// <param name="Imagen"></param>
             /// <param name="CodigoCcTalk"></param>
+            /// <param name="Posicion"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Valor.Denominacion> Items(Int64? Id,String Nombre,Int64? TipoValorId,Int64? MonedaId,Decimal? Unidades,String Imagen,String CodigoCcTalk,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Valor.Denominacion> Items(Int64? Id,String Nombre,Int64? TipoValorId,Int64? MonedaId,Decimal? Unidades,String Imagen,String CodigoCcTalk,Int32? Posicion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -26365,6 +26802,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.CodigoCcTalk, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, CodigoCcTalk);
+                    }
+                   
+                }
+                if (Posicion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Posicion, sqlEnum.OperandEnum.Equal, Posicion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Posicion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Posicion);
                     }
                    
                 }
@@ -26474,15 +26923,16 @@ using System.Text;
             /// <param name="Unidades"></param>
             /// <param name="Imagen"></param>
             /// <param name="CodigoCcTalk"></param>
+            /// <param name="Posicion"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 tipovalorid,Int64 monedaid,Decimal unidades,String imagen,String codigocctalk,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Int64 tipovalorid,Int64 monedaid,Decimal unidades,String imagen,String codigocctalk,Int32 posicion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Valor.Denominacion {Id = id,Nombre = nombre,TipoValorId = tipovalorid,MonedaId = monedaid,Unidades = unidades,Imagen = imagen,CodigoCcTalk = codigocctalk,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Valor.Denominacion {Id = id,Nombre = nombre,TipoValorId = tipovalorid,MonedaId = monedaid,Unidades = unidades,Imagen = imagen,CodigoCcTalk = codigocctalk,Posicion = posicion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Valor.Denominacion
@@ -26576,6 +27026,7 @@ using System.Text;
 					PaisId,
 					Codigo,
 					Simbolo,
+					IndiceEnContadora,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -26626,15 +27077,16 @@ using System.Text;
          /// <param name='PaisId'></param>
          /// <param name='Codigo'></param>
          /// <param name='Simbolo'></param>
+         /// <param name='IndiceEnContadora'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Valor.Moneda</returns>
-			public Entities.Tables.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,String Simbolo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,String Simbolo,Int32 IndiceEnContadora,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Valor.Moneda)base.Add(new Entities.Tables.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Valor.Moneda)base.Add(new Entities.Tables.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,IndiceEnContadora,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Valor.Moneda> Items()
             {
@@ -26671,13 +27123,14 @@ using System.Text;
             /// <param name="PaisId"></param>
             /// <param name="Codigo"></param>
             /// <param name="Simbolo"></param>
+            /// <param name="IndiceEnContadora"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,Int32? IndiceEnContadora,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -26737,6 +27190,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Simbolo, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Simbolo);
+                    }
+                   
+                }
+                if (IndiceEnContadora != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.IndiceEnContadora, sqlEnum.OperandEnum.Equal, IndiceEnContadora);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.IndiceEnContadora, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, IndiceEnContadora);
                     }
                    
                 }
@@ -26844,15 +27309,16 @@ using System.Text;
             /// <param name="PaisId"></param>
             /// <param name="Codigo"></param>
             /// <param name="Simbolo"></param>
+            /// <param name="IndiceEnContadora"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 paisid,String codigo,String simbolo,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Int64 paisid,String codigo,String simbolo,Int32 indiceencontadora,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Valor.Moneda {Id = id,Nombre = nombre,PaisId = paisid,Codigo = codigo,Simbolo = simbolo,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Valor.Moneda {Id = id,Nombre = nombre,PaisId = paisid,Codigo = codigo,Simbolo = simbolo,IndiceEnContadora = indiceencontadora,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Valor.Moneda

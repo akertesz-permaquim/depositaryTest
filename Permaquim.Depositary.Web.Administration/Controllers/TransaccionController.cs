@@ -24,6 +24,66 @@
             return resultado;
         }
 
+        //public static List<Entities.TransaccionDepositarioMonedaDefault> ObtenerTransaccionesDepositarioMonedaDefault(Int64 pDepositarioId, bool enBolsa)
+        //{
+        //    List<Entities.TransaccionDepositarioMonedaDefault> resultado = new();
+        //    Entities.Moneda monedaDefaultDepositario = DepositarioController.ObtenerMonedaPrincipalDepositario(pDepositarioId);
+        //    DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
+        //    oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pDepositarioId);
+        //    //Si se solicita lo que esta en bolsa actualmente se busca solo en el contenedor indicado
+        //    if(enBolsa)
+        //    {
+        //        Int64? bolsaColocada = ObtenerBolsaColocada(pDepositarioId).Value;
+        //        if (bolsaColocada.HasValue)
+        //            oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, bolsaColocada.Value);
+        //        else
+        //            return resultado; //Si no hay bolsa colocada devolvemos result vacio.
+        //    }
+
+        //    oTransaccion.Items();
+
+        //    foreach(var transaccion in oTransaccion.Result)
+        //    {
+        //        Entities.TransaccionDepositarioMonedaDefault transaccionDepositarioMonedaDefault = new();
+
+        //        transaccionDepositarioMonedaDefault.TransaccionId = transaccion.Id;
+        //        transaccionDepositarioMonedaDefault.DepositarioId = transaccion.DepositarioId.Id;
+        //        transaccionDepositarioMonedaDefault.TotalAValidar = transaccion.TotalAValidar;
+        //        transaccionDepositarioMonedaDefault.TotalValidado = transaccion.TotalValidado;
+        //        transaccionDepositarioMonedaDefault.MonedaId = transaccion.SucursalId.
+
+        //        foreach(var transaccionDetalle in transaccion.ListOf_TransaccionDetalle_TransaccionId.Where(x => x.DenominacionId.MonedaId.Id == monedaDefaultDepositario.Id))
+        //        {
+
+        //        }
+
+
+        //    }
+
+
+        //    return resultado;
+        //}
+
+        public static Int64? ObtenerBolsaColocada(Int64 pDepositario)
+        {
+            Int64? bolsaColocada = new();
+
+            DepositarioAdminWeb.Business.Relations.Operacion.Contenedor oContenedor = new();
+            oContenedor.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Now);
+
+            oContenedor.Items();
+
+            foreach(var contenedor in oContenedor.Result)
+            {
+                foreach(var transaccion in contenedor.ListOf_Transaccion_ContenedorId.Where(x => x.DepositarioId.Id == pDepositario))
+                {
+                    bolsaColocada = contenedor.Id;
+                }
+            }
+
+            return bolsaColocada;
+        }
+
         #endregion
 
         #region Depositos con sobre
@@ -97,6 +157,21 @@
             oSP.Items(pDepositarioID);
 
             resultado = oSP.MappedResultSet.Resultado;
+
+            return resultado;
+        }
+
+        #endregion
+
+        #region Dashboard
+
+        public static int ObtenerCantidadTransaccionesPorDia(DateTime pFecha)
+        {
+            int resultado = 0;
+            DepositarioAdminWeb.Business.Tables.Operacion.Transaccion oTransaccion = new();
+            oTransaccion.Where.Add(DepositarioAdminWeb.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
+            oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
+            resultado = oTransaccion.Items().Count;
 
             return resultado;
         }

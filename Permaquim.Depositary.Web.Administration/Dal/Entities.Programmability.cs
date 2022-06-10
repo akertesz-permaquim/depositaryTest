@@ -303,7 +303,7 @@ using System.Text;
              [DataItemAttributeFieldName("Contenedor","Contenedor")]
              public String Contenedor { get; set; }
              [DataItemAttributeFieldName("TotalValidado","TotalValidado")]
-             public Double? TotalValidado { get; set; }
+             public String TotalValidado { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              public Int64? DepositarioId { get; set; }
 				

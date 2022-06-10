@@ -48,11 +48,13 @@
     <string>Operacion.ObtenerTransaccionesPorDepositario</string>
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
     <string>Regionalizacion.ObtenerTextosLenguaje</string>
+    <string>Seguridad.ObtenerRolesPorUsuario</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures />
   <SelectedTables>
     <string>Banca.Banco</string>
     <string>Banca.Cuenta</string>
+    <string>Banca.TipoCuenta</string>
     <string>Banca.UsuarioCuenta</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
@@ -72,9 +74,7 @@
     <string>Dispositivo.TipoConfiguracionDepositario</string>
     <string>Dispositivo.TipoContadora</string>
     <string>Dispositivo.TipoPlaca</string>
-    <string>Estilo.Esquema</string>
-    <string>Estilo.EsquemaDetalle</string>
-    <string>Estilo.EsquemaDetalleValor</string>
+    <string>Estilo.TipoEsquemaDetalle</string>
     <string>Geografia.Ciudad</string>
     <string>Geografia.CodigoPostal</string>
     <string>Geografia.Pais</string>
@@ -86,8 +86,6 @@
     <string>Operacion.TipoTransaccion</string>
     <string>Operacion.Turno</string>
     <string>Operacion.TurnoUsuario</string>
-    <string>Regionalizacion.Lenguaje</string>
-    <string>Regionalizacion.LenguajeItem</string>
     <string>Seguridad.Aplicacion</string>
     <string>Seguridad.AplicacionParametro</string>
     <string>Seguridad.AplicacionParametroValor</string>
@@ -110,9 +108,6 @@
     <string>Valor.Moneda</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
-    <string>Visualizacion.Perfil</string>
-    <string>Visualizacion.PerfilItem</string>
-    <string>Visualizacion.PerfilTipo</string>
   </SelectedTables>
   <SelectedDatabase>Depositario</SelectedDatabase>
   <SelectedTemplates>

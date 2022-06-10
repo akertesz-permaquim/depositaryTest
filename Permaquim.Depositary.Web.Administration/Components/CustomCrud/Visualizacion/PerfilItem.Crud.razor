@@ -1,0 +1,511 @@
+@page "/VisualizacionPerfilItemCustomCrud"
+
+@using Permaquim.Depositary.Web.Administration.Controllers;
+@using Permaquim.Depositary.Web.Administration.Entities;
+
+@inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+@if (PerfilItem_entities == null)
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+}
+else
+{
+    switch (crudMode)
+    {
+        case CrudMode.Add:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_A_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Delete:
+            <RadzenBadge BadgeStyle="BadgeStyle.Warning">
+                <ChildContent>
+                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_D_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto? </h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.Edit:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_M_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+        case CrudMode.List:
+            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                <ChildContent>
+                    <div>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_L_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                    </div>
+                </ChildContent>
+            </RadzenBadge>
+            break;
+    }
+    <hr>
+    if (crudMode == CrudMode.List)
+    {
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@PerfilItem_entities" TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+            <EmptyTemplate>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+            </EmptyTemplate>
+            <Columns>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                    <HeaderTemplate>
+                        <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text=@dataLenguaje.Where(x => x.Clave == "NEW_BUTTON" || x.Clave == "GENERIC").FirstOrDefault().Texto Click="Add">
+                        </RadzenButton>
+                    </HeaderTemplate>
+                    <Template Context="element">
+                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                        <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Title=@dataLenguaje.Where(x => x.Clave == "PERFILID" || x.Clave=="GENERIC").FirstOrDefault().Texto Property="PerfilId" Width="100px">
+                    <Template>
+                        @if (Perfil_entities.FirstOrDefault(c => c.Id == @context.PerfilId) != null)
+                        {
+                            <RadzenLabel Text="@Perfil_entities.FirstOrDefault( c => c.Id == @context.PerfilId).Nombre" Component="PerfilId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                            <RadzenLabel Text="No data available" Component="PerfilId" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="IdTablaReferencia" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "IDTABLAREFERENCIA" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                    <Template>
+                        @if (dataPerfilTablaReferencia.FirstOrDefault(c => c.Id == @context.IdTablaReferencia) != null)
+                        {
+                            <RadzenLabel Text="@dataPerfilTablaReferencia.FirstOrDefault( c => c.Id == @context.IdTablaReferencia).Nombre" Component="IdTablaReferencia" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                        else
+                        {
+                            <RadzenLabel Text="No data available" Component="IdTablaReferencia" style="width: 100%">
+                            </RadzenLabel>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="Habilitado" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                    <Template Context="data">
+                        <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
+                        </RadzenCheckBox>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="UsuarioCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="FechaCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="UsuarioModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="FechaModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+        <hr>
+    }
+
+    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+    {
+        <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Data="@PerfilItem_entity" @bind-Value="PerfilItem_entity" Submit="Save" Visible="@(PerfilItem_entity != null)">
+            <ChildContent>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Id" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(PerfilItem_entity.Id)" Name="Id" Disabled="true">
+                        </RadzenNumeric>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "PERFILID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="PerfilId" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Value="@PerfilId"
+                                Data=@Perfil_entities TextProperty="Nombre" ValueProperty="Id"
+                                Disabled="true" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "IDTABLAREFERENCIA" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="IdTablaReferencia" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(PerfilItem_entity.IdTablaReferencia)"
+                                Data=@dataPerfilTablaReferencia TextProperty="Nombre" ValueProperty="Id"
+                                Disabled="@(crudMode == CrudMode.Delete)" />
+                    </div>
+                </div>
+                <div style=" margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenCheckBox @bind-Value=@PerfilItem_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @PerfilItem_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                    </div>
+                </div>
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioCreacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(PerfilItem_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaCreacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(PerfilItem_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenDatePicker>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioModificacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenNumeric TValue="long?" style="display: block; width: 100%" @bind-Value="@(PerfilItem_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                }
+                @if (crudMode != CrudMode.Add)
+                {
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaModificacion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(PerfilItem_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenDatePicker>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col offset-sm-3">
+                        <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@dataLenguaje.Where(x => x.Clave == "ACCEPT_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto ButtonStyle="ButtonStyle.Primary">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@dataLenguaje.Where(x => x.Clave == "CANCEL_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto Click="Cancel">
+                        </RadzenButton>
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenTemplateForm>
+        <hr>
+    }
+
+    <RadzenNotification />
+}
+
+@code {
+    /// <summary>
+    /// Crud Mode Enum
+    /// </summary>
+    private enum CrudMode
+    {
+        List,
+        Add,
+        Edit,
+        Delete
+    }
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem PerfilItem_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem> PerfilItem_entities = null;
+
+    /// <summary>
+    /// Variables to multilanguaje
+    /// </summary>
+    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+
+    /// <summary>
+    /// Variables to handle Relation between PerfilItem.PerfilId and Perfil.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Visualizacion.Perfil Perfil_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Visualizacion.Perfil>? Perfil_entities;
+
+    private List<PerfilReferencia> dataPerfilTablaReferencia = new();
+
+    /// <summary>
+    ///  Page crud mode {List,Add,Edit,Delete}
+    /// </summary>
+    private CrudMode crudMode = CrudMode.List;
+
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Int64? userId = null;
+
+    [Parameter]
+    public Int64 PerfilId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
+        await Task.Run(LoadPerfilReferenciaIds);
+
+        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+        if (userId == null)
+            NavManager.NavigateTo("login", true);
+    }
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        DepositarioAdminWeb.Business.Tables.Visualizacion.PerfilItem entity = new();
+        entity.Where.Add(DepositarioAdminWeb.Business.Tables.Visualizacion.PerfilItem.ColumnEnum.PerfilId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PerfilId);
+        PerfilItem_entities = entity.Items();
+    }
+    /// <summary>
+    /// Loads Type Tables data
+    /// </summary>
+    private void LoadTypesData()
+    {
+        DepositarioAdminWeb.Business.Tables.Visualizacion.Perfil Perfil_local = new();
+        Perfil_entities = Perfil_local.Items();
+
+    }
+
+    private void LoadPerfilReferenciaIds()
+    {
+        //En funcion del perfil seleccionado cargamos el combo de id tabla referencia con los id de la tabla relacionada
+        dataPerfilTablaReferencia = VisualizacionController.ObtenerReferenciasPerfilItem(PerfilId);
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Initializations for adding a new entity
+    /// </summary>
+    private void Add()
+    {
+        //Main entity initialization
+        PerfilItem_entity = new();
+        //Relations entities initialization
+        Perfil_entity = new();
+        crudMode = CrudMode.Add;
+    }
+    /// <summary>
+    /// <summary>
+    /// Initializations for editing an entity
+    /// </summary>
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem item, bool delete)
+    {
+        PerfilItem_entity = item;
+        Perfil_entity = new()
+            {
+                Id = Perfil_entities.FirstOrDefault(c => c.Id == PerfilItem_entity.PerfilId).Id,
+                Nombre = Perfil_entities.FirstOrDefault(c => c.Id == PerfilItem_entity.PerfilId).Nombre
+            };
+        if (delete)
+            crudMode = CrudMode.Delete;
+        else
+            crudMode = CrudMode.Edit;
+    }
+    /// <summary>
+    /// Operation depending on Crud mode
+    /// </summary>
+    private async Task Save()
+    {
+        string actionInformation = string.Empty;
+        NotificationSeverity severityType = NotificationSeverity.Error;
+        string summary = string.Empty;
+        DepositarioAdminWeb.Business.Tables.Visualizacion.PerfilItem crud = new();
+        PerfilItem_entity.PerfilId = PerfilId;
+        foreach (var property in PerfilItem_entity.GetType().GetProperties())
+        {
+            switch (property.Name)
+            {
+                case "FechaModificacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        PerfilItem_entity.FechaModificacion = null;
+                    }
+                    else
+                    {
+                        PerfilItem_entity.FechaModificacion = DateTime.Now;
+                    }
+                    break;
+                case "FechaCreacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        PerfilItem_entity.FechaCreacion = DateTime.Now;
+                    }
+                    break;
+                case "UsuarioCreacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        PerfilItem_entity.UsuarioCreacion = userId.Value;
+                    }
+                    break;
+                case "UsuarioModificacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        PerfilItem_entity.UsuarioModificacion = null;
+                    }
+                    else
+                    {
+                        PerfilItem_entity.UsuarioModificacion = userId.Value;
+                    }
+                    break;
+            }
+        }
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                try
+                {
+                    crud.Add(PerfilItem_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "agregado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+                break;
+            case CrudMode.Edit:
+                try
+                {
+                    crud.Update(PerfilItem_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "modificado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+                break;
+            case CrudMode.Delete:
+                try
+                {
+                    PerfilItem_entity.Habilitado = false;
+                    crud.Update(PerfilItem_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "eliminado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+                break;
+        }
+
+        //Recargamos el set de datos de la visualizacion en el session storage.
+        await sessionStorage.RemoveItemAsync("DataPerfilItem");
+        //dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(userId.Value);
+        await sessionStorage.SetItemAsync("DataPerfilItem", dataLenguaje);
+        //dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+
+        // Sets Crud mode to List
+        crudMode = CrudMode.List;
+
+        ShowNotification(new NotificationMessage
+            {
+                Severity = severityType,
+                Summary = summary,
+                Detail = actionInformation,
+                Duration = 4000
+            });
+
+        await Task.Run(LoadMainEntityData);
+    }
+    /// <summary>
+    /// Crud mode cancellation and default mode
+    /// </summary>
+    private void Cancel()
+    {
+        crudMode = CrudMode.List;
+        LoadMainEntityData();
+    }
+    /// <summary>
+    /// Sets detail panel title - TODO: Implement Multilanguage
+    /// </summary>
+    /// <returns></returns>
+    private string GetDialogTitle()
+    {
+        string retValue = string.Empty;
+        switch (crudMode)
+        {
+            case CrudMode.Add:
+                retValue = "Nuevo...";
+                break;
+            case CrudMode.Edit:
+                retValue = "Editar...";
+                break;
+            case CrudMode.Delete:
+                retValue = "Borrar...";
+                break;
+        }
+        return retValue;
+    }
+    #region Notifications
+    private void ShowNotification(NotificationMessage message)
+    {
+        NotificationService.Notify(message);
+
+    }
+
+    #endregion
+    #region Selection events
+
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value, DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem item)
+    {
+        PerfilItem_entity = item;
+    }
+    #endregion
+
+    #region Export
+
+    #endregion
+
+}

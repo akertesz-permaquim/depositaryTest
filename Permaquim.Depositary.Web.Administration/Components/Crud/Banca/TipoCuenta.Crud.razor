@@ -1,9 +1,9 @@
-@page "/VisualizacionPerfilTipoCrud"
+@page "/BancaTipoCuentaCrud"
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
  
-@if (PerfilTipo_entities == null)
+@if (TipoCuenta_entities == null)
 {
     <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
 }
@@ -14,21 +14,21 @@ else
         case CrudMode.Add:
             <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
-                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_A_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILTIPO" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_A_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOCUENTA" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
         case CrudMode.Delete:
             <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
                 <ChildContent>
-                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_D_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILTIPO" || x.Clave=="GENERIC").FirstOrDefault().Texto? </h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_D_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOCUENTA" || x.Clave=="GENERIC").FirstOrDefault().Texto? </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
             case CrudMode.Edit:
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
-                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_M_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILTIPO" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_M_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOCUENTA" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                 </ChildContent>
             </RadzenBadge>
             break;         
@@ -36,7 +36,7 @@ else
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                 <ChildContent>
                     <div>
-                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_L_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILTIPO" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_L_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "TIPOCUENTA" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
                     </div>
                 </ChildContent>
             </RadzenBadge>
@@ -46,12 +46,12 @@ else
     if (crudMode == CrudMode.List)
     {
         <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-        Data="@PerfilTipo_entities" TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+        Data="@TipoCuenta_entities" TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
        <EmptyTemplate>
             <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
         </EmptyTemplate>        
         <Columns>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
              <HeaderTemplate>
                  <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text =@dataLenguaje.Where(x => x.Clave == "NEW_BUTTON" || x.Clave == "GENERIC").FirstOrDefault().Texto Click="Add">
                  </RadzenButton>
@@ -63,30 +63,24 @@ else
                     </RadzenButton>
                 </Template>
              </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="Nombre" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="Nombre" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "NOMBRE" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="Descripcion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "DESCRIPCION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="Descripcion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "DESCRIPCION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="EsAdministrador" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ESADMINISTRADOR" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
-            <Template Context="data">
-                <RadzenCheckBox TValue ="bool" Value=@data.EsAdministrador Disabled="true">
-                </RadzenCheckBox>
-            </Template>
-    </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="Habilitado" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="Habilitado" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
             <Template Context="data">
                 <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                 </RadzenCheckBox>
             </Template>
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="UsuarioCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="UsuarioCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="FechaCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="FechaCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="UsuarioModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="UsuarioModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Property="FechaModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Property="FechaModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
     </RadzenDataGridColumn>
         </Columns>
         </RadzenDataGrid>
@@ -95,7 +89,7 @@ else
  
     if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
     {
-         <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo" Data="@PerfilTipo_entity"  @bind-Value="PerfilTipo_entity" Submit ="Save" Visible ="@(PerfilTipo_entity != null)">
+         <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta" Data="@TipoCuenta_entity"  @bind-Value="TipoCuenta_entity" Submit ="Save" Visible ="@(TipoCuenta_entity != null)">
           <ChildContent>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
@@ -103,7 +97,7 @@ else
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(PerfilTipo_entity.Id)" Name="Id" Disabled="true" >
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoCuenta_entity.Id)" Name="Id" Disabled="true" >
                  </RadzenNumeric>
                  </div>
              </div>
@@ -113,7 +107,7 @@ else
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenTextBox  style="display: block" @bind-Value="@(PerfilTipo_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(TipoCuenta_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
                      @if(@crudMode!=CrudMode.Delete)
                      {
@@ -128,7 +122,7 @@ else
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenTextBox  style="display: block" @bind-Value="@(PerfilTipo_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
+                     <RadzenTextBox  style="display: block" @bind-Value="@(TipoCuenta_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
                      </RadzenTextBox>
                      @if(@crudMode!=CrudMode.Delete)
                      {
@@ -139,18 +133,10 @@ else
                </div>
               <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "ESADMINISTRADOR" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="EsAdministrador" Style="margin-left: 0px; vertical-align: middle;" />
+                <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                  </div>
                  <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@PerfilTipo_entity.EsAdministrador  Name="EsAdministradorCheckBox" TValue="bool" Change=@(args => EsAdministradorChange(args, @PerfilTipo_entity)) />
-                 </div>
-               </div>
-              <div style="margin-bottom: 1rem" class="row">
-                 <div class="col-md-3">
-                <RadzenLabelText=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
-                 </div>
-                 <div class="col-md-9">
-                <RadzenCheckBox @bind-Value=@PerfilTipo_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @PerfilTipo_entity)) />
+                <RadzenCheckBox @bind-Value=@TipoCuenta_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @TipoCuenta_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                  </div>
                </div>
          @if(crudMode!=CrudMode.Add)
@@ -161,7 +147,7 @@ else
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(PerfilTipo_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
+                     <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoCuenta_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
                  </RadzenNumeric>
                  </div>
              </div>
@@ -174,7 +160,7 @@ else
                      </RadzenLabel>
                  </div>
               <div class="col-md-9">
-                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(PerfilTipo_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoCuenta_entity.FechaCreacion)" Name="FechaCreacion" Disabled="@(crudMode==CrudMode.Delete)" >
                  </RadzenDatePicker>
               </div>
             </div>
@@ -187,7 +173,7 @@ else
                      </RadzenLabel>
                  </div>
                  <div class="col-md-9">
-                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(PerfilTipo_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
+                     <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(TipoCuenta_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
                  </RadzenNumeric>
                  </div>
              </div>
@@ -200,7 +186,7 @@ else
                      </RadzenLabel>
                  </div>
               <div class="col-md-9">
-                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(PerfilTipo_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
+                 <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(TipoCuenta_entity.FechaModificacion)" Name="FechaModificacion" Disabled="@(crudMode==CrudMode.Delete)" >
                  </RadzenDatePicker>
               </div>
             </div>
@@ -235,8 +221,8 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo PerfilTipo_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo> PerfilTipo_entities = null;
+    private DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta TipoCuenta_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta> TipoCuenta_entities = null;
  
     /// <summary>
     /// Variables to multilanguaje
@@ -268,8 +254,8 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        DepositarioAdminWeb.Business.Tables.Visualizacion.PerfilTipo entity = new();
-        PerfilTipo_entities = entity.Items();
+        DepositarioAdminWeb.Business.Tables.Banca.TipoCuenta entity = new();
+        TipoCuenta_entities = entity.Items();
     }
     /// <summary>
     /// Loads Type Tables data
@@ -286,7 +272,7 @@ else
     private void Add()
     {
         //Main entity initialization
-        PerfilTipo_entity = new();
+        TipoCuenta_entity = new();
         //Relations entities initialization
         crudMode = CrudMode.Add;
     }
@@ -294,9 +280,9 @@ else
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo item, bool delete)
+    private void Edit(DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta item, bool delete)
     {
-             PerfilTipo_entity = item;
+             TipoCuenta_entity = item;
         if (delete)
             crudMode = CrudMode.Delete;
         else
@@ -310,41 +296,41 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        DepositarioAdminWeb.Business.Tables.Visualizacion.PerfilTipo crud = new();
-        foreach(var property in PerfilTipo_entity.GetType().GetProperties())
+        DepositarioAdminWeb.Business.Tables.Banca.TipoCuenta crud = new();
+        foreach(var property in TipoCuenta_entity.GetType().GetProperties())
         {
              switch(property.Name)
              {
                  case "FechaModificacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     PerfilTipo_entity.FechaModificacion=null;
+                     TipoCuenta_entity.FechaModificacion=null;
                  }
                  else
                  {
-                     PerfilTipo_entity.FechaModificacion=DateTime.Now;
+                     TipoCuenta_entity.FechaModificacion=DateTime.Now;
                  }
                  break;
                  case "FechaCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     PerfilTipo_entity.FechaCreacion=DateTime.Now;
+                     TipoCuenta_entity.FechaCreacion=DateTime.Now;
                  }
                  break;
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     PerfilTipo_entity.UsuarioCreacion=userId.Value;
+                     TipoCuenta_entity.UsuarioCreacion=userId.Value;
                  }
                  break;
                  case "UsuarioModificacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     PerfilTipo_entity.UsuarioModificacion=null;
+                     TipoCuenta_entity.UsuarioModificacion=null;
                  }
                  else
                  {
-                     PerfilTipo_entity.UsuarioModificacion=userId.Value;
+                     TipoCuenta_entity.UsuarioModificacion=userId.Value;
                  }
                  break;
              }
@@ -354,7 +340,7 @@ else
             case CrudMode.Add:
                 try
                 {
-                     crud.Add(PerfilTipo_entity);
+                     crud.Add(TipoCuenta_entity);
                      summary = "El registro se ha ";
                      actionInformation = "agregado.";
                      severityType = NotificationSeverity.Success;
@@ -369,7 +355,7 @@ else
             case CrudMode.Edit:
                 try
                 {
-                     crud.Update(PerfilTipo_entity);
+                     crud.Update(TipoCuenta_entity);
                      summary = "El registro se ha ";
                      actionInformation = "modificado.";
                      severityType = NotificationSeverity.Success;
@@ -384,7 +370,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                     crud.Delete(PerfilTipo_entity);
+                     TipoCuenta_entity.Habilitado=false;
+                     crud.Update(TipoCuenta_entity);
                      summary = "El registro se ha ";
                      actionInformation = "eliminado.";
                      severityType = NotificationSeverity.Success;
@@ -451,17 +438,9 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void EsAdministradorChange(bool? value,DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo item)
+    void HabilitadoChange(bool? value,DepositarioAdminWeb.Entities.Tables.Banca.TipoCuenta item)
     {
-         PerfilTipo_entity = item;
-    }
-    /// <summary>
-    /// Entity is binded, however it sets anyway.
-    /// </summary>
-    /// <returns></returns>
-    void HabilitadoChange(bool? value,DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilTipo item)
-    {
-         PerfilTipo_entity = item;
+         TipoCuenta_entity = item;
     }
     #endregion
  

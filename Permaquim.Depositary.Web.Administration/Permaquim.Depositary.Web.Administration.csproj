@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Components\Crud\Estilo\EsquemaDetalleValor.Crud.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
     <PackageReference Include="Radzen.Blazor" Version="3.18.12" />
@@ -15,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\CustomCrud\Estilo\" />
+    <Folder Include="Components\CustomCrud\Visualizacion\" />
+    <Folder Include="Components\CustomCrud\Regionalizacion\" />
     <Folder Include="Dal\" />
   </ItemGroup>
 
@@ -41,8 +48,6 @@
     <None Include="Components\Crud\Dispositivo\TipoContadora.Crud.razor" />
     <None Include="Components\Crud\Dispositivo\TipoPlaca.Crud.razor" />
     <None Include="Components\Crud\Estilo\Esquema.Crud.razor" />
-    <None Include="Components\Crud\Estilo\EsquemaDetalle.Crud.razor" />
-    <None Include="Components\Crud\Estilo\EsquemaDetalleValor.Crud.razor" />
     <None Include="Components\Crud\Geografia\Ciudad.Crud.razor" />
     <None Include="Components\Crud\Geografia\CodigoPostal.Crud.razor" />
     <None Include="Components\Crud\Geografia\Pais.Crud.razor" />
@@ -54,14 +59,11 @@
     <None Include="Components\Crud\Operacion\TipoTransaccion.Crud.razor" />
     <None Include="Components\Crud\Operacion\Turno.Crud.razor" />
     <None Include="Components\Crud\Operacion\TurnoUsuario.Crud.razor" />
-    <None Include="Components\Crud\Regionalizacion\Lenguaje.Crud.razor" />
-    <None Include="Components\Crud\Regionalizacion\LenguajeItem.Crud.razor" />
     <None Include="Components\Crud\Seguridad\Aplicacion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\AplicacionParametro.Crud.razor" />
     <None Include="Components\Crud\Seguridad\AplicacionParametroValor.Crud.razor" />
     <None Include="Components\Crud\Seguridad\Funcion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\Menu.Crud.razor" />
-    <None Include="Components\Crud\Seguridad\Rol.Crud.razor" />
     <None Include="Components\Crud\Seguridad\RolFuncion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\TipoAplicacion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\TipoFuncion.Crud.razor" />
@@ -74,13 +76,11 @@
     <None Include="Components\Crud\Turno\Agenda.Crud.razor" />
     <None Include="Components\Crud\Turno\Esquema.Crud.razor" />
     <None Include="Components\Crud\Turno\EsquemaDetalle.Crud.razor" />
-    <None Include="Components\Crud\Valor\Denominacion.Crud.razor" />
     <None Include="Components\Crud\Valor\Moneda.Crud.razor" />
     <None Include="Components\Crud\Valor\RelacionMonedaTipoValor.Crud.razor" />
     <None Include="Components\Crud\Valor\Tipo.Crud.razor" />
     <None Include="Components\Crud\Visualizacion\Perfil.Crud.razor" />
     <None Include="Components\Crud\Visualizacion\PerfilItem.Crud.razor" />
-    <None Include="Components\Crud\Visualizacion\PerfilTipo.Crud.razor" />
     <None Include="Components\CustomCrud\Directorio\Sucursal.Crud.razor" />
   </ItemGroup>
 

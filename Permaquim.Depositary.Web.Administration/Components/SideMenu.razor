@@ -20,9 +20,11 @@
                     <ChildContent>
                         <RadzenPanelMenuItem Text="Bancos" Path="BancaBancoCrud" Icon="computer" Visible="true" Style="padding-left:4%">
                         </RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Text="Tipos de cuenta" Path="BancaTipoCuentaCrud" Icon="computer" Visible="true" Style="padding-left:4%">
+                        </RadzenPanelMenuItem>
                         <RadzenPanelMenuItem Text="Cuentas" Path="BancaCuentaCrud" Icon="perm_contact_calendar" Visible="true" Style="padding-left:4%">
                         </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Usuarios por cuenta" Path="BancaUsuarioCuentaCrud" Icon="account_balance" Visible="true" Style="padding-left:4%">
+                        <RadzenPanelMenuItem Text="Cuentas por usuario" Path="BancaUsuarioCuentaCrud" Icon="account_balance" Visible="true" Style="padding-left:4%">
                         </RadzenPanelMenuItem>
                     </ChildContent>
                 </RadzenPanelMenuItem>
@@ -76,11 +78,9 @@
                 </RadzenPanelMenuItem>
                 <RadzenPanelMenuItem Text="Estilo" Icon="style" Visible="true" Style="padding-left:2%">
                     <ChildContent>
-                        <RadzenPanelMenuItem Text="Esquemas" Path="EstiloEsquemaCrud" Icon="computer" Visible="true" Style="padding-left:4%">
+                        <RadzenPanelMenuItem Text="Esquemas" Path="EstiloEsquemaCustomCrud" Icon="computer" Visible="true" Style="padding-left:4%">
                         </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Detalles de esquema" Path="EstiloDetalleEsquemaCrud" Icon="perm_contact_calendar" Visible="true" Style="padding-left:4%">
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Valor por detalle" Path="EstiloEsquemaDetalleValorCrud" Icon="account_balance" Visible="true" Style="padding-left:4%">
+                        <RadzenPanelMenuItem Text="Tipos de detalle esquema" Path="EstiloTipoEsquemaDetalleCrud" Icon="account_balance" Visible="true" Style="padding-left:4%">
                         </RadzenPanelMenuItem>
                     </ChildContent>
                 </RadzenPanelMenuItem>
@@ -118,9 +118,7 @@
                 </RadzenPanelMenuItem>
                 <RadzenPanelMenuItem Text="Regionalización" Icon="language" Visible="true" Style="padding-left:2%">
                     <ChildContent>
-                        <RadzenPanelMenuItem Text="Lenguajes" Path="RegionalizacionLenguajeCrud" Icon="computer" Visible="true" Style="padding-left:4%">
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Items de lenguaje" Path="RegionalizacionLenguajeItemCrud" Icon="perm_contact_calendar" Visible="true" Style="padding-left:4%">
+                        <RadzenPanelMenuItem Text="Lenguajes" Path="RegionalizacionLenguajeCustomCrud" Icon="computer" Visible="true" Style="padding-left:4%">
                         </RadzenPanelMenuItem>
                     </ChildContent>
                 </RadzenPanelMenuItem>
@@ -182,12 +180,12 @@
                 </RadzenPanelMenuItem>
                 <RadzenPanelMenuItem Text="Visualización" Icon="remove_red_eye" Visible="true" Style="padding-left:2%">
                     <ChildContent>
-                        <RadzenPanelMenuItem Text="Perfiles" Path="VisualizacionPerfilCrud" Icon="computer" Visible="true" Style="padding-left:4%">
+                        <RadzenPanelMenuItem Text="Perfiles" Path="VisualizacionPerfilCustomCrud" Icon="computer" Visible="true" Style="padding-left:4%">
                         </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Items de perfil" Path="VisualizacionPerfilItemCrud" Icon="perm_contact_calendar" Visible="true" Style="padding-left:4%">
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Tipos" Path="VisualizacionPerfilTipoCrud" Icon="perm_contact_calendar" Visible="true" Style="padding-left:4%">
-                        </RadzenPanelMenuItem>
+@*                        <RadzenPanelMenuItem Text="Items de perfil" Path="VisualizacionPerfilItemCustomCrud" Icon="perm_contact_calendar" Visible="true" Style="padding-left:4%">
+                        </RadzenPanelMenuItem>*@
+@*                        <RadzenPanelMenuItem Text="Tipos" Path="VisualizacionPerfilTipoCrud" Icon="perm_contact_calendar" Visible="true" Style="padding-left:4%">
+                        </RadzenPanelMenuItem>*@
                     </ChildContent>
                 </RadzenPanelMenuItem>
             </ChildContent>
