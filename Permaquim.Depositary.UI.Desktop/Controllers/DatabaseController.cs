@@ -23,6 +23,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         }
 
 
+
         /// <summary>
         /// Representa el contenedor actual
         /// </summary>
@@ -110,6 +111,20 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
 
             return entities.Items();
+        }
+        /// <summary>
+        /// Monedas disponibles en el sistema
+        /// </summary>
+        /// <returns></returns>
+        public static List<Permaquim.Depositario.Entities.Relations.Valor.RelacionMonedaTipoValor> GetEnvelopeValues()
+        {
+
+            Permaquim.Depositario.Business.Relations.Valor.RelacionMonedaTipoValor entities = new();
+
+            entities.Where.Add(Depositario.Business.Relations.Valor.RelacionMonedaTipoValor.ColumnEnum.MonedaId,
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentCurrency.Id);
+            return entities.Items();
+
         }
 
         /// <summary>

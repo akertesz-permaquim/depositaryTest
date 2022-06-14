@@ -34,8 +34,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             _poolingTimer.Tick += PoolingTimer_Tick;
 
             LoadLogo();
-
-            SetOwnerData();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -107,29 +105,32 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
 
-  
+
+            _device.Sense();
             // consulta el estado de la contadora si está conectada
             if (_device.CounterConnected)
             {
-                CounterLabel.Text = MultilanguangeController.GetText("COUNTER_ONLINE");
-                CounterLabel.ForeColor = Color.Green;
-                _device.Sense();
+                CounterPictureBox.Image = MainImageList.Images["GREEN"];
             }
+            else
+            {
+                CounterPictureBox.Image = MainImageList.Images["RED"];
+            }
+
+            _device.Status();
 
             // consulta el estado de la ioboard  si está conectada
             if (_device.IoBoardConnected)
             {
-                IoBoardLabel.Text = MultilanguangeController.GetText("IO_BOARD_ONLINE");
-                IoBoardLabel.ForeColor = Color.Green;
-                _device.Status();
+                IoBoardPictureBox.Image = MainImageList.Images["GREEN"];
+                //IoBoardPictureBox.Too = MultilanguangeController.GetText("IO_BOARD_ONLINE");
+            }
+            else
+            {
+                IoBoardPictureBox.Image = MainImageList.Images["RED"];
             }
             LoadAvatar();
             SetUserData();
-        }
-
-        private void SetOwnerData()
-        {
-            OwnerDataLabel.Text = "Permaquim :.: Depositario. Versión 0.1";
         }
 
         private void SetUserData()
@@ -160,8 +161,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
        private void LoadStyles()
         {
-            TopPanel.BackColor = StyleController.GetColor("Cabecera");
-            HeadPanel.BackColor = StyleController.GetColor("Color2");
+            HeadPanel.BackColor = StyleController.GetColor("Cabecera");
             MainPanel.BackColor = StyleController.GetColor("Contenido");
             BottomPanel.BackColor = StyleController.GetColor("Pie");
         }

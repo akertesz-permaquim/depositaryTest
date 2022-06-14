@@ -39,7 +39,7 @@
             this.MessageLabel.BackColor = System.Drawing.Color.Transparent;
             this.MessageLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.MessageLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.MessageLabel.Location = new System.Drawing.Point(74, 168);
+            this.MessageLabel.Location = new System.Drawing.Point(72, 8);
             this.MessageLabel.Name = "MessageLabel";
             this.MessageLabel.Size = new System.Drawing.Size(550, 25);
             this.MessageLabel.TabIndex = 109;
@@ -56,7 +56,7 @@
             this.ContinueDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ContinueDepositButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ContinueDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ContinueDepositButton.Location = new System.Drawing.Point(362, 272);
+            this.ContinueDepositButton.Location = new System.Drawing.Point(362, 48);
             this.ContinueDepositButton.Name = "ContinueDepositButton";
             this.ContinueDepositButton.Size = new System.Drawing.Size(248, 55);
             this.ContinueDepositButton.TabIndex = 108;
@@ -77,7 +77,7 @@
             this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelDepositButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
-            this.CancelDepositButton.Location = new System.Drawing.Point(74, 272);
+            this.CancelDepositButton.Location = new System.Drawing.Point(74, 48);
             this.CancelDepositButton.Name = "CancelDepositButton";
             this.CancelDepositButton.Size = new System.Drawing.Size(272, 55);
             this.CancelDepositButton.TabIndex = 106;
@@ -91,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 558);
+            this.ClientSize = new System.Drawing.Size(699, 116);
             this.ControlBox = false;
             this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.ContinueDepositButton);

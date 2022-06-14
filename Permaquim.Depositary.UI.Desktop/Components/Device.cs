@@ -1040,7 +1040,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             IoBoardStatus result = new();
             try
             {
-                if (this._ioboardPort.IsOpen)
+                if (this._ioboardPort != null && this._ioboardPort.IsOpen)
                 {
 
                     this._ioboardPort.Write(_device.Status);
@@ -1632,7 +1632,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             State47 = 47,
             State48 = 48,
             State49 = 49,
-            State50 = 50,
+            PQWaitingEnvelope = 50,
             State51 = 51,
             PQWaitingTocloseEscrow = 52
 

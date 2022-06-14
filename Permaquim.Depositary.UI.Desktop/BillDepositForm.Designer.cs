@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
@@ -47,7 +47,7 @@
             this.GeneralStatusLabel = new System.Windows.Forms.Label();
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.InformationLabel = new System.Windows.Forms.Label();
             this.EventCheckbox = new System.Windows.Forms.CheckBox();
             this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -56,6 +56,7 @@
             this.Denominacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ConfirmAndContinueDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.MonitorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +74,7 @@
             this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
             this.CancelDepositButton.Location = new System.Drawing.Point(162, 492);
             this.CancelDepositButton.Name = "CancelDepositButton";
-            this.CancelDepositButton.Size = new System.Drawing.Size(300, 55);
+            this.CancelDepositButton.Size = new System.Drawing.Size(230, 55);
             this.CancelDepositButton.TabIndex = 93;
             this.CancelDepositButton.Tag = "";
             this.CancelDepositButton.Text = "Cancelar";
@@ -93,9 +94,9 @@
             this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(566, 493);
+            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(632, 493);
             this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
-            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(300, 55);
+            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(234, 55);
             this.ConfirmAndExitDepositButton.TabIndex = 98;
             this.ConfirmAndExitDepositButton.Tag = "";
             this.ConfirmAndExitDepositButton.Text = "Confirmar ";
@@ -127,7 +128,6 @@
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
             this.MonitorGroupBox.Visible = false;
-            this.MonitorGroupBox.Enter += new System.EventHandler(this.MonitorGroupBox_Enter);
             // 
             // CurrencyStatusLabel
             // 
@@ -304,16 +304,16 @@
             this.CurrencyLabel.TabIndex = 102;
             this.CurrencyLabel.Text = "Divisa: Pesos";
             // 
-            // label4
+            // RemainingTimeLabel
             // 
-            this.label4.BackColor = System.Drawing.Color.SteelBlue;
-            this.label4.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(616, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(248, 23);
-            this.label4.TabIndex = 105;
-            this.label4.Text = "Tiempo restante: ";
+            this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(616, 20);
+            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(248, 23);
+            this.RemainingTimeLabel.TabIndex = 105;
+            this.RemainingTimeLabel.Text = "Tiempo restante: ";
             // 
             // InformationLabel
             // 
@@ -351,9 +351,9 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(352, 493);
+            this.BackButton.Location = new System.Drawing.Point(404, 493);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(304, 55);
+            this.BackButton.Size = new System.Drawing.Size(216, 55);
             this.BackButton.TabIndex = 109;
             this.BackButton.Text = "Salir";
             this.BackButton.TextColor = System.Drawing.Color.White;
@@ -370,28 +370,28 @@
             this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Image,
             this.Denominacion,
             this.Cantidad,
             this.Importe});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle8;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
             this.DenominationsGridView.Location = new System.Drawing.Point(168, 48);
@@ -440,6 +440,28 @@
             this.Importe.ReadOnly = true;
             this.Importe.Width = 220;
             // 
+            // ConfirmAndContinueDepositButton
+            // 
+            this.ConfirmAndContinueDepositButton.BackColor = System.Drawing.Color.SeaGreen;
+            this.ConfirmAndContinueDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
+            this.ConfirmAndContinueDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
+            this.ConfirmAndContinueDepositButton.BorderRadius = 4;
+            this.ConfirmAndContinueDepositButton.BorderSize = 0;
+            this.ConfirmAndContinueDepositButton.FlatAppearance.BorderSize = 0;
+            this.ConfirmAndContinueDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ConfirmAndContinueDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmAndContinueDepositButton.ForeColor = System.Drawing.Color.White;
+            this.ConfirmAndContinueDepositButton.Location = new System.Drawing.Point(405, 493);
+            this.ConfirmAndContinueDepositButton.Name = "ConfirmAndContinueDepositButton";
+            this.ConfirmAndContinueDepositButton.Size = new System.Drawing.Size(214, 55);
+            this.ConfirmAndContinueDepositButton.TabIndex = 135;
+            this.ConfirmAndContinueDepositButton.Tag = "";
+            this.ConfirmAndContinueDepositButton.Text = "Continuar";
+            this.ConfirmAndContinueDepositButton.TextColor = System.Drawing.Color.White;
+            this.ConfirmAndContinueDepositButton.UseVisualStyleBackColor = false;
+            this.ConfirmAndContinueDepositButton.Visible = false;
+            this.ConfirmAndContinueDepositButton.Click += new System.EventHandler(this.ConfirmAndContinueDepositButton_Click);
+            // 
             // BillDepositForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -447,11 +469,12 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1026, 641);
             this.ControlBox = false;
+            this.Controls.Add(this.ConfirmAndContinueDepositButton);
             this.Controls.Add(this.DenominationsGridView);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.EventCheckbox);
             this.Controls.Add(this.InformationLabel);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.RemainingTimeLabel);
             this.Controls.Add(this.SubtotalLabel);
             this.Controls.Add(this.CurrencyLabel);
             this.Controls.Add(this.MonitorGroupBox);
@@ -487,7 +510,7 @@
         private CheckBox JammingCheckBox;
         private Label SubtotalLabel;
         private Label CurrencyLabel;
-        private Label label4;
+        private Label RemainingTimeLabel;
         private Label InformationLabel;
         private CheckBox EventCheckbox;
         private CustomButton BackButton;
@@ -497,5 +520,6 @@
         private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Importe;
         private Label CurrencyStatusLabel;
+        private CustomButton ConfirmAndContinueDepositButton;
     }
 }

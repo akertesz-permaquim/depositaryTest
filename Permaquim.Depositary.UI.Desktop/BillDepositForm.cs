@@ -101,18 +101,10 @@ namespace Permaquim.Depositary.UI.Desktop
             // Asigna a la máquina el valor del estado de la contadora en este ciclo
             _operationStatus.GeneralStatus = _device.CurrentStatus;
 
-            // Marca en la máquina de estado que se detectó el máximo de billetes
-            if (GetDenominationsCount() == 100 && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
-                _operationStatus.StackerFull = true;
-
-            //if(_device.StateResultProperty.DeviceStateInformation.StackerFull)
-            //    _operationStatus.StackerFull = true;
 
             _device.CountingDataRequest();
 
-            VerifyStackerFullCondition();
-
-            VerifySavetoDatabase();
+             VerifySavetoDatabase();
 
             VerifyStartCounting();
 
@@ -121,7 +113,6 @@ namespace Permaquim.Depositary.UI.Desktop
             VerifyLoadDetectedBills();
 
             VerifyButtonsVisibility();
-
 
             ShowInformation();
         }
@@ -132,19 +123,29 @@ namespace Permaquim.Depositary.UI.Desktop
         private void VerifyButtonsVisibility()
         {
 
+            //BackButton.Visible = false;
+            //ConfirmAndExitDepositButton.Visible = false;
+            //ConfirmAndContinueDepositButton.Visible = false;
+            //CancelDepositButton.Visible = false;
+
             BackButton.Visible =
                 !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _operationStatus.CurrentTransactionAmount == 0;
+                && _operationStatus.CurrentTransactionAmount == 0 
+                && !_device.StateResultProperty.DeviceStateInformation.StackerFull;
 
-
-            //Solo se habilita el botón de volver si no hay dinero en el escrow
             ConfirmAndExitDepositButton.Visible =
-                _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                 && _device.StateResultProperty.DoorStateInformation.Escrow
                 && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
                 && !_device.StateResultProperty.DeviceStateInformation.HopperBillPresent
                 && _device.StateResultProperty.StatusInformation.OperatingState
-                    != StatusInformation.State.PQWaitingToRemoveBankNotes;
+                    != StatusInformation.State.PQWaitingToRemoveBankNotes
+                && _device.StateResultProperty.StatusInformation.OperatingState
+                    != StatusInformation.State.EscrowOpen)
+                    || _device.StateResultProperty.DeviceStateInformation.StackerFull;
+
+            ConfirmAndContinueDepositButton.Visible = 
+                    _device.StateResultProperty.DeviceStateInformation.StackerFull;
 
             CancelDepositButton.Visible =
                 _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
@@ -195,7 +196,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 InformationLabel.ForeColor = Color.Red;
             }
 
-
+            if(_device.StateResultProperty.DeviceStateInformation.StackerFull )
+            {
+                InformationLabel.Text = "Se ha alcanzado el tamaño máximo de billetes en la bandeja.";
+                InformationLabel.ForeColor = Color.Red;
+            }
         }
 
         private int GetDenominationsCount()
@@ -257,58 +262,7 @@ namespace Permaquim.Depositary.UI.Desktop
             }
         }
 
-        private void VerifyStackerFullCondition()
-        {
-            if (_operationStatus.StackerFull
-                && _operationStatus.StackerFullTreated == false)
-            {
-                _operationStatus.StackerFullTreated = true;
-
-                StackerFullDialog stackerFullDialog = new();
-                stackerFullDialog.ShowDialog();
-
-                switch (stackerFullDialog.DialogResult)
-                {
-                    case DialogResult.None:
-                        // No implementado
-                        break;
-                    case DialogResult.OK:
-                        // Finaliza el depósito
-                        ConfirmDeposit();
-                        break;
-                    case DialogResult.Cancel:
-                        // Cancela el depósito
-                        CancelDeposit();
-                        break;
-                    case DialogResult.Abort:
-                        // No implementado
-                        break;
-                    case DialogResult.Retry:
-                        // No implementado
-                        break;
-                    case DialogResult.Ignore:
-                        // No implementado
-                        break;
-                    case DialogResult.Yes:
-                        // No implementado
-                        break;
-                    case DialogResult.No:
-                        // No implementado
-                        break;
-                    case DialogResult.TryAgain:
-                        // No implementado
-                        break;
-                    case DialogResult.Continue:
-                        // solo espera mas billetines
-                        SaveAndContinueDeposit();
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        }
-
+   
         private void WaitEmptyEscrow()
         {
             _poolingTimer.Enabled = false;
@@ -461,7 +415,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void CancelDeposit()
         {
-            //_operationStatus.Initialize();
+            ConfirmAndExitDepositButton.Visible = false;
             _operationStatus.StackerFull = false;
             _device.OpenEscrow();
             _device.PreviousState = StatusInformation.State.PQWaitingToRemoveBankNotes;
@@ -469,8 +423,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
-            _operationStatus.DepositConfirmed = true;
             ConfirmDeposit();
+            _operationStatus.DepositConfirmed = true;
         }
 
         private void ConfirmDeposit()
@@ -654,9 +608,9 @@ namespace Permaquim.Depositary.UI.Desktop
             MonitorGroupBox.Visible = EventCheckbox.Checked;
         }
 
-        private void MonitorGroupBox_Enter(object sender, EventArgs e)
+         private void ConfirmAndContinueDepositButton_Click(object sender, EventArgs e)
         {
-
+            SaveAndContinueDeposit();
         }
     }
 

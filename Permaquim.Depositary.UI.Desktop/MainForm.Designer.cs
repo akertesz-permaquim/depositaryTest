@@ -28,49 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TopPanel = new System.Windows.Forms.Panel();
-            this.OwnerDataLabel = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.HeadPanel = new System.Windows.Forms.Panel();
             this.EnterpriseLabel = new System.Windows.Forms.Label();
             this.AvatarPicturebox = new System.Windows.Forms.PictureBox();
             this.UserLabel = new System.Windows.Forms.Label();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
-            this.CounterLabel = new System.Windows.Forms.Label();
-            this.IoBoardLabel = new System.Windows.Forms.Label();
+            this.IoBoardPictureBox = new System.Windows.Forms.PictureBox();
+            this.CounterPictureBox = new System.Windows.Forms.PictureBox();
             this.DateTimeLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.InformationPanel = new System.Windows.Forms.Panel();
             this.InformationLabel = new System.Windows.Forms.Label();
-            this.TopPanel.SuspendLayout();
+            this.MainImageList = new System.Windows.Forms.ImageList(this.components);
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
             this.BottomPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IoBoardPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CounterPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.InformationPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TopPanel
-            // 
-            this.TopPanel.BackColor = System.Drawing.Color.White;
-            this.TopPanel.Controls.Add(this.OwnerDataLabel);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(868, 56);
-            this.TopPanel.TabIndex = 0;
-            // 
-            // OwnerDataLabel
-            // 
-            this.OwnerDataLabel.AutoSize = true;
-            this.OwnerDataLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.OwnerDataLabel.ForeColor = System.Drawing.Color.White;
-            this.OwnerDataLabel.Location = new System.Drawing.Point(16, 20);
-            this.OwnerDataLabel.Name = "OwnerDataLabel";
-            this.OwnerDataLabel.Size = new System.Drawing.Size(108, 21);
-            this.OwnerDataLabel.TabIndex = 0;
-            this.OwnerDataLabel.Text = "**************";
             // 
             // HeadPanel
             // 
@@ -81,7 +62,7 @@
             this.HeadPanel.Controls.Add(this.UserLabel);
             this.HeadPanel.Controls.Add(this.LogoPictureBox);
             this.HeadPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.HeadPanel.Location = new System.Drawing.Point(0, 56);
+            this.HeadPanel.Location = new System.Drawing.Point(0, 0);
             this.HeadPanel.Name = "HeadPanel";
             this.HeadPanel.Size = new System.Drawing.Size(868, 54);
             this.HeadPanel.TabIndex = 1;
@@ -90,9 +71,9 @@
             // 
             this.EnterpriseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.EnterpriseLabel.AutoSize = true;
-            this.EnterpriseLabel.BackColor = System.Drawing.Color.White;
+            this.EnterpriseLabel.BackColor = System.Drawing.Color.Transparent;
             this.EnterpriseLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.EnterpriseLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.EnterpriseLabel.ForeColor = System.Drawing.Color.White;
             this.EnterpriseLabel.Location = new System.Drawing.Point(656, 32);
             this.EnterpriseLabel.Name = "EnterpriseLabel";
             this.EnterpriseLabel.Size = new System.Drawing.Size(37, 15);
@@ -115,9 +96,9 @@
             // 
             this.UserLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.UserLabel.AutoSize = true;
-            this.UserLabel.BackColor = System.Drawing.Color.White;
+            this.UserLabel.BackColor = System.Drawing.Color.Transparent;
             this.UserLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.UserLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.UserLabel.ForeColor = System.Drawing.Color.White;
             this.UserLabel.Location = new System.Drawing.Point(656, 8);
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(37, 15);
@@ -128,17 +109,17 @@
             // LogoPictureBox
             // 
             this.LogoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LogoPictureBox.Location = new System.Drawing.Point(0, 3);
+            this.LogoPictureBox.Location = new System.Drawing.Point(0, 0);
             this.LogoPictureBox.Name = "LogoPictureBox";
-            this.LogoPictureBox.Size = new System.Drawing.Size(288, 50);
+            this.LogoPictureBox.Size = new System.Drawing.Size(288, 53);
             this.LogoPictureBox.TabIndex = 0;
             this.LogoPictureBox.TabStop = false;
             // 
             // BottomPanel
             // 
             this.BottomPanel.BackColor = System.Drawing.Color.White;
-            this.BottomPanel.Controls.Add(this.CounterLabel);
-            this.BottomPanel.Controls.Add(this.IoBoardLabel);
+            this.BottomPanel.Controls.Add(this.IoBoardPictureBox);
+            this.BottomPanel.Controls.Add(this.CounterPictureBox);
             this.BottomPanel.Controls.Add(this.DateTimeLabel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 445);
@@ -146,29 +127,29 @@
             this.BottomPanel.Size = new System.Drawing.Size(868, 47);
             this.BottomPanel.TabIndex = 2;
             // 
-            // CounterLabel
+            // IoBoardPictureBox
             // 
-            this.CounterLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.CounterLabel.AutoSize = true;
-            this.CounterLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CounterLabel.ForeColor = System.Drawing.Color.Red;
-            this.CounterLabel.Location = new System.Drawing.Point(8, 16);
-            this.CounterLabel.Name = "CounterLabel";
-            this.CounterLabel.Size = new System.Drawing.Size(106, 15);
-            this.CounterLabel.TabIndex = 17;
-            this.CounterLabel.Text = "Contadora Offline";
+            this.IoBoardPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IoBoardPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.IoBoardPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("IoBoardPictureBox.Image")));
+            this.IoBoardPictureBox.Location = new System.Drawing.Point(64, 8);
+            this.IoBoardPictureBox.Name = "IoBoardPictureBox";
+            this.IoBoardPictureBox.Size = new System.Drawing.Size(24, 24);
+            this.IoBoardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.IoBoardPictureBox.TabIndex = 20;
+            this.IoBoardPictureBox.TabStop = false;
             // 
-            // IoBoardLabel
+            // CounterPictureBox
             // 
-            this.IoBoardLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.IoBoardLabel.AutoSize = true;
-            this.IoBoardLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.IoBoardLabel.ForeColor = System.Drawing.Color.Red;
-            this.IoBoardLabel.Location = new System.Drawing.Point(144, 16);
-            this.IoBoardLabel.Name = "IoBoardLabel";
-            this.IoBoardLabel.Size = new System.Drawing.Size(98, 15);
-            this.IoBoardLabel.TabIndex = 18;
-            this.IoBoardLabel.Text = "IO Board Offline";
+            this.CounterPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.CounterPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.CounterPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("CounterPictureBox.Image")));
+            this.CounterPictureBox.Location = new System.Drawing.Point(24, 8);
+            this.CounterPictureBox.Name = "CounterPictureBox";
+            this.CounterPictureBox.Size = new System.Drawing.Size(24, 24);
+            this.CounterPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CounterPictureBox.TabIndex = 19;
+            this.CounterPictureBox.TabStop = false;
             // 
             // DateTimeLabel
             // 
@@ -187,9 +168,9 @@
             this.MainPanel.BackColor = System.Drawing.Color.White;
             this.MainPanel.Controls.Add(this.InformationPanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 110);
+            this.MainPanel.Location = new System.Drawing.Point(0, 54);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(868, 335);
+            this.MainPanel.Size = new System.Drawing.Size(868, 391);
             this.MainPanel.TabIndex = 3;
             this.MainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainPanel_MouseClick);
             // 
@@ -216,6 +197,15 @@
             this.InformationLabel.TabIndex = 0;
             this.InformationLabel.Text = "El dispositivo no está operativo";
             // 
+            // MainImageList
+            // 
+            this.MainImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.MainImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("MainImageList.ImageStream")));
+            this.MainImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.MainImageList.Images.SetKeyName(0, "RED");
+            this.MainImageList.Images.SetKeyName(1, "GREEN");
+            this.MainImageList.Images.SetKeyName(2, "YELLOW");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -225,7 +215,6 @@
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.BottomPanel);
             this.Controls.Add(this.HeadPanel);
-            this.Controls.Add(this.TopPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -235,14 +224,14 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.TopPanel.ResumeLayout(false);
-            this.TopPanel.PerformLayout();
             this.HeadPanel.ResumeLayout(false);
             this.HeadPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).EndInit();
             this.BottomPanel.ResumeLayout(false);
             this.BottomPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IoBoardPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CounterPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.InformationPanel.ResumeLayout(false);
             this.InformationPanel.PerformLayout();
@@ -251,20 +240,18 @@
         }
 
         #endregion
-
-        private Panel TopPanel;
         private Panel HeadPanel;
         private Panel BottomPanel;
         private PictureBox LogoPictureBox;
         public Panel MainPanel;
-        private Label OwnerDataLabel;
         private Label DateTimeLabel;
-        private Label CounterLabel;
-        private Label IoBoardLabel;
         private Panel InformationPanel;
         private Label InformationLabel;
         private Label UserLabel;
         private PictureBox AvatarPicturebox;
         private Label EnterpriseLabel;
+        private PictureBox IoBoardPictureBox;
+        private PictureBox CounterPictureBox;
+        private ImageList MainImageList;
     }
 }

@@ -74,6 +74,7 @@
             this.Button_3 = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_2 = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_1 = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.InformationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Button_Delete
@@ -116,7 +117,7 @@
             this.Button_Star.Text = "*";
             this.Button_Star.TextColor = System.Drawing.Color.White;
             this.Button_Star.UseVisualStyleBackColor = false;
-            this.Button_Star.Click += new System.EventHandler(this.Keys);
+            this.Button_Star.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_Underscore
             // 
@@ -137,7 +138,7 @@
             this.Button_Underscore.Text = "_";
             this.Button_Underscore.TextColor = System.Drawing.Color.White;
             this.Button_Underscore.UseVisualStyleBackColor = false;
-            this.Button_Underscore.Click += new System.EventHandler(this.Keys);
+            this.Button_Underscore.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_Dot
             // 
@@ -158,7 +159,7 @@
             this.Button_Dot.Text = ".";
             this.Button_Dot.TextColor = System.Drawing.Color.White;
             this.Button_Dot.UseVisualStyleBackColor = false;
-            this.Button_Dot.Click += new System.EventHandler(this.Keys);
+            this.Button_Dot.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_M
             // 
@@ -179,7 +180,7 @@
             this.Button_M.Text = "M";
             this.Button_M.TextColor = System.Drawing.Color.White;
             this.Button_M.UseVisualStyleBackColor = false;
-            this.Button_M.Click += new System.EventHandler(this.Keys);
+            this.Button_M.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_N
             // 
@@ -200,7 +201,7 @@
             this.Button_N.Text = "N";
             this.Button_N.TextColor = System.Drawing.Color.White;
             this.Button_N.UseVisualStyleBackColor = false;
-            this.Button_N.Click += new System.EventHandler(this.Keys);
+            this.Button_N.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_B
             // 
@@ -221,7 +222,7 @@
             this.Button_B.Text = "B";
             this.Button_B.TextColor = System.Drawing.Color.White;
             this.Button_B.UseVisualStyleBackColor = false;
-            this.Button_B.Click += new System.EventHandler(this.Keys);
+            this.Button_B.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_V
             // 
@@ -242,7 +243,7 @@
             this.Button_V.Text = "V";
             this.Button_V.TextColor = System.Drawing.Color.White;
             this.Button_V.UseVisualStyleBackColor = false;
-            this.Button_V.Click += new System.EventHandler(this.Keys);
+            this.Button_V.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_C
             // 
@@ -263,7 +264,7 @@
             this.Button_C.Text = "C";
             this.Button_C.TextColor = System.Drawing.Color.White;
             this.Button_C.UseVisualStyleBackColor = false;
-            this.Button_C.Click += new System.EventHandler(this.Keys);
+            this.Button_C.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_X
             // 
@@ -284,7 +285,7 @@
             this.Button_X.Text = "X";
             this.Button_X.TextColor = System.Drawing.Color.White;
             this.Button_X.UseVisualStyleBackColor = false;
-            this.Button_X.Click += new System.EventHandler(this.Keys);
+            this.Button_X.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_Z
             // 
@@ -305,7 +306,7 @@
             this.Button_Z.Text = "Z";
             this.Button_Z.TextColor = System.Drawing.Color.White;
             this.Button_Z.UseVisualStyleBackColor = false;
-            this.Button_Z.Click += new System.EventHandler(this.Keys);
+            this.Button_Z.Click += new System.EventHandler(this.KeysHandler);
             // 
             // PasswordTexbox
             // 
@@ -329,6 +330,7 @@
             this.PasswordTexbox.Texts = "";
             this.PasswordTexbox.UnderlinedStyle = false;
             this.PasswordTexbox.Enter += new System.EventHandler(this.PasswordTexbox_Enter);
+            this.PasswordTexbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTexbox_KeyPress);
             // 
             // UsernameTextBox
             // 
@@ -352,6 +354,7 @@
             this.UsernameTextBox.Texts = "";
             this.UsernameTextBox.UnderlinedStyle = false;
             this.UsernameTextBox.Enter += new System.EventHandler(this.UsernameTextBox_Enter);
+            this.UsernameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UsernameTextBox_KeyPress);
             // 
             // Button_Space
             // 
@@ -372,7 +375,7 @@
             this.Button_Space.Text = " Espacio";
             this.Button_Space.TextColor = System.Drawing.Color.White;
             this.Button_Space.UseVisualStyleBackColor = false;
-            this.Button_Space.Click += new System.EventHandler(this.Keys);
+            this.Button_Space.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_Enter
             // 
@@ -393,7 +396,7 @@
             this.Button_Enter.Text = "Intro";
             this.Button_Enter.TextColor = System.Drawing.Color.White;
             this.Button_Enter.UseVisualStyleBackColor = false;
-            this.Button_Enter.Click += new System.EventHandler(this.Keys);
+            this.Button_Enter.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_Ñ
             // 
@@ -414,7 +417,7 @@
             this.Button_Ñ.Text = "Ñ";
             this.Button_Ñ.TextColor = System.Drawing.Color.White;
             this.Button_Ñ.UseVisualStyleBackColor = false;
-            this.Button_Ñ.Click += new System.EventHandler(this.Keys);
+            this.Button_Ñ.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_L
             // 
@@ -435,7 +438,7 @@
             this.Button_L.Text = "L";
             this.Button_L.TextColor = System.Drawing.Color.White;
             this.Button_L.UseVisualStyleBackColor = false;
-            this.Button_L.Click += new System.EventHandler(this.Keys);
+            this.Button_L.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_K
             // 
@@ -456,7 +459,7 @@
             this.Button_K.Text = "K";
             this.Button_K.TextColor = System.Drawing.Color.White;
             this.Button_K.UseVisualStyleBackColor = false;
-            this.Button_K.Click += new System.EventHandler(this.Keys);
+            this.Button_K.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_J
             // 
@@ -477,7 +480,7 @@
             this.Button_J.Text = "J";
             this.Button_J.TextColor = System.Drawing.Color.White;
             this.Button_J.UseVisualStyleBackColor = false;
-            this.Button_J.Click += new System.EventHandler(this.Keys);
+            this.Button_J.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_H
             // 
@@ -498,7 +501,7 @@
             this.Button_H.Text = "H";
             this.Button_H.TextColor = System.Drawing.Color.White;
             this.Button_H.UseVisualStyleBackColor = false;
-            this.Button_H.Click += new System.EventHandler(this.Keys);
+            this.Button_H.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_G
             // 
@@ -519,7 +522,7 @@
             this.Button_G.Text = "G";
             this.Button_G.TextColor = System.Drawing.Color.White;
             this.Button_G.UseVisualStyleBackColor = false;
-            this.Button_G.Click += new System.EventHandler(this.Keys);
+            this.Button_G.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_F
             // 
@@ -540,7 +543,7 @@
             this.Button_F.Text = "F";
             this.Button_F.TextColor = System.Drawing.Color.White;
             this.Button_F.UseVisualStyleBackColor = false;
-            this.Button_F.Click += new System.EventHandler(this.Keys);
+            this.Button_F.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_D
             // 
@@ -561,7 +564,7 @@
             this.Button_D.Text = "D";
             this.Button_D.TextColor = System.Drawing.Color.White;
             this.Button_D.UseVisualStyleBackColor = false;
-            this.Button_D.Click += new System.EventHandler(this.Keys);
+            this.Button_D.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_S
             // 
@@ -582,7 +585,7 @@
             this.Button_S.Text = "S";
             this.Button_S.TextColor = System.Drawing.Color.White;
             this.Button_S.UseVisualStyleBackColor = false;
-            this.Button_S.Click += new System.EventHandler(this.Keys);
+            this.Button_S.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_A
             // 
@@ -603,7 +606,7 @@
             this.Button_A.Text = "A";
             this.Button_A.TextColor = System.Drawing.Color.White;
             this.Button_A.UseVisualStyleBackColor = false;
-            this.Button_A.Click += new System.EventHandler(this.Keys);
+            this.Button_A.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_P
             // 
@@ -624,7 +627,7 @@
             this.Button_P.Text = "P";
             this.Button_P.TextColor = System.Drawing.Color.White;
             this.Button_P.UseVisualStyleBackColor = false;
-            this.Button_P.Click += new System.EventHandler(this.Keys);
+            this.Button_P.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_O
             // 
@@ -645,7 +648,7 @@
             this.Button_O.Text = "O";
             this.Button_O.TextColor = System.Drawing.Color.White;
             this.Button_O.UseVisualStyleBackColor = false;
-            this.Button_O.Click += new System.EventHandler(this.Keys);
+            this.Button_O.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_I
             // 
@@ -666,7 +669,7 @@
             this.Button_I.Text = "I";
             this.Button_I.TextColor = System.Drawing.Color.White;
             this.Button_I.UseVisualStyleBackColor = false;
-            this.Button_I.Click += new System.EventHandler(this.Keys);
+            this.Button_I.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_U
             // 
@@ -687,7 +690,7 @@
             this.Button_U.Text = "U";
             this.Button_U.TextColor = System.Drawing.Color.White;
             this.Button_U.UseVisualStyleBackColor = false;
-            this.Button_U.Click += new System.EventHandler(this.Keys);
+            this.Button_U.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_Y
             // 
@@ -708,7 +711,7 @@
             this.Button_Y.Text = "Y";
             this.Button_Y.TextColor = System.Drawing.Color.White;
             this.Button_Y.UseVisualStyleBackColor = false;
-            this.Button_Y.Click += new System.EventHandler(this.Keys);
+            this.Button_Y.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_T
             // 
@@ -729,7 +732,7 @@
             this.Button_T.Text = "T";
             this.Button_T.TextColor = System.Drawing.Color.White;
             this.Button_T.UseVisualStyleBackColor = false;
-            this.Button_T.Click += new System.EventHandler(this.Keys);
+            this.Button_T.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_R
             // 
@@ -750,7 +753,7 @@
             this.Button_R.Text = "R";
             this.Button_R.TextColor = System.Drawing.Color.White;
             this.Button_R.UseVisualStyleBackColor = false;
-            this.Button_R.Click += new System.EventHandler(this.Keys);
+            this.Button_R.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_E
             // 
@@ -771,7 +774,7 @@
             this.Button_E.Text = "E";
             this.Button_E.TextColor = System.Drawing.Color.White;
             this.Button_E.UseVisualStyleBackColor = false;
-            this.Button_E.Click += new System.EventHandler(this.Keys);
+            this.Button_E.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_W
             // 
@@ -792,7 +795,7 @@
             this.Button_W.Text = "W";
             this.Button_W.TextColor = System.Drawing.Color.White;
             this.Button_W.UseVisualStyleBackColor = false;
-            this.Button_W.Click += new System.EventHandler(this.Keys);
+            this.Button_W.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_Q
             // 
@@ -813,7 +816,7 @@
             this.Button_Q.Text = "Q";
             this.Button_Q.TextColor = System.Drawing.Color.White;
             this.Button_Q.UseVisualStyleBackColor = false;
-            this.Button_Q.Click += new System.EventHandler(this.Keys);
+            this.Button_Q.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_BackSpace
             // 
@@ -834,7 +837,7 @@
             this.Button_BackSpace.Text = "←";
             this.Button_BackSpace.TextColor = System.Drawing.Color.White;
             this.Button_BackSpace.UseVisualStyleBackColor = false;
-            this.Button_BackSpace.Click += new System.EventHandler(this.Keys);
+            this.Button_BackSpace.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_0
             // 
@@ -855,7 +858,7 @@
             this.Button_0.Text = "0";
             this.Button_0.TextColor = System.Drawing.Color.White;
             this.Button_0.UseVisualStyleBackColor = false;
-            this.Button_0.Click += new System.EventHandler(this.Keys);
+            this.Button_0.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_9
             // 
@@ -876,7 +879,7 @@
             this.Button_9.Text = "9";
             this.Button_9.TextColor = System.Drawing.Color.White;
             this.Button_9.UseVisualStyleBackColor = false;
-            this.Button_9.Click += new System.EventHandler(this.Keys);
+            this.Button_9.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_8
             // 
@@ -897,7 +900,7 @@
             this.Button_8.Text = "8";
             this.Button_8.TextColor = System.Drawing.Color.White;
             this.Button_8.UseVisualStyleBackColor = false;
-            this.Button_8.Click += new System.EventHandler(this.Keys);
+            this.Button_8.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_7
             // 
@@ -918,7 +921,7 @@
             this.Button_7.Text = "7";
             this.Button_7.TextColor = System.Drawing.Color.White;
             this.Button_7.UseVisualStyleBackColor = false;
-            this.Button_7.Click += new System.EventHandler(this.Keys);
+            this.Button_7.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_6
             // 
@@ -939,7 +942,7 @@
             this.Button_6.Text = "6";
             this.Button_6.TextColor = System.Drawing.Color.White;
             this.Button_6.UseVisualStyleBackColor = false;
-            this.Button_6.Click += new System.EventHandler(this.Keys);
+            this.Button_6.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_5
             // 
@@ -960,7 +963,7 @@
             this.Button_5.Text = "5";
             this.Button_5.TextColor = System.Drawing.Color.White;
             this.Button_5.UseVisualStyleBackColor = false;
-            this.Button_5.Click += new System.EventHandler(this.Keys);
+            this.Button_5.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_4
             // 
@@ -981,7 +984,7 @@
             this.Button_4.Text = "4";
             this.Button_4.TextColor = System.Drawing.Color.White;
             this.Button_4.UseVisualStyleBackColor = false;
-            this.Button_4.Click += new System.EventHandler(this.Keys);
+            this.Button_4.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_3
             // 
@@ -1002,7 +1005,7 @@
             this.Button_3.Text = "3";
             this.Button_3.TextColor = System.Drawing.Color.White;
             this.Button_3.UseVisualStyleBackColor = false;
-            this.Button_3.Click += new System.EventHandler(this.Keys);
+            this.Button_3.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_2
             // 
@@ -1023,7 +1026,7 @@
             this.Button_2.Text = "2";
             this.Button_2.TextColor = System.Drawing.Color.White;
             this.Button_2.UseVisualStyleBackColor = false;
-            this.Button_2.Click += new System.EventHandler(this.Keys);
+            this.Button_2.Click += new System.EventHandler(this.KeysHandler);
             // 
             // Button_1
             // 
@@ -1044,7 +1047,18 @@
             this.Button_1.Text = "1";
             this.Button_1.TextColor = System.Drawing.Color.White;
             this.Button_1.UseVisualStyleBackColor = false;
-            this.Button_1.Click += new System.EventHandler(this.Keys);
+            this.Button_1.Click += new System.EventHandler(this.KeysHandler);
+            // 
+            // InformationLabel
+            // 
+            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
+            this.InformationLabel.Location = new System.Drawing.Point(3, 432);
+            this.InformationLabel.Name = "InformationLabel";
+            this.InformationLabel.Size = new System.Drawing.Size(704, 44);
+            this.InformationLabel.TabIndex = 108;
+            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CustomKeyboard
             // 
@@ -1052,6 +1066,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.InformationLabel);
             this.Controls.Add(this.Button_Delete);
             this.Controls.Add(this.Button_Star);
             this.Controls.Add(this.Button_Underscore);
@@ -1100,7 +1115,7 @@
             this.Controls.Add(this.Button_1);
             this.DoubleBuffered = true;
             this.Name = "CustomKeyboard";
-            this.Size = new System.Drawing.Size(726, 473);
+            this.Size = new System.Drawing.Size(717, 476);
             this.ResumeLayout(false);
 
         }
@@ -1153,5 +1168,6 @@
         private CustomButton Button_3;
         private CustomButton Button_2;
         private CustomButton Button_1;
+        private Label InformationLabel;
     }
 }
