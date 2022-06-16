@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.label4 = new System.Windows.Forms.Label();
+            this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -87,7 +87,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(404, 462);
+            this.BackButton.Location = new System.Drawing.Point(294, 486);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(160, 55);
             this.BackButton.TabIndex = 124;
@@ -96,16 +96,16 @@
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
-            // label4
+            // RemainingTimeLabel
             // 
-            this.label4.BackColor = System.Drawing.Color.SteelBlue;
-            this.label4.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(496, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(234, 23);
-            this.label4.TabIndex = 123;
-            this.label4.Text = "Tiempo restante: ";
+            this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(496, 14);
+            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(224, 25);
+            this.RemainingTimeLabel.TabIndex = 123;
+            this.RemainingTimeLabel.Text = "Tiempo restante: ";
             // 
             // SubtotalLabel
             // 
@@ -114,9 +114,9 @@
             this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
             this.SubtotalLabel.Location = new System.Drawing.Point(248, 14);
             this.SubtotalLabel.Name = "SubtotalLabel";
-            this.SubtotalLabel.Size = new System.Drawing.Size(248, 23);
+            this.SubtotalLabel.Size = new System.Drawing.Size(248, 25);
             this.SubtotalLabel.TabIndex = 122;
-            this.SubtotalLabel.Text = "Sub total: $ 0";
+            this.SubtotalLabel.Text = "Sub Total: $ 0";
             // 
             // CurrencyLabel
             // 
@@ -125,7 +125,7 @@
             this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
             this.CurrencyLabel.Location = new System.Drawing.Point(47, 14);
             this.CurrencyLabel.Name = "CurrencyLabel";
-            this.CurrencyLabel.Size = new System.Drawing.Size(201, 23);
+            this.CurrencyLabel.Size = new System.Drawing.Size(201, 25);
             this.CurrencyLabel.TabIndex = 121;
             this.CurrencyLabel.Text = "Divisa: Pesos";
             // 
@@ -133,16 +133,16 @@
             // 
             this.ConfirmAndExitDepositButton.BackColor = System.Drawing.Color.SeaGreen;
             this.ConfirmAndExitDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
-            this.ConfirmAndExitDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
+            this.ConfirmAndExitDepositButton.BorderColor = System.Drawing.Color.SeaGreen;
             this.ConfirmAndExitDepositButton.BorderRadius = 4;
             this.ConfirmAndExitDepositButton.BorderSize = 0;
             this.ConfirmAndExitDepositButton.FlatAppearance.BorderSize = 0;
             this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(548, 462);
+            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(456, 486);
             this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
-            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(300, 55);
+            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(266, 55);
             this.ConfirmAndExitDepositButton.TabIndex = 120;
             this.ConfirmAndExitDepositButton.Tag = "";
             this.ConfirmAndExitDepositButton.Text = "Confirmar ";
@@ -162,9 +162,9 @@
             this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
-            this.CancelDepositButton.Location = new System.Drawing.Point(156, 462);
+            this.CancelDepositButton.Location = new System.Drawing.Point(46, 486);
             this.CancelDepositButton.Name = "CancelDepositButton";
-            this.CancelDepositButton.Size = new System.Drawing.Size(300, 55);
+            this.CancelDepositButton.Size = new System.Drawing.Size(250, 55);
             this.CancelDepositButton.TabIndex = 119;
             this.CancelDepositButton.Tag = "";
             this.CancelDepositButton.Text = "Cancelar";
@@ -178,9 +178,8 @@
             this.DenominationsGridView.AllowUserToDeleteRows = false;
             this.DenominationsGridView.AllowUserToResizeColumns = false;
             this.DenominationsGridView.AllowUserToResizeRows = false;
-            this.DenominationsGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DenominationsGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.DenominationsGridView.BackgroundColor = System.Drawing.Color.White;
             this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -215,9 +214,10 @@
             this.DenominationsGridView.RowTemplate.DividerHeight = 1;
             this.DenominationsGridView.RowTemplate.Height = 50;
             this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DenominationsGridView.Size = new System.Drawing.Size(680, 360);
+            this.DenominationsGridView.Size = new System.Drawing.Size(670, 320);
             this.DenominationsGridView.TabIndex = 133;
             this.DenominationsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellClicked);
+            this.DenominationsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DenominationsGridView_CellContentClick);
             this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             this.DenominationsGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DenominationsGridView_EditingControlShowing);
             // 
@@ -226,7 +226,7 @@
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(150, 528);
+            this.InformationLabel.Location = new System.Drawing.Point(40, 552);
             this.InformationLabel.Name = "InformationLabel";
             this.InformationLabel.Size = new System.Drawing.Size(704, 72);
             this.InformationLabel.TabIndex = 134;
@@ -261,7 +261,7 @@
             this.MonitorGroupBox.Controls.Add(this.DeviceModeLabel);
             this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(752, 144);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(752, 104);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
             this.MonitorGroupBox.Size = new System.Drawing.Size(152, 256);
             this.MonitorGroupBox.TabIndex = 135;
@@ -423,7 +423,7 @@
             this.EnvelopeTextBox.BorderSize = 2;
             this.EnvelopeTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.EnvelopeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.EnvelopeTextBox.Location = new System.Drawing.Point(232, 408);
+            this.EnvelopeTextBox.Location = new System.Drawing.Point(48, 368);
             this.EnvelopeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.EnvelopeTextBox.Multiline = false;
             this.EnvelopeTextBox.Name = "EnvelopeTextBox";
@@ -431,10 +431,11 @@
             this.EnvelopeTextBox.PasswordChar = false;
             this.EnvelopeTextBox.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.EnvelopeTextBox.PlaceholderText = "Identificador de sobre";
-            this.EnvelopeTextBox.Size = new System.Drawing.Size(352, 45);
+            this.EnvelopeTextBox.Size = new System.Drawing.Size(672, 45);
             this.EnvelopeTextBox.TabIndex = 138;
             this.EnvelopeTextBox.Texts = "";
             this.EnvelopeTextBox.UnderlinedStyle = false;
+            this.EnvelopeTextBox.Enter += new System.EventHandler(this.EnvelopeTextBox_Enter);
             // 
             // Button_3
             // 
@@ -447,7 +448,7 @@
             this.Button_3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_3.ForeColor = System.Drawing.Color.White;
-            this.Button_3.Location = new System.Drawing.Point(856, 152);
+            this.Button_3.Location = new System.Drawing.Point(160, 424);
             this.Button_3.Name = "Button_3";
             this.Button_3.Size = new System.Drawing.Size(55, 55);
             this.Button_3.TabIndex = 141;
@@ -468,7 +469,7 @@
             this.Button_2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_2.ForeColor = System.Drawing.Color.White;
-            this.Button_2.Location = new System.Drawing.Point(797, 152);
+            this.Button_2.Location = new System.Drawing.Point(104, 424);
             this.Button_2.Name = "Button_2";
             this.Button_2.Size = new System.Drawing.Size(55, 55);
             this.Button_2.TabIndex = 140;
@@ -489,7 +490,7 @@
             this.Button_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_1.ForeColor = System.Drawing.Color.White;
-            this.Button_1.Location = new System.Drawing.Point(738, 152);
+            this.Button_1.Location = new System.Drawing.Point(48, 424);
             this.Button_1.Name = "Button_1";
             this.Button_1.Size = new System.Drawing.Size(55, 55);
             this.Button_1.TabIndex = 139;
@@ -510,7 +511,7 @@
             this.Button_6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_6.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_6.ForeColor = System.Drawing.Color.White;
-            this.Button_6.Location = new System.Drawing.Point(856, 94);
+            this.Button_6.Location = new System.Drawing.Point(328, 424);
             this.Button_6.Name = "Button_6";
             this.Button_6.Size = new System.Drawing.Size(55, 55);
             this.Button_6.TabIndex = 144;
@@ -531,7 +532,7 @@
             this.Button_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_5.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_5.ForeColor = System.Drawing.Color.White;
-            this.Button_5.Location = new System.Drawing.Point(797, 94);
+            this.Button_5.Location = new System.Drawing.Point(272, 424);
             this.Button_5.Name = "Button_5";
             this.Button_5.Size = new System.Drawing.Size(55, 55);
             this.Button_5.TabIndex = 143;
@@ -552,7 +553,7 @@
             this.Button_4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_4.ForeColor = System.Drawing.Color.White;
-            this.Button_4.Location = new System.Drawing.Point(738, 94);
+            this.Button_4.Location = new System.Drawing.Point(216, 424);
             this.Button_4.Name = "Button_4";
             this.Button_4.Size = new System.Drawing.Size(55, 55);
             this.Button_4.TabIndex = 142;
@@ -573,7 +574,7 @@
             this.Button_Dot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Dot.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Dot.ForeColor = System.Drawing.Color.White;
-            this.Button_Dot.Location = new System.Drawing.Point(797, 209);
+            this.Button_Dot.Location = new System.Drawing.Point(608, 424);
             this.Button_Dot.Name = "Button_Dot";
             this.Button_Dot.Size = new System.Drawing.Size(55, 55);
             this.Button_Dot.TabIndex = 147;
@@ -594,7 +595,7 @@
             this.Button_BackSpace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_BackSpace.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_BackSpace.ForeColor = System.Drawing.Color.White;
-            this.Button_BackSpace.Location = new System.Drawing.Point(856, 208);
+            this.Button_BackSpace.Location = new System.Drawing.Point(664, 424);
             this.Button_BackSpace.Name = "Button_BackSpace";
             this.Button_BackSpace.Size = new System.Drawing.Size(54, 55);
             this.Button_BackSpace.TabIndex = 146;
@@ -615,7 +616,7 @@
             this.Button_0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_0.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_0.ForeColor = System.Drawing.Color.White;
-            this.Button_0.Location = new System.Drawing.Point(738, 209);
+            this.Button_0.Location = new System.Drawing.Point(552, 424);
             this.Button_0.Name = "Button_0";
             this.Button_0.Size = new System.Drawing.Size(55, 55);
             this.Button_0.TabIndex = 145;
@@ -636,7 +637,7 @@
             this.Button_9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_9.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_9.ForeColor = System.Drawing.Color.White;
-            this.Button_9.Location = new System.Drawing.Point(855, 36);
+            this.Button_9.Location = new System.Drawing.Point(496, 424);
             this.Button_9.Name = "Button_9";
             this.Button_9.Size = new System.Drawing.Size(55, 55);
             this.Button_9.TabIndex = 150;
@@ -657,7 +658,7 @@
             this.Button_8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_8.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_8.ForeColor = System.Drawing.Color.White;
-            this.Button_8.Location = new System.Drawing.Point(797, 36);
+            this.Button_8.Location = new System.Drawing.Point(440, 424);
             this.Button_8.Name = "Button_8";
             this.Button_8.Size = new System.Drawing.Size(55, 55);
             this.Button_8.TabIndex = 149;
@@ -678,7 +679,7 @@
             this.Button_7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_7.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_7.ForeColor = System.Drawing.Color.White;
-            this.Button_7.Location = new System.Drawing.Point(739, 36);
+            this.Button_7.Location = new System.Drawing.Point(384, 424);
             this.Button_7.Name = "Button_7";
             this.Button_7.Size = new System.Drawing.Size(55, 55);
             this.Button_7.TabIndex = 148;
@@ -722,7 +723,6 @@
             this.Quantity.Frozen = true;
             this.Quantity.HeaderText = "Cantidad";
             this.Quantity.Name = "Quantity";
-            this.Quantity.Width = 90;
             // 
             // Amount
             // 
@@ -736,7 +736,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 614);
+            this.ClientSize = new System.Drawing.Size(738, 643);
             this.ControlBox = false;
             this.Controls.Add(this.Button_3);
             this.Controls.Add(this.Button_9);
@@ -755,7 +755,7 @@
             this.Controls.Add(this.InformationLabel);
             this.Controls.Add(this.DenominationsGridView);
             this.Controls.Add(this.BackButton);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.RemainingTimeLabel);
             this.Controls.Add(this.SubtotalLabel);
             this.Controls.Add(this.CurrencyLabel);
             this.Controls.Add(this.ConfirmAndExitDepositButton);
@@ -775,7 +775,7 @@
 
         #endregion
         private CustomButton BackButton;
-        private Label label4;
+        private Label RemainingTimeLabel;
         private Label SubtotalLabel;
         private Label CurrencyLabel;
         private CustomButton ConfirmAndExitDepositButton;

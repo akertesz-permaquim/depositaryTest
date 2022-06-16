@@ -19,6 +19,16 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         public Device _device { get; set; }
 
+
+        private enum SelectedEditElementEnum
+        {
+            Ninguno = 0,
+            Celda = 1,
+            CodigoSobre = 2
+        }
+
+        private SelectedEditElementEnum _selectedEditElement;
+
         private List<EnvelopeDepositItem> _envelopeDepositItems = new();
 
         private long _totalQuantity = 0;
@@ -38,14 +48,45 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CellClicked(object sender, DataGridViewCellEventArgs e)
         {
             activatedCell = ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex];
+            _selectedEditElement = SelectedEditElementEnum.Celda;
         }
 
         //////////////////////////////////////////////////////////////////////
         public EnvelopeDepositForm()
         {
             InitializeComponent();
+            LoadStyles();
         }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
 
+            Button_0.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_1.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_2.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_3.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_4.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_5.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_6.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_7.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_8.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_9.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_Dot.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            Button_BackSpace.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
+            CurrencyLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+            SubtotalLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+            
+            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+
+            ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText("ACCEPT_BUTTON");
+            CancelDepositButton.Text = MultilanguangeController.GetText("CANCEL_BUTTON");
+            BackButton.Text = MultilanguangeController.GetText("EXIT_BUTTON");
+            RemainingTimeLabel.Text = MultilanguangeController.GetText("TIEMPO_RESTANTE");
+
+            DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText("DENOMINACION");
+            DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText("CANTIDAD");
+            DenominationsGridView.Columns["Amount"].HeaderText = MultilanguangeController.GetText("IMPORTE");
+        }
         private void EnvelopeDepositForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
@@ -303,25 +344,17 @@ namespace Permaquim.Depositary.UI.Desktop
             if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
              && _operationStatus.CurrentTransactionQuantity == 0)
             {
-                InformationLabel.Text = "Ingrese el detalle de valores que irán dentro del sobre";
+                InformationLabel.Text = MultilanguangeController.GetText("INGRESAR_VALORES_SOBRE");
                 InformationLabel.ForeColor = Color.Green;
             }
 
-            if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                    && _operationStatus.CurrentTransactionQuantity > 0)
-            {
-                InformationLabel.Text = "Presione 'Confirmar' para depositar o 'Cancelar' para anular el depósito";
-                InformationLabel.ForeColor = Color.Green;
-            }
             if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                 && _operationStatus.CurrentTransactionQuantity == 0
                 && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQWaitingToRemoveBankNotes)
             {
-                InformationLabel.Text = "Retire el sobre para cancelar la operación.";
+                InformationLabel.Text = MultilanguangeController.GetText("RETIRAR_SOBRE");
                 InformationLabel.ForeColor = Color.Red;
             }
-
-
         }
 
         /// <summary>
@@ -456,39 +489,54 @@ namespace Permaquim.Depositary.UI.Desktop
         private void Keys(object sender, EventArgs e)
         {
 
-            // If the cell wasn't set, return
-            if (activatedCell == null) { return; }
-
-            // Set the number to your buttons' "Tag"-property, and read it to Cell
-            if (activatedCell.Value != null)
+            if (_selectedEditElement == SelectedEditElementEnum.Celda)
             {
-                if (((Button)sender).Tag.ToString().Equals("{BACKSPACE}"))
+                if (activatedCell == null) { return; }
+
+                if (activatedCell.Value != null)
                 {
-                    if (activatedCell.Value.ToString().Length > 1)
+                    if (((Button)sender).Tag.ToString().Equals("{BACKSPACE}"))
+                    {
+                        if (activatedCell.Value.ToString().Length > 1)
+                        {
+                            activatedCell.Value = Convert.ToDouble(activatedCell.Value.ToString()
+                                .Substring(0, activatedCell.Value.ToString().Length - 1));
+                        }
+                    }
+                    else
                     {
                         activatedCell.Value =
-                                     Convert.ToDouble(activatedCell.Value.ToString().Substring(0, activatedCell.Value.ToString().Length - 1));
+                            Convert.ToDouble((activatedCell.Value) +
+                            ((Button)sender).Tag.ToString());
                     }
+
                 }
                 else
                 {
-                    activatedCell.Value =
-                        Convert.ToDouble((activatedCell.Value) +
-                        ((Button)sender).Tag.ToString());
+                    activatedCell.Value = Convert.ToDouble(((Button)sender).Tag);
+
+                    DenominationsGridView.Refresh();
+                    DenominationsGridView.Invalidate();
+                    DenominationsGridView.ClearSelection();
                 }
-
+                SumValues();
             }
-            else
+            if (_selectedEditElement == SelectedEditElementEnum.CodigoSobre)
             {
-                activatedCell.Value = Convert.ToDouble(((Button)sender).Tag);
-
-                DenominationsGridView.Refresh();
-                DenominationsGridView.Invalidate();
-                DenominationsGridView.ClearSelection();
+                EnvelopeTextBox.Focus();
+                SendKeys.Send(((CustomButton)sender).Tag.ToString());
             }
-            SumValues();
-
         }
         #endregion
+
+        private void DenominationsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void EnvelopeTextBox_Enter(object sender, EventArgs e)
+        {
+            _selectedEditElement = SelectedEditElementEnum.CodigoSobre;
+        }
     }
 }

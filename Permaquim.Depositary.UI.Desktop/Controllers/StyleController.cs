@@ -9,16 +9,35 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static  class StyleController
     {
+        public enum ColorNameEnum
+        {
+            Ninguno =0,
+            Cabecera = 1,
+            Contenido = 2,
+            Pie=3,
+            FuentePrincipal =4,
+            FuenteContraste = 5,
+            BotonEstandar = 6,
+            BotonAceptar = 7,
+            BotonCancelar = 8,
+            BotonContinuar = 9,
+            BotonAlerta = 10,
+            TextoInformacion = 11,
+            TextoAlerta =12,
+            TextoError  =13
+
+        }
+
         private static Permaquim.Depositario.Entities.Relations.Estilo.Esquema _selectedSchema = new();
         public static Image GetLogo()
         {
-            return GetResource("Logo");
+            return GetImageResource("Logo");
         }
         public static Image GetLogin()
         {
-            return GetResource("Login");
+            return GetImageResource("Login");
         }
-        public static Image GetResource(string resourceName)
+        public static Image GetImageResource(string resourceName)
         {
             Image resultImage = null;
 
@@ -37,7 +56,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return resultImage;
         }
 
-        public static System.Drawing.Color GetColor(string colorName)
+        public static System.Drawing.Color GetColor(ColorNameEnum colorName)
         {
             System.Drawing.Color returnValue = Color.White;
 
@@ -48,7 +67,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId.Id);
             entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.Nombre,
-                Depositario.sqlEnum.OperandEnum.Equal, colorName);
+                Depositario.sqlEnum.OperandEnum.Equal, Enum.GetName(typeof(ColorNameEnum), colorName));
 
             entities.Items();
             if (entities.Result.Count > 0)

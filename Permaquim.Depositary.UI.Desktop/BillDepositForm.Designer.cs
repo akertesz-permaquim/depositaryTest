@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
@@ -53,9 +53,9 @@
             this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.DenominationsGridView = new System.Windows.Forms.DataGridView();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Denominacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Denomination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConfirmAndContinueDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.MonitorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
@@ -289,7 +289,7 @@
             this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
             this.SubtotalLabel.Location = new System.Drawing.Point(368, 20);
             this.SubtotalLabel.Name = "SubtotalLabel";
-            this.SubtotalLabel.Size = new System.Drawing.Size(248, 23);
+            this.SubtotalLabel.Size = new System.Drawing.Size(248, 27);
             this.SubtotalLabel.TabIndex = 103;
             this.SubtotalLabel.Text = "Sub total: $ 0";
             // 
@@ -300,7 +300,7 @@
             this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
             this.CurrencyLabel.Location = new System.Drawing.Point(167, 20);
             this.CurrencyLabel.Name = "CurrencyLabel";
-            this.CurrencyLabel.Size = new System.Drawing.Size(201, 23);
+            this.CurrencyLabel.Size = new System.Drawing.Size(201, 27);
             this.CurrencyLabel.TabIndex = 102;
             this.CurrencyLabel.Text = "Divisa: Pesos";
             // 
@@ -311,7 +311,7 @@
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
             this.RemainingTimeLabel.Location = new System.Drawing.Point(616, 20);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(248, 23);
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(248, 27);
             this.RemainingTimeLabel.TabIndex = 105;
             this.RemainingTimeLabel.Text = "Tiempo restante: ";
             // 
@@ -370,28 +370,28 @@
             this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Image,
-            this.Denominacion,
-            this.Cantidad,
-            this.Importe});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Denomination,
+            this.Quantity,
+            this.Amount});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
             this.DenominationsGridView.Location = new System.Drawing.Point(168, 48);
@@ -416,29 +416,29 @@
             this.Image.ReadOnly = true;
             this.Image.Width = 105;
             // 
-            // Denominacion
+            // Denomination
             // 
-            this.Denominacion.DataPropertyName = "Denomination";
-            this.Denominacion.HeaderText = "Denominación";
-            this.Denominacion.Name = "Denominacion";
-            this.Denominacion.ReadOnly = true;
-            this.Denominacion.Width = 260;
+            this.Denomination.DataPropertyName = "Denomination";
+            this.Denomination.HeaderText = "Denominación";
+            this.Denomination.Name = "Denomination";
+            this.Denomination.ReadOnly = true;
+            this.Denomination.Width = 260;
             // 
-            // Cantidad
+            // Quantity
             // 
-            this.Cantidad.DataPropertyName = "Quantity";
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 110;
+            this.Quantity.DataPropertyName = "Quantity";
+            this.Quantity.HeaderText = "Cantidad";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.Width = 110;
             // 
-            // Importe
+            // Amount
             // 
-            this.Importe.DataPropertyName = "Amount";
-            this.Importe.HeaderText = "Importe";
-            this.Importe.Name = "Importe";
-            this.Importe.ReadOnly = true;
-            this.Importe.Width = 220;
+            this.Amount.DataPropertyName = "Amount";
+            this.Amount.HeaderText = "Importe";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.Width = 220;
             // 
             // ConfirmAndContinueDepositButton
             // 
@@ -521,5 +521,8 @@
         private DataGridViewTextBoxColumn Importe;
         private Label CurrencyStatusLabel;
         private CustomButton ConfirmAndContinueDepositButton;
+        private DataGridViewTextBoxColumn Denomination;
+        private DataGridViewTextBoxColumn Quantity;
+        private DataGridViewTextBoxColumn Amount;
     }
 }

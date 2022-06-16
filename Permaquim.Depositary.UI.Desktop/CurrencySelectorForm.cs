@@ -44,22 +44,21 @@ namespace Permaquim.Depositary.UI.Desktop
                 // Si la moneda no está habilitada para la sucursal 
 
                 CustomButton newButton = new CustomButton();
-
-                newButton.BackColor = System.Drawing.Color.SeaGreen;
-                newButton.BackgroundColor = System.Drawing.Color.SeaGreen;
-                newButton.BorderColor = System.Drawing.Color.LightGreen;
+                newButton.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
+                newButton.BackgroundColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
+                newButton.BorderColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
                 newButton.BorderRadius = 5;
                 newButton.BorderSize = 0;
                 newButton.FlatAppearance.BorderSize = 0;
                 newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                 newButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-                newButton.ForeColor = System.Drawing.Color.White;
+                newButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
                 newButton.Location = new System.Drawing.Point(3, 3);
                 newButton.Name = "DepositButton" + item.Id.ToString();
                 newButton.Size = new System.Drawing.Size(293, 77);
                 newButton.TabIndex = 0;
                 newButton.Text = MultilanguangeController.GetText(item.Nombre);
-                newButton.TextColor = System.Drawing.Color.White;
+                newButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
                 newButton.UseVisualStyleBackColor = false;
 
                 newButton.Click += new System.EventHandler(CurrencyButton_Click);
@@ -73,21 +72,21 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = new CustomButton();
-            backButton.BackColor = System.Drawing.Color.SteelBlue;
-            backButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            backButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            backButton.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
+            backButton.BackgroundColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
+            backButton.BorderColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
             backButton.BorderRadius = 5;
             backButton.BorderSize = 0;
             backButton.FlatAppearance.BorderSize = 0;
             backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             backButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            backButton.ForeColor = System.Drawing.Color.White;
+            backButton.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
             backButton.Location = new System.Drawing.Point(3, 3);
             backButton.Name = "BackButton";
             backButton.Size = new System.Drawing.Size(293, 77);
             backButton.TabIndex = 3;
             backButton.Text = MultilanguangeController.GetText("Salir");
-            backButton.TextColor = System.Drawing.Color.White;
+            backButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
             backButton.UseVisualStyleBackColor = false;
 
             this.MainPanel.Controls.Add(backButton);
@@ -140,6 +139,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CurrencySelectorForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            LoadStyles();
+        }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
         }
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.HeadPanel = new System.Windows.Forms.Panel();
             this.EnterpriseLabel = new System.Windows.Forms.Label();
@@ -40,9 +39,10 @@
             this.CounterPictureBox = new System.Windows.Forms.PictureBox();
             this.DateTimeLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.StartMessageLabel = new System.Windows.Forms.Label();
+            this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.InformationPanel = new System.Windows.Forms.Panel();
             this.InformationLabel = new System.Windows.Forms.Label();
-            this.MainImageList = new System.Windows.Forms.ImageList(this.components);
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
@@ -50,6 +50,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.IoBoardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CounterPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             this.InformationPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,6 +167,8 @@
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.White;
+            this.MainPanel.Controls.Add(this.StartMessageLabel);
+            this.MainPanel.Controls.Add(this.MainPictureBox);
             this.MainPanel.Controls.Add(this.InformationPanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 54);
@@ -173,6 +176,32 @@
             this.MainPanel.Size = new System.Drawing.Size(868, 391);
             this.MainPanel.TabIndex = 3;
             this.MainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainPanel_MouseClick);
+            // 
+            // StartMessageLabel
+            // 
+            this.StartMessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.StartMessageLabel.BackColor = System.Drawing.Color.Transparent;
+            this.StartMessageLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.StartMessageLabel.ForeColor = System.Drawing.Color.Silver;
+            this.StartMessageLabel.Location = new System.Drawing.Point(0, 248);
+            this.StartMessageLabel.Name = "StartMessageLabel";
+            this.StartMessageLabel.Size = new System.Drawing.Size(864, 72);
+            this.StartMessageLabel.TabIndex = 108;
+            this.StartMessageLabel.Text = "Presione la pantalla para ingresar";
+            this.StartMessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.StartMessageLabel.Visible = false;
+            // 
+            // MainPictureBox
+            // 
+            this.MainPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.MainPictureBox.Name = "MainPictureBox";
+            this.MainPictureBox.Size = new System.Drawing.Size(868, 391);
+            this.MainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.MainPictureBox.TabIndex = 1;
+            this.MainPictureBox.TabStop = false;
+            this.MainPictureBox.Click += new System.EventHandler(this.MainPictureBox_Click);
             // 
             // InformationPanel
             // 
@@ -196,15 +225,6 @@
             this.InformationLabel.Size = new System.Drawing.Size(373, 32);
             this.InformationLabel.TabIndex = 0;
             this.InformationLabel.Text = "El dispositivo no está operativo";
-            // 
-            // MainImageList
-            // 
-            this.MainImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.MainImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("MainImageList.ImageStream")));
-            this.MainImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.MainImageList.Images.SetKeyName(0, "RED");
-            this.MainImageList.Images.SetKeyName(1, "GREEN");
-            this.MainImageList.Images.SetKeyName(2, "YELLOW");
             // 
             // MainForm
             // 
@@ -233,6 +253,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.IoBoardPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CounterPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
             this.InformationPanel.ResumeLayout(false);
             this.InformationPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -252,6 +273,7 @@
         private Label EnterpriseLabel;
         private PictureBox IoBoardPictureBox;
         private PictureBox CounterPictureBox;
-        private ImageList MainImageList;
+        private PictureBox MainPictureBox;
+        private Label StartMessageLabel;
     }
 }

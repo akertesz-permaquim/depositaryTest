@@ -22,6 +22,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             AppController.MainFormInstance = this;
 
+            StartMessageLabel.Parent = MainPictureBox;
+
             // StartPosition was set to FormStartPosition.Manual in the properties window.
             Rectangle screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(0,0);
@@ -48,7 +50,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             var device = JsonConvert.DeserializeObject<DE50Device>(str);
 
             _de50Device = device;
-            this.Text =  MultilanguangeController.GetText("DEVICE") + ": " + device.DeviceName;
+            this.Text =  MultilanguangeController.GetText("DISPOSITIVO") + ": " + device.DeviceName;
             _device = new Device(device);
 
             this.Tag = _device;
@@ -70,9 +72,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 {
                     _device.PreviousState = _device.Sense().StatusInformation.OperatingState;
 
-                    // Setea el estado de la contadora previo al inicio del pooling 
-                    //_device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
-
                     // Si el escrow está abierto se debe cerrar
                     if (_device.StateResultProperty.StatusInformation.OperatingState ==
                             StatusInformation.State.EscrowOpen ||
@@ -89,8 +88,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 }
                 else
                 {
-                    MessageBox.Show(MultilanguangeController.GetText("DEVICE_NOT_CONNECTED"), 
-                        MultilanguangeController.GetText("DEVICE_NOT_CONNECTED"), MessageBoxButtons.OK,
+                    MessageBox.Show(MultilanguangeController.GetText("DISPOSITIVO_NO_CONECTADO"), 
+                        MultilanguangeController.GetText("DISPOSITIVO_NO_CONECTADO"), MessageBoxButtons.OK,
                         MessageBoxIcon.Error,MessageBoxDefaultButton.Button1);
                 }
             }
@@ -110,25 +109,28 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             // consulta el estado de la contadora si está conectada
             if (_device.CounterConnected)
             {
-                CounterPictureBox.Image = MainImageList.Images["GREEN"];
+                CounterPictureBox.Image = StyleController.GetImageResource("GREENLED");
             }
             else
             {
-                CounterPictureBox.Image = MainImageList.Images["RED"];
+                CounterPictureBox.Image = StyleController.GetImageResource("REDLED");
             }
 
-            _device.Status();
+            IoBoardStatus ioBoardStatus =  _device.Status();
 
             // consulta el estado de la ioboard  si está conectada
             if (_device.IoBoardConnected)
             {
-                IoBoardPictureBox.Image = MainImageList.Images["GREEN"];
+                IoBoardPictureBox.Image = StyleController.GetImageResource("GREENLED");
                 //IoBoardPictureBox.Too = MultilanguangeController.GetText("IO_BOARD_ONLINE");
             }
             else
             {
-                IoBoardPictureBox.Image = MainImageList.Images["RED"];
+                IoBoardPictureBox.Image = StyleController.GetImageResource("REDLED");
             }
+
+            //if(ioBoardStatus.BAG_STATUS.)
+
             LoadAvatar();
             SetUserData();
         }
@@ -151,6 +153,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void MainPanel_MouseClick(object sender, MouseEventArgs e)
         {
+            Login();
+        }
+
+        private void Login()
+        {
             if (DatabaseController.CurrentUser != null)
                 AppController.OpenChildForm(new OperationForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
@@ -159,11 +166,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 AppController.OpenChildForm(new KeyboardInputForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
-       private void LoadStyles()
+
+        private void LoadStyles()
         {
-            HeadPanel.BackColor = StyleController.GetColor("Cabecera");
-            MainPanel.BackColor = StyleController.GetColor("Contenido");
-            BottomPanel.BackColor = StyleController.GetColor("Pie");
+            HeadPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+            MainPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            BottomPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Pie);
+            MainPictureBox.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            StartMessageLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
         }
         private void LoadLogo()
         {
@@ -188,5 +198,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             Application.Exit();
         }
 
+        private void MainPictureBox_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
     }
 }

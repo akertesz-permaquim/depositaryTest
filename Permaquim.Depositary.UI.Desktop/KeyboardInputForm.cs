@@ -18,7 +18,7 @@ namespace Permaquim.Depositary.UI.Desktop
             MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText("USERTEXTBOXPLACEHOLDER");
             MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText("PASSWORDTEXTBOXPLACEHOLDER");
 
-            MainKeyboard.SetButtonsColor(StyleController.GetColor("Cabecera"));
+            MainKeyboard.SetButtonsColor(StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal));
 
             MainKeyboard.KeyboardEvent += MainKeyboard_KeyboardEvent;
             this.ResumeLayout();
@@ -26,8 +26,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor("Color1");
-            MainKeyboard.BackColor = StyleController.GetColor("Color2");
+            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            MainKeyboard.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
 
         }
 
@@ -39,7 +39,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 if (args.UserText.Trim().Equals(string.Empty) ||
                     args.PasswordText.Trim().Equals(string.Empty))
                 {
-                    MainKeyboard.SetLoginError(MultilanguangeController.GetText("USERNAME_OR_PASSWORD_MISSING"));
+                    MainKeyboard.SetLoginError(MultilanguangeController.GetText("FALTA_USUARIO_PASSWORD"));
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        MainKeyboard.SetLoginError(MultilanguangeController.GetText("USER_NOT_REGISTERED"));
+                        MainKeyboard.SetLoginError(MultilanguangeController.GetText("USUARIO_NO_REGISTRADO"));
                     }
                 }
             }
