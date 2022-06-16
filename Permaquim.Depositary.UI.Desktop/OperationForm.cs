@@ -115,7 +115,8 @@ namespace Permaquim.Depositary.UI.Desktop
             backButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
             backButton.UseVisualStyleBackColor = false;
             
-            this.MainPanel.Controls.Add(backButton);
+            this.ExitPanel.Controls.Add(backButton);
+            backButton.Dock = DockStyle.Bottom;
 
             backButton.Click += new System.EventHandler(BackButton_Click);
         }
