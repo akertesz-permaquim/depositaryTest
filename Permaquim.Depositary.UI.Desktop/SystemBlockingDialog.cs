@@ -32,6 +32,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
             InformationLabel.Text= MultilanguangeController.GetText("PUERTA_ABIERTA");
+            InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoError);
         }
 
         private void SystemBlockingDialog_Load(object sender, EventArgs e)

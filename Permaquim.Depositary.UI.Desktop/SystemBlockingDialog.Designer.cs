@@ -37,11 +37,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
             this.InformationLabel.Location = new System.Drawing.Point(32, 176);
             this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(894, 203);
+            this.InformationLabel.Size = new System.Drawing.Size(894, 76);
             this.InformationLabel.TabIndex = 108;
             this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -49,7 +49,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(990, 581);
+            this.ClientSize = new System.Drawing.Size(990, 454);
             this.Controls.Add(this.InformationLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SystemBlockingDialog";

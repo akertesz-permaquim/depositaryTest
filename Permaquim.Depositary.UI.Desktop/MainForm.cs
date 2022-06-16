@@ -7,7 +7,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
-
+        private const int VALUE_EXTRACT_OPERATION = 7;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         /// <summary>
@@ -129,11 +129,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     IoBoardPictureBox.Image = StyleController.GetImageResource("REDLED");
                 }
 
-                //if(ioBoardStatus.BAG_STATUS.)
             }
             else
             {
-                if (_blockingDialog == null  && DatabaseController.CurrentOperation.Id != 7 )
+                if (_blockingDialog == null  && 
+                    (DatabaseController.CurrentOperation == null ||
+                    DatabaseController.CurrentOperation.Id != VALUE_EXTRACT_OPERATION))
                 {
                     _blockingDialog = new SystemBlockingDialog()
                     {
