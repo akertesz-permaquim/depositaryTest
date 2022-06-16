@@ -29,7 +29,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
-        private System.Windows.Forms.Timer _poolingTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
 
         private List<DepositItem> _depositItems = new();
@@ -52,18 +52,16 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BillDepositForm_Load(object sender, EventArgs e)
         {
 
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
-
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
 
             _detectedDenominations = new();
 
-            _poolingTimer = new System.Windows.Forms.Timer()
+            _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = 200,
                 Enabled = true
             };
-            _poolingTimer.Tick += PoolTimer_Tick;
+            _pollingTimer.Tick += PoolTimer_Tick;
 
             _operationStatus = new();
 
@@ -146,83 +144,102 @@ namespace Permaquim.Depositary.UI.Desktop
         private void VerifyButtonsVisibility()
         {
 
-            //BackButton.Visible = false;
-            //ConfirmAndExitDepositButton.Visible = false;
-            //ConfirmAndContinueDepositButton.Visible = false;
-            //CancelDepositButton.Visible = false;
+            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+            {
 
-            BackButton.Visible =
-                !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _operationStatus.CurrentTransactionAmount == 0 
-                && !_device.StateResultProperty.DeviceStateInformation.StackerFull;
+                BackButton.Visible =
+                    !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                    && _operationStatus.CurrentTransactionAmount == 0
+                    && !_device.StateResultProperty.DeviceStateInformation.StackerFull;
 
-            ConfirmAndExitDepositButton.Visible =
-                (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _device.StateResultProperty.DoorStateInformation.Escrow
-                && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
-                && !_device.StateResultProperty.DeviceStateInformation.HopperBillPresent
-                && _device.StateResultProperty.StatusInformation.OperatingState
-                    != StatusInformation.State.PQWaitingToRemoveBankNotes
-                && _device.StateResultProperty.StatusInformation.OperatingState
-                    != StatusInformation.State.EscrowOpen)
-                    || _device.StateResultProperty.DeviceStateInformation.StackerFull;
+                ConfirmAndExitDepositButton.Visible =
+                    (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                    && _device.StateResultProperty.DoorStateInformation.Escrow
+                    && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
+                    && !_device.StateResultProperty.DeviceStateInformation.HopperBillPresent
+                    && _device.StateResultProperty.StatusInformation.OperatingState
+                        != StatusInformation.State.PQWaitingToRemoveBankNotes
+                    && _device.StateResultProperty.StatusInformation.OperatingState
+                        != StatusInformation.State.EscrowOpen)
+                        || _device.StateResultProperty.DeviceStateInformation.StackerFull;
 
-            ConfirmAndContinueDepositButton.Visible = 
-                    _device.StateResultProperty.DeviceStateInformation.StackerFull;
+                ConfirmAndContinueDepositButton.Visible =
+                        _device.StateResultProperty.DeviceStateInformation.StackerFull;
 
-            CancelDepositButton.Visible =
-                _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _device.StateResultProperty.DoorStateInformation.Escrow
-                && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQWaitingToRemoveBankNotes;
+                CancelDepositButton.Visible =
+                    _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                    && _device.StateResultProperty.DoorStateInformation.Escrow
+                    && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQWaitingToRemoveBankNotes;
+            }
+            else
+            {
+                BackButton.Visible = true;
+                ConfirmAndExitDepositButton.Visible = false;
+                ConfirmAndContinueDepositButton.Visible = false;
+                CancelDepositButton.Visible = false;
+            }
 
         }
         private void ShowInformation()
         {
             InformationLabel.Text = String.Empty;
 
-            if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+            {
+
+
+                if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
              && _operationStatus.CurrentTransactionQuantity == 0)
-            {
-                InformationLabel.Text = MultilanguangeController.GetText("INGRESAR_BILLETES");
-                InformationLabel.ForeColor = Color.Green;
-            }
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("INGRESAR_BILLETES");
+                    InformationLabel.ForeColor = Color.Green;
+                }
 
-            if (_device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQCounting)
-            {
-                InformationLabel.Text = MultilanguangeController.GetText("CONTANDO");
-                InformationLabel.ForeColor = Color.Blue;
-            }
+                if (_device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQCounting)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("CONTANDO");
+                    InformationLabel.ForeColor = Color.Blue;
+                }
 
-            if (_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
-            {
-                InformationLabel.Text = MultilanguangeController.GetText("RETIRAR_BILLETES_RECHAZADOS");
-                InformationLabel.ForeColor = Color.Red;
-            }
-            if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                 && _operationStatus.CurrentTransactionQuantity == 0
-                 && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
-            {
-                InformationLabel.Text = MultilanguangeController.GetText("CONTINUAR_INGRESANDO_BILLETES");
-                InformationLabel.ForeColor = Color.Green;
-            }
-            if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                    && _operationStatus.CurrentTransactionQuantity > 0)
-            {
-                InformationLabel.Text = MultilanguangeController.GetText("ACEPTAR_O_CANCELAR_DEPOSITO");
-                InformationLabel.ForeColor = Color.Green;
-            }
-            if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _operationStatus.CurrentTransactionQuantity == 0
-                && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQWaitingToRemoveBankNotes)
-            {
-                InformationLabel.Text = MultilanguangeController.GetText("CANCELAR_DEPOSITO");
-                InformationLabel.ForeColor = Color.Red;
-            }
+                if (_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("RETIRAR_BILLETES_RECHAZADOS");
+                    InformationLabel.ForeColor = Color.Red;
+                }
+                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                     && _operationStatus.CurrentTransactionQuantity == 0
+                     && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("CONTINUAR_INGRESANDO_BILLETES");
+                    InformationLabel.ForeColor = Color.Green;
+                }
+                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                        && _operationStatus.CurrentTransactionQuantity > 0)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("ACEPTAR_O_CANCELAR_DEPOSITO");
+                    InformationLabel.ForeColor = Color.Green;
+                }
+                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                    && _operationStatus.CurrentTransactionQuantity == 0
+                    && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQWaitingToRemoveBankNotes)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("CANCELAR_DEPOSITO");
+                    InformationLabel.ForeColor = Color.Red;
+                }
 
-            if(_device.StateResultProperty.DeviceStateInformation.StackerFull )
+                if (_device.StateResultProperty.DeviceStateInformation.StackerFull)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("ESCROW_LLENO");
+                    InformationLabel.ForeColor = Color.Red;
+                }
+            }
+            else
             {
-                InformationLabel.Text = MultilanguangeController.GetText("ESCROW_LLENO");
-                InformationLabel.ForeColor = Color.Red;
+                if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText("PUERTA_ABIERTA");
+                    InformationLabel.ForeColor = Color.Red;
+                }
             }
         }
 
@@ -246,14 +263,14 @@ namespace Permaquim.Depositary.UI.Desktop
                 && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
                 )
             {
-                _poolingTimer.Enabled = false;
+                _pollingTimer.Enabled = false;
                 // Cambia el estado 
                 _device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
                 _device.RemoteCancel();
                 _device.CloseEscrow();
 
                 _device.DepositMode();
-                _poolingTimer.Enabled = true;
+                _pollingTimer.Enabled = true;
                 _operationStatus.StackerFull = false;
                 _operationStatus.StackerFullTreated = false;
             }
@@ -288,14 +305,14 @@ namespace Permaquim.Depositary.UI.Desktop
    
         private void WaitEmptyEscrow()
         {
-            _poolingTimer.Enabled = false;
+            _pollingTimer.Enabled = false;
             // Cambia el estado 
             _device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
             _device.RemoteCancel();
             _device.CloseEscrow();
             CleanDetectedBills();
             _device.DepositMode();
-            _poolingTimer.Enabled = true;
+            _pollingTimer.Enabled = true;
             // inicializa el flag de stacker lleno 
 
         }
@@ -463,7 +480,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (_device.CounterConnected)
                 _device.RemoteCancel();
-            _poolingTimer.Enabled = false;
+            _pollingTimer.Enabled = false;
             AppController.OpenChildForm(new OperationForm(), _device);
 
         }
@@ -476,7 +493,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ExitBillDepositForm()
         {
             // Ya que se debe salir del form, se 
-            _poolingTimer.Enabled = false;
+            _pollingTimer.Enabled = false;
 
             DisableControls();
 

@@ -14,9 +14,9 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class OperationForm : Form
     {
-
- 
-
+        private const int BILL_DEPOSIT = 1;
+        private const int ENVELOPE_DEPOSIT = 3;
+        private const int BAG_EXTRACTION = 7;
         private List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> _transactions = DatabaseController.GetTransactionTypes();
 
         Device _device = null;
@@ -86,13 +86,24 @@ namespace Permaquim.Depositary.UI.Desktop
         private void TransactionButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CurrentOperation = (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((CustomButton)sender).Tag;
-    
-            if (DatabaseController.CurrentOperation.Id == 1
-                || DatabaseController.CurrentOperation.Id == 3)
+
+
+            switch (DatabaseController.CurrentOperation.Id)
             {
+
+                case BILL_DEPOSIT:
+                case ENVELOPE_DEPOSIT:
                 AppController.OpenChildForm(new CurrencySelectorForm(),
                 (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    break;
+                case BAG_EXTRACTION:
+                    AppController.OpenChildForm(new BagExtractionForm(),
+                        (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    break;
+                default:
+                    break;
             }
+
 
         }
         private void LoadBackButton()

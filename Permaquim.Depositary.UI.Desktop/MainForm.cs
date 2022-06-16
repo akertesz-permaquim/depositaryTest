@@ -8,13 +8,15 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
     public partial class MainForm : System.Windows.Forms.Form
     {
 
-        private System.Windows.Forms.Timer _poolingTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         /// <summary>
         /// Instancias de los componentes que gestionan dispositivos
         /// </summary>
         Device _device = null;
         DE50Device? _de50Device = null;
+
+        SystemBlockingDialog _blockingDialog;
 
         public MainForm()
         {
@@ -28,12 +30,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             Rectangle screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(0,0);
             this.Size = new Size(screen.Width, screen.Height);
-            _poolingTimer = new System.Windows.Forms.Timer()
+            _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = 200,
                 Enabled = true
             };
-            _poolingTimer.Tick += PoolingTimer_Tick;
+            _pollingTimer.Tick += PollingTimer_Tick;
 
             LoadLogo();
         }
@@ -86,12 +88,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                         _device.RemoteCancel();
                     }
                 }
-                else
-                {
-                    MessageBox.Show(MultilanguangeController.GetText("DISPOSITIVO_NO_CONECTADO"), 
-                        MultilanguangeController.GetText("DISPOSITIVO_NO_CONECTADO"), MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,MessageBoxDefaultButton.Button1);
-                }
             }
             catch (Exception ex)
             {
@@ -100,37 +96,55 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
 
         }
-        private void PoolingTimer_Tick(object? sender, EventArgs e)
+        private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
+            
+            _device.Status();
 
-
-            _device.Sense();
-            // consulta el estado de la contadora si está conectada
-            if (_device.CounterConnected)
+            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
             {
-                CounterPictureBox.Image = StyleController.GetImageResource("GREENLED");
+
+                _device.Sense();
+                // consulta el estado de la contadora si está conectada
+                if (_device.CounterConnected)
+                {
+                    CounterPictureBox.Image = StyleController.GetImageResource("GREENLED");
+                }
+                else
+                {
+                    CounterPictureBox.Image = StyleController.GetImageResource("REDLED");
+                }
+
+                IoBoardStatus ioBoardStatus = _device.Status();
+
+                // consulta el estado de la ioboard  si está conectada
+                if (_device.IoBoardConnected)
+                {
+                    IoBoardPictureBox.Image = StyleController.GetImageResource("GREENLED");
+                    //IoBoardPictureBox.Too = MultilanguangeController.GetText("IO_BOARD_ONLINE");
+                }
+                else
+                {
+                    IoBoardPictureBox.Image = StyleController.GetImageResource("REDLED");
+                }
+
+                //if(ioBoardStatus.BAG_STATUS.)
             }
             else
             {
-                CounterPictureBox.Image = StyleController.GetImageResource("REDLED");
+                if (_blockingDialog == null  && DatabaseController.CurrentOperation.Id != 7 )
+                {
+                    _blockingDialog = new SystemBlockingDialog()
+                    {
+                        Tag = this.Tag
+                    };
+                    _blockingDialog.ShowDialog();
+                    _blockingDialog = null;
+                }
+
+
             }
-
-            IoBoardStatus ioBoardStatus =  _device.Status();
-
-            // consulta el estado de la ioboard  si está conectada
-            if (_device.IoBoardConnected)
-            {
-                IoBoardPictureBox.Image = StyleController.GetImageResource("GREENLED");
-                //IoBoardPictureBox.Too = MultilanguangeController.GetText("IO_BOARD_ONLINE");
-            }
-            else
-            {
-                IoBoardPictureBox.Image = StyleController.GetImageResource("REDLED");
-            }
-
-            //if(ioBoardStatus.BAG_STATUS.)
-
             LoadAvatar();
             SetUserData();
         }

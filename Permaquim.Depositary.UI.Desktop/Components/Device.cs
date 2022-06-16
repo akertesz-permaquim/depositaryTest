@@ -30,6 +30,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
         }
 
+        private IoBoardStatus _ioBoardStatus;
+
+        public IoBoardStatus IoBoardStatusProperty
+        {
+            get { return _ioBoardStatus; }
+        }
+
         private StatesResult _stateResultProperty;
 
         public StatesResult StateResultProperty
@@ -367,7 +374,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         public StatesResult Sense()
         {
-            if (_counterPort.IsOpen)
+            if (_counterPort != null && _counterPort.IsOpen)
             {
                 Log("COMMAND: Sense");
                 DiscardBuffer(_counterPort);
@@ -1046,6 +1053,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     this._ioboardPort.Write(_device.Status);
 
                     result.ParseStatus(ReadIoBoardResponse());
+
+                    _ioBoardStatus = result;
                 }
                 return result;
             }

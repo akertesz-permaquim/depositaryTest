@@ -187,5 +187,31 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return entities.Items();
         }
 
+
+        public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor UpdateContainer(string bagIdentifier)
+        {
+            Permaquim.Depositario.Entities.Tables.Operacion.Contenedor returnValue = new();
+
+            Permaquim.Depositario.Business.Tables.Operacion.Contenedor entities = new();
+            entities.Add(new Depositario.Entities.Tables.Operacion.Contenedor()
+            {
+                FechaApertura = DateTime.Now,
+                FechaCierre = null,
+                FechaCreacion = DateTime.Now,
+                FechaModificacion = null,
+                Habilitado = true,
+                Identificador = bagIdentifier,
+                Nombre = "",
+                TipoId = 1,
+                UsuarioCreacion = CurrentUser.Id,
+                UsuarioModificacion = null
+
+            });
+
+
+
+            return returnValue;
+        }
+
     }
 }
