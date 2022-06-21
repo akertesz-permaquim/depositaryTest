@@ -32,7 +32,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             this.Size = new Size(screen.Width, screen.Height);
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = 200,
+                Interval = DeviceController.GetPollingInterval(),
                 Enabled = true
             };
             _pollingTimer.Tick += PollingTimer_Tick;
@@ -101,50 +101,52 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
             
             _device.Status();
-
-            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+            if (_device.IoBoardConnected)
             {
+                if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+                {
 
-                _device.Sense();
-                // consulta el estado de la contadora si está conectada
-                if (_device.CounterConnected)
-                {
-                    CounterPictureBox.Image = StyleController.GetImageResource("GREENLED");
-                }
-                else
-                {
-                    CounterPictureBox.Image = StyleController.GetImageResource("REDLED");
-                }
-
-                IoBoardStatus ioBoardStatus = _device.Status();
-
-                // consulta el estado de la ioboard  si está conectada
-                if (_device.IoBoardConnected)
-                {
-                    IoBoardPictureBox.Image = StyleController.GetImageResource("GREENLED");
-                    //IoBoardPictureBox.Too = MultilanguangeController.GetText("IO_BOARD_ONLINE");
-                }
-                else
-                {
-                    IoBoardPictureBox.Image = StyleController.GetImageResource("REDLED");
-                }
-
-            }
-            else
-            {
-                if (_blockingDialog == null  && 
-                    (DatabaseController.CurrentOperation == null ||
-                    DatabaseController.CurrentOperation.Id != VALUE_EXTRACT_OPERATION))
-                {
-                    _blockingDialog = new SystemBlockingDialog()
+                    _device.Sense();
+                    // consulta el estado de la contadora si está conectada
+                    if (_device.CounterConnected)
                     {
-                        Tag = this.Tag
-                    };
-                    _blockingDialog.ShowDialog();
-                    _blockingDialog = null;
+                        CounterPictureBox.Image = StyleController.GetImageResource("GREENLED");
+                    }
+                    else
+                    {
+                        CounterPictureBox.Image = StyleController.GetImageResource("REDLED");
+                    }
+
+                    IoBoardStatus ioBoardStatus = _device.Status();
+
+                    // consulta el estado de la ioboard  si está conectada
+                    if (_device.IoBoardConnected)
+                    {
+                        IoBoardPictureBox.Image = StyleController.GetImageResource("GREENLED");
+                    }
+                    else
+                    {
+                        IoBoardPictureBox.Image = StyleController.GetImageResource("REDLED");
+                    }
+
                 }
+                else
+                {
+                    if (_blockingDialog == null &&
+                        (DatabaseController.CurrentOperation == null ||
+                        DatabaseController.CurrentOperation.Id != VALUE_EXTRACT_OPERATION))
+                    {
+                        _blockingDialog = new SystemBlockingDialog()
+                        {
+                            Tag = this.Tag
+                        };
+                        _blockingDialog.LoadStyles();
+                        _blockingDialog.ShowDialog();
+                        _blockingDialog = null;
+                    }
 
 
+                }
             }
             LoadAvatar();
             SetUserData();
@@ -180,6 +182,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             else
                 AppController.OpenChildForm(new KeyboardInputForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+            MainPictureBox.Image = null;
+
         }
 
         private void LoadStyles()
@@ -188,7 +192,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             MainPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
             BottomPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Pie);
             MainPictureBox.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
-            StartMessageLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
+            StartMessageLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
+            UserLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
+            EnterpriseLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
+            DateTimeLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
+
+            //MainPictureBox.Image = StyleController.GetImageResource("Presentacion");
         }
         private void LoadLogo()
         {

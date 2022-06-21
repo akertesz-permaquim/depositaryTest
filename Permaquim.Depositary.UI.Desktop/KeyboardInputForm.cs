@@ -11,6 +11,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.SuspendLayout();
             InitializeComponent();
+
             LoadStyles();
             Loadlogo();
 
@@ -30,7 +31,15 @@ namespace Permaquim.Depositary.UI.Desktop
             MainKeyboard.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
 
         }
+        private void CenterPanel()
+        {
 
+            MainPanel.Location = new Point()
+            {
+                X = this.Width / 2 - MainPanel.Width / 2,
+                Y = this.Height / 2 - MainPanel.Height / 2
+            };
+        }
         private void MainKeyboard_KeyboardEvent(object sender, KeyboardEventArgs args)
         {
 
@@ -67,6 +76,11 @@ namespace Permaquim.Depositary.UI.Desktop
             LoginPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             LoginPictureBox.Image = StyleController.GetLogin();
 
+        }
+
+        private void KeyboardInputForm_Load(object sender, EventArgs e)
+        {
+            CenterPanel();
         }
     }
 }

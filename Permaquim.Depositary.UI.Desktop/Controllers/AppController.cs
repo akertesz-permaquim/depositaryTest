@@ -34,6 +34,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 childForm.TopLevel = false;
                 childForm.FormBorderStyle = FormBorderStyle.None;
                 childForm.Dock = DockStyle.None;
+                childForm.Width = MainFormInstance.MainPanel.Width;
+                childForm.Height = MainFormInstance.MainPanel.Height;
+                childForm.Location = new Point(MainFormInstance.MainPanel.Left, MainFormInstance.MainPanel.Top);
                 MainFormInstance.MainPanel.Controls.Add(childForm);
                 MainFormInstance.MainPanel.Tag = childForm;
                 childForm.BringToFront();

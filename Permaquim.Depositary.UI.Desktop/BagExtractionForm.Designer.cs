@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ExitPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
             this.LockStateLabel = new System.Windows.Forms.Label();
@@ -36,30 +35,22 @@
             this.ShutterStatusLabel = new System.Windows.Forms.Label();
             this.BagStatusLabel = new System.Windows.Forms.Label();
             this.GatelStatusLabel = new System.Windows.Forms.Label();
-            this.ContainerTextBox = new CustomTextBox();
+            this.InformationLabel = new System.Windows.Forms.Label();
+            this.EventCheckbox = new System.Windows.Forms.CheckBox();
             this.MonitorGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ExitPanel
-            // 
-            this.ExitPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExitPanel.BackColor = System.Drawing.Color.Transparent;
-            this.ExitPanel.Location = new System.Drawing.Point(298, 493);
-            this.ExitPanel.Name = "ExitPanel";
-            this.ExitPanel.Size = new System.Drawing.Size(300, 103);
-            this.ExitPanel.TabIndex = 3;
             // 
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(300, 80);
+            this.MainPanel.Location = new System.Drawing.Point(248, 56);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 224);
+            this.MainPanel.Size = new System.Drawing.Size(400, 344);
             this.MainPanel.TabIndex = 2;
             // 
             // MonitorGroupBox
             // 
+            this.MonitorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MonitorGroupBox.BackColor = System.Drawing.Color.Transparent;
             this.MonitorGroupBox.Controls.Add(this.LockStateLabel);
             this.MonitorGroupBox.Controls.Add(this.BagAproveStatelabel);
@@ -67,12 +58,13 @@
             this.MonitorGroupBox.Controls.Add(this.BagStatusLabel);
             this.MonitorGroupBox.Controls.Add(this.GatelStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(616, 80);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(656, 112);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
-            this.MonitorGroupBox.Size = new System.Drawing.Size(248, 168);
+            this.MonitorGroupBox.Size = new System.Drawing.Size(232, 168);
             this.MonitorGroupBox.TabIndex = 100;
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
+            this.MonitorGroupBox.Visible = false;
             // 
             // LockStateLabel
             // 
@@ -134,28 +126,32 @@
             this.GatelStatusLabel.TabIndex = 25;
             this.GatelStatusLabel.Text = "Gate Status";
             // 
-            // ContainerTextBox
+            // InformationLabel
             // 
-            this.ContainerTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.ContainerTextBox.BorderColor = System.Drawing.Color.SteelBlue;
-            this.ContainerTextBox.BorderFocusColor = System.Drawing.Color.MediumSlateBlue;
-            this.ContainerTextBox.BorderRadius = 4;
-            this.ContainerTextBox.BorderSize = 2;
-            this.ContainerTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ContainerTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ContainerTextBox.Location = new System.Drawing.Point(296, 336);
-            this.ContainerTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.ContainerTextBox.Multiline = false;
-            this.ContainerTextBox.Name = "ContainerTextBox";
-            this.ContainerTextBox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.ContainerTextBox.PasswordChar = false;
-            this.ContainerTextBox.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.ContainerTextBox.PlaceholderText = "Identificador de bolsa";
-            this.ContainerTextBox.Size = new System.Drawing.Size(300, 45);
-            this.ContainerTextBox.TabIndex = 139;
-            this.ContainerTextBox.Texts = "";
-            this.ContainerTextBox.UnderlinedStyle = false;
-            this.ContainerTextBox.Visible = false;
+            this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
+            this.InformationLabel.Location = new System.Drawing.Point(80, 416);
+            this.InformationLabel.Name = "InformationLabel";
+            this.InformationLabel.Size = new System.Drawing.Size(704, 72);
+            this.InformationLabel.TabIndex = 143;
+            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // EventCheckbox
+            // 
+            this.EventCheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EventCheckbox.AutoSize = true;
+            this.EventCheckbox.BackColor = System.Drawing.Color.Transparent;
+            this.EventCheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.EventCheckbox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.EventCheckbox.Location = new System.Drawing.Point(656, 352);
+            this.EventCheckbox.Name = "EventCheckbox";
+            this.EventCheckbox.Size = new System.Drawing.Size(71, 17);
+            this.EventCheckbox.TabIndex = 144;
+            this.EventCheckbox.Text = "Eventos";
+            this.EventCheckbox.UseVisualStyleBackColor = false;
+            this.EventCheckbox.CheckedChanged += new System.EventHandler(this.EventCheckbox_CheckedChanged);
             // 
             // BagExtractionForm
             // 
@@ -163,9 +159,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(898, 593);
             this.ControlBox = false;
-            this.Controls.Add(this.ContainerTextBox);
+            this.Controls.Add(this.EventCheckbox);
+            this.Controls.Add(this.InformationLabel);
             this.Controls.Add(this.MonitorGroupBox);
-            this.Controls.Add(this.ExitPanel);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BagExtractionForm";
@@ -173,12 +169,11 @@
             this.MonitorGroupBox.ResumeLayout(false);
             this.MonitorGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private FlowLayoutPanel ExitPanel;
         private FlowLayoutPanel MainPanel;
         private GroupBox MonitorGroupBox;
         private Label GatelStatusLabel;
@@ -186,6 +181,7 @@
         private Label ShutterStatusLabel;
         private Label BagAproveStatelabel;
         private Label LockStateLabel;
-        private CustomTextBox ContainerTextBox;
+        private Label InformationLabel;
+        private CheckBox EventCheckbox;
     }
 }

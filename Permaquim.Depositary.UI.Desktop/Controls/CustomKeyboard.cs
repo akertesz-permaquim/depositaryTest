@@ -57,6 +57,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                     ((CustomButton)item).BackColor = _mainColor;
                 }
             }
+
+            UsernameTextBox.ForeColor = _mainColor;
+            PasswordTexbox.ForeColor = _mainColor;
         }
 
         private void KeysHandler(object sender, EventArgs e)

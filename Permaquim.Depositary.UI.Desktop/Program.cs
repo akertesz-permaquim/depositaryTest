@@ -8,6 +8,10 @@ namespace Permaquim.Depositary.UI.Desktop
         [STAThread]
         static void Main()
         {
+            //var services = new ServiceCollection();
+
+            //ConfigureServices(services);
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();

@@ -30,8 +30,15 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.MainPanel = new System.Windows.Forms.Panel();
+            this.ConfirmAndContinueDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.DenominationsGridView = new System.Windows.Forms.DataGridView();
+            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.EventCheckbox = new System.Windows.Forms.CheckBox();
+            this.InformationLabel = new System.Windows.Forms.Label();
+            this.RemainingTimeLabel = new System.Windows.Forms.Label();
+            this.SubtotalLabel = new System.Windows.Forms.Label();
+            this.CurrencyLabel = new System.Windows.Forms.Label();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
             this.CurrencyStatusLabel = new System.Windows.Forms.Label();
             this.JammingCheckBox = new System.Windows.Forms.CheckBox();
@@ -45,65 +52,180 @@
             this.StackerFullCheckBox = new System.Windows.Forms.CheckBox();
             this.DeviceModeLabel = new System.Windows.Forms.Label();
             this.GeneralStatusLabel = new System.Windows.Forms.Label();
-            this.SubtotalLabel = new System.Windows.Forms.Label();
-            this.CurrencyLabel = new System.Windows.Forms.Label();
-            this.RemainingTimeLabel = new System.Windows.Forms.Label();
-            this.InformationLabel = new System.Windows.Forms.Label();
-            this.EventCheckbox = new System.Windows.Forms.CheckBox();
-            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.DenominationsGridView = new System.Windows.Forms.DataGridView();
+            this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.Denomination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ConfirmAndContinueDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.MonitorGroupBox.SuspendLayout();
+            this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
+            this.MonitorGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // CancelDepositButton
+            // MainPanel
             // 
-            this.CancelDepositButton.BackColor = System.Drawing.Color.Red;
-            this.CancelDepositButton.BackgroundColor = System.Drawing.Color.Red;
-            this.CancelDepositButton.BorderColor = System.Drawing.Color.DarkOrange;
-            this.CancelDepositButton.BorderRadius = 4;
-            this.CancelDepositButton.BorderSize = 0;
-            this.CancelDepositButton.FlatAppearance.BorderSize = 0;
-            this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CancelDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
-            this.CancelDepositButton.Location = new System.Drawing.Point(162, 492);
-            this.CancelDepositButton.Name = "CancelDepositButton";
-            this.CancelDepositButton.Size = new System.Drawing.Size(230, 55);
-            this.CancelDepositButton.TabIndex = 93;
-            this.CancelDepositButton.Tag = "";
-            this.CancelDepositButton.Text = "Cancelar";
-            this.CancelDepositButton.TextColor = System.Drawing.Color.White;
-            this.CancelDepositButton.UseVisualStyleBackColor = false;
-            this.CancelDepositButton.Visible = false;
-            this.CancelDepositButton.Click += new System.EventHandler(this.CancelDepositButton_Click);
+            this.MainPanel.Controls.Add(this.ConfirmAndContinueDepositButton);
+            this.MainPanel.Controls.Add(this.DenominationsGridView);
+            this.MainPanel.Controls.Add(this.BackButton);
+            this.MainPanel.Controls.Add(this.EventCheckbox);
+            this.MainPanel.Controls.Add(this.InformationLabel);
+            this.MainPanel.Controls.Add(this.RemainingTimeLabel);
+            this.MainPanel.Controls.Add(this.SubtotalLabel);
+            this.MainPanel.Controls.Add(this.CurrencyLabel);
+            this.MainPanel.Controls.Add(this.MonitorGroupBox);
+            this.MainPanel.Controls.Add(this.ConfirmAndExitDepositButton);
+            this.MainPanel.Controls.Add(this.CancelDepositButton);
+            this.MainPanel.Location = new System.Drawing.Point(0, 8);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(1024, 632);
+            this.MainPanel.TabIndex = 0;
             // 
-            // ConfirmAndExitDepositButton
+            // ConfirmAndContinueDepositButton
             // 
-            this.ConfirmAndExitDepositButton.BackColor = System.Drawing.Color.SeaGreen;
-            this.ConfirmAndExitDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
-            this.ConfirmAndExitDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
-            this.ConfirmAndExitDepositButton.BorderRadius = 4;
-            this.ConfirmAndExitDepositButton.BorderSize = 0;
-            this.ConfirmAndExitDepositButton.FlatAppearance.BorderSize = 0;
-            this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(632, 493);
-            this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
-            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(234, 55);
-            this.ConfirmAndExitDepositButton.TabIndex = 98;
-            this.ConfirmAndExitDepositButton.Tag = "";
-            this.ConfirmAndExitDepositButton.Text = "Confirmar ";
-            this.ConfirmAndExitDepositButton.TextColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.UseVisualStyleBackColor = false;
-            this.ConfirmAndExitDepositButton.Visible = false;
-            this.ConfirmAndExitDepositButton.Click += new System.EventHandler(this.ConfirmAndExitDepositButton_Click);
+            this.ConfirmAndContinueDepositButton.BackColor = System.Drawing.Color.SeaGreen;
+            this.ConfirmAndContinueDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
+            this.ConfirmAndContinueDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
+            this.ConfirmAndContinueDepositButton.BorderRadius = 4;
+            this.ConfirmAndContinueDepositButton.BorderSize = 0;
+            this.ConfirmAndContinueDepositButton.FlatAppearance.BorderSize = 0;
+            this.ConfirmAndContinueDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ConfirmAndContinueDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmAndContinueDepositButton.ForeColor = System.Drawing.Color.White;
+            this.ConfirmAndContinueDepositButton.Location = new System.Drawing.Point(400, 491);
+            this.ConfirmAndContinueDepositButton.Name = "ConfirmAndContinueDepositButton";
+            this.ConfirmAndContinueDepositButton.Size = new System.Drawing.Size(214, 55);
+            this.ConfirmAndContinueDepositButton.TabIndex = 146;
+            this.ConfirmAndContinueDepositButton.Tag = "";
+            this.ConfirmAndContinueDepositButton.Text = "Continuar";
+            this.ConfirmAndContinueDepositButton.TextColor = System.Drawing.Color.White;
+            this.ConfirmAndContinueDepositButton.UseVisualStyleBackColor = false;
+            this.ConfirmAndContinueDepositButton.Visible = false;
+            this.ConfirmAndContinueDepositButton.Click += new System.EventHandler(this.ConfirmAndContinueDepositButton_Click);
+            // 
+            // DenominationsGridView
+            // 
+            this.DenominationsGridView.AllowUserToAddRows = false;
+            this.DenominationsGridView.AllowUserToDeleteRows = false;
+            this.DenominationsGridView.AllowUserToResizeColumns = false;
+            this.DenominationsGridView.AllowUserToResizeRows = false;
+            this.DenominationsGridView.BackgroundColor = System.Drawing.Color.White;
+            this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Image,
+            this.Denomination,
+            this.Quantity,
+            this.Amount});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DenominationsGridView.EnableHeadersVisualStyles = false;
+            this.DenominationsGridView.GridColor = System.Drawing.Color.White;
+            this.DenominationsGridView.Location = new System.Drawing.Point(163, 46);
+            this.DenominationsGridView.Name = "DenominationsGridView";
+            this.DenominationsGridView.RowHeadersVisible = false;
+            this.DenominationsGridView.RowTemplate.DividerHeight = 1;
+            this.DenominationsGridView.RowTemplate.Height = 50;
+            this.DenominationsGridView.RowTemplate.ReadOnly = true;
+            this.DenominationsGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DenominationsGridView.Size = new System.Drawing.Size(696, 440);
+            this.DenominationsGridView.TabIndex = 145;
+            this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
+            // 
+            // BackButton
+            // 
+            this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BackButton.BorderRadius = 5;
+            this.BackButton.BorderSize = 0;
+            this.BackButton.FlatAppearance.BorderSize = 0;
+            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BackButton.ForeColor = System.Drawing.Color.White;
+            this.BackButton.Location = new System.Drawing.Point(399, 491);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(216, 55);
+            this.BackButton.TabIndex = 144;
+            this.BackButton.Text = "Salir";
+            this.BackButton.TextColor = System.Drawing.Color.White;
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
+            // EventCheckbox
+            // 
+            this.EventCheckbox.AutoSize = true;
+            this.EventCheckbox.BackColor = System.Drawing.Color.Transparent;
+            this.EventCheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.EventCheckbox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.EventCheckbox.Location = new System.Drawing.Point(883, 518);
+            this.EventCheckbox.Name = "EventCheckbox";
+            this.EventCheckbox.Size = new System.Drawing.Size(71, 17);
+            this.EventCheckbox.TabIndex = 143;
+            this.EventCheckbox.Text = "Eventos";
+            this.EventCheckbox.UseVisualStyleBackColor = false;
+            this.EventCheckbox.Click += new System.EventHandler(this.EventCheckbox_CheckedChanged);
+            // 
+            // InformationLabel
+            // 
+            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
+            this.InformationLabel.Location = new System.Drawing.Point(155, 550);
+            this.InformationLabel.Name = "InformationLabel";
+            this.InformationLabel.Size = new System.Drawing.Size(704, 72);
+            this.InformationLabel.TabIndex = 142;
+            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // RemainingTimeLabel
+            // 
+            this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(611, 18);
+            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(248, 27);
+            this.RemainingTimeLabel.TabIndex = 141;
+            this.RemainingTimeLabel.Text = "Tiempo restante: ";
+            // 
+            // SubtotalLabel
+            // 
+            this.SubtotalLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
+            this.SubtotalLabel.Location = new System.Drawing.Point(363, 18);
+            this.SubtotalLabel.Name = "SubtotalLabel";
+            this.SubtotalLabel.Size = new System.Drawing.Size(248, 27);
+            this.SubtotalLabel.TabIndex = 140;
+            this.SubtotalLabel.Text = "Sub total: $ 0";
+            // 
+            // CurrencyLabel
+            // 
+            this.CurrencyLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
+            this.CurrencyLabel.Location = new System.Drawing.Point(162, 18);
+            this.CurrencyLabel.Name = "CurrencyLabel";
+            this.CurrencyLabel.Size = new System.Drawing.Size(201, 27);
+            this.CurrencyLabel.TabIndex = 139;
+            this.CurrencyLabel.Text = "Divisa: Pesos";
             // 
             // MonitorGroupBox
             // 
@@ -121,10 +243,10 @@
             this.MonitorGroupBox.Controls.Add(this.DeviceModeLabel);
             this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(872, 60);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(867, 58);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
             this.MonitorGroupBox.Size = new System.Drawing.Size(152, 308);
-            this.MonitorGroupBox.TabIndex = 99;
+            this.MonitorGroupBox.TabIndex = 138;
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
             this.MonitorGroupBox.Visible = false;
@@ -282,135 +404,55 @@
             this.GeneralStatusLabel.TabIndex = 25;
             this.GeneralStatusLabel.Text = "GeneralStatus";
             // 
-            // SubtotalLabel
+            // ConfirmAndExitDepositButton
             // 
-            this.SubtotalLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
-            this.SubtotalLabel.Location = new System.Drawing.Point(368, 20);
-            this.SubtotalLabel.Name = "SubtotalLabel";
-            this.SubtotalLabel.Size = new System.Drawing.Size(248, 27);
-            this.SubtotalLabel.TabIndex = 103;
-            this.SubtotalLabel.Text = "Sub total: $ 0";
+            this.ConfirmAndExitDepositButton.BackColor = System.Drawing.Color.SeaGreen;
+            this.ConfirmAndExitDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
+            this.ConfirmAndExitDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
+            this.ConfirmAndExitDepositButton.BorderRadius = 4;
+            this.ConfirmAndExitDepositButton.BorderSize = 0;
+            this.ConfirmAndExitDepositButton.FlatAppearance.BorderSize = 0;
+            this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
+            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(627, 491);
+            this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
+            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(234, 55);
+            this.ConfirmAndExitDepositButton.TabIndex = 137;
+            this.ConfirmAndExitDepositButton.Tag = "";
+            this.ConfirmAndExitDepositButton.Text = "Confirmar ";
+            this.ConfirmAndExitDepositButton.TextColor = System.Drawing.Color.White;
+            this.ConfirmAndExitDepositButton.UseVisualStyleBackColor = false;
+            this.ConfirmAndExitDepositButton.Visible = false;
+            this.ConfirmAndExitDepositButton.Click += new System.EventHandler(this.ConfirmAndExitDepositButton_Click);
             // 
-            // CurrencyLabel
+            // CancelDepositButton
             // 
-            this.CurrencyLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
-            this.CurrencyLabel.Location = new System.Drawing.Point(167, 20);
-            this.CurrencyLabel.Name = "CurrencyLabel";
-            this.CurrencyLabel.Size = new System.Drawing.Size(201, 27);
-            this.CurrencyLabel.TabIndex = 102;
-            this.CurrencyLabel.Text = "Divisa: Pesos";
-            // 
-            // RemainingTimeLabel
-            // 
-            this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(616, 20);
-            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(248, 27);
-            this.RemainingTimeLabel.TabIndex = 105;
-            this.RemainingTimeLabel.Text = "Tiempo restante: ";
-            // 
-            // InformationLabel
-            // 
-            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(160, 552);
-            this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(704, 72);
-            this.InformationLabel.TabIndex = 107;
-            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // EventCheckbox
-            // 
-            this.EventCheckbox.AutoSize = true;
-            this.EventCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.EventCheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.EventCheckbox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.EventCheckbox.Location = new System.Drawing.Point(888, 520);
-            this.EventCheckbox.Name = "EventCheckbox";
-            this.EventCheckbox.Size = new System.Drawing.Size(71, 17);
-            this.EventCheckbox.TabIndex = 108;
-            this.EventCheckbox.Text = "Eventos";
-            this.EventCheckbox.UseVisualStyleBackColor = false;
-            this.EventCheckbox.CheckedChanged += new System.EventHandler(this.EventCheckbox_CheckedChanged);
-            // 
-            // BackButton
-            // 
-            this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BackButton.BorderRadius = 5;
-            this.BackButton.BorderSize = 0;
-            this.BackButton.FlatAppearance.BorderSize = 0;
-            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(404, 493);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(216, 55);
-            this.BackButton.TabIndex = 109;
-            this.BackButton.Text = "Salir";
-            this.BackButton.TextColor = System.Drawing.Color.White;
-            this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
-            // 
-            // DenominationsGridView
-            // 
-            this.DenominationsGridView.AllowUserToAddRows = false;
-            this.DenominationsGridView.AllowUserToDeleteRows = false;
-            this.DenominationsGridView.AllowUserToResizeColumns = false;
-            this.DenominationsGridView.AllowUserToResizeRows = false;
-            this.DenominationsGridView.BackgroundColor = System.Drawing.Color.White;
-            this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Image,
-            this.Denomination,
-            this.Quantity,
-            this.Amount});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DenominationsGridView.EnableHeadersVisualStyles = false;
-            this.DenominationsGridView.GridColor = System.Drawing.Color.White;
-            this.DenominationsGridView.Location = new System.Drawing.Point(168, 48);
-            this.DenominationsGridView.Name = "DenominationsGridView";
-            this.DenominationsGridView.RowHeadersVisible = false;
-            this.DenominationsGridView.RowTemplate.DividerHeight = 1;
-            this.DenominationsGridView.RowTemplate.Height = 50;
-            this.DenominationsGridView.RowTemplate.ReadOnly = true;
-            this.DenominationsGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DenominationsGridView.Size = new System.Drawing.Size(696, 440);
-            this.DenominationsGridView.TabIndex = 134;
-            this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
+            this.CancelDepositButton.BackColor = System.Drawing.Color.Red;
+            this.CancelDepositButton.BackgroundColor = System.Drawing.Color.Red;
+            this.CancelDepositButton.BorderColor = System.Drawing.Color.DarkOrange;
+            this.CancelDepositButton.BorderRadius = 4;
+            this.CancelDepositButton.BorderSize = 0;
+            this.CancelDepositButton.FlatAppearance.BorderSize = 0;
+            this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CancelDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
+            this.CancelDepositButton.Location = new System.Drawing.Point(157, 490);
+            this.CancelDepositButton.Name = "CancelDepositButton";
+            this.CancelDepositButton.Size = new System.Drawing.Size(230, 55);
+            this.CancelDepositButton.TabIndex = 136;
+            this.CancelDepositButton.Tag = "";
+            this.CancelDepositButton.Text = "Cancelar";
+            this.CancelDepositButton.TextColor = System.Drawing.Color.White;
+            this.CancelDepositButton.UseVisualStyleBackColor = false;
+            this.CancelDepositButton.Visible = false;
+            this.CancelDepositButton.Click += new System.EventHandler(this.CancelDepositButton_Click);
             // 
             // Image
             // 
             this.Image.DataPropertyName = "Image";
             this.Image.Frozen = true;
-            this.Image.HeaderText = "Imágen";
+            this.Image.HeaderText = "*";
             this.Image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.Image.Name = "Image";
             this.Image.ReadOnly = true;
@@ -419,7 +461,7 @@
             // Denomination
             // 
             this.Denomination.DataPropertyName = "Denomination";
-            this.Denomination.HeaderText = "Denominación";
+            this.Denomination.HeaderText = "*";
             this.Denomination.Name = "Denomination";
             this.Denomination.ReadOnly = true;
             this.Denomination.Width = 260;
@@ -427,7 +469,7 @@
             // Quantity
             // 
             this.Quantity.DataPropertyName = "Quantity";
-            this.Quantity.HeaderText = "Cantidad";
+            this.Quantity.HeaderText = "*";
             this.Quantity.Name = "Quantity";
             this.Quantity.ReadOnly = true;
             this.Quantity.Width = 110;
@@ -435,32 +477,10 @@
             // Amount
             // 
             this.Amount.DataPropertyName = "Amount";
-            this.Amount.HeaderText = "Importe";
+            this.Amount.HeaderText = "*";
             this.Amount.Name = "Amount";
             this.Amount.ReadOnly = true;
             this.Amount.Width = 220;
-            // 
-            // ConfirmAndContinueDepositButton
-            // 
-            this.ConfirmAndContinueDepositButton.BackColor = System.Drawing.Color.SeaGreen;
-            this.ConfirmAndContinueDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
-            this.ConfirmAndContinueDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
-            this.ConfirmAndContinueDepositButton.BorderRadius = 4;
-            this.ConfirmAndContinueDepositButton.BorderSize = 0;
-            this.ConfirmAndContinueDepositButton.FlatAppearance.BorderSize = 0;
-            this.ConfirmAndContinueDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ConfirmAndContinueDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ConfirmAndContinueDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndContinueDepositButton.Location = new System.Drawing.Point(405, 493);
-            this.ConfirmAndContinueDepositButton.Name = "ConfirmAndContinueDepositButton";
-            this.ConfirmAndContinueDepositButton.Size = new System.Drawing.Size(214, 55);
-            this.ConfirmAndContinueDepositButton.TabIndex = 135;
-            this.ConfirmAndContinueDepositButton.Tag = "";
-            this.ConfirmAndContinueDepositButton.Text = "Continuar";
-            this.ConfirmAndContinueDepositButton.TextColor = System.Drawing.Color.White;
-            this.ConfirmAndContinueDepositButton.UseVisualStyleBackColor = false;
-            this.ConfirmAndContinueDepositButton.Visible = false;
-            this.ConfirmAndContinueDepositButton.Click += new System.EventHandler(this.ConfirmAndContinueDepositButton_Click);
             // 
             // BillDepositForm
             // 
@@ -469,34 +489,39 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1026, 641);
             this.ControlBox = false;
-            this.Controls.Add(this.ConfirmAndContinueDepositButton);
-            this.Controls.Add(this.DenominationsGridView);
-            this.Controls.Add(this.BackButton);
-            this.Controls.Add(this.EventCheckbox);
-            this.Controls.Add(this.InformationLabel);
-            this.Controls.Add(this.RemainingTimeLabel);
-            this.Controls.Add(this.SubtotalLabel);
-            this.Controls.Add(this.CurrencyLabel);
-            this.Controls.Add(this.MonitorGroupBox);
-            this.Controls.Add(this.ConfirmAndExitDepositButton);
-            this.Controls.Add(this.CancelDepositButton);
+            this.Controls.Add(this.MainPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BillDepositForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.BillDepositForm_Load);
+            this.MainPanel.ResumeLayout(false);
+            this.MainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).EndInit();
             this.MonitorGroupBox.ResumeLayout(false);
             this.MonitorGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private CustomButton CancelDepositButton;
-        private CustomButton ConfirmAndExitDepositButton;
+        private DataGridViewTextBoxColumn Denominacion;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Importe;
+        private Panel MainPanel;
+        private CustomButton ConfirmAndContinueDepositButton;
+        private DataGridView DenominationsGridView;
+        private CustomButton BackButton;
+        private CheckBox EventCheckbox;
+        private Label InformationLabel;
+        private Label RemainingTimeLabel;
+        private Label SubtotalLabel;
+        private Label CurrencyLabel;
         private GroupBox MonitorGroupBox;
+        private Label CurrencyStatusLabel;
+        private CheckBox JammingCheckBox;
+        private CheckBox CountingErrorCheckBox;
+        private CheckBox DepositFinishedCheckbox;
         private CheckBox HopperBillPresentCheckBox;
         private CheckBox EscrowBillPresentCheckBox;
         private CheckBox DischargingFailureCheckBox;
@@ -505,22 +530,9 @@
         private CheckBox StackerFullCheckBox;
         private Label DeviceModeLabel;
         private Label GeneralStatusLabel;
-        private CheckBox DepositFinishedCheckbox;
-        private CheckBox CountingErrorCheckBox;
-        private CheckBox JammingCheckBox;
-        private Label SubtotalLabel;
-        private Label CurrencyLabel;
-        private Label RemainingTimeLabel;
-        private Label InformationLabel;
-        private CheckBox EventCheckbox;
-        private CustomButton BackButton;
-        private DataGridView DenominationsGridView;
+        private CustomButton ConfirmAndExitDepositButton;
+        private CustomButton CancelDepositButton;
         private DataGridViewImageColumn Image;
-        private DataGridViewTextBoxColumn Denominacion;
-        private DataGridViewTextBoxColumn Cantidad;
-        private DataGridViewTextBoxColumn Importe;
-        private Label CurrencyStatusLabel;
-        private CustomButton ConfirmAndContinueDepositButton;
         private DataGridViewTextBoxColumn Denomination;
         private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn Amount;

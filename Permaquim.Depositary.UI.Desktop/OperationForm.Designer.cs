@@ -29,26 +29,16 @@
         private void InitializeComponent()
         {
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.ExitPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // MainPanel
             // 
+            this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(250, 0);
+            this.MainPanel.Location = new System.Drawing.Point(250, 60);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 496);
+            this.MainPanel.Size = new System.Drawing.Size(300, 480);
             this.MainPanel.TabIndex = 0;
-            // 
-            // ExitPanel
-            // 
-            this.ExitPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExitPanel.BackColor = System.Drawing.Color.Transparent;
-            this.ExitPanel.Location = new System.Drawing.Point(248, 496);
-            this.ExitPanel.Name = "ExitPanel";
-            this.ExitPanel.Size = new System.Drawing.Size(300, 103);
-            this.ExitPanel.TabIndex = 1;
             // 
             // OperationForm
             // 
@@ -57,7 +47,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(798, 598);
             this.ControlBox = false;
-            this.Controls.Add(this.ExitPanel);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "OperationForm";
@@ -69,6 +58,6 @@
         #endregion
 
         private FlowLayoutPanel MainPanel;
-        private FlowLayoutPanel ExitPanel;
+        private CustomButton customButton1;
     }
 }

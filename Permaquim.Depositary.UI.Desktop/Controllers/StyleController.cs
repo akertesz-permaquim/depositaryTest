@@ -22,9 +22,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             BotonCancelar = 8,
             BotonContinuar = 9,
             BotonAlerta = 10,
-            TextoInformacion = 11,
-            TextoAlerta =12,
-            TextoError  =13
+            BotonSalir = 11,
+            BotonAlternativo = 12,
+            TextoInformacion = 13,
+            TextoAlerta =14,
+            TextoError  =15
 
         }
 

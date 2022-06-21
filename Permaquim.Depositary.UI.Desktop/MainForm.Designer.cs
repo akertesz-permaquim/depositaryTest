@@ -156,6 +156,7 @@
             // 
             this.DateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DateTimeLabel.AutoSize = true;
+            this.DateTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.DateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.DateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.DateTimeLabel.Location = new System.Drawing.Point(672, 14);
@@ -190,11 +191,12 @@
             this.StartMessageLabel.TabIndex = 108;
             this.StartMessageLabel.Text = "Presione la pantalla para ingresar";
             this.StartMessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.StartMessageLabel.Visible = false;
             // 
             // MainPictureBox
             // 
             this.MainPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPictureBox.ErrorImage = null;
+            this.MainPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("MainPictureBox.Image")));
             this.MainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.MainPictureBox.Name = "MainPictureBox";
             this.MainPictureBox.Size = new System.Drawing.Size(868, 391);

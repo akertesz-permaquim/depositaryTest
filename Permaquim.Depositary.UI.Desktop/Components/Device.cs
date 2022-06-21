@@ -455,7 +455,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         public StatesResult SwitchCurrency(long counterIndex)
         {
-            if (_counterPort.IsOpen)
+            if (_counterPort !=null && _counterPort.IsOpen)
             {
                 Log("COMMAND: StoringStart");
                 DiscardBuffer(_counterPort);

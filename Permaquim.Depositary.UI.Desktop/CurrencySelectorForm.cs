@@ -35,31 +35,25 @@ namespace Permaquim.Depositary.UI.Desktop
             };
         }
 
+        private void CurrencySelectorForm_Load(object sender, EventArgs e)
+        {
+            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            LoadStyles();
+        }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+        }
         private void LoadCurrencyButtons()
         {
 
 
             foreach (var item in _currencies)
             {
-                // Si la moneda no está habilitada para la sucursal 
 
-                CustomButton newButton = new CustomButton();
-                newButton.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
-                newButton.BackgroundColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
-                newButton.BorderColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
-                newButton.BorderRadius = 5;
-                newButton.BorderSize = 0;
-                newButton.FlatAppearance.BorderSize = 0;
-                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                newButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-                newButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-                newButton.Location = new System.Drawing.Point(3, 3);
-                newButton.Name = "DepositButton" + item.Id.ToString();
-                newButton.Size = new System.Drawing.Size(293, 77);
-                newButton.TabIndex = 0;
-                newButton.Text = MultilanguangeController.GetText(item.Nombre);
-                newButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-                newButton.UseVisualStyleBackColor = false;
+                CustomButton newButton = ControlBuilder.BuildStandardbutton(
+                    "DepositButton" + item.Id.ToString(), 
+                    MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
                 newButton.Click += new System.EventHandler(CurrencyButton_Click);
 
@@ -71,23 +65,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = new CustomButton();
-            backButton.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
-            backButton.BackgroundColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
-            backButton.BorderColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
-            backButton.BorderRadius = 5;
-            backButton.BorderSize = 0;
-            backButton.FlatAppearance.BorderSize = 0;
-            backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            backButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            backButton.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-            backButton.Location = new System.Drawing.Point(3, 3);
-            backButton.Name = "BackButton";
-            backButton.Size = new System.Drawing.Size(293, 77);
-            backButton.TabIndex = 3;
-            backButton.Text = MultilanguangeController.GetText("Salir");
-            backButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-            backButton.UseVisualStyleBackColor = false;
+            CustomButton backButton = ControlBuilder.BuildStandardbutton(
+                "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -136,14 +115,5 @@ namespace Permaquim.Depositary.UI.Desktop
             this.Close();
         }
 
-        private void CurrencySelectorForm_Load(object sender, EventArgs e)
-        {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
-            LoadStyles();
-        }
-        private void LoadStyles()
-        {
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
-        }
     }
 }

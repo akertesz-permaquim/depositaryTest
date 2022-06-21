@@ -41,7 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
-        private System.Windows.Forms.Timer _poolingTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         //////////////////////////////////////////////////////////////////////
         DataGridViewCell activatedCell;
@@ -56,6 +56,16 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             InitializeComponent();
             LoadStyles();
+            CenterPanel();
+        }
+        private void CenterPanel()
+        {
+
+            MainPanel.Location = new Point()
+            {
+                X = this.Width / 2 - MainPanel.Width / 2,
+                Y = this.Height / 2 - MainPanel.Height / 2
+            };
         }
         private void LoadStyles()
         {
@@ -90,12 +100,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private void EnvelopeDepositForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
-            _poolingTimer = new System.Windows.Forms.Timer()
+            _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = 200,
+                Interval = DeviceController.GetPollingInterval(),
                 Enabled = true
             };
-            _poolingTimer.Tick += PoolTimer_Tick;
+            _pollingTimer.Tick += PollTimer_Tick;
 
             _operationStatus = new();
 
@@ -115,52 +125,57 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 _envelopeDepositItems.Add(new EnvelopeDepositItem()
                 {
-                    Id = item.Id,
+                    Image = System.Drawing.Image.FromStream(new MemoryStream(bytes)),
                     Denomination = item.MonedaId.Nombre + " - " + item.TipoValorId.Nombre,
+                    Quantity = 0,
                     Amount = 0,
-                    Image = System.Drawing.Image.FromStream(new MemoryStream(bytes))
+                    Id = item.Id,
                 }); 
             }
             // Row Totales
             _envelopeDepositItems.Add(new EnvelopeDepositItem()
             {
+                Image = null,
+                Denomination = "Total",
+                Quantity = 0,
                 Amount = 0,
                 Id = -1,
-                Denomination = "Total",
-                Quantity = 0
             });
 
             DenominationsGridView.DataSource = _envelopeDepositItems;
-            ChangeTotals();
+            UpdateTotals();
 
 
         }
 
-        private void PoolTimer_Tick(object? sender, EventArgs e)
+        private void PollTimer_Tick(object? sender, EventArgs e)
         {
 
             // Asigna a la máquina el valor del estado de la contadora en este ciclo
-            _operationStatus.GeneralStatus = _device.CurrentStatus;
-
-            if (_device != null && _device.CounterConnected)
+            if (_device.CounterConnected)
             {
-                if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode)
+                _operationStatus.GeneralStatus = _device.CurrentStatus;
+
+                if (_device != null && _device.CounterConnected)
                 {
-                    _device.ManualDepositMode();
-                }
-                else
-                {
-                    // Muestra el estado del hardware
-                    ShowHardwareMonitorData();
-                    // Procesa los estados 
-                    ProcessDeviceStatus();
+                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode)
+                    {
+                        _device.ManualDepositMode();
+                    }
+                    else
+                    {
+                        // Muestra el estado del hardware
+                        ShowHardwareMonitorData();
+                        // Procesa los estados 
+                        ProcessDeviceStatus();
+                    }
                 }
             }
 
-            ChangeTotals();
+            UpdateTotals();
         }
 
-        private void ChangeTotals()
+        private void UpdateTotals()
         {
             try
             {
@@ -185,24 +200,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex == 0 && e.RowIndex == DenominationsGridView.Rows.Count - 1)
+            if (e.ColumnIndex == 4 && e.RowIndex == DenominationsGridView.Rows.Count - 1)
             {
                 e.PaintBackground(e.ClipBounds, true);
                 e.Handled = true;
             }
         }
-        private void DenominationsGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            e.Control.KeyPress -= new KeyPressEventHandler(DenominationsGridView_KeyPress);
-            if (DenominationsGridView.CurrentCell.ColumnIndex > 2) //Desired Column
-            {
-                TextBox tb = e.Control as TextBox;
-                if (tb != null)
-                {
-                    tb.KeyPress += new KeyPressEventHandler(DenominationsGridView_KeyPress);
-                }
-            }
-        }
+
 
         private void DenominationsGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -226,7 +230,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Quantity"].Value = _totalQuantity;
             DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Amount"].Value = _totalAmount;
-
 
         }
 
@@ -284,7 +287,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.Waiting)
                     {
                         _device.RemoteCancel();
-                        _poolingTimer.Enabled = false;
+                        _pollingTimer.Enabled = false;
                         this.Close();
                         AppController.OpenChildForm(new OperationForm(), _device);
                     }
@@ -335,6 +338,8 @@ namespace Permaquim.Depositary.UI.Desktop
             CancelDepositButton.Visible =
            !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                 && _totalQuantity > 0 && _totalAmount > 0;
+
+          
 
         }
         private void ShowInformation()
@@ -389,6 +394,10 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private void SaveTransaction()
         {
+            NumberPanel.Visible = false;
+            DenominationsGridView.Visible = false;
+            InformationLabel.Text = MultilanguangeController.GetText("AGUARDE_DEPOSITO");
+            InformationLabel.ForeColor = Color.Green;
 
             Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
             sesiones.Items(null, DatabaseController.CurrentUser.Id, null, null, null);
@@ -462,14 +471,14 @@ namespace Permaquim.Depositary.UI.Desktop
             public string Denomination { get; set; }
             public long Quantity { get; set; }
             public double Amount { get; set; }
-            public Image Image { get; set; }
+            public Image? Image { get; set; }
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             if (_device.CounterConnected)
                 _device.RemoteCancel();
-            _poolingTimer.Enabled = false;
+            _pollingTimer.Enabled = false;
             AppController.OpenChildForm(new OperationForm(), _device);
         }
 
@@ -529,14 +538,27 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         #endregion
 
-        private void DenominationsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+  
         private void EnvelopeTextBox_Enter(object sender, EventArgs e)
         {
             _selectedEditElement = SelectedEditElementEnum.CodigoSobre;
+        }
+
+        private void DenominationsGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            System.Diagnostics.Debug.Print(e.Exception.Message);
+        }
+
+        private void DenominationsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            activatedCell = ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex];
+            _selectedEditElement = SelectedEditElementEnum.Celda;
+            DenominationsGridView.BeginEdit(true);
+        }
+
+        private void DenominationsGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+          
         }
     }
 }

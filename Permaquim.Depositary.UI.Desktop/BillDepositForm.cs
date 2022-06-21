@@ -51,24 +51,35 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BillDepositForm_Load(object sender, EventArgs e)
         {
-
+            this.SuspendLayout();
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
 
             _detectedDenominations = new();
 
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = 200,
+                Interval = DeviceController.GetPollingInterval(),
                 Enabled = true
             };
-            _pollingTimer.Tick += PoolTimer_Tick;
+            _pollingTimer.Tick += PollTimer_Tick;
 
             _operationStatus = new();
 
+            LoadCurrentContainer();
             LoadDenominations();
             LoadStyles();
-
+            CenterPanel();
             CurrencyLabel.Text = DatabaseController.CurrentCurrency.Nombre;
+            this.ResumeLayout();
+        }
+        private void CenterPanel()
+        {
+
+            MainPanel.Location = new Point()
+            {
+                X = this.Width / 2 - MainPanel.Width / 2,
+                Y = this.Height / 2 - MainPanel.Height / 2
+            };
         }
         private void LoadStyles()
         {
@@ -90,7 +101,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Columns["Amount"].HeaderText = MultilanguangeController.GetText("IMPORTE");
 
         }
-        private void PoolTimer_Tick(object? sender, EventArgs e)
+        private void PollTimer_Tick(object? sender, EventArgs e)
         {
             if (_device != null && _device.CounterConnected)
             {
@@ -400,12 +411,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 SetTotalRowStyle();
 
-
-                //BillsQuantityLabel.Text = (currentCountingQuantity + _operationStatus.CurrentTransactionQuantity).ToString();
-                //TotalAmountLabel.Text = DatabaseController.CurrentCurrency.Simbolo + " " +
-                //    (currentCountingAmount + _operationStatus.CurrentTransactionAmount).ToString();
-
-
             }
             else
             {
@@ -441,7 +446,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // I suppose your check box is at column index 0
             if (e.ColumnIndex == 0 && e.RowIndex == DenominationsGridView.Rows.Count - 1)
             {
                 e.PaintBackground(e.ClipBounds, true);
@@ -524,6 +528,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
 
         #region Database Access
+
+        public void LoadCurrentContainer()
+        {
+            var x = DatabaseController.CurrentContainer;
+        }
         public void LoadDenominations()
         {
             Permaquim.Depositario.Business.Relations.Valor.Denominacion denominacion = new();

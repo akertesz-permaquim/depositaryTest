@@ -34,6 +34,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Permaquim.Depositario.Business.Relations.Operacion.Contenedor entity = new();
                 entity.Where.Add(Depositario.Business.Relations.Operacion.Contenedor.ColumnEnum.Id,
                     Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+                entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre,
+               Depositario.sqlEnum.OperandEnum.IsNull, null);
                 return entity.Items().LastOrDefault();
             }
         }
@@ -188,11 +191,22 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         }
 
 
-        public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor UpdateContainer(string bagIdentifier)
+        public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor UpdateandCreateContainer(string bagIdentifier)
         {
             Permaquim.Depositario.Entities.Tables.Operacion.Contenedor returnValue = new();
 
             Permaquim.Depositario.Business.Tables.Operacion.Contenedor entities = new();
+
+            var currentcontainer = entities.Items(CurrentContainer.Id).FirstOrDefault();
+            currentcontainer.FechaCierre = DateTime.Now;
+
+            // Primero actualiza la fecha de cierre de la bolsa actual
+            entities.Update(currentcontainer);
+
+            Permaquim.Depositario.Business.Tables.Operacion.TipoContenedor typesOfContainer = new();
+
+
+            //Luego genera una nueva
             entities.Add(new Depositario.Entities.Tables.Operacion.Contenedor()
             {
                 FechaApertura = DateTime.Now,
@@ -201,17 +215,43 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 FechaModificacion = null,
                 Habilitado = true,
                 Identificador = bagIdentifier,
-                Nombre = "",
-                TipoId = 1,
+                Nombre = bagIdentifier,
+                TipoId = typesOfContainer.Items().FirstOrDefault().Id,
                 UsuarioCreacion = CurrentUser.Id,
                 UsuarioModificacion = null
 
             });
 
 
-
             return returnValue;
         }
 
+
+        public static List<Permaquim.Depositario.Entities.Relations.Operacion.Transaccion> GetOperationsHeaders()
+        {
+
+            Permaquim.Depositario.Business.Relations.Operacion.Transaccion transaccion = new();
+            transaccion.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id, 
+                Depositario.sqlEnum.DirEnum.DESC);
+            transaccion.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, 
+                Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.UtcNow.Date);
+            transaccion.Items();
+
+            return transaccion.Result;
+
+        }
+        public static List<Permaquim.Depositario.Entities.Relations.Operacion.TransaccionDetalle> GetOperationsDetails(long transactionId)
+        {
+
+            Permaquim.Depositario.Business.Relations.Operacion.TransaccionDetalle transaccionDetalle = new();
+            transaccionDetalle.OrderByParameter.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Id,
+                Depositario.sqlEnum.DirEnum.DESC);
+            transaccionDetalle.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
+                Depositario.sqlEnum.OperandEnum.Equal, transactionId);
+            transaccionDetalle.Items();
+
+            return transaccionDetalle.Result;
+
+        }
     }
 }

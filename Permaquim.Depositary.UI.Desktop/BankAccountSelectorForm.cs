@@ -1,4 +1,5 @@
-﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+﻿using Permaquim.Depositary.UI.Desktop.Components;
+using Permaquim.Depositary.UI.Desktop.Controllers;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -40,27 +41,12 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _userBankAccounts)
             {
 
-                CustomButton newButton = new CustomButton();
+                CustomButton newButton = ControlBuilder.BuildStandardbutton(
+                "BankAccountButton" + item.Id.ToString(),
+                item.CuentaId.Nombre + " - " + item.CuentaId.Numero + " (" + item.CuentaId.BancoId.Nombre + ")"
+                , MainPanel.Width);
 
-
-                newButton.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
-                newButton.BackgroundColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
-                newButton.BorderColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonAceptar);
-                newButton.BorderRadius = 5;
-                newButton.BorderSize = 0;
-                newButton.FlatAppearance.BorderSize = 0;
-                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                newButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-                newButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-                newButton.Location = new System.Drawing.Point(3, 3);
-                newButton.Name = "BankAccounttButton" + item.Id.ToString();
-                newButton.Size = new System.Drawing.Size(MainPanel.Width - 5, 77);
-                newButton.TabIndex = 0;
-                newButton.Text = item.CuentaId.Nombre + " - "  + item.CuentaId.Numero + " (" + item.CuentaId.BancoId.Nombre + ")";
-                newButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-                newButton.UseVisualStyleBackColor = false;
-
-                newButton.Click += new System.EventHandler(BankAccountButton_Click);
+                 newButton.Click += new System.EventHandler(BankAccountButton_Click);
 
                 newButton.Tag = item;
 
@@ -70,25 +56,9 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = new CustomButton();
+            CustomButton backButton = ControlBuilder.BuildStandardbutton(
+                "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
 
-            backButton.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
-            backButton.BackgroundColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
-            backButton.BorderColor = StyleController.GetColor(StyleController.ColorNameEnum.BotonEstandar);
-            backButton.BorderRadius = 5;
-            backButton.BorderSize = 0;
-            backButton.FlatAppearance.BorderSize = 0;
-            backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            backButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            backButton.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-            backButton.Location = new System.Drawing.Point(3, 3);
-            backButton.Name = "BackButton";
-            backButton.TabIndex = 3;
-            backButton.Text = MultilanguangeController.GetText("Salir");
-            backButton.TextColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-            backButton.UseVisualStyleBackColor = false;
-            backButton.Size = new System.Drawing.Size(MainPanel.Width - 5, 77);
-  
 
             this.MainPanel.Controls.Add(backButton);
 

@@ -25,10 +25,9 @@ namespace Permaquim.Depositary.UI.Desktop
         public SystemBlockingDialog()
         {
             InitializeComponent();
-            LoadStyles();
         }
 
-        private void LoadStyles()
+        public void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
             InformationLabel.Text= MultilanguangeController.GetText("PUERTA_ABIERTA");
@@ -42,7 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = 200,
+                Interval = DeviceController.GetPollingInterval(),
                 Enabled = true
             };
             _pollingTimer.Tick += PoolTimer_Tick;
