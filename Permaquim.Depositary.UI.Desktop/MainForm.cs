@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 using Permaquim.Depositary.UI.Desktop.Helpers;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
@@ -188,14 +189,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void LoadStyles()
         {
-            HeadPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
-            MainPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
-            BottomPanel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Pie);
-            MainPictureBox.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
-            StartMessageLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-            UserLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-            EnterpriseLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
-            DateTimeLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.FuenteContraste);
+            HeadPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
+            MainPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            BottomPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Pie);
+            MainPictureBox.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            StartMessageLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            UserLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            EnterpriseLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            DateTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             //MainPictureBox.Image = StyleController.GetImageResource("Presentacion");
         }

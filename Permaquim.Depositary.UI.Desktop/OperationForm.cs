@@ -1,5 +1,7 @@
-﻿using Permaquim.Depositary.UI.Desktop.Components;
+﻿using Permaquim.Depositary.UI.Desktop.Builders;
+using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,7 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
         }
         private void CenterPanel()
         {
@@ -57,7 +59,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _transactions)
             {
 
-                CustomButton newButton = ControlBuilder.BuildStandardbutton(
+                CustomButton newButton = ControlBuilder.BuildStandardButton(
                     "TransactionButton" + item.Id.ToString(), 
                     MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 

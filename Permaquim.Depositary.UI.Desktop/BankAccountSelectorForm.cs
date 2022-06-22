@@ -1,4 +1,4 @@
-﻿using Permaquim.Depositary.UI.Desktop.Components;
+﻿using Permaquim.Depositary.UI.Desktop.Builders;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -41,7 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _userBankAccounts)
             {
 
-                CustomButton newButton = ControlBuilder.BuildStandardbutton(
+                CustomButton newButton = ControlBuilder.BuildStandardButton(
                 "BankAccountButton" + item.Id.ToString(),
                 item.CuentaId.Nombre + " - " + item.CuentaId.Numero + " (" + item.CuentaId.BancoId.Nombre + ")"
                 , MainPanel.Width);
@@ -56,7 +56,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildStandardbutton(
+            CustomButton backButton = ControlBuilder.BuildStandardButton(
                 "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
 
 

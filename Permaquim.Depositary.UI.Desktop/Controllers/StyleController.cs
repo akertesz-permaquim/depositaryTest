@@ -1,34 +1,10 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static  class StyleController
     {
-        public enum ColorNameEnum
-        {
-            Ninguno =0,
-            Cabecera = 1,
-            Contenido = 2,
-            Pie=3,
-            FuentePrincipal =4,
-            FuenteContraste = 5,
-            BotonEstandar = 6,
-            BotonAceptar = 7,
-            BotonCancelar = 8,
-            BotonContinuar = 9,
-            BotonAlerta = 10,
-            BotonSalir = 11,
-            BotonAlternativo = 12,
-            TextoInformacion = 13,
-            TextoAlerta =14,
-            TextoError  =15
-
-        }
 
         private static Permaquim.Depositario.Entities.Relations.Estilo.Esquema _selectedSchema = new();
         public static Image GetLogo()

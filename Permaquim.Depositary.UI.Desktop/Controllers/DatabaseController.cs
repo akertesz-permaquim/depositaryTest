@@ -12,6 +12,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         /// Representa el usuario registrado en el Sistema
         /// </summary>
         public static Permaquim.Depositario.Entities.Relations.Seguridad.Usuario CurrentUser { get; private set; }
+
+        public static Permaquim.Depositario.Entities.Tables.Operacion.Sesion CurrentSession { get; private set; }
+
         public static Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario CurrentDepositary { 
             get
             {
@@ -83,8 +86,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 {
                     usuario = usuarios.Result.FirstOrDefault();
                     CurrentUser = usuario;
+                    
+                    // Se genera una sesión
+                    Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
+                    CurrentSession = sesiones.Add(CurrentUser.Id, DateTime.Now, null, null);
                 }
-
+                
                 return usuario;
             }
             catch (Exception ex )
@@ -100,6 +107,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             CurrentUser = null;
             _currentCurrency = new();
+            Permaquim.Depositario.Business.Tables.Operacion.Sesion session = new();
+            CurrentSession.FechaCierre = DateTime.Now;
+            CurrentSession.EsCierreAutomatico = false;
+            session.Update(CurrentSession);
 
         }
 
@@ -252,6 +263,41 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             return transaccionDetalle.Result;
 
+        }
+        public static List<Permaquim.Depositario.Entities.Relations.Operacion.TransaccionSobreDetalle>
+            GetenvelopeOperationsDetails(long transactionId)
+        {
+            Permaquim.Depositario.Business.Relations.Operacion.TransaccionSobreDetalle transaccionDetalle = new();
+
+            Permaquim.Depositario.Business.Relations.Operacion.TransaccionSobre transaccionsobre = new();
+            transaccionsobre.Where.Add(Depositario.Business.Relations.Operacion.TransaccionSobre.ColumnEnum.TransaccionId,
+                Depositario.sqlEnum.OperandEnum.Equal, transactionId);
+            transaccionsobre.Items();
+            if (transaccionsobre.Result.Count > 0) {
+
+                transaccionDetalle.OrderByParameter.Add(Depositario.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.Id,
+                    Depositario.sqlEnum.DirEnum.DESC);
+                transaccionDetalle.Where.Add(Depositario.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.SobreId,
+                    Depositario.sqlEnum.OperandEnum.Equal, transaccionsobre.Result.FirstOrDefault().Id);
+                transaccionDetalle.Items();
+
+            }
+            return transaccionDetalle.Result;
+
+        }
+
+        public static Permaquim.Depositario.Entities.Relations.Operacion.Turno TurnClosing()
+        {
+            return null;
+        }
+
+        public static Permaquim.Depositario.Entities.Relations.Operacion.CierreDiario DailyClosing()
+        {
+            return null;
+        }
+        public static void AccountClosing()
+        {
+            
         }
     }
 }

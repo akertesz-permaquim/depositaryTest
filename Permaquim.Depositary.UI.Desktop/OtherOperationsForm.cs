@@ -1,5 +1,7 @@
-﻿using Permaquim.Depositary.UI.Desktop.Components;
+﻿using Permaquim.Depositary.UI.Desktop.Builders;
+using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,23 +20,24 @@ namespace Permaquim.Depositary.UI.Desktop
         public OtherOperationsForm()
         {
             InitializeComponent();
+            CenterPanel();
+            LoadStyles();
+            LoadTurnButton();
+            LoadAccountClosingButton();
+            LoadDailyClosingButton();
+            LoadOperationsButton();
+            LoadSupportButton();
+            LoadBackButton();
         }
 
         private void OtherOperationsForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
-            LoadStyles();
-            CenterPanel();
-            LoadTurnButton();
-            LoadAccountClosingButton();
-            LoadOperationsButton();
-            LoadSupportButton();
-            LoadBackButton();
 
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
         }
         private void CenterPanel()
         {
@@ -68,7 +71,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadTurnButton()
         {
-            CustomButton TurnButton = ControlBuilder.BuildStandardbutton(
+            CustomButton TurnButton = ControlBuilder.BuildStandardButton(
                 "TurnButton", MultilanguangeController.GetText("CAMBIO_TURNO"), MainPanel.Width);
 
             this.MainPanel.Controls.Add(TurnButton);
@@ -77,8 +80,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void TurnButton_Click(object sender, EventArgs e)
         {
-            //    AppController.OpenChildForm(new TurnForm(),
-            //      (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+            AppController.OpenChildForm(new TurnChangeForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
 
@@ -86,7 +89,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadAccountClosingButton()
         {
-            CustomButton AccountClosingButton = ControlBuilder.BuildStandardbutton(
+            CustomButton AccountClosingButton = ControlBuilder.BuildStandardButton(
                 "AccountClosingButton", MultilanguangeController.GetText("CIERRE_CONTABLE"), MainPanel.Width);
 
             this.MainPanel.Controls.Add(AccountClosingButton);
@@ -95,8 +98,26 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void AccountClosingButton_Click(object sender, EventArgs e)
         {
-            //    AppController.OpenChildForm(new TurnForm(),
-            //      (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+            AppController.OpenChildForm(new AccountClosingForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+        }
+        #endregion
+
+        #region DailyClosing
+
+        private void LoadDailyClosingButton()
+        {
+            CustomButton AccountClosingButton = ControlBuilder.BuildStandardButton(
+                "DailyClosingButton", MultilanguangeController.GetText("CIERRE_DIARIO"), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(AccountClosingButton);
+            AccountClosingButton.Click += new System.EventHandler(DailyClosingButton_Click);
+        }
+
+        private void DailyClosingButton_Click(object sender, EventArgs e)
+        {
+            AppController.OpenChildForm(new DailyClosingForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
 
@@ -105,7 +126,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadOperationsButton()
         {
-            CustomButton OperationsButton = ControlBuilder.BuildStandardbutton(
+            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
                 "OperationsButton", MultilanguangeController.GetText("HISTORICO_OPERACIONES"), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
@@ -114,7 +135,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OperationsButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new OperationHistoryForm(),
+            AppController.OpenChildForm(new OperationsHistoryform(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion

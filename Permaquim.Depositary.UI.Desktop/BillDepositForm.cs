@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 using System.Text;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -40,10 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private int _remainingTime = 60;
 
-        private const int IMAGE_COLUMN = 0;
-        private const int DENOMINATION_COLUMN = 1;
-        private const int QUANTITY_COLUMN = 2;
-        private const int AMOUNT_COLUMN = 3;
+  
 
         public BillDepositForm()
         {
@@ -83,12 +81,12 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
 
-             CurrencyLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
-            SubtotalLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+             CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
+            SubtotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
             DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
-                StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+                StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
 
             ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText("ACCEPT_BUTTON");
             ConfirmAndContinueDepositButton.Text = MultilanguangeController.GetText("CONTINUE_BUTTON");
@@ -581,8 +579,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _operationStatus.CurrentTransactionAmount += currentCountingAmount;
 
-            Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
-            sesiones.Items(null, DatabaseController.CurrentUser.Id, null, null, null);
+
 
 
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
@@ -598,7 +595,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     Fecha = DateTime.Now,
                     Finalizada = true,
                     SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
-                    SesionId = sesiones.Result.FirstOrDefault().Id,
+                    SesionId = DatabaseController.CurrentSession.Id,
                     SucursalId = DatabaseController.CurrentDepositary.SectorId.SucursalId.Id,
                     TipoId = 1,             // Depósito de Billete
                     TotalAValidar = 0,

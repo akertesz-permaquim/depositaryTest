@@ -43,7 +43,7 @@
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(248, 56);
+            this.MainPanel.Location = new System.Drawing.Point(248, 168);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(400, 344);
             this.MainPanel.TabIndex = 2;
@@ -58,7 +58,7 @@
             this.MonitorGroupBox.Controls.Add(this.BagStatusLabel);
             this.MonitorGroupBox.Controls.Add(this.GatelStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(656, 112);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(656, 192);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
             this.MonitorGroupBox.Size = new System.Drawing.Size(232, 168);
             this.MonitorGroupBox.TabIndex = 100;
@@ -132,7 +132,7 @@
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(80, 416);
+            this.InformationLabel.Location = new System.Drawing.Point(80, 24);
             this.InformationLabel.Name = "InformationLabel";
             this.InformationLabel.Size = new System.Drawing.Size(704, 72);
             this.InformationLabel.TabIndex = 143;
@@ -145,7 +145,7 @@
             this.EventCheckbox.BackColor = System.Drawing.Color.Transparent;
             this.EventCheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.EventCheckbox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.EventCheckbox.Location = new System.Drawing.Point(656, 352);
+            this.EventCheckbox.Location = new System.Drawing.Point(656, 432);
             this.EventCheckbox.Name = "EventCheckbox";
             this.EventCheckbox.Size = new System.Drawing.Size(71, 17);
             this.EventCheckbox.TabIndex = 144;

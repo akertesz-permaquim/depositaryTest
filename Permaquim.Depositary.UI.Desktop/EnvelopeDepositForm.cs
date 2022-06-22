@@ -1,5 +1,6 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -20,12 +22,7 @@ namespace Permaquim.Depositary.UI.Desktop
         public Device _device { get; set; }
 
 
-        private enum SelectedEditElementEnum
-        {
-            Ninguno = 0,
-            Celda = 1,
-            CodigoSobre = 2
-        }
+
 
         private SelectedEditElementEnum _selectedEditElement;
 
@@ -48,7 +45,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CellClicked(object sender, DataGridViewCellEventArgs e)
         {
             activatedCell = ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex];
-            _selectedEditElement = SelectedEditElementEnum.Celda;
+            _selectedEditElement = SelectedEditElementEnum.Cell;
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -69,24 +66,24 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
 
-            Button_0.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_1.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_2.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_3.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_4.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_5.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_6.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_7.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_8.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_9.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_Dot.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            Button_BackSpace.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.FuentePrincipal);
-            CurrencyLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
-            SubtotalLabel.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+            Button_0.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_1.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_2.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_3.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_4.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_5.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_6.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_7.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_8.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_9.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_Dot.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            Button_BackSpace.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+            CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
+            SubtotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
             
-            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Cabecera);
+            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
 
             ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText("ACCEPT_BUTTON");
             CancelDepositButton.Text = MultilanguangeController.GetText("CANCEL_BUTTON");
@@ -498,7 +495,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void Keys(object sender, EventArgs e)
         {
 
-            if (_selectedEditElement == SelectedEditElementEnum.Celda)
+            if (_selectedEditElement == SelectedEditElementEnum.Cell)
             {
                 if (activatedCell == null) { return; }
 
@@ -530,7 +527,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 SumValues();
             }
-            if (_selectedEditElement == SelectedEditElementEnum.CodigoSobre)
+            if (_selectedEditElement == SelectedEditElementEnum.EnvelopeCode)
             {
                 EnvelopeTextBox.Focus();
                 SendKeys.Send(((CustomButton)sender).Tag.ToString());
@@ -541,7 +538,7 @@ namespace Permaquim.Depositary.UI.Desktop
   
         private void EnvelopeTextBox_Enter(object sender, EventArgs e)
         {
-            _selectedEditElement = SelectedEditElementEnum.CodigoSobre;
+            _selectedEditElement = SelectedEditElementEnum.EnvelopeCode;
         }
 
         private void DenominationsGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -552,7 +549,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void DenominationsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             activatedCell = ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex];
-            _selectedEditElement = SelectedEditElementEnum.Celda;
+            _selectedEditElement = SelectedEditElementEnum.Cell;
             DenominationsGridView.BeginEdit(true);
         }
 

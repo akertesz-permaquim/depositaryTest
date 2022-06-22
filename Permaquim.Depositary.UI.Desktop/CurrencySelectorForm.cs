@@ -1,5 +1,7 @@
-﻿using Permaquim.Depositary.UI.Desktop.Components;
+﻿using Permaquim.Depositary.UI.Desktop.Builders;
+using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,17 +44,19 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
         }
-        private void LoadCurrencyButtons()
+        #region CurrencyButtons
+
+       private void LoadCurrencyButtons()
         {
 
 
             foreach (var item in _currencies)
             {
 
-                CustomButton newButton = ControlBuilder.BuildStandardbutton(
-                    "DepositButton" + item.Id.ToString(), 
+                CustomButton newButton = ControlBuilder.BuildStandardButton(
+                    "CurrencyButton" + item.Id.ToString(), 
                     MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
                 newButton.Click += new System.EventHandler(CurrencyButton_Click);
@@ -62,15 +66,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 this.MainPanel.Controls.Add(newButton);
             
             }
-        }
-        private void LoadBackButton()
-        {
-            CustomButton backButton = ControlBuilder.BuildStandardbutton(
-                "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
-
-            this.MainPanel.Controls.Add(backButton);
-
-            backButton.Click += new System.EventHandler(BackButton_Click);
         }
         private void CurrencyButton_Click(object sender, EventArgs e)
         {
@@ -108,12 +103,24 @@ namespace Permaquim.Depositary.UI.Desktop
             }
 
         }
+        #endregion
 
+        #region BackButton
+        private void LoadBackButton()
+        {
+            CustomButton backButton = ControlBuilder.BuildExitButton(
+                "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(backButton);
+
+            backButton.Click += new System.EventHandler(BackButton_Click);
+        }
         private void BackButton_Click(object sender, EventArgs e)
         {
             AppController.OpenChildForm(new OperationForm(), _device);
             this.Close();
         }
+        #endregion
 
     }
 }

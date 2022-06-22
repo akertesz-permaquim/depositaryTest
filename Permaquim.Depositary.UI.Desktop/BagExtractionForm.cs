@@ -1,23 +1,13 @@
-﻿using Permaquim.Depositary.UI.Desktop.Components;
+﻿using Permaquim.Depositary.UI.Desktop.Builders;
+using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class BagExtractionForm : Form
     {
-        private enum BagExtractionProcessEnum
-        {
-            BagError = -1,
-            None = 0,
-            GateWaitingToRelease,
-            GateUnlocked,
-            GateReleased,
-            BagExtracting,
-            BagExtracted,
-            BagPuttingStart,
-            IdentifierPending,
-            ProcessFinished
-        }
         public Device _device { get; set; }
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
@@ -165,43 +155,43 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case BagExtractionProcessEnum.BagError:
                     InformationLabel.Text = "Hay un error en la posición de la bolsa!";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoError);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 case BagExtractionProcessEnum.None:
                     InformationLabel.Text = "Presione el boton para iniciar.";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.GateWaitingToRelease:
                     InformationLabel.Text = "Esperando la apertura de puerta.";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.GateUnlocked:
                     InformationLabel.Text = "Puerta liberada, puede abrirla.";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.GateReleased:
                     InformationLabel.Text = "La puerta está abierta, puede retirar la bolsa: " + DatabaseController.CurrentContainer.Nombre + "." ;//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.BagExtracting:
                     InformationLabel.Text = "La bolsa " + DatabaseController.CurrentContainer.Nombre + " está siendo extraída.";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.BagExtracted:
                     InformationLabel.Text = "La bolsa fué extraída.Colocar la nueva bolsa.";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.BagPuttingStart:
                     InformationLabel.Text = "Ingresando nueva bolsa";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.ProcessFinished:
                     InformationLabel.Text = "Proceso finalizado, aguarde mientras se genera la operación.";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.IdentifierPending:
                     InformationLabel.Text = "Indique por favor el código de la nueva bolsa.";//MultilanguangeController.GetText("CONTANDO");
-                    InformationLabel.ForeColor = StyleController.GetColor(StyleController.ColorNameEnum.TextoInformacion);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 default:
                     break;
@@ -225,7 +215,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadGateButton()
         {
 
-            _gateButton = ControlBuilder.BuildStandardbutton(
+            _gateButton = ControlBuilder.BuildStandardButton(
             "GateButton", MultilanguangeController.GetText("ABRIR_PUERTA"), MainPanel.Width);
 
             _gateButton.Visible = false;
@@ -239,7 +229,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadConfirmButton()
         {
 
-            _confirmButton = ControlBuilder.BuildStandardbutton(
+            _confirmButton = ControlBuilder.BuildStandardButton(
             "GateButton", MultilanguangeController.GetText("ACCEPT_BUTTON"), MainPanel.Width);
 
             _confirmButton.Visible = false;
@@ -291,7 +281,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(StyleController.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
         }
 
         private void EventCheckbox_CheckedChanged(object sender, EventArgs e)
