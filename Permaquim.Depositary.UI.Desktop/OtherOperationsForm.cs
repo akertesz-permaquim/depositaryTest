@@ -23,17 +23,14 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             LoadStyles();
             LoadTurnButton();
-            LoadAccountClosingButton();
             LoadDailyClosingButton();
             LoadOperationsButton();
             LoadSupportButton();
             LoadBackButton();
         }
-
         private void OtherOperationsForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
-
         }
         private void LoadStyles()
         {
@@ -49,12 +46,11 @@ namespace Permaquim.Depositary.UI.Desktop
             };
         }
 
-
         #region Back button
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
+                "BackButton", MultilanguageConstants.SALIR, MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
@@ -81,24 +77,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private void TurnButton_Click(object sender, EventArgs e)
         {
             AppController.OpenChildForm(new TurnChangeForm(),
-              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-        }
-        #endregion
-
-        #region AccountClosing
-
-        private void LoadAccountClosingButton()
-        {
-            CustomButton AccountClosingButton = ControlBuilder.BuildStandardButton(
-                "AccountClosingButton", MultilanguangeController.GetText("CIERRE_CONTABLE"), MainPanel.Width);
-
-            this.MainPanel.Controls.Add(AccountClosingButton);
-            AccountClosingButton.Click += new System.EventHandler(AccountClosingButton_Click);
-        }
-
-        private void AccountClosingButton_Click(object sender, EventArgs e)
-        {
-            AppController.OpenChildForm(new AccountClosingForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion

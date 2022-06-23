@@ -16,7 +16,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             LoadStyles();
             Loadlogo();
-
            
             TitleLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.LOGIN_TITLE);
             MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText(MultilanguageConstants.USERTEXTBOXPLACEHOLDER);
@@ -64,6 +63,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
                         Permaquim.Depositario.Business.Tables.Operacion.Sesion sesion = new();
                         sesion.Add(DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
+
+                        DatabaseController.GetTurnSchedule();
+
                         if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
                             AppController.OpenChildForm(new OperationForm(), (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     }

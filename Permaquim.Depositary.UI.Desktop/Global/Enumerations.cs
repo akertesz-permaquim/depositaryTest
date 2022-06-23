@@ -49,5 +49,10 @@
             Cell = 1,
             EnvelopeCode = 2
         }
+        public enum OperationblockingReasonEnum
+        {
+            None = 0,
+            NoTurn = 1
+        }
     }
 }

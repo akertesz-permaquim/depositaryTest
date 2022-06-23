@@ -92,6 +92,7 @@
             this.AvatarPicturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.AvatarPicturebox.TabIndex = 109;
             this.AvatarPicturebox.TabStop = false;
+            this.AvatarPicturebox.Click += new System.EventHandler(this.AvatarPicturebox_Click);
             // 
             // UserLabel
             // 
@@ -115,6 +116,7 @@
             this.LogoPictureBox.Size = new System.Drawing.Size(288, 53);
             this.LogoPictureBox.TabIndex = 0;
             this.LogoPictureBox.TabStop = false;
+            this.LogoPictureBox.Click += new System.EventHandler(this.LogoPictureBox_Click);
             // 
             // BottomPanel
             // 
@@ -164,6 +166,7 @@
             this.DateTimeLabel.Size = new System.Drawing.Size(57, 15);
             this.DateTimeLabel.TabIndex = 1;
             this.DateTimeLabel.Text = "**********";
+            this.DateTimeLabel.Click += new System.EventHandler(this.DateTimeLabel_Click);
             // 
             // MainPanel
             // 
@@ -243,6 +246,7 @@
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.HeadPanel.ResumeLayout(false);

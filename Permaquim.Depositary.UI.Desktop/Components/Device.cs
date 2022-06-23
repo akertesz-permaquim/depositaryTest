@@ -1501,6 +1501,31 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
 
         }
+        public void IoBoardReconnect()
+        {
+            try
+            {
+                _ioboardPort.Open();
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        public void CounterBoardReconnect()
+        {
+            try
+            {
+                _counterPort.Open();
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
         #endregion
     }
     #region Event classes

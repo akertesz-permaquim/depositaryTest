@@ -33,24 +33,33 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.OperationsHeaderGridView = new System.Windows.Forms.DataGridView();
             this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
-            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // MainPanel
+            // BackButton
             // 
-            this.MainPanel.Controls.Add(this.OperationsHeaderGridView);
-            this.MainPanel.Controls.Add(this.OperationsDetailGridView);
-            this.MainPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.MainPanel.Location = new System.Drawing.Point(176, 0);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(936, 544);
-            this.MainPanel.TabIndex = 0;
+            this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BackButton.BorderRadius = 5;
+            this.BackButton.BorderSize = 0;
+            this.BackButton.FlatAppearance.BorderSize = 0;
+            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BackButton.ForeColor = System.Drawing.Color.White;
+            this.BackButton.Location = new System.Drawing.Point(368, 552);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(160, 55);
+            this.BackButton.TabIndex = 179;
+            this.BackButton.Text = "Salir";
+            this.BackButton.TextColor = System.Drawing.Color.White;
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // OperationsHeaderGridView
             // 
@@ -58,6 +67,7 @@
             this.OperationsHeaderGridView.AllowUserToDeleteRows = false;
             this.OperationsHeaderGridView.AllowUserToResizeColumns = false;
             this.OperationsHeaderGridView.AllowUserToResizeRows = false;
+            this.OperationsHeaderGridView.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.OperationsHeaderGridView.BackgroundColor = System.Drawing.Color.White;
             this.OperationsHeaderGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.OperationsHeaderGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -81,7 +91,7 @@
             this.OperationsHeaderGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.OperationsHeaderGridView.EnableHeadersVisualStyles = false;
             this.OperationsHeaderGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsHeaderGridView.Location = new System.Drawing.Point(3, 3);
+            this.OperationsHeaderGridView.Location = new System.Drawing.Point(14, 8);
             this.OperationsHeaderGridView.Name = "OperationsHeaderGridView";
             this.OperationsHeaderGridView.RowHeadersVisible = false;
             this.OperationsHeaderGridView.RowTemplate.DividerHeight = 1;
@@ -89,7 +99,7 @@
             this.OperationsHeaderGridView.RowTemplate.ReadOnly = true;
             this.OperationsHeaderGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OperationsHeaderGridView.Size = new System.Drawing.Size(925, 256);
-            this.OperationsHeaderGridView.TabIndex = 176;
+            this.OperationsHeaderGridView.TabIndex = 181;
             this.OperationsHeaderGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OperationsHeaderGridView_CellClick);
             this.OperationsHeaderGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
             // 
@@ -99,6 +109,7 @@
             this.OperationsDetailGridView.AllowUserToDeleteRows = false;
             this.OperationsDetailGridView.AllowUserToResizeColumns = false;
             this.OperationsDetailGridView.AllowUserToResizeRows = false;
+            this.OperationsDetailGridView.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.OperationsDetailGridView.BackgroundColor = System.Drawing.Color.White;
             this.OperationsDetailGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.OperationsDetailGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
@@ -122,7 +133,7 @@
             this.OperationsDetailGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.OperationsDetailGridView.EnableHeadersVisualStyles = false;
             this.OperationsDetailGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsDetailGridView.Location = new System.Drawing.Point(3, 265);
+            this.OperationsDetailGridView.Location = new System.Drawing.Point(14, 270);
             this.OperationsDetailGridView.Name = "OperationsDetailGridView";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -138,41 +149,21 @@
             this.OperationsDetailGridView.RowTemplate.ReadOnly = true;
             this.OperationsDetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OperationsDetailGridView.Size = new System.Drawing.Size(925, 256);
-            this.OperationsDetailGridView.TabIndex = 180;
+            this.OperationsDetailGridView.TabIndex = 182;
             this.OperationsDetailGridView.Visible = false;
             this.OperationsDetailGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
-            // 
-            // BackButton
-            // 
-            this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BackButton.BorderRadius = 5;
-            this.BackButton.BorderSize = 0;
-            this.BackButton.FlatAppearance.BorderSize = 0;
-            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(544, 592);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(160, 55);
-            this.BackButton.TabIndex = 179;
-            this.BackButton.Text = "Salir";
-            this.BackButton.TextColor = System.Drawing.Color.White;
-            this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // OperationsHistoryform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 663);
+            this.ClientSize = new System.Drawing.Size(953, 615);
+            this.Controls.Add(this.OperationsHeaderGridView);
+            this.Controls.Add(this.OperationsDetailGridView);
             this.Controls.Add(this.BackButton);
-            this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "OperationsHistoryform";
             this.Text = "OperationsHistoryform";
-            this.MainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).EndInit();
             this.ResumeLayout(false);
@@ -180,9 +171,8 @@
         }
 
         #endregion
-        private DataGridView OperationsHeaderGridView;
         private CustomButton BackButton;
-        private FlowLayoutPanel MainPanel;
+        private DataGridView OperationsHeaderGridView;
         private DataGridView OperationsDetailGridView;
     }
 }

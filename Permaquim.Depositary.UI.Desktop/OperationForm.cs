@@ -97,7 +97,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText("Salir"),MainPanel.Width);
+                "BackButton", MultilanguageConstants.SALIR,MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);

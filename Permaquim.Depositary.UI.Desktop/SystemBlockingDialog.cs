@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class SystemBlockingDialog : Form
     {
-        /// <summary>
+         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
@@ -31,7 +31,7 @@ namespace Permaquim.Depositary.UI.Desktop
         public void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
-            InformationLabel.Text= MultilanguangeController.GetText("PUERTA_ABIERTA");
+            InformationLabel.Text= MultilanguangeController.GetText(MultilanguageConstants.PUERTA_ABIERTA);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
         }
 

@@ -10,6 +10,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
     {
         private const int VALUE_EXTRACT_OPERATION = 7;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
+        private int closingcombination = 0;
 
         /// <summary>
         /// Instancias de los componentes que gestionan dispositivos
@@ -73,20 +74,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 if (_device.CounterConnected)
                 {
-                    _device.PreviousState = _device.Sense().StatusInformation.OperatingState;
-
-                    // Si el escrow está abierto se debe cerrar
-                    if (_device.StateResultProperty.StatusInformation.OperatingState ==
-                            StatusInformation.State.EscrowOpen ||
-                            _device.StateResultProperty.StatusInformation.OperatingState ==
-                            StatusInformation.State.PQWaitingTocloseEscrow)
-
-                        _device.CloseEscrow();
-
-                    // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                    StatesResult statesResult = _device.Sense();
+                    if (statesResult != null)
                     {
-                        _device.RemoteCancel();
+                        _device.PreviousState = statesResult.StatusInformation.OperatingState;
+
+                        // Si el escrow está abierto se debe cerrar
+                        if (_device.StateResultProperty.StatusInformation.OperatingState ==
+                                StatusInformation.State.EscrowOpen ||
+                                _device.StateResultProperty.StatusInformation.OperatingState ==
+                                StatusInformation.State.PQWaitingTocloseEscrow)
+
+                            _device.CloseEscrow();
+
+                        // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
+                        if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                        {
+                            _device.RemoteCancel();
+                        }
                     }
                 }
             }
@@ -116,6 +121,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     else
                     {
                         CounterPictureBox.Image = StyleController.GetImageResource("REDLED");
+                        _device.CounterBoardReconnect();
                     }
 
                     IoBoardStatus ioBoardStatus = _device.Status();
@@ -128,6 +134,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     else
                     {
                         IoBoardPictureBox.Image = StyleController.GetImageResource("REDLED");
+                        _device.IoBoardReconnect();
                     }
 
                 }
@@ -171,7 +178,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void MainPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            Login();
+            if (VerifySchedule())
+                Login();
+            else
+                AppController.OpenChildForm(new OperationBlockingForm() 
+                { OperationBlockingReason = Enumerations.OperationblockingReasonEnum.NoTurn},
+                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
 
         private void Login()
@@ -218,6 +230,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 AvatarPicturebox.Image = null;
             }
         }
+
+        private bool VerifySchedule()
+        {
+            return DatabaseController.VerifySchedule();
+        }
         private void ExitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -225,7 +242,29 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void MainPictureBox_Click(object sender, EventArgs e)
         {
-            Login();
+            if (VerifySchedule())
+                Login();
+            else
+                AppController.OpenChildForm(new OperationBlockingForm()
+                { OperationBlockingReason = Enumerations.OperationblockingReasonEnum.NoTurn },
+                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+        }
+
+        private void LogoPictureBox_Click(object sender, EventArgs e)
+        {
+            closingcombination += 1;
+        }
+
+        private void AvatarPicturebox_Click(object sender, EventArgs e)
+        {
+            closingcombination += 1;
+        }
+
+        private void DateTimeLabel_Click(object sender, EventArgs e)
+        {
+            closingcombination += 1;
+            if (closingcombination == 3)
+                Application.Exit();
         }
     }
 }

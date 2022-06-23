@@ -82,7 +82,10 @@ namespace Permaquim.Depositary.UI.Desktop
             Button_BackSpace.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
             CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
             SubtotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
-            
+
+            EnvelopeTextBox.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
+
+
             DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
 
             ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText("ACCEPT_BUTTON");
@@ -234,20 +237,20 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             int generalStatus = (int)_device.StateResultProperty.StatusInformation.OperatingState;
-            GeneralStatusLabel.Text = Enum.GetName(typeof(StatusInformation.State), generalStatus);
+            //GeneralStatusLabel.Text = Enum.GetName(typeof(StatusInformation.State), generalStatus);
 
-            int deviceMode = (int)_device.StateResultProperty.ModeStateInformation.ModeState;
-            DeviceModeLabel.Text = Enum.GetName(typeof(ModeStateInformation.Mode), deviceMode);
+            //int deviceMode = (int)_device.StateResultProperty.ModeStateInformation.ModeState;
+            //DeviceModeLabel.Text = Enum.GetName(typeof(ModeStateInformation.Mode), deviceMode);
 
-            StackerFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.StackerFull;
-            RejectFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectFull;
-            RejectedBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectedBillPresent;
-            DischargingFailureCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.DischargingFailure;
-            EscrowBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
-            HopperBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.HopperBillPresent;
-            DepositFinishedCheckbox.Checked = _device.StateResultProperty.EndInformation.StoreEnd;
-            CountingErrorCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.CountingError;
-            JammingCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.Jamming;
+            //StackerFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.StackerFull;
+            //RejectFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectFull;
+            //RejectedBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectedBillPresent;
+            //DischargingFailureCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.DischargingFailure;
+            //EscrowBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
+            //HopperBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.HopperBillPresent;
+            //DepositFinishedCheckbox.Checked = _device.StateResultProperty.EndInformation.StoreEnd;
+            //CountingErrorCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.CountingError;
+            //JammingCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.Jamming;
 
         }
         private void ProcessDeviceStatus()
@@ -393,6 +396,9 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             NumberPanel.Visible = false;
             DenominationsGridView.Visible = false;
+            CurrencyLabel.Visible = false;
+            RemainingTimeLabel.Visible = false;
+            SubtotalLabel.Visible = false;
             InformationLabel.Text = MultilanguangeController.GetText("AGUARDE_DEPOSITO");
             InformationLabel.ForeColor = Color.Green;
 
@@ -407,6 +413,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     CierreDiarioId = 0,
                     ContenedorId = DatabaseController.CurrentContainer.Id,
                     DepositarioId = DatabaseController.CurrentDepositary.Id,
+                    MonedaId = DatabaseController.CurrentCurrency.Id,
                     Fecha = DateTime.Now,
                     Finalizada = true,
                     SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
@@ -442,6 +449,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         
                         CantidadDeclarada = item.Quantity,
                         RelacionMonedaTipoValorId = item.Id,
+                        ValorDeclarado = item.Amount,
                         Fecha = DateTime.Now,
                         SobreId = transactionEnvelope.Id
                        
@@ -479,11 +487,6 @@ namespace Permaquim.Depositary.UI.Desktop
             AppController.OpenChildForm(new OperationForm(), _device);
         }
 
-        private void EventCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            MonitorGroupBox.Visible = EventCheckbox.Checked;
-        }
-
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
             _device.OpenEscrow();
@@ -507,6 +510,10 @@ namespace Permaquim.Depositary.UI.Desktop
                         {
                             activatedCell.Value = Convert.ToDouble(activatedCell.Value.ToString()
                                 .Substring(0, activatedCell.Value.ToString().Length - 1));
+                        }
+                        else
+                        {
+                            activatedCell.Value = null;
                         }
                     }
                     else
@@ -550,12 +557,12 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             activatedCell = ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex];
             _selectedEditElement = SelectedEditElementEnum.Cell;
-            DenominationsGridView.BeginEdit(true);
+            DenominationsGridView.BeginEdit(false);
         }
 
         private void DenominationsGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-          
+            System.Diagnostics.Debug.Print(e.ToString());
         }
     }
 }

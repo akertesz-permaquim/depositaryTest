@@ -277,7 +277,6 @@
     <string>Directorio.Grupo</string>
     <string>Directorio.IdentificadorUsuario</string>
     <string>Directorio.RelacionMonedaSucursal</string>
-    <string>Directorio.RolFuncion</string>
     <string>Directorio.Sector</string>
     <string>Directorio.Sucursal</string>
     <string>Directorio.TipoIdentificador</string>
@@ -334,9 +333,9 @@
     <string>Sincronizacion.Entidad</string>
     <string>Sincronizacion.EntidadCabecera</string>
     <string>Sincronizacion.EntidadDetalle</string>
-    <string>Turno.Agenda</string>
-    <string>Turno.Esquema</string>
-    <string>Turno.EsquemaDetalle</string>
+    <string>Turno.AgendaTurno</string>
+    <string>Turno.EsquemaDetalleTurno</string>
+    <string>Turno.EsquemaTurno</string>
     <string>Valor.Denominacion</string>
     <string>Valor.Moneda</string>
     <string>Valor.RelacionMonedaTipoValor</string>

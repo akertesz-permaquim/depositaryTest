@@ -13,5 +13,10 @@ namespace Permaquim.Depositary.UI.Desktop.Global
         public const string PASSWORDTEXTBOXPLACEHOLDER = "PASSWORDTEXTBOXPLACEHOLDER";
         public const string FALTA_USUARIO_PASSWORD = "PASSWORDTEXTBOXPLACEHOLDER";
         public const string USUARIO_NO_REGISTRADO = "USUARIO_NO_REGISTRADO";
+        public const string SIN_TURNO = "SIN_TURNO";
+        public const string SALIR = "Salir";
+        public const string PUERTA_ABIERTA = "PUERTA_ABIERTA";
+
+
     }
 }

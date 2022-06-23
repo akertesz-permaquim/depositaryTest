@@ -18,10 +18,22 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CenterPanel()
         {
 
-            MainPanel.Location = new Point()
+            OperationsHeaderGridView.Location = new Point()
             {
-                X = this.Width / 2 - MainPanel.Width / 2,
-                Y = this.Height / 2 - MainPanel.Height / 2
+                X = this.Width / 2 - OperationsHeaderGridView.Width / 2,
+                Y = OperationsHeaderGridView.Location.Y
+            };
+
+            OperationsDetailGridView.Location = new Point()
+            {
+                X = this.Width / 2 - OperationsDetailGridView.Width / 2,
+                Y = OperationsDetailGridView.Location.Y
+            };
+
+            BackButton.Location = new Point()
+            {
+                X = this.Width / 2 - BackButton.Width / 2,
+                Y = BackButton.Location.Y
             };
         }
         private void LoadStyles()
@@ -62,6 +74,17 @@ namespace Permaquim.Depositary.UI.Desktop
                 DataPropertyName = "Tipo",
                 HeaderText = MultilanguangeController.GetText("Tipo"),
                 Name = "Tipo",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            OperationsHeaderGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Moneda",
+                HeaderText = MultilanguangeController.GetText("Moneda"),
+                Name = "Moneda",
                 Visible = true,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
@@ -287,6 +310,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     Fecha = item.Fecha,
                     Finalizada = item.Finalizada,
                     Id = item.Id,
+                    Moneda = item.MonedaId.Nombre,
                     Tipo = item.TipoId.Nombre,
                     TipoId = item.TipoId.Id,
                     TotalAValidar = item.TotalAValidar,
@@ -329,7 +353,7 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             if ((OperationTypeEnum)operationTypeId == OperationTypeEnum.EnvelopeDeposit)
             {
-                var operationEnvelopeDetails = DatabaseController.GetenvelopeOperationsDetails(operationId);
+                var operationEnvelopeDetails = DatabaseController.GetEnvelopeOperationsDetails(operationId);
 
                 _transactionEnvelopeDetailItems.Clear();
 
@@ -341,6 +365,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         Sobre = item.SobreId.CodigoSobre,
                         Fecha = item.Fecha,
                         TipoValor     = item.RelacionMonedaTipoValorId.TipoValorId.Nombre
+
                     });
                 }
 
@@ -361,6 +386,7 @@ namespace Permaquim.Depositary.UI.Desktop
             public long Id { get; set; }
             public string Tipo { get; set; }
             public long TipoId { get; set; }
+            public string Moneda { get; set; }
             public string Usuario { get; set; }
             public string UsuarioCuenta { get; set; }
             public string Contenedor { get; set; }

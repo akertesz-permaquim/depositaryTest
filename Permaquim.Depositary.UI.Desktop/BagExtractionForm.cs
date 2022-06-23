@@ -244,7 +244,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
              _backButton = ControlBuilder.BuildExitButton(
-            "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
+            "BackButton", MultilanguageConstants.SALIR, MainPanel.Width);
 
             this.MainPanel.Controls.Add(_backButton);
 

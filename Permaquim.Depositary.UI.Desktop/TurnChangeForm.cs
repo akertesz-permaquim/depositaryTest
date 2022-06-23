@@ -51,6 +51,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void TurnchangeButton_Click(object sender, EventArgs e)
         {
+            DatabaseController.CloseCurrentTurn();
             AppController.OpenChildForm(new OtherOperationsForm(), _device);
             this.Close();
         }

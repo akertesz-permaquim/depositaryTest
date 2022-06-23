@@ -580,8 +580,6 @@ namespace Permaquim.Depositary.UI.Desktop
             _operationStatus.CurrentTransactionAmount += currentCountingAmount;
 
 
-
-
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
             Permaquim.Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = new();
 
@@ -594,6 +592,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     DepositarioId = DatabaseController.CurrentDepositary.Id,
                     Fecha = DateTime.Now,
                     Finalizada = true,
+                    MonedaId = DatabaseController.CurrentCurrency.Id,
                     SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
                     SesionId = DatabaseController.CurrentSession.Id,
                     SucursalId = DatabaseController.CurrentDepositary.SectorId.SucursalId.Id,

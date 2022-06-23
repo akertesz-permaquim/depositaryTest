@@ -67,10 +67,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -213,10 +217,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -294,10 +302,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -382,10 +394,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -451,10 +467,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -523,10 +543,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -596,10 +620,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -706,10 +734,14 @@ using System.Text;
              [DataItemAttributeFieldName("EsDefault","EsDefault")]
              public Boolean EsDefault { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -780,10 +812,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -853,10 +889,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -930,88 +970,19 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
 				
 			} //Class RelacionMonedaSucursal 
-} //namespace Permaquim.Depositario.Entities.Tables.Directorio
-		namespace Permaquim.Depositario.Entities.Tables.Directorio {
-			[Serializable()]                         //
-			[DataItemAttributeSchemaName("Directorio")]  // Database Schema Name
-			[DataItemAttributeObjectName("RolFuncion","RolFuncion")]    // Object name  and alias in Database
-			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class RolFuncion : IDataItem
-			{
-				        
-				public class ColumnNames
-				{
-					public const string Id = "Id";
-					public const string FuncionId = "FuncionId";
-					public const string RolId = "RolId";
-					public const string Descripcion = "Descripcion";
-					public const string Habilitado = "Habilitado";
-					public const string UsuarioCreacion = "UsuarioCreacion";
-					public const string FechaCreacion = "FechaCreacion";
-					public const string UsuarioModificacion = "UsuarioModificacion";
-					public const string FechaModificacion = "FechaModificacion";
-				}
-				public enum FieldEnum : int
-                {
-					Id,
-					FuncionId,
-					RolId,
-					Descripcion,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-	               /// <summary>
-                /// Parameterless Constructor
-	               /// <summary>
-                public RolFuncion()
-                {
-                }
-                public  RolFuncion(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-                {
-                    this.Id = Id;
-                    this.FuncionId = FuncionId;
-                    this.RolId = RolId;
-                    this.Descripcion = Descripcion;
-                    this.Habilitado = Habilitado;
-                    this.UsuarioCreacion = UsuarioCreacion;
-                    this.FechaCreacion = FechaCreacion;
-                    this.UsuarioModificacion = UsuarioModificacion;
-                    this.FechaModificacion = FechaModificacion;
-                }
-             [DataItemAttributeFieldName("Id","Id")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
-             public Int16 Id { get; set; }
-             [DataItemAttributeFieldName("FuncionId","FuncionId")]
-             public Int64 FuncionId { get; set; }
-             [DataItemAttributeFieldName("RolId","RolId")]
-             public Int64 RolId { get; set; }
-             [DataItemAttributeFieldName("Descripcion","Descripcion")]
-             public String Descripcion { get; set; }
-             [DataItemAttributeFieldName("Habilitado","Habilitado")]
-             public Boolean Habilitado { get; set; }
-             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             public Int64 UsuarioCreacion { get; set; }
-             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
-             public DateTime FechaCreacion { get; set; }
-             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64? UsuarioModificacion { get; set; }
-             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime? FechaModificacion { get; set; }
-				
-			} //Class RolFuncion 
 } //namespace Permaquim.Depositario.Entities.Tables.Directorio
 		namespace Permaquim.Depositario.Entities.Tables.Directorio {
 			[Serializable()]                         //
@@ -1079,10 +1050,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1177,10 +1152,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1251,10 +1230,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1342,10 +1325,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1433,10 +1420,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1510,10 +1501,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1603,10 +1598,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1725,10 +1724,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -1982,10 +1985,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2054,10 +2061,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2123,10 +2134,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2199,10 +2214,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2273,10 +2292,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2394,10 +2417,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2565,10 +2592,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2634,10 +2665,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2722,10 +2757,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2791,10 +2830,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2872,10 +2915,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -2953,10 +3000,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3032,10 +3083,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3113,10 +3168,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3187,10 +3246,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3258,10 +3321,14 @@ using System.Text;
              [PropertyAttributeForeignKeyObjectName("Sesion")]// Object name in Database
              public Int64 SesionId { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3344,10 +3411,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3409,6 +3480,8 @@ using System.Text;
              [DataItemAttributeFieldName("SesionId","SesionId")]
              public Int64? SesionId { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
              public Int64 DepositarioId { get; set; }
              [DataItemAttributeFieldName("Mensaje","Mensaje")]
              public String Mensaje { get; set; }
@@ -3536,10 +3609,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3610,10 +3687,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3679,10 +3760,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -3704,6 +3789,7 @@ using System.Text;
 					public const string DepositarioId = "DepositarioId";
 					public const string SectorId = "SectorId";
 					public const string SucursalId = "SucursalId";
+					public const string MonedaId = "MonedaId";
 					public const string UsuarioId = "UsuarioId";
 					public const string UsuarioCuentaId = "UsuarioCuentaId";
 					public const string ContenedorId = "ContenedorId";
@@ -3722,6 +3808,7 @@ using System.Text;
 					DepositarioId,
 					SectorId,
 					SucursalId,
+					MonedaId,
 					UsuarioId,
 					UsuarioCuentaId,
 					ContenedorId,
@@ -3739,13 +3826,14 @@ using System.Text;
                 public Transaccion()
                 {
                 }
-                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada)
+                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
                     this.DepositarioId = DepositarioId;
                     this.SectorId = SectorId;
                     this.SucursalId = SucursalId;
+                    this.MonedaId = MonedaId;
                     this.UsuarioId = UsuarioId;
                     this.UsuarioCuentaId = UsuarioCuentaId;
                     this.ContenedorId = ContenedorId;
@@ -3777,6 +3865,10 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Sucursal")]// Object name in Database
              public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
+             public Int64 MonedaId { get; set; }
              [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
              public Int64 UsuarioId { get; set; }
              [DataItemAttributeFieldName("UsuarioCuentaId","UsuarioCuentaId")]
@@ -3929,6 +4021,7 @@ using System.Text;
 					public const string SobreId = "SobreId";
 					public const string RelacionMonedaTipoValorId = "RelacionMonedaTipoValorId";
 					public const string CantidadDeclarada = "CantidadDeclarada";
+					public const string ValorDeclarado = "ValorDeclarado";
 					public const string Fecha = "Fecha";
 				}
 				public enum FieldEnum : int
@@ -3937,6 +4030,7 @@ using System.Text;
 					SobreId,
 					RelacionMonedaTipoValorId,
 					CantidadDeclarada,
+					ValorDeclarado,
 					Fecha
 				}
 	               /// <summary>
@@ -3945,12 +4039,13 @@ using System.Text;
                 public TransaccionSobreDetalle()
                 {
                 }
-                public  TransaccionSobreDetalle(Int64 SobreId,Int64 RelacionMonedaTipoValorId,Int64 CantidadDeclarada,DateTime Fecha)
+                public  TransaccionSobreDetalle(Int64 SobreId,Int64 RelacionMonedaTipoValorId,Int64 CantidadDeclarada,Double ValorDeclarado,DateTime Fecha)
                 {
                     this.Id = Id;
                     this.SobreId = SobreId;
                     this.RelacionMonedaTipoValorId = RelacionMonedaTipoValorId;
                     this.CantidadDeclarada = CantidadDeclarada;
+                    this.ValorDeclarado = ValorDeclarado;
                     this.Fecha = Fecha;
                 }
              [DataItemAttributeFieldName("Id","Id")]
@@ -3967,6 +4062,8 @@ using System.Text;
              public Int64 RelacionMonedaTipoValorId { get; set; }
              [DataItemAttributeFieldName("CantidadDeclarada","CantidadDeclarada")]
              public Int64 CantidadDeclarada { get; set; }
+             [DataItemAttributeFieldName("ValorDeclarado","ValorDeclarado")]
+             public Double ValorDeclarado { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
              public DateTime Fecha { get; set; }
 				
@@ -4067,10 +4164,14 @@ using System.Text;
              [DataItemAttributeFieldName("Observaciones","Observaciones")]
              public String Observaciones { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4137,10 +4238,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4211,10 +4316,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4291,10 +4400,14 @@ using System.Text;
              [DataItemAttributeFieldName("LargoMaximo","LargoMaximo")]
              public Int32 LargoMaximo { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4367,10 +4480,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4438,10 +4555,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4511,10 +4632,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4599,10 +4724,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4694,10 +4823,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4770,10 +4903,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4794,6 +4931,10 @@ using System.Text;
 					public const string FuncionId = "FuncionId";
 					public const string RolId = "RolId";
 					public const string Descripcion = "Descripcion";
+					public const string PuedeAgregar = "PuedeAgregar";
+					public const string PuedeModificar = "PuedeModificar";
+					public const string PuedeEliminar = "PuedeEliminar";
+					public const string PuedeVisualizar = "PuedeVisualizar";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -4806,6 +4947,10 @@ using System.Text;
 					FuncionId,
 					RolId,
 					Descripcion,
+					PuedeAgregar,
+					PuedeModificar,
+					PuedeEliminar,
+					PuedeVisualizar,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -4818,12 +4963,16 @@ using System.Text;
                 public RolFuncion()
                 {
                 }
-                public  RolFuncion(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  RolFuncion(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean PuedeAgregar,Boolean PuedeModificar,Boolean PuedeEliminar,Boolean PuedeVisualizar,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.FuncionId = FuncionId;
                     this.RolId = RolId;
                     this.Descripcion = Descripcion;
+                    this.PuedeAgregar = PuedeAgregar;
+                    this.PuedeModificar = PuedeModificar;
+                    this.PuedeEliminar = PuedeEliminar;
+                    this.PuedeVisualizar = PuedeVisualizar;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -4835,18 +4984,34 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
              public Int16 Id { get; set; }
              [DataItemAttributeFieldName("FuncionId","FuncionId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Funcion")]// Object name in Database
              public Int64 FuncionId { get; set; }
              [DataItemAttributeFieldName("RolId","RolId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Rol")]// Object name in Database
              public Int64 RolId { get; set; }
              [DataItemAttributeFieldName("Descripcion","Descripcion")]
              public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("PuedeAgregar","PuedeAgregar")]
+             public Boolean PuedeAgregar { get; set; }
+             [DataItemAttributeFieldName("PuedeModificar","PuedeModificar")]
+             public Boolean PuedeModificar { get; set; }
+             [DataItemAttributeFieldName("PuedeEliminar","PuedeEliminar")]
+             public Boolean PuedeEliminar { get; set; }
+             [DataItemAttributeFieldName("PuedeVisualizar","PuedeVisualizar")]
+             public Boolean PuedeVisualizar { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4912,10 +5077,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -4981,10 +5150,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -5050,10 +5223,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -5185,10 +5362,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -5264,10 +5445,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -5332,10 +5517,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -5462,10 +5651,14 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -5580,16 +5773,16 @@ using System.Text;
 		namespace Permaquim.Depositario.Entities.Tables.Turno {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
-			[DataItemAttributeObjectName("Agenda","Agenda")]    // Object name  and alias in Database
+			[DataItemAttributeObjectName("AgendaTurno","AgendaTurno")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class Agenda : IDataItem
+			public class AgendaTurno : IDataItem
 			{
 				        
 				public class ColumnNames
 				{
 					public const string Id = "Id";
 					public const string Nombre = "Nombre";
-					public const string EsquemaDetalleId = "EsquemaDetalleId";
+					public const string EsquemaDetalleTurnoId = "EsquemaDetalleTurnoId";
 					public const string Fecha = "Fecha";
 					public const string SectorId = "SectorId";
 					public const string Secuencia = "Secuencia";
@@ -5603,7 +5796,7 @@ using System.Text;
                 {
 					Id,
 					Nombre,
-					EsquemaDetalleId,
+					EsquemaDetalleTurnoId,
 					Fecha,
 					SectorId,
 					Secuencia,
@@ -5616,14 +5809,14 @@ using System.Text;
 	               /// <summary>
                 /// Parameterless Constructor
 	               /// <summary>
-                public Agenda()
+                public AgendaTurno()
                 {
                 }
-                public  Agenda(Int64 Id,String Nombre,Int64 EsquemaDetalleId,DateTime Fecha,Int64 SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
+                public  AgendaTurno(String Nombre,Int64 EsquemaDetalleTurnoId,DateTime Fecha,Int64 SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
-                    this.EsquemaDetalleId = EsquemaDetalleId;
+                    this.EsquemaDetalleTurnoId = EsquemaDetalleTurnoId;
                     this.Fecha = Fecha;
                     this.SectorId = SectorId;
                     this.Secuencia = Secuencia;
@@ -5635,14 +5828,15 @@ using System.Text;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
              public Int64 Id { get; set; }
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
-             [DataItemAttributeFieldName("EsquemaDetalleId","EsquemaDetalleId")]
+             [DataItemAttributeFieldName("EsquemaDetalleTurnoId","EsquemaDetalleTurnoId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("EsquemaDetalle")]// Object name in Database
-             public Int64 EsquemaDetalleId { get; set; }
+             [PropertyAttributeForeignKeyObjectName("EsquemaDetalleTurno")]// Object name in Database
+             public Int64 EsquemaDetalleTurnoId { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
              public DateTime Fecha { get; set; }
              [DataItemAttributeFieldName("SectorId","SectorId")]
@@ -5652,83 +5846,28 @@ using System.Text;
              [DataItemAttributeFieldName("Secuencia","Secuencia")]
              public Int32 Secuencia { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
 				
-			} //Class Agenda 
+			} //Class AgendaTurno 
 } //namespace Permaquim.Depositario.Entities.Tables.Turno
 		namespace Permaquim.Depositario.Entities.Tables.Turno {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
-			[DataItemAttributeObjectName("Esquema","Esquema")]    // Object name  and alias in Database
+			[DataItemAttributeObjectName("EsquemaDetalleTurno","EsquemaDetalleTurno")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class Esquema : IDataItem
-			{
-				        
-				public class ColumnNames
-				{
-					public const string Id = "Id";
-					public const string Nombre = "Nombre";
-					public const string UsuarioCreacion = "UsuarioCreacion";
-					public const string FechaCreacion = "FechaCreacion";
-					public const string UsuarioModificacion = "UsuarioModificacion";
-					public const string FechaModificacion = "FechaModificacion";
-				}
-				public enum FieldEnum : int
-                {
-					Id,
-					Nombre,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-	               /// <summary>
-                /// Parameterless Constructor
-	               /// <summary>
-                public Esquema()
-                {
-                }
-                public  Esquema(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-                {
-                    this.Id = Id;
-                    this.Nombre = Nombre;
-                    this.UsuarioCreacion = UsuarioCreacion;
-                    this.FechaCreacion = FechaCreacion;
-                    this.UsuarioModificacion = UsuarioModificacion;
-                    this.FechaModificacion = FechaModificacion;
-                }
-             [DataItemAttributeFieldName("Id","Id")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
-             public Int64 Id { get; set; }
-             [DataItemAttributeFieldName("Nombre","Nombre")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
-             public String Nombre { get; set; }
-             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             public Int64 UsuarioCreacion { get; set; }
-             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
-             public DateTime FechaCreacion { get; set; }
-             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64? UsuarioModificacion { get; set; }
-             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime? FechaModificacion { get; set; }
-				
-			} //Class Esquema 
-} //namespace Permaquim.Depositario.Entities.Tables.Turno
-		namespace Permaquim.Depositario.Entities.Tables.Turno {
-			[Serializable()]                         //
-			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
-			[DataItemAttributeObjectName("EsquemaDetalle","EsquemaDetalle")]    // Object name  and alias in Database
-			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class EsquemaDetalle : IDataItem
+			public class EsquemaDetalleTurno : IDataItem
 			{
 				        
 				public class ColumnNames
@@ -5756,10 +5895,10 @@ using System.Text;
 	               /// <summary>
                 /// Parameterless Constructor
 	               /// <summary>
-                public EsquemaDetalle()
+                public EsquemaDetalleTurno()
                 {
                 }
-                public  EsquemaDetalle(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  EsquemaDetalleTurno(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EsquemaTurnoId = EsquemaTurnoId;
@@ -5775,6 +5914,8 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
              public Int64 Id { get; set; }
              [DataItemAttributeFieldName("EsquemaTurnoId","EsquemaTurnoId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("EsquemaTurno")]// Object name in Database
              public Int64 EsquemaTurnoId { get; set; }
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
@@ -5782,15 +5923,82 @@ using System.Text;
              [DataItemAttributeFieldName("Secuencia","Secuencia")]
              public Int32 Secuencia { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
 				
-			} //Class EsquemaDetalle 
+			} //Class EsquemaDetalleTurno 
+} //namespace Permaquim.Depositario.Entities.Tables.Turno
+		namespace Permaquim.Depositario.Entities.Tables.Turno {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
+			[DataItemAttributeObjectName("EsquemaTurno","EsquemaTurno")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class EsquemaTurno : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string Nombre = "Nombre";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					Nombre,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public EsquemaTurno()
+                {
+                }
+                public  EsquemaTurno(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.Nombre = Nombre;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64? UsuarioModificacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+				
+			} //Class EsquemaTurno 
 } //namespace Permaquim.Depositario.Entities.Tables.Turno
 		namespace Permaquim.Depositario.Entities.Tables.Valor {
 			[Serializable()]                         //
@@ -5880,10 +6088,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -5964,10 +6176,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -6031,10 +6247,14 @@ using System.Text;
              [PropertyAttributeForeignKeyObjectName("Tipo")]// Object name in Database
              public Int64 TipoValorId { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -6105,10 +6325,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -6181,10 +6405,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -6251,10 +6479,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
@@ -6325,10 +6557,14 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }

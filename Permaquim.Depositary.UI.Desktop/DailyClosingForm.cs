@@ -51,6 +51,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
+            DatabaseController.CloseCurrentDay();
+
             AppController.OpenChildForm(new OtherOperationsForm(), _device);
             this.Close();
         }

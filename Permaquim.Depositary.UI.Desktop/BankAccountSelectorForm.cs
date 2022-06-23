@@ -1,5 +1,6 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Builders;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -57,7 +58,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildStandardButton(
-                "BackButton", MultilanguangeController.GetText("Salir"), MainPanel.Width);
+                "BackButton", MultilanguageConstants.SALIR, MainPanel.Width);
 
 
             this.MainPanel.Controls.Add(backButton);
