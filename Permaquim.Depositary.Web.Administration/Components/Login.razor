@@ -38,34 +38,39 @@
 @code
 {
     private LoginForm loginForm = new LoginForm();
-    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+    private List<Entities.TextoLenguaje> dataLenguaje;
 
     //Datasets
-    private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario dataUsuario = new DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario();
-    private List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> dataUsuarioRol = new List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
+    private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? dataUsuario = new();
+    private DepositarioAdminWeb.Entities.Tables.Seguridad.Rol? usuarioRol = new();
     private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+    private List<Entities.FuncionMenu> dataFuncionesMenues = new();
 
     protected async void LoginUser()
     {
         dataUsuario = SeguridadController.ObtenerUsuario(loginForm.Username, loginForm.Password);
-        if (dataUsuario.NickName == null)
+        if (dataUsuario == null)
         {
             //Si no encontro usuario cargamos los textos default.
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(-1);
-            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave == "GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_INCORRECT_USERORPASSWORD" || x.Clave == "GENERIC").FirstOrDefault().Texto, Duration = 3000 });
+            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), Duration = 3000 });
         }
         else
         {
-            dataUsuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+            usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
             dataEsquemaDetalle = EstiloController.ObtenerEsquemaDetalles(dataUsuario.Id);
-            if (dataUsuarioRol.Count < 1)
+            if (usuarioRol == null)
             {
-                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR" || x.Clave == "GENERIC").FirstOrDefault().Texto, Detail = dataLenguaje.Where(x => x.Clave == "LOGIN_ERROR_NOROLES" || x.Clave == "GENERIC").FirstOrDefault().Texto, Duration = 3000 });
+                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_NOROLES", dataLenguaje), Duration = 3000 });
             }
             else
             {
+                //Si se encontro un rol buscamos todos los menues y funciones que puede acceder con ese rol
+                dataFuncionesMenues = SeguridadController.ObtenerFuncionesMenues(usuarioRol.Id);
+
                 await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
+                await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
                 await sessionStorage.SetItemAsync("Nickname", dataUsuario.NickName);
                 await sessionStorage.SetItemAsync("NombreUsuario", dataUsuario.Nombre);
                 await sessionStorage.SetItemAsync("ApellidoUsuario", dataUsuario.Apellido);
@@ -73,6 +78,7 @@
                 await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
                 await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
                 await sessionStorage.SetItemAsync("DataEsquemaDetalle", dataEsquemaDetalle);
+                await sessionStorage.SetItemAsync("DataFuncionesMenues", dataFuncionesMenues);
 
                 //SessionStorageManager.SetUsuarioId(dataUsuario.Id);
                 //SessionStorageManager.SetNickName(dataUsuario.NickName);
@@ -81,7 +87,7 @@
                 //SessionStorageManager.SetLenguajeId(dataUsuario.LenguajeId);
                 //SessionStorageManager.SetDataLenguaje(dataLenguaje);
 
-                NavManager.NavigateTo("Monitor", true);
+                NavManager.NavigateTo("Dashboard", true);
             }
         }
     }

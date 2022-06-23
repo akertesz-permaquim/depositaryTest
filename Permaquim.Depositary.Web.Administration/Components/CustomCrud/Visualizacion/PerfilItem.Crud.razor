@@ -18,21 +18,21 @@ else
         case CrudMode.Add:
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                 <ChildContent>
-                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_A_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                    <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_TITLE",dataLenguaje)  @MultilenguajeController.ObtenerTextoPorClave("PERFILITEM",dataLenguaje) </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
         case CrudMode.Delete:
             <RadzenBadge BadgeStyle="BadgeStyle.Warning">
                 <ChildContent>
-                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_D_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto? </h4>
+                    <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_TITLE",dataLenguaje)  @MultilenguajeController.ObtenerTextoPorClave("PERFILITEM",dataLenguaje)? </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
         case CrudMode.Edit:
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                 <ChildContent>
-                    <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_M_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                    <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_TITLE",dataLenguaje)  @MultilenguajeController.ObtenerTextoPorClave("PERFILITEM",dataLenguaje) </h4>
                 </ChildContent>
             </RadzenBadge>
             break;
@@ -40,7 +40,7 @@ else
             <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                 <ChildContent>
                     <div>
-                        <h4 style="color:white;">@dataLenguaje.Where(x => x.Clave == "ABM_L_TITLE" || x.Clave=="GENERIC").FirstOrDefault().Texto  @dataLenguaje.Where(x => x.Clave == "PERFILITEM" || x.Clave=="GENERIC").FirstOrDefault().Texto </h4>
+                        <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_TITLE",dataLenguaje)  @MultilenguajeController.ObtenerTextoPorClave("PERFILITEM",dataLenguaje) </h4>
                     </div>
                 </ChildContent>
             </RadzenBadge>
@@ -57,7 +57,7 @@ else
             <Columns>
                 <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                     <HeaderTemplate>
-                        <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text=@dataLenguaje.Where(x => x.Clave == "NEW_BUTTON" || x.Clave == "GENERIC").FirstOrDefault().Texto Click="Add">
+                        <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
                         </RadzenButton>
                     </HeaderTemplate>
                     <Template Context="element">
@@ -67,8 +67,8 @@ else
                         </RadzenButton>
                     </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="Id" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Title=@dataLenguaje.Where(x => x.Clave == "PERFILID" || x.Clave=="GENERIC").FirstOrDefault().Texto Property="PerfilId" Width="100px">
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Title=@MultilenguajeController.ObtenerTextoPorClave("PERFILID",dataLenguaje) Property="PerfilId" Width="100px">
                     <Template>
                         @if (Perfil_entities.FirstOrDefault(c => c.Id == @context.PerfilId) != null)
                         {
@@ -82,7 +82,7 @@ else
                         }
                     </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="IdTablaReferencia" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "IDTABLAREFERENCIA" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="IdTablaReferencia" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("IDTABLAREFERENCIA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                     <Template>
                         @if (dataPerfilTablaReferencia.FirstOrDefault(c => c.Id == @context.IdTablaReferencia) != null)
                         {
@@ -96,19 +96,19 @@ else
                         }
                     </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="Habilitado" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                     <Template Context="data">
                         <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                         </RadzenCheckBox>
                     </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="UsuarioCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="UsuarioCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="FechaCreacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="UsuarioModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="UsuarioModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="FechaModificacion" Filterable="false" Title=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave=="GENERIC").FirstOrDefault().Texto Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Visualizacion.PerfilItem" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>
@@ -121,7 +121,7 @@ else
             <ChildContent>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "ID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Id" style="width: 100%">
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                         </RadzenLabel>
                     </div>
                     <div class="col-md-9">
@@ -131,7 +131,7 @@ else
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "PERFILID" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="PerfilId" style="width: 100%">
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PERFILID",dataLenguaje) Component="PerfilId" style="width: 100%">
                         </RadzenLabel>
                     </div>
                     <div class="col-md-9">
@@ -142,7 +142,7 @@ else
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "IDTABLAREFERENCIA" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="IdTablaReferencia" style="width: 100%">
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("IDTABLAREFERENCIA",dataLenguaje) Component="IdTablaReferencia" style="width: 100%">
                         </RadzenLabel>
                     </div>
                     <div class="col-md-9">
@@ -153,7 +153,7 @@ else
                 </div>
                 <div style=" margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "HABILITADO" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                     </div>
                     <div class="col-md-9">
                         <RadzenCheckBox @bind-Value=@PerfilItem_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @PerfilItem_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
@@ -163,7 +163,7 @@ else
                 {
                     <div style="margin-bottom: 1rem" class="row">
                         <div class="col-md-3">
-                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOCREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioCreacion" style="width: 100%">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Component="UsuarioCreacion" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col-md-9">
@@ -176,7 +176,7 @@ else
                 {
                     <div style="margin-bottom: 1rem" class="row">
                         <div class="col-md-3">
-                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHACREACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaCreacion" style="width: 100%">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Component="FechaCreacion" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col-md-9">
@@ -189,7 +189,7 @@ else
                 {
                     <div style="margin-bottom: 1rem" class="row">
                         <div class="col-md-3">
-                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "USUARIOMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="UsuarioModificacion" style="width: 100%">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Component="UsuarioModificacion" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col-md-9">
@@ -202,7 +202,7 @@ else
                 {
                     <div style="margin-bottom: 1rem" class="row">
                         <div class="col-md-3">
-                            <RadzenLabel Text=@dataLenguaje.Where(x => x.Clave == "FECHAMODIFICACION" || x.Clave == "GENERIC").FirstOrDefault().Texto Component="FechaModificacion" style="width: 100%">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Component="FechaModificacion" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col-md-9">
@@ -213,9 +213,9 @@ else
                 }
                 <div class="row">
                     <div class="col offset-sm-3">
-                        <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@dataLenguaje.Where(x => x.Clave == "ACCEPT_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto ButtonStyle="ButtonStyle.Primary">
+                        <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
                         </RadzenButton>
-                        <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@dataLenguaje.Where(x => x.Clave == "CANCEL_BUTTON" || x.Clave=="GENERIC").FirstOrDefault().Texto Click="Cancel">
+                        <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
                         </RadzenButton>
                     </div>
                 </div>
@@ -247,7 +247,7 @@ else
     /// <summary>
     /// Variables to multilanguaje
     /// </summary>
-    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+    private List<Entities.TextoLenguaje> dataLenguaje;
 
     /// <summary>
     /// Variables to handle Relation between PerfilItem.PerfilId and Perfil.Id
@@ -272,7 +272,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
 
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);

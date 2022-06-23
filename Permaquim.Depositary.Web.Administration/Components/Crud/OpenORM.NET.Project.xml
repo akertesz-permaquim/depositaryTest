@@ -18,7 +18,7 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=NB000101</ConnectionString>
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews>
     <string>Valor.VistaDenominacion</string>
   </SelectedViews>
@@ -59,7 +59,6 @@
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.IdentificadorUsuario</string>
-    <string>Directorio.RolFuncion</string>
     <string>Directorio.Sector</string>
     <string>Directorio.TipoIdentificador</string>
     <string>Dispositivo.ComandoContadora</string>
@@ -104,8 +103,6 @@
     <string>Turno.Agenda</string>
     <string>Turno.Esquema</string>
     <string>Turno.EsquemaDetalle</string>
-    <string>Valor.Denominacion</string>
-    <string>Valor.Moneda</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
   </SelectedTables>

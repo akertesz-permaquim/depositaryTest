@@ -39,7 +39,7 @@
 
     //Datasets
     private List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> dataRolesUsuario = new List<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
-    private List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> dataLenguaje;
+    private List<Entities.TextoLenguaje> dataLenguaje;
 
     //Variables para controles
     private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario> gridTransacciones = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Seguridad.ObtenerRolesPorUsuario>();
@@ -51,7 +51,7 @@
     {
         if (firstRender)
         {
-            dataLenguaje = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+            dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
             userId = await sessionStorage.GetItemAsync<Int64?>("Id");
             if (userId == null)
                 NavManager.NavigateTo("login", true);

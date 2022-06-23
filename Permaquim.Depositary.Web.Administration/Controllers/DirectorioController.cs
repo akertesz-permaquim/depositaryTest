@@ -15,17 +15,19 @@
 
             if (oRelacionMonedaSucursal.Result.Count > 0)
             {
-                moneda.Id = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.Id;
-                moneda.Nombre = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.Nombre;
-                moneda.Simbolo = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.Simbolo;
-                moneda.Codigo = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.Codigo;
-                moneda.Habilitado = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.Habilitado;
-                moneda.IndiceEnContadora = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.IndiceEnContadora;
-                moneda.PaisId = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.PaisId;
-                moneda.UsuarioCreacion = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.UsuarioCreacion.ToString();
-                moneda.UsuarioModificacion = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.UsuarioModificacion.ToString();
-                moneda.FechaModificacion = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.FechaModificacion;
-                moneda.FechaCreacion = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId.FechaCreacion;
+                var entidadMoneda = oRelacionMonedaSucursal.Result.FirstOrDefault().MonedaId;
+                moneda.Id = entidadMoneda.Id;
+                moneda.Nombre = entidadMoneda.Nombre;
+                moneda.Simbolo = entidadMoneda.Simbolo;
+                moneda.Codigo = entidadMoneda.Codigo;
+                moneda.Habilitado = entidadMoneda.Habilitado;
+                moneda.IndiceEnContadora = entidadMoneda.IndiceEnContadora;
+                moneda.PaisId = entidadMoneda.PaisId;
+                //TODO revisar FK usuario
+                moneda.UsuarioCreacion = entidadMoneda.UsuarioCreacion.ToString();
+                moneda.UsuarioModificacion = entidadMoneda.UsuarioModificacion.ToString();
+                moneda.FechaModificacion = entidadMoneda.FechaModificacion;
+                moneda.FechaCreacion = entidadMoneda.FechaCreacion;
             }
 
             return moneda;

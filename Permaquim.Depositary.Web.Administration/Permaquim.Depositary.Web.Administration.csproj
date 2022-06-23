@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Components\Crud\Estilo\EsquemaDetalleValor.Crud.razor" />
+    <Content Remove="Components\UserRolViewer.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,24 +16,23 @@
     <PackageReference Include="Radzen.Blazor" Version="3.18.12" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\CustomCrud\Estilo\" />
-    <Folder Include="Components\CustomCrud\Visualizacion\" />
-    <Folder Include="Components\CustomCrud\Regionalizacion\" />
     <Folder Include="Dal\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Components\Crud\Banca\Banco.Crud.razor" />
     <None Include="Components\Crud\Banca\Cuenta.Crud.razor" />
+    <None Include="Components\Crud\Banca\TipoCuenta.Crud.razor" />
     <None Include="Components\Crud\Banca\UsuarioCuenta.Crud.razor" />
     <None Include="Components\Crud\Directorio\Empresa.Crud.razor" />
     <None Include="Components\Crud\Directorio\Grupo.Crud.razor" />
     <None Include="Components\Crud\Directorio\IdentificadorUsuario.Crud.razor" />
-    <None Include="Components\Crud\Directorio\RolFuncion.Crud.razor" />
     <None Include="Components\Crud\Directorio\Sector.Crud.razor" />
+    <None Include="Components\Crud\Directorio\Sucursal.Crud.razor" />
     <None Include="Components\Crud\Directorio\TipoIdentificador.Crud.razor" />
     <None Include="Components\Crud\Dispositivo\ComandoContadora.Crud.razor" />
     <None Include="Components\Crud\Dispositivo\ComandoPlaca.Crud.razor" />
@@ -47,7 +46,7 @@
     <None Include="Components\Crud\Dispositivo\TipoConfiguracionDepositario.Crud.razor" />
     <None Include="Components\Crud\Dispositivo\TipoContadora.Crud.razor" />
     <None Include="Components\Crud\Dispositivo\TipoPlaca.Crud.razor" />
-    <None Include="Components\Crud\Estilo\Esquema.Crud.razor" />
+    <None Include="Components\Crud\Estilo\TipoEsquemaDetalle.Crud.razor" />
     <None Include="Components\Crud\Geografia\Ciudad.Crud.razor" />
     <None Include="Components\Crud\Geografia\CodigoPostal.Crud.razor" />
     <None Include="Components\Crud\Geografia\Pais.Crud.razor" />
@@ -64,6 +63,7 @@
     <None Include="Components\Crud\Seguridad\AplicacionParametroValor.Crud.razor" />
     <None Include="Components\Crud\Seguridad\Funcion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\Menu.Crud.razor" />
+    <None Include="Components\Crud\Seguridad\Rol.Crud.razor" />
     <None Include="Components\Crud\Seguridad\RolFuncion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\TipoAplicacion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\TipoFuncion.Crud.razor" />
@@ -76,12 +76,19 @@
     <None Include="Components\Crud\Turno\Agenda.Crud.razor" />
     <None Include="Components\Crud\Turno\Esquema.Crud.razor" />
     <None Include="Components\Crud\Turno\EsquemaDetalle.Crud.razor" />
-    <None Include="Components\Crud\Valor\Moneda.Crud.razor" />
     <None Include="Components\Crud\Valor\RelacionMonedaTipoValor.Crud.razor" />
     <None Include="Components\Crud\Valor\Tipo.Crud.razor" />
-    <None Include="Components\Crud\Visualizacion\Perfil.Crud.razor" />
-    <None Include="Components\Crud\Visualizacion\PerfilItem.Crud.razor" />
+    <None Include="Components\Crud\Valor\VistaDenominacion.View.razor" />
+    <None Include="Components\CustomCrud\Directorio\RelacionMonedaSucursal.Crud.razor" />
     <None Include="Components\CustomCrud\Directorio\Sucursal.Crud.razor" />
+    <None Include="Components\CustomCrud\Estilo\Esquema.Crud.razor" />
+    <None Include="Components\CustomCrud\Estilo\EsquemaDetalle.Crud.razor" />
+    <None Include="Components\CustomCrud\Regionalizacion\Lenguaje.Crud.razor" />
+    <None Include="Components\CustomCrud\Regionalizacion\LenguajeItem.Crud.razor" />
+    <None Include="Components\CustomCrud\Valor\Denominacion.Crud.razor" />
+    <None Include="Components\CustomCrud\Valor\Moneda.Crud.razor" />
+    <None Include="Components\CustomCrud\Visualizacion\Perfil.Crud.razor" />
+    <None Include="Components\CustomCrud\Visualizacion\PerfilItem.Crud.razor" />
   </ItemGroup>
 
 </Project>

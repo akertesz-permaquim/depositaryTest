@@ -61,12 +61,12 @@ using System.Text;
          /// <param name='Clave'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Aplicacion.Configuracion</returns>
-			public Entities.Relations.Aplicacion.Configuracion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Aplicacion.Configuracion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Clave,String Valor,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Aplicacion.Configuracion)base.Add(new Entities.Relations.Aplicacion.Configuracion(AplicacionId,Clave,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -679,12 +679,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Auditoria.TipoLog</returns>
-			public Entities.Relations.Auditoria.TipoLog Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Auditoria.TipoLog Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Auditoria.TipoLog)base.Add(new Entities.Relations.Auditoria.TipoLog(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -976,12 +976,12 @@ using System.Text;
          /// <param name='Codigo'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Banca.Banco</returns>
-			public Entities.Relations.Banca.Banco Add(String Nombre,String Descripcion,String Codigo,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.Banco Add(String Nombre,String Descripcion,String Codigo,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Banca.Banco)base.Add(new Entities.Relations.Banca.Banco(Nombre,Descripcion,Codigo,PaisId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -1305,12 +1305,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Banca.Banco BancoId'></param>
          /// <param name='SucursalBancaria'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Banca.Cuenta</returns>
-			public Entities.Relations.Banca.Cuenta Add(DepositarioAdminWeb.Entities.Relations.Banca.TipoCuenta TipoId,String Nombre,String Numero,DepositarioAdminWeb.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.Cuenta Add(DepositarioAdminWeb.Entities.Relations.Banca.TipoCuenta TipoId,String Nombre,String Numero,DepositarioAdminWeb.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Banca.Cuenta)base.Add(new Entities.Relations.Banca.Cuenta(TipoId,Nombre,Numero,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -1643,12 +1643,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Banca.TipoCuenta</returns>
-			public Entities.Relations.Banca.TipoCuenta Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.TipoCuenta Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Banca.TipoCuenta)base.Add(new Entities.Relations.Banca.TipoCuenta(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -1933,15 +1933,15 @@ using System.Text;
          /// <summary>
          /// UsuarioCuenta Add Method
          /// </summary>
-         /// <param name='UsuarioId'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioId'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Banca.Cuenta CuentaId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Banca.UsuarioCuenta</returns>
-			public Entities.Relations.Banca.UsuarioCuenta Add(Int64 UsuarioId,DepositarioAdminWeb.Entities.Relations.Banca.Cuenta CuentaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.UsuarioCuenta Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioId,DepositarioAdminWeb.Entities.Relations.Banca.Cuenta CuentaId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Banca.UsuarioCuenta)base.Add(new Entities.Relations.Banca.UsuarioCuenta(UsuarioId,CuentaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2231,12 +2231,12 @@ using System.Text;
          /// <param name='Dedo'></param>
          /// <param name='Huella'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Biometria.HuellaDactilar</returns>
-			public Entities.Relations.Biometria.HuellaDactilar Add(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Biometria.HuellaDactilar Add(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Biometria.HuellaDactilar)base.Add(new Entities.Relations.Biometria.HuellaDactilar(UsuarioId,Dedo,Huella,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2553,12 +2553,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId'></param>
          /// <param name='Habilitado'></param>
          /// <param name='EsDefault'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Empresa</returns>
-			public Entities.Relations.Directorio.Empresa Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,DepositarioAdminWeb.Entities.Relations.Estilo.Esquema EstiloEsquemaId,DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Empresa Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,DepositarioAdminWeb.Entities.Relations.Estilo.Esquema EstiloEsquemaId,DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Empresa)base.Add(new Entities.Relations.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,LenguajeId,Habilitado,EsDefault,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2953,12 +2953,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Grupo</returns>
-			public Entities.Relations.Directorio.Grupo Add(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Grupo Add(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Grupo)base.Add(new Entities.Relations.Directorio.Grupo(Nombre,Descripcion,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3263,12 +3263,12 @@ using System.Text;
          /// <param name='UsuarioId'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.IdentificadorUsuario</returns>
-			public Entities.Relations.Directorio.IdentificadorUsuario Add(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.IdentificadorUsuario Add(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.IdentificadorUsuario)base.Add(new Entities.Relations.Directorio.IdentificadorUsuario(TipoId,UsuarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3573,12 +3573,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId'></param>
          /// <param name='EsDefault'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.RelacionMonedaSucursal</returns>
-			public Entities.Relations.Directorio.RelacionMonedaSucursal Add(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,Boolean EsDefault,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.RelacionMonedaSucursal Add(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,Boolean EsDefault,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.RelacionMonedaSucursal)base.Add(new Entities.Relations.Directorio.RelacionMonedaSucursal(MonedaId,SucursalId,EsDefault,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3828,316 +3828,6 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class RolFuncion : RelationsDataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					FuncionId,
-					RolId,
-					Descripcion,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-			   protected List<Entities.Relations.Directorio.RolFuncion> _cacheItemList = new List<Entities.Relations.Directorio.RolFuncion>();
-			   protected List<Entities.Relations.Directorio.RolFuncion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
-            public RolFuncion() : base()
-            {
-                base._dataItem = new Entities.Relations.Directorio.RolFuncion();
-                Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
-            }
-            public class CustomAggregateParameter : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Relations.Directorio.RolFuncion item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// RolFuncion Add Method
-         /// </summary>
-         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId'></param>
-         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId'></param>
-         /// <param name='Descripcion'></param>
-         /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
-         /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
-         /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Relations.Directorio.RolFuncion</returns>
-			public Entities.Relations.Directorio.RolFuncion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
-			{
-			  return (Entities.Relations.Directorio.RolFuncion)base.Add(new Entities.Relations.Directorio.RolFuncion(FuncionId,RolId,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
-			}
-            public new List<Entities.Relations.Directorio.RolFuncion> Items()
-            {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                _entities = dh.Items().Cast<Entities.Relations.Directorio.RolFuncion>().ToList<Entities.Relations.Directorio.RolFuncion>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Relations.Directorio.RolFuncion items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Directorio.RolFuncion> Items(Int16 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets items with all fields
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="FuncionId"></param>
-            /// <param name="RolId"></param>
-            /// <param name="Descripcion"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Directorio.RolFuncion> Items(Int16? Id,Int64? FuncionId,Int64? RolId,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-            {
-                this.Where.whereParameter.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (FuncionId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FuncionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FuncionId);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FuncionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FuncionId);
-                    }
-                   
-                }
-                if (RolId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RolId);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, RolId);
-                    }
-                   
-                }
-                if (Descripcion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
-                    }
-                   
-                }
-                if (Habilitado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                   
-                }
-                if (UsuarioCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                   
-                }
-                if (FechaCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                   
-                }
-                if (UsuarioModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                   
-                }
-                if (FechaModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            public List<Entities.Relations.Directorio.RolFuncion> Result 
-            {
-                get { return _entities; }
-            }
-            public Entities.Relations.Directorio.RolFuncion Add(Entities.Relations.Directorio.RolFuncion item)
-            {
-                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
-                return (Entities.Relations.Directorio.RolFuncion)base.Add((IDataItem)item);
-            }
-            public Int64 Update(Entities.Relations.Directorio.RolFuncion item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            public Int64 Delete(Entities.Relations.Directorio.RolFuncion item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Relations.Directorio.RolFuncion with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="FuncionId"></param>
-            /// <param name="RolId"></param>
-            /// <param name="Descripcion"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int16 Id,Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
-            {
-                 Entities.Tables.Directorio.RolFuncion item = new Entities.Tables.Directorio.RolFuncion();
-                 item.Id = Id;
-                 item.FuncionId = FuncionId;
-                 item.RolId = RolId;
-                 item.Descripcion = Descripcion;
-                 item.Habilitado = Habilitado;
-                 item.UsuarioCreacion = UsuarioCreacion;
-                 item.FechaCreacion = FechaCreacion;
-                 item.UsuarioModificacion = UsuarioModificacion;
-                 item.FechaModificacion = FechaModificacion;
-
-                return base.Update((IDataItem)item);
-            }
-            public class CustomWhereParameter : WhereParameter {
-                 internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Clear()
-                 {
-                     this.whereParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.whereParameter.Count;
-                     }
-                 }
-            }
-            public class CustomOrderByParameter : OrderByParameter {
-                 internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
-                 {
-                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-            }
-            public class CustomGroupByParameter : GroupByParameter {
-                 internal GroupByParameter groupByParameter = new GroupByParameter();
-                 public void Add(ColumnEnum column)
-                 {
-                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-            }
-        } // class RolFuncion
-	} //namespace DepositarioAdminWeb.Business.Relations.Directorio
-	namespace DepositarioAdminWeb.Business.Relations.Directorio {
-	    /// <summary>
-	    /// 
-	    /// </summary>
 		public class Sector : RelationsDataHandler
 		{
 				public enum ColumnEnum : int
@@ -4193,12 +3883,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Sector</returns>
-			public Entities.Relations.Directorio.Sector Add(DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Sector Add(DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Sector)base.Add(new Entities.Relations.Directorio.Sector(SucursalId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -4511,12 +4201,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Geografia.CodigoPostal CodigoPostalId'></param>
          /// <param name='ZonaId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Sucursal</returns>
-			public Entities.Relations.Directorio.Sucursal Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,String CodigoExterno,String Direccion,DepositarioAdminWeb.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Int64 ZonaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Sucursal Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,String CodigoExterno,String Direccion,DepositarioAdminWeb.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Int64 ZonaId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Sucursal)base.Add(new Entities.Relations.Directorio.Sucursal(Nombre,Descripcion,EmpresaId,CodigoExterno,Direccion,CodigoPostalId,ZonaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -4881,12 +4571,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Mascara'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.TipoIdentificador</returns>
-			public Entities.Relations.Directorio.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.TipoIdentificador)base.Add(new Entities.Relations.Directorio.TipoIdentificador(Nombre,Descripcion,Mascara,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5197,12 +4887,12 @@ using System.Text;
          /// <param name='TiempoDetencion'></param>
          /// <param name='Respuesta'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.ComandoContadora</returns>
-			public Entities.Relations.Dispositivo.ComandoContadora Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.ComandoContadora Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.ComandoContadora)base.Add(new Entities.Relations.Dispositivo.ComandoContadora(ContadoraId,Nombre,Descripcion,Comando,TiempoDetencion,Respuesta,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5558,12 +5248,12 @@ using System.Text;
          /// <param name='TiempoDetencion'></param>
          /// <param name='Respuesta'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.ComandoPlaca</returns>
-			public Entities.Relations.Dispositivo.ComandoPlaca Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.ComandoPlaca Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.ComandoPlaca)base.Add(new Entities.Relations.Dispositivo.ComandoPlaca(TipoPlacaId,Nombre,Descripcion,Comando,TiempoDetencion,Respuesta,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5913,12 +5603,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.ConfiguracionDepositario</returns>
-			public Entities.Relations.Dispositivo.ConfiguracionDepositario Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoConfiguracionDepositario TipoId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.ConfiguracionDepositario Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoConfiguracionDepositario TipoId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.ConfiguracionDepositario)base.Add(new Entities.Relations.Dispositivo.ConfiguracionDepositario(TipoId,DepositarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -6229,12 +5919,12 @@ using System.Text;
          /// <param name='CodigoExterno'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Depositario</returns>
-			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.Depositario)base.Add(new Entities.Relations.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -6602,12 +6292,12 @@ using System.Text;
          /// <param name='BaudRate'></param>
          /// <param name='RtsEnable'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.DepositarioContadora</returns>
-			public Entities.Relations.Dispositivo.DepositarioContadora Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.DepositarioContadora Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoContadora ContadoraId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.DepositarioContadora)base.Add(new Entities.Relations.Dispositivo.DepositarioContadora(ContadoraId,DepositarioId,NumeroSerie,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -7444,12 +7134,12 @@ using System.Text;
          /// <param name='SensorL'></param>
          /// <param name='BitSensorL'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.DepositarioPlaca</returns>
-			public Entities.Relations.Dispositivo.DepositarioPlaca Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca PlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.DepositarioPlaca Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.TipoPlaca PlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.DepositarioPlaca)base.Add(new Entities.Relations.Dispositivo.DepositarioPlaca(DepositarioId,PlacaId,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,SensorA,BitSensorA,SensorB,BitSensorB,SensorC,BitSensorC,SensorD,BitSensorD,SensorL,BitSensorL,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -8022,12 +7712,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Valor.Moneda ValorId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.DepositarioValor</returns>
-			public Entities.Relations.Dispositivo.DepositarioValor Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda ValorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.DepositarioValor Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda ValorId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.DepositarioValor)base.Add(new Entities.Relations.Dispositivo.DepositarioValor(DepositarioId,ValorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -8315,12 +8005,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Marca</returns>
-			public Entities.Relations.Dispositivo.Marca Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Marca Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.Marca)base.Add(new Entities.Relations.Dispositivo.Marca(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -8610,12 +8300,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Modelo</returns>
-			public Entities.Relations.Dispositivo.Modelo Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Modelo Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.Modelo)base.Add(new Entities.Relations.Dispositivo.Modelo(MarcaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -8920,12 +8610,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.TipoConfiguracionDepositario</returns>
-			public Entities.Relations.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.TipoConfiguracionDepositario)base.Add(new Entities.Relations.Dispositivo.TipoConfiguracionDepositario(Clave,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9248,12 +8938,12 @@ using System.Text;
          /// <param name='BaudRate'></param>
          /// <param name='RtsEnable'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.TipoContadora</returns>
-			public Entities.Relations.Dispositivo.TipoContadora Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.TipoContadora Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.TipoContadora)base.Add(new Entities.Relations.Dispositivo.TipoContadora(ModeloId,Nombre,Descripcion,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9731,12 +9421,12 @@ using System.Text;
          /// <param name='SensorL'></param>
          /// <param name='BitSensorL'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.TipoPlaca</returns>
-			public Entities.Relations.Dispositivo.TipoPlaca Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.TipoPlaca Add(DepositarioAdminWeb.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.TipoPlaca)base.Add(new Entities.Relations.Dispositivo.TipoPlaca(ModeloId,Nombre,Descripcion,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,SensorA,BitSensorA,SensorB,BitSensorB,SensorC,BitSensorC,SensorD,BitSensorD,SensorL,BitSensorL,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10324,12 +10014,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Estilo.Esquema</returns>
-			public Entities.Relations.Estilo.Esquema Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Estilo.Esquema Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Estilo.Esquema)base.Add(new Entities.Relations.Estilo.Esquema(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10623,12 +10313,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Estilo.EsquemaDetalle</returns>
-			public Entities.Relations.Estilo.EsquemaDetalle Add(DepositarioAdminWeb.Entities.Relations.Estilo.Esquema EsquemaId,DepositarioAdminWeb.Entities.Relations.Estilo.TipoEsquemaDetalle TipoEsquemaDetalleId,String Nombre,String Descripcion,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Estilo.EsquemaDetalle Add(DepositarioAdminWeb.Entities.Relations.Estilo.Esquema EsquemaId,DepositarioAdminWeb.Entities.Relations.Estilo.TipoEsquemaDetalle TipoEsquemaDetalleId,String Nombre,String Descripcion,String Valor,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Estilo.EsquemaDetalle)base.Add(new Entities.Relations.Estilo.EsquemaDetalle(EsquemaId,TipoEsquemaDetalleId,Nombre,Descripcion,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10961,12 +10651,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Estilo.TipoEsquemaDetalle</returns>
-			public Entities.Relations.Estilo.TipoEsquemaDetalle Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Estilo.TipoEsquemaDetalle Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Estilo.TipoEsquemaDetalle)base.Add(new Entities.Relations.Estilo.TipoEsquemaDetalle(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -11258,12 +10948,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Geografia.Provincia ProvinciaId'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.Ciudad</returns>
-			public Entities.Relations.Geografia.Ciudad Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Provincia ProvinciaId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Ciudad Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Provincia ProvinciaId,String CodigoExterno,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.Ciudad)base.Add(new Entities.Relations.Geografia.Ciudad(Nombre,Descripcion,ProvinciaId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -11585,12 +11275,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Geografia.Ciudad CiudadId'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.CodigoPostal</returns>
-			public Entities.Relations.Geografia.CodigoPostal Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Ciudad CiudadId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.CodigoPostal Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Ciudad CiudadId,String CodigoExterno,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.CodigoPostal)base.Add(new Entities.Relations.Geografia.CodigoPostal(Nombre,Descripcion,CiudadId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -11912,12 +11602,12 @@ using System.Text;
          /// <param name='Codigo'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.Pais</returns>
-			public Entities.Relations.Geografia.Pais Add(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Pais Add(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.Pais)base.Add(new Entities.Relations.Geografia.Pais(Nombre,Descripcion,Codigo,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12239,12 +11929,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.Provincia</returns>
-			public Entities.Relations.Geografia.Provincia Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Provincia Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Geografia.Pais PaisId,String CodigoExterno,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.Provincia)base.Add(new Entities.Relations.Geografia.Provincia(Nombre,Descripcion,PaisId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12564,12 +12254,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Codigo'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.Zona</returns>
-			public Entities.Relations.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.Zona)base.Add(new Entities.Relations.Geografia.Zona(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12872,12 +12562,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Fecha'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Operacion.Sesion SesionId'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.CierreDiario</returns>
-			public Entities.Relations.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Operacion.Sesion SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Operacion.Sesion SesionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.CierreDiario)base.Add(new Entities.Relations.Operacion.CierreDiario(Nombre,Fecha,SesionId,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -13171,12 +12861,12 @@ using System.Text;
          /// <param name='FechaApertura'></param>
          /// <param name='FechaCierre'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.Contenedor</returns>
-			public Entities.Relations.Operacion.Contenedor Add(String Nombre,DepositarioAdminWeb.Entities.Relations.Operacion.TipoContenedor TipoId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.Contenedor Add(String Nombre,DepositarioAdminWeb.Entities.Relations.Operacion.TipoContenedor TipoId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.Contenedor)base.Add(new Entities.Relations.Operacion.Contenedor(Nombre,TipoId,Identificador,FechaApertura,FechaCierre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -13507,12 +13197,12 @@ using System.Text;
          /// </summary>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Operacion.TipoEvento TipoId'></param>
          /// <param name='SesionId'></param>
-         /// <param name='DepositarioId'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
          /// <param name='Mensaje'></param>
          /// <param name='Valor'></param>
          /// <param name='Fecha'></param>
          /// <returns>Entities.Relations.Operacion.Evento</returns>
-			public Entities.Relations.Operacion.Evento Add(DepositarioAdminWeb.Entities.Relations.Operacion.TipoEvento TipoId,Int64 SesionId,Int64 DepositarioId,String Mensaje,String Valor,DateTime Fecha) 
+			public Entities.Relations.Operacion.Evento Add(DepositarioAdminWeb.Entities.Relations.Operacion.TipoEvento TipoId,Int64 SesionId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,String Mensaje,String Valor,DateTime Fecha) 
 			{
 			  return (Entities.Relations.Operacion.Evento)base.Add(new Entities.Relations.Operacion.Evento(TipoId,SesionId,DepositarioId,Mensaje,Valor,Fecha));
 			}
@@ -14029,12 +13719,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Capacidad'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.TipoContenedor</returns>
-			public Entities.Relations.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.TipoContenedor)base.Add(new Entities.Relations.Operacion.TipoContenedor(Nombre,Descripcion,Capacidad,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14339,12 +14029,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='EsBloqueante'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.TipoEvento</returns>
-			public Entities.Relations.Operacion.TipoEvento Add(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TipoEvento Add(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.TipoEvento)base.Add(new Entities.Relations.Operacion.TipoEvento(Nombre,Descripcion,EsBloqueante,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14647,12 +14337,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.TipoTransaccion</returns>
-			public Entities.Relations.Operacion.TipoTransaccion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TipoTransaccion Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.TipoTransaccion)base.Add(new Entities.Relations.Operacion.TipoTransaccion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -16074,13 +15764,13 @@ using System.Text;
          /// <param name='Secuencia'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Operacion.CierreDiario CierreDiarioId'></param>
          /// <param name='Observaciones'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Operacion.Turno</returns>
-			public Entities.Relations.Operacion.Turno Add(Int64 TurnoDepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Operacion.CierreDiario CierreDiarioId,String Observaciones,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Operacion.Turno Add(Int64 TurnoDepositarioId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Operacion.CierreDiario CierreDiarioId,String Observaciones,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Operacion.Turno)base.Add(new Entities.Relations.Operacion.Turno(TurnoDepositarioId,DepositarioId,SectorId,FechaApertura,FechaCierre,Fecha,Secuencia,CierreDiarioId,Observaciones,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -16473,12 +16163,12 @@ using System.Text;
          /// <param name='UsuarioId'></param>
          /// <param name='TurnoId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.TurnoUsuario</returns>
-			public Entities.Relations.Operacion.TurnoUsuario Add(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TurnoUsuario Add(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.TurnoUsuario)base.Add(new Entities.Relations.Operacion.TurnoUsuario(UsuarioId,TurnoId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -16768,12 +16458,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='EsDefault'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Regionalizacion.Lenguaje</returns>
-			public Entities.Relations.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,Boolean EsDefault,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,Boolean EsDefault,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Regionalizacion.Lenguaje)base.Add(new Entities.Relations.Regionalizacion.Lenguaje(Nombre,Descripcion,EsDefault,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -17080,12 +16770,12 @@ using System.Text;
          /// <param name='Texto'></param>
          /// <param name='Habilitado'></param>
          /// <param name='LargoMaximo'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Regionalizacion.LenguajeItem</returns>
-			public Entities.Relations.Regionalizacion.LenguajeItem Add(DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int32 LargoMaximo,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Regionalizacion.LenguajeItem Add(DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int32 LargoMaximo,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Regionalizacion.LenguajeItem)base.Add(new Entities.Relations.Regionalizacion.LenguajeItem(LenguajeId,Clave,Texto,Habilitado,LargoMaximo,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -17405,12 +17095,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Aplicacion</returns>
-			public Entities.Relations.Seguridad.Aplicacion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoAplicacion TipoId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Aplicacion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoAplicacion TipoId,String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.Aplicacion)base.Add(new Entities.Relations.Seguridad.Aplicacion(TipoId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -17713,12 +17403,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.AplicacionParametro</returns>
-			public Entities.Relations.Seguridad.AplicacionParametro Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.AplicacionParametro Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.AplicacionParametro)base.Add(new Entities.Relations.Seguridad.AplicacionParametro(AplicacionId,Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -18008,12 +17698,12 @@ using System.Text;
          /// <param name='ParametroId'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.AplicacionParametroValor</returns>
-			public Entities.Relations.Seguridad.AplicacionParametroValor Add(Int64 AplicacionId,Int64 ParametroId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.AplicacionParametroValor Add(Int64 AplicacionId,Int64 ParametroId,String Valor,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.AplicacionParametroValor)base.Add(new Entities.Relations.Seguridad.AplicacionParametroValor(AplicacionId,ParametroId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -18322,12 +18012,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Referencia'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Funcion</returns>
-			public Entities.Relations.Seguridad.Funcion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.TipoFuncion TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Funcion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.TipoFuncion TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.Funcion)base.Add(new Entities.Relations.Seguridad.Funcion(AplicacionId,TipoId,Nombre,Descripcion,Referencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -18668,12 +18358,12 @@ using System.Text;
          /// <param name='Imagen'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Menu DependeDe'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Menu</returns>
-			public Entities.Relations.Seguridad.Menu Add(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,DepositarioAdminWeb.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Menu Add(DepositarioAdminWeb.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,DepositarioAdminWeb.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.Menu)base.Add(new Entities.Relations.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19023,12 +18713,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Rol DependeDe'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Rol</returns>
-			public Entities.Relations.Seguridad.Rol Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Rol Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.Rol)base.Add(new Entities.Relations.Seguridad.Rol(Nombre,Descripcion,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19286,6 +18976,10 @@ using System.Text;
 					FuncionId,
 					RolId,
 					Descripcion,
+					PuedeAgregar,
+					PuedeModificar,
+					PuedeEliminar,
+					PuedeVisualizar,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -19329,18 +19023,22 @@ using System.Text;
          /// <summary>
          /// RolFuncion Add Method
          /// </summary>
-         /// <param name='FuncionId'></param>
-         /// <param name='RolId'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='PuedeAgregar'></param>
+         /// <param name='PuedeModificar'></param>
+         /// <param name='PuedeEliminar'></param>
+         /// <param name='PuedeVisualizar'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.RolFuncion</returns>
-			public Entities.Relations.Seguridad.RolFuncion Add(Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.RolFuncion Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Funcion FuncionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,String Descripcion,Boolean PuedeAgregar,Boolean PuedeModificar,Boolean PuedeEliminar,Boolean PuedeVisualizar,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Seguridad.RolFuncion)base.Add(new Entities.Relations.Seguridad.RolFuncion(FuncionId,RolId,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Seguridad.RolFuncion)base.Add(new Entities.Relations.Seguridad.RolFuncion(FuncionId,RolId,Descripcion,PuedeAgregar,PuedeModificar,PuedeEliminar,PuedeVisualizar,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Seguridad.RolFuncion> Items()
             {
@@ -19376,13 +19074,17 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="RolId"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="PuedeAgregar"></param>
+            /// <param name="PuedeModificar"></param>
+            /// <param name="PuedeEliminar"></param>
+            /// <param name="PuedeVisualizar"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.RolFuncion> Items(Int16? Id,Int64? FuncionId,Int64? RolId,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Seguridad.RolFuncion> Items(Int16? Id,Int64? FuncionId,Int64? RolId,String Descripcion,Boolean? PuedeAgregar,Boolean? PuedeModificar,Boolean? PuedeEliminar,Boolean? PuedeVisualizar,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -19430,6 +19132,54 @@ using System.Text;
                     else
                     {
                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (PuedeAgregar != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PuedeAgregar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeAgregar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PuedeAgregar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeAgregar);
+                    }
+                   
+                }
+                if (PuedeModificar != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PuedeModificar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeModificar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PuedeModificar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeModificar);
+                    }
+                   
+                }
+                if (PuedeEliminar != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PuedeEliminar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeEliminar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PuedeEliminar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeEliminar);
+                    }
+                   
+                }
+                if (PuedeVisualizar != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PuedeVisualizar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeVisualizar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PuedeVisualizar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, PuedeVisualizar);
                     }
                    
                 }
@@ -19518,19 +19268,27 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="RolId"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="PuedeAgregar"></param>
+            /// <param name="PuedeModificar"></param>
+            /// <param name="PuedeEliminar"></param>
+            /// <param name="PuedeVisualizar"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int16 Id,Int64 FuncionId,Int64 RolId,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int16 Id,Int64 FuncionId,Int64 RolId,String Descripcion,Boolean PuedeAgregar,Boolean PuedeModificar,Boolean PuedeEliminar,Boolean PuedeVisualizar,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Seguridad.RolFuncion item = new Entities.Tables.Seguridad.RolFuncion();
                  item.Id = Id;
                  item.FuncionId = FuncionId;
                  item.RolId = RolId;
                  item.Descripcion = Descripcion;
+                 item.PuedeAgregar = PuedeAgregar;
+                 item.PuedeModificar = PuedeModificar;
+                 item.PuedeEliminar = PuedeEliminar;
+                 item.PuedeVisualizar = PuedeVisualizar;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -19641,12 +19399,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.TipoAplicacion</returns>
-			public Entities.Relations.Seguridad.TipoAplicacion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.TipoAplicacion Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.TipoAplicacion)base.Add(new Entities.Relations.Seguridad.TipoAplicacion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19934,12 +19692,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.TipoFuncion</returns>
-			public Entities.Relations.Seguridad.TipoFuncion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.TipoFuncion Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.TipoFuncion)base.Add(new Entities.Relations.Seguridad.TipoFuncion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -20227,12 +19985,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.TipoMenu</returns>
-			public Entities.Relations.Seguridad.TipoMenu Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.TipoMenu Add(String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.TipoMenu)base.Add(new Entities.Relations.Seguridad.TipoMenu(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -20544,12 +20302,12 @@ using System.Text;
          /// <param name='FechaUltimoLogin'></param>
          /// <param name='DebeCambiarPassword'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Usuario</returns>
-			public Entities.Relations.Seguridad.Usuario Add(DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,DepositarioAdminWeb.Entities.Relations.Visualizacion.Perfil PerfilId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Usuario Add(DepositarioAdminWeb.Entities.Relations.Directorio.Empresa EmpresaId,DepositarioAdminWeb.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,DepositarioAdminWeb.Entities.Relations.Visualizacion.Perfil PerfilId,String Nombre,String Apellido,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.Usuario)base.Add(new Entities.Relations.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -21019,12 +20777,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.UsuarioRol</returns>
-			public Entities.Relations.Seguridad.UsuarioRol Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioId,DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.UsuarioRol Add(DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioId,DepositarioAdminWeb.Entities.Relations.Seguridad.Aplicacion AplicacionId,DepositarioAdminWeb.Entities.Relations.Seguridad.Rol RolId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.UsuarioRol)base.Add(new Entities.Relations.Seguridad.UsuarioRol(UsuarioId,AplicacionId,RolId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -21327,12 +21085,12 @@ using System.Text;
          /// <param name='UsuarioId'></param>
          /// <param name='SectorId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.UsuarioSector</returns>
-			public Entities.Relations.Seguridad.UsuarioSector Add(Int64 UsuarioId,Int64 SectorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.UsuarioSector Add(Int64 UsuarioId,Int64 SectorId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.UsuarioSector)base.Add(new Entities.Relations.Seguridad.UsuarioSector(UsuarioId,SectorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -21910,13 +21668,13 @@ using System.Text;
          /// Entidad Add Method
          /// </summary>
          /// <param name='Nombre'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Sincronizacion.Entidad</returns>
-			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Sincronizacion.Entidad)base.Add(new Entities.Relations.Sincronizacion.Entidad(Nombre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -22662,13 +22420,13 @@ using System.Text;
          /// <param name='Fecha'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId'></param>
          /// <param name='Secuencia'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Turno.Agenda</returns>
-			public Entities.Relations.Turno.Agenda Add(Int64 Id,String Nombre,DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Turno.Agenda Add(Int64 Id,String Nombre,DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Turno.Agenda)base.Add(new Entities.Relations.Turno.Agenda(Id,Nombre,EsquemaDetalleId,Fecha,SectorId,Secuencia,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -23563,12 +23321,12 @@ using System.Text;
          /// <param name='CodigoCcTalk'></param>
          /// <param name='Posicion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Valor.Denominacion</returns>
-			public Entities.Relations.Valor.Denominacion Add(String Nombre,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Denominacion Add(String Nombre,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Valor.Denominacion)base.Add(new Entities.Relations.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Posicion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -23937,12 +23695,12 @@ using System.Text;
          /// <param name='Simbolo'></param>
          /// <param name='IndiceEnContadora'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Valor.Moneda</returns>
-			public Entities.Relations.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,String Simbolo,Int32 IndiceEnContadora,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,String Simbolo,Int32 IndiceEnContadora,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Valor.Moneda)base.Add(new Entities.Relations.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,IndiceEnContadora,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -24273,12 +24031,12 @@ using System.Text;
          /// </summary>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Valor.RelacionMonedaTipoValor</returns>
-			public Entities.Relations.Valor.RelacionMonedaTipoValor Add(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.RelacionMonedaTipoValor Add(DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,DepositarioAdminWeb.Entities.Relations.Valor.Tipo TipoValorId,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Valor.RelacionMonedaTipoValor)base.Add(new Entities.Relations.Valor.RelacionMonedaTipoValor(MonedaId,TipoValorId,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -24505,6 +24263,7 @@ using System.Text;
 					Id,
 					Nombre,
 					Descripcion,
+					Imagen,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -24550,15 +24309,16 @@ using System.Text;
          /// </summary>
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='Imagen'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Valor.Tipo</returns>
-			public Entities.Relations.Valor.Tipo Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Tipo Add(String Nombre,String Descripcion,String Imagen,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Valor.Tipo)base.Add(new Entities.Relations.Valor.Tipo(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Valor.Tipo)base.Add(new Entities.Relations.Valor.Tipo(Nombre,Descripcion,Imagen,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Valor.Tipo> Items()
             {
@@ -24593,13 +24353,14 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Imagen"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.Tipo> Items(Int64? Id,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Valor.Tipo> Items(Int64? Id,String Nombre,String Descripcion,String Imagen,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -24635,6 +24396,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Imagen != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Imagen, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Imagen, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Imagen);
                     }
                    
                 }
@@ -24722,18 +24495,20 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Imagen"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Valor.Tipo item = new Entities.Tables.Valor.Tipo();
                  item.Id = Id;
                  item.Nombre = Nombre;
                  item.Descripcion = Descripcion;
+                 item.Imagen = Imagen;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -24846,12 +24621,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='DepositarioAdminWeb.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Visualizacion.Perfil</returns>
-			public Entities.Relations.Visualizacion.Perfil Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Visualizacion.Perfil Add(String Nombre,String Descripcion,DepositarioAdminWeb.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Visualizacion.Perfil)base.Add(new Entities.Relations.Visualizacion.Perfil(Nombre,Descripcion,PerfilTipoId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -25154,12 +24929,12 @@ using System.Text;
          /// <param name='DepositarioAdminWeb.Entities.Relations.Visualizacion.Perfil PerfilId'></param>
          /// <param name='IdTablaReferencia'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Visualizacion.PerfilItem</returns>
-			public Entities.Relations.Visualizacion.PerfilItem Add(DepositarioAdminWeb.Entities.Relations.Visualizacion.Perfil PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Visualizacion.PerfilItem Add(DepositarioAdminWeb.Entities.Relations.Visualizacion.Perfil PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Visualizacion.PerfilItem)base.Add(new Entities.Relations.Visualizacion.PerfilItem(PerfilId,IdTablaReferencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -25449,12 +25224,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='EsAdministrador'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Visualizacion.PerfilTipo</returns>
-			public Entities.Relations.Visualizacion.PerfilTipo Add(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Visualizacion.PerfilTipo Add(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Visualizacion.PerfilTipo)base.Add(new Entities.Relations.Visualizacion.PerfilTipo(Nombre,Descripcion,EsAdministrador,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}

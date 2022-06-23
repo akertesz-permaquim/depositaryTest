@@ -1,11 +1,18 @@
-﻿namespace Permaquim.Depositary.Web.Administration.Entities
+﻿namespace Permaquim.Depositary.Web.Administration.TransaccionEntities
 {
-    public class TransaccionDepositarioMonedaDefault
+    public enum TipoTransaccion
     {
-        public Int64 DepositarioId { get; set; }
-        public Int64 TransaccionId { get; set; }
-        public double TotalAValidar { get; set; }
-        public double TotalValidado { get; set; }
-        public Int64 MonedaId { get; set; }
+        DepositoBillete = 1,
+        DepositoMoneda = 2,
+        DepositoSobre = 3,
+        RetiroValores = 7
+    }
+    public enum TipoEvento
+    {
+        AperturaPuerta = 0,
+        CambioContenedor = 1,
+        AlarmaContenedorMalUbicado = 5,
+        AlarmaExclusa = 6,
+        FueraServicio = 7
     }
 }
