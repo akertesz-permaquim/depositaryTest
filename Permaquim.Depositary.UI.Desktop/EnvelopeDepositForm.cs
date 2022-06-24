@@ -120,6 +120,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in DatabaseController.GetEnvelopeValues())
             {
                 byte[] bytes = Convert.FromBase64String(item.TipoValorId.Imagen
+               .Replace("data:image/png;base64,", String.Empty)
                .Replace("data:image/jpeg;base64,", String.Empty)
                .Replace("data:image/webp;base64,", String.Empty));
 
@@ -442,19 +443,16 @@ namespace Permaquim.Depositary.UI.Desktop
             Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transactionenvelopeDetails = new();
             foreach (var item in _envelopeDepositItems)
             {
-                if (item.Id > -1)
+                if (item.Id > -1 && item.Amount > 0)
                 {
                     Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle transactionEnvelopeDetail = new()
                     {
-                        
                         CantidadDeclarada = item.Quantity,
                         RelacionMonedaTipoValorId = item.Id,
                         ValorDeclarado = item.Amount,
                         Fecha = DateTime.Now,
                         SobreId = transactionEnvelope.Id
-                       
-
-                    };
+                     };
 
                     transaction.TotalAValidar += item.Amount;
                     transactionenvelopeDetails.Add(transactionEnvelopeDetail);

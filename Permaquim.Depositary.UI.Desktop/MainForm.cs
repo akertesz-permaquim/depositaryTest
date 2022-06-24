@@ -252,7 +252,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void LogoPictureBox_Click(object sender, EventArgs e)
         {
-            closingcombination += 1;
+            closingcombination = 1;
         }
 
         private void AvatarPicturebox_Click(object sender, EventArgs e)
@@ -263,7 +263,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void DateTimeLabel_Click(object sender, EventArgs e)
         {
             closingcombination += 1;
-            if (closingcombination == 3)
+            if (closingcombination == 4)
                 Application.Exit();
         }
     }

@@ -14,6 +14,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         public Device _device { get; set; }
 
+        private bool _depositing = false;
         /// <summary>
         /// Máquina de estado
         /// </summary>
@@ -83,7 +84,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
 
-             CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
+            CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
             SubtotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
             DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
                 StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
@@ -114,9 +115,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     ProcessDeviceStatus();
                 }
             }
- 
-
-        }
+         }
         public bool EsMultiplo(int numero,int multiplo)
         {
             if (numero % multiplo == 0)
