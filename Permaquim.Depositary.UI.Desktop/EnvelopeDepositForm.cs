@@ -21,9 +21,6 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         public Device _device { get; set; }
 
-
-
-
         private SelectedEditElementEnum _selectedEditElement;
 
         private List<EnvelopeDepositItem> _envelopeDepositItems = new();
@@ -54,6 +51,7 @@ namespace Permaquim.Depositary.UI.Desktop
             InitializeComponent();
             LoadStyles();
             CenterPanel();
+            TimeOutController.Reset();
         }
         private void CenterPanel()
         {
@@ -66,7 +64,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
 
             Button_0.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
             Button_1.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
@@ -80,14 +78,28 @@ namespace Permaquim.Depositary.UI.Desktop
             Button_9.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
             Button_Dot.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
             Button_BackSpace.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
-            CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
-            SubtotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
+
+            CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
+            CurrencyLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            SubtotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
+            SubtotalLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            RemainingTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
+            RemainingTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
 
             EnvelopeTextBox.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
 
+            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
 
-            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
 
+        }
+        private void LoadLanguageItems()
+        { 
             ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText("ACCEPT_BUTTON");
             CancelDepositButton.Text = MultilanguangeController.GetText("CANCEL_BUTTON");
             BackButton.Text = MultilanguangeController.GetText("EXIT_BUTTON");
@@ -96,8 +108,10 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText("DENOMINACION");
             DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText("CANTIDAD");
             DenominationsGridView.Columns["Amount"].HeaderText = MultilanguangeController.GetText("IMPORTE");
+
         }
-        private void EnvelopeDepositForm_Load(object sender, EventArgs e)
+
+            private void EnvelopeDepositForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -110,13 +124,24 @@ namespace Permaquim.Depositary.UI.Desktop
             _operationStatus = new();
 
 
-            LoadDenominations();
+           
 
             CurrencyLabel.Text = DatabaseController.CurrentCurrency.Nombre;
         }
+        private void EnvelopeDepositForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
+            if (this.Visible)
+            {
+                LoadDenominations();
+                LoadLanguageItems();
+            }
+        }
         public void LoadDenominations()
         {
-            
+
+            _envelopeDepositItems = new();
+
             foreach (var item in DatabaseController.GetEnvelopeValues())
             {
                 byte[] bytes = Convert.FromBase64String(item.TipoValorId.Imagen
@@ -131,12 +156,13 @@ namespace Permaquim.Depositary.UI.Desktop
                     Quantity = 0,
                     Amount = 0,
                     Id = item.Id,
-                }); 
+                });
             }
+
             // Row Totales
             _envelopeDepositItems.Add(new EnvelopeDepositItem()
             {
-                Image = null,
+                Image = StyleController.GetCellStyleBitmap(),
                 Denomination = "Total",
                 Quantity = 0,
                 Amount = 0,
@@ -144,13 +170,19 @@ namespace Permaquim.Depositary.UI.Desktop
             });
 
             DenominationsGridView.DataSource = _envelopeDepositItems;
-            UpdateTotals();
-
-
+            SetTotalRowStyle();
+            SetTotals();
         }
 
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                AppController.HideInstance(this);
+            }
+            EvaluateTimeout();
 
             // Asigna a la máquina el valor del estado de la contadora en este ciclo
             if (_device.CounterConnected)
@@ -173,15 +205,18 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
 
-            UpdateTotals();
+            SetTotals();
         }
 
-        private void UpdateTotals()
+        private void SetTotalRowStyle()
         {
-            try
+            if (DenominationsGridView.Rows.Count > 0)
             {
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.BackColor = Color.SteelBlue;
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.ForeColor = Color.White;
+                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.BackColor =
+                      StyleController.GetColor(Enumerations.ColorNameEnum.PieGrilla);
+                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.ForeColor =
+                    StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
                 DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
 
                 for (int i = 2; i < DenominationsGridView.Columns.Count; i++)
@@ -190,24 +225,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     DenominationsGridView.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
                 }
-                SumValues();
+
                 DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Selected = true;
+       
             }
-            catch (Exception)
-            {
-            }
+            SetTotals();
 
         }
-
-        private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.ColumnIndex == 4 && e.RowIndex == DenominationsGridView.Rows.Count - 1)
-            {
-                e.PaintBackground(e.ClipBounds, true);
-                e.Handled = true;
-            }
-        }
-
 
         private void DenominationsGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -216,7 +240,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 e.Handled = true;
             }
         }
-        private void SumValues()
+        private void SetTotals()
         {
             _totalQuantity = 0;
             _totalAmount = 0;
@@ -289,8 +313,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     {
                         _device.RemoteCancel();
                         _pollingTimer.Enabled = false;
-                        this.Close();
-                        AppController.OpenChildForm(new OperationForm(), _device);
+                        AppController.OpenChildForm(this,new OperationForm(), _device);
                     }
                     break;
                 case ModeStateInformation.Mode.NormalErrorRecoveryMode:
@@ -481,12 +504,12 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (_device.CounterConnected)
                 _device.RemoteCancel();
-            _pollingTimer.Enabled = false;
-            AppController.OpenChildForm(new OperationForm(), _device);
+            AppController.OpenChildForm(this,new OperationForm(), _device);
         }
 
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             _device.OpenEscrow();
             _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
 
@@ -495,6 +518,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Number Keyboard buttons
         private void Keys(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
 
             if (_selectedEditElement == SelectedEditElementEnum.Cell)
             {
@@ -530,7 +554,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     DenominationsGridView.Invalidate();
                     DenominationsGridView.ClearSelection();
                 }
-                SumValues();
+                SetTotals();
             }
             if (_selectedEditElement == SelectedEditElementEnum.EnvelopeCode)
             {
@@ -561,6 +585,23 @@ namespace Permaquim.Depositary.UI.Desktop
         private void DenominationsGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             System.Diagnostics.Debug.Print(e.ToString());
+        }
+        private void EvaluateTimeout()
+        {
+
+            RemainingTimeLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.TIEMPO_RESTANTE) +
+                TimeOutController.GetRemainingtime().ToString();
+            if (TimeOutController.GetRemainingtime() > 10)
+                RemainingTimeLabel.ForeColor = Color.Green;
+            if (TimeOutController.GetRemainingtime() < 10)
+                RemainingTimeLabel.ForeColor = Color.Yellow;
+            if (TimeOutController.GetRemainingtime() < 5)
+                RemainingTimeLabel.ForeColor = Color.Red;
+        }
+
+        private void RemainingTimeLabel_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

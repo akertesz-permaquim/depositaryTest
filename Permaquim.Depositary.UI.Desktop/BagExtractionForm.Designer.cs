@@ -185,6 +185,7 @@
             this.NumberPanel.Name = "NumberPanel";
             this.NumberPanel.Size = new System.Drawing.Size(336, 128);
             this.NumberPanel.TabIndex = 175;
+            this.NumberPanel.Visible = false;
             // 
             // Button_3
             // 

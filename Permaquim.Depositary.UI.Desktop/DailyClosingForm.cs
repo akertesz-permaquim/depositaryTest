@@ -8,7 +8,7 @@ namespace Permaquim.Depositary.UI.Desktop
     public partial class DailyClosingForm : Form
     {
         public Device _device { get; set; }
-
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public DailyClosingForm()
         {
             InitializeComponent();
@@ -16,6 +16,22 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadStyles();
             LoadDailyClosingButton();
             LoadBackButton();
+            TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval(),
+                Enabled = true
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
+        }
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                AppController.HideInstance(this);
+            }
         }
         private void DailyClosingForm_Load(object sender, EventArgs e)
         {
@@ -33,7 +49,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
             InformationLabel.Text = MultilanguangeController.GetText("CONFIRMA_CIERRE_DIARIO");
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
         }
@@ -52,9 +68,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CloseCurrentDay();
-
-            AppController.OpenChildForm(new OtherOperationsForm(), _device);
-            this.Close();
+            AppController.OpenChildForm(this,new OtherOperationsForm(), _device);
         }
         #endregion
 
@@ -70,8 +84,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new OtherOperationsForm(), _device);
-            this.Close();
+            AppController.OpenChildForm(this,new OtherOperationsForm(), _device);
         }
         #endregion
 

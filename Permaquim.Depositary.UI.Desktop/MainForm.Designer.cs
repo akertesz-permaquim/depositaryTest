@@ -43,6 +43,7 @@
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.InformationPanel = new System.Windows.Forms.Panel();
             this.InformationLabel = new System.Windows.Forms.Label();
+            this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
@@ -121,6 +122,7 @@
             // BottomPanel
             // 
             this.BottomPanel.BackColor = System.Drawing.Color.White;
+            this.BottomPanel.Controls.Add(this.RemainingTimeLabel);
             this.BottomPanel.Controls.Add(this.IoBoardPictureBox);
             this.BottomPanel.Controls.Add(this.CounterPictureBox);
             this.BottomPanel.Controls.Add(this.DateTimeLabel);
@@ -230,6 +232,19 @@
             this.InformationLabel.TabIndex = 0;
             this.InformationLabel.Text = "El dispositivo no está operativo";
             // 
+            // RemainingTimeLabel
+            // 
+            this.RemainingTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemainingTimeLabel.AutoSize = true;
+            this.RemainingTimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.RemainingTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(406, 16);
+            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(57, 15);
+            this.RemainingTimeLabel.TabIndex = 21;
+            this.RemainingTimeLabel.Text = "**********";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -279,5 +294,6 @@
         private PictureBox CounterPictureBox;
         private PictureBox MainPictureBox;
         private Label StartMessageLabel;
+        private Label RemainingTimeLabel;
     }
 }

@@ -7,6 +7,7 @@ namespace Permaquim.Depositary.UI.Desktop
     public partial class BankAccountSelectorForm : Form
     {
         private List<Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta> _userBankAccounts = DatabaseController.GetUserBankAccounts();
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public BankAccountSelectorForm()
         {
             InitializeComponent();
@@ -15,15 +16,31 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadBankAccountsButtons();
             LoadBackButton();
             ChechSingleAccount();
-        }
 
+            TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval(),
+                Enabled = true
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
+        }
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                AppController.HideInstance(this);
+            }
+        }
         private void ChechSingleAccount()
         {
             if (_userBankAccounts.Count <= 1)
                    DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
-                AppController.OpenChildForm(new BillDepositForm(),
+                AppController.OpenChildForm(this,new BillDepositForm(),
                  (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-           
+          
         }
 
         private void CenterPanel()
@@ -69,14 +86,15 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentUserBankAccount = (Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta)((CustomButton)sender).Tag;
 
-            AppController.OpenChildForm(new BillDepositForm(),
+            AppController.OpenChildForm(this,new BillDepositForm(),
             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
 
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            AppController.OpenChildForm(this,new CurrencySelectorForm(),
+                  (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
     }
 }

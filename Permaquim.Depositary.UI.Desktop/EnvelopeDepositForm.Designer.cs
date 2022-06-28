@@ -136,7 +136,6 @@
             this.DenominationsGridView.Size = new System.Drawing.Size(674, 326);
             this.DenominationsGridView.TabIndex = 175;
             this.DenominationsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DenominationsGridView_CellClick);
-            this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             this.DenominationsGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DenominationsGridView_EditingControlShowing);
             this.DenominationsGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DenominationsGridView_KeyPress);
             // 
@@ -515,9 +514,10 @@
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
             this.RemainingTimeLabel.Location = new System.Drawing.Point(474, 7);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(224, 25);
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(225, 25);
             this.RemainingTimeLabel.TabIndex = 155;
-            this.RemainingTimeLabel.Text = "Tiempo restante: ";
+            this.RemainingTimeLabel.Text = "*";
+            this.RemainingTimeLabel.Click += new System.EventHandler(this.RemainingTimeLabel_Click);
             // 
             // SubtotalLabel
             // 
@@ -595,6 +595,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EnvelopeDepositForm";
             this.Load += new System.EventHandler(this.EnvelopeDepositForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.EnvelopeDepositForm_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.denominationItemBindingSource)).EndInit();
             this.MainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).EndInit();

@@ -49,8 +49,10 @@
             this.ControlBox = false;
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "OperationForm";
             this.Load += new System.EventHandler(this.OperationForm_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationForm_MouseClick);
             this.ResumeLayout(false);
 
         }

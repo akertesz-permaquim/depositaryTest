@@ -8,19 +8,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class MultilanguangeController
     {
-        private static readonly List<Permaquim.Depositario.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> _languageItems = new();
+        private static List<Permaquim.Depositario.Entities.Tables.Regionalizacion.LenguajeItem> _languageItems = new();
 
-        public static List<Permaquim.Depositario.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> LanguageItems
+        public static List<Permaquim.Depositario.Entities.Tables.Regionalizacion.LenguajeItem> LanguageItems
         {
             get
             {
                 if (_languageItems.Count == 0)
                 {
-                    Permaquim.Depositario.Business.Procedures.Regionalizacion.ObtenerTextosLenguaje entities = new();
-                    
-                    entities.Items(DatabaseController.CurrentUser != null ? DatabaseController.CurrentUser.Id : -1);
+                    Permaquim.Depositario.Business.Tables.Regionalizacion.LenguajeItem entities = new();
+                    entities.Where.Add(Depositario.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId,
+                        Depositario.sqlEnum.OperandEnum.Equal,
+                       DatabaseController.CurrentUser== null ? 1 : DatabaseController.CurrentUser.LenguajeId.Id);
+                    _languageItems = entities.Items();
 
-                    return entities.MappedResultSet.Resultado;
+                    return entities.Result;
                 }
 
                 return _languageItems;

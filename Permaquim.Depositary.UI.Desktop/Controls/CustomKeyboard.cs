@@ -27,6 +27,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             if(this.ParentForm !=null)
                 this.ParentForm.AcceptButton = this.Button_Enter;
         }
+        public void ClearCredentials()
+        {
+            UsernameTextBox.Texts = String.Empty;
+            PasswordTexbox.Texts = String.Empty;
+        }
         public void SetLoginError(string message)
         {
             InformationLabel.Text = message;
@@ -122,6 +127,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                     KeyboardEvent(this, args);
                 }
             }
+            else
+            {
+                KeyboardEvent(this, new KeyboardEventArgs());
+            }
         }
 
         private void UsernameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -130,6 +139,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             {
                 PasswordTexbox.Focus();
             }
+            KeyboardEvent(this, new KeyboardEventArgs());
         }
     }
     public class KeyboardEventArgs : EventArgs

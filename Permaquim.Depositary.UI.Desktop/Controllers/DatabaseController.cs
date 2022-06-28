@@ -106,14 +106,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         }
 
-        public static void LogOff()
+        public static void LogOff(bool IsAutoLoOff)
         {
-            Permaquim.Depositario.Business.Tables.Operacion.Sesion session = new();
-            CurrentSession.FechaCierre = DateTime.Now;
-            CurrentSession.EsCierreAutomatico = false;
-            session.Update(CurrentSession);
-            CurrentUser = null;
-            _currentCurrency = new();
+            if (CurrentSession != null)
+            {
+                Permaquim.Depositario.Business.Tables.Operacion.Sesion session = new();
+                CurrentSession.FechaCierre = DateTime.Now;
+                CurrentSession.EsCierreAutomatico = IsAutoLoOff;
+                session.Update(CurrentSession);
+                CurrentUser = null;
+                _currentCurrency = new();
+            }
 
         }
 
@@ -267,6 +270,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return transaccionDetalle.Result;
 
         }
+
+        public static List<Permaquim.Depositario.Entities.Relations.Valor.Denominacion> GetCurrentCurrencyDenominations()
+        {
+            Permaquim.Depositario.Business.Relations.Valor.Denominacion denominacion = new();
+            denominacion.Where.Add(Permaquim.Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.MonedaId,
+                Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentCurrency.Id);
+            denominacion.OrderByParameter.Add(Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.Unidades);
+
+            return denominacion.Items();
+        }
+
         public static List<Permaquim.Depositario.Entities.Relations.Operacion.TransaccionSobreDetalle>
             GetEnvelopeOperationsDetails(long transactionId)
         {
@@ -403,6 +417,37 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
             return newClosing;
+        }
+        public static string GetApplicationParameterValue(string key)
+        {
+            string returnValue = string.Empty;
+
+            Permaquim.Depositario.Business.Tables.Aplicacion.Configuracion entities = new();
+            entities.Where.Add(Depositario.Business.Tables.Aplicacion.Configuracion.ColumnEnum.Clave,
+                Depositario.sqlEnum.OperandEnum.Equal, key);
+            entities.Items();
+            if (entities.Result.Count > 0)
+                return entities.Result.FirstOrDefault().Valor;
+
+            return returnValue;
+        }
+        public static List<Permaquim.Depositario.Entities.Tables.Regionalizacion.Lenguaje> GetLanguageList()
+        {
+            Permaquim.Depositario.Business.Tables.Regionalizacion.Lenguaje entities = new();
+
+            entities.Where.Add(Depositario.Business.Tables.Regionalizacion.Lenguaje.ColumnEnum.Habilitado,
+                Depositario.sqlEnum.OperandEnum.Equal, true);
+            entities.Items();
+
+            return entities.Result;
+        }
+        public static bool SetLanguageId(long languageId)
+        {
+            Permaquim.Depositario.Business.Tables.Seguridad.Usuario entities = new();
+
+            var user = entities.Items(CurrentUser.Id).FirstOrDefault();
+            user.LenguajeId = languageId;
+            return entities.Update(user) != 0;
         }
     }
 }

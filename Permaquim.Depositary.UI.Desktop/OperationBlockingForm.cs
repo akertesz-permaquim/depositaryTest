@@ -10,6 +10,7 @@ namespace Permaquim.Depositary.UI.Desktop
     {
 
         public OperationblockingReasonEnum OperationBlockingReason { get; set; } = OperationblockingReasonEnum.None;
+ 
         /// <summary>
         /// Instancia del dispositivo
         /// </summary>
@@ -18,10 +19,11 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             InitializeComponent();
             LoadBackButton();
+            TimeOutController.Reset();
         }
         public void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
 
         }
 
@@ -55,7 +57,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            AppController.HideInstance(this);
         }
         #endregion
     }

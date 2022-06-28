@@ -26,6 +26,8 @@ namespace Permaquim.Depositary.UI.Desktop.Global
         public const string INGRESANDO_BOLSA = "INGRESANDO_BOLSA";
         public const string PROCESO_BOLSA_FINALIZADO = "PROCESO_BOLSA_FINALIZADO";
         public const string INDICAR_CODIGO_BOLSA = "INDICAR_CODIGO_BOLSA";
+        public const string TIEMPO_RESTANTE = "TIEMPO_RESTANTE";
+        public const string SUB_TOTAL = "SUB_TOTAL";
 
 
     }

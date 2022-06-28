@@ -26,11 +26,12 @@ namespace Permaquim.Depositary.UI.Desktop
         public SystemBlockingDialog()
         {
             InitializeComponent();
+            TimeOutController.Reset();
         }
 
         public void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
             InformationLabel.Text= MultilanguangeController.GetText(MultilanguageConstants.PUERTA_ABIERTA);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
         }
@@ -51,13 +52,14 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PoolTimer_Tick(object? sender, EventArgs e)
         {
+
             if (_device != null && _device.IoBoardConnected)
             {
 
                 if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
                 {
                     this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    AppController.HideInstance(this);
                 }
 
 

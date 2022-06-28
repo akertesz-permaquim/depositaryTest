@@ -13,21 +13,25 @@
         public enum ColorNameEnum
         {
             Ninguno = 0,
-            Cabecera = 1,
-            Contenido = 2,
-            Pie = 3,
-            FuentePrincipal = 4,
-            FuenteContraste = 5,
-            BotonEstandar = 6,
-            BotonAceptar = 7,
-            BotonCancelar = 8,
-            BotonContinuar = 9,
-            BotonAlerta = 10,
-            BotonSalir = 11,
-            BotonAlternativo = 12,
-            TextoInformacion = 13,
-            TextoAlerta = 14,
-            TextoError = 15
+            CabeceraAplicacion,
+            FondoFormulario,
+            PieAplicacion,
+            FuentePrincipal,
+            FuenteContraste,
+            BotonEstandar,
+            BotonAceptar,
+            BotonCancelar,
+            BotonContinuar,
+            BotonAlerta,
+            BotonSalir,
+            BotonAlternativo,
+            TextoInformacion,
+            TextoAlerta,
+            TextoError,
+            FondoControl,
+            CabeceraGrilla,
+            PieGrilla,
+            SegundaCabeceraGrilla
 
         }
         public enum BagExtractionProcessEnum

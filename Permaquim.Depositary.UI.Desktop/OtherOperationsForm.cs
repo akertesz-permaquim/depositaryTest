@@ -17,6 +17,7 @@ namespace Permaquim.Depositary.UI.Desktop
     public partial class OtherOperationsForm : Form
     {
         Device _device = null;
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public OtherOperationsForm()
         {
             InitializeComponent();
@@ -27,6 +28,22 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadOperationsButton();
             LoadSupportButton();
             LoadBackButton();
+            TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval(),
+                Enabled = true
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
+        }
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                AppController.HideInstance(this);
+            }
         }
         private void OtherOperationsForm_Load(object sender, EventArgs e)
         {
@@ -34,7 +51,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
         }
         private void CenterPanel()
         {
@@ -58,7 +75,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new OperationForm(),
+            AppController.OpenChildForm(this,new OperationForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -76,7 +93,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void TurnButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new TurnChangeForm(),
+            AppController.OpenChildForm(this,new TurnChangeForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -94,7 +111,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new DailyClosingForm(),
+            AppController.OpenChildForm(this, new DailyClosingForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -113,7 +130,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OperationsButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new OperationsHistoryform(),
+            AppController.OpenChildForm(this, new OperationsHistoryform(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -131,7 +148,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void SupportButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new SupportForm(),
+            AppController.OpenChildForm(this, new SupportForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion

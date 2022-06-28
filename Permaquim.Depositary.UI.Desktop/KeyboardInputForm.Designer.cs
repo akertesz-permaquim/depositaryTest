@@ -43,9 +43,9 @@
             this.MainPanel.Controls.Add(this.LoginPictureBox);
             this.MainPanel.Controls.Add(this.TitleLabel);
             this.MainPanel.Controls.Add(this.MainKeyboard);
-            this.MainPanel.Location = new System.Drawing.Point(3, 3);
+            this.MainPanel.Location = new System.Drawing.Point(3, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(725, 533);
+            this.MainPanel.Size = new System.Drawing.Size(725, 480);
             this.MainPanel.TabIndex = 0;
             // 
             // LoginPictureBox
@@ -79,15 +79,16 @@
             this.MainKeyboard.Location = new System.Drawing.Point(4, 46);
             this.MainKeyboard.Name = "MainKeyboard";
             this.MainKeyboard.PasswordTextBoxPlaceholder = "Clave";
-            this.MainKeyboard.Size = new System.Drawing.Size(715, 478);
+            this.MainKeyboard.Size = new System.Drawing.Size(715, 476);
             this.MainKeyboard.TabIndex = 6;
             this.MainKeyboard.UserTextboxPlaceholder = "Usuario";
+            this.MainKeyboard.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainKeyboard_MouseClick);
             // 
             // KeyboardInputForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(734, 537);
+            this.ClientSize = new System.Drawing.Size(734, 572);
             this.ControlBox = false;
             this.Controls.Add(this.MainPanel);
             this.DoubleBuffered = true;

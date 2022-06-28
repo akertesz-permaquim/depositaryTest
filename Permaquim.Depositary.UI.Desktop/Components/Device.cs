@@ -1062,6 +1062,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             {
                 return result;
             }
+            finally
+            {
+                result = null;
+            }
         }
 
         public void CleanError()

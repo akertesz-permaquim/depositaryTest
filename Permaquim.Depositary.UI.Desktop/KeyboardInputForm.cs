@@ -7,7 +7,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class KeyboardInputForm : System.Windows.Forms.Form
     {
-
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         private const string ENTER = "{ENTER}";
         public KeyboardInputForm()
         {
@@ -26,11 +26,29 @@ namespace Permaquim.Depositary.UI.Desktop
             MainKeyboard.KeyboardEvent += MainKeyboard_KeyboardEvent;
             this.ResumeLayout();
 
+            TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval(),
+                Enabled = true
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
+
+        }
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                AppController.HideInstance(this);
+            }
+
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
-            MainKeyboard.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+            MainKeyboard.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
 
         }
         private void CenterPanel()
@@ -44,7 +62,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void MainKeyboard_KeyboardEvent(object sender, KeyboardEventArgs args)
         {
-
+            TimeOutController.Reset();
             
             if (args.KeyPressed.Equals(ENTER))
             {
@@ -67,7 +85,11 @@ namespace Permaquim.Depositary.UI.Desktop
                         DatabaseController.GetTurnSchedule();
 
                         if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
-                            AppController.OpenChildForm(new OperationForm(), (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                        {
+                            MainKeyboard.ClearCredentials();
+                            AppController.OpenChildForm(this,new OperationForm(), 
+                                (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                        }
                     }
                     else
                     {
@@ -87,6 +109,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void KeyboardInputForm_Load(object sender, EventArgs e)
         {
             CenterPanel();
+        }
+
+        private void MainKeyboard_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

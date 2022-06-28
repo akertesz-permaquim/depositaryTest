@@ -26,6 +26,7 @@ namespace Permaquim.Depositary.UI.Desktop
         public BagExtractionForm()
         {
             InitializeComponent();
+            TimeOutController.Reset();
         }
 
         private void BagExtractionForm_Load(object sender, EventArgs e)
@@ -65,6 +66,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                AppController.HideInstance(this);
+            }
+
             if (_device != null && _device.IoBoardConnected)
             {
                 // Muestra el estado del hardware
@@ -93,9 +101,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_0)
                 && _bagExtractionProcess == BagExtractionProcessEnum.ProcessFinished)
             {
-                AppController.OpenChildForm(new OperationForm(), _device);
                 _pollingTimer.Enabled = false;
-                this.Close();
+                AppController.OpenChildForm(this,new OperationForm(), _device);
             }
             
 
@@ -283,22 +290,18 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.UpdateandCreateContainer(_containerTextBox.Texts.Trim());
             _bagExtractionProcess = BagExtractionProcessEnum.ProcessFinished;
-            //AppController.OpenChildForm(new OperationForm(), _device);
-            //this.Close();
         }
         private void BagButton_Click(object sender, EventArgs e)
         {
-
             _bagExtractionProcess = BagExtractionProcessEnum.BagExtracting;
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new OperationForm(), _device);
-            this.Close();
+            AppController.OpenChildForm(this,new OperationForm(), _device);
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
         }
 
         private void EventCheckbox_CheckedChanged(object sender, EventArgs e)

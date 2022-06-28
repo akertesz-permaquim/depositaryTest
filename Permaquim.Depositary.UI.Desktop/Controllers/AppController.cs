@@ -14,18 +14,30 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static Form _activeForm = null;
 
 
+
+        /// <summary>
+        /// Hides 'instance' and shows 'childForm'
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="childForm"></param>
+        /// <param name="device"></param>
+        public static void OpenChildForm(Form instance, Form childForm,
+       Permaquim.Depositary.UI.Desktop.Components.Device device)
+        {
+            HideInstance(instance);
+            OpenChildForm(childForm, device);
+        }
+
+
         public static void OpenChildForm(Form childForm,
-            Permaquim.Depositary.UI.Desktop.Components.Device device)
+        Permaquim.Depositary.UI.Desktop.Components.Device device)
         {
 
-            if (_activeForm != null)
-                _activeForm.Hide();
-            _activeForm = childForm;
+            var refForm = _formList.FirstOrDefault(s => s.Name.Equals(childForm.Name));
 
-            if (_formList.IndexOf(childForm) != -1)
+            if (refForm != null)
             {
-                _formList[_formList.IndexOf(childForm)].Show();
-
+                childForm = refForm;
             }
             else
             {
@@ -46,7 +58,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
             childForm.Show();
 
-             
+
 
             childForm.Location = new Point()
             {
@@ -55,23 +67,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             };
         }
 
-        public static void Back()
+        public static void HideInstance(Form instance)
         {
-
-            //_activeForm = _formList.LastOrDefault();
-
-            _activeForm.TopLevel = false;
-            _activeForm.FormBorderStyle = FormBorderStyle.None;
-            _activeForm.Dock = DockStyle.None;
-            MainFormInstance.MainPanel.Controls.Add(_activeForm);
-            MainFormInstance.MainPanel.Tag = _activeForm;
-            _activeForm.BringToFront();
-            _activeForm.StartPosition = FormStartPosition.Manual;
-            _activeForm.Show();
-
-           //_formList.LastOrDefault().Show();
-       
-
+            instance.Hide();
         }
     }
 }

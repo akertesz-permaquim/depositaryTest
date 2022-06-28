@@ -11,22 +11,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class OperationForm : Form
     {
-        private const int BILL_DEPOSIT = 1;
-        private const int ENVELOPE_DEPOSIT = 3;
-        private const int BAG_EXTRACTION = 7;
+
         private List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> _transactions = DatabaseController.GetTransactionTypes();
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         Device _device = null;
         public OperationForm()
         {
             InitializeComponent();
+            TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval(),
+                Enabled = true
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
         }
-
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                AppController.HideInstance(this);
+            }
+        }
         private void OperationForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
@@ -41,7 +56,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
         }
         private void CenterPanel()
         {
@@ -54,11 +69,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadTransactionButtons()
         {
-
-
             foreach (var item in _transactions)
             {
-
                 CustomButton newButton = ControlBuilder.BuildStandardButton(
                     "TransactionButton" + item.Id.ToString(), 
                     MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
@@ -68,31 +80,27 @@ namespace Permaquim.Depositary.UI.Desktop
                 newButton.Tag = item;
 
                 this.MainPanel.Controls.Add(newButton);
-
             }
         }
         private void TransactionButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CurrentOperation = (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((CustomButton)sender).Tag;
 
-
-            switch (DatabaseController.CurrentOperation.Id)
+            switch ((int)DatabaseController.CurrentOperation.Id)
             {
 
-                case BILL_DEPOSIT:
-                case ENVELOPE_DEPOSIT:
-                AppController.OpenChildForm(new CurrencySelectorForm(),
+                case (int)OperationTypeEnum.BillDeposit:
+                case (int)OperationTypeEnum.EnvelopeDeposit:
+                AppController.OpenChildForm(this,new CurrencySelectorForm(),
                 (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     break;
-                case BAG_EXTRACTION:
-                    AppController.OpenChildForm(new BagExtractionForm(),
+                case (int)OperationTypeEnum.ValueExtraction:
+                    AppController.OpenChildForm(this,new BagExtractionForm(),
                         (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     break;
                 default:
                     break;
             }
-
-
         }
         private void LoadBackButton()
         {
@@ -115,15 +123,15 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OtherOperationButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new OtherOperationsForm(),
+            AppController.OpenChildForm(this,new OtherOperationsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         # endregion
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            DatabaseController.LogOff();
-            this.Close();
+            DatabaseController.LogOff(false);
+            AppController.HideInstance(this);
         }
         private void SetDeviceToNeutralMode()
         {
@@ -136,6 +144,11 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _device.RemoteCancel();
             }
+        }
+
+        private void OperationForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

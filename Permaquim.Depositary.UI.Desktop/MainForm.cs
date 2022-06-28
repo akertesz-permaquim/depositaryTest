@@ -3,12 +3,12 @@ using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
 using Permaquim.Depositary.UI.Desktop.Helpers;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
-        private const int VALUE_EXTRACT_OPERATION = 7;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         private int closingcombination = 0;
 
@@ -104,9 +104,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
+
             DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
-            
-            _device.Status();
+            EvaluateTimeout();
+
+            //_device.Status();
             if (_device.IoBoardConnected)
             {
                 if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
@@ -142,7 +144,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 {
                     if (_blockingDialog == null &&
                         (DatabaseController.CurrentOperation == null ||
-                        DatabaseController.CurrentOperation.Id != VALUE_EXTRACT_OPERATION))
+                        DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
                     {
                         _blockingDialog = new SystemBlockingDialog()
                         {
@@ -156,8 +158,22 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 }
             }
-            LoadAvatar();
-            SetUserData();
+
+        }
+
+        private void EvaluateTimeout()
+        {
+            long remainingTime = TimeOutController.GetRemainingtime();
+            RemainingTimeLabel.Visible = remainingTime > 0;
+
+            RemainingTimeLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.TIEMPO_RESTANTE) +
+                remainingTime.ToString();
+            if (remainingTime > 10)
+                RemainingTimeLabel.ForeColor = Color.Green;
+            if (remainingTime < 10)
+                RemainingTimeLabel.ForeColor = Color.Yellow;
+            if (remainingTime < 5)
+                RemainingTimeLabel.ForeColor = Color.Red;
         }
 
         private void SetUserData()
@@ -188,6 +204,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void Login()
         {
+            MainPictureBox.Image = null;
             if (DatabaseController.CurrentUser != null)
                 AppController.OpenChildForm(new OperationForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
@@ -195,22 +212,23 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             else
                 AppController.OpenChildForm(new KeyboardInputForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-            MainPictureBox.Image = null;
 
         }
 
         private void LoadStyles()
         {
-            HeadPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Cabecera);
-            MainPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
-            BottomPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Pie);
-            MainPictureBox.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            HeadPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraAplicacion);
+            MainPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+            BottomPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.PieAplicacion);
+            MainPictureBox.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
             StartMessageLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             UserLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             EnterpriseLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             DateTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
-            //MainPictureBox.Image = StyleController.GetImageResource("Presentacion");
+            MainPictureBox.Image = StyleController.GetImageResource("Presentacion");
+            LoadAvatar();
+            SetUserData();
         }
         private void LoadLogo()
         {
@@ -262,9 +280,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void DateTimeLabel_Click(object sender, EventArgs e)
         {
-            closingcombination += 1;
-            if (closingcombination == 4)
+            if (closingcombination == 3)
                 Application.Exit();
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

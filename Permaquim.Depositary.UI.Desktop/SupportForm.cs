@@ -37,7 +37,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Contenido);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
         }
 
         private void SupportForm_Load(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
-
+            TimeOutController.Reset();
             IoBoardStatusPropertyGrid.SelectedObject = _device.Status();
             SetCounterPropertyGridValue();
         }
@@ -184,7 +184,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(new OperationForm(),
+            _pollingTimer.Enabled = false;
+            AppController.OpenChildForm(this,new OperationForm(),
             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
 
