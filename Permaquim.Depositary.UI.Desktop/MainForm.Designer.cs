@@ -35,6 +35,7 @@
             this.UserLabel = new System.Windows.Forms.Label();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.IoBoardPictureBox = new System.Windows.Forms.PictureBox();
             this.CounterPictureBox = new System.Windows.Forms.PictureBox();
             this.DateTimeLabel = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.InformationPanel = new System.Windows.Forms.Panel();
             this.InformationLabel = new System.Windows.Forms.Label();
-            this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
@@ -132,6 +132,19 @@
             this.BottomPanel.Size = new System.Drawing.Size(868, 47);
             this.BottomPanel.TabIndex = 2;
             // 
+            // RemainingTimeLabel
+            // 
+            this.RemainingTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemainingTimeLabel.AutoSize = true;
+            this.RemainingTimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.RemainingTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(406, 16);
+            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(57, 15);
+            this.RemainingTimeLabel.TabIndex = 21;
+            this.RemainingTimeLabel.Text = "**********";
+            // 
             // IoBoardPictureBox
             // 
             this.IoBoardPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -207,6 +220,7 @@
             this.MainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.MainPictureBox.TabIndex = 1;
             this.MainPictureBox.TabStop = false;
+            this.MainPictureBox.VisibleChanged += new System.EventHandler(this.MainPictureBox_VisibleChanged);
             this.MainPictureBox.Click += new System.EventHandler(this.MainPictureBox_Click);
             // 
             // InformationPanel
@@ -231,19 +245,6 @@
             this.InformationLabel.Size = new System.Drawing.Size(373, 32);
             this.InformationLabel.TabIndex = 0;
             this.InformationLabel.Text = "El dispositivo no está operativo";
-            // 
-            // RemainingTimeLabel
-            // 
-            this.RemainingTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemainingTimeLabel.AutoSize = true;
-            this.RemainingTimeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.RemainingTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(406, 16);
-            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(57, 15);
-            this.RemainingTimeLabel.TabIndex = 21;
-            this.RemainingTimeLabel.Text = "**********";
             // 
             // MainForm
             // 

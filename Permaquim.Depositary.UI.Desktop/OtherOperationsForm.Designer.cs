@@ -50,6 +50,7 @@
             this.Name = "OtherOperationsForm";
             this.Text = "OtherOperationsForm";
             this.Load += new System.EventHandler(this.OtherOperationsForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.OtherOperationsForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }

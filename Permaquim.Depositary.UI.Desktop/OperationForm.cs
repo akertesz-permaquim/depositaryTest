@@ -28,8 +28,7 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = DeviceController.GetPollingInterval(),
-                Enabled = true
+                Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
@@ -39,7 +38,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                AppController.HideInstance(this);
+                FormsController.HideInstance(this);
             }
         }
         private void OperationForm_Load(object sender, EventArgs e)
@@ -91,11 +90,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.BillDeposit:
                 case (int)OperationTypeEnum.EnvelopeDeposit:
-                AppController.OpenChildForm(this,new CurrencySelectorForm(),
+                FormsController.OpenChildForm(this,new CurrencySelectorForm(),
                 (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     break;
                 case (int)OperationTypeEnum.ValueExtraction:
-                    AppController.OpenChildForm(this,new BagExtractionForm(),
+                    FormsController.OpenChildForm(this,new BagExtractionForm(),
                         (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     break;
                 default:
@@ -105,7 +104,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguageConstants.SALIR,MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON),MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
@@ -115,7 +114,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadOtherOperationsButton()
         {
             CustomButton otherOperationsButton = ControlBuilder.BuildAlternateButton(
-                "OtherOperationsButton", MultilanguangeController.GetText("OTRAS_OPERACIONES"), MainPanel.Width);
+                "OtherOperationsButton", MultilanguangeController.GetText(MultiLanguageEnum.OTRAS_OPERACIONES), MainPanel.Width);
 
             this.MainPanel.Controls.Add(otherOperationsButton);
             otherOperationsButton.Click += new System.EventHandler(OtherOperationButton_Click);
@@ -123,7 +122,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OtherOperationButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this,new OtherOperationsForm(),
+            FormsController.OpenChildForm(this,new OtherOperationsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         # endregion
@@ -131,7 +130,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BackButton_Click(object sender, EventArgs e)
         {
             DatabaseController.LogOff(false);
-            AppController.HideInstance(this);
+            FormsController.HideInstance(this);
         }
         private void SetDeviceToNeutralMode()
         {
@@ -149,6 +148,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OperationForm_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
+        }
+
+        private void OperationForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
         }
     }
 }

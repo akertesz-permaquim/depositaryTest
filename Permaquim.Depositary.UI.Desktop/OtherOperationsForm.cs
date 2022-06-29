@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -31,8 +32,7 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = DeviceController.GetPollingInterval(),
-                Enabled = true
+                Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
@@ -42,7 +42,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                AppController.HideInstance(this);
+                FormsController.HideInstance(this);
             }
         }
         private void OtherOperationsForm_Load(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguageConstants.SALIR, MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
@@ -75,7 +75,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this,new OperationForm(),
+            FormsController.OpenChildForm(this,new OperationForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -85,7 +85,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadTurnButton()
         {
             CustomButton TurnButton = ControlBuilder.BuildStandardButton(
-                "TurnButton", MultilanguangeController.GetText("CAMBIO_TURNO"), MainPanel.Width);
+                "TurnButton", MultilanguangeController.GetText(MultiLanguageEnum.CAMBIO_TURNO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(TurnButton);
             TurnButton.Click += new System.EventHandler(TurnButton_Click);
@@ -93,7 +93,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void TurnButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this,new TurnChangeForm(),
+            FormsController.OpenChildForm(this,new TurnChangeForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -103,7 +103,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadDailyClosingButton()
         {
             CustomButton AccountClosingButton = ControlBuilder.BuildStandardButton(
-                "DailyClosingButton", MultilanguangeController.GetText("CIERRE_DIARIO"), MainPanel.Width);
+                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.CIERRE_DIARIO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(AccountClosingButton);
             AccountClosingButton.Click += new System.EventHandler(DailyClosingButton_Click);
@@ -111,7 +111,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this, new DailyClosingForm(),
+            FormsController.OpenChildForm(this, new DailyClosingForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -122,7 +122,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadOperationsButton()
         {
             CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
-                "OperationsButton", MultilanguangeController.GetText("HISTORICO_OPERACIONES"), MainPanel.Width);
+                "OperationsButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_OPERACIONES), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
             OperationsButton.Click += new System.EventHandler(OperationsButton_Click);
@@ -130,7 +130,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OperationsButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this, new OperationsHistoryform(),
+            FormsController.OpenChildForm(this, new OperationsHistoryform(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
@@ -140,7 +140,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadSupportButton()
         {
             CustomButton supportButton = ControlBuilder.BuildAlternateButton(
-                "SupportButton", MultilanguangeController.GetText("SOPORTE"), MainPanel.Width);
+                "SupportButton", MultilanguangeController.GetText(MultiLanguageEnum.SOPORTE), MainPanel.Width);
 
             this.MainPanel.Controls.Add(supportButton);
             supportButton.Click += new System.EventHandler(SupportButton_Click);
@@ -148,10 +148,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void SupportButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this, new SupportForm(),
+            FormsController.OpenChildForm(this, new SupportForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion
 
+        private void OtherOperationsForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
+        }
     }
 }

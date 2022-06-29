@@ -10,7 +10,6 @@ namespace Permaquim.Depositary.UI.Desktop
     {
         public Device _device { get; set; }
 
- 
 
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
@@ -35,8 +34,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = DeviceController.GetPollingInterval(),
-                Enabled = true
+                Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollTimer_Tick;
             CenterPanel();
@@ -70,7 +68,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                AppController.HideInstance(this);
+                FormsController.HideInstance(this);
             }
 
             if (_device != null && _device.IoBoardConnected)
@@ -102,7 +100,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 && _bagExtractionProcess == BagExtractionProcessEnum.ProcessFinished)
             {
                 _pollingTimer.Enabled = false;
-                AppController.OpenChildForm(this,new OperationForm(), _device);
+                FormsController.OpenChildForm(this,new OperationForm(), _device);
             }
             
 
@@ -179,43 +177,43 @@ namespace Permaquim.Depositary.UI.Desktop
             {
 
                 case BagExtractionProcessEnum.BagError:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.ERROR_POSICION_BOLSA);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_POSICION_BOLSA);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 case BagExtractionProcessEnum.None:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.PRESIONAR_BOTON_INICIAR);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.PRESIONAR_BOTON_INICIAR);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.GateWaitingToRelease:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.ESPERANDO_APERTURA_PUERTA);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ESPERANDO_APERTURA_PUERTA);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.GateUnlocked:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.PUERTA_LIBERADA);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_LIBERADA);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.GateReleased:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.PUEDE_RETIRAR_BOLSA) + DatabaseController.CurrentContainer.Nombre;
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.PUEDE_RETIRAR_BOLSA) + DatabaseController.CurrentContainer.Nombre;
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.BagExtracting:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.EXTRAYENDO_BOLSA).Replace("@@BOLSA@@", DatabaseController.CurrentContainer.Nombre);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EXTRAYENDO_BOLSA).Replace("@@BOLSA@@", DatabaseController.CurrentContainer.Nombre);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.BagExtracted:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.BOLSA_EXTRAIDA);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOLSA_EXTRAIDA);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.BagPuttingStart:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.INGRESANDO_BOLSA);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.INGRESANDO_BOLSA);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.ProcessFinished:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.PROCESO_BOLSA_FINALIZADO);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.PROCESO_BOLSA_FINALIZADO);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 case BagExtractionProcessEnum.IdentifierPending:
-                    InformationLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.INDICAR_CODIGO_BOLSA);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.INDICAR_CODIGO_BOLSA);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
                     break;
                 default:
@@ -239,7 +237,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadGateButton()
         {
             _gateButton = ControlBuilder.BuildStandardButton(
-            "GateButton", MultilanguangeController.GetText("ABRIR_PUERTA"), MainPanel.Width);
+            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.ABRIR_PUERTA), MainPanel.Width);
 
             _gateButton.Visible = false;
 
@@ -253,7 +251,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             _confirmButton = ControlBuilder.BuildStandardButton(
-            "GateButton", MultilanguangeController.GetText("ACCEPT_BUTTON"), MainPanel.Width);
+            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width);
 
             _confirmButton.Visible = false;
 
@@ -267,7 +265,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
              _backButton = ControlBuilder.BuildExitButton(
-            "BackButton", MultilanguageConstants.SALIR, MainPanel.Width);
+            "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
 
             this.MainPanel.Controls.Add(_backButton);
 
@@ -281,7 +279,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadContainerTextbox()
         {
            _containerTextBox =  ControlBuilder.BuildStandardTextBox("ContainerTextbox",
-                MultilanguangeController.GetText("INGRESE_CODIGO_CONTENEDOR"),MainPanel.Width);
+                MultilanguangeController.GetText(MultiLanguageEnum.INGRESE_CODIGO_CONTENEDOR),MainPanel.Width);
             _containerTextBox.Visible = false;
 
             MainPanel.Controls.Add(_containerTextBox);
@@ -297,7 +295,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this,new OperationForm(), _device);
+            FormsController.OpenChildForm(this,new OperationForm(), _device);
         }
         private void LoadStyles()
         {
@@ -313,6 +311,11 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _containerTextBox.Focus();
             SendKeys.Send(((CustomButton)sender).Tag.ToString());
+        }
+
+        private void BagExtractionForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
         }
     }
 }

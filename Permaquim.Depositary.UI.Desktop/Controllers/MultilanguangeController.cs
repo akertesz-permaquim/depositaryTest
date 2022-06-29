@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class MultilanguangeController
     {
+
         private static List<Permaquim.Depositario.Entities.Tables.Regionalizacion.LenguajeItem> _languageItems = new();
 
         public static List<Permaquim.Depositario.Entities.Tables.Regionalizacion.LenguajeItem> LanguageItems
@@ -27,13 +29,22 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 return _languageItems;
             }
-
         }
         public static string GetText(string key)
         {
             var ret = LanguageItems.FirstOrDefault(s => s.Clave.Equals(key));
 
             return ret == null ? "***" : ret.Texto;
+        }
+        public static string GetText(MultiLanguageEnum key)
+        {
+            var ret = LanguageItems.FirstOrDefault(s => s.Clave.Equals(Enum.GetName(key)));
+
+            return ret == null ? "***" : ret.Texto;
+        }
+        public static void ResetLanguage()
+        {
+            _languageItems = new();
         }
     }
 }

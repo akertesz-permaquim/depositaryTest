@@ -52,6 +52,7 @@
             this.KeyPreview = true;
             this.Name = "OperationForm";
             this.Load += new System.EventHandler(this.OperationForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.OperationForm_VisibleChanged);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationForm_MouseClick);
             this.ResumeLayout(false);
 

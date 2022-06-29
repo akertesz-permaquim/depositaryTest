@@ -185,7 +185,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BackButton_Click(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = false;
-            AppController.OpenChildForm(this,new OperationForm(),
+            FormsController.OpenChildForm(this,new OperationForm(),
             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
 

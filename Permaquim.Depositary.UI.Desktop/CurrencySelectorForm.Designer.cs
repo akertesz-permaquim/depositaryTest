@@ -51,6 +51,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CurrencySelectorForm";
             this.Load += new System.EventHandler(this.CurrencySelectorForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.CurrencySelectorForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }

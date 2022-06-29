@@ -50,6 +50,7 @@
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BankAccountSelectorForm";
+            this.VisibleChanged += new System.EventHandler(this.BankAccountSelectorForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }

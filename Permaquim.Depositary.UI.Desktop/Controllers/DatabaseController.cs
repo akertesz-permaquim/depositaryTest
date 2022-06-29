@@ -449,5 +449,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             user.LenguajeId = languageId;
             return entities.Update(user) != 0;
         }
+        public static void CreateSession()
+        {
+            Permaquim.Depositario.Business.Tables.Operacion.Sesion sesion = new();
+            sesion.Add(DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
+        }
     }
 }

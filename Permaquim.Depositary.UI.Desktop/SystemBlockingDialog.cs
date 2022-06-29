@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -32,10 +33,12 @@ namespace Permaquim.Depositary.UI.Desktop
         public void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            InformationLabel.Text= MultilanguangeController.GetText(MultilanguageConstants.PUERTA_ABIERTA);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
         }
-
+        public void LoadLanguageItems()
+        {
+            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA);
+        }
         private void SystemBlockingDialog_Load(object sender, EventArgs e)
         {
 
@@ -49,6 +52,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Tick += PoolTimer_Tick;
 
             LoadStyles();
+            LoadLanguageItems();
         }
         private void PoolTimer_Tick(object? sender, EventArgs e)
         {
@@ -59,7 +63,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
                 {
                     this.DialogResult = DialogResult.OK;
-                    AppController.HideInstance(this);
+                    FormsController.HideInstance(this);
                 }
 
 

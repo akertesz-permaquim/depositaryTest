@@ -65,6 +65,7 @@
             this.Name = "TurnChangeForm";
             this.Text = "TurnChangeForm";
             this.Load += new System.EventHandler(this.TurnChangeForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.TurnChangeForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }

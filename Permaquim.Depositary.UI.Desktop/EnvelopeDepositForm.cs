@@ -100,14 +100,15 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadLanguageItems()
         { 
-            ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText("ACCEPT_BUTTON");
-            CancelDepositButton.Text = MultilanguangeController.GetText("CANCEL_BUTTON");
-            BackButton.Text = MultilanguangeController.GetText("EXIT_BUTTON");
-            RemainingTimeLabel.Text = MultilanguangeController.GetText("TIEMPO_RESTANTE");
+            ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON);
+            CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON);
+            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON);
+            RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
-            DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText("DENOMINACION");
-            DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText("CANTIDAD");
-            DenominationsGridView.Columns["Amount"].HeaderText = MultilanguangeController.GetText("IMPORTE");
+            DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION);
+            DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD);
+            DenominationsGridView.Columns["Amount"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMPORTE);
+            EnvelopeTextBox.PlaceholderText = MultilanguangeController.GetText(MultiLanguageEnum.ENVELOPE_TEXTBOX_PLACEHOLDER);
 
         }
 
@@ -180,7 +181,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                AppController.HideInstance(this);
+                FormsController.HideInstance(this);
             }
             EvaluateTimeout();
 
@@ -262,20 +263,20 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             int generalStatus = (int)_device.StateResultProperty.StatusInformation.OperatingState;
-            //GeneralStatusLabel.Text = Enum.GetName(typeof(StatusInformation.State), generalStatus);
+            GeneralStatusLabel.Text = Enum.GetName(typeof(StatusInformation.State), generalStatus);
 
-            //int deviceMode = (int)_device.StateResultProperty.ModeStateInformation.ModeState;
-            //DeviceModeLabel.Text = Enum.GetName(typeof(ModeStateInformation.Mode), deviceMode);
+            int deviceMode = (int)_device.StateResultProperty.ModeStateInformation.ModeState;
+            DeviceModeLabel.Text = Enum.GetName(typeof(ModeStateInformation.Mode), deviceMode);
 
-            //StackerFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.StackerFull;
-            //RejectFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectFull;
-            //RejectedBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectedBillPresent;
-            //DischargingFailureCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.DischargingFailure;
-            //EscrowBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
-            //HopperBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.HopperBillPresent;
-            //DepositFinishedCheckbox.Checked = _device.StateResultProperty.EndInformation.StoreEnd;
-            //CountingErrorCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.CountingError;
-            //JammingCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.Jamming;
+            StackerFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.StackerFull;
+            RejectFullCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectFull;
+            RejectedBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.RejectedBillPresent;
+            DischargingFailureCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.DischargingFailure;
+            EscrowBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent;
+            HopperBillPresentCheckBox.Checked = _device.StateResultProperty.DeviceStateInformation.HopperBillPresent;
+            DepositFinishedCheckbox.Checked = _device.StateResultProperty.EndInformation.StoreEnd;
+            CountingErrorCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.CountingError;
+            JammingCheckBox.Checked = _device.StateResultProperty.ErrorStateInformation.Jamming;
 
         }
         private void ProcessDeviceStatus()
@@ -313,7 +314,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     {
                         _device.RemoteCancel();
                         _pollingTimer.Enabled = false;
-                        AppController.OpenChildForm(this,new OperationForm(), _device);
+                        FormsController.OpenChildForm(this,new OperationForm(), _device);
                     }
                     break;
                 case ModeStateInformation.Mode.NormalErrorRecoveryMode:
@@ -373,7 +374,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
              && _operationStatus.CurrentTransactionQuantity == 0)
             {
-                InformationLabel.Text = MultilanguangeController.GetText("INGRESAR_VALORES_SOBRE");
+                InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.INGRESAR_VALORES_SOBRE);
                 InformationLabel.ForeColor = Color.Green;
             }
 
@@ -381,7 +382,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 && _operationStatus.CurrentTransactionQuantity == 0
                 && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQWaitingToRemoveBankNotes)
             {
-                InformationLabel.Text = MultilanguangeController.GetText("RETIRAR_SOBRE");
+                InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.RETIRAR_SOBRE);
                 InformationLabel.ForeColor = Color.Red;
             }
         }
@@ -423,7 +424,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CurrencyLabel.Visible = false;
             RemainingTimeLabel.Visible = false;
             SubtotalLabel.Visible = false;
-            InformationLabel.Text = MultilanguangeController.GetText("AGUARDE_DEPOSITO");
+            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO);
             InformationLabel.ForeColor = Color.Green;
 
             Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
@@ -504,7 +505,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (_device.CounterConnected)
                 _device.RemoteCancel();
-            AppController.OpenChildForm(this,new OperationForm(), _device);
+            FormsController.OpenChildForm(this,new OperationForm(), _device);
         }
 
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
@@ -567,6 +568,7 @@ namespace Permaquim.Depositary.UI.Desktop
   
         private void EnvelopeTextBox_Enter(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             _selectedEditElement = SelectedEditElementEnum.EnvelopeCode;
         }
 
@@ -589,7 +591,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void EvaluateTimeout()
         {
 
-            RemainingTimeLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.TIEMPO_RESTANTE) +
+            RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
                 TimeOutController.GetRemainingtime().ToString();
             if (TimeOutController.GetRemainingtime() > 10)
                 RemainingTimeLabel.ForeColor = Color.Green;
@@ -602,6 +604,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void RemainingTimeLabel_Click(object sender, EventArgs e)
         {
             TimeOutController.Reset();
+        }
+
+        private void MonitorGroupcheckbox_CheckStateChanged(object sender, EventArgs e)
+        {
+            MonitorGroupBox.Visible = MonitorGroupcheckbox.Checked;
         }
     }
 }

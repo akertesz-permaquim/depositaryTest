@@ -65,6 +65,7 @@
             this.Name = "DailyClosingForm";
             this.Text = "DailyClosingForm";
             this.Load += new System.EventHandler(this.DailyClosingForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.DailyClosingForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }

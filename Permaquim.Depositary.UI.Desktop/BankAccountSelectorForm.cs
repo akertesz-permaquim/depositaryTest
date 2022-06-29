@@ -1,6 +1,7 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Builders;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -20,8 +21,7 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = DeviceController.GetPollingInterval(),
-                Enabled = true
+                Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
@@ -31,14 +31,14 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                AppController.HideInstance(this);
+                FormsController.HideInstance(this);
             }
         }
         private void ChechSingleAccount()
         {
             if (_userBankAccounts.Count <= 1)
                    DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
-                AppController.OpenChildForm(this,new BillDepositForm(),
+                FormsController.OpenChildForm(this,new BillDepositForm(),
                  (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
           
         }
@@ -75,7 +75,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildStandardButton(
-                "BackButton", MultilanguageConstants.SALIR, MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
 
 
             this.MainPanel.Controls.Add(backButton);
@@ -86,15 +86,20 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentUserBankAccount = (Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta)((CustomButton)sender).Tag;
 
-            AppController.OpenChildForm(this,new BillDepositForm(),
+            FormsController.OpenChildForm(this,new BillDepositForm(),
             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
 
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this,new CurrencySelectorForm(),
+            FormsController.OpenChildForm(this,new CurrencySelectorForm(),
                   (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+        }
+
+        private void BankAccountSelectorForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
         }
     }
 }

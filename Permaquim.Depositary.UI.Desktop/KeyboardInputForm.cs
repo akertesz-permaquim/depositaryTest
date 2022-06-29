@@ -2,6 +2,7 @@ using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Controls;
 using Permaquim.Depositary.UI.Desktop.Global;
 using System.Configuration;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -17,9 +18,9 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadStyles();
             Loadlogo();
            
-            TitleLabel.Text = MultilanguangeController.GetText(MultilanguageConstants.LOGIN_TITLE);
-            MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText(MultilanguageConstants.USERTEXTBOXPLACEHOLDER);
-            MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText(MultilanguageConstants.PASSWORDTEXTBOXPLACEHOLDER);
+            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LOGIN_TITLE);
+            MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.USERTEXTBOXPLACEHOLDER);
+            MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PASSWORDTEXTBOXPLACEHOLDER);
 
             MainKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
@@ -29,8 +30,7 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = DeviceController.GetPollingInterval(),
-                Enabled = true
+                Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
 
@@ -41,7 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                AppController.HideInstance(this);
+                FormsController.HideInstance(this);
             }
 
         }
@@ -69,31 +69,28 @@ namespace Permaquim.Depositary.UI.Desktop
                 if (args.UserText.Trim().Equals(string.Empty) ||
                     args.PasswordText.Trim().Equals(string.Empty))
                 {
-                    MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultilanguageConstants.FALTA_USUARIO_PASSWORD));
+                    MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.FALTA_USUARIO_PASSWORD));
                 }
                 else
                 {
-                    Permaquim.Depositario.Entities.Relations.Seguridad.Usuario currentUser =
-                        DatabaseController.Login(args.UserText.Trim(), args.PasswordText.Trim());
+                    var currentUser = DatabaseController.Login(args.UserText.Trim(), args.PasswordText.Trim());
 
                     if (currentUser.Id != 0)
                     {
-
-                        Permaquim.Depositario.Business.Tables.Operacion.Sesion sesion = new();
-                        sesion.Add(DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
+                        MultilanguangeController.ResetLanguage();
 
                         DatabaseController.GetTurnSchedule();
 
                         if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
                         {
                             MainKeyboard.ClearCredentials();
-                            AppController.OpenChildForm(this,new OperationForm(), 
+                            FormsController.OpenChildForm(this,new OperationForm(), 
                                 (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                         }
                     }
                     else
                     {
-                        MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultilanguageConstants.USUARIO_NO_REGISTRADO));
+                        MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_REGISTRADO));
                     }
                 }
             }
@@ -114,6 +111,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void MainKeyboard_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
+        }
+
+        private void KeyboardInputForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
         }
     }
 }

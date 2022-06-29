@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
-    internal static class AppController
+    internal static class FormsController
     {
         private static List<Form> _formList = new();
         public static MainForm MainFormInstance { get; set; }
@@ -27,8 +27,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             HideInstance(instance);
             OpenChildForm(childForm, device);
         }
-
-
         public static void OpenChildForm(Form childForm,
         Permaquim.Depositary.UI.Desktop.Components.Device device)
         {

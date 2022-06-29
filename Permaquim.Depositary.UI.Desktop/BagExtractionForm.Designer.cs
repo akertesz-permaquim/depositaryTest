@@ -453,6 +453,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BagExtractionForm";
             this.Load += new System.EventHandler(this.BagExtractionForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.BagExtractionForm_VisibleChanged);
             this.MonitorGroupBox.ResumeLayout(false);
             this.MonitorGroupBox.PerformLayout();
             this.NumberPanel.ResumeLayout(false);

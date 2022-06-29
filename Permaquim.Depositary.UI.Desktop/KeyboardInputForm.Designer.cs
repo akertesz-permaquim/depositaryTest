@@ -97,6 +97,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Load += new System.EventHandler(this.KeyboardInputForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.KeyboardInputForm_VisibleChanged);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LoginPictureBox)).EndInit();

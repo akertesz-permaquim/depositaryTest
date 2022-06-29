@@ -18,7 +18,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             return GetImageResource("Login");
         }
-
+        public static Image GetPresentation()
+        {
+            return GetImageResource("Presentacion");
+        }
         public static Image GetImageResource(string resourceName)
         {
             Image resultImage = null;
@@ -60,8 +63,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             System.Drawing.Color retValue = Color.White;
 
-            string stringColorName = Enum.GetName(colorName);
-            var ret = StyleItems.FirstOrDefault(s => s.Nombre.Equals(stringColorName));
+            var ret = StyleItems.FirstOrDefault(s => s.Nombre.Equals(Enum.GetName(colorName)));
 
             string value = ret.Valor;
             string valueType = ret.Valor.Substring(0, ret.Valor.IndexOf('('));
@@ -72,8 +74,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Int32 blue = Int32.Parse(value.Split(',')[2]);
             if (value.Split(',').Length == 4)
             {
-                int opacity = Convert.ToInt32(Decimal.Parse(value.Split(',')[3].Trim()) * 100);
-                retValue = Color.FromArgb(opacity,red, green, blue);
+                int transparency = Convert.ToInt32(Decimal.Parse(value.Split(',')[3].Trim()) * 100);
+                retValue = Color.FromArgb(transparency,red, green, blue);
             }
             else
             {

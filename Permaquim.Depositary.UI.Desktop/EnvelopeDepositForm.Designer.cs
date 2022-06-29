@@ -36,11 +36,6 @@
             this.denominationItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MainPanel = new System.Windows.Forms.Panel();
             this.DenominationsGridView = new System.Windows.Forms.DataGridView();
-            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Denomination = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumberPanel = new System.Windows.Forms.Panel();
             this.Button_3 = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_9 = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -62,10 +57,30 @@
             this.CurrencyLabel = new System.Windows.Forms.Label();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.MonitorGroupcheckbox = new System.Windows.Forms.CheckBox();
+            this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
+            this.CurrencyStatusLabel = new System.Windows.Forms.Label();
+            this.JammingCheckBox = new System.Windows.Forms.CheckBox();
+            this.CountingErrorCheckBox = new System.Windows.Forms.CheckBox();
+            this.DepositFinishedCheckbox = new System.Windows.Forms.CheckBox();
+            this.HopperBillPresentCheckBox = new System.Windows.Forms.CheckBox();
+            this.EscrowBillPresentCheckBox = new System.Windows.Forms.CheckBox();
+            this.DischargingFailureCheckBox = new System.Windows.Forms.CheckBox();
+            this.RejectedBillPresentCheckBox = new System.Windows.Forms.CheckBox();
+            this.RejectFullCheckBox = new System.Windows.Forms.CheckBox();
+            this.StackerFullCheckBox = new System.Windows.Forms.CheckBox();
+            this.DeviceModeLabel = new System.Windows.Forms.Label();
+            this.GeneralStatusLabel = new System.Windows.Forms.Label();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Denomination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.denominationItemBindingSource)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
             this.NumberPanel.SuspendLayout();
+            this.MonitorGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // denominationItemBindingSource
@@ -85,7 +100,7 @@
             this.MainPanel.Controls.Add(this.CurrencyLabel);
             this.MainPanel.Controls.Add(this.ConfirmAndExitDepositButton);
             this.MainPanel.Controls.Add(this.CancelDepositButton);
-            this.MainPanel.Location = new System.Drawing.Point(28, 8);
+            this.MainPanel.Location = new System.Drawing.Point(8, 8);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(724, 624);
             this.MainPanel.TabIndex = 137;
@@ -125,7 +140,7 @@
             this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
-            this.DenominationsGridView.Location = new System.Drawing.Point(24, 34);
+            this.DenominationsGridView.Location = new System.Drawing.Point(12, 34);
             this.DenominationsGridView.Name = "DenominationsGridView";
             this.DenominationsGridView.RowHeadersVisible = false;
             this.DenominationsGridView.RowTemplate.DividerHeight = 1;
@@ -133,54 +148,11 @@
             this.DenominationsGridView.RowTemplate.ReadOnly = true;
             this.DenominationsGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DenominationsGridView.Size = new System.Drawing.Size(674, 326);
+            this.DenominationsGridView.Size = new System.Drawing.Size(697, 326);
             this.DenominationsGridView.TabIndex = 175;
             this.DenominationsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DenominationsGridView_CellClick);
             this.DenominationsGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DenominationsGridView_EditingControlShowing);
             this.DenominationsGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DenominationsGridView_KeyPress);
-            // 
-            // Image
-            // 
-            this.Image.DataPropertyName = "Image";
-            this.Image.Frozen = true;
-            this.Image.HeaderText = "*";
-            this.Image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.Image.Name = "Image";
-            this.Image.ReadOnly = true;
-            this.Image.Width = 90;
-            // 
-            // Denomination
-            // 
-            this.Denomination.DataPropertyName = "Denomination";
-            this.Denomination.HeaderText = "*";
-            this.Denomination.Name = "Denomination";
-            this.Denomination.ReadOnly = true;
-            this.Denomination.Width = 260;
-            // 
-            // Quantity
-            // 
-            this.Quantity.DataPropertyName = "Quantity";
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.Quantity.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Quantity.HeaderText = "*";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.Width = 110;
-            // 
-            // Amount
-            // 
-            this.Amount.DataPropertyName = "Amount";
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Amount.HeaderText = "*";
-            this.Amount.Name = "Amount";
-            this.Amount.Width = 220;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
             // 
             // NumberPanel
             // 
@@ -196,9 +168,9 @@
             this.NumberPanel.Controls.Add(this.Button_4);
             this.NumberPanel.Controls.Add(this.Button_2);
             this.NumberPanel.Controls.Add(this.Button_1);
-            this.NumberPanel.Location = new System.Drawing.Point(28, 408);
+            this.NumberPanel.Location = new System.Drawing.Point(10, 409);
             this.NumberPanel.Name = "NumberPanel";
-            this.NumberPanel.Size = new System.Drawing.Size(668, 72);
+            this.NumberPanel.Size = new System.Drawing.Size(703, 72);
             this.NumberPanel.TabIndex = 174;
             // 
             // Button_3
@@ -319,7 +291,7 @@
             this.Button_BackSpace.ForeColor = System.Drawing.Color.White;
             this.Button_BackSpace.Location = new System.Drawing.Point(615, 9);
             this.Button_BackSpace.Name = "Button_BackSpace";
-            this.Button_BackSpace.Size = new System.Drawing.Size(54, 55);
+            this.Button_BackSpace.Size = new System.Drawing.Size(85, 55);
             this.Button_BackSpace.TabIndex = 179;
             this.Button_BackSpace.Tag = "{BACKSPACE}";
             this.Button_BackSpace.Text = "←";
@@ -462,15 +434,15 @@
             this.EnvelopeTextBox.BorderSize = 2;
             this.EnvelopeTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.EnvelopeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.EnvelopeTextBox.Location = new System.Drawing.Point(26, 361);
+            this.EnvelopeTextBox.Location = new System.Drawing.Point(8, 361);
             this.EnvelopeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.EnvelopeTextBox.Multiline = false;
             this.EnvelopeTextBox.Name = "EnvelopeTextBox";
             this.EnvelopeTextBox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
             this.EnvelopeTextBox.PasswordChar = false;
             this.EnvelopeTextBox.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.EnvelopeTextBox.PlaceholderText = "Identificador de sobre";
-            this.EnvelopeTextBox.Size = new System.Drawing.Size(672, 45);
+            this.EnvelopeTextBox.PlaceholderText = "*";
+            this.EnvelopeTextBox.Size = new System.Drawing.Size(702, 45);
             this.EnvelopeTextBox.TabIndex = 159;
             this.EnvelopeTextBox.Texts = "";
             this.EnvelopeTextBox.UnderlinedStyle = false;
@@ -498,11 +470,11 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(272, 479);
+            this.BackButton.Location = new System.Drawing.Point(244, 479);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(160, 55);
+            this.BackButton.Size = new System.Drawing.Size(230, 55);
             this.BackButton.TabIndex = 156;
-            this.BackButton.Text = "Salir";
+            this.BackButton.Text = "*";
             this.BackButton.TextColor = System.Drawing.Color.White;
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
@@ -512,9 +484,9 @@
             this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(474, 7);
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(461, 8);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(225, 25);
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(249, 25);
             this.RemainingTimeLabel.TabIndex = 155;
             this.RemainingTimeLabel.Text = "*";
             this.RemainingTimeLabel.Click += new System.EventHandler(this.RemainingTimeLabel_Click);
@@ -524,22 +496,22 @@
             this.SubtotalLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
-            this.SubtotalLabel.Location = new System.Drawing.Point(226, 7);
+            this.SubtotalLabel.Location = new System.Drawing.Point(213, 8);
             this.SubtotalLabel.Name = "SubtotalLabel";
             this.SubtotalLabel.Size = new System.Drawing.Size(248, 25);
             this.SubtotalLabel.TabIndex = 154;
-            this.SubtotalLabel.Text = "Sub Total: $ 0";
+            this.SubtotalLabel.Text = "*";
             // 
             // CurrencyLabel
             // 
             this.CurrencyLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
-            this.CurrencyLabel.Location = new System.Drawing.Point(25, 7);
+            this.CurrencyLabel.Location = new System.Drawing.Point(12, 8);
             this.CurrencyLabel.Name = "CurrencyLabel";
             this.CurrencyLabel.Size = new System.Drawing.Size(201, 25);
             this.CurrencyLabel.TabIndex = 153;
-            this.CurrencyLabel.Text = "Divisa: Pesos";
+            this.CurrencyLabel.Text = "*";
             // 
             // ConfirmAndExitDepositButton
             // 
@@ -552,12 +524,12 @@
             this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(434, 479);
+            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(481, 479);
             this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
-            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(266, 55);
+            this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(230, 55);
             this.ConfirmAndExitDepositButton.TabIndex = 152;
             this.ConfirmAndExitDepositButton.Tag = "";
-            this.ConfirmAndExitDepositButton.Text = "Confirmar ";
+            this.ConfirmAndExitDepositButton.Text = "*";
             this.ConfirmAndExitDepositButton.TextColor = System.Drawing.Color.White;
             this.ConfirmAndExitDepositButton.UseVisualStyleBackColor = false;
             this.ConfirmAndExitDepositButton.Visible = false;
@@ -574,23 +546,261 @@
             this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
-            this.CancelDepositButton.Location = new System.Drawing.Point(24, 479);
+            this.CancelDepositButton.Location = new System.Drawing.Point(8, 479);
             this.CancelDepositButton.Name = "CancelDepositButton";
-            this.CancelDepositButton.Size = new System.Drawing.Size(248, 55);
+            this.CancelDepositButton.Size = new System.Drawing.Size(230, 55);
             this.CancelDepositButton.TabIndex = 151;
             this.CancelDepositButton.Tag = "";
-            this.CancelDepositButton.Text = "Cancelar";
+            this.CancelDepositButton.Text = "*";
             this.CancelDepositButton.TextColor = System.Drawing.Color.White;
             this.CancelDepositButton.UseVisualStyleBackColor = false;
             this.CancelDepositButton.Visible = false;
             this.CancelDepositButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
+            // MonitorGroupcheckbox
+            // 
+            this.MonitorGroupcheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MonitorGroupcheckbox.AutoSize = true;
+            this.MonitorGroupcheckbox.BackColor = System.Drawing.Color.Transparent;
+            this.MonitorGroupcheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MonitorGroupcheckbox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(816, 8);
+            this.MonitorGroupcheckbox.Name = "MonitorGroupcheckbox";
+            this.MonitorGroupcheckbox.Size = new System.Drawing.Size(71, 17);
+            this.MonitorGroupcheckbox.TabIndex = 143;
+            this.MonitorGroupcheckbox.Text = "Eventos";
+            this.MonitorGroupcheckbox.UseVisualStyleBackColor = false;
+            this.MonitorGroupcheckbox.CheckStateChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
+            // 
+            // MonitorGroupBox
+            // 
+            this.MonitorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MonitorGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.MonitorGroupBox.Controls.Add(this.CurrencyStatusLabel);
+            this.MonitorGroupBox.Controls.Add(this.JammingCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.CountingErrorCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.DepositFinishedCheckbox);
+            this.MonitorGroupBox.Controls.Add(this.HopperBillPresentCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.EscrowBillPresentCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.DischargingFailureCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.RejectedBillPresentCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.RejectFullCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.StackerFullCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.DeviceModeLabel);
+            this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
+            this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(752, 112);
+            this.MonitorGroupBox.Name = "MonitorGroupBox";
+            this.MonitorGroupBox.Size = new System.Drawing.Size(152, 308);
+            this.MonitorGroupBox.TabIndex = 142;
+            this.MonitorGroupBox.TabStop = false;
+            this.MonitorGroupBox.Text = "Monitor";
+            this.MonitorGroupBox.Visible = false;
+            // 
+            // CurrencyStatusLabel
+            // 
+            this.CurrencyStatusLabel.AutoSize = true;
+            this.CurrencyStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CurrencyStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CurrencyStatusLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.CurrencyStatusLabel.Location = new System.Drawing.Point(6, 64);
+            this.CurrencyStatusLabel.Name = "CurrencyStatusLabel";
+            this.CurrencyStatusLabel.Size = new System.Drawing.Size(96, 13);
+            this.CurrencyStatusLabel.TabIndex = 36;
+            this.CurrencyStatusLabel.Text = "CurrencyStatus";
+            // 
+            // JammingCheckBox
+            // 
+            this.JammingCheckBox.AutoSize = true;
+            this.JammingCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.JammingCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.JammingCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.JammingCheckBox.Location = new System.Drawing.Point(9, 280);
+            this.JammingCheckBox.Name = "JammingCheckBox";
+            this.JammingCheckBox.Size = new System.Drawing.Size(77, 17);
+            this.JammingCheckBox.TabIndex = 35;
+            this.JammingCheckBox.Text = "Jamming";
+            this.JammingCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // CountingErrorCheckBox
+            // 
+            this.CountingErrorCheckBox.AutoSize = true;
+            this.CountingErrorCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.CountingErrorCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CountingErrorCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.CountingErrorCheckBox.Location = new System.Drawing.Point(9, 256);
+            this.CountingErrorCheckBox.Name = "CountingErrorCheckBox";
+            this.CountingErrorCheckBox.Size = new System.Drawing.Size(110, 17);
+            this.CountingErrorCheckBox.TabIndex = 34;
+            this.CountingErrorCheckBox.Text = "Counting Error";
+            this.CountingErrorCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // DepositFinishedCheckbox
+            // 
+            this.DepositFinishedCheckbox.AutoSize = true;
+            this.DepositFinishedCheckbox.BackColor = System.Drawing.Color.Transparent;
+            this.DepositFinishedCheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DepositFinishedCheckbox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.DepositFinishedCheckbox.Location = new System.Drawing.Point(9, 232);
+            this.DepositFinishedCheckbox.Name = "DepositFinishedCheckbox";
+            this.DepositFinishedCheckbox.Size = new System.Drawing.Size(117, 17);
+            this.DepositFinishedCheckbox.TabIndex = 33;
+            this.DepositFinishedCheckbox.Text = "Deposit finished";
+            this.DepositFinishedCheckbox.UseVisualStyleBackColor = false;
+            // 
+            // HopperBillPresentCheckBox
+            // 
+            this.HopperBillPresentCheckBox.AutoSize = true;
+            this.HopperBillPresentCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.HopperBillPresentCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.HopperBillPresentCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.HopperBillPresentCheckBox.Location = new System.Drawing.Point(8, 207);
+            this.HopperBillPresentCheckBox.Name = "HopperBillPresentCheckBox";
+            this.HopperBillPresentCheckBox.Size = new System.Drawing.Size(135, 17);
+            this.HopperBillPresentCheckBox.TabIndex = 32;
+            this.HopperBillPresentCheckBox.Text = "Hopper Bill Present";
+            this.HopperBillPresentCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // EscrowBillPresentCheckBox
+            // 
+            this.EscrowBillPresentCheckBox.AutoSize = true;
+            this.EscrowBillPresentCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.EscrowBillPresentCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.EscrowBillPresentCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.EscrowBillPresentCheckBox.Location = new System.Drawing.Point(8, 183);
+            this.EscrowBillPresentCheckBox.Name = "EscrowBillPresentCheckBox";
+            this.EscrowBillPresentCheckBox.Size = new System.Drawing.Size(134, 17);
+            this.EscrowBillPresentCheckBox.TabIndex = 31;
+            this.EscrowBillPresentCheckBox.Text = "Escrow Bill Present";
+            this.EscrowBillPresentCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // DischargingFailureCheckBox
+            // 
+            this.DischargingFailureCheckBox.AutoSize = true;
+            this.DischargingFailureCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.DischargingFailureCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DischargingFailureCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.DischargingFailureCheckBox.Location = new System.Drawing.Point(8, 159);
+            this.DischargingFailureCheckBox.Name = "DischargingFailureCheckBox";
+            this.DischargingFailureCheckBox.Size = new System.Drawing.Size(134, 17);
+            this.DischargingFailureCheckBox.TabIndex = 30;
+            this.DischargingFailureCheckBox.Text = "Discharging Failure";
+            this.DischargingFailureCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // RejectedBillPresentCheckBox
+            // 
+            this.RejectedBillPresentCheckBox.AutoSize = true;
+            this.RejectedBillPresentCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.RejectedBillPresentCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RejectedBillPresentCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.RejectedBillPresentCheckBox.Location = new System.Drawing.Point(8, 135);
+            this.RejectedBillPresentCheckBox.Name = "RejectedBillPresentCheckBox";
+            this.RejectedBillPresentCheckBox.Size = new System.Drawing.Size(144, 17);
+            this.RejectedBillPresentCheckBox.TabIndex = 29;
+            this.RejectedBillPresentCheckBox.Text = "Rejected Bill Present";
+            this.RejectedBillPresentCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // RejectFullCheckBox
+            // 
+            this.RejectFullCheckBox.AutoSize = true;
+            this.RejectFullCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.RejectFullCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RejectFullCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.RejectFullCheckBox.Location = new System.Drawing.Point(8, 111);
+            this.RejectFullCheckBox.Name = "RejectFullCheckBox";
+            this.RejectFullCheckBox.Size = new System.Drawing.Size(85, 17);
+            this.RejectFullCheckBox.TabIndex = 28;
+            this.RejectFullCheckBox.Text = "Reject Full";
+            this.RejectFullCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // StackerFullCheckBox
+            // 
+            this.StackerFullCheckBox.AutoSize = true;
+            this.StackerFullCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.StackerFullCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.StackerFullCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.StackerFullCheckBox.Location = new System.Drawing.Point(8, 87);
+            this.StackerFullCheckBox.Name = "StackerFullCheckBox";
+            this.StackerFullCheckBox.Size = new System.Drawing.Size(93, 17);
+            this.StackerFullCheckBox.TabIndex = 27;
+            this.StackerFullCheckBox.Text = "Stacker Full";
+            this.StackerFullCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // DeviceModeLabel
+            // 
+            this.DeviceModeLabel.AutoSize = true;
+            this.DeviceModeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.DeviceModeLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DeviceModeLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.DeviceModeLabel.Location = new System.Drawing.Point(6, 40);
+            this.DeviceModeLabel.Name = "DeviceModeLabel";
+            this.DeviceModeLabel.Size = new System.Drawing.Size(76, 13);
+            this.DeviceModeLabel.TabIndex = 26;
+            this.DeviceModeLabel.Text = "DeviceMode";
+            // 
+            // GeneralStatusLabel
+            // 
+            this.GeneralStatusLabel.AutoSize = true;
+            this.GeneralStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.GeneralStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.GeneralStatusLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.GeneralStatusLabel.Location = new System.Drawing.Point(6, 16);
+            this.GeneralStatusLabel.Name = "GeneralStatusLabel";
+            this.GeneralStatusLabel.Size = new System.Drawing.Size(88, 13);
+            this.GeneralStatusLabel.TabIndex = 25;
+            this.GeneralStatusLabel.Text = "GeneralStatus";
+            // 
+            // Image
+            // 
+            this.Image.DataPropertyName = "Image";
+            this.Image.Frozen = true;
+            this.Image.HeaderText = "*";
+            this.Image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Image.Name = "Image";
+            this.Image.ReadOnly = true;
+            this.Image.Width = 90;
+            // 
+            // Denomination
+            // 
+            this.Denomination.DataPropertyName = "Denomination";
+            this.Denomination.HeaderText = "*";
+            this.Denomination.Name = "Denomination";
+            this.Denomination.ReadOnly = true;
+            this.Denomination.Width = 260;
+            // 
+            // Quantity
+            // 
+            this.Quantity.DataPropertyName = "Quantity";
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.Quantity.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Quantity.HeaderText = "*";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Width = 110;
+            // 
+            // Amount
+            // 
+            this.Amount.DataPropertyName = "Amount";
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.Amount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Amount.HeaderText = "*";
+            this.Amount.Name = "Amount";
+            this.Amount.Width = 236;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
             // EnvelopeDepositForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(783, 643);
+            this.ClientSize = new System.Drawing.Size(919, 643);
             this.ControlBox = false;
+            this.Controls.Add(this.MonitorGroupcheckbox);
+            this.Controls.Add(this.MonitorGroupBox);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EnvelopeDepositForm";
@@ -600,7 +810,10 @@
             this.MainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).EndInit();
             this.NumberPanel.ResumeLayout(false);
+            this.MonitorGroupBox.ResumeLayout(false);
+            this.MonitorGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -632,6 +845,20 @@
         private CustomButton Button_2;
         private CustomButton Button_1;
         private DataGridView DenominationsGridView;
+        private CheckBox MonitorGroupcheckbox;
+        private GroupBox MonitorGroupBox;
+        private Label CurrencyStatusLabel;
+        private CheckBox JammingCheckBox;
+        private CheckBox CountingErrorCheckBox;
+        private CheckBox DepositFinishedCheckbox;
+        private CheckBox HopperBillPresentCheckBox;
+        private CheckBox EscrowBillPresentCheckBox;
+        private CheckBox DischargingFailureCheckBox;
+        private CheckBox RejectedBillPresentCheckBox;
+        private CheckBox RejectFullCheckBox;
+        private CheckBox StackerFullCheckBox;
+        private Label DeviceModeLabel;
+        private Label GeneralStatusLabel;
         private DataGridViewImageColumn Image;
         private DataGridViewTextBoxColumn Denomination;
         private DataGridViewTextBoxColumn Quantity;

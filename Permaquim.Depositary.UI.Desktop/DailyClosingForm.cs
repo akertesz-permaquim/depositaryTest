@@ -2,6 +2,7 @@
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -19,8 +20,7 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
-                Interval = DeviceController.GetPollingInterval(),
-                Enabled = true
+                Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
@@ -30,7 +30,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                AppController.HideInstance(this);
+                FormsController.HideInstance(this);
             }
         }
         private void DailyClosingForm_Load(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            InformationLabel.Text = MultilanguangeController.GetText("CONFIRMA_CIERRE_DIARIO");
+            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
         }
 
@@ -59,7 +59,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadDailyClosingButton()
         {
             CustomButton backButton = ControlBuilder.BuildStandardButton(
-                "DailyClosingButton", MultilanguangeController.GetText("ACCEPT_BUTTON"), MainPanel.Width);
+                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -68,7 +68,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CloseCurrentDay();
-            AppController.OpenChildForm(this,new OtherOperationsForm(), _device);
+            FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
         }
         #endregion
 
@@ -76,7 +76,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildCancelButton(
-                "BackButton", MultilanguangeController.GetText("CANCEL_BUTTON"), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -84,10 +84,14 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            AppController.OpenChildForm(this,new OtherOperationsForm(), _device);
+            FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
         }
         #endregion
 
+        private void DailyClosingForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
+        }
     }
 }
 
