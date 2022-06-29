@@ -30,6 +30,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
         }
 
+        private IoBoardStatus _ioBoardStatus;
+
+        public IoBoardStatus IoBoardStatusProperty
+        {
+            get { return _ioBoardStatus; }
+        }
+
         private StatesResult _stateResultProperty;
 
         public StatesResult StateResultProperty
@@ -367,7 +374,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         public StatesResult Sense()
         {
-            if (_counterPort.IsOpen)
+            if (_counterPort != null && _counterPort.IsOpen)
             {
                 Log("COMMAND: Sense");
                 DiscardBuffer(_counterPort);
@@ -428,6 +435,35 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 Log("COMMAND: StoringStart");
                 DiscardBuffer(_counterPort);
                 byte[] bcc = GetBCC(_device.StoringStart);
+
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterSimpleResponse();
+
+                _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return _stateResultProperty;
+            }
+            else
+            {
+                Log("COMMAND NOT SENT: StoringStart. Port is closed.");
+                return StateResultProperty;
+            }
+        }
+
+        public StatesResult SwitchCurrency(long counterIndex)
+        {
+            if (_counterPort !=null && _counterPort.IsOpen)
+            {
+                Log("COMMAND: StoringStart");
+                DiscardBuffer(_counterPort);
+                byte[] currencyRequest = _device.SwitchCurrency;
+                  
+                currencyRequest[5] = BitConverter.GetBytes(counterIndex)[0]; 
+
+                byte[] bcc = GetBCC(currencyRequest);
 
                 _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
@@ -1011,18 +1047,24 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             IoBoardStatus result = new();
             try
             {
-                if (this._ioboardPort.IsOpen)
+                if (this._ioboardPort != null && this._ioboardPort.IsOpen)
                 {
 
                     this._ioboardPort.Write(_device.Status);
 
                     result.ParseStatus(ReadIoBoardResponse());
+
+                    _ioBoardStatus = result;
                 }
                 return result;
             }
             catch (Exception ex)
             {
                 return result;
+            }
+            finally
+            {
+                result = null;
             }
         }
 
@@ -1386,7 +1428,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
 
             return source.ToArray<byte>();
-
+            //return Qarray;
 
         }
 
@@ -1462,6 +1504,31 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     return false;
             }
 
+        }
+        public void IoBoardReconnect()
+        {
+            try
+            {
+                _ioboardPort.Open();
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        public void CounterBoardReconnect()
+        {
+            try
+            {
+                _counterPort.Open();
+
+            }
+            catch (Exception)
+            {
+
+
+            }
         }
         #endregion
     }
@@ -1603,7 +1670,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             State47 = 47,
             State48 = 48,
             State49 = 49,
-            State50 = 50,
+            PQWaitingEnvelope = 50,
             State51 = 51,
             PQWaitingTocloseEscrow = 52
 

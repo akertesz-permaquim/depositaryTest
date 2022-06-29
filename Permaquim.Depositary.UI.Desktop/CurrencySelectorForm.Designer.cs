@@ -35,10 +35,9 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.MainPanel.Location = new System.Drawing.Point(250, 0);
+            this.MainPanel.Location = new System.Drawing.Point(250, 60);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 600);
+            this.MainPanel.Size = new System.Drawing.Size(300, 480);
             this.MainPanel.TabIndex = 1;
             // 
             // CurrencySelectorForm
@@ -51,6 +50,8 @@
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CurrencySelectorForm";
+            this.Load += new System.EventHandler(this.CurrencySelectorForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.CurrencySelectorForm_VisibleChanged);
             this.ResumeLayout(false);
 
         }

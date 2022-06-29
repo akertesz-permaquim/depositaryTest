@@ -35,23 +35,25 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(240, 8);
+            this.MainPanel.Location = new System.Drawing.Point(250, 60);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 560);
+            this.MainPanel.Size = new System.Drawing.Size(300, 480);
             this.MainPanel.TabIndex = 0;
-            this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPanel_Paint);
             // 
             // OperationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(770, 571);
+            this.ClientSize = new System.Drawing.Size(798, 598);
             this.ControlBox = false;
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "OperationForm";
             this.Load += new System.EventHandler(this.OperationForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.OperationForm_VisibleChanged);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationForm_MouseClick);
             this.ResumeLayout(false);
 
         }
@@ -59,5 +61,6 @@
         #endregion
 
         private FlowLayoutPanel MainPanel;
+        private CustomButton customButton1;
     }
 }

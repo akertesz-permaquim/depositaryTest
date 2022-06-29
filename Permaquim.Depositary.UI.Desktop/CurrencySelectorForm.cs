@@ -1,4 +1,7 @@
-﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+﻿using Permaquim.Depositary.UI.Desktop.Builders;
+using Permaquim.Depositary.UI.Desktop.Components;
+using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,20 +11,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class CurrencySelectorForm : Form
     {
+        public Device _device { get; set; }
+
         private List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> _currencies = DatabaseController.GetCurrencies();
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public CurrencySelectorForm()
         {
             InitializeComponent();
             CenterPanel();
             LoadCurrencyButtons();
             LoadBackButton();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval()
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
+            TimeOutController.Reset();
         }
-
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                FormsController.HideInstance(this);
+            }
+        }
         private void CenterPanel()
         {
 
@@ -32,32 +53,27 @@ namespace Permaquim.Depositary.UI.Desktop
             };
         }
 
-        private void LoadCurrencyButtons()
+        private void CurrencySelectorForm_Load(object sender, EventArgs e)
+        {
+            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            LoadStyles();
+        }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+        }
+        #region CurrencyButtons
+
+       private void LoadCurrencyButtons()
         {
 
 
             foreach (var item in _currencies)
             {
-                // Si la moneda no está habilitada para la sucursal 
 
-                CustomButton newButton = new CustomButton();
-
-                newButton.BackColor = System.Drawing.Color.SeaGreen;
-                newButton.BackgroundColor = System.Drawing.Color.SeaGreen;
-                newButton.BorderColor = System.Drawing.Color.LightGreen;
-                newButton.BorderRadius = 5;
-                newButton.BorderSize = 0;
-                newButton.FlatAppearance.BorderSize = 0;
-                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                newButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-                newButton.ForeColor = System.Drawing.Color.White;
-                newButton.Location = new System.Drawing.Point(3, 3);
-                newButton.Name = "DepositButton" + item.Id.ToString();
-                newButton.Size = new System.Drawing.Size(293, 77);
-                newButton.TabIndex = 0;
-                newButton.Text = MultilanguangeController.GetText(item.Nombre);
-                newButton.TextColor = System.Drawing.Color.White;
-                newButton.UseVisualStyleBackColor = false;
+                CustomButton newButton = ControlBuilder.BuildStandardButton(
+                    "CurrencyButton" + item.Id.ToString(), 
+                    MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
                 newButton.Click += new System.EventHandler(CurrencyButton_Click);
 
@@ -67,44 +83,22 @@ namespace Permaquim.Depositary.UI.Desktop
             
             }
         }
-        private void LoadBackButton()
-        {
-            CustomButton backButton = new CustomButton();
-            backButton.BackColor = System.Drawing.Color.SteelBlue;
-            backButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            backButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            backButton.BorderRadius = 5;
-            backButton.BorderSize = 0;
-            backButton.FlatAppearance.BorderSize = 0;
-            backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            backButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            backButton.ForeColor = System.Drawing.Color.White;
-            backButton.Location = new System.Drawing.Point(3, 3);
-            backButton.Name = "BackButton";
-            backButton.Size = new System.Drawing.Size(293, 77);
-            backButton.TabIndex = 3;
-            backButton.Text = MultilanguangeController.GetText("Salir");
-            backButton.TextColor = System.Drawing.Color.White;
-            backButton.UseVisualStyleBackColor = false;
-
-            this.MainPanel.Controls.Add(backButton);
-
-            backButton.Click += new System.EventHandler(BackButton_Click);
-        }
         private void CurrencyButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
-            if (DatabaseController.CurrentOperation.Id == 1)
+            
+            _device.SwitchCurrency(DatabaseController.CurrentCurrency.IndiceEnContadora);
+
+             if (DatabaseController.CurrentOperation.Id == 1)
             {
                 if (DatabaseController.GetUserBankAccounts().Count == 0)
                 {
-
-                    AppController.OpenChildForm(new BillDepositForm(),
+                     FormsController.OpenChildForm(this,new BillDepositForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                 }
                 else
                 {
-                    AppController.OpenChildForm(new BankAccountSelectorForm(),
+                    FormsController.OpenChildForm(this,new BankAccountSelectorForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                 }
             }
@@ -113,22 +107,39 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (DatabaseController.GetUserBankAccounts().Count == 0)
                 {
-                    AppController.OpenChildForm(new EnvelopeDepositForm(),
+                    FormsController.OpenChildForm(this,new EnvelopeDepositForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                 }
                 else
                 {
-                    AppController.OpenChildForm(new BankAccountSelectorForm(),
+                    FormsController.OpenChildForm(this,new BankAccountSelectorForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                 }
 
             }
 
         }
+        #endregion
 
+        #region BackButton
+        private void LoadBackButton()
+        {
+            CustomButton backButton = ControlBuilder.BuildExitButton(
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(backButton);
+
+            backButton.Click += new System.EventHandler(BackButton_Click);
+        }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            FormsController.OpenChildForm(this,new OperationForm(), _device);
+        }
+        #endregion
+
+        private void CurrencySelectorForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
         }
     }
 }

@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
 
-    internal class DeviceController
+    internal static class DeviceController
     {
-      
+      public static int GetPollingInterval()
+        {
+            return 200;
+        }
     }
 }

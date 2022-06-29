@@ -1,10 +1,14 @@
-﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+﻿using Permaquim.Depositary.UI.Desktop.Builders;
+using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class BankAccountSelectorForm : Form
     {
         private List<Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta> _userBankAccounts = DatabaseController.GetUserBankAccounts();
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public BankAccountSelectorForm()
         {
             InitializeComponent();
@@ -13,15 +17,30 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadBankAccountsButtons();
             LoadBackButton();
             ChechSingleAccount();
-        }
 
+            TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval()
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
+        }
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                FormsController.HideInstance(this);
+            }
+        }
         private void ChechSingleAccount()
         {
             if (_userBankAccounts.Count <= 1)
                    DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
-                AppController.OpenChildForm(new BillDepositForm(),
+                FormsController.OpenChildForm(this,new BillDepositForm(),
                  (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-           
+          
         }
 
         private void CenterPanel()
@@ -40,26 +59,12 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _userBankAccounts)
             {
 
-                CustomButton newButton = new CustomButton();
+                CustomButton newButton = ControlBuilder.BuildStandardButton(
+                "BankAccountButton" + item.Id.ToString(),
+                item.CuentaId.Nombre + " - " + item.CuentaId.Numero + " (" + item.CuentaId.BancoId.Nombre + ")"
+                , MainPanel.Width);
 
-                newButton.BackColor = System.Drawing.Color.SeaGreen;
-                newButton.BackgroundColor = System.Drawing.Color.SeaGreen;
-                newButton.BorderColor = System.Drawing.Color.LightGreen;
-                newButton.BorderRadius = 5;
-                newButton.BorderSize = 0;
-                newButton.FlatAppearance.BorderSize = 0;
-                newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                newButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-                newButton.ForeColor = System.Drawing.Color.White;
-                newButton.Location = new System.Drawing.Point(3, 3);
-                newButton.Name = "BankAccounttButton" + item.Id.ToString();
-                newButton.Size = new System.Drawing.Size(MainPanel.Width - 5, 77);
-                newButton.TabIndex = 0;
-                newButton.Text = item.CuentaId.Nombre + " - "  + item.CuentaId.Numero + " (" + item.CuentaId.BancoId.Nombre + ")";
-                newButton.TextColor = System.Drawing.Color.White;
-                newButton.UseVisualStyleBackColor = false;
-
-                newButton.Click += new System.EventHandler(BankAccountButton_Click);
+                 newButton.Click += new System.EventHandler(BankAccountButton_Click);
 
                 newButton.Tag = item;
 
@@ -69,23 +74,9 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = new CustomButton();
-            backButton.BackColor = System.Drawing.Color.SteelBlue;
-            backButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            backButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            backButton.BorderRadius = 5;
-            backButton.BorderSize = 0;
-            backButton.FlatAppearance.BorderSize = 0;
-            backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            backButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            backButton.ForeColor = System.Drawing.Color.White;
-            backButton.Location = new System.Drawing.Point(3, 3);
-            backButton.Name = "BackButton";
-            backButton.Size = new System.Drawing.Size(MainPanel.Width - 5, 77);
-            backButton.TabIndex = 3;
-            backButton.Text = MultilanguangeController.GetText("Salir");
-            backButton.TextColor = System.Drawing.Color.White;
-            backButton.UseVisualStyleBackColor = false;
+            CustomButton backButton = ControlBuilder.BuildStandardButton(
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -95,14 +86,20 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentUserBankAccount = (Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta)((CustomButton)sender).Tag;
 
-            AppController.OpenChildForm(new BillDepositForm(),
+            FormsController.OpenChildForm(this,new BillDepositForm(),
             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
 
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            FormsController.OpenChildForm(this,new CurrencySelectorForm(),
+                  (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+        }
+
+        private void BankAccountSelectorForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _pollingTimer.Enabled = this.Visible;
         }
     }
 }

@@ -32,7 +32,7 @@
     "BaudRate": 9600
   },
   "IOboardComPort": {
-    "PortName": "COM9",
+    "PortName": "COM3",
     "Parity": 0,
     "DataBits": 8,
     "ReadBufferSize": 1048576,

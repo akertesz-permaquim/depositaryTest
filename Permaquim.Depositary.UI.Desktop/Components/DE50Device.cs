@@ -43,7 +43,9 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public byte[] DenominationDataRequest = new byte[7] { (byte)2, (byte)48, (byte)48, (byte)49, (byte)68, (byte)3, (byte)0 };
 
         // Currency
-        public byte[] SwitchCurrency = new byte[7] { (byte)2, (byte)48, (byte)48, (byte)49, (byte)57, (byte)3, (byte)0 };
+        public byte[] SwitchCurrency = new byte[8] { (byte)2, (byte)48, (byte)48, (byte)50, (byte)57, (byte)48, (byte)3, (byte)0 };
+
+                                     //new byte[8] { (byte)2, (byte)30, (byte)30, (byte)32, (byte)39, (byte)0, (byte)3, (byte)0 };
 
         //IO board commands
 
