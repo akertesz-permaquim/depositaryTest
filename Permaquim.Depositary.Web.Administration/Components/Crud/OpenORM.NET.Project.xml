@@ -53,9 +53,7 @@
   <MappedStoredProcedures />
   <SelectedTables>
     <string>Banca.Banco</string>
-    <string>Banca.Cuenta</string>
     <string>Banca.TipoCuenta</string>
-    <string>Banca.UsuarioCuenta</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.IdentificadorUsuario</string>
@@ -89,7 +87,6 @@
     <string>Seguridad.AplicacionParametro</string>
     <string>Seguridad.AplicacionParametroValor</string>
     <string>Seguridad.Funcion</string>
-    <string>Seguridad.Menu</string>
     <string>Seguridad.Rol</string>
     <string>Seguridad.RolFuncion</string>
     <string>Seguridad.TipoAplicacion</string>
@@ -100,9 +97,9 @@
     <string>Seguridad.UsuarioSector</string>
     <string>Sincronizacion.Configuracion</string>
     <string>Sincronizacion.Entidad</string>
-    <string>Turno.Agenda</string>
-    <string>Turno.Esquema</string>
-    <string>Turno.EsquemaDetalle</string>
+    <string>Turno.AgendaTurno</string>
+    <string>Turno.EsquemaDetalleTurno</string>
+    <string>Turno.EsquemaTurno</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
   </SelectedTables>

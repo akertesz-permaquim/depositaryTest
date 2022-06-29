@@ -35,17 +35,42 @@
         public string UsuarioCreacion { get; set; }
     }
 
+    public class FuncionRol
+    {
+        public Int64 FuncionId { get; set; }
+        public Int64 RolId { get; set; }
+        public string FuncionNombre { get; set; }
+        public bool PuedeVisualizar { get; set; }
+        public bool PuedeAgregar { get; set; }
+        public bool PuedeModificar { get; set; }
+        public bool PuedeEliminar { get; set; }
+    }
+    public class Menu
+    {
+        public Int64 MenuId { get; set; }
+        public Int64? DependeDe { get; set; }
+        public Int64 TipoMenuId { get; set; }
+        public string MenuNombre { get; set; }
+        public string MenuDescripcion { get; set; }
+        public string Imagen { get; set; }
+        public string Referencia { get; set; }
+    }
+
     public class FuncionMenu
     {
         public Int64 FuncionId { get; set; }
         public Int64? MenuId { get; set; }
         public Int64? DependeDe { get; set; }
+        public string ImagenMenu { get; set; }
         public string FuncionNombre { get; set; }
         public string MenuNombre { get; set; }
+        public string MenuDescripcion { get; set; }
+        public Int64 TipoMenuId { get; set; }
         public bool PuedeVisualizar { get; set; }
         public bool PuedeAgregar { get; set; }
         public bool PuedeModificar { get; set; }
         public bool PuedeEliminar { get; set; }
         public string Referencia { get; set; }
     }
+
 }

@@ -34,16 +34,41 @@
         public double PorcentajeOcupacionbolsa { get; set; }
     }
 
+    public class InformacionDepositario
+    {
+        public Int64 DepositarioId { get; set; }
+        public string NumeroSerie { get; set; }
+        public string ImagenModelo { get; set; }
+        public DateTime FechaUltimaSincronizacion { get; set; }
+        public float PorcentajeOcupacionBolsa { get; set; }
+        public string IdentificadorBolsa { get; set; }
+        public Double TotalValidado { get; set; }
+        public Double TotalAValidar { get; set; }
+        public Double Total
+        {
+            get
+            {
+                return TotalValidado + TotalAValidar;
+            }
+        }
+        public string CodigoMoneda { get; set; }
+        public int CantidadBilletesEnBolsa { get; set; }
+        public int CapacidadBilletesBolsa { get; set; }
+        public string Turno { get; set; }
+        public DateTime FechaAperturaTurno { get; set; }
+        public bool DepositoEnOtraMoneda { get; set; }
+    }
+
     public class TransaccionValidadaMonitor
     {
         public Int64 TransaccionId { get; set; }
         public DateTime FechaTransaccion { get; set; }
         public string TipoTransaccion { get; set; }
+        public string Moneda { get; set; }
         public string UsuarioTransaccion { get; set; }
         public string UsuarioCuenta { get; set; }
         public string Cuenta { get; set; }
         public string Banco { get; set; }
-        public string Contenedor { get; set; }
         public string TotalValidado { get; set; }
         public Int64 DepositarioId { get; set; }
     }
@@ -53,9 +78,18 @@
         public Int64 TransaccionId { get; set; }
         public Int64 TransaccionDetalleId { get; set; }
         public DateTime FechaTransaccionDetalle { get; set; }
+        public Int64 DenominacionId { get; set; }
         public string Denominacion { get; set; }
         public string ImagenDenominacion { get; set; }
-        public string Moneda { get; set; }
+        public string CodigoMoneda { get; set; }
+        public double TotalValidado { get; set; }
+        public string TotalValidadoFormateado
+        {
+            get
+            {
+                return CodigoMoneda + " " + TotalValidado.ToString();
+            }
+        }
         public Int64 CantidadUnidades { get; set; }
     }
 
@@ -70,9 +104,9 @@
         public string UsuarioCuenta { get; set; }
         public string Cuenta { get; set; }
         public string Banco { get; set; }
-        public string Contenedor { get; set; }
         public string CodigoSobre { get; set; }
         public string TotalAValidar { get; set; }
+        public string Moneda { get; set; }
         public Int64 DepositarioId { get; set; }
     }
     public class DetalleTransaccionAValidarMonitor
@@ -80,8 +114,16 @@
         public Int64 TransaccionSobreDetalleId { get; set; }
         public DateTime FechaTransaccionSobreDetalle { get; set; }
         public Int64 CantidadDeclarada { get; set; }
+        public double ValorDeclarado { get; set; }
         public Int64 TransaccionSobreId { get; set; }
-        public string Moneda { get; set; }
+        public string CodigoMoneda { get; set; }
+        public string ValorDeclaradoFormateado
+        {
+            get
+            {
+                return CodigoMoneda + " " + ValorDeclarado.ToString();
+            }
+        }
         public string TipoValor { get; set; }
     }
 
@@ -99,12 +141,11 @@
     public class ExistenciaAValidar
     {
         public Int64 DepositarioId { get; set; }
-        public Int64 DenominacionId { get; set; }
-        public string Denominacion { get; set; }
-        public Int64 CantidadValidada { get; set; }
-        public string ImagenDenominacion { get; set; }
-        public Int64 MonedaId { get; set; }
         public string Moneda { get; set; }
+        public Int64 TipoValorId { get; set; }
+        public string TipoValor { get; set; }
+        public string ImagenTipoValor { get; set; }
+        public Int64 Cantidad { get; set; }
     }
     public class TotalGeneral
     {

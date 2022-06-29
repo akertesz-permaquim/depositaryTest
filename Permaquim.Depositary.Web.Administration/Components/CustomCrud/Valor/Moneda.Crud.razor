@@ -4,301 +4,316 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
-@if (Moneda_entities == null)
+@if (dataFunciones != null)
 {
-    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+    @if (SeguridadController.VerificarPermisoFuncion("ValorMoneda", dataFunciones, "PuedeVisualizar"))
+    {
+        @if (Moneda_entities == null)
+        {
+            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+        }
+        else
+        {
+            switch (crudMode)
+            {
+                case CrudMode.Add:
+                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                        <ChildContent>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_TITLE",dataLenguaje) </h4>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+                case CrudMode.Delete:
+                    <RadzenBadge BadgeStyle="BadgeStyle.Warning">
+                        <ChildContent>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_TITLE",dataLenguaje) </h4>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+                case CrudMode.Edit:
+                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                        <ChildContent>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_TITLE",dataLenguaje) </h4>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+                case CrudMode.List:
+                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                        <ChildContent>
+                            <div>
+                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_TITLE",dataLenguaje) </h4>
+                            </div>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+            }
+            <hr>
+            if (crudMode == CrudMode.List)
+            {
+                <RadzenDataGrid RowExpand="@expandirMoneda" RowRender="@monedaRowRender" RowCollapse="@colapsarMoneda" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@Moneda_entities" TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+                    <EmptyTemplate>
+                        <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                    </EmptyTemplate>
+                    <Columns>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                            <HeaderTemplate>
+                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("ValorMoneda",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                                </RadzenButton>
+                            </HeaderTemplate>
+                            <Template Context="element">
+                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("ValorMoneda",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                                </RadzenButton>
+                                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("ValorMoneda",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                                </RadzenButton>
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="PaisId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Codigo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Simbolo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("SIMBOLO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="IndiceEnContadora" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                            <Template Context="data">
+                                <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
+                                </RadzenCheckBox>
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px">
+                            <Template>
+                                @if (Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion) != null)
+                                {
+                                    <RadzenLabel Text="@Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioCreacion).NickName" Component="UsuarioCreacion" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                                else
+                                {
+                                    <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px">
+                            <Template>
+                                @if (Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion) != null)
+                                {
+                                    <RadzenLabel Text="@Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion).NickName" Component="UsuarioModificacion" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                                else
+                                {
+                                    <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                    </Columns>
+                    <Template Context="moneda">
+                        <Denominacion_Crud MonedaId="@(moneda.Id)"></Denominacion_Crud>
+                    </Template>
+                </RadzenDataGrid>
+                <hr>
+            }
+
+            if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+            {
+                <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Data="@Moneda_entity" @bind-Value="Moneda_entity" Submit="Save" Visible="@(Moneda_entity != null)">
+                    <ChildContent>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.Id)" Name="Id" Disabled="true">
+                                </RadzenNumeric>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Component="Nombre" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Moneda_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                                </RadzenTextBox>
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Component="PaisId" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.PaisId)" Name="PaisId" Disabled="@(crudMode==CrudMode.Delete)">
+                                </RadzenNumeric>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Component="Codigo" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Moneda_entity.Codigo)" Name="Codigo" Disabled="@(crudMode==CrudMode.Delete)">
+                                </RadzenTextBox>
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenRequiredValidator Component="Codigo" Text="Codigo is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("SIMBOLO",dataLenguaje) Component="Simbolo" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Moneda_entity.Simbolo)" Name="Simbolo" Disabled="@(crudMode==CrudMode.Delete)">
+                                </RadzenTextBox>
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenRequiredValidator Component="Simbolo" Text="Simbolo is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Component="IndiceEnContadora" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.IndiceEnContadora)" Name="IndiceEnContadora" Disabled="@(crudMode==CrudMode.Delete)">
+                                </RadzenNumeric>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenCheckBox @bind-Value=@Moneda_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Moneda_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                            </div>
+                        </div>
+                        @if (crudMode != CrudMode.Add)
+                        {
+                            <div style="margin-bottom: 1rem" class="row">
+                                <div class="col-md-3">
+                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Component="UsuarioCreacion" style="width: 100%">
+                                    </RadzenLabel>
+                                </div>
+                                <div class="col-md-9">
+                                    @if ((@Usuario_UsuarioCreacion_entities.Count > 0 && @Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @Moneda_entity.UsuarioCreacion) != null) || crudMode != CrudMode.Delete)
+                                    {
+                                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Moneda_entity.UsuarioCreacion)"
+                                Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
+                                Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
+                                Disabled="true" />
+                                    }
+                                    else
+                                    {
+                                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
+                                Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
+                                Disabled="true" />
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @if (crudMode != CrudMode.Add)
+                        {
+                            <div style="margin-bottom: 1rem" class="row">
+                                <div class="col-md-3">
+                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Component="FechaCreacion" style="width: 100%">
+                                    </RadzenLabel>
+                                </div>
+                                <div class="col-md-9">
+                                    <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(Moneda_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true">
+                                    </RadzenDatePicker>
+                                </div>
+                            </div>
+                        }
+                        @if (crudMode != CrudMode.Add)
+                        {
+                            <div style="margin-bottom: 1rem" class="row">
+                                <div class="col-md-3">
+                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Component="UsuarioModificacion" style="width: 100%">
+                                    </RadzenLabel>
+                                </div>
+                                <div class="col-md-9">
+                                    @if ((@Usuario_UsuarioModificacion_entities.Count > 0 && @Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @Moneda_entity.UsuarioModificacion) != null) || crudMode != CrudMode.Delete)
+                                    {
+                                        <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100" @bind-Value="@(Moneda_entity.UsuarioModificacion)"
+                                Data=@Usuario_UsuarioModificacion_entities TextProperty="NickName" ValueProperty="Id"
+                                Change=@(args => SelectUsuario_UsuarioModificacionValueChanged(args))
+                                Disabled="true" />
+                                    }
+                                    else
+                                    {
+                                        <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100"
+                                Data=@Usuario_UsuarioModificacion_entities TextProperty="NickName" ValueProperty="Id"
+                                Change=@(args => SelectUsuario_UsuarioModificacionValueChanged(args))
+                                Disabled="true" />
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @if (crudMode != CrudMode.Add)
+                        {
+                            <div style="margin-bottom: 1rem" class="row">
+                                <div class="col-md-3">
+                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Component="FechaModificacion" style="width: 100%">
+                                    </RadzenLabel>
+                                </div>
+                                <div class="col-md-9">
+                                    <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(Moneda_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true">
+                                    </RadzenDatePicker>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col offset-sm-3">
+                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                                </RadzenButton>
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
+                                </RadzenButton>
+                            </div>
+                        </div>
+                    </ChildContent>
+                </RadzenTemplateForm>
+                <hr>
+            }
+
+            <RadzenNotification />
+        }
+    }
+    else
+    {
+        <p>No tiene permisos para visualizar los registros.</p>
+    }
 }
 else
 {
-    switch (crudMode)
-    {
-        case CrudMode.Add:
-            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
-                <ChildContent>
-                    <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_TITLE",dataLenguaje) </h4>
-                </ChildContent>
-            </RadzenBadge>
-            break;
-        case CrudMode.Delete:
-            <RadzenBadge BadgeStyle="BadgeStyle.Warning">
-                <ChildContent>
-                    <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_TITLE",dataLenguaje) </h4>
-                </ChildContent>
-            </RadzenBadge>
-            break;
-        case CrudMode.Edit:
-            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
-                <ChildContent>
-                    <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_TITLE",dataLenguaje) </h4>
-                </ChildContent>
-            </RadzenBadge>
-            break;
-        case CrudMode.List:
-            <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
-                <ChildContent>
-                    <div>
-                        <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_TITLE",dataLenguaje) </h4>
-                    </div>
-                </ChildContent>
-            </RadzenBadge>
-            break;
-    }
-    <hr>
-    if (crudMode == CrudMode.List)
-    {
-        <RadzenDataGrid RowExpand="@expandirMoneda" RowRender="@monedaRowRender" RowCollapse="@colapsarMoneda" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@Moneda_entities" TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
-            <EmptyTemplate>
-                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
-            </EmptyTemplate>
-            <Columns>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
-                    <HeaderTemplate>
-                        <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
-                        </RadzenButton>
-                    </HeaderTemplate>
-                    <Template Context="element">
-                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
-                        </RadzenButton>
-                        <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
-                        </RadzenButton>
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="PaisId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Codigo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Simbolo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("SIMBOLO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="IndiceEnContadora" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                    <Template Context="data">
-                        <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
-                        </RadzenCheckBox>
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px">
-                    <Template>
-                        @if (Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion) != null)
-                        {
-                            <RadzenLabel Text="@Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioCreacion).NickName" Component="UsuarioCreacion" style="width: 100%">
-                            </RadzenLabel>
-                        }
-                        else
-                        {
-                            <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
-                            </RadzenLabel>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px">
-                    <Template>
-                        @if (Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion) != null)
-                        {
-                            <RadzenLabel Text="@Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion).NickName" Component="UsuarioModificacion" style="width: 100%">
-                            </RadzenLabel>
-                        }
-                        else
-                        {
-                            <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
-                            </RadzenLabel>
-                        }
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                </RadzenDataGridColumn>
-            </Columns>
-            <Template Context="moneda">
-                <Denominacion_Crud MonedaId="@(moneda.Id)"></Denominacion_Crud>
-            </Template>
-        </RadzenDataGrid>
-        <hr>
-    }
-
-    if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
-    {
-        <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Valor.Moneda" Data="@Moneda_entity" @bind-Value="Moneda_entity" Submit="Save" Visible="@(Moneda_entity != null)">
-            <ChildContent>
-                <div style="margin-bottom: 1rem" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-md-9">
-                        <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.Id)" Name="Id" Disabled="true">
-                        </RadzenNumeric>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1rem" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Component="Nombre" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-md-9">
-                        <RadzenTextBox style="display: block" @bind-Value="@(Moneda_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
-                        </RadzenTextBox>
-                        @if (@crudMode != CrudMode.Delete)
-                        {
-                            <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute">
-                            </RadzenRequiredValidator>
-                        }
-                    </div>
-                </div>
-                <div style="margin-bottom: 1rem" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Component="PaisId" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-md-9">
-                        <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.PaisId)" Name="PaisId" Disabled="@(crudMode==CrudMode.Delete)">
-                        </RadzenNumeric>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1rem" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Component="Codigo" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-md-9">
-                        <RadzenTextBox style="display: block" @bind-Value="@(Moneda_entity.Codigo)" Name="Codigo" Disabled="@(crudMode==CrudMode.Delete)">
-                        </RadzenTextBox>
-                        @if (@crudMode != CrudMode.Delete)
-                        {
-                            <RadzenRequiredValidator Component="Codigo" Text="Codigo is required" Style="position: absolute">
-                            </RadzenRequiredValidator>
-                        }
-                    </div>
-                </div>
-                <div style="margin-bottom: 1rem" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("SIMBOLO",dataLenguaje) Component="Simbolo" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-md-9">
-                        <RadzenTextBox style="display: block" @bind-Value="@(Moneda_entity.Simbolo)" Name="Simbolo" Disabled="@(crudMode==CrudMode.Delete)">
-                        </RadzenTextBox>
-                        @if (@crudMode != CrudMode.Delete)
-                        {
-                            <RadzenRequiredValidator Component="Simbolo" Text="Simbolo is required" Style="position: absolute">
-                            </RadzenRequiredValidator>
-                        }
-                    </div>
-                </div>
-                <div style="margin-bottom: 1rem" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Component="IndiceEnContadora" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-md-9">
-                        <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(Moneda_entity.IndiceEnContadora)" Name="IndiceEnContadora" Disabled="@(crudMode==CrudMode.Delete)">
-                        </RadzenNumeric>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1rem" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
-                    </div>
-                    <div class="col-md-9">
-                        <RadzenCheckBox @bind-Value=@Moneda_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Moneda_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
-                    </div>
-                </div>
-                @if (crudMode != CrudMode.Add)
-                {
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div class="col-md-3">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Component="UsuarioCreacion" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col-md-9">
-                            @if ((@Usuario_UsuarioCreacion_entities.Count > 0 && @Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @Moneda_entity.UsuarioCreacion) != null) || crudMode != CrudMode.Delete)
-                            {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Moneda_entity.UsuarioCreacion)"
-                                Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
-                                Disabled="true" />
-                            }
-                            else
-                            {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
-                                Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
-                                Disabled="true" />
-                            }
-                        </div>
-                    </div>
-                }
-                @if (crudMode != CrudMode.Add)
-                {
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div class="col-md-3">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Component="FechaCreacion" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col-md-9">
-                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(Moneda_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true">
-                            </RadzenDatePicker>
-                        </div>
-                    </div>
-                }
-                @if (crudMode != CrudMode.Add)
-                {
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div class="col-md-3">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Component="UsuarioModificacion" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col-md-9">
-                            @if ((@Usuario_UsuarioModificacion_entities.Count > 0 && @Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @Moneda_entity.UsuarioModificacion) != null) || crudMode != CrudMode.Delete)
-                            {
-                                <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100" @bind-Value="@(Moneda_entity.UsuarioModificacion)"
-                                Data=@Usuario_UsuarioModificacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioModificacionValueChanged(args))
-                                Disabled="true" />
-                            }
-                            else
-                            {
-                                <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100"
-                                Data=@Usuario_UsuarioModificacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioModificacionValueChanged(args))
-                                Disabled="true" />
-                            }
-                        </div>
-                    </div>
-                }
-                @if (crudMode != CrudMode.Add)
-                {
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div class="col-md-3">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Component="FechaModificacion" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col-md-9">
-                            <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(Moneda_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true">
-                            </RadzenDatePicker>
-                        </div>
-                    </div>
-                }
-                <div class="row">
-                    <div class="col offset-sm-3">
-                        <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
-                        </RadzenButton>
-                        <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
-                        </RadzenButton>
-                    </div>
-                </div>
-            </ChildContent>
-        </RadzenTemplateForm>
-        <hr>
-    }
-
-    <RadzenNotification />
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
 }
+
 
 @code {
     /// <summary>
@@ -321,6 +336,11 @@ else
     /// Variables to multilanguaje
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
+
+    /// <summary>
+    /// Variables to store permissions
+    /// </summary>
+    private List<Entities.FuncionRol> dataFunciones;
 
     private List<DepositarioAdminWeb.Entities.Tables.Valor.Moneda> rowsMonedasExpandidas = new();
 
@@ -349,6 +369,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");

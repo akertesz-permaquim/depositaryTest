@@ -33,18 +33,80 @@
                         RowExpand="@expandirDepositario"
                         RowCollapse="@colapsarDepositario"
                         RowRender="@depositarioRowRender"
+                        PageSizeOptions="@(new int[]{10,20,50,100})"
+                        AllowColumnPicking="false"
                         AllowGrouping="true">
                 <Columns>
                     <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Visible="false" Property="DepositarioId" Title="ID" Width="2%" />
-                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" />
-                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" />
-                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" />
-                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="Nombre" Title="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje)" />
-                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="Modelo" Width="9%" Title="@MultilenguajeController.ObtenerTextoPorClave("MODELO",dataLenguaje)" />
-                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="ValorTotalEnBolsa" FormatString="{0:C2}" Width="12%" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("VALORTOTALENBOLSA",dataLenguaje)" />
-                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="SemaforoOnline" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROONLINE",dataLenguaje)" Width="9%" TextAlign="TextAlign.Center">
-                        <Template Context="depositario">
-                            @switch (depositario.SemaforoOnline)
+                    <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Property="Empresa">
+                        <Template>
+                            @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
+                            {
+                                <div class="textoResaltadoRow">
+                                    @context.Empresa
+                                </div>
+                            }
+                            else
+                                @context.Empresa
+
+
+
+
+
+
+
+
+
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Property="Sucursal">
+                            <Template>
+                                @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
+                            {
+                                <div class="textoResaltadoRow">
+                                    @context.Sucursal
+                                </div>
+                            }
+                            else
+                                @context.Sucursal
+
+
+
+
+
+
+
+
+
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector">
+                            <Template>
+                                @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
+                            {
+                                <div class="textoResaltadoRow">
+                                    @context.Sector
+                                </div>
+                            }
+                            else
+                                @context.Sector
+
+
+
+
+
+
+
+
+
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="Nombre" Title="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje)" />
+                        <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="Modelo" Width="9%" Title="@MultilenguajeController.ObtenerTextoPorClave("MODELO",dataLenguaje)" />
+                        <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="ValorTotalEnBolsa" FormatString="{0:C2}" Width="12%" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("VALORTOTALENBOLSA",dataLenguaje)" />
+                        <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Property="SemaforoOnline" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROONLINE",dataLenguaje)" Width="9%" TextAlign="TextAlign.Center">
+                            <Template Context="depositario">
+                                @switch (depositario.SemaforoOnline)
                             {
                                 case "Verde":
                                     <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
@@ -100,83 +162,97 @@
                     <RadzenDataGridColumn TItem="Entities.DepositarioMonitor" Visible="false" Property="Habilitado" Title="Habilitado" />
                 </Columns>
                 <Template Context="depositario">
-                    <RadzenCard Style="background-color:azure; margin-bottom:1%">
-                        <ChildContent>
-                            @{
-                                var auxInformacionDepositario = dataInformacionDepositario.Where(x => x.DepositarioId == depositario.DepositarioId).FirstOrDefault();
-                                @if (auxInformacionDepositario != null)
-                                {
-                                    <div class="container-fluid flex">
-                                        <div class="row" style="margin-left: -5%;">
-                                            <div class="col-md-2" style="align-self: center;text-align: center;">
-                                                <RadzenImage Path="images/de-50.png" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
+                    <div style="background-color:silver">
+                        <RadzenCard Style="background-color:azure; margin-bottom:1%; padding-bottom: 0.5%">
+                            <ChildContent>
+                                @{
+                                    var auxInformacionDepositario = dataInformacionDepositario.Where(x => x.DepositarioId == depositario.DepositarioId).FirstOrDefault();
+                                    @if (auxInformacionDepositario != null)
+                                    {
+                                        <div class="container-fluid flex">
+                                            <div class="row" style="margin-left: -5%;">
+                                                <div class="col-md-2" style="align-self: center;text-align: center;">
+                                                    <RadzenImage Path="@auxInformacionDepositario.ImagenModelo" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
+                                                    <br />
+                                                    <b>@MultilenguajeController.ObtenerTextoPorClave("NUMEROSERIE",dataLenguaje):</b> @auxInformacionDepositario.NumeroSerie
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div style="padding-left: 5%; padding-top: 1%; text-align:center">
+                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROVALIDADO",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalValidado
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div style="padding-left: 5%; padding-top: 1%; text-align:center">
+                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROAVALIDAR",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalAValidar
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div style="padding-left: 5%; padding-top: 1%; text-align:center">
+                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROTOTAL",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.Total
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4" style="padding-left: 5%; padding-top: 3%; font-size: medium; text-align:center;">
+                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("IDDEBOLSA",dataLenguaje):</b> @auxInformacionDepositario.IdentificadorBolsa
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div style="padding-top: 5%; text-align:center"><b>@MultilenguajeController.ObtenerTextoPorClave("OCUPACIONDELABOLSA",dataLenguaje)</b></div>
+                                                            @if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 70 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 90)
+                                                            {
+                                                                <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                            }
+                                                            else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 90 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 100)
+                                                            {
+                                                                <PermaquimProgressBar BarColor="red" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                            }
+                                                            else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 100)
+                                                            {
+                                                                <PermaquimProgressBar BarColor="darkred" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <PermaquimProgressBar BarColor="green" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                            }
+                                                        </div>
+                                                        <div class="col-md-4" style="padding-top: 5%; padding-top: 3%; font-size: medium; text-align:center;">
+                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("CANTIDADBILLETESBOLSA",dataLenguaje):</b>
+                                                            @auxInformacionDepositario.CantidadBilletesEnBolsa / @auxInformacionDepositario.CapacidadBilletesBolsa
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4" style="padding-top: 3%; font-size: medium; text-align:center;">
+                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("TURNOACTIVO",dataLenguaje):</b>
+                                                            @auxInformacionDepositario.Turno
+                                                        </div>
+                                                        <div class="col-md-4" style="padding-top: 3%; font-size: medium; text-align:center;">
+                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURATURNOACTIVO",dataLenguaje):</b>
+                                                            @auxInformacionDepositario.FechaAperturaTurno
+                                                        </div>
+                                                        <div class="col-md-4" style="padding-left: 5%; padding-top: 3%; font-size: medium; text-align:center;">
+                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMASINCRONIZACION",dataLenguaje):</b> @auxInformacionDepositario.FechaUltimaSincronizacion
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-8">
-                                                <div class="row">
-                                                    <div class="col-md-4" style="padding-top: 1%; font-size: medium; text-align:center;">
-                                                        <b>@MultilenguajeController.ObtenerTextoPorClave("NUMERODESERIE",dataLenguaje):</b>
-                                                        @auxInformacionDepositario.NumeroSerie
-                                                    </div>
-                                                    <div class="col-md-4" style="padding-left: 5%; padding-top: 1%; font-size: medium; text-align:center;">
-                                                        <b>@MultilenguajeController.ObtenerTextoPorClave("IDDEBOLSA",dataLenguaje):</b> @auxInformacionDepositario.IdentificadorBolsa
-                                                    </div>
-                                                    <div class="col-md-4" style="padding-left: 5%; padding-top: 1%; font-size: medium; text-align:center;">
-                                                        <b>@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMASINCRONIZACION",dataLenguaje):</b> @auxInformacionDepositario.FechaUltimaSincronizacion
-                                                    </div>
+                                            @if (auxInformacionDepositario.DepositoEnOtraMoneda)
+                                            {
+                                                <div class="mensajeTransaccionOtrasMonedas">
+                                                    *<b>@MultilenguajeController.ObtenerTextoPorClave("EXISTENCIADEPOSITOSOTRAMONEDA",dataLenguaje)</b>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROVALIDADO",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalValidado
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROAVALIDAR",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalAValidar
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROTOTAL",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.Total
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div style="padding-top: 5%; text-align:center"><b>@MultilenguajeController.ObtenerTextoPorClave("OCUPACIONDELABOLSA",dataLenguaje)</b></div>
-                                                        @if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 70 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 90)
-                                                        {
-                                                            <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                        }
-                                                        else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 90 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 100)
-                                                        {
-                                                            <PermaquimProgressBar BarColor="red" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                        }
-                                                        else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 100)
-                                                        {
-                                                            <PermaquimProgressBar BarColor="darkred" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                        }
-                                                        else
-                                                        {
-                                                            <PermaquimProgressBar BarColor="green" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                        }
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div style="padding-left: 5%; padding-top: 10%; text-align:center">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div style="margin-top:2%;" />
+                                            }
                                         </div>
-                                    </div>
+                                    }
                                 }
-                            }
-                        </ChildContent>
-                    </RadzenCard>
+                            </ChildContent>
+                        </RadzenCard>
+                    </div>
                     <RadzenTabs Change="@(args => changeTabMonitorDepositario(args,depositario))">
                         <Tabs>
                             <RadzenTabsItem Icon="local_atm" Text="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITOS",dataLenguaje)">
@@ -189,6 +265,7 @@
                                             IsLoading="@estaCargandoGridTransacciones"
                                             ExpandMode="DataGridExpandMode.Multiple"
                                             RowExpand="@expandirTransaccion"
+                                            PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataTransaccionesDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                     <Columns>
                                         <RadzenDataGridColumn TItem="Entities.TransaccionValidadaMonitor" Visible="false" Property="TransaccionId" Title="ID" />
@@ -198,7 +275,7 @@
                                         <RadzenDataGridColumn TItem="Entities.TransaccionValidadaMonitor" Property="UsuarioCuenta" Title="Usuario cuenta" />
                                         <RadzenDataGridColumn TItem="Entities.TransaccionValidadaMonitor" Property="Cuenta" Title="Cuenta" />
                                         <RadzenDataGridColumn TItem="Entities.TransaccionValidadaMonitor" Property="Banco" Width="10%" Title="Banco" />
-                                        <RadzenDataGridColumn TItem="Entities.TransaccionValidadaMonitor" Property="Contenedor" Title="Contenedor" />
+                                        <RadzenDataGridColumn TItem="Entities.TransaccionValidadaMonitor" Property="Moneda" Title="Moneda" />
                                         <RadzenDataGridColumn TItem="Entities.TransaccionValidadaMonitor" Property="TotalValidado" Title="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
                                     </Columns>
                                     <Template Context="transaccion">
@@ -207,12 +284,11 @@
                                                     IsLoading="@estaCargandoGridTransaccionDetalles"
                                                     AllowFiltering="true"
                                                     AllowPaging="true"
+                                                    PageSizeOptions="@(new int[]{10,20,50,100})"
                                                     Data="@dataTransaccionDetalles.Where(x => x.TransaccionId==transaccion.TransaccionId)">
                                             <Columns>
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Visible="false" Property="TransaccionDetalleId" Title="ID" />
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Property="FechaTransaccionDetalle" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                                <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Property="Moneda" Title="Moneda" />
-                                                <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Property="Denominacion" Title="Denominación" />
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Property="ImagenDenominacion" Title="Imagen">
                                                     <Template Context="transaccionDetalle">
                                                         <div style="text-align:center">
@@ -220,11 +296,13 @@
                                                         </div>
                                                     </Template>
                                                 </RadzenDataGridColumn>
+                                                <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Property="Denominacion" Title="Denominación" />
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Property="CantidadUnidades" Title="Cantidad" TextAlign="TextAlign.Right">
                                                     <FooterTemplate>
                                                         Total cantidad: <b>@dataTransaccionDetalles.Where(x => x.TransaccionId==transaccion.TransaccionId).Sum(o => o.CantidadUnidades)</b>
                                                     </FooterTemplate>
                                                 </RadzenDataGridColumn>
+                                                <RadzenDataGridColumn TItem="Entities.DetalleTransaccionValidadaMonitor" Property="TotalValidadoFormateado" Title="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
                                             </Columns>
                                         </RadzenDataGrid>
                                     </Template>
@@ -238,6 +316,7 @@
                                             ExpandMode="DataGridExpandMode.Multiple"
                                             IsLoading="@estaCargandoGridTransaccionesSobres"
                                             RowExpand="@expandirTransaccionSobre"
+                                            PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataTransaccionesSobreDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                     <Columns>
                                         <RadzenDataGridColumn TItem="Entities.TransaccionAValidarMonitor" Visible="false" Property="TransaccionSobreId" Title="ID" />
@@ -248,7 +327,7 @@
                                         <RadzenDataGridColumn TItem="Entities.TransaccionAValidarMonitor" Property="UsuarioCuenta" Title="Usuario cuenta" />
                                         <RadzenDataGridColumn TItem="Entities.TransaccionAValidarMonitor" Property="Cuenta" Title="Cuenta" />
                                         <RadzenDataGridColumn TItem="Entities.TransaccionAValidarMonitor" Property="Banco" Width="10%" Title="Banco" />
-                                        <RadzenDataGridColumn TItem="Entities.TransaccionAValidarMonitor" Property="Contenedor" Title="Contenedor" />
+                                        <RadzenDataGridColumn TItem="Entities.TransaccionAValidarMonitor" Property="Moneda" Title="Moneda" />
                                         <RadzenDataGridColumn TItem="Entities.TransaccionAValidarMonitor" Property="TotalAValidar" Title="Total a validar" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
                                     </Columns>
                                     <Template Context="transaccionSobre">
@@ -261,9 +340,10 @@
                                             <Columns>
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionAValidarMonitor" Visible="false" Property="TransaccionSobreDetalleId" Title="ID" />
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionAValidarMonitor" Property="FechaTransaccionSobreDetalle" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                                <RadzenDataGridColumn TItem="Entities.DetalleTransaccionAValidarMonitor" Property="Moneda" Title="Moneda" />
+                                                <RadzenDataGridColumn TItem="Entities.DetalleTransaccionAValidarMonitor" Visible="false" Property="Moneda" Title="Moneda" />
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionAValidarMonitor" Property="TipoValor" Title="Tipo valor" />
                                                 <RadzenDataGridColumn TItem="Entities.DetalleTransaccionAValidarMonitor" Property="CantidadDeclarada" Title="Cantidad declarada" TextAlign="TextAlign.Right" />
+                                                <RadzenDataGridColumn TItem="Entities.DetalleTransaccionAValidarMonitor" Property="ValorDeclaradoFormateado" Title="Valor Declarado" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
                                             </Columns>
                                         </RadzenDataGrid>
                                     </Template>
@@ -275,31 +355,38 @@
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridExistencias"
+                                            PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataExistenciasDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                     <Columns>
-                                        <RadzenDataGridColumn TItem="Entities.ExistenciaValidada" Property="Moneda" Title="Moneda" />
-                                        <RadzenDataGridColumn TItem="Entities.ExistenciaValidada" Property="Denominacion" Title="Denominacion" />
                                         <RadzenDataGridColumn TItem="Entities.ExistenciaValidada" Property="ImagenDenominacion" Title="Imagen" TextAlign="TextAlign.Center">
                                             <Template Context="dataExistencia">
                                                 <RadzenImage Path="@dataExistencia.ImagenDenominacion" style="width: 100px; border-radius: 8px;">
                                                 </RadzenImage>
                                             </Template>
                                         </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="Entities.ExistenciaValidada" Property="Moneda" Title="Moneda" />
+                                        <RadzenDataGridColumn TItem="Entities.ExistenciaValidada" Property="Denominacion" Title="Denominacion" />
                                         <RadzenDataGridColumn TItem="Entities.ExistenciaValidada" Property="CantidadValidada" TextAlign="TextAlign.Right" Title="Cantidad validada" />
                                     </Columns>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
                             <RadzenTabsItem Icon="mark_as_unread" Text="@MultilenguajeController.ObtenerTextoPorClave("EXISTENCIASAVALIDAR",dataLenguaje)">
-                                <RadzenDataGrid TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado"
+                                <RadzenDataGrid TItem="Entities.ExistenciaAValidar"
                                             @ref="@gridExistenciasAValidar"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridExistenciasAValidar"
+                                            PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataExistenciasAValidarDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                     <Columns>
-                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado" Property="Moneda" Title="Moneda" />
-                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado" Property="TipoValor" Title="Tipo valor" />
-                                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado" Property="ValorDeclarado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Valor declarado" />
+                                        <RadzenDataGridColumn TItem="Entities.ExistenciaAValidar" Property="ImagenTipoValor" Title="Imagen" TextAlign="TextAlign.Center">
+                                            <Template Context="dataExistenciaAValidar">
+                                                <RadzenImage Path="@dataExistenciaAValidar.ImagenTipoValor" style="width: 100px; border-radius: 8px;">
+                                                </RadzenImage>
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="Entities.ExistenciaAValidar" Property="TipoValor" Title="Tipo valor" />
+                                        <RadzenDataGridColumn TItem="Entities.ExistenciaAValidar" Property="Cantidad" TextAlign="TextAlign.Right" Title="Cantidad" />
                                     </Columns>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
@@ -314,7 +401,7 @@
                                         <RadzenDataGridColumn TItem="Entities.TotalGeneral" Property="Moneda" Title="Moneda" />
                                         <RadzenDataGridColumn TItem="Entities.TotalGeneral" Property="TotalValidado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Total validado" />
                                         <RadzenDataGridColumn TItem="Entities.TotalGeneral" Property="TotalAValidar" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Total a validar" />
-                                        <RadzenDataGridColumn TItem="Entities.TotalGeneral" Property="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Total" />
+                                        <RadzenDataGridColumn TItem="Entities.TotalGeneral" Property="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="Total general" />
                                     </Columns>
                                 </RadzenDataGrid>
                             </RadzenTabsItem>
@@ -324,6 +411,7 @@
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridEventos"
+                                            PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataEventosDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                     <Columns>
                                         <RadzenDataGridColumn TItem="Entities.Evento" Visible="false" Property="EventoID" Title="ID" />
@@ -351,10 +439,11 @@
     private List<Entities.DetalleTransaccionAValidarMonitor> dataTransaccionSobreDetalles = new();
     private List<Entities.Evento> dataEventosDepositario = new List<Entities.Evento>();
     private List<Entities.ExistenciaValidada> dataExistenciasDepositario = new List<Entities.ExistenciaValidada>();
-    private List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado> dataExistenciasAValidarDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>();
-    private List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado> dataInformacionDepositario = new List<DepositarioAdminWeb.Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado>();
+    private List<Entities.ExistenciaAValidar> dataExistenciasAValidarDepositario = new List<Entities.ExistenciaAValidar>();
+    private List<Entities.InformacionDepositario> dataInformacionDepositario = new List<Entities.InformacionDepositario>();
     private List<Entities.TotalGeneral> dataTotalesGeneralesDepositario = new();
     private List<Entities.TextoLenguaje> dataLenguaje;
+    private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
 
     //Variables para controles
     private RadzenDataGrid<Entities.TransaccionValidadaMonitor> gridTransacciones = new();
@@ -364,7 +453,7 @@
     private RadzenDataGrid<Entities.DetalleTransaccionAValidarMonitor> gridTransaccionSobreDetalles = new();
     private RadzenDataGrid<Entities.Evento> gridEventos = new RadzenDataGrid<Entities.Evento>();
     private RadzenDataGrid<Entities.ExistenciaValidada> gridExistencias = new RadzenDataGrid<Entities.ExistenciaValidada>();
-    private RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado> gridExistenciasAValidar = new RadzenDataGrid<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>();
+    private RadzenDataGrid<Entities.ExistenciaAValidar> gridExistenciasAValidar = new RadzenDataGrid<Entities.ExistenciaAValidar>();
     private RadzenDataGrid<Entities.TotalGeneral> gridTotalesGenerales = new RadzenDataGrid<Entities.TotalGeneral>();
     private RadzenCard cardInformacionDepositario = new RadzenCard();
     private bool estaCargandoGridExistencias = false;
@@ -381,6 +470,8 @@
     private Timer timerRecargaInformacion = new Timer();
     private List<Entities.DepositarioMonitor> rowsDepositariosExpandidas = new List<Entities.DepositarioMonitor>();
     Int64? userId;
+    string colorRow;
+    string colorMensajesResaltados;
 
     protected override void OnInitialized()
     {
@@ -393,6 +484,9 @@
         {
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
             userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+            dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
+            colorRow = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorRowExpandida", true);
+            colorMensajesResaltados = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorMensajeResaltadoMonitor", true);
             if (userId == null)
                 NavManager.NavigateTo("login", true);
             estaCargandoGridDepositarios = true;
@@ -510,7 +604,6 @@
 
     private async Task changeTabMonitorDepositario(int index, Entities.DepositarioMonitor depositario)
     {
-
         switch (index)
         {
             case 0:
@@ -595,5 +688,30 @@
         dataTransaccionSobreDetalles.AddRange(TransaccionController.ObtenerDetalleTransaccionAValidarMonitor(pTransaccionSobreId));
         estaCargandoGridTransaccionSobreDetalles = false;
     }
+}
 
-        }
+<style>
+    .rz-expanded-row-template {
+        background-color: @colorRow;
+        padding: 0.625rem;
+        border: solid 1px rgba(71, 156, 200, 0.2);
+        border-radius: 2px;
+    }
+
+    .row-highlight {
+        background-color: @colorRow;
+    }
+
+    .textoResaltadoRow {
+        color:@colorMensajesResaltados;
+        font-weight:bold
+    }
+
+    .mensajeTransaccionOtrasMonedas {
+        float: right;
+        margin-top: 1%;
+        margin-right: -3%;
+        color: @colorMensajesResaltados;
+        font-weight: bold
+    }
+</style>

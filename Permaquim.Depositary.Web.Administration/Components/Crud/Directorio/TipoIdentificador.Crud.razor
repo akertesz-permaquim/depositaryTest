@@ -4,9 +4,9 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
  
-@if(dataFuncionesMenues != null)
+@if(dataFunciones != null)
 {
-@if (SeguridadController.VerificarRolFuncion("DirectorioTipoIdentificador",dataFuncionesMenues,"PuedeVisualizar"))
+@if (SeguridadController.VerificarPermisoFuncion("DirectorioTipoIdentificador",dataFunciones,"PuedeVisualizar"))
 {
  @if (TipoIdentificador_entities == null)
  {
@@ -58,13 +58,13 @@
          <Columns>
              <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.TipoIdentificador" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
                  <HeaderTemplate>
-                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarRolFuncion("DirectorioTipoIdentificador",dataFuncionesMenues,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioTipoIdentificador",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
                      </RadzenButton>
                      </HeaderTemplate>
                      <Template Context="element">
-                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarRolFuncion("DirectorioTipoIdentificador",dataFuncionesMenues,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioTipoIdentificador",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                      </RadzenButton>
-                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarRolFuncion("DirectorioTipoIdentificador",dataFuncionesMenues,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioTipoIdentificador",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                      </RadzenButton>
                  </Template>
                  </RadzenDataGridColumn>
@@ -311,7 +311,7 @@ else
     /// <summary>
     /// Variables to store permissions
     /// </summary>
-    private List<Entities.FuncionMenu> dataFuncionesMenues;
+    private List<Entities.FuncionRol> dataFunciones;
  
     /// <summary>
     /// Variables to handle Relation between TipoIdentificador.UsuarioCreacion and Usuario.Id
@@ -338,7 +338,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFuncionesMenues = await sessionStorage.GetItemAsync<List<Entities.FuncionMenu>>("DataFuncionesMenues");
+        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");

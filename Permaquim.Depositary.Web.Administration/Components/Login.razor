@@ -44,7 +44,8 @@
     private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? dataUsuario = new();
     private DepositarioAdminWeb.Entities.Tables.Seguridad.Rol? usuarioRol = new();
     private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
-    private List<Entities.FuncionMenu> dataFuncionesMenues = new();
+    private List<Entities.Menu> dataMenues = new();
+    private List<Entities.FuncionRol> dataFunciones = new();
 
     protected async void LoginUser()
     {
@@ -66,8 +67,11 @@
             }
             else
             {
-                //Si se encontro un rol buscamos todos los menues y funciones que puede acceder con ese rol
-                dataFuncionesMenues = SeguridadController.ObtenerFuncionesMenues(usuarioRol.Id);
+                //Si se encontro un rol buscamos todos los menues a los que tiene acceso ese rol
+                dataMenues = SeguridadController.ObtenerMenuesPorRol(usuarioRol.Id);
+
+                //Si se encontro un rol buscamos todos las funciones que puede acceder con ese rol
+                dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
 
                 await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
                 await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
@@ -78,14 +82,8 @@
                 await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
                 await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
                 await sessionStorage.SetItemAsync("DataEsquemaDetalle", dataEsquemaDetalle);
-                await sessionStorage.SetItemAsync("DataFuncionesMenues", dataFuncionesMenues);
-
-                //SessionStorageManager.SetUsuarioId(dataUsuario.Id);
-                //SessionStorageManager.SetNickName(dataUsuario.NickName);
-                //SessionStorageManager.SetNombreUsuario(dataUsuario.Nombre);
-                //SessionStorageManager.SetApellidoUsuario(dataUsuario.Apellido);
-                //SessionStorageManager.SetLenguajeId(dataUsuario.LenguajeId);
-                //SessionStorageManager.SetDataLenguaje(dataLenguaje);
+                await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
+                await sessionStorage.SetItemAsync("DataMenues", dataMenues);
 
                 NavManager.NavigateTo("Dashboard", true);
             }

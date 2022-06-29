@@ -2,10 +2,11 @@
 {
     public enum TipoTransaccion
     {
+        NoEspecificado = 0,
         DepositoBillete = 1,
         DepositoMoneda = 2,
-        DepositoSobre = 3,
-        RetiroValores = 7
+        RetiroValores = 3,
+        DepositoSobre = 4
     }
     public enum TipoEvento
     {

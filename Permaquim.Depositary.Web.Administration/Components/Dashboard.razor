@@ -12,8 +12,24 @@
     <ChildContent>
         <RadzenIcon Icon="assessment">
         </RadzenIcon>
-        <RadzenHeading Size="H1" style="display: inline-block" Text="Dashboard depositario">
-        </RadzenHeading>
+        <div class="row">
+            <div class="col-8 align-items-left d-flex">
+                <RadzenHeading Size="H1" style="display: inline-block; vertical-align:middle" Text="Dashboard depositario">
+                </RadzenHeading>
+            </div>
+            <div class="col-4 align-items-right d-flex" style="margin-top:0.5%">
+                @if (dataEmpresasAccesibles != null)
+                {
+                    if (dataEmpresasAccesibles.Count > 0)
+                    {
+                        <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                @bind-Value=@empresasSeleccionadas Multiple="true" Placeholder="Seleccione empresas" Data=@dataEmpresasAccesibles TextProperty="Nombre" ValueProperty="EmpresaId"
+                                Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
+                    }
+                }
+            </div>
+
+        </div>
         @if (estaCargando)
         {
             <div class="spinner"></div>
@@ -35,7 +51,7 @@
                                     </RadzenHeading>
                                     <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="DEL DIA">
                                     </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadTransaccionesAlDia.ToString()">
+                                    <RadzenHeading Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadTransaccionesAlDia">
                                     </RadzenHeading>
                                 </div>
                             </div>
@@ -74,10 +90,18 @@
                                 <div class="col-sm-8">
                                     <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
                                     </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="EN LINEA">
+                                    <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="EN LINEA / FUERA DE LINEA">
                                     </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #3dd311; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
-                                    </RadzenHeading>
+                                    <div class="row">
+                                        <div class="col-4 align-items-center d-flex" style="margin-left:10%">
+                                            <RadzenHeading Size="H4" style="color: #3dd311; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                            </RadzenHeading>
+                                        </div>
+                                        <div class="col-4 align-items-center d-flex" style="margin-left:10%">
+                                            <RadzenHeading Size="H4" style="color:red ; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                            </RadzenHeading>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </ChildContent>
@@ -112,9 +136,32 @@
                         <ChildContent>
                             <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Depositarios con mayor carga de transacciones">
                             </RadzenHeading>
-                            <RadzenChart ColorScheme="ColorScheme.Pastel">
-                                <RadzenPieSeries Data="@dataCargaDepositarios" Title="Transacciones" CategoryProperty="NombreDepositario" ValueProperty="CantidadTransacciones" />
-                            </RadzenChart>
+                            @if (dataCargaDepositarios != null)
+                            {
+                                if (dataCargaDepositarios.Count > 0)
+                                {
+                                    <RadzenChart ColorScheme="ColorScheme.Pastel">
+                                        <RadzenValueAxis Min="0" />
+                                        @foreach (var item in dataCargaDepositarios)
+                                        {
+                                            var nombreColumna = item.FirstOrDefault().NombreDepositarioConCantidad;
+                                            <RadzenColumnSeries Data="@item" CategoryProperty="NombreDepositario" Title="@nombreColumna" LineType="LineType.Dashed" ValueProperty="CantidadTransacciones">
+                                                <TooltipTemplate>
+                                                    <div style="text-align:center">
+                                                        <b>
+                                                            @context.NombreDepositario
+                                                            <br>
+                                                            Cantidad transacciones: @context.CantidadTransacciones
+                                                        </b>
+                                                    </div>
+                                                </TooltipTemplate>
+                                            </RadzenColumnSeries>
+                                        }
+                                        <RadzenColumnOptions Margin="1" Radius="5" />
+                                        <RadzenCategoryAxis Visible="false" Padding="40" />
+                                    </RadzenChart>
+                                }
+                            }
                         </ChildContent>
                     </RadzenCard>
                 </div>
@@ -123,9 +170,25 @@
                         <ChildContent>
                             <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Cantidad de transacciones por tipo">
                             </RadzenHeading>
-                            <RadzenChart ColorScheme="ColorScheme.Pastel">
-                                <RadzenPieSeries Data="@dataCantidadTipoTransacciones" Title="Cantidad" CategoryProperty="NombreTipoTransaccion" ValueProperty="CantidadTipoTransaccion" />
-                            </RadzenChart>
+                            @if (dataCantidadTipoTransacciones != null)
+                            {
+                                if (dataCantidadTipoTransacciones.Count > 0)
+                                {
+                                    <RadzenChart ColorScheme="ColorScheme.Pastel">
+                                        <RadzenPieSeries Data="@dataCantidadTipoTransacciones" Title="Cantidad" CategoryProperty="NombreTipoTransaccionConPorcentaje" ValueProperty="CantidadTipoTransaccion">
+                                            <TooltipTemplate>
+                                                <div style="text-align:center">
+                                                    <b>
+                                                        @context.NombreTipoTransaccion
+                                                        <br>
+                                                        Cantidad transacciones: @context.CantidadTipoTransaccion
+                                                    </b>
+                                                </div>
+                                            </TooltipTemplate>
+                                        </RadzenPieSeries>
+                                    </RadzenChart>
+                                }
+                            }
                         </ChildContent>
                     </RadzenCard>
                 </div>
@@ -135,61 +198,126 @@
 </RadzenContent>
 
 @code {
-    bool estaCargando = true;
+    private bool estaCargando { get; set; }
+    Int64? userId;
     private List<Entities.TextoLenguaje> dataLenguaje;
-    private int cantidadTransaccionesAlDia { get; set; }
+    private string cantidadTransaccionesAlDia { get; set; }
     private string cantidadDepositariosBolsaCasiLlena { get; set; }
     private string cantidadDepositariosEnLinea { get; set; }
+    private string cantidadDepositariosFueraLinea { get; set; }
     private string cantidadDepositariosFueraServicio { get; set; }
-    private List<Entities.DepositarioCarga> dataCargaDepositarios { get; set; }
+    private List<List<Entities.DepositarioCarga>> dataCargaDepositarios { get; set; }
     private List<Entities.TransaccionTipoCantidad> dataCantidadTipoTransacciones { get; set; }
+    private List<Entities.Empresa> dataEmpresasAccesibles { get; set; }
+    private IEnumerable<Int64> empresasSeleccionadas = new Int64[] { };
+
+    protected override void OnInitialized()
+    {
+        estaCargando = true;
+        base.OnInitialized();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-            Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
+            userId = await sessionStorage.GetItemAsync<Int64?>("Id");
             if (userId == null)
                 NavManager.NavigateTo("login", true);
-            await Task.Run(obtenerCantidadTransaccionesAlDia);
-            await Task.Run(obtenerCantidadDepositariosBolsaCasiLlena);
-            await Task.Run(obtenerCantidadDepositariosEnLinea);
-            await Task.Run(obtenerCantidadDepositariosFueraServicio);
-            await Task.Run(obtenerDepositariosConMayorCarga);
-            await Task.Run(obtenerCantidadTransaccionesPorTipo);
-            estaCargando = false;
+
+            //En funcion del usuario que consulta obtenemos el perfil de visualizacion y luego las empresas a las que puede acceder
+            await Task.Run(obtenerEmpresasAccesibles);
+            obtenerInformacion();
             StateHasChanged();
         }
     }
 
+    private async void obtenerInformacion()
+    {
+        if (empresasSeleccionadas != null)
+        {
+            if (empresasSeleccionadas.Count() > 0)
+            {
+                await Task.Run(obtenerCantidadTransaccionesAlDia);
+                await Task.Run(obtenerCantidadDepositariosBolsaCasiLlena);
+                await Task.Run(obtenerCantidadDepositariosEnLinea);
+                await Task.Run(obtenerCantidadDepositariosFueraServicio);
+                await Task.Run(obtenerDepositariosConMayorCarga);
+                await Task.Run(obtenerCantidadTransaccionesPorTipo);
+            }
+        }
+        estaCargando = false;
+        StateHasChanged();
+    }
+
+    private void obtenerEmpresasAccesibles()
+    {
+        dataEmpresasAccesibles = DirectorioController.ObtenerEmpresasAccesibles(userId.Value);
+        //Dejo todas las empresas marcadas
+        if (dataEmpresasAccesibles.Count > 0)
+        {
+            List<Int64> empresas = new();
+            foreach (var empresa in dataEmpresasAccesibles)
+            {
+                empresas.Add(empresa.EmpresaId);
+            }
+            empresasSeleccionadas = empresas.AsEnumerable();
+        }
+    }
+
+    void OnChangeEmpresa(object value)
+    {
+        reiniciarDataSets();
+        estaCargando = true;
+        StateHasChanged();
+        obtenerInformacion();
+    }
+
+    void reiniciarDataSets()
+    {
+        cantidadTransaccionesAlDia = "";
+        cantidadDepositariosBolsaCasiLlena = "";
+        cantidadDepositariosEnLinea = "";
+        cantidadDepositariosFueraLinea = "";
+        cantidadDepositariosFueraServicio = "";
+        dataCargaDepositarios = new();
+        dataCantidadTipoTransacciones = new();
+
+    }
+
     private void obtenerCantidadTransaccionesAlDia()
     {
-        cantidadTransaccionesAlDia = TransaccionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date);
+        cantidadTransaccionesAlDia = TransaccionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date, empresasSeleccionadas.ToList()).ToString();
     }
 
     private void obtenerCantidadDepositariosBolsaCasiLlena()
     {
-        cantidadDepositariosBolsaCasiLlena = DepositarioController.ObtenerCantidadDepositariosConBolsaCasiLlena();
+        cantidadDepositariosBolsaCasiLlena = DepositarioController.ObtenerCantidadDepositariosConBolsaCasiLlena(empresasSeleccionadas.ToList());
     }
 
     private void obtenerCantidadDepositariosEnLinea()
     {
-        cantidadDepositariosEnLinea = DepositarioController.ObtenerCantidadDepositariosEnLinea();
+        cantidadDepositariosEnLinea = DepositarioController.ObtenerCantidadDepositariosEnLinea(empresasSeleccionadas.ToList());
+    }
+
+    private void obtenerCantidadDepositariosFueraLinea()
+    {
+        cantidadDepositariosFueraLinea = DepositarioController.ObtenerCantidadDepositariosFueraLinea(empresasSeleccionadas.ToList());
     }
 
     private void obtenerCantidadDepositariosFueraServicio()
     {
-        cantidadDepositariosFueraServicio = DepositarioController.ObtenerCantidadDepositariosFueraServicio();
+        cantidadDepositariosFueraServicio = DepositarioController.ObtenerCantidadDepositariosFueraServicio(empresasSeleccionadas.ToList());
     }
 
     private void obtenerDepositariosConMayorCarga()
     {
-        dataCargaDepositarios = DepositarioController.ObtenerDepositariosConMayorCarga();
+        dataCargaDepositarios = DepositarioController.ObtenerDepositariosConMayorCarga(empresasSeleccionadas.ToList());
     }
 
     private void obtenerCantidadTransaccionesPorTipo()
     {
-        dataCantidadTipoTransacciones = TransaccionController.ObtenerCantidadTipoTransacciones();
+        dataCantidadTipoTransacciones = TransaccionController.ObtenerCantidadTipoTransacciones(empresasSeleccionadas.ToList());
     }
 }

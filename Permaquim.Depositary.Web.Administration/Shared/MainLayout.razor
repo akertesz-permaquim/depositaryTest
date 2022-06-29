@@ -60,190 +60,49 @@
     <ChildContent>
         <RadzenPanelMenu style="height: 100%">
             <ChildContent>
-                <RadzenPanelMenuItem Icon="dashboard" Path="Dashboard" Text="Dashboard" Visible="@SeguridadController.VerificarPermisoMenu("Dashboard",dataFuncionesMenues)">
-                </RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Icon="monitor" Path="Monitor" Text="Monitor" Visible="@SeguridadController.VerificarPermisoMenu("Monitor",dataFuncionesMenues)">
-                </RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Icon="assignment" Text="Reportes" Visible="@SeguridadController.VerificarPermisoMenu("Reportes",dataFuncionesMenues)">
-                    <ChildContent>
-                        <RadzenPanelMenuItem Text="Informe transacciones por fecha" Path="" Icon="attach_money" Visible="@SeguridadController.VerificarPermisoMenu("InformeTransaccionesFecha",dataFuncionesMenues)" Style="padding-left:4%">
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Informe retiro de bolsa" Path="" Icon="shopping_bag" Visible="@SeguridadController.VerificarPermisoMenu("InformeRetiroBolsa",dataFuncionesMenues)" Style="padding-left:4%">
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Reporte histórico de bolsa" Path="" Icon="badge" Visible="@SeguridadController.VerificarPermisoMenu("ReporteHistoricoBolsa",dataFuncionesMenues)" Style="padding-left:4%">
-                        </RadzenPanelMenuItem>
-                    </ChildContent>
-                </RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Icon="person" Text="Administración" Visible="@SeguridadController.VerificarPermisoMenu("Administracion",dataFuncionesMenues)">
-                    <ChildContent>
-                        <RadzenPanelMenuItem Text="Banca" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("Banca",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Bancos" Path="BancaBancoCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("BancaBanco",dataFuncionesMenues)" Style="padding-left:4%">
+                @if (dataMenues.Count > 0)
+                {
+                    //Menues principales
+                    foreach (var menu in dataMenues.Where(x => x.DependeDe == null))
+                    {
+                        switch (menu.TipoMenuId)
+                        {
+                            case (Int64)Entities.TipoMenu.Carpeta:
+                                <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)">
+                                    <ChildContent>
+                                        @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId))
+                                        {
+                                            switch (menu.TipoMenuId)
+                                            {
+                                                case (Int64)Entities.TipoMenu.Carpeta:
+                                                    <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" class="sub-menu">
+                                                        @foreach (var subMenuDependiente in dataMenues.Where(x => x.DependeDe == menuDependiente.MenuId))
+                                                        {
+                                                            <RadzenPanelMenuItem Text="@(subMenuDependiente.MenuDescripcion)" Icon="@(subMenuDependiente.Imagen)" Path="@(subMenuDependiente.Referencia)" class="sub-menu2">
+
+                                                            </RadzenPanelMenuItem>
+                                                        }
+                                                    </RadzenPanelMenuItem>
+                                                    break;
+                                                case (Int64)Entities.TipoMenu.Pagina:
+                                                    <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" Path="@(menuDependiente.Referencia)" class="sub-menu">
+
+                                                    </RadzenPanelMenuItem>
+                                                    break;
+                                            }
+                                        }
+                                    </ChildContent>
                                 </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de cuenta" Path="BancaTipoCuentaCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("BancaTipoCuenta",dataFuncionesMenues)" Style="padding-left:4%">
+                                break;
+                            case (Int64)Entities.TipoMenu.Pagina:
+                                <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)" Path="@(menu.Referencia)">
+
                                 </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Cuentas" Path="BancaCuentaCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("BancaCuenta",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Cuentas por usuario" Path="BancaUsuarioCuentaCrud" Icon="account_balance"Visible="@SeguridadController.VerificarPermisoMenu("BancaUsuarioCuenta",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Directorio" Icon="work" Visible="@SeguridadController.VerificarPermisoMenu("Directorio",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Empresa" Path="DirectorioEmpresaCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("DirectorioEmpresa",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Grupo" Path="DirectorioGrupoCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("DirectorioGrupo",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Identificador por usuario" Path="DirectorioIdentificadorUsuarioCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DirectorioIdentificadorUsuario",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Roles por función" Path="DirectorioRolFuncionCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DirectorioRolFuncion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Sectores" Path="DirectorioSectorCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DirectorioSector",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Sucursales" Path="DirectorioSucursalCustomCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DirectorioSucursal",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de identificador" Path="DirectorioTipoIdentificadorCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DirectorioTipoIdentificador",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Dispositivo" Icon="devices" Visible="@SeguridadController.VerificarPermisoMenu("Dispositivo",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Depositarios" Path="DispositivoDepositarioCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoDepositario",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Marcas" Path="DispositivoMarcaCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoMarca",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Modelos" Path="DispositivoModeloCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoModelo",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Comandos por contadora" Path="DispositivoComandoContadoraCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoComandoContadora",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Comandos por placa" Path="DispositivoComandoPlacaCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoComandoPlaca",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Configuraciones por depositario" Path="DispositivoConfiguracionDepositarioCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoConfiguracionDepositario",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Depositarios por contadora" Path="DispositivoDepositarioContadoraCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoDepositarioContadora",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Estados de depositario" Path="DispositivoDepositarioEstadoCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoDepositarioEstado",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Placas por depositario" Path="DispositivoDepositarioPlacaCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoDepositarioPlaca",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Valores por depositario" Path="DispositivoDepositarioValorCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoDepositarioValor",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos configuración" Path="DispositivoTipoConfiguracionDepositarioCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoTipoConfiguracionDepositario",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos contadora" Path="DispositivoTipoContadoraCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoTipoContadora",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos placa" Path="DispositivoTipoPlacaCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("DispositivoTipoPlaca",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Estilo" Icon="style" Visible="@SeguridadController.VerificarPermisoMenu("Estilo",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Esquemas" Path="EstiloEsquemaCustomCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("EstiloEsquema",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de detalle esquema" Path="EstiloTipoEsquemaDetalleCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("EstiloTipoEsquemaDetalle",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Geografia" Icon="public" Visible="@SeguridadController.VerificarPermisoMenu("Geografia",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Paises" Path="GeografiaPaisCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("GeografiaPais",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Provincias" Path="GeografiaProvinciaCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("GeografiaProvincia",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Ciudades" Path="GeografiaCiudadCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("GeografiaCiudad",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Zonas" Path="GeografiaZonaCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("GeografiaZona",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Codigos postales" Path="GeografiaCodigoPostalCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("GeografiaCodigoPostal",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Operación" Icon="sync_alt" Visible="@SeguridadController.VerificarPermisoMenu("Operacion",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Cierres diarios" Path="OperacionCierreDiarioCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("OperacionCierreDiario",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Contenedores" Path="OperacionContenedorCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("OperacionContenedor",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de contenedor" Path="OperacionTipoContenedorCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("OperacionTipoContenedor",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de evento" Path="OperacionTipoEventoCrud" Icon="account_balance" Visible="@SeguridadController.VerificarPermisoMenu("OperacionTipoEvento",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de transacción" Path="OperacionTipoTransaccionCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("OperacionTipoTransaccion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Turnos" Path="OperacionTurnoCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("OperacionTurno",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Turnos por usuario" Path="OperacionTurnoUsuarioCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("OperacionTurnoUsuario",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Regionalización" Icon="language" Visible="@SeguridadController.VerificarPermisoMenu("Regionalizacion",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Lenguajes" Path="RegionalizacionLenguajeCustomCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("RegionalizacionLenguaje",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Seguridad" Icon="security" Visible="@SeguridadController.VerificarPermisoMenu("Seguridad",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Funciones" Path="SeguridadFuncionCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadFuncion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Menues" Path="SeguridadMenuCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadMenu",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Roles" Path="SeguridadRolCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadRol",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Aplicaciones" Path="SeguridadAplicacionCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadAplicacion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Funciones por rol" Path="SeguridadRolFuncionCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadRolFuncion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de aplicación" Path="SeguridadTipoAplicacionCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadTipoAplicacion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de función" Path="SeguridadTipoFuncionCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadTipoFuncion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos de menu" Path="SeguridadTipoMenuCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadTipoMenu",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Usuarios" Path="SeguridadUsuarioCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadUsuario",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Roles por usuario" Path="SeguridadUsuarioRolCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadUsuarioRol",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Sectores por usuario" Path="SeguridadUsuarioSectorCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SeguridadUsuarioSector",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Sincronización" Icon="update" Visible="@SeguridadController.VerificarPermisoMenu("Sincronizacion",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Configuraciones" Path="SincronizacionConfiguracionCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("SincronizacionConfiguracion",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Entidades" Path="SincronizacionEntidadCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("SincronizacionEntidad",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Turno" Icon="calendar_today" Visible="@SeguridadController.VerificarPermisoMenu("Turno",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Agendas" Path="TurnoAgendaCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("TurnoAgenda",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Esquemas" Path="TurnoEsquemaCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("TurnoEsquema",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Detalles de esquema" Path="TurnoEsquemaDetalleCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("TurnoEsquemaDetalle",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Valor" Icon="money" Visible="@SeguridadController.VerificarPermisoMenu("Valor",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Monedas" Path="ValorMonedaCustomCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("ValorMoneda",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Relación monedas tipo valor" Path="ValorRelacionMonedaTipoValorCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("ValorRelacionMonedaTipoValor",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                                <RadzenPanelMenuItem Text="Tipos" Path="ValorTipoCrud" Icon="perm_contact_calendar" Visible="@SeguridadController.VerificarPermisoMenu("ValorTipo",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Visualización" Icon="remove_red_eye" Visible="@SeguridadController.VerificarPermisoMenu("Visualizacion",dataFuncionesMenues)" Style="padding-left:2%">
-                            <ChildContent>
-                                <RadzenPanelMenuItem Text="Perfiles" Path="VisualizacionPerfilCustomCrud" Icon="computer" Visible="@SeguridadController.VerificarPermisoMenu("VisualizacionPerfil",dataFuncionesMenues)" Style="padding-left:4%">
-                                </RadzenPanelMenuItem>
-                            </ChildContent>
-                        </RadzenPanelMenuItem>
-                    </ChildContent>
-                </RadzenPanelMenuItem>
+                                break;
+                        }
+
+                    }
+                }
             </ChildContent>
         </RadzenPanelMenu>
     </ChildContent>
@@ -261,7 +120,7 @@
     private string apellidoUsuario;
     private string avatarUsuario;
     private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>();
-    private List<Entities.FuncionMenu> dataFuncionesMenues = new();
+    private List<Entities.Menu> dataMenues = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -274,7 +133,7 @@
             }
             else
             {
-                dataFuncionesMenues = await sessionStorage.GetItemAsync<List<Entities.FuncionMenu>>("DataFuncionesMenues");
+                dataMenues = await sessionStorage.GetItemAsync<List<Entities.Menu>>("DataMenues");
                 dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
                 nombreUsuario = await sessionStorage.GetItemAsync<string>("NombreUsuario");
                 apellidoUsuario = await sessionStorage.GetItemAsync<string>("ApellidoUsuario");

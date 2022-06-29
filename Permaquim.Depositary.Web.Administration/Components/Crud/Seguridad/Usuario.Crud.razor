@@ -4,9 +4,9 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
  
-@if(dataFuncionesMenues != null)
+@if(dataFunciones != null)
 {
-@if (SeguridadController.VerificarRolFuncion("SeguridadUsuario",dataFuncionesMenues,"PuedeVisualizar"))
+@if (SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeVisualizar"))
 {
  @if (Usuario_entities == null)
  {
@@ -58,13 +58,13 @@
          <Columns>
              <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
                  <HeaderTemplate>
-                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarRolFuncion("SeguridadUsuario",dataFuncionesMenues,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
                      </RadzenButton>
                      </HeaderTemplate>
                      <Template Context="element">
-                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarRolFuncion("SeguridadUsuario",dataFuncionesMenues,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                      </RadzenButton>
-                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarRolFuncion("SeguridadUsuario",dataFuncionesMenues,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                      </RadzenButton>
                  </Template>
                  </RadzenDataGridColumn>
@@ -379,7 +379,7 @@
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("AVATAR",dataLenguaje) Component="Avatar" Style="margin-left: 0px; vertical-align: middle;" />
                      </div>
                      <div class="col-md-9">
-                         <RadzenFileInput @bind-Value="@Usuario_entity.Avatar" TValue="string" Class="w-100" />  
+                         <RadzenFileInput @bind-Value="@Usuario_entity.Avatar" Error ="@ErrorFileInput_Avatar" TValue="string" Class="w-100" />  
                      </div>
                  </div>
                  <div style="margin-bottom: 1rem" class="row">
@@ -536,7 +536,7 @@ else
     /// <summary>
     /// Variables to store permissions
     /// </summary>
-    private List<Entities.FuncionMenu> dataFuncionesMenues;
+    private List<Entities.FuncionRol> dataFunciones;
  
     /// <summary>
     /// Variables to handle Relation between Usuario.EmpresaId and Empresa.Id
@@ -581,7 +581,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFuncionesMenues = await sessionStorage.GetItemAsync<List<Entities.FuncionMenu>>("DataFuncionesMenues");
+        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");
@@ -826,6 +826,21 @@ else
     /// <param name="item"></param>
     private void SelectPerfil_PerfilIdValueChanged(object item)
     {
+    }
+ 
+    /// <summary>
+    /// Usuario_entity.Avatar input error
+    /// </summary>
+    /// <param name="args"></param>
+    private void ErrorFileInput_Avatar(UploadErrorEventArgs args)
+    {
+         ShowNotification(new NotificationMessage
+         {
+             Severity = NotificationSeverity.Error,
+             Summary = "Error al procesar archivo.",
+             Detail = args.Message,
+             Duration = 4000
+         });
     }
  
     /// <summary>

@@ -88,14 +88,14 @@
         //    return resultado;
 
         //}
-
-        public static List<Entities.FuncionMenu> ObtenerFuncionesMenues(Int64 pRolId)
+        public static List<Entities.Menu> ObtenerMenuesPorRol(Int64 pRolId)
         {
-            List<Entities.FuncionMenu> resultado = new();
+            List<Entities.Menu> resultado = new();
 
-            DepositarioAdminWeb.Business.Tables.Seguridad.RolFuncion oRolFuncion = new();
-            oRolFuncion.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.RolFuncion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-            oRolFuncion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.RolFuncion.ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pRolId);
+            //Obtengo las funciones a las que puede acceder el rol.
+            DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
+            oRolFuncion.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+            oRolFuncion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pRolId);
 
             oRolFuncion.Items();
 
@@ -103,83 +103,122 @@
             {
                 foreach (var rolfuncion in oRolFuncion.Result)
                 {
-                    //var funcion = rolfuncion.FuncionId;
-
-                    DepositarioAdminWeb.Business.Tables.Seguridad.Funcion oFuncion = new();
-                    oFuncion.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Funcion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-                    oFuncion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.Funcion.ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, rolfuncion.FuncionId);
-
-                    oFuncion.Items();
-
-                    if (oFuncion.Result.Count > 0)
+                    var funcion = rolfuncion.FuncionId;
+                    foreach (var menuAccesible in funcion.ListOf_Menu_FuncionId.Where(x => x.Habilitado == true))
                     {
-                        foreach (var funcion in oFuncion.Result)
-                        {
-                            DepositarioAdminWeb.Business.Tables.Seguridad.Menu oMenu = new();
-                            oMenu.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Menu.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-                            oMenu.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.Menu.ColumnEnum.FuncionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, funcion.Id);
+                        Entities.Menu menu = new();
+                        menu.MenuId = menuAccesible.Id;
+                        menu.DependeDe = menuAccesible._DependeDe == 0 ? null : menuAccesible._DependeDe;
+                        menu.MenuDescripcion = menuAccesible.Descripcion;
+                        menu.MenuNombre = menuAccesible.Nombre;
+                        menu.TipoMenuId = menuAccesible._TipoId;
+                        menu.Imagen = menuAccesible.Imagen;
+                        menu.Referencia = funcion.Referencia;
 
-                            oMenu.Items();
-
-                            if (oMenu.Result.Count > 0)
-                            {
-                                foreach (var menu in oMenu.Result)
-                                {
-                                    Entities.FuncionMenu funcionMenu = new();
-                                    funcionMenu.PuedeModificar = rolfuncion.PuedeModificar;
-                                    funcionMenu.PuedeAgregar = rolfuncion.PuedeAgregar;
-                                    funcionMenu.PuedeEliminar = rolfuncion.PuedeEliminar;
-                                    funcionMenu.PuedeVisualizar = rolfuncion.PuedeVisualizar;
-                                    funcionMenu.FuncionId = funcion.Id;
-                                    funcionMenu.FuncionNombre = funcion.Nombre;
-                                    funcionMenu.DependeDe = menu.DependeDe == 0 ? null : menu.DependeDe;
-                                    funcionMenu.Referencia = funcion.Referencia;
-                                    funcionMenu.MenuNombre = menu.Nombre;
-                                    funcionMenu.MenuId = menu.Id;
-
-                                    resultado.Add(funcionMenu);
-                                }
-                            }
-                        }
-
+                        resultado.Add(menu);
                     }
+                }
+            }
+            return resultado;
+        }
 
+        public static List<Entities.FuncionRol> ObtenerFuncionesPorRol(Int64 pRolId)
+        {
+            List<Entities.FuncionRol> resultado = new();
 
+            DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
+            oRolFuncion.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+            oRolFuncion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pRolId);
+
+            oRolFuncion.Items();
+
+            if (oRolFuncion.Result.Count > 0)
+            {
+                foreach (var rolfuncion in oRolFuncion.Result)
+                {
+                    var funcion = rolfuncion.FuncionId;
+                    if(funcion != null)
+                    {
+                        Entities.FuncionRol funcionRol = new();
+                        funcionRol.FuncionId = funcion.Id;
+                        funcionRol.RolId = rolfuncion._RolId;
+                        funcionRol.FuncionNombre = funcion.Nombre;
+                        funcionRol.PuedeAgregar = rolfuncion.PuedeAgregar;
+                        funcionRol.PuedeModificar = rolfuncion.PuedeModificar;
+                        funcionRol.PuedeVisualizar = rolfuncion.PuedeVisualizar;
+                        funcionRol.PuedeEliminar = rolfuncion.PuedeEliminar;
+
+                        resultado.Add(funcionRol);
+                    }
                 }
             }
 
             return resultado;
-
         }
 
-        public static bool VerificarPermisoMenu(string pMenu, List<Entities.FuncionMenu> pDataFuncionesMenues)
-        {
-            bool resultado = false;
+        //public static bool VerificarPermisoMenu(string pMenu, List<Entities.FuncionMenu> pDataFuncionesMenues)
+        //{
+        //    bool resultado = false;
 
-            if (pDataFuncionesMenues.Count > 0)
-            {
-                if (pDataFuncionesMenues.Exists(x => x.MenuNombre == pMenu))
-                    resultado = true;
-            }
+        //    if (pDataFuncionesMenues.Count > 0)
+        //    {
+        //        if (pDataFuncionesMenues.Exists(x => x.MenuNombre == pMenu))
+        //            resultado = true;
+        //    }
 
-            return resultado;
-        }
+        //    return resultado;
+        //}
 
-        public static bool VerificarRolFuncion(string pMenu, List<Entities.FuncionMenu> pDataFuncionesMenues, string pAccion)
+        //public static bool VerificarRolFuncion(string pMenu, List<Entities.FuncionMenu> pDataFuncionesMenues, string pAccion)
+        //{
+        //    bool resultado = false;
+        //    object? variable = null;
+
+        //    if (pDataFuncionesMenues != null)
+        //    {
+        //        if (pDataFuncionesMenues.Count > 0)
+        //        {
+        //            var item = pDataFuncionesMenues.FirstOrDefault(x => x.MenuNombre == pMenu);
+
+        //            if (item != null)
+        //            {
+        //                bool valorPermiso;
+        //                var propiedadPermiso = item.GetType().GetProperty(pAccion);
+        //                if (propiedadPermiso != null)
+        //                {
+        //                    try
+        //                    {
+        //                        valorPermiso = (bool)propiedadPermiso.GetValue(item, null);
+        //                        resultado = valorPermiso;
+        //                    }
+        //                    catch (Exception ex)
+        //                    {
+        //                        resultado = false;
+        //                        //throw (ex);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return resultado;
+        //}
+
+        public static bool VerificarPermisoFuncion(string pFuncionNombre, List<Entities.FuncionRol> pDataFunciones, string pFuncionAccion)
         {
             bool resultado = false;
             object? variable = null;
 
-            if (pDataFuncionesMenues != null)
+            if (pDataFunciones != null)
             {
-                if (pDataFuncionesMenues.Count > 0)
+                if (pDataFunciones.Count > 0)
                 {
-                    var item = pDataFuncionesMenues.FirstOrDefault(x => x.MenuNombre == pMenu);
+                    var item = pDataFunciones.FirstOrDefault(x => x.FuncionNombre == pFuncionNombre);
 
                     if (item != null)
                     {
                         bool valorPermiso;
-                        var propiedadPermiso = item.GetType().GetProperty(pAccion);
+                        var propiedadPermiso = item.GetType().GetProperty(pFuncionAccion);
                         if (propiedadPermiso != null)
                         {
                             try
@@ -199,35 +238,6 @@
 
             return resultado;
         }
-
-        //public static List<Entities.RolUsuario> ObtenerRolesPorUsuario(Int64 pUsuarioId)
-        //{
-        //    List<Entities.RolUsuario> resultado = new();
-
-        //    DepositarioAdminWeb.Business.Relations.Seguridad.UsuarioRol oUsuarioRol = new();
-        //    oUsuarioRol.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-        //    oUsuarioRol.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsuarioId);
-
-        //    oUsuarioRol.Items();
-
-        //    foreach (var rolUsuario in oUsuarioRol.Result)
-        //    {
-        //        if (rolUsuario.RolId.Habilitado && rolUsuario.UsuarioId.Habilitado)
-        //        {
-        //            Entities.RolUsuario rolUsuarioNodo = new();
-        //            rolUsuarioNodo.UsuarioModificacion = "1";
-        //            rolUsuarioNodo.FechaCreacion = rolUsuario.FechaCreacion;
-        //            rolUsuarioNodo.FechaModificacion = rolUsuario.FechaModificacion;
-        //            rolUsuarioNodo.UsuarioCreacion = "1";
-        //            rolUsuarioNodo.Aplicacion = rolUsuario.AplicacionId.Nombre;
-        //            rolUsuarioNodo.DependeDe = rolUsuario.RolId.DependeDe.Nombre;
-        //            rolUsuarioNodo.Rol = rolUsuario.RolId.Nombre;
-        //            resultado.Add(rolUsuarioNodo);
-        //        }
-        //    }
-
-        //    return resultado;
-        //}
 
     }
 }

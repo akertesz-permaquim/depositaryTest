@@ -39,7 +39,7 @@ namespace Permaquim.Depositary.Web.Administration.Components.CustomRadzen
         /// </summary>
         /// <value>The value.</value>
         [Parameter]
-        public double Value { get; set; }
+        public float Value { get; set; }
 
         /// <summary>
         /// Determines the maximum value.

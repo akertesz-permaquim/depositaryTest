@@ -19,7 +19,7 @@
         {
             List<Entities.TextoLenguaje> resultado = new();
 
-            if(pUsuarioId==-1)
+            if (pUsuarioId == -1)
             {
                 DepositarioAdminWeb.Business.Relations.Regionalizacion.Lenguaje oLenguaje = new();
                 oLenguaje.Where.Add(DepositarioAdminWeb.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
@@ -27,7 +27,7 @@
 
                 oLenguaje.Items();
 
-                if(oLenguaje.Result.Count>0)
+                if (oLenguaje.Result.Count > 0)
                 {
                     foreach (var lenguajeitem in oLenguaje.Result.FirstOrDefault().ListOf_LenguajeItem_LenguajeId.Where(x => x.Habilitado == true))
                     {
@@ -37,6 +37,7 @@
                         textoLenguaje.Texto = lenguajeitem.Texto;
                         textoLenguaje.LenguajeItemId = lenguajeitem.Id;
                         textoLenguaje.Clave = lenguajeitem.Clave;
+                        textoLenguaje.Cultura = oLenguaje.Result.FirstOrDefault().Cultura;
                         resultado.Add(textoLenguaje);
                     }
                 }
@@ -61,6 +62,7 @@
                         textoLenguaje.Texto = lenguajeitem.Texto;
                         textoLenguaje.LenguajeItemId = lenguajeitem.Id;
                         textoLenguaje.Clave = lenguajeitem.Clave;
+                        textoLenguaje.Cultura = lenguaje.Cultura;
                         resultado.Add(textoLenguaje);
                     }
                 }
@@ -73,6 +75,7 @@
             genericoLenguaje.Texto = "**";
             genericoLenguaje.LenguajeItemId = -1;
             genericoLenguaje.Clave = "GENERIC";
+            genericoLenguaje.Cultura = "ES-ar";
             resultado.Add(genericoLenguaje);
 
             return resultado;

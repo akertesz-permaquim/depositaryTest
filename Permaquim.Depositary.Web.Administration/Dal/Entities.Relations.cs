@@ -1675,14 +1675,14 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Agenda that have this SectorId value.
+                 ///  Represents the child collection of AgendaTurno that have this SectorId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Turno.Agenda> ListOf_Agenda_SectorId
+                 public List<DepositarioAdminWeb.Entities.Relations.Turno.AgendaTurno> ListOf_AgendaTurno_SectorId
                 {
                      get {
-                             DepositarioAdminWeb.Business.Relations.Turno.Agenda entities = new DepositarioAdminWeb.Business.Relations.Turno.Agenda();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.Agenda.ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno entities = new DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno.ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -3389,6 +3389,7 @@ using System.Text;
 					public const string MarcaId = "MarcaId";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
+					public const string Imagen = "Imagen";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -3401,6 +3402,7 @@ using System.Text;
 					MarcaId,
 					Nombre,
 					Descripcion,
+					Imagen,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -3413,12 +3415,13 @@ using System.Text;
                 public Modelo()
                 {
                 }
-                public  Modelo(DepositarioAdminWeb.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  Modelo(DepositarioAdminWeb.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,String Imagen,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.MarcaId = MarcaId;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
+                    this.Imagen = Imagen;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -3450,6 +3453,8 @@ using System.Text;
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Descripcion","Descripcion")]
              public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Imagen","Imagen")]
+             public String Imagen { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -4340,18 +4345,6 @@ using System.Text;
              static DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
-                 /// <summary>
-                 ///  Represents the child collection of Agenda that have this EsquemaDetalleId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Turno.Agenda> ListOf_Agenda_EsquemaDetalleId
-                {
-                     get {
-                             DepositarioAdminWeb.Business.Relations.Turno.Agenda entities = new DepositarioAdminWeb.Business.Relations.Turno.Agenda();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.Agenda.ColumnEnum.EsquemaDetalleId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -5929,6 +5922,7 @@ using System.Text;
 					public const string DepositarioId = "DepositarioId";
 					public const string SectorId = "SectorId";
 					public const string SucursalId = "SucursalId";
+					public const string MonedaId = "MonedaId";
 					public const string UsuarioId = "UsuarioId";
 					public const string UsuarioCuentaId = "UsuarioCuentaId";
 					public const string ContenedorId = "ContenedorId";
@@ -5947,6 +5941,7 @@ using System.Text;
 					DepositarioId,
 					SectorId,
 					SucursalId,
+					MonedaId,
 					UsuarioId,
 					UsuarioCuentaId,
 					ContenedorId,
@@ -5964,13 +5959,14 @@ using System.Text;
                 public Transaccion()
                 {
                 }
-                public  Transaccion(DepositarioAdminWeb.Entities.Relations.Operacion.TipoTransaccion TipoId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,Int64 UsuarioId,DepositarioAdminWeb.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,DepositarioAdminWeb.Entities.Relations.Operacion.Contenedor ContenedorId,DepositarioAdminWeb.Entities.Relations.Operacion.Sesion SesionId,Int64 TurnoId,DepositarioAdminWeb.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada)
+                public  Transaccion(DepositarioAdminWeb.Entities.Relations.Operacion.TipoTransaccion TipoId,DepositarioAdminWeb.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId,DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId,Int64 UsuarioId,DepositarioAdminWeb.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,DepositarioAdminWeb.Entities.Relations.Operacion.Contenedor ContenedorId,DepositarioAdminWeb.Entities.Relations.Operacion.Sesion SesionId,Int64 TurnoId,DepositarioAdminWeb.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
                     this.DepositarioId = DepositarioId;
                     this.SectorId = SectorId;
                     this.SucursalId = SucursalId;
+                    this.MonedaId = MonedaId;
                     this.UsuarioId = UsuarioId;
                     this.UsuarioCuentaId = UsuarioCuentaId;
                     this.ContenedorId = ContenedorId;
@@ -6053,6 +6049,23 @@ using System.Text;
                  set {SucursalId_  =  value;}
              }
              static DepositarioAdminWeb.Entities.Relations.Directorio.Sucursal SucursalId_ = null;
+             [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _MonedaId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId
+             {
+                 get {
+                     if (MonedaId_ == null || MonedaId_.Id != _MonedaId)
+                         {
+                             MonedaId = new DepositarioAdminWeb.Business.Relations.Valor.Moneda().Items(this._MonedaId).FirstOrDefault();
+                         }
+                     return MonedaId_;
+                     }
+                 set {MonedaId_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Valor.Moneda MonedaId_ = null;
              [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
              public Int64 UsuarioId { get; set; }
              [DataItemAttributeFieldName("UsuarioCuentaId","UsuarioCuentaId")]
@@ -6330,6 +6343,7 @@ using System.Text;
 					public const string SobreId = "SobreId";
 					public const string RelacionMonedaTipoValorId = "RelacionMonedaTipoValorId";
 					public const string CantidadDeclarada = "CantidadDeclarada";
+					public const string ValorDeclarado = "ValorDeclarado";
 					public const string Fecha = "Fecha";
 				}
 				public enum FieldEnum : int
@@ -6338,6 +6352,7 @@ using System.Text;
 					SobreId,
 					RelacionMonedaTipoValorId,
 					CantidadDeclarada,
+					ValorDeclarado,
 					Fecha
 				}
 	               /// <summary>
@@ -6346,12 +6361,13 @@ using System.Text;
                 public TransaccionSobreDetalle()
                 {
                 }
-                public  TransaccionSobreDetalle(DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId,DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId,Int64 CantidadDeclarada,DateTime Fecha)
+                public  TransaccionSobreDetalle(DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionSobre SobreId,DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId,Int64 CantidadDeclarada,Double ValorDeclarado,DateTime Fecha)
                 {
                     this.Id = Id;
                     this.SobreId = SobreId;
                     this.RelacionMonedaTipoValorId = RelacionMonedaTipoValorId;
                     this.CantidadDeclarada = CantidadDeclarada;
+                    this.ValorDeclarado = ValorDeclarado;
                     this.Fecha = Fecha;
                 }
              [DataItemAttributeFieldName("Id","Id")]
@@ -6393,6 +6409,8 @@ using System.Text;
              static DepositarioAdminWeb.Entities.Relations.Valor.RelacionMonedaTipoValor RelacionMonedaTipoValorId_ = null;
              [DataItemAttributeFieldName("CantidadDeclarada","CantidadDeclarada")]
              public Int64 CantidadDeclarada { get; set; }
+             [DataItemAttributeFieldName("ValorDeclarado","ValorDeclarado")]
+             public Double ValorDeclarado { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
              public DateTime Fecha { get; set; }
 				
@@ -6670,6 +6688,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
+					public const string Cultura = "Cultura";
 					public const string EsDefault = "EsDefault";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
@@ -6682,6 +6701,7 @@ using System.Text;
 					Id,
 					Nombre,
 					Descripcion,
+					Cultura,
 					EsDefault,
 					Habilitado,
 					UsuarioCreacion,
@@ -6695,11 +6715,12 @@ using System.Text;
                 public Lenguaje()
                 {
                 }
-                public  Lenguaje(String Nombre,String Descripcion,Boolean EsDefault,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  Lenguaje(String Nombre,String Descripcion,String Cultura,Boolean EsDefault,Boolean Habilitado,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
+                    this.Cultura = Cultura;
                     this.EsDefault = EsDefault;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
@@ -6715,6 +6736,8 @@ using System.Text;
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Descripcion","Descripcion")]
              public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Cultura","Cultura")]
+             public String Cultura { get; set; }
              [DataItemAttributeFieldName("EsDefault","EsDefault")]
              public Boolean EsDefault { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
@@ -9828,18 +9851,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Entidad that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Sincronizacion.Entidad> ListOf_Entidad_UsuarioCreacion
-                {
-                     get {
-                             DepositarioAdminWeb.Business.Relations.Sincronizacion.Entidad entities = new DepositarioAdminWeb.Business.Relations.Sincronizacion.Entidad();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Sincronizacion.Entidad.ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Entidad that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -9852,26 +9863,38 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Agenda that have this UsuarioCreacion value.
+                 ///  Represents the child collection of Entidad that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Turno.Agenda> ListOf_Agenda_UsuarioCreacion
+                 public List<DepositarioAdminWeb.Entities.Relations.Sincronizacion.Entidad> ListOf_Entidad_UsuarioCreacion
                 {
                      get {
-                             DepositarioAdminWeb.Business.Relations.Turno.Agenda entities = new DepositarioAdminWeb.Business.Relations.Turno.Agenda();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.Agenda.ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             DepositarioAdminWeb.Business.Relations.Sincronizacion.Entidad entities = new DepositarioAdminWeb.Business.Relations.Sincronizacion.Entidad();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Sincronizacion.Entidad.ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Agenda that have this UsuarioModificacion value.
+                 ///  Represents the child collection of AgendaTurno that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Turno.Agenda> ListOf_Agenda_UsuarioModificacion
+                 public List<DepositarioAdminWeb.Entities.Relations.Turno.AgendaTurno> ListOf_AgendaTurno_UsuarioModificacion
                 {
                      get {
-                             DepositarioAdminWeb.Business.Relations.Turno.Agenda entities = new DepositarioAdminWeb.Business.Relations.Turno.Agenda();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.Agenda.ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno entities = new DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno.ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of AgendaTurno that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Turno.AgendaTurno> ListOf_AgendaTurno_UsuarioCreacion
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno entities = new DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno.ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -9900,18 +9923,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Moneda that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Valor.Moneda> ListOf_Moneda_UsuarioCreacion
-                {
-                     get {
-                             DepositarioAdminWeb.Business.Relations.Valor.Moneda entities = new DepositarioAdminWeb.Business.Relations.Valor.Moneda();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Valor.Moneda.ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Moneda that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -9920,6 +9931,18 @@ using System.Text;
                      get {
                              DepositarioAdminWeb.Business.Relations.Valor.Moneda entities = new DepositarioAdminWeb.Business.Relations.Valor.Moneda();
                              entities.Where.Add(DepositarioAdminWeb.Business.Relations.Valor.Moneda.ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Moneda that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Valor.Moneda> ListOf_Moneda_UsuarioCreacion
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Valor.Moneda entities = new DepositarioAdminWeb.Business.Relations.Valor.Moneda();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Valor.Moneda.ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10020,18 +10043,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of PerfilTipo that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositarioAdminWeb.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioModificacion
-                {
-                     get {
-                             DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo entities = new DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo();
-                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10040,6 +10051,18 @@ using System.Text;
                      get {
                              DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo entities = new DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo();
                              entities.Where.Add(DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioCreacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of PerfilTipo that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioModificacion
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo entities = new DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioModificacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10595,16 +10618,16 @@ using System.Text;
 		namespace DepositarioAdminWeb.Entities.Relations.Turno {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
-			[DataItemAttributeObjectName("Agenda","Agenda")]    // Object name  and alias in Database
+			[DataItemAttributeObjectName("AgendaTurno","AgendaTurno")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class Agenda : IRelationsDataITem
+			public class AgendaTurno : IRelationsDataITem
 			{
 				        
 				public class ColumnNames
 				{
 					public const string Id = "Id";
 					public const string Nombre = "Nombre";
-					public const string EsquemaDetalleId = "EsquemaDetalleId";
+					public const string EsquemaDetalleTurnoId = "EsquemaDetalleTurnoId";
 					public const string Fecha = "Fecha";
 					public const string SectorId = "SectorId";
 					public const string Secuencia = "Secuencia";
@@ -10618,7 +10641,7 @@ using System.Text;
                 {
 					Id,
 					Nombre,
-					EsquemaDetalleId,
+					EsquemaDetalleTurnoId,
 					Fecha,
 					SectorId,
 					Secuencia,
@@ -10631,14 +10654,14 @@ using System.Text;
 	               /// <summary>
                 /// Parameterless Constructor
 	               /// <summary>
-                public Agenda()
+                public AgendaTurno()
                 {
                 }
-                public  Agenda(Int64 Id,String Nombre,DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
+                public  AgendaTurno(String Nombre,DepositarioAdminWeb.Entities.Relations.Turno.EsquemaDetalleTurno EsquemaDetalleTurnoId,DateTime Fecha,DepositarioAdminWeb.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
-                    this.EsquemaDetalleId = EsquemaDetalleId;
+                    this.EsquemaDetalleTurnoId = EsquemaDetalleTurnoId;
                     this.Fecha = Fecha;
                     this.SectorId = SectorId;
                     this.Secuencia = Secuencia;
@@ -10654,23 +10677,23 @@ using System.Text;
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
-             [DataItemAttributeFieldName("EsquemaDetalleId","EsquemaDetalleId")]
+             [DataItemAttributeFieldName("EsquemaDetalleTurnoId","EsquemaDetalleTurnoId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _EsquemaDetalleId { get; set; }
+             internal Int64 _EsquemaDetalleTurnoId { get; set; }
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("EsquemaDetalle")]// Object name in Database
-             public DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId
+             [PropertyAttributeForeignKeyObjectName("EsquemaDetalleTurno")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Turno.EsquemaDetalleTurno EsquemaDetalleTurnoId
              {
                  get {
-                     if (EsquemaDetalleId_ == null || EsquemaDetalleId_.Id != _EsquemaDetalleId)
+                     if (EsquemaDetalleTurnoId_ == null || EsquemaDetalleTurnoId_.Id != _EsquemaDetalleTurnoId)
                          {
-                             EsquemaDetalleId = new DepositarioAdminWeb.Business.Relations.Estilo.EsquemaDetalle().Items(this._EsquemaDetalleId).FirstOrDefault();
+                             EsquemaDetalleTurnoId = new DepositarioAdminWeb.Business.Relations.Turno.EsquemaDetalleTurno().Items(this._EsquemaDetalleTurnoId).FirstOrDefault();
                          }
-                     return EsquemaDetalleId_;
+                     return EsquemaDetalleTurnoId_;
                      }
-                 set {EsquemaDetalleId_  =  value;}
+                 set {EsquemaDetalleTurnoId_  =  value;}
              }
-             static DepositarioAdminWeb.Entities.Relations.Estilo.EsquemaDetalle EsquemaDetalleId_ = null;
+             static DepositarioAdminWeb.Entities.Relations.Turno.EsquemaDetalleTurno EsquemaDetalleTurnoId_ = null;
              [DataItemAttributeFieldName("Fecha","Fecha")]
              public DateTime Fecha { get; set; }
              [DataItemAttributeFieldName("SectorId","SectorId")]
@@ -10735,74 +10758,14 @@ using System.Text;
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
-			} //Class Agenda 
+			} //Class AgendaTurno 
 } //namespace DepositarioAdminWeb.Entities.Relations.Turno
 		namespace DepositarioAdminWeb.Entities.Relations.Turno {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
-			[DataItemAttributeObjectName("Esquema","Esquema")]    // Object name  and alias in Database
+			[DataItemAttributeObjectName("EsquemaDetalleTurno","EsquemaDetalleTurno")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class Esquema : IRelationsDataITem
-			{
-				        
-				public class ColumnNames
-				{
-					public const string Id = "Id";
-					public const string Nombre = "Nombre";
-					public const string UsuarioCreacion = "UsuarioCreacion";
-					public const string FechaCreacion = "FechaCreacion";
-					public const string UsuarioModificacion = "UsuarioModificacion";
-					public const string FechaModificacion = "FechaModificacion";
-				}
-				public enum FieldEnum : int
-                {
-					Id,
-					Nombre,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-	               /// <summary>
-                /// Parameterless Constructor
-	               /// <summary>
-                public Esquema()
-                {
-                }
-                public  Esquema(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-                {
-                    this.Id = Id;
-                    this.Nombre = Nombre;
-                    this.UsuarioCreacion = UsuarioCreacion;
-                    this.FechaCreacion = FechaCreacion;
-                    this.UsuarioModificacion = UsuarioModificacion;
-                    this.FechaModificacion = FechaModificacion;
-                }
-             [DataItemAttributeFieldName("Id","Id")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
-             public Int64 Id { get; set; }
-             [DataItemAttributeFieldName("Nombre","Nombre")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
-             public String Nombre { get; set; }
-             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             public Int64 UsuarioCreacion { get; set; }
-             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
-             public DateTime FechaCreacion { get; set; }
-             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64? UsuarioModificacion { get; set; }
-             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime? FechaModificacion { get; set; }
-             public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
-             public override string ToString() => Nombre;
-				
-			} //Class Esquema 
-} //namespace DepositarioAdminWeb.Entities.Relations.Turno
-		namespace DepositarioAdminWeb.Entities.Relations.Turno {
-			[Serializable()]                         //
-			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
-			[DataItemAttributeObjectName("EsquemaDetalle","EsquemaDetalle")]    // Object name  and alias in Database
-			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
-			public class EsquemaDetalle : IRelationsDataITem
+			public class EsquemaDetalleTurno : IRelationsDataITem
 			{
 				        
 				public class ColumnNames
@@ -10830,10 +10793,10 @@ using System.Text;
 	               /// <summary>
                 /// Parameterless Constructor
 	               /// <summary>
-                public EsquemaDetalle()
+                public EsquemaDetalleTurno()
                 {
                 }
-                public  EsquemaDetalle(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  EsquemaDetalleTurno(DepositarioAdminWeb.Entities.Relations.Turno.EsquemaTurno EsquemaTurnoId,String Nombre,Int32 Secuencia,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EsquemaTurnoId = EsquemaTurnoId;
@@ -10848,24 +10811,183 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
              public Int64 Id { get; set; }
              [DataItemAttributeFieldName("EsquemaTurnoId","EsquemaTurnoId")]
-             public Int64 EsquemaTurnoId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _EsquemaTurnoId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("EsquemaTurno")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Turno.EsquemaTurno EsquemaTurnoId
+             {
+                 get {
+                     if (EsquemaTurnoId_ == null || EsquemaTurnoId_.Id != _EsquemaTurnoId)
+                         {
+                             EsquemaTurnoId = new DepositarioAdminWeb.Business.Relations.Turno.EsquemaTurno().Items(this._EsquemaTurnoId).FirstOrDefault();
+                         }
+                     return EsquemaTurnoId_;
+                     }
+                 set {EsquemaTurnoId_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Turno.EsquemaTurno EsquemaTurnoId_ = null;
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Secuencia","Secuencia")]
              public Int32 Secuencia { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             public Int64 UsuarioCreacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioCreacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion
+             {
+                 get {
+                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
+                         {
+                             UsuarioCreacion = new DepositarioAdminWeb.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
+                         }
+                     return UsuarioCreacion_;
+                     }
+                 set {UsuarioCreacion_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64? UsuarioModificacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioModificacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion
+             {
+                 get {
+                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
+                         {
+                             UsuarioModificacion = new DepositarioAdminWeb.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
+                         }
+                     return UsuarioModificacion_;
+                     }
+                 set {UsuarioModificacion_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of AgendaTurno that have this EsquemaDetalleTurnoId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Turno.AgendaTurno> ListOf_AgendaTurno_EsquemaDetalleTurnoId
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno entities = new DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
-			} //Class EsquemaDetalle 
+			} //Class EsquemaDetalleTurno 
+} //namespace DepositarioAdminWeb.Entities.Relations.Turno
+		namespace DepositarioAdminWeb.Entities.Relations.Turno {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Turno")]  // Database Schema Name
+			[DataItemAttributeObjectName("EsquemaTurno","EsquemaTurno")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class EsquemaTurno : IRelationsDataITem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string Nombre = "Nombre";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					Nombre,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public EsquemaTurno()
+                {
+                }
+                public  EsquemaTurno(String Nombre,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.Nombre = Nombre;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioCreacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion
+             {
+                 get {
+                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
+                         {
+                             UsuarioCreacion = new DepositarioAdminWeb.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
+                         }
+                     return UsuarioCreacion_;
+                     }
+                 set {UsuarioCreacion_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioModificacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion
+             {
+                 get {
+                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
+                         {
+                             UsuarioModificacion = new DepositarioAdminWeb.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
+                         }
+                     return UsuarioModificacion_;
+                     }
+                 set {UsuarioModificacion_  =  value;}
+             }
+             static DepositarioAdminWeb.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of EsquemaDetalleTurno that have this EsquemaTurnoId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Turno.EsquemaDetalleTurno> ListOf_EsquemaDetalleTurno_EsquemaTurnoId
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Turno.EsquemaDetalleTurno entities = new DepositarioAdminWeb.Business.Relations.Turno.EsquemaDetalleTurno();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Turno.EsquemaDetalleTurno.ColumnEnum.EsquemaTurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+             public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
+             public override string ToString() => Nombre;
+				
+			} //Class EsquemaTurno 
 } //namespace DepositarioAdminWeb.Entities.Relations.Turno
 		namespace DepositarioAdminWeb.Entities.Relations.Valor {
 			[Serializable()]                         //
@@ -11165,6 +11287,18 @@ using System.Text;
                      get {
                              DepositarioAdminWeb.Business.Relations.Dispositivo.DepositarioValor entities = new DepositarioAdminWeb.Business.Relations.Dispositivo.DepositarioValor();
                              entities.Where.Add(DepositarioAdminWeb.Business.Relations.Dispositivo.DepositarioValor.ColumnEnum.ValorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Transaccion that have this MonedaId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> ListOf_Transaccion_MonedaId
+                {
+                     get {
+                             DepositarioAdminWeb.Business.Relations.Operacion.Transaccion entities = new DepositarioAdminWeb.Business.Relations.Operacion.Transaccion();
+                             entities.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }

@@ -44,7 +44,7 @@
             return resultado;
         }
 
-        public static string ObtenerItemEstilo(List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalles, string pNombre)
+        public static string ObtenerItemEstilo(List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalles, string pNombre, bool obtenerSoloValor = false)
         {
             string resultado = "";
             DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
@@ -52,18 +52,23 @@
             if (dataEsquemaDetalles.Where(x => x.Nombre == pNombre).Count() > 0)
             {
                 esquemaDetalle = dataEsquemaDetalles.Where(x => x.Nombre == pNombre).FirstOrDefault();
-                switch (esquemaDetalle.TipoEsquemaDetalleId)
+                if (!obtenerSoloValor)
                 {
-                    case 1:
-                        resultado = "background-color:" + esquemaDetalle.Valor;
-                        break;
-                    case 2:
-                        resultado = "font-family:" + esquemaDetalle.Valor;
-                        break;
-                    case 3:
-                        resultado = esquemaDetalle.Valor;
-                        break;
+                    switch (esquemaDetalle.TipoEsquemaDetalleId)
+                    {
+                        case 1:
+                            resultado = "background-color:" + esquemaDetalle.Valor;
+                            break;
+                        case 2:
+                            resultado = "font-family:" + esquemaDetalle.Valor;
+                            break;
+                        case 3:
+                            resultado = esquemaDetalle.Valor;
+                            break;
+                    }
                 }
+                else
+                    resultado = esquemaDetalle.Valor;
             }
             return resultado;
         }
