@@ -13,6 +13,7 @@ namespace Permaquim.Depositary.UI.Desktop.Helpers
         {
             byte[] bytes = Convert.FromBase64String(stringValue
            .Replace("data:image/png;base64,", String.Empty)
+           .Replace("data:image/gif;base64,", String.Empty)
            .Replace("data:image/jpeg;base64,", String.Empty)
            .Replace("data:image/webp;base64,", String.Empty));
 

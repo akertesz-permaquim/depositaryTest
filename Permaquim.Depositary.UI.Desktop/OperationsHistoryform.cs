@@ -1,4 +1,5 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
@@ -27,7 +28,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void CenterPanel()
@@ -402,39 +403,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<TransactionDetailItem> _transactionDetailItems = new();
         private List<TransactionEnvelopDetailItem> _transactionEnvelopeDetailItems = new();
 
-        private class TransactionHeaderItem
-        {
-            public long Id { get; set; }
-            public string Tipo { get; set; }
-            public long TipoId { get; set; }
-            public string Moneda { get; set; }
-            public string Usuario { get; set; }
-            public string UsuarioCuenta { get; set; }
-            public string Contenedor { get; set; }
-            public string Turno { get; set; }
-            public string Cierrediario { get; set; }
-            public double TotalValidado { get; set; }
-            public double TotalAValidar { get; set; }
-            public DateTime Fecha { get; set; }
-            public bool Finalizada { get; set; }
-        }
-        private class TransactionDetailItem
-        {
-            public long Id { get; set; }
-            public string Denominacion { get; set; }
-            public long CantidadUnidades { get; set; }
 
-            public DateTime Fecha { get; set; }
-        }
-
-        private class TransactionEnvelopDetailItem
-        {
-            public string Sobre { get; set; }
-            public string TipoValor { get; set; }
-            public long CantidadDeclarada { get; set; }
-            public DateTime Fecha { get; set; }
-        }
-
+ 
         private void OperationsHeaderGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             System.Diagnostics.Debug.Print("");
@@ -447,8 +417,15 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 LoadOperationsHeader();
             }
+            else
+            {
+                InitializeLocals();
+            }
         }
-
+        private void InitializeLocals()
+        {
+           // inicializar variables locales
+        }
         private void OperationsDetailGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();

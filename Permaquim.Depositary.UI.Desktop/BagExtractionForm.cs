@@ -64,12 +64,15 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
-            if (TimeOutController.IsTimeOut())
-            {
-                _pollingTimer.Enabled = false;
-                DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
-            }
+
+            TimeOutController.Stop();
+
+            //if (TimeOutController.IsTimeOut())
+            //{
+            //    _pollingTimer.Enabled = false;
+            //    DatabaseController.LogOff(true);
+            //    FormsController.HideInstance(this);
+            //}
 
             if (_device != null && _device.IoBoardConnected)
             {

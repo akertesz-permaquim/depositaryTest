@@ -11,7 +11,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
     {
       public static int GetPollingInterval()
         {
-            return 200;
+            
+            int returnValue = Int32.Parse( DatabaseController.
+                GetDepositaryConfigurationItem(Global.Enumerations.DepositaryConfiguratoinEnum.POLLTIME));
+            return returnValue;
+        }
+        public static int GetSleepInterval()
+        {
+
+            int returnValue = Int32.Parse(DatabaseController.
+                GetDepositaryConfigurationItem(Global.Enumerations.DepositaryConfiguratoinEnum.SLEEPTIME));
+            return returnValue;
         }
     }
 }

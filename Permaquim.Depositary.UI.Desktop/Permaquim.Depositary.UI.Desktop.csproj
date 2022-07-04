@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Compile Remove="Controls\BillDepositDialog.Designer.cs" />
+    <Compile Remove="Model\User.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,6 +73,10 @@
     <None Update="Devices\DE50.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

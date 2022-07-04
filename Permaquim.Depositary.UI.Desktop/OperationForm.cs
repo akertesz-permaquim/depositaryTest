@@ -2,15 +2,6 @@
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -38,7 +29,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void OperationForm_Load(object sender, EventArgs e)
@@ -46,7 +37,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
             LoadStyles();
             CenterPanel();
-            if(_device.CounterConnected)
+            if (_device.CounterConnected)
                 SetDeviceToNeutralMode();
             LoadTransactionButtons();
             LoadOtherOperationsButton();
@@ -71,7 +62,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _transactions)
             {
                 CustomButton newButton = ControlBuilder.BuildStandardButton(
-                    "TransactionButton" + item.Id.ToString(), 
+                    "TransactionButton" + item.Id.ToString(),
                     MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
                 newButton.Click += new System.EventHandler(TransactionButton_Click);
@@ -90,11 +81,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.BillDeposit:
                 case (int)OperationTypeEnum.EnvelopeDeposit:
-                FormsController.OpenChildForm(this,new CurrencySelectorForm(),
-                (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     break;
                 case (int)OperationTypeEnum.ValueExtraction:
-                    FormsController.OpenChildForm(this,new BagExtractionForm(),
+                    FormsController.OpenChildForm(this, new BagExtractionForm(),
                         (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     break;
                 default:
@@ -104,7 +95,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON),MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
@@ -122,7 +113,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OtherOperationButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new OtherOperationsForm(),
+            FormsController.OpenChildForm(this, new OtherOperationsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         # endregion
@@ -130,6 +121,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BackButton_Click(object sender, EventArgs e)
         {
             DatabaseController.LogOff(false);
+            MultilanguangeController.ResetLanguage();
             FormsController.HideInstance(this);
         }
         private void SetDeviceToNeutralMode()
@@ -137,7 +129,7 @@ namespace Permaquim.Depositary.UI.Desktop
             // si por algun motivo el equipo se recupera de una transacción fallida,
             // se cancela la operación.
             if (_device.StateResultProperty.ModeStateInformation.ModeState
-                == ModeStateInformation.Mode.DepositMode 
+                == ModeStateInformation.Mode.DepositMode
                 || _device.StateResultProperty.ModeStateInformation.ModeState
                 == ModeStateInformation.Mode.ManualMode)
             {
@@ -153,6 +145,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OperationForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+            if (!this.Visible)
+                InitializeLocals();
+        }
+        private void InitializeLocals()
+        {
+            _transactions = new();
         }
     }
 }

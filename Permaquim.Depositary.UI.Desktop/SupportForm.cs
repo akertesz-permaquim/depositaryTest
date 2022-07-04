@@ -1,15 +1,6 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -229,6 +220,21 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void MainPanel_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SupportForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!this.Visible)
+                InitializeLocals();
+        }
+        private void InitializeLocals()
+        {
+            // inicializar variables locales.
         }
     }
 }

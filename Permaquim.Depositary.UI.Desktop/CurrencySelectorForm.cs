@@ -2,15 +2,6 @@
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -40,7 +31,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void CenterPanel()
@@ -140,6 +131,13 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CurrencySelectorForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+            if (!this.Visible)
+                InitializeLocals();
+        }
+        private void InitializeLocals()
+        {
+            _currencies = new();
+
         }
     }
 }

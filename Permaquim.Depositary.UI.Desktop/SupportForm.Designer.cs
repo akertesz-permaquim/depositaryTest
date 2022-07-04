@@ -57,6 +57,7 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(1056, 648);
             this.MainPanel.TabIndex = 0;
+            this.MainPanel.VisibleChanged += new System.EventHandler(this.MainPanel_VisibleChanged);
             // 
             // ModeCheckBox
             // 
@@ -285,6 +286,7 @@
             this.Name = "SupportForm";
             this.Text = "SupportForm";
             this.Load += new System.EventHandler(this.SupportForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.SupportForm_VisibleChanged);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             this.IoBoardStatusGroup.ResumeLayout(false);

@@ -41,7 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
 
         }

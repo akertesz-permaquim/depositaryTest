@@ -1,13 +1,4 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Controllers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -33,7 +24,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void CenterPanel()

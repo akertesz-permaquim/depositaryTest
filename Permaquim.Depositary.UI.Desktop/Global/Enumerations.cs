@@ -58,7 +58,34 @@
             None = 0,
             NoTurn = 1
         }
-
+        public enum DepositaryConfiguratoinEnum
+        {
+            NOESP,
+            BILLDEP,
+            SBRDEP,
+            MONDEP,
+            BILLNTF,
+            ENVNTF,
+            COINDEP,
+            TRN,
+            TMR,
+            RIC,
+            RIS,
+            CNTCPTCK,
+            BLOQFALT,
+            ERRNTF,
+            SISERR,
+            PAPELNTF,
+            CONTCAPNTF,
+            COMCONTNTF,
+            COMIOBOARDNTF,
+            ACEPTAMULTIMONEDA,
+            ACEPTAUSLOC,
+            TEMPLATEMONCOMPLETO,
+            CNTCPDEPOSITO,
+            POLLTIME,
+            SLEEPTIME
+        }
         public enum MultiLanguageEnum
         {
             LOGIN_TITLE,
@@ -127,7 +154,8 @@
             CONFIRMA_CIERRE_DIARIO,
             CIERRE_DIARIO,
             CANTIDADDECLARADA,
-            CAMBIO_TURNO
+            CAMBIO_TURNO,
+            REPORTES
         }
     }
 }

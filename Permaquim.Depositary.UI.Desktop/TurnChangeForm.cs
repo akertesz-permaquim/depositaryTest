@@ -16,6 +16,7 @@ namespace Permaquim.Depositary.UI.Desktop
             InitializeComponent();
             CenterPanel();
             LoadStyles();
+            LoadMultiLangiageItems();
             LoadTurnChangeButton();
             LoadBackButton();
             TimeOutController.Reset();
@@ -25,13 +26,14 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
+
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void TurnChangeForm_Load(object sender, EventArgs e)
@@ -51,8 +53,13 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_TURNO);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
+        }
+        private void LoadMultiLangiageItems()
+        {
+            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_TURNO);
+            InformationLabel.Text += Environment.NewLine + "Turno actual: "
+                + DatabaseController.CurrentTurn.TurnoDepositarioId.Nombre;
         }
 
 
@@ -69,6 +76,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void TurnchangeButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CloseCurrentTurn();
+
             FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
         }
         #endregion
@@ -92,6 +100,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private void TurnChangeForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+            if (!this.Visible)
+                InitializeLocals();
+        }
+        private void InitializeLocals()
+        {
+            // inicializar variables locales.
         }
     }
 }

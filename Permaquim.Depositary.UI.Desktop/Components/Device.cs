@@ -46,6 +46,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public DenominationResult DenominationResultProperty { get; set; } = new DenominationResult();
 
         public event EventHandler<ECErrorArgs> ECError;
+        public int SleepTimeout { get; set; } = 150;
 
         // Port Names
         List<string> _portNames = new List<string>();
@@ -430,8 +431,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         }
         public StatesResult StoringStart()
         {
-            if (_counterPort.IsOpen)
-            {
+            if ( _counterPort!= null &&_counterPort.IsOpen)
+            { 
                 Log("COMMAND: StoringStart");
                 DiscardBuffer(_counterPort);
                 byte[] bcc = GetBCC(_device.StoringStart);
@@ -645,7 +646,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 Log("COMMAND: RemoteCancel");
                 DiscardBuffer(_counterPort);
                 byte[] bcc = GetBCC(_device.RemoteCancel);
-                Thread.Sleep(150);
+                Thread.Sleep(SleepTimeout);
                 _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
 
                 List<byte> _buffer = ReadCounterSimpleResponse();
@@ -744,7 +745,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private List<byte> ReadCounterResponse()
         {
             List<byte> _buffer = new();
-            Thread.Sleep(150);
+            Thread.Sleep(SleepTimeout);
             while (true)
             {
                 if (_counterPort.IsOpen)
@@ -785,7 +786,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private List<byte> ReadCounterSimpleResponse()
         {
             List<byte> _buffer = new();
-            Thread.Sleep(150);
+            Thread.Sleep(SleepTimeout);
             while (true)
             {
                 if (_counterPort.IsOpen)
@@ -826,7 +827,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private List<byte> ReadCounterResponse2()
         {
             List<byte> _buffer = new();
-            Thread.Sleep(150);
+            Thread.Sleep(SleepTimeout);
             while (this.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQCounting)
             {
                 var bytes = _counterPort.BytesToRead;

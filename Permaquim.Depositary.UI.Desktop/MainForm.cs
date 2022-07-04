@@ -65,6 +65,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             _de50Device = device;
             this.Text =  MultilanguangeController.GetText(MultiLanguageEnum.DISPOSITIVO) + ": " + device.DeviceName;
             _device = new Device(device);
+            _device.SleepTimeout = DeviceController.GetSleepInterval();
 
             this.Tag = _device;
 

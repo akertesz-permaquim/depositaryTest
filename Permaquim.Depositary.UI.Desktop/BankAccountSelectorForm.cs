@@ -31,16 +31,16 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void ChechSingleAccount()
         {
             if (_userBankAccounts.Count <= 1)
-                   DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
-                FormsController.OpenChildForm(this,new BillDepositForm(),
-                 (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-          
+                DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
+            FormsController.OpenChildForm(this, new BillDepositForm(),
+             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+
         }
 
         private void CenterPanel()
@@ -64,7 +64,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 item.CuentaId.Nombre + " - " + item.CuentaId.Numero + " (" + item.CuentaId.BancoId.Nombre + ")"
                 , MainPanel.Width);
 
-                 newButton.Click += new System.EventHandler(BankAccountButton_Click);
+                newButton.Click += new System.EventHandler(BankAccountButton_Click);
 
                 newButton.Tag = item;
 
@@ -86,20 +86,28 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentUserBankAccount = (Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta)((CustomButton)sender).Tag;
 
-            FormsController.OpenChildForm(this,new BillDepositForm(),
+            FormsController.OpenChildForm(this, new BillDepositForm(),
             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
 
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new CurrencySelectorForm(),
+            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
                   (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
 
         private void BankAccountSelectorForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+            if (!this.Visible)
+                InitializeLocals();
+        }
+
+        private void InitializeLocals()
+        {
+            _userBankAccounts = new();
+
         }
     }
 }

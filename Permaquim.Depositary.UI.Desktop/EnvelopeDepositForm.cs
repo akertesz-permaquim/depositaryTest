@@ -1,15 +1,6 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -87,11 +78,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
             RemainingTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
             RemainingTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            
+            EnvelopeTextBox.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
 
             DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
                 StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
-
-            EnvelopeTextBox.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
 
             DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
                 StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
@@ -137,6 +128,16 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadDenominations();
                 LoadLanguageItems();
             }
+            else
+                InitializeLocals();
+
+        }
+        private void InitializeLocals()
+        {
+            _envelopeDepositItems = new();
+            _totalQuantity = 0;
+            _totalAmount = 0;
+            _operationStatus = new();
         }
         public void LoadDenominations()
         {
@@ -181,7 +182,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
             EvaluateTimeout();
 
@@ -333,7 +334,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void VerifyEscrowEmpty()
         {
 
-            // Si el esrcrow está aberto, y el sensor detecta presencia, se asume que es un sobre y se 
+            // Si el esrcrow está abierto, y el sensor detecta presencia, se asume que es un sobre y se 
             // completa el depósito
             if (
                 _operationStatus.GeneralStatus == StatusInformation.State.PQWaitingTocloseEscrow
@@ -363,8 +364,6 @@ namespace Permaquim.Depositary.UI.Desktop
             CancelDepositButton.Visible =
            !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                 && _totalQuantity > 0 && _totalAmount > 0;
-
-          
 
         }
         private void ShowInformation()

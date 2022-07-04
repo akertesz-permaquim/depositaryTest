@@ -2,15 +2,6 @@
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -27,6 +18,7 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadTurnButton();
             LoadDailyClosingButton();
             LoadOperationsButton();
+            LoadReportssButton();
             LoadSupportButton();
             LoadBackButton();
             TimeOutController.Reset();
@@ -42,7 +34,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void OtherOperationsForm_Load(object sender, EventArgs e)
@@ -135,6 +127,22 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         #endregion
 
+        #region Reports
+        private void LoadReportssButton()
+        {
+            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+                "ReportsButton", MultilanguangeController.GetText(MultiLanguageEnum.REPORTES), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(OperationsButton);
+            OperationsButton.Click += new System.EventHandler(ReportsButton_Click);
+        }
+        private void ReportsButton_Click(object sender, EventArgs e)
+        {
+            FormsController.OpenChildForm(this, new OperationsHistoryform(),
+              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+        }
+        #endregion
+
         #region Support
 
         private void LoadSupportButton()
@@ -156,6 +164,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OtherOperationsForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+            if (!this.Visible)
+                InitializeLocals();
+        }
+        private void InitializeLocals()
+        {
+            // inicializar variables locales
         }
     }
 }

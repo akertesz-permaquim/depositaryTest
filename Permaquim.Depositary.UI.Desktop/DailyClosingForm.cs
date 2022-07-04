@@ -1,6 +1,7 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Builders;
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
@@ -10,6 +11,8 @@ namespace Permaquim.Depositary.UI.Desktop
     {
         public Device _device { get; set; }
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
+
+        private List<DailyClosingItem> _dailyClosingItems = new();
         public DailyClosingForm()
         {
             InitializeComponent();
@@ -30,7 +33,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
-                FormsController.HideInstance(this);
+                FormsController.LogOff();
             }
         }
         private void DailyClosingForm_Load(object sender, EventArgs e)
@@ -44,14 +47,27 @@ namespace Permaquim.Depositary.UI.Desktop
             MainPanel.Location = new Point()
             {
                 X = this.Width / 2 - MainPanel.Width / 2,
-                Y = this.Height / 2 - MainPanel.Height / 2
+                Y = MainPanel.Location.Y
             };
+
+            DenominationsGridView.Location = new Point()
+            {
+                X = this.Width / 2 - DenominationsGridView.Width / 2,
+                Y = DenominationsGridView.Location.Y
+            };
+
         }
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
             InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
+
+            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
+            StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+
+            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
         }
 
 
@@ -68,7 +84,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CloseCurrentDay();
-            FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
+            FormsController.OpenChildForm(this, new OtherOperationsForm(), _device);
         }
         #endregion
 
@@ -84,13 +100,106 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
+            FormsController.OpenChildForm(this, new OtherOperationsForm(), _device);
+        }
+        #endregion
+        #region Data    
+        private void LoadDailyClosingItems()
+        {
+            _dailyClosingItems = DatabaseController.GetLoadDailyClosingItems();
+            DenominationsGridView.DataSource = _dailyClosingItems;
+        }
+        #endregion
+
+        #region Datagrid        
+        private void InitializeDenominationsGridViewDetailGridView()
+        {
+            DenominationsGridView.AutoGenerateColumns = false;
+
+            DenominationsGridView.Columns.Clear();
+
+
+            DenominationsGridView.Columns.Add(new()
+            {
+                Visible = false,
+                Width = 1,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DenominationsGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Moneda",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
+                Name = "Moneda",
+                Visible = true,
+                Width = 250,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+            
+ 
+            DenominationsGridView.Columns.Add(new()
+            {
+                DataPropertyName = "CantidadOperaciones",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                Name = "CantidadOperaciones",
+                Visible = true,
+                Width = 100,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DenominationsGridView.Columns.Add(new()
+            {
+                DataPropertyName = "TotalValidado",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                Name = "TotalValidado",
+                Visible = true,
+                Width = 100,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DenominationsGridView.Columns.Add(new()
+            {
+                DataPropertyName = "TotalAValidar",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                Name = "TotalAValidar",
+                Visible = true,
+                Width = 100,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+            DenominationsGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Total",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                Name = "Total",
+                Visible = true,
+                Width = 100,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            }); 
+
         }
         #endregion
 
         private void DailyClosingForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+            if (this.Visible)
+            {
+                InitializeDenominationsGridViewDetailGridView();
+                LoadDailyClosingItems();
+            }
+            else
+                InitializeLocals();
+        }
+        private void InitializeLocals()
+        {
+            // inicializar las variables locales
+
         }
     }
 }

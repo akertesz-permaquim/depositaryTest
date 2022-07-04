@@ -69,5 +69,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             instance.Hide();
         }
+        public static void LogOff()
+        {
+            foreach (var item in _formList)
+            {
+                if (item.GetType().BaseType.FullName.Equals("System.Windows.Forms.Form"))
+                {
+                    item.Close();
+                }
+            }
+            _formList.Clear();
+        }
     }
 }
