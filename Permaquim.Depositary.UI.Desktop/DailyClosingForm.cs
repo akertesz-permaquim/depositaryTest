@@ -63,11 +63,7 @@ namespace Permaquim.Depositary.UI.Desktop
             InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
 
-            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
-            StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
-
-            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
-                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            StyleController.SetControlStyle(DenominationsGridView);
         }
 
 
@@ -75,7 +71,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadDailyClosingButton()
         {
             CustomButton backButton = ControlBuilder.BuildStandardButton(
-                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width);
+                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width / 2 - 5);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -92,7 +88,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildCancelButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width / 2 - 5);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -106,7 +102,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Data    
         private void LoadDailyClosingItems()
         {
-            _dailyClosingItems = DatabaseController.GetLoadDailyClosingItems();
+            _dailyClosingItems = DatabaseController.GetDailyClosingItems();
             DenominationsGridView.DataSource = _dailyClosingItems;
         }
         #endregion
@@ -117,7 +113,6 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.AutoGenerateColumns = false;
 
             DenominationsGridView.Columns.Clear();
-
 
             DenominationsGridView.Columns.Add(new()
             {
@@ -133,7 +128,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
                 Name = "Moneda",
                 Visible = true,
-                Width = 250,
+                Width = 260,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -199,7 +194,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private void InitializeLocals()
         {
             // inicializar las variables locales
+            DenominationsGridView.DataSource = null;
+        }
 
+        private void DenominationsGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            DenominationsGridView.ClearSelection();
         }
     }
 }

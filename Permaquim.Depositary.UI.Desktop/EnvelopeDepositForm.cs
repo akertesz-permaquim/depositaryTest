@@ -52,6 +52,13 @@ namespace Permaquim.Depositary.UI.Desktop
                 X = this.Width / 2 - MainPanel.Width / 2,
                 Y = this.Height / 2 - MainPanel.Height / 2
             };
+
+            ButtonsPanel.Location = new Point()
+            {
+                X = DenominationsGridView.Location.X,
+                Y = ButtonsPanel.Location.Y
+            };
+
         }
         private void LoadStyles()
         {
@@ -81,11 +88,15 @@ namespace Permaquim.Depositary.UI.Desktop
             
             EnvelopeTextBox.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
 
-            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
-                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            StyleController.SetControlStyle(DenominationsGridView);
 
-            DenominationsGridView.ColumnHeadersDefaultCellStyle.BackColor =
-                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+
+            ConfirmAndExitDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ConfirmAndExitDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            CancelDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
+            CancelDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
+            BackButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
 
         }
@@ -244,19 +255,22 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void SetTotals()
         {
-            _totalQuantity = 0;
-            _totalAmount = 0;
-            foreach (var item in DenominationsGridView.Rows)
+            if (DenominationsGridView.Rows.Count > 0)
             {
-                if (((long)((DataGridViewRow)item).Cells["Id"].Value) > -1)
+                _totalQuantity = 0;
+                _totalAmount = 0;
+                foreach (var item in DenominationsGridView.Rows)
                 {
-                    _totalQuantity += (long)((DataGridViewRow)item).Cells["Quantity"].Value;
-                    _totalAmount  += (double)((DataGridViewRow)item).Cells["Amount"].Value;
+                    if (((long)((DataGridViewRow)item).Cells["Id"].Value) > -1)
+                    {
+                        _totalQuantity += (long)((DataGridViewRow)item).Cells["Quantity"].Value;
+                        _totalAmount += (double)((DataGridViewRow)item).Cells["Amount"].Value;
+                    }
                 }
-            }
 
-            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Quantity"].Value = _totalQuantity;
-            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Amount"].Value = _totalAmount;
+                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Quantity"].Value = _totalQuantity;
+                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Amount"].Value = _totalAmount;
+            }
 
         }
 
@@ -344,7 +358,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _operationStatus.DepositConfirmed = true;
                 _device.CloseEscrow();
                 _device.PreviousState = StatusInformation.State.PQClosingEscrow;
-
+                ButtonsPanel.Visible = false;
             }
         }
         /// <summary>
@@ -443,11 +457,12 @@ namespace Permaquim.Depositary.UI.Desktop
                     SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
                     SesionId = sesiones.Result.FirstOrDefault().Id,
                     SucursalId = DatabaseController.CurrentDepositary.SectorId.SucursalId.Id,
-                    TipoId = 3,             // Depósito de Sobre
-                    TotalAValidar = 0,
+                    TipoId = (long)OperationTypeEnum.EnvelopeDeposit,             // Depósito de Sobre
+                    TotalAValidar = _totalQuantity,
                     TotalValidado = 0,
-                    TurnoId = 0,
-                    UsuarioCuentaId = 0,
+                    TurnoId = DatabaseController.CurrentTurn.Id,
+                    UsuarioCuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
+                    DatabaseController.CurrentUserBankAccount.CuentaId.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id
 
                 };

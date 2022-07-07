@@ -2,6 +2,12 @@
 {
     public static class Enumerations
     {
+
+        public enum LogTypeEnum
+        {
+            Excepction = 0,
+            Information = 1
+        }
         public enum OperationTypeEnum
         {
             None = 0,
@@ -31,6 +37,9 @@
             FondoControl,
             CabeceraGrilla,
             PieGrilla,
+            FondoGrilla,
+            FondoFilasGrilla,
+            TextoFilasGrilla,
             SegundaCabeceraGrilla
 
         }
@@ -121,6 +130,7 @@
             USUARIOCUENTA,
             USUARIO,
             TURNO,
+            TOTAL,
             TOTALVALIDADO,
             TOTALAVALIDAR,
             TIPOVALOR,
@@ -128,8 +138,11 @@
             TIPO,
             SOPORTE,
             CIERREDIARIO,
+            BILLETE,
+            BILLETES,
             MONEDA,
             SOBRE,
+            SOBRES,
             RETIRAR_SOBRE,
             INGRESAR_VALORES_SOBRE,
             RETIRAR_BILLETES_RECHAZADOS,
@@ -155,7 +168,8 @@
             CIERRE_DIARIO,
             CANTIDADDECLARADA,
             CAMBIO_TURNO,
-            REPORTES
+            REPORTES,
+            CONTENIDO_BOLSA
         }
     }
 }

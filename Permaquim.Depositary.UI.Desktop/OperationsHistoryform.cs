@@ -55,16 +55,14 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            OperationsHeaderGridView.ColumnHeadersDefaultCellStyle.BackColor =
-                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
-            OperationsDetailGridView.ColumnHeadersDefaultCellStyle.BackColor =
-                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            StyleController.SetControlStyle(OperationsHeaderGridView);
+            StyleController.SetControlStyle(OperationsDetailGridView);
         }
 
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new OperationForm(),
+            FormsController.OpenChildForm(this,new OtherOperationsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
 
@@ -317,7 +315,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadOperationsHeader()
         {
 
-            var operations = DatabaseController.GetOperationsHeaders();
+            var operations = DatabaseController.GetTodaysOperationsHeaders();
 
             _transactionHeaderItems.Clear();
 
@@ -424,7 +422,9 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void InitializeLocals()
         {
-           // inicializar variables locales
+            // inicializar variables locales
+            OperationsHeaderGridView.DataSource = null;
+            OperationsDetailGridView.DataSource = null;
         }
         private void OperationsDetailGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {

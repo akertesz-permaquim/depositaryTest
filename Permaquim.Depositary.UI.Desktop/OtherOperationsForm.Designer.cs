@@ -37,7 +37,7 @@
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
             this.MainPanel.Location = new System.Drawing.Point(250, 60);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 531);
+            this.MainPanel.Size = new System.Drawing.Size(300, 524);
             this.MainPanel.TabIndex = 1;
             // 
             // OtherOperationsForm

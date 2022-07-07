@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.ButtonsPanel = new System.Windows.Forms.Panel();
             this.ConfirmAndContinueDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -47,6 +47,10 @@
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
+            this.CollectEndCheckBox = new System.Windows.Forms.CheckBox();
+            this.StoreEndCheckBox = new System.Windows.Forms.CheckBox();
+            this.CountEndCheckBox = new System.Windows.Forms.CheckBox();
+            this.BatchEndCheckBox = new System.Windows.Forms.CheckBox();
             this.CurrencyStatusLabel = new System.Windows.Forms.Label();
             this.JammingCheckBox = new System.Windows.Forms.CheckBox();
             this.CountingErrorCheckBox = new System.Windows.Forms.CheckBox();
@@ -89,11 +93,14 @@
             this.ButtonsPanel.Controls.Add(this.CancelDepositButton);
             this.ButtonsPanel.Location = new System.Drawing.Point(16, 488);
             this.ButtonsPanel.Name = "ButtonsPanel";
-            this.ButtonsPanel.Size = new System.Drawing.Size(720, 56);
+            this.ButtonsPanel.Size = new System.Drawing.Size(705, 56);
             this.ButtonsPanel.TabIndex = 146;
             // 
             // ConfirmAndContinueDepositButton
             // 
+            this.ConfirmAndContinueDepositButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConfirmAndContinueDepositButton.BackColor = System.Drawing.Color.SeaGreen;
             this.ConfirmAndContinueDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
             this.ConfirmAndContinueDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
@@ -103,9 +110,9 @@
             this.ConfirmAndContinueDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndContinueDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndContinueDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndContinueDepositButton.Location = new System.Drawing.Point(241, 0);
+            this.ConfirmAndContinueDepositButton.Location = new System.Drawing.Point(237, 0);
             this.ConfirmAndContinueDepositButton.Name = "ConfirmAndContinueDepositButton";
-            this.ConfirmAndContinueDepositButton.Size = new System.Drawing.Size(230, 55);
+            this.ConfirmAndContinueDepositButton.Size = new System.Drawing.Size(228, 55);
             this.ConfirmAndContinueDepositButton.TabIndex = 150;
             this.ConfirmAndContinueDepositButton.Tag = "";
             this.ConfirmAndContinueDepositButton.Text = "*";
@@ -116,6 +123,9 @@
             // 
             // BackButton
             // 
+            this.BackButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
             this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -125,9 +135,9 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(242, 1);
+            this.BackButton.Location = new System.Drawing.Point(238, 1);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(230, 55);
+            this.BackButton.Size = new System.Drawing.Size(228, 55);
             this.BackButton.TabIndex = 149;
             this.BackButton.Text = "*";
             this.BackButton.TextColor = System.Drawing.Color.White;
@@ -136,6 +146,8 @@
             // 
             // ConfirmAndExitDepositButton
             // 
+            this.ConfirmAndExitDepositButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConfirmAndExitDepositButton.BackColor = System.Drawing.Color.SeaGreen;
             this.ConfirmAndExitDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
             this.ConfirmAndExitDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
@@ -145,7 +157,7 @@
             this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(479, 0);
+            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(472, 0);
             this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
             this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(230, 55);
             this.ConfirmAndExitDepositButton.TabIndex = 148;
@@ -158,6 +170,8 @@
             // 
             // CancelDepositButton
             // 
+            this.CancelDepositButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.CancelDepositButton.BackColor = System.Drawing.Color.Red;
             this.CancelDepositButton.BackgroundColor = System.Drawing.Color.Red;
             this.CancelDepositButton.BorderColor = System.Drawing.Color.DarkOrange;
@@ -167,7 +181,7 @@
             this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
-            this.CancelDepositButton.Location = new System.Drawing.Point(2, 0);
+            this.CancelDepositButton.Location = new System.Drawing.Point(-1, 0);
             this.CancelDepositButton.Name = "CancelDepositButton";
             this.CancelDepositButton.Size = new System.Drawing.Size(230, 55);
             this.CancelDepositButton.TabIndex = 147;
@@ -188,28 +202,28 @@
             this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Image,
             this.Denomination,
             this.Quantity,
             this.Amount});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.DenominationsGridView.Enabled = false;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
@@ -321,6 +335,10 @@
             // 
             this.MonitorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MonitorGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.MonitorGroupBox.Controls.Add(this.CollectEndCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.StoreEndCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.CountEndCheckBox);
+            this.MonitorGroupBox.Controls.Add(this.BatchEndCheckBox);
             this.MonitorGroupBox.Controls.Add(this.CurrencyStatusLabel);
             this.MonitorGroupBox.Controls.Add(this.JammingCheckBox);
             this.MonitorGroupBox.Controls.Add(this.CountingErrorCheckBox);
@@ -336,11 +354,63 @@
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonitorGroupBox.Location = new System.Drawing.Point(752, 120);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
-            this.MonitorGroupBox.Size = new System.Drawing.Size(152, 308);
+            this.MonitorGroupBox.Size = new System.Drawing.Size(152, 448);
             this.MonitorGroupBox.TabIndex = 140;
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
             this.MonitorGroupBox.Visible = false;
+            // 
+            // CollectEndCheckBox
+            // 
+            this.CollectEndCheckBox.AutoSize = true;
+            this.CollectEndCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.CollectEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CollectEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.CollectEndCheckBox.Location = new System.Drawing.Point(8, 406);
+            this.CollectEndCheckBox.Name = "CollectEndCheckBox";
+            this.CollectEndCheckBox.Size = new System.Drawing.Size(86, 17);
+            this.CollectEndCheckBox.TabIndex = 40;
+            this.CollectEndCheckBox.Text = "CollectEnd";
+            this.CollectEndCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // StoreEndCheckBox
+            // 
+            this.StoreEndCheckBox.AutoSize = true;
+            this.StoreEndCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.StoreEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.StoreEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.StoreEndCheckBox.Location = new System.Drawing.Point(8, 380);
+            this.StoreEndCheckBox.Name = "StoreEndCheckBox";
+            this.StoreEndCheckBox.Size = new System.Drawing.Size(78, 17);
+            this.StoreEndCheckBox.TabIndex = 39;
+            this.StoreEndCheckBox.Text = "StoreEnd";
+            this.StoreEndCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // CountEndCheckBox
+            // 
+            this.CountEndCheckBox.AutoSize = true;
+            this.CountEndCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.CountEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CountEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.CountEndCheckBox.Location = new System.Drawing.Point(8, 354);
+            this.CountEndCheckBox.Name = "CountEndCheckBox";
+            this.CountEndCheckBox.Size = new System.Drawing.Size(81, 17);
+            this.CountEndCheckBox.TabIndex = 38;
+            this.CountEndCheckBox.Text = "CountEnd";
+            this.CountEndCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // BatchEndCheckBox
+            // 
+            this.BatchEndCheckBox.AutoSize = true;
+            this.BatchEndCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.BatchEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BatchEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.BatchEndCheckBox.Location = new System.Drawing.Point(8, 328);
+            this.BatchEndCheckBox.Name = "BatchEndCheckBox";
+            this.BatchEndCheckBox.Size = new System.Drawing.Size(79, 17);
+            this.BatchEndCheckBox.TabIndex = 37;
+            this.BatchEndCheckBox.Text = "BatchEnd";
+            this.BatchEndCheckBox.UseVisualStyleBackColor = false;
             // 
             // CurrencyStatusLabel
             // 
@@ -571,5 +641,9 @@
         private CustomButton BackButton;
         private CustomButton ConfirmAndExitDepositButton;
         private CustomButton CancelDepositButton;
+        private CheckBox BatchEndCheckBox;
+        private CheckBox CountEndCheckBox;
+        private CheckBox StoreEndCheckBox;
+        private CheckBox CollectEndCheckBox;
     }
 }

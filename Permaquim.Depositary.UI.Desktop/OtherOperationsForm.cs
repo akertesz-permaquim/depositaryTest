@@ -18,7 +18,7 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadTurnButton();
             LoadDailyClosingButton();
             LoadOperationsButton();
-            LoadReportssButton();
+            LoadBagContentButton();
             LoadSupportButton();
             LoadBackButton();
             TimeOutController.Reset();
@@ -128,17 +128,17 @@ namespace Permaquim.Depositary.UI.Desktop
         #endregion
 
         #region Reports
-        private void LoadReportssButton()
+        private void LoadBagContentButton()
         {
             CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
-                "ReportsButton", MultilanguangeController.GetText(MultiLanguageEnum.REPORTES), MainPanel.Width);
+                "BagContentButton", MultilanguangeController.GetText(MultiLanguageEnum.CONTENIDO_BOLSA), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
-            OperationsButton.Click += new System.EventHandler(ReportsButton_Click);
+            OperationsButton.Click += new System.EventHandler(BagContentButton_Click);
         }
-        private void ReportsButton_Click(object sender, EventArgs e)
+        private void BagContentButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this, new OperationsHistoryform(),
+            FormsController.OpenChildForm(this, new BagContentForm(),
               (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
         }
         #endregion

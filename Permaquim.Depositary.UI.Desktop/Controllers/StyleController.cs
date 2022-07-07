@@ -100,5 +100,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             return bitmap;
         }
+
+        public static void SetControlStyle(DataGridView grid)
+        {
+
+            grid.ColumnHeadersDefaultCellStyle.BackColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            grid.ColumnHeadersDefaultCellStyle.BackColor =
+                   StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            grid.BackgroundColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.FondoGrilla);
+            grid.DefaultCellStyle.BackColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.FondoFilasGrilla);
+            grid.DefaultCellStyle.ForeColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.TextoFilasGrilla);
+
+        }
     }
 }

@@ -41,11 +41,11 @@
             this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(24, 552);
+            this.InformationLabel.Location = new System.Drawing.Point(24, 528);
             this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(760, 32);
+            this.InformationLabel.Size = new System.Drawing.Size(760, 64);
             this.InformationLabel.TabIndex = 148;
             this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -61,8 +61,8 @@
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -71,7 +71,7 @@
             this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -79,24 +79,26 @@
             this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
-            this.DenominationsGridView.Location = new System.Drawing.Point(38, 16);
+            this.DenominationsGridView.Location = new System.Drawing.Point(52, 8);
             this.DenominationsGridView.Name = "DenominationsGridView";
             this.DenominationsGridView.RowHeadersVisible = false;
             this.DenominationsGridView.RowTemplate.DividerHeight = 1;
-            this.DenominationsGridView.RowTemplate.Height = 30;
+            this.DenominationsGridView.RowTemplate.Height = 50;
             this.DenominationsGridView.RowTemplate.ReadOnly = true;
-            this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DenominationsGridView.Size = new System.Drawing.Size(704, 256);
-            this.DenominationsGridView.TabIndex = 183;
+            this.DenominationsGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DenominationsGridView.Size = new System.Drawing.Size(697, 400);
+            this.DenominationsGridView.TabIndex = 185;
+            this.DenominationsGridView.SelectionChanged += new System.EventHandler(this.DenominationsGridView_SelectionChanged);
             // 
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(250, 320);
+            this.MainPanel.Location = new System.Drawing.Point(192, 440);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 220);
-            this.MainPanel.TabIndex = 184;
+            this.MainPanel.Size = new System.Drawing.Size(400, 86);
+            this.MainPanel.TabIndex = 188;
             // 
             // DailyClosingForm
             // 

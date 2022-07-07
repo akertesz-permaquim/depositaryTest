@@ -98,6 +98,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (DatabaseController.GetUserBankAccounts().Count == 0)
                 {
+
                     FormsController.OpenChildForm(this,new EnvelopeDepositForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                 }

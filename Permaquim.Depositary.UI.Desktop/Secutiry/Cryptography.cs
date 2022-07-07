@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Permaquim.Depositary.UI.Desktop.Secutiry
+namespace Permaquim.Depositary.UI.Desktop.Security
 {
-    internal static class Cryptography
+    public static class Cryptography
     {
         /// <summary>
         /// Metodo de hasheo de una cadena de caracteres alfanumericos con MD5
@@ -17,7 +17,7 @@ namespace Permaquim.Depositary.UI.Desktop.Secutiry
             byte[] _hashbyte = _md5.ComputeHash(_data);
             return BitConverter.ToString(_hashbyte);
         }
-        internal static string HashNuevo(string str)
+        public static string HashNuevo(string str)
         {
             System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
             byte[] bytes = Encoding.Default.GetBytes(str);
