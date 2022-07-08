@@ -25,7 +25,7 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             return newButton;
         }
 
-        public static CustomButton BuildStandardButton(string name, string text, int width)
+        public static CustomButton BuildStandardButton(string name, string text, int width,int height = 77)
         {
 
             CustomButton newButton = BuildButton();
@@ -34,14 +34,14 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             newButton.Name = name;
             newButton.Text = text;
-            newButton.Size = new Size(width - 5, 77);
+            newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             return newButton;
         }
-        public static CustomButton BuildExitButton(string name, string text, int width)
+        public static CustomButton BuildExitButton(string name, string text, int width, int height = 77)
         {
             CustomButton newButton = BuildButton();
 
@@ -49,14 +49,14 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonEstandar);
             newButton.Name = name;
             newButton.Text = text;
-            newButton.Size = new Size(width - 5, 77);
+            newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             return newButton;
         }
-        public static CustomButton BuildCancelButton(string name, string text, int width)
+        public static CustomButton BuildCancelButton(string name, string text, int width, int height = 77)
         {
             CustomButton newButton = BuildButton();
 
@@ -64,14 +64,14 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
             newButton.Name = name;
             newButton.Text = text;
-            newButton.Size = new Size(width - 5, 77);
+            newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             return newButton;
         }
-        public static CustomButton BuildAlternateButton(string name, string text, int width)
+        public static CustomButton BuildAlternateButton(string name, string text, int width, int height = 77)
         {
             CustomButton newButton = BuildButton();
 
@@ -79,7 +79,7 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
             newButton.Name = name;
             newButton.Text = text;
-            newButton.Size = new Size(width - 5, 77);
+            newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
@@ -87,7 +87,7 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             return newButton;
         }
 
-        public static CustomTextBox BuildStandardTextBox(string name, string placeholder, int width)
+        public static CustomTextBox BuildStandardTextBox(string name, string placeholder, int width, int height = 77)
         {
 
             CustomTextBox newTextBox = new CustomTextBox();
@@ -105,7 +105,7 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             newTextBox.PasswordChar = false;
             newTextBox.PlaceholderColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonEstandar);
             newTextBox.PlaceholderText = placeholder;
-            newTextBox.Size = new Size(width - 5, 50);
+            newTextBox.Size = new Size(width - 5, height);
             newTextBox.Texts = "";
             newTextBox.UnderlinedStyle = false;
             newTextBox.Visible = false;

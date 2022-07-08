@@ -220,28 +220,36 @@ namespace Permaquim.Depositary.UI.Desktop
 
             SetTotals();
         }
+        private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < DenominationsGridView.Rows.Count - 1 && e.ColumnIndex >= 0)
+            {
 
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.Border);
+                using (Pen p = new Pen(StyleController.GetColor(Enumerations.ColorNameEnum.ColorBordesCeldasGrilla), 1))
+                {
+                    Rectangle rect = e.CellBounds;
+                    rect.Width -= 1;
+                    rect.Height -= 1;
+                    e.Graphics.DrawRectangle(p, rect);
+                }
+                e.Handled = true;
+
+            }
+        }
         private void SetTotalRowStyle()
         {
-            if (DenominationsGridView.Rows.Count > 0)
+            StyleController.SetControlFooterStyle(DenominationsGridView);
+
+            for (int i = 2; i < DenominationsGridView.Columns.Count; i++)
             {
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.BackColor =
-                      StyleController.GetColor(Enumerations.ColorNameEnum.PieGrilla);
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.ForeColor =
-                    StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                DenominationsGridView.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
-
-                for (int i = 2; i < DenominationsGridView.Columns.Count; i++)
-                {
-                    DenominationsGridView.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-                    DenominationsGridView.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-                }
-
-                DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Selected = true;
-       
+                DenominationsGridView.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
+
+            DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Selected = true;
+
             SetTotals();
 
         }
@@ -623,6 +631,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void MonitorGroupcheckbox_CheckStateChanged(object sender, EventArgs e)
         {
             MonitorGroupBox.Visible = MonitorGroupcheckbox.Checked;
+        }
+
+        private void EnvelopeDepositForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

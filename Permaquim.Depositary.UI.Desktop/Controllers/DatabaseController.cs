@@ -526,25 +526,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             sesion.Add(DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
         }
 
-        public static string GetDepositaryConfigurationItem(DepositaryConfiguratoinEnum key)
-        {
-            string returnValue = string.Empty;
-
-            Permaquim.Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario entities = new();
-            entities.Where.Add(Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.DepositarioId,
-                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.Id);
-            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.Habilitado,
-                Depositario.sqlEnum.OperandEnum.Equal, true);
-            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.TipoId,
-                Depositario.sqlEnum.OperandEnum.Equal, (long)key);
-            if (entities.Items().Count > 0)
-                returnValue = entities.Result.FirstOrDefault().Valor;
-
-            return returnValue;
-        }
-
         public static List<DailyClosingItem> GetDailyClosingItems()
         {
             List<DailyClosingItem> returnValue = new();

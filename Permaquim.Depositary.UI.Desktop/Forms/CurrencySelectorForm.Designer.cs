@@ -52,6 +52,7 @@
             this.Name = "CurrencySelectorForm";
             this.Load += new System.EventHandler(this.CurrencySelectorForm_Load);
             this.VisibleChanged += new System.EventHandler(this.CurrencySelectorForm_VisibleChanged);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CurrencySelectorForm_MouseClick);
             this.ResumeLayout(false);
 
         }

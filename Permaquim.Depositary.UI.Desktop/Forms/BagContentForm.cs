@@ -74,8 +74,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadMultilanguageItems()
         {
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO);
-            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
+            //InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO);
+            //InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
             BagContentTabControl.TabPages[0].Text = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES);
             BagContentTabControl.TabPages[1].Text = MultilanguangeController.GetText(MultiLanguageEnum.SOBRES);
         }
@@ -83,7 +83,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -119,8 +119,6 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
             }
 
-            
-
             _bagContentItems.Add(new BagContentItem()
             {
                 Moneda = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
@@ -129,20 +127,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
             referenceDataGridview.DataSource = _bagContentItems;
 
-                if (referenceDataGridview.Rows.Count > 0)
-                {
-                    referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.BackColor =
-                        StyleController.GetColor(Enumerations.ColorNameEnum.PieGrilla);
-                    referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.ForeColor =
-                        StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-                    referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
+            if (referenceDataGridview.Rows.Count > 0)
+            {
+                referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.BackColor =
+                    StyleController.GetColor(Enumerations.ColorNameEnum.PieGrilla);
+                referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.ForeColor =
+                    StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
+            }
 
-
-                for (int i = 0; i < referenceDataGridview.Columns.Count; i++)
-                {
-                    referenceDataGridview.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                    referenceDataGridview.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                }
+            for (int i = 0; i < referenceDataGridview.Columns.Count; i++)
+            {
+                referenceDataGridview.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                referenceDataGridview.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             }
 
             referenceDataGridview.ClearSelection();
@@ -271,6 +268,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void EnvelopeDepositGridView_SelectionChanged(object sender, EventArgs e)
         {
             EnvelopeDepositGridView.ClearSelection();
+        }
+
+        private void BagContentForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

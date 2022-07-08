@@ -37,13 +37,14 @@ namespace Permaquim.Depositary.UI.Desktop
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollTimer_Tick;
+
             CenterPanel();
 
             LoadStyles();
             LoadGateButton();
+            LoadContainerTextbox();
             LoadConfirmButton();
             LoadBackButton();
-            LoadContainerTextbox();
         }
         private void CenterPanel()
         {
@@ -254,7 +255,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             _confirmButton = ControlBuilder.BuildStandardButton(
-            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width);
+            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width,55);
 
             _confirmButton.Visible = false;
 
@@ -319,6 +320,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BagExtractionForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+        }
+
+        private void BagExtractionForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

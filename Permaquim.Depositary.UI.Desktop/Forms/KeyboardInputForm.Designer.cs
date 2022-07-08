@@ -45,7 +45,7 @@
             this.MainPanel.Controls.Add(this.MainKeyboard);
             this.MainPanel.Location = new System.Drawing.Point(3, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(725, 480);
+            this.MainPanel.Size = new System.Drawing.Size(725, 552);
             this.MainPanel.TabIndex = 0;
             // 
             // LoginPictureBox
@@ -79,7 +79,7 @@
             this.MainKeyboard.Location = new System.Drawing.Point(4, 46);
             this.MainKeyboard.Name = "MainKeyboard";
             this.MainKeyboard.PasswordTextBoxPlaceholder = "Clave";
-            this.MainKeyboard.Size = new System.Drawing.Size(715, 476);
+            this.MainKeyboard.Size = new System.Drawing.Size(715, 548);
             this.MainKeyboard.TabIndex = 6;
             this.MainKeyboard.UserTextboxPlaceholder = "Usuario";
             this.MainKeyboard.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainKeyboard_MouseClick);

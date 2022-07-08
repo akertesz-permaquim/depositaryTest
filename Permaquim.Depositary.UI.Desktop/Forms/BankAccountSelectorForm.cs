@@ -109,5 +109,10 @@ namespace Permaquim.Depositary.UI.Desktop
             _userBankAccounts = new();
 
         }
+
+        private void BankAccountSelectorForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
     }
 }

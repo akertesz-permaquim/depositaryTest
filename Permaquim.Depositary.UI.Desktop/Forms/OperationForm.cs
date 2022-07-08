@@ -81,6 +81,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.BillDeposit:
                 case (int)OperationTypeEnum.EnvelopeDeposit:
+                    _device.RemoteCancel();
                     FormsController.OpenChildForm(this, new CurrencySelectorForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                     break;

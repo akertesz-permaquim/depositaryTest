@@ -40,6 +40,7 @@
             FondoGrilla,
             FondoFilasGrilla,
             TextoFilasGrilla,
+            ColorBordesCeldasGrilla,
             SegundaCabeceraGrilla
 
         }
@@ -67,7 +68,7 @@
             None = 0,
             NoTurn = 1
         }
-        public enum DepositaryConfiguratoinEnum
+        public enum DepositaryConfigurationEnum
         {
             NOESP,
             BILLDEP,
@@ -169,7 +170,8 @@
             CANTIDADDECLARADA,
             CAMBIO_TURNO,
             REPORTES,
-            CONTENIDO_BOLSA
+            CONTENIDO_BOLSA,
+            CANTIDADOPERACIONES
         }
     }
 }

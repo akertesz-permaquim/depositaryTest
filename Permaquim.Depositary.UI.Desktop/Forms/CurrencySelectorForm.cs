@@ -140,5 +140,10 @@ namespace Permaquim.Depositary.UI.Desktop
             _currencies = new();
 
         }
+
+        private void CurrencySelectorForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
     }
 }

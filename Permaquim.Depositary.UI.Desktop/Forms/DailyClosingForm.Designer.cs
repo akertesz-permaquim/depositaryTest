@@ -43,7 +43,7 @@
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(24, 528);
+            this.InformationLabel.Location = new System.Drawing.Point(8, 432);
             this.InformationLabel.Name = "InformationLabel";
             this.InformationLabel.Size = new System.Drawing.Size(760, 64);
             this.InformationLabel.TabIndex = 148;
@@ -95,9 +95,9 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(192, 440);
+            this.MainPanel.Location = new System.Drawing.Point(176, 528);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(400, 86);
+            this.MainPanel.Size = new System.Drawing.Size(448, 55);
             this.MainPanel.TabIndex = 188;
             // 
             // DailyClosingForm
@@ -113,6 +113,7 @@
             this.Text = "DailyClosingForm";
             this.Load += new System.EventHandler(this.DailyClosingForm_Load);
             this.VisibleChanged += new System.EventHandler(this.DailyClosingForm_VisibleChanged);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DailyClosingForm_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).EndInit();
             this.ResumeLayout(false);
 

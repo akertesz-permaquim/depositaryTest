@@ -237,6 +237,7 @@
             this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DenominationsGridView.Size = new System.Drawing.Size(697, 440);
             this.DenominationsGridView.TabIndex = 145;
+            this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             // 
             // Image
             // 
@@ -596,6 +597,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.BillDepositForm_Load);
             this.VisibleChanged += new System.EventHandler(this.BillDepositForm_VisibleChanged);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BillDepositForm_MouseClick);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             this.ButtonsPanel.ResumeLayout(false);

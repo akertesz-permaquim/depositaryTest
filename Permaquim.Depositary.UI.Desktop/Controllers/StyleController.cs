@@ -114,7 +114,28 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 StyleController.GetColor(Enumerations.ColorNameEnum.FondoFilasGrilla);
             grid.DefaultCellStyle.ForeColor =
                 StyleController.GetColor(Enumerations.ColorNameEnum.TextoFilasGrilla);
+            
 
+        }
+
+        public static void SetControlFooterStyle(DataGridView grid) {
+            {
+                if (grid.Rows.Count > 0)
+                {
+                    grid.Rows[grid.Rows.Count - 1].DefaultCellStyle.BackColor =
+                        StyleController.GetColor(Enumerations.ColorNameEnum.PieGrilla);
+                    grid.Rows[grid.Rows.Count - 1].DefaultCellStyle.ForeColor =
+                        StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    grid.Rows[grid.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
+
+                    SetControlHeight(grid);
+                }
+            }
+        }
+        public static void SetControlHeight(DataGridView grid)
+        {
+            grid.Height = grid.RowTemplate.Height * grid.Rows.Count +
+            grid.ColumnHeadersHeight;
         }
     }
 }

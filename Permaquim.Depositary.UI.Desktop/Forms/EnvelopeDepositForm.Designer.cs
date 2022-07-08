@@ -224,6 +224,7 @@
             this.DenominationsGridView.Size = new System.Drawing.Size(697, 326);
             this.DenominationsGridView.TabIndex = 175;
             this.DenominationsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DenominationsGridView_CellClick);
+            this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             this.DenominationsGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DenominationsGridView_EditingControlShowing);
             this.DenominationsGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DenominationsGridView_KeyPress);
             // 
@@ -815,6 +816,7 @@
             this.Name = "EnvelopeDepositForm";
             this.Load += new System.EventHandler(this.EnvelopeDepositForm_Load);
             this.VisibleChanged += new System.EventHandler(this.EnvelopeDepositForm_VisibleChanged);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EnvelopeDepositForm_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.denominationItemBindingSource)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.ButtonsPanel.ResumeLayout(false);

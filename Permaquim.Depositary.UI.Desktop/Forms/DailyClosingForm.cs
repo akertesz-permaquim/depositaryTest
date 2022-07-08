@@ -71,7 +71,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadDailyClosingButton()
         {
             CustomButton backButton = ControlBuilder.BuildStandardButton(
-                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width / 2 - 5);
+                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width / 2 - 5, 55);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -88,7 +88,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildCancelButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width / 2 - 5);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width / 2 - 5, 55);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -104,6 +104,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _dailyClosingItems = DatabaseController.GetDailyClosingItems();
             DenominationsGridView.DataSource = _dailyClosingItems;
+            StyleController.SetControlHeight(DenominationsGridView);
         }
         #endregion
 
@@ -137,7 +138,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Columns.Add(new()
             {
                 DataPropertyName = "CantidadOperaciones",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADOPERACIONES),
                 Name = "CantidadOperaciones",
                 Visible = true,
                 Width = 100,
@@ -148,7 +149,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalValidado",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTALVALIDADO),
                 Name = "TotalValidado",
                 Visible = true,
                 Width = 100,
@@ -159,7 +160,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalAValidar",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTALAVALIDAR),
                 Name = "TotalAValidar",
                 Visible = true,
                 Width = 100,
@@ -169,7 +170,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Columns.Add(new()
             {
                 DataPropertyName = "Total",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
                 Name = "Total",
                 Visible = true,
                 Width = 100,
@@ -200,6 +201,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void DenominationsGridView_SelectionChanged(object sender, EventArgs e)
         {
             DenominationsGridView.ClearSelection();
+        }
+
+        private void DailyClosingForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

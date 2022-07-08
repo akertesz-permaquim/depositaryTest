@@ -13,6 +13,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private int closingcombination = 0;
         private Image _greenLedImage;
         private Image _redLedImage;
+        private Image _avatarImage;
+
         private string _remainingTimeText;
 
         /// <summary>
@@ -116,11 +118,18 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
 
             DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
-            EvaluateTimeout();
+            
+            VerifyTimeout();
+            
+            VerifyUserData();
+            
+            VerifyAvatar();
 
             _device.Status();
             if (_device.IoBoardConnected)
             {
+
+
                 if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
                 {
 
@@ -171,7 +180,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         }
 
-        private void EvaluateTimeout()
+        private void VerifyTimeout()
         {
             long remainingTime = TimeOutController.GetRemainingtime();
             RemainingTimeLabel.Visible = remainingTime > 0;
@@ -186,7 +195,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 RemainingTimeLabel.ForeColor = Color.Red;
         }
 
-        private void SetUserData()
+        private void VerifyUserData()
         {
             if (DatabaseController.CurrentUser != null)
             {
@@ -237,8 +246,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             DateTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             MainPictureBox.Image = StyleController.GetImageResource("Presentacion");
-            LoadAvatar();
-            SetUserData();
         }
         private void LoadLogo()
         {
@@ -246,12 +253,16 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             LogoPictureBox.Image = StyleController.GetLogo();
         }
 
-        private void LoadAvatar()
+        private void VerifyAvatar()
         {
-            if (DatabaseController.CurrentUser != null)
+            if (DatabaseController.CurrentUser != null )
             {
-                AvatarPicturebox.Image = ImageFromBase64Helper.
-                    GetImageFromBase64String(DatabaseController.CurrentUser.Avatar);
+                if (AvatarPicturebox.Image == null)
+                {
+                    _avatarImage = ImageFromBase64Helper.
+                        GetImageFromBase64String(DatabaseController.CurrentUser.Avatar);
+                    AvatarPicturebox.Image = _avatarImage;
+                }
             }
             else
             {

@@ -171,5 +171,10 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             // inicializar variables locales
         }
+
+        private void OtherOperationsForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
     }
 }
