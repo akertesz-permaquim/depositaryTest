@@ -83,7 +83,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -208,8 +208,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     Visible = true,
                     Width = 150,
                     CellTemplate = new DataGridViewTextBoxCell()
-
-                });
+                 });
             }
 
             referenceDataGridview.Columns.Add(new()
@@ -236,6 +235,16 @@ namespace Permaquim.Depositary.UI.Desktop
             });
 
         }
+        private void SetcolumnsAlignment(DataGridView grid)
+        {
+            for (int i = 1; i < grid.Columns.Count; i++)
+            {
+                grid.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                grid.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+
+
+         }
         #endregion
 
         private void BagContentForm_VisibleChanged(object sender, EventArgs e)
@@ -251,6 +260,9 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
                 InitializeLocals();
+
+            SetcolumnsAlignment(BillDepositGridView);
+            SetcolumnsAlignment(EnvelopeDepositGridView);
         }
         private void InitializeLocals()
         {

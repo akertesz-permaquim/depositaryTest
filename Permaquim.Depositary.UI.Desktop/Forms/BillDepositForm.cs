@@ -69,16 +69,22 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BillDepositForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+
+            MonitorGroupcheckbox.Visible = SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+
             if (this.Visible)
             {
                 LoadCurrentContainer();
                 LoadLanguageItems();
                 EnableDisableControls(false);
                 LoadDenominations();
-                if (_device.StateResultProperty != null)
+                if (_device != null)
                 {
-                    if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
-                        ButtonsPanel.Visible = true;
+                    if (_device.StateResultProperty != null)
+                    {
+                        if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                            ButtonsPanel.Visible = true;
+                    }
                 }
                 _countingCycle = 1;
             }
@@ -138,7 +144,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON);
             ConfirmAndContinueDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTINUE_BUTTON);
             CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON);
-            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON);
+            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
             DenominationsGridView.Columns["Image"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMAGEN);
             DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION);
@@ -215,11 +221,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
                 TimeOutController.GetRemainingtime().ToString();
-            if (TimeOutController.GetRemainingtime() > 10)
+            if (TimeOutController.GetRemainingtime() > ParameterController.GreenStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Green;
-            if (TimeOutController.GetRemainingtime() < 10)
+            if (TimeOutController.GetRemainingtime() < ParameterController.YellowStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Yellow;
-            if (TimeOutController.GetRemainingtime() < 5)
+            if (TimeOutController.GetRemainingtime() < ParameterController.RedStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Red;
         }
 
@@ -272,16 +278,24 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 ConfirmAndExitDepositButton.Visible =
                     (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                    && _device.StateResultProperty.DoorStateInformation.Escrow
-                    && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
-                    && !_device.StateResultProperty.DeviceStateInformation.HopperBillPresent
+                    && _operationStatus.DepositConfirmed == false)
+                    && _device.StateResultProperty.DoorStateInformation.Escrow == false
                     && _device.StateResultProperty.StatusInformation.OperatingState
-                        != StatusInformation.State.PQWaitingToRemoveBankNotes
-                    && _device.StateResultProperty.StatusInformation.OperatingState
-                        != StatusInformation.State.EscrowOpen)
-                        || _device.StateResultProperty.DeviceStateInformation.StackerFull
-                           && _device.StateResultProperty.StatusInformation.OperatingState
-                    != StatusInformation.State.PQStoring;
+                    == StatusInformation.State.BeingReset
+                    && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                ;
+                //&& _device.StateResultProperty.DoorStateInformation.Escrow
+                //&& !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
+                //&& !_device.StateResultProperty.DeviceStateInformation.HopperBillPresent
+                //&& _device.StateResultProperty.StatusInformation.OperatingState
+                //    != StatusInformation.State.PQWaitingToRemoveBankNotes
+                //&& _device.StateResultProperty.StatusInformation.OperatingState
+                //    != StatusInformation.State.EscrowOpen)
+                //    || _device.StateResultProperty.DeviceStateInformation.StackerFull
+                //       && _device.StateResultProperty.StatusInformation.OperatingState
+                //!= StatusInformation.State.PQStoring;
+
+
 
                 ConfirmAndContinueDepositButton.Visible =
                         _device.StateResultProperty.DeviceStateInformation.StackerFull
@@ -290,15 +304,18 @@ namespace Permaquim.Depositary.UI.Desktop
                 CancelDepositButton.Visible =
                     (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     && _operationStatus.DepositConfirmed == false)
-                    && _device.StateResultProperty.DoorStateInformation.Escrow
-                    && _device.StateResultProperty.StatusInformation.OperatingState
-                    != StatusInformation.State.PQWaitingToRemoveBankNotes
-                    && _device.StateResultProperty.StatusInformation.OperatingState
-                    != StatusInformation.State.PQStoring;
+                    && _device.StateResultProperty.DoorStateInformation.Escrow == false
+                && _device.StateResultProperty.StatusInformation.OperatingState
+                == StatusInformation.State.BeingReset;
+                //&& _device.StateResultProperty.StatusInformation.OperatingState
+                //!= StatusInformation.State.PQWaitingToRemoveBankNotes
+                //&& _device.StateResultProperty.StatusInformation.OperatingState
+                //!= StatusInformation.State.PQStoring;
 
 
-                if(_device.StateResultProperty.EndInformation.CountEnd)
-                    ButtonsPanel.Visible = true;
+                ButtonsPanel.Visible = true;
+                    //_device.StateResultProperty.StatusInformation.OperatingState
+                    //!= StatusInformation.State.PQCounting;
             }
             else
             {
@@ -327,6 +344,13 @@ namespace Permaquim.Depositary.UI.Desktop
                 if (_device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQCounting)
                 {
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTANDO);
+                    InformationLabel.ForeColor = Color.Blue;
+                    TimeOutController.Reset();
+                }
+
+                if (_device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQStoring)
+                {
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO);
                     InformationLabel.ForeColor = Color.Blue;
                     TimeOutController.Reset();
                 }
@@ -599,13 +623,15 @@ namespace Permaquim.Depositary.UI.Desktop
             CancelDepositButton.Visible = false;
             _device.StoringStart();
             _device.PreviousState = StatusInformation.State.PQStoring;
-
+            SaveTransaction();
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            if (_device.CounterConnected)
-                _device.RemoteCancel();
+            if(_device != null){
+                if (_device.CounterConnected)
+                    _device.RemoteCancel();
+            }
             FormsController.OpenChildForm(this,new OperationForm(), _device);
 
         }

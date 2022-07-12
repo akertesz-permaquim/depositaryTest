@@ -118,45 +118,22 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
 
             DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
-            
+
             VerifyTimeout();
-            
+
             VerifyUserData();
-            
+
             VerifyAvatar();
 
             _device.Status();
             if (_device.IoBoardConnected)
             {
 
+                // Verificación de puerta abierta
 
                 if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
                 {
-
-                    _device.Sense();
-                    // consulta el estado de la contadora si está conectada
-                    if (_device.CounterConnected)
-                    {
-                        CounterPictureBox.Image = _greenLedImage;
-                    }
-                    else
-                    {
-                        CounterPictureBox.Image = _redLedImage;
-                        _device.CounterBoardReconnect();
-                    }
-
-                    IoBoardStatus ioBoardStatus = _device.Status();
-
-                    // consulta el estado de la ioboard  si está conectada
-                    if (_device.IoBoardConnected)
-                    {
-                        IoBoardPictureBox.Image = _greenLedImage;
-                    }
-                    else
-                    {
-                        IoBoardPictureBox.Image = _redLedImage;
-                        _device.IoBoardReconnect();
-                    }
+                    VerifyConnections();
 
                 }
                 else
@@ -173,11 +150,60 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                         _blockingDialog.ShowDialog();
                         _blockingDialog = null;
                     }
-
+                }
+                // Verificación de bolsa en posición
+                if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)
+                {
+                    VerifyConnections();
 
                 }
+                else
+                {
+                    FormsController.OpenChildForm(new OperationBlockingForm()
+                    { OperationBlockingReason = Enumerations.OperationblockingReasonEnum.NoBag },
+                              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                }
+
+
             }
 
+            // Verificación de bolsa en posición
+            if (DatabaseController.CurrentContainer != null)
+            {
+                VerifyConnections();
+            }
+            else
+            {
+                DatabaseController.CreateOrUpdateContainer(string.Empty);
+            }
+        }
+
+        private void VerifyConnections()
+        {
+            _device.Sense();
+            // consulta el estado de la contadora si está conectada
+            if (_device.CounterConnected)
+            {
+                CounterPictureBox.Image = _greenLedImage;
+            }
+            else
+            {
+                CounterPictureBox.Image = _redLedImage;
+                //_device.CounterBoardReconnect();
+            }
+
+            IoBoardStatus ioBoardStatus = _device.Status();
+
+            // consulta el estado de la ioboard  si está conectada
+            if (_device.IoBoardConnected)
+            {
+                IoBoardPictureBox.Image = _greenLedImage;
+            }
+            else
+            {
+                IoBoardPictureBox.Image = _redLedImage;
+                //_device.IoBoardReconnect();
+            }
         }
 
         private void VerifyTimeout()
@@ -187,12 +213,16 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             RemainingTimeLabel.Text = _remainingTimeText +
                 remainingTime.ToString();
-            if (remainingTime > 10)
+            if (remainingTime > ParameterController.GreenStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Green;
-            if (remainingTime < 10)
+            if (remainingTime < ParameterController.YellowStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Yellow;
-            if (remainingTime < 5)
+            if (remainingTime < ParameterController.RedStatusIndicator)
+            {
                 RemainingTimeLabel.ForeColor = Color.Red;
+                RemainingTimeLabel.Text += " * " + 
+                    MultilanguangeController.GetText(MultiLanguageEnum.SOLICITAR_MAS_TIEMPO);
+            }
         }
 
         private void VerifyUserData()
@@ -203,11 +233,21 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 DatabaseController.CurrentUser.Apellido + " " + DatabaseController.CurrentUser.Nombre;
                 EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " + 
                 DatabaseController.CurrentUser.EmpresaId.Nombre;
+
+                SucursalLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": " +
+                    DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre;
+
+                DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": " +
+                    DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre;
+
             }
             else
             {
                 UserLabel.Text = String.Empty;
                 EnterpriseLabel.Text = String.Empty;
+                SucursalLabel.Text = String.Empty;
+                DepositaryLabel.Text = String.Empty;
+                RemainingTimeLabel.Text = String.Empty;
             }
         }
 

@@ -40,11 +40,6 @@
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.DenominationsGridView = new System.Windows.Forms.DataGridView();
-            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Denomination = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumberPanel = new System.Windows.Forms.Panel();
             this.Button_3 = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_9 = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -77,6 +72,11 @@
             this.StackerFullCheckBox = new System.Windows.Forms.CheckBox();
             this.DeviceModeLabel = new System.Windows.Forms.Label();
             this.GeneralStatusLabel = new System.Windows.Forms.Label();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Denomination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.denominationItemBindingSource)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.ButtonsPanel.SuspendLayout();
@@ -227,49 +227,6 @@
             this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             this.DenominationsGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DenominationsGridView_EditingControlShowing);
             this.DenominationsGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DenominationsGridView_KeyPress);
-            // 
-            // Image
-            // 
-            this.Image.DataPropertyName = "Image";
-            this.Image.Frozen = true;
-            this.Image.HeaderText = "*";
-            this.Image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.Image.Name = "Image";
-            this.Image.ReadOnly = true;
-            this.Image.Width = 90;
-            // 
-            // Denomination
-            // 
-            this.Denomination.DataPropertyName = "Denomination";
-            this.Denomination.HeaderText = "*";
-            this.Denomination.Name = "Denomination";
-            this.Denomination.ReadOnly = true;
-            this.Denomination.Width = 260;
-            // 
-            // Quantity
-            // 
-            this.Quantity.DataPropertyName = "Quantity";
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.Quantity.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Quantity.HeaderText = "*";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.Width = 110;
-            // 
-            // Amount
-            // 
-            this.Amount.DataPropertyName = "Amount";
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Amount.HeaderText = "*";
-            this.Amount.Name = "Amount";
-            this.Amount.Width = 236;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
             // 
             // NumberPanel
             // 
@@ -803,6 +760,50 @@
             this.GeneralStatusLabel.TabIndex = 25;
             this.GeneralStatusLabel.Text = "GeneralStatus";
             // 
+            // Image
+            // 
+            this.Image.DataPropertyName = "Image";
+            this.Image.Frozen = true;
+            this.Image.HeaderText = "*";
+            this.Image.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Image.Name = "Image";
+            this.Image.ReadOnly = true;
+            this.Image.Width = 90;
+            // 
+            // Denomination
+            // 
+            this.Denomination.DataPropertyName = "Denomination";
+            this.Denomination.HeaderText = "*";
+            this.Denomination.Name = "Denomination";
+            this.Denomination.ReadOnly = true;
+            this.Denomination.Width = 496;
+            // 
+            // Quantity
+            // 
+            this.Quantity.DataPropertyName = "Quantity";
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.Quantity.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Quantity.HeaderText = "*";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Width = 110;
+            // 
+            // Amount
+            // 
+            this.Amount.DataPropertyName = "Amount";
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.Amount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Amount.HeaderText = "*";
+            this.Amount.Name = "Amount";
+            this.Amount.Visible = false;
+            this.Amount.Width = 236;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
             // EnvelopeDepositForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -868,14 +869,14 @@
         private CheckBox StackerFullCheckBox;
         private Label DeviceModeLabel;
         private Label GeneralStatusLabel;
+        private Panel ButtonsPanel;
+        private CustomButton BackButton;
+        private CustomButton ConfirmAndExitDepositButton;
+        private CustomButton CancelDepositButton;
         private DataGridViewImageColumn Image;
         private DataGridViewTextBoxColumn Denomination;
         private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn Amount;
         private DataGridViewTextBoxColumn Id;
-        private Panel ButtonsPanel;
-        private CustomButton BackButton;
-        private CustomButton ConfirmAndExitDepositButton;
-        private CustomButton CancelDepositButton;
     }
 }

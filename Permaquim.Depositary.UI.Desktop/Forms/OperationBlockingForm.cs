@@ -41,6 +41,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
+                case OperationblockingReasonEnum.NoBag:
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
                 default:
                     break;
             }
@@ -49,7 +53,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);

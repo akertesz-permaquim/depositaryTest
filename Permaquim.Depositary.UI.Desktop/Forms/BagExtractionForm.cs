@@ -17,6 +17,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private BagExtractionProcessEnum _bagExtractionProcess = BagExtractionProcessEnum.None;
+
+        private Permaquim.Depositario.Entities.Tables.Operacion.Contenedor _newContainer;
+
                CustomButton _gateButton = new CustomButton();
         CustomButton _backButton = new CustomButton();
         CustomButton _confirmButton = new CustomButton();
@@ -137,7 +140,10 @@ namespace Permaquim.Depositary.UI.Desktop
                 System.Diagnostics.Debug.Print("");
 
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
+            {
                 _bagExtractionProcess = BagExtractionProcessEnum.BagExtracted;
+                DatabaseController.CreateOrUpdateContainer(string.Empty);
+            }
 
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_PUTTING_START)
                 _bagExtractionProcess = BagExtractionProcessEnum.BagPuttingStart;
@@ -235,7 +241,8 @@ namespace Permaquim.Depositary.UI.Desktop
             _gateButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None;
             _backButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None 
                 || _bagExtractionProcess == BagExtractionProcessEnum.BagError;
-            _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending;
+            _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending 
+                && ParameterController.RequiresContainerIdentifier;
 
         }
         private void LoadGateButton()
@@ -269,7 +276,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
              _backButton = ControlBuilder.BuildExitButton(
-            "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+            "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(_backButton);
 
@@ -290,7 +297,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            DatabaseController.UpdateandCreateContainer(_containerTextBox.Texts.Trim());
+            DatabaseController.CreateOrUpdateContainer(_containerTextBox.Texts.Trim());
             _bagExtractionProcess = BagExtractionProcessEnum.ProcessFinished;
         }
         private void BagButton_Click(object sender, EventArgs e)

@@ -58,6 +58,7 @@ namespace Permaquim.Depositary.UI.Desktop
        private void LoadCurrencyButtons()
         {
 
+            this.MainPanel.Controls.Clear();
 
             foreach (var item in _currencies)
             {
@@ -80,9 +81,9 @@ namespace Permaquim.Depositary.UI.Desktop
             
             _device.SwitchCurrency(DatabaseController.CurrentCurrency.IndiceEnContadora);
 
-             if (DatabaseController.CurrentOperation.Id == 1)
+             if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
             {
-                if (DatabaseController.GetUserBankAccounts().Count == 0)
+                if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
                 {
                      FormsController.OpenChildForm(this,new BillDepositForm(),
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
@@ -93,10 +94,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
                 }
             }
-            if (DatabaseController.CurrentOperation.Id == 3)
+            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
             {
 
-                if (DatabaseController.GetUserBankAccounts().Count == 0)
+                if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
                 {
 
                     FormsController.OpenChildForm(this,new EnvelopeDepositForm(),
@@ -117,7 +118,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -133,7 +134,15 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _pollingTimer.Enabled = this.Visible;
             if (!this.Visible)
+            {
                 InitializeLocals();
+            }
+            else
+            {
+                _currencies = DatabaseController.GetCurrencies();
+                LoadCurrencyButtons();
+                LoadBackButton();
+            }
         }
         private void InitializeLocals()
         {

@@ -35,6 +35,8 @@
             this.UserLabel = new System.Windows.Forms.Label();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.DepositaryLabel = new System.Windows.Forms.Label();
+            this.SucursalLabel = new System.Windows.Forms.Label();
             this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.IoBoardPictureBox = new System.Windows.Forms.PictureBox();
             this.CounterPictureBox = new System.Windows.Forms.PictureBox();
@@ -122,6 +124,8 @@
             // BottomPanel
             // 
             this.BottomPanel.BackColor = System.Drawing.Color.White;
+            this.BottomPanel.Controls.Add(this.DepositaryLabel);
+            this.BottomPanel.Controls.Add(this.SucursalLabel);
             this.BottomPanel.Controls.Add(this.RemainingTimeLabel);
             this.BottomPanel.Controls.Add(this.IoBoardPictureBox);
             this.BottomPanel.Controls.Add(this.CounterPictureBox);
@@ -132,14 +136,39 @@
             this.BottomPanel.Size = new System.Drawing.Size(868, 47);
             this.BottomPanel.TabIndex = 2;
             // 
+            // DepositaryLabel
+            // 
+            this.DepositaryLabel.AutoSize = true;
+            this.DepositaryLabel.BackColor = System.Drawing.Color.Transparent;
+            this.DepositaryLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.DepositaryLabel.ForeColor = System.Drawing.Color.White;
+            this.DepositaryLabel.Location = new System.Drawing.Point(288, 16);
+            this.DepositaryLabel.Name = "DepositaryLabel";
+            this.DepositaryLabel.Size = new System.Drawing.Size(37, 15);
+            this.DepositaryLabel.TabIndex = 103;
+            this.DepositaryLabel.Text = "------";
+            this.DepositaryLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // SucursalLabel
+            // 
+            this.SucursalLabel.AutoSize = true;
+            this.SucursalLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SucursalLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.SucursalLabel.ForeColor = System.Drawing.Color.White;
+            this.SucursalLabel.Location = new System.Drawing.Point(112, 16);
+            this.SucursalLabel.Name = "SucursalLabel";
+            this.SucursalLabel.Size = new System.Drawing.Size(37, 15);
+            this.SucursalLabel.TabIndex = 102;
+            this.SucursalLabel.Text = "------";
+            this.SucursalLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // RemainingTimeLabel
             // 
-            this.RemainingTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RemainingTimeLabel.AutoSize = true;
             this.RemainingTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.RemainingTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(406, 16);
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(416, 16);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
             this.RemainingTimeLabel.Size = new System.Drawing.Size(57, 15);
             this.RemainingTimeLabel.TabIndex = 21;
@@ -176,7 +205,7 @@
             this.DateTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.DateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.DateTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.DateTimeLabel.Location = new System.Drawing.Point(672, 14);
+            this.DateTimeLabel.Location = new System.Drawing.Point(672, 16);
             this.DateTimeLabel.Name = "DateTimeLabel";
             this.DateTimeLabel.Size = new System.Drawing.Size(57, 15);
             this.DateTimeLabel.TabIndex = 1;
@@ -296,5 +325,7 @@
         private PictureBox MainPictureBox;
         private Label StartMessageLabel;
         private Label RemainingTimeLabel;
+        private Label SucursalLabel;
+        private Label DepositaryLabel;
     }
 }

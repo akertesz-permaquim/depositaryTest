@@ -66,7 +66,8 @@
         public enum OperationblockingReasonEnum
         {
             None = 0,
-            NoTurn = 1
+            NoTurn,
+            NoBag
         }
         public enum DepositaryConfigurationEnum
         {
@@ -104,7 +105,9 @@
             FALTA_USUARIO_PASSWORD,
             USUARIO_NO_REGISTRADO,
             SIN_TURNO,
-            //SALIR,
+            SIN_BOLSA,
+            SIN_BOLSA_ACTIVA,
+            VOLVER,
             PUERTA_ABIERTA,
             ERROR_POSICION_BOLSA,
             PRESIONAR_BOTON_INICIAR,
@@ -125,6 +128,7 @@
             CANCEL_BUTTON,
             EXIT_BUTTON,
             DENOMINACION,
+            DESCRIPCION,
             ID,
             IMAGEN,
             CANTIDAD,
@@ -164,6 +168,7 @@
             CONTINUAR_INGRESANDO_BILLETES,
             ACEPTAR_O_CANCELAR_DEPOSITO,
             CANTIDADUNIDADES,
+            TRANSACCIONES_TURNO,
             CONFIRMA_CIERRE_TURNO,
             CONFIRMA_CIERRE_DIARIO,
             CIERRE_DIARIO,
@@ -171,7 +176,25 @@
             CAMBIO_TURNO,
             REPORTES,
             CONTENIDO_BOLSA,
-            CANTIDADOPERACIONES
+            CANTIDADOPERACIONES,
+            SUCURSAL,
+            DEPOSITARIO,
+            SOLICITAR_MAS_TIEMPO
+        }
+
+        public enum FunctionEnum
+        {
+            BillDeposit = 99,
+            CoinDeposit = 100,
+            EnvelopeDeposit = 101,
+            OtherOperations = 102,
+            BagContent = 103,
+            BagExtraction = 104,
+            DailyClosing = 105,
+            Transactions = 106,
+            Support = 107,
+            TurnChange = 108,
+            ViewEvents = 109
         }
     }
 }

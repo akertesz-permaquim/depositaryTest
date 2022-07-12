@@ -13,14 +13,11 @@ namespace Permaquim.Depositary.UI.Desktop
         public OtherOperationsForm()
         {
             InitializeComponent();
+
             CenterPanel();
+
             LoadStyles();
-            LoadTurnButton();
-            LoadDailyClosingButton();
-            LoadOperationsButton();
-            LoadBagContentButton();
-            LoadSupportButton();
-            LoadBackButton();
+
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
@@ -28,6 +25,24 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
+
+        private void LoadFunctionButtons()
+        {
+            this.MainPanel.Controls.Clear();
+
+            if (SecurityController.IsFunctionenabled(FunctionEnum.TurnChange))
+                LoadTurnButton();
+            if (SecurityController.IsFunctionenabled(FunctionEnum.DailyClosing))
+                LoadDailyClosingButton();
+            if (SecurityController.IsFunctionenabled(FunctionEnum.Transactions))
+                LoadOperationsHistoryButton();
+            if (SecurityController.IsFunctionenabled(FunctionEnum.BagContent))
+                LoadBagContentButton();
+            if (SecurityController.IsFunctionenabled(FunctionEnum.Support))
+                LoadSupportButton();
+            LoadBackButton();
+        }
+
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -59,7 +74,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
@@ -111,7 +126,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         #region Operations
 
-        private void LoadOperationsButton()
+        private void LoadOperationsHistoryButton()
         {
             CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
                 "OperationsButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_OPERACIONES), MainPanel.Width);
@@ -166,6 +181,8 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (!this.Visible)
                 InitializeLocals();
+            else
+                LoadFunctionButtons();
         }
         private void InitializeLocals()
         {

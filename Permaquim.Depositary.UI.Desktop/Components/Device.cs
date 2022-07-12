@@ -641,7 +641,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         }
         public StatesResult RemoteCancel()
         {
-            if (_counterPort.IsOpen)
+            if (_counterPort != null &&_counterPort.IsOpen )
             {
                 Log("COMMAND: RemoteCancel");
                 DiscardBuffer(_counterPort);

@@ -79,6 +79,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
             }
             _formList.Clear();
+
+            MultilanguangeController.ResetLanguage();
         }
     }
 }

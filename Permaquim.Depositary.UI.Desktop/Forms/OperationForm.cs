@@ -59,17 +59,23 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadTransactionButtons()
         {
+            this.MainPanel.Controls.Clear();
+
             foreach (var item in _transactions)
             {
-                CustomButton newButton = ControlBuilder.BuildStandardButton(
-                    "TransactionButton" + item.Id.ToString(),
-                    MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
-                newButton.Click += new System.EventHandler(TransactionButton_Click);
+                if (SecurityController.IsFunctionenabled((long)item.FuncionId))
+                {
+                    CustomButton newButton = ControlBuilder.BuildStandardButton(
+                        "TransactionButton" + item.Id.ToString(),
+                        MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
-                newButton.Tag = item;
+                    newButton.Click += new System.EventHandler(TransactionButton_Click);
 
-                this.MainPanel.Controls.Add(newButton);
+                    newButton.Tag = item;
+
+                    this.MainPanel.Controls.Add(newButton);
+                }
             }
         }
         private void TransactionButton_Click(object sender, EventArgs e)
@@ -105,11 +111,14 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Other Operations
         private void LoadOtherOperationsButton()
         {
-            CustomButton otherOperationsButton = ControlBuilder.BuildAlternateButton(
-                "OtherOperationsButton", MultilanguangeController.GetText(MultiLanguageEnum.OTRAS_OPERACIONES), MainPanel.Width);
+            if (SecurityController.IsFunctionenabled(FunctionEnum.OtherOperations))
+            {
+                CustomButton otherOperationsButton = ControlBuilder.BuildAlternateButton(
+                    "OtherOperationsButton", MultilanguangeController.GetText(MultiLanguageEnum.OTRAS_OPERACIONES), MainPanel.Width);
 
-            this.MainPanel.Controls.Add(otherOperationsButton);
-            otherOperationsButton.Click += new System.EventHandler(OtherOperationButton_Click);
+                this.MainPanel.Controls.Add(otherOperationsButton);
+                otherOperationsButton.Click += new System.EventHandler(OtherOperationButton_Click);
+            }
         }
 
         private void OtherOperationButton_Click(object sender, EventArgs e)
@@ -148,6 +157,13 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (!this.Visible)
                 InitializeLocals();
+            else
+            {
+                _transactions = DatabaseController.GetTransactionTypes();
+                LoadTransactionButtons();
+                LoadOtherOperationsButton();
+                LoadBackButton();
+            }
         }
         private void InitializeLocals()
         {

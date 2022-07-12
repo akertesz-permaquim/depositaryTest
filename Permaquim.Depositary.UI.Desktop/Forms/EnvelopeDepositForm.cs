@@ -104,10 +104,10 @@ namespace Permaquim.Depositary.UI.Desktop
         { 
             ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON);
             CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON);
-            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON);
+            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
-            DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION);
+            DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DESCRIPCION);
             DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD);
             DenominationsGridView.Columns["Amount"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMPORTE);
             EnvelopeTextBox.PlaceholderText = MultilanguangeController.GetText(MultiLanguageEnum.ENVELOPE_TEXTBOX_PLACEHOLDER);
@@ -125,19 +125,23 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Tick += PollTimer_Tick;
 
             _operationStatus = new();
-
-
-           
-
             CurrencyLabel.Text = DatabaseController.CurrentCurrency.Nombre;
         }
         private void EnvelopeDepositForm_VisibleChanged(object sender, EventArgs e)
         {
+            MonitorGroupcheckbox.Visible = SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
                 LoadDenominations();
                 LoadLanguageItems();
+                NumberPanel.Visible = true;
+                DenominationsGridView.Visible = true;
+                CurrencyLabel.Visible = true;
+                RemainingTimeLabel.Visible = true;
+                SubtotalLabel.Visible = true;
+                ButtonsPanel.Visible = true;
             }
             else
                 InitializeLocals();
@@ -376,16 +380,16 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             BackButton.Visible =
                 !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _totalQuantity == 0 && _totalAmount == 0;
+                && _totalQuantity == 0;// && _totalAmount == 0;
 
             //Solo se habilita el botón de volver si no hay dinero en el escrow
             ConfirmAndExitDepositButton.Visible =
                 !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _totalQuantity > 0 && _totalAmount > 0;
+                && _totalQuantity > 0;//&& _totalAmount > 0;
 
             CancelDepositButton.Visible =
            !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _totalQuantity > 0 && _totalAmount > 0;
+                && _totalQuantity > 0;//&& _totalAmount > 0;
 
         }
         private void ShowInformation()
@@ -430,7 +434,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             DisableControls();
 
-            SaveTransaction();
+            SaveTransaction(false);
 
            _operationStatus.DepositEnded = true;
 
@@ -438,7 +442,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Graba el depósito en base de datos
         /// </summary>
-        private void SaveTransaction()
+        private void SaveTransaction(bool IsAutoclose)
         {
             NumberPanel.Visible = false;
             DenominationsGridView.Visible = false;
@@ -449,7 +453,7 @@ namespace Permaquim.Depositary.UI.Desktop
             InformationLabel.ForeColor = Color.Green;
 
             Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
-            sesiones.Items(null, DatabaseController.CurrentUser.Id, null, null, null);
+            sesiones.Items(null, DatabaseController.CurrentUser.Id, null, null, null, IsAutoclose);
 
 
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
@@ -489,7 +493,7 @@ namespace Permaquim.Depositary.UI.Desktop
             Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transactionenvelopeDetails = new();
             foreach (var item in _envelopeDepositItems)
             {
-                if (item.Id > -1 && item.Amount > 0)
+                if (item.Id > -1  && item.Quantity > 0)
                 {
                     Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle transactionEnvelopeDetail = new()
                     {
@@ -615,11 +619,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
                 TimeOutController.GetRemainingtime().ToString();
-            if (TimeOutController.GetRemainingtime() > 10)
+            if (TimeOutController.GetRemainingtime() > ParameterController.GreenStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Green;
-            if (TimeOutController.GetRemainingtime() < 10)
+            if (TimeOutController.GetRemainingtime() < ParameterController.YellowStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Yellow;
-            if (TimeOutController.GetRemainingtime() < 5)
+            if (TimeOutController.GetRemainingtime() < ParameterController.RedStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Red;
         }
 
