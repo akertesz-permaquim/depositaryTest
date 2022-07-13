@@ -179,7 +179,8 @@
             CANTIDADOPERACIONES,
             SUCURSAL,
             DEPOSITARIO,
-            SOLICITAR_MAS_TIEMPO
+            SOLICITAR_MAS_TIEMPO,
+            REQUIERE_IDENTIFICADOR_SOBRE
         }
 
         public enum FunctionEnum

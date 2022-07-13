@@ -11,12 +11,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AutenticacionController : ControllerBase
     {
-        private readonly ILogger<AuthenticationController> _logger;
+        private readonly ILogger<AutenticacionController> _logger;
         private readonly IConfiguration _configuration;
 
-        public AuthenticationController(
+        public AutenticacionController(
 
           IConfiguration configuration)
         {
@@ -24,13 +24,11 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("GetToken")]
+        [HttpPost("ObtenerToken")]
  
-        public ActionResult GetToken([FromHeader]LoginModel model)
-        //private JwtSecurityToken GetToken(LoginModel model)
+        public ActionResult ObtenerToken([FromBody]LoginModel model)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-           
 
             DepositaryWebApi.Business.Relations.Seguridad.Usuario usuarios = new();
             usuarios.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.Usuario.ColumnEnum.NickName,
@@ -68,8 +66,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 expires: DateTime.Now.AddHours(Convert.ToInt32(_configuration["JWT:Hours"])),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-             
-                
+               
                 );
 
             return Ok(new

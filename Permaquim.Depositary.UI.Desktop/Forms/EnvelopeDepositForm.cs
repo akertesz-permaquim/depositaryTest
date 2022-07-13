@@ -136,12 +136,8 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 LoadDenominations();
                 LoadLanguageItems();
-                NumberPanel.Visible = true;
-                DenominationsGridView.Visible = true;
-                CurrencyLabel.Visible = true;
-                RemainingTimeLabel.Visible = true;
-                SubtotalLabel.Visible = true;
-                ButtonsPanel.Visible = true;
+                EnableDisableControls(true);
+
             }
             else
                 InitializeLocals();
@@ -432,9 +428,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ExitEnvelopeDepositForm()
         {
 
-            DisableControls();
+            EnableDisableControls(false);
 
-            SaveTransaction(false);
+            SaveTransaction();
 
            _operationStatus.DepositEnded = true;
 
@@ -442,7 +438,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Graba el depósito en base de datos
         /// </summary>
-        private void SaveTransaction(bool IsAutoclose)
+        private void SaveTransaction()
         {
             NumberPanel.Visible = false;
             DenominationsGridView.Visible = false;
@@ -453,7 +449,8 @@ namespace Permaquim.Depositary.UI.Desktop
             InformationLabel.ForeColor = Color.Green;
 
             Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
-            sesiones.Items(null, DatabaseController.CurrentUser.Id, null, null, null, IsAutoclose);
+            sesiones.Items(null,DatabaseController.CurrentDepositary.Id,
+                DatabaseController.CurrentUser.Id, null, null, null);
 
 
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
@@ -510,12 +507,17 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             transactions.Update(transaction);
         }
-        private void DisableControls()
+        private void EnableDisableControls(bool value)
         {
-            DenominationsGridView.Visible = false;
-            CancelDepositButton.Visible = false;
-            ConfirmAndExitDepositButton.Visible = false;
-            EnvelopeTextBox.Visible = false;
+            DenominationsGridView.Visible = value;
+            CancelDepositButton.Visible = value;
+            ConfirmAndExitDepositButton.Visible = value;
+            EnvelopeTextBox.Visible = value;
+            NumberPanel.Visible = value;
+            CurrencyLabel.Visible = value;
+            RemainingTimeLabel.Visible = value;
+            SubtotalLabel.Visible = value;
+            ButtonsPanel.Visible = value;
 
         }
         private class EnvelopeDepositItem
@@ -536,9 +538,18 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
-            TimeOutController.Reset();
-            _device.OpenEscrow();
-            _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+
+            if (ParameterController.RequiresEnvelopeIdentifier && EnvelopeTextBox.Texts.Trim().Equals(String.Empty))
+            {
+                InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.REQUIERE_IDENTIFICADOR_SOBRE);
+                InformationLabel.ForeColor = Color.Red;
+            }
+            else
+            {
+                TimeOutController.Reset();
+                _device.OpenEscrow();
+                _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+            }
 
         }
 
@@ -640,6 +651,18 @@ namespace Permaquim.Depositary.UI.Desktop
         private void EnvelopeDepositForm_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
+        }
+
+        private void CancelDepositButton_Click(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i < DenominationsGridView.Rows.Count; i++)
+            {
+                DenominationsGridView.Rows[i].Cells["Quantity"].Value = 0;
+
+            }
+            EnvelopeTextBox.Texts = string.Empty;
+    
         }
     }
 }

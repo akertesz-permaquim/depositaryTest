@@ -48,5 +48,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        public static bool RequiresEnvelopeIdentifier
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("REQUIERE_IDENTIFICADOR_SOBRE"));
+            }
+
+        }
     }
 }
