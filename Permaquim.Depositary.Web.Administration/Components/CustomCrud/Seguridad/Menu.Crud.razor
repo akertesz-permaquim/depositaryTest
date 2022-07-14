@@ -182,14 +182,14 @@
                             <div class="col-md-9">
                                 @if ((@TipoMenu_TipoId_entities.Count > 0 && @TipoMenu_TipoId_entities.FirstOrDefault(c => c.Id == @Menu_entity.TipoId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.TipoId)"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.TipoId)"
                                 Data=@TipoMenu_TipoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoMenu_TipoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@TipoMenu_TipoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoMenu_TipoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -234,14 +234,14 @@
                             <div class="col-md-9">
                                 @if ((@Funcion_FuncionId_entities.Count > 0 && @Funcion_FuncionId_entities.FirstOrDefault(c => c.Id == @Menu_entity.FuncionId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.FuncionId)"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.FuncionId)"
                                 Data=@Funcion_FuncionId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectFuncion_FuncionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@Funcion_FuncionId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectFuncion_FuncionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -271,17 +271,22 @@
                             <div class="col-md-9">
                                 @if ((@Menu_DependeDe_entities.Count > 0 && @Menu_DependeDe_entities.FirstOrDefault(c => c.Id == @Menu_entity.DependeDe) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100" @bind-Value="@(Menu_entity.DependeDe)"
+                                    <RadzenDropDown Name="dropDependeDe" AllowClear="true" TValue="Int64?" Class="w-100" @bind-Value="@(Menu_entity.DependeDe)"
                                 Data=@Menu_DependeDe_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMenu_DependeDeValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100"
+                                    <RadzenDropDown Name="dropDependeDe" AllowClear="true" TValue="Int64?" Class="w-100"
                                 Data=@Menu_DependeDe_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMenu_DependeDeValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenRequiredValidator Component="dropDependeDe" Text="Depende de is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
                                 }
                             </div>
                         </div>
@@ -303,14 +308,14 @@
                                 <div class="col-md-9">
                                     @if ((@Usuario_UsuarioCreacion_entities.Count > 0 && @Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @Menu_entity.UsuarioCreacion) != null) || crudMode != CrudMode.Delete)
                                     {
-                                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.UsuarioCreacion)"
+                                        <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.UsuarioCreacion)"
                                 Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
                                 Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
                                 Disabled="true" />
                                     }
                                     else
                                     {
-                                        <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                        <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
                                 Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
                                 Disabled="true" />
@@ -421,7 +426,7 @@ else
     /// <summary>
     /// Variables to store permissions
     /// </summary>
-    private List<Entities.FuncionRol> dataFunciones;
+    private List<SeguridadEntities.FuncionRol> dataFunciones;
 
     /// <summary>
     /// Variables to handle Relation between Menu.TipoId and TipoMenu.Id
@@ -468,7 +473,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
+        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");

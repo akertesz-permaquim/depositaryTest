@@ -247,14 +247,14 @@
                  <div class="col-md-9">
                      @if((@Usuario_UsuarioCreacion_entities.Count > 0 && @Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @UsuarioRol_entity.UsuarioCreacion) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioRol_entity.UsuarioCreacion)"
+                         <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioRol_entity.UsuarioCreacion)"
                                      Data=@Usuario_UsuarioCreacion_entities TextProperty = "NickName" ValueProperty = "Id"
                                      Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
                                      Disabled="true" />
                      }
                      else
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                         <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" 
                                      Data=@Usuario_UsuarioCreacion_entities TextProperty = "NickName" ValueProperty = "Id"
                                      Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
                                      Disabled="true" />
@@ -365,7 +365,7 @@ else
     /// <summary>
     /// Variables to store permissions
     /// </summary>
-    private List<Entities.FuncionRol> dataFunciones;
+    private List<SeguridadEntities.FuncionRol> dataFunciones;
  
     /// <summary>
     /// Variables to handle Relation between UsuarioRol.UsuarioId and Usuario.Id
@@ -410,7 +410,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
+        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");

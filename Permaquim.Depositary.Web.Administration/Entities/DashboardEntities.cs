@@ -24,9 +24,4 @@
         public Int64 CantidadTipoTransaccion { get; set; }
     }
 
-    public class Empresa
-    {
-        public Int64 EmpresaId { get; set; }
-        public string Nombre { get; set; }
-    }
 }

@@ -1,4 +1,4 @@
-﻿namespace Permaquim.Depositary.Web.Administration.Entities
+﻿namespace Permaquim.Depositary.Web.Administration.SeguridadEntities
 {
     public enum TipoAplicacion
     {
@@ -71,6 +71,22 @@
         public bool PuedeModificar { get; set; }
         public bool PuedeEliminar { get; set; }
         public string Referencia { get; set; }
+    }
+
+    public class Usuario
+    {
+        public Int64 UsuarioId { get; set; }
+        public string Nickname { get; set; }
+        public string UsuarioNombre { get; set; }
+        public string UsuarioApellido { get; set; }
+        public string NombreyApellido
+        {
+            get
+            {
+                return UsuarioNombre + " " + UsuarioApellido;
+            }
+        }
+
     }
 
 }

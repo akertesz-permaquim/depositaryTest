@@ -92,14 +92,10 @@
     <string>Seguridad.TipoAplicacion</string>
     <string>Seguridad.TipoFuncion</string>
     <string>Seguridad.TipoMenu</string>
-    <string>Seguridad.Usuario</string>
     <string>Seguridad.UsuarioRol</string>
     <string>Seguridad.UsuarioSector</string>
     <string>Sincronizacion.Configuracion</string>
     <string>Sincronizacion.Entidad</string>
-    <string>Turno.AgendaTurno</string>
-    <string>Turno.EsquemaDetalleTurno</string>
-    <string>Turno.EsquemaTurno</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
   </SelectedTables>

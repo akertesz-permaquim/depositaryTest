@@ -5,12 +5,16 @@
         public static string ObtenerTextoPorClave(string pClave, List<Entities.TextoLenguaje> pDataTextos)
         {
             string resultado = "";
-            if (pDataTextos.Exists(x => x.Clave == pClave))
+            if (pDataTextos != null)
             {
-                resultado = pDataTextos.FirstOrDefault(x => x.Clave == pClave).Texto;
+                var registro = pDataTextos.FirstOrDefault(x => x.Clave == pClave);
+                if (registro != null)
+                    resultado = registro.Texto;
+                else
+                    resultado = pDataTextos.FirstOrDefault(x => x.Clave == "GENERIC").Texto;
             }
             else
-                resultado = pDataTextos.FirstOrDefault(x => x.Clave == "GENERIC").Texto;
+                resultado = "**";
 
             return resultado;
         }

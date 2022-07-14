@@ -20,6 +20,21 @@ builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 builder.Services.AddServerSideBlazor().AddHubOptions(options => { options.MaximumReceiveMessageSize = 10 * 1024 * 1024; });
 
+var supportedCultures = new[]
+{
+    new System.Globalization.CultureInfo("es-AR")
+};
+//supportedCultures.NumberFormat.NumberDecimalSeparator = ",";
+//supportedCultures.NumberFormat.CurrencyDecimalSeparator = ",";
+//supportedCultures.NumberFormat.CurrencyGroupSeparator = ".";
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es-AR");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+}
+);
 //builder.Services.AddScoped<SessionStorageManager>();
 
 var app = builder.Build();
@@ -32,14 +47,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-var supportedCulture = new System.Globalization.CultureInfo("es-AR");
-supportedCulture.NumberFormat.NumberDecimalSeparator = ",";
-supportedCulture.NumberFormat.CurrencyDecimalSeparator = ",";
-supportedCulture.NumberFormat.CurrencyGroupSeparator = ".";
 
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
-    DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(supportedCulture)
+    DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es-AR")
 });
 
 app.UseHttpsRedirection();

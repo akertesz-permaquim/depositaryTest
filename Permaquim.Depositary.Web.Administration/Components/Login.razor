@@ -16,19 +16,23 @@
     <ChildContent>
         <RadzenTemplateForm TItem="LoginForm" Data="@loginForm" Submit="@LoginUser">
             <ChildContent>
+                @if (estaCargando)
+                {
+                    <div class="spinnerCentrado"></div>
+                }
                 <RadzenLabel Component="Username" style="display: block; margin-top: 16px" Text="Username">
                 </RadzenLabel>
-                <RadzenTextBox @bind-Value="@(loginForm.Username)" style="width: 100%" Name="Username">
+                <RadzenTextBox Disabled="@estaCargando" @bind-Value="@(loginForm.Username)" style="width: 100%" Name="Username">
                 </RadzenTextBox>
                 <RadzenRequiredValidator Component="Username" Text="Username is required">
                 </RadzenRequiredValidator>
                 <RadzenLabel Component="Password" style="display: block; margin-top: 16px" Text="Password">
                 </RadzenLabel>
-                <RadzenPassword @bind-Value="@(loginForm.Password)" style="width: 100%" Name="Password">
+                <RadzenPassword Disabled="@estaCargando" @bind-Value="@(loginForm.Password)" style="width: 100%" Name="Password">
                 </RadzenPassword>
                 <RadzenRequiredValidator Component="Password" Text="Password is required">
                 </RadzenRequiredValidator>
-                <RadzenButton ButtonType="ButtonType.Submit" style="display: block; margin-top: 16px; width: 100%; background-color: #4158ff" Text="Login">
+                <RadzenButton ButtonType="ButtonType.Submit" Disabled="@estaCargando" style="display: block; margin-top: 16px; width: 100%; background-color: #4158ff" Text="Login">
                 </RadzenButton>
             </ChildContent>
         </RadzenTemplateForm>
@@ -39,17 +43,26 @@
 {
     private LoginForm loginForm = new LoginForm();
     private List<Entities.TextoLenguaje> dataLenguaje;
+    private bool estaCargando { get; set; }
 
     //Datasets
     private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? dataUsuario = new();
     private DepositarioAdminWeb.Entities.Tables.Seguridad.Rol? usuarioRol = new();
     private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
-    private List<Entities.Menu> dataMenues = new();
-    private List<Entities.FuncionRol> dataFunciones = new();
+    private List<SeguridadEntities.Menu> dataMenues = new();
+    private List<SeguridadEntities.FuncionRol> dataFunciones = new();
+
+    protected override void OnInitialized()
+    {
+        estaCargando = false;
+        base.OnInitialized();
+    }
 
     protected async void LoginUser()
     {
-        dataUsuario = SeguridadController.ObtenerUsuario(loginForm.Username, loginForm.Password);
+        estaCargando = true;
+        StateHasChanged();
+        dataUsuario = await Task.Run(() => SeguridadController.LoguearUsuario(loginForm.Username, loginForm.Password));
         if (dataUsuario == null)
         {
             //Si no encontro usuario cargamos los textos default.
@@ -58,35 +71,61 @@
         }
         else
         {
-            usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
-            dataEsquemaDetalle = EstiloController.ObtenerEsquemaDetalles(dataUsuario.Id);
-            if (usuarioRol == null)
+
+            //Si el usuario esta bloqueado damos aviso y no permitimos el ingreso
+            if (dataUsuario.Bloqueado)
             {
-                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_NOROLES", dataLenguaje), Duration = 3000 });
+                NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_BLOCKED_USER", dataLenguaje), Duration = 3000 });
             }
             else
             {
-                //Si se encontro un rol buscamos todos los menues a los que tiene acceso ese rol
-                dataMenues = SeguridadController.ObtenerMenuesPorRol(usuarioRol.Id);
+                if (dataUsuario.Password != Cryptography.Hash(loginForm.Password))
+                    NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), Duration = 3000 });
+                else
+                {
+                    if (dataUsuario.DebeCambiarPassword)
+                    {
+                        NavManager.NavigateTo("cambioPassword/" + dataUsuario.NickName + "/" + dataUsuario.Id, true);
+                    }
+                    else
+                    {
+                        usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+                        dataEsquemaDetalle = EstiloController.ObtenerEsquemaDetalles(dataUsuario.Id);
+                        if (usuarioRol == null)
+                        {
+                            NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_NOROLES", dataLenguaje), Duration = 3000 });
+                        }
+                        else
+                        {
+                            //Si se encontro un rol buscamos todos los menues a los que tiene acceso ese rol
+                            dataMenues = SeguridadController.ObtenerMenuesPorRol(usuarioRol.Id);
 
-                //Si se encontro un rol buscamos todos las funciones que puede acceder con ese rol
-                dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
+                            //Si se encontro un rol buscamos todos las funciones que puede acceder con ese rol
+                            dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
 
-                await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
-                await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
-                await sessionStorage.SetItemAsync("Nickname", dataUsuario.NickName);
-                await sessionStorage.SetItemAsync("NombreUsuario", dataUsuario.Nombre);
-                await sessionStorage.SetItemAsync("ApellidoUsuario", dataUsuario.Apellido);
-                await sessionStorage.SetItemAsync("AvatarUsuario", dataUsuario.Avatar);
-                await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
-                await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
-                await sessionStorage.SetItemAsync("DataEsquemaDetalle", dataEsquemaDetalle);
-                await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
-                await sessionStorage.SetItemAsync("DataMenues", dataMenues);
+                            await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
+                            await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
+                            await sessionStorage.SetItemAsync("Nickname", dataUsuario.NickName);
+                            await sessionStorage.SetItemAsync("NombreUsuario", dataUsuario.Nombre);
+                            await sessionStorage.SetItemAsync("ApellidoUsuario", dataUsuario.Apellido);
+                            await sessionStorage.SetItemAsync("AvatarUsuario", dataUsuario.Avatar);
+                            await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
+                            await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
+                            await sessionStorage.SetItemAsync("DataEsquemaDetalle", dataEsquemaDetalle);
+                            await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
+                            await sessionStorage.SetItemAsync("DataMenues", dataMenues);
 
-                NavManager.NavigateTo("Dashboard", true);
+                            estaCargando = false;
+                            StateHasChanged();
+
+                            NavManager.NavigateTo("Dashboard", true);
+                        }
+                    }
+                }
             }
         }
+        estaCargando = false;
+        StateHasChanged();
     }
 }

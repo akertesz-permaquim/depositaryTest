@@ -185,14 +185,14 @@
                             <div class="col-md-9">
                                 @if ((@Empresa_entities.Count > 0 && @Empresa_entities.FirstOrDefault(c => c.Id == @Sucursal_entity.EmpresaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.EmpresaId)"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.EmpresaId)"
                                 Data=@Empresa_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEmpresaValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@Empresa_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEmpresaValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -237,14 +237,14 @@
                             <div class="col-md-9">
                                 @if ((@CodigoPostal_entities.Count > 0 && @CodigoPostal_entities.FirstOrDefault(c => c.Id == @Sucursal_entity.CodigoPostalId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.CodigoPostalId)"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.CodigoPostalId)"
                                 Data=@CodigoPostal_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostalValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@CodigoPostal_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostalValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -372,7 +372,7 @@ else
     /// <summary>
     /// Variables to store permissions
     /// </summary>
-    private List<Entities.FuncionRol> dataFunciones;
+    private List<SeguridadEntities.FuncionRol> dataFunciones;
 
     /// <summary>
     /// Variables to handle Relation between Sucursal.EmpresaId and Empresa.Id
@@ -401,7 +401,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
+        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");
