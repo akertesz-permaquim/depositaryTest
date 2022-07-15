@@ -26,7 +26,7 @@
                 {
                     DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera eSincronizacionNuevaEntidadCabecera = new();
 
-                    eSincronizacionNuevaEntidadCabecera = (DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera)oSincronizacionEntidad.Add(eSincronizacionEntidadCabecera);
+                    eSincronizacionNuevaEntidadCabecera = oSincronizacionEntidadCabecera.Add(eSincronizacionEntidadCabecera);
 
                     resultado = eSincronizacionNuevaEntidadCabecera.Id;
                 }
