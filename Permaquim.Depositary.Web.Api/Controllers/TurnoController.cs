@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Permaquim.Depositary.Web.Api.Model;
 
@@ -7,22 +6,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EstiloController : ControllerBase
+    public class TurnoController : ControllerBase
     {
         #region Endpoints
 
         [HttpGet]
-        [Route("ObtenerEstilo")]
+        [Route("ObtenerAgendas")]
         [Authorize]
-        public async Task<IActionResult> ObtenerEstilo()
+        public async Task<IActionResult> ObtenerAgendas()
         {
-            EstiloDTO data = new();
+            TurnoAgendaTurnoDTO data = new();
 
             try
             {
-                data.Esquema = ObtenerEsquemasBD();
-                data.EsquemaDetalle = ObtenerEsquemasDetallesBD();
-                data.TipoEsquemaDetalle = ObtenerTiposEsquemasDetallesBD();
+                data.Agendas = ObtenerAgendasBD();
             }
             catch (Exception ex)
             {
@@ -30,7 +27,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
 
             return Ok(data);
-
         }
 
         [HttpGet]
@@ -38,7 +34,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEsquemas()
         {
-            EstiloEsquemaDTO data = new();
+            TurnoEsquemaTurnoDTO data = new();
 
             try
             {
@@ -57,7 +53,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEsquemasDetalles()
         {
-            EstiloEsquemaDetalleDTO data = new();
+            TurnoEsquemaDetalleTurnoDTO data = new();
 
             try
             {
@@ -71,55 +67,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet]
-        [Route("ObtenerTiposEsquemasDetalles")]
-        [Authorize]
-        public async Task<IActionResult> ObtenerTiposEsquemasDetalles()
-        {
-            EstiloTipoEsquemaDetalleDTO data = new();
-
-            try
-            {
-                data.TiposEsquemasDetalles = ObtenerTiposEsquemasDetallesBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok(data);
-        }
-
         #endregion
 
         #region Controllers
-
-        private List<DepositaryWebApi.Entities.Tables.Estilo.Esquema> ObtenerEsquemasBD()
+        private List<DepositaryWebApi.Entities.Tables.Turno.AgendaTurno> ObtenerAgendasBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Estilo.Esquema> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.Esquema oEntities = new();
-
-            try
-            {
-                oEntities.Items();
-                if (oEntities.Result.Count > 0)
-                {
-                    foreach (var item in oEntities.Result)
-                    {
-                        result.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return result;
-        }
-        private List<DepositaryWebApi.Entities.Tables.Estilo.EsquemaDetalle> ObtenerEsquemasDetallesBD()
-        {
-            List<DepositaryWebApi.Entities.Tables.Estilo.EsquemaDetalle> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.EsquemaDetalle oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Turno.AgendaTurno> result = new();
+            DepositaryWebApi.Business.Tables.Turno.AgendaTurno oEntities = new();
 
             try
             {
@@ -138,10 +92,32 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Estilo.TipoEsquemaDetalle> ObtenerTiposEsquemasDetallesBD()
+        private List<DepositaryWebApi.Entities.Tables.Turno.EsquemaTurno> ObtenerEsquemasBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Estilo.TipoEsquemaDetalle> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.TipoEsquemaDetalle oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Turno.EsquemaTurno> result = new();
+            DepositaryWebApi.Business.Tables.Turno.EsquemaTurno oEntities = new();
+
+            try
+            {
+                oEntities.Items();
+                if (oEntities.Result.Count > 0)
+                {
+                    foreach (var item in oEntities.Result)
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        private List<DepositaryWebApi.Entities.Tables.Turno.EsquemaDetalleTurno> ObtenerEsquemasDetallesBD()
+        {
+            List<DepositaryWebApi.Entities.Tables.Turno.EsquemaDetalleTurno> result = new();
+            DepositaryWebApi.Business.Tables.Turno.EsquemaDetalleTurno oEntities = new();
 
             try
             {

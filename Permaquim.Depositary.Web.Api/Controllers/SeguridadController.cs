@@ -4,23 +4,23 @@ using Permaquim.Depositary.Web.Api.Model;
 
 namespace Permaquim.Depositary.Web.Api.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class DispositivoController : ControllerBase
+    public class SeguridadController : ControllerBase
     {
-
         #region Endpoints
 
         [HttpGet]
-        [Route("ObtenerDepositarios")]
+        [Route("ObtenerUsuarios")]
         [Authorize]
-        public async Task<IActionResult> ObtenerDepositarios()
+        public async Task<IActionResult> ObtenerUsuarios()
         {
-            DispositivoDepositarioDTO data = new();
+            SeguridadUsuarioDTO data = new();
 
             try
             {
-                data.Depositarios = ObtenerDepositariosBD();
+                data.Usuarios = ObtenerUsuariosBD();
             }
             catch (Exception ex)
             {
@@ -31,15 +31,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerMarcas")]
+        [Route("ObtenerAplicacionesParametros")]
         [Authorize]
-        public async Task<IActionResult> ObtenerMarcas()
+        public async Task<IActionResult> ObtenerAplicacionesParametros()
         {
-            DispositivoMarcaDTO data = new();
+            SeguridadAplicacionParametroDTO data = new();
 
             try
             {
-                data.Marcas = ObtenerMarcasBD();
+                data.AplicacionesParametros = ObtenerAplicacionesParametrosBD();
             }
             catch (Exception ex)
             {
@@ -50,15 +50,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerModelos")]
+        [Route("ObtenerAplicacionesParametrosValores")]
         [Authorize]
-        public async Task<IActionResult> ObtenerModelos()
+        public async Task<IActionResult> ObtenerAplicacionesParametrosValores()
         {
-            DispositivoModeloDTO data = new();
+            SeguridadAplicacionParametroValorDTO data = new();
 
             try
             {
-                data.Modelos = ObtenerModelosBD();
+                data.AplicacionesParametrosValores = ObtenerAplicacionesParametrosValoresBD();
             }
             catch (Exception ex)
             {
@@ -69,15 +69,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerTiposPlacas")]
+        [Route("ObtenerRolesFunciones")]
         [Authorize]
-        public async Task<IActionResult> ObtenerTiposPlacas()
+        public async Task<IActionResult> ObtenerRolesFunciones()
         {
-            DispositivoTipoPlacaDTO data = new();
+            SeguridadRolFuncionDTO data = new();
 
             try
             {
-                data.TiposPlacas = ObtenerTiposPlacasBD();
+                data.RolesFunciones = ObtenerRolesFuncionesBD();
             }
             catch (Exception ex)
             {
@@ -88,15 +88,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerComandosContadoras")]
+        [Route("ObtenerUsuariosRoles")]
         [Authorize]
-        public async Task<IActionResult> ObtenerComandosContadoras()
+        public async Task<IActionResult> ObtenerUsuariosRoles()
         {
-            DispositivoComandoContadoraDTO data = new();
+            SeguridadUsuarioRolDTO data = new();
 
             try
             {
-                data.ComandosContadoras = ObtenerComandosContadorasBD();
+                data.UsuariosRoles = ObtenerUsuariosRolesBD();
             }
             catch (Exception ex)
             {
@@ -107,15 +107,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerComandosPlacas")]
+        [Route("ObtenerUsuariosSectores")]
         [Authorize]
-        public async Task<IActionResult> ObtenerComandosPlacas()
+        public async Task<IActionResult> ObtenerUsuariosSectores()
         {
-            DispositivoComandoPlacaDTO data = new();
+            SeguridadUsuarioSectorDTO data = new();
 
             try
             {
-                data.ComandosPlacas = ObtenerComandosPlacasBD();
+                data.UsuariosSectores = ObtenerUsuariosSectoresBD();
             }
             catch (Exception ex)
             {
@@ -126,15 +126,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerConfiguraciones")]
+        [Route("ObtenerRoles")]
         [Authorize]
-        public async Task<IActionResult> ObtenerConfiguraciones()
+        public async Task<IActionResult> ObtenerRoles()
         {
-            DispositivoConfiguracionDepositarioDTO data = new();
+            SeguridadRolDTO data = new();
 
             try
             {
-                data.ConfiguracionesDepositarios = ObtenerConfiguracionesBD();
+                data.Roles = ObtenerRolesBD();
             }
             catch (Exception ex)
             {
@@ -145,15 +145,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerContadoras")]
+        [Route("ObtenerMenues")]
         [Authorize]
-        public async Task<IActionResult> ObtenerContadoras()
+        public async Task<IActionResult> ObtenerMenues()
         {
-            DispositivoDepositarioContadoraDTO data = new();
+            SeguridadMenuDTO data = new();
 
             try
             {
-                data.ContadorasDepositarios = ObtenerContadorasBD();
+                data.Menues = ObtenerMenuesBD();
             }
             catch (Exception ex)
             {
@@ -164,15 +164,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerEstados")]
+        [Route("ObtenerFunciones")]
         [Authorize]
-        public async Task<IActionResult> ObtenerEstados()
+        public async Task<IActionResult> ObtenerFunciones()
         {
-            DispositivoDepositarioEstadoDTO data = new();
+            SeguridadFuncionDTO data = new();
 
             try
             {
-                data.EstadosDepositarios = ObtenerEstadosBD();
+                data.Funciones = ObtenerFuncionesBD();
             }
             catch (Exception ex)
             {
@@ -183,15 +183,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerPlacas")]
+        [Route("ObtenerTiposFunciones")]
         [Authorize]
-        public async Task<IActionResult> ObtenerPlacas()
+        public async Task<IActionResult> ObtenerTiposFunciones()
         {
-            DispositivoDepositarioPlacaDTO data = new();
+            SeguridadTipoFuncionDTO data = new();
 
             try
             {
-                data.PlacasDepositarios = ObtenerPlacasBD();
+                data.TiposFunciones = ObtenerTiposFuncionesBD();
             }
             catch (Exception ex)
             {
@@ -202,15 +202,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerValores")]
+        [Route("ObtenerTiposMenues")]
         [Authorize]
-        public async Task<IActionResult> ObtenerValores()
+        public async Task<IActionResult> ObtenerTiposMenues()
         {
-            DispositivoDepositarioValorDTO data = new();
+            SeguridadTipoMenuDTO data = new();
 
             try
             {
-                data.ValoresDepositarios = ObtenerValoresBD();
+                data.TiposMenues = ObtenerTiposMenuesBD();
             }
             catch (Exception ex)
             {
@@ -221,15 +221,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerTiposConfiguraciones")]
+        [Route("ObtenerTiposAplicaciones")]
         [Authorize]
-        public async Task<IActionResult> ObtenerTiposConfiguraciones()
+        public async Task<IActionResult> ObtenerTiposAplicaciones()
         {
-            DispositivoTipoConfiguracionDepositarioDTO data = new();
+            SeguridadTipoAplicacionDTO data = new();
 
             try
             {
-                data.TiposConfiguraciones = ObtenerTiposConfiguracionesBD();
+                data.TiposAplicaciones = ObtenerTiposAplicacionesBD();
             }
             catch (Exception ex)
             {
@@ -240,15 +240,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerTiposContadoras")]
+        [Route("ObtenerAplicaciones")]
         [Authorize]
-        public async Task<IActionResult> ObtenerTiposContadoras()
+        public async Task<IActionResult> ObtenerAplicaciones()
         {
-            DispositivoTipoContadoraDTO data = new();
+            SeguridadAplicacionDTO data = new();
 
             try
             {
-                data.TiposContadoras = ObtenerTiposContadorasBD();
+                data.Aplicaciones = ObtenerAplicacionesBD();
             }
             catch (Exception ex)
             {
@@ -262,10 +262,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         #region Controllers
 
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> ObtenerDepositariosBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.Usuario> ObtenerUsuariosBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.Depositario oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.Usuario> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.Usuario oEntities = new();
 
             try
             {
@@ -284,10 +284,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoContadora> ObtenerTiposContadorasBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.Rol> ObtenerRolesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoContadora> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.TipoContadora oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.Rol> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.Rol oEntities = new();
 
             try
             {
@@ -306,10 +306,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoConfiguracionDepositario> ObtenerTiposConfiguracionesBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.RolFuncion> ObtenerRolesFuncionesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoConfiguracionDepositario> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.TipoConfiguracionDepositario oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.RolFuncion> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.RolFuncion oEntities = new();
 
             try
             {
@@ -328,10 +328,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioValor> ObtenerValoresBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoAplicacion> ObtenerTiposAplicacionesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioValor> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioValor oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.TipoAplicacion> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.TipoAplicacion oEntities = new();
 
             try
             {
@@ -350,10 +350,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> ObtenerPlacasBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoFuncion> ObtenerTiposFuncionesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.TipoFuncion> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.TipoFuncion oEntities = new();
 
             try
             {
@@ -372,10 +372,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> ObtenerEstadosBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoMenu> ObtenerTiposMenuesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.TipoMenu> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.TipoMenu oEntities = new();
 
             try
             {
@@ -394,10 +394,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> ObtenerContadorasBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioRol> ObtenerUsuariosRolesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioRol> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.UsuarioRol oEntities = new();
 
             try
             {
@@ -416,10 +416,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> ObtenerConfiguracionesBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioSector> ObtenerUsuariosSectoresBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioSector> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.UsuarioSector oEntities = new();
 
             try
             {
@@ -438,10 +438,11 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoPlaca> ObtenerComandosPlacasBD()
+
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.Aplicacion> ObtenerAplicacionesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoPlaca> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.ComandoPlaca oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.Aplicacion> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.Aplicacion oEntities = new();
 
             try
             {
@@ -460,10 +461,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoContadora> ObtenerComandosContadorasBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.AplicacionParametro> ObtenerAplicacionesParametrosBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoContadora> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.ComandoContadora oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.AplicacionParametro> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.AplicacionParametro oEntities = new();
 
             try
             {
@@ -482,10 +483,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.Marca> ObtenerMarcasBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.AplicacionParametroValor> ObtenerAplicacionesParametrosValoresBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.Marca> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.Marca oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.AplicacionParametroValor> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.AplicacionParametroValor oEntities = new();
 
             try
             {
@@ -504,10 +505,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.Modelo> ObtenerModelosBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.Funcion> ObtenerFuncionesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.Modelo> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.Modelo oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.Funcion> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.Funcion oEntities = new();
 
             try
             {
@@ -526,10 +527,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoPlaca> ObtenerTiposPlacasBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.Menu> ObtenerMenuesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoPlaca> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.TipoPlaca oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.Menu> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.Menu oEntities = new();
 
             try
             {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Permaquim.Depositary.Web.Api.Model;
 
@@ -7,42 +6,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EstiloController : ControllerBase
+    public class BancaController : ControllerBase
     {
         #region Endpoints
 
         [HttpGet]
-        [Route("ObtenerEstilo")]
+        [Route("ObtenerBancos")]
         [Authorize]
-        public async Task<IActionResult> ObtenerEstilo()
+        public async Task<IActionResult> ObtenerBancos()
         {
-            EstiloDTO data = new();
+            BancaBancoDTO data = new();
 
             try
             {
-                data.Esquema = ObtenerEsquemasBD();
-                data.EsquemaDetalle = ObtenerEsquemasDetallesBD();
-                data.TipoEsquemaDetalle = ObtenerTiposEsquemasDetallesBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok(data);
-
-        }
-
-        [HttpGet]
-        [Route("ObtenerEsquemas")]
-        [Authorize]
-        public async Task<IActionResult> ObtenerEsquemas()
-        {
-            EstiloEsquemaDTO data = new();
-
-            try
-            {
-                data.Esquemas = ObtenerEsquemasBD();
+                data.Bancos = ObtenerBancosBD();
             }
             catch (Exception ex)
             {
@@ -53,15 +30,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerEsquemasDetalles")]
+        [Route("ObtenerCuentas")]
         [Authorize]
-        public async Task<IActionResult> ObtenerEsquemasDetalles()
+        public async Task<IActionResult> ObtenerCuentas()
         {
-            EstiloEsquemaDetalleDTO data = new();
+            BancaCuentaDTO data = new();
 
             try
             {
-                data.EsquemasDetalles = ObtenerEsquemasDetallesBD();
+                data.Cuentas = ObtenerCuentasBD();
             }
             catch (Exception ex)
             {
@@ -72,15 +49,34 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerTiposEsquemasDetalles")]
+        [Route("ObtenerTiposCuenta")]
         [Authorize]
-        public async Task<IActionResult> ObtenerTiposEsquemasDetalles()
+        public async Task<IActionResult> ObtenerTiposCuenta()
         {
-            EstiloTipoEsquemaDetalleDTO data = new();
+            BancaTipoCuentaDTO data = new();
 
             try
             {
-                data.TiposEsquemasDetalles = ObtenerTiposEsquemasDetallesBD();
+                data.TiposCuenta = ObtenerTiposCuentasBD();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("ObtenerUsuariosCuenta")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerUsuariosCuenta()
+        {
+            BancaUsuarioCuentaDTO data = new();
+
+            try
+            {
+                data.UsuariosCuenta = ObtenerUsuariosCuentasBD();
             }
             catch (Exception ex)
             {
@@ -94,10 +90,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         #region Controllers
 
-        private List<DepositaryWebApi.Entities.Tables.Estilo.Esquema> ObtenerEsquemasBD()
+        private List<DepositaryWebApi.Entities.Tables.Banca.Banco> ObtenerBancosBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Estilo.Esquema> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.Esquema oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Banca.Banco> result = new();
+            DepositaryWebApi.Business.Tables.Banca.Banco oEntities = new();
 
             try
             {
@@ -116,10 +112,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Estilo.EsquemaDetalle> ObtenerEsquemasDetallesBD()
+        private List<DepositaryWebApi.Entities.Tables.Banca.Cuenta> ObtenerCuentasBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Estilo.EsquemaDetalle> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.EsquemaDetalle oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Banca.Cuenta> result = new();
+            DepositaryWebApi.Business.Tables.Banca.Cuenta oEntities = new();
 
             try
             {
@@ -138,10 +134,32 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Estilo.TipoEsquemaDetalle> ObtenerTiposEsquemasDetallesBD()
+        private List<DepositaryWebApi.Entities.Tables.Banca.TipoCuenta> ObtenerTiposCuentasBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Estilo.TipoEsquemaDetalle> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.TipoEsquemaDetalle oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Banca.TipoCuenta> result = new();
+            DepositaryWebApi.Business.Tables.Banca.TipoCuenta oEntities = new();
+
+            try
+            {
+                oEntities.Items();
+                if (oEntities.Result.Count > 0)
+                {
+                    foreach (var item in oEntities.Result)
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        private List<DepositaryWebApi.Entities.Tables.Banca.UsuarioCuenta> ObtenerUsuariosCuentasBD()
+        {
+            List<DepositaryWebApi.Entities.Tables.Banca.UsuarioCuenta> result = new();
+            DepositaryWebApi.Business.Tables.Banca.UsuarioCuenta oEntities = new();
 
             try
             {

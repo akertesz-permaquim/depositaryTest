@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Permaquim.Depositary.Web.Api.Model;
 
@@ -7,42 +6,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EstiloController : ControllerBase
+    public class VisualizacionController : ControllerBase
     {
         #region Endpoints
 
         [HttpGet]
-        [Route("ObtenerEstilo")]
+        [Route("ObtenerPerfiles")]
         [Authorize]
-        public async Task<IActionResult> ObtenerEstilo()
+        public async Task<IActionResult> ObtenerPerfiles()
         {
-            EstiloDTO data = new();
+            VisualizacionPerfilDTO data = new();
 
             try
             {
-                data.Esquema = ObtenerEsquemasBD();
-                data.EsquemaDetalle = ObtenerEsquemasDetallesBD();
-                data.TipoEsquemaDetalle = ObtenerTiposEsquemasDetallesBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok(data);
-
-        }
-
-        [HttpGet]
-        [Route("ObtenerEsquemas")]
-        [Authorize]
-        public async Task<IActionResult> ObtenerEsquemas()
-        {
-            EstiloEsquemaDTO data = new();
-
-            try
-            {
-                data.Esquemas = ObtenerEsquemasBD();
+                data.Perfiles = ObtenerPerfilesBD();
             }
             catch (Exception ex)
             {
@@ -53,15 +30,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerEsquemasDetalles")]
+        [Route("ObtenerTipos")]
         [Authorize]
-        public async Task<IActionResult> ObtenerEsquemasDetalles()
+        public async Task<IActionResult> ObtenerTipos()
         {
-            EstiloEsquemaDetalleDTO data = new();
+            VisualizacionPerfilTipoDTO data = new();
 
             try
             {
-                data.EsquemasDetalles = ObtenerEsquemasDetallesBD();
+                data.Tipos = ObtenerTiposBD();
             }
             catch (Exception ex)
             {
@@ -72,15 +49,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerTiposEsquemasDetalles")]
+        [Route("ObtenerPerfilesItems")]
         [Authorize]
-        public async Task<IActionResult> ObtenerTiposEsquemasDetalles()
+        public async Task<IActionResult> ObtenerPerfilesItems()
         {
-            EstiloTipoEsquemaDetalleDTO data = new();
+            VisualizacionPerfilItemDTO data = new();
 
             try
             {
-                data.TiposEsquemasDetalles = ObtenerTiposEsquemasDetallesBD();
+                data.PerfilesItems = ObtenerPerfilesItemsBD();
             }
             catch (Exception ex)
             {
@@ -93,33 +70,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #endregion
 
         #region Controllers
-
-        private List<DepositaryWebApi.Entities.Tables.Estilo.Esquema> ObtenerEsquemasBD()
+        private List<DepositaryWebApi.Entities.Tables.Visualizacion.Perfil> ObtenerPerfilesBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Estilo.Esquema> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.Esquema oEntities = new();
-
-            try
-            {
-                oEntities.Items();
-                if (oEntities.Result.Count > 0)
-                {
-                    foreach (var item in oEntities.Result)
-                    {
-                        result.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return result;
-        }
-        private List<DepositaryWebApi.Entities.Tables.Estilo.EsquemaDetalle> ObtenerEsquemasDetallesBD()
-        {
-            List<DepositaryWebApi.Entities.Tables.Estilo.EsquemaDetalle> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.EsquemaDetalle oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Visualizacion.Perfil> result = new();
+            DepositaryWebApi.Business.Tables.Visualizacion.Perfil oEntities = new();
 
             try
             {
@@ -138,10 +92,32 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Estilo.TipoEsquemaDetalle> ObtenerTiposEsquemasDetallesBD()
+        private List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilTipo> ObtenerTiposBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Estilo.TipoEsquemaDetalle> result = new();
-            DepositaryWebApi.Business.Tables.Estilo.TipoEsquemaDetalle oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilTipo> result = new();
+            DepositaryWebApi.Business.Tables.Visualizacion.PerfilTipo oEntities = new();
+
+            try
+            {
+                oEntities.Items();
+                if (oEntities.Result.Count > 0)
+                {
+                    foreach (var item in oEntities.Result)
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        private List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilItem> ObtenerPerfilesItemsBD()
+        {
+            List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilItem> result = new();
+            DepositaryWebApi.Business.Tables.Visualizacion.PerfilItem oEntities = new();
 
             try
             {

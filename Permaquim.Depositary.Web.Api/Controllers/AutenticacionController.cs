@@ -38,9 +38,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             usuarios.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,
                 DepositaryWebApi.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
             usuarios.Items();
-            var usuario = usuarios.Result.FirstOrDefault();
 
-            var authClaims = new List<Claim>
+            //Si se encuentra un usuario con ese password se devuelve el token, si no un BadRequest con mensaje de error.
+            if(usuarios.Result.Count>0)
+            {
+                var usuario = usuarios.Result.FirstOrDefault();
+
+                var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, usuario.Nombre),
                     new Claim(ClaimTypes.Surname, usuario.Apellido),
@@ -48,33 +52,37 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, usuario.Id.ToString()),
                 };
 
-            DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol usuarioRol = new();
+                DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol usuarioRol = new();
 
-            usuarioRol.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId,
-                DepositaryWebApi.sqlEnum.OperandEnum.Equal, usuarios.Result.FirstOrDefault().Id);
+                usuarioRol.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId,
+                    DepositaryWebApi.sqlEnum.OperandEnum.Equal, usuarios.Result.FirstOrDefault().Id);
 
-            var userRoles = usuarioRol.Items();
+                var userRoles = usuarioRol.Items();
 
-            foreach (var userRole in userRoles)
-            {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole.RolId.Nombre));
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole.RolId.Nombre));
+                }
+
+                var token = new JwtSecurityToken(
+                    issuer: _configuration["JWT:ValidIssuer"],
+                    audience: _configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddHours(Convert.ToInt32(_configuration["JWT:Hours"])),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+
+                    );
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo
+                });
             }
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"],
-                audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(Convert.ToInt32(_configuration["JWT:Hours"])),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-               
-                );
-
-            return Ok(new
+            else
             {
-                token = new JwtSecurityTokenHandler().WriteToken(token),
-                expiration = token.ValidTo
-            });
-
+                return BadRequest("Usuario o contraseña invalidos.");
+            }
         }
 
     }
