@@ -21,6 +21,9 @@
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
+    <string>Reporte.DetalleTransacciones</string>
+    <string>Reporte.DetalleTransaccionesSobre</string>
+    <string>Reporte.Transacciones</string>
     <string>Valor.VistaDenominacion</string>
   </SelectedViews>
   <SelectedStoredProcedures>

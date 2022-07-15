@@ -11,24 +11,24 @@
 <RadzenTooltip />
 <RadzenContextMenu />
 
-<RadzenBody @ref="body0" >
-  <ChildContent>
-    <RadzenImage Path="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"FondoLoginWeb")" style="bottom: 0; height: 100%; left: 0; position: absolute; right: 0; top: 0; width: 100%">
-    </RadzenImage>
-    <div class="row justify-content-center align-items-center" style="bottom: 0; left: 0; margin-left: 0; margin-right: 0; position: absolute; right: 0; top: 0">
-      <div class="col-xl-3 col-lg-3 col-md-5 col-sm-8" style="padding-left: 0; padding-right: 0">
-        <RadzenCard style="margin-top: 0">
-          <ChildContent>
-            <RadzenImage Path="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"LogoLoginWeb")" style="display: block; width: 100%">
-            </RadzenImage>
-            <RadzenContentContainer Name="main">
-            @Body
-            </RadzenContentContainer>
-          </ChildContent>
-        </RadzenCard>
-      </div>
-    </div>
-  </ChildContent>
+<RadzenBody @ref="body0">
+    <ChildContent>
+        <RadzenImage Path="images/permakim2v2.gif" style="bottom: 0; height: 100%; left: 0; position: absolute; right: 0; top: 0; width: 100%">
+        </RadzenImage>
+        <div class="row justify-content-center align-items-center" style="bottom: 0; left: 0; margin-left: 0; margin-right: 0; position: absolute; right: 0; top: 0">
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-8" style="padding-left: 0; padding-right: 0">
+                <RadzenCard style="margin-top: 0">
+                    <ChildContent>
+                        <RadzenImage Path="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"LogoLoginWeb")" style="display: block; width: 100%">
+                        </RadzenImage>
+                        <RadzenContentContainer Name="main">
+                            @Body
+                        </RadzenContentContainer>
+                    </ChildContent>
+                </RadzenCard>
+            </div>
+        </div>
+    </ChildContent>
 </RadzenBody>
 
 @code

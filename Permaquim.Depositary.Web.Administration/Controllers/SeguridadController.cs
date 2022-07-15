@@ -1,13 +1,15 @@
-﻿namespace Permaquim.Depositary.Web.Administration.Controllers
+﻿using System.Security.Cryptography;
+using System.Text;
+
+namespace Permaquim.Depositary.Web.Administration.Controllers
 {
     public class SeguridadController
     {
-        public static DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? ObtenerUsuario(string pUsername, string pPassword)
+        public static DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? LoguearUsuario(string pUsername, string pPassword)
         {
             DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? resultado = new();
             DepositarioAdminWeb.Business.Tables.Seguridad.Usuario oTable = new DepositarioAdminWeb.Business.Tables.Seguridad.Usuario();
             oTable.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsername);
-            oTable.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.Password, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pPassword);
             oTable.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
 
             oTable.Items();
@@ -15,10 +17,68 @@
             if (oTable.Result.Count > 0)
             {
                 resultado = oTable.Result.FirstOrDefault();
+                //Verificamos que el password coincida
+                if (oTable.Result.FirstOrDefault().Password == Cryptography.Hash(pPassword))
+                {
+                    //Registramos fecha de ultimo login y reseteamos cantidad de logueos incorrectos
+                    resultado.CantidadLogueosIncorrectos = 0;
+                    resultado.FechaUltimoLogin = DateTime.Now;
+                    oTable.Update(resultado);
+                }
+                else
+                {
+                    //Incrementamos la cantidad de logueos incorrectos
+                    resultado.CantidadLogueosIncorrectos = resultado.CantidadLogueosIncorrectos + 1;
+
+                    //Obtenemos el parametro (si existe) de cantidad maxima de logueos erroneos
+                    string valorParametroMaxLogueosErroneos = AplicacionController.ObtenerConfiguracion("CANTIDAD_MAXIMA_LOGUEOS_ERRONEOS");
+                    int cantidadMaximaLogueosErroneos;
+
+                    if (int.TryParse(valorParametroMaxLogueosErroneos, out cantidadMaximaLogueosErroneos))
+                    {
+                        if (resultado.CantidadLogueosIncorrectos >= cantidadMaximaLogueosErroneos)
+                        {
+                            //Si llego a la cantidad de logueos incorrectos de tope lo bloqueamos.
+                            resultado.Bloqueado = true;
+                        }
+                    }
+
+                    oTable.Update(resultado);
+                }
                 return resultado;
             }
             else
                 return null;
+        }
+
+        public static string ModificarPasswordUsuario(string pUsername, string pNewPassword)
+        {
+            string resultado = "";
+
+            DepositarioAdminWeb.Business.Tables.Seguridad.Usuario oTable = new DepositarioAdminWeb.Business.Tables.Seguridad.Usuario();
+            oTable.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsername);
+            oTable.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+
+            oTable.Items();
+
+            if (oTable.Result.Count > 0)
+            {
+                DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario oUsuario = new();
+                oUsuario = oTable.Result.FirstOrDefault();
+                oUsuario.Password = Cryptography.Hash(pNewPassword);
+                oUsuario.DebeCambiarPassword = false;
+                try
+                {
+                    oTable.Update(oUsuario);
+                }
+                catch (Exception ex)
+                {
+                    resultado = ex.Message;
+                }
+
+            }
+
+            return resultado;
         }
 
         public static DepositarioAdminWeb.Entities.Tables.Seguridad.Rol? ObtenerRolesPorUsuario(Int64 pUsuarioId)
@@ -88,9 +148,9 @@
         //    return resultado;
 
         //}
-        public static List<Entities.Menu> ObtenerMenuesPorRol(Int64 pRolId)
+        public static List<SeguridadEntities.Menu> ObtenerMenuesPorRol(Int64 pRolId)
         {
-            List<Entities.Menu> resultado = new();
+            List<SeguridadEntities.Menu> resultado = new();
 
             //Obtengo las funciones a las que puede acceder el rol.
             DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
@@ -106,7 +166,7 @@
                     var funcion = rolfuncion.FuncionId;
                     foreach (var menuAccesible in funcion.ListOf_Menu_FuncionId.Where(x => x.Habilitado == true))
                     {
-                        Entities.Menu menu = new();
+                        SeguridadEntities.Menu menu = new();
                         menu.MenuId = menuAccesible.Id;
                         menu.DependeDe = menuAccesible._DependeDe == 0 ? null : menuAccesible._DependeDe;
                         menu.MenuDescripcion = menuAccesible.Descripcion;
@@ -122,9 +182,9 @@
             return resultado;
         }
 
-        public static List<Entities.FuncionRol> ObtenerFuncionesPorRol(Int64 pRolId)
+        public static List<SeguridadEntities.FuncionRol> ObtenerFuncionesPorRol(Int64 pRolId)
         {
-            List<Entities.FuncionRol> resultado = new();
+            List<SeguridadEntities.FuncionRol> resultado = new();
 
             DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
             oRolFuncion.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
@@ -137,9 +197,9 @@
                 foreach (var rolfuncion in oRolFuncion.Result)
                 {
                     var funcion = rolfuncion.FuncionId;
-                    if(funcion != null)
+                    if (funcion != null)
                     {
-                        Entities.FuncionRol funcionRol = new();
+                        SeguridadEntities.FuncionRol funcionRol = new();
                         funcionRol.FuncionId = funcion.Id;
                         funcionRol.RolId = rolfuncion._RolId;
                         funcionRol.FuncionNombre = funcion.Nombre;
@@ -204,7 +264,33 @@
         //    return resultado;
         //}
 
-        public static bool VerificarPermisoFuncion(string pFuncionNombre, List<Entities.FuncionRol> pDataFunciones, string pFuncionAccion)
+        public static List<SeguridadEntities.Usuario> ObtenerUsuarios(bool obtenerSoloHabilitados = true)
+        {
+            List<SeguridadEntities.Usuario> resultado = new();
+
+            DepositarioAdminWeb.Business.Tables.Seguridad.Usuario oUsuario = new();
+            if (obtenerSoloHabilitados)
+                oUsuario.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+
+            oUsuario.Items();
+
+            if (oUsuario.Result.Count > 0)
+            {
+                foreach (var usuario in oUsuario.Result)
+                {
+                    SeguridadEntities.Usuario usuarioEntitie = new();
+                    usuarioEntitie.UsuarioId = usuario.Id;
+                    usuarioEntitie.Nickname = usuario.NickName;
+                    usuarioEntitie.UsuarioNombre = usuario.Nombre;
+                    usuarioEntitie.UsuarioApellido = usuario.Apellido;
+
+                    resultado.Add(usuarioEntitie);
+                }
+            }
+
+            return resultado;
+        }
+        public static bool VerificarPermisoFuncion(string pFuncionNombre, List<SeguridadEntities.FuncionRol> pDataFunciones, string pFuncionAccion)
         {
             bool resultado = false;
             object? variable = null;
@@ -239,5 +325,21 @@
             return resultado;
         }
 
+    }
+
+    public static class Cryptography
+    {
+        /// <summary>
+        /// Metodo de hasheo de una cadena de caracteres alfanumericos con MD5
+        /// </summary>
+        /// <param name="Source">La cadena de caracteres</param>
+        /// <returns>Un array de bytes con el hash</returns>
+        internal static String Hash(String source)
+        {
+            byte[] _data = System.Text.UTF8Encoding.ASCII.GetBytes(source);
+            MD5CryptoServiceProvider _md5 = new MD5CryptoServiceProvider();
+            byte[] _hashbyte = _md5.ComputeHash(_data);
+            return BitConverter.ToString(_hashbyte);
+        }
     }
 }

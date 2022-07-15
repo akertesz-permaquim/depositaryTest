@@ -71,6 +71,19 @@
              <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Operacion.Contenedor" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
              <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Operacion.Contenedor" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
      </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Operacion.Contenedor" Title=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Property="DepositarioId" Width="100px" >
+                 <Template>
+                     @if(Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @context.DepositarioId) != null){
+                         <RadzenLabel Text="@Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @context.DepositarioId).Nombre" Component="DepositarioId" style="width: 100%">
+                             </RadzenLabel>
+                         }
+                         else
+                         {
+                         <RadzenLabel Text="No data available" Component="DepositarioId" style="width: 100%">
+                             </RadzenLabel>                        
+                         }
+                 </Template>
+             </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Operacion.Contenedor" Title=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Property="TipoId" Width="100px" >
                  <Template>
                      @if(TipoContenedor_TipoId_entities.FirstOrDefault( c => c.Id == @context.TipoId) != null){
@@ -162,6 +175,28 @@
                  </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
+                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Component ="DepositarioId" style="width: 100%">
+                 </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     @if((@Depositario_DepositarioId_entities.Count > 0 && @Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @Contenedor_entity.DepositarioId) != null) || crudMode != CrudMode.Delete)
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Contenedor_entity.DepositarioId)"
+                                     Data=@Depositario_DepositarioId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectDepositario_DepositarioIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                     }
+                     else
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                     Data=@Depositario_DepositarioId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectDepositario_DepositarioIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                    }
+                </div>
+              </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Component ="TipoId" style="width: 100%">
                  </RadzenLabel>
                  </div>
@@ -235,14 +270,14 @@
                  <div class="col-md-9">
                      @if((@Usuario_UsuarioCreacion_entities.Count > 0 && @Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @Contenedor_entity.UsuarioCreacion) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Contenedor_entity.UsuarioCreacion)"
+                         <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Contenedor_entity.UsuarioCreacion)"
                                      Data=@Usuario_UsuarioCreacion_entities TextProperty = "NickName" ValueProperty = "Id"
                                      Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
                                      Disabled="true" />
                      }
                      else
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                         <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" 
                                      Data=@Usuario_UsuarioCreacion_entities TextProperty = "NickName" ValueProperty = "Id"
                                      Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
                                      Disabled="true" />
@@ -353,7 +388,13 @@ else
     /// <summary>
     /// Variables to store permissions
     /// </summary>
-    private List<Entities.FuncionRol> dataFunciones;
+    private List<SeguridadEntities.FuncionRol> dataFunciones;
+ 
+    /// <summary>
+    /// Variables to handle Relation between Contenedor.DepositarioId and Depositario.Id
+    /// </summary>
+    private DepositarioAdminWeb.Entities.Tables.Dispositivo.Depositario Depositario_DepositarioId_entity = new();
+    private List<DepositarioAdminWeb.Entities.Tables.Dispositivo.Depositario>? Depositario_DepositarioId_entities;
  
     /// <summary>
     /// Variables to handle Relation between Contenedor.TipoId and TipoContenedor.Id
@@ -386,7 +427,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
+        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");
@@ -407,6 +448,9 @@ else
     /// </summary>
     private void LoadTypesData()
     {
+        DepositarioAdminWeb.Business.Tables.Dispositivo.Depositario Depositario_DepositarioId_local = new();
+        Depositario_DepositarioId_entities = Depositario_DepositarioId_local.Items();
+ 
         DepositarioAdminWeb.Business.Tables.Operacion.TipoContenedor TipoContenedor_TipoId_local = new();
         TipoContenedor_TipoId_entities = TipoContenedor_TipoId_local.Items();
  
@@ -428,6 +472,7 @@ else
         //Main entity initialization
         Contenedor_entity = new();
         //Relations entities initialization
+        Depositario_DepositarioId_entity = new(); 
         TipoContenedor_TipoId_entity = new(); 
         Usuario_UsuarioCreacion_entity = new(); 
         Usuario_UsuarioModificacion_entity = new(); 
@@ -440,6 +485,10 @@ else
     private void Edit(DepositarioAdminWeb.Entities.Tables.Operacion.Contenedor item, bool delete)
     {
              Contenedor_entity = item;
+            Depositario_DepositarioId_entity = new() { 
+            Id = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.DepositarioId).Id, 
+            Nombre = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.DepositarioId).Nombre
+            };
             TipoContenedor_TipoId_entity = new() { 
             Id = TipoContenedor_TipoId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.TipoId).Id, 
             Nombre = TipoContenedor_TipoId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.TipoId).Nombre
@@ -606,6 +655,14 @@ else
  
     #endregion
     #region Selection events
+    /// <summary>
+    /// Depositario_DepositarioId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectDepositario_DepositarioIdValueChanged(object item)
+    {
+    }
+ 
     /// <summary>
     /// TipoContenedor_TipoId value changed
     /// </summary>

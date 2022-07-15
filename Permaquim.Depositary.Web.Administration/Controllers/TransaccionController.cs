@@ -4,9 +4,9 @@
     {
 
         #region Depositos
-        public static List<Entities.TransaccionValidadaMonitor> ObtenerTransaccionesValidadasMonitor(Int64 pDepositarioID)
+        public static List<MonitorEntities.TransaccionValidadaMonitor> ObtenerTransaccionesValidadasMonitor(Int64 pDepositarioID)
         {
-            List<Entities.TransaccionValidadaMonitor> resultado = new();
+            List<MonitorEntities.TransaccionValidadaMonitor> resultado = new();
 
             List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
@@ -23,16 +23,20 @@
                 var moneda = transaccion.MonedaId;
                 if (moneda != null)
                 {
-                    Entities.TransaccionValidadaMonitor transaccionValidadaMonitor = new();
+                    MonitorEntities.TransaccionValidadaMonitor transaccionValidadaMonitor = new();
+                    var usuarioTransaccion = transaccion.UsuarioId;
+                    var usuarioCuenta = transaccion.UsuarioCuentaId;
+                    var cuentaTransaccion = usuarioCuenta.CuentaId;
+                    var detallesUsuarioCuenta = usuarioCuenta.UsuarioId;
                     transaccionValidadaMonitor.TransaccionId = transaccion.Id;
                     transaccionValidadaMonitor.TipoTransaccion = transaccion.TipoId.Nombre;
-                    transaccionValidadaMonitor.Banco = transaccion.UsuarioCuentaId.CuentaId.BancoId.Nombre;
-                    transaccionValidadaMonitor.Cuenta = transaccion.UsuarioCuentaId.CuentaId.Nombre;
+                    transaccionValidadaMonitor.Banco = cuentaTransaccion.BancoId.Nombre;
+                    transaccionValidadaMonitor.Cuenta = cuentaTransaccion.Nombre;
                     transaccionValidadaMonitor.DepositarioId = transaccion._DepositarioId;
                     transaccionValidadaMonitor.FechaTransaccion = transaccion.Fecha;
                     transaccionValidadaMonitor.TotalValidado = moneda.Codigo + " " + transaccion.TotalValidado.ToString();
-                    transaccionValidadaMonitor.UsuarioCuenta = transaccion.UsuarioCuentaId.UsuarioId.Nombre + " " + transaccion.UsuarioCuentaId.UsuarioId.Apellido;
-                    transaccionValidadaMonitor.UsuarioTransaccion = transaccion.UsuarioId.ToString(); //REVISAR FALTA FK.
+                    transaccionValidadaMonitor.UsuarioCuenta = detallesUsuarioCuenta.Nombre + " " + detallesUsuarioCuenta.Apellido;
+                    transaccionValidadaMonitor.UsuarioTransaccion = usuarioTransaccion.Nombre + " " + usuarioTransaccion.Apellido;
                     transaccionValidadaMonitor.Moneda = moneda.Nombre;
                     resultado.Add(transaccionValidadaMonitor);
                 }
@@ -42,9 +46,9 @@
             return resultado;
         }
 
-        public static List<Entities.DetalleTransaccionValidadaMonitor> ObtenerDetalleTransaccionValidadaMonitor(Int64 pTransaccionId)
+        public static List<MonitorEntities.DetalleTransaccionValidadaMonitor> ObtenerDetalleTransaccionValidadaMonitor(Int64 pTransaccionId)
         {
-            List<Entities.DetalleTransaccionValidadaMonitor> resultado = new();
+            List<MonitorEntities.DetalleTransaccionValidadaMonitor> resultado = new();
 
             DepositarioAdminWeb.Business.Relations.Operacion.TransaccionDetalle transaccionDetalles = new();
             transaccionDetalles.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pTransaccionId);
@@ -64,7 +68,7 @@
                 {
                     var denominacion = transaccionDetalle.DenominacionId;
                     var moneda = denominacion.MonedaId;
-                    Entities.DetalleTransaccionValidadaMonitor detalleTransaccionValidadaMonitor = new();
+                    MonitorEntities.DetalleTransaccionValidadaMonitor detalleTransaccionValidadaMonitor = new();
                     detalleTransaccionValidadaMonitor.TransaccionId = transaccionDetalle._TransaccionId;
                     detalleTransaccionValidadaMonitor.TransaccionDetalleId = transaccionDetalle.Id;
                     detalleTransaccionValidadaMonitor.ImagenDenominacion = transaccionDetalle.DenominacionId.Imagen;
@@ -107,7 +111,6 @@
             if (pFechaDesde != null)
             {
                 oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, pFechaDesde);
-
             }
             oTransaccion.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
 
@@ -115,109 +118,38 @@
 
             foreach (var transaccion in oTransaccion.Result)
             {
-                ////Si se buscan con moneda default se filtra segun moneda.
-                //if (monedaId.HasValue)
-                //{
-                //    //Si la transaccion tiene la moneda principal entonces la guardo.
-                //    var monedaTransaccion = transaccion.MonedaId;
-                //    if (monedaTransaccion != null)
-                //    {
-                //        if (monedaTransaccion.Id == monedaId)
-                //        {
-                //            resultado.Add(transaccion);
-                //        }
-                //    }
-                //}
-                //else
-                //{
                 resultado.Add(transaccion);
-                //}
-
             }
 
 
             return resultado;
         }
 
-        //public static Entities.Moneda? ObtenerMonedaTransaccion(Int64 pTransaccionId)
-        //{
-        //    DepositarioAdminWeb.Entities.Relations.Valor.Moneda? moneda = null;
-        //    Entities.Moneda? resultado = null;
-        //    DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
-        //    oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pTransaccionId);
-
-        //    oTransaccion.Items();
-
-        //    if (oTransaccion.Result.Count > 0)
-        //    {
-        //        var transaccion = oTransaccion.Result.FirstOrDefault();
-        //        //Determinamos si es una transaccion validada o de tipo sobre.
-        //        List<DepositarioAdminWeb.Entities.Relations.Operacion.TransaccionDetalle> transaccionDetalles = new();
-        //        transaccionDetalles = transaccion.ListOf_TransaccionDetalle_TransaccionId;
-
-        //        if (transaccionDetalles.Count > 0)
-        //        {
-        //            //Tomamos la primera posicion y con la denominacion obtenemos la moneda
-        //            moneda = transaccionDetalles.FirstOrDefault().DenominacionId.MonedaId;
-
-        //        }
-        //        else //se supone que si no es de dinero validado es de tipo sobre
-        //        {
-        //            var transaccionSobre = transaccion.ListOf_TransaccionSobre_TransaccionId.FirstOrDefault();
-        //            if (transaccionSobre != null)
-        //            {
-        //                var transaccionSobreDetalle = transaccionSobre.ListOf_TransaccionSobreDetalle_SobreId.FirstOrDefault();
-        //                if (transaccionSobreDetalle != null)
-        //                {
-        //                    //Tomamos la primera posicion y con la relacion de denominacion obtenemos la moneda
-        //                    moneda = transaccionSobreDetalle.RelacionMonedaTipoValorId.MonedaId;
-        //                }
-
-        //            }
-
-        //        }
-        //    }
-
-        //    if (moneda != null)
-        //    {
-        //        resultado = new();
-        //        resultado.Id = moneda.Id;
-        //        resultado.Nombre = moneda.Nombre;
-        //        resultado.Codigo = moneda.Codigo;
-        //        resultado.Simbolo = moneda.Simbolo;
-        //        resultado.Habilitado = moneda.Habilitado;
-        //        resultado.IndiceEnContadora = moneda.IndiceEnContadora;
-        //        resultado.UsuarioCreacion = moneda.UsuarioCreacion.ToString();
-        //        resultado.FechaCreacion = moneda.FechaCreacion;
-        //        resultado.FechaModificacion = moneda.FechaModificacion;
-        //        resultado.UsuarioModificacion = moneda.UsuarioModificacion.ToString();
-        //    }
-
-        //    return resultado;
-        //}
-
         public static Int64? ObtenerBolsaColocada(Int64 pDepositario)
         {
             Int64? bolsaColocada = new();
 
             DepositarioAdminWeb.Business.Relations.Operacion.Contenedor oContenedor = new();
-            oContenedor.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull, 0);
-
+            oContenedor.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull, 0); oContenedor.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull, 0);
+            oContenedor.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pDepositario);
+            oContenedor.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull, 0);
+            oContenedor.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaApertura, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
             oContenedor.Items();
 
             if (oContenedor.Result.Count > 0)
             {
-                foreach (var contenedor in oContenedor.Result)
-                {
-                    var bolsaTransaccion = contenedor.ListOf_Transaccion_ContenedorId.FirstOrDefault(x => x._DepositarioId == pDepositario);
+                bolsaColocada = oContenedor.Result.FirstOrDefault().Id;
+                //foreach (var contenedor in oContenedor.Result)
+                //{
+                //    var bolsaTransaccion = contenedor.ListOf_Transaccion_ContenedorId.FirstOrDefault(x => x._DepositarioId == pDepositario);
 
-                    if (bolsaTransaccion != null)
-                    {
-                        bolsaColocada = bolsaTransaccion._ContenedorId;
-                        return bolsaColocada;
-                    }
+                //    if (bolsaTransaccion != null)
+                //    {
+                //        bolsaColocada = bolsaTransaccion._ContenedorId;
+                //        return bolsaColocada;
+                //    }
 
-                }
+                //}
             }
 
             return bolsaColocada;
@@ -226,9 +158,9 @@
         #endregion
 
         #region Depositos con sobre
-        public static List<Entities.TransaccionAValidarMonitor> ObtenerTransaccionesAValidarMonitor(Int64 pDepositarioID)
+        public static List<MonitorEntities.TransaccionAValidarMonitor> ObtenerTransaccionesAValidarMonitor(Int64 pDepositarioID)
         {
-            List<Entities.TransaccionAValidarMonitor> resultado = new();
+            List<MonitorEntities.TransaccionAValidarMonitor> resultado = new();
 
             List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
@@ -247,7 +179,8 @@
                     var cuenta = usuarioCuenta.CuentaId;
                     var banco = cuenta.BancoId;
                     var usuarioCuentaUsuario = usuarioCuenta.UsuarioId;
-                    Entities.TransaccionAValidarMonitor transaccionAValidarMonitor = new();
+                    var usuarioTransaccion = transaccion.UsuarioId;
+                    MonitorEntities.TransaccionAValidarMonitor transaccionAValidarMonitor = new();
                     transaccionAValidarMonitor.Banco = banco.Nombre;
                     transaccionAValidarMonitor.TipoTransaccion = transaccion.TipoId.Nombre;
                     transaccionAValidarMonitor.CodigoSobre = transaccionSobre.CodigoSobre;
@@ -257,8 +190,7 @@
                     transaccionAValidarMonitor.FechaTransaccionSobre = transaccionSobre.Fecha;
                     transaccionAValidarMonitor.TotalAValidar = moneda.Codigo + " " + transaccion.TotalAValidar.ToString();
                     transaccionAValidarMonitor.UsuarioCuenta = usuarioCuentaUsuario.Nombre + " " + usuarioCuentaUsuario.Apellido;
-                    transaccionAValidarMonitor.UsuarioTransaccion = transaccion.UsuarioId.ToString(); //REVISAR FALTA FK.
-                    transaccionAValidarMonitor.UsuarioCuenta = usuarioCuentaUsuario.Nombre + " " + usuarioCuentaUsuario.Apellido;
+                    transaccionAValidarMonitor.UsuarioTransaccion = usuarioTransaccion.Nombre + " " + usuarioTransaccion.Apellido;
                     transaccionAValidarMonitor.TransaccionId = transaccion.Id;
                     transaccionAValidarMonitor.TransaccionSobreId = transaccionSobre.Id;
                     transaccionAValidarMonitor.Moneda = moneda.Nombre;
@@ -270,11 +202,12 @@
             return resultado;
         }
 
-        public static List<Entities.DetalleTransaccionAValidarMonitor> ObtenerDetalleTransaccionAValidarMonitor(Int64 pTransaccionSobreId)
+        public static List<MonitorEntities.DetalleTransaccionAValidarMonitor> ObtenerDetalleTransaccionAValidarMonitor(Int64 pTransaccionSobreId)
         {
-            List<Entities.DetalleTransaccionAValidarMonitor> resultado = new();
+            List<MonitorEntities.DetalleTransaccionAValidarMonitor> resultado = new();
 
             DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle transaccionSobreDetalles = new();
+            transaccionSobreDetalles.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.SobreId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pTransaccionSobreId);
             transaccionSobreDetalles.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
 
             transaccionSobreDetalles.Items();
@@ -282,7 +215,7 @@
             foreach (var transaccionDetalleSobre in transaccionSobreDetalles.Result)
             {
                 var relacionMonedaTipoValor = transaccionDetalleSobre.RelacionMonedaTipoValorId;
-                Entities.DetalleTransaccionAValidarMonitor detalleTransaccionAValidarMonitor = new();
+                MonitorEntities.DetalleTransaccionAValidarMonitor detalleTransaccionAValidarMonitor = new();
                 detalleTransaccionAValidarMonitor.TransaccionSobreId = transaccionDetalleSobre._SobreId;
                 detalleTransaccionAValidarMonitor.TransaccionSobreDetalleId = transaccionDetalleSobre.Id;
                 detalleTransaccionAValidarMonitor.FechaTransaccionSobreDetalle = transaccionDetalleSobre.Fecha;
@@ -316,7 +249,7 @@
                 cantidadMaxima = contenedor.Result.FirstOrDefault().TipoId.Capacidad;
                 DepositarioAdminWeb.Business.Relations.Operacion.Transaccion transacciones = new();
                 transacciones.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pContenedorId);
-                transacciones.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, TransaccionEntities.TipoTransaccion.DepositoBillete);
+                transacciones.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionEntities.TipoTransaccion.DepositoBillete);
                 transacciones.Items();
 
                 foreach (var transaccion in transacciones.Result)
@@ -331,9 +264,9 @@
             }
             return resultado;
         }
-        public static List<Entities.ExistenciaValidada> ObtenerExistenciasValidadasPorDepositario(Int64 pDepositarioID)
+        public static List<MonitorEntities.ExistenciaValidada> ObtenerExistenciasValidadasPorDepositario(Int64 pDepositarioID)
         {
-            List<Entities.ExistenciaValidada> resultado = new();
+            List<MonitorEntities.ExistenciaValidada> resultado = new();
 
             List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
@@ -361,7 +294,7 @@
                         DepositarioAdminWeb.Entities.Relations.Valor.Denominacion denominacion = new();
                         DepositarioAdminWeb.Entities.Relations.Valor.Moneda moneda = new();
 
-                        Entities.ExistenciaValidada existenciaValidada = new();
+                        MonitorEntities.ExistenciaValidada existenciaValidada = new();
 
                         denominacion = transaccionDetalle.DenominacionId;
                         moneda = denominacion.MonedaId;
@@ -381,9 +314,9 @@
             return resultado;
         }
 
-        public static List<Entities.ExistenciaAValidar> ObtenerExistenciasAValidarPorDepositario(Int64 pDepositarioID)
+        public static List<MonitorEntities.ExistenciaAValidar> ObtenerExistenciasAValidarPorDepositario(Int64 pDepositarioID)
         {
-            List<Entities.ExistenciaAValidar> resultado = new();
+            List<MonitorEntities.ExistenciaAValidar> resultado = new();
 
             List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
@@ -408,7 +341,7 @@
                         }
                         else
                         {
-                            Entities.ExistenciaAValidar nuevoTipoValorAValidar = new();
+                            MonitorEntities.ExistenciaAValidar nuevoTipoValorAValidar = new();
                             var tipoValor = relacionMonedaTipoValor.TipoValorId;
                             nuevoTipoValorAValidar.Cantidad = detalleTransaccionSobre.CantidadDeclarada;
                             nuevoTipoValorAValidar.Moneda = relacionMonedaTipoValor.MonedaId.Nombre;
@@ -431,9 +364,9 @@
 
         #region Eventos
 
-        public static List<Entities.Evento> ObtenerEventosPorDepositario(Int64 pDepositarioId)
+        public static List<MonitorEntities.Evento> ObtenerEventosPorDepositario(Int64 pDepositarioId)
         {
-            List<Entities.Evento> resultado = new();
+            List<MonitorEntities.Evento> resultado = new();
 
             DepositarioAdminWeb.Business.Relations.Operacion.Evento oEvento = new();
             oEvento.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Evento.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pDepositarioId);
@@ -443,7 +376,7 @@
 
             foreach (var evento in oEvento.Result)
             {
-                Entities.Evento auxEvento = new();
+                MonitorEntities.Evento auxEvento = new();
                 auxEvento.FechaEvento = evento.Fecha;
                 auxEvento.Valor = evento.Valor;
                 auxEvento.Mensaje = evento.Mensaje;
@@ -459,9 +392,9 @@
 
         #region Totales generales
 
-        public static List<Entities.TotalGeneral> ObtenerTotalesGeneralesPorDepositarioSegunMoneda(Int64 pDepositarioID)
+        public static List<MonitorEntities.TotalGeneral> ObtenerTotalesGeneralesPorDepositarioSegunMoneda(Int64 pDepositarioID)
         {
-            List<Entities.TotalGeneral> resultado = new();
+            List<MonitorEntities.TotalGeneral> resultado = new();
             List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
             transacciones = ObtenerTransaccionesPorDepositario(pDepositarioID, true, null, null);
@@ -480,7 +413,7 @@
                     }
                     else
                     {
-                        Entities.TotalGeneral totalGeneral = new();
+                        MonitorEntities.TotalGeneral totalGeneral = new();
 
                         totalGeneral.TotalAValidar = transaccion.TotalAValidar;
                         totalGeneral.TotalValidado = transaccion.TotalValidado;
@@ -510,24 +443,27 @@
 
         #region Dashboard
 
-        public static int ObtenerCantidadTransaccionesPorDia(DateTime pFecha, List<Int64> pEmpresasSeleccionadas)
+        public static string ObtenerCantidadTransaccionesPorDia(DateTime pFecha, List<Int64> pEmpresasSeleccionadas)
         {
-            int resultado = 0;
+            string resultado = "";
 
             //Crear una funcion que me devuelva una lista de depositarios por empresa
             var depositarios = DepositarioController.ObtenerListadoDepositariosPorEmpresa(pEmpresasSeleccionadas);
 
             if (depositarios != null)
             {
-                //Levanto transacciones con un IN y con la fecha de hoy.
-                DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
-                oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
-                oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, depositarios);
-                oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
+                if (depositarios.Count > 0)
+                {
+                    //Levanto transacciones con un IN y con la fecha de hoy.
+                    DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
+                    oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
+                    oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, depositarios);
+                    oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
 
-                oTransaccion.Items();
+                    oTransaccion.Items();
 
-                resultado = oTransaccion.Result.Count;
+                    resultado = oTransaccion.Result.Count.ToString();
+                }
             }
 
             return resultado;
@@ -543,34 +479,41 @@
             int transaccionesTotales = 0;
             var depositarios = DepositarioController.ObtenerListadoDepositariosPorEmpresa(pEmpresasSeleccionadas);
 
-            DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
-            oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Today);
-            oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND,DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, depositarios);
-
-            oTransaccion.Items();
-
-            if (oTransaccion.Result.Count > 0)
+            if (depositarios != null)
             {
-                foreach (var transaccion in oTransaccion.Result)
+                if (depositarios.Count > 0)
                 {
-                    var existenciaTipoTransaccion = resultado.FirstOrDefault(x => x.TipoTransaccionId == transaccion._TipoId);
-                    if (existenciaTipoTransaccion != null)
+                    DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
+                    oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Today);
+                    oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, depositarios);
+
+                    oTransaccion.Items();
+
+                    if (oTransaccion.Result.Count > 0)
                     {
-                        existenciaTipoTransaccion.CantidadTipoTransaccion++;
+                        foreach (var transaccion in oTransaccion.Result)
+                        {
+                            var existenciaTipoTransaccion = resultado.FirstOrDefault(x => x.TipoTransaccionId == transaccion._TipoId);
+                            if (existenciaTipoTransaccion != null)
+                            {
+                                existenciaTipoTransaccion.CantidadTipoTransaccion++;
+                            }
+                            else
+                            {
+                                Entities.TransaccionTipoCantidad transaccionTipoCantidad = new();
+                                transaccionTipoCantidad.NombreTipoTransaccion = transaccion.TipoId.Nombre;
+                                transaccionTipoCantidad.CantidadTipoTransaccion = 1;
+                                transaccionTipoCantidad.TipoTransaccionId = transaccion._TipoId;
+                                resultado.Add(transaccionTipoCantidad);
+                            }
+                            transaccionesTotales++;
+                        }
                     }
-                    else
-                    {
-                        Entities.TransaccionTipoCantidad transaccionTipoCantidad = new();
-                        transaccionTipoCantidad.NombreTipoTransaccion = transaccion.TipoId.Nombre;
-                        transaccionTipoCantidad.CantidadTipoTransaccion = 1;
-                        transaccionTipoCantidad.TipoTransaccionId = transaccion._TipoId;
-                        resultado.Add(transaccionTipoCantidad);
-                    }
-                    transaccionesTotales++;
                 }
             }
 
-            foreach(var transaccionTipo in resultado)
+
+            foreach (var transaccionTipo in resultado)
             {
                 transaccionTipo.NombreTipoTransaccionConPorcentaje = transaccionTipo.NombreTipoTransaccion + ": " + ((decimal)transaccionTipo.CantidadTipoTransaccion * 100 / transaccionesTotales).ToString("n2") + "%";
             }
@@ -579,6 +522,31 @@
         }
 
         #endregion
+
+        public static List<TransaccionEntities.Contenedor> ObtenerContenedores(bool obtenerSoloHabilitados = true)
+        {
+            List<TransaccionEntities.Contenedor> resultado = new();
+
+            DepositarioAdminWeb.Business.Tables.Operacion.Contenedor oContenedor = new();
+            if (obtenerSoloHabilitados)
+                oContenedor.Where.Add(DepositarioAdminWeb.Business.Tables.Operacion.Contenedor.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+
+            oContenedor.Items();
+
+            if (oContenedor.Result.Count > 0)
+            {
+                foreach (var contenedor in oContenedor.Result)
+                {
+                    TransaccionEntities.Contenedor contenedorEntitie = new();
+                    contenedorEntitie.ContenedorId = contenedor.Id;
+                    contenedorEntitie.Identificador = contenedor.Identificador;
+
+                    resultado.Add(contenedorEntitie);
+                }
+            }
+
+            return resultado;
+        }
 
     }
 }

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
+    <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
     <PackageReference Include="Radzen.Blazor" Version="3.19.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
@@ -66,7 +67,6 @@
     <None Include="Components\Crud\Seguridad\TipoAplicacion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\TipoFuncion.Crud.razor" />
     <None Include="Components\Crud\Seguridad\TipoMenu.Crud.razor" />
-    <None Include="Components\Crud\Seguridad\Usuario.Crud.razor" />
     <None Include="Components\Crud\Seguridad\UsuarioRol.Crud.razor" />
     <None Include="Components\Crud\Seguridad\UsuarioSector.Crud.razor" />
     <None Include="Components\Crud\Sincronizacion\Configuracion.Crud.razor" />
@@ -82,10 +82,34 @@
     <None Include="Components\CustomCrud\Estilo\EsquemaDetalle.Crud.razor" />
     <None Include="Components\CustomCrud\Regionalizacion\Lenguaje.Crud.razor" />
     <None Include="Components\CustomCrud\Regionalizacion\LenguajeItem.Crud.razor" />
+    <None Include="Components\CustomCrud\Turno\EsquemaDetalleTurno.Crud.razor" />
+    <None Include="Components\CustomCrud\Turno\EsquemaTurno.Crud.razor" />
     <None Include="Components\CustomCrud\Valor\Denominacion.Crud.razor" />
     <None Include="Components\CustomCrud\Valor\Moneda.Crud.razor" />
     <None Include="Components\CustomCrud\Visualizacion\Perfil.Crud.razor" />
     <None Include="Components\CustomCrud\Visualizacion\PerfilItem.Crud.razor" />
+    <None Include="Components\Reports\DetalleTransacciones.View.razor" />
+    <None Include="Components\Reports\DetalleTransaccionesSobre.View.razor" />
+    <None Include="Components\Reports\Transacciones.View.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Permaquim.Depositary.Device\Permaquim.Depositary.Device.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

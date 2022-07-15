@@ -67,14 +67,14 @@
                     {
                         switch (menu.TipoMenuId)
                         {
-                            case (Int64)Entities.TipoMenu.Carpeta:
+                            case (Int64)SeguridadEntities.TipoMenu.Carpeta:
                                 <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)">
                                     <ChildContent>
                                         @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId))
                                         {
-                                            switch (menu.TipoMenuId)
+                                            switch (menuDependiente.TipoMenuId)
                                             {
-                                                case (Int64)Entities.TipoMenu.Carpeta:
+                                                case (Int64)SeguridadEntities.TipoMenu.Carpeta:
                                                     <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" class="sub-menu">
                                                         @foreach (var subMenuDependiente in dataMenues.Where(x => x.DependeDe == menuDependiente.MenuId))
                                                         {
@@ -84,7 +84,7 @@
                                                         }
                                                     </RadzenPanelMenuItem>
                                                     break;
-                                                case (Int64)Entities.TipoMenu.Pagina:
+                                                case (Int64)SeguridadEntities.TipoMenu.Pagina:
                                                     <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" Path="@(menuDependiente.Referencia)" class="sub-menu">
 
                                                     </RadzenPanelMenuItem>
@@ -94,7 +94,7 @@
                                     </ChildContent>
                                 </RadzenPanelMenuItem>
                                 break;
-                            case (Int64)Entities.TipoMenu.Pagina:
+                            case (Int64)SeguridadEntities.TipoMenu.Pagina:
                                 <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)" Path="@(menu.Referencia)">
 
                                 </RadzenPanelMenuItem>
@@ -120,7 +120,7 @@
     private string apellidoUsuario;
     private string avatarUsuario;
     private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>();
-    private List<Entities.Menu> dataMenues = new();
+    private List<SeguridadEntities.Menu> dataMenues = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -133,7 +133,7 @@
             }
             else
             {
-                dataMenues = await sessionStorage.GetItemAsync<List<Entities.Menu>>("DataMenues");
+                dataMenues = await sessionStorage.GetItemAsync<List<SeguridadEntities.Menu>>("DataMenues");
                 dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
                 nombreUsuario = await sessionStorage.GetItemAsync<string>("NombreUsuario");
                 apellidoUsuario = await sessionStorage.GetItemAsync<string>("ApellidoUsuario");

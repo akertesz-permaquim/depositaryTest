@@ -1,6 +1,6 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
-    public class LenguajeDTO
+    public class LenguajeModel
     {
         public List<DepositaryWebApi.Entities.Tables.Regionalizacion.Lenguaje> Lenguaje { get; set; }
 

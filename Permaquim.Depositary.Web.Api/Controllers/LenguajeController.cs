@@ -14,7 +14,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerLenguaje()
         {
-            LenguajeDTO data = new();
+            LenguajeModel data = new();
 
             data.Lenguaje = ObtenerLenguajeCabecera();
             data.LenguajeItems = ObtenerLenguajeItems();

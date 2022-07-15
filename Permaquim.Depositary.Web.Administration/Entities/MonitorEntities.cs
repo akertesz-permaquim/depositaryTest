@@ -1,4 +1,4 @@
-﻿namespace Permaquim.Depositary.Web.Administration.Entities
+﻿namespace Permaquim.Depositary.Web.Administration.MonitorEntities
 {
     public class DepositarioMonitor
     {
@@ -39,7 +39,7 @@
         public Int64 DepositarioId { get; set; }
         public string NumeroSerie { get; set; }
         public string ImagenModelo { get; set; }
-        public DateTime FechaUltimaSincronizacion { get; set; }
+        public DateTime? FechaUltimaSincronizacion { get; set; }
         public float PorcentajeOcupacionBolsa { get; set; }
         public string IdentificadorBolsa { get; set; }
         public Double TotalValidado { get; set; }
@@ -55,7 +55,7 @@
         public int CantidadBilletesEnBolsa { get; set; }
         public int CapacidadBilletesBolsa { get; set; }
         public string Turno { get; set; }
-        public DateTime FechaAperturaTurno { get; set; }
+        public DateTime? FechaAperturaTurno { get; set; }
         public bool DepositoEnOtraMoneda { get; set; }
     }
 

@@ -23,7 +23,7 @@
                     if (dataEmpresasAccesibles.Count > 0)
                     {
                         <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                @bind-Value=@empresasSeleccionadas Multiple="true" Placeholder="Seleccione empresas" Data=@dataEmpresasAccesibles TextProperty="Nombre" ValueProperty="EmpresaId"
+                                @bind-Value=@empresasSeleccionadas Multiple="true" Placeholder="Seleccione empresas" Data=@dataEmpresasAccesibles TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
                                 Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
                     }
                 }
@@ -98,7 +98,7 @@
                                             </RadzenHeading>
                                         </div>
                                         <div class="col-4 align-items-center d-flex" style="margin-left:10%">
-                                            <RadzenHeading Size="H4" style="color:red ; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                            <RadzenHeading Size="H4" style="color:red ; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraLinea">
                                             </RadzenHeading>
                                         </div>
                                     </div>
@@ -208,7 +208,7 @@
     private string cantidadDepositariosFueraServicio { get; set; }
     private List<List<Entities.DepositarioCarga>> dataCargaDepositarios { get; set; }
     private List<Entities.TransaccionTipoCantidad> dataCantidadTipoTransacciones { get; set; }
-    private List<Entities.Empresa> dataEmpresasAccesibles { get; set; }
+    private List<DirectorioEntities.Empresa> dataEmpresasAccesibles { get; set; }
     private IEnumerable<Int64> empresasSeleccionadas = new Int64[] { };
 
     protected override void OnInitialized()
@@ -227,7 +227,7 @@
                 NavManager.NavigateTo("login", true);
 
             //En funcion del usuario que consulta obtenemos el perfil de visualizacion y luego las empresas a las que puede acceder
-            await Task.Run(obtenerEmpresasAccesibles);
+            await Task.Run(ObtenerListadoEmpresasPorPerfil);
             obtenerInformacion();
             StateHasChanged();
         }
@@ -242,6 +242,7 @@
                 await Task.Run(obtenerCantidadTransaccionesAlDia);
                 await Task.Run(obtenerCantidadDepositariosBolsaCasiLlena);
                 await Task.Run(obtenerCantidadDepositariosEnLinea);
+                await Task.Run(obtenerCantidadDepositariosFueraLinea);
                 await Task.Run(obtenerCantidadDepositariosFueraServicio);
                 await Task.Run(obtenerDepositariosConMayorCarga);
                 await Task.Run(obtenerCantidadTransaccionesPorTipo);
@@ -251,9 +252,9 @@
         StateHasChanged();
     }
 
-    private void obtenerEmpresasAccesibles()
+    private void ObtenerListadoEmpresasPorPerfil()
     {
-        dataEmpresasAccesibles = DirectorioController.ObtenerEmpresasAccesibles(userId.Value);
+        dataEmpresasAccesibles = DirectorioController.ObtenerListadoEmpresasPorPerfil(userId.Value);
         //Dejo todas las empresas marcadas
         if (dataEmpresasAccesibles.Count > 0)
         {
@@ -288,7 +289,7 @@
 
     private void obtenerCantidadTransaccionesAlDia()
     {
-        cantidadTransaccionesAlDia = TransaccionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date, empresasSeleccionadas.ToList()).ToString();
+        cantidadTransaccionesAlDia = TransaccionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date, empresasSeleccionadas.ToList());
     }
 
     private void obtenerCantidadDepositariosBolsaCasiLlena()

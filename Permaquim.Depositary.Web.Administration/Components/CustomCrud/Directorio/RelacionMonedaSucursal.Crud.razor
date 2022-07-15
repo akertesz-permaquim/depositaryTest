@@ -144,14 +144,14 @@
                             <div class="col-md-9">
                                 @if ((@Moneda_entities.Count > 0 && @Moneda_entities.FirstOrDefault(c => c.Id == @RelacionMonedaSucursal_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaSucursal_entity.MonedaId)"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaSucursal_entity.MonedaId)"
                                 Data=@Moneda_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMonedaValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@Moneda_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMonedaValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -164,7 +164,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Value="@SucursalId"
+                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@SucursalId"
                                 Data=@Sucursal_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
                             </div>
@@ -310,7 +310,7 @@ else
     /// <summary>
     /// Variables to store permissions
     /// </summary>
-    private List<Entities.FuncionRol> dataFunciones;
+    private List<SeguridadEntities.FuncionRol> dataFunciones;
 
     [Parameter]
     public Int64 SucursalId { get; set; }
@@ -318,7 +318,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<Entities.FuncionRol>>("DataFunciones");
+        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         userId = await sessionStorage.GetItemAsync<Int64?>("Id");

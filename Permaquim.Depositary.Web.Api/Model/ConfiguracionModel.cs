@@ -2,7 +2,7 @@
 
 namespace Permaquim.Depositary.Web.Api.Model
 {
-    public class ConfiguracionDTO
+    public class ConfiguracionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> ConfiguracionAplicacion { get; set; }
 
