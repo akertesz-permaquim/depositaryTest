@@ -17,10 +17,14 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         void IModel.Process()
         {
+
+            CodigoExternoDepositario = DatabaseController.CurrentDepositary.CodigoExterno;
+
             Depositario.Business.Tables.Operacion.Transaccion transaccion = new();
             Transaccion = transaccion.Items();
 
             Depositario.Business.Tables.Operacion.TransaccionDetalle transaccionDetalle = new();
+            transaccionDetalle.OrderBy.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId);
             TransaccionDetalle = transaccionDetalle.Items();
 
             Depositario.Business.Tables.Operacion.TransaccionSobre transaccionSobre = new();

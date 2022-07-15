@@ -19,22 +19,17 @@ namespace Permaquim.Depositary.Sincronization.Console
             try
             {
 
-
-
                 Depositario.Business.Tables.Estilo.Esquema esquema = new();
                 foreach (var item in Esquema)
                 {
                     esquema.AddOrUpdate(item);
                 }
 
-
-
                 Depositario.Business.Tables.Estilo.TipoEsquemaDetalle tipoEsquemaDetalle = new();
                 foreach (var item in TipoEsquemaDetalle)
                 {
                     tipoEsquemaDetalle.AddOrUpdate(item);
                 }
-
 
                 Depositario.Business.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
                 foreach (var item in EsquemaDetalle)

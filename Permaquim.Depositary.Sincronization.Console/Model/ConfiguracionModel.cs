@@ -5,13 +5,31 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class ConfiguracionModel:IModel
     {
-        public List<Permaquim.Depositario.Entities.Tables.Aplicacion.Configuracion> ConfiguracionAplicacion { get; set; }
+        public List<Depositario.Entities.Tables.Aplicacion.Configuracion> ConfiguracionAplicacion { get; set; }
 
-        public List<Permaquim.Depositario.Entities.Tables.Dispositivo.ConfiguracionDepositario> ConfiguracionDispositivo { get; set; }
+        public List<Depositario.Entities.Tables.Dispositivo.ConfiguracionDepositario> ConfiguracionDispositivo { get; set; }
 
         public void Process()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Depositario.Business.Tables.Aplicacion.Configuracion configuracion = new();
+                foreach (var item in ConfiguracionAplicacion)
+                {
+                    configuracion.AddOrUpdate(item);
+                }
+
+                Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario configuracionDepositario = new();
+                foreach (var item in ConfiguracionDispositivo)
+                {
+                    configuracionDepositario.AddOrUpdate(item);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public void Process(DateTime dateTime)

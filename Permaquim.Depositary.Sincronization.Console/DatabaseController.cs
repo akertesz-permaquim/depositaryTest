@@ -21,5 +21,18 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             return returnValue;
         }
+        public static Permaquim.Depositario.Entities.Tables.Dispositivo.Depositario CurrentDepositary
+        {
+            get
+            {
+                Permaquim.Depositario.Business.Tables.Dispositivo.Depositario entity = new();
+                entity.Where.Add(Depositario.Business.Tables.Dispositivo.Depositario.ColumnEnum.Id,
+                    Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+                entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado,
+                  Depositario.sqlEnum.OperandEnum.Equal, true);
+                return entity.Items().FirstOrDefault();
+            }
+        }
     }
 }

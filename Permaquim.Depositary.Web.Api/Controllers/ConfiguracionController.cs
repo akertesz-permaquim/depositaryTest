@@ -16,7 +16,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             ConfiguracionModel data = new();
 
                 data.ConfiguracionAplicacion = ObtenerConfiguracionAplicacion();
-                data.ConfiguracionDispositivo = ObtenerConfiguracionDepositario();
+                data.ConfiguracionDepositario = ObtenerConfiguracionDepositario();
 
             return Ok(data);
 

@@ -4,16 +4,33 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class LenguajeModel : IModel
     {
-        public List<Permaquim.Depositario.Entities.Tables.Regionalizacion.Lenguaje> Lenguaje { get; set; }
+        public List<Depositario.Entities.Tables.Regionalizacion.Lenguaje> Lenguaje { get; set; }
 
-        public List<Permaquim.Depositario.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItems { get; set; }
+        public List<Depositario.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItems { get; set; }
 
-        public void Process()
+        void IModel.Process()
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                Depositario.Business.Tables.Regionalizacion.Lenguaje lenguaje = new();
+                foreach (var item in Lenguaje)
+                {
+                    lenguaje.AddOrUpdate(item);
+                }
 
-        public void Process(DateTime dateTime)
+                Depositario.Business.Tables.Regionalizacion.LenguajeItem lenguajeItem = new();
+                foreach (var item in LenguajeItems)
+                {
+                    lenguajeItem.AddOrUpdate(item);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        void IModel.Process(DateTime dateTime)
         {
             throw new NotImplementedException();
         }

@@ -26,8 +26,8 @@
                 {
                     DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera eSincronizacionNuevaEntidadCabecera = new();
 
-                    eSincronizacionNuevaEntidadCabecera = (DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera)oSincronizacionEntidad.Add(eSincronizacionEntidadCabecera);
-
+                    //eSincronizacionNuevaEntidadCabecera = (DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera)oSincronizacionEntidad.Add(eSincronizacionEntidadCabecera);
+                    var x = oSincronizacionEntidad.Add(eSincronizacionEntidadCabecera);
                     resultado = eSincronizacionNuevaEntidadCabecera.Id;
                 }
                 catch (Exception ex)

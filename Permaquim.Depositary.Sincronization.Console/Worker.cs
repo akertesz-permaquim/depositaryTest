@@ -89,23 +89,45 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             model.Process();
 
-            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+            try
+            {
+
+                var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+
+                _httpClient.BaseAddress = new Uri(item.Endpoint);
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
+
                 var postResponse = _httpClient.PostAsync(item.Endpoint, content);
                 var postResult = postResponse.Result;
 
-            
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         private async Task GetToken(WorkerTask item)
         {
             if (_jwToken == null || DateTime.Now >= _jwToken.Expiration)
             {
-                LoginModel loginModel = new LoginModel();
+                try
+                {
 
-                var content = new StringContent(JsonConvert.SerializeObject(loginModel), Encoding.UTF8, MEDIATYPE_JSON);
-                var postResponse = _httpClient.PostAsync(item.Endpoint, content);
-                var postResult = postResponse.Result;
-                var jsonResult = await postResult.Content.ReadAsStringAsync();
-                _jwToken = JsonConvert.DeserializeObject<JwtTokenModel>(jsonResult);
+                    LoginModel loginModel = new LoginModel();
+
+                    var content = new StringContent(JsonConvert.SerializeObject(loginModel), Encoding.UTF8, MEDIATYPE_JSON);
+                    var postResponse = _httpClient.PostAsync(item.Endpoint, content);
+                    var postResult = postResponse.Result;
+                    var jsonResult = await postResult.Content.ReadAsStringAsync();
+                    _jwToken = JsonConvert.DeserializeObject<JwtTokenModel>(jsonResult);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 
