@@ -1,18 +1,18 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
-    public class ValorDenominacionDTO
+    public class ValorDenominacionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Valor.Denominacion> Denominaciones { get; set; } = new();
     }
-    public class ValorMonedaDTO
+    public class ValorMonedaModel
     {
         public List<DepositaryWebApi.Entities.Tables.Valor.Moneda> Monedas { get; set; } = new();
     }
-    public class ValorTipoDTO
+    public class ValorTipoModel
     {
         public List<DepositaryWebApi.Entities.Tables.Valor.Tipo> Tipos { get; set; } = new();
     }
-    public class ValorRelacionMonedaTipoValorDTO
+    public class ValorRelacionMonedaTipoValorModel
     {
         public List<DepositaryWebApi.Entities.Tables.Valor.RelacionMonedaTipoValor> RelacionesMonedasTiposValores { get; set; } = new();
     }

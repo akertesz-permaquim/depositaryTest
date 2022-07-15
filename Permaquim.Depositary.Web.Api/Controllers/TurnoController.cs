@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerAgendas()
         {
-            TurnoAgendaTurnoDTO data = new();
+            TurnoAgendaTurnoModel data = new();
 
             try
             {
@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEsquemas()
         {
-            TurnoEsquemaTurnoDTO data = new();
+            TurnoEsquemaTurnoModel data = new();
 
             try
             {
@@ -53,7 +53,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEsquemasDetalles()
         {
-            TurnoEsquemaDetalleTurnoDTO data = new();
+            TurnoEsquemaDetalleTurnoModel data = new();
 
             try
             {

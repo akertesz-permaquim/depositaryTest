@@ -14,7 +14,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerPaises()
         {
-            GeografiaPaisDTO data = new();
+            GeografiaPaisModel data = new();
 
             try
             {
@@ -33,7 +33,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerProvincias()
         {
-            GeografiaProvinciaDTO data = new();
+            GeografiaProvinciaModel data = new();
 
             try
             {
@@ -52,7 +52,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerCiudades()
         {
-            GeografiaCiudadDTO data = new();
+            GeografiaCiudadModel data = new();
 
             try
             {
@@ -71,7 +71,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerZonas()
         {
-            GeografiaZonaDTO data = new();
+            GeografiaZonaModel data = new();
 
             try
             {
@@ -90,7 +90,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerCodigosPostales()
         {
-            GeografiaCodigoPostalDTO data = new();
+            GeografiaCodigoPostalModel data = new();
 
             try
             {

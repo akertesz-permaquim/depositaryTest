@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerPerfiles()
         {
-            VisualizacionPerfilDTO data = new();
+            VisualizacionPerfilModel data = new();
 
             try
             {
@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTipos()
         {
-            VisualizacionPerfilTipoDTO data = new();
+            VisualizacionPerfilTipoModel data = new();
 
             try
             {
@@ -53,7 +53,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerPerfilesItems()
         {
-            VisualizacionPerfilItemDTO data = new();
+            VisualizacionPerfilItemModel data = new();
 
             try
             {

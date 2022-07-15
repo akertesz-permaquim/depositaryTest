@@ -1,54 +1,54 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
-    public class SeguridadUsuarioDTO
+    public class SeguridadUsuarioModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Usuario> Usuarios { get; set; } = new();
     }
-    public class SeguridadRolDTO
+    public class SeguridadRolModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Rol> Roles { get; set; } = new();
     }
-    public class SeguridadFuncionDTO
+    public class SeguridadFuncionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Funcion> Funciones { get; set; } = new();
     }
-    public class SeguridadMenuDTO
+    public class SeguridadMenuModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Menu> Menues { get; set; } = new();
     }
-    public class SeguridadTipoMenuDTO
+    public class SeguridadTipoMenuModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoMenu> TiposMenues { get; set; } = new();
     }
-    public class SeguridadTipoFuncionDTO
+    public class SeguridadTipoFuncionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoFuncion> TiposFunciones { get; set; } = new();
     }
-    public class SeguridadTipoAplicacionDTO
+    public class SeguridadTipoAplicacionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoAplicacion> TiposAplicaciones { get; set; } = new();
     }
-    public class SeguridadAplicacionDTO
+    public class SeguridadAplicacionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Aplicacion> Aplicaciones { get; set; } = new();
     }
-    public class SeguridadAplicacionParametroDTO
+    public class SeguridadAplicacionParametroModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.AplicacionParametro> AplicacionesParametros { get; set; } = new();
     }
-    public class SeguridadAplicacionParametroValorDTO
+    public class SeguridadAplicacionParametroValorModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.AplicacionParametroValor> AplicacionesParametrosValores { get; set; } = new();
     }
-    public class SeguridadRolFuncionDTO
+    public class SeguridadRolFuncionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.RolFuncion> RolesFunciones { get; set; } = new();
     }
-    public class SeguridadUsuarioRolDTO
+    public class SeguridadUsuarioRolModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioRol> UsuariosRoles { get; set; } = new();
     }
-    public class SeguridadUsuarioSectorDTO
+    public class SeguridadUsuarioSectorModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioSector> UsuariosSectores { get; set; } = new();
     }

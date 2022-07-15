@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerLenguajes()
         {
-            RegionalizacionLenguajeDTO data = new();
+            RegionalizacionLenguajeModel data = new();
 
             try
             {
@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerLenguajesItems()
         {
-            RegionalizacionLenguajeItemDTO data = new();
+            RegionalizacionLenguajeItemModel data = new();
 
             try
             {

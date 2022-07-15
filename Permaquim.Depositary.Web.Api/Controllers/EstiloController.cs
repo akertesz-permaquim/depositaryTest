@@ -16,7 +16,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEstilo()
         {
-            EstiloDTO data = new();
+            EstiloModel data = new();
 
             try
             {
@@ -38,7 +38,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEsquemas()
         {
-            EstiloEsquemaDTO data = new();
+            EstiloEsquemaModel data = new();
 
             try
             {
@@ -57,7 +57,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEsquemasDetalles()
         {
-            EstiloEsquemaDetalleDTO data = new();
+            EstiloEsquemaDetalleModel data = new();
 
             try
             {
@@ -76,7 +76,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposEsquemasDetalles()
         {
-            EstiloTipoEsquemaDetalleDTO data = new();
+            EstiloTipoEsquemaDetalleModel data = new();
 
             try
             {

@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerBancos()
         {
-            BancaBancoDTO data = new();
+            BancaBancoModel data = new();
 
             try
             {
@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerCuentas()
         {
-            BancaCuentaDTO data = new();
+            BancaCuentaModel data = new();
 
             try
             {
@@ -53,7 +53,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposCuenta()
         {
-            BancaTipoCuentaDTO data = new();
+            BancaTipoCuentaModel data = new();
 
             try
             {
@@ -72,7 +72,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerUsuariosCuenta()
         {
-            BancaUsuarioCuentaDTO data = new();
+            BancaUsuarioCuentaModel data = new();
 
             try
             {

@@ -1,14 +1,14 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
-    public class VisualizacionPerfilDTO
+    public class VisualizacionPerfilModel
     {
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.Perfil> Perfiles { get; set; } = new();
     }
-    public class VisualizacionPerfilItemDTO
+    public class VisualizacionPerfilItemModel
     {
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilItem> PerfilesItems { get; set; } = new();
     }
-    public class VisualizacionPerfilTipoDTO
+    public class VisualizacionPerfilTipoModel
     {
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilTipo> Tipos { get; set; } = new();
     }

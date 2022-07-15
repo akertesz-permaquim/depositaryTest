@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerHuellasDactilares()
         {
-            BiometriaHuellaDactilarDTO data = new();
+            BiometriaHuellaDactilarModel data = new();
 
             try
             {

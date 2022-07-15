@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerDenominaciones()
         {
-            ValorDenominacionDTO data = new();
+            ValorDenominacionModel data = new();
 
             try
             {
@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerMonedas()
         {
-            ValorMonedaDTO data = new();
+            ValorMonedaModel data = new();
 
             try
             {
@@ -53,7 +53,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTipos()
         {
-            ValorTipoDTO data = new();
+            ValorTipoModel data = new();
 
             try
             {
@@ -72,7 +72,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerRelacionesMonedasTiposValores()
         {
-            ValorRelacionMonedaTipoValorDTO data = new();
+            ValorRelacionMonedaTipoValorModel data = new();
 
             try
             {

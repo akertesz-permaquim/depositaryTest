@@ -1,6 +1,6 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
-    public class TransaccionDTO
+    public class TransaccionModel
     {
         public string CodigoExternoDepositario { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.Transaccion> Transaccion { get; set; }
@@ -8,42 +8,42 @@
         public List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionSobre { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionSobreDetalle { get; set; }
     }
-    public class EventoDTO
+    public class EventoModel
     {
         public string CodigoExternoDepositario { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.Evento> Evento { get; set; }
     }
-    public class ContenedorDTO
+    public class ContenedorModel
     {
         public string CodigoExternoDepositario { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.Contenedor> Contenedor { get; set; }
     }
-    public class CierreDiarioDTO
+    public class CierreDiarioModel
     {
         public string CodigoExternoDepositario { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.CierreDiario> CierreDiario { get; set; }
     }
-    public class SesionDTO
+    public class SesionModel
     {
         public string CodigoExternoDepositario { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.Sesion> Sesion { get; set; }
     }
-    public class TurnoDTO
+    public class OperacionTurnoModel
     {
         public string CodigoExternoDepositario { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.Turno> Turno { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.TurnoUsuario> TurnoUsuario { get; set; }
 
     }
-    public class OperacionTipoContenedorDTO
+    public class OperacionTipoContenedorModel
     {
         public List<DepositaryWebApi.Entities.Tables.Operacion.TipoContenedor> TiposContenedores { get; set; } = new();
     }
-    public class OperacionTipoEventoDTO
+    public class OperacionTipoEventoModel
     {
         public List<DepositaryWebApi.Entities.Tables.Operacion.TipoEvento> TiposEventos { get; set; } = new();
     }
-    public class OperacionTipoTransaccionDTO
+    public class OperacionTipoTransaccionModel
     {
         public List<DepositaryWebApi.Entities.Tables.Operacion.TipoTransaccion> TiposTransacciones { get; set; } = new();
     }

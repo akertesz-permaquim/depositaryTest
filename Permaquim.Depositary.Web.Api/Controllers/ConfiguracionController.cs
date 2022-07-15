@@ -14,7 +14,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerConfiguraciones()
         {
-            ConfiguracionDTO data = new();
+            ConfiguracionModel data = new();
 
                 data.ConfiguracionAplicacion = ObtenerConfiguracionAplicacion();
                 data.ConfiguracionDispositivo = ObtenerConfiguracionDepositario();

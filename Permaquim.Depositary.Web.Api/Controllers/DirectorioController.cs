@@ -15,7 +15,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerGrupos()
         {
-            DirectorioGrupoDTO data = new();
+            DirectorioGrupoModel data = new();
 
             try
             {
@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEmpresas()
         {
-            DirectorioEmpresaDTO data = new();
+            DirectorioEmpresaModel data = new();
 
             try
             {
@@ -53,7 +53,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerSucursales()
         {
-            DirectorioSucursalDTO data = new();
+            DirectorioSucursalModel data = new();
 
             try
             {
@@ -72,7 +72,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerSectores()
         {
-            DirectorioSectorDTO data = new();
+            DirectorioSectorModel data = new();
 
             try
             {
@@ -91,7 +91,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposIdentificadores()
         {
-            DirectorioTipoIdentificadorDTO data = new();
+            DirectorioTipoIdentificadorModel data = new();
 
             try
             {
@@ -110,7 +110,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerRelacionesMonedasSucursales()
         {
-            DirectorioRelacionMonedaSucursalDTO data = new();
+            DirectorioRelacionMonedaSucursalModel data = new();
 
             try
             {
@@ -129,7 +129,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerIdentificadoresUsuario()
         {
-            DirectorioIdentificadorUsuarioDTO data = new();
+            DirectorioIdentificadorUsuarioModel data = new();
 
             try
             {

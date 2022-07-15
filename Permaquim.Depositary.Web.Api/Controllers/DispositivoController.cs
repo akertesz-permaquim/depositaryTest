@@ -16,7 +16,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerDepositarios()
         {
-            DispositivoDepositarioDTO data = new();
+            DispositivoDepositarioModel data = new();
 
             try
             {
@@ -35,7 +35,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerMarcas()
         {
-            DispositivoMarcaDTO data = new();
+            DispositivoMarcaModel data = new();
 
             try
             {
@@ -54,7 +54,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerModelos()
         {
-            DispositivoModeloDTO data = new();
+            DispositivoModeloModel data = new();
 
             try
             {
@@ -73,7 +73,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposPlacas()
         {
-            DispositivoTipoPlacaDTO data = new();
+            DispositivoTipoPlacaModel data = new();
 
             try
             {
@@ -92,7 +92,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerComandosContadoras()
         {
-            DispositivoComandoContadoraDTO data = new();
+            DispositivoComandoContadoraModel data = new();
 
             try
             {
@@ -111,7 +111,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerComandosPlacas()
         {
-            DispositivoComandoPlacaDTO data = new();
+            DispositivoComandoPlacaModel data = new();
 
             try
             {
@@ -130,7 +130,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerConfiguraciones()
         {
-            DispositivoConfiguracionDepositarioDTO data = new();
+            DispositivoConfiguracionDepositarioModel data = new();
 
             try
             {
@@ -149,7 +149,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerContadoras()
         {
-            DispositivoDepositarioContadoraDTO data = new();
+            DispositivoDepositarioContadoraModel data = new();
 
             try
             {
@@ -168,7 +168,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEstados()
         {
-            DispositivoDepositarioEstadoDTO data = new();
+            DispositivoDepositarioEstadoModel data = new();
 
             try
             {
@@ -187,7 +187,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerPlacas()
         {
-            DispositivoDepositarioPlacaDTO data = new();
+            DispositivoDepositarioPlacaModel data = new();
 
             try
             {
@@ -206,7 +206,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerValores()
         {
-            DispositivoDepositarioValorDTO data = new();
+            DispositivoDepositarioValorModel data = new();
 
             try
             {
@@ -225,7 +225,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposConfiguraciones()
         {
-            DispositivoTipoConfiguracionDepositarioDTO data = new();
+            DispositivoTipoConfiguracionDepositarioModel data = new();
 
             try
             {
@@ -244,7 +244,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposContadoras()
         {
-            DispositivoTipoContadoraDTO data = new();
+            DispositivoTipoContadoraModel data = new();
 
             try
             {

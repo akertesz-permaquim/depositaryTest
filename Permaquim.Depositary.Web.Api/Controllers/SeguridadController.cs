@@ -16,7 +16,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerUsuarios()
         {
-            SeguridadUsuarioDTO data = new();
+            SeguridadUsuarioModel data = new();
 
             try
             {
@@ -35,7 +35,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerAplicacionesParametros()
         {
-            SeguridadAplicacionParametroDTO data = new();
+            SeguridadAplicacionParametroModel data = new();
 
             try
             {
@@ -54,7 +54,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerAplicacionesParametrosValores()
         {
-            SeguridadAplicacionParametroValorDTO data = new();
+            SeguridadAplicacionParametroValorModel data = new();
 
             try
             {
@@ -73,7 +73,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerRolesFunciones()
         {
-            SeguridadRolFuncionDTO data = new();
+            SeguridadRolFuncionModel data = new();
 
             try
             {
@@ -92,7 +92,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerUsuariosRoles()
         {
-            SeguridadUsuarioRolDTO data = new();
+            SeguridadUsuarioRolModel data = new();
 
             try
             {
@@ -111,7 +111,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerUsuariosSectores()
         {
-            SeguridadUsuarioSectorDTO data = new();
+            SeguridadUsuarioSectorModel data = new();
 
             try
             {
@@ -130,7 +130,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerRoles()
         {
-            SeguridadRolDTO data = new();
+            SeguridadRolModel data = new();
 
             try
             {
@@ -149,7 +149,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerMenues()
         {
-            SeguridadMenuDTO data = new();
+            SeguridadMenuModel data = new();
 
             try
             {
@@ -168,7 +168,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerFunciones()
         {
-            SeguridadFuncionDTO data = new();
+            SeguridadFuncionModel data = new();
 
             try
             {
@@ -187,7 +187,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposFunciones()
         {
-            SeguridadTipoFuncionDTO data = new();
+            SeguridadTipoFuncionModel data = new();
 
             try
             {
@@ -206,7 +206,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposMenues()
         {
-            SeguridadTipoMenuDTO data = new();
+            SeguridadTipoMenuModel data = new();
 
             try
             {
@@ -225,7 +225,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposAplicaciones()
         {
-            SeguridadTipoAplicacionDTO data = new();
+            SeguridadTipoAplicacionModel data = new();
 
             try
             {
@@ -244,7 +244,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerAplicaciones()
         {
-            SeguridadAplicacionDTO data = new();
+            SeguridadAplicacionModel data = new();
 
             try
             {

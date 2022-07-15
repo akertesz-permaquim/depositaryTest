@@ -24,7 +24,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("SincronizarTransacciones")]
         [Authorize]
-        public async Task<IActionResult> Transacciones([FromBody] TransaccionDTO model)
+        public async Task<IActionResult> Transacciones([FromBody] TransaccionModel model)
         {
             DepositaryWebApi.Business.Tables.Operacion.Transaccion transaccionEntity = new();
 
@@ -87,7 +87,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("SincronizarEventos")]
         [Authorize]
-        public async Task<IActionResult> Eventos([FromBody] EventoDTO model)
+        public async Task<IActionResult> Eventos([FromBody] EventoModel model)
         {
             DepositaryWebApi.Business.Tables.Operacion.Evento eventoEntity = new();
 
@@ -127,7 +127,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("SincronizarContenedores")]
         [Authorize]
-        public async Task<IActionResult> Contenedores([FromBody] ContenedorDTO model)
+        public async Task<IActionResult> Contenedores([FromBody] ContenedorModel model)
         {
             DepositaryWebApi.Business.Tables.Operacion.Contenedor contenedorEntity = new();
 
@@ -167,7 +167,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("SincronizarCierresDiarios")]
         [Authorize]
-        public async Task<IActionResult> CierresDiarios([FromBody] CierreDiarioDTO model)
+        public async Task<IActionResult> CierresDiarios([FromBody] CierreDiarioModel model)
         {
             DepositaryWebApi.Business.Tables.Operacion.Contenedor cierreDiarioEntity = new();
 
@@ -207,7 +207,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("SincronizarSesiones")]
         [Authorize]
-        public async Task<IActionResult> Sesiones([FromBody] SesionDTO model)
+        public async Task<IActionResult> Sesiones([FromBody] SesionModel model)
         {
             DepositaryWebApi.Business.Tables.Operacion.Sesion sesionEntity = new();
 
@@ -247,7 +247,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("SincronizarTurnos")]
         [Authorize]
-        public async Task<IActionResult> Turnos([FromBody] TurnoDTO model)
+        public async Task<IActionResult> Turnos([FromBody] OperacionTurnoModel model)
         {
             DepositaryWebApi.Business.Tables.Operacion.Transaccion turnoEntity = new();
 
@@ -304,7 +304,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposTransacciones()
         {
-            OperacionTipoTransaccionDTO data = new();
+            OperacionTipoTransaccionModel data = new();
 
             try
             {
@@ -323,7 +323,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposContenedores()
         {
-            OperacionTipoContenedorDTO data = new();
+            OperacionTipoContenedorModel data = new();
 
             try
             {
@@ -342,7 +342,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerTiposEventos()
         {
-            OperacionTipoEventoDTO data = new();
+            OperacionTipoEventoModel data = new();
 
             try
             {

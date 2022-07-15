@@ -1,19 +1,19 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
-    public class BancaBancoDTO
+    public class BancaBancoModel
     {
         public List<DepositaryWebApi.Entities.Tables.Banca.Banco> Bancos { get; set; } = new();
     }
 
-    public class BancaCuentaDTO
+    public class BancaCuentaModel
     {
         public List<DepositaryWebApi.Entities.Tables.Banca.Cuenta> Cuentas { get; set; } = new();
     }
-    public class BancaTipoCuentaDTO
+    public class BancaTipoCuentaModel
     {
         public List<DepositaryWebApi.Entities.Tables.Banca.TipoCuenta> TiposCuenta { get; set; } = new();
     }
-    public class BancaUsuarioCuentaDTO
+    public class BancaUsuarioCuentaModel
     {
         public List<DepositaryWebApi.Entities.Tables.Banca.UsuarioCuenta> UsuariosCuenta { get; set; } = new();
     }
