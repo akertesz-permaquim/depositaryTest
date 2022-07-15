@@ -1,0 +1,20 @@
+[
+  {
+    "ExecutionOrder": 1,
+    "Endpoint": "/autenticacion/obtenertoken",
+    "WorkerTaskType": 1,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.LoginModel"
+  },
+  //{
+  //  "ExecutionOrder": 2,
+  //  "Endpoint": "/Operacion/SincronizarTransacciones",
+  //  "WorkerTaskType": 2,
+  //  "Entity": "Permaquim.Depositary.Sincronization.Console.OperacionModel"
+  //},
+  {
+    "ExecutionOrder": 3,
+    "Endpoint": "/estilo/Obtenerestilo",
+    "WorkerTaskType": 3,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.EstiloModel"
+  }
+]

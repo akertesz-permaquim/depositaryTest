@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\DispositivoController.cs" />
+    <Compile Remove="Model\RequestModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
