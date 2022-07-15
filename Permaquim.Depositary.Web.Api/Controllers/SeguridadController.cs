@@ -12,6 +12,37 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
+        [Route("ObtenerSeguridad")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerSeguridad()
+        {
+            SeguridadModel data = new();
+
+            try
+            {
+                data.TiposAplicaciones = ObtenerTiposAplicacionesBD();
+                data.Aplicaciones = ObtenerAplicacionesBD();
+                data.AplicacionesParametros = ObtenerAplicacionesParametrosBD();
+                data.AplicacionesParametrosValores = ObtenerAplicacionesParametrosValoresBD();
+                data.TiposFunciones = ObtenerTiposFuncionesBD();
+                data.TiposMenues = ObtenerTiposMenuesBD();
+                data.Roles = ObtenerRolesBD();
+                data.Funciones = ObtenerFuncionesBD();
+                data.RolesFunciones = ObtenerRolesFuncionesBD();
+                data.Menues = ObtenerMenuesBD();
+                data.Usuarios = ObtenerUsuariosBD();
+                data.UsuariosRoles = ObtenerUsuariosRolesBD();
+                data.UsuariosSectores = ObtenerUsuariosSectoresBD();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerUsuarios")]
         [Authorize]
         public async Task<IActionResult> ObtenerUsuarios()

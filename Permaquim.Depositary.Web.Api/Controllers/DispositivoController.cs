@@ -8,8 +8,39 @@ namespace Permaquim.Depositary.Web.Api.Controllers
     [ApiController]
     public class DispositivoController : ControllerBase
     {
-
         #region Endpoints
+
+        [HttpGet]
+        [Route("ObtenerDispositivo")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerDispositivo()
+        {
+            DispositivoModel data = new();
+
+            try
+            {
+                data.Modelos = ObtenerModelosBD();
+                data.Marcas = ObtenerMarcasBD();
+                data.Depositarios = ObtenerDepositariosBD();
+                data.TiposPlacas = ObtenerTiposPlacasBD();
+                data.ComandosPlacas = ObtenerComandosPlacasBD();
+                data.TiposConfiguraciones = ObtenerTiposConfiguracionesBD();
+                data.PlacasDepositarios = ObtenerPlacasBD();
+                data.ConfiguracionesDepositarios = ObtenerConfiguracionesBD();
+                data.TiposContadoras = ObtenerTiposContadorasBD();
+                data.ContadorasDepositarios = ObtenerContadorasBD();
+                data.ComandosContadoras = ObtenerComandosContadorasBD();
+                data.ValoresDepositarios = ObtenerValoresBD();
+                data.EstadosDepositarios = ObtenerEstadosBD();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
 
         [HttpGet]
         [Route("ObtenerDepositarios")]

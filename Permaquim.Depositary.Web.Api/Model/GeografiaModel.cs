@@ -1,5 +1,14 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
+    public class GeografiaModel
+    {
+        public List<DepositaryWebApi.Entities.Tables.Geografia.Pais> Paises { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Geografia.Provincia> Provincias { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Geografia.Ciudad> Ciudades { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Geografia.CodigoPostal> CodigosPostales { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Geografia.Zona> Zonas { get; set; } = new();
+
+    }
     public class GeografiaPaisModel
     {
         public List<DepositaryWebApi.Entities.Tables.Geografia.Pais> Paises { get; set; } = new();

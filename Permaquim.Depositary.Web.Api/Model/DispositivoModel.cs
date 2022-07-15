@@ -1,5 +1,22 @@
 ﻿namespace Permaquim.Depositary.Web.Api.Model
 {
+    public class DispositivoModel
+    {
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.Modelo> Modelos { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.Marca> Marcas { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> Depositarios { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoPlaca> TiposPlacas { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoPlaca> ComandosPlacas { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoConfiguracionDepositario> TiposConfiguraciones { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> PlacasDepositarios { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> ConfiguracionesDepositarios { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoContadora> TiposContadoras { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> ContadorasDepositarios { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoContadora> ComandosContadoras { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioValor> ValoresDepositarios { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> EstadosDepositarios { get; set; } = new();
+    }
+
     public class DispositivoDepositarioModel
     {
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> Depositarios { get; set; } = new();

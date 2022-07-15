@@ -11,6 +11,26 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
+        [Route("ObtenerRegionalizacion")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerRegionalizacion()
+        {
+            RegionalizacionModel data = new();
+
+            try
+            {
+                data.Lenguajes = ObtenerLenguajesBD();
+                data.LenguajeItems = ObtenerLenguajesItemsBD();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerLenguajes")]
         [Authorize]
         public async Task<IActionResult> ObtenerLenguajes()
