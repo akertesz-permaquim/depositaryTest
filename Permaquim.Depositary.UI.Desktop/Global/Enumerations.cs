@@ -16,6 +16,17 @@
             EnvelopeDeposit = 3,
             ValueExtraction = 4
         }
+        public enum ReportTypeEnum
+        {
+            None,
+            BillDeposit,
+            CoinDeposit,
+            EnvelopeDeposit,
+            ValueExtraction,
+            DailyClosing,
+            TurnChange
+
+        }
         public enum ColorNameEnum
         {
             Ninguno = 0,

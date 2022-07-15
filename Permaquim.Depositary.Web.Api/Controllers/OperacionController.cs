@@ -40,28 +40,46 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
                     transaccionEntity.BeginTransaction();
 
-                    foreach (var item in model.Transaccion)
+                    foreach (var transactionItem in model.Transaccion)
                     {
-                        item.DepositarioId = depositarioId;
-                        transaccionEntity.Add(item);
-                    }
+                        transactionItem.DepositarioId = depositarioId;
+                        var previousTransactionId = transactionItem.Id;
+                        var newTransaction = transaccionEntity.AddOrUpdate(transactionItem);
 
-                    DepositaryWebApi.Business.Tables.Operacion.TransaccionDetalle transaccionDetalleEntity = new(transaccionEntity);
-                    foreach (var item in model.TransaccionDetalle)
-                    {
-                        transaccionDetalleEntity.Add(item);
-                    }
+                        DepositaryWebApi.Business.Tables.Operacion.TransaccionDetalle transaccionDetalleEntity = new(transaccionEntity);
 
-                    DepositaryWebApi.Business.Tables.Operacion.TransaccionSobre transaccionSobreEntity = new(transaccionEntity);
-                    foreach (var item in model.TransaccionSobre)
-                    {
-                        transaccionSobreEntity.Add(item);
-                    }
+                        foreach (var itemDetail in model.TransaccionDetalle)
+                        {
+                            if (itemDetail.TransaccionId == previousTransactionId)
+                            {
+                                itemDetail.TransaccionId = newTransaction.Id;
+                                transaccionDetalleEntity.AddOrUpdate(itemDetail);
+                            }
+                        }
 
-                    DepositaryWebApi.Business.Tables.Operacion.TransaccionSobreDetalle transaccionSobreDetalleEntity = new(transaccionEntity);
-                    foreach (var item in model.TransaccionSobreDetalle)
-                    {
-                        transaccionSobreDetalleEntity.Add(item);
+                        DepositaryWebApi.Business.Tables.Operacion.TransaccionSobre transaccionSobreEntity = new(transaccionEntity);
+                        DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobre newEnvelope = new();
+
+                        foreach (var itemEnvelope in model.TransaccionSobre)
+                        {
+                            var previousEnvelopeId = itemEnvelope.Id;
+
+                            if (itemEnvelope.TransaccionId == previousTransactionId)
+                            {
+                                itemEnvelope.TransaccionId = newTransaction.Id;
+                                newEnvelope = transaccionSobreEntity.AddOrUpdate(itemEnvelope);
+
+                                DepositaryWebApi.Business.Tables.Operacion.TransaccionSobreDetalle transaccionSobreDetalleEntity = new(transaccionEntity);
+                                foreach (var itemEnvelopeDetail in model.TransaccionSobreDetalle)
+                                {
+                                    if (itemEnvelopeDetail.SobreId == previousEnvelopeId)
+                                    {
+                                        itemEnvelopeDetail.SobreId = newEnvelope.Id;
+                                        transaccionSobreDetalleEntity.AddOrUpdate(itemEnvelopeDetail);
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     transaccionEntity.EndTransaction(true);

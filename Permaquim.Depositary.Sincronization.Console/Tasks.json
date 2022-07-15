@@ -1,0 +1,33 @@
+[
+  {
+    "ExecutionOrder": 1,
+    "Endpoint": "/autenticacion/obtenertoken",
+    "WorkerTaskType": 1,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.LoginModel"
+  },
+  {
+    "ExecutionOrder": 2,
+    "Endpoint": "/Operacion/SincronizarTransacciones",
+    "WorkerTaskType": 2,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.OperacionModel"
+  },
+  //{
+  //  "ExecutionOrder": 3,
+  //  "Endpoint": "/estilo/Obtenerestilo",
+  //  "WorkerTaskType": 3,
+  //  "Entity": "Permaquim.Depositary.Sincronization.Console.EstiloModel"
+  //},
+  //{
+  //  "ExecutionOrder": 3,
+  //  "Endpoint": "/lenguaje/ObtenerLenguaje",
+  //  "WorkerTaskType": 3,
+  //  "Entity": "Permaquim.Depositary.Sincronization.Console.LenguajeModel"
+  //},
+  //{
+  //  "ExecutionOrder": 3,
+  //  "Endpoint": "/configuracion/ObtenerConfiguracion",
+  //  "WorkerTaskType": 3,
+  //  "Entity": "Permaquim.Depositary.Sincronization.Console.ConfiguracionModel"
+  //}
+  
+]

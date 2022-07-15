@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Permaquim.Depositary.Web.Api.Model;
 
@@ -17,8 +16,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             ConfiguracionModel data = new();
 
                 data.ConfiguracionAplicacion = ObtenerConfiguracionAplicacion();
-                data.ConfiguracionDispositivo = ObtenerConfiguracionDepositario();
-
+                data.ConfiguracionDepositario = ObtenerConfiguracionDepositario();
 
             return Ok(data);
 

@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using Permaquim.Depositary.UI.Desktop.Components;
+﻿using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
 using System.Text;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
+using Microsoft.Reporting.WinForms;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -730,6 +730,8 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private void SaveTransaction()
         {
+            List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> headerTransaction = new();
+            List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> detailTransactions = new();
             _operationStatus.CurrentTransactionAmount += _currentCountingAmount;
 
 
@@ -759,7 +761,7 @@ namespace Permaquim.Depositary.UI.Desktop
                    
 
                 };
-                transactions.Add(transaction);
+                headerTransaction.Add(transactions.Add(transaction));
                 _operationStatus.CurrentTransactionId = transaction.Id;
             }
             else
@@ -786,9 +788,18 @@ namespace Permaquim.Depositary.UI.Desktop
                         TransaccionId = _operationStatus.CurrentTransactionId
 
                     };
-                    transactionDetails.Add(transactionDetail);
+                    detailTransactions.Add(
+                    transactionDetails.Add(transactionDetail)
+                    );
                 }
             }
+
+            ReportDataSource rdsHeaderTransaction = new ReportDataSource("Transaccion", headerTransaction);
+            ReportDataSource rdsDetailTransactions = new ReportDataSource("TransaccionDetalle", detailTransactions);
+
+
+            ReportController.PrintReport(ReportTypeEnum.BillDeposit,
+                new List<ReportDataSource>(){ rdsHeaderTransaction , rdsDetailTransactions },null);
 
         }
         #endregion
