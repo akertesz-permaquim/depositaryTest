@@ -11,6 +11,29 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
+        [Route("ObtenerValor")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerValor()
+        {
+            ValorModel data = new();
+
+            try
+            {
+                data.Monedas = ObtenerMonedasBD();
+                data.Denominaciones = ObtenerDenominacionesBD();
+                data.Tipos = ObtenerTiposBD();
+                data.RelacionesMonedasTiposValores = ObtenerRelacionesMonedasTiposValoresBD();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerDenominaciones")]
         [Authorize]
         public async Task<IActionResult> ObtenerDenominaciones()

@@ -11,6 +11,27 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
+        [Route("ObtenerVisualizacion")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerVisualizacion()
+        {
+            VisualizacionModel data = new();
+
+            try
+            {
+                data.Tipos = ObtenerTiposBD();
+                data.Perfiles = ObtenerPerfilesBD();
+                data.PerfilesItems = ObtenerPerfilesItemsBD();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerPerfiles")]
         [Authorize]
         public async Task<IActionResult> ObtenerPerfiles()

@@ -11,6 +11,28 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
+        [Route("ObtenerBanca")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerBanca()
+        {
+            BancaModel data = new();
+
+            try
+            {
+                data.Bancos = ObtenerBancosBD();
+                data.TiposCuenta = ObtenerTiposCuentasBD();
+                data.Cuentas = ObtenerCuentasBD();
+                data.UsuariosCuenta = ObtenerUsuariosCuentasBD();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerBancos")]
         [Authorize]
         public async Task<IActionResult> ObtenerBancos()

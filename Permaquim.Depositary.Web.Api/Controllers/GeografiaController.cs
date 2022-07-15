@@ -10,6 +10,29 @@ namespace Permaquim.Depositary.Web.Api.Controllers
     {
         #region Endpoints
         [HttpGet]
+        [Route("ObtenerGeografia")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerGeografia()
+        {
+            GeografiaModel data = new();
+
+            try
+            {
+                data.Paises = ObtenerPaisesBD();
+                data.Provincias = ObtenerProvinciasBD();
+                data.Ciudades = ObtenerCiudadesBD();
+                data.CodigosPostales = ObtenerCodigosPostalesBD();
+                data.Zonas = ObtenerZonasBD();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerPaises")]
         [Authorize]
         public async Task<IActionResult> ObtenerPaises()

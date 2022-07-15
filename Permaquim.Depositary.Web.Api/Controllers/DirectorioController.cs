@@ -11,6 +11,32 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
+        [Route("ObtenerDirectorio")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerDirectorio()
+        {
+            DirectorioModel data = new();
+
+            try
+            {
+                data.Grupos = ObtenerGruposBD();
+                data.Empresas = ObtenerEmpresasBD();
+                data.Sucursales = ObtenerSucursalesBD();
+                data.Sectores = ObtenerSectoresBD();
+                data.TiposIdentificador = ObtenerTiposIdentificadoresBD();
+                data.IdentificadoresUsuario = ObtenerIdentificadoresUsuariosBD();
+                data.RelacionesMonedasSucursales = ObtenerRelacionesMonedasSucursalesBD();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerGrupos")]
         [Authorize]
         public async Task<IActionResult> ObtenerGrupos()

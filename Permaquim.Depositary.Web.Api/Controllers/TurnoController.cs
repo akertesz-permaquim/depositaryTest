@@ -11,6 +11,27 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
+        [Route("ObtenerTurno")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerTurno()
+        {
+            TurnoModel data = new();
+
+            try
+            {
+                data.Esquemas = ObtenerEsquemasBD();
+                data.EsquemasDetalles = ObtenerEsquemasDetallesBD();
+                data.Agendas = ObtenerAgendasBD();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
+        [HttpGet]
         [Route("ObtenerAgendas")]
         [Authorize]
         public async Task<IActionResult> ObtenerAgendas()
