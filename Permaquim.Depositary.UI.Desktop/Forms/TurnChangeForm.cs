@@ -182,7 +182,7 @@ namespace Permaquim.Depositary.UI.Desktop
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalValidado",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTALVALIDADO),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
                 Name = "TotalValidado",
                 Visible = true,
                 Width = 100,
@@ -193,7 +193,7 @@ namespace Permaquim.Depositary.UI.Desktop
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalAValidar",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTALAVALIDAR),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
                 Name = "TotalAValidar",
                 Visible = true,
                 Width = 100,

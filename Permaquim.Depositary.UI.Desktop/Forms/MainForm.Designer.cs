@@ -164,13 +164,12 @@
             // 
             // RemainingTimeLabel
             // 
-            this.RemainingTimeLabel.AutoSize = true;
             this.RemainingTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.RemainingTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(416, 16);
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(408, 16);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(57, 15);
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(376, 15);
             this.RemainingTimeLabel.TabIndex = 21;
             this.RemainingTimeLabel.Text = "**********";
             // 

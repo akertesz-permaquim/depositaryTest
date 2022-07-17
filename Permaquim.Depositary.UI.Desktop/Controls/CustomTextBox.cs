@@ -101,7 +101,25 @@ using System.Drawing.Drawing2D;
             set { textBox1.Multiline = value; }
         }
 
-        [Category("RJ Code Advance")]
+        public int SelectionStart
+        {
+            get { return textBox1.SelectionStart; }
+            set
+            {
+                textBox1.SelectionStart = value;
+            }
+        }
+
+    public int SelectionLength
+    {
+        get { return textBox1.SelectionLength; }
+        set
+        {
+            textBox1.SelectionLength = value;
+        }
+    }
+
+    [Category("RJ Code Advance")]
         public override Color BackColor
         {
             get { return base.BackColor; }

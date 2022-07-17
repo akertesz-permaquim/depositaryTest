@@ -43,9 +43,9 @@
             this.MainPanel.Controls.Add(this.LoginPictureBox);
             this.MainPanel.Controls.Add(this.TitleLabel);
             this.MainPanel.Controls.Add(this.MainKeyboard);
-            this.MainPanel.Location = new System.Drawing.Point(3, 0);
+            this.MainPanel.Location = new System.Drawing.Point(9, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(725, 552);
+            this.MainPanel.Size = new System.Drawing.Size(856, 552);
             this.MainPanel.TabIndex = 0;
             // 
             // LoginPictureBox
@@ -63,7 +63,7 @@
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.TitleLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.TitleLabel.Location = new System.Drawing.Point(204, 6);
+            this.TitleLabel.Location = new System.Drawing.Point(304, 6);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(259, 37);
             this.TitleLabel.TabIndex = 4;
@@ -79,7 +79,7 @@
             this.MainKeyboard.Location = new System.Drawing.Point(4, 46);
             this.MainKeyboard.Name = "MainKeyboard";
             this.MainKeyboard.PasswordTextBoxPlaceholder = "Clave";
-            this.MainKeyboard.Size = new System.Drawing.Size(715, 548);
+            this.MainKeyboard.Size = new System.Drawing.Size(846, 490);
             this.MainKeyboard.TabIndex = 6;
             this.MainKeyboard.UserTextboxPlaceholder = "Usuario";
             this.MainKeyboard.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainKeyboard_MouseClick);
@@ -88,7 +88,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(734, 572);
+            this.ClientSize = new System.Drawing.Size(879, 572);
             this.ControlBox = false;
             this.Controls.Add(this.MainPanel);
             this.DoubleBuffered = true;

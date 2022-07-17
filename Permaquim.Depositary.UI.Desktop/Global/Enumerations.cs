@@ -147,8 +147,8 @@
             USUARIO,
             TURNO,
             TOTAL,
-            TOTALVALIDADO,
-            TOTALAVALIDAR,
+            TOTAL_VALIDADO,
+            TOTAL_A_VALIDAR,
             TIPOVALOR,
             TIPOID,
             TIPO,
@@ -191,7 +191,8 @@
             SUCURSAL,
             DEPOSITARIO,
             SOLICITAR_MAS_TIEMPO,
-            REQUIERE_IDENTIFICADOR_SOBRE
+            REQUIERE_IDENTIFICADOR_SOBRE,
+            EJECUTAR
         }
 
         public enum FunctionEnum

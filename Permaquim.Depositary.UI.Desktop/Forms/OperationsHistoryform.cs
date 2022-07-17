@@ -7,6 +7,10 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class OperationsHistoryform : Form
     {
+        private const string NICKNAME = "NickName";
+        private const string NOMBRE = "Nombre";
+        private const string ID = "Id";
+        private const string TODOS = "Todos";
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public OperationsHistoryform()
         {
@@ -15,7 +19,9 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadStyles();
             LoadFilterControls();
             InitializeOperationsHeaderGridView();
-  
+
+            FromDateTimePicker.Value = DateTime.Now.AddDays(-30);
+
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
@@ -56,6 +62,14 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+   
+            ExecuteButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ExecuteButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ExecuteButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            ExecuteButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            ExecuteButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EJECUTAR);
+
             StyleController.SetControlStyle(OperationsHeaderGridView);
             StyleController.SetControlStyle(OperationsDetailGridView);
         }
@@ -69,16 +83,23 @@ namespace Permaquim.Depositary.UI.Desktop
 
         public void LoadFilterControls()
         {
-            
-            UserComboBox.DataSource = DatabaseController.GetUserList();
+            var userList = DatabaseController.GetUserList();
 
-            UserComboBox.DisplayMember = "NickName";
-            UserComboBox.ValueMember = "Id";
+            userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
+            {
+                NickName = TODOS,
+                Id = -1
+            });
+
+            UserComboBox.DataSource = userList;
+
+            UserComboBox.DisplayMember = NICKNAME;
+            UserComboBox.ValueMember = ID;
 
             TurnComboBox.DataSource = DatabaseController.GetTurnList();
 
-            TurnComboBox.DisplayMember = "Nombre";
-            TurnComboBox.ValueMember = "Id";
+            TurnComboBox.DisplayMember = NOMBRE;
+            TurnComboBox.ValueMember = ID;
         }
 
         private void OperationHistoryForm_Load(object sender, EventArgs e)
@@ -93,9 +114,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
             OperationsHeaderGridView.Columns.Add(new()
             {
-                DataPropertyName = "Id",
+                DataPropertyName = ID,
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
-                Name = "Id",
+                Name = ID,
                 Visible = false,
                 Width = 100,
                 CellTemplate = new DataGridViewTextBoxCell()
@@ -105,7 +126,7 @@ namespace Permaquim.Depositary.UI.Desktop
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalValidado",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTALVALIDADO),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
                 Name = "TotalValidado",
                 Visible = true,
                 Width = 100,
@@ -116,7 +137,7 @@ namespace Permaquim.Depositary.UI.Desktop
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalAValidar",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTALAVALIDAR),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
                 Name = "TotalAValidar",
                 Visible = true,
                 Width = 100,
@@ -192,7 +213,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
- 
 
             OperationsHeaderGridView.Columns.Add(new()
             {
@@ -204,9 +224,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-
-
-  
 
             OperationsHeaderGridView.Columns.Add(new()
             {
@@ -230,7 +247,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Finalizada",
@@ -241,8 +257,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewCheckBoxCell()
 
             });
-
-
         }
 
         private void InitializeOperationsDetailGridView(OperationTypeEnum operationType)
@@ -254,9 +268,9 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 OperationsDetailGridView.Columns.Add(new()
                 {
-                    DataPropertyName = "Id",
+                    DataPropertyName = ID,
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
-                    Name = "Id",
+                    Name = ID,
                     Visible = false,
                     Width = 100,
                     CellTemplate = new DataGridViewTextBoxCell()
@@ -336,8 +350,10 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadOperationsHeader()
         {
 
+            OperationsHeaderGridView.DataSource = null;
+
             var operations = DatabaseController.GetOperationsHeaders(
-                FromDateTimePicker.Value ,
+                FromDateTimePicker.Value,
                 ToDateTimePicker.Value,
                 (long)UserComboBox.SelectedValue,
                 (long)TurnComboBox.SelectedValue
@@ -373,7 +389,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
-            var operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["Id"].Value;
+            var operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells[ID].Value;
             var operationTypeId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["TipoId"].Value;
 
             InitializeOperationsDetailGridView((OperationTypeEnum)operationTypeId);

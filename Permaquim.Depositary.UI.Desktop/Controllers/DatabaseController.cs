@@ -316,19 +316,24 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             DateTime dateFrom, DateTime dateTo, long userId, long turnId)
         {
 
+
+
             Permaquim.Depositario.Business.Relations.Operacion.Transaccion transaction = new();
 
             transaction.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha,
-                Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, dateFrom);
-            transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, 
+                Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, dateFrom.Date);
+            transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha,
-                Depositario.sqlEnum.OperandEnum.LessThanOrEqual, dateTo);
-            transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, 
-                Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.UsuarioId,
-                Depositario.sqlEnum.OperandEnum.Equal, userId);
-            transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, 
-                Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
-                Depositario.sqlEnum.OperandEnum.Equal, turnId);
+                Depositario.sqlEnum.OperandEnum.LessThanOrEqual, dateTo.Date);
+            if (userId > -1)
+            {
+                transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.UsuarioId,
+                    Depositario.sqlEnum.OperandEnum.Equal, userId);
+            }
+            //transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, 
+            //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
+            //    Depositario.sqlEnum.OperandEnum.Equal, turnId);
             transaction.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
 
             transaction.Items();

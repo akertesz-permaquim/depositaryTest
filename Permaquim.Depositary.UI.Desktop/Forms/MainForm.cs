@@ -222,6 +222,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 RemainingTimeLabel.ForeColor = Color.Red;
                 RemainingTimeLabel.Text += " * " + 
                     MultilanguangeController.GetText(MultiLanguageEnum.SOLICITAR_MAS_TIEMPO);
+                RemainingTimeLabel.Visible = ((remainingTime % 2) == 0);
             }
         }
 

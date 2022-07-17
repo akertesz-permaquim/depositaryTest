@@ -1,6 +1,6 @@
 ﻿namespace Permaquim.Depositary.UI.Desktop.Controls
 {
-    partial class CustomKeyboard
+    partial class CustomInputboxKeyboard
     {
         /// <summary> 
         /// Required designer variable.
@@ -39,8 +39,7 @@
             this.Button_C = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_X = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_Z = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.PasswordTexbox = new CustomTextBox();
-            this.UsernameTextBox = new CustomTextBox();
+            this.InputTexbox = new CustomTextBox();
             this.Button_Space = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_Enter = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.Button_Ñ = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -96,7 +95,7 @@
             this.Button_Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Delete.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Delete.ForeColor = System.Drawing.Color.White;
-            this.Button_Delete.Location = new System.Drawing.Point(592, 285);
+            this.Button_Delete.Location = new System.Drawing.Point(592, 237);
             this.Button_Delete.Name = "Button_Delete";
             this.Button_Delete.Size = new System.Drawing.Size(236, 55);
             this.Button_Delete.TabIndex = 92;
@@ -117,7 +116,7 @@
             this.Button_Star.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Star.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Star.ForeColor = System.Drawing.Color.White;
-            this.Button_Star.Location = new System.Drawing.Point(533, 285);
+            this.Button_Star.Location = new System.Drawing.Point(533, 237);
             this.Button_Star.Name = "Button_Star";
             this.Button_Star.Size = new System.Drawing.Size(55, 55);
             this.Button_Star.TabIndex = 91;
@@ -138,7 +137,7 @@
             this.Button_Underscore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Underscore.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Underscore.ForeColor = System.Drawing.Color.White;
-            this.Button_Underscore.Location = new System.Drawing.Point(475, 285);
+            this.Button_Underscore.Location = new System.Drawing.Point(475, 237);
             this.Button_Underscore.Name = "Button_Underscore";
             this.Button_Underscore.Size = new System.Drawing.Size(55, 55);
             this.Button_Underscore.TabIndex = 90;
@@ -159,7 +158,7 @@
             this.Button_Dot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Dot.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Dot.ForeColor = System.Drawing.Color.White;
-            this.Button_Dot.Location = new System.Drawing.Point(417, 285);
+            this.Button_Dot.Location = new System.Drawing.Point(417, 237);
             this.Button_Dot.Name = "Button_Dot";
             this.Button_Dot.Size = new System.Drawing.Size(55, 55);
             this.Button_Dot.TabIndex = 89;
@@ -180,7 +179,7 @@
             this.Button_M.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_M.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_M.ForeColor = System.Drawing.Color.White;
-            this.Button_M.Location = new System.Drawing.Point(359, 285);
+            this.Button_M.Location = new System.Drawing.Point(359, 237);
             this.Button_M.Name = "Button_M";
             this.Button_M.Size = new System.Drawing.Size(55, 55);
             this.Button_M.TabIndex = 88;
@@ -201,7 +200,7 @@
             this.Button_N.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_N.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_N.ForeColor = System.Drawing.Color.White;
-            this.Button_N.Location = new System.Drawing.Point(300, 285);
+            this.Button_N.Location = new System.Drawing.Point(300, 237);
             this.Button_N.Name = "Button_N";
             this.Button_N.Size = new System.Drawing.Size(55, 55);
             this.Button_N.TabIndex = 87;
@@ -222,7 +221,7 @@
             this.Button_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_B.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_B.ForeColor = System.Drawing.Color.White;
-            this.Button_B.Location = new System.Drawing.Point(241, 285);
+            this.Button_B.Location = new System.Drawing.Point(241, 237);
             this.Button_B.Name = "Button_B";
             this.Button_B.Size = new System.Drawing.Size(55, 55);
             this.Button_B.TabIndex = 86;
@@ -243,7 +242,7 @@
             this.Button_V.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_V.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_V.ForeColor = System.Drawing.Color.White;
-            this.Button_V.Location = new System.Drawing.Point(182, 285);
+            this.Button_V.Location = new System.Drawing.Point(182, 237);
             this.Button_V.Name = "Button_V";
             this.Button_V.Size = new System.Drawing.Size(55, 55);
             this.Button_V.TabIndex = 85;
@@ -264,7 +263,7 @@
             this.Button_C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_C.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_C.ForeColor = System.Drawing.Color.White;
-            this.Button_C.Location = new System.Drawing.Point(124, 285);
+            this.Button_C.Location = new System.Drawing.Point(124, 237);
             this.Button_C.Name = "Button_C";
             this.Button_C.Size = new System.Drawing.Size(55, 55);
             this.Button_C.TabIndex = 84;
@@ -285,7 +284,7 @@
             this.Button_X.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_X.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_X.ForeColor = System.Drawing.Color.White;
-            this.Button_X.Location = new System.Drawing.Point(65, 285);
+            this.Button_X.Location = new System.Drawing.Point(65, 237);
             this.Button_X.Name = "Button_X";
             this.Button_X.Size = new System.Drawing.Size(55, 55);
             this.Button_X.TabIndex = 83;
@@ -306,7 +305,7 @@
             this.Button_Z.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Z.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Z.ForeColor = System.Drawing.Color.White;
-            this.Button_Z.Location = new System.Drawing.Point(6, 285);
+            this.Button_Z.Location = new System.Drawing.Point(6, 237);
             this.Button_Z.Name = "Button_Z";
             this.Button_Z.Size = new System.Drawing.Size(55, 55);
             this.Button_Z.TabIndex = 82;
@@ -316,57 +315,31 @@
             this.Button_Z.UseVisualStyleBackColor = false;
             this.Button_Z.Click += new System.EventHandler(this.KeysHandler);
             // 
-            // PasswordTexbox
+            // InputTexbox
             // 
-            this.PasswordTexbox.BackColor = System.Drawing.SystemColors.Window;
-            this.PasswordTexbox.BorderColor = System.Drawing.Color.SteelBlue;
-            this.PasswordTexbox.BorderFocusColor = System.Drawing.Color.MediumSlateBlue;
-            this.PasswordTexbox.BorderRadius = 4;
-            this.PasswordTexbox.BorderSize = 2;
-            this.PasswordTexbox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.PasswordTexbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PasswordTexbox.Location = new System.Drawing.Point(256, 56);
-            this.PasswordTexbox.Margin = new System.Windows.Forms.Padding(4);
-            this.PasswordTexbox.Multiline = false;
-            this.PasswordTexbox.Name = "PasswordTexbox";
-            this.PasswordTexbox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.PasswordTexbox.PasswordChar = true;
-            this.PasswordTexbox.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.PasswordTexbox.PlaceholderText = "Clave";
-            this.PasswordTexbox.SelectionLength = 0;
-            this.PasswordTexbox.SelectionStart = 0;
-            this.PasswordTexbox.Size = new System.Drawing.Size(352, 45);
-            this.PasswordTexbox.TabIndex = 81;
-            this.PasswordTexbox.Texts = "";
-            this.PasswordTexbox.UnderlinedStyle = false;
-            this.PasswordTexbox.Enter += new System.EventHandler(this.PasswordTexbox_Enter);
-            this.PasswordTexbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTexbox_KeyPress);
-            // 
-            // UsernameTextBox
-            // 
-            this.UsernameTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.UsernameTextBox.BorderColor = System.Drawing.Color.SteelBlue;
-            this.UsernameTextBox.BorderFocusColor = System.Drawing.Color.MediumSlateBlue;
-            this.UsernameTextBox.BorderRadius = 4;
-            this.UsernameTextBox.BorderSize = 2;
-            this.UsernameTextBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.UsernameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.UsernameTextBox.Location = new System.Drawing.Point(255, 0);
-            this.UsernameTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.UsernameTextBox.Multiline = false;
-            this.UsernameTextBox.Name = "UsernameTextBox";
-            this.UsernameTextBox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.UsernameTextBox.PasswordChar = false;
-            this.UsernameTextBox.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.UsernameTextBox.PlaceholderText = "Usuario";
-            this.UsernameTextBox.SelectionLength = 0;
-            this.UsernameTextBox.SelectionStart = 0;
-            this.UsernameTextBox.Size = new System.Drawing.Size(352, 45);
-            this.UsernameTextBox.TabIndex = 80;
-            this.UsernameTextBox.Texts = "";
-            this.UsernameTextBox.UnderlinedStyle = false;
-            this.UsernameTextBox.Enter += new System.EventHandler(this.UsernameTextBox_Enter);
-            this.UsernameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UsernameTextBox_KeyPress);
+            this.InputTexbox.BackColor = System.Drawing.SystemColors.Window;
+            this.InputTexbox.BorderColor = System.Drawing.Color.SteelBlue;
+            this.InputTexbox.BorderFocusColor = System.Drawing.Color.MediumSlateBlue;
+            this.InputTexbox.BorderRadius = 4;
+            this.InputTexbox.BorderSize = 2;
+            this.InputTexbox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InputTexbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.InputTexbox.Location = new System.Drawing.Point(6, 8);
+            this.InputTexbox.Margin = new System.Windows.Forms.Padding(4);
+            this.InputTexbox.Multiline = false;
+            this.InputTexbox.Name = "InputTexbox";
+            this.InputTexbox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.InputTexbox.PasswordChar = true;
+            this.InputTexbox.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.InputTexbox.PlaceholderText = "...";
+            this.InputTexbox.SelectionLength = 0;
+            this.InputTexbox.SelectionStart = 0;
+            this.InputTexbox.Size = new System.Drawing.Size(822, 45);
+            this.InputTexbox.TabIndex = 81;
+            this.InputTexbox.Texts = "";
+            this.InputTexbox.UnderlinedStyle = false;
+            this.InputTexbox.Enter += new System.EventHandler(this.PasswordTexbox_Enter);
+            this.InputTexbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTexbox_KeyPress);
             // 
             // Button_Space
             // 
@@ -379,7 +352,7 @@
             this.Button_Space.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Space.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Space.ForeColor = System.Drawing.Color.White;
-            this.Button_Space.Location = new System.Drawing.Point(123, 344);
+            this.Button_Space.Location = new System.Drawing.Point(123, 296);
             this.Button_Space.Name = "Button_Space";
             this.Button_Space.Size = new System.Drawing.Size(581, 55);
             this.Button_Space.TabIndex = 79;
@@ -400,7 +373,7 @@
             this.Button_Enter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Enter.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Enter.ForeColor = System.Drawing.Color.White;
-            this.Button_Enter.Location = new System.Drawing.Point(706, 165);
+            this.Button_Enter.Location = new System.Drawing.Point(706, 117);
             this.Button_Enter.Name = "Button_Enter";
             this.Button_Enter.Size = new System.Drawing.Size(122, 114);
             this.Button_Enter.TabIndex = 78;
@@ -421,7 +394,7 @@
             this.Button_Ñ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Ñ.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Ñ.ForeColor = System.Drawing.Color.White;
-            this.Button_Ñ.Location = new System.Drawing.Point(533, 225);
+            this.Button_Ñ.Location = new System.Drawing.Point(533, 177);
             this.Button_Ñ.Name = "Button_Ñ";
             this.Button_Ñ.Size = new System.Drawing.Size(55, 55);
             this.Button_Ñ.TabIndex = 77;
@@ -442,7 +415,7 @@
             this.Button_L.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_L.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_L.ForeColor = System.Drawing.Color.White;
-            this.Button_L.Location = new System.Drawing.Point(475, 225);
+            this.Button_L.Location = new System.Drawing.Point(475, 177);
             this.Button_L.Name = "Button_L";
             this.Button_L.Size = new System.Drawing.Size(55, 55);
             this.Button_L.TabIndex = 76;
@@ -463,7 +436,7 @@
             this.Button_K.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_K.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_K.ForeColor = System.Drawing.Color.White;
-            this.Button_K.Location = new System.Drawing.Point(417, 225);
+            this.Button_K.Location = new System.Drawing.Point(417, 177);
             this.Button_K.Name = "Button_K";
             this.Button_K.Size = new System.Drawing.Size(55, 55);
             this.Button_K.TabIndex = 75;
@@ -484,7 +457,7 @@
             this.Button_J.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_J.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_J.ForeColor = System.Drawing.Color.White;
-            this.Button_J.Location = new System.Drawing.Point(359, 225);
+            this.Button_J.Location = new System.Drawing.Point(359, 177);
             this.Button_J.Name = "Button_J";
             this.Button_J.Size = new System.Drawing.Size(55, 55);
             this.Button_J.TabIndex = 74;
@@ -505,7 +478,7 @@
             this.Button_H.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_H.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_H.ForeColor = System.Drawing.Color.White;
-            this.Button_H.Location = new System.Drawing.Point(300, 225);
+            this.Button_H.Location = new System.Drawing.Point(300, 177);
             this.Button_H.Name = "Button_H";
             this.Button_H.Size = new System.Drawing.Size(55, 55);
             this.Button_H.TabIndex = 73;
@@ -526,7 +499,7 @@
             this.Button_G.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_G.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_G.ForeColor = System.Drawing.Color.White;
-            this.Button_G.Location = new System.Drawing.Point(241, 225);
+            this.Button_G.Location = new System.Drawing.Point(241, 177);
             this.Button_G.Name = "Button_G";
             this.Button_G.Size = new System.Drawing.Size(55, 55);
             this.Button_G.TabIndex = 72;
@@ -547,7 +520,7 @@
             this.Button_F.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_F.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_F.ForeColor = System.Drawing.Color.White;
-            this.Button_F.Location = new System.Drawing.Point(182, 225);
+            this.Button_F.Location = new System.Drawing.Point(182, 177);
             this.Button_F.Name = "Button_F";
             this.Button_F.Size = new System.Drawing.Size(55, 55);
             this.Button_F.TabIndex = 71;
@@ -568,7 +541,7 @@
             this.Button_D.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_D.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_D.ForeColor = System.Drawing.Color.White;
-            this.Button_D.Location = new System.Drawing.Point(124, 225);
+            this.Button_D.Location = new System.Drawing.Point(124, 177);
             this.Button_D.Name = "Button_D";
             this.Button_D.Size = new System.Drawing.Size(55, 55);
             this.Button_D.TabIndex = 70;
@@ -589,7 +562,7 @@
             this.Button_S.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_S.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_S.ForeColor = System.Drawing.Color.White;
-            this.Button_S.Location = new System.Drawing.Point(65, 225);
+            this.Button_S.Location = new System.Drawing.Point(65, 177);
             this.Button_S.Name = "Button_S";
             this.Button_S.Size = new System.Drawing.Size(55, 55);
             this.Button_S.TabIndex = 69;
@@ -610,7 +583,7 @@
             this.Button_A.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_A.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_A.ForeColor = System.Drawing.Color.White;
-            this.Button_A.Location = new System.Drawing.Point(6, 225);
+            this.Button_A.Location = new System.Drawing.Point(6, 177);
             this.Button_A.Name = "Button_A";
             this.Button_A.Size = new System.Drawing.Size(55, 55);
             this.Button_A.TabIndex = 68;
@@ -631,7 +604,7 @@
             this.Button_P.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_P.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_P.ForeColor = System.Drawing.Color.White;
-            this.Button_P.Location = new System.Drawing.Point(533, 167);
+            this.Button_P.Location = new System.Drawing.Point(533, 119);
             this.Button_P.Name = "Button_P";
             this.Button_P.Size = new System.Drawing.Size(55, 55);
             this.Button_P.TabIndex = 67;
@@ -652,7 +625,7 @@
             this.Button_O.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_O.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_O.ForeColor = System.Drawing.Color.White;
-            this.Button_O.Location = new System.Drawing.Point(475, 167);
+            this.Button_O.Location = new System.Drawing.Point(475, 119);
             this.Button_O.Name = "Button_O";
             this.Button_O.Size = new System.Drawing.Size(55, 55);
             this.Button_O.TabIndex = 66;
@@ -673,7 +646,7 @@
             this.Button_I.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_I.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_I.ForeColor = System.Drawing.Color.White;
-            this.Button_I.Location = new System.Drawing.Point(417, 167);
+            this.Button_I.Location = new System.Drawing.Point(417, 119);
             this.Button_I.Name = "Button_I";
             this.Button_I.Size = new System.Drawing.Size(55, 55);
             this.Button_I.TabIndex = 65;
@@ -694,7 +667,7 @@
             this.Button_U.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_U.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_U.ForeColor = System.Drawing.Color.White;
-            this.Button_U.Location = new System.Drawing.Point(359, 167);
+            this.Button_U.Location = new System.Drawing.Point(359, 119);
             this.Button_U.Name = "Button_U";
             this.Button_U.Size = new System.Drawing.Size(55, 55);
             this.Button_U.TabIndex = 64;
@@ -715,7 +688,7 @@
             this.Button_Y.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Y.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Y.ForeColor = System.Drawing.Color.White;
-            this.Button_Y.Location = new System.Drawing.Point(300, 167);
+            this.Button_Y.Location = new System.Drawing.Point(300, 119);
             this.Button_Y.Name = "Button_Y";
             this.Button_Y.Size = new System.Drawing.Size(55, 55);
             this.Button_Y.TabIndex = 63;
@@ -736,7 +709,7 @@
             this.Button_T.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_T.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_T.ForeColor = System.Drawing.Color.White;
-            this.Button_T.Location = new System.Drawing.Point(241, 167);
+            this.Button_T.Location = new System.Drawing.Point(241, 119);
             this.Button_T.Name = "Button_T";
             this.Button_T.Size = new System.Drawing.Size(55, 55);
             this.Button_T.TabIndex = 62;
@@ -757,7 +730,7 @@
             this.Button_R.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_R.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_R.ForeColor = System.Drawing.Color.White;
-            this.Button_R.Location = new System.Drawing.Point(182, 167);
+            this.Button_R.Location = new System.Drawing.Point(182, 119);
             this.Button_R.Name = "Button_R";
             this.Button_R.Size = new System.Drawing.Size(55, 55);
             this.Button_R.TabIndex = 61;
@@ -778,7 +751,7 @@
             this.Button_E.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_E.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_E.ForeColor = System.Drawing.Color.White;
-            this.Button_E.Location = new System.Drawing.Point(124, 167);
+            this.Button_E.Location = new System.Drawing.Point(124, 119);
             this.Button_E.Name = "Button_E";
             this.Button_E.Size = new System.Drawing.Size(55, 55);
             this.Button_E.TabIndex = 60;
@@ -799,7 +772,7 @@
             this.Button_W.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_W.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_W.ForeColor = System.Drawing.Color.White;
-            this.Button_W.Location = new System.Drawing.Point(65, 167);
+            this.Button_W.Location = new System.Drawing.Point(65, 119);
             this.Button_W.Name = "Button_W";
             this.Button_W.Size = new System.Drawing.Size(55, 55);
             this.Button_W.TabIndex = 59;
@@ -820,7 +793,7 @@
             this.Button_Q.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Q.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Q.ForeColor = System.Drawing.Color.White;
-            this.Button_Q.Location = new System.Drawing.Point(6, 167);
+            this.Button_Q.Location = new System.Drawing.Point(6, 119);
             this.Button_Q.Name = "Button_Q";
             this.Button_Q.Size = new System.Drawing.Size(55, 55);
             this.Button_Q.TabIndex = 58;
@@ -841,7 +814,7 @@
             this.Button_BackSpace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_BackSpace.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_BackSpace.ForeColor = System.Drawing.Color.White;
-            this.Button_BackSpace.Location = new System.Drawing.Point(706, 107);
+            this.Button_BackSpace.Location = new System.Drawing.Point(706, 59);
             this.Button_BackSpace.Name = "Button_BackSpace";
             this.Button_BackSpace.Size = new System.Drawing.Size(122, 55);
             this.Button_BackSpace.TabIndex = 57;
@@ -862,7 +835,7 @@
             this.Button_0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_0.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_0.ForeColor = System.Drawing.Color.White;
-            this.Button_0.Location = new System.Drawing.Point(533, 108);
+            this.Button_0.Location = new System.Drawing.Point(533, 60);
             this.Button_0.Name = "Button_0";
             this.Button_0.Size = new System.Drawing.Size(55, 55);
             this.Button_0.TabIndex = 56;
@@ -883,7 +856,7 @@
             this.Button_9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_9.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_9.ForeColor = System.Drawing.Color.White;
-            this.Button_9.Location = new System.Drawing.Point(475, 108);
+            this.Button_9.Location = new System.Drawing.Point(475, 60);
             this.Button_9.Name = "Button_9";
             this.Button_9.Size = new System.Drawing.Size(55, 55);
             this.Button_9.TabIndex = 55;
@@ -904,7 +877,7 @@
             this.Button_8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_8.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_8.ForeColor = System.Drawing.Color.White;
-            this.Button_8.Location = new System.Drawing.Point(417, 108);
+            this.Button_8.Location = new System.Drawing.Point(417, 60);
             this.Button_8.Name = "Button_8";
             this.Button_8.Size = new System.Drawing.Size(55, 55);
             this.Button_8.TabIndex = 54;
@@ -925,7 +898,7 @@
             this.Button_7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_7.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_7.ForeColor = System.Drawing.Color.White;
-            this.Button_7.Location = new System.Drawing.Point(359, 108);
+            this.Button_7.Location = new System.Drawing.Point(359, 60);
             this.Button_7.Name = "Button_7";
             this.Button_7.Size = new System.Drawing.Size(55, 55);
             this.Button_7.TabIndex = 53;
@@ -946,7 +919,7 @@
             this.Button_6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_6.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_6.ForeColor = System.Drawing.Color.White;
-            this.Button_6.Location = new System.Drawing.Point(300, 108);
+            this.Button_6.Location = new System.Drawing.Point(300, 60);
             this.Button_6.Name = "Button_6";
             this.Button_6.Size = new System.Drawing.Size(55, 55);
             this.Button_6.TabIndex = 52;
@@ -968,7 +941,7 @@
             this.Button_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_5.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_5.ForeColor = System.Drawing.Color.White;
-            this.Button_5.Location = new System.Drawing.Point(241, 108);
+            this.Button_5.Location = new System.Drawing.Point(241, 60);
             this.Button_5.Name = "Button_5";
             this.Button_5.Size = new System.Drawing.Size(55, 55);
             this.Button_5.TabIndex = 51;
@@ -989,7 +962,7 @@
             this.Button_4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_4.ForeColor = System.Drawing.Color.White;
-            this.Button_4.Location = new System.Drawing.Point(182, 108);
+            this.Button_4.Location = new System.Drawing.Point(182, 60);
             this.Button_4.Name = "Button_4";
             this.Button_4.Size = new System.Drawing.Size(55, 55);
             this.Button_4.TabIndex = 50;
@@ -1010,7 +983,7 @@
             this.Button_3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_3.ForeColor = System.Drawing.Color.White;
-            this.Button_3.Location = new System.Drawing.Point(124, 108);
+            this.Button_3.Location = new System.Drawing.Point(124, 60);
             this.Button_3.Name = "Button_3";
             this.Button_3.Size = new System.Drawing.Size(55, 55);
             this.Button_3.TabIndex = 49;
@@ -1031,7 +1004,7 @@
             this.Button_2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_2.ForeColor = System.Drawing.Color.White;
-            this.Button_2.Location = new System.Drawing.Point(65, 108);
+            this.Button_2.Location = new System.Drawing.Point(65, 60);
             this.Button_2.Name = "Button_2";
             this.Button_2.Size = new System.Drawing.Size(55, 55);
             this.Button_2.TabIndex = 48;
@@ -1052,7 +1025,7 @@
             this.Button_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_1.ForeColor = System.Drawing.Color.White;
-            this.Button_1.Location = new System.Drawing.Point(6, 108);
+            this.Button_1.Location = new System.Drawing.Point(6, 60);
             this.Button_1.Name = "Button_1";
             this.Button_1.Size = new System.Drawing.Size(55, 55);
             this.Button_1.TabIndex = 47;
@@ -1067,7 +1040,7 @@
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(0, 408);
+            this.InformationLabel.Location = new System.Drawing.Point(0, 360);
             this.InformationLabel.Name = "InformationLabel";
             this.InformationLabel.Size = new System.Drawing.Size(824, 44);
             this.InformationLabel.TabIndex = 108;
@@ -1084,7 +1057,7 @@
             this.Button_Left_Shift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Left_Shift.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Left_Shift.ForeColor = System.Drawing.Color.White;
-            this.Button_Left_Shift.Location = new System.Drawing.Point(6, 344);
+            this.Button_Left_Shift.Location = new System.Drawing.Point(6, 296);
             this.Button_Left_Shift.Name = "Button_Left_Shift";
             this.Button_Left_Shift.Size = new System.Drawing.Size(114, 55);
             this.Button_Left_Shift.TabIndex = 109;
@@ -1105,7 +1078,7 @@
             this.Button_SpecialCharacter_6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_SpecialCharacter_6.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_SpecialCharacter_6.ForeColor = System.Drawing.Color.White;
-            this.Button_SpecialCharacter_6.Location = new System.Drawing.Point(649, 224);
+            this.Button_SpecialCharacter_6.Location = new System.Drawing.Point(649, 176);
             this.Button_SpecialCharacter_6.Name = "Button_SpecialCharacter_6";
             this.Button_SpecialCharacter_6.Size = new System.Drawing.Size(55, 55);
             this.Button_SpecialCharacter_6.TabIndex = 115;
@@ -1126,7 +1099,7 @@
             this.Button_SpecialCharacter_5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_SpecialCharacter_5.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_SpecialCharacter_5.ForeColor = System.Drawing.Color.White;
-            this.Button_SpecialCharacter_5.Location = new System.Drawing.Point(591, 224);
+            this.Button_SpecialCharacter_5.Location = new System.Drawing.Point(591, 176);
             this.Button_SpecialCharacter_5.Name = "Button_SpecialCharacter_5";
             this.Button_SpecialCharacter_5.Size = new System.Drawing.Size(55, 55);
             this.Button_SpecialCharacter_5.TabIndex = 114;
@@ -1147,7 +1120,7 @@
             this.Button_SpecialCharacter_4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_SpecialCharacter_4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_SpecialCharacter_4.ForeColor = System.Drawing.Color.White;
-            this.Button_SpecialCharacter_4.Location = new System.Drawing.Point(648, 165);
+            this.Button_SpecialCharacter_4.Location = new System.Drawing.Point(648, 117);
             this.Button_SpecialCharacter_4.Name = "Button_SpecialCharacter_4";
             this.Button_SpecialCharacter_4.Size = new System.Drawing.Size(55, 55);
             this.Button_SpecialCharacter_4.TabIndex = 113;
@@ -1168,7 +1141,7 @@
             this.Button_SpecialCharacter_3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_SpecialCharacter_3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_SpecialCharacter_3.ForeColor = System.Drawing.Color.White;
-            this.Button_SpecialCharacter_3.Location = new System.Drawing.Point(591, 166);
+            this.Button_SpecialCharacter_3.Location = new System.Drawing.Point(591, 118);
             this.Button_SpecialCharacter_3.Name = "Button_SpecialCharacter_3";
             this.Button_SpecialCharacter_3.Size = new System.Drawing.Size(55, 55);
             this.Button_SpecialCharacter_3.TabIndex = 112;
@@ -1189,7 +1162,7 @@
             this.Button_SpecialCharacter_2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_SpecialCharacter_2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_SpecialCharacter_2.ForeColor = System.Drawing.Color.White;
-            this.Button_SpecialCharacter_2.Location = new System.Drawing.Point(649, 107);
+            this.Button_SpecialCharacter_2.Location = new System.Drawing.Point(649, 59);
             this.Button_SpecialCharacter_2.Name = "Button_SpecialCharacter_2";
             this.Button_SpecialCharacter_2.Size = new System.Drawing.Size(55, 55);
             this.Button_SpecialCharacter_2.TabIndex = 111;
@@ -1210,7 +1183,7 @@
             this.Button_SpecialCharacter_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_SpecialCharacter_1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_SpecialCharacter_1.ForeColor = System.Drawing.Color.White;
-            this.Button_SpecialCharacter_1.Location = new System.Drawing.Point(591, 107);
+            this.Button_SpecialCharacter_1.Location = new System.Drawing.Point(591, 59);
             this.Button_SpecialCharacter_1.Name = "Button_SpecialCharacter_1";
             this.Button_SpecialCharacter_1.Size = new System.Drawing.Size(55, 55);
             this.Button_SpecialCharacter_1.TabIndex = 110;
@@ -1231,7 +1204,7 @@
             this.Button_Right_Shift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Button_Right_Shift.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Button_Right_Shift.ForeColor = System.Drawing.Color.White;
-            this.Button_Right_Shift.Location = new System.Drawing.Point(706, 344);
+            this.Button_Right_Shift.Location = new System.Drawing.Point(706, 296);
             this.Button_Right_Shift.Name = "Button_Right_Shift";
             this.Button_Right_Shift.Size = new System.Drawing.Size(122, 55);
             this.Button_Right_Shift.TabIndex = 116;
@@ -1241,7 +1214,7 @@
             this.Button_Right_Shift.UseVisualStyleBackColor = false;
             this.Button_Right_Shift.Click += new System.EventHandler(this.Button_Shift_Click);
             // 
-            // CustomKeyboard
+            // CustomInputboxKeyboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -1267,8 +1240,7 @@
             this.Controls.Add(this.Button_C);
             this.Controls.Add(this.Button_X);
             this.Controls.Add(this.Button_Z);
-            this.Controls.Add(this.PasswordTexbox);
-            this.Controls.Add(this.UsernameTextBox);
+            this.Controls.Add(this.InputTexbox);
             this.Controls.Add(this.Button_Space);
             this.Controls.Add(this.Button_Enter);
             this.Controls.Add(this.Button_Ñ);
@@ -1303,8 +1275,8 @@
             this.Controls.Add(this.Button_2);
             this.Controls.Add(this.Button_1);
             this.DoubleBuffered = true;
-            this.Name = "CustomKeyboard";
-            this.Size = new System.Drawing.Size(840, 476);
+            this.Name = "CustomInputboxKeyboard";
+            this.Size = new System.Drawing.Size(840, 422);
             this.ResumeLayout(false);
 
         }
@@ -1322,8 +1294,7 @@
         private CustomButton Button_C;
         private CustomButton Button_X;
         private CustomButton Button_Z;
-        private CustomTextBox PasswordTexbox;
-        private CustomTextBox UsernameTextBox;
+        private CustomTextBox InputTexbox;
         private CustomButton Button_Space;
         private CustomButton Button_Enter;
         private CustomButton Button_Ñ;
