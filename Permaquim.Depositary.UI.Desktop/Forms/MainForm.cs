@@ -51,6 +51,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             InitializeDevices();
             LoadLedImages();
+            VerifyUserData();
         }
         private void LoadLedImages()
         {
@@ -121,7 +122,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             VerifyTimeout();
 
-            VerifyUserData();
+            //VerifyUserData();
 
             VerifyAvatar();
 

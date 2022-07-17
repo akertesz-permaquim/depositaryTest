@@ -10,27 +10,28 @@ using System.Windows.Forms;
 
 namespace Permaquim.Depositary.UI.Desktop.Controls
 {
-    public partial class CustomInputboxKeyboard : UserControl
+    public partial class CustomInputBoxKeyboar : UserControl
     {
         private Color _mainColor;
 
         private bool _shift = false;
-        public delegate void KeyboardDataReceived(object sender, InputBoxKeyboardEventArgs args);
+        public delegate void KeyboardDataReceived(object sender, InputboxKeyboardEventArgs args);
 
         public event KeyboardDataReceived KeyboardEvent;
 
         private Color _buttonsBackgroundColor;
-        private CustomTextBox _activeTextbox ;
-        public CustomInputboxKeyboard()
+        private CustomTextBox _activeTextbox;
+        public CustomInputBoxKeyboar()
         {
             InitializeComponent();
+            _activeTextbox = InputTexbox;
             _activeTextbox.Focus();
-            if(this.ParentForm !=null)
+            if (this.ParentForm != null)
                 this.ParentForm.AcceptButton = this.Button_Enter;
         }
-        public void ClearText()
+        public void ClearCredentials()
         {
-              InputTexbox.Texts = String.Empty;
+            InputTexbox.Texts = String.Empty;
         }
         public void SetLoginError(string message)
         {
@@ -38,8 +39,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             InformationLabel.ForeColor = Color.Red;
             InputTexbox.BorderColor = Color.Red;
         }
-
-
+        public string ReturnValue
+        {
+            get { return InputTexbox.Texts; }
+            set { InputTexbox.Texts = value; }
+        }
         public string InputTexboxPlaceholder
         {
             get { return InputTexbox.PlaceholderText; }
@@ -51,9 +55,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             _mainColor = color;
             foreach (var item in this.Controls)
             {
-               if(item.GetType().Name.Equals("CustomButton"))
+                if (item.GetType().Name.Equals("CustomButton"))
                 {
-                    ((CustomButton)item).BackColor = _mainColor;
+                    string buttonTag = ((CustomButton)item).Tag.ToString();
+
+                    if (!(buttonTag.Equals("{ACCEPT}") || buttonTag.Equals("{CANCEL}")))
+                        ((CustomButton)item).BackColor = _mainColor;
                 }
             }
 
@@ -70,10 +77,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                 if (KeyboardEvent != null)
                 {
 
-                    InputBoxKeyboardEventArgs args = new()
+                    InputboxKeyboardEventArgs args = new()
                     {
                         KeyPressed = "{ENTER}",
-                        InputboxText = InputTexbox.Texts
+                        InputTex = InputTexbox.Texts
                     };
 
                     // Raise the event.
@@ -91,10 +98,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                 if (KeyboardEvent != null)
                 {
 
-                    InputBoxKeyboardEventArgs args = new()
+                    InputboxKeyboardEventArgs args = new()
                     {
                         KeyPressed = ((CustomButton)sender).Tag.ToString(),
-                        InputboxText = InputTexbox.Texts
+                        InputTex = InputTexbox.Texts
                     };
 
                     // Raise the event.
@@ -128,10 +135,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                 if (KeyboardEvent != null)
                 {
 
-                    InputBoxKeyboardEventArgs args = new()
+                    InputboxKeyboardEventArgs args = new()
                     {
                         KeyPressed = "{ENTER}",
-                        InputboxText = InputTexbox.Texts
+                        InputTex = InputTexbox.Texts,
+
                     };
 
                     // Raise the event.
@@ -140,17 +148,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             }
             else
             {
-                KeyboardEvent(this, new InputBoxKeyboardEventArgs());
+                KeyboardEvent(this, new InputboxKeyboardEventArgs());
             }
-        }
-
-        private void UsernameTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                InputTexbox.Focus();
-            }
-            KeyboardEvent(this, new InputBoxKeyboardEventArgs());
         }
 
         private void Button_Shift_Click(object sender, EventArgs e)
@@ -219,13 +218,47 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                 }
             }
         }
+        private void ConfirmButton_Click(object sender, EventArgs e)
+        {
+            //Raises event for counter
+            if (KeyboardEvent != null)
+            {
+
+                InputboxKeyboardEventArgs args = new()
+                {
+                    KeyPressed = "{ACCEPT}",
+                     InputTex = InputTexbox.Texts
+                };
+
+                // Raise the event.
+                KeyboardEvent(this, args);
+            }
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            //Raises event for counter
+            if (KeyboardEvent != null)
+            {
+
+                InputboxKeyboardEventArgs args = new()
+                {
+                    KeyPressed = "{CANCEL}",
+                     InputTex = InputTexbox.Texts
+                };
+
+                // Raise the event.
+                KeyboardEvent(this, args);
+            }
+        }
     }
-    public class InputBoxKeyboardEventArgs : EventArgs
+    public class InputboxKeyboardEventArgs : EventArgs
     {
         // The Key pressed
         public string KeyPressed = string.Empty;
 
-        // The PasswordText
-        public string InputboxText = string.Empty;
+        // The UserText
+        public string InputTex = string.Empty;
+
     }
 }
