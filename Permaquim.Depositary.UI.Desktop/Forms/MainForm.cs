@@ -15,6 +15,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private Image _redLedImage;
         private Image _avatarImage;
 
+        private int _greenStatusIndicator;
+        private int _yellowStatusIndicator;
+        private int _redStatusIndicator;
         private string _remainingTimeText;
 
         /// <summary>
@@ -52,6 +55,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             InitializeDevices();
             LoadLedImages();
             VerifyUserData();
+            Loadparameters();
+        }
+        private void Loadparameters()
+        {
+            _greenStatusIndicator = ParameterController.GreenStatusIndicator;
+            _yellowStatusIndicator = ParameterController.YellowStatusIndicator;
+            _redStatusIndicator = ParameterController.RedStatusIndicator;
         }
         private void LoadLedImages()
         {
@@ -181,8 +191,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void VerifyConnections()
         {
+         
             _device.Sense();
             // consulta el estado de la contadora si está conectada
+
             if (_device.CounterConnected)
             {
                 CounterPictureBox.Image = _greenLedImage;
@@ -210,20 +222,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void VerifyTimeout()
         {
             long remainingTime = TimeOutController.GetRemainingtime();
-            RemainingTimeLabel.Visible = remainingTime > 0;
 
-            RemainingTimeLabel.Text = _remainingTimeText +
-                remainingTime.ToString();
-            if (remainingTime > ParameterController.GreenStatusIndicator)
-                RemainingTimeLabel.ForeColor = Color.Green;
-            if (remainingTime < ParameterController.YellowStatusIndicator)
-                RemainingTimeLabel.ForeColor = Color.Yellow;
-            if (remainingTime < ParameterController.RedStatusIndicator)
+            if (remainingTime > 0)
             {
-                RemainingTimeLabel.ForeColor = Color.Red;
-                RemainingTimeLabel.Text += " * " + 
-                    MultilanguangeController.GetText(MultiLanguageEnum.SOLICITAR_MAS_TIEMPO);
-                RemainingTimeLabel.Visible = ((remainingTime % 2) == 0);
+                RemainingTimeLabel.Visible = remainingTime > 0;
+
+                RemainingTimeLabel.Text = _remainingTimeText +
+                    remainingTime.ToString();
+                if (remainingTime > _greenStatusIndicator)
+                    RemainingTimeLabel.ForeColor = Color.Green;
+                if (remainingTime < _yellowStatusIndicator)
+                    RemainingTimeLabel.ForeColor = Color.Yellow;
+                if (remainingTime < _redStatusIndicator)
+                {
+                    RemainingTimeLabel.ForeColor = Color.Red;
+                    RemainingTimeLabel.Text += " * " +
+                        MultilanguangeController.GetText(MultiLanguageEnum.SOLICITAR_MAS_TIEMPO);
+                    RemainingTimeLabel.Visible = ((remainingTime % 2) == 0);
+                }
             }
         }
 

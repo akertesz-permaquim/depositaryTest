@@ -153,7 +153,6 @@
             this.OperationsDetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OperationsDetailGridView.Size = new System.Drawing.Size(776, 180);
             this.OperationsDetailGridView.TabIndex = 189;
-            this.OperationsDetailGridView.Visible = false;
             this.OperationsDetailGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
             // 
             // TurnLabel

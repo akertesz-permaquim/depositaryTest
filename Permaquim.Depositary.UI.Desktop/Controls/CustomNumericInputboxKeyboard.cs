@@ -1,4 +1,8 @@
-﻿namespace Permaquim.Depositary.UI.Desktop.Controls
+﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
+
+namespace Permaquim.Depositary.UI.Desktop.Controls
 {
     public partial class CustomNumericInputboxKeyboard : UserControl
     {
@@ -14,6 +18,25 @@
             NumericInputBoxTexbox.Focus();
             if (this.ParentForm != null)
                 this.ParentForm.AcceptButton = this.ConfirmButton;
+            LoadStyles();
+        }
+        private void LoadStyles()
+        {
+            ConfirmButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON);
+            ConfirmButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ConfirmButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ConfirmButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            ConfirmButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            CancelButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON);
+            CancelButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
+            CancelButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
+            CancelButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            CancelButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+
+            
+
         }
         public void ClearData()
         {

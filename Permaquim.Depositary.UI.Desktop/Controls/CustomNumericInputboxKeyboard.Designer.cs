@@ -322,7 +322,7 @@
             this.CancelButton.BorderSize = 0;
             this.CancelButton.FlatAppearance.BorderSize = 0;
             this.CancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CancelButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CancelButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelButton.ForeColor = System.Drawing.Color.White;
             this.CancelButton.Location = new System.Drawing.Point(112, 296);
             this.CancelButton.Name = "CancelButton";
@@ -343,7 +343,7 @@
             this.ConfirmButton.BorderSize = 0;
             this.ConfirmButton.FlatAppearance.BorderSize = 0;
             this.ConfirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ConfirmButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmButton.ForeColor = System.Drawing.Color.White;
             this.ConfirmButton.Location = new System.Drawing.Point(4, 296);
             this.ConfirmButton.Name = "ConfirmButton";

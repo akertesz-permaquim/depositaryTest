@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Global;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controls
 {
@@ -28,6 +22,23 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             _activeTextbox.Focus();
             if (this.ParentForm != null)
                 this.ParentForm.AcceptButton = this.Button_Enter;
+            LoadStyles();
+        }
+        private void LoadStyles()
+        {
+            ConfirmButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON);
+            ConfirmButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ConfirmButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ConfirmButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            ConfirmButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            CancelButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON);
+            CancelButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
+            CancelButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
+            CancelButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            CancelButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+
         }
         public void ClearCredentials()
         {
@@ -39,7 +50,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             InformationLabel.ForeColor = Color.Red;
             InputTexbox.BorderColor = Color.Red;
         }
-        public string ReturnValue
+        public string ReturnTextValue
         {
             get { return InputTexbox.Texts; }
             set { InputTexbox.Texts = value; }

@@ -388,56 +388,58 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OperationsHeaderGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
-
-            var operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells[ID].Value;
-            var operationTypeId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["TipoId"].Value;
-
-            InitializeOperationsDetailGridView((OperationTypeEnum)operationTypeId);
-
-            if ((OperationTypeEnum)operationTypeId == OperationTypeEnum.BillDeposit)
+            if (e.RowIndex > -1)
             {
-                var operationDetails = DatabaseController.GetOperationsDetails(operationId);
 
-                _transactionDetailItems.Clear();
+                var operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells[ID].Value;
+                var operationTypeId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["TipoId"].Value;
 
-                foreach (var item in operationDetails)
+                InitializeOperationsDetailGridView((OperationTypeEnum)operationTypeId);
+
+                if ((OperationTypeEnum)operationTypeId == OperationTypeEnum.BillDeposit)
                 {
-                    _transactionDetailItems.Add(new TransactionDetailItem()
+                    var operationDetails = DatabaseController.GetOperationsDetails(operationId);
+
+                    _transactionDetailItems.Clear();
+
+                    foreach (var item in operationDetails)
                     {
-                        CantidadUnidades = item.CantidadUnidades,
-                        Denominacion = item.DenominacionId.Nombre,
-                        Fecha = item.Fecha,
-                        Id = item.Id
-                    });
+                        _transactionDetailItems.Add(new TransactionDetailItem()
+                        {
+                            CantidadUnidades = item.CantidadUnidades,
+                            Denominacion = item.DenominacionId.Nombre,
+                            Fecha = item.Fecha,
+                            Id = item.Id
+                        });
+                    }
+
+                    OperationsDetailGridView.DataSource = _transactionDetailItems;
+
+
                 }
-             
-                OperationsDetailGridView.DataSource = _transactionDetailItems;
-
-
-            }
-            if ((OperationTypeEnum)operationTypeId == OperationTypeEnum.EnvelopeDeposit)
-            {
-                var operationEnvelopeDetails = DatabaseController.GetEnvelopeOperationsDetails(operationId);
-
-                _transactionEnvelopeDetailItems.Clear();
-
-                foreach (var item in operationEnvelopeDetails)
+                if ((OperationTypeEnum)operationTypeId == OperationTypeEnum.EnvelopeDeposit)
                 {
-                    _transactionEnvelopeDetailItems.Add(new TransactionEnvelopDetailItem()
-                    {
-                        CantidadDeclarada = item.CantidadDeclarada,
-                        Sobre = item.SobreId.CodigoSobre,
-                        Fecha = item.Fecha,
-                        TipoValor     = item.RelacionMonedaTipoValorId.TipoValorId.Nombre
+                    var operationEnvelopeDetails = DatabaseController.GetEnvelopeOperationsDetails(operationId);
 
-                    });
+                    _transactionEnvelopeDetailItems.Clear();
+
+                    foreach (var item in operationEnvelopeDetails)
+                    {
+                        _transactionEnvelopeDetailItems.Add(new TransactionEnvelopDetailItem()
+                        {
+                            CantidadDeclarada = item.CantidadDeclarada,
+                            Sobre = item.SobreId.CodigoSobre,
+                            Fecha = item.Fecha,
+                            TipoValor = item.RelacionMonedaTipoValorId.TipoValorId.Nombre
+
+                        });
+                    }
+
+
+                    OperationsDetailGridView.DataSource = _transactionEnvelopeDetailItems;
                 }
 
-
-                OperationsDetailGridView.DataSource = _transactionEnvelopeDetailItems;
-            }
-
-            OperationsDetailGridView.Visible = true;
+             }
         }
 
 

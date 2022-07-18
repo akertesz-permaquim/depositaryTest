@@ -30,6 +30,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
             long depositarioId = SincronizacionController.ObtenerIdDepositario(model.CodigoExternoDepositario);
 
+
+
+
             //Iniciamos un registro de sincronizacion de la entidad
             Int64? SincronizacionEntidadId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.Transaccion");
 
@@ -37,6 +40,40 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             {
                 try
                 {
+
+                    DepositaryWebApi.Business.Tables.Operacion.Sesion sessionEntities = new();
+
+                    foreach (var item in model.Sesion)
+                    {
+                        item.DepositarioId = depositarioId;
+                        sessionEntities.AddOrUpdate(item);
+                    }
+
+                    DepositaryWebApi.Business.Tables.Operacion.CierreDiario dailyclosingEntities = new();
+
+                    foreach (var item in model.CierreDiario)
+                    {
+                        item.DepositarioId = depositarioId;
+                        dailyclosingEntities.AddOrUpdate(item);
+                    }
+
+
+                    DepositaryWebApi.Business.Tables.Operacion.Turno turnEntities = new();
+
+                    foreach (var item in model.Turno)
+                    {
+                        item.DepositarioId = depositarioId;
+                        turnEntities.AddOrUpdate(item);
+                    }
+
+
+                    DepositaryWebApi.Business.Tables.Operacion.Contenedor containerEntities = new();
+
+                    foreach (var item in model.Contenedor)
+                    {
+                        item.DepositarioId = depositarioId;
+                        containerEntities.AddOrUpdate(item);
+                    }
 
                     transaccionEntity.BeginTransaction();
 

@@ -3,6 +3,10 @@
     public class TransaccionModel
     {
         public string CodigoExternoDepositario { get; set; }
+        public List<DepositaryWebApi.Entities.Tables.Operacion.Sesion> Sesion { get; set; }
+        public List<DepositaryWebApi.Entities.Tables.Operacion.CierreDiario> CierreDiario { get; set; }
+        public List<DepositaryWebApi.Entities.Tables.Operacion.Turno> Turno { get; set; }
+        public List<DepositaryWebApi.Entities.Tables.Operacion.Contenedor> Contenedor { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.Transaccion> Transaccion { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionDetalle> TransaccionDetalle { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobre> TransaccionSobre { get; set; }

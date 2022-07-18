@@ -29,34 +29,22 @@
         private void InitializeComponent()
         {
             this.NumericInputBoxControl = new Permaquim.Depositary.UI.Desktop.Controls.CustomNumericInputboxKeyboard();
-            this.TitleLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NumericInputBoxControl
             // 
-            this.NumericInputBoxControl.Location = new System.Drawing.Point(8, 56);
+            this.NumericInputBoxControl.Location = new System.Drawing.Point(8, 8);
             this.NumericInputBoxControl.Name = "NumericInputBoxControl";
             this.NumericInputBoxControl.NumericInputBoxPlaceholder = "*";
-            this.NumericInputBoxControl.Size = new System.Drawing.Size(225, 419);
+            this.NumericInputBoxControl.Size = new System.Drawing.Size(225, 400);
             this.NumericInputBoxControl.TabIndex = 0;
             this.NumericInputBoxControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NumericInputBoxControl_MouseClick);
-            // 
-            // TitleLabel
-            // 
-            this.TitleLabel.AutoSize = true;
-            this.TitleLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.TitleLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.TitleLabel.Location = new System.Drawing.Point(16, 16);
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(163, 25);
-            this.TitleLabel.TabIndex = 5;
-            this.TitleLabel.Text = "Ingrese Cantidad";
             // 
             // InputboxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 489);
+            this.ClientSize = new System.Drawing.Size(244, 400);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.NumericInputBoxControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

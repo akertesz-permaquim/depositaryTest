@@ -22,9 +22,8 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         public CustomNumericInputboxKeyboard()
         {
             InitializeComponent();
-            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LOGIN_TITLE);
-            NumericInputBoxControl.NumericInputBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.USERTEXTBOXPLACEHOLDER);
-            
+            NumericInputBoxControl.NumericInputBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.NUMERIC_TEXTBOX_PLACEHOLDER);
+
 
             NumericInputBoxControl.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 

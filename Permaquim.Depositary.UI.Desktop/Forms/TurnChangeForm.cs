@@ -369,12 +369,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
                         });
                     }
-
-
                     OperationsDetailGridView.DataSource = _transactionEnvelopeDetailItems;
                 }
 
-                OperationsDetailGridView.Visible = true;
+             
             }
         }
 

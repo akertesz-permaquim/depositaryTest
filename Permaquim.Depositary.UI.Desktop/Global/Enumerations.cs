@@ -192,7 +192,9 @@
             DEPOSITARIO,
             SOLICITAR_MAS_TIEMPO,
             REQUIERE_IDENTIFICADOR_SOBRE,
-            EJECUTAR
+            EJECUTAR,
+            NUMERIC_TEXTBOX_PLACEHOLDER,
+            ALPHANUMERIC_TEXTBOX_PLACEHOLDER
         }
 
         public enum FunctionEnum

@@ -22,18 +22,20 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         public InputBoxForm()
         {
             InitializeComponent();
-            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LOGIN_TITLE);
-            CustomInputBoxKeyboard.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.USERTEXTBOXPLACEHOLDER);
-
-
+            CustomInputBoxKeyboard.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.ALPHANUMERIC_TEXTBOX_PLACEHOLDER);
             CustomInputBoxKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
             CustomInputBoxKeyboard.KeyboardEvent += CustomInputBoxKeyboard_KeyboardEvent;
         }
-        public string ReturnValue
+        public string ReturnTextValue
         {
-            get { return CustomInputBoxKeyboard.ReturnValue; }
-            set { CustomInputBoxKeyboard.ReturnValue = value; }
+            get { return CustomInputBoxKeyboard.ReturnTextValue; }
+            set { CustomInputBoxKeyboard.ReturnTextValue = value; }
+        }
+        public string InputTexboxPlaceholder
+        {
+            get { return CustomInputBoxKeyboard.InputTexboxPlaceholder; }
+            set { CustomInputBoxKeyboard.InputTexboxPlaceholder = value; }
         }
         private void CustomInputBoxKeyboard_KeyboardEvent(object sender, InputboxKeyboardEventArgs args)
         {

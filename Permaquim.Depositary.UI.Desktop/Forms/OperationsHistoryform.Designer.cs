@@ -41,11 +41,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.RemainingTimeLabel = new System.Windows.Forms.Label();
+            this.ExecuteButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.UserComboBox = new System.Windows.Forms.ComboBox();
             this.TurnComboBox = new System.Windows.Forms.ComboBox();
             this.ToDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FromDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.ExecuteButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).BeginInit();
             this.FilterPanel.SuspendLayout();
@@ -161,7 +161,6 @@
             this.OperationsDetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OperationsDetailGridView.Size = new System.Drawing.Size(925, 256);
             this.OperationsDetailGridView.TabIndex = 182;
-            this.OperationsDetailGridView.Visible = false;
             this.OperationsDetailGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OperationsDetailGridView_CellClick);
             this.OperationsDetailGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
             // 
@@ -226,6 +225,26 @@
             this.RemainingTimeLabel.TabIndex = 198;
             this.RemainingTimeLabel.Text = "*";
             // 
+            // ExecuteButton
+            // 
+            this.ExecuteButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.ExecuteButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.ExecuteButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ExecuteButton.BorderRadius = 5;
+            this.ExecuteButton.BorderSize = 0;
+            this.ExecuteButton.FlatAppearance.BorderSize = 0;
+            this.ExecuteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExecuteButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ExecuteButton.ForeColor = System.Drawing.Color.White;
+            this.ExecuteButton.Location = new System.Drawing.Point(808, 8);
+            this.ExecuteButton.Name = "ExecuteButton";
+            this.ExecuteButton.Size = new System.Drawing.Size(128, 64);
+            this.ExecuteButton.TabIndex = 197;
+            this.ExecuteButton.Text = "***";
+            this.ExecuteButton.TextColor = System.Drawing.Color.White;
+            this.ExecuteButton.UseVisualStyleBackColor = false;
+            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
+            // 
             // UserComboBox
             // 
             this.UserComboBox.FormattingEnabled = true;
@@ -255,27 +274,6 @@
             this.FromDateTimePicker.Name = "FromDateTimePicker";
             this.FromDateTimePicker.Size = new System.Drawing.Size(200, 23);
             this.FromDateTimePicker.TabIndex = 193;
-            // 
-            // ExecuteButton
-            // 
-            this.ExecuteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ExecuteButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.ExecuteButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.ExecuteButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.ExecuteButton.BorderRadius = 5;
-            this.ExecuteButton.BorderSize = 0;
-            this.ExecuteButton.FlatAppearance.BorderSize = 0;
-            this.ExecuteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExecuteButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ExecuteButton.ForeColor = System.Drawing.Color.White;
-            this.ExecuteButton.Location = new System.Drawing.Point(808, 8);
-            this.ExecuteButton.Name = "ExecuteButton";
-            this.ExecuteButton.Size = new System.Drawing.Size(128, 64);
-            this.ExecuteButton.TabIndex = 197;
-            this.ExecuteButton.Text = "***";
-            this.ExecuteButton.TextColor = System.Drawing.Color.White;
-            this.ExecuteButton.UseVisualStyleBackColor = false;
-            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
             // 
             // OperationsHistoryform
             // 

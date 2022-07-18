@@ -40,13 +40,16 @@ namespace Permaquim.Depositary.UI.Desktop
         private Double _currentCountingAmount = 0;
         private int _currentCountingQuantity = 0;
         private int _countingCycle = 1;
-
+        private int _greenStatusIndicator;
+        private int _yellowStatusIndicator;
+        private int _redStatusIndicator;
 
         public BillDepositForm()
         {
             InitializeComponent();
             LoadStyles();
             CenterPanel();
+            Loadparameters();
             TimeOutController.Reset();
         }
         private void BillDepositForm_Load(object sender, EventArgs e)
@@ -65,6 +68,12 @@ namespace Permaquim.Depositary.UI.Desktop
             _operationStatus = new();
 
 
+        }
+        private void Loadparameters()
+        {
+            _greenStatusIndicator = ParameterController.GreenStatusIndicator;
+            _yellowStatusIndicator = ParameterController.YellowStatusIndicator;
+            _redStatusIndicator = ParameterController.RedStatusIndicator;
         }
         private void BillDepositForm_VisibleChanged(object sender, EventArgs e)
         {
@@ -221,11 +230,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
                 TimeOutController.GetRemainingtime().ToString();
-            if (TimeOutController.GetRemainingtime() > ParameterController.GreenStatusIndicator)
+            if (TimeOutController.GetRemainingtime() > _greenStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Green;
-            if (TimeOutController.GetRemainingtime() < ParameterController.YellowStatusIndicator)
+            if (TimeOutController.GetRemainingtime() < _yellowStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Yellow;
-            if (TimeOutController.GetRemainingtime() < ParameterController.RedStatusIndicator)
+            if (TimeOutController.GetRemainingtime() < _redStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Red;
         }
 

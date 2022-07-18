@@ -19,6 +19,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private long _totalQuantity = 0;
         private double _totalAmount = 0;
+        private int _greenStatusIndicator;
+        private int _yellowStatusIndicator;
+        private int _redStatusIndicator;
 
         /// <summary>
         /// Máquina de estado
@@ -44,6 +47,7 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadStyles();
             CenterPanel();
             TimeOutController.Reset();
+            Loadparameters();
         }
         private void CenterPanel()
         {
@@ -169,7 +173,12 @@ namespace Permaquim.Depositary.UI.Desktop
             SetTotalRowStyle();
             SetTotals();
         }
-
+        private void Loadparameters()
+        {
+            _greenStatusIndicator = ParameterController.GreenStatusIndicator;
+            _yellowStatusIndicator = ParameterController.YellowStatusIndicator;
+            _redStatusIndicator = ParameterController.RedStatusIndicator;
+        }
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -579,10 +588,15 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _selectedEditElement = SelectedEditElementEnum.EnvelopeCode;
             InputBoxForm inputForm = new InputBoxForm();
-            inputForm.ReturnValue = EnvelopeTextBox.Texts;
+
+            if(EnvelopeTextBox.Texts.Equals(EnvelopeTextBox.PlaceholderText))
+                inputForm.InputTexboxPlaceholder = EnvelopeTextBox.PlaceholderText;
+
+
+            inputForm.ReturnTextValue = EnvelopeTextBox.Texts;
             if (inputForm.ShowDialog() == DialogResult.OK)
             {
-                EnvelopeTextBox.Texts = inputForm.ReturnValue;
+                EnvelopeTextBox.Texts = inputForm.ReturnTextValue;
             }
         }
 
@@ -617,11 +631,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
                 TimeOutController.GetRemainingtime().ToString();
-            if (TimeOutController.GetRemainingtime() > ParameterController.GreenStatusIndicator)
+            if (TimeOutController.GetRemainingtime() > _greenStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Green;
-            if (TimeOutController.GetRemainingtime() < ParameterController.YellowStatusIndicator)
+            if (TimeOutController.GetRemainingtime() < _yellowStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Yellow;
-            if (TimeOutController.GetRemainingtime() < ParameterController.RedStatusIndicator)
+            if (TimeOutController.GetRemainingtime() < _redStatusIndicator)
                 RemainingTimeLabel.ForeColor = Color.Red;
         }
 
