@@ -132,9 +132,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             VerifyTimeout();
 
-            //VerifyUserData();
-
-            VerifyAvatar();
+             VerifyAvatar();
 
             _device.Status();
             if (_device.IoBoardConnected)
@@ -178,16 +176,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             }
 
-            // Verificación de bolsa en posición
-            if (DatabaseController.CurrentContainer != null)
-            {
-                VerifyConnections();
-            }
-            else
-            {
-                DatabaseController.CreateOrUpdateContainer(string.Empty);
-            }
-        }
+         }
 
         private void VerifyConnections()
         {

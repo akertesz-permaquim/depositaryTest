@@ -14109,7 +14109,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.CierreDiario</returns>
-			public Entities.Tables.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,Int64? DepositarioId,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Operacion.CierreDiario Add(String Nombre,DateTime? Fecha,Int64? DepositarioId,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.CierreDiario)base.Add(new Entities.Tables.Operacion.CierreDiario(Nombre,Fecha,DepositarioId,SesionId,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14313,7 +14313,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,DateTime fecha,Int64? depositarioid,Int64 sesionid,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,DateTime? fecha,Int64? depositarioid,Int64 sesionid,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.CierreDiario {Id = id,Nombre = nombre,Fecha = fecha,DepositarioId = depositarioid,SesionId = sesionid,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }

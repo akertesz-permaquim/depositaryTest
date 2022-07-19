@@ -31,11 +31,15 @@ namespace Permaquim.Depositary.Sincronization.Console
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
 
+            _logger.Log(LogLevel.Information, "Starting sincronization...");
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 foreach (var item in _workerTasks)
                 {
                     item.Endpoint = _baseUrl + item.Endpoint;
+
+                    _logger.Log(LogLevel.Information, "Api endpoint is " + item.Endpoint);
 
                     switch (item.WorkerTaskType)
                     {
@@ -45,7 +49,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                             await GetToken(item);
                             break;
                         case WorkerTask.WorkerTaskTypeEnum.Receive:
-                            await ReceiveData(item);
+                             await ReceiveData(item);
                             break;
                         case WorkerTask.WorkerTaskTypeEnum.Send:
                             await SendData(item);
@@ -63,6 +67,8 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         private async Task ReceiveData(WorkerTask item)
         {
+            _logger.Log(LogLevel.Information, "Receiving data: " + item.Entity);
+
             _httpClient.BaseAddress = new Uri(item.Endpoint);
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
@@ -89,10 +95,16 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             model.Process();
 
+            _logger.Log(LogLevel.Information, "Sending data: " + item.Entity);
+          
             try
             {
-
                 var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+                string jsonToSend = JsonConvert.SerializeObject(model);
+
+                _logger.Log(LogLevel.Information, "Sending content: " + jsonToSend);
+
+                Log(jsonToSend);
 
                 _httpClient.BaseAddress = new Uri(item.Endpoint);
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
@@ -101,6 +113,8 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                 var postResponse = _httpClient.PostAsync(item.Endpoint, content);
                 var postResult = postResponse.Result;
+
+               
 
             }
             catch (Exception ex)
@@ -114,6 +128,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 try
                 {
+                    _logger.Log(LogLevel.Information, "Getting token..");
 
                     LoginModel loginModel = new LoginModel();
 
@@ -136,6 +151,23 @@ namespace Permaquim.Depositary.Sincronization.Console
             _httpClient.Dispose();
             _logger.LogInformation("The service has been stopped...");
             return base.StopAsync(cancellationToken);
+        }
+
+        private void Log(string message)
+        {
+            AppendToLogFile(message);
+        }
+        private void AppendToLogFile(string message)
+        {
+            string logDirectory = System.IO.Directory.GetCurrentDirectory() + @"\Logs\";
+            if (!System.IO.Directory.Exists(logDirectory))
+                System.IO.Directory.CreateDirectory(logDirectory);
+
+            string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".log";
+
+            System.IO.StreamWriter file = new(filename, true);
+            file.WriteLine(message);
+            file.Close();
         }
     }
 }

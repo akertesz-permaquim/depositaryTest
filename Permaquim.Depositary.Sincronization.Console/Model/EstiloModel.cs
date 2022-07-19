@@ -43,5 +43,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                 throw ex;
             }
         }
+        public void Persist()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

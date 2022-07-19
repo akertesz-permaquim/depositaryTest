@@ -10,5 +10,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Interfaces
     {
         public void Process();
         public void Process(DateTime dateTime);
+
+        public void Persist();
     }
 }

@@ -3326,7 +3326,7 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
-             public DateTime Fecha { get; set; }
+             public DateTime? Fecha { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database

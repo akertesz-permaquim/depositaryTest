@@ -4,15 +4,17 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class OperacionModel:IModel
     {
+        private DateTime _startDateTime = DateTime.MinValue;
+
         public string CodigoExternoDepositario { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Sesion> Sesion { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.CierreDiario> CierreDiario { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Turno> Turno { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Contenedor> Contenedor { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Transaccion> Transaccion { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> TransaccionDetalle { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> TransaccionSobre { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionSobreDetalle { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.Sesion> Sesiones { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.CierreDiario> CierresDiarios { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.Turno> Turnos { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.Contenedor> Contenedores { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.Transaccion> Transacciones { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> TransaccionesDetalles { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> TransaccionesSobres { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionesSobresDetalles { get; set; }
 
         public void Process(DateTime dateTime)
         {
@@ -21,33 +23,48 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         void IModel.Process()
         {
+            _startDateTime = DateTime.Now;
+            DateTime lastSincronizationDate;
 
             CodigoExternoDepositario = DatabaseController.CurrentDepositary.CodigoExterno;
 
-            Depositario.Business.Tables.Operacion.Sesion session = new();
-            Sesion = session.Items();
+            Sesiones = DatabaseController.GetSessions();
 
-            Depositario.Business.Tables.Operacion.CierreDiario dailyclosing = new();
-            CierreDiario = dailyclosing.Items();
+            CierresDiarios = DatabaseController.GetDailyclosingItems();
+ 
+            Turnos = DatabaseController.GetTurns();
 
-            Depositario.Business.Tables.Operacion.Turno turn = new();
-            Turno = turn.Items();
+            Contenedores = DatabaseController.GetContainers();
 
-            Depositario.Business.Tables.Operacion.Contenedor container = new();
-            Contenedor = container.Items();
+            Transacciones = DatabaseController.GetTransactions();
 
-            Depositario.Business.Tables.Operacion.Transaccion transaccion = new();
-            Transaccion = transaccion.Items();
+            TransaccionesDetalles = DatabaseController.GetTransactionDetails();
 
-            Depositario.Business.Tables.Operacion.TransaccionDetalle transaccionDetalle = new();
-            transaccionDetalle.OrderBy.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId);
-            TransaccionDetalle = transaccionDetalle.Items();
+            TransaccionesSobres = DatabaseController.GetEnvelopeTransaction();
 
-            Depositario.Business.Tables.Operacion.TransaccionSobre transaccionSobre = new();
-            TransaccionSobre = transaccionSobre.Items();
+            TransaccionesSobresDetalles = DatabaseController.GetEnvelopeTransactionDetails();
+        }
+        public void Persist()
+        {
+            DateTime endSincronizationDate = DateTime.Now;
 
-            Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transaccionSobreDetalle = new();
-            TransaccionSobreDetalle = transaccionSobreDetalle.Items();
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_Sesion, _startDateTime, endSincronizationDate);
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_CierreDiario, _startDateTime, endSincronizationDate);
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_Turno, _startDateTime, endSincronizationDate);
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_Contenedor, _startDateTime, endSincronizationDate);
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_Transaccion, _startDateTime, endSincronizationDate);
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_TransaccionDetalle, _startDateTime, endSincronizationDate);
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_TransaccionSobre, _startDateTime, endSincronizationDate);
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle, _startDateTime, endSincronizationDate);
+
         }
     }
 }

@@ -56,5 +56,30 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+
+        public static bool PrintsBillDeposit
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("IMPRIME_TICKET_DEPOSITO_BILLETE"));
+            }
+
+        }
+        public static bool PrintsEnvelopeDeposit
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("IMPRIME_TICKET_DEPOSITO_SOBRE"));
+            }
+
+        }
+        public static bool PrintsCoinDeposit
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("IMPRIME_TICKET_DEPOSITO_MONEDA"));
+            }
+
+        }
     }
 }

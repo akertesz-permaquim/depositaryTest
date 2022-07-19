@@ -44,6 +44,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private int _yellowStatusIndicator;
         private int _redStatusIndicator;
 
+        private bool _alreadyPrinted = false;
+
         public BillDepositForm()
         {
             InitializeComponent();
@@ -111,6 +113,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _depositItems = new();
             _currentCountingAmount = 0;
             _currentCountingQuantity = 0;
+            _alreadyPrinted = false;
         }
         private void CenterPanel()
         {
@@ -751,7 +754,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 Permaquim.Depositario.Entities.Tables.Operacion.Transaccion transaction = new()
                 {
-                    CierreDiarioId = 0,
+                    CierreDiarioId = DatabaseController.CurrentDailyClosing.Id,
                     ContenedorId = DatabaseController.CurrentContainer.Id,
                     DepositarioId = DatabaseController.CurrentDepositary.Id,
                     Fecha = DateTime.Now,
@@ -806,9 +809,15 @@ namespace Permaquim.Depositary.UI.Desktop
             ReportDataSource rdsHeaderTransaction = new ReportDataSource("Transaccion", headerTransaction);
             ReportDataSource rdsDetailTransactions = new ReportDataSource("TransaccionDetalle", detailTransactions);
 
-
-            ReportController.PrintReport(ReportTypeEnum.BillDeposit,
-                new List<ReportDataSource>(){ rdsHeaderTransaction , rdsDetailTransactions },null);
+            if (ParameterController.PrintsEnvelopeDeposit)
+            {
+                if (!_alreadyPrinted)
+                {
+                    ReportController.PrintReport(ReportTypeEnum.BillDeposit,
+                        new List<ReportDataSource>() { rdsHeaderTransaction, rdsDetailTransactions }, null);
+                    _alreadyPrinted = true;
+                }
+            }
 
         }
         #endregion

@@ -14743,11 +14743,11 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId'></param>
-         /// <param name='UsuarioId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.Contenedor ContenedorId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.Sesion SesionId'></param>
-         /// <param name='TurnoId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.Turno TurnoId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId'></param>
          /// <param name='TotalValidado'></param>
          /// <param name='TotalAValidar'></param>
@@ -14755,7 +14755,7 @@ using System.Text;
          /// <param name='Finalizada'></param>
          /// <param name='EsDepositoAutomatico'></param>
          /// <returns>Entities.Relations.Operacion.Transaccion</returns>
-			public Entities.Relations.Operacion.Transaccion Add(Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Int64 UsuarioId,Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,Permaquim.Depositario.Entities.Relations.Operacion.Contenedor ContenedorId,Permaquim.Depositario.Entities.Relations.Operacion.Sesion SesionId,Int64 TurnoId,Permaquim.Depositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico) 
+			public Entities.Relations.Operacion.Transaccion Add(Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,Permaquim.Depositario.Entities.Relations.Operacion.Contenedor ContenedorId,Permaquim.Depositario.Entities.Relations.Operacion.Sesion SesionId,Permaquim.Depositario.Entities.Relations.Operacion.Turno TurnoId,Permaquim.Depositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico) 
 			{
 			  return (Entities.Relations.Operacion.Transaccion)base.Add(new Entities.Relations.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico));
 			}

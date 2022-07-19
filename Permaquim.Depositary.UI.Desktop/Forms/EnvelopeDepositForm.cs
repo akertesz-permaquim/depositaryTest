@@ -445,7 +445,7 @@ namespace Permaquim.Depositary.UI.Desktop
     
             Permaquim.Depositario.Entities.Tables.Operacion.Transaccion transaction = new()
                 {
-                    CierreDiarioId = 0,
+                    CierreDiarioId = DatabaseController.CurrentDailyClosing.Id,
                     ContenedorId = DatabaseController.CurrentContainer.Id,
                     DepositarioId = DatabaseController.CurrentDepositary.Id,
                     MonedaId = DatabaseController.CurrentCurrency.Id,

@@ -3306,7 +3306,7 @@ using System.Text;
                 public CierreDiario()
                 {
                 }
-                public  CierreDiario(String Nombre,DateTime Fecha,Int64? DepositarioId,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  CierreDiario(String Nombre,DateTime? Fecha,Int64? DepositarioId,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -3326,7 +3326,7 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
-             public DateTime Fecha { get; set; }
+             public DateTime? Fecha { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
@@ -3907,6 +3907,8 @@ using System.Text;
              [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
              public Int64 MonedaId { get; set; }
              [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioId { get; set; }
              [DataItemAttributeFieldName("UsuarioCuentaId","UsuarioCuentaId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
@@ -3921,6 +3923,8 @@ using System.Text;
              [PropertyAttributeForeignKeyObjectName("Sesion")]// Object name in Database
              public Int64 SesionId { get; set; }
              [DataItemAttributeFieldName("TurnoId","TurnoId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Turno")]// Object name in Database
              public Int64 TurnoId { get; set; }
              [DataItemAttributeFieldName("CierreDiarioId","CierreDiarioId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
