@@ -14109,7 +14109,7 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Operacion.CierreDiario</returns>
-			public Entities.Tables.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,Int64? DepositarioId,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Operacion.CierreDiario Add(String Nombre,DateTime? Fecha,Int64? DepositarioId,Int64 SesionId,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
 			  return (Entities.Tables.Operacion.CierreDiario)base.Add(new Entities.Tables.Operacion.CierreDiario(Nombre,Fecha,DepositarioId,SesionId,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14313,7 +14313,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,DateTime fecha,Int64? depositarioid,Int64 sesionid,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,DateTime? fecha,Int64? depositarioid,Int64 sesionid,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.CierreDiario {Id = id,Nombre = nombre,Fecha = fecha,DepositarioId = depositarioid,SesionId = sesionid,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -25235,7 +25235,8 @@ using System.Text;
 					Id,
 					EntidadCabeceraId,
 					FechaCreacion,
-					Valor
+					OrigenId,
+					DestinoId
 				}
          protected List<Entities.Tables.Sincronizacion.EntidadDetalle> _entities = new List<Entities.Tables.Sincronizacion.EntidadDetalle>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -25279,11 +25280,12 @@ using System.Text;
          /// </summary>
          /// <param name='EntidadCabeceraId'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Valor'></param>
+         /// <param name='OrigenId'></param>
+         /// <param name='DestinoId'></param>
          /// <returns>Entities.Tables.Sincronizacion.EntidadDetalle</returns>
-			public Entities.Tables.Sincronizacion.EntidadDetalle Add(Int64 EntidadCabeceraId,DateTime FechaCreacion,String Valor) 
+			public Entities.Tables.Sincronizacion.EntidadDetalle Add(Int64 EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
 			{
-			  return (Entities.Tables.Sincronizacion.EntidadDetalle)base.Add(new Entities.Tables.Sincronizacion.EntidadDetalle(EntidadCabeceraId,FechaCreacion,Valor));
+			  return (Entities.Tables.Sincronizacion.EntidadDetalle)base.Add(new Entities.Tables.Sincronizacion.EntidadDetalle(EntidadCabeceraId,FechaCreacion,OrigenId,DestinoId));
 			}
             public new List<Entities.Tables.Sincronizacion.EntidadDetalle> Items()
             {
@@ -25318,9 +25320,10 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="EntidadCabeceraId"></param>
             /// <param name="FechaCreacion"></param>
-            /// <param name="Valor"></param>
+            /// <param name="OrigenId"></param>
+            /// <param name="DestinoId"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Sincronizacion.EntidadDetalle> Items(Int64? Id,Int64? EntidadCabeceraId,DateTime? FechaCreacion,String Valor)
+            public List<Entities.Tables.Sincronizacion.EntidadDetalle> Items(Int64? Id,Int64? EntidadCabeceraId,DateTime? FechaCreacion,Int64? OrigenId,Int64? DestinoId)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -25359,15 +25362,27 @@ using System.Text;
                     }
                    
                 }
-                if (Valor != null)
+                if (OrigenId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
+                        this.Where.Add(ColumnEnum.OrigenId, sqlEnum.OperandEnum.Equal, OrigenId);
                     }
                     else
                     {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor);
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.OrigenId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OrigenId);
+                    }
+                   
+                }
+                if (DestinoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DestinoId, sqlEnum.OperandEnum.Equal, DestinoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.DestinoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DestinoId);
                     }
                    
                 }
@@ -25413,11 +25428,12 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="EntidadCabeceraId"></param>
             /// <param name="FechaCreacion"></param>
-            /// <param name="Valor"></param>
+            /// <param name="OrigenId"></param>
+            /// <param name="DestinoId"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 entidadcabeceraid,DateTime fechacreacion,String valor)
+            public Int64 Update(Int64 id,Int64 entidadcabeceraid,DateTime fechacreacion,Int64 origenid,Int64 destinoid)
             {
-                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.EntidadDetalle {Id = id,EntidadCabeceraId = entidadcabeceraid,FechaCreacion = fechacreacion,Valor = valor});
+                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.EntidadDetalle {Id = id,EntidadCabeceraId = entidadcabeceraid,FechaCreacion = fechacreacion,OrigenId = origenid,DestinoId = destinoid});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Sincronizacion.EntidadDetalle

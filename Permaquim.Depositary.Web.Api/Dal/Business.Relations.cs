@@ -14743,11 +14743,11 @@ using System.Text;
          /// <param name='DepositaryWebApi.Entities.Relations.Directorio.Sector SectorId'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Directorio.Sucursal SucursalId'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId'></param>
-         /// <param name='UsuarioId'></param>
+         /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioId'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Operacion.Contenedor ContenedorId'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Operacion.Sesion SesionId'></param>
-         /// <param name='TurnoId'></param>
+         /// <param name='DepositaryWebApi.Entities.Relations.Operacion.Turno TurnoId'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Operacion.CierreDiario CierreDiarioId'></param>
          /// <param name='TotalValidado'></param>
          /// <param name='TotalAValidar'></param>
@@ -14755,7 +14755,7 @@ using System.Text;
          /// <param name='Finalizada'></param>
          /// <param name='EsDepositoAutomatico'></param>
          /// <returns>Entities.Relations.Operacion.Transaccion</returns>
-			public Entities.Relations.Operacion.Transaccion Add(DepositaryWebApi.Entities.Relations.Operacion.TipoTransaccion TipoId,DepositaryWebApi.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositaryWebApi.Entities.Relations.Directorio.Sector SectorId,DepositaryWebApi.Entities.Relations.Directorio.Sucursal SucursalId,DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,Int64 UsuarioId,DepositaryWebApi.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,DepositaryWebApi.Entities.Relations.Operacion.Contenedor ContenedorId,DepositaryWebApi.Entities.Relations.Operacion.Sesion SesionId,Int64 TurnoId,DepositaryWebApi.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico) 
+			public Entities.Relations.Operacion.Transaccion Add(DepositaryWebApi.Entities.Relations.Operacion.TipoTransaccion TipoId,DepositaryWebApi.Entities.Relations.Dispositivo.Depositario DepositarioId,DepositaryWebApi.Entities.Relations.Directorio.Sector SectorId,DepositaryWebApi.Entities.Relations.Directorio.Sucursal SucursalId,DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioId,DepositaryWebApi.Entities.Relations.Banca.UsuarioCuenta UsuarioCuentaId,DepositaryWebApi.Entities.Relations.Operacion.Contenedor ContenedorId,DepositaryWebApi.Entities.Relations.Operacion.Sesion SesionId,DepositaryWebApi.Entities.Relations.Operacion.Turno TurnoId,DepositaryWebApi.Entities.Relations.Operacion.CierreDiario CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico) 
 			{
 			  return (Entities.Relations.Operacion.Transaccion)base.Add(new Entities.Relations.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico));
 			}
@@ -22381,7 +22381,8 @@ using System.Text;
 					Id,
 					EntidadCabeceraId,
 					FechaCreacion,
-					Valor
+					OrigenId,
+					DestinoId
 				}
 			   protected List<Entities.Relations.Sincronizacion.EntidadDetalle> _cacheItemList = new List<Entities.Relations.Sincronizacion.EntidadDetalle>();
 			   protected List<Entities.Relations.Sincronizacion.EntidadDetalle> _entities = null;
@@ -22422,11 +22423,12 @@ using System.Text;
          /// </summary>
          /// <param name='EntidadCabeceraId'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Valor'></param>
+         /// <param name='OrigenId'></param>
+         /// <param name='DestinoId'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadDetalle</returns>
-			public Entities.Relations.Sincronizacion.EntidadDetalle Add(Int64 EntidadCabeceraId,DateTime FechaCreacion,String Valor) 
+			public Entities.Relations.Sincronizacion.EntidadDetalle Add(Int64 EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
 			{
-			  return (Entities.Relations.Sincronizacion.EntidadDetalle)base.Add(new Entities.Relations.Sincronizacion.EntidadDetalle(EntidadCabeceraId,FechaCreacion,Valor));
+			  return (Entities.Relations.Sincronizacion.EntidadDetalle)base.Add(new Entities.Relations.Sincronizacion.EntidadDetalle(EntidadCabeceraId,FechaCreacion,OrigenId,DestinoId));
 			}
             public new List<Entities.Relations.Sincronizacion.EntidadDetalle> Items()
             {
@@ -22461,9 +22463,10 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="EntidadCabeceraId"></param>
             /// <param name="FechaCreacion"></param>
-            /// <param name="Valor"></param>
+            /// <param name="OrigenId"></param>
+            /// <param name="DestinoId"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Sincronizacion.EntidadDetalle> Items(Int64? Id,Int64? EntidadCabeceraId,DateTime? FechaCreacion,String Valor)
+            public List<Entities.Relations.Sincronizacion.EntidadDetalle> Items(Int64? Id,Int64? EntidadCabeceraId,DateTime? FechaCreacion,Int64? OrigenId,Int64? DestinoId)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -22502,15 +22505,27 @@ using System.Text;
                     }
                    
                 }
-                if (Valor != null)
+                if (OrigenId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor);
+                        this.Where.Add(ColumnEnum.OrigenId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OrigenId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OrigenId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OrigenId);
+                    }
+                   
+                }
+                if (DestinoId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DestinoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DestinoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DestinoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DestinoId);
                     }
                    
                 }
@@ -22538,15 +22553,17 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="EntidadCabeceraId"></param>
             /// <param name="FechaCreacion"></param>
-            /// <param name="Valor"></param>
+            /// <param name="OrigenId"></param>
+            /// <param name="DestinoId"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 EntidadCabeceraId,DateTime FechaCreacion,String Valor)
+            public Int64 Update(Int64 Id,Int64 EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId)
             {
                  Entities.Tables.Sincronizacion.EntidadDetalle item = new Entities.Tables.Sincronizacion.EntidadDetalle();
                  item.Id = Id;
                  item.EntidadCabeceraId = EntidadCabeceraId;
                  item.FechaCreacion = FechaCreacion;
-                 item.Valor = Valor;
+                 item.OrigenId = OrigenId;
+                 item.DestinoId = DestinoId;
 
                 return base.Update((IDataItem)item);
             }
