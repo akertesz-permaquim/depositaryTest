@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Permaquim.Depositary.UI.Desktop.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 returnValue = entities.Result.FirstOrDefault().Valor;
 
             return returnValue;
+        }
+        public static SettingsModel SettingsModel()
+        {
+            SettingsModel model = new SettingsModel();
+            return model;
         }
     }
 }

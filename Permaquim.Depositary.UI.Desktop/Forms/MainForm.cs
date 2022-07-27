@@ -5,6 +5,7 @@ using Permaquim.Depositary.UI.Desktop.Global;
 using Permaquim.Depositary.UI.Desktop.Helpers;
 using Permaquim.Depositary.UI.Desktop.CustomExceptions;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
+using Permaquim.Depositary.UI.Desktop.Forms;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
@@ -49,15 +50,25 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             Rectangle screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new Point(0, 0);
             this.Size = new Size(screen.Width, screen.Height);
-            _pollingTimer = new System.Windows.Forms.Timer()
+            if (DatabaseController.CurrentDepositary == null)
             {
-                Interval = DeviceController.GetPollingInterval(),
-                Enabled = false
-            };
-            _pollingTimer.Tick += PollingTimer_Tick;
+                PreferencesForm newfrom = new();
+                newfrom.ShowDialog();
 
-            LoadLogo();
-            _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+
+            }
+            else
+            {
+                _pollingTimer = new System.Windows.Forms.Timer()
+                {
+                    Interval = DeviceController.GetPollingInterval(),
+                    Enabled = false
+                };
+                _pollingTimer.Tick += PollingTimer_Tick;
+
+                LoadLogo();
+                _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+            }
 
         }
         protected override CreateParams CreateParams
@@ -71,12 +82,22 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            InitializeDevices();
-            LoadLedImages();
-            VerifyUserData();
-            Loadparameters();
-            LoadLanguageItems();
+
+            if (DatabaseController.CurrentDepositary == null)
+            {
+                FormsController.OpenChildForm(new PreferencesForm(),
+                   (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
+            else
+            {
+                InitializeDevices();
+                LoadLedImages();
+                VerifyUserData();
+                Loadparameters();
+                LoadLanguageItems();
+            }
         }
+
         private void Loadparameters()
         {
             _greenStatusIndicator = ParameterController.GreenStatusIndicator;
