@@ -7,9 +7,9 @@ using static Permaquim.Depositary.Sincronization.Console.Enumerations;
 
 namespace Permaquim.Depositary.Sincronization.Console
 {
-    internal static class DatabaseController
+    internal  class DatabaseController
     {
-        public static string GetApplicationParameterValue(string key)
+        public  string GetApplicationParameterValue(string key)
         {
             string returnValue = string.Empty;
 
@@ -22,7 +22,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             return returnValue;
         }
-        public static Permaquim.Depositario.Entities.Tables.Dispositivo.Depositario CurrentDepositary
+        public  Permaquim.Depositario.Entities.Tables.Dispositivo.Depositario CurrentDepositary
         {
             get
             {
@@ -35,7 +35,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 return entity.Items().FirstOrDefault();
             }
         }
-        public static DateTime GetLastSincronizationDate(EntitiesEnum entity)
+        public  DateTime GetLastSincronizationDate(EntitiesEnum entity)
         {
             DateTime returnValue = new DateTime(1999,11,11,9,0,0,0); // Hasar!
 
@@ -49,19 +49,20 @@ namespace Permaquim.Depositary.Sincronization.Console
                 Depositario.Business.Tables.Sincronizacion.EntidadCabecera headerEntities = new();
                 headerEntities.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId,
                     Depositario.sqlEnum.OperandEnum.Equal, entities.Result.FirstOrDefault().Id);
+                headerEntities.OrderBy.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id,
+                    Depositario.sqlEnum.DirEnum.DESC);
                 headerEntities.Items();
                 if (headerEntities.Result.Count > 0)
                 {
                     returnValue = headerEntities.Result.FirstOrDefault().Fechainicio;
                 }
-
             }
 
             return returnValue;
 
         }
 
-        public static List<Depositario.Entities.Tables.Operacion.Sesion> GetSessions()
+        public  List<Depositario.Entities.Tables.Operacion.Sesion> GetSessions()
         {
             var lastSincronizationDate = GetLastSincronizationDate(EntitiesEnum.Operacion_Sesion);
 
@@ -74,9 +75,9 @@ namespace Permaquim.Depositary.Sincronization.Console
             return session.Items();
         }
 
-        public static List<Depositario.Entities.Tables.Operacion.CierreDiario> GetDailyclosingItems()
+        public  List<Depositario.Entities.Tables.Operacion.CierreDiario> GetDailyclosingItems()
         {
-            var lastSincronizationDate = DatabaseController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_CierreDiario);
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_CierreDiario);
             Depositario.Business.Tables.Operacion.CierreDiario dailyclosing = new();
             dailyclosing.Where.Add(Depositario.Business.Tables.Operacion.CierreDiario.ColumnEnum.FechaCreacion,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
@@ -87,9 +88,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         }
 
-        public static List<Depositario.Entities.Tables.Operacion.Turno> GetTurns()
+        public  List<Depositario.Entities.Tables.Operacion.Turno> GetTurns()
         {
-            var lastSincronizationDate = DatabaseController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Turno);
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Turno);
             Depositario.Business.Tables.Operacion.Turno turn = new();
             turn.Where.Add(Depositario.Business.Tables.Operacion.Turno.ColumnEnum.FechaCreacion,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
@@ -99,9 +100,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             return turn.Items();
         }
-        public static List<Depositario.Entities.Tables.Operacion.Contenedor> GetContainers()
+        public  List<Depositario.Entities.Tables.Operacion.Contenedor> GetContainers()
         {
-            var lastSincronizationDate = DatabaseController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Contenedor);
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Contenedor);
             Depositario.Business.Tables.Operacion.Contenedor container = new();
             container.Where.Add(Depositario.Business.Tables.Operacion.Contenedor.ColumnEnum.FechaApertura,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
@@ -111,9 +112,9 @@ namespace Permaquim.Depositary.Sincronization.Console
             return container.Items();
         }
 
-        public static List<Depositario.Entities.Tables.Operacion.Transaccion> GetTransactions()
+        public  List<Depositario.Entities.Tables.Operacion.Transaccion> GetTransactions()
         {
-            var lastSincronizationDate = DatabaseController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Transaccion);
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Transaccion);
             Depositario.Business.Tables.Operacion.Transaccion transaccion = new();
             transaccion.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
@@ -121,9 +122,9 @@ namespace Permaquim.Depositary.Sincronization.Console
             return transaccion.Items();
         }
 
-        public static List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> GetTransactionDetails()
+        public  List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> GetTransactionDetails()
         {
-            var lastSincronizationDate = DatabaseController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionDetalle);
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionDetalle);
             Depositario.Business.Tables.Operacion.TransaccionDetalle transaccionDetalle = new();
             transaccionDetalle.Where.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.Fecha,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
@@ -131,9 +132,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             return transaccionDetalle.Items();
         }
-        public static List<Depositario.Entities.Tables.Operacion.TransaccionSobre> GetEnvelopeTransaction()
+        public  List<Depositario.Entities.Tables.Operacion.TransaccionSobre> GetEnvelopeTransaction()
         {
-            var lastSincronizationDate = DatabaseController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionSobre);
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionSobre);
             Depositario.Business.Tables.Operacion.TransaccionSobre transaccionSobre = new();
             transaccionSobre.Where.Add(Depositario.Business.Tables.Operacion.TransaccionSobre.ColumnEnum.Fecha,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
@@ -141,16 +142,16 @@ namespace Permaquim.Depositary.Sincronization.Console
             return transaccionSobre.Items();
         }
 
-        public static List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> GetEnvelopeTransactionDetails()
+        public  List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> GetEnvelopeTransactionDetails()
         {
-            var lastSincronizationDate = DatabaseController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle);
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle);
             Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transaccionSobreDetalle = new();
             transaccionSobreDetalle.Where.Add(Depositario.Business.Tables.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
             return transaccionSobreDetalle.Items();
         }
 
-        public static void SaveEntitySincronizationDate(EntitiesEnum entity,DateTime startDate,DateTime endDate)
+        public  void SaveEntitySincronizationDate(EntitiesEnum entity,DateTime startDate,DateTime endDate)
         {
             Depositario.Business.Tables.Sincronizacion.Entidad entities = new();
             entities.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre,

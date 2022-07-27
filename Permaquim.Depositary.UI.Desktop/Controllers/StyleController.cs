@@ -64,25 +64,27 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             System.Drawing.Color retValue = Color.White;
 
             var ret = StyleItems.FirstOrDefault(s => s.Nombre.Equals(Enum.GetName(colorName)));
-
-            string value = ret.Valor;
-            string valueType = ret.Valor.Substring(0, ret.Valor.IndexOf('('));
-            value = value.Replace(valueType, "").Replace("(", "").Replace(")", "");
- 
-            Int32 red = Int32.Parse(value.Split(',')[0]);
-            Int32 green = Int32.Parse(value.Split(',')[1]);
-            Int32 blue = Int32.Parse(value.Split(',')[2]);
-            if (value.Split(',').Length == 4)
+            if (ret != null)
             {
-                int transparency = Convert.ToInt32(Decimal.Parse(value.Split(',')[3].Trim()) * 100);
-                retValue = Color.FromArgb(transparency,red, green, blue);
-            }
-            else
-            {
-                retValue = Color.FromArgb(red, green, blue);
+                string value = ret.Valor;
+                string valueType = ret.Valor.Substring(0, ret.Valor.IndexOf('('));
+                value = value.Replace(valueType, "").Replace("(", "").Replace(")", "");
+
+                Int32 red = Int32.Parse(value.Split(',')[0]);
+                Int32 green = Int32.Parse(value.Split(',')[1]);
+                Int32 blue = Int32.Parse(value.Split(',')[2]);
+                if (value.Split(',').Length == 4)
+                {
+                    int transparency = Convert.ToInt32(Decimal.Parse(value.Split(',')[3].Trim()) * 100);
+                    retValue = Color.FromArgb(transparency, red, green, blue);
+                }
+                else
+                {
+                    retValue = Color.FromArgb(red, green, blue);
+                }
             }
 
-            return ret == null ? Color.White : retValue;
+            return  retValue;
         }
         public static Bitmap GetCellStyleBitmap()
         {

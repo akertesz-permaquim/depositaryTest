@@ -18,7 +18,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 {
     public partial class BagHistoryForm : Form
     {
-        public Device _device { get; set; }
+        public CounterDevice _device { get; set; }
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private List<BagHistoryItem> _bagHistoryItems = new();
@@ -35,6 +35,15 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -47,7 +56,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
         private void BagHistoryForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
         }
         private void CenterPanel()
         {
@@ -68,10 +77,10 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO);
-            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
-
-            StyleController.SetControlStyle(MainGridView);
+            //FormsController.SetInformationMessage(InformationTypeEnum.Information,
+            //MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO));
+            
+              StyleController.SetControlStyle(MainGridView);
         }
         #region BackButton
         private void LoadBackButton()
@@ -184,6 +193,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             }
             else
                 InitializeLocals();
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         #endregion
         private void BagHistoryForm_MouseClick(object sender, MouseEventArgs e)

@@ -5,16 +5,16 @@ namespace Permaquim.Depositary.Sincronization.Console
     public class OperacionModel:IModel
     {
         private DateTime _startDateTime = DateTime.MinValue;
-
+        DatabaseController DatabaseController = new();
         public string CodigoExternoDepositario { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Sesion> Sesiones { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.CierreDiario> CierresDiarios { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Turno> Turnos { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Contenedor> Contenedores { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Transaccion> Transacciones { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> TransaccionesDetalles { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> TransaccionesSobres { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionesSobresDetalles { get; set; }
+        public List<Depositario.Entities.Tables.Operacion.Sesion> Sesiones { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.CierreDiario> CierresDiarios { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.Turno> Turnos { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.Contenedor> Contenedores { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.Transaccion> Transacciones { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> TransaccionesDetalles { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> TransaccionesSobres { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionesSobresDetalles { get; set; } = new();
 
         public void Process(DateTime dateTime)
         {
@@ -66,5 +66,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle, _startDateTime, endSincronizationDate);
 
         }
+
+   
     }
 }

@@ -9,7 +9,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class DailyClosingForm : Form
     {
-        public Device _device { get; set; }
+        public CounterDevice _device { get; set; }
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private List<DailyClosingItem> _dailyClosingItems = new();
@@ -27,6 +27,15 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -38,7 +47,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void DailyClosingForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
 
         }
         private void CenterPanel()
@@ -60,8 +69,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO);
-            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
+            FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO));
 
             StyleController.SetControlStyle(DenominationsGridView);
         }
@@ -191,6 +200,8 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
                 InitializeLocals();
+
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {

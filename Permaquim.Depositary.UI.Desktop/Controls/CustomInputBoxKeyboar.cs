@@ -97,6 +97,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                     // Raise the event.
                     KeyboardEvent(this, args);
                 }
+                return;
+            }
+            if (((CustomButton)sender).Tag.ToString().Equals("{BACKSPACE}"))
+            {
+                if (InputTexbox.Texts.Length > 0)
+                {
+                    InputTexbox.Texts = InputTexbox.Texts.Substring(0, InputTexbox.Texts.Length - 1);
+                    InputTexbox.SelectionStart = InputTexbox.Texts.Length;
+                }
             }
             else
             {

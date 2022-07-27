@@ -14,13 +14,21 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Instancia del dispositivo
         /// </summary>
-        public Device _device { get; set; }
+        public CounterDevice _device { get; set; }
         public SystemBlockingDialog()
         {
             InitializeComponent();
             TimeOutController.Reset();
         }
-
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
         public void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
@@ -33,7 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void SystemBlockingDialog_Load(object sender, EventArgs e)
         {
 
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
 
             _pollingTimer = new System.Windows.Forms.Timer()
             {

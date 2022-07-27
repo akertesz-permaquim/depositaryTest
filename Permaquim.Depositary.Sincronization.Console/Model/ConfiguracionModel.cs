@@ -5,9 +5,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class ConfiguracionModel:IModel
     {
-        public List<Depositario.Entities.Tables.Aplicacion.Configuracion> ConfiguracionAplicacion { get; set; }
+        public List<Depositario.Entities.Tables.Aplicacion.Configuracion> ConfiguracionAplicacion { get; set; } = new();
 
-        public List<Depositario.Entities.Tables.Dispositivo.ConfiguracionDepositario> ConfiguracionDispositivo { get; set; }
+        public List<Depositario.Entities.Tables.Dispositivo.ConfiguracionDepositario> ConfiguracionDispositivo { get; set; } = new();
 
         public void Process()
         {
@@ -40,5 +40,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

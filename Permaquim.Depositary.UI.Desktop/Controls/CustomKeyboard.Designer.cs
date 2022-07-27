@@ -105,6 +105,7 @@
             this.Button_Delete.TextColor = System.Drawing.Color.White;
             this.Button_Delete.UseVisualStyleBackColor = false;
             this.Button_Delete.Click += new System.EventHandler(this.Delete);
+     
             // 
             // Button_Star
             // 
@@ -614,8 +615,8 @@
             this.Button_A.Name = "Button_A";
             this.Button_A.Size = new System.Drawing.Size(55, 55);
             this.Button_A.TabIndex = 68;
-            this.Button_A.Tag = "A";
-            this.Button_A.Text = "A";
+            this.Button_A.Tag = "a";
+            this.Button_A.Text = "a";
             this.Button_A.TextColor = System.Drawing.Color.White;
             this.Button_A.UseVisualStyleBackColor = false;
             this.Button_A.Click += new System.EventHandler(this.KeysHandler);

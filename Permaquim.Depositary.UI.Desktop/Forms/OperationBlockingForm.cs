@@ -14,12 +14,21 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Instancia del dispositivo
         /// </summary>
-        public Device _device { get; set; }
+        public CounterDevice _device { get; set; }
         public OperationBlockingForm()
         {
             InitializeComponent();
             LoadBackButton();
             TimeOutController.Reset();
+        }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
         }
         public void LoadStyles()
         {
@@ -29,7 +38,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OperationBlockingForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
 
             LoadStyles();
 
@@ -43,6 +52,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
                 case OperationblockingReasonEnum.NoBag:
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
+                case OperationblockingReasonEnum.PortError:
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 default:
@@ -64,5 +77,10 @@ namespace Permaquim.Depositary.UI.Desktop
             FormsController.HideInstance(this);
         }
         #endregion
+
+        private void InformationLabel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, InformationLabel.DisplayRectangle, InformationLabel.ForeColor, ButtonBorderStyle.Solid);
+        }
     }
 }

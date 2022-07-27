@@ -21,5 +21,6 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             throw new NotImplementedException();
         }
-    }
+
+      }
 }

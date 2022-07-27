@@ -14,7 +14,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.SuspendLayout();
             InitializeComponent();
-
+            MainKeyboard.Visible = false;
             LoadStyles();
             Loadlogo();
            
@@ -25,7 +25,6 @@ namespace Permaquim.Depositary.UI.Desktop
             MainKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
             MainKeyboard.KeyboardEvent += MainKeyboard_KeyboardEvent;
-            this.ResumeLayout();
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -34,7 +33,19 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
 
+            MainKeyboard.Visible = true;
+            this.ResumeLayout();
         }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
+
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -69,7 +80,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 if (args.UserText.Trim().Equals(string.Empty) ||
                     args.PasswordText.Trim().Equals(string.Empty))
                 {
-                    MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.FALTA_USUARIO_PASSWORD));
+                    MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.ERROR_FALTA_DATO));
                 }
                 else
                 {
@@ -85,7 +96,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         {
                             MainKeyboard.ClearCredentials();
                             FormsController.OpenChildForm(this,new OperationForm(), 
-                                (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                     }
                     else
@@ -116,6 +127,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void KeyboardInputForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
     }
 }

@@ -3,11 +3,50 @@
     public static class Enumerations
     {
 
+        public enum CounterCommandEnum
+        {
+            DeviceReset,
+            RemoteCancel,
+            OpenEscrow,
+            CloseEscrow,
+            DepositMode,
+            ManualDepositMode,
+            NormalErrorRecoveryMode,
+            StoringErrorRecoveryMode,
+            CollectMode,
+            StopCounting,
+            StoringStart,
+            BatchDataTransmission,
+            Sense,
+            CountingDataRequest,
+            DenominationDataRequest,
+            SwitchCurrency
+        }
+        public enum IoboardCommandEnum
+        {
+            Open,
+            Close,
+            UnLock,
+            Status,
+            Empty,
+            Approve
+        }
+
         public enum LogTypeEnum
         {
             Excepction = 0,
             Information = 1
         }
+
+        public enum InformationTypeEnum
+        {
+            None,
+            Information,
+            Alert,
+            Error,
+            Event
+        }
+
         public enum OperationTypeEnum
         {
             None = 0,
@@ -45,6 +84,7 @@
             TextoInformacion,
             TextoAlerta,
             TextoError,
+            TextoEvento,
             FondoControl,
             CabeceraGrilla,
             PieGrilla,
@@ -52,7 +92,8 @@
             FondoFilasGrilla,
             TextoFilasGrilla,
             ColorBordesCeldasGrilla,
-            SegundaCabeceraGrilla
+            SegundaCabeceraGrilla,
+            Breadcrumb
 
         }
         public enum BagExtractionProcessEnum
@@ -78,7 +119,8 @@
         {
             None = 0,
             NoTurn,
-            NoBag
+            NoBag,
+            PortError
         }
         public enum DepositaryConfigurationEnum
         {
@@ -194,7 +236,28 @@
             REQUIERE_IDENTIFICADOR_SOBRE,
             EJECUTAR,
             NUMERIC_TEXTBOX_PLACEHOLDER,
-            ALPHANUMERIC_TEXTBOX_PLACEHOLDER
+            ALPHANUMERIC_TEXTBOX_PLACEHOLDER,
+            BAG_CODE_PLACEHOLDER,
+            FIN_DEPOSITO,
+            CURRENCYSELECTORFORM,
+            DAILYCLOSINGFORM,
+            ENVELOPEDEPOSITFORM,
+            INPUTBOXFORM,
+            KEYBOARDINPUTFORM,
+            MAINFORM,
+            NUMERICINPUTBOXFORM,
+            OPERATIONBLOCKINGFORM,
+            OPERATIONFORM,
+            OPERATIONSHISTORYFORM,
+            OTHEROPERATIONSFORM,
+            PREFERENCESFORM,
+            REPORTSFORM,
+            SUPPORTFORM,
+            SYSTEMBLOCKI, NGDIALOG,
+            TURNCHANGEFORM,
+            ERROR_FALTA_DATO,
+            ERROR_PUERTO,
+            TOQUE_PANTALLA_PARA_INICIAR
         }
 
         public enum FunctionEnum
@@ -209,7 +272,8 @@
             Transactions = 106,
             Support = 107,
             TurnChange = 108,
-            ViewEvents = 109
+            ViewEvents = 109,
+            Reports = 110
         }
     }
 }

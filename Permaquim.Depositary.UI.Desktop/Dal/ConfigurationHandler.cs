@@ -1,8 +1,6 @@
 using Microsoft.Extensions.Configuration;
-
 internal class ConfigurationHandler
 {
-
      internal static String ConnectionString
      {
          get { return getConfiguration(Constants.CONNECTIONSTRING); }

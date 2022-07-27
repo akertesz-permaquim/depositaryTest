@@ -37,6 +37,7 @@
             this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InformationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
             this.InformationLabel.Location = new System.Drawing.Point(32, 93);
@@ -44,6 +45,7 @@
             this.InformationLabel.Size = new System.Drawing.Size(888, 91);
             this.InformationLabel.TabIndex = 150;
             this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.InformationLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.InformationLabel_Paint);
             // 
             // MainPanel
             // 

@@ -15,5 +15,7 @@
 
         public string Entity { get; set; }
 
+        public bool Log { get; set; }
+
     }
 }

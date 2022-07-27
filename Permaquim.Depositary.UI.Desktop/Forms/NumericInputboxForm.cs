@@ -29,10 +29,24 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
             NumericInputBoxControl.KeyboardEvent += NumericInputBoxControl_KeyboardEvent;
         }
-
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
         private void NumericInputBoxControl_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        public string NumericInputBoxPlaceholder
+        {
+            get { return NumericInputBoxControl.NumericInputBoxPlaceholder; }
+            set { NumericInputBoxControl.NumericInputBoxPlaceholder = value; }
         }
         public string ReturnValue
         {

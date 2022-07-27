@@ -27,6 +27,15 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
             CustomInputBoxKeyboard.KeyboardEvent += CustomInputBoxKeyboard_KeyboardEvent;
         }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
         public string ReturnTextValue
         {
             get { return CustomInputBoxKeyboard.ReturnTextValue; }
@@ -46,7 +55,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                 if (args.InputTex.Trim().Equals(string.Empty))
                 {
                     CustomInputBoxKeyboard.SetLoginError(MultilanguangeController.
-                        GetText(MultiLanguageEnum.FALTA_USUARIO_PASSWORD));
+                        GetText(MultiLanguageEnum.ERROR_FALTA_DATO));
                 }
                 else
                 {

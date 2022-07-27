@@ -23,11 +23,24 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         private CustomTextBox _activeTextbox ;
         public CustomKeyboard()
         {
+           this.SuspendLayout();
+            this.DoubleBuffered = true;
             InitializeComponent();
+
+            this.ResumeLayout();
             _activeTextbox = UsernameTextBox;
             _activeTextbox.Focus();
             if(this.ParentForm !=null)
                 this.ParentForm.AcceptButton = this.Button_Enter;
+        }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
         }
         public void ClearCredentials()
         {
@@ -88,6 +101,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
 
                     // Raise the event.
                     KeyboardEvent(this, args);
+                }
+                return;
+            }
+            if (((CustomButton)sender).Tag.ToString().Equals("{BACKSPACE}"))
+            {
+                if (_activeTextbox.Texts.Length > 0)
+                {
+                    _activeTextbox.Texts = _activeTextbox.Texts.Substring(0, _activeTextbox.Texts.Length - 1);
+                    _activeTextbox.SelectionStart = _activeTextbox.Texts.Length;
                 }
             }
             else

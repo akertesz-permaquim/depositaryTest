@@ -11,7 +11,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Instancia del dispositivo
         /// </summary>
-        public Device _device { get; set; }
+        public CounterDevice _device { get; set; }
 
         private SelectedEditElementEnum _selectedEditElement;
 
@@ -48,6 +48,15 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             TimeOutController.Reset();
             Loadparameters();
+        }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
         }
         private void CenterPanel()
         {
@@ -103,7 +112,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             private void EnvelopeDepositForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
             _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = DeviceController.GetPollingInterval(),
@@ -124,10 +133,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadDenominations();
                 LoadLanguageItems();
                 EnableDisableControls(true);
-
             }
             else
                 InitializeLocals();
+
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
 
         }
         private void InitializeLocals()
@@ -190,7 +200,7 @@ namespace Permaquim.Depositary.UI.Desktop
             EvaluateTimeout();
 
             // Asigna a la máquina el valor del estado de la contadora en este ciclo
-            if (_device.CounterConnected)
+            if (_device != null &&_device.CounterConnected)
             {
                 _operationStatus.GeneralStatus = _device.CurrentStatus;
 
@@ -375,6 +385,9 @@ namespace Permaquim.Depositary.UI.Desktop
            !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                 && _totalQuantity > 0;//&& _totalAmount > 0;
 
+            EnvelopeTextBox.Visible = ParameterController.RequiresEnvelopeIdentifier
+                && ConfirmAndExitDepositButton.Visible;
+
         }
         private void ShowInformation()
         {
@@ -383,16 +396,16 @@ namespace Permaquim.Depositary.UI.Desktop
             if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
              && _operationStatus.CurrentTransactionQuantity == 0)
             {
-                InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.INGRESAR_VALORES_SOBRE);
-                InformationLabel.ForeColor = Color.Green;
+                FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                     MultilanguangeController.GetText(MultiLanguageEnum.INGRESAR_VALORES_SOBRE));
             }
 
             if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                 && _operationStatus.CurrentTransactionQuantity == 0
                 && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQWaitingToRemoveBankNotes)
             {
-                InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.RETIRAR_SOBRE);
-                InformationLabel.ForeColor = Color.Red;
+                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                MultilanguangeController.GetText(MultiLanguageEnum.RETIRAR_SOBRE));
             }
         }
 
@@ -433,8 +446,9 @@ namespace Permaquim.Depositary.UI.Desktop
             CurrencyLabel.Visible = false;
             RemainingTimeLabel.Visible = false;
             SubtotalLabel.Visible = false;
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO);
-            InformationLabel.ForeColor = Color.Green;
+            FormsController.SetInformationMessage(InformationTypeEnum.Information,
+            MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO));
+
 
             Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
             sesiones.Items(null,DatabaseController.CurrentDepositary.Id,
@@ -521,8 +535,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (ParameterController.RequiresEnvelopeIdentifier && EnvelopeTextBox.Texts.Trim().Equals(String.Empty))
             {
-                InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.REQUIERE_IDENTIFICADOR_SOBRE);
-                InformationLabel.ForeColor = Color.Red;
+                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                MultilanguangeController.GetText(MultiLanguageEnum.REQUIERE_IDENTIFICADOR_SOBRE));
             }
             else
             {
@@ -591,13 +605,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if(EnvelopeTextBox.Texts.Equals(EnvelopeTextBox.PlaceholderText))
                 inputForm.InputTexboxPlaceholder = EnvelopeTextBox.PlaceholderText;
-
-
+            ButtonsPanel.Visible = false;
             inputForm.ReturnTextValue = EnvelopeTextBox.Texts;
             if (inputForm.ShowDialog() == DialogResult.OK)
             {
                 EnvelopeTextBox.Texts = inputForm.ReturnTextValue;
             }
+            ButtonsPanel.Visible = true;
         }
 
         private void DenominationsGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -614,7 +628,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 DenominationsGridView.BeginEdit(false);
 
                 CustomNumericInputboxKeyboard numericInputForm = new CustomNumericInputboxKeyboard();
-
+                numericInputForm.NumericInputBoxPlaceholder =
+                    ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 if (numericInputForm.ShowDialog() == DialogResult.OK)
                 {
                     ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value = numericInputForm.ReturnValue;
@@ -632,11 +647,11 @@ namespace Permaquim.Depositary.UI.Desktop
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
                 TimeOutController.GetRemainingtime().ToString();
             if (TimeOutController.GetRemainingtime() > _greenStatusIndicator)
-                RemainingTimeLabel.ForeColor = Color.Green;
+                RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoInformacion);
             if (TimeOutController.GetRemainingtime() < _yellowStatusIndicator)
-                RemainingTimeLabel.ForeColor = Color.Yellow;
+                RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoAlerta);
             if (TimeOutController.GetRemainingtime() < _redStatusIndicator)
-                RemainingTimeLabel.ForeColor = Color.Red;
+                RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoError);
         }
 
         private void RemainingTimeLabel_Click(object sender, EventArgs e)
@@ -661,6 +676,25 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.RemoteCancel();
             FormsController.OpenChildForm(this, new OperationForm(), _device);
 
+        }
+
+        private void EnvelopeTextBox_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+            _selectedEditElement = SelectedEditElementEnum.EnvelopeCode;
+            InputBoxForm inputForm = new InputBoxForm();
+
+            if (EnvelopeTextBox.Texts.Equals(EnvelopeTextBox.PlaceholderText))
+                inputForm.InputTexboxPlaceholder = EnvelopeTextBox.PlaceholderText;
+            else
+                inputForm.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.ENVELOPE_TEXTBOX_PLACEHOLDER);
+
+            inputForm.ReturnTextValue = EnvelopeTextBox.Texts;
+            if (inputForm.ShowDialog() == DialogResult.OK)
+            {
+                EnvelopeTextBox.Texts = inputForm.ReturnTextValue
+                    .Replace("{ENTER}","");
+            }
         }
     }
 }

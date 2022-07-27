@@ -29,6 +29,15 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -78,7 +87,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BackButton_Click(object sender, EventArgs e)
         {
             FormsController.OpenChildForm(this,new OtherOperationsForm(),
-              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
         public void LoadFilterControls()
@@ -465,6 +474,8 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 InitializeLocals();
             }
+
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {

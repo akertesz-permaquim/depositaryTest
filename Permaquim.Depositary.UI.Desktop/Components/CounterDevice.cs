@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Permaquim.Depositary.UI.Desktop.CustomExceptions;
 using System.Collections;
 using System.IO.Ports;
 using System.Security.Permissions;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Permaquim.Depositary.UI.Desktop.Components
 {
-    public class Device : IDisposable
+    public class CounterDevice : IDisposable
     {
         #region Local variables
 
@@ -19,7 +20,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private static string _readbuffer = string.Empty;
 
         // Device instance
-        private DE50Device _device = null;
+        private DEXDevice _device = null;
 
         public StatusInformation.State PreviousState { get; set; }
         public StatusInformation.State CurrentStatus
@@ -49,7 +50,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public int SleepTimeout { get; set; } = 150;
 
         // Port Names
-        List<string> _portNames = new List<string>();
+        public List<string> PortNames { get; private set; } = new List<string>();
 
         #endregion
 
@@ -120,16 +121,16 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         /// Constructor
         /// </summary>
         /// <param name="device"></param>
-        public Device(DE50Device device)
+        public CounterDevice(DEXDevice device)
         {
 
-            _portNames = GetPortNames();
+            PortNames = GetPortNames();
 
             _device = device;
             Log("FUNCTION: Counter Device initializing in COM Port: " + device.CounterComPort.PortName + ".");
             try
             {
-                if (_portNames.Exists(e => e.EndsWith(device.CounterComPort.PortName)))
+                if (PortNames.Exists(e => e.EndsWith(device.CounterComPort.PortName)))
                 {
                     _counterPort = new SerialPort
                     {
@@ -150,12 +151,15 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 }
                 else
                 {
-                    Log("FUNCTION: Device Constructor: port " + device.CounterComPort.PortName + " not present.");
+                    throw new CommPortException()
+                    {
+                        ExceptionMessage = "Port " + device.CounterComPort.PortName + " not present.",
+                        PortName = device.CounterComPort.PortName
+                    };
                 }
 
-                if (_portNames.Exists(e => e.EndsWith(device.IOboardComPort.PortName)))
+                if (PortNames.Exists(e => e.EndsWith(device.IOboardComPort.PortName)))
                 {
-
 
                     _ioboardPort = new SerialPort
                     {
@@ -177,21 +181,26 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 }
                 else
                 {
-                    Log("FUNCTION: Device Constructor: port " + device.IOboardComPort.PortName + " not present.");
+                    throw new CommPortException()
+                    {
+                        ExceptionMessage = "Port " + device.CounterComPort.PortName + " not present.",
+                        PortName = device.CounterComPort.PortName
+                    };
                 }
 
 
             }
             catch (Exception ex)
             {
-                Log(ex);
+                throw ex;
             }
         }
 
-        public Device()
+        public CounterDevice()
         {
         }
 
+        public int MyProperty { get; set; }
 
         #endregion
 
