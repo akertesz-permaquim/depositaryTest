@@ -45,6 +45,8 @@
     <string>Desarrollo.GenerarTablaModelo</string>
     <string>Desarrollo.GenerarTablaTipoModelo</string>
     <string>Dispositivo.ObtenerInformacionDepositario</string>
+    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
+    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
     <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
     <string>Operacion.ObtenerExistenciasPorDepositario</string>
     <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
@@ -291,8 +293,8 @@
     <string>Dispositivo.Depositario</string>
     <string>Dispositivo.DepositarioContadora</string>
     <string>Dispositivo.DepositarioEstado</string>
+    <string>Dispositivo.DepositarioMoneda</string>
     <string>Dispositivo.DepositarioPlaca</string>
-    <string>Dispositivo.DepositarioValor</string>
     <string>Dispositivo.Marca</string>
     <string>Dispositivo.Modelo</string>
     <string>Dispositivo.TipoConfiguracionDepositario</string>

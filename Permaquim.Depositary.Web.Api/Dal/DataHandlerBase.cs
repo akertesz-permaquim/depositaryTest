@@ -478,7 +478,7 @@ public class DataHandlerBase: IDataHandler
         }
         finally
         {
-            if(_connection.State != ConnectionState.Closed && transaction == null)
+            if(_connection.State != ConnectionState.Closed)
                  _connection.Close();
         }
     }

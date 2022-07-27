@@ -26,117 +26,324 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> Transacciones([FromBody] TransaccionModel model)
         {
-            DepositaryWebApi.Business.Tables.Operacion.Transaccion transaccionEntity = new();
 
             long depositarioId = SincronizacionController.ObtenerIdDepositario(model.CodigoExternoDepositario);
+            DepositaryWebApi.Business.Tables.Operacion.Contenedor contenedorController = new();
 
-
-
-
-            //Iniciamos un registro de sincronizacion de la entidad
-            Int64? SincronizacionEntidadId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.Transaccion");
-
-            if (SincronizacionEntidadId.HasValue)
+            try
             {
-                try
+                if (model.Contenedores.Count > 0)
                 {
+                    //Iniciamos un registro de sincronizacion de la entidad
+                    Int64? SincronizacionContenedorId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.Contenedor");
 
-                    DepositaryWebApi.Business.Tables.Operacion.Sesion sessionEntities = new();
-
-                    foreach (var item in model.Sesion)
+                    foreach (var contenedorItem in model.Contenedores)
                     {
-                        item.DepositarioId = depositarioId;
-                        sessionEntities.AddOrUpdate(item);
-                    }
-
-                    DepositaryWebApi.Business.Tables.Operacion.CierreDiario dailyclosingEntities = new();
-
-                    foreach (var item in model.CierreDiario)
-                    {
-                        item.DepositarioId = depositarioId;
-                        dailyclosingEntities.AddOrUpdate(item);
-                    }
-
-
-                    DepositaryWebApi.Business.Tables.Operacion.Turno turnEntities = new();
-
-                    foreach (var item in model.Turno)
-                    {
-                        item.DepositarioId = depositarioId;
-                        turnEntities.AddOrUpdate(item);
-                    }
-
-
-                    DepositaryWebApi.Business.Tables.Operacion.Contenedor containerEntities = new();
-
-                    foreach (var item in model.Contenedor)
-                    {
-                        item.DepositarioId = depositarioId;
-                        containerEntities.AddOrUpdate(item);
-                    }
-
-                    transaccionEntity.BeginTransaction();
-
-                    foreach (var transactionItem in model.Transaccion)
-                    {
-                        transactionItem.DepositarioId = depositarioId;
-                        var previousTransactionId = transactionItem.Id;
-                        var newTransaction = transaccionEntity.AddOrUpdate(transactionItem);
-
-                        DepositaryWebApi.Business.Tables.Operacion.TransaccionDetalle transaccionDetalleEntity = new(transaccionEntity);
-
-                        foreach (var itemDetail in model.TransaccionDetalle)
+                        contenedorItem.DepositarioId = depositarioId;
+                        contenedorItem.OrigenContenedor_Id = contenedorItem.Id;
+                        Int64? idContenedorExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Contenedor", depositarioId, contenedorItem.OrigenContenedor_Id.Value);
+                        if (idContenedorExistente.HasValue)
                         {
-                            if (itemDetail.TransaccionId == previousTransactionId)
+                            contenedorItem.Id = idContenedorExistente.Value;
+                            contenedorController.Update(contenedorItem);
+                        }
+                        else
+                            contenedorController.Add(contenedorItem);
+
+                        SincronizacionController.guardarDetalleSincronizacion(SincronizacionContenedorId.Value, contenedorItem.OrigenContenedor_Id.Value, contenedorItem.Id);
+                    }
+
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionContenedorId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionContenedorId.Value);
+                }
+
+                if (model.Sesiones.Count > 0)
+                {
+                    //Iniciamos un registro de sincronizacion de la entidad
+                    Int64? SincronizacionSesionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.Sesion");
+
+                    DepositaryWebApi.Business.Tables.Operacion.Sesion sesionController;
+                    foreach (var sesionItem in model.Sesiones)
+                    {
+                        sesionController = new();
+                        sesionItem.DepositarioId = depositarioId;
+                        sesionItem.OrigenSesion_Id = sesionItem.Id;
+
+                        Int64? idSesionExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Sesion", depositarioId, sesionItem.OrigenSesion_Id.Value);
+                        if (idSesionExistente.HasValue)
+                        {
+                            sesionItem.Id = idSesionExistente.Value;
+                            sesionController.Update(sesionItem);
+                        }
+                        else
+                            sesionController.Add(sesionItem);
+
+                        SincronizacionController.guardarDetalleSincronizacion(SincronizacionSesionId.Value, sesionItem.OrigenSesion_Id.Value, sesionItem.Id);
+                    }
+
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionSesionId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionSesionId.Value);
+                }
+
+                if (model.CierresDiarios.Count > 0)
+                {
+                    //Iniciamos un registro de sincronizacion de la entidad
+                    Int64? SincronizacionCierreDiarioId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.CierreDiario");
+
+                    DepositaryWebApi.Business.Tables.Operacion.CierreDiario cierreDiarioController;
+                    foreach (var cierreDiarioItem in model.CierresDiarios)
+                    {
+                        cierreDiarioController = new();
+                        cierreDiarioItem.DepositarioId = depositarioId;
+                        cierreDiarioItem.OrigenCierreDiario_Id = cierreDiarioItem.Id;
+                        if (model.Sesiones.Count > 0)
+                        {
+                            var sesionAsociada = model.Sesiones.Where(x => x.OrigenSesion_Id == cierreDiarioItem.SesionId).FirstOrDefault();
+                            if (sesionAsociada != null)
+                                cierreDiarioItem.SesionId = sesionAsociada.Id;
+                            else
+                                cierreDiarioItem.SesionId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Sesion", depositarioId, cierreDiarioItem.SesionId).Value;
+                        }
+                        else
+                            cierreDiarioItem.SesionId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Sesion", depositarioId, cierreDiarioItem.SesionId).Value;
+
+                        Int64? idCierreDiarioExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.CierreDiario", depositarioId, cierreDiarioItem.OrigenCierreDiario_Id.Value);
+                        if (idCierreDiarioExistente.HasValue)
+                        {
+                            cierreDiarioItem.Id = idCierreDiarioExistente.Value;
+                            cierreDiarioController.Update(cierreDiarioItem);
+                        }
+                        else
+                            cierreDiarioController.Add(cierreDiarioItem);
+
+                        SincronizacionController.guardarDetalleSincronizacion(SincronizacionCierreDiarioId.Value, cierreDiarioItem.OrigenCierreDiario_Id.Value, cierreDiarioItem.Id);
+                    }
+
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionCierreDiarioId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionCierreDiarioId.Value);
+                }
+
+
+                if (model.Turnos.Count > 0)
+                {
+                    //Iniciamos un registro de sincronizacion de la entidad
+                    Int64? SincronizacionTurnoId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.Turno");
+
+                    DepositaryWebApi.Business.Tables.Operacion.Turno turnoController;
+                    foreach (var turnoItem in model.Turnos)
+                    {
+                        turnoController = new();
+                        turnoItem.DepositarioId = depositarioId;
+                        turnoItem.OrigenTurno_Id = turnoItem.Id;
+                        if (turnoItem.CierreDiarioId.HasValue)
+                        {
+                            if (model.CierresDiarios.Count > 0)
                             {
-                                itemDetail.TransaccionId = newTransaction.Id;
-                                transaccionDetalleEntity.AddOrUpdate(itemDetail);
+                                var cierreDiarioAsociado = model.CierresDiarios.Where(x => x.OrigenCierreDiario_Id == turnoItem.CierreDiarioId).FirstOrDefault();
+                                if (cierreDiarioAsociado != null)
+                                    turnoItem.CierreDiarioId = cierreDiarioAsociado.Id;
+                                else
+                                    turnoItem.CierreDiarioId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.CierreDiario", depositarioId, turnoItem.CierreDiarioId.Value).Value;
                             }
+                            else
+                                turnoItem.CierreDiarioId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.CierreDiario", depositarioId, turnoItem.CierreDiarioId.Value).Value;
                         }
 
-                        DepositaryWebApi.Business.Tables.Operacion.TransaccionSobre transaccionSobreEntity = new(transaccionEntity);
-                        DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobre newEnvelope = new();
-
-                        foreach (var itemEnvelope in model.TransaccionSobre)
+                        Int64? idTurnoExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Turno", depositarioId, turnoItem.OrigenTurno_Id.Value);
+                        if (idTurnoExistente.HasValue)
                         {
-                            var previousEnvelopeId = itemEnvelope.Id;
+                            turnoItem.Id = idTurnoExistente.Value;
+                            turnoController.Update(turnoItem);
+                        }
+                        else
+                            turnoController.Add(turnoItem);
 
-                            if (itemEnvelope.TransaccionId == previousTransactionId)
+                        SincronizacionController.guardarDetalleSincronizacion(SincronizacionTurnoId.Value, turnoItem.OrigenTurno_Id.Value, turnoItem.Id);
+                    }
+
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionTurnoId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionTurnoId.Value);
+                }
+
+                if (model.Transacciones.Count > 0)
+                {
+                    //Iniciamos un registro de sincronizacion de la entidad
+                    Int64? SincronizacionTransaccionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.Transaccion");
+                    Int64? SincronizacionTransaccionDetalleId = null;
+                    Int64? SincronizacionTransaccionSobreId = null;
+                    Int64? SincronizacionTransaccionSobreDetalleId = null;
+
+                    DepositaryWebApi.Business.Tables.Operacion.Transaccion transaccionController;
+                    foreach (var transaccionItem in model.Transacciones)
+                    {
+                        transaccionController = new();
+                        transaccionItem.DepositarioId = depositarioId;
+                        transaccionItem.OrigenTransaccion_Id = transaccionItem.Id;
+                        Int64? idTransaccionExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Transaccion", depositarioId, transaccionItem.OrigenTransaccion_Id.Value);
+                        if (!idTransaccionExistente.HasValue)
+                        {
+                            if (model.Sesiones.Count > 0)
                             {
-                                itemEnvelope.TransaccionId = newTransaction.Id;
-                                newEnvelope = transaccionSobreEntity.AddOrUpdate(itemEnvelope);
+                                var SesionAsociada = model.Sesiones.Where(x => x.OrigenSesion_Id == transaccionItem.SesionId).FirstOrDefault();
+                                if (SesionAsociada != null)
+                                    transaccionItem.SesionId = SesionAsociada.Id;
+                                else
+                                    transaccionItem.SesionId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Sesion", depositarioId, transaccionItem.SesionId).Value;
+                            }
+                            else
+                                transaccionItem.SesionId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Sesion", depositarioId, transaccionItem.SesionId).Value;
 
-                                DepositaryWebApi.Business.Tables.Operacion.TransaccionSobreDetalle transaccionSobreDetalleEntity = new(transaccionEntity);
-                                foreach (var itemEnvelopeDetail in model.TransaccionSobreDetalle)
+                            if (transaccionItem.CierreDiarioId.HasValue)
+                            {
+                                if (model.CierresDiarios.Count > 0)
                                 {
-                                    if (itemEnvelopeDetail.SobreId == previousEnvelopeId)
+                                    var cierreDiarioAsociado = model.CierresDiarios.Where(x => x.OrigenCierreDiario_Id == transaccionItem.CierreDiarioId).FirstOrDefault();
+                                    if (cierreDiarioAsociado != null)
+                                        transaccionItem.CierreDiarioId = cierreDiarioAsociado.Id;
+                                    else
+                                        transaccionItem.CierreDiarioId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.CierreDiario", depositarioId, transaccionItem.CierreDiarioId.Value).Value;
+                                }
+                                else
+                                    transaccionItem.CierreDiarioId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.CierreDiario", depositarioId, transaccionItem.CierreDiarioId.Value).Value;
+                            }
+
+                            if (model.Turnos.Count > 0)
+                            {
+                                var turnoAsociado = model.Turnos.Where(x => x.OrigenTurno_Id == transaccionItem.TurnoId).FirstOrDefault();
+                                if (turnoAsociado != null)
+                                    transaccionItem.TurnoId = turnoAsociado.Id;
+                                else
+                                    transaccionItem.TurnoId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Turno", depositarioId, transaccionItem.TurnoId).Value;
+                            }
+                            else
+                                transaccionItem.TurnoId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Turno", depositarioId, transaccionItem.TurnoId).Value;
+
+                            if (model.Contenedores.Count > 0)
+                            {
+                                var contenedorAsociado = model.Contenedores.Where(x => x.OrigenContenedor_Id == transaccionItem.ContenedorId).FirstOrDefault();
+                                if (contenedorAsociado != null)
+                                    transaccionItem.ContenedorId = contenedorAsociado.Id;
+                                else
+                                    transaccionItem.ContenedorId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Contenedor", depositarioId, transaccionItem.ContenedorId).Value;
+                            }
+                            else
+                                transaccionItem.ContenedorId = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.Contenedor", depositarioId, transaccionItem.ContenedorId).Value;
+
+                            var newTransaccionEntity = transaccionController.Add(transaccionItem);
+
+                            SincronizacionController.guardarDetalleSincronizacion(SincronizacionTransaccionId.Value, transaccionItem.OrigenTransaccion_Id.Value, transaccionItem.Id);
+
+                            if (newTransaccionEntity != null)
+                            {
+                                bool existenTransaccionesDetalles = model.TransaccionesDetalles.Exists(x => x.TransaccionId == transaccionItem.OrigenTransaccion_Id);
+                                bool existeTransaccionSobre = model.TransaccionesSobres.Exists(x => x.TransaccionId == transaccionItem.OrigenTransaccion_Id);
+
+                                if (existenTransaccionesDetalles)
+                                {
+                                    var transaccionesDetalles = model.TransaccionesDetalles.Where(x => x.TransaccionId == transaccionItem.OrigenTransaccion_Id);
+
+                                    //Iniciamos un registro de sincronizacion de la entidad
+                                    if (!SincronizacionTransaccionDetalleId.HasValue)
+                                        SincronizacionTransaccionDetalleId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.TransaccionDetalle");
+
+                                    DepositaryWebApi.Business.Tables.Operacion.TransaccionDetalle transaccionDetalleController;
+                                    foreach (var transaccionDetalle in transaccionesDetalles)
                                     {
-                                        itemEnvelopeDetail.SobreId = newEnvelope.Id;
-                                        transaccionSobreDetalleEntity.AddOrUpdate(itemEnvelopeDetail);
+
+                                        transaccionDetalleController = new();
+                                        transaccionDetalle.TransaccionId = transaccionItem.Id;
+                                        transaccionDetalle.OrigenTransaccionDetalle_Id = transaccionDetalle.Id;
+                                        Int64? idTransaccionDetalleExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.TransaccionDetalle", depositarioId, transaccionDetalle.OrigenTransaccionDetalle_Id.Value);
+
+                                        if (!idTransaccionDetalleExistente.HasValue)
+                                        {
+                                            var newTransaccionDetalleEntity = transaccionDetalleController.AddOrUpdate(transaccionDetalle);
+                                            SincronizacionController.guardarDetalleSincronizacion(SincronizacionTransaccionDetalleId.Value, transaccionDetalle.OrigenTransaccionDetalle_Id.Value, transaccionDetalle.Id);
+                                        }
+                                    }
+                                }
+                                else if (existeTransaccionSobre)
+                                {
+                                    var transaccionSobre = model.TransaccionesSobres.Where(x => x.TransaccionId == transaccionItem.OrigenTransaccion_Id).FirstOrDefault();
+                                    //Iniciamos un registro de sincronizacion de la entidad
+                                    if (!SincronizacionTransaccionSobreId.HasValue)
+                                        SincronizacionTransaccionSobreId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.TransaccionSobre");
+
+                                    DepositaryWebApi.Business.Tables.Operacion.TransaccionSobre transaccionSobreController;
+                                    transaccionSobreController = new();
+                                    transaccionSobre.OrigenTransaccionSobre_Id = transaccionSobre.Id;
+
+                                    Int64? idTransaccionSobreExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.TransaccionSobre", depositarioId, transaccionSobre.OrigenTransaccionSobre_Id.Value);
+
+                                    if (!idTransaccionSobreExistente.HasValue)
+                                    {
+                                        transaccionSobre.TransaccionId = transaccionItem.Id;
+                                        var newTransaccionSobreEntity = transaccionSobreController.Add(transaccionSobre);
+
+                                        SincronizacionController.guardarDetalleSincronizacion(SincronizacionTransaccionSobreId.Value, transaccionSobre.OrigenTransaccionSobre_Id.Value, transaccionSobre.Id);
+
+                                        if (newTransaccionSobreEntity != null)
+                                        {
+                                            bool existenTransaccionesSobresDetalles = model.TransaccionesSobresDetalles.Exists(x => x.SobreId == transaccionSobre.OrigenTransaccionSobre_Id);
+
+                                            if (existenTransaccionesSobresDetalles)
+                                            {
+                                                var transaccionesSobresDetalles = model.TransaccionesSobresDetalles.Where(x => x.SobreId == transaccionSobre.OrigenTransaccionSobre_Id);
+
+                                                //Iniciamos un registro de sincronizacion de la entidad
+                                                if (!SincronizacionTransaccionSobreDetalleId.HasValue)
+                                                    SincronizacionTransaccionSobreDetalleId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.TransaccionSobreDetalle");
+
+                                                DepositaryWebApi.Business.Tables.Operacion.TransaccionSobreDetalle transaccionSobreDetalleController;
+                                                foreach (var transaccionSobreDetalle in transaccionesSobresDetalles)
+                                                {
+                                                    transaccionSobreDetalleController = new();
+                                                    transaccionSobreDetalle.SobreId = transaccionSobre.Id;
+                                                    transaccionSobreDetalle.OrigenTransaccionSobreDetalle_Id = transaccionSobreDetalle.Id;
+
+                                                    Int64? idTransaccionSobreDetalleExistente = SincronizacionController.obtenerIdDestinoDetalleSincronizacion("Operacion.TransaccionSobreDetalle", depositarioId, transaccionSobreDetalle.OrigenTransaccionSobreDetalle_Id.Value);
+
+                                                    if (!idTransaccionSobreDetalleExistente.HasValue)
+                                                    {
+                                                        var newTransaccionSobreDetalleEntity = transaccionSobreDetalleController.AddOrUpdate(transaccionSobreDetalle);
+                                                        SincronizacionController.guardarDetalleSincronizacion(SincronizacionTransaccionSobreDetalleId.Value, transaccionSobreDetalle.OrigenTransaccionSobreDetalle_Id.Value, transaccionSobreDetalle.Id);
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-
-                    transaccionEntity.EndTransaction(true);
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionTransaccionSobreDetalleId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionTransaccionSobreDetalleId.Value);
 
                     //Cerramos el registro de sincronizacion de la entidad
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionEntidadId.Value);
+                    if (SincronizacionTransaccionSobreId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionTransaccionSobreId.Value);
 
-                    return Ok();
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionTransaccionDetalleId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionTransaccionDetalleId.Value);
+
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionTransaccionId.HasValue)
+                        SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionTransaccionId.Value);
                 }
-                catch (Exception ex)
-                {
-                    transaccionEntity.EndTransaction(false);
-                    return BadRequest(ex.Message);
-                }
+
+
+                return Ok();
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("No se pudo encontrar la entidad a sincronizar en Sincronizacion.Entidad");
+                return BadRequest(ex.Message);
             }
-
         }
 
         [HttpPost]

@@ -30,7 +30,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 data.TiposContadoras = ObtenerTiposContadorasBD();
                 data.ContadorasDepositarios = ObtenerContadorasBD();
                 data.ComandosContadoras = ObtenerComandosContadorasBD();
-                data.ValoresDepositarios = ObtenerValoresBD();
+                data.MonedasDepositarios = ObtenerMonedasBD();
                 data.EstadosDepositarios = ObtenerEstadosBD();
 
             }
@@ -241,7 +241,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
             try
             {
-                data.ValoresDepositarios = ObtenerValoresBD();
+                data.MonedasDepositarios = ObtenerMonedasBD();
             }
             catch (Exception ex)
             {
@@ -359,10 +359,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioValor> ObtenerValoresBD()
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> ObtenerMonedasBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioValor> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioValor oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> result = new();
+            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda oEntities = new();
 
             try
             {
