@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
@@ -13,8 +14,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         private static Form _activeForm = null;
 
-
-
         /// <summary>
         /// Hides 'instance' and shows 'childForm'
         /// </summary>
@@ -22,13 +21,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         /// <param name="childForm"></param>
         /// <param name="device"></param>
         public static void OpenChildForm(Form instance, Form childForm,
-       Permaquim.Depositary.UI.Desktop.Components.Device device)
+       Permaquim.Depositary.UI.Desktop.Components.CounterDevice device)
         {
             HideInstance(instance);
             OpenChildForm(childForm, device);
+            MainFormInstance.BreadCrumbText =
+                 MultilanguangeController.GetText(childForm.Name);
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         public static void OpenChildForm(Form childForm,
-        Permaquim.Depositary.UI.Desktop.Components.Device device)
+        Permaquim.Depositary.UI.Desktop.Components.CounterDevice device)
         {
 
             var refForm = _formList.FirstOrDefault(s => s.Name.Equals(childForm.Name));
@@ -53,10 +55,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 childForm.StartPosition = FormStartPosition.Manual;
 
                 childForm.Tag = device;
+                MainFormInstance.BreadCrumbText =
+                    MultilanguangeController.GetText(childForm.Name);
             }
             childForm.Show();
 
-
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
 
             childForm.Location = new Point()
             {
@@ -67,6 +71,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static void HideInstance(Form instance)
         {
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
             instance.Hide();
         }
         public static void LogOff()
@@ -79,8 +84,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
             }
             _formList.Clear();
-
+            MainFormInstance.BreadCrumbText =
+                 MultilanguangeController.GetText(MainFormInstance.Name);
             MultilanguangeController.ResetLanguage();
+
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
+        }
+
+        public static void SetInformationMessage(InformationTypeEnum type, string message)
+        {
+            MainFormInstance.SetInformationMessage(type, message);
         }
     }
 }

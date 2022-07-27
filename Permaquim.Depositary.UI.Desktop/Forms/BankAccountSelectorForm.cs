@@ -25,6 +25,15 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
+        }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -39,7 +48,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_userBankAccounts.Count <= 1)
                 DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
             FormsController.OpenChildForm(this, new BillDepositForm(),
-             (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+             (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
 
         }
 
@@ -87,14 +96,14 @@ namespace Permaquim.Depositary.UI.Desktop
             DatabaseController.CurrentUserBankAccount = (Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta)((CustomButton)sender).Tag;
 
             FormsController.OpenChildForm(this, new BillDepositForm(),
-            (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
 
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                  (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                  (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
         private void BankAccountSelectorForm_VisibleChanged(object sender, EventArgs e)
@@ -102,6 +111,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (!this.Visible)
                 InitializeLocals();
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 
         private void InitializeLocals()

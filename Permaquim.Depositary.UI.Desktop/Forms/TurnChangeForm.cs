@@ -9,7 +9,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class TurnChangeForm : Form
     {
-        public Device _device { get; set; }
+        CounterDevice _device = null;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         public TurnChangeForm()
@@ -40,7 +40,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void TurnChangeForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
 
         }
         private void CenterPanel()
@@ -67,7 +67,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
 
             StyleController.SetControlStyle(OperationsHeaderGridView);
             StyleController.SetControlStyle(OperationsDetailGridView);
@@ -75,10 +74,11 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadMultiLanguageItems()
         {
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_TURNO);
-            InformationLabel.Text += Environment.NewLine + "Turno actual: "
+            string message = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_TURNO)
+             + Environment.NewLine + "Turno actual: "
                 + DatabaseController.CurrentTurn.TurnoDepositarioId.Nombre;
-            InformationLabel.Visible = true;
+            FormsController.SetInformationMessage(InformationTypeEnum.Information, message);
+ 
             TurnLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TRANSACCIONES_TURNO);
         }
 
@@ -128,6 +128,8 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 InitializeLocals();
             }
+
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 
         #region Datagrid        

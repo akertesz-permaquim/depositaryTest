@@ -3,22 +3,30 @@ using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
-namespace Permaquim.Depositary.UI.Desktop
+namespace Permaquim.Depositary.UI.Desktop.Forms
 {
-    public partial class DailyClosingForm : Form
+    public partial class BagHistoryForm : Form
     {
         public CounterDevice _device { get; set; }
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
-        private List<DailyClosingItem> _dailyClosingItems = new();
-        public DailyClosingForm()
+        private List<BagHistoryItem> _bagHistoryItems = new();
+        public BagHistoryForm()
         {
             InitializeComponent();
             CenterPanel();
             LoadStyles();
-            LoadDailyClosingButton();
             LoadBackButton();
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -45,10 +53,10 @@ namespace Permaquim.Depositary.UI.Desktop
                 FormsController.LogOff();
             }
         }
-        private void DailyClosingForm_Load(object sender, EventArgs e)
+
+        private void BagHistoryForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
-
         }
         private void CenterPanel()
         {
@@ -59,40 +67,21 @@ namespace Permaquim.Depositary.UI.Desktop
                 Y = MainPanel.Location.Y
             };
 
-            DenominationsGridView.Location = new Point()
+            MainGridView.Location = new Point()
             {
-                X = this.Width / 2 - DenominationsGridView.Width / 2,
-                Y = DenominationsGridView.Location.Y
+                X = this.Width / 2 - MainGridView.Width / 2,
+                Y = MainGridView.Location.Y
             };
 
         }
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            FormsController.SetInformationMessage(InformationTypeEnum.Information,
-                MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO));
-
-            StyleController.SetControlStyle(DenominationsGridView);
+            //FormsController.SetInformationMessage(InformationTypeEnum.Information,
+            //MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO));
+            
+              StyleController.SetControlStyle(MainGridView);
         }
-
-
-        #region DailyClosingButton
-        private void LoadDailyClosingButton()
-        {
-            CustomButton backButton = ControlBuilder.BuildStandardButton(
-                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width / 2 - 5, 55);
-
-            this.MainPanel.Controls.Add(backButton);
-
-            backButton.Click += new System.EventHandler(DailyClosingButton_Click);
-        }
-        private void DailyClosingButton_Click(object sender, EventArgs e)
-        {
-            DatabaseController.CloseCurrentDay();
-            FormsController.OpenChildForm(this, new OtherOperationsForm(), _device);
-        }
-        #endregion
-
         #region BackButton
         private void LoadBackButton()
         {
@@ -108,23 +97,14 @@ namespace Permaquim.Depositary.UI.Desktop
             FormsController.OpenChildForm(this, new OtherOperationsForm(), _device);
         }
         #endregion
-        #region Data    
-        private void LoadDailyClosingItems()
-        {
-            _dailyClosingItems = DatabaseController.GetDailyClosingItems();
-            DenominationsGridView.DataSource = _dailyClosingItems;
-            StyleController.SetControlHeight(DenominationsGridView);
-        }
-        #endregion
-
         #region Datagrid        
-        private void InitializeDenominationsGridViewDetailGridView()
+        private void InitializeMainGridView()
         {
-            DenominationsGridView.AutoGenerateColumns = false;
+            MainGridView.AutoGenerateColumns = false;
 
-            DenominationsGridView.Columns.Clear();
+            MainGridView.Columns.Clear();
 
-            DenominationsGridView.Columns.Add(new()
+            MainGridView.Columns.Add(new()
             {
                 Visible = false,
                 Width = 1,
@@ -132,7 +112,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            DenominationsGridView.Columns.Add(new()
+            MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "Moneda",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
@@ -142,9 +122,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-            
- 
-            DenominationsGridView.Columns.Add(new()
+
+
+            MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "CantidadOperaciones",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADOPERACIONES),
@@ -155,7 +135,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            DenominationsGridView.Columns.Add(new()
+            MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalValidado",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
@@ -166,7 +146,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            DenominationsGridView.Columns.Add(new()
+            MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalAValidar",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
@@ -176,7 +156,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-            DenominationsGridView.Columns.Add(new()
+            MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "Total",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
@@ -185,39 +165,40 @@ namespace Permaquim.Depositary.UI.Desktop
                 Width = 100,
                 CellTemplate = new DataGridViewTextBoxCell()
 
-            }); 
+            });
 
         }
         #endregion
-
-        private void DailyClosingForm_VisibleChanged(object sender, EventArgs e)
+        #region Data    
+        private void LoadDailyClosingItems()
+        {
+            _bagHistoryItems = DatabaseController.GetBaghistoryItems();
+            MainGridView.DataSource = _bagHistoryItems;
+            StyleController.SetControlHeight(MainGridView);
+        }
+        #endregion
+        private void InitializeLocals()
+        {
+            // inicializar las variables locales
+            MainGridView.DataSource = null;
+        }
+        #region Datagrid   
+        private void BagHistoryForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
-                InitializeDenominationsGridViewDetailGridView();
+                InitializeMainGridView();
                 LoadDailyClosingItems();
             }
             else
                 InitializeLocals();
-
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
-        private void InitializeLocals()
-        {
-            // inicializar las variables locales
-            DenominationsGridView.DataSource = null;
-        }
-
-        private void DenominationsGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            DenominationsGridView.ClearSelection();
-        }
-
-        private void DailyClosingForm_MouseClick(object sender, MouseEventArgs e)
+        #endregion
+        private void BagHistoryForm_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
         }
     }
 }
-

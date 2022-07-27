@@ -8,7 +8,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class CurrencySelectorForm : Form
     {
-        public Device _device { get; set; }
+        public CounterDevice _device { get; set; }
 
         private List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> _currencies = DatabaseController.GetCurrencies();
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
@@ -24,6 +24,15 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
             TimeOutController.Reset();
+        }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
@@ -46,7 +55,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void CurrencySelectorForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
             LoadStyles();
         }
         private void LoadStyles()
@@ -78,20 +87,20 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CurrencyButton_Click(object sender, EventArgs e)
         {
             DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
-            
-            _device.SwitchCurrency(DatabaseController.CurrentCurrency.IndiceEnContadora);
+            if(_device != null)
+                _device.SwitchCurrency(DatabaseController.CurrentCurrency.IndiceEnContadora);
 
              if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
             {
                 if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
                 {
                      FormsController.OpenChildForm(this,new BillDepositForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                 }
                 else
                 {
                     FormsController.OpenChildForm(this,new BankAccountSelectorForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                 }
             }
             if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
@@ -101,12 +110,12 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
 
                     FormsController.OpenChildForm(this,new EnvelopeDepositForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                 }
                 else
                 {
                     FormsController.OpenChildForm(this,new BankAccountSelectorForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                 }
 
             }
@@ -143,6 +152,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadCurrencyButtons();
                 LoadBackButton();
             }
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {

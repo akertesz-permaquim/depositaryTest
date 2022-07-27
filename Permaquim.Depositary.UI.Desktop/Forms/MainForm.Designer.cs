@@ -42,9 +42,8 @@
             this.CounterPictureBox = new System.Windows.Forms.PictureBox();
             this.DateTimeLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.StartMessageLabel = new System.Windows.Forms.Label();
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
-            this.InformationPanel = new System.Windows.Forms.Panel();
+            this.BreadcrumbLabel = new System.Windows.Forms.Label();
             this.InformationLabel = new System.Windows.Forms.Label();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).BeginInit();
@@ -54,7 +53,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.CounterPictureBox)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
-            this.InformationPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // HeadPanel
@@ -68,7 +66,7 @@
             this.HeadPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeadPanel.Location = new System.Drawing.Point(0, 0);
             this.HeadPanel.Name = "HeadPanel";
-            this.HeadPanel.Size = new System.Drawing.Size(868, 54);
+            this.HeadPanel.Size = new System.Drawing.Size(873, 54);
             this.HeadPanel.TabIndex = 1;
             // 
             // EnterpriseLabel
@@ -78,7 +76,7 @@
             this.EnterpriseLabel.BackColor = System.Drawing.Color.Transparent;
             this.EnterpriseLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.EnterpriseLabel.ForeColor = System.Drawing.Color.White;
-            this.EnterpriseLabel.Location = new System.Drawing.Point(656, 32);
+            this.EnterpriseLabel.Location = new System.Drawing.Point(661, 32);
             this.EnterpriseLabel.Name = "EnterpriseLabel";
             this.EnterpriseLabel.Size = new System.Drawing.Size(37, 15);
             this.EnterpriseLabel.TabIndex = 110;
@@ -89,7 +87,7 @@
             // 
             this.AvatarPicturebox.BackColor = System.Drawing.Color.Transparent;
             this.AvatarPicturebox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.AvatarPicturebox.Location = new System.Drawing.Point(808, 0);
+            this.AvatarPicturebox.Location = new System.Drawing.Point(813, 0);
             this.AvatarPicturebox.Name = "AvatarPicturebox";
             this.AvatarPicturebox.Size = new System.Drawing.Size(60, 54);
             this.AvatarPicturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -104,7 +102,7 @@
             this.UserLabel.BackColor = System.Drawing.Color.Transparent;
             this.UserLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.UserLabel.ForeColor = System.Drawing.Color.White;
-            this.UserLabel.Location = new System.Drawing.Point(656, 8);
+            this.UserLabel.Location = new System.Drawing.Point(661, 8);
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(37, 15);
             this.UserLabel.TabIndex = 101;
@@ -133,7 +131,7 @@
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 445);
             this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(868, 47);
+            this.BottomPanel.Size = new System.Drawing.Size(873, 47);
             this.BottomPanel.TabIndex = 2;
             // 
             // DepositaryLabel
@@ -172,6 +170,7 @@
             this.RemainingTimeLabel.Size = new System.Drawing.Size(376, 15);
             this.RemainingTimeLabel.TabIndex = 21;
             this.RemainingTimeLabel.Text = "**********";
+            this.RemainingTimeLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.RemainingTimeLabel_Paint);
             // 
             // IoBoardPictureBox
             // 
@@ -204,7 +203,7 @@
             this.DateTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.DateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.DateTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.DateTimeLabel.Location = new System.Drawing.Point(672, 16);
+            this.DateTimeLabel.Location = new System.Drawing.Point(677, 16);
             this.DateTimeLabel.Name = "DateTimeLabel";
             this.DateTimeLabel.Size = new System.Drawing.Size(57, 15);
             this.DateTimeLabel.TabIndex = 1;
@@ -213,73 +212,66 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPanel.BackColor = System.Drawing.Color.White;
-            this.MainPanel.Controls.Add(this.StartMessageLabel);
             this.MainPanel.Controls.Add(this.MainPictureBox);
-            this.MainPanel.Controls.Add(this.InformationPanel);
-            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 54);
+            this.MainPanel.Location = new System.Drawing.Point(0, 96);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(868, 391);
+            this.MainPanel.Size = new System.Drawing.Size(873, 306);
             this.MainPanel.TabIndex = 3;
             this.MainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainPanel_MouseClick);
             // 
-            // StartMessageLabel
-            // 
-            this.StartMessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.StartMessageLabel.BackColor = System.Drawing.Color.Transparent;
-            this.StartMessageLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.StartMessageLabel.ForeColor = System.Drawing.Color.Silver;
-            this.StartMessageLabel.Location = new System.Drawing.Point(0, 248);
-            this.StartMessageLabel.Name = "StartMessageLabel";
-            this.StartMessageLabel.Size = new System.Drawing.Size(864, 72);
-            this.StartMessageLabel.TabIndex = 108;
-            this.StartMessageLabel.Text = "Presione la pantalla para ingresar";
-            this.StartMessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // MainPictureBox
             // 
-            this.MainPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPictureBox.ErrorImage = null;
             this.MainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.MainPictureBox.Name = "MainPictureBox";
-            this.MainPictureBox.Size = new System.Drawing.Size(868, 391);
+            this.MainPictureBox.Size = new System.Drawing.Size(873, 261);
             this.MainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.MainPictureBox.TabIndex = 1;
             this.MainPictureBox.TabStop = false;
             this.MainPictureBox.VisibleChanged += new System.EventHandler(this.MainPictureBox_VisibleChanged);
             this.MainPictureBox.Click += new System.EventHandler(this.MainPictureBox_Click);
             // 
-            // InformationPanel
+            // BreadcrumbLabel
             // 
-            this.InformationPanel.Controls.Add(this.InformationLabel);
-            this.InformationPanel.Location = new System.Drawing.Point(0, 328);
-            this.InformationPanel.Name = "InformationPanel";
-            this.InformationPanel.Size = new System.Drawing.Size(864, 17);
-            this.InformationPanel.TabIndex = 0;
-            this.InformationPanel.Visible = false;
+            this.BreadcrumbLabel.BackColor = System.Drawing.Color.Transparent;
+            this.BreadcrumbLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BreadcrumbLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BreadcrumbLabel.ForeColor = System.Drawing.Color.Silver;
+            this.BreadcrumbLabel.Location = new System.Drawing.Point(0, 54);
+            this.BreadcrumbLabel.Name = "BreadcrumbLabel";
+            this.BreadcrumbLabel.Size = new System.Drawing.Size(873, 42);
+            this.BreadcrumbLabel.TabIndex = 111;
+            this.BreadcrumbLabel.Text = "Breadcrumb";
+            this.BreadcrumbLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InformationLabel
             // 
-            this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InformationLabel.AutoSize = true;
-            this.InformationLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(248, 136);
+            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InformationLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InformationLabel.ForeColor = System.Drawing.Color.Silver;
+            this.InformationLabel.Location = new System.Drawing.Point(0, 403);
             this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(373, 32);
-            this.InformationLabel.TabIndex = 0;
-            this.InformationLabel.Text = "El dispositivo no está operativo";
+            this.InformationLabel.Size = new System.Drawing.Size(873, 42);
+            this.InformationLabel.TabIndex = 113;
+            this.InformationLabel.Text = "...";
+            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 492);
+            this.ClientSize = new System.Drawing.Size(873, 492);
             this.ControlBox = false;
+            this.Controls.Add(this.InformationLabel);
+            this.Controls.Add(this.BreadcrumbLabel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.BottomPanel);
             this.Controls.Add(this.HeadPanel);
@@ -302,8 +294,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.CounterPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
-            this.InformationPanel.ResumeLayout(false);
-            this.InformationPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -314,17 +304,16 @@
         private PictureBox LogoPictureBox;
         public Panel MainPanel;
         private Label DateTimeLabel;
-        private Panel InformationPanel;
-        private Label InformationLabel;
         private Label UserLabel;
         private PictureBox AvatarPicturebox;
         private Label EnterpriseLabel;
         private PictureBox IoBoardPictureBox;
         private PictureBox CounterPictureBox;
-        private PictureBox MainPictureBox;
-        private Label StartMessageLabel;
         private Label RemainingTimeLabel;
         private Label SucursalLabel;
         private Label DepositaryLabel;
+        private PictureBox MainPictureBox;
+        private Label BreadcrumbLabel;
+        private Label InformationLabel;
     }
 }

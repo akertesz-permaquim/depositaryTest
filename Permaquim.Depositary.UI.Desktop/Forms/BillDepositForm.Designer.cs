@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.ButtonsPanel = new System.Windows.Forms.Panel();
             this.ConfirmAndContinueDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -42,7 +42,6 @@
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventCheckbox = new System.Windows.Forms.CheckBox();
-            this.InformationLabel = new System.Windows.Forms.Label();
             this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
@@ -76,13 +75,12 @@
             this.MainPanel.Controls.Add(this.ButtonsPanel);
             this.MainPanel.Controls.Add(this.DenominationsGridView);
             this.MainPanel.Controls.Add(this.EventCheckbox);
-            this.MainPanel.Controls.Add(this.InformationLabel);
             this.MainPanel.Controls.Add(this.RemainingTimeLabel);
             this.MainPanel.Controls.Add(this.SubtotalLabel);
             this.MainPanel.Controls.Add(this.CurrencyLabel);
-            this.MainPanel.Location = new System.Drawing.Point(8, 0);
+            this.MainPanel.Location = new System.Drawing.Point(1, 8);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(736, 640);
+            this.MainPanel.Size = new System.Drawing.Size(704, 644);
             this.MainPanel.TabIndex = 0;
             // 
             // ButtonsPanel
@@ -91,7 +89,7 @@
             this.ButtonsPanel.Controls.Add(this.BackButton);
             this.ButtonsPanel.Controls.Add(this.ConfirmAndExitDepositButton);
             this.ButtonsPanel.Controls.Add(this.CancelDepositButton);
-            this.ButtonsPanel.Location = new System.Drawing.Point(16, 504);
+            this.ButtonsPanel.Location = new System.Drawing.Point(3, 508);
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.Size = new System.Drawing.Size(705, 56);
             this.ButtonsPanel.TabIndex = 146;
@@ -202,32 +200,32 @@
             this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Image,
             this.Denomination,
             this.Quantity,
             this.Amount});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.DenominationsGridView.Enabled = false;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
-            this.DenominationsGridView.Location = new System.Drawing.Point(17, 57);
+            this.DenominationsGridView.Location = new System.Drawing.Point(4, 61);
             this.DenominationsGridView.Name = "DenominationsGridView";
             this.DenominationsGridView.RowHeadersVisible = false;
             this.DenominationsGridView.RowTemplate.DividerHeight = 1;
@@ -287,23 +285,12 @@
             this.EventCheckbox.UseVisualStyleBackColor = false;
             this.EventCheckbox.Click += new System.EventHandler(this.EventCheckbox_CheckedChanged);
             // 
-            // InformationLabel
-            // 
-            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(11, 563);
-            this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(704, 72);
-            this.InformationLabel.TabIndex = 142;
-            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // RemainingTimeLabel
             // 
             this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(466, 28);
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(451, 32);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
             this.RemainingTimeLabel.Size = new System.Drawing.Size(250, 27);
             this.RemainingTimeLabel.TabIndex = 141;
@@ -315,7 +302,7 @@
             this.SubtotalLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
-            this.SubtotalLabel.Location = new System.Drawing.Point(218, 28);
+            this.SubtotalLabel.Location = new System.Drawing.Point(203, 32);
             this.SubtotalLabel.Name = "SubtotalLabel";
             this.SubtotalLabel.Size = new System.Drawing.Size(248, 27);
             this.SubtotalLabel.TabIndex = 140;
@@ -326,7 +313,7 @@
             this.CurrencyLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
-            this.CurrencyLabel.Location = new System.Drawing.Point(17, 28);
+            this.CurrencyLabel.Location = new System.Drawing.Point(1, 32);
             this.CurrencyLabel.Name = "CurrencyLabel";
             this.CurrencyLabel.Size = new System.Drawing.Size(201, 27);
             this.CurrencyLabel.TabIndex = 139;
@@ -353,7 +340,7 @@
             this.MonitorGroupBox.Controls.Add(this.DeviceModeLabel);
             this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(752, 120);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(720, 120);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
             this.MonitorGroupBox.Size = new System.Drawing.Size(152, 448);
             this.MonitorGroupBox.TabIndex = 140;
@@ -573,7 +560,7 @@
             this.MonitorGroupcheckbox.BackColor = System.Drawing.Color.Transparent;
             this.MonitorGroupcheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonitorGroupcheckbox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(816, 16);
+            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(728, 80);
             this.MonitorGroupcheckbox.Name = "MonitorGroupcheckbox";
             this.MonitorGroupcheckbox.Size = new System.Drawing.Size(71, 17);
             this.MonitorGroupcheckbox.TabIndex = 141;
@@ -586,7 +573,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(917, 641);
+            this.ClientSize = new System.Drawing.Size(917, 650);
             this.ControlBox = false;
             this.Controls.Add(this.MonitorGroupcheckbox);
             this.Controls.Add(this.MonitorGroupBox);
@@ -616,7 +603,6 @@
         private Panel MainPanel;
         private DataGridView DenominationsGridView;
         private CheckBox EventCheckbox;
-        private Label InformationLabel;
         private Label RemainingTimeLabel;
         private Label SubtotalLabel;
         private Label CurrencyLabel;

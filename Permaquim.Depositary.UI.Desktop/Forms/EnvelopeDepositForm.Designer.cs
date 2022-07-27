@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.ButtonsPanel = new System.Windows.Forms.Panel();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
@@ -90,6 +90,7 @@
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.Size = new System.Drawing.Size(704, 62);
             this.ButtonsPanel.TabIndex = 179;
+            this.ButtonsPanel.Visible = false;
             // 
             // ConfirmAndExitDepositButton
             // 
@@ -145,14 +146,14 @@
             this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Image,
@@ -160,14 +161,14 @@
             this.Quantity,
             this.Amount,
             this.Id});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
             this.DenominationsGridView.Location = new System.Drawing.Point(12, 34);
@@ -206,8 +207,8 @@
             // Quantity
             // 
             this.Quantity.DataPropertyName = "Quantity";
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.Quantity.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.Quantity.DefaultCellStyle = dataGridViewCellStyle2;
             this.Quantity.HeaderText = "*";
             this.Quantity.Name = "Quantity";
             this.Quantity.Width = 110;
@@ -215,8 +216,8 @@
             // Amount
             // 
             this.Amount.DataPropertyName = "Amount";
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.Amount.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.Amount.DefaultCellStyle = dataGridViewCellStyle3;
             this.Amount.HeaderText = "*";
             this.Amount.Name = "Amount";
             this.Amount.Visible = false;
@@ -252,7 +253,8 @@
             this.EnvelopeTextBox.TabIndex = 159;
             this.EnvelopeTextBox.Texts = "";
             this.EnvelopeTextBox.UnderlinedStyle = false;
-            this.EnvelopeTextBox.Enter += new System.EventHandler(this.EnvelopeTextBox_Enter);
+            this.EnvelopeTextBox.Visible = false;
+            this.EnvelopeTextBox.Click += new System.EventHandler(this.EnvelopeTextBox_Click);
             // 
             // InformationLabel
             // 

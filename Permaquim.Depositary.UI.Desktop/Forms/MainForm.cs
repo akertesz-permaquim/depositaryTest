@@ -3,6 +3,7 @@ using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
 using Permaquim.Depositary.UI.Desktop.Helpers;
+using Permaquim.Depositary.UI.Desktop.CustomExceptions;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
@@ -23,32 +24,50 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         /// <summary>
         /// Instancias de los componentes que gestionan dispositivos
         /// </summary>
-        Device _device = null;
-        DE50Device? _de50Device = null;
+        CounterDevice _counterDevice = new();
+        DEXDevice? _deXDevice = null;
 
         SystemBlockingDialog _blockingDialog;
+ 
+
+        public string BreadCrumbText
+        {
+            get { return BreadcrumbLabel.Text; }
+            set { BreadcrumbLabel.Text = value; }
+        }
+
 
         public MainForm()
         {
             InitializeComponent();
 
+            this.MainPanel.Width = this.Width;
+
             FormsController.MainFormInstance = this;
 
-            StartMessageLabel.Parent = MainPictureBox;
-
-            // StartPosition was set to FormStartPosition.Manual in the properties window.
+             // StartPosition was set to FormStartPosition.Manual in the properties window.
             Rectangle screen = Screen.PrimaryScreen.WorkingArea;
-            this.Location = new Point(0,0);
+            this.Location = new Point(0, 0);
             this.Size = new Size(screen.Width, screen.Height);
             _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = DeviceController.GetPollingInterval(),
-                Enabled = true
+                Enabled = false
             };
             _pollingTimer.Tick += PollingTimer_Tick;
 
             LoadLogo();
             _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+
+        }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -56,6 +75,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             LoadLedImages();
             VerifyUserData();
             Loadparameters();
+            LoadLanguageItems();
         }
         private void Loadparameters()
         {
@@ -70,58 +90,66 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void InitializeDevices()
         {
-            // TODO: Obtener de la DB
-            string str = File.ReadAllText(Directory.GetCurrentDirectory() + @"\Devices\DE50.Json");
 
-            var device = JsonConvert.DeserializeObject<DE50Device>(str);
+            DEXDevice device = DeviceController.InitializeDevice();
 
-            _de50Device = device;
-            this.Text =  MultilanguangeController.GetText(MultiLanguageEnum.DISPOSITIVO) + ": " + device.DeviceName;
-            _device = new Device(device);
-            _device.SleepTimeout = DeviceController.GetSleepInterval();
 
-            this.Tag = _device;
+            _deXDevice = device;
 
+            this.Text = MultilanguangeController.GetText(MultiLanguageEnum.DISPOSITIVO) + ": " + device.DeviceName;
+            
             LoadStyles();
 
-            // Evaluación de estado de la contadora y el ioBoard
-            // Si está todo en órden, se libera la aplicación
-
-            InformationPanel.SendToBack();
-            MainPanel.BringToFront();
-
-            // Ejecuto la primera consulta al dispositivo. 
-            // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
-            // Operación anterior.
             try
             {
-                if (_device.CounterConnected)
+                _counterDevice = new CounterDevice(device);
+                _pollingTimer.Enabled = true;
+
+                _counterDevice.SleepTimeout = DeviceController.GetSleepInterval();
+
+                this.Tag = _counterDevice;
+
+
+                // Evaluación de estado de la contadora y el ioBoard
+                // Si está todo en órden, se libera la aplicación
+
+                MainPanel.BringToFront();
+
+                // Ejecuto la primera consulta al dispositivo. 
+                // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
+                // Operación anterior.
+
+                if (_counterDevice.CounterConnected)
                 {
-                    StatesResult statesResult = _device.Sense();
+                    StatesResult statesResult = _counterDevice.Sense();
                     if (statesResult != null)
                     {
-                        _device.PreviousState = statesResult.StatusInformation.OperatingState;
+                        _counterDevice.PreviousState = statesResult.StatusInformation.OperatingState;
 
                         // Si el escrow está abierto se debe cerrar
-                        if (_device.StateResultProperty.StatusInformation.OperatingState ==
+                        if (_counterDevice.StateResultProperty.StatusInformation.OperatingState ==
                                 StatusInformation.State.EscrowOpen ||
-                                _device.StateResultProperty.StatusInformation.OperatingState ==
+                                _counterDevice.StateResultProperty.StatusInformation.OperatingState ==
                                 StatusInformation.State.PQWaitingTocloseEscrow)
 
-                            _device.CloseEscrow();
+                            _counterDevice.CloseEscrow();
 
                         // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                        if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                        if (_counterDevice.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
                         {
-                            _device.RemoteCancel();
+                            _counterDevice.RemoteCancel();
                         }
                     }
                 }
             }
+            catch (CommPortException ex)
+            {
+                SetInformationMessage(InformationTypeEnum.Error, ex.ExceptionMessage);
+            }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
             }
 
         }
@@ -130,19 +158,19 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
 
-            VerifyTimeout();
+            VerifyUserData();
 
-            //VerifyUserData();
+            VerifyTimeout();
 
             VerifyAvatar();
 
-            _device.Status();
-            if (_device.IoBoardConnected)
+            _counterDevice.Status();
+            if (_counterDevice.IoBoardConnected)
             {
 
                 // Verificación de puerta abierta
 
-                if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+                if (_counterDevice.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
                 {
                     VerifyConnections();
 
@@ -162,40 +190,18 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                         _blockingDialog = null;
                     }
                 }
-                // Verificación de bolsa en posición
-                if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)
-                {
-                    VerifyConnections();
 
-                }
-                else
-                {
-                    FormsController.OpenChildForm(new OperationBlockingForm()
-                    { OperationBlockingReason = Enumerations.OperationblockingReasonEnum.NoBag },
-                              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
-                }
-
-
-            }
-
-            // Verificación de bolsa en posición
-            if (DatabaseController.CurrentContainer != null)
-            {
                 VerifyConnections();
-            }
-            else
-            {
-                DatabaseController.CreateOrUpdateContainer(string.Empty);
             }
         }
 
         private void VerifyConnections()
         {
          
-            _device.Sense();
+            _counterDevice.Sense();
             // consulta el estado de la contadora si está conectada
 
-            if (_device.CounterConnected)
+            if (_counterDevice.CounterConnected)
             {
                 CounterPictureBox.Image = _greenLedImage;
             }
@@ -205,10 +211,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 //_device.CounterBoardReconnect();
             }
 
-            IoBoardStatus ioBoardStatus = _device.Status();
+            IoBoardStatus ioBoardStatus = _counterDevice.Status();
 
             // consulta el estado de la ioboard  si está conectada
-            if (_device.IoBoardConnected)
+            if (_counterDevice.IoBoardConnected)
             {
                 IoBoardPictureBox.Image = _greenLedImage;
             }
@@ -230,12 +236,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 RemainingTimeLabel.Text = _remainingTimeText +
                     remainingTime.ToString();
                 if (remainingTime > _greenStatusIndicator)
-                    RemainingTimeLabel.ForeColor = Color.Green;
+                    RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoInformacion);
                 if (remainingTime < _yellowStatusIndicator)
-                    RemainingTimeLabel.ForeColor = Color.Yellow;
+                    RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoAlerta);
                 if (remainingTime < _redStatusIndicator)
                 {
-                    RemainingTimeLabel.ForeColor = Color.Red;
+                    RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoError);
                     RemainingTimeLabel.Text += " * " +
                         MultilanguangeController.GetText(MultiLanguageEnum.SOLICITAR_MAS_TIEMPO);
                     RemainingTimeLabel.Visible = ((remainingTime % 2) == 0);
@@ -274,9 +280,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             if (VerifySchedule())
                 Login();
             else
-                FormsController.OpenChildForm(new OperationBlockingForm() 
-                { OperationBlockingReason = Enumerations.OperationblockingReasonEnum.NoTurn},
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                SetInformationMessage(InformationTypeEnum.Error,
+                    MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
         }
 
         private void Login()
@@ -284,12 +289,18 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             MainPictureBox.Image = null;
             if (DatabaseController.CurrentUser != null)
                 FormsController.OpenChildForm(new OperationForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
 
             else
                 FormsController.OpenChildForm(new KeyboardInputForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
 
+        }
+
+        private void LoadLanguageItems()
+        {
+            BreadCrumbText = MultilanguangeController.GetText(this.Name);
+            SetInformationMessage(InformationTypeEnum.None, MultilanguangeController.GetText(MultiLanguageEnum.TOQUE_PANTALLA_PARA_INICIAR));
         }
 
         private void LoadStyles()
@@ -298,10 +309,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             MainPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
             BottomPanel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.PieAplicacion);
             MainPictureBox.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            StartMessageLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             UserLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             EnterpriseLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             DateTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            BreadcrumbLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Breadcrumb);
+            BreadcrumbLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             MainPictureBox.Image = StyleController.GetImageResource("Presentacion");
         }
@@ -339,11 +353,18 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void MainPictureBox_Click(object sender, EventArgs e)
         {
             if (VerifySchedule())
-                Login();
+                if (_counterDevice.CounterConnected && _counterDevice.IoBoardConnected)
+                {
+                    Login();
+                }
+                else
+                {
+                    SetInformationMessage(InformationTypeEnum.Error,
+                            MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO));
+                }
             else
-                FormsController.OpenChildForm(new OperationBlockingForm()
-                { OperationBlockingReason = Enumerations.OperationblockingReasonEnum.NoTurn },
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                SetInformationMessage(InformationTypeEnum.Error,
+                MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
         }
 
         private void LogoPictureBox_Click(object sender, EventArgs e)
@@ -369,6 +390,41 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void MainPictureBox_VisibleChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void RemainingTimeLabel_Paint(object sender, PaintEventArgs e)
+        {
+            //ControlPaint.DrawBorder(e.Graphics, ((Label)sender).DisplayRectangle, 
+            //    ((Label)sender).ForeColor, ButtonBorderStyle.Solid);
+        }
+
+        public void SetInformationMessage(InformationTypeEnum type,string message)
+        {
+
+            switch (type)
+            {
+                case InformationTypeEnum.None:
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Breadcrumb);
+                    break;
+                case InformationTypeEnum.Information:
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoInformacion);
+                    break;
+                case InformationTypeEnum.Alert:
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoAlerta);
+                    break;
+                case InformationTypeEnum.Error:
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
+                case InformationTypeEnum.Event:
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoEvento);
+                    break;
+                default:
+                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Breadcrumb);
+                    break;
+            }
+
+            this.InformationLabel.Text = message;
+            this.InformationLabel.Refresh();
         }
     }
 }

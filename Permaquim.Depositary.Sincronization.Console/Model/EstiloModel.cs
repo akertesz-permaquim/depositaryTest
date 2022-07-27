@@ -4,10 +4,10 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class EstiloModel : IModel
     {
-        public List<Depositario.Entities.Tables.Estilo.Esquema> Esquema { get; set; }
+        public List<Depositario.Entities.Tables.Estilo.Esquema> Esquema { get; set; } = new();
 
-        public List<Depositario.Entities.Tables.Estilo.EsquemaDetalle> EsquemaDetalle { get; set; }
-        public List<Depositario.Entities.Tables.Estilo.TipoEsquemaDetalle> TipoEsquemaDetalle { get; set; }
+        public List<Depositario.Entities.Tables.Estilo.EsquemaDetalle> EsquemaDetalle { get; set; } = new();
+        public List<Depositario.Entities.Tables.Estilo.TipoEsquemaDetalle> TipoEsquemaDetalle { get; set; } = new();
 
         public void Process(DateTime dateTime)
         {
@@ -22,19 +22,40 @@ namespace Permaquim.Depositary.Sincronization.Console
                 Depositario.Business.Tables.Estilo.Esquema esquema = new();
                 foreach (var item in Esquema)
                 {
-                    esquema.AddOrUpdate(item);
+                    esquema.Where.Clear();
+                    esquema.Where.Add(Depositario.Business.Tables.Estilo.Esquema.ColumnEnum.Nombre,
+                        Depositario.sqlEnum.OperandEnum.Equal, item.Nombre);
+                    esquema.Items();
+                    if (esquema.Result.Count == 0)
+                        esquema.Add(item);
+                    else
+                        esquema.Update(item);
                 }
 
                 Depositario.Business.Tables.Estilo.TipoEsquemaDetalle tipoEsquemaDetalle = new();
                 foreach (var item in TipoEsquemaDetalle)
                 {
-                    tipoEsquemaDetalle.AddOrUpdate(item);
+                    tipoEsquemaDetalle.Where.Clear();
+                    tipoEsquemaDetalle.Where.Add(Depositario.Business.Tables.Estilo.TipoEsquemaDetalle.ColumnEnum.Nombre,
+                        Depositario.sqlEnum.OperandEnum.Equal, item.Nombre);
+                    tipoEsquemaDetalle.Items();
+                    if (tipoEsquemaDetalle.Result.Count == 0)
+                        tipoEsquemaDetalle.Add(item);
+                    else
+                        tipoEsquemaDetalle.Update(item);
                 }
 
                 Depositario.Business.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
                 foreach (var item in EsquemaDetalle)
                 {
-                    esquemaDetalle.AddOrUpdate(item);
+                    esquemaDetalle.Where.Clear();
+                    esquemaDetalle.Where.Add(Depositario.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Nombre,
+                        Depositario.sqlEnum.OperandEnum.Equal, item.Nombre);
+                    esquemaDetalle.Items();
+                    if (esquemaDetalle.Result.Count == 0)
+                        esquemaDetalle.Add(item);
+                    else
+                        esquemaDetalle.Update(item);
                 }
             }
             catch (Exception ex)
@@ -43,5 +64,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                 throw ex;
             }
         }
+        public void Persist()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

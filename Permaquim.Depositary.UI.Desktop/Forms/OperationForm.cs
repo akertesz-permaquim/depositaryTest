@@ -12,7 +12,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> _transactions = DatabaseController.GetTransactionTypes();
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
-        Device _device = null;
+        CounterDevice _device = null;
         public OperationForm()
         {
             InitializeComponent();
@@ -22,6 +22,15 @@ namespace Permaquim.Depositary.UI.Desktop
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
+        }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
@@ -34,10 +43,10 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void OperationForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
             LoadStyles();
             CenterPanel();
-            if (_device.CounterConnected)
+            if (_device != null &&_device.CounterConnected)
                 SetDeviceToNeutralMode();
             LoadTransactionButtons();
             LoadOtherOperationsButton();
@@ -87,13 +96,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.BillDeposit:
                 case (int)OperationTypeEnum.EnvelopeDeposit:
-                    _device.RemoteCancel();
+                    if(_device != null)
+                        _device.RemoteCancel();
                     FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                     break;
                 case (int)OperationTypeEnum.ValueExtraction:
                     FormsController.OpenChildForm(this, new BagExtractionForm(),
-                        (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                     break;
                 default:
                     break;
@@ -124,7 +134,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OtherOperationButton_Click(object sender, EventArgs e)
         {
             FormsController.OpenChildForm(this, new OtherOperationsForm(),
-              (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
         # endregion
 
@@ -133,6 +143,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DatabaseController.LogOff(false);
             MultilanguangeController.ResetLanguage();
             FormsController.HideInstance(this);
+            FormsController.LogOff();
         }
         private void SetDeviceToNeutralMode()
         {
@@ -162,8 +173,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 _transactions = DatabaseController.GetTransactionTypes();
                 LoadTransactionButtons();
                 LoadOtherOperationsButton();
-                LoadBackButton();
+                LoadBackButton();;
             }
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {

@@ -63,7 +63,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(392, 632);
+            this.BackButton.Location = new System.Drawing.Point(392, 608);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(160, 55);
             this.BackButton.TabIndex = 179;
@@ -159,7 +159,7 @@
             this.OperationsDetailGridView.RowTemplate.Height = 30;
             this.OperationsDetailGridView.RowTemplate.ReadOnly = true;
             this.OperationsDetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OperationsDetailGridView.Size = new System.Drawing.Size(925, 256);
+            this.OperationsDetailGridView.Size = new System.Drawing.Size(925, 240);
             this.OperationsDetailGridView.TabIndex = 182;
             this.OperationsDetailGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OperationsDetailGridView_CellClick);
             this.OperationsDetailGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);

@@ -33,36 +33,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.InformationLabel = new System.Windows.Forms.Label();
-            this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.OperationsHeaderGridView = new System.Windows.Forms.DataGridView();
             this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
             this.TurnLabel = new System.Windows.Forms.Label();
+            this.MainPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // InformationLabel
-            // 
-            this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(40, 440);
-            this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(697, 56);
-            this.InformationLabel.TabIndex = 146;
-            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // MainPanel
-            // 
-            this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(168, 504);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(448, 55);
-            this.MainPanel.TabIndex = 187;
             // 
             // OperationsHeaderGridView
             // 
@@ -167,16 +144,22 @@
             this.TurnLabel.TabIndex = 190;
             this.TurnLabel.Text = "*";
             // 
+            // MainPanel
+            // 
+            this.MainPanel.Location = new System.Drawing.Point(232, 464);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(336, 64);
+            this.MainPanel.TabIndex = 191;
+            // 
             // TurnChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.TurnLabel);
-            this.Controls.Add(this.InformationLabel);
             this.Controls.Add(this.OperationsHeaderGridView);
             this.Controls.Add(this.OperationsDetailGridView);
-            this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TurnChangeForm";
             this.Text = "TurnChangeForm";
@@ -190,11 +173,9 @@
         }
 
         #endregion
-
-        private Label InformationLabel;
-        private FlowLayoutPanel MainPanel;
         private DataGridView OperationsHeaderGridView;
         private DataGridView OperationsDetailGridView;
         private Label TurnLabel;
+        private Panel MainPanel;
     }
 }

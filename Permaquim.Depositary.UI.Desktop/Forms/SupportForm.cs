@@ -1,12 +1,13 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class SupportForm : Form
     {
-        public Device _device { get; set; }
+        public CounterDevice _device { get; set; }
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
@@ -16,6 +17,15 @@ namespace Permaquim.Depositary.UI.Desktop
             InitializeComponent();
             LoadStyles();
             CenterPanel();
+        }
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams CP = base.CreateParams;
+                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
+                return CP;
+            }
         }
         private void CenterPanel()
         {
@@ -33,7 +43,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void SupportForm_Load(object sender, EventArgs e)
         {
-            _device = (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
             _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = DeviceController.GetPollingInterval(),
@@ -177,7 +187,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _pollingTimer.Enabled = false;
             FormsController.OpenChildForm(this,new OperationForm(),
-            (Permaquim.Depositary.UI.Desktop.Components.Device)this.Tag);
+            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
         private void CounterComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -231,6 +241,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (!this.Visible)
                 InitializeLocals();
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {
