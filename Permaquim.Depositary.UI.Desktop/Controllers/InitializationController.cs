@@ -1,4 +1,4 @@
-﻿using ermaquim.Depositary.UI.Desktop;
+﻿using Permaquim.Depositary.UI.Desktop;
 using Newtonsoft.Json;
 using Permaquim.Depositary.UI.Desktop.Model;
 using System;
@@ -17,7 +17,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private const string WEBAPI_BASE_URL = "WEBAPI_BASE_URL";
         private const string SINCRONIZATION_DELAY = "SINCRONIZATION_DELAY";
         private const string TOKEN_ENDPOINT = "autenticacion/obtenertoken";
-        private const string SINCRO_ENDPOINT = "autenticacion/obtenerdatosiniciales";
+        private const string SINCRO_ENDPOINT = "inicializacion/obtenerdatosiniciales";
         private const string SECURITY_SCHEME = "Bearer";
         private static JwtTokenModel _jwToken;
         private static HttpClient _httpClient = new();
@@ -26,12 +26,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static void InitializeDepositary(LoginModel loginModel,string webapiUrl)
         {
-            GetToken(loginModel,);
+            GetToken(loginModel, webapiUrl);
         }
 
 
         private static async Task GetToken(LoginModel loginModel, string webapiUrl)
         {
+            _webapiUrl = webapiUrl;
 
             if (_jwToken == null || DateTime.Now >= _jwToken.Expiration)
             {
@@ -78,8 +79,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                     string getRresult = getResponse.ToString();
 
-                    //var ret = JsonConvert.DeserializeObject(getRresult, model.GetType());
+                    InicializacionModel model = new();
 
+                    model = JsonConvert.DeserializeObject<InicializacionModel>(getRresult);
+                    model.Process();
 
                 }
                 catch (Exception ex)

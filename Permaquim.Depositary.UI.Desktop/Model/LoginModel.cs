@@ -13,9 +13,6 @@ namespace Permaquim.Depositary.UI.Desktop.Model
         public string Password { get; set; }
         public LoginModel()
         {
-            
-            this.UserName = userName;
-            this.Password = password;
         }
 
   
