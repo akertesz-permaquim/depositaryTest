@@ -156,6 +156,7 @@ public class DataHandlerBase: IDataHandler
                 bool isDp = false;
                 bool isNone = false;
                 bool exclude = false;
+                bool isComputed = false;
                 String fieldName = String.Empty;
                 String fieldFrameworkName = String.Empty;
                 int customAttributesCount = info.GetCustomAttributes(false).GetLength(0);
@@ -186,6 +187,9 @@ public class DataHandlerBase: IDataHandler
                             case global::PropertyAttribute.PropertyAttributeEnum.Exclude:
                                 exclude = true;
                                 break;
+                            case global::PropertyAttribute.PropertyAttributeEnum.Computed:
+                                isComputed = true;
+                                break;
                             default:
                                 break;
                         }
@@ -198,7 +202,7 @@ public class DataHandlerBase: IDataHandler
                     }
                 }
                  if(!exclude)
-                     _dataFieldDefinitions.Add(new DataFieldDefinition(fieldName, fieldFrameworkName,(info.PropertyType).FullName, isPk,isAuto, isKey, isFk, isDp,isNone,exclude));
+                     _dataFieldDefinitions.Add(new DataFieldDefinition(fieldName, fieldFrameworkName,(info.PropertyType).FullName, isPk,isAuto, isKey, isFk, isDp,isNone,exclude, isComputed));
             }
         }
     }
@@ -219,12 +223,12 @@ public class DataHandlerBase: IDataHandler
     /// Returns field list separated by colon eg.: "[Id],[Name],[Description]"
     /// </summary>
     /// <returns></returns>
-	protected String GetFieldList(bool includePk)
+	protected String GetFieldList(bool includePk, bool includeComputed)
 	{
 		string result = string.Empty;
         foreach (DataFieldDefinition field in _dataFieldDefinitions)
 		{
-            if (!field.IsPk || (field.IsPk && !field.IsAuto) || (includePk && field.IsPk))
+            if ((!field.IsPk && !field.IsComputed) || (field.IsPk && !field.IsAuto) || (includePk && field.IsPk) || (includeComputed && field.IsComputed))
                 result += "[" + field.Name + "]" + ",";
 		}
 		return result.Substring(0, result.Length - 1);	
@@ -234,12 +238,12 @@ public class DataHandlerBase: IDataHandler
     /// </summary>
     /// <param name="includePk"></param>
     /// <returns></returns>
-    protected String GetParameterizedValuesList(bool includePk)
+    protected String GetParameterizedValuesList(bool includePk, bool includeComputed)
     {
         string result = string.Empty;
         foreach (DataFieldDefinition field in _dataFieldDefinitions)
         {
-            if (!field.IsPk || (field.IsPk && !field.IsAuto) || (includePk && field.IsPk))
+            if ((!field.IsPk && !field.IsComputed) || (field.IsPk && !field.IsAuto) || (includePk && field.IsPk) || (includeComputed && field.IsComputed))
                 result += _parameterPrefix + field.Name + ",";
         }
         return result.Substring(0, result.Length - 1);
@@ -253,9 +257,12 @@ public class DataHandlerBase: IDataHandler
         _parameterizedValues.Clear();
         foreach (ParameterItem field in item._whereParameters)
         {
-            foreach (ParameterItemValue value in field.Values)
+            if(field.IsFieldParameter)
             {
-                _parameterizedValues.Add(new ParameterItemValue(value.Name.Replace(Constants.INPUT_PARAMETER, _parameterPrefix), value.Value));
+                 foreach (ParameterItemValue value in field.Values)
+                 {
+                     _parameterizedValues.Add(new ParameterItemValue(value.Name.Replace(Constants.INPUT_PARAMETER, _parameterPrefix), value.Value));
+                 }
             }
         }
     }	
@@ -310,7 +317,7 @@ public class DataHandlerBase: IDataHandler
 		string result = string.Empty;
         foreach (DataFieldDefinition field in _dataFieldDefinitions)
         {
-            if (!field.IsPk)
+            if (!field.IsPk && !field.IsComputed)
             {
 				result += "[" + field.Name + "]" + " = " + _parameterPrefix + field.Name + ",";
             }
@@ -423,10 +430,10 @@ public class DataHandlerBase: IDataHandler
         newCommand.CommandTimeout = _commandTimeout;
         foreach (ParameterItemValue parameterValue in _parameterizedValues)
 		{
-			IDbDataParameter parameter = newCommand.CreateParameter();
-			parameter.ParameterName = parameterValue.Name;
-			parameter.Value = parameterValue.Value == null ? DBNull.Value : parameterValue.Value;
-			newCommand.Parameters.Add(parameter);
+			    IDbDataParameter parameter = newCommand.CreateParameter();
+			    parameter.ParameterName = parameterValue.Name;
+			    parameter.Value = parameterValue.Value == null ? DBNull.Value : parameterValue.Value;
+			    newCommand.Parameters.Add(parameter);
 		}		
         return newCommand;
     }

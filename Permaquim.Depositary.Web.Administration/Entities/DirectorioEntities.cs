@@ -20,4 +20,11 @@
         public string SectorNombre { get; set; }
 
     }
+
+    public class SectorDepositario
+    {
+        public Int64 SectorId { get; set; }
+        public string EmpresaSucursalSectorNombre { get; set; }
+
+    }
 }

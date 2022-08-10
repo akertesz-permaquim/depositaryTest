@@ -1,5 +1,5 @@
 @page "/SincronizacionConfiguracionCrud"
-@using Permaquim.Depositary.Web.Administration.Controllers
+@using Permaquim.Depositary.Web.Administration.Controllers;
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
@@ -19,21 +19,21 @@
          case CrudMode.Add:
              <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_TITLE",dataLenguaje) </h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Sincronizacion.Configuracion",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;
          case CrudMode.Delete:
              <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_TITLE",dataLenguaje) </h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Sincronizacion.Configuracion",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;
              case CrudMode.Edit:
              <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_TITLE",dataLenguaje) </h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Sincronizacion.Configuracion",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;         
@@ -41,7 +41,7 @@
              <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
                      <div>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_TITLE",dataLenguaje) </h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Sincronizacion.Configuracion",dataLenguaje)</h4>
                      </div>
                  </ChildContent>
              </RadzenBadge>
@@ -50,15 +50,15 @@
      <hr>
      if (crudMode == CrudMode.List)
      {
-         <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-         Data="@Configuracion_entities" TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+         <RadzenDataGrid AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         Data="@Configuracion_entities" TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
          </EmptyTemplate>        
          <Columns>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
                  <HeaderTemplate>
-                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("SincronizacionConfiguracion",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("SincronizacionConfiguracion",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                      </RadzenButton>
                      </HeaderTemplate>
                      <Template Context="element">
@@ -68,24 +68,24 @@
                      </RadzenButton>
                  </Template>
                  </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="EntidadId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ENTIDADID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="EntidadId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ENTIDADID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="Segundos" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("SEGUNDOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Segundos" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("SEGUNDOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
              <Template Context="data">
                  <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                  </RadzenCheckBox>
              </Template>
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
          </Columns>
          </RadzenDataGrid>
@@ -94,8 +94,10 @@
  
      if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
      {
-             <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion" Data="@Configuracion_entity"  @bind-Value="Configuracion_entity" Submit ="Save" Visible ="@(Configuracion_entity != null)">
+             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Data="@Configuracion_entity"  @bind-Value="Configuracion_entity" Submit ="Save" Visible ="@(Configuracion_entity != null)">
              <ChildContent>
+                @if(crudMode != CrudMode.Add)
+                {
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
                          <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
@@ -106,6 +108,7 @@
                      </RadzenNumeric>
                      </div>
                  </div>
+                }
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
                          <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ENTIDADID",dataLenguaje) Component="EntidadId" style="width: 100%">
@@ -134,63 +137,11 @@
                  <RadzenCheckBox @bind-Value=@Configuracion_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Configuracion_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                      </div>
                  </div>
-          @if(crudMode!=CrudMode.Add)
-          {
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Component="UsuarioCreacion" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                   <div class="col-md-9">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Configuracion_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="@(crudMode==CrudMode.Delete)">
-                    </RadzenNumeric>
-                   </div>
-               </div>
-             }
-             @if(crudMode!=CrudMode.Add)
-             {
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Component="FechaCreacion" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                 <div class="col-md-9">
-                     <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Configuracion_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true" >
-                     </RadzenDatePicker>
-                 </div>
-             </div>
-             }
-          @if(crudMode!=CrudMode.Add)
-          {
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Component="UsuarioModificacion" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                   <div class="col-md-9">
-                         <RadzenNumeric  TValue="long?" style="display: block; width: 100%" @bind-Value="@(Configuracion_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="@(crudMode==CrudMode.Delete)">
-                    </RadzenNumeric>
-                   </div>
-               </div>
-             }
-             @if(crudMode!=CrudMode.Add)
-             {
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Component="FechaModificacion" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                 <div class="col-md-9">
-                     <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Configuracion_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true" >
-                     </RadzenDatePicker>
-                 </div>
-             </div>
-             }
              <div class="row">
                  <div class="col offset-sm-3">
-                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle ="ButtonStyle.Primary">
+                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle ="ButtonStyle.Primary">
                  </RadzenButton>
-                 <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
+                 <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                  </RadzenButton>
                   </div>
              </div>
@@ -226,8 +177,8 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion Configuracion_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion> Configuracion_entities = null;
+    private Depositary.Entities.Tables.Sincronizacion.Configuracion Configuracion_entity = new();
+    private List<Depositary.Entities.Tables.Sincronizacion.Configuracion> Configuracion_entities = null;
  
     /// <summary>
     /// Variables to store multilanguaje
@@ -248,7 +199,7 @@ else
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
-    private Int64? userId = null;
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
  
     protected override async Task OnInitializedAsync()
     {
@@ -256,8 +207,8 @@ else
         dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
-        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-        if (userId == null)
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
              NavManager.NavigateTo("login", true);
     }
     #region Loading entities data
@@ -266,7 +217,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        DepositarioAdminWeb.Business.Tables.Sincronizacion.Configuracion entity = new();
+        Depositary.Business.Tables.Sincronizacion.Configuracion entity = new();
         Configuracion_entities = entity.Items();
     }
     /// <summary>
@@ -292,7 +243,7 @@ else
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion item, bool delete)
+    private void Edit(Depositary.Entities.Tables.Sincronizacion.Configuracion item, bool delete)
     {
              Configuracion_entity = item;
         if (delete)
@@ -308,7 +259,7 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        DepositarioAdminWeb.Business.Tables.Sincronizacion.Configuracion crud = new();
+        Depositary.Business.Tables.Sincronizacion.Configuracion crud = new();
         foreach(var property in Configuracion_entity.GetType().GetProperties())
         {
              switch(property.Name)
@@ -332,7 +283,7 @@ else
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     Configuracion_entity.UsuarioCreacion=userId.Value;
+                     Configuracion_entity.UsuarioCreacion=dataUsuario.Id;
                  }
                  break;
                  case "UsuarioModificacion":
@@ -342,7 +293,7 @@ else
                  }
                  else
                  {
-                     Configuracion_entity.UsuarioModificacion=userId.Value;
+                     Configuracion_entity.UsuarioModificacion=dataUsuario.Id;
                  }
                  break;
              }
@@ -450,7 +401,7 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void HabilitadoChange(bool? value,DepositarioAdminWeb.Entities.Tables.Sincronizacion.Configuracion item)
+    void HabilitadoChange(bool? value,Depositary.Entities.Tables.Sincronizacion.Configuracion item)
     {
          Configuracion_entity = item;
     }

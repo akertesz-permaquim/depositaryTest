@@ -1,6 +1,5 @@
 ﻿@page "/login"
 @layout LoginLayout
-@inherits Permaquim.Depositary.Web.Administration.Components.LoginComponent
 
 @using Radzen
 @using Radzen.Blazor
@@ -11,6 +10,7 @@
 @inject NavigationManager NavManager
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> L
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NotificationService NotificationService
 
 <RadzenContent Container="main">
     <ChildContent>
@@ -30,6 +30,9 @@
                 </RadzenLabel>
                 <RadzenPassword Disabled="@estaCargando" @bind-Value="@(loginForm.Password)" style="width: 100%" Name="Password">
                 </RadzenPassword>
+                <div style="text-align:right">
+                    <RadzenLink Path="olvidoPassword" Visible Text="¿Olvido su clave?" />
+                </div>
                 <RadzenRequiredValidator Component="Password" Text="Password is required">
                 </RadzenRequiredValidator>
                 <RadzenButton ButtonType="ButtonType.Submit" Disabled="@estaCargando" style="display: block; margin-top: 16px; width: 100%; background-color: #4158ff" Text="Login">
@@ -46,11 +49,17 @@
     private bool estaCargando { get; set; }
 
     //Datasets
-    private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? dataUsuario = new();
-    private DepositarioAdminWeb.Entities.Tables.Seguridad.Rol? usuarioRol = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = new();
+    private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
+    private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
     private List<SeguridadEntities.Menu> dataMenues = new();
     private List<SeguridadEntities.FuncionRol> dataFunciones = new();
+
+    public class LoginForm
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
 
     protected override void OnInitialized()
     {
@@ -84,9 +93,9 @@
                     NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), Duration = 3000 });
                 else
                 {
-                    if (dataUsuario.DebeCambiarPassword)
+                    if (dataUsuario.DebeCambiarPassword || dataUsuario.FechaExpiracion <= DateTime.Now)
                     {
-                        NavManager.NavigateTo("cambioPassword/" + dataUsuario.NickName + "/" + dataUsuario.Id, true);
+                        NavManager.NavigateTo("cambioPasswordLogin/" + dataUsuario.NickName + "/" + dataUsuario.Id + "/" + dataUsuario.EmpresaId, true);
                     }
                     else
                     {
@@ -104,13 +113,8 @@
                             //Si se encontro un rol buscamos todos las funciones que puede acceder con ese rol
                             dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
 
-                            await sessionStorage.SetItemAsync("Id", dataUsuario.Id);
                             await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
-                            await sessionStorage.SetItemAsync("Nickname", dataUsuario.NickName);
-                            await sessionStorage.SetItemAsync("NombreUsuario", dataUsuario.Nombre);
-                            await sessionStorage.SetItemAsync("ApellidoUsuario", dataUsuario.Apellido);
-                            await sessionStorage.SetItemAsync("AvatarUsuario", dataUsuario.Avatar);
-                            await sessionStorage.SetItemAsync("LenguajeId", dataUsuario.LenguajeId);
+                            await sessionStorage.SetItemAsync("DataUsuario", dataUsuario);
                             await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
                             await sessionStorage.SetItemAsync("DataEsquemaDetalle", dataEsquemaDetalle);
                             await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);

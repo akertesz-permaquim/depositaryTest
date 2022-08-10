@@ -469,7 +469,7 @@
     private List<MonitorEntities.InformacionDepositario> dataInformacionDepositario = new();
     private List<MonitorEntities.TotalGeneral> dataTotalesGeneralesDepositario = new();
     private List<Entities.TextoLenguaje> dataLenguaje;
-    private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+    private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
 
     //Variables para controles
     private RadzenDataGrid<MonitorEntities.TransaccionValidadaMonitor> gridTransacciones = new();
@@ -497,7 +497,7 @@
     //Variables auxiliares
     private Timer timerRecargaInformacion = new Timer();
     private List<MonitorEntities.DepositarioMonitor> rowsDepositariosExpandidas = new();
-    Int64? userId;
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
     string colorRow;
     string colorMensajesResaltados;
 
@@ -512,17 +512,17 @@
         if (firstRender)
         {
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-            userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-            dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
+            dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+            dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
             colorRow = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorRowExpandida", true);
             colorMensajesResaltados = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorMensajeResaltadoMonitor", true);
             string valorConfiguracionCuentaBancaria = "";
-            valorConfiguracionCuentaBancaria = AplicacionController.ObtenerConfiguracion("USA_CUENTA_BANCARIA");
+            valorConfiguracionCuentaBancaria = AplicacionController.ObtenerConfiguracionGeneral("USA_CUENTA_BANCARIA");
             if(valorConfiguracionCuentaBancaria!="")
             {
                 bool.TryParse(valorConfiguracionCuentaBancaria, out mostrarDatosCuentaBancaria);
             }
-            if (userId == null)
+            if (dataUsuario == null)
                 NavManager.NavigateTo("login", true);
             estaCargandoGridDepositarios = true;
             StateHasChanged();
@@ -559,7 +559,7 @@
 
     private void obtenerDepositarios()
     {
-        dataDepositarios = DepositarioController.ObtenerDepositarios(userId.Value);
+        dataDepositarios = DepositarioController.ObtenerDepositarios(dataUsuario.Id);
         estaCargandoGridDepositarios = false;
     }
 
@@ -598,7 +598,7 @@
     private void obtenerTransaccionesPorDepositario(Int64 pDepositarioId)
     {
         dataTransaccionesDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
-        dataTransaccionesDepositario.AddRange(TransaccionController.ObtenerTransaccionesValidadasMonitor(pDepositarioId));
+        dataTransaccionesDepositario.AddRange(OperacionController.ObtenerTransaccionesValidadasMonitor(pDepositarioId));
         estaCargandoGridDepositarios = false;
         estaCargandoGridTransacciones = false;
     }
@@ -606,35 +606,35 @@
     private void obtenerTransaccionesSobrePorDepositario(Int64 pDepositarioId)
     {
         dataTransaccionesSobreDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
-        dataTransaccionesSobreDepositario.AddRange(TransaccionController.ObtenerTransaccionesAValidarMonitor(pDepositarioId));
+        dataTransaccionesSobreDepositario.AddRange(OperacionController.ObtenerTransaccionesAValidarMonitor(pDepositarioId));
         estaCargandoGridTransaccionesSobres = false;
     }
 
     private void obtenerExistenciasPorDepositario(Int64 pDepositarioId)
     {
         dataExistenciasDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
-        dataExistenciasDepositario.AddRange(TransaccionController.ObtenerExistenciasValidadasPorDepositario(pDepositarioId));
+        dataExistenciasDepositario.AddRange(OperacionController.ObtenerExistenciasValidadasPorDepositario(pDepositarioId));
         estaCargandoGridExistencias = false;
     }
 
     private void obtenerExistenciasAValidarPorDepositario(Int64 pDepositarioId)
     {
         dataExistenciasAValidarDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
-        dataExistenciasAValidarDepositario.AddRange(TransaccionController.ObtenerExistenciasAValidarPorDepositario(pDepositarioId));
+        dataExistenciasAValidarDepositario.AddRange(OperacionController.ObtenerExistenciasAValidarPorDepositario(pDepositarioId));
         estaCargandoGridExistenciasAValidar = false;
     }
 
     private void obtenerTotalesGeneralesPorDepositario(Int64 pDepositarioId)
     {
         dataTotalesGeneralesDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
-        dataTotalesGeneralesDepositario.AddRange(TransaccionController.ObtenerTotalesGeneralesPorDepositarioSegunMoneda(pDepositarioId));
+        dataTotalesGeneralesDepositario.AddRange(OperacionController.ObtenerTotalesGeneralesPorDepositarioSegunMoneda(pDepositarioId));
         estaCargandoGridTotalesGenerales = false;
     }
 
     private void obtenerEventosPorDepositario(Int64 pDepositarioId)
     {
         dataEventosDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
-        dataEventosDepositario.AddRange(TransaccionController.ObtenerEventosPorDepositario(pDepositarioId));
+        dataEventosDepositario.AddRange(OperacionController.ObtenerEventosPorDepositario(pDepositarioId));
         estaCargandoGridEventos = false;
     }
 
@@ -708,7 +708,7 @@
     private void obtenerDetalleTransaccion(Int64 pTransaccionId)
     {
         dataTransaccionDetalles.RemoveAll(x => x.TransaccionId == pTransaccionId);
-        dataTransaccionDetalles.AddRange(TransaccionController.ObtenerDetalleTransaccionValidadaMonitor(pTransaccionId));
+        dataTransaccionDetalles.AddRange(OperacionController.ObtenerDetalleTransaccionValidadaMonitor(pTransaccionId));
         estaCargandoGridTransaccionDetalles = false;
     }
 
@@ -721,7 +721,7 @@
     private void obtenerDetalleTransaccionSobre(Int64 pTransaccionSobreId)
     {
         dataTransaccionSobreDetalles.RemoveAll(x => x.TransaccionSobreId == pTransaccionSobreId);
-        dataTransaccionSobreDetalles.AddRange(TransaccionController.ObtenerDetalleTransaccionAValidarMonitor(pTransaccionSobreId));
+        dataTransaccionSobreDetalles.AddRange(OperacionController.ObtenerDetalleTransaccionAValidarMonitor(pTransaccionSobreId));
         estaCargandoGridTransaccionSobreDetalles = false;
     }
 }

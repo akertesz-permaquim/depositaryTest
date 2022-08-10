@@ -27,6 +27,26 @@
         public string SectorNombre { get; set; }
     }
 
+    public class TurnoComboReporte
+    {
+        public Int64 TurnoEsquemaDetalleId { get; set; }
+        public string NombreEsquema { get; set; }
+        public string NombreEsquemaDetalle { get; set; }
+        public string Nombre
+        {
+            get
+            {
+                return NombreEsquema + " - " + NombreEsquemaDetalle;
+            }
+        }
+    }
+
+    public class AgendaTurno
+    {
+        public Int64 TurnoId { get; set; }
+        public string TurnoNombre { get; set; }
+    }
+
     public class AgendaTurnoABM
     {
         public DateTime FechaDesde { get; set; }

@@ -2,41 +2,43 @@
 {
     public class EstiloController
     {
-        public static List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> ObtenerEsquemaDetalles(Int64 pUsuarioId)
+        public static List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> ObtenerEsquemaDetalles(Int64 pUsuarioId)
         {
-            List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> resultado = new();
-            DepositarioAdminWeb.Business.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
+            List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> resultado = new();
+            Depositary.Business.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
 
             //Primero valoro que usuario se esta recibiendo como parametro, si es -1 traemos los estilos de la empresa default o la primera que se encuentre.
             if (pUsuarioId == -1)
             {
-                DepositarioAdminWeb.Business.Relations.Directorio.Empresa empresa = new DepositarioAdminWeb.Business.Relations.Directorio.Empresa();
-                empresa.Where.Add(DepositarioAdminWeb.Business.Relations.Directorio.Empresa.ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-                empresa.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+                Depositary.Business.Relations.Directorio.Empresa empresa = new Depositary.Business.Relations.Directorio.Empresa();
+                empresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
+                empresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
 
                 if (empresa.Items().Count == 0)
                 {
                     empresa.Where.Clear();
-                    esquemaDetalle.Where.Add(DepositarioAdminWeb.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, empresa.Items().FirstOrDefault().EstiloEsquemaId.Id);
+                    esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, empresa.Items().FirstOrDefault().EstiloEsquemaId.Id);
                 }
                 else
-                    esquemaDetalle.Where.Add(DepositarioAdminWeb.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, empresa.Result.FirstOrDefault().EstiloEsquemaId.Id);
+                    esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, empresa.Result.FirstOrDefault().EstiloEsquemaId.Id);
 
-                esquemaDetalle.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
                 esquemaDetalle.Items();
             }
             else
             {
-                DepositarioAdminWeb.Business.Relations.Seguridad.Usuario usuario = new();
-                usuario.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-                usuario.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.Usuario.ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsuarioId);
+                Depositary.Business.Relations.Seguridad.Usuario usuario = new();
+                usuario.Where.Add(Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                usuario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, pUsuarioId);
 
                 usuario.Items();
 
-                esquemaDetalle.Where.Add(DepositarioAdminWeb.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, usuario.Result.FirstOrDefault().EmpresaId.EstiloEsquemaId.Id);
-                esquemaDetalle.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+                var estiloEsquemaId = usuario.Result.FirstOrDefault().EmpresaId._EstiloEsquemaId;
+
+                esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, estiloEsquemaId);
+                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
                 resultado = esquemaDetalle.Items();
             }
@@ -44,10 +46,10 @@
             return resultado;
         }
 
-        public static string ObtenerItemEstilo(List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalles, string pNombre, bool obtenerSoloValor = false)
+        public static string ObtenerItemEstilo(List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalles, string pNombre, bool obtenerSoloValor = false)
         {
             string resultado = "";
-            DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
+            Depositary.Entities.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
 
             if (dataEsquemaDetalles.Where(x => x.Nombre == pNombre).Count() > 0)
             {

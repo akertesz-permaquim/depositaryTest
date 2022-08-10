@@ -6,8 +6,8 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-        if (userId == null)
+        Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
             NavManager.NavigateTo("login");
     }
 }

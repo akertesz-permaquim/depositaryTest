@@ -25,9 +25,9 @@
 
             if (pUsuarioId == -1)
             {
-                DepositarioAdminWeb.Business.Relations.Regionalizacion.Lenguaje oLenguaje = new();
-                oLenguaje.Where.Add(DepositarioAdminWeb.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-                oLenguaje.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+                Depositary.Business.Relations.Regionalizacion.Lenguaje oLenguaje = new();
+                oLenguaje.Where.Add(Depositary.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                oLenguaje.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
 
                 oLenguaje.Items();
 
@@ -49,9 +49,9 @@
             }
             else
             {
-                DepositarioAdminWeb.Business.Relations.Seguridad.Usuario oUsuario = new();
-                oUsuario.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-                oUsuario.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.Usuario.ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsuarioId);
+                Depositary.Business.Relations.Seguridad.Usuario oUsuario = new();
+                oUsuario.Where.Add(Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                oUsuario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, pUsuarioId);
 
                 oUsuario.Items();
 

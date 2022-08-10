@@ -13,6 +13,7 @@ public class Constants {
     #endregion
     #region Configuration Constants
          internal const string ADONETASSEMBLYNAME = "AdoNetAssemblyName";
+         internal const string PASSWORDKEY = "PasswordKey";
          internal const string ADONETCONNECTIONTYPENAME = "AdoNetConnectionTypeName";
          internal const string ADONETCOMMANDTIMEOUT = "AdoNetCommandTimeout";
          internal const string CONNECTIONSTRING = "ConnectionString";
@@ -42,6 +43,8 @@ public class Constants {
          internal const string SQL_INSERT_INTO = " INSERT INTO ";
          internal const string SQL_VALUES = " VALUES ";
          internal const string SQL_AND = " AND ";
+         internal const string SQL_OPENPARENTHESES = " ( ";
+         internal const string SQL_CLOSEPARENTHESES = " ) ";
     #endregion
     #region Error Constants
          internal const string ERROR_CONSTRUCTOR = "DataHandler (constructor) : Transaction assignment Error.";

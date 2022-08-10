@@ -10,7 +10,7 @@
   <UseWithNolock>true</UseWithNolock>
   <IncludeGenerationInformation>false</IncludeGenerationInformation>
   <SerializeEntitiesClases>true</SerializeEntitiesClases>
-  <Namespace>DepositarioAdminWeb</Namespace>
+  <Namespace>Permaquim.Depositary</Namespace>
   <ShowSystemData>false</ShowSystemData>
   <BuildRelations>true</BuildRelations>
   <ForceNullableDatetime>false</ForceNullableDatetime>
@@ -21,6 +21,7 @@
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
+    <string>Reporte.Contenedores</string>
     <string>Reporte.DetalleTransacciones</string>
     <string>Reporte.DetalleTransaccionesSobre</string>
     <string>Reporte.Transacciones</string>
@@ -48,6 +49,8 @@
     <string>Desarrollo.GenerarTablaModelo</string>
     <string>Desarrollo.GenerarTablaTipoModelo</string>
     <string>Dispositivo.ObtenerInformacionDepositario</string>
+    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
+    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
     <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
     <string>Operacion.ObtenerExistenciasPorDepositario</string>
     <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
@@ -274,6 +277,7 @@
   </MappedStoredProcedures>
   <SelectedTables>
     <string>Aplicacion.Configuracion</string>
+    <string>Aplicacion.ConfiguracionEmpresa</string>
     <string>Auditoria.Log</string>
     <string>Auditoria.TipoLog</string>
     <string>Banca.Banco</string>
@@ -283,21 +287,21 @@
     <string>Biometria.HuellaDactilar</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
-    <string>Directorio.IdentificadorUsuario</string>
     <string>Directorio.RelacionMonedaSucursal</string>
     <string>Directorio.Sector</string>
     <string>Directorio.Sucursal</string>
-    <string>Directorio.TipoIdentificador</string>
     <string>Dispositivo.ComandoContadora</string>
     <string>Dispositivo.ComandoPlaca</string>
     <string>Dispositivo.ConfiguracionDepositario</string>
     <string>Dispositivo.Depositario</string>
     <string>Dispositivo.DepositarioContadora</string>
     <string>Dispositivo.DepositarioEstado</string>
+    <string>Dispositivo.DepositarioMoneda</string>
     <string>Dispositivo.DepositarioPlaca</string>
-    <string>Dispositivo.DepositarioValor</string>
     <string>Dispositivo.Marca</string>
     <string>Dispositivo.Modelo</string>
+    <string>Dispositivo.PlantillaMoneda</string>
+    <string>Dispositivo.PlantillaMonedaDetalle</string>
     <string>Dispositivo.TipoConfiguracionDepositario</string>
     <string>Dispositivo.TipoContadora</string>
     <string>Dispositivo.TipoPlaca</string>
@@ -328,11 +332,13 @@
     <string>Seguridad.AplicacionParametro</string>
     <string>Seguridad.AplicacionParametroValor</string>
     <string>Seguridad.Funcion</string>
+    <string>Seguridad.IdentificadorUsuario</string>
     <string>Seguridad.Menu</string>
     <string>Seguridad.Rol</string>
     <string>Seguridad.RolFuncion</string>
     <string>Seguridad.TipoAplicacion</string>
     <string>Seguridad.TipoFuncion</string>
+    <string>Seguridad.TipoIdentificador</string>
     <string>Seguridad.TipoMenu</string>
     <string>Seguridad.Usuario</string>
     <string>Seguridad.UsuarioRol</string>
@@ -346,6 +352,7 @@
     <string>Turno.EsquemaTurno</string>
     <string>Valor.Denominacion</string>
     <string>Valor.Moneda</string>
+    <string>Valor.OrigenValor</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
     <string>Visualizacion.Perfil</string>
@@ -396,4 +403,5 @@
       <Value />
     </TemplateConfigurationEntry>
   </TemplateConfigurationEntries>
+  <UsesEncription>false</UsesEncription>
 </GenerationProject>

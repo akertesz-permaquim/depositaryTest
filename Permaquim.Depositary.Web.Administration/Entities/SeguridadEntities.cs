@@ -8,6 +8,14 @@
         Webapi = 3,
         ServiceWorker = 4
     }
+    public enum Aplicacion
+    {
+        NoEspecificado = 0,
+        Depositario = 1,
+        AdministradorWeb = 2,
+        Webapi = 3,
+        ServiceWorker = 4
+    }
     public enum TipoMenu
     {
         NoEspecificado = 0,

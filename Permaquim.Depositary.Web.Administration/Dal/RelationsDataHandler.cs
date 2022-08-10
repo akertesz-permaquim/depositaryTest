@@ -3,7 +3,7 @@ using System.Data;
 using System.Collections;
 using System.Reflection;
 using System.Collections.Generic;
-using DepositarioAdminWeb.Entities;
+using Permaquim.Depositary.Entities;
 public class RelationsDataHandler : DataHandler
 {
     /// <summary>

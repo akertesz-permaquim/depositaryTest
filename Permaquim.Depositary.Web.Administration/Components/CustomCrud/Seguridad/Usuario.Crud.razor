@@ -19,21 +19,21 @@
                 case CrudMode.Add:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_TITLE",dataLenguaje) </h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Seguridad.Usuario",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Delete:
                     <RadzenBadge BadgeStyle="BadgeStyle.Warning">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_TITLE",dataLenguaje) </h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Seguridad.Usuario",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Edit:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_TITLE",dataLenguaje) </h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Seguridad.Usuario",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
@@ -41,7 +41,7 @@
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
                             <div>
-                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_TITLE",dataLenguaje) </h4>
+                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Seguridad.Usuario",dataLenguaje)</h4>
                             </div>
                         </ChildContent>
                     </RadzenBadge>
@@ -50,13 +50,13 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@Usuario_entities" TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirUsuario" RowRender="@usuarioRowRender" RowCollapse="@colapsarUsuario" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@Usuario_entities" TItem="Depositary.Entities.Tables.Seguridad.Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
                     </EmptyTemplate>
                     <Columns>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                             <HeaderTemplate>
                                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
                                 </RadzenButton>
@@ -68,8 +68,8 @@
                                 </RadzenButton>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("EMPRESAID",dataLenguaje) Property="EmpresaId" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("EMPRESAID",dataLenguaje) Property="EmpresaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_EmpresaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == @context.EmpresaId) != null)
                                 {
@@ -82,8 +82,12 @@
                                     </RadzenLabel>
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_EmpresaId Data="@Empresa_EmpresaId_filter" Change="OnSelectedFilter_EmpresaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("LENGUAJEID",dataLenguaje) Property="LenguajeId" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("LENGUAJEID",dataLenguaje) Property="LenguajeId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_LenguajeId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @context.LenguajeId) != null)
                                 {
@@ -96,8 +100,12 @@
                                     </RadzenLabel>
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_LenguajeId Data="@Lenguaje_LenguajeId_filter" Change="OnSelectedFilter_LenguajeId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("PERFILID",dataLenguaje) Property="PerfilId" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("PERFILID",dataLenguaje) Property="PerfilId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_PerfilId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Perfil_PerfilId_entities.FirstOrDefault(c => c.Id == @context.PerfilId) != null)
                                 {
@@ -110,104 +118,153 @@
                                     </RadzenLabel>
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_PerfilId Data="@Perfil_PerfilId_filter" Change="OnSelectedFilter_PerfilId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Apellido" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("APELLIDO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Apellido" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("APELLIDO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Identificador" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("IDENTIFICADOR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Documento" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DOCUMENTO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Legajo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("LEGAJO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Legajo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("LEGAJO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Mail" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("MAIL",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Mail" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("MAIL",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="FechaIngreso" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAINGRESO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaIngreso" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAINGRESO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="NickName" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NICKNAME",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="NickName" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NICKNAME",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Visible="false" Property="Password" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Visible="false" Property="Password" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Token" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("TOKEN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn Visible="false" TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Token" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("TOKEN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Avatar" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("AVATAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Avatar" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("AVATAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenImage Path="@data.Avatar" style="width: 40px; height: 40px; border-radius: 8px;">
                                 </RadzenImage>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="FechaUltimoLogin" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMOLOGIN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaUltimoLogin" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMOLOGIN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="DebeCambiarPassword" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DEBECAMBIARPASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaExpiracion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAEXPIRACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="DebeCambiarPassword" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DEBECAMBIARPASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.DebeCambiarPassword Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="CantidadLogueosIncorrectos" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CANTIDADLOGUEOSINCORRECTOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="CantidadLogueosIncorrectos" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CANTIDADLOGUEOSINCORRECTOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="Bloqueado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Bloqueado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Bloqueado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false">
                             <Template>
-                                @if (Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion) != null)
-                                {
-                                    <RadzenLabel Text="@Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioCreacion).NickName" Component="UsuarioCreacion" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                                else
-                                {
-                                    <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
-                                    </RadzenLabel>
+                                @{
+                                    var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
+                                    if (usuario != null)
+                                    {
+                                        var usuarioTexto = usuario.Nombre + " " + usuario.Apellido;
+
+                                        <RadzenLabel Text=@usuarioTexto Component="UsuarioCreacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                    else
+                                    {
+                                        <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
-                                @if (Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion) != null)
-                                {
-                                    <RadzenLabel Text="@Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion).NickName" Component="UsuarioModificacion" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                                else
-                                {
-                                    <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
-                                    </RadzenLabel>
+                                @{
+                                    var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion);
+                                    if (usuario != null)
+                                    {
+                                        var usuarioTexto = usuario.Nombre + " " + usuario.Apellido;
+
+                                        <RadzenLabel Text=@usuarioTexto Component="UsuarioModificacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                    else
+                                    {
+                                        <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
                     </Columns>
+                    <Template>
+                        <RadzenTabs>
+                            <Tabs>
+                                <RadzenTabsItem Text="Roles">
+                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioRol_Crud UsuarioId="@context.Id">
+                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioRol_Crud>
+                                </RadzenTabsItem>
+                                <RadzenTabsItem Text="Sectores">
+                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud UsuarioId="@context.Id">
+                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud>
+                                </RadzenTabsItem>
+                                <RadzenTabsItem Text="Cuentas">
+                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud UsuarioId="@context.Id" EmpresaId="@context.EmpresaId">
+                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud>
+                                </RadzenTabsItem>
+                                <RadzenTabsItem Text="Identificadores">
+                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.IdentificadorUsuario_Crud UsuarioId="@context.Id">
+                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.IdentificadorUsuario_Crud>
+                                </RadzenTabsItem>
+                            </Tabs>
+                        </RadzenTabs>
+                    </Template>
                 </RadzenDataGrid>
                 <hr>
             }
 
             if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
             {
-                <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario" Data="@Usuario_entity" @bind-Value="Usuario_entity" Submit="Save" Visible="@(Usuario_entity != null)">
+                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Seguridad.Usuario" Data="@Usuario_entity" @bind-Value="Usuario_entity" Submit="Save" Visible="@(Usuario_entity != null)">
                     <ChildContent>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
-                                </RadzenLabel>
+                        @if (crudMode != CrudMode.Add)
+                        {
+                            <div style="margin-bottom: 1rem" class="row">
+                                <div class="col-md-3">
+                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
+                                    </RadzenLabel>
+                                </div>
+                                <div class="col-md-9">
+                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Usuario_entity.Id)" Name="Id" Disabled="true">
+                                    </RadzenNumeric>
+                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Usuario_entity.Id)" Name="Id" Disabled="true">
-                                </RadzenNumeric>
-                            </div>
-                        </div>
+                        }
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("EMPRESAID",dataLenguaje) Component="EmpresaId" style="width: 100%">
@@ -306,15 +363,15 @@
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("IDENTIFICADOR",dataLenguaje) Component="Identificador" style="width: 100%">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DOCUMENTO",dataLenguaje) Component="Documento" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Usuario_entity.Identificador)" Name="Identificador" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Usuario_entity.Documento)" Name="Documento" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenRequiredValidator Component="Identificador" Text="Identificador is required" Style="position: absolute">
+                                    <RadzenRequiredValidator Component="Documento" Text="Documento is required" Style="position: absolute">
                                     </RadzenRequiredValidator>
                                 }
                             </div>
@@ -375,36 +432,6 @@
                                 }
                             </div>
                         </div>
-                        @*                        <div style="margin-bottom: 1rem" class="row">
-        <div class="col-md-3">
-        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PASSWORD",dataLenguaje) Component="Password" style="width: 100%">
-        </RadzenLabel>
-        </div>
-        <div class="col-md-9">
-        <RadzenPassword style="display: block" @bind-Value="@(Usuario_entity.Password)" Name="Password" Disabled="@(crudMode==CrudMode.Delete)" Class="w-25" />
-        @if (@crudMode != CrudMode.Delete)
-        {
-        <RadzenRequiredValidator Component="Password" Text="Password is required">
-        </RadzenRequiredValidator>
-        <RadzenRegexValidator Component="Password" Text="Password must have at least 8 characters with one numeric character, one special character and one capital letter" Pattern="@validacionPassword" />
-        }
-        </div>
-        </div>*@
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TOKEN",dataLenguaje) Component="Token" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Usuario_entity.Token)" Name="Token" Disabled="@(crudMode==CrudMode.Delete)">
-                                </RadzenTextBox>
-                                @if (@crudMode != CrudMode.Delete)
-                                {
-                                    <RadzenRequiredValidator Component="Token" Text="Token is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>
-                                }
-                            </div>
-                        </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("AVATAR",dataLenguaje) Component="Avatar" Style="margin-left: 0px; vertical-align: middle;" />
@@ -427,6 +454,16 @@
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHAEXPIRACION",dataLenguaje) Component="FechaExpiracion" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenDatePicker ShowTime="true" AllowClear="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(Usuario_entity.FechaExpiracion)" Name="FechaExpiracion" Disabled="@(crudMode==CrudMode.Delete)">
+                                </RadzenDatePicker>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DEBECAMBIARPASSWORD",dataLenguaje) Component="DebeCambiarPassword" Style="margin-left: 0px; vertical-align: middle;" />
                             </div>
                             <div class="col-md-9">
@@ -443,98 +480,12 @@
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CANTIDADLOGUEOSINCORRECTOS",dataLenguaje) Component="CantidadLogueosIncorrectos" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col-md-9">
-                                <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(Usuario_entity.CantidadLogueosIncorrectos)" Name="CantidadLogueosIncorrectos" Disabled="@(crudMode==CrudMode.Delete)">
-                                </RadzenNumeric>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje) Component="BloqueadoCheckBox" Style="margin-left: 0px; vertical-align: middle;" />
                             </div>
                             <div class="col-md-9">
-                                <RadzenCheckBox @bind-Value=@Usuario_entity.Bloqueado Name="BloqueadoCheckBox" TValue="bool" Disabled="@(crudMode == CrudMode.Delete)" />
+                                <RadzenCheckBox @bind-Value=@Usuario_entity.Bloqueado Name="BloqueadoCheckBox" TValue="bool" Disabled="@(crudMode == CrudMode.Delete)" Change=@(args => BloqueadoChange(args, @Usuario_entity)) />
                             </div>
                         </div>
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Component="UsuarioCreacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    @if ((@Usuario_UsuarioCreacion_entities.Count > 0 && @Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @Usuario_entity.UsuarioCreacion) != null) || crudMode != CrudMode.Delete)
-                                    {
-                                        <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.UsuarioCreacion)"
-                                Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
-                                Disabled="true" />
-                                    }
-                                    else
-                                    {
-                                        <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
-                                Data=@Usuario_UsuarioCreacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioCreacionValueChanged(args))
-                                Disabled="true" />
-                                    }
-                                </div>
-                            </div>
-                        }
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Component="FechaCreacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(Usuario_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true">
-                                    </RadzenDatePicker>
-                                </div>
-                            </div>
-                        }
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Component="UsuarioModificacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    @if ((@Usuario_UsuarioModificacion_entities.Count > 0 && @Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @Usuario_entity.UsuarioModificacion) != null) || crudMode != CrudMode.Delete)
-                                    {
-                                        <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100" @bind-Value="@(Usuario_entity.UsuarioModificacion)"
-                                Data=@Usuario_UsuarioModificacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioModificacionValueChanged(args))
-                                Disabled="true" />
-                                    }
-                                    else
-                                    {
-                                        <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100"
-                                Data=@Usuario_UsuarioModificacion_entities TextProperty="NickName" ValueProperty="Id"
-                                Change=@(args => SelectUsuario_UsuarioModificacionValueChanged(args))
-                                Disabled="true" />
-                                    }
-                                </div>
-                            </div>
-                        }
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Component="FechaModificacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(Usuario_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true">
-                                    </RadzenDatePicker>
-                                </div>
-                            </div>
-                        }
                         <div class="row">
                             <div class="col offset-sm-3">
                                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
@@ -575,8 +526,8 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario Usuario_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario> Usuario_entities = null;
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_entities = null;
 
     /// <summary>
     /// Variables to store multilanguaje
@@ -589,37 +540,49 @@ else
     /// </summary>
     private List<SeguridadEntities.FuncionRol> dataFunciones;
 
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> rowsUsuariosExpandidos = new();
+
+    private int CantidadLogueosIncorrectosPrevios;
+
     /// <summary>
     /// Variables to handle Relation between Usuario.EmpresaId and Empresa.Id
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Directorio.Empresa Empresa_EmpresaId_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Directorio.Empresa>? Empresa_EmpresaId_entities;
+    private Depositary.Entities.Tables.Directorio.Empresa Empresa_EmpresaId_entity = new();
+    private List<Depositary.Entities.Tables.Directorio.Empresa>? Empresa_EmpresaId_entities;
+    private List<Depositary.Entities.Tables.Directorio.Empresa> Empresa_EmpresaId_filter;
+    private IEnumerable<Int64> selectedFilter_EmpresaId;
 
     /// <summary>
     /// Variables to handle Relation between Usuario.LenguajeId and Lenguaje.Id
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Regionalizacion.Lenguaje Lenguaje_LenguajeId_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Regionalizacion.Lenguaje>? Lenguaje_LenguajeId_entities;
+    private Depositary.Entities.Tables.Regionalizacion.Lenguaje Lenguaje_LenguajeId_entity = new();
+    private List<Depositary.Entities.Tables.Regionalizacion.Lenguaje>? Lenguaje_LenguajeId_entities;
+    private List<Depositary.Entities.Tables.Regionalizacion.Lenguaje> Lenguaje_LenguajeId_filter;
+    private IEnumerable<Int64> selectedFilter_LenguajeId;
 
     /// <summary>
     /// Variables to handle Relation between Usuario.PerfilId and Perfil.Id
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Visualizacion.Perfil Perfil_PerfilId_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Visualizacion.Perfil>? Perfil_PerfilId_entities;
+    private Depositary.Entities.Tables.Visualizacion.Perfil Perfil_PerfilId_entity = new();
+    private List<Depositary.Entities.Tables.Visualizacion.Perfil>? Perfil_PerfilId_entities;
+    private List<Depositary.Entities.Tables.Visualizacion.Perfil> Perfil_PerfilId_filter;
+    private IEnumerable<Int64> selectedFilter_PerfilId;
 
     /// <summary>
     /// Variables to handle Relation between Usuario.UsuarioCreacion and Usuario.Id
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioCreacion_filter;
+    private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
 
     /// <summary>
     /// Variables to handle Relation between Usuario.UsuarioModificacion and Usuario.Id
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
-
-    private string validacionPassword { get; set; }
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
+    private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
 
     /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
@@ -629,17 +592,16 @@ else
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
-    private Int64? userId = null;
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
 
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
-        validacionPassword = "";
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
-        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-        if (userId == null)
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
     }
     #region Loading entities data
@@ -648,7 +610,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        DepositarioAdminWeb.Business.Tables.Seguridad.Usuario entity = new();
+        Depositary.Business.Tables.Seguridad.Usuario entity = new();
         Usuario_entities = entity.Items();
     }
     /// <summary>
@@ -656,21 +618,25 @@ else
     /// </summary>
     private void LoadTypesData()
     {
-        DepositarioAdminWeb.Business.Tables.Directorio.Empresa Empresa_EmpresaId_local = new();
+        Depositary.Business.Tables.Directorio.Empresa Empresa_EmpresaId_local = new();
         Empresa_EmpresaId_entities = Empresa_EmpresaId_local.Items();
+        Empresa_EmpresaId_filter = Empresa_EmpresaId_entities.Where(x => Usuario_entities.Select(x => x.EmpresaId).Distinct().Contains(x.Id)).ToList();
 
-        DepositarioAdminWeb.Business.Tables.Regionalizacion.Lenguaje Lenguaje_LenguajeId_local = new();
+        Depositary.Business.Tables.Regionalizacion.Lenguaje Lenguaje_LenguajeId_local = new();
         Lenguaje_LenguajeId_entities = Lenguaje_LenguajeId_local.Items();
+        Lenguaje_LenguajeId_filter = Lenguaje_LenguajeId_entities.Where(x => Usuario_entities.Select(x => x.LenguajeId).Distinct().Contains(x.Id)).ToList();
 
-        DepositarioAdminWeb.Business.Tables.Visualizacion.Perfil Perfil_PerfilId_local = new();
+        Depositary.Business.Tables.Visualizacion.Perfil Perfil_PerfilId_local = new();
         Perfil_PerfilId_entities = Perfil_PerfilId_local.Items();
+        Perfil_PerfilId_filter = Perfil_PerfilId_entities.Where(x => Usuario_entities.Select(x => x.PerfilId).Distinct().Contains(x.Id)).ToList();
 
-        DepositarioAdminWeb.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
+        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
+        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Usuario_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
 
-        DepositarioAdminWeb.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
+        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
         Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
-
+        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => Usuario_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
     }
 
     #endregion
@@ -686,25 +652,22 @@ else
         Empresa_EmpresaId_entity = new();
         Lenguaje_LenguajeId_entity = new();
         Perfil_PerfilId_entity = new();
-
         //Por defecto se debe cambiar el password al cargar un nuevo usuario.
         Usuario_entity.DebeCambiarPassword = true;
         Usuario_entity.FechaIngreso = DateTime.Now;
 
         crudMode = CrudMode.Add;
 
-        //Obtenemos las validaciones para el password:
-        validacionPassword = AplicacionController.ObtenerConfiguracion("REGEX_POLITICAS_CONTRASEÑAS");
     }
+
     /// <summary>
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario item, bool delete)
+    private void Edit(Depositary.Entities.Tables.Seguridad.Usuario item, bool delete)
     {
-        //Obtenemos las validaciones para el password:
-        validacionPassword = AplicacionController.ObtenerConfiguracion("REGEX_POLITICAS_CONTRASEÑAS");
         Usuario_entity = item;
+        CantidadLogueosIncorrectosPrevios = item.CantidadLogueosIncorrectos;
         Empresa_EmpresaId_entity = new()
             {
                 Id = Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == Usuario_entity.EmpresaId).Id,
@@ -733,7 +696,7 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        DepositarioAdminWeb.Business.Tables.Seguridad.Usuario crud = new();
+        Depositary.Business.Tables.Seguridad.Usuario crud = new();
         foreach (var property in Usuario_entity.GetType().GetProperties())
         {
             switch (property.Name)
@@ -757,7 +720,7 @@ else
                 case "UsuarioCreacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        Usuario_entity.UsuarioCreacion = userId.Value;
+                        Usuario_entity.UsuarioCreacion = dataUsuario.Id;
                     }
                     break;
                 case "UsuarioModificacion":
@@ -767,7 +730,7 @@ else
                     }
                     else
                     {
-                        Usuario_entity.UsuarioModificacion = userId.Value;
+                        Usuario_entity.UsuarioModificacion = dataUsuario.Id;
                     }
                     break;
             }
@@ -775,77 +738,79 @@ else
         switch (crudMode)
         {
             case CrudMode.Add:
-            //Obtengo todas las configuraciones de envio de mail y si falta alguna doy mensaje de error.
-                string smtpHostEnvio = AplicacionController.ObtenerConfiguracion("SMTP_HOST_ENVIO_MAIL");
-                if (smtpHostEnvio != "")
+                //Obtengo todas las configuraciones de envio de mail y si falta alguna doy mensaje de error.
+                //string smtpHostEnvio = AplicacionController.ObtenerConfiguracionGeneral("SMTP_HOST_ENVIO_MAIL");
+                //if (smtpHostEnvio != "")
+                //{
+                //    string smtpPortEnvio = AplicacionController.ObtenerConfiguracionGeneral("SMTP_PORT_ENVIO_MAIL");
+                //    if (smtpPortEnvio != "")
+                //    {
+                //        //Obtengo las credenciales de configuracion para envio de mail, si no existen doy error
+                //        string usuarioEmailEnvio = AplicacionController.ObtenerConfiguracionGeneral("USUARIO_ENVIO_MAIL");
+                //        if (usuarioEmailEnvio != "")
+                //        {
+                //            string passwordEmailEnvio = AplicacionController.ObtenerConfiguracionGeneral("PASSWORD_ENVIO_MAIL");
+                //            if (passwordEmailEnvio != "")
+                //            {
+                //                List<string> emailsReceptores = new();
+                //                emailsReceptores.Add(Usuario_entity.Mail);
+                //                string resultadoEnvioMail = "";
+                //                //Comentado hasta configurar el envio.
+                //                //GeneralController.EnviarMail(smtpHostEnvio, smtpPortEnvio, usuarioEmailEnvio, passwordEmailEnvio, emailsReceptores, "Generacion de clave usuario", "Su clave es " + Usuario_entity.Documento);
+                //                //Enviar mail con password al nuevo usuario
+                //                if (resultadoEnvioMail == "")
+                //                {
+                try
                 {
-                    string smtpPortEnvio = AplicacionController.ObtenerConfiguracion("SMTP_PORT_ENVIO_MAIL");
-                    if (smtpPortEnvio != "")
-                    {
-                        //Obtengo las credenciales de configuracion para envio de mail, si no existen doy error
-                        string usuarioEmailEnvio = AplicacionController.ObtenerConfiguracion("USUARIO_ENVIO_MAIL");
-                        if (usuarioEmailEnvio != "")
-                        {
-                            string passwordEmailEnvio = AplicacionController.ObtenerConfiguracion("PASSWORD_ENVIO_MAIL");
-                            if (passwordEmailEnvio != "")
-                            {
-                                List<string> emailsReceptores = new();
-                                emailsReceptores.Add(Usuario_entity.Mail);
-                                string resultadoEnvioMail = GeneralController.EnviarMail(smtpHostEnvio, smtpPortEnvio, usuarioEmailEnvio, passwordEmailEnvio, emailsReceptores, "Generacion de clave usuario", "Su clave es " + Usuario_entity.Identificador);
-                                //Enviar mail con password al nuevo usuario
-                                if (resultadoEnvioMail == "")
-                                {
-                                    try
-                                    {
-                                        Usuario_entity.Password = Cryptography.Hash(Usuario_entity.Identificador);
-                                        crud.Add(Usuario_entity);
-                                        summary = "El registro se ha ";
-                                        actionInformation = "agregado.";
-                                        severityType = NotificationSeverity.Success;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        summary = "Error al procesar.";
-                                        actionInformation = ex.Message;
-                                        severityType = NotificationSeverity.Error;
-                                    }
-                                }
-                                else
-                                {
-                                    summary = "Error al procesar.";
-                                    actionInformation = resultadoEnvioMail;
-                                    severityType = NotificationSeverity.Error;
-                                }
-                            }
-                            else
-                            {
-                                summary = "Error al procesar.";
-                                actionInformation = "Falta indicar la clave de configuración PASSWORD_ENVIO_MAIL para enviar mail al usuario nuevo";
-                                severityType = NotificationSeverity.Error;
-                            }
-                        }
-                        else
-                        {
-                            summary = "Error al procesar.";
-                            actionInformation = "Falta indicar la clave de configuración USUARIO_ENVIO_MAIL para enviar mail al usuario nuevo";
-                            severityType = NotificationSeverity.Error;
-                        }
-                    }
-                    else
-                    {
-                        summary = "Error al procesar.";
-                        actionInformation = "Falta indicar la clave de configuración SMTP_PORT_ENVIO_MAIL para enviar mail al usuario nuevo";
-                        severityType = NotificationSeverity.Error;
-                    }
+                    Usuario_entity.FechaExpiracion = SeguridadController.ObtenerFechaExpiracion(Usuario_entity.EmpresaId);
+                    string password = Usuario_entity.Nombre.Substring(0, 1) + Usuario_entity.Apellido.Substring(0, 1) + Usuario_entity.Documento;
+                    Usuario_entity.Password = Cryptography.Hash(password);
+                    crud.Add(Usuario_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "agregado.";
+                    severityType = NotificationSeverity.Success;
                 }
-                else
+                catch (Exception ex)
                 {
                     summary = "Error al procesar.";
-                    actionInformation = "Falta indicar la clave de configuración SMTP_HOST_ENVIO_MAIL para enviar mail al usuario nuevo";
+                    actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
                 }
-
-
+                //                }
+                //                else
+                //                {
+                //                    summary = "Error al procesar.";
+                //                    actionInformation = resultadoEnvioMail;
+                //                    severityType = NotificationSeverity.Error;
+                //                }
+                //            }
+                //            else
+                //            {
+                //                summary = "Error al procesar.";
+                //                actionInformation = "Falta indicar la clave de configuración PASSWORD_ENVIO_MAIL para enviar mail al usuario nuevo";
+                //                severityType = NotificationSeverity.Error;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            summary = "Error al procesar.";
+                //            actionInformation = "Falta indicar la clave de configuración USUARIO_ENVIO_MAIL para enviar mail al usuario nuevo";
+                //            severityType = NotificationSeverity.Error;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        summary = "Error al procesar.";
+                //        actionInformation = "Falta indicar la clave de configuración SMTP_PORT_ENVIO_MAIL para enviar mail al usuario nuevo";
+                //        severityType = NotificationSeverity.Error;
+                //    }
+                //}
+                //else
+                //{
+                //    summary = "Error al procesar.";
+                //    actionInformation = "Falta indicar la clave de configuración SMTP_HOST_ENVIO_MAIL para enviar mail al usuario nuevo";
+                //    severityType = NotificationSeverity.Error;
+                //}
                 break;
             case CrudMode.Edit:
                 try
@@ -990,7 +955,7 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void DebeCambiarPasswordChange(bool? value, DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario item)
+    void DebeCambiarPasswordChange(bool? value, Depositary.Entities.Tables.Seguridad.Usuario item)
     {
         Usuario_entity = item;
     }
@@ -998,9 +963,108 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void HabilitadoChange(bool? value, DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario item)
+    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Seguridad.Usuario item)
     {
         Usuario_entity = item;
+    }
+
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void BloqueadoChange(bool? value, Depositary.Entities.Tables.Seguridad.Usuario item)
+    {
+        if (crudMode == CrudMode.Edit)
+        {
+            if (value.HasValue)
+            {
+                if (value.Value == false)
+                    Usuario_entity.CantidadLogueosIncorrectos = 0;
+                else
+                    Usuario_entity.CantidadLogueosIncorrectos = CantidadLogueosIncorrectosPrevios;
+            }
+        }
+    }
+
+    /// <summary>
+    /// selectedFilter_PerfilId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_PerfilId_Changed(object value)
+    {
+        if (selectedFilter_PerfilId != null && !selectedFilter_PerfilId.Any())
+        {
+            selectedFilter_PerfilId = null;
+        }
+    }
+
+    /// <summary>
+    /// selectedFilter_EmpresaId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_EmpresaId_Changed(object value)
+    {
+        if (selectedFilter_EmpresaId != null && !selectedFilter_EmpresaId.Any())
+        {
+            selectedFilter_EmpresaId = null;
+        }
+    }
+    /// <summary>
+    /// selectedFilter_LenguajeId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_LenguajeId_Changed(object value)
+    {
+        if (selectedFilter_LenguajeId != null && !selectedFilter_LenguajeId.Any())
+        {
+            selectedFilter_LenguajeId = null;
+        }
+    }
+
+    /// <summary>
+    /// selectedFilter_UsuarioCreacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_UsuarioCreacion_Changed(object value)
+    {
+        if (selectedFilter_UsuarioCreacion != null && !selectedFilter_UsuarioCreacion.Any())
+        {
+            selectedFilter_UsuarioCreacion = null;
+        }
+    }
+
+    /// <summary>
+    /// selectedFilter_UsuarioModificacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_UsuarioModificacion_Changed(object value)
+    {
+        if (selectedFilter_UsuarioModificacion != null && !selectedFilter_UsuarioModificacion.Any())
+        {
+            selectedFilter_UsuarioModificacion = null;
+        }
+    }
+
+    protected async Task expandirUsuario(Depositary.Entities.Tables.Seguridad.Usuario args)
+    {
+        rowsUsuariosExpandidos.Add(args);
+    }
+
+    protected async Task colapsarUsuario(Depositary.Entities.Tables.Seguridad.Usuario args)
+    {
+        rowsUsuariosExpandidos.RemoveAll(x => x.Id == args.Id);
+    }
+
+    void usuarioRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Seguridad.Usuario> args)
+    {
+        if (rowsUsuariosExpandidos.Where(x => x.Id == args.Data.Id).ToList().Count > 0)
+        {
+            args.Attributes.Add("class", "row-highlight");
+        }
+        else
+        {
+            args.Attributes.Add("class", "rz-datatable-even");
+        }
     }
     #endregion
 
@@ -1008,4 +1072,4 @@ else
 
     #endregion
 
-}
+        }
