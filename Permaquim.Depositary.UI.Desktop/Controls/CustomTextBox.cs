@@ -39,7 +39,7 @@ using System.Drawing.Drawing2D;
         }
 
         #region -> Properties
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public Color BorderColor
         {
             get { return borderColor; }
@@ -50,14 +50,16 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+
+
+        [Category("Permaquim")]
         public Color BorderFocusColor
         {
             get { return borderFocusColor; }
             set { borderFocusColor = value; }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public int BorderSize
         {
             get { return borderSize; }
@@ -71,7 +73,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public bool UnderlinedStyle
         {
             get { return underlinedStyle; }
@@ -82,7 +84,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public bool PasswordChar
         {
             get { return isPasswordChar; }
@@ -94,14 +96,21 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public bool Multiline
         {
             get { return textBox1.Multiline; }
             set { textBox1.Multiline = value; }
         }
 
-        public int SelectionStart
+    [Category("Permaquim")]
+    public HorizontalAlignment TextAlign
+    {
+        get { return textBox1.TextAlign; }
+        set { textBox1.TextAlign = value; }
+    }
+
+    public int SelectionStart
         {
             get { return textBox1.SelectionStart; }
             set
@@ -119,7 +128,7 @@ using System.Drawing.Drawing2D;
         }
     }
 
-    [Category("RJ Code Advance")]
+    [Category("Permaquim")]
         public override Color BackColor
         {
             get { return base.BackColor; }
@@ -130,7 +139,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public override Color ForeColor
         {
             get { return base.ForeColor; }
@@ -141,7 +150,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public override Font Font
         {
             get { return base.Font; }
@@ -154,7 +163,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public string Texts
         {
             get
@@ -169,7 +178,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public int BorderRadius
         {
             get { return borderRadius; }
@@ -183,7 +192,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public Color PlaceholderColor
         {
             get { return placeholderColor; }
@@ -195,7 +204,7 @@ using System.Drawing.Drawing2D;
             }
         }
 
-        [Category("RJ Code Advance")]
+        [Category("Permaquim")]
         public string PlaceholderText
         {
             get { return placeholderText; }

@@ -13,6 +13,7 @@ public class Constants {
     #endregion
     #region Configuration Constants
          internal const string ADONETASSEMBLYNAME = "AdoNetAssemblyName";
+         internal const string PASSWORDKEY = "PasswordKey";
          internal const string ADONETCONNECTIONTYPENAME = "AdoNetConnectionTypeName";
          internal const string ADONETCOMMANDTIMEOUT = "AdoNetCommandTimeout";
          internal const string CONNECTIONSTRING = "ConnectionString";

@@ -341,14 +341,14 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ShowInformation()
         {
-            //FormsController.SetInformationMessage(InformationTypeEnum.None,string.Empty);
 
             if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
             {
 
 
                 if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                    && _operationStatus.CurrentTransactionQuantity == 0)
+                    && _operationStatus.CurrentTransactionQuantity == 0
+                    && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQWaitingTocloseEscrow)
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
                         MultilanguangeController.GetText(MultiLanguageEnum.INGRESAR_BILLETES));
@@ -377,8 +377,16 @@ namespace Permaquim.Depositary.UI.Desktop
                      && _operationStatus.CurrentTransactionQuantity == 0
                      && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
                 {
-                    FormsController.SetInformationMessage(InformationTypeEnum.Information, 
-                        MultilanguangeController.GetText(MultiLanguageEnum.CONTINUAR_INGRESANDO_BILLETES));
+                    if (ButtonsPanel.Visible)
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                        MultilanguangeController.GetText(MultiLanguageEnum.ACEPTAR_O_CANCELAR_DEPOSITO));
+                    }
+                    else
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                            MultilanguangeController.GetText(MultiLanguageEnum.CONTINUAR_INGRESANDO_BILLETES));
+                    }
                 }
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                         && _operationStatus.CurrentTransactionQuantity > 0)

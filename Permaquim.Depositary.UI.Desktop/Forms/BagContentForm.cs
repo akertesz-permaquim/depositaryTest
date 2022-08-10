@@ -16,18 +16,27 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<BagContentItem> _bagContentItems = new();
         public BagContentForm()
         {
-            InitializeComponent();
-            CenterPanel();
-            LoadStyles();
-            LoadMultilanguageItems();
-            LoadBackButton();
-
-            TimeOutController.Reset();
-            _pollingTimer = new System.Windows.Forms.Timer()
+            try
             {
-                Interval = DeviceController.GetPollingInterval()
-            };
-            _pollingTimer.Tick += PollingTimer_Tick;
+
+
+                InitializeComponent();
+                CenterPanel();
+                LoadStyles();
+                LoadMultilanguageItems();
+                LoadBackButton();
+
+                TimeOutController.Reset();
+                _pollingTimer = new System.Windows.Forms.Timer()
+                {
+                    Interval = DeviceController.GetPollingInterval()
+                };
+                _pollingTimer.Tick += PollingTimer_Tick;
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+            }
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
@@ -83,7 +92,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadMultilanguageItems()
         {
-             BagContentTabControl.TabPages[0].Text = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES);
+            BagContentTabControl.TabPages[0].Text = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES);
             BagContentTabControl.TabPages[1].Text = MultilanguangeController.GetText(MultiLanguageEnum.SOBRES);
         }
         #region BackButton

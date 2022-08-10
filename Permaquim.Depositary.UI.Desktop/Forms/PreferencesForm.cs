@@ -79,7 +79,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Password = _model.ClaveDepositario
             };
 
-            InitializationController.InitializeDepositary(loginModel, _model.WebApiUrl);
+            //InitializationController.InitializeDepositary(loginModel, _model.WebApiUrl);
                
          
         }

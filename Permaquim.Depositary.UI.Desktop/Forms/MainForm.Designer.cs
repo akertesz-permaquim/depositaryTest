@@ -30,14 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.HeadPanel = new System.Windows.Forms.Panel();
+            this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.EnterpriseLabel = new System.Windows.Forms.Label();
             this.AvatarPicturebox = new System.Windows.Forms.PictureBox();
             this.UserLabel = new System.Windows.Forms.Label();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
-            this.DepositaryLabel = new System.Windows.Forms.Label();
-            this.SucursalLabel = new System.Windows.Forms.Label();
-            this.RemainingTimeLabel = new System.Windows.Forms.Label();
+            this.SucursalInfoLabel = new System.Windows.Forms.Label();
             this.IoBoardPictureBox = new System.Windows.Forms.PictureBox();
             this.CounterPictureBox = new System.Windows.Forms.PictureBox();
             this.DateTimeLabel = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             // 
             this.HeadPanel.BackColor = System.Drawing.Color.White;
             this.HeadPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.HeadPanel.Controls.Add(this.RemainingTimeLabel);
             this.HeadPanel.Controls.Add(this.EnterpriseLabel);
             this.HeadPanel.Controls.Add(this.AvatarPicturebox);
             this.HeadPanel.Controls.Add(this.UserLabel);
@@ -69,6 +69,21 @@
             this.HeadPanel.Size = new System.Drawing.Size(873, 54);
             this.HeadPanel.TabIndex = 1;
             // 
+            // RemainingTimeLabel
+            // 
+            this.RemainingTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemainingTimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.Black;
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(288, 3);
+            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(344, 48);
+            this.RemainingTimeLabel.TabIndex = 111;
+            this.RemainingTimeLabel.Text = "**********";
+            this.RemainingTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // EnterpriseLabel
             // 
             this.EnterpriseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -76,7 +91,7 @@
             this.EnterpriseLabel.BackColor = System.Drawing.Color.Transparent;
             this.EnterpriseLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.EnterpriseLabel.ForeColor = System.Drawing.Color.White;
-            this.EnterpriseLabel.Location = new System.Drawing.Point(661, 32);
+            this.EnterpriseLabel.Location = new System.Drawing.Point(640, 5);
             this.EnterpriseLabel.Name = "EnterpriseLabel";
             this.EnterpriseLabel.Size = new System.Drawing.Size(37, 15);
             this.EnterpriseLabel.TabIndex = 110;
@@ -102,7 +117,7 @@
             this.UserLabel.BackColor = System.Drawing.Color.Transparent;
             this.UserLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.UserLabel.ForeColor = System.Drawing.Color.White;
-            this.UserLabel.Location = new System.Drawing.Point(661, 8);
+            this.UserLabel.Location = new System.Drawing.Point(640, 32);
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(37, 15);
             this.UserLabel.TabIndex = 101;
@@ -122,9 +137,7 @@
             // BottomPanel
             // 
             this.BottomPanel.BackColor = System.Drawing.Color.White;
-            this.BottomPanel.Controls.Add(this.DepositaryLabel);
-            this.BottomPanel.Controls.Add(this.SucursalLabel);
-            this.BottomPanel.Controls.Add(this.RemainingTimeLabel);
+            this.BottomPanel.Controls.Add(this.SucursalInfoLabel);
             this.BottomPanel.Controls.Add(this.IoBoardPictureBox);
             this.BottomPanel.Controls.Add(this.CounterPictureBox);
             this.BottomPanel.Controls.Add(this.DateTimeLabel);
@@ -134,43 +147,18 @@
             this.BottomPanel.Size = new System.Drawing.Size(873, 47);
             this.BottomPanel.TabIndex = 2;
             // 
-            // DepositaryLabel
+            // SucursalInfoLabel
             // 
-            this.DepositaryLabel.AutoSize = true;
-            this.DepositaryLabel.BackColor = System.Drawing.Color.Transparent;
-            this.DepositaryLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DepositaryLabel.ForeColor = System.Drawing.Color.White;
-            this.DepositaryLabel.Location = new System.Drawing.Point(288, 16);
-            this.DepositaryLabel.Name = "DepositaryLabel";
-            this.DepositaryLabel.Size = new System.Drawing.Size(37, 15);
-            this.DepositaryLabel.TabIndex = 103;
-            this.DepositaryLabel.Text = "------";
-            this.DepositaryLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // SucursalLabel
-            // 
-            this.SucursalLabel.AutoSize = true;
-            this.SucursalLabel.BackColor = System.Drawing.Color.Transparent;
-            this.SucursalLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.SucursalLabel.ForeColor = System.Drawing.Color.White;
-            this.SucursalLabel.Location = new System.Drawing.Point(112, 16);
-            this.SucursalLabel.Name = "SucursalLabel";
-            this.SucursalLabel.Size = new System.Drawing.Size(37, 15);
-            this.SucursalLabel.TabIndex = 102;
-            this.SucursalLabel.Text = "------";
-            this.SucursalLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // RemainingTimeLabel
-            // 
-            this.RemainingTimeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.RemainingTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(408, 16);
-            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(376, 15);
-            this.RemainingTimeLabel.TabIndex = 21;
-            this.RemainingTimeLabel.Text = "**********";
-            this.RemainingTimeLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.RemainingTimeLabel_Paint);
+            this.SucursalInfoLabel.AutoSize = true;
+            this.SucursalInfoLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SucursalInfoLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.SucursalInfoLabel.ForeColor = System.Drawing.Color.White;
+            this.SucursalInfoLabel.Location = new System.Drawing.Point(112, 16);
+            this.SucursalInfoLabel.Name = "SucursalInfoLabel";
+            this.SucursalInfoLabel.Size = new System.Drawing.Size(37, 15);
+            this.SucursalInfoLabel.TabIndex = 102;
+            this.SucursalInfoLabel.Text = "------";
+            this.SucursalInfoLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // IoBoardPictureBox
             // 
@@ -309,11 +297,10 @@
         private Label EnterpriseLabel;
         private PictureBox IoBoardPictureBox;
         private PictureBox CounterPictureBox;
-        private Label RemainingTimeLabel;
-        private Label SucursalLabel;
-        private Label DepositaryLabel;
+        private Label SucursalInfoLabel;
         private PictureBox MainPictureBox;
         private Label BreadcrumbLabel;
         private Label InformationLabel;
+        private Label RemainingTimeLabel;
     }
 }

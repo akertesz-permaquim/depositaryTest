@@ -21,7 +21,7 @@ using System.Text;
 					Id,
 					TransaccionId,
 					DenominacionId,
-					Cantidad,
+					CantidadUnidades,
 					Fecha
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -66,9 +66,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Operacion.VistaTransaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 Cantidad,DateTime Fecha) 
+			public Entities.Views.Operacion.VistaTransaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 CantidadUnidades,DateTime Fecha) 
 			{
-			  return (Entities.Views.Operacion.VistaTransaccion)base.Add(new Entities.Views.Operacion.VistaTransaccion(TipoId,DepositarioId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,Id,TransaccionId,DenominacionId,Cantidad,Fecha));
+			  return (Entities.Views.Operacion.VistaTransaccion)base.Add(new Entities.Views.Operacion.VistaTransaccion(TipoId,DepositarioId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,Id,TransaccionId,DenominacionId,CantidadUnidades,Fecha));
 			}
             public new List<Entities.Views.Operacion.VistaTransaccion> Items()
             {
@@ -94,10 +94,10 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="TransaccionId"></param>
             /// <param name="DenominacionId"></param>
-            /// <param name="Cantidad"></param>
+            /// <param name="CantidadUnidades"></param>
             /// <param name="Fecha"></param>
             /// <returns></returns>
-            public List<Entities.Views.Operacion.VistaTransaccion> Items(Int64? TipoId,Int64? DepositarioId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Int64? Id,Int64? TransaccionId,Int64? DenominacionId,Int64? Cantidad,DateTime? Fecha)
+            public List<Entities.Views.Operacion.VistaTransaccion> Items(Int64? TipoId,Int64? DepositarioId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Int64? Id,Int64? TransaccionId,Int64? DenominacionId,Int64? CantidadUnidades,DateTime? Fecha)
             {
                 this.Where.whereParameter.Clear();
                 if (TipoId != null)
@@ -232,15 +232,15 @@ using System.Text;
                     }
                    
                 }
-                if (Cantidad != null)
+                if (CantidadUnidades != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Cantidad, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Cantidad);
+                        this.Where.Add(ColumnEnum.CantidadUnidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CantidadUnidades);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Cantidad, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Cantidad);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CantidadUnidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CantidadUnidades);
                     }
                    
                 }
@@ -280,6 +280,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
                  }
             }
             public class OrderByCollection : OrderByParameter {
@@ -450,6 +462,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
                  }
             }
             public class OrderByCollection : OrderByParameter {

@@ -58,6 +58,7 @@ public class PropertyAttribute : Attribute
         Key,
         Display,
         Exclude,
+        Computed,
         None
     }
     public PropertyAttributeEnum _propertyAttribute { get; set; }

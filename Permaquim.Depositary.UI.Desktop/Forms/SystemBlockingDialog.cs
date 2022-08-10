@@ -31,8 +31,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         public void LoadStyles()
         {
-            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
+            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
         }
         public void LoadLanguageItems()
         {

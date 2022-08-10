@@ -34,12 +34,20 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
+            MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
+                == ModeStateInformation.Mode.Neutral_SettingMode;
+
             if (TimeOutController.IsTimeOut())
             {
                 _pollingTimer.Enabled = false;
                 DatabaseController.LogOff(true);
                 FormsController.LogOff();
             }
+
+            if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                _device.RemoteCancel();
+            
+
         }
         private void OperationForm_Load(object sender, EventArgs e)
         {
@@ -165,6 +173,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OperationForm_VisibleChanged(object sender, EventArgs e)
         {
+            MainPanel.Enabled = false;
             _pollingTimer.Enabled = this.Visible;
             if (!this.Visible)
                 InitializeLocals();
@@ -174,8 +183,10 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadTransactionButtons();
                 LoadOtherOperationsButton();
                 LoadBackButton();;
+                _device.RemoteCancel();
             }
-            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+
+         //FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {

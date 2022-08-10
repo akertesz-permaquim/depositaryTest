@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Permaquim.Depositary.Web.Api.Model;
+using Permaquim.Depositary.Web.Api.Security;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Permaquim.Depositary.Web.Api.Controllers
 {
@@ -9,6 +14,15 @@ namespace Permaquim.Depositary.Web.Api.Controllers
     [ApiController]
     public class InicializacionController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        public InicializacionController(
+
+                IConfiguration configuration)
+        {
+
+            _configuration = configuration;
+        }
         #region GetEndpoints
 
         [HttpGet]
@@ -17,84 +31,94 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         public async Task<IActionResult> ObtenerDatosIniciales()
         {
             InicializacionModel model = new();
-            model.AplicacionConfiguracion = ObtenerAplicacionConfiguracion();
-            model.AuditoriaLog = ObtenerAuditoriaLog();
-            model.AuditoriaTipoLog = ObtenerAuditoriaTipoLog();
-            model.BancaBanco = ObtenerBancaBanco();
-            model.BancaCuenta = ObtenerBancaCuenta();
-            model.BancaTipoCuenta = ObtenerBancaTipoCuenta();
-            model.BancaUsuarioCuenta = ObtenerBancaUsuarioCuenta();
-            model.BiometriaHuellaDactilar = ObtenerBiometriaHuellaDactilar();
-            model.DirectorioEmpresa = ObtenerDirectorioEmpresa();
-            model.DirectorioGrupo = ObtenerDirectorioGrupo();
-            model.DirectorioIdentificadorUsuario = ObtenerDirectorioIdentificadorUsuario();
-            model.DirectorioRelacionMonedaSucursal = ObtenerDirectorioRelacionMonedaSucursal();
-            model.DirectorioSector = ObtenerDirectorioSector();
-            model.DirectorioSucursal = ObtenerDirectorioSucursal();
-            model.DirectorioTipoIdentificador = ObtenerDirectorioTipoIdentificador();
-            model.DispositivoComandoContadora = ObtenerDispositivoComandoContadora();
-            model.DispositivoComandoPlaca = ObtenerDispositivoComandoPlaca();
-            model.DispositivoConfiguracionDepositario = ObtenerDispositivoConfiguracionDepositario();
-            model.DispositivoDepositario = ObtenerDispositivoDepositario();
-            model.DispositivoDepositarioContadora = ObtenerDispositivoDepositarioContadora();
-            model.DispositivoDepositarioEstado = ObtenerDispositivoDepositarioEstado();
-            model.DispositivoDepositarioMoneda = ObtenerDispositivoDepositarioMoneda();
-            model.DispositivoDepositarioPlaca = ObtenerDispositivoDepositarioPlaca();
-            model.DispositivoMarca = ObtenerDispositivoMarca();
-            model.DispositivoModelo = ObtenerDispositivoModelo();
-            model.DispositivoTipoConfiguracionDepositario = ObtenerDispositivoTipoConfiguracionDepositario();
-            model.DispositivoTipoContadora = ObtenerDispositivoTipoContadora();
-            model.DispositivoTipoPlaca = ObtenerDispositivoTipoPlaca();
-            model.EstiloEsquema = ObtenerEstiloEsquema();
-            model.EstiloEsquemaDetalle = ObtenerEstiloEsquemaDetalle();
-            model.EstiloTipoEsquemaDetalle = ObtenerEstiloTipoEsquemaDetalle();
-            model.GeografiaCiudad = ObtenerGeografiaCiudad();
-            model.GeografiaCodigoPostal = ObtenerGeografiaCodigoPostal();
-            model.GeografiaPais = ObtenerGeografiaPais();
-            model.GeografiaProvincia = ObtenerGeografiaProvincia();
-            model.GeografiaZona = ObtenerGeografiaZona();
-            model.OperacionCierreDiario = ObtenerOperacionCierreDiario();
-            model.OperacionContenedor = ObtenerOperacionContenedor();
-            model.OperacionEvento = ObtenerOperacionEvento();
-            model.OperacionSesion = ObtenerOperacionSesion();
-            model.OperacionTipoContenedor = ObtenerOperacionTipoContenedor();
-            model.OperacionTipoEvento = ObtenerOperacionTipoEvento();
-            model.OperacionTipoTransaccion = ObtenerOperacionTipoTransaccion();
-            model.OperacionTransaccion = ObtenerOperacionTransaccion();
-            model.OperacionTransaccionDetalle = ObtenerOperacionTransaccionDetalle();
-            model.OperacionTransaccionSobre = ObtenerOperacionTransaccionSobre();
-            model.OperacionTransaccionSobreDetalle = ObtenerOperacionTransaccionSobreDetalle();
-            model.OperacionTurno = ObtenerOperacionTurno();
-            model.OperacionTurnoUsuario = ObtenerOperacionTurnoUsuario();
-            model.RegionalizacionLenguaje = ObtenerRegionalizacionLenguaje();
-            model.RegionalizacionLenguajeItem = ObtenerRegionalizacionLenguajeItem();
-            model.SeguridadAplicacion = ObtenerSeguridadAplicacion();
-            model.SeguridadAplicacionParametro = ObtenerSeguridadAplicacionParametro();
-            model.SeguridadAplicacionParametroValor = ObtenerSeguridadAplicacionParametroValor();
-            model.SeguridadFuncion = ObtenerSeguridadFuncion();
-            model.SeguridadMenu = ObtenerSeguridadMenu();
-            model.SeguridadRol = ObtenerSeguridadRol();
-            model.SeguridadRolFuncion = ObtenerSeguridadRolFuncion();
-            model.SeguridadTipoAplicacion = ObtenerSeguridadTipoAplicacion();
-            model.SeguridadTipoFuncion = ObtenerSeguridadTipoFuncion();
-            model.SeguridadTipoMenu = ObtenerSeguridadTipoMenu();
-            model.SeguridadUsuario = ObtenerSeguridadUsuario();
-            model.SeguridadUsuarioRol = ObtenerSeguridadUsuarioRol();
-            model.SeguridadUsuarioSector = ObtenerSeguridadUsuarioSector();
-            model.SincronizacionConfiguracion = ObtenerSincronizacionConfiguracion();
-            model.SincronizacionEntidad = ObtenerSincronizacionEntidad();
-            model.SincronizacionEntidadCabecera = ObtenerSincronizacionEntidadCabecera();
-            model.SincronizacionEntidadDetalle = ObtenerSincronizacionEntidadDetalle();
-            model.TurnoAgendaTurno = ObtenerTurnoAgendaTurno();
-            model.TurnoEsquemaDetalleTurno = ObtenerTurnoEsquemaDetalleTurno();
-            model.TurnoEsquemaTurno = ObtenerTurnoEsquemaTurno();
-            model.ValorDenominacion = ObtenerValorDenominacion();
-            model.ValorMoneda = ObtenerValorMoneda();
-            model.ValorRelacionMonedaTipoValor = ObtenerValorRelacionMonedaTipoValor();
-            model.ValorTipo = ObtenerValorTipo();
-            model.VisualizacionPerfil = ObtenerVisualizacionPerfil();
-            model.VisualizacionPerfilItem = ObtenerVisualizacionPerfilItem();
-            model.VisualizacionPerfilTipo = ObtenerVisualizacionPerfilTipo();
+            try
+            {
+
+                model.AplicacionConfiguracion = ObtenerAplicacionConfiguracion();
+                model.AuditoriaLog = ObtenerAuditoriaLog();
+                model.AuditoriaTipoLog = ObtenerAuditoriaTipoLog();
+                model.BancaBanco = ObtenerBancaBanco();
+                model.BancaCuenta = ObtenerBancaCuenta();
+                model.BancaTipoCuenta = ObtenerBancaTipoCuenta();
+                model.BancaUsuarioCuenta = ObtenerBancaUsuarioCuenta();
+                model.BiometriaHuellaDactilar = ObtenerBiometriaHuellaDactilar();
+                model.DirectorioEmpresa = ObtenerDirectorioEmpresa();
+                model.DirectorioGrupo = ObtenerDirectorioGrupo();
+                model.DirectorioIdentificadorUsuario = ObtenerDirectorioIdentificadorUsuario();
+                model.DirectorioRelacionMonedaSucursal = ObtenerDirectorioRelacionMonedaSucursal();
+                model.DirectorioSector = ObtenerDirectorioSector();
+                model.DirectorioSucursal = ObtenerDirectorioSucursal();
+                model.DirectorioTipoIdentificador = ObtenerDirectorioTipoIdentificador();
+                model.DispositivoComandoContadora = ObtenerDispositivoComandoContadora();
+                model.DispositivoComandoPlaca = ObtenerDispositivoComandoPlaca();
+                model.DispositivoConfiguracionDepositario = ObtenerDispositivoConfiguracionDepositario();
+                model.DispositivoDepositario = ObtenerDispositivoDepositario();
+                model.DispositivoDepositarioContadora = ObtenerDispositivoDepositarioContadora();
+                model.DispositivoDepositarioEstado = ObtenerDispositivoDepositarioEstado();
+                model.DispositivoDepositarioMoneda = ObtenerDispositivoDepositarioMoneda();
+                model.DispositivoDepositarioPlaca = ObtenerDispositivoDepositarioPlaca();
+                model.DispositivoMarca = ObtenerDispositivoMarca();
+                model.DispositivoModelo = ObtenerDispositivoModelo();
+                model.DispositivoTipoConfiguracionDepositario = ObtenerDispositivoTipoConfiguracionDepositario();
+                model.DispositivoTipoContadora = ObtenerDispositivoTipoContadora();
+                model.DispositivoTipoPlaca = ObtenerDispositivoTipoPlaca();
+                model.EstiloEsquema = ObtenerEstiloEsquema();
+                model.EstiloEsquemaDetalle = ObtenerEstiloEsquemaDetalle();
+                model.EstiloTipoEsquemaDetalle = ObtenerEstiloTipoEsquemaDetalle();
+                model.GeografiaCiudad = ObtenerGeografiaCiudad();
+                model.GeografiaCodigoPostal = ObtenerGeografiaCodigoPostal();
+                model.GeografiaPais = ObtenerGeografiaPais();
+                model.GeografiaProvincia = ObtenerGeografiaProvincia();
+                model.GeografiaZona = ObtenerGeografiaZona();
+                model.OperacionCierreDiario = ObtenerOperacionCierreDiario();
+                model.OperacionContenedor = ObtenerOperacionContenedor();
+                model.OperacionEvento = ObtenerOperacionEvento();
+                model.OperacionSesion = ObtenerOperacionSesion();
+                model.OperacionTipoContenedor = ObtenerOperacionTipoContenedor();
+                model.OperacionTipoEvento = ObtenerOperacionTipoEvento();
+                model.OperacionTipoTransaccion = ObtenerOperacionTipoTransaccion();
+                model.OperacionTransaccion = ObtenerOperacionTransaccion();
+                model.OperacionTransaccionDetalle = ObtenerOperacionTransaccionDetalle();
+                model.OperacionTransaccionSobre = ObtenerOperacionTransaccionSobre();
+                model.OperacionTransaccionSobreDetalle = ObtenerOperacionTransaccionSobreDetalle();
+                model.OperacionTurno = ObtenerOperacionTurno();
+                model.OperacionTurnoUsuario = ObtenerOperacionTurnoUsuario();
+                model.RegionalizacionLenguaje = ObtenerRegionalizacionLenguaje();
+                model.RegionalizacionLenguajeItem = ObtenerRegionalizacionLenguajeItem();
+                model.SeguridadAplicacion = ObtenerSeguridadAplicacion();
+                model.SeguridadAplicacionParametro = ObtenerSeguridadAplicacionParametro();
+                model.SeguridadAplicacionParametroValor = ObtenerSeguridadAplicacionParametroValor();
+                model.SeguridadFuncion = ObtenerSeguridadFuncion();
+                model.SeguridadMenu = ObtenerSeguridadMenu();
+                model.SeguridadRol = ObtenerSeguridadRol();
+                model.SeguridadRolFuncion = ObtenerSeguridadRolFuncion();
+                model.SeguridadTipoAplicacion = ObtenerSeguridadTipoAplicacion();
+                model.SeguridadTipoFuncion = ObtenerSeguridadTipoFuncion();
+                model.SeguridadTipoMenu = ObtenerSeguridadTipoMenu();
+                model.SeguridadUsuario = ObtenerSeguridadUsuario();
+                model.SeguridadUsuarioRol = ObtenerSeguridadUsuarioRol();
+                model.SeguridadUsuarioSector = ObtenerSeguridadUsuarioSector();
+                model.SincronizacionConfiguracion = ObtenerSincronizacionConfiguracion();
+                model.SincronizacionEntidad = ObtenerSincronizacionEntidad();
+                model.SincronizacionEntidadCabecera = ObtenerSincronizacionEntidadCabecera();
+                model.SincronizacionEntidadDetalle = ObtenerSincronizacionEntidadDetalle();
+                model.TurnoAgendaTurno = ObtenerTurnoAgendaTurno();
+                model.TurnoEsquemaDetalleTurno = ObtenerTurnoEsquemaDetalleTurno();
+                model.TurnoEsquemaTurno = ObtenerTurnoEsquemaTurno();
+                model.ValorDenominacion = ObtenerValorDenominacion();
+                model.ValorMoneda = ObtenerValorMoneda();
+                model.ValorRelacionMonedaTipoValor = ObtenerValorRelacionMonedaTipoValor();
+                model.ValorTipo = ObtenerValorTipo();
+                model.VisualizacionPerfil = ObtenerVisualizacionPerfil();
+                model.VisualizacionPerfilItem = ObtenerVisualizacionPerfilItem();
+                model.VisualizacionPerfilTipo = ObtenerVisualizacionPerfilTipo();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex; 
+            }
 
             return Ok(model);
         }
@@ -161,9 +185,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Directorio.IdentificadorUsuario> ObtenerDirectorioIdentificadorUsuario()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> ObtenerDirectorioIdentificadorUsuario()
         {
-            DepositaryWebApi.Business.Tables.Directorio.IdentificadorUsuario entities = new();
+            DepositaryWebApi.Business.Tables.Seguridad.IdentificadorUsuario entities = new();
             return entities.Items();
         }
 
@@ -185,9 +209,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Directorio.TipoIdentificador> ObtenerDirectorioTipoIdentificador()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> ObtenerDirectorioTipoIdentificador()
         {
-            DepositaryWebApi.Business.Tables.Directorio.TipoIdentificador entities = new();
+            DepositaryWebApi.Business.Tables.Seguridad.TipoIdentificador entities = new();
             return entities.Items();
         }
 
@@ -571,5 +595,55 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
 
         #endregion
+
+        #region Post endpoints
+
+        [HttpPost("ObtenerTokenInicializacion")]
+
+        public ActionResult ObtenerTokenInicializacion([FromBody] InicializacionModel model)
+        {
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+            DepositaryWebApi.Business.Relations.Dispositivo.Depositario depositarios = new();
+            depositarios.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
+                DepositaryWebApi.sqlEnum.OperandEnum.Equal, 
+                Cryptography.Decrypt(model.CodigoExternoDepositario, _configuration["AppSettings:PasswordKey"]));
+            depositarios.Items();
+
+            //Si se encuentra un usuario con ese password se devuelve el token, si no un BadRequest con mensaje de error.
+            if (depositarios.Result.Count > 0)
+            {
+                var depositario = depositarios.Result.FirstOrDefault();
+
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, depositario.Nombre),
+                    new Claim(JwtRegisteredClaimNames.Jti, depositario.Id.ToString()),
+                };
+
+                var token = new JwtSecurityToken(
+                    issuer: _configuration["JWT:ValidIssuer"],
+                    audience: _configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddHours(Convert.ToInt32(_configuration["JWT:Hours"])),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+
+                    );
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo
+                });
+            }
+            else
+            {
+                return BadRequest("Usuario o contraseña invalidos.");
+            }
+        }
+
+        #endregion
+
+
     }
 }

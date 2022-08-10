@@ -261,10 +261,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Directorio.TipoIdentificador> ObtenerTiposIdentificadoresBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> ObtenerTiposIdentificadoresBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Directorio.TipoIdentificador> result = new();
-            DepositaryWebApi.Business.Tables.Directorio.TipoIdentificador oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.TipoIdentificador oEntities = new();
 
             try
             {
@@ -283,10 +283,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Directorio.IdentificadorUsuario> ObtenerIdentificadoresUsuariosBD()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> ObtenerIdentificadoresUsuariosBD()
         {
-            List<DepositaryWebApi.Entities.Tables.Directorio.IdentificadorUsuario> result = new();
-            DepositaryWebApi.Business.Tables.Directorio.IdentificadorUsuario oEntities = new();
+            List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> result = new();
+            DepositaryWebApi.Business.Tables.Seguridad.IdentificadorUsuario oEntities = new();
 
             try
             {

@@ -327,6 +327,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -355,6 +367,372 @@ using System.Text;
                  }
             }
         } // class Configuracion
+	} //namespace DepositaryWebApi.Business.Tables.Aplicacion
+	namespace DepositaryWebApi.Business.Tables.Aplicacion {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class ConfiguracionEmpresa : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					EmpresaId,
+					Clave,
+					Valor,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> _entities = new List<Entities.Tables.Aplicacion.ConfiguracionEmpresa>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public ConfiguracionEmpresa() : base()
+            {
+                base._dataItem = new Entities.Tables.Aplicacion.ConfiguracionEmpresa();
+            }
+            public ConfiguracionEmpresa(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Aplicacion.ConfiguracionEmpresa();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// ConfiguracionEmpresa Add Method
+         /// </summary>
+         /// <param name='EmpresaId'></param>
+         /// <param name='Clave'></param>
+         /// <param name='Valor'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Aplicacion.ConfiguracionEmpresa</returns>
+			public Entities.Tables.Aplicacion.ConfiguracionEmpresa Add(Int64 EmpresaId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Aplicacion.ConfiguracionEmpresa)base.Add(new Entities.Tables.Aplicacion.ConfiguracionEmpresa(EmpresaId,Clave,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Tables.Aplicacion.ConfiguracionEmpresa>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Aplicacion.ConfiguracionEmpresa items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Aplicacion.ConfiguracionEmpresa items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EmpresaId"></param>
+            /// <param name="Clave"></param>
+            /// <param name="Valor"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Items(Int64? Id,Int64? EmpresaId,String Clave,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (EmpresaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                   
+                }
+                if (Clave != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Clave, sqlEnum.OperandEnum.Equal, Clave);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Clave, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Clave);
+                    }
+                   
+                }
+                if (Valor != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Aplicacion.ConfiguracionEmpresa Add(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                return (Entities.Tables.Aplicacion.ConfiguracionEmpresa)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Aplicacion.ConfiguracionEmpresa AddOrUpdate(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Aplicacion.ConfiguracionEmpresa)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EmpresaId"></param>
+            /// <param name="Clave"></param>
+            /// <param name="Valor"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64 empresaid,String clave,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Aplicacion.ConfiguracionEmpresa {Id = id,EmpresaId = empresaid,Clave = clave,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Aplicacion.ConfiguracionEmpresa with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Aplicacion.ConfiguracionEmpresa {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class ConfiguracionEmpresa
 	} //namespace DepositaryWebApi.Business.Tables.Aplicacion
 	namespace DepositaryWebApi.Business.Tables.Auditoria {
 	    /// <summary>
@@ -680,6 +1058,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -1018,6 +1408,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -1389,6 +1791,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -1428,6 +1842,7 @@ using System.Text;
                 {
 					Id,
 					TipoId,
+					EmpresaId,
 					Nombre,
 					Numero,
 					BancoId,
@@ -1479,6 +1894,7 @@ using System.Text;
          /// Cuenta Add Method
          /// </summary>
          /// <param name='TipoId'></param>
+         /// <param name='EmpresaId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Numero'></param>
          /// <param name='BancoId'></param>
@@ -1489,9 +1905,9 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Banca.Cuenta</returns>
-			public Entities.Tables.Banca.Cuenta Add(Int64 TipoId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Banca.Cuenta Add(Int64 TipoId,Int64 EmpresaId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Banca.Cuenta)base.Add(new Entities.Tables.Banca.Cuenta(TipoId,Nombre,Numero,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Banca.Cuenta)base.Add(new Entities.Tables.Banca.Cuenta(TipoId,EmpresaId,Nombre,Numero,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Banca.Cuenta> Items()
             {
@@ -1525,6 +1941,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="TipoId"></param>
+            /// <param name="EmpresaId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Numero"></param>
             /// <param name="BancoId"></param>
@@ -1535,7 +1952,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,String Nombre,String Numero,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,Int64? EmpresaId,String Nombre,String Numero,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -1559,6 +1976,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                   
+                }
+                if (EmpresaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, EmpresaId);
                     }
                    
                 }
@@ -1711,6 +2140,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="TipoId"></param>
+            /// <param name="EmpresaId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Numero"></param>
             /// <param name="BancoId"></param>
@@ -1721,9 +2151,9 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String numero,Int64 bancoid,String sucursalbancaria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 empresaid,String nombre,String numero,Int64 bancoid,String sucursalbancaria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Banca.Cuenta {Id = id,TipoId = tipoid,Nombre = nombre,Numero = numero,BancoId = bancoid,SucursalBancaria = sucursalbancaria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Banca.Cuenta {Id = id,TipoId = tipoid,EmpresaId = empresaid,Nombre = nombre,Numero = numero,BancoId = bancoid,SucursalBancaria = sucursalbancaria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Banca.Cuenta
@@ -1774,6 +2204,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -2113,6 +2555,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -2450,6 +2904,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -2804,6 +3270,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -3255,6 +3733,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -3609,6 +4099,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -3637,360 +4139,6 @@ using System.Text;
                  }
             }
         } // class Grupo
-	} //namespace DepositaryWebApi.Business.Tables.Directorio
-	namespace DepositaryWebApi.Business.Tables.Directorio {
-	    /// <summary>
-	    /// 
-	    /// </summary>
-		public class IdentificadorUsuario : DataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					TipoId,
-					UsuarioId,
-					Valor,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-         protected List<Entities.Tables.Directorio.IdentificadorUsuario> _entities = new List<Entities.Tables.Directorio.IdentificadorUsuario>();
-         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
-         public WhereCollection Where = new WhereCollection();
-         public OrderByCollection OrderBy = new OrderByCollection();
-         public GroupByCollection GroupBy = new GroupByCollection();
-         public AggregateCollection Aggregate { get; set; }
-            public IdentificadorUsuario() : base()
-            {
-                base._dataItem = new Entities.Tables.Directorio.IdentificadorUsuario();
-            }
-            public IdentificadorUsuario(IDataHandler dataHandler)
-                : base(dataHandler)
-            {
-                base._transaction = dataHandler.GetTransaction();
-                base._dataItem = new Entities.Tables.Directorio.IdentificadorUsuario();
-            }
-            public class AggregateCollection : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Tables.Directorio.IdentificadorUsuario item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// IdentificadorUsuario Add Method
-         /// </summary>
-         /// <param name='TipoId'></param>
-         /// <param name='UsuarioId'></param>
-         /// <param name='Valor'></param>
-         /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
-         /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
-         /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Tables.Directorio.IdentificadorUsuario</returns>
-			public Entities.Tables.Directorio.IdentificadorUsuario Add(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
-			{
-			  return (Entities.Tables.Directorio.IdentificadorUsuario)base.Add(new Entities.Tables.Directorio.IdentificadorUsuario(TipoId,UsuarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
-			}
-            public new List<Entities.Tables.Directorio.IdentificadorUsuario> Items()
-            {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                _entities = dh.Items().Cast<Entities.Tables.Directorio.IdentificadorUsuario>().ToList<Entities.Tables.Directorio.IdentificadorUsuario>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Tables.Directorio.IdentificadorUsuario items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Tables.Directorio.IdentificadorUsuario> Items(Int64 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets Entities.Tables.Directorio.IdentificadorUsuario items with parameters.
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="TipoId"></param>
-            /// <param name="UsuarioId"></param>
-            /// <param name="Valor"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns></returns>
-            public List<Entities.Tables.Directorio.IdentificadorUsuario> Items(Int64? Id,Int64? TipoId,Int64? UsuarioId,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-            {
-                this.Where.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (TipoId != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TipoId, sqlEnum.OperandEnum.Equal, TipoId);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, TipoId);
-                    }
-                   
-                }
-                if (UsuarioId != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioId, sqlEnum.OperandEnum.Equal, UsuarioId);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioId);
-                    }
-                   
-                }
-                if (Valor != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor);
-                    }
-                   
-                }
-                if (Habilitado != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                   
-                }
-                if (UsuarioCreacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                   
-                }
-                if (FechaCreacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                   
-                }
-                if (UsuarioModificacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                   
-                }
-                if (FechaModificacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            /// <summary>
-            /// Adds an instance of Entities.Tables.Directorio.IdentificadorUsuario
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns></returns>
-            public Entities.Tables.Directorio.IdentificadorUsuario Add(Entities.Tables.Directorio.IdentificadorUsuario item)
-            {
-                return (Entities.Tables.Directorio.IdentificadorUsuario)base.Add((IDataItem)item);
-            }
-            /// <summary>
-            /// Adds or updates an instance of Entities.Tables.Directorio.IdentificadorUsuario
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns></returns>
-            public Entities.Tables.Directorio.IdentificadorUsuario AddOrUpdate(Entities.Tables.Directorio.IdentificadorUsuario item)
-            {
-                 if (Items(item.Id).Count == 0)
-                 {
-                     return (Entities.Tables.Directorio.IdentificadorUsuario)base.Add((IDataItem)item);
-                 }
-                 else
-                 {
-                     Update(item);
-                     return item;
-                 }
-             }
-            /// <summary>
-            /// Updates an instance of Entities.Tables.Directorio.IdentificadorUsuario
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns><Int64/returns>
-            public Int64 Update(Entities.Tables.Directorio.IdentificadorUsuario item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Tables.Directorio.IdentificadorUsuario with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="TipoId"></param>
-            /// <param name="UsuarioId"></param>
-            /// <param name="Valor"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 usuarioid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
-            {
-                return base.Update((IDataItem) new Entities.Tables.Directorio.IdentificadorUsuario {Id = id,TipoId = tipoid,UsuarioId = usuarioid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
-            }
-            /// <summary>
-            /// Deletes an instance of Entities.Tables.Directorio.IdentificadorUsuario
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns></returns>
-            public Int64 Delete(Entities.Tables.Directorio.IdentificadorUsuario item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// <summary>
-            /// Deletes Entities.Tables.Directorio.IdentificadorUsuario with where conditions
-            /// </summary>
-            /// <returns></returns>
-            public new Int64 Delete()
-            {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
-            }
-            /// <summary>
-            /// Deletes by Pks
-            /// </summary>
-            /// <returns></returns>
-            public Int64 Delete(Int64 id)
-            {
-                return base.DeleteItem((IDataItem) new Entities.Tables.Directorio.IdentificadorUsuario {Id = id});
-            }
-            /// <summary>
-            /// Holds last Items() executed.
-            /// </summary>
-            /// <returns>Last Items()</returns>
-            public List<Entities.Tables.Directorio.IdentificadorUsuario> Result
-            {
-                get{return _entities;}
-            }
-            public class WhereCollection : WhereParameter {
-                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
-                 {
-                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public new void Clear()
-                 {
-                     base.Clear();
-                 }
-                 public new long Count
-                 {
-                     get {
-                         return base.Count;
-                     }
-                 }
-            }
-            public class OrderByCollection : OrderByParameter {
-                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-            }
-            public class GroupByCollection : GroupByParameter {
-                 public void Add(ColumnEnum column)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-            }
-        } // class IdentificadorUsuario
 	} //namespace DepositaryWebApi.Business.Tables.Directorio
 	namespace DepositaryWebApi.Business.Tables.Directorio {
 	    /// <summary>
@@ -4316,6 +4464,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -4670,6 +4830,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -5089,6 +5261,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -5117,360 +5301,6 @@ using System.Text;
                  }
             }
         } // class Sucursal
-	} //namespace DepositaryWebApi.Business.Tables.Directorio
-	namespace DepositaryWebApi.Business.Tables.Directorio {
-	    /// <summary>
-	    /// 
-	    /// </summary>
-		public class TipoIdentificador : DataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					Nombre,
-					Descripcion,
-					Mascara,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-         protected List<Entities.Tables.Directorio.TipoIdentificador> _entities = new List<Entities.Tables.Directorio.TipoIdentificador>();
-         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
-         public WhereCollection Where = new WhereCollection();
-         public OrderByCollection OrderBy = new OrderByCollection();
-         public GroupByCollection GroupBy = new GroupByCollection();
-         public AggregateCollection Aggregate { get; set; }
-            public TipoIdentificador() : base()
-            {
-                base._dataItem = new Entities.Tables.Directorio.TipoIdentificador();
-            }
-            public TipoIdentificador(IDataHandler dataHandler)
-                : base(dataHandler)
-            {
-                base._transaction = dataHandler.GetTransaction();
-                base._dataItem = new Entities.Tables.Directorio.TipoIdentificador();
-            }
-            public class AggregateCollection : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Tables.Directorio.TipoIdentificador item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// TipoIdentificador Add Method
-         /// </summary>
-         /// <param name='Nombre'></param>
-         /// <param name='Descripcion'></param>
-         /// <param name='Mascara'></param>
-         /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
-         /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
-         /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Tables.Directorio.TipoIdentificador</returns>
-			public Entities.Tables.Directorio.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
-			{
-			  return (Entities.Tables.Directorio.TipoIdentificador)base.Add(new Entities.Tables.Directorio.TipoIdentificador(Nombre,Descripcion,Mascara,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
-			}
-            public new List<Entities.Tables.Directorio.TipoIdentificador> Items()
-            {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                _entities = dh.Items().Cast<Entities.Tables.Directorio.TipoIdentificador>().ToList<Entities.Tables.Directorio.TipoIdentificador>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Tables.Directorio.TipoIdentificador items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Tables.Directorio.TipoIdentificador> Items(Int64 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets Entities.Tables.Directorio.TipoIdentificador items with parameters.
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Descripcion"></param>
-            /// <param name="Mascara"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns></returns>
-            public List<Entities.Tables.Directorio.TipoIdentificador> Items(Int64? Id,String Nombre,String Descripcion,String Mascara,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-            {
-                this.Where.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (Nombre != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                   
-                }
-                if (Descripcion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Descripcion, sqlEnum.OperandEnum.Equal, Descripcion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Descripcion);
-                    }
-                   
-                }
-                if (Mascara != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Mascara, sqlEnum.OperandEnum.Equal, Mascara);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Mascara, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Mascara);
-                    }
-                   
-                }
-                if (Habilitado != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                   
-                }
-                if (UsuarioCreacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                   
-                }
-                if (FechaCreacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                   
-                }
-                if (UsuarioModificacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                   
-                }
-                if (FechaModificacion != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            /// <summary>
-            /// Adds an instance of Entities.Tables.Directorio.TipoIdentificador
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns></returns>
-            public Entities.Tables.Directorio.TipoIdentificador Add(Entities.Tables.Directorio.TipoIdentificador item)
-            {
-                return (Entities.Tables.Directorio.TipoIdentificador)base.Add((IDataItem)item);
-            }
-            /// <summary>
-            /// Adds or updates an instance of Entities.Tables.Directorio.TipoIdentificador
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns></returns>
-            public Entities.Tables.Directorio.TipoIdentificador AddOrUpdate(Entities.Tables.Directorio.TipoIdentificador item)
-            {
-                 if (Items(item.Id).Count == 0)
-                 {
-                     return (Entities.Tables.Directorio.TipoIdentificador)base.Add((IDataItem)item);
-                 }
-                 else
-                 {
-                     Update(item);
-                     return item;
-                 }
-             }
-            /// <summary>
-            /// Updates an instance of Entities.Tables.Directorio.TipoIdentificador
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns><Int64/returns>
-            public Int64 Update(Entities.Tables.Directorio.TipoIdentificador item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Tables.Directorio.TipoIdentificador with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Descripcion"></param>
-            /// <param name="Mascara"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,String mascara,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
-            {
-                return base.Update((IDataItem) new Entities.Tables.Directorio.TipoIdentificador {Id = id,Nombre = nombre,Descripcion = descripcion,Mascara = mascara,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
-            }
-            /// <summary>
-            /// Deletes an instance of Entities.Tables.Directorio.TipoIdentificador
-            /// </summary>
-            /// <param name="item"></param>
-            /// <returns></returns>
-            public Int64 Delete(Entities.Tables.Directorio.TipoIdentificador item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// <summary>
-            /// Deletes Entities.Tables.Directorio.TipoIdentificador with where conditions
-            /// </summary>
-            /// <returns></returns>
-            public new Int64 Delete()
-            {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
-            }
-            /// <summary>
-            /// Deletes by Pks
-            /// </summary>
-            /// <returns></returns>
-            public Int64 Delete(Int64 id)
-            {
-                return base.DeleteItem((IDataItem) new Entities.Tables.Directorio.TipoIdentificador {Id = id});
-            }
-            /// <summary>
-            /// Holds last Items() executed.
-            /// </summary>
-            /// <returns>Last Items()</returns>
-            public List<Entities.Tables.Directorio.TipoIdentificador> Result
-            {
-                get{return _entities;}
-            }
-            public class WhereCollection : WhereParameter {
-                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
-                 {
-                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public new void Clear()
-                 {
-                     base.Clear();
-                 }
-                 public new long Count
-                 {
-                     get {
-                         return base.Count;
-                     }
-                 }
-            }
-            public class OrderByCollection : OrderByParameter {
-                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-            }
-            public class GroupByCollection : GroupByParameter {
-                 public void Add(ColumnEnum column)
-                 {
-                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-            }
-        } // class TipoIdentificador
 	} //namespace DepositaryWebApi.Business.Tables.Directorio
 	namespace DepositaryWebApi.Business.Tables.Dispositivo {
 	    /// <summary>
@@ -5844,6 +5674,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -6247,6 +6089,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -6600,6 +6454,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -7002,6 +6868,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -7501,6 +7379,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -7903,6 +7793,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -7943,6 +7845,7 @@ using System.Text;
 					Id,
 					DepositarioId,
 					MonedaId,
+					IndiceEnContadora,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -7991,15 +7894,16 @@ using System.Text;
          /// </summary>
          /// <param name='DepositarioId'></param>
          /// <param name='MonedaId'></param>
+         /// <param name='IndiceEnContadora'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.DepositarioMoneda</returns>
-			public Entities.Tables.Dispositivo.DepositarioMoneda Add(Int64 DepositarioId,Int64 MonedaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Dispositivo.DepositarioMoneda Add(Int64 DepositarioId,Int64 MonedaId,Int32 IndiceEnContadora,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Dispositivo.DepositarioMoneda)base.Add(new Entities.Tables.Dispositivo.DepositarioMoneda(DepositarioId,MonedaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Dispositivo.DepositarioMoneda)base.Add(new Entities.Tables.Dispositivo.DepositarioMoneda(DepositarioId,MonedaId,IndiceEnContadora,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Dispositivo.DepositarioMoneda> Items()
             {
@@ -8034,13 +7938,14 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="DepositarioId"></param>
             /// <param name="MonedaId"></param>
+            /// <param name="IndiceEnContadora"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Dispositivo.DepositarioMoneda> Items(Int64? Id,Int64? DepositarioId,Int64? MonedaId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Dispositivo.DepositarioMoneda> Items(Int64? Id,Int64? DepositarioId,Int64? MonedaId,Int32? IndiceEnContadora,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -8076,6 +7981,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                   
+                }
+                if (IndiceEnContadora != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.IndiceEnContadora, sqlEnum.OperandEnum.Equal, IndiceEnContadora);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.IndiceEnContadora, DepositaryWebApi.sqlEnum.OperandEnum.Equal, IndiceEnContadora);
                     }
                    
                 }
@@ -8181,15 +8098,16 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="DepositarioId"></param>
             /// <param name="MonedaId"></param>
+            /// <param name="IndiceEnContadora"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 depositarioid,Int64 monedaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 depositarioid,Int64 monedaid,Int32 indiceencontadora,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioMoneda {Id = id,DepositarioId = depositarioid,MonedaId = monedaid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioMoneda {Id = id,DepositarioId = depositarioid,MonedaId = monedaid,IndiceEnContadora = indiceencontadora,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Dispositivo.DepositarioMoneda
@@ -8240,6 +8158,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -8883,6 +8813,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -9221,6 +9163,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -9263,6 +9217,7 @@ using System.Text;
 					Nombre,
 					Descripcion,
 					Imagen,
+					PlantillaMonedaId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -9313,15 +9268,16 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Imagen'></param>
+         /// <param name='PlantillaMonedaId'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.Modelo</returns>
-			public Entities.Tables.Dispositivo.Modelo Add(Int64 MarcaId,String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Dispositivo.Modelo Add(Int64 MarcaId,String Nombre,String Descripcion,String Imagen,Int64 PlantillaMonedaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Dispositivo.Modelo)base.Add(new Entities.Tables.Dispositivo.Modelo(MarcaId,Nombre,Descripcion,Imagen,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Dispositivo.Modelo)base.Add(new Entities.Tables.Dispositivo.Modelo(MarcaId,Nombre,Descripcion,Imagen,PlantillaMonedaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Dispositivo.Modelo> Items()
             {
@@ -9358,13 +9314,14 @@ using System.Text;
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
             /// <param name="Imagen"></param>
+            /// <param name="PlantillaMonedaId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Dispositivo.Modelo> Items(Int64? Id,Int64? MarcaId,String Nombre,String Descripcion,String Imagen,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Dispositivo.Modelo> Items(Int64? Id,Int64? MarcaId,String Nombre,String Descripcion,String Imagen,Int64? PlantillaMonedaId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -9424,6 +9381,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Imagen, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                   
+                }
+                if (PlantillaMonedaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PlantillaMonedaId, sqlEnum.OperandEnum.Equal, PlantillaMonedaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.PlantillaMonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, PlantillaMonedaId);
                     }
                    
                 }
@@ -9531,15 +9500,16 @@ using System.Text;
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
             /// <param name="Imagen"></param>
+            /// <param name="PlantillaMonedaId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 marcaid,String nombre,String descripcion,String imagen,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 marcaid,String nombre,String descripcion,String imagen,Int64 plantillamonedaid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Dispositivo.Modelo {Id = id,MarcaId = marcaid,Nombre = nombre,Descripcion = descripcion,Imagen = imagen,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Dispositivo.Modelo {Id = id,MarcaId = marcaid,Nombre = nombre,Descripcion = descripcion,Imagen = imagen,PlantillaMonedaId = plantillamonedaid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Dispositivo.Modelo
@@ -9591,6 +9561,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -9619,6 +9601,754 @@ using System.Text;
                  }
             }
         } // class Modelo
+	} //namespace DepositaryWebApi.Business.Tables.Dispositivo
+	namespace DepositaryWebApi.Business.Tables.Dispositivo {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class PlantillaMoneda : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Nombre,
+					Decripcion,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Dispositivo.PlantillaMoneda> _entities = new List<Entities.Tables.Dispositivo.PlantillaMoneda>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public PlantillaMoneda() : base()
+            {
+                base._dataItem = new Entities.Tables.Dispositivo.PlantillaMoneda();
+            }
+            public PlantillaMoneda(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Dispositivo.PlantillaMoneda();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Dispositivo.PlantillaMoneda item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// PlantillaMoneda Add Method
+         /// </summary>
+         /// <param name='Nombre'></param>
+         /// <param name='Decripcion'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Dispositivo.PlantillaMoneda</returns>
+			public Entities.Tables.Dispositivo.PlantillaMoneda Add(String Nombre,String Decripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Dispositivo.PlantillaMoneda)base.Add(new Entities.Tables.Dispositivo.PlantillaMoneda(Nombre,Decripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Dispositivo.PlantillaMoneda> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.PlantillaMoneda>().ToList<Entities.Tables.Dispositivo.PlantillaMoneda>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Dispositivo.PlantillaMoneda items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Dispositivo.PlantillaMoneda> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Dispositivo.PlantillaMoneda items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Decripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Dispositivo.PlantillaMoneda> Items(Int64? Id,String Nombre,String Decripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Decripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Decripcion, sqlEnum.OperandEnum.Equal, Decripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Decripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Decripcion);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Dispositivo.PlantillaMoneda
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Dispositivo.PlantillaMoneda Add(Entities.Tables.Dispositivo.PlantillaMoneda item)
+            {
+                return (Entities.Tables.Dispositivo.PlantillaMoneda)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Dispositivo.PlantillaMoneda
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Dispositivo.PlantillaMoneda AddOrUpdate(Entities.Tables.Dispositivo.PlantillaMoneda item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Dispositivo.PlantillaMoneda)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Dispositivo.PlantillaMoneda
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Dispositivo.PlantillaMoneda item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Dispositivo.PlantillaMoneda with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Decripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,String nombre,String decripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Dispositivo.PlantillaMoneda {Id = id,Nombre = nombre,Decripcion = decripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Dispositivo.PlantillaMoneda
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Dispositivo.PlantillaMoneda item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Dispositivo.PlantillaMoneda with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Dispositivo.PlantillaMoneda {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Dispositivo.PlantillaMoneda> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class PlantillaMoneda
+	} //namespace DepositaryWebApi.Business.Tables.Dispositivo
+	namespace DepositaryWebApi.Business.Tables.Dispositivo {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class PlantillaMonedaDetalle : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					PlantillaMonedaId,
+					Nombre,
+					Decripcion,
+					MonedaId,
+					Secuencia,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Dispositivo.PlantillaMonedaDetalle> _entities = new List<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public PlantillaMonedaDetalle() : base()
+            {
+                base._dataItem = new Entities.Tables.Dispositivo.PlantillaMonedaDetalle();
+            }
+            public PlantillaMonedaDetalle(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Dispositivo.PlantillaMonedaDetalle();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Dispositivo.PlantillaMonedaDetalle item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// PlantillaMonedaDetalle Add Method
+         /// </summary>
+         /// <param name='PlantillaMonedaId'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Decripcion'></param>
+         /// <param name='MonedaId'></param>
+         /// <param name='Secuencia'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Dispositivo.PlantillaMonedaDetalle</returns>
+			public Entities.Tables.Dispositivo.PlantillaMonedaDetalle Add(Int64 PlantillaMonedaId,String Nombre,String Decripcion,Int64 MonedaId,Int16 Secuencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Dispositivo.PlantillaMonedaDetalle)base.Add(new Entities.Tables.Dispositivo.PlantillaMonedaDetalle(PlantillaMonedaId,Nombre,Decripcion,MonedaId,Secuencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Dispositivo.PlantillaMonedaDetalle> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>().ToList<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Dispositivo.PlantillaMonedaDetalle items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Dispositivo.PlantillaMonedaDetalle> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Dispositivo.PlantillaMonedaDetalle items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="PlantillaMonedaId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Decripcion"></param>
+            /// <param name="MonedaId"></param>
+            /// <param name="Secuencia"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Dispositivo.PlantillaMonedaDetalle> Items(Int64? Id,Int64? PlantillaMonedaId,String Nombre,String Decripcion,Int64? MonedaId,Int16? Secuencia,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (PlantillaMonedaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PlantillaMonedaId, sqlEnum.OperandEnum.Equal, PlantillaMonedaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.PlantillaMonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, PlantillaMonedaId);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Decripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Decripcion, sqlEnum.OperandEnum.Equal, Decripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Decripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Decripcion);
+                    }
+                   
+                }
+                if (MonedaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.MonedaId, sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, MonedaId);
+                    }
+                   
+                }
+                if (Secuencia != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Secuencia, sqlEnum.OperandEnum.Equal, Secuencia);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Secuencia, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Secuencia);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Dispositivo.PlantillaMonedaDetalle
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Dispositivo.PlantillaMonedaDetalle Add(Entities.Tables.Dispositivo.PlantillaMonedaDetalle item)
+            {
+                return (Entities.Tables.Dispositivo.PlantillaMonedaDetalle)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Dispositivo.PlantillaMonedaDetalle
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Dispositivo.PlantillaMonedaDetalle AddOrUpdate(Entities.Tables.Dispositivo.PlantillaMonedaDetalle item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Dispositivo.PlantillaMonedaDetalle)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Dispositivo.PlantillaMonedaDetalle
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Dispositivo.PlantillaMonedaDetalle item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Dispositivo.PlantillaMonedaDetalle with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="PlantillaMonedaId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Decripcion"></param>
+            /// <param name="MonedaId"></param>
+            /// <param name="Secuencia"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64 plantillamonedaid,String nombre,String decripcion,Int64 monedaid,Int16 secuencia,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Dispositivo.PlantillaMonedaDetalle {Id = id,PlantillaMonedaId = plantillamonedaid,Nombre = nombre,Decripcion = decripcion,MonedaId = monedaid,Secuencia = secuencia,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Dispositivo.PlantillaMonedaDetalle
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Dispositivo.PlantillaMonedaDetalle item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Dispositivo.PlantillaMonedaDetalle with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Dispositivo.PlantillaMonedaDetalle {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Dispositivo.PlantillaMonedaDetalle> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class PlantillaMonedaDetalle
 	} //namespace DepositaryWebApi.Business.Tables.Dispositivo
 	namespace DepositaryWebApi.Business.Tables.Dispositivo {
 	    /// <summary>
@@ -9944,6 +10674,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -10442,6 +11184,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -11101,6 +11855,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -11454,6 +12220,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -11873,6 +12651,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -12210,6 +13000,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -12581,6 +13383,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -12950,6 +13764,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -13321,6 +14147,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -13691,6 +14529,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -14045,6 +14895,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -14398,6 +15260,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -14801,6 +15675,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -15123,6 +16009,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -15428,6 +16326,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -15783,6 +16693,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -16136,6 +17058,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -16491,6 +17425,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -16544,7 +17490,8 @@ using System.Text;
 					TotalAValidar,
 					Fecha,
 					Finalizada,
-					EsDepositoAutomatico
+					EsDepositoAutomatico,
+					OrigenValorId
 				}
          protected List<Entities.Tables.Operacion.Transaccion> _entities = new List<Entities.Tables.Operacion.Transaccion>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -16602,10 +17549,11 @@ using System.Text;
          /// <param name='Fecha'></param>
          /// <param name='Finalizada'></param>
          /// <param name='EsDepositoAutomatico'></param>
+         /// <param name='OrigenValorId'></param>
          /// <returns>Entities.Tables.Operacion.Transaccion</returns>
-			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico) 
+			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64 OrigenValorId) 
 			{
-			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico));
+			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico,OrigenValorId));
 			}
             public new List<Entities.Tables.Operacion.Transaccion> Items()
             {
@@ -16654,8 +17602,9 @@ using System.Text;
             /// <param name="Fecha"></param>
             /// <param name="Finalizada"></param>
             /// <param name="EsDepositoAutomatico"></param>
+            /// <param name="OrigenValorId"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico)
+            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico,Int64? OrigenValorId)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -16862,6 +17811,18 @@ using System.Text;
                     }
                    
                 }
+                if (OrigenValorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OrigenValorId, sqlEnum.OperandEnum.Equal, OrigenValorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OrigenValorId);
+                    }
+                   
+                }
                 return this.Items();
             }
             /// <summary>
@@ -16918,10 +17879,11 @@ using System.Text;
             /// <param name="Fecha"></param>
             /// <param name="Finalizada"></param>
             /// <param name="EsDepositoAutomatico"></param>
+            /// <param name="OrigenValorId"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? usuariocuentaid,Int64 contenedorid,Int64 sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? usuariocuentaid,Int64 contenedorid,Int64 sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64 origenvalorid)
             {
-                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,UsuarioCuentaId = usuariocuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico});
+                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,UsuarioCuentaId = usuariocuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico,OrigenValorId = origenvalorid});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Operacion.Transaccion
@@ -16972,6 +17934,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -17263,6 +18237,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -17536,6 +18522,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -17842,6 +18840,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -18293,6 +19303,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -18630,6 +19652,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -19001,6 +20035,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -19371,6 +20417,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -19725,6 +20783,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -20062,6 +21132,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -20416,6 +21498,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -20803,6 +21897,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -20831,6 +21937,372 @@ using System.Text;
                  }
             }
         } // class Funcion
+	} //namespace DepositaryWebApi.Business.Tables.Seguridad
+	namespace DepositaryWebApi.Business.Tables.Seguridad {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class IdentificadorUsuario : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					TipoId,
+					UsuarioId,
+					Valor,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Seguridad.IdentificadorUsuario> _entities = new List<Entities.Tables.Seguridad.IdentificadorUsuario>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public IdentificadorUsuario() : base()
+            {
+                base._dataItem = new Entities.Tables.Seguridad.IdentificadorUsuario();
+            }
+            public IdentificadorUsuario(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Seguridad.IdentificadorUsuario();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Seguridad.IdentificadorUsuario item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// IdentificadorUsuario Add Method
+         /// </summary>
+         /// <param name='TipoId'></param>
+         /// <param name='UsuarioId'></param>
+         /// <param name='Valor'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Seguridad.IdentificadorUsuario</returns>
+			public Entities.Tables.Seguridad.IdentificadorUsuario Add(Int64 TipoId,Int64 UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Seguridad.IdentificadorUsuario)base.Add(new Entities.Tables.Seguridad.IdentificadorUsuario(TipoId,UsuarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Seguridad.IdentificadorUsuario> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Seguridad.IdentificadorUsuario>().ToList<Entities.Tables.Seguridad.IdentificadorUsuario>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Seguridad.IdentificadorUsuario items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Seguridad.IdentificadorUsuario> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Seguridad.IdentificadorUsuario items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="UsuarioId"></param>
+            /// <param name="Valor"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Seguridad.IdentificadorUsuario> Items(Int64? Id,Int64? TipoId,Int64? UsuarioId,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (TipoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoId, sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                   
+                }
+                if (UsuarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioId, sqlEnum.OperandEnum.Equal, UsuarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioId);
+                    }
+                   
+                }
+                if (Valor != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Seguridad.IdentificadorUsuario
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Seguridad.IdentificadorUsuario Add(Entities.Tables.Seguridad.IdentificadorUsuario item)
+            {
+                return (Entities.Tables.Seguridad.IdentificadorUsuario)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Seguridad.IdentificadorUsuario
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Seguridad.IdentificadorUsuario AddOrUpdate(Entities.Tables.Seguridad.IdentificadorUsuario item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Seguridad.IdentificadorUsuario)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Seguridad.IdentificadorUsuario
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Seguridad.IdentificadorUsuario item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Seguridad.IdentificadorUsuario with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="UsuarioId"></param>
+            /// <param name="Valor"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 usuarioid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Seguridad.IdentificadorUsuario {Id = id,TipoId = tipoid,UsuarioId = usuarioid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Seguridad.IdentificadorUsuario
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Seguridad.IdentificadorUsuario item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Seguridad.IdentificadorUsuario with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Seguridad.IdentificadorUsuario {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Seguridad.IdentificadorUsuario> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class IdentificadorUsuario
 	} //namespace DepositaryWebApi.Business.Tables.Seguridad
 	namespace DepositaryWebApi.Business.Tables.Seguridad {
 	    /// <summary>
@@ -21205,6 +22677,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -21558,6 +23042,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -21977,6 +23473,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -22314,6 +23822,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -22653,6 +24173,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -22681,6 +24213,372 @@ using System.Text;
                  }
             }
         } // class TipoFuncion
+	} //namespace DepositaryWebApi.Business.Tables.Seguridad
+	namespace DepositaryWebApi.Business.Tables.Seguridad {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class TipoIdentificador : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Nombre,
+					Descripcion,
+					Mascara,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Seguridad.TipoIdentificador> _entities = new List<Entities.Tables.Seguridad.TipoIdentificador>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public TipoIdentificador() : base()
+            {
+                base._dataItem = new Entities.Tables.Seguridad.TipoIdentificador();
+            }
+            public TipoIdentificador(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Seguridad.TipoIdentificador();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Seguridad.TipoIdentificador item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// TipoIdentificador Add Method
+         /// </summary>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
+         /// <param name='Mascara'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Seguridad.TipoIdentificador</returns>
+			public Entities.Tables.Seguridad.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Seguridad.TipoIdentificador)base.Add(new Entities.Tables.Seguridad.TipoIdentificador(Nombre,Descripcion,Mascara,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Seguridad.TipoIdentificador> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoIdentificador>().ToList<Entities.Tables.Seguridad.TipoIdentificador>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Seguridad.TipoIdentificador items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Seguridad.TipoIdentificador> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Seguridad.TipoIdentificador items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Mascara"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Seguridad.TipoIdentificador> Items(Int64? Id,String Nombre,String Descripcion,String Mascara,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Descripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Descripcion, sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Mascara != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Mascara, sqlEnum.OperandEnum.Equal, Mascara);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Mascara, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Mascara);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Seguridad.TipoIdentificador
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Seguridad.TipoIdentificador Add(Entities.Tables.Seguridad.TipoIdentificador item)
+            {
+                return (Entities.Tables.Seguridad.TipoIdentificador)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Seguridad.TipoIdentificador
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Seguridad.TipoIdentificador AddOrUpdate(Entities.Tables.Seguridad.TipoIdentificador item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Seguridad.TipoIdentificador)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Seguridad.TipoIdentificador
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Seguridad.TipoIdentificador item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Seguridad.TipoIdentificador with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Mascara"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,String nombre,String descripcion,String mascara,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Seguridad.TipoIdentificador {Id = id,Nombre = nombre,Descripcion = descripcion,Mascara = mascara,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Seguridad.TipoIdentificador
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Seguridad.TipoIdentificador item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Seguridad.TipoIdentificador with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Seguridad.TipoIdentificador {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Seguridad.TipoIdentificador> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class TipoIdentificador
 	} //namespace DepositaryWebApi.Business.Tables.Seguridad
 	namespace DepositaryWebApi.Business.Tables.Seguridad {
 	    /// <summary>
@@ -22991,6 +24889,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -23034,6 +24944,7 @@ using System.Text;
 					PerfilId,
 					Nombre,
 					Apellido,
+					NombreApellido,
 					Documento,
 					Legajo,
 					Mail,
@@ -23047,6 +24958,7 @@ using System.Text;
 					Habilitado,
 					CantidadLogueosIncorrectos,
 					Bloqueado,
+					FechaExpiracion,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -23097,6 +25009,7 @@ using System.Text;
          /// <param name='PerfilId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Apellido'></param>
+         /// <param name='NombreApellido'></param>
          /// <param name='Documento'></param>
          /// <param name='Legajo'></param>
          /// <param name='Mail'></param>
@@ -23110,14 +25023,15 @@ using System.Text;
          /// <param name='Habilitado'></param>
          /// <param name='CantidadLogueosIncorrectos'></param>
          /// <param name='Bloqueado'></param>
+         /// <param name='FechaExpiracion'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Usuario</returns>
-			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,Int64 LenguajeId,Int64 PerfilId,String Nombre,String Apellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Seguridad.Usuario Add(Int64 EmpresaId,Int64 LenguajeId,Int64 PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime? FechaExpiracion,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Seguridad.Usuario)base.Add(new Entities.Tables.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,Documento,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,CantidadLogueosIncorrectos,Bloqueado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Seguridad.Usuario)base.Add(new Entities.Tables.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,NombreApellido,Documento,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,CantidadLogueosIncorrectos,Bloqueado,FechaExpiracion,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Seguridad.Usuario> Items()
             {
@@ -23155,6 +25069,7 @@ using System.Text;
             /// <param name="PerfilId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Apellido"></param>
+            /// <param name="NombreApellido"></param>
             /// <param name="Documento"></param>
             /// <param name="Legajo"></param>
             /// <param name="Mail"></param>
@@ -23168,12 +25083,13 @@ using System.Text;
             /// <param name="Habilitado"></param>
             /// <param name="CantidadLogueosIncorrectos"></param>
             /// <param name="Bloqueado"></param>
+            /// <param name="FechaExpiracion"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,Int64? PerfilId,String Nombre,String Apellido,String Documento,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int32? CantidadLogueosIncorrectos,Boolean? Bloqueado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,Int64? PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int32? CantidadLogueosIncorrectos,Boolean? Bloqueado,DateTime? FechaExpiracion,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -23245,6 +25161,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Apellido);
+                    }
+                   
+                }
+                if (NombreApellido != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.NombreApellido, sqlEnum.OperandEnum.Equal, NombreApellido);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, NombreApellido);
                     }
                    
                 }
@@ -23404,6 +25332,18 @@ using System.Text;
                     }
                    
                 }
+                if (FechaExpiracion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaExpiracion, sqlEnum.OperandEnum.Equal, FechaExpiracion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaExpiracion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaExpiracion);
+                    }
+                   
+                }
                 if (UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
@@ -23497,6 +25437,7 @@ using System.Text;
             /// <param name="PerfilId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Apellido"></param>
+            /// <param name="NombreApellido"></param>
             /// <param name="Documento"></param>
             /// <param name="Legajo"></param>
             /// <param name="Mail"></param>
@@ -23510,14 +25451,15 @@ using System.Text;
             /// <param name="Habilitado"></param>
             /// <param name="CantidadLogueosIncorrectos"></param>
             /// <param name="Bloqueado"></param>
+            /// <param name="FechaExpiracion"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 empresaid,Int64 lenguajeid,Int64 perfilid,String nombre,String apellido,String documento,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime? fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int32 cantidadlogueosincorrectos,Boolean bloqueado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 empresaid,Int64 lenguajeid,Int64 perfilid,String nombre,String apellido,String nombreapellido,String documento,String legajo,String mail,DateTime fechaingreso,String nickname,String password,String token,String avatar,DateTime? fechaultimologin,Boolean debecambiarpassword,Boolean habilitado,Int32 cantidadlogueosincorrectos,Boolean bloqueado,DateTime? fechaexpiracion,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Seguridad.Usuario {Id = id,EmpresaId = empresaid,LenguajeId = lenguajeid,PerfilId = perfilid,Nombre = nombre,Apellido = apellido,Documento = documento,Legajo = legajo,Mail = mail,FechaIngreso = fechaingreso,NickName = nickname,Password = password,Token = token,Avatar = avatar,FechaUltimoLogin = fechaultimologin,DebeCambiarPassword = debecambiarpassword,Habilitado = habilitado,CantidadLogueosIncorrectos = cantidadlogueosincorrectos,Bloqueado = bloqueado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Seguridad.Usuario {Id = id,EmpresaId = empresaid,LenguajeId = lenguajeid,PerfilId = perfilid,Nombre = nombre,Apellido = apellido,NombreApellido = nombreapellido,Documento = documento,Legajo = legajo,Mail = mail,FechaIngreso = fechaingreso,NickName = nickname,Password = password,Token = token,Avatar = avatar,FechaUltimoLogin = fechaultimologin,DebeCambiarPassword = debecambiarpassword,Habilitado = habilitado,CantidadLogueosIncorrectos = cantidadlogueosincorrectos,Bloqueado = bloqueado,FechaExpiracion = fechaexpiracion,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Seguridad.Usuario
@@ -23568,6 +25510,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -23923,6 +25877,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -24260,6 +26226,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -24599,6 +26577,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -24921,6 +26911,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -25227,6 +27229,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -25516,6 +27530,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -25903,6 +27929,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -26241,6 +28279,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -26546,6 +28596,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -26965,6 +29027,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -27007,7 +29081,6 @@ using System.Text;
 					PaisId,
 					Codigo,
 					Simbolo,
-					IndiceEnContadora,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -27058,16 +29131,15 @@ using System.Text;
          /// <param name='PaisId'></param>
          /// <param name='Codigo'></param>
          /// <param name='Simbolo'></param>
-         /// <param name='IndiceEnContadora'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Valor.Moneda</returns>
-			public Entities.Tables.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,String Simbolo,Int32 IndiceEnContadora,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Valor.Moneda Add(String Nombre,Int64 PaisId,String Codigo,String Simbolo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Valor.Moneda)base.Add(new Entities.Tables.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,IndiceEnContadora,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Valor.Moneda)base.Add(new Entities.Tables.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Valor.Moneda> Items()
             {
@@ -27104,14 +29176,13 @@ using System.Text;
             /// <param name="PaisId"></param>
             /// <param name="Codigo"></param>
             /// <param name="Simbolo"></param>
-            /// <param name="IndiceEnContadora"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,Int32? IndiceEnContadora,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -27171,18 +29242,6 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Simbolo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Simbolo);
-                    }
-                   
-                }
-                if (IndiceEnContadora != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.IndiceEnContadora, sqlEnum.OperandEnum.Equal, IndiceEnContadora);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.IndiceEnContadora, DepositaryWebApi.sqlEnum.OperandEnum.Equal, IndiceEnContadora);
                     }
                    
                 }
@@ -27290,16 +29349,15 @@ using System.Text;
             /// <param name="PaisId"></param>
             /// <param name="Codigo"></param>
             /// <param name="Simbolo"></param>
-            /// <param name="IndiceEnContadora"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 paisid,String codigo,String simbolo,Int32 indiceencontadora,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Int64 paisid,String codigo,String simbolo,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Valor.Moneda {Id = id,Nombre = nombre,PaisId = paisid,Codigo = codigo,Simbolo = simbolo,IndiceEnContadora = indiceencontadora,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Valor.Moneda {Id = id,Nombre = nombre,PaisId = paisid,Codigo = codigo,Simbolo = simbolo,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Valor.Moneda
@@ -27351,6 +29409,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -27379,6 +29449,356 @@ using System.Text;
                  }
             }
         } // class Moneda
+	} //namespace DepositaryWebApi.Business.Tables.Valor
+	namespace DepositaryWebApi.Business.Tables.Valor {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class OrigenValor : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Nombre,
+					Descripcion,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Valor.OrigenValor> _entities = new List<Entities.Tables.Valor.OrigenValor>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public OrigenValor() : base()
+            {
+                base._dataItem = new Entities.Tables.Valor.OrigenValor();
+            }
+            public OrigenValor(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Valor.OrigenValor();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Valor.OrigenValor item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// OrigenValor Add Method
+         /// </summary>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Valor.OrigenValor</returns>
+			public Entities.Tables.Valor.OrigenValor Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Valor.OrigenValor)base.Add(new Entities.Tables.Valor.OrigenValor(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Valor.OrigenValor> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Valor.OrigenValor>().ToList<Entities.Tables.Valor.OrigenValor>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Valor.OrigenValor items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Valor.OrigenValor> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Valor.OrigenValor items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Valor.OrigenValor> Items(Int64? Id,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Descripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Descripcion, sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Valor.OrigenValor Add(Entities.Tables.Valor.OrigenValor item)
+            {
+                return (Entities.Tables.Valor.OrigenValor)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Valor.OrigenValor AddOrUpdate(Entities.Tables.Valor.OrigenValor item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Valor.OrigenValor)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Valor.OrigenValor item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Valor.OrigenValor with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Valor.OrigenValor {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Valor.OrigenValor item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Valor.OrigenValor with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Valor.OrigenValor {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Valor.OrigenValor> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class OrigenValor
 	} //namespace DepositaryWebApi.Business.Tables.Valor
 	namespace DepositaryWebApi.Business.Tables.Valor {
 	    /// <summary>
@@ -27688,6 +30108,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -28043,6 +30475,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -28397,6 +30841,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -28734,6 +31190,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {
@@ -29088,6 +31556,18 @@ using System.Text;
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
                  {

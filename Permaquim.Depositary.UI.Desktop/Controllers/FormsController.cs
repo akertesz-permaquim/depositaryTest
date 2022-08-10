@@ -60,13 +60,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
             childForm.Show();
 
-            MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
+            
 
             childForm.Location = new Point()
             {
                 X = MainFormInstance.MainPanel.Width / 2 - childForm.Width / 2,
                 Y = MainFormInstance.MainPanel.Height / 2 - childForm.Height / 2
             };
+
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 
         public static void HideInstance(Form instance)
@@ -89,6 +91,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             MultilanguangeController.ResetLanguage();
 
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
+
+
         }
 
         public static void SetInformationMessage(InformationTypeEnum type, string message)

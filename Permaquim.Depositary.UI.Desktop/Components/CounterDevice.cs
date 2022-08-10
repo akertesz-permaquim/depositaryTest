@@ -47,7 +47,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public DenominationResult DenominationResultProperty { get; set; } = new DenominationResult();
 
         public event EventHandler<ECErrorArgs> ECError;
-        public int SleepTimeout { get; set; } = 150;
+        public int SleepTimeout { get; set; }
 
         // Port Names
         public List<string> PortNames { get; private set; } = new List<string>();
@@ -1203,11 +1203,12 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             string filename = logDirectory + _device.DeviceName + "."
                 + DateTime.Now.ToString("yyyy.MM.dd") + ".log";
 
-            System.IO.StreamWriter file = new(filename, true);
+           /*System.IO.StreamWriter file = new(filename, true);
             file.WriteLine(DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss"));
             file.WriteLine(message);
             file.WriteLine("------------------------------------------------------------------------");
             file.Close();
+           */
         }
 
         #endregion
@@ -1299,30 +1300,30 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     string CurrencyInput = (CountryCodeBitArray[0] ? 1 : 0).ToString() + (object)(CountryCodeBitArray[1] ? 1 : 0) + (object)(CountryCodeBitArray[2] ? 1 : 0);
                     statesResult.CountryCode.CurrencyStateInformation = (CountryCode.Currency)BinaryToDecimal(CurrencyInput);
 
-                    //if (statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming)
-                    //{
-                    //    // ISSUE: reference to a compiler-generated field
-                    //    ECError((object)_counterPort, new ECErrorArgs()
-                    //    {
-                    //        Errorcode = 8
-                    //    });
-                    //}
-                    //if (statesResult.ErrorStateInformation.AbnormalStorage)
-                    //{
-                    //    // ISSUE: reference to a compiler-generated field
-                    //    ECError((object)_counterPort, new ECErrorArgs()
-                    //    {
-                    //        Errorcode = 1
-                    //    });
-                    //}
-                    //if (statesResult.ErrorStateInformation.CountingError)
-                    //{
-                    //    // ISSUE: reference to a compiler-generated field
-                    //    ECError((object)_counterPort, new ECErrorArgs()
-                    //    {
-                    //        Errorcode = 3
-                    //    });
-                    //}
+                    if (statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming)
+                    {
+                        // ISSUE: reference to a compiler-generated field
+                        ECError((object)_counterPort, new ECErrorArgs()
+                        {
+                            Errorcode = 8
+                        });
+                    }
+                    if (statesResult.ErrorStateInformation.AbnormalStorage)
+                    {
+                        // ISSUE: reference to a compiler-generated field
+                        ECError((object)_counterPort, new ECErrorArgs()
+                        {
+                            Errorcode = 1
+                        });
+                    }
+                    if (statesResult.ErrorStateInformation.CountingError)
+                    {
+                        // ISSUE: reference to a compiler-generated field
+                        ECError((object)_counterPort, new ECErrorArgs()
+                        {
+                            Errorcode = 3
+                        });
+                    }
 
                 }
                 return statesResult;

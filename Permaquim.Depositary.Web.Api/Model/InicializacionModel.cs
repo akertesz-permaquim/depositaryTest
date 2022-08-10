@@ -2,6 +2,8 @@
 {
     public class InicializacionModel
     {
+        public string CodigoExternoDepositario { get; set; }
+
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> AplicacionConfiguracion { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Auditoria.Log> AuditoriaLog { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Auditoria.TipoLog> AuditoriaTipoLog { get; set; } = new();
@@ -12,11 +14,11 @@
         public List<DepositaryWebApi.Entities.Tables.Biometria.HuellaDactilar> BiometriaHuellaDactilar { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Empresa> DirectorioEmpresa { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Grupo> DirectorioGrupo { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Directorio.IdentificadorUsuario> DirectorioIdentificadorUsuario { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> DirectorioIdentificadorUsuario { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> DirectorioTipoIdentificador { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.RelacionMonedaSucursal> DirectorioRelacionMonedaSucursal { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Sector> DirectorioSector { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Sucursal> DirectorioSucursal { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Directorio.TipoIdentificador> DirectorioTipoIdentificador { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoContadora> DispositivoComandoContadora { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoPlaca> DispositivoComandoPlaca { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> DispositivoConfiguracionDepositario { get; set; } = new();
@@ -80,5 +82,10 @@
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.Perfil> VisualizacionPerfil { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilItem> VisualizacionPerfilItem { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilTipo> VisualizacionPerfilTipo { get; set; } = new();
+
+        public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ConfiguracionEmpresa { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMoneda> PlantillaMoneda { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> PlantillaMonedaDetalle { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Valor.OrigenValor> OrigenValor { get; set; } = new();
     }
 }

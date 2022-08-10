@@ -33,15 +33,13 @@
             // 
             // InformationLabel
             // 
-            this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InformationLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(32, 192);
+            this.InformationLabel.Location = new System.Drawing.Point(8, 72);
             this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(804, 322);
+            this.InformationLabel.Size = new System.Drawing.Size(784, 96);
             this.InformationLabel.TabIndex = 108;
             this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -50,7 +48,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(900, 700);
+            this.ClientSize = new System.Drawing.Size(802, 250);
             this.Controls.Add(this.InformationLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SystemBlockingDialog";

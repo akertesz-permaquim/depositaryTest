@@ -16,6 +16,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             InitializeComponent();
             NumericInputBoxTexbox.Focus();
+            NumericInputBoxTexbox.TextAlign = HorizontalAlignment.Right;
             if (this.ParentForm != null)
                 this.ParentForm.AcceptButton = this.ConfirmButton;
             LoadStyles();

@@ -1,7 +1,9 @@
-﻿namespace Permaquim.Depositary.UI.Desktop.Model
+﻿namespace Permaquim.Depositary.Launcher.Model
 {
     public class InicializacionModel
     {
+        public string CodigoExternoDepositario { get; set; }
+
         public List<Depositario.Entities.Tables.Aplicacion.Configuracion> AplicacionConfiguracion { get; set; } = new();
         public List<Depositario.Entities.Tables.Auditoria.Log> AuditoriaLog { get; set; } = new();
         public List<Depositario.Entities.Tables.Auditoria.TipoLog> AuditoriaTipoLog { get; set; } = new();
@@ -12,11 +14,11 @@
         public List<Depositario.Entities.Tables.Biometria.HuellaDactilar> BiometriaHuellaDactilar { get; set; } = new();
         public List<Depositario.Entities.Tables.Directorio.Empresa> DirectorioEmpresa { get; set; } = new();
         public List<Depositario.Entities.Tables.Directorio.Grupo> DirectorioGrupo { get; set; } = new();
-        public List<Depositario.Entities.Tables.Directorio.IdentificadorUsuario> DirectorioIdentificadorUsuario { get; set; } = new();
+        public List<Depositario.Entities.Tables.Seguridad.IdentificadorUsuario> DirectorioIdentificadorUsuario { get; set; } = new();
         public List<Depositario.Entities.Tables.Directorio.RelacionMonedaSucursal> DirectorioRelacionMonedaSucursal { get; set; } = new();
         public List<Depositario.Entities.Tables.Directorio.Sector> DirectorioSector { get; set; } = new();
         public List<Depositario.Entities.Tables.Directorio.Sucursal> DirectorioSucursal { get; set; } = new();
-        public List<Depositario.Entities.Tables.Directorio.TipoIdentificador> DirectorioTipoIdentificador { get; set; } = new();
+        public List<Depositario.Entities.Tables.Seguridad.TipoIdentificador> DirectorioTipoIdentificador { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.ComandoContadora> DispositivoComandoContadora { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.ComandoPlaca> DispositivoComandoPlaca { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.ConfiguracionDepositario> DispositivoConfiguracionDepositario { get; set; } = new();
@@ -80,9 +82,12 @@
         public List<Depositario.Entities.Tables.Visualizacion.Perfil> VisualizacionPerfil { get; set; } = new();
         public List<Depositario.Entities.Tables.Visualizacion.PerfilItem> VisualizacionPerfilItem { get; set; } = new();
         public List<Depositario.Entities.Tables.Visualizacion.PerfilTipo> VisualizacionPerfilTipo { get; set; } = new();
-    
-    
-    public void Process()
+        public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ConfiguracionEmpresa { get; set; } = new();
+        public List<Depositario.Entities.Tables.Dispositivo.PlantillaMoneda> PlantillaMoneda { get; set; } = new();
+        public List<Depositario.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> PlantillaMonedaDetalle { get; set; } = new();
+        public List<Depositario.Entities.Tables.Valor.OrigenValor> OrigenValor { get; set; } = new();
+
+        public void Persist()
         {
 
             Depositario.Business.Tables.Sincronizacion.EntidadDetalle entitiesSincronizacionEntidadDetalle = new();
@@ -90,13 +95,11 @@
             {
                 entitiesSincronizacionEntidadDetalle.Add(item);
             }
-
             Depositario.Business.Tables.Turno.AgendaTurno entitiesTurnoAgendaTurno = new();
             foreach (var item in TurnoAgendaTurno)
             {
                 entitiesTurnoAgendaTurno.Add(item);
             }
-
             Depositario.Business.Tables.Seguridad.Aplicacion entitiesSeguridadAplicacion = new();
             foreach (var item in SeguridadAplicacion)
             {
@@ -107,102 +110,30 @@
             {
                 entitiesSeguridadAplicacionParametro.Add(item);
             }
-
+            Depositario.Business.Tables.Seguridad.AplicacionParametroValor entitiesSeguridadAplicacionParametroValor = new();
+            foreach (var item in SeguridadAplicacionParametroValor)
+            {
+                entitiesSeguridadAplicacionParametroValor.Add(item);
+            }
             Depositario.Business.Tables.Banca.Banco entitiesBancaBanco = new();
             foreach (var item in BancaBanco)
             {
                 entitiesBancaBanco.Add(item);
             }
-
             Depositario.Business.Tables.Operacion.CierreDiario entitiesOperacionCierreDiario = new();
             foreach (var item in OperacionCierreDiario)
             {
                 entitiesOperacionCierreDiario.Add(item);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            Depositario.Business.Tables.Aplicacion.Configuracion entitiesAplicacionConfiguracion = new();
-            foreach (var item in AplicacionConfiguracion)
+            Depositario.Business.Tables.Geografia.Ciudad entitiesGeografiaCiudad = new();
+            foreach (var item in GeografiaCiudad)
             {
-                entitiesAplicacionConfiguracion.Add(item);
+                entitiesGeografiaCiudad.Add(item);
             }
-            Depositario.Business.Tables.Auditoria.Log entitiesAuditoriaLog = new();
-            foreach (var item in AuditoriaLog)
+            Depositario.Business.Tables.Geografia.CodigoPostal entitiesGeografiaCodigoPostal = new();
+            foreach (var item in GeografiaCodigoPostal)
             {
-                entitiesAuditoriaLog.Add(item);
-            }
-            Depositario.Business.Tables.Auditoria.TipoLog entitiesAuditoriaTipoLog = new();
-            foreach (var item in AuditoriaTipoLog)
-            {
-                entitiesAuditoriaTipoLog.Add(item);
-            }
-
-            Depositario.Business.Tables.Banca.Cuenta entitiesBancaCuenta = new();
-            foreach (var item in BancaCuenta)
-            {
-                entitiesBancaCuenta.Add(item);
-            }
-            Depositario.Business.Tables.Banca.TipoCuenta entitiesBancaTipoCuenta = new();
-            foreach (var item in BancaTipoCuenta)
-            {
-                entitiesBancaTipoCuenta.Add(item);
-            }
-            Depositario.Business.Tables.Banca.UsuarioCuenta entitiesBancaUsuarioCuenta = new();
-            foreach (var item in BancaUsuarioCuenta)
-            {
-                entitiesBancaUsuarioCuenta.Add(item);
-            }
-            Depositario.Business.Tables.Biometria.HuellaDactilar entitiesBiometriaHuellaDactilar = new();
-            foreach (var item in BiometriaHuellaDactilar)
-            {
-                entitiesBiometriaHuellaDactilar.Add(item);
-            }
-            Depositario.Business.Tables.Directorio.Empresa entitiesDirectorioEmpresa = new();
-            foreach (var item in DirectorioEmpresa)
-            {
-                entitiesDirectorioEmpresa.Add(item);
-            }
-            Depositario.Business.Tables.Directorio.Grupo entitiesDirectorioGrupo = new();
-            foreach (var item in DirectorioGrupo)
-            {
-                entitiesDirectorioGrupo.Add(item);
-            }
-            Depositario.Business.Tables.Directorio.IdentificadorUsuario entitiesDirectorioIdentificadorUsuario = new();
-            foreach (var item in DirectorioIdentificadorUsuario)
-            {
-                entitiesDirectorioIdentificadorUsuario.Add(item);
-            }
-            Depositario.Business.Tables.Directorio.RelacionMonedaSucursal entitiesDirectorioRelacionMonedaSucursal = new();
-            foreach (var item in DirectorioRelacionMonedaSucursal)
-            {
-                entitiesDirectorioRelacionMonedaSucursal.Add(item);
-            }
-            Depositario.Business.Tables.Directorio.Sector entitiesDirectorioSector = new();
-            foreach (var item in DirectorioSector)
-            {
-                entitiesDirectorioSector.Add(item);
-            }
-            Depositario.Business.Tables.Directorio.Sucursal entitiesDirectorioSucursal = new();
-            foreach (var item in DirectorioSucursal)
-            {
-                entitiesDirectorioSucursal.Add(item);
-            }
-            Depositario.Business.Tables.Directorio.TipoIdentificador entitiesDirectorioTipoIdentificador = new();
-            foreach (var item in DirectorioTipoIdentificador)
-            {
-                entitiesDirectorioTipoIdentificador.Add(item);
+                entitiesGeografiaCodigoPostal.Add(item);
             }
             Depositario.Business.Tables.Dispositivo.ComandoContadora entitiesDispositivoComandoContadora = new();
             foreach (var item in DispositivoComandoContadora)
@@ -214,10 +145,35 @@
             {
                 entitiesDispositivoComandoPlaca.Add(item);
             }
+            Depositario.Business.Tables.Aplicacion.Configuracion entitiesAplicacionConfiguracion = new();
+            foreach (var item in AplicacionConfiguracion)
+            {
+                entitiesAplicacionConfiguracion.Add(item);
+            }
+            Depositario.Business.Tables.Sincronizacion.Configuracion entitiesSincronizacionConfiguracion = new();
+            foreach (var item in SincronizacionConfiguracion)
+            {
+                entitiesSincronizacionConfiguracion.Add(item);
+            }
             Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario entitiesDispositivoConfiguracionDepositario = new();
             foreach (var item in DispositivoConfiguracionDepositario)
             {
                 entitiesDispositivoConfiguracionDepositario.Add(item);
+            }
+            Depositario.Business.Tables.Operacion.Contenedor entitiesOperacionContenedor = new();
+            foreach (var item in OperacionContenedor)
+            {
+                entitiesOperacionContenedor.Add(item);
+            }
+            Depositario.Business.Tables.Banca.Cuenta entitiesBancaCuenta = new();
+            foreach (var item in BancaCuenta)
+            {
+                entitiesBancaCuenta.Add(item);
+            }
+            Depositario.Business.Tables.Valor.Denominacion entitiesValorDenominacion = new();
+            foreach (var item in ValorDenominacion)
+            {
+                entitiesValorDenominacion.Add(item);
             }
             Depositario.Business.Tables.Dispositivo.Depositario entitiesDispositivoDepositario = new();
             foreach (var item in DispositivoDepositario)
@@ -244,30 +200,20 @@
             {
                 entitiesDispositivoDepositarioPlaca.Add(item);
             }
-            Depositario.Business.Tables.Dispositivo.Marca entitiesDispositivoMarca = new();
-            foreach (var item in DispositivoMarca)
+            Depositario.Business.Tables.Directorio.Empresa entitiesDirectorioEmpresa = new();
+            foreach (var item in DirectorioEmpresa)
             {
-                entitiesDispositivoMarca.Add(item);
+                entitiesDirectorioEmpresa.Add(item);
             }
-            Depositario.Business.Tables.Dispositivo.Modelo entitiesDispositivoModelo = new();
-            foreach (var item in DispositivoModelo)
+            Depositario.Business.Tables.Sincronizacion.Entidad entitiesSincronizacionEntidad = new();
+            foreach (var item in SincronizacionEntidad)
             {
-                entitiesDispositivoModelo.Add(item);
+                entitiesSincronizacionEntidad.Add(item);
             }
-            Depositario.Business.Tables.Dispositivo.TipoConfiguracionDepositario entitiesDispositivoTipoConfiguracionDepositario = new();
-            foreach (var item in DispositivoTipoConfiguracionDepositario)
+            Depositario.Business.Tables.Sincronizacion.EntidadCabecera entitiesSincronizacionEntidadCabecera = new();
+            foreach (var item in SincronizacionEntidadCabecera)
             {
-                entitiesDispositivoTipoConfiguracionDepositario.Add(item);
-            }
-            Depositario.Business.Tables.Dispositivo.TipoContadora entitiesDispositivoTipoContadora = new();
-            foreach (var item in DispositivoTipoContadora)
-            {
-                entitiesDispositivoTipoContadora.Add(item);
-            }
-            Depositario.Business.Tables.Dispositivo.TipoPlaca entitiesDispositivoTipoPlaca = new();
-            foreach (var item in DispositivoTipoPlaca)
-            {
-                entitiesDispositivoTipoPlaca.Add(item);
+                entitiesSincronizacionEntidadCabecera.Add(item);
             }
             Depositario.Business.Tables.Estilo.Esquema entitiesEstiloEsquema = new();
             foreach (var item in EstiloEsquema)
@@ -279,61 +225,200 @@
             {
                 entitiesEstiloEsquemaDetalle.Add(item);
             }
-            Depositario.Business.Tables.Estilo.TipoEsquemaDetalle entitiesEstiloTipoEsquemaDetalle = new();
-            foreach (var item in EstiloTipoEsquemaDetalle)
+            Depositario.Business.Tables.Turno.EsquemaDetalleTurno entitiesTurnoEsquemaDetalleTurno = new();
+            foreach (var item in TurnoEsquemaDetalleTurno)
             {
-                entitiesEstiloTipoEsquemaDetalle.Add(item);
+                entitiesTurnoEsquemaDetalleTurno.Add(item);
             }
-            Depositario.Business.Tables.Geografia.Ciudad entitiesGeografiaCiudad = new();
-            foreach (var item in GeografiaCiudad)
+            Depositario.Business.Tables.Turno.EsquemaTurno entitiesTurnoEsquemaTurno = new();
+            foreach (var item in TurnoEsquemaTurno)
             {
-                entitiesGeografiaCiudad.Add(item);
-            }
-            Depositario.Business.Tables.Geografia.CodigoPostal entitiesGeografiaCodigoPostal = new();
-            foreach (var item in GeografiaCodigoPostal)
-            {
-                entitiesGeografiaCodigoPostal.Add(item);
-            }
-            Depositario.Business.Tables.Geografia.Pais entitiesGeografiaPais = new();
-            foreach (var item in GeografiaPais)
-            {
-                entitiesGeografiaPais.Add(item);
-            }
-            Depositario.Business.Tables.Geografia.Provincia entitiesGeografiaProvincia = new();
-            foreach (var item in GeografiaProvincia)
-            {
-                entitiesGeografiaProvincia.Add(item);
-            }
-            Depositario.Business.Tables.Geografia.Zona entitiesGeografiaZona = new();
-            foreach (var item in GeografiaZona)
-            {
-                entitiesGeografiaZona.Add(item);
-            }
-
-            Depositario.Business.Tables.Operacion.Contenedor entitiesOperacionContenedor = new();
-            foreach (var item in OperacionContenedor)
-            {
-                entitiesOperacionContenedor.Add(item);
+                entitiesTurnoEsquemaTurno.Add(item);
             }
             Depositario.Business.Tables.Operacion.Evento entitiesOperacionEvento = new();
             foreach (var item in OperacionEvento)
             {
                 entitiesOperacionEvento.Add(item);
             }
+            Depositario.Business.Tables.Seguridad.Funcion entitiesSeguridadFuncion = new();
+            foreach (var item in SeguridadFuncion)
+            {
+                entitiesSeguridadFuncion.Add(item);
+            }
+            Depositario.Business.Tables.Directorio.Grupo entitiesDirectorioGrupo = new();
+            foreach (var item in DirectorioGrupo)
+            {
+                entitiesDirectorioGrupo.Add(item);
+            }
+            Depositario.Business.Tables.Biometria.HuellaDactilar entitiesBiometriaHuellaDactilar = new();
+            foreach (var item in BiometriaHuellaDactilar)
+            {
+                entitiesBiometriaHuellaDactilar.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.IdentificadorUsuario entitiesDirectorioIdentificadorUsuario = new();
+            foreach (var item in DirectorioIdentificadorUsuario)
+            {
+                entitiesDirectorioIdentificadorUsuario.Add(item);
+            }
+            Depositario.Business.Tables.Regionalizacion.Lenguaje entitiesRegionalizacionLenguaje = new();
+            foreach (var item in RegionalizacionLenguaje)
+            {
+                entitiesRegionalizacionLenguaje.Add(item);
+            }
+            Depositario.Business.Tables.Regionalizacion.LenguajeItem entitiesRegionalizacionLenguajeItem = new();
+            foreach (var item in RegionalizacionLenguajeItem)
+            {
+                entitiesRegionalizacionLenguajeItem.Add(item);
+            }
+            Depositario.Business.Tables.Auditoria.Log entitiesAuditoriaLog = new();
+            foreach (var item in AuditoriaLog)
+            {
+                entitiesAuditoriaLog.Add(item);
+            }
+            Depositario.Business.Tables.Dispositivo.Marca entitiesDispositivoMarca = new();
+            foreach (var item in DispositivoMarca)
+            {
+                entitiesDispositivoMarca.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.Menu entitiesSeguridadMenu = new();
+            foreach (var item in SeguridadMenu)
+            {
+                entitiesSeguridadMenu.Add(item);
+            }
+            Depositario.Business.Tables.Dispositivo.Modelo entitiesDispositivoModelo = new();
+            foreach (var item in DispositivoModelo)
+            {
+                entitiesDispositivoModelo.Add(item);
+            }
+            Depositario.Business.Tables.Valor.Moneda entitiesValorMoneda = new();
+            foreach (var item in ValorMoneda)
+            {
+                entitiesValorMoneda.Add(item);
+            }
+            Depositario.Business.Tables.Geografia.Pais entitiesGeografiaPais = new();
+            foreach (var item in GeografiaPais)
+            {
+                entitiesGeografiaPais.Add(item);
+            }
+            Depositario.Business.Tables.Visualizacion.Perfil entitiesVisualizacionPerfil = new();
+            foreach (var item in VisualizacionPerfil)
+            {
+                entitiesVisualizacionPerfil.Add(item);
+            }
+            Depositario.Business.Tables.Visualizacion.PerfilItem entitiesVisualizacionPerfilItem = new();
+            foreach (var item in VisualizacionPerfilItem)
+            {
+                entitiesVisualizacionPerfilItem.Add(item);
+            }
+            Depositario.Business.Tables.Visualizacion.PerfilTipo entitiesVisualizacionPerfilTipo = new();
+            foreach (var item in VisualizacionPerfilTipo)
+            {
+                entitiesVisualizacionPerfilTipo.Add(item);
+            }
+            Depositario.Business.Tables.Geografia.Provincia entitiesGeografiaProvincia = new();
+            foreach (var item in GeografiaProvincia)
+            {
+                entitiesGeografiaProvincia.Add(item);
+            }
+            Depositario.Business.Tables.Directorio.RelacionMonedaSucursal entitiesDirectorioRelacionMonedaSucursal = new();
+            foreach (var item in DirectorioRelacionMonedaSucursal)
+            {
+                entitiesDirectorioRelacionMonedaSucursal.Add(item);
+            }
+            Depositario.Business.Tables.Valor.RelacionMonedaTipoValor entitiesValorRelacionMonedaTipoValor = new();
+            foreach (var item in ValorRelacionMonedaTipoValor)
+            {
+                entitiesValorRelacionMonedaTipoValor.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.Rol entitiesSeguridadRol = new();
+            foreach (var item in SeguridadRol)
+            {
+                entitiesSeguridadRol.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.RolFuncion entitiesSeguridadRolFuncion = new();
+            foreach (var item in SeguridadRolFuncion)
+            {
+                entitiesSeguridadRolFuncion.Add(item);
+            }
+            Depositario.Business.Tables.Directorio.Sector entitiesDirectorioSector = new();
+            foreach (var item in DirectorioSector)
+            {
+                entitiesDirectorioSector.Add(item);
+            }
             Depositario.Business.Tables.Operacion.Sesion entitiesOperacionSesion = new();
             foreach (var item in OperacionSesion)
             {
                 entitiesOperacionSesion.Add(item);
+            }
+            Depositario.Business.Tables.Directorio.Sucursal entitiesDirectorioSucursal = new();
+            foreach (var item in DirectorioSucursal)
+            {
+                entitiesDirectorioSucursal.Add(item);
+            }
+            Depositario.Business.Tables.Valor.Tipo entitiesValorTipo = new();
+            foreach (var item in ValorTipo)
+            {
+                entitiesValorTipo.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.TipoAplicacion entitiesSeguridadTipoAplicacion = new();
+            foreach (var item in SeguridadTipoAplicacion)
+            {
+                entitiesSeguridadTipoAplicacion.Add(item);
+            }
+            Depositario.Business.Tables.Dispositivo.TipoConfiguracionDepositario entitiesDispositivoTipoConfiguracionDepositario = new();
+            foreach (var item in DispositivoTipoConfiguracionDepositario)
+            {
+                entitiesDispositivoTipoConfiguracionDepositario.Add(item);
+            }
+            Depositario.Business.Tables.Dispositivo.TipoContadora entitiesDispositivoTipoContadora = new();
+            foreach (var item in DispositivoTipoContadora)
+            {
+                entitiesDispositivoTipoContadora.Add(item);
             }
             Depositario.Business.Tables.Operacion.TipoContenedor entitiesOperacionTipoContenedor = new();
             foreach (var item in OperacionTipoContenedor)
             {
                 entitiesOperacionTipoContenedor.Add(item);
             }
+            Depositario.Business.Tables.Banca.TipoCuenta entitiesBancaTipoCuenta = new();
+            foreach (var item in BancaTipoCuenta)
+            {
+                entitiesBancaTipoCuenta.Add(item);
+            }
+            Depositario.Business.Tables.Estilo.TipoEsquemaDetalle entitiesEstiloTipoEsquemaDetalle = new();
+            foreach (var item in EstiloTipoEsquemaDetalle)
+            {
+                entitiesEstiloTipoEsquemaDetalle.Add(item);
+            }
             Depositario.Business.Tables.Operacion.TipoEvento entitiesOperacionTipoEvento = new();
             foreach (var item in OperacionTipoEvento)
             {
                 entitiesOperacionTipoEvento.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.TipoFuncion entitiesSeguridadTipoFuncion = new();
+            foreach (var item in SeguridadTipoFuncion)
+            {
+                entitiesSeguridadTipoFuncion.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.TipoIdentificador entitiesDirectorioTipoIdentificador = new();
+            foreach (var item in DirectorioTipoIdentificador)
+            {
+                entitiesDirectorioTipoIdentificador.Add(item);
+            }
+            Depositario.Business.Tables.Auditoria.TipoLog entitiesAuditoriaTipoLog = new();
+            foreach (var item in AuditoriaTipoLog)
+            {
+                entitiesAuditoriaTipoLog.Add(item);
+            }
+            Depositario.Business.Tables.Seguridad.TipoMenu entitiesSeguridadTipoMenu = new();
+            foreach (var item in SeguridadTipoMenu)
+            {
+                entitiesSeguridadTipoMenu.Add(item);
+            }
+            Depositario.Business.Tables.Dispositivo.TipoPlaca entitiesDispositivoTipoPlaca = new();
+            foreach (var item in DispositivoTipoPlaca)
+            {
+                entitiesDispositivoTipoPlaca.Add(item);
             }
             Depositario.Business.Tables.Operacion.TipoTransaccion entitiesOperacionTipoTransaccion = new();
             foreach (var item in OperacionTipoTransaccion)
@@ -370,61 +455,15 @@
             {
                 entitiesOperacionTurnoUsuario.Add(item);
             }
-            Depositario.Business.Tables.Regionalizacion.Lenguaje entitiesRegionalizacionLenguaje = new();
-            foreach (var item in RegionalizacionLenguaje)
-            {
-                entitiesRegionalizacionLenguaje.Add(item);
-            }
-            Depositario.Business.Tables.Regionalizacion.LenguajeItem entitiesRegionalizacionLenguajeItem = new();
-            foreach (var item in RegionalizacionLenguajeItem)
-            {
-                entitiesRegionalizacionLenguajeItem.Add(item);
-            }
-
-            Depositario.Business.Tables.Seguridad.AplicacionParametroValor entitiesSeguridadAplicacionParametroValor = new();
-            foreach (var item in SeguridadAplicacionParametroValor)
-            {
-                entitiesSeguridadAplicacionParametroValor.Add(item);
-            }
-            Depositario.Business.Tables.Seguridad.Funcion entitiesSeguridadFuncion = new();
-            foreach (var item in SeguridadFuncion)
-            {
-                entitiesSeguridadFuncion.Add(item);
-            }
-            Depositario.Business.Tables.Seguridad.Menu entitiesSeguridadMenu = new();
-            foreach (var item in SeguridadMenu)
-            {
-                entitiesSeguridadMenu.Add(item);
-            }
-            Depositario.Business.Tables.Seguridad.Rol entitiesSeguridadRol = new();
-            foreach (var item in SeguridadRol)
-            {
-                entitiesSeguridadRol.Add(item);
-            }
-            Depositario.Business.Tables.Seguridad.RolFuncion entitiesSeguridadRolFuncion = new();
-            foreach (var item in SeguridadRolFuncion)
-            {
-                entitiesSeguridadRolFuncion.Add(item);
-            }
-            Depositario.Business.Tables.Seguridad.TipoAplicacion entitiesSeguridadTipoAplicacion = new();
-            foreach (var item in SeguridadTipoAplicacion)
-            {
-                entitiesSeguridadTipoAplicacion.Add(item);
-            }
-            Depositario.Business.Tables.Seguridad.TipoFuncion entitiesSeguridadTipoFuncion = new();
-            foreach (var item in SeguridadTipoFuncion)
-            {
-                entitiesSeguridadTipoFuncion.Add(item);
-            }
-            Depositario.Business.Tables.Seguridad.TipoMenu entitiesSeguridadTipoMenu = new();
-            foreach (var item in SeguridadTipoMenu)
-            {
-                entitiesSeguridadTipoMenu.Add(item);
-            }
             Depositario.Business.Tables.Seguridad.Usuario entitiesSeguridadUsuario = new();
             foreach (var item in SeguridadUsuario)
             {
                 entitiesSeguridadUsuario.Add(item);
+            }
+            Depositario.Business.Tables.Banca.UsuarioCuenta entitiesBancaUsuarioCuenta = new();
+            foreach (var item in BancaUsuarioCuenta)
+            {
+                entitiesBancaUsuarioCuenta.Add(item);
             }
             Depositario.Business.Tables.Seguridad.UsuarioRol entitiesSeguridadUsuarioRol = new();
             foreach (var item in SeguridadUsuarioRol)
@@ -436,71 +475,37 @@
             {
                 entitiesSeguridadUsuarioSector.Add(item);
             }
-            Depositario.Business.Tables.Sincronizacion.Configuracion entitiesSincronizacionConfiguracion = new();
-            foreach (var item in SincronizacionConfiguracion)
+            Depositario.Business.Tables.Geografia.Zona entitiesGeografiaZona = new();
+            foreach (var item in GeografiaZona)
             {
-                entitiesSincronizacionConfiguracion.Add(item);
-            }
-            Depositario.Business.Tables.Sincronizacion.Entidad entitiesSincronizacionEntidad = new();
-            foreach (var item in SincronizacionEntidad)
-            {
-                entitiesSincronizacionEntidad.Add(item);
-            }
-            Depositario.Business.Tables.Sincronizacion.EntidadCabecera entitiesSincronizacionEntidadCabecera = new();
-            foreach (var item in SincronizacionEntidadCabecera)
-            {
-                entitiesSincronizacionEntidadCabecera.Add(item);
+                entitiesGeografiaZona.Add(item);
             }
 
-
-            Depositario.Business.Tables.Turno.EsquemaDetalleTurno entitiesTurnoEsquemaDetalleTurno = new();
-            foreach (var item in TurnoEsquemaDetalleTurno)
+            Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entitiesConfiguracionEmpresa = new();
+            foreach (var item in ConfiguracionEmpresa)
             {
-                entitiesTurnoEsquemaDetalleTurno.Add(item);
-            }
-            Depositario.Business.Tables.Turno.EsquemaTurno entitiesTurnoEsquemaTurno = new();
-            foreach (var item in TurnoEsquemaTurno)
-            {
-                entitiesTurnoEsquemaTurno.Add(item);
-            }
-            Depositario.Business.Tables.Valor.Denominacion entitiesValorDenominacion = new();
-            foreach (var item in ValorDenominacion)
-            {
-                entitiesValorDenominacion.Add(item);
-            }
-            Depositario.Business.Tables.Valor.Moneda entitiesValorMoneda = new();
-            foreach (var item in ValorMoneda)
-            {
-                entitiesValorMoneda.Add(item);
-            }
-            Depositario.Business.Tables.Valor.RelacionMonedaTipoValor entitiesValorRelacionMonedaTipoValor = new();
-            foreach (var item in ValorRelacionMonedaTipoValor)
-            {
-                entitiesValorRelacionMonedaTipoValor.Add(item);
-            }
-            Depositario.Business.Tables.Valor.Tipo entitiesValorTipo = new();
-            foreach (var item in ValorTipo)
-            {
-                entitiesValorTipo.Add(item);
-            }
-            Depositario.Business.Tables.Visualizacion.Perfil entitiesVisualizacionPerfil = new();
-            foreach (var item in VisualizacionPerfil)
-            {
-                entitiesVisualizacionPerfil.Add(item);
-            }
-            Depositario.Business.Tables.Visualizacion.PerfilItem entitiesVisualizacionPerfilItem = new();
-            foreach (var item in VisualizacionPerfilItem)
-            {
-                entitiesVisualizacionPerfilItem.Add(item);
-            }
-            Depositario.Business.Tables.Visualizacion.PerfilTipo entitiesVisualizacionPerfilTipo = new();
-            foreach (var item in VisualizacionPerfilTipo)
-            {
-                entitiesVisualizacionPerfilTipo.Add(item);
+                entitiesConfiguracionEmpresa.Add(item);
             }
 
-      
+            Depositario.Business.Tables.Dispositivo.PlantillaMoneda entitiesPlantillaMoneda = new();
+            foreach (var item in PlantillaMoneda)
+            {
+                entitiesPlantillaMoneda.Add(item);
+            }
 
+            Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle entitiesPlantillaMonedaDetalle = new();
+            foreach (var item in PlantillaMonedaDetalle)
+            {
+                entitiesPlantillaMonedaDetalle.Add(item);
+            }
+
+            Depositario.Business.Tables.Valor.OrigenValor entitiesOrigenValor = new();
+            foreach (var item in OrigenValor)
+            {
+                entitiesOrigenValor.Add(item);
+            }
         }
+
     }
+    
 }

@@ -1,6 +1,10 @@
 using Microsoft.Extensions.Configuration;
 internal class ConfigurationHandler
 {
+     internal static String PasswordKey
+     {
+         get { return getConfiguration(Constants.PASSWORDKEY); }
+     }
      internal static String ConnectionString
      {
          get { return getConfiguration(Constants.CONNECTIONSTRING); }

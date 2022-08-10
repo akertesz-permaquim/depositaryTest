@@ -77,7 +77,7 @@
             this.MainPanel.Controls.Add(this.RemainingTimeLabel);
             this.MainPanel.Controls.Add(this.SubtotalLabel);
             this.MainPanel.Controls.Add(this.CurrencyLabel);
-            this.MainPanel.Location = new System.Drawing.Point(8, 8);
+            this.MainPanel.Location = new System.Drawing.Point(8, 22);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(726, 632);
             this.MainPanel.TabIndex = 137;
@@ -498,7 +498,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(919, 643);
+            this.ClientSize = new System.Drawing.Size(919, 671);
             this.ControlBox = false;
             this.Controls.Add(this.MonitorGroupcheckbox);
             this.Controls.Add(this.MonitorGroupBox);

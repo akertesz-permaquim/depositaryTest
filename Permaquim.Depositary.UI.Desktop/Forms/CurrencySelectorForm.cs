@@ -88,7 +88,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
             if(_device != null)
-                _device.SwitchCurrency(DatabaseController.CurrentCurrency.IndiceEnContadora);
+                _device.SwitchCurrency(DatabaseController.GetCurrencySequence());
 
              if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
             {

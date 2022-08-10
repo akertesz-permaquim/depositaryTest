@@ -1,5 +1,5 @@
 ﻿
-namespace Permaquim.Depositary.UI.Desktop.Model
+namespace Permaquim.Depositary.Launcher.Model
 {
     public class JwtTokenModel 
     {

@@ -23,7 +23,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string TransaccionId = "TransaccionId";
 					public const string DenominacionId = "DenominacionId";
-					public const string Cantidad = "Cantidad";
+					public const string CantidadUnidades = "CantidadUnidades";
 					public const string Fecha = "Fecha";
 				}
 				public enum FieldEnum : int
@@ -39,7 +39,7 @@ using System.Text;
 					Id,
 					TransaccionId,
 					DenominacionId,
-					Cantidad,
+					CantidadUnidades,
 					Fecha
 				}
 	               /// <summary>
@@ -51,7 +51,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  VistaTransaccion(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 Cantidad,DateTime Fecha)
+                public  VistaTransaccion(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 CantidadUnidades,DateTime Fecha)
                 {
                     this.TipoId = TipoId;
                     this.DepositarioId = DepositarioId;
@@ -64,7 +64,7 @@ using System.Text;
                     this.Id = Id;
                     this.TransaccionId = TransaccionId;
                     this.DenominacionId = DenominacionId;
-                    this.Cantidad = Cantidad;
+                    this.CantidadUnidades = CantidadUnidades;
                     this.Fecha = Fecha;
                 }
              [DataItemAttributeFieldName("TipoId","TipoId")]
@@ -89,8 +89,8 @@ using System.Text;
              public Int64 TransaccionId { get; set; }
              [DataItemAttributeFieldName("DenominacionId","DenominacionId")]
              public Int64 DenominacionId { get; set; }
-             [DataItemAttributeFieldName("Cantidad","Cantidad")]
-             public Int64 Cantidad { get; set; }
+             [DataItemAttributeFieldName("CantidadUnidades","CantidadUnidades")]
+             public Int64 CantidadUnidades { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
              public DateTime Fecha { get; set; }
 				

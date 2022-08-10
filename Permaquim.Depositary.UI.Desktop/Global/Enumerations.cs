@@ -32,12 +32,6 @@
             Approve
         }
 
-        public enum LogTypeEnum
-        {
-            Excepction = 0,
-            Information = 1
-        }
-
         public enum InformationTypeEnum
         {
             None,
@@ -274,6 +268,14 @@
             TurnChange = 108,
             ViewEvents = 109,
             Reports = 110
+        }
+
+        public enum LogTypeEnum
+        {
+            None,
+            Exception,
+            Information,
+            Navigation
         }
     }
 }

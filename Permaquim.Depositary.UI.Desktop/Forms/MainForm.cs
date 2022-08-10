@@ -11,6 +11,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
+        private const string DEPOSITARIO_NO_INICIALIZADO = "Depositario no inicializado.";
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         private int closingcombination = 0;
         private Image _greenLedImage;
@@ -28,7 +29,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         CounterDevice _counterDevice = new();
         DEXDevice? _deXDevice = null;
 
-        SystemBlockingDialog _blockingDialog;
+        SystemBlockingDialog _blockingDialog = null;
  
 
         public string BreadCrumbText
@@ -40,25 +41,20 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         public MainForm()
         {
-            InitializeComponent();
-
-            this.MainPanel.Width = this.Width;
-
-            FormsController.MainFormInstance = this;
-
-             // StartPosition was set to FormStartPosition.Manual in the properties window.
-            Rectangle screen = Screen.PrimaryScreen.WorkingArea;
-            this.Location = new Point(0, 0);
-            this.Size = new Size(screen.Width, screen.Height);
-            if (DatabaseController.CurrentDepositary == null)
+            try
             {
-                PreferencesForm newfrom = new();
-                newfrom.ShowDialog();
 
+                InitializeComponent();
 
-            }
-            else
-            {
+                this.MainPanel.Width = this.Width;
+
+                FormsController.MainFormInstance = this;
+
+                // StartPosition was set to FormStartPosition.Manual in the properties window.
+                Rectangle screen = Screen.PrimaryScreen.WorkingArea;
+                this.Location = new Point(0, 0);
+                this.Size = new Size(screen.Width, screen.Height);
+
                 _pollingTimer = new System.Windows.Forms.Timer()
                 {
                     Interval = DeviceController.GetPollingInterval(),
@@ -68,8 +64,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 LoadLogo();
                 _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
-            }
 
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+            }
+            catch (System.FormatException ex)
+            {
+                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AuditController.Log(ex);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+            }
         }
         protected override CreateParams CreateParams
         {
@@ -83,22 +95,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-            if (DatabaseController.CurrentDepositary == null)
+
+            if (DatabaseController.CurrentDepositary != null)
             {
-                FormsController.OpenChildForm(new PreferencesForm(),
-                   (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-            }
-            else
-            {
+
                 InitializeDevices();
                 LoadLedImages();
                 VerifyUserData();
-                Loadparameters();
+                LoadParameters();
                 LoadLanguageItems();
+            }
+            else
+            {
+                AuditController.Log(LogTypeEnum.Information, DEPOSITARIO_NO_INICIALIZADO, DEPOSITARIO_NO_INICIALIZADO);
+                SetInformationMessage(InformationTypeEnum.Error, DEPOSITARIO_NO_INICIALIZADO);
             }
         }
 
-        private void Loadparameters()
+        private void LoadParameters()
         {
             _greenStatusIndicator = ParameterController.GreenStatusIndicator;
             _yellowStatusIndicator = ParameterController.YellowStatusIndicator;
@@ -113,7 +127,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
 
             DEXDevice device = DeviceController.InitializeDevice();
-
 
             _deXDevice = device;
 
@@ -166,11 +179,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             catch (CommPortException ex)
             {
                 SetInformationMessage(InformationTypeEnum.Error, ex.ExceptionMessage);
+                AuditController.Log(ex);
             }
             catch (Exception ex)
             {
-
                 SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+                AuditController.Log(ex);
             }
 
         }
@@ -194,7 +208,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 if (_counterDevice.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
                 {
                     VerifyConnections();
-
                 }
                 else
                 {
@@ -276,22 +289,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " +
                 DatabaseController.CurrentUser.Apellido + " " + DatabaseController.CurrentUser.Nombre;
+
                 EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " + 
                 DatabaseController.CurrentUser.EmpresaId.Nombre;
 
-                SucursalLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": " +
-                    DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre;
-
-                DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": " +
-                    DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre;
+                SucursalInfoLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": " 
+                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + " - " 
+                    + MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": " 
+                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + " - "
+                    + DatabaseController.CurrentDepositary.CodigoExterno + " - "
+                    + MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : " 
+                    + DatabaseController.CurrentTurn.TurnoDepositarioId.Nombre;
 
             }
             else
             {
                 UserLabel.Text = String.Empty;
                 EnterpriseLabel.Text = String.Empty;
-                SucursalLabel.Text = String.Empty;
-                DepositaryLabel.Text = String.Empty;
+                SucursalInfoLabel.Text = String.Empty;
                 RemainingTimeLabel.Text = String.Empty;
             }
         }
@@ -410,15 +425,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void MainPictureBox_VisibleChanged(object sender, EventArgs e)
         {
-
+            //System.Diagnostics.Debug.Print(
+            //    _counterDevice.StateResultProperty.StatusInformation.OperatingState.ToString());
         }
-
-        private void RemainingTimeLabel_Paint(object sender, PaintEventArgs e)
-        {
-            //ControlPaint.DrawBorder(e.Graphics, ((Label)sender).DisplayRectangle, 
-            //    ((Label)sender).ForeColor, ButtonBorderStyle.Solid);
-        }
-
         public void SetInformationMessage(InformationTypeEnum type,string message)
         {
 

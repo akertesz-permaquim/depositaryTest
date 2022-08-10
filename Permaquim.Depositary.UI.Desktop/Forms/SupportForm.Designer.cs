@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.ModeCheckBox = new System.Windows.Forms.CheckBox();
             this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.IoBoardStatusGroup = new System.Windows.Forms.GroupBox();
             this.ExecuteIoBoardComandButton = new System.Windows.Forms.Button();
@@ -42,6 +41,7 @@
             this.ExecuteCounterComandButton = new System.Windows.Forms.Button();
             this.CounterStatusPropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.CounterCommandComboBox = new System.Windows.Forms.ComboBox();
+            this.ModeCheckBox = new System.Windows.Forms.CheckBox();
             this.MainPanel.SuspendLayout();
             this.IoBoardStatusGroup.SuspendLayout();
             this.CounterStatudGroupBox.SuspendLayout();
@@ -49,25 +49,14 @@
             // 
             // MainPanel
             // 
-            this.MainPanel.Controls.Add(this.ModeCheckBox);
             this.MainPanel.Controls.Add(this.BackButton);
             this.MainPanel.Controls.Add(this.IoBoardStatusGroup);
             this.MainPanel.Controls.Add(this.CounterStatudGroupBox);
             this.MainPanel.Location = new System.Drawing.Point(0, 8);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1232, 648);
+            this.MainPanel.Size = new System.Drawing.Size(1232, 632);
             this.MainPanel.TabIndex = 0;
             this.MainPanel.VisibleChanged += new System.EventHandler(this.MainPanel_VisibleChanged);
-            // 
-            // ModeCheckBox
-            // 
-            this.ModeCheckBox.AutoSize = true;
-            this.ModeCheckBox.Location = new System.Drawing.Point(32, 24);
-            this.ModeCheckBox.Name = "ModeCheckBox";
-            this.ModeCheckBox.Size = new System.Drawing.Size(68, 19);
-            this.ModeCheckBox.TabIndex = 158;
-            this.ModeCheckBox.Text = "Append";
-            this.ModeCheckBox.UseVisualStyleBackColor = true;
             // 
             // BackButton
             // 
@@ -80,7 +69,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(416, 584);
+            this.BackButton.Location = new System.Drawing.Point(520, 552);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(160, 55);
             this.BackButton.TabIndex = 157;
@@ -97,7 +86,7 @@
             this.IoBoardStatusGroup.Controls.Add(this.IoBoardStatusPropertyGrid);
             this.IoBoardStatusGroup.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.IoBoardStatusGroup.ForeColor = System.Drawing.Color.SteelBlue;
-            this.IoBoardStatusGroup.Location = new System.Drawing.Point(608, 56);
+            this.IoBoardStatusGroup.Location = new System.Drawing.Point(608, 32);
             this.IoBoardStatusGroup.Name = "IoBoardStatusGroup";
             this.IoBoardStatusGroup.Size = new System.Drawing.Size(600, 512);
             this.IoBoardStatusGroup.TabIndex = 33;
@@ -170,6 +159,7 @@
             // 
             // CounterStatudGroupBox
             // 
+            this.CounterStatudGroupBox.Controls.Add(this.ModeCheckBox);
             this.CounterStatudGroupBox.Controls.Add(this.CounterComboBox);
             this.CounterStatudGroupBox.Controls.Add(this.CounterResponseTextBox);
             this.CounterStatudGroupBox.Controls.Add(this.ExecuteCounterComandButton);
@@ -177,7 +167,7 @@
             this.CounterStatudGroupBox.Controls.Add(this.CounterCommandComboBox);
             this.CounterStatudGroupBox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CounterStatudGroupBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.CounterStatudGroupBox.Location = new System.Drawing.Point(16, 56);
+            this.CounterStatudGroupBox.Location = new System.Drawing.Point(16, 32);
             this.CounterStatudGroupBox.Name = "CounterStatudGroupBox";
             this.CounterStatudGroupBox.Size = new System.Drawing.Size(584, 512);
             this.CounterStatudGroupBox.TabIndex = 0;
@@ -197,7 +187,7 @@
             "DoorStateInformation "});
             this.CounterComboBox.Location = new System.Drawing.Point(248, 56);
             this.CounterComboBox.Name = "CounterComboBox";
-            this.CounterComboBox.Size = new System.Drawing.Size(285, 22);
+            this.CounterComboBox.Size = new System.Drawing.Size(232, 22);
             this.CounterComboBox.TabIndex = 162;
             this.CounterComboBox.SelectedIndexChanged += new System.EventHandler(this.CounterComboBox_SelectedIndexChanged);
             // 
@@ -230,7 +220,7 @@
             this.ExecuteCounterComandButton.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ExecuteCounterComandButton.Location = new System.Drawing.Point(248, 22);
             this.ExecuteCounterComandButton.Name = "ExecuteCounterComandButton";
-            this.ExecuteCounterComandButton.Size = new System.Drawing.Size(285, 27);
+            this.ExecuteCounterComandButton.Size = new System.Drawing.Size(232, 27);
             this.ExecuteCounterComandButton.TabIndex = 31;
             this.ExecuteCounterComandButton.Text = "Ejecutar";
             this.ExecuteCounterComandButton.UseVisualStyleBackColor = true;
@@ -279,6 +269,16 @@
             this.CounterCommandComboBox.Size = new System.Drawing.Size(232, 22);
             this.CounterCommandComboBox.TabIndex = 30;
             // 
+            // ModeCheckBox
+            // 
+            this.ModeCheckBox.AutoSize = true;
+            this.ModeCheckBox.Location = new System.Drawing.Point(488, 24);
+            this.ModeCheckBox.Name = "ModeCheckBox";
+            this.ModeCheckBox.Size = new System.Drawing.Size(75, 18);
+            this.ModeCheckBox.TabIndex = 163;
+            this.ModeCheckBox.Text = "Append";
+            this.ModeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // SupportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -292,9 +292,9 @@
             this.Load += new System.EventHandler(this.SupportForm_Load);
             this.VisibleChanged += new System.EventHandler(this.SupportForm_VisibleChanged);
             this.MainPanel.ResumeLayout(false);
-            this.MainPanel.PerformLayout();
             this.IoBoardStatusGroup.ResumeLayout(false);
             this.CounterStatudGroupBox.ResumeLayout(false);
+            this.CounterStatudGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -308,12 +308,12 @@
         private ComboBox CounterCommandComboBox;
         private CustomTextBox CounterResponseTextBox;
         private ComboBox CounterComboBox;
-        private CheckBox ModeCheckBox;
         private CustomButton BackButton;
         private GroupBox IoBoardStatusGroup;
         private Button ExecuteIoBoardComandButton;
         private ComboBox IoboardCommandComboBox;
         private CustomTextBox IoBoardResponseTextBox;
         private PropertyGrid IoBoardStatusPropertyGrid;
+        private CheckBox ModeCheckBox;
     }
 }

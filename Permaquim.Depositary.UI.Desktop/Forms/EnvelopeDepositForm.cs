@@ -64,7 +64,7 @@ namespace Permaquim.Depositary.UI.Desktop
             MainPanel.Location = new Point()
             {
                 X = this.Width / 2 - MainPanel.Width / 2,
-                Y = this.Height / 2 - MainPanel.Height / 2
+                Y = (this.Height / 2 - MainPanel.Height / 2 ) + 50
             };
 
             ButtonsPanel.Location = new Point()
@@ -132,7 +132,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 LoadDenominations();
                 LoadLanguageItems();
-                EnableDisableControls(true);
+                //EnableDisableControls(false);
             }
             else
                 InitializeLocals();
@@ -383,10 +383,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
             CancelDepositButton.Visible =
            !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _totalQuantity > 0;//&& _totalAmount > 0;
+                && _totalQuantity >= 0;//&& _totalAmount > 0;
 
             EnvelopeTextBox.Visible = ParameterController.RequiresEnvelopeIdentifier
                 && ConfirmAndExitDepositButton.Visible;
+
+            ButtonsPanel.Visible = _totalQuantity > 0;
 
         }
         private void ShowInformation()

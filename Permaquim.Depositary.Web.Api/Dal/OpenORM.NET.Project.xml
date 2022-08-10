@@ -273,6 +273,7 @@
   </MappedStoredProcedures>
   <SelectedTables>
     <string>Aplicacion.Configuracion</string>
+    <string>Aplicacion.ConfiguracionEmpresa</string>
     <string>Auditoria.Log</string>
     <string>Auditoria.TipoLog</string>
     <string>Banca.Banco</string>
@@ -282,11 +283,9 @@
     <string>Biometria.HuellaDactilar</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
-    <string>Directorio.IdentificadorUsuario</string>
     <string>Directorio.RelacionMonedaSucursal</string>
     <string>Directorio.Sector</string>
     <string>Directorio.Sucursal</string>
-    <string>Directorio.TipoIdentificador</string>
     <string>Dispositivo.ComandoContadora</string>
     <string>Dispositivo.ComandoPlaca</string>
     <string>Dispositivo.ConfiguracionDepositario</string>
@@ -297,6 +296,8 @@
     <string>Dispositivo.DepositarioPlaca</string>
     <string>Dispositivo.Marca</string>
     <string>Dispositivo.Modelo</string>
+    <string>Dispositivo.PlantillaMoneda</string>
+    <string>Dispositivo.PlantillaMonedaDetalle</string>
     <string>Dispositivo.TipoConfiguracionDepositario</string>
     <string>Dispositivo.TipoContadora</string>
     <string>Dispositivo.TipoPlaca</string>
@@ -327,11 +328,13 @@
     <string>Seguridad.AplicacionParametro</string>
     <string>Seguridad.AplicacionParametroValor</string>
     <string>Seguridad.Funcion</string>
+    <string>Seguridad.IdentificadorUsuario</string>
     <string>Seguridad.Menu</string>
     <string>Seguridad.Rol</string>
     <string>Seguridad.RolFuncion</string>
     <string>Seguridad.TipoAplicacion</string>
     <string>Seguridad.TipoFuncion</string>
+    <string>Seguridad.TipoIdentificador</string>
     <string>Seguridad.TipoMenu</string>
     <string>Seguridad.Usuario</string>
     <string>Seguridad.UsuarioRol</string>
@@ -345,6 +348,7 @@
     <string>Turno.EsquemaTurno</string>
     <string>Valor.Denominacion</string>
     <string>Valor.Moneda</string>
+    <string>Valor.OrigenValor</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
     <string>Visualizacion.Perfil</string>
@@ -394,4 +398,5 @@
       <Value />
     </TemplateConfigurationEntry>
   </TemplateConfigurationEntries>
+  <UsesEncription>false</UsesEncription>
 </GenerationProject>
