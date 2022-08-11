@@ -26,7 +26,15 @@ namespace Permaquim.Depositary.Launcher
 
             if (DatabaseController.CurrentDepositary == null)
             {
-               InitializationController.InitializeDepositary();
+                try
+                {
+                    InitializationController.InitializeDepositary();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {

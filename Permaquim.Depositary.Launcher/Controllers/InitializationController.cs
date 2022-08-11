@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Permaquim.Depositary.Launcher.Model;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 
 namespace Permaquim.Depositary.Launcher.Controllers
@@ -17,17 +19,22 @@ namespace Permaquim.Depositary.Launcher.Controllers
         private static JwtTokenModel _jwToken;
         private static HttpClient _httpClient = new();
 
-        private static string _webapiUrl  =string.Empty;
+        private static string _webapiUrl = string.Empty;
 
         public static async void InitializeDepositary()
         {
             string webapiUrl = GetConfiguration("WebApiUrl");
             InicializacionModel model = new()
             {
-                CodigoExternoDepositario =
-                GetConfiguration("CodigoDepositario")
+                CodigoExternoDepositario = GetConfiguration("CodigoDepositario")
             };
             await GetinitializationToken(model, webapiUrl);
+
+            //Si obtenemos un token valido empezamos a consultar los metodos get y a llenar las tablas
+            if (_jwToken != null && DateTime.Now <= _jwToken.Expiration)
+            {
+                ReceiveData(webapiUrl);
+            }
         }
 
 
@@ -39,7 +46,6 @@ namespace Permaquim.Depositary.Launcher.Controllers
             {
                 try
                 {
- 
                     var content = new StringContent(JsonConvert.SerializeObject(inicializacionModel), Encoding.UTF8, MEDIATYPE_JSON);
                     var postResponse = _httpClient.PostAsync(_webapiUrl + TOKEN_ENDPOINT, content);
                     var postResult = postResponse.Result;
@@ -50,8 +56,6 @@ namespace Permaquim.Depositary.Launcher.Controllers
                     }
 
                     _jwToken = JsonConvert.DeserializeObject<JwtTokenModel>(jsonResult);
-
-                    ReceiveData(webapiUrl);
 
                 }
                 catch (Exception ex)
@@ -74,6 +78,7 @@ namespace Permaquim.Depositary.Launcher.Controllers
                     string getRresult = getResponse.ToString();
                     InicializacionModel model = new();
                     model = JsonConvert.DeserializeObject<InicializacionModel>(getRresult);
+                    //Persistimos los metodos en la base de datos.
                     model.Persist();
                 }
                 catch (Exception ex)
@@ -102,7 +107,6 @@ namespace Permaquim.Depositary.Launcher.Controllers
 
                     var postResponse = _httpClient.PostAsync(baseUrl + SINCRO_ENDPOINT, content);
                     var postResult = postResponse.Result;
-
 
                     if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
                     {

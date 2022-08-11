@@ -14,8 +14,8 @@
         public List<DepositaryWebApi.Entities.Tables.Biometria.HuellaDactilar> BiometriaHuellaDactilar { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Empresa> DirectorioEmpresa { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Grupo> DirectorioGrupo { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> DirectorioIdentificadorUsuario { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> DirectorioTipoIdentificador { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> SeguridadIdentificadorUsuario { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> SeguridadTipoIdentificador { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.RelacionMonedaSucursal> DirectorioRelacionMonedaSucursal { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Sector> DirectorioSector { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Sucursal> DirectorioSucursal { get; set; } = new();
