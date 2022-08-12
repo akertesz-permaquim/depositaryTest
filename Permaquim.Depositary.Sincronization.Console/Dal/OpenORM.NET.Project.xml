@@ -389,5 +389,5 @@
       <Value />
     </TemplateConfigurationEntry>
   </TemplateConfigurationEntries>
-  <UsesEncription>false</UsesEncription>
+  <UsesEncription>true</UsesEncription>
 </GenerationProject>

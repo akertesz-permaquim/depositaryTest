@@ -1,5 +1,6 @@
 ﻿using Permaquim.Depositary.Sincronization.Console.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using Permaquim.Depositary.Sincronization.Console.Controllers;
 
 namespace Permaquim.Depositary.Sincronization.Console
 {
@@ -21,6 +22,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             DatabaseController DatabaseController = new();
             this.UserName = DatabaseController.GetApplicationParameterValue(WEBAPI_USER);
             this.Password = DatabaseController.GetApplicationParameterValue(WEBAPI_PASSWORD);
+            this.DepositaryCode = ConfigurationController.GetCurrentDepositaryCode();
         }
 
         public void Process()
