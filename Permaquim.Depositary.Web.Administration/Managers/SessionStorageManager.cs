@@ -78,7 +78,7 @@ namespace Permaquim.Depositary.Web.Administration.Managers
             }
         }
 
-        public static List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> DataLenguaje
+        public static List<Depositary.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> DataLenguaje
         {
             get
             {
@@ -143,13 +143,13 @@ namespace Permaquim.Depositary.Web.Administration.Managers
         {
             return await sessionStorage.GetItemAsync<Int64>("LenguajeId");
         }
-        public static async void SetDataLenguaje(List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> pDataLenguaje)
+        public static async void SetDataLenguaje(List<Depositary.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> pDataLenguaje)
         {
             await sessionStorage.SetItemAsync("DataLenguaje", pDataLenguaje);
         }
-        public static async Task<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>> GetDataLenguaje()
+        public static async Task<List<Depositary.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>> GetDataLenguaje()
         {
-            return await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
+            return await sessionStorage.GetItemAsync<List<Depositary.Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>>("DataLenguaje");
         }
 
         public static async void clearSessionStorage()

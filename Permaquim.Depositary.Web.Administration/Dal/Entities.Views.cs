@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-		namespace DepositarioAdminWeb.Entities.Views.Operacion {
+		namespace Permaquim.Depositary.Entities.Views.Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("VistaTransaccion","VistaTransaccion")]    // Object name  and alias in Database
@@ -23,7 +23,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string TransaccionId = "TransaccionId";
 					public const string DenominacionId = "DenominacionId";
-					public const string Cantidad = "Cantidad";
+					public const string CantidadUnidades = "CantidadUnidades";
 					public const string Fecha = "Fecha";
 				}
 				public enum FieldEnum : int
@@ -39,7 +39,7 @@ using System.Text;
 					Id,
 					TransaccionId,
 					DenominacionId,
-					Cantidad,
+					CantidadUnidades,
 					Fecha
 				}
 	               /// <summary>
@@ -51,7 +51,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  VistaTransaccion(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 Cantidad,DateTime Fecha)
+                public  VistaTransaccion(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 CantidadUnidades,DateTime Fecha)
                 {
                     this.TipoId = TipoId;
                     this.DepositarioId = DepositarioId;
@@ -64,7 +64,7 @@ using System.Text;
                     this.Id = Id;
                     this.TransaccionId = TransaccionId;
                     this.DenominacionId = DenominacionId;
-                    this.Cantidad = Cantidad;
+                    this.CantidadUnidades = CantidadUnidades;
                     this.Fecha = Fecha;
                 }
              [DataItemAttributeFieldName("TipoId","TipoId")]
@@ -89,16 +89,102 @@ using System.Text;
              public Int64 TransaccionId { get; set; }
              [DataItemAttributeFieldName("DenominacionId","DenominacionId")]
              public Int64 DenominacionId { get; set; }
-             [DataItemAttributeFieldName("Cantidad","Cantidad")]
-             public Int64 Cantidad { get; set; }
+             [DataItemAttributeFieldName("CantidadUnidades","CantidadUnidades")]
+             public Int64 CantidadUnidades { get; set; }
              [DataItemAttributeFieldName("Fecha","Fecha")]
              public DateTime Fecha { get; set; }
 				
 			} //Class VistaTransaccion 
 			
-} //namespace DepositarioAdminWeb.Entities.Views.Operacion
+} //namespace Permaquim.Depositary.Entities.Views.Operacion
 //////////////////////////////////////////////////////////////////////////////////
-		namespace DepositarioAdminWeb.Entities.Views.Reporte {
+		namespace Permaquim.Depositary.Entities.Views.Reporte {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
+			[DataItemAttributeObjectName("Contenedores","Contenedores")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
+			public class Contenedores : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string ContenedorId = "ContenedorId";
+					public const string Identificador = "Identificador";
+					public const string FechaApertura = "FechaApertura";
+					public const string FechaCierre = "FechaCierre";
+					public const string Depositario = "Depositario";
+					public const string DepositarioId = "DepositarioId";
+					public const string CantidadTransacciones = "CantidadTransacciones";
+					public const string SectorId = "SectorId";
+					public const string CantidadBilletes = "CantidadBilletes";
+					public const string CantidadSobres = "CantidadSobres";
+					public const string CantidadTotalDineroMonedaDefault = "CantidadTotalDineroMonedaDefault";
+				}
+				public enum FieldEnum : int
+                {
+					ContenedorId,
+					Identificador,
+					FechaApertura,
+					FechaCierre,
+					Depositario,
+					DepositarioId,
+					CantidadTransacciones,
+					SectorId,
+					CantidadBilletes,
+					CantidadSobres,
+					CantidadTotalDineroMonedaDefault
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public Contenedores()
+                {
+                }
+	               /// <summary>
+                /// Constructor with Parameters 
+	               /// <summary>
+                public  Contenedores(Int64 ContenedorId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,String Depositario,Int64 DepositarioId,Int32 CantidadTransacciones,Int64 SectorId,Int64 CantidadBilletes,Int32 CantidadSobres,Double CantidadTotalDineroMonedaDefault)
+                {
+                    this.ContenedorId = ContenedorId;
+                    this.Identificador = Identificador;
+                    this.FechaApertura = FechaApertura;
+                    this.FechaCierre = FechaCierre;
+                    this.Depositario = Depositario;
+                    this.DepositarioId = DepositarioId;
+                    this.CantidadTransacciones = CantidadTransacciones;
+                    this.SectorId = SectorId;
+                    this.CantidadBilletes = CantidadBilletes;
+                    this.CantidadSobres = CantidadSobres;
+                    this.CantidadTotalDineroMonedaDefault = CantidadTotalDineroMonedaDefault;
+                }
+             [DataItemAttributeFieldName("ContenedorId","ContenedorId")]
+             public Int64 ContenedorId { get; set; }
+             [DataItemAttributeFieldName("Identificador","Identificador")]
+             public String Identificador { get; set; }
+             [DataItemAttributeFieldName("FechaApertura","FechaApertura")]
+             public DateTime FechaApertura { get; set; }
+             [DataItemAttributeFieldName("FechaCierre","FechaCierre")]
+             public DateTime FechaCierre { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("CantidadTransacciones","CantidadTransacciones")]
+             public Int32 CantidadTransacciones { get; set; }
+             [DataItemAttributeFieldName("SectorId","SectorId")]
+             public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("CantidadBilletes","CantidadBilletes")]
+             public Int64 CantidadBilletes { get; set; }
+             [DataItemAttributeFieldName("CantidadSobres","CantidadSobres")]
+             public Int32 CantidadSobres { get; set; }
+             [DataItemAttributeFieldName("CantidadTotalDineroMonedaDefault","CantidadTotalDineroMonedaDefault")]
+             public Double CantidadTotalDineroMonedaDefault { get; set; }
+				
+			} //Class Contenedores 
+			
+} //namespace Permaquim.Depositary.Entities.Views.Reporte
+//////////////////////////////////////////////////////////////////////////////////
+		namespace Permaquim.Depositary.Entities.Views.Reporte {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
 			[DataItemAttributeObjectName("DetalleTransacciones","DetalleTransacciones")]    // Object name  and alias in Database
@@ -114,6 +200,8 @@ using System.Text;
 					public const string Moneda = "Moneda";
 					public const string Denominacion = "Denominacion";
 					public const string CodigoMoneda = "CodigoMoneda";
+					public const string DepositarioId = "DepositarioId";
+					public const string Depositario = "Depositario";
 					public const string Total = "Total";
 				}
 				public enum FieldEnum : int
@@ -124,6 +212,8 @@ using System.Text;
 					Moneda,
 					Denominacion,
 					CodigoMoneda,
+					DepositarioId,
+					Depositario,
 					Total
 				}
 	               /// <summary>
@@ -135,7 +225,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,String Moneda,String Denominacion,String CodigoMoneda,Decimal Total)
+                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,String Moneda,String Denominacion,String CodigoMoneda,Int64 DepositarioId,String Depositario,Decimal Total)
                 {
                     this.TransaccionId = TransaccionId;
                     this.FechaTransaccion = FechaTransaccion;
@@ -143,6 +233,8 @@ using System.Text;
                     this.Moneda = Moneda;
                     this.Denominacion = Denominacion;
                     this.CodigoMoneda = CodigoMoneda;
+                    this.DepositarioId = DepositarioId;
+                    this.Depositario = Depositario;
                     this.Total = Total;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
@@ -157,14 +249,18 @@ using System.Text;
              public String Denominacion { get; set; }
              [DataItemAttributeFieldName("CodigoMoneda","CodigoMoneda")]
              public String CodigoMoneda { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
              [DataItemAttributeFieldName("Total","Total")]
              public Decimal Total { get; set; }
 				
 			} //Class DetalleTransacciones 
 			
-} //namespace DepositarioAdminWeb.Entities.Views.Reporte
+} //namespace Permaquim.Depositary.Entities.Views.Reporte
 //////////////////////////////////////////////////////////////////////////////////
-		namespace DepositarioAdminWeb.Entities.Views.Reporte {
+		namespace Permaquim.Depositary.Entities.Views.Reporte {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
 			[DataItemAttributeObjectName("DetalleTransaccionesSobre","DetalleTransaccionesSobre")]    // Object name  and alias in Database
@@ -180,9 +276,11 @@ using System.Text;
 					public const string UsuarioId = "UsuarioId";
 					public const string ContenedorId = "ContenedorId";
 					public const string Cantidad = "Cantidad";
+					public const string Depositario = "Depositario";
 					public const string TipoValor = "TipoValor";
 					public const string TurnoId = "TurnoId";
 					public const string SectorId = "SectorId";
+					public const string DepositarioId = "DepositarioId";
 				}
 				public enum FieldEnum : int
                 {
@@ -192,9 +290,11 @@ using System.Text;
 					UsuarioId,
 					ContenedorId,
 					Cantidad,
+					Depositario,
 					TipoValor,
 					TurnoId,
-					SectorId
+					SectorId,
+					DepositarioId
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -205,7 +305,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  DetalleTransaccionesSobre(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 UsuarioId,Int64 ContenedorId,Int64 Cantidad,String TipoValor,Int64 TurnoId,Int64 SectorId)
+                public  DetalleTransaccionesSobre(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 UsuarioId,Int64 ContenedorId,Int64 Cantidad,String Depositario,String TipoValor,Int64 TurnoId,Int64 SectorId,Int64 DepositarioId)
                 {
                     this.TransaccionId = TransaccionId;
                     this.FechaTransaccion = FechaTransaccion;
@@ -213,9 +313,11 @@ using System.Text;
                     this.UsuarioId = UsuarioId;
                     this.ContenedorId = ContenedorId;
                     this.Cantidad = Cantidad;
+                    this.Depositario = Depositario;
                     this.TipoValor = TipoValor;
                     this.TurnoId = TurnoId;
                     this.SectorId = SectorId;
+                    this.DepositarioId = DepositarioId;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -229,18 +331,22 @@ using System.Text;
              public Int64 ContenedorId { get; set; }
              [DataItemAttributeFieldName("Cantidad","Cantidad")]
              public Int64 Cantidad { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
              [DataItemAttributeFieldName("TipoValor","TipoValor")]
              public String TipoValor { get; set; }
              [DataItemAttributeFieldName("TurnoId","TurnoId")]
              public Int64 TurnoId { get; set; }
              [DataItemAttributeFieldName("SectorId","SectorId")]
              public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
 				
 			} //Class DetalleTransaccionesSobre 
 			
-} //namespace DepositarioAdminWeb.Entities.Views.Reporte
+} //namespace Permaquim.Depositary.Entities.Views.Reporte
 //////////////////////////////////////////////////////////////////////////////////
-		namespace DepositarioAdminWeb.Entities.Views.Reporte {
+		namespace Permaquim.Depositary.Entities.Views.Reporte {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
 			[DataItemAttributeObjectName("Transacciones","Transacciones")]    // Object name  and alias in Database
@@ -262,12 +368,16 @@ using System.Text;
 					public const string Empresa = "Empresa";
 					public const string Sucursal = "Sucursal";
 					public const string Sector = "Sector";
-					public const string Contenedor = "Contenedor";
 					public const string Turno = "Turno";
+					public const string Depositario = "Depositario";
+					public const string Contenedor = "Contenedor";
 					public const string ContenedorId = "ContenedorId";
-					public const string TurnoId = "TurnoId";
+					public const string EsquemaDetalleTurnoId = "EsquemaDetalleTurnoId";
 					public const string SectorId = "SectorId";
+					public const string SucursalId = "SucursalId";
+					public const string EmpresaId = "EmpresaId";
 					public const string UsuarioId = "UsuarioId";
+					public const string DepositarioId = "DepositarioId";
 				}
 				public enum FieldEnum : int
                 {
@@ -283,12 +393,16 @@ using System.Text;
 					Empresa,
 					Sucursal,
 					Sector,
-					Contenedor,
 					Turno,
+					Depositario,
+					Contenedor,
 					ContenedorId,
-					TurnoId,
+					EsquemaDetalleTurnoId,
 					SectorId,
-					UsuarioId
+					SucursalId,
+					EmpresaId,
+					UsuarioId,
+					DepositarioId
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -299,7 +413,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Contenedor,String Turno,Int64 ContenedorId,Int64 TurnoId,Int64 SectorId,Int64 UsuarioId)
+                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId)
                 {
                     this.TransaccionId = TransaccionId;
                     this.TransaccionTipoId = TransaccionTipoId;
@@ -313,12 +427,16 @@ using System.Text;
                     this.Empresa = Empresa;
                     this.Sucursal = Sucursal;
                     this.Sector = Sector;
-                    this.Contenedor = Contenedor;
                     this.Turno = Turno;
+                    this.Depositario = Depositario;
+                    this.Contenedor = Contenedor;
                     this.ContenedorId = ContenedorId;
-                    this.TurnoId = TurnoId;
+                    this.EsquemaDetalleTurnoId = EsquemaDetalleTurnoId;
                     this.SectorId = SectorId;
+                    this.SucursalId = SucursalId;
+                    this.EmpresaId = EmpresaId;
                     this.UsuarioId = UsuarioId;
+                    this.DepositarioId = DepositarioId;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -344,24 +462,32 @@ using System.Text;
              public String Sucursal { get; set; }
              [DataItemAttributeFieldName("Sector","Sector")]
              public String Sector { get; set; }
-             [DataItemAttributeFieldName("Contenedor","Contenedor")]
-             public String Contenedor { get; set; }
              [DataItemAttributeFieldName("Turno","Turno")]
              public String Turno { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
+             [DataItemAttributeFieldName("Contenedor","Contenedor")]
+             public String Contenedor { get; set; }
              [DataItemAttributeFieldName("ContenedorId","ContenedorId")]
              public Int64 ContenedorId { get; set; }
-             [DataItemAttributeFieldName("TurnoId","TurnoId")]
-             public Int64 TurnoId { get; set; }
+             [DataItemAttributeFieldName("EsquemaDetalleTurnoId","EsquemaDetalleTurnoId")]
+             public Int64 EsquemaDetalleTurnoId { get; set; }
              [DataItemAttributeFieldName("SectorId","SectorId")]
              public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             public Int64 EmpresaId { get; set; }
              [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
              public Int64 UsuarioId { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
 				
 			} //Class Transacciones 
 			
-} //namespace DepositarioAdminWeb.Entities.Views.Reporte
+} //namespace Permaquim.Depositary.Entities.Views.Reporte
 //////////////////////////////////////////////////////////////////////////////////
-		namespace DepositarioAdminWeb.Entities.Views.Valor {
+		namespace Permaquim.Depositary.Entities.Views.Valor {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Valor")]  // Database Schema Name
 			[DataItemAttributeObjectName("VistaDenominacion","VistaDenominacion")]    // Object name  and alias in Database
@@ -410,5 +536,5 @@ using System.Text;
 				
 			} //Class VistaDenominacion 
 			
-} //namespace DepositarioAdminWeb.Entities.Views.Valor
+} //namespace Permaquim.Depositary.Entities.Views.Valor
 //////////////////////////////////////////////////////////////////////////////////

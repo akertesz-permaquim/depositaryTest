@@ -7,6 +7,7 @@
 @using Permaquim.Depositary.Web.Administration.Controllers;
 @using Radzen
 @using Radzen.Blazor
+@using System.Timers;
 
 <RadzenContent Container="main">
     <ChildContent>
@@ -22,13 +23,12 @@
                 {
                     if (dataEmpresasAccesibles.Count > 0)
                     {
-                        <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                        <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" SelectAllText="Todos"
                                 @bind-Value=@empresasSeleccionadas Multiple="true" Placeholder="Seleccione empresas" Data=@dataEmpresasAccesibles TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
-                                Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
+                                Change=@(args => OnChangeEmpresa(args)) Disabled=@estaCargando Class="w-100" />
                     }
                 }
             </div>
-
         </div>
         @if (estaCargando)
         {
@@ -72,8 +72,19 @@
                                     </RadzenHeading>
                                     <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="CON BOLSA CASI LLENA">
                                     </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #f9777f; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
-                                    </RadzenHeading>
+                                    @{
+                                        int parseVar;
+                                        if (!int.TryParse(cantidadDepositariosBolsaCasiLlena, out parseVar))
+                                        {
+                                            <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
+                                            </RadzenHeading>
+                                        }
+                                        else
+                                        {
+                                            <RadzenHeading Size="H4" style="color: #f9777f; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
+                                            </RadzenHeading>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </ChildContent>
@@ -92,16 +103,35 @@
                                     </RadzenHeading>
                                     <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="EN LINEA / FUERA DE LINEA">
                                     </RadzenHeading>
-                                    <div class="row">
-                                        <div class="col-4 align-items-center d-flex" style="margin-left:10%">
-                                            <RadzenHeading Size="H4" style="color: #3dd311; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
-                                            </RadzenHeading>
-                                        </div>
-                                        <div class="col-4 align-items-center d-flex" style="margin-left:10%">
-                                            <RadzenHeading Size="H4" style="color:red ; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraLinea">
-                                            </RadzenHeading>
-                                        </div>
-                                    </div>
+                                    @{
+                                        int parseVar;
+                                        @if (!int.TryParse(cantidadDepositariosEnLinea, out parseVar) || !int.TryParse(cantidadDepositariosFueraLinea, out parseVar))
+                                        {
+                                            if (!int.TryParse(cantidadDepositariosEnLinea, out parseVar))
+                                            {
+                                                <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                                </RadzenHeading>
+                                            }
+                                            else
+                                            {
+                                                <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
+                                                </RadzenHeading>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class="col-4 align-items-center d-flex" style="margin-left:10%">
+                                                    <RadzenHeading Size="H4" style="color: #3dd311; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                                    </RadzenHeading>
+                                                </div>
+                                                <div class="col-4 align-items-center d-flex" style="margin-left:10%">
+                                                    <RadzenHeading Size="H4" style="color:red ; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraLinea">
+                                                    </RadzenHeading>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </ChildContent>
@@ -199,7 +229,7 @@
 
 @code {
     private bool estaCargando { get; set; }
-    Int64? userId;
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
     private List<Entities.TextoLenguaje> dataLenguaje;
     private string cantidadTransaccionesAlDia { get; set; }
     private string cantidadDepositariosBolsaCasiLlena { get; set; }
@@ -210,6 +240,9 @@
     private List<Entities.TransaccionTipoCantidad> dataCantidadTipoTransacciones { get; set; }
     private List<DirectorioEntities.Empresa> dataEmpresasAccesibles { get; set; }
     private IEnumerable<Int64> empresasSeleccionadas = new Int64[] { };
+    private int tiempoRecargaSegundos { get; set; } = 10;
+    //Variables auxiliares
+    private Timer timerRecargaInformacion = new Timer();
 
     protected override void OnInitialized()
     {
@@ -222,15 +255,49 @@
         if (firstRender)
         {
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-            userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-            if (userId == null)
+            dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+            if (dataUsuario == null)
                 NavManager.NavigateTo("login", true);
 
             //En funcion del usuario que consulta obtenemos el perfil de visualizacion y luego las empresas a las que puede acceder
             await Task.Run(ObtenerListadoEmpresasPorPerfil);
+            await Task.Run(obtenerParametrosConfiguracion);
+            SetTimer();
             obtenerInformacion();
             StateHasChanged();
         }
+    }
+
+    private void obtenerParametrosConfiguracion()
+    {
+        int tiempoRecarga;
+        string tiempoRecargaString = "";
+        //Obtenemos el tiempo de recarga en segundos de la configuracion
+        tiempoRecargaString = AplicacionController.ObtenerConfiguracionEmpresa("TIEMPO_RECARGA_DASHBOARD_SEGUNDOS", dataUsuario.EmpresaId);
+        if (int.TryParse(tiempoRecargaString, out tiempoRecarga))
+        {
+            //Si el tiempo parametrizado es mayor al tiempo default definido por codigo entonces pisamos el valor.
+            if (tiempoRecarga > tiempoRecargaSegundos)
+                tiempoRecargaSegundos = tiempoRecarga;
+        }
+    }
+
+    private void SetTimer()
+    {
+        //Creamos un timer con el tiempo parametrizado.
+        timerRecargaInformacion = new System.Timers.Timer(tiempoRecargaSegundos * 1000);
+        timerRecargaInformacion.Elapsed += new ElapsedEventHandler(recargarInformacion);
+        timerRecargaInformacion.AutoReset = true;
+        timerRecargaInformacion.Enabled = true;
+        timerRecargaInformacion.Start();
+    }
+
+    private void recargarInformacion(Object source, ElapsedEventArgs e)
+    {
+        //Se deshabilita el timer hasta que se complete la operacion.
+        timerRecargaInformacion.Enabled = false;
+        obtenerInformacion();
+        timerRecargaInformacion.Enabled = true;
     }
 
     private async void obtenerInformacion()
@@ -249,12 +316,12 @@
             }
         }
         estaCargando = false;
-        StateHasChanged();
+        this.InvokeAsync(() => this.StateHasChanged());
     }
 
     private void ObtenerListadoEmpresasPorPerfil()
     {
-        dataEmpresasAccesibles = DirectorioController.ObtenerListadoEmpresasPorPerfil(userId.Value);
+        dataEmpresasAccesibles = DirectorioController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
         //Dejo todas las empresas marcadas
         if (dataEmpresasAccesibles.Count > 0)
         {
@@ -289,22 +356,22 @@
 
     private void obtenerCantidadTransaccionesAlDia()
     {
-        cantidadTransaccionesAlDia = TransaccionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date, empresasSeleccionadas.ToList());
+        cantidadTransaccionesAlDia = OperacionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date, empresasSeleccionadas.ToList());
     }
 
     private void obtenerCantidadDepositariosBolsaCasiLlena()
     {
-        cantidadDepositariosBolsaCasiLlena = DepositarioController.ObtenerCantidadDepositariosConBolsaCasiLlena(empresasSeleccionadas.ToList());
+        cantidadDepositariosBolsaCasiLlena = DepositarioController.ObtenerCantidadDepositariosConBolsaCasiLlena(empresasSeleccionadas.ToList(), dataUsuario.EmpresaId);
     }
 
     private void obtenerCantidadDepositariosEnLinea()
     {
-        cantidadDepositariosEnLinea = DepositarioController.ObtenerCantidadDepositariosEnLinea(empresasSeleccionadas.ToList());
+        cantidadDepositariosEnLinea = DepositarioController.ObtenerCantidadDepositariosEnLinea(empresasSeleccionadas.ToList(), dataUsuario.EmpresaId);
     }
 
     private void obtenerCantidadDepositariosFueraLinea()
     {
-        cantidadDepositariosFueraLinea = DepositarioController.ObtenerCantidadDepositariosFueraLinea(empresasSeleccionadas.ToList());
+        cantidadDepositariosFueraLinea = DepositarioController.ObtenerCantidadDepositariosFueraLinea(empresasSeleccionadas.ToList(), dataUsuario.EmpresaId);
     }
 
     private void obtenerCantidadDepositariosFueraServicio()
@@ -319,6 +386,6 @@
 
     private void obtenerCantidadTransaccionesPorTipo()
     {
-        dataCantidadTipoTransacciones = TransaccionController.ObtenerCantidadTipoTransacciones(empresasSeleccionadas.ToList());
+        dataCantidadTipoTransacciones = OperacionController.ObtenerCantidadTipoTransacciones(empresasSeleccionadas.ToList());
     }
 }

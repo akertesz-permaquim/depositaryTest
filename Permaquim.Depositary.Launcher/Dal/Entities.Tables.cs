@@ -1818,6 +1818,8 @@ using System.Text;
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
              public Int64 DepositarioId { get; set; }
              [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
              public Int64 MonedaId { get; set; }
              [DataItemAttributeFieldName("IndiceEnContadora","IndiceEnContadora")]
              public Int32 IndiceEnContadora { get; set; }
@@ -6061,7 +6063,7 @@ using System.Text;
                 public EntidadCabecera()
                 {
                 }
-                public  EntidadCabecera(Int64 EntidadId,Int64 DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin)
+                public  EntidadCabecera(Int64 EntidadId,Int64? DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin)
                 {
                     this.Id = Id;
                     this.EntidadId = EntidadId;
@@ -6081,7 +6083,7 @@ using System.Text;
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
-             public Int64 DepositarioId { get; set; }
+             public Int64? DepositarioId { get; set; }
              [DataItemAttributeFieldName("Valor","Valor")]
              public String Valor { get; set; }
              [DataItemAttributeFieldName("Fechainicio","Fechainicio")]

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-	namespace DepositarioAdminWeb.Business.Views.Operacion {
+	namespace Permaquim.Depositary.Business.Views.Operacion {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -21,7 +21,7 @@ using System.Text;
 					Id,
 					TransaccionId,
 					DenominacionId,
-					Cantidad,
+					CantidadUnidades,
 					Fecha
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -48,7 +48,7 @@ using System.Text;
             public class AggregateCollection : AggregateParameter
             {
                  internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                 public void Add(Permaquim.Depositary.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
                      {
                          this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
                      }
@@ -66,9 +66,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Operacion.VistaTransaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 Cantidad,DateTime Fecha) 
+			public Entities.Views.Operacion.VistaTransaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 UsuarioId,Int64 UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64 CierreDiarioId,Int64 Id,Int64 TransaccionId,Int64 DenominacionId,Int64 CantidadUnidades,DateTime Fecha) 
 			{
-			  return (Entities.Views.Operacion.VistaTransaccion)base.Add(new Entities.Views.Operacion.VistaTransaccion(TipoId,DepositarioId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,Id,TransaccionId,DenominacionId,Cantidad,Fecha));
+			  return (Entities.Views.Operacion.VistaTransaccion)base.Add(new Entities.Views.Operacion.VistaTransaccion(TipoId,DepositarioId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,Id,TransaccionId,DenominacionId,CantidadUnidades,Fecha));
 			}
             public new List<Entities.Views.Operacion.VistaTransaccion> Items()
             {
@@ -94,21 +94,21 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="TransaccionId"></param>
             /// <param name="DenominacionId"></param>
-            /// <param name="Cantidad"></param>
+            /// <param name="CantidadUnidades"></param>
             /// <param name="Fecha"></param>
             /// <returns></returns>
-            public List<Entities.Views.Operacion.VistaTransaccion> Items(Int64? TipoId,Int64? DepositarioId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Int64? Id,Int64? TransaccionId,Int64? DenominacionId,Int64? Cantidad,DateTime? Fecha)
+            public List<Entities.Views.Operacion.VistaTransaccion> Items(Int64? TipoId,Int64? DepositarioId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Int64? Id,Int64? TransaccionId,Int64? DenominacionId,Int64? CantidadUnidades,DateTime? Fecha)
             {
                 this.Where.whereParameter.Clear();
                 if (TipoId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TipoId);
+                        this.Where.Add(ColumnEnum.TipoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TipoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TipoId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TipoId);
                     }
                    
                 }
@@ -116,11 +116,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, DepositarioId);
+                        this.Where.Add(ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, DepositarioId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
                     }
                    
                 }
@@ -128,11 +128,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioId);
+                        this.Where.Add(ColumnEnum.UsuarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
                     }
                    
                 }
@@ -140,11 +140,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.UsuarioCuentaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioCuentaId);
+                        this.Where.Add(ColumnEnum.UsuarioCuentaId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioCuentaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCuentaId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioCuentaId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCuentaId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioCuentaId);
                     }
                    
                 }
@@ -152,11 +152,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, ContenedorId);
+                        this.Where.Add(ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, ContenedorId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
                     }
                    
                 }
@@ -164,11 +164,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.SesionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SesionId);
+                        this.Where.Add(ColumnEnum.SesionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SesionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SesionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SesionId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SesionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SesionId);
                     }
                    
                 }
@@ -176,11 +176,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TurnoId);
+                        this.Where.Add(ColumnEnum.TurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TurnoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TurnoId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TurnoId);
                     }
                    
                 }
@@ -188,11 +188,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.CierreDiarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, CierreDiarioId);
+                        this.Where.Add(ColumnEnum.CierreDiarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CierreDiarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CierreDiarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, CierreDiarioId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CierreDiarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CierreDiarioId);
                     }
                    
                 }
@@ -200,11 +200,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Id);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
                     }
                    
                 }
@@ -212,11 +212,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                    
                 }
@@ -224,23 +224,23 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.DenominacionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, DenominacionId);
+                        this.Where.Add(ColumnEnum.DenominacionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DenominacionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DenominacionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, DenominacionId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DenominacionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DenominacionId);
                     }
                    
                 }
-                if (Cantidad != null)
+                if (CantidadUnidades != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Cantidad, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Cantidad);
+                        this.Where.Add(ColumnEnum.CantidadUnidades, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadUnidades);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Cantidad, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Cantidad);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CantidadUnidades, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadUnidades);
                     }
                    
                 }
@@ -248,11 +248,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Fecha);
+                        this.Where.Add(ColumnEnum.Fecha, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Fecha);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Fecha);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Fecha, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Fecha);
                     }
                    
                 }
@@ -265,26 +265,38 @@ using System.Text;
             }
             public class WhereCollection : WhereParameter {
                  internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
+                 public void  Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand,object value)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand, object value)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
                  }
             }
             public class OrderByCollection : OrderByParameter {
                  internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+                 public void Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.DirEnum direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
@@ -297,8 +309,288 @@ using System.Text;
                  }
             }
         } // class VistaTransaccion
-	} //namespace DepositarioAdminWeb.Business.Views.Operacion
-	namespace DepositarioAdminWeb.Business.Views.Reporte {
+	} //namespace Permaquim.Depositary.Business.Views.Operacion
+	namespace Permaquim.Depositary.Business.Views.Reporte {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class Contenedores : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					ContenedorId,
+					Identificador,
+					FechaApertura,
+					FechaCierre,
+					Depositario,
+					DepositarioId,
+					CantidadTransacciones,
+					SectorId,
+					CantidadBilletes,
+					CantidadSobres,
+					CantidadTotalDineroMonedaDefault
+				}
+			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where { get; set; }
+         public OrderByCollection OrderBy { get; set; }
+         public GroupByCollection GroupBy { get; set; }
+         public AggregateCollection Aggregate { get; set; }
+            public Contenedores() : base()
+            {
+                base._dataItem = new Entities.Views.Reporte.Contenedores();
+                Where = new WhereCollection();
+                OrderBy = new OrderByCollection();
+                GroupBy = new GroupByCollection();
+            }
+            public Contenedores(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Views.Reporte.Contenedores();
+                Where = new WhereCollection();
+                OrderBy = new OrderByCollection();
+                GroupBy = new GroupByCollection();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositary.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Views.Reporte.Contenedores item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+			public Entities.Views.Reporte.Contenedores Add(Int64 ContenedorId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,String Depositario,Int64 DepositarioId,Int32 CantidadTransacciones,Int64 SectorId,Int64 CantidadBilletes,Int32 CantidadSobres,Double CantidadTotalDineroMonedaDefault) 
+			{
+			  return (Entities.Views.Reporte.Contenedores)base.Add(new Entities.Views.Reporte.Contenedores(ContenedorId,Identificador,FechaApertura,FechaCierre,Depositario,DepositarioId,CantidadTransacciones,SectorId,CantidadBilletes,CantidadSobres,CantidadTotalDineroMonedaDefault));
+			}
+            public new List<Entities.Views.Reporte.Contenedores> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where.whereParameter;
+                dh.OrderByParameter = this.OrderBy.orderByParameter;
+                dh.GroupByParameter = this.GroupBy.groupByParameter;
+                List<Entities.Views.Reporte.Contenedores> _entities = new List<Entities.Views.Reporte.Contenedores>();
+                _entities = dh.Items().Cast<Entities.Views.Reporte.Contenedores>().ToList<Entities.Views.Reporte.Contenedores>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets 
+            /// </summary>
+            /// <param name="ContenedorId"></param>
+            /// <param name="Identificador"></param>
+            /// <param name="FechaApertura"></param>
+            /// <param name="FechaCierre"></param>
+            /// <param name="Depositario"></param>
+            /// <param name="DepositarioId"></param>
+            /// <param name="CantidadTransacciones"></param>
+            /// <param name="SectorId"></param>
+            /// <param name="CantidadBilletes"></param>
+            /// <param name="CantidadSobres"></param>
+            /// <param name="CantidadTotalDineroMonedaDefault"></param>
+            /// <returns></returns>
+            public List<Entities.Views.Reporte.Contenedores> Items(Int64? ContenedorId,String Identificador,DateTime? FechaApertura,DateTime? FechaCierre,String Depositario,Int64? DepositarioId,Int32? CantidadTransacciones,Int64? SectorId,Int64? CantidadBilletes,Int32? CantidadSobres,Double? CantidadTotalDineroMonedaDefault)
+            {
+                this.Where.whereParameter.Clear();
+                if (ContenedorId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
+                    }
+                   
+                }
+                if (Identificador != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Identificador, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Identificador);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Identificador, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Identificador);
+                    }
+                   
+                }
+                if (FechaApertura != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaApertura, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaApertura);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaApertura, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaApertura);
+                    }
+                   
+                }
+                if (FechaCierre != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCierre, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaCierre);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCierre, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaCierre);
+                    }
+                   
+                }
+                if (Depositario != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
+                    }
+                   
+                }
+                if (DepositarioId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                   
+                }
+                if (CantidadTransacciones != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CantidadTransacciones, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadTransacciones);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CantidadTransacciones, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadTransacciones);
+                    }
+                   
+                }
+                if (SectorId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
+                    }
+                   
+                }
+                if (CantidadBilletes != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CantidadBilletes, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadBilletes);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CantidadBilletes, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadBilletes);
+                    }
+                   
+                }
+                if (CantidadSobres != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CantidadSobres, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadSobres);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CantidadSobres, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadSobres);
+                    }
+                   
+                }
+                if (CantidadTotalDineroMonedaDefault != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CantidadTotalDineroMonedaDefault, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadTotalDineroMonedaDefault);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CantidadTotalDineroMonedaDefault, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CantidadTotalDineroMonedaDefault);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            public new IDataItem Add(IDataItem item)
+            {
+                DataHandler dh = new DataHandler(this._dataItem);
+                return base.Add(item);
+            }
+            public class WhereCollection : WhereParameter {
+                 internal WhereParameter whereParameter = new WhereParameter();
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand,object value)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand, object value)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 internal OrderByParameter orderByParameter = new OrderByParameter();
+                 public void Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.DirEnum direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
+                 {
+                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 internal GroupByParameter groupByParameter = new GroupByParameter();
+                 public void Add(ColumnEnum column)
+                 {
+                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class Contenedores
+	} //namespace Permaquim.Depositary.Business.Views.Reporte
+	namespace Permaquim.Depositary.Business.Views.Reporte {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -312,6 +604,8 @@ using System.Text;
 					Moneda,
 					Denominacion,
 					CodigoMoneda,
+					DepositarioId,
+					Depositario,
 					Total
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -338,7 +632,7 @@ using System.Text;
             public class AggregateCollection : AggregateParameter
             {
                  internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                 public void Add(Permaquim.Depositary.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
                      {
                          this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
                      }
@@ -356,9 +650,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.DetalleTransacciones Add(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,String Moneda,String Denominacion,String CodigoMoneda,Decimal Total) 
+			public Entities.Views.Reporte.DetalleTransacciones Add(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,String Moneda,String Denominacion,String CodigoMoneda,Int64 DepositarioId,String Depositario,Decimal Total) 
 			{
-			  return (Entities.Views.Reporte.DetalleTransacciones)base.Add(new Entities.Views.Reporte.DetalleTransacciones(TransaccionId,FechaTransaccion,SectorId,Moneda,Denominacion,CodigoMoneda,Total));
+			  return (Entities.Views.Reporte.DetalleTransacciones)base.Add(new Entities.Views.Reporte.DetalleTransacciones(TransaccionId,FechaTransaccion,SectorId,Moneda,Denominacion,CodigoMoneda,DepositarioId,Depositario,Total));
 			}
             public new List<Entities.Views.Reporte.DetalleTransacciones> Items()
             {
@@ -379,20 +673,22 @@ using System.Text;
             /// <param name="Moneda"></param>
             /// <param name="Denominacion"></param>
             /// <param name="CodigoMoneda"></param>
+            /// <param name="DepositarioId"></param>
+            /// <param name="Depositario"></param>
             /// <param name="Total"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.DetalleTransacciones> Items(Int64? TransaccionId,DateTime? FechaTransaccion,Int64? SectorId,String Moneda,String Denominacion,String CodigoMoneda,Decimal? Total)
+            public List<Entities.Views.Reporte.DetalleTransacciones> Items(Int64? TransaccionId,DateTime? FechaTransaccion,Int64? SectorId,String Moneda,String Denominacion,String CodigoMoneda,Int64? DepositarioId,String Depositario,Decimal? Total)
             {
                 this.Where.whereParameter.Clear();
                 if (TransaccionId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                    
                 }
@@ -400,11 +696,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaTransaccion);
+                        this.Where.Add(ColumnEnum.FechaTransaccion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaTransaccion);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaTransaccion);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaTransaccion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaTransaccion);
                     }
                    
                 }
@@ -412,11 +708,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SectorId);
+                        this.Where.Add(ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SectorId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
                     }
                    
                 }
@@ -424,11 +720,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Moneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Moneda);
+                        this.Where.Add(ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Moneda);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
                     }
                    
                 }
@@ -436,11 +732,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Denominacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Denominacion);
+                        this.Where.Add(ColumnEnum.Denominacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Denominacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Denominacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Denominacion);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Denominacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Denominacion);
                     }
                    
                 }
@@ -448,11 +744,35 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.CodigoMoneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, CodigoMoneda);
+                        this.Where.Add(ColumnEnum.CodigoMoneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoMoneda);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoMoneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, CodigoMoneda);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoMoneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoMoneda);
+                    }
+                   
+                }
+                if (DepositarioId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                   
+                }
+                if (Depositario != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
                     }
                    
                 }
@@ -460,11 +780,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Total, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Total);
+                        this.Where.Add(ColumnEnum.Total, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Total);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Total, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Total);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Total, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Total);
                     }
                    
                 }
@@ -477,26 +797,38 @@ using System.Text;
             }
             public class WhereCollection : WhereParameter {
                  internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
+                 public void  Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand,object value)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand, object value)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
                  }
             }
             public class OrderByCollection : OrderByParameter {
                  internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+                 public void Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.DirEnum direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
@@ -509,8 +841,8 @@ using System.Text;
                  }
             }
         } // class DetalleTransacciones
-	} //namespace DepositarioAdminWeb.Business.Views.Reporte
-	namespace DepositarioAdminWeb.Business.Views.Reporte {
+	} //namespace Permaquim.Depositary.Business.Views.Reporte
+	namespace Permaquim.Depositary.Business.Views.Reporte {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -524,9 +856,11 @@ using System.Text;
 					UsuarioId,
 					ContenedorId,
 					Cantidad,
+					Depositario,
 					TipoValor,
 					TurnoId,
-					SectorId
+					SectorId,
+					DepositarioId
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -552,7 +886,7 @@ using System.Text;
             public class AggregateCollection : AggregateParameter
             {
                  internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                 public void Add(Permaquim.Depositary.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
                      {
                          this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
                      }
@@ -570,9 +904,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.DetalleTransaccionesSobre Add(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 UsuarioId,Int64 ContenedorId,Int64 Cantidad,String TipoValor,Int64 TurnoId,Int64 SectorId) 
+			public Entities.Views.Reporte.DetalleTransaccionesSobre Add(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 UsuarioId,Int64 ContenedorId,Int64 Cantidad,String Depositario,String TipoValor,Int64 TurnoId,Int64 SectorId,Int64 DepositarioId) 
 			{
-			  return (Entities.Views.Reporte.DetalleTransaccionesSobre)base.Add(new Entities.Views.Reporte.DetalleTransaccionesSobre(TransaccionId,FechaTransaccion,CodigoSobre,UsuarioId,ContenedorId,Cantidad,TipoValor,TurnoId,SectorId));
+			  return (Entities.Views.Reporte.DetalleTransaccionesSobre)base.Add(new Entities.Views.Reporte.DetalleTransaccionesSobre(TransaccionId,FechaTransaccion,CodigoSobre,UsuarioId,ContenedorId,Cantidad,Depositario,TipoValor,TurnoId,SectorId,DepositarioId));
 			}
             public new List<Entities.Views.Reporte.DetalleTransaccionesSobre> Items()
             {
@@ -593,22 +927,24 @@ using System.Text;
             /// <param name="UsuarioId"></param>
             /// <param name="ContenedorId"></param>
             /// <param name="Cantidad"></param>
+            /// <param name="Depositario"></param>
             /// <param name="TipoValor"></param>
             /// <param name="TurnoId"></param>
             /// <param name="SectorId"></param>
+            /// <param name="DepositarioId"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.DetalleTransaccionesSobre> Items(Int64? TransaccionId,DateTime? FechaTransaccion,String CodigoSobre,Int64? UsuarioId,Int64? ContenedorId,Int64? Cantidad,String TipoValor,Int64? TurnoId,Int64? SectorId)
+            public List<Entities.Views.Reporte.DetalleTransaccionesSobre> Items(Int64? TransaccionId,DateTime? FechaTransaccion,String CodigoSobre,Int64? UsuarioId,Int64? ContenedorId,Int64? Cantidad,String Depositario,String TipoValor,Int64? TurnoId,Int64? SectorId,Int64? DepositarioId)
             {
                 this.Where.whereParameter.Clear();
                 if (TransaccionId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                    
                 }
@@ -616,11 +952,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaTransaccion);
+                        this.Where.Add(ColumnEnum.FechaTransaccion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaTransaccion);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaTransaccion);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaTransaccion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaTransaccion);
                     }
                    
                 }
@@ -628,11 +964,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.CodigoSobre, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, CodigoSobre);
+                        this.Where.Add(ColumnEnum.CodigoSobre, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoSobre);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoSobre, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, CodigoSobre);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoSobre, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoSobre);
                     }
                    
                 }
@@ -640,11 +976,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioId);
+                        this.Where.Add(ColumnEnum.UsuarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
                     }
                    
                 }
@@ -652,11 +988,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, ContenedorId);
+                        this.Where.Add(ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, ContenedorId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
                     }
                    
                 }
@@ -664,11 +1000,23 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Cantidad, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Cantidad);
+                        this.Where.Add(ColumnEnum.Cantidad, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Cantidad);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Cantidad, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Cantidad);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Cantidad, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Cantidad);
+                    }
+                   
+                }
+                if (Depositario != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
                     }
                    
                 }
@@ -676,11 +1024,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TipoValor, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TipoValor);
+                        this.Where.Add(ColumnEnum.TipoValor, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TipoValor);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoValor, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TipoValor);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoValor, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TipoValor);
                     }
                    
                 }
@@ -688,11 +1036,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TurnoId);
+                        this.Where.Add(ColumnEnum.TurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TurnoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TurnoId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TurnoId);
                     }
                    
                 }
@@ -700,11 +1048,23 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SectorId);
+                        this.Where.Add(ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SectorId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
+                    }
+                   
+                }
+                if (DepositarioId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
                     }
                    
                 }
@@ -717,26 +1077,38 @@ using System.Text;
             }
             public class WhereCollection : WhereParameter {
                  internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
+                 public void  Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand,object value)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand, object value)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
                  }
             }
             public class OrderByCollection : OrderByParameter {
                  internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+                 public void Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.DirEnum direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
@@ -749,8 +1121,8 @@ using System.Text;
                  }
             }
         } // class DetalleTransaccionesSobre
-	} //namespace DepositarioAdminWeb.Business.Views.Reporte
-	namespace DepositarioAdminWeb.Business.Views.Reporte {
+	} //namespace Permaquim.Depositary.Business.Views.Reporte
+	namespace Permaquim.Depositary.Business.Views.Reporte {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -770,12 +1142,16 @@ using System.Text;
 					Empresa,
 					Sucursal,
 					Sector,
-					Contenedor,
 					Turno,
+					Depositario,
+					Contenedor,
 					ContenedorId,
-					TurnoId,
+					EsquemaDetalleTurnoId,
 					SectorId,
-					UsuarioId
+					SucursalId,
+					EmpresaId,
+					UsuarioId,
+					DepositarioId
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -801,7 +1177,7 @@ using System.Text;
             public class AggregateCollection : AggregateParameter
             {
                  internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                 public void Add(Permaquim.Depositary.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
                      {
                          this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
                      }
@@ -819,9 +1195,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.Transacciones Add(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Contenedor,String Turno,Int64 ContenedorId,Int64 TurnoId,Int64 SectorId,Int64 UsuarioId) 
+			public Entities.Views.Reporte.Transacciones Add(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId) 
 			{
-			  return (Entities.Views.Reporte.Transacciones)base.Add(new Entities.Views.Reporte.Transacciones(TransaccionId,TransaccionTipoId,TransaccionTipo,Usuario,FechaTransaccion,FechaRetiroBolsa,Moneda,TotalValidado,TotalAValidar,Empresa,Sucursal,Sector,Contenedor,Turno,ContenedorId,TurnoId,SectorId,UsuarioId));
+			  return (Entities.Views.Reporte.Transacciones)base.Add(new Entities.Views.Reporte.Transacciones(TransaccionId,TransaccionTipoId,TransaccionTipo,Usuario,FechaTransaccion,FechaRetiroBolsa,Moneda,TotalValidado,TotalAValidar,Empresa,Sucursal,Sector,Turno,Depositario,Contenedor,ContenedorId,EsquemaDetalleTurnoId,SectorId,SucursalId,EmpresaId,UsuarioId,DepositarioId));
 			}
             public new List<Entities.Views.Reporte.Transacciones> Items()
             {
@@ -848,25 +1224,29 @@ using System.Text;
             /// <param name="Empresa"></param>
             /// <param name="Sucursal"></param>
             /// <param name="Sector"></param>
-            /// <param name="Contenedor"></param>
             /// <param name="Turno"></param>
+            /// <param name="Depositario"></param>
+            /// <param name="Contenedor"></param>
             /// <param name="ContenedorId"></param>
-            /// <param name="TurnoId"></param>
+            /// <param name="EsquemaDetalleTurnoId"></param>
             /// <param name="SectorId"></param>
+            /// <param name="SucursalId"></param>
+            /// <param name="EmpresaId"></param>
             /// <param name="UsuarioId"></param>
+            /// <param name="DepositarioId"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.Transacciones> Items(Int64? TransaccionId,Int64? TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime? FechaTransaccion,DateTime? FechaRetiroBolsa,String Moneda,Double? TotalValidado,Double? TotalAValidar,String Empresa,String Sucursal,String Sector,String Contenedor,String Turno,Int64? ContenedorId,Int64? TurnoId,Int64? SectorId,Int64? UsuarioId)
+            public List<Entities.Views.Reporte.Transacciones> Items(Int64? TransaccionId,Int64? TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime? FechaTransaccion,DateTime? FechaRetiroBolsa,String Moneda,Double? TotalValidado,Double? TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64? ContenedorId,Int64? EsquemaDetalleTurnoId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,Int64? DepositarioId)
             {
                 this.Where.whereParameter.Clear();
                 if (TransaccionId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionId);
                     }
                    
                 }
@@ -874,11 +1254,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TransaccionTipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionTipoId);
+                        this.Where.Add(ColumnEnum.TransaccionTipoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionTipoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionTipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionTipoId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionTipoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionTipoId);
                     }
                    
                 }
@@ -886,11 +1266,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TransaccionTipo, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionTipo);
+                        this.Where.Add(ColumnEnum.TransaccionTipo, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionTipo);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionTipo, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionTipo);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TransaccionTipo, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TransaccionTipo);
                     }
                    
                 }
@@ -898,11 +1278,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Usuario, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Usuario);
+                        this.Where.Add(ColumnEnum.Usuario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Usuario);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Usuario, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Usuario);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Usuario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Usuario);
                     }
                    
                 }
@@ -910,11 +1290,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaTransaccion);
+                        this.Where.Add(ColumnEnum.FechaTransaccion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaTransaccion);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaTransaccion);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaTransaccion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaTransaccion);
                     }
                    
                 }
@@ -922,11 +1302,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.FechaRetiroBolsa, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaRetiroBolsa);
+                        this.Where.Add(ColumnEnum.FechaRetiroBolsa, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaRetiroBolsa);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaRetiroBolsa, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, FechaRetiroBolsa);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaRetiroBolsa, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaRetiroBolsa);
                     }
                    
                 }
@@ -934,11 +1314,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Moneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Moneda);
+                        this.Where.Add(ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Moneda);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
                     }
                    
                 }
@@ -946,11 +1326,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TotalValidado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TotalValidado);
+                        this.Where.Add(ColumnEnum.TotalValidado, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TotalValidado);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TotalValidado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TotalValidado);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TotalValidado, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TotalValidado);
                     }
                    
                 }
@@ -958,11 +1338,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TotalAValidar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TotalAValidar);
+                        this.Where.Add(ColumnEnum.TotalAValidar, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TotalAValidar);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TotalAValidar, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TotalAValidar);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TotalAValidar, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TotalAValidar);
                     }
                    
                 }
@@ -970,11 +1350,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Empresa, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Empresa);
+                        this.Where.Add(ColumnEnum.Empresa, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Empresa);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Empresa, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Empresa);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Empresa, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Empresa);
                     }
                    
                 }
@@ -982,11 +1362,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Sucursal, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Sucursal);
+                        this.Where.Add(ColumnEnum.Sucursal, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Sucursal);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Sucursal, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Sucursal);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Sucursal, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Sucursal);
                     }
                    
                 }
@@ -994,23 +1374,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Sector, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Sector);
+                        this.Where.Add(ColumnEnum.Sector, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Sector);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Sector, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Sector);
-                    }
-                   
-                }
-                if (Contenedor != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Contenedor, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Contenedor);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Contenedor, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Contenedor);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Sector, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Sector);
                     }
                    
                 }
@@ -1018,11 +1386,35 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Turno, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Turno);
+                        this.Where.Add(ColumnEnum.Turno, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Turno);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Turno, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Turno);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Turno, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Turno);
+                    }
+                   
+                }
+                if (Depositario != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Depositario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Depositario);
+                    }
+                   
+                }
+                if (Contenedor != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Contenedor, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Contenedor);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Contenedor, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Contenedor);
                     }
                    
                 }
@@ -1030,23 +1422,23 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, ContenedorId);
+                        this.Where.Add(ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, ContenedorId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ContenedorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, ContenedorId);
                     }
                    
                 }
-                if (TurnoId != null)
+                if (EsquemaDetalleTurnoId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.TurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TurnoId);
+                        this.Where.Add(ColumnEnum.EsquemaDetalleTurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, EsquemaDetalleTurnoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TurnoId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.EsquemaDetalleTurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, EsquemaDetalleTurnoId);
                     }
                    
                 }
@@ -1054,11 +1446,35 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SectorId);
+                        this.Where.Add(ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SectorId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SectorId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SectorId);
+                    }
+                   
+                }
+                if (SucursalId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SucursalId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SucursalId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SucursalId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, SucursalId);
+                    }
+                   
+                }
+                if (EmpresaId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EmpresaId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.EmpresaId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, EmpresaId);
                     }
                    
                 }
@@ -1066,11 +1482,23 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioId);
+                        this.Where.Add(ColumnEnum.UsuarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, UsuarioId);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
+                    }
+                   
+                }
+                if (DepositarioId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
                     }
                    
                 }
@@ -1083,26 +1511,38 @@ using System.Text;
             }
             public class WhereCollection : WhereParameter {
                  internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
+                 public void  Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand,object value)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand, object value)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
                  }
             }
             public class OrderByCollection : OrderByParameter {
                  internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+                 public void Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.DirEnum direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
@@ -1115,8 +1555,8 @@ using System.Text;
                  }
             }
         } // class Transacciones
-	} //namespace DepositarioAdminWeb.Business.Views.Reporte
-	namespace DepositarioAdminWeb.Business.Views.Valor {
+	} //namespace Permaquim.Depositary.Business.Views.Reporte
+	namespace Permaquim.Depositary.Business.Views.Valor {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -1153,7 +1593,7 @@ using System.Text;
             public class AggregateCollection : AggregateParameter
             {
                  internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                 public void Add(Permaquim.Depositary.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
                      {
                          this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
                      }
@@ -1200,11 +1640,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Nombre, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Nombre);
+                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Nombre);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Nombre);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Nombre);
                     }
                    
                 }
@@ -1212,11 +1652,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Moneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Moneda);
+                        this.Where.Add(ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Moneda);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
                     }
                    
                 }
@@ -1224,11 +1664,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Denominacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Denominacion);
+                        this.Where.Add(ColumnEnum.Denominacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Denominacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Denominacion, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Denominacion);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Denominacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Denominacion);
                     }
                    
                 }
@@ -1236,11 +1676,11 @@ using System.Text;
                 {
                     if (this.Where.whereParameter.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Unidades, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Unidades);
+                        this.Where.Add(ColumnEnum.Unidades, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Unidades);
                     }
                     else
                     {
-                        this.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Unidades, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, Unidades);
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Unidades, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Unidades);
                     }
                    
                 }
@@ -1253,26 +1693,38 @@ using System.Text;
             }
             public class WhereCollection : WhereParameter {
                  internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void  Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand,object value)
+                 public void  Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand,object value)
                  {
                      this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
-                 public void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, object value)
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand, object value)
                  {
                      this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void AddOperand(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     this.whereParameter.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     this.whereParameter.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     this.whereParameter.CloseParentheses();
                  }
             }
             public class OrderByCollection : OrderByParameter {
                  internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositarioAdminWeb.sqlEnum.DirEnum direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+                 public void Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.DirEnum direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
@@ -1285,4 +1737,4 @@ using System.Text;
                  }
             }
         } // class VistaDenominacion
-	} //namespace DepositarioAdminWeb.Business.Views.Valor
+	} //namespace Permaquim.Depositary.Business.Views.Valor

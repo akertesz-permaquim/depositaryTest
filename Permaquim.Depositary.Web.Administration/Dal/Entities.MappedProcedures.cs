@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-		namespace DepositarioAdminWeb.Entities.Procedures. Operacion {
+		namespace Permaquim.Depositary.Entities.Procedures. Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerExistenciasPorDepositario","ObtenerExistenciasPorDepositario")]
@@ -49,7 +49,7 @@ using System.Text;
      }
      }
      }
-		namespace DepositarioAdminWeb.Entities.Procedures. Dispositivo {
+		namespace Permaquim.Depositary.Entities.Procedures. Dispositivo {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Dispositivo")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerInformacionDepositario","ObtenerInformacionDepositario")]
@@ -108,7 +108,7 @@ using System.Text;
      }
      }
      }
-		namespace DepositarioAdminWeb.Entities.Procedures. Operacion {
+		namespace Permaquim.Depositary.Entities.Procedures. Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerExistenciasAValidarPorDepositario","ObtenerExistenciasAValidarPorDepositario")]
@@ -147,7 +147,7 @@ using System.Text;
      }
      }
      }
-		namespace DepositarioAdminWeb.Entities.Procedures. Operacion {
+		namespace Permaquim.Depositary.Entities.Procedures. Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerTotalesGeneralesPorMonedaDepositario","ObtenerTotalesGeneralesPorMonedaDepositario")]
@@ -190,7 +190,7 @@ using System.Text;
      }
      }
      }
-		namespace DepositarioAdminWeb.Entities.Procedures. Regionalizacion {
+		namespace Permaquim.Depositary.Entities.Procedures. Regionalizacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Regionalizacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerTextosLenguaje","ObtenerTextosLenguaje")]

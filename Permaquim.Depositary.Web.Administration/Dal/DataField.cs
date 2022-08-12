@@ -14,7 +14,7 @@ public class GenericDataField : IDataField
 }
 public class DataFieldDefinition
 {
-    public DataFieldDefinition(String name, String frameworkName,String dataTypeName, bool isPk,bool isAuto, bool isKey, bool isFk, bool isDp,bool isNone,bool exclude)
+    public DataFieldDefinition(String name, String frameworkName,String dataTypeName, bool isPk,bool isAuto, bool isKey, bool isFk, bool isDp,bool isNone,bool exclude, bool isComputed)
     {
         Name = name;
         FrameworkName = frameworkName;
@@ -26,6 +26,7 @@ public class DataFieldDefinition
         IsDp = isDp;
         IsNone = isNone;
         Exclude = exclude;
+        IsComputed = isComputed;
     }
     public String Name { get; set; }
     public String FrameworkName { get; set; }
@@ -37,4 +38,5 @@ public class DataFieldDefinition
     public bool IsDp { get; set; }
     public bool IsNone { get; set; }
     public bool Exclude { get; set; }
+    public bool IsComputed { get; set; }
 }

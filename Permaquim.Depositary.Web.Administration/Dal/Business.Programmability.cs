@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-	namespace DepositarioAdminWeb.Business.Procedures.Dispositivo {
+	namespace Permaquim.Depositary.Business.Procedures.Dispositivo {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -26,8 +26,8 @@ using System.Text;
                  get { return _result; }
              }
         }// class Dispositivo
-	} // namespace DepositarioAdminWeb.Business.Procedures.Dispositivo
-	namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+	} // namespace Permaquim.Depositary.Business.Procedures.Dispositivo
+	namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -51,8 +51,8 @@ using System.Text;
                  get { return _result; }
              }
         }// class Operacion
-	} // namespace DepositarioAdminWeb.Business.Procedures.Operacion
-	namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+	} // namespace Permaquim.Depositary.Business.Procedures.Operacion
+	namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -76,8 +76,8 @@ using System.Text;
                  get { return _result; }
              }
         }// class Operacion
-	} // namespace DepositarioAdminWeb.Business.Procedures.Operacion
-	namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+	} // namespace Permaquim.Depositary.Business.Procedures.Operacion
+	namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -101,8 +101,8 @@ using System.Text;
                  get { return _result; }
              }
         }// class Operacion
-	} // namespace DepositarioAdminWeb.Business.Procedures.Operacion
-	namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+	} // namespace Permaquim.Depositary.Business.Procedures.Operacion
+	namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -126,8 +126,8 @@ using System.Text;
                  get { return _result; }
              }
         }// class Operacion
-	} // namespace DepositarioAdminWeb.Business.Procedures.Operacion
-	namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+	} // namespace Permaquim.Depositary.Business.Procedures.Operacion
+	namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -151,8 +151,8 @@ using System.Text;
                  get { return _result; }
              }
         }// class Operacion
-	} // namespace DepositarioAdminWeb.Business.Procedures.Operacion
-	namespace DepositarioAdminWeb.Business.Procedures.Seguridad {
+	} // namespace Permaquim.Depositary.Business.Procedures.Operacion
+	namespace Permaquim.Depositary.Business.Procedures.Seguridad {
 	    /// <summary>
 	    /// 
 	    /// </summary>
@@ -176,4 +176,4 @@ using System.Text;
                  get { return _result; }
              }
         }// class Seguridad
-	} // namespace DepositarioAdminWeb.Business.Procedures.Seguridad
+	} // namespace Permaquim.Depositary.Business.Procedures.Seguridad

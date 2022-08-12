@@ -47,9 +47,9 @@ public class DataHandler : DataHandlerBase
         {
             _commandText = Constants.SQL_INSERT_INTO ;
             _commandText += GetFullDataEntityName();
-            _commandText += " ( " + GetFieldList(false);
+            _commandText += " ( " + GetFieldList(false, false);
             _commandText += " ) " + Constants.SQL_VALUES;
-            _commandText += " ( " + GetParameterizedValuesList(false);
+            _commandText += " ( " + GetParameterizedValuesList(false,false);
             _commandText += " )";
             BuildParameterValuesList(item);
             _commandText +=  ConfigurationHandler.PkFunction;
@@ -100,7 +100,7 @@ public class DataHandler : DataHandlerBase
             //Clears previous result
             _itemList.Clear();
             _commandText = Constants.SQL_SELECT ;
-            _commandText += GetFieldList(true);
+            _commandText += GetFieldList(true, true);
             _commandText += Constants.SQL_FROM ;
             _commandText += GetFullDataEntityName();
             _commandText += " WITH (NOLOCK) ";

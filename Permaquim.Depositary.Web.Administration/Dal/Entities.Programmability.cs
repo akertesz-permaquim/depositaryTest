@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-		namespace DepositarioAdminWeb.Entities.Procedures.Dispositivo {
+		namespace Permaquim.Depositary.Entities.Procedures.Dispositivo {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Dispositivo")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerDepositarios","ObtenerDepositarios")]    // Object name  and alias in Database
@@ -97,8 +97,8 @@ using System.Text;
 				
 			} //Class ObtenerDepositarios 
 			
-} //namespace DepositarioAdminWeb.Entities.Procedures.Dispositivo
-		namespace DepositarioAdminWeb.Entities.Procedures.Operacion {
+} //namespace Permaquim.Depositary.Entities.Procedures.Dispositivo
+		namespace Permaquim.Depositary.Entities.Procedures.Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerDetalleTransaccion","ObtenerDetalleTransaccion")]    // Object name  and alias in Database
@@ -149,8 +149,8 @@ using System.Text;
 				
 			} //Class ObtenerDetalleTransaccion 
 			
-} //namespace DepositarioAdminWeb.Entities.Procedures.Operacion
-		namespace DepositarioAdminWeb.Entities.Procedures.Operacion {
+} //namespace Permaquim.Depositary.Entities.Procedures.Operacion
+		namespace Permaquim.Depositary.Entities.Procedures.Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerDetalleTransaccionSobre","ObtenerDetalleTransaccionSobre")]    // Object name  and alias in Database
@@ -197,8 +197,8 @@ using System.Text;
 				
 			} //Class ObtenerDetalleTransaccionSobre 
 			
-} //namespace DepositarioAdminWeb.Entities.Procedures.Operacion
-		namespace DepositarioAdminWeb.Entities.Procedures.Operacion {
+} //namespace Permaquim.Depositary.Entities.Procedures.Operacion
+		namespace Permaquim.Depositary.Entities.Procedures.Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerEventosPorDepositario","ObtenerEventosPorDepositario")]    // Object name  and alias in Database
@@ -245,8 +245,8 @@ using System.Text;
 				
 			} //Class ObtenerEventosPorDepositario 
 			
-} //namespace DepositarioAdminWeb.Entities.Procedures.Operacion
-		namespace DepositarioAdminWeb.Entities.Procedures.Operacion {
+} //namespace Permaquim.Depositary.Entities.Procedures.Operacion
+		namespace Permaquim.Depositary.Entities.Procedures.Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerTransaccionesPorDepositario","ObtenerTransaccionesPorDepositario")]    // Object name  and alias in Database
@@ -309,8 +309,8 @@ using System.Text;
 				
 			} //Class ObtenerTransaccionesPorDepositario 
 			
-} //namespace DepositarioAdminWeb.Entities.Procedures.Operacion
-		namespace DepositarioAdminWeb.Entities.Procedures.Operacion {
+} //namespace Permaquim.Depositary.Entities.Procedures.Operacion
+		namespace Permaquim.Depositary.Entities.Procedures.Operacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Operacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerTransaccionesSobrePorDepositario","ObtenerTransaccionesSobrePorDepositario")]    // Object name  and alias in Database
@@ -385,8 +385,8 @@ using System.Text;
 				
 			} //Class ObtenerTransaccionesSobrePorDepositario 
 			
-} //namespace DepositarioAdminWeb.Entities.Procedures.Operacion
-		namespace DepositarioAdminWeb.Entities.Procedures.Seguridad {
+} //namespace Permaquim.Depositary.Entities.Procedures.Operacion
+		namespace Permaquim.Depositary.Entities.Procedures.Seguridad {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Seguridad")]  // Database Schema Name
 			[DataItemAttributeObjectName("ObtenerRolesPorUsuario","ObtenerRolesPorUsuario")]    // Object name  and alias in Database
@@ -437,4 +437,4 @@ using System.Text;
 				
 			} //Class ObtenerRolesPorUsuario 
 			
-} //namespace DepositarioAdminWeb.Entities.Procedures.Seguridad
+} //namespace Permaquim.Depositary.Entities.Procedures.Seguridad

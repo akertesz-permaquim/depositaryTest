@@ -19,21 +19,21 @@
                 case CrudMode.Add:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_TITLE",dataLenguaje) </h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Directorio.RelacionMonedaSucursal",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Delete:
                     <RadzenBadge BadgeStyle="BadgeStyle.Warning">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_TITLE",dataLenguaje) </h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Directorio.RelacionMonedaSucursal",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Edit:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_TITLE",dataLenguaje) </h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Directorio.RelacionMonedaSucursal",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
@@ -41,7 +41,7 @@
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
                             <div>
-                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_TITLE",dataLenguaje) </h4>
+                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Directorio.RelacionMonedaSucursal",dataLenguaje)</h4>
                             </div>
                         </ChildContent>
                     </RadzenBadge>
@@ -50,13 +50,13 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@RelacionMonedaSucursal_entities" TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@RelacionMonedaSucursal_entities" TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
                     </EmptyTemplate>
                     <Columns>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px">
                             <HeaderTemplate>
                                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioRelacionMonedaSucursal",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
                                 </RadzenButton>
@@ -68,8 +68,8 @@
                                 </RadzenButton>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Title="MonedaId" Property="MonedaId" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Title="MonedaId" Property="MonedaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_MonedaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Moneda_entities.FirstOrDefault(c => c.Id == @context.MonedaId) != null)
                                 {
@@ -82,8 +82,12 @@
                                     </RadzenLabel>
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_MonedaId Data="@Moneda_MonedaId_filter" Change="OnSelectedFilter_MonedaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Title="SucursalId" Property="SucursalId" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Title="SucursalId" Property="SucursalId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_SucursalId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Sucursal_entities.FirstOrDefault(c => c.Id == @context.SucursalId) != null)
                                 {
@@ -96,26 +100,68 @@
                                     </RadzenLabel>
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_SucursalId Data="@Sucursal_SucursalId_filter" Change="OnSelectedFilter_SucursalId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="EsDefault" Filterable="false" Title="EsDefault" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="EsDefault" Filterable="false" Title="EsDefault" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.EsDefault Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="UsuarioCreacion" Filterable="false" Title="UsuarioCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                            <Template>
+                                @{
+                                    var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
+                                    if (usuario != null)
+                                    {
+                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                    else
+                                    {
+                                        <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                }
+                            </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="FechaCreacion" Filterable="false" Title="FechaCreacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="UsuarioModificacion" Filterable="false" Title="UsuarioModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                            <Template>
+                                @{
+                                    var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion);
+                                    if (usuario != null)
+                                    {
+                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                    else
+                                    {
+                                        <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                }
+                            </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="FechaModificacion" Filterable="false" Title="FechaModificacion" Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
                     </Columns>
                 </RadzenDataGrid>
@@ -124,18 +170,21 @@
 
             if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
             {
-                <RadzenTemplateForm TItem="DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal" Data="@RelacionMonedaSucursal_entity" @bind-Value="RelacionMonedaSucursal_entity" Submit="Save" Visible="@(RelacionMonedaSucursal_entity != null)">
+                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Data="@RelacionMonedaSucursal_entity" @bind-Value="RelacionMonedaSucursal_entity" Submit="Save" Visible="@(RelacionMonedaSucursal_entity != null)">
                     <ChildContent>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
-                                <RadzenLabel Text="Id" Component="Id" style="width: 100%">
-                                </RadzenLabel>
+                        @if (crudMode != CrudMode.Add)
+                        {
+                            <div style="margin-bottom: 1rem" class="row">
+                                <div class="col-md-3">
+                                    <RadzenLabel Text="Id" Component="Id" style="width: 100%">
+                                    </RadzenLabel>
+                                </div>
+                                <div class="col-md-9">
+                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaSucursal_entity.Id)" Name="Id" Disabled="true">
+                                    </RadzenNumeric>
+                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaSucursal_entity.Id)" Name="Id" Disabled="true">
-                                </RadzenNumeric>
-                            </div>
-                        </div>
+                        }
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
                                 <RadzenLabel Text="MonedaId" Component="MonedaId" style="width: 100%">
@@ -185,58 +234,6 @@
                                 <RadzenCheckBox @bind-Value=@RelacionMonedaSucursal_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @RelacionMonedaSucursal_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
                             </div>
                         </div>
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text="UsuarioCreacion" Component="UsuarioCreacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaSucursal_entity.UsuarioCreacion)" Name="UsuarioCreacion" Disabled="true">
-                                    </RadzenNumeric>
-                                </div>
-                            </div>
-                        }
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text="FechaCreacion" Component="FechaCreacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(RelacionMonedaSucursal_entity.FechaCreacion)" Name="FechaCreacion" Disabled="true">
-                                    </RadzenDatePicker>
-                                </div>
-                            </div>
-                        }
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text="UsuarioModificacion" Component="UsuarioModificacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    <RadzenNumeric TValue="long?" style="display: block; width: 100%" @bind-Value="@(RelacionMonedaSucursal_entity.UsuarioModificacion)" Name="UsuarioModificacion" Disabled="true">
-                                    </RadzenNumeric>
-                                </div>
-                            </div>
-                        }
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text="FechaModificacion" Component="FechaModificacion" style="width: 100%">
-                                    </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    <RadzenDatePicker ShowTime="true" ShowSeconds="true" style="width: 25%" @bind-Value="@(RelacionMonedaSucursal_entity.FechaModificacion)" Name="FechaModificacion" Disabled="true">
-                                    </RadzenDatePicker>
-                                </div>
-                            </div>
-                        }
                         <div class="row">
                             <div class="col offset-sm-3">
                                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Aceptar" ButtonStyle="ButtonStyle.Primary">
@@ -277,20 +274,40 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal RelacionMonedaSucursal_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal> RelacionMonedaSucursal_entities = null;
+    private Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal RelacionMonedaSucursal_entity = new();
+    private List<Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal> RelacionMonedaSucursal_entities = null;
 
     /// <summary>
     /// Variables to handle Relation between RelacionMonedaSucursal.MonedaId and Moneda.Id
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Valor.Moneda Moneda_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Valor.Moneda>? Moneda_entities;
+    private Depositary.Entities.Tables.Valor.Moneda Moneda_entity = new();
+    private List<Depositary.Entities.Tables.Valor.Moneda>? Moneda_entities;
+    private List<Depositary.Entities.Tables.Valor.Moneda> Moneda_MonedaId_filter;
+    private IEnumerable<Int64> selectedFilter_MonedaId;
 
     /// <summary>
     /// Variables to handle Relation between RelacionMonedaSucursal.SucursalId and Sucursal.Id
     /// </summary>
-    private DepositarioAdminWeb.Entities.Tables.Directorio.Sucursal Sucursal_entity = new();
-    private List<DepositarioAdminWeb.Entities.Tables.Directorio.Sucursal>? Sucursal_entities;
+    private Depositary.Entities.Tables.Directorio.Sucursal Sucursal_entity = new();
+    private List<Depositary.Entities.Tables.Directorio.Sucursal>? Sucursal_entities;
+    private List<Depositary.Entities.Tables.Directorio.Sucursal> Sucursal_SucursalId_filter;
+    private IEnumerable<Int64> selectedFilter_SucursalId;
+
+    /// <summary>
+    /// Variables to handle Relation between RelacionMonedaSucursal.UsuarioCreacion and Usuario.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioCreacion_filter;
+    private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
+
+    /// <summary>
+    /// Variables to handle Relation between Banco.UsuarioModificacion and Usuario.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
+    private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
 
     /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
@@ -300,7 +317,7 @@ else
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
-    private Int64? userId = null;
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
 
     /// <summary>
     /// Variables to store multilanguaje
@@ -321,8 +338,8 @@ else
         dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
-        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-        if (userId == null)
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
     }
     #region Loading entities data
@@ -331,8 +348,8 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal entity = new DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal();
-        entity.Where.Add(DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
+        Depositary.Business.Tables.Directorio.RelacionMonedaSucursal entity = new Depositary.Business.Tables.Directorio.RelacionMonedaSucursal();
+        entity.Where.Add(Depositary.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, SucursalId);
         RelacionMonedaSucursal_entities = entity.Items();
     }
     /// <summary>
@@ -340,12 +357,21 @@ else
     /// </summary>
     private void LoadTypesData()
     {
-        DepositarioAdminWeb.Business.Tables.Valor.Moneda Moneda_local = new();
+        Depositary.Business.Tables.Valor.Moneda Moneda_local = new();
         Moneda_entities = Moneda_local.Items();
+        Moneda_MonedaId_filter = Moneda_entities.Where(x => RelacionMonedaSucursal_entities.Select(x => x.MonedaId).Distinct().Contains(x.Id)).ToList();
 
-        DepositarioAdminWeb.Business.Tables.Directorio.Sucursal Sucursal_local = new();
+        Depositary.Business.Tables.Directorio.Sucursal Sucursal_local = new();
         Sucursal_entities = Sucursal_local.Items();
+        Sucursal_SucursalId_filter = Sucursal_entities.Where(x => RelacionMonedaSucursal_entities.Select(x => x.SucursalId).Distinct().Contains(x.Id)).ToList();
 
+        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
+        Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
+        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => RelacionMonedaSucursal_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
+
+        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
+        Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
+        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => RelacionMonedaSucursal_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
     }
 
     #endregion
@@ -355,11 +381,11 @@ else
     private bool verificarExistenciaMonedaSucursalDefault()
     {
         bool resultado = true;
-        DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal oMonedaSucursal = new DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal();
-        oMonedaSucursal.Where.Add(DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, SucursalId);
-        oMonedaSucursal.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.EsDefault, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-        oMonedaSucursal.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-        oMonedaSucursal.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.NotEqual, RelacionMonedaSucursal_entity.Id);
+        Depositary.Business.Tables.Directorio.RelacionMonedaSucursal oMonedaSucursal = new Depositary.Business.Tables.Directorio.RelacionMonedaSucursal();
+        oMonedaSucursal.Where.Add(Depositary.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, SucursalId);
+        oMonedaSucursal.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
+        oMonedaSucursal.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+        oMonedaSucursal.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.NotEqual, RelacionMonedaSucursal_entity.Id);
 
         oMonedaSucursal.Items();
         if (oMonedaSucursal.Result.Count == 0)
@@ -386,7 +412,7 @@ else
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal item, bool delete)
+    private void Edit(Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal item, bool delete)
     {
         RelacionMonedaSucursal_entity = item;
         Moneda_entity = new()
@@ -432,7 +458,7 @@ else
         if (validacionesSave)
         {
             RelacionMonedaSucursal_entity.SucursalId = SucursalId;
-            DepositarioAdminWeb.Business.Tables.Directorio.RelacionMonedaSucursal crud = new();
+            Depositary.Business.Tables.Directorio.RelacionMonedaSucursal crud = new();
             foreach (var property in RelacionMonedaSucursal_entity.GetType().GetProperties())
             {
                 switch (property.Name)
@@ -456,7 +482,7 @@ else
                     case "UsuarioCreacion":
                         if (crudMode == CrudMode.Add)
                         {
-                            RelacionMonedaSucursal_entity.UsuarioCreacion = userId.Value;
+                            RelacionMonedaSucursal_entity.UsuarioCreacion = dataUsuario.Id;
                         }
                         break;
                     case "UsuarioModificacion":
@@ -466,7 +492,7 @@ else
                         }
                         else
                         {
-                            RelacionMonedaSucursal_entity.UsuarioModificacion = userId.Value;
+                            RelacionMonedaSucursal_entity.UsuarioModificacion = dataUsuario.Id;
                         }
                         break;
                 }
@@ -593,7 +619,7 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void EsDefaultChange(bool? value, DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal item)
+    void EsDefaultChange(bool? value, Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal item)
     {
         RelacionMonedaSucursal_entity = item;
     }
@@ -601,9 +627,57 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void HabilitadoChange(bool? value, DepositarioAdminWeb.Entities.Tables.Directorio.RelacionMonedaSucursal item)
+    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal item)
     {
         RelacionMonedaSucursal_entity = item;
+    }
+
+    /// <summary>
+    /// selectedFilter_UsuarioModificacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_UsuarioModificacion_Changed(object value)
+    {
+        if (selectedFilter_UsuarioModificacion != null && !selectedFilter_UsuarioModificacion.Any())
+        {
+            selectedFilter_UsuarioModificacion = null;
+        }
+    }
+
+    /// <summary>
+    /// selectedFilter_UsuarioCreacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_UsuarioCreacion_Changed(object value)
+    {
+        if (selectedFilter_UsuarioCreacion != null && !selectedFilter_UsuarioCreacion.Any())
+        {
+            selectedFilter_UsuarioCreacion = null;
+        }
+    }
+
+    /// <summary>
+    /// selectedFilter_SucursalId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_SucursalId_Changed(object value)
+    {
+        if (selectedFilter_SucursalId != null && !selectedFilter_SucursalId.Any())
+        {
+            selectedFilter_SucursalId = null;
+        }
+    }
+
+    /// <summary>
+    /// selectedFilter_MonedaId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_MonedaId_Changed(object value)
+    {
+        if (selectedFilter_MonedaId != null && !selectedFilter_MonedaId.Any())
+        {
+            selectedFilter_MonedaId = null;
+        }
     }
     #endregion
 

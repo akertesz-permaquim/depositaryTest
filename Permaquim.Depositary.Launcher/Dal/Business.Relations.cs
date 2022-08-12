@@ -6802,7 +6802,7 @@ using System.Text;
          /// DepositarioMoneda Add Method
          /// </summary>
          /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
-         /// <param name='MonedaId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId'></param>
          /// <param name='IndiceEnContadora'></param>
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
@@ -6810,7 +6810,7 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.DepositarioMoneda</returns>
-			public Entities.Relations.Dispositivo.DepositarioMoneda Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 MonedaId,Int32 IndiceEnContadora,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.DepositarioMoneda Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Int32 IndiceEnContadora,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.DepositarioMoneda)base.Add(new Entities.Relations.Dispositivo.DepositarioMoneda(DepositarioId,MonedaId,IndiceEnContadora,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}

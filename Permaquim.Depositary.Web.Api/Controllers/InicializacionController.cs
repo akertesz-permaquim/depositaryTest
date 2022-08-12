@@ -35,7 +35,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             {
 
                 model.AplicacionConfiguracion = ObtenerAplicacionConfiguracion();
-                model.AuditoriaLog = ObtenerAuditoriaLog();
+                model.ConfiguracionEmpresa = ObtenerAplicacionConfiguracionEmpresa();
                 model.AuditoriaTipoLog = ObtenerAuditoriaTipoLog();
                 model.BancaBanco = ObtenerBancaBanco();
                 model.BancaCuenta = ObtenerBancaCuenta();
@@ -44,15 +44,17 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 model.BiometriaHuellaDactilar = ObtenerBiometriaHuellaDactilar();
                 model.DirectorioEmpresa = ObtenerDirectorioEmpresa();
                 model.DirectorioGrupo = ObtenerDirectorioGrupo();
-                model.DirectorioIdentificadorUsuario = ObtenerDirectorioIdentificadorUsuario();
+                model.SeguridadIdentificadorUsuario = ObtenerSeguridadIdentificadorUsuario();
                 model.DirectorioRelacionMonedaSucursal = ObtenerDirectorioRelacionMonedaSucursal();
                 model.DirectorioSector = ObtenerDirectorioSector();
                 model.DirectorioSucursal = ObtenerDirectorioSucursal();
-                model.DirectorioTipoIdentificador = ObtenerDirectorioTipoIdentificador();
+                model.SeguridadTipoIdentificador = ObtenerSeguridadTipoIdentificador();
                 model.DispositivoComandoContadora = ObtenerDispositivoComandoContadora();
                 model.DispositivoComandoPlaca = ObtenerDispositivoComandoPlaca();
                 model.DispositivoConfiguracionDepositario = ObtenerDispositivoConfiguracionDepositario();
                 model.DispositivoDepositario = ObtenerDispositivoDepositario();
+                model.PlantillaMoneda = ObtenerDispositivoPlantillaMoneda();
+                model.PlantillaMonedaDetalle = ObtenerDispositivoPlantillaMonedaDetalle();
                 model.DispositivoDepositarioContadora = ObtenerDispositivoDepositarioContadora();
                 model.DispositivoDepositarioEstado = ObtenerDispositivoDepositarioEstado();
                 model.DispositivoDepositarioMoneda = ObtenerDispositivoDepositarioMoneda();
@@ -70,19 +72,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 model.GeografiaPais = ObtenerGeografiaPais();
                 model.GeografiaProvincia = ObtenerGeografiaProvincia();
                 model.GeografiaZona = ObtenerGeografiaZona();
-                model.OperacionCierreDiario = ObtenerOperacionCierreDiario();
-                model.OperacionContenedor = ObtenerOperacionContenedor();
-                model.OperacionEvento = ObtenerOperacionEvento();
-                model.OperacionSesion = ObtenerOperacionSesion();
                 model.OperacionTipoContenedor = ObtenerOperacionTipoContenedor();
                 model.OperacionTipoEvento = ObtenerOperacionTipoEvento();
                 model.OperacionTipoTransaccion = ObtenerOperacionTipoTransaccion();
-                model.OperacionTransaccion = ObtenerOperacionTransaccion();
-                model.OperacionTransaccionDetalle = ObtenerOperacionTransaccionDetalle();
-                model.OperacionTransaccionSobre = ObtenerOperacionTransaccionSobre();
-                model.OperacionTransaccionSobreDetalle = ObtenerOperacionTransaccionSobreDetalle();
-                model.OperacionTurno = ObtenerOperacionTurno();
-                model.OperacionTurnoUsuario = ObtenerOperacionTurnoUsuario();
                 model.RegionalizacionLenguaje = ObtenerRegionalizacionLenguaje();
                 model.RegionalizacionLenguajeItem = ObtenerRegionalizacionLenguajeItem();
                 model.SeguridadAplicacion = ObtenerSeguridadAplicacion();
@@ -100,8 +92,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 model.SeguridadUsuarioSector = ObtenerSeguridadUsuarioSector();
                 model.SincronizacionConfiguracion = ObtenerSincronizacionConfiguracion();
                 model.SincronizacionEntidad = ObtenerSincronizacionEntidad();
-                model.SincronizacionEntidadCabecera = ObtenerSincronizacionEntidadCabecera();
-                model.SincronizacionEntidadDetalle = ObtenerSincronizacionEntidadDetalle();
                 model.TurnoAgendaTurno = ObtenerTurnoAgendaTurno();
                 model.TurnoEsquemaDetalleTurno = ObtenerTurnoEsquemaDetalleTurno();
                 model.TurnoEsquemaTurno = ObtenerTurnoEsquemaTurno();
@@ -109,6 +99,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 model.ValorMoneda = ObtenerValorMoneda();
                 model.ValorRelacionMonedaTipoValor = ObtenerValorRelacionMonedaTipoValor();
                 model.ValorTipo = ObtenerValorTipo();
+                model.OrigenValor = ObtenerValorOrigenValor();
                 model.VisualizacionPerfil = ObtenerVisualizacionPerfil();
                 model.VisualizacionPerfilItem = ObtenerVisualizacionPerfilItem();
                 model.VisualizacionPerfilTipo = ObtenerVisualizacionPerfilTipo();
@@ -131,9 +122,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Auditoria.Log> ObtenerAuditoriaLog()
+        private List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ObtenerAplicacionConfiguracionEmpresa()
         {
-            DepositaryWebApi.Business.Tables.Auditoria.Log entities = new();
+            DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionEmpresa entities = new();
             return entities.Items();
         }
 
@@ -185,7 +176,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> ObtenerDirectorioIdentificadorUsuario()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> ObtenerSeguridadIdentificadorUsuario()
         {
             DepositaryWebApi.Business.Tables.Seguridad.IdentificadorUsuario entities = new();
             return entities.Items();
@@ -209,7 +200,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> ObtenerDirectorioTipoIdentificador()
+        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> ObtenerSeguridadTipoIdentificador()
         {
             DepositaryWebApi.Business.Tables.Seguridad.TipoIdentificador entities = new();
             return entities.Items();
@@ -272,6 +263,18 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private List<DepositaryWebApi.Entities.Tables.Dispositivo.Modelo> ObtenerDispositivoModelo()
         {
             DepositaryWebApi.Business.Tables.Dispositivo.Modelo entities = new();
+            return entities.Items();
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMoneda> ObtenerDispositivoPlantillaMoneda()
+        {
+            DepositaryWebApi.Business.Tables.Dispositivo.PlantillaMoneda entities = new();
+            return entities.Items();
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> ObtenerDispositivoPlantillaMonedaDetalle()
+        {
+            DepositaryWebApi.Business.Tables.Dispositivo.PlantillaMonedaDetalle entities = new();
             return entities.Items();
         }
 
@@ -382,43 +385,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             DepositaryWebApi.Business.Tables.Operacion.TipoTransaccion entities = new();
             return entities.Items();
         }
-
-        private List<DepositaryWebApi.Entities.Tables.Operacion.Transaccion> ObtenerOperacionTransaccion()
-        {
-            DepositaryWebApi.Business.Tables.Operacion.Transaccion entities = new();
-            return entities.Items();
-        }
-
-        private List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionDetalle> ObtenerOperacionTransaccionDetalle()
-        {
-            DepositaryWebApi.Business.Tables.Operacion.TransaccionDetalle entities = new();
-            return entities.Items();
-        }
-
-        private List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobre> ObtenerOperacionTransaccionSobre()
-        {
-            DepositaryWebApi.Business.Tables.Operacion.TransaccionSobre entities = new();
-            return entities.Items();
-        }
-
-        private List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobreDetalle> ObtenerOperacionTransaccionSobreDetalle()
-        {
-            DepositaryWebApi.Business.Tables.Operacion.TransaccionSobreDetalle entities = new();
-            return entities.Items();
-        }
-
-        private List<DepositaryWebApi.Entities.Tables.Operacion.Turno> ObtenerOperacionTurno()
-        {
-            DepositaryWebApi.Business.Tables.Operacion.Turno entities = new();
-            return entities.Items();
-        }
-
-        private List<DepositaryWebApi.Entities.Tables.Operacion.TurnoUsuario> ObtenerOperacionTurnoUsuario()
-        {
-            DepositaryWebApi.Business.Tables.Operacion.TurnoUsuario entities = new();
-            return entities.Items();
-        }
-
         private List<DepositaryWebApi.Entities.Tables.Regionalizacion.Lenguaje> ObtenerRegionalizacionLenguaje()
         {
             DepositaryWebApi.Business.Tables.Regionalizacion.Lenguaje entities = new();
@@ -521,18 +487,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera> ObtenerSincronizacionEntidadCabecera()
-        {
-            DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera entities = new();
-            return entities.Items();
-        }
-
-        private List<DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle> ObtenerSincronizacionEntidadDetalle()
-        {
-            DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle entities = new();
-            return entities.Items();
-        }
-
         private List<DepositaryWebApi.Entities.Tables.Turno.AgendaTurno> ObtenerTurnoAgendaTurno()
         {
             DepositaryWebApi.Business.Tables.Turno.AgendaTurno entities = new();
@@ -572,6 +526,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private List<DepositaryWebApi.Entities.Tables.Valor.Tipo> ObtenerValorTipo()
         {
             DepositaryWebApi.Business.Tables.Valor.Tipo entities = new();
+            return entities.Items();
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Valor.OrigenValor> ObtenerValorOrigenValor()
+        {
+            DepositaryWebApi.Business.Tables.Valor.OrigenValor entities = new();
             return entities.Items();
         }
 

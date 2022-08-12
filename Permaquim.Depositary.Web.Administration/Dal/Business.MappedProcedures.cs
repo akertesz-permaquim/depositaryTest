@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-		namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+		namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// ObtenerExistenciasPorDepositario
 	    /// </summary>
@@ -32,7 +32,7 @@ using System.Text;
              }
         }// class 
      }
-		namespace DepositarioAdminWeb.Business.Procedures.Dispositivo {
+		namespace Permaquim.Depositary.Business.Procedures.Dispositivo {
 	    /// <summary>
 	    /// ObtenerInformacionDepositario
 	    /// </summary>
@@ -62,7 +62,7 @@ using System.Text;
              }
         }// class 
      }
-		namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+		namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// ObtenerExistenciasAValidarPorDepositario
 	    /// </summary>
@@ -92,7 +92,7 @@ using System.Text;
              }
         }// class 
      }
-		namespace DepositarioAdminWeb.Business.Procedures.Operacion {
+		namespace Permaquim.Depositary.Business.Procedures.Operacion {
 	    /// <summary>
 	    /// ObtenerTotalesGeneralesPorMonedaDepositario
 	    /// </summary>
@@ -122,7 +122,7 @@ using System.Text;
              }
         }// class 
      }
-		namespace DepositarioAdminWeb.Business.Procedures.Regionalizacion {
+		namespace Permaquim.Depositary.Business.Procedures.Regionalizacion {
 	    /// <summary>
 	    /// ObtenerTextosLenguaje
 	    /// </summary>

@@ -7,16 +7,19 @@ public class ParameterItem
     public string Name { get; set; }
     public List<ParameterItemValue> Values {get;set;}
 	public string FullQuery  {get;set;}
-    public ParameterItem(String fullQuery)
+	public bool IsFieldParameter  {get;set;} = true;
+    public ParameterItem(String fullQuery, bool isFieldParameter = true)
 	{
 		FullQuery = fullQuery;
+		IsFieldParameter = isFieldParameter;
 	}
-    public ParameterItem(string fullQuery, string column, string operand, string name, List<ParameterItemValue> values)
+    public ParameterItem(string fullQuery, string column, string operand, string name, List<ParameterItemValue> values, bool isFieldParameter = true)
 	{
 		Operand   = operand;
 		Values     = values;
         Name = name;
 		FullQuery = fullQuery;
+		IsFieldParameter = isFieldParameter;
 	}
 }
 public class ParameterItemValue
@@ -86,37 +89,37 @@ public class WhereParameterBase
             throw ex;
         }
     }
-    protected string GetOperand(DepositarioAdminWeb.sqlEnum.OperandEnum Operand)
+    protected string GetOperand(Permaquim.Depositary.sqlEnum.OperandEnum Operand)
     {
         try
         {
             switch (Operand)
             {
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.Between:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.Between:
                     return _BETWEEN;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.Equal:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.Equal:
                     return _EQUAL;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThan:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.GreaterThan:
                     return _GREATER_THAN;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual:
                     return _GREATER_THAN_OR_EQUAL;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.In:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.In:
                     return _IN_;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.IsNotNull:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.IsNotNull:
                     return _IS_NOT_NULL;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.IsNull:
                     return _IS_NULL;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.LessThan:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.LessThan:
                     return _LESS_THAN;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.LessThanOrEqual:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.LessThanOrEqual:
                     return _LESS_THAN_OR_EQUAL;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.Like:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.Like:
                     return _LIKE;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.NotEqual:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.NotEqual:
                     return _NOT_EQUAL;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.NotIn:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.NotIn:
                     return _NOT_IN;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.NotLike:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.NotLike:
                     return _NOT_LIKE;
             }
             return null;
@@ -232,25 +235,25 @@ public  class AggregateParameterBase
     private const string _VAR = " VAR ";
     private const string _COLON = ",";
     protected List<ParameterItem> _aggregateParameters = new List<ParameterItem>();
-    protected string GetOperand(DepositarioAdminWeb.sqlEnum.FunctionEnum Operand)
+    protected string GetOperand(Permaquim.Depositary.sqlEnum.FunctionEnum Operand)
     {
         try
         {
             switch (Operand)
             {
-                case DepositarioAdminWeb.sqlEnum.FunctionEnum.Avg:
+                case Permaquim.Depositary.sqlEnum.FunctionEnum.Avg:
                     return _AVG;
-                case DepositarioAdminWeb.sqlEnum.FunctionEnum.Count:
+                case Permaquim.Depositary.sqlEnum.FunctionEnum.Count:
                     return _COUNT;
-                case DepositarioAdminWeb.sqlEnum.FunctionEnum.Max:
+                case Permaquim.Depositary.sqlEnum.FunctionEnum.Max:
                     return _MAX;
-                case DepositarioAdminWeb.sqlEnum.FunctionEnum.Min:
+                case Permaquim.Depositary.sqlEnum.FunctionEnum.Min:
                     return _MIN;
-                case DepositarioAdminWeb.sqlEnum.FunctionEnum.StdDev:
+                case Permaquim.Depositary.sqlEnum.FunctionEnum.StdDev:
                     return _STDEV;
-                case DepositarioAdminWeb.sqlEnum.FunctionEnum.Sum:
+                case Permaquim.Depositary.sqlEnum.FunctionEnum.Sum:
                     return _SUM;
-                case DepositarioAdminWeb.sqlEnum.FunctionEnum.Var:
+                case Permaquim.Depositary.sqlEnum.FunctionEnum.Var:
                     return _VAR;
             }
             return null;
@@ -298,7 +301,7 @@ public class WhereParameter : WhereParameterBase
         : base()
     {
     }
-    internal void Add(String column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, dynamic values)
+    internal void Add(String column, Permaquim.Depositary.sqlEnum.OperandEnum operand, dynamic values)
     {
         string operandString = base.GetOperand(operand);
         List<ParameterItemValue> _values = new List<ParameterItemValue>();
@@ -323,13 +326,13 @@ public class WhereParameter : WhereParameterBase
             }
             switch (operand)
             {
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.In:
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.NotIn:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.In:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.NotIn:
                       if( _buff.Length > 0)
                        _whereParameters.Add(new ParameterItem(column + " " + operandString + " (" + _buff.Substring(0, _buff.Length - 1) + ")", column, operandString, column, _values));
                     break;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull:
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.IsNotNull:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.IsNull:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.IsNotNull:
                     _whereParameters.Add(new ParameterItem(column + " " + operandString, column, operandString, column, _values));
                     break;
                 default:
@@ -343,7 +346,7 @@ public class WhereParameter : WhereParameterBase
             throw ex;
         }
     }
-    internal void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum Conjunction, String column, DepositarioAdminWeb.sqlEnum.OperandEnum operand, dynamic values)
+    internal void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction, String column, Permaquim.Depositary.sqlEnum.OperandEnum operand, dynamic values)
     {
         string operandString = base.GetOperand(operand);
         List<ParameterItemValue> _values = new List<ParameterItemValue>();
@@ -368,18 +371,18 @@ public class WhereParameter : WhereParameterBase
             }
             switch (operand)
             {
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.In:
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.NotIn:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.In:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.NotIn:
                       if( _buff.Length > 0)
-                         _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(DepositarioAdminWeb.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " (" + _buff.Substring(0, _buff.Length - 1) + ")", column, operandString, column, _values));
+                         _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " (" + _buff.Substring(0, _buff.Length - 1) + ")", column, operandString, column, _values));
                     break;
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull:
-                case DepositarioAdminWeb.sqlEnum.OperandEnum.IsNotNull:
-                    _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(DepositarioAdminWeb.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString, column, operandString, column, _values));
+                case Permaquim.Depositary.sqlEnum.OperandEnum.IsNull:
+                case Permaquim.Depositary.sqlEnum.OperandEnum.IsNotNull:
+                    _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString, column, operandString, column, _values));
                     break;
                 default:
                       if( _buff.Length > 0)
-                         _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(DepositarioAdminWeb.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " " + _buff.Substring(0, _buff.Length - 1), column, operandString, column, _values));
+                         _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " " + _buff.Substring(0, _buff.Length - 1), column, operandString, column, _values));
                     break;
             }
         }
@@ -404,7 +407,7 @@ public class WhereParameter : WhereParameterBase
             throw ex;
         }
     }
-    internal void Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum Conjunction, String betweenColumn, object fromValue, object toValue)
+    internal void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction, String betweenColumn, object fromValue, object toValue)
     {
         if (_whereParameters.Count > 0)
         {
@@ -413,21 +416,33 @@ public class WhereParameter : WhereParameterBase
         string secondParameter = GetNextParameterIndex().ToString();
         _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + firstParameter, fromValue));
         _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + secondParameter, toValue));
-        _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(DepositarioAdminWeb.sqlEnum.ConjunctionEnum), Conjunction) + " " + betweenColumn + " BETWEEN " + Constants.INPUT_PARAMETER + firstParameter + " AND " + Constants.INPUT_PARAMETER + secondParameter, betweenColumn, "Between", betweenColumn, _values));
+        _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + betweenColumn + " BETWEEN " + Constants.INPUT_PARAMETER + firstParameter + " AND " + Constants.INPUT_PARAMETER + secondParameter, betweenColumn, "Between", betweenColumn, _values));
         }
         else
         {
             throw new Exception("Add: Overload Error.");
         }
     }
+    internal void OpenParentheses()
+    {
+        _whereParameters.Add(new ParameterItem(Constants.SQL_OPENPARENTHESES, false));
+    }
+    internal void CloseParentheses()
+    {
+        _whereParameters.Add(new ParameterItem(Constants.SQL_CLOSEPARENTHESES, false));
+    }
+    internal void AddConjunction(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+    {
+        _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " ", false));
+    }
 }
 public class OrderByParameter : OrderByParameterBase
 {
-    internal void Add(String Column, DepositarioAdminWeb.sqlEnum.DirEnum Direction = DepositarioAdminWeb.sqlEnum.DirEnum.ASC)
+    internal void Add(String Column, Permaquim.Depositary.sqlEnum.DirEnum Direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
     {
         try
         {
-            base._orderByParameters.Add(new ParameterItem(Column + " " + Enum.GetName(typeof(DepositarioAdminWeb.sqlEnum.DirEnum), Direction)));
+            base._orderByParameters.Add(new ParameterItem(Column + " " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.DirEnum), Direction)));
         }
         catch (Exception ex)
         {
@@ -451,7 +466,7 @@ public class GroupByParameter : GroupByParameterBase
 }
 public class AggregateParameter : AggregateParameterBase
 {
-    internal void Add(DepositarioAdminWeb.sqlEnum.FunctionEnum AggregateFunction, String Column)
+    internal void Add(Permaquim.Depositary.sqlEnum.FunctionEnum AggregateFunction, String Column)
     {
         try
         {

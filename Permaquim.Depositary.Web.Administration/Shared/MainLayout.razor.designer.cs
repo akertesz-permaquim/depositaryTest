@@ -14,11 +14,6 @@ namespace Permaquim.Depositary.Web.Administration.Layouts
 {
     public partial class MainLayoutComponent : LayoutComponentBase
     {
-        [Inject]
-        protected Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; }
-
-        [Inject]
-        protected NavigationManager UriHelper { get; set; }
 
         [Inject]
         protected DialogService DialogService { get; set; }
@@ -49,29 +44,5 @@ namespace Permaquim.Depositary.Web.Administration.Layouts
              StateHasChanged();
         }
 
-        protected override async System.Threading.Tasks.Task OnInitializedAsync()
-        {
-             //if (Security != null)
-             //{
-             //     Security.Authenticated += Authenticated;
-
-             //     await Security.InitializeAsync(AuthenticationStateProvider);
-             //}
-        }
-
-        protected async System.Threading.Tasks.Task SidebarToggle0Click(dynamic args)
-        {
-            await InvokeAsync(() => { sidebar0.Toggle(); });
-
-            await InvokeAsync(() => { body0.Toggle(); });
-        }
-
-        protected async System.Threading.Tasks.Task Profilemenu0Click(dynamic args)
-        {
-            //if (args.Value == "Logout")
-            //{
-            //    await Security.Logout();
-            //}
-        }
     }
 }

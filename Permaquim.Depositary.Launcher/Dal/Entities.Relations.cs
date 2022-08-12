@@ -2966,7 +2966,7 @@ using System.Text;
                 public DepositarioMoneda()
                 {
                 }
-                public  DepositarioMoneda(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 MonedaId,Int32 IndiceEnContadora,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  DepositarioMoneda(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Int32 IndiceEnContadora,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.DepositarioId = DepositarioId;
@@ -2999,7 +2999,22 @@ using System.Text;
              }
              static Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId_ = null;
              [DataItemAttributeFieldName("MonedaId","MonedaId")]
-             public Int64 MonedaId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _MonedaId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
+             public Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId
+             {
+                 get {
+                     if (MonedaId_ == null || MonedaId_.Id != _MonedaId)
+                         {
+                             MonedaId = new Permaquim.Depositario.Business.Relations.Valor.Moneda().Items(this._MonedaId).FirstOrDefault();
+                         }
+                     return MonedaId_;
+                     }
+                 set {MonedaId_  =  value;}
+             }
+             static Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId_ = null;
              [DataItemAttributeFieldName("IndiceEnContadora","IndiceEnContadora")]
              public Int32 IndiceEnContadora { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
@@ -12162,6 +12177,18 @@ using System.Text;
                      get {
                              Permaquim.Depositario.Business.Relations.Directorio.RelacionMonedaSucursal entities = new Permaquim.Depositario.Business.Relations.Directorio.RelacionMonedaSucursal();
                              entities.Where.Add(Permaquim.Depositario.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.MonedaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of DepositarioMoneda that have this MonedaId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Dispositivo.DepositarioMoneda> ListOf_DepositarioMoneda_MonedaId
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Dispositivo.DepositarioMoneda entities = new Permaquim.Depositario.Business.Relations.Dispositivo.DepositarioMoneda();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Dispositivo.DepositarioMoneda.ColumnEnum.MonedaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }

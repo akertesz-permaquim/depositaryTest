@@ -99,22 +99,24 @@
 @if (DetalleTransacciones_entities != null)
 {
     <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@DetalleTransacciones_entities" TItem="DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+                Data="@DetalleTransacciones_entities" TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
         <EmptyTemplate>
             <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
         </EmptyTemplate>
         <Columns>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones" Property="TransaccionId" Title="TransaccionId" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Depositario" Title="Depositario" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones" Property="FechaTransaccion" Title="FechaTransaccion" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="TransaccionId" Title="TransaccionId" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones" Property="Moneda" Title="Moneda" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="FechaTransaccion" Title="FechaTransaccion" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones" Property="Denominacion" Title="Denominacion" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Moneda" Title="Moneda" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones" Property="CodigoMoneda" Title="CodigoMoneda" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Denominacion" Title="Denominacion" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones" Property="Total" Title="Total" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="CodigoMoneda" Title="CodigoMoneda" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Total" Title="Total" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
         </Columns>
     </RadzenDataGrid>
@@ -139,8 +141,8 @@
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
-    private Int64? userId = null;
-    private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+    private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
 
     private List<DirectorioEntities.Empresa> dataEmpresasVisiblesUsuario = new();
     private List<DirectorioEntities.Sucursal> dataSucursalesVisiblesUsuario = new();
@@ -154,14 +156,14 @@
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private List<DepositarioAdminWeb.Entities.Views.Reporte.DetalleTransacciones>? DetalleTransacciones_entities;
+    private List<Depositary.Entities.Views.Reporte.DetalleTransacciones>? DetalleTransacciones_entities;
 
     protected override async Task OnInitializedAsync()
     {
-        userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-        if (userId == null)
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
-        dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
+        dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         if (TransaccionId == null)
         {
             await Task.Run(CargarPerfilVisualizacion);
@@ -248,9 +250,9 @@
     /// </summary>
     private void CargarPerfilVisualizacion()
     {
-        dataEmpresasVisiblesUsuario = DirectorioController.ObtenerListadoEmpresasPorPerfil(userId.Value);
-        dataSucursalesVisiblesUsuario = DirectorioController.ObtenerListadoSucursalesPorPerfil(userId.Value);
-        dataSectoresVisiblesUsuario = DirectorioController.ObtenerListadoSectoresPorPerfil(userId.Value);
+        dataEmpresasVisiblesUsuario = DirectorioController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id);
+        dataSucursalesVisiblesUsuario = DirectorioController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id);
+        dataSectoresVisiblesUsuario = DirectorioController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
     }
     #endregion
 
@@ -260,10 +262,10 @@
     /// </summary>
     private void LoadMainEntityData()
     {
-        DepositarioAdminWeb.Business.Views.Reporte.DetalleTransacciones entity = new();
+        Depositary.Business.Views.Reporte.DetalleTransacciones entity = new();
         if (TransaccionId.HasValue)
         {
-            entity.Where.Add(DepositarioAdminWeb.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, TransaccionId.Value);
+            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.TransaccionId, Depositary.sqlEnum.OperandEnum.In, TransaccionId.Value);
             DetalleTransacciones_entities = entity.Items();
         }
         else if (dataSectoresVisiblesUsuario.Count > 0)
@@ -284,12 +286,12 @@
                     sectoresSeleccionados.Add(sector.SectorId);
                 }
             }
-            entity.Where.Add(DepositarioAdminWeb.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, sectoresSeleccionados);
+            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.In, sectoresSeleccionados);
             if (parametrosDetalleTransaccionesView.fechaDesde.HasValue)
-                entity.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosDetalleTransaccionesView.fechaDesde.Value);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosDetalleTransaccionesView.fechaDesde.Value);
 
             if (parametrosDetalleTransaccionesView.fechaHasta.HasValue)
-                entity.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.FechaTransaccion, DepositarioAdminWeb.sqlEnum.OperandEnum.LessThanOrEqual, parametrosDetalleTransaccionesView.fechaHasta.Value);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosDetalleTransaccionesView.fechaHasta.Value);
 
             DetalleTransacciones_entities = entity.Items();
         }

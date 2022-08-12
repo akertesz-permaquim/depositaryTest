@@ -5,12 +5,12 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 {
     public class SeguridadController
     {
-        public static DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? LoguearUsuario(string pUsername, string pPassword)
+        public static Depositary.Entities.Tables.Seguridad.Usuario? LoguearUsuario(string pUsername, string pPassword)
         {
-            DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario? resultado = new();
-            DepositarioAdminWeb.Business.Tables.Seguridad.Usuario oTable = new DepositarioAdminWeb.Business.Tables.Seguridad.Usuario();
-            oTable.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsername);
-            oTable.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+            Depositary.Entities.Tables.Seguridad.Usuario? resultado = new();
+            Depositary.Business.Tables.Seguridad.Usuario oTable = new Depositary.Business.Tables.Seguridad.Usuario();
+            oTable.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, Depositary.sqlEnum.OperandEnum.Equal, pUsername);
+            oTable.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
             oTable.Items();
 
@@ -31,16 +31,12 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                     resultado.CantidadLogueosIncorrectos = resultado.CantidadLogueosIncorrectos + 1;
 
                     //Obtenemos el parametro (si existe) de cantidad maxima de logueos erroneos
-                    string valorParametroMaxLogueosErroneos = AplicacionController.ObtenerConfiguracion("CANTIDAD_MAXIMA_LOGUEOS_ERRONEOS");
-                    int cantidadMaximaLogueosErroneos;
+                    int cantidadMaximaLogueosErroneos = ObtenerCantidadMaximaLogueosIncorrectos(resultado.EmpresaId);
 
-                    if (int.TryParse(valorParametroMaxLogueosErroneos, out cantidadMaximaLogueosErroneos))
+                    if (resultado.CantidadLogueosIncorrectos >= cantidadMaximaLogueosErroneos)
                     {
-                        if (resultado.CantidadLogueosIncorrectos >= cantidadMaximaLogueosErroneos)
-                        {
-                            //Si llego a la cantidad de logueos incorrectos de tope lo bloqueamos.
-                            resultado.Bloqueado = true;
-                        }
+                        //Si llego a la cantidad de logueos incorrectos de tope lo bloqueamos.
+                        resultado.Bloqueado = true;
                     }
 
                     oTable.Update(resultado);
@@ -51,20 +47,36 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                 return null;
         }
 
+        public static int ObtenerCantidadMaximaLogueosIncorrectos(Int64 pEmpresaId)
+        {
+            string valorParametroMaxLogueosErroneos = AplicacionController.ObtenerConfiguracionEmpresa("CANTIDAD_MAXIMA_LOGUEOS_ERRONEOS", pEmpresaId);
+            int cantidadMaximaLogueosErroneos;
+
+            if (int.TryParse(valorParametroMaxLogueosErroneos, out cantidadMaximaLogueosErroneos))
+            {
+                return cantidadMaximaLogueosErroneos;
+            }
+
+            return 5; //Si no se encontro configuracion devolvemos este valor por defecto.
+        }
+
         public static string ModificarPasswordUsuario(string pUsername, string pNewPassword)
         {
             string resultado = "";
 
-            DepositarioAdminWeb.Business.Tables.Seguridad.Usuario oTable = new DepositarioAdminWeb.Business.Tables.Seguridad.Usuario();
-            oTable.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsername);
-            oTable.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+            Depositary.Business.Tables.Seguridad.Usuario oTable = new Depositary.Business.Tables.Seguridad.Usuario();
+            oTable.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, Depositary.sqlEnum.OperandEnum.Equal, pUsername);
+            oTable.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
             oTable.Items();
 
             if (oTable.Result.Count > 0)
             {
-                DepositarioAdminWeb.Entities.Tables.Seguridad.Usuario oUsuario = new();
+                Depositary.Entities.Tables.Seguridad.Usuario oUsuario = new();
                 oUsuario = oTable.Result.FirstOrDefault();
+                //Actualizamos la fecha de expiracion si es que tenia una.
+                if (oUsuario.FechaExpiracion.HasValue)
+                    oUsuario.FechaExpiracion = ObtenerFechaExpiracion(oUsuario.EmpresaId);
                 oUsuario.Password = Cryptography.Hash(pNewPassword);
                 oUsuario.DebeCambiarPassword = false;
                 try
@@ -81,19 +93,37 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             return resultado;
         }
 
-        public static DepositarioAdminWeb.Entities.Tables.Seguridad.Rol? ObtenerRolesPorUsuario(Int64 pUsuarioId)
+        public static DateTime ObtenerFechaExpiracion(Int64 pEmpresaId)
         {
-            DepositarioAdminWeb.Business.Relations.Seguridad.UsuarioRol oUsuarioRol = new();
+            //Por defecto la fecha de expiracion es dentro de 30 dias si es que no se definio por parametro.
+            DateTime resultado = DateTime.Now.AddDays(30);
+            string diasExpiracionParametro = "";
+            diasExpiracionParametro = AplicacionController.ObtenerConfiguracionEmpresa("DIAS_EXPIRACION_USUARIO", pEmpresaId);
+            if (diasExpiracionParametro != "")
+            {
+                int diasExpiracion;
+                if (int.TryParse(diasExpiracionParametro, out diasExpiracion))
+                {
+                    resultado = DateTime.Now.AddDays(diasExpiracion);
+                }
+            }
 
-            oUsuarioRol.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pUsuarioId);
-            oUsuarioRol.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.AplicacionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, 2);
-            oUsuarioRol.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+            return resultado;
+        }
+
+        public static Depositary.Entities.Tables.Seguridad.Rol? ObtenerRolesPorUsuario(Int64 pUsuarioId)
+        {
+            Depositary.Business.Relations.Seguridad.UsuarioRol oUsuarioRol = new();
+
+            oUsuarioRol.Where.Add(Depositary.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, pUsuarioId);
+            oUsuarioRol.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.AplicacionId, Depositary.sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
+            oUsuarioRol.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
             oUsuarioRol.Items();
 
             if (oUsuarioRol.Result.Count > 0)
             {
-                DepositarioAdminWeb.Entities.Tables.Seguridad.Rol resultado = new();
+                Depositary.Entities.Tables.Seguridad.Rol resultado = new();
                 var rol = oUsuarioRol.Result.FirstOrDefault().RolId;
                 resultado.Id = rol.Id;
                 resultado.DependeDe = rol._DependeDe;
@@ -110,52 +140,15 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                 return null;
 
         }
-        //public static List<Entities.FuncionMenu> ObtenerFuncionesMenues(Int64 pRolId)
-        //{
-        //    List<Entities.FuncionMenu> resultado = new();
 
-        //    DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
-        //    oRolFuncion.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-        //    oRolFuncion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pRolId);
-
-        //    oRolFuncion.Items();
-
-        //    if (oRolFuncion.Result.Count > 0)
-        //    {
-        //        foreach (var rolfuncion in oRolFuncion.Result)
-        //        {
-        //            var funcion = rolfuncion.FuncionId;
-
-        //            foreach (var menu in funcion.ListOf_Menu_FuncionId)
-        //            {
-        //                Entities.FuncionMenu funcionMenu = new();
-        //                funcionMenu.PuedeModificar = rolfuncion.PuedeModificar;
-        //                funcionMenu.PuedeAgregar = rolfuncion.PuedeAgregar;
-        //                funcionMenu.PuedeEliminar = rolfuncion.PuedeEliminar;
-        //                funcionMenu.PuedeVisualizar = rolfuncion.PuedeVisualizar;
-        //                funcionMenu.FuncionId = funcion.Id;
-        //                funcionMenu.FuncionNombre = funcion.Nombre;
-        //                funcionMenu.DependeDe = menu._DependeDe == 0 ? null : menu._DependeDe;
-        //                funcionMenu.Referencia = funcion.Referencia;
-        //                funcionMenu.MenuNombre = menu.Nombre;
-        //                funcionMenu.MenuId = menu.Id;
-
-        //                resultado.Add(funcionMenu);
-        //            }
-        //        }
-        //    }
-
-        //    return resultado;
-
-        //}
         public static List<SeguridadEntities.Menu> ObtenerMenuesPorRol(Int64 pRolId)
         {
             List<SeguridadEntities.Menu> resultado = new();
 
             //Obtengo las funciones a las que puede acceder el rol.
-            DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
-            oRolFuncion.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-            oRolFuncion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pRolId);
+            Depositary.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
+            oRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            oRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
 
             oRolFuncion.Items();
 
@@ -186,9 +179,9 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
         {
             List<SeguridadEntities.FuncionRol> resultado = new();
 
-            DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
-            oRolFuncion.Where.Add(DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
-            oRolFuncion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pRolId);
+            Depositary.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
+            oRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            oRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
 
             oRolFuncion.Items();
 
@@ -216,61 +209,31 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             return resultado;
         }
 
-        //public static bool VerificarPermisoMenu(string pMenu, List<Entities.FuncionMenu> pDataFuncionesMenues)
-        //{
-        //    bool resultado = false;
+        public static Depositary.Entities.Tables.Seguridad.Usuario? ObtenerUsuarioPorMail(string pMail)
+        {
+            Depositary.Entities.Tables.Seguridad.Usuario? resultado = null;
 
-        //    if (pDataFuncionesMenues.Count > 0)
-        //    {
-        //        if (pDataFuncionesMenues.Exists(x => x.MenuNombre == pMenu))
-        //            resultado = true;
-        //    }
+            Depositary.Business.Tables.Seguridad.Usuario oUsuario = new();
+            oUsuario.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            oUsuario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Mail, Depositary.sqlEnum.OperandEnum.Equal, pMail);
 
-        //    return resultado;
-        //}
+            oUsuario.Items();
 
-        //public static bool VerificarRolFuncion(string pMenu, List<Entities.FuncionMenu> pDataFuncionesMenues, string pAccion)
-        //{
-        //    bool resultado = false;
-        //    object? variable = null;
+            if (oUsuario.Result.Count > 0)
+            {
+                resultado = oUsuario.Result.FirstOrDefault();
+            }
 
-        //    if (pDataFuncionesMenues != null)
-        //    {
-        //        if (pDataFuncionesMenues.Count > 0)
-        //        {
-        //            var item = pDataFuncionesMenues.FirstOrDefault(x => x.MenuNombre == pMenu);
-
-        //            if (item != null)
-        //            {
-        //                bool valorPermiso;
-        //                var propiedadPermiso = item.GetType().GetProperty(pAccion);
-        //                if (propiedadPermiso != null)
-        //                {
-        //                    try
-        //                    {
-        //                        valorPermiso = (bool)propiedadPermiso.GetValue(item, null);
-        //                        resultado = valorPermiso;
-        //                    }
-        //                    catch (Exception ex)
-        //                    {
-        //                        resultado = false;
-        //                        //throw (ex);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return resultado;
-        //}
+            return resultado;
+        }
 
         public static List<SeguridadEntities.Usuario> ObtenerUsuarios(bool obtenerSoloHabilitados = true)
         {
             List<SeguridadEntities.Usuario> resultado = new();
 
-            DepositarioAdminWeb.Business.Tables.Seguridad.Usuario oUsuario = new();
+            Depositary.Business.Tables.Seguridad.Usuario oUsuario = new();
             if (obtenerSoloHabilitados)
-                oUsuario.Where.Add(DepositarioAdminWeb.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+                oUsuario.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
             oUsuario.Items();
 

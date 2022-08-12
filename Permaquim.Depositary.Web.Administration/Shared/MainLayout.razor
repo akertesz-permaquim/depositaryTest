@@ -1,4 +1,4 @@
-﻿@inherits Permaquim.Depositary.Web.Administration.Layouts.MainLayoutComponent
+﻿@inherits LayoutComponentBase
 
 @using Radzen
 @using Radzen.Blazor
@@ -15,131 +15,161 @@
 <RadzenTooltip />
 <RadzenContextMenu />
 
-<RadzenHeader Style="z-index:3;">
-    <ChildContent>
-        <div class="row justify-content-start align-items-center">
-            <div class="col-6 d-flex align-items-center">
-                <RadzenSidebarToggle Click="@SidebarToggle0Click">
-                </RadzenSidebarToggle>
-                <RadzenLabel Text="Administrador Depositario">
-                </RadzenLabel>
+@if (dataUsuario != null)
+{
+    <RadzenHeader class="mainHeader">
+        <ChildContent>
+            <div class="row justify-content-start align-items-center">
+                <div class="col-6 d-flex align-items-center">
+                    <RadzenSidebarToggle Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ButtonSideBarAdministradorWebDepositario", false) Click="@SidebarToggle0Click">
+                    </RadzenSidebarToggle>
+                    <RadzenLabel Text="Administrador Depositario">
+                    </RadzenLabel>
+                </div>
+                <div class="col-6 text-right">
+                    <RadzenProfileMenu Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@Profilemenu0Click">
+                        <ChildContent>
+                            <div style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfilDesplegable", false)>
+                            <RadzenProfileMenuItem Text="Perfil" Path="perfil" Value="Perfil" Icon="person">
+                            </RadzenProfileMenuItem>
+                            <RadzenProfileMenuItem Text="Cambiar password" Path="cambioPassword" Value="ActualizarPassword" Icon="password">
+                            </RadzenProfileMenuItem>
+                            <RadzenProfileMenuItem Text="Logout" Path="logout" Value="Logout" Icon="power_settings_new">
+                            </RadzenProfileMenuItem>
+                                </div>
+                        </ChildContent>
+                        <Template>
+                            <RadzenLabel Text="@dataUsuario.Nombre">
+                            </RadzenLabel>
+                            <RadzenLabel Text="@dataUsuario.Apellido">
+                            </RadzenLabel>
+                            <RadzenImage Path="@dataUsuario.Avatar" style="border-radius: 16px; height: 32px; width: 32px">
+                            </RadzenImage>
+                        </Template>
+                    </RadzenProfileMenu>
+                </div>
             </div>
-            <div class="col-6 text-right">
-                <RadzenProfileMenu Visible="true" Click="@Profilemenu0Click">
-                    <ChildContent>
-                        @*                        <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" Visible="true">
-                        </RadzenProfileMenuItem>
-                        <RadzenProfileMenuItem Path="application-users" Icon="person" Text="Users" Visible="true">
-                        </RadzenProfileMenuItem>*@
-                        <RadzenProfileMenuItem Path="userRolViewer" Icon="security" Text="Roles" Visible="true">
-                        </RadzenProfileMenuItem>
-                        <RadzenProfileMenuItem Text="Logout" Path="logout" Value="Logout" Icon="power_settings_new">
-                        </RadzenProfileMenuItem>
-                    </ChildContent>
-                    <Template>
-                        <RadzenLabel Text="@nombreUsuario">
-                        </RadzenLabel>
-                        <RadzenLabel Text="@apellidoUsuario">
-                        </RadzenLabel>
-                        <RadzenImage Path="@avatarUsuario" style="border-radius: 16px; height: 32px; width: 32px">
-                        </RadzenImage>
-                    </Template>
-                </RadzenProfileMenu>
-            </div>
-        </div>
-    </ChildContent>
-</RadzenHeader>
-<RadzenBody @ref="body0">
-    <ChildContent>
-        <RadzenContentContainer Name="main">
-            @Body
-        </RadzenContentContainer>
-    </ChildContent>
-</RadzenBody>
-<RadzenSidebar @ref="sidebar0">
-    <ChildContent>
-        <RadzenPanelMenu style="height: 100%">
-            <ChildContent>
-                @if (dataMenues.Count > 0)
-                {
-                    //Menues principales
-                    foreach (var menu in dataMenues.Where(x => x.DependeDe == null))
+        </ChildContent>
+    </RadzenHeader>
+    <RadzenBody @ref="body0">
+        <ChildContent>
+            <RadzenContentContainer Name="main">
+                @Body
+            </RadzenContentContainer>
+        </ChildContent>
+    </RadzenBody>
+    <RadzenSidebar @ref="sidebar0">
+        <ChildContent>
+            <RadzenPanelMenu style="height: 100%">
+                <ChildContent>
+                    @if (dataMenues.Count > 0)
                     {
-                        switch (menu.TipoMenuId)
+                        //Menues principales
+                        foreach (var menu in dataMenues.Where(x => x.DependeDe == null).OrderBy(x => x.MenuDescripcion))
                         {
-                            case (Int64)SeguridadEntities.TipoMenu.Carpeta:
-                                <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)">
-                                    <ChildContent>
-                                        @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId))
-                                        {
-                                            switch (menuDependiente.TipoMenuId)
+                            switch (menu.TipoMenuId)
+                            {
+                                case (Int64)SeguridadEntities.TipoMenu.Carpeta:
+                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)">
+                                        <ChildContent>
+                                            @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId).OrderBy(x => x.MenuDescripcion))
                                             {
-                                                case (Int64)SeguridadEntities.TipoMenu.Carpeta:
-                                                    <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" class="sub-menu">
-                                                        @foreach (var subMenuDependiente in dataMenues.Where(x => x.DependeDe == menuDependiente.MenuId))
-                                                        {
-                                                            <RadzenPanelMenuItem Text="@(subMenuDependiente.MenuDescripcion)" Icon="@(subMenuDependiente.Imagen)" Path="@(subMenuDependiente.Referencia)" class="sub-menu2">
+                                                switch (menuDependiente.TipoMenuId)
+                                                {
+                                                    case (Int64)SeguridadEntities.TipoMenu.Carpeta:
+                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" class="sub-menu">
+                                                            @foreach (var subMenuDependiente in dataMenues.Where(x => x.DependeDe == menuDependiente.MenuId).OrderBy(x => x.MenuDescripcion))
+                                                            {
+                                                                <RadzenPanelMenuItem Text="@(subMenuDependiente.MenuDescripcion)" Icon="@(subMenuDependiente.Imagen)" Path="@(subMenuDependiente.Referencia)" class="sub-menu2">
 
-                                                            </RadzenPanelMenuItem>
-                                                        }
-                                                    </RadzenPanelMenuItem>
-                                                    break;
-                                                case (Int64)SeguridadEntities.TipoMenu.Pagina:
-                                                    <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" Path="@(menuDependiente.Referencia)" class="sub-menu">
+                                                                </RadzenPanelMenuItem>
+                                                            }
+                                                        </RadzenPanelMenuItem>
+                                                        break;
+                                                    case (Int64)SeguridadEntities.TipoMenu.Pagina:
+                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" Path="@(menuDependiente.Referencia)" class="sub-menu">
 
-                                                    </RadzenPanelMenuItem>
-                                                    break;
+                                                        </RadzenPanelMenuItem>
+                                                        break;
+                                                }
                                             }
-                                        }
-                                    </ChildContent>
-                                </RadzenPanelMenuItem>
-                                break;
-                            case (Int64)SeguridadEntities.TipoMenu.Pagina:
-                                <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)" Path="@(menu.Referencia)">
+                                        </ChildContent>
+                                    </RadzenPanelMenuItem>
+                                    break;
+                                case (Int64)SeguridadEntities.TipoMenu.Pagina:
+                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)" Path="@(menu.Referencia)">
 
-                                </RadzenPanelMenuItem>
-                                break;
+                                    </RadzenPanelMenuItem>
+                                    break;
+                            }
+
                         }
-
                     }
-                }
-            </ChildContent>
-        </RadzenPanelMenu>
-    </ChildContent>
-</RadzenSidebar>
-<RadzenFooter Style="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"FooterAdministradorWebDepositario")">
-    <ChildContent>
-        <RadzenLabel Text="Permaquim S.A., Copyright Ⓒ 2022">
-        </RadzenLabel>
-    </ChildContent>
-</RadzenFooter>
+                </ChildContent>
+            </RadzenPanelMenu>
+        </ChildContent>
+    </RadzenSidebar>
+    <RadzenFooter Style="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"FooterAdministradorWebDepositario",false)">
+        <ChildContent>
+            <RadzenLabel Text="Permaquim S.A., Copyright Ⓒ 2022">
+            </RadzenLabel>
+        </ChildContent>
+    </RadzenFooter>
+
+}
 
 @code
 {
-    private string nombreUsuario;
-    private string apellidoUsuario;
-    private string avatarUsuario;
-    private List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>();
+    private RadzenBody body0;
+    protected RadzenSidebar sidebar0;
+    private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>();
     private List<SeguridadEntities.Menu> dataMenues = new();
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+    private string colorHeader;
+
+    protected async System.Threading.Tasks.Task SidebarToggle0Click(dynamic args)
+    {
+        await InvokeAsync(() => { sidebar0.Toggle(); });
+
+        await InvokeAsync(() => { body0.Toggle(); });
+    }
+
+    protected async System.Threading.Tasks.Task Profilemenu0Click(dynamic args)
+    {
+        //if (args.Value == "Logout")
+        //{
+        //    await Security.Logout();
+        //}
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            Int64? userId = await sessionStorage.GetItemAsync<Int64?>("Id");
-            if (userId == null)
+            dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+            if (dataUsuario == null)
             {
                 NavManager.NavigateTo("login", true);
             }
             else
             {
                 dataMenues = await sessionStorage.GetItemAsync<List<SeguridadEntities.Menu>>("DataMenues");
-                dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<DepositarioAdminWeb.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
-                nombreUsuario = await sessionStorage.GetItemAsync<string>("NombreUsuario");
-                apellidoUsuario = await sessionStorage.GetItemAsync<string>("ApellidoUsuario");
-                avatarUsuario = await sessionStorage.GetItemAsync<string>("AvatarUsuario");
+                dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
+                colorHeader = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "HeaderAdministradorWebDepositario", true);
                 StateHasChanged();
             }
         }
     }
 }
+
+<style>
+    .mainHeader {
+        background-color: @colorHeader;
+        z-index: 3;
+    }
+
+    .rz-panel-menu {
+        height: 100%;
+    }
+
+</style>

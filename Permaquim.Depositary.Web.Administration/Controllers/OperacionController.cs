@@ -1,6 +1,6 @@
 ﻿namespace Permaquim.Depositary.Web.Administration.Controllers
 {
-    public class TransaccionController
+    public class OperacionController
     {
 
         #region Depositos
@@ -8,7 +8,7 @@
         {
             List<MonitorEntities.TransaccionValidadaMonitor> resultado = new();
 
-            List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
+            List<Depositary.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
             List<Int64> tiposTransaccion = new();
             tiposTransaccion.Add((Int64)TransaccionEntities.TipoTransaccion.DepositoMoneda);
@@ -50,9 +50,9 @@
         {
             List<MonitorEntities.DetalleTransaccionValidadaMonitor> resultado = new();
 
-            DepositarioAdminWeb.Business.Relations.Operacion.TransaccionDetalle transaccionDetalles = new();
-            transaccionDetalles.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pTransaccionId);
-            transaccionDetalles.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
+            Depositary.Business.Relations.Operacion.TransaccionDetalle transaccionDetalles = new();
+            transaccionDetalles.Where.Add(Depositary.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId, Depositary.sqlEnum.OperandEnum.Equal, pTransaccionId);
+            transaccionDetalles.OrderByParameter.Add(Depositary.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
             transaccionDetalles.Items();
 
@@ -85,34 +85,34 @@
             return resultado;
         }
 
-        public static List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> ObtenerTransaccionesPorDepositario(Int64 pDepositarioId, bool bolsaActual, List<Int64>? monedasId = null, List<Int64>? tiposTransaccion = null, DateTime? pFechaDesde = null)
+        public static List<Depositary.Entities.Relations.Operacion.Transaccion> ObtenerTransaccionesPorDepositario(Int64 pDepositarioId, bool bolsaActual, List<Int64>? monedasId = null, List<Int64>? tiposTransaccion = null, DateTime? pFechaDesde = null)
         {
-            List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> resultado = new();
-            DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
-            oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pDepositarioId);
+            List<Depositary.Entities.Relations.Operacion.Transaccion> resultado = new();
+            Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new();
+            oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositarioId);
             //Si se solicita lo que esta en bolsa actualmente se busca solo en el contenedor indicado y si no se trae el historico.
             if (bolsaActual)
             {
                 Int64? bolsaColocada = ObtenerBolsaColocada(pDepositarioId);
                 if (bolsaColocada.HasValue)
-                    oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, bolsaColocada.Value);
+                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, Depositary.sqlEnum.OperandEnum.Equal, bolsaColocada.Value);
                 else
                     return resultado; //Si no hay bolsa colocada devolvemos result vacio.
             }
             if (monedasId != null)
             {
-                oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, monedasId);
+                oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId, Depositary.sqlEnum.OperandEnum.In, monedasId);
 
             }
             if (tiposTransaccion != null)
             {
-                oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, tiposTransaccion);
+                oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, Depositary.sqlEnum.OperandEnum.In, tiposTransaccion);
             }
             if (pFechaDesde != null)
             {
-                oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, pFechaDesde);
+                oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, pFechaDesde);
             }
-            oTransaccion.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
+            oTransaccion.OrderByParameter.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
             oTransaccion.Items();
 
@@ -129,11 +129,11 @@
         {
             Int64? bolsaColocada = new();
 
-            DepositarioAdminWeb.Business.Relations.Operacion.Contenedor oContenedor = new();
-            oContenedor.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull, 0); oContenedor.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull, 0);
-            oContenedor.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pDepositario);
-            oContenedor.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, DepositarioAdminWeb.sqlEnum.OperandEnum.IsNull, 0);
-            oContenedor.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaApertura, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
+            Depositary.Business.Relations.Operacion.Contenedor oContenedor = new();
+            oContenedor.Where.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.IsNull, 0); oContenedor.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.IsNull, 0);
+            oContenedor.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositario);
+            oContenedor.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.IsNull, 0);
+            oContenedor.OrderByParameter.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaApertura, Depositary.sqlEnum.DirEnum.DESC);
             oContenedor.Items();
 
             if (oContenedor.Result.Count > 0)
@@ -162,7 +162,7 @@
         {
             List<MonitorEntities.TransaccionAValidarMonitor> resultado = new();
 
-            List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
+            List<Depositary.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
             List<Int64> tiposTransaccion = new();
             tiposTransaccion.Add((Int64)TransaccionEntities.TipoTransaccion.DepositoSobre);
@@ -206,9 +206,9 @@
         {
             List<MonitorEntities.DetalleTransaccionAValidarMonitor> resultado = new();
 
-            DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle transaccionSobreDetalles = new();
-            transaccionSobreDetalles.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.SobreId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pTransaccionSobreId);
-            transaccionSobreDetalles.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
+            Depositary.Business.Relations.Operacion.TransaccionSobreDetalle transaccionSobreDetalles = new();
+            transaccionSobreDetalles.Where.Add(Depositary.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.SobreId, Depositary.sqlEnum.OperandEnum.Equal, pTransaccionSobreId);
+            transaccionSobreDetalles.OrderByParameter.Add(Depositary.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
             transaccionSobreDetalles.Items();
 
@@ -239,17 +239,17 @@
             float resultado = 0;
             Int64 cantidadMaxima = 0;
             Int64 cantidadUnidadesAcumuladas = 0;
-            DepositarioAdminWeb.Business.Relations.Operacion.Contenedor contenedor = new();
-            contenedor.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Contenedor.ColumnEnum.Id, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pContenedorId);
+            Depositary.Business.Relations.Operacion.Contenedor contenedor = new();
+            contenedor.Where.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, pContenedorId);
 
             contenedor.Items();
 
             if (contenedor.Result.Count > 0)
             {
                 cantidadMaxima = contenedor.Result.FirstOrDefault().TipoId.Capacidad;
-                DepositarioAdminWeb.Business.Relations.Operacion.Transaccion transacciones = new();
-                transacciones.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pContenedorId);
-                transacciones.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, TransaccionEntities.TipoTransaccion.DepositoBillete);
+                Depositary.Business.Relations.Operacion.Transaccion transacciones = new();
+                transacciones.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, Depositary.sqlEnum.OperandEnum.Equal, pContenedorId);
+                transacciones.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, Depositary.sqlEnum.OperandEnum.Equal, TransaccionEntities.TipoTransaccion.DepositoBillete);
                 transacciones.Items();
 
                 foreach (var transaccion in transacciones.Result)
@@ -268,7 +268,7 @@
         {
             List<MonitorEntities.ExistenciaValidada> resultado = new();
 
-            List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
+            List<Depositary.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
             List<Int64> tiposTransaccion = new();
             tiposTransaccion.Add((Int64)TransaccionEntities.TipoTransaccion.DepositoMoneda);
@@ -291,8 +291,8 @@
                     }
                     else
                     {
-                        DepositarioAdminWeb.Entities.Relations.Valor.Denominacion denominacion = new();
-                        DepositarioAdminWeb.Entities.Relations.Valor.Moneda moneda = new();
+                        Depositary.Entities.Relations.Valor.Denominacion denominacion = new();
+                        Depositary.Entities.Relations.Valor.Moneda moneda = new();
 
                         MonitorEntities.ExistenciaValidada existenciaValidada = new();
 
@@ -318,7 +318,7 @@
         {
             List<MonitorEntities.ExistenciaAValidar> resultado = new();
 
-            List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
+            List<Depositary.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
             List<Int64> tiposTransaccion = new();
             tiposTransaccion.Add((Int64)TransaccionEntities.TipoTransaccion.DepositoSobre);
@@ -368,9 +368,9 @@
         {
             List<MonitorEntities.Evento> resultado = new();
 
-            DepositarioAdminWeb.Business.Relations.Operacion.Evento oEvento = new();
-            oEvento.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Evento.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pDepositarioId);
-            oEvento.OrderByParameter.Add(DepositarioAdminWeb.Business.Relations.Operacion.Evento.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.DirEnum.DESC);
+            Depositary.Business.Relations.Operacion.Evento oEvento = new();
+            oEvento.Where.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositarioId);
+            oEvento.OrderByParameter.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
             oEvento.Items();
 
@@ -395,7 +395,7 @@
         public static List<MonitorEntities.TotalGeneral> ObtenerTotalesGeneralesPorDepositarioSegunMoneda(Int64 pDepositarioID)
         {
             List<MonitorEntities.TotalGeneral> resultado = new();
-            List<DepositarioAdminWeb.Entities.Relations.Operacion.Transaccion> transacciones = new();
+            List<Depositary.Entities.Relations.Operacion.Transaccion> transacciones = new();
 
             transacciones = ObtenerTransaccionesPorDepositario(pDepositarioID, true, null, null);
 
@@ -427,10 +427,10 @@
             return resultado;
         }
 
-        public static List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> ObtenerTotalesGeneralesPorMonedaDepositario(Int64 pDepositarioID)
+        public static List<Depositary.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> ObtenerTotalesGeneralesPorMonedaDepositario(Int64 pDepositarioID)
         {
-            List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> resultado = new List<DepositarioAdminWeb.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>();
-            DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario oSP = new DepositarioAdminWeb.Business.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario();
+            List<Depositary.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> resultado = new List<Depositary.Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>();
+            Depositary.Business.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario oSP = new Depositary.Business.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario();
 
             oSP.Items(pDepositarioID);
 
@@ -455,10 +455,10 @@
                 if (depositarios.Count > 0)
                 {
                     //Levanto transacciones con un IN y con la fecha de hoy.
-                    DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
-                    oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
-                    oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, depositarios);
-                    oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
+                    Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new();
+                    oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
+                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
+                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
 
                     oTransaccion.Items();
 
@@ -483,9 +483,9 @@
             {
                 if (depositarios.Count > 0)
                 {
-                    DepositarioAdminWeb.Business.Relations.Operacion.Transaccion oTransaccion = new();
-                    oTransaccion.Where.Add(DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Today);
-                    oTransaccion.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, DepositarioAdminWeb.sqlEnum.OperandEnum.In, depositarios);
+                    Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new();
+                    oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Today);
+                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
 
                     oTransaccion.Items();
 
@@ -527,9 +527,9 @@
         {
             List<TransaccionEntities.Contenedor> resultado = new();
 
-            DepositarioAdminWeb.Business.Tables.Operacion.Contenedor oContenedor = new();
+            Depositary.Business.Tables.Operacion.Contenedor oContenedor = new();
             if (obtenerSoloHabilitados)
-                oContenedor.Where.Add(DepositarioAdminWeb.Business.Tables.Operacion.Contenedor.ColumnEnum.Habilitado, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, true);
+                oContenedor.Where.Add(Depositary.Business.Tables.Operacion.Contenedor.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
             oContenedor.Items();
 
@@ -542,6 +542,33 @@
                     contenedorEntitie.Identificador = contenedor.Identificador;
 
                     resultado.Add(contenedorEntitie);
+                }
+            }
+
+            return resultado;
+        }
+
+        public static List<TurnoEntities.TurnoComboReporte> ObtenerTurnosReporte()
+        {
+            List<TurnoEntities.TurnoComboReporte> resultado = new();
+
+            Depositary.Business.Relations.Turno.EsquemaTurno oEsquemaTurno = new();
+
+            oEsquemaTurno.Items();
+
+            if (oEsquemaTurno.Result.Count > 0)
+            {
+                foreach (var esquema in oEsquemaTurno.Result)
+                {
+                    foreach(var esquemaDetalle in esquema.ListOf_EsquemaDetalleTurno_EsquemaTurnoId)
+                    {
+                        TurnoEntities.TurnoComboReporte turnoComboReporte = new();
+                        turnoComboReporte.NombreEsquema = esquema.Nombre;
+                        turnoComboReporte.NombreEsquemaDetalle = esquemaDetalle.Nombre;
+                        turnoComboReporte.TurnoEsquemaDetalleId = esquemaDetalle.Id;
+
+                        resultado.Add(turnoComboReporte);
+                    }
                 }
             }
 

@@ -7,7 +7,7 @@
             List<TurnoEntities.GrupoTurno> resultado = new();
 
             //1°Obtenemos todas las empresas
-            DepositarioAdminWeb.Business.Relations.Directorio.Grupo oGrupo = new();
+            Depositary.Business.Relations.Directorio.Grupo oGrupo = new();
 
             oGrupo.Items();
 
@@ -70,8 +70,8 @@
             string resultado = "";
 
             //Primero hay que ver cuantos detalles de esquema tiene el esquema seleccionado
-            DepositarioAdminWeb.Business.Tables.Turno.EsquemaDetalleTurno oEsquemaDetalleTurno = new();
-            oEsquemaDetalleTurno.Where.Add(DepositarioAdminWeb.Business.Tables.Turno.EsquemaDetalleTurno.ColumnEnum.EsquemaTurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, pAgendaTurnoABM.EsquemaTurnoId);
+            Depositary.Business.Tables.Turno.EsquemaDetalleTurno oEsquemaDetalleTurno = new();
+            oEsquemaDetalleTurno.Where.Add(Depositary.Business.Tables.Turno.EsquemaDetalleTurno.ColumnEnum.EsquemaTurnoId, Depositary.sqlEnum.OperandEnum.Equal, pAgendaTurnoABM.EsquemaTurnoId);
             oEsquemaDetalleTurno.Items();
 
             if (oEsquemaDetalleTurno.Result.Count > 0)
@@ -85,11 +85,11 @@
                         //Tercero tenemos que hacer un insert por cada dia del periodo fecha desde - fecha hasta
                         for (int i = 0; auxFecha <= pAgendaTurnoABM.FechaHasta; auxFecha = auxFecha.AddDays(1))
                         {
-                            DepositarioAdminWeb.Business.Tables.Turno.AgendaTurno oAgendaTurno = new();
-                            oAgendaTurno.Where.Add(DepositarioAdminWeb.Business.Tables.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, esquemaDetalle.Id);
-                            oAgendaTurno.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, auxFecha);
-                            oAgendaTurno.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Turno.AgendaTurno.ColumnEnum.Secuencia, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, esquemaDetalle.Secuencia);
-                            oAgendaTurno.Where.Add(DepositarioAdminWeb.sqlEnum.ConjunctionEnum.AND, DepositarioAdminWeb.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, DepositarioAdminWeb.sqlEnum.OperandEnum.Equal, sector.SectorId);
+                            Depositary.Business.Tables.Turno.AgendaTurno oAgendaTurno = new();
+                            oAgendaTurno.Where.Add(Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Id);
+                            oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.Equal, auxFecha);
+                            oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Secuencia, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Secuencia);
+                            oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, sector.SectorId);
                             oAgendaTurno.Items();
 
                             //Solo agrego la agenda si no existia previamente una para esa fecha, ese sector, ese detalle y esa secuencia.

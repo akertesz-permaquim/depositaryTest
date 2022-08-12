@@ -1,21 +1,15 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Identity;
-using Radzen;
 using Blazored.SessionStorage;
-using Permaquim.Depositary.Web.Administration.Managers;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddLocalization();
 builder.Services.AddScoped<Radzen.NotificationService>();
 builder.Services.AddScoped<Radzen.DialogService>();
 builder.Services.AddScoped<Radzen.TooltipService>();
 builder.Services.AddScoped<Radzen.ContextMenuService>();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddLocalization();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 builder.Services.AddServerSideBlazor().AddHubOptions(options => { options.MaximumReceiveMessageSize = 10 * 1024 * 1024; });
@@ -35,7 +29,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = supportedCultures;
 }
 );
-//builder.Services.AddScoped<SessionStorageManager>();
 
 var app = builder.Build();
 

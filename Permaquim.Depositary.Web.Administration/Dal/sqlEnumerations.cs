@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-namespace DepositarioAdminWeb {
+namespace Permaquim.Depositary {
 public class sqlEnum
 {
     public enum OperandEnum
