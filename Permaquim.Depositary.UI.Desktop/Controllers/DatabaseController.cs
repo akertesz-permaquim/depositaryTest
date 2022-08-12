@@ -1,27 +1,24 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class DatabaseController
     {
-        private static Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario _currentDepositary = null;
-        private static Permaquim.Depositario.Entities.Relations.Dispositivo.DepositarioContadora _currentDepositaryCounter = null;
-        private static Permaquim.Depositario.Entities.Relations.Dispositivo.DepositarioPlaca _currentDepositaryIoboard = null;
-        private static Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion _currentOperation;
-        private static List<Permaquim.Depositario.Entities.Relations.Dispositivo.ComandoContadora> _currentDepositaryCounterCommands = null;
-        private static List<Permaquim.Depositario.Entities.Relations.Dispositivo.ComandoPlaca> _currentDepositaryIoBoardCommands = null;
-        private static Permaquim.Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
+        private static Depositario.Entities.Relations.Dispositivo.Depositario _currentDepositary = null;
+        private static Depositario.Entities.Relations.Dispositivo.DepositarioContadora _currentDepositaryCounter = null;
+        private static Depositario.Entities.Relations.Dispositivo.DepositarioPlaca _currentDepositaryIoboard = null;
+        private static Depositario.Entities.Relations.Operacion.TipoTransaccion _currentOperation;
+        private static List<Depositario.Entities.Relations.Dispositivo.ComandoContadora> _currentDepositaryCounterCommands = null;
+        private static List<Depositario.Entities.Relations.Dispositivo.ComandoPlaca> _currentDepositaryIoBoardCommands = null;
+        private static Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
 
         private const string CIERRE_DIARIO = "Cierre diario";
 
         public static int AvailableTurnsCount { get; set; }
+
+        public static Depositario.Entities.Relations.Valor.OrigenValor CurrentDepositOrigin { get; set; }
 
         /// <summary>
         /// Representa el usuario registrado en el Sistema
@@ -396,7 +393,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return entities.Items();
         }
 
+        /// <summary>
+        /// Origenes del depósito
+        /// </summary>
+        /// <returns></returns>
+        public static List<Permaquim.Depositario.Entities.Relations.Valor.OrigenValor> GetDepositOrigin()
+        {
+            Permaquim.Depositario.Business.Relations.Valor.OrigenValor entities = new();
+            entities.Where.Add(Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Habilitado,
+                Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
 
+            entities.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
+                Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Id,
+            Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+            return entities.Items();
+        }
         public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor CreateContainer()
         {
             Permaquim.Depositario.Entities.Tables.Operacion.Contenedor returnValue = new();
@@ -919,12 +930,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             sesion.Add(CurrentDepositary.Id, DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
         }
 
-        public static List<BagHistoryItem> GetBaghistoryItems()
+        public static List<Depositario.Entities.Views.Reporte.Contenedores> GetBaghistoryItems()
         {
-            List<BagHistoryItem> returnValue = new();
-            BagHistoryItem newItem = null;
+            Depositario.Business.Views.Reporte.Contenedores entities = new();
+           
 
-            return returnValue;
+            return entities.Items();
         }
         public static List<DailyClosingItem> GetDailyClosingItems()
         {

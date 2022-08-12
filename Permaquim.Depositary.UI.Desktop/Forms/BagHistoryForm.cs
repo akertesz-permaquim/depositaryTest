@@ -3,25 +3,16 @@ using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
-namespace Permaquim.Depositary.UI.Desktop.Forms
+namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class BagHistoryForm : Form
     {
         public CounterDevice _device { get; set; }
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
-        private List<BagHistoryItem> _bagHistoryItems = new();
+        private List<Depositario.Entities.Views.Reporte.Contenedores> _bagHistoryItems = new();
         public BagHistoryForm()
         {
             InitializeComponent();
@@ -77,10 +68,8 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            //FormsController.SetInformationMessage(InformationTypeEnum.Information,
-            //MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_DIARIO));
-            
-              StyleController.SetControlStyle(MainGridView);
+
+            StyleController.SetControlStyle(MainGridView);
         }
         #region BackButton
         private void LoadBackButton()
@@ -104,73 +93,98 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
             MainGridView.Columns.Clear();
 
-            MainGridView.Columns.Add(new()
-            {
-                Visible = false,
-                Width = 1,
-                CellTemplate = new DataGridViewTextBoxCell()
 
-            });
 
             MainGridView.Columns.Add(new()
             {
-                DataPropertyName = "Moneda",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
-                Name = "Moneda",
+                DataPropertyName = "Identificador",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CODIGO),
+                Name = "Identificador",
                 Visible = true,
                 Width = 260,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
 
+            MainGridView.Columns.Add(new()
+            {
+                DataPropertyName = "FechaApertura",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
+                Name = "FechaApertura",
+                Visible = true,
+                Width = 260,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
 
             MainGridView.Columns.Add(new()
             {
-                DataPropertyName = "CantidadOperaciones",
+                DataPropertyName = "FechaCierre",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
+                Name = "FechaCierre",
+                Visible = true,
+                Width = 260,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            MainGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Depositario",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO),
+                Name = "Depositario",
+                Visible = true,
+                Width = 260,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            MainGridView.Columns.Add(new()
+            {
+                DataPropertyName = "CantidadTransacciones",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADOPERACIONES),
-                Name = "CantidadOperaciones",
+                Name = "CantidadTransacciones",
                 Visible = true,
-                Width = 100,
+                Width = 260,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
 
             MainGridView.Columns.Add(new()
             {
-                DataPropertyName = "TotalValidado",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
-                Name = "TotalValidado",
+                DataPropertyName = "CantidadBilletes",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES),
+                Name = "CantidadBilletes",
                 Visible = true,
-                Width = 100,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-            MainGridView.Columns.Add(new()
-            {
-                DataPropertyName = "TotalAValidar",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
-                Name = "TotalAValidar",
-                Visible = true,
-                Width = 100,
+                Width = 260,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
             MainGridView.Columns.Add(new()
             {
-                DataPropertyName = "Total",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
-                Name = "Total",
+                DataPropertyName = "CantidadSobres",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.SOBRES),
+                Name = "CantidadSobres",
                 Visible = true,
-                Width = 100,
+                Width = 260,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
+            MainGridView.Columns.Add(new()
+            {
+                DataPropertyName = "CantidadTotalDineroMonedaDefault",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD),
+                Name = "CantidadTotalDineroMonedaDefault",
+                Visible = true,
+                Width = 260,
+                CellTemplate = new DataGridViewTextBoxCell()
 
+            });
         }
+
         #endregion
         #region Data    
-        private void LoadDailyClosingItems()
+        private void LoadBagHistoryItems()
         {
             _bagHistoryItems = DatabaseController.GetBaghistoryItems();
             MainGridView.DataSource = _bagHistoryItems;
@@ -189,7 +203,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             if (this.Visible)
             {
                 InitializeMainGridView();
-                LoadDailyClosingItems();
+                LoadBagHistoryItems();
             }
             else
                 InitializeLocals();

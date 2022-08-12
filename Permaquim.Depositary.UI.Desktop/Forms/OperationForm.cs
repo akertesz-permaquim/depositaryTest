@@ -109,16 +109,13 @@ namespace Permaquim.Depositary.UI.Desktop
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
                             DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                            FormsController.OpenChildForm(this, new BillDepositForm(),
                                         (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                         else
                         {
-                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                            FormsController.OpenChildForm(this, new BillDepositForm(),
-                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                     }
                     else
@@ -135,15 +132,12 @@ namespace Permaquim.Depositary.UI.Desktop
                         {
                             DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
                             FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
-                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
                             (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                         else
                         {
-                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
-                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                     }
                     else

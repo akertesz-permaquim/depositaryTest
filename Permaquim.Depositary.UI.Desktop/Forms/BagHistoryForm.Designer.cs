@@ -1,4 +1,4 @@
-﻿namespace Permaquim.Depositary.UI.Desktop.Forms
+﻿namespace Permaquim.Depositary.UI.Desktop
 {
     partial class BagHistoryForm
     {
@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.MainGridView = new System.Windows.Forms.DataGridView();
-            this.InformationLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +39,7 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(218, 528);
+            this.MainPanel.Location = new System.Drawing.Point(218, 448);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(448, 99);
             this.MainPanel.TabIndex = 191;
@@ -86,19 +85,6 @@
             this.MainGridView.Size = new System.Drawing.Size(697, 400);
             this.MainGridView.TabIndex = 190;
             // 
-            // InformationLabel
-            // 
-            this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(50, 448);
-            this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(760, 64);
-            this.InformationLabel.TabIndex = 189;
-            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // BagHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -106,7 +92,6 @@
             this.ClientSize = new System.Drawing.Size(861, 605);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainGridView);
-            this.Controls.Add(this.InformationLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BagHistoryForm";
             this.Text = "BagHisoryForm";
@@ -122,6 +107,5 @@
 
         private FlowLayoutPanel MainPanel;
         private DataGridView MainGridView;
-        private Label InformationLabel;
     }
 }

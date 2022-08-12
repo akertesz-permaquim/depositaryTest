@@ -27013,7 +27013,7 @@ using System.Text;
          /// <param name='Fechainicio'></param>
          /// <param name='Fechafin'></param>
          /// <returns>Entities.Tables.Sincronizacion.EntidadCabecera</returns>
-			public Entities.Tables.Sincronizacion.EntidadCabecera Add(Int64 EntidadId,Int64 DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin) 
+			public Entities.Tables.Sincronizacion.EntidadCabecera Add(Int64 EntidadId,Int64? DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin) 
 			{
 			  return (Entities.Tables.Sincronizacion.EntidadCabecera)base.Add(new Entities.Tables.Sincronizacion.EntidadCabecera(EntidadId,DepositarioId,Valor,Fechainicio,Fechafin));
 			}
@@ -27175,7 +27175,7 @@ using System.Text;
             /// <param name="Fechainicio"></param>
             /// <param name="Fechafin"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 entidadid,Int64 depositarioid,String valor,DateTime fechainicio,DateTime? fechafin)
+            public Int64 Update(Int64 id,Int64 entidadid,Int64? depositarioid,String valor,DateTime fechainicio,DateTime? fechafin)
             {
                 return base.Update((IDataItem) new Entities.Tables.Sincronizacion.EntidadCabecera {Id = id,EntidadId = entidadid,DepositarioId = depositarioid,Valor = valor,Fechainicio = fechainicio,Fechafin = fechafin});
             }

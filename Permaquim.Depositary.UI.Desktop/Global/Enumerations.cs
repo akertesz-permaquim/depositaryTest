@@ -225,6 +225,7 @@
             CAMBIO_TURNO,
             REPORTES,
             CONTENIDO_BOLSA,
+            HISTORICO_BOLSA,
             CANTIDADOPERACIONES,
             SUCURSAL,
             SECTOR,
@@ -271,7 +272,8 @@
             Support = 107,
             TurnChange = 108,
             ViewEvents = 109,
-            Reports = 110
+            Reports = 110,
+            BagHistory = 111 
         }
 
         public enum LogTypeEnum

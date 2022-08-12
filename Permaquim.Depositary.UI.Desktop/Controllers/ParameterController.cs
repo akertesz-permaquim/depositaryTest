@@ -12,7 +12,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("USA_CUENTA_BANCARIA"));
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_CUENTA_BANCARIA"));
             }
                 
         }
