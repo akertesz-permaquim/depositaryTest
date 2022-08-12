@@ -102,9 +102,11 @@ namespace Permaquim.Depositary.Launcher.Model
                             {
                                 subItem.EntidadId = newEntitieSincronizacionEntidad.Id;
 
+                                Int64 origenId = subItem.Id;
+
                                 var newEntitieSincronizacionConfiguracion = entitiesSincronizacionConfiguracion.Add(subItem);
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, subItem.Id, newEntitieSincronizacionConfiguracion.Id);
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSincronizacionConfiguracion.Id);
                             }
 
                             SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -128,9 +130,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in GeografiaPais)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieGeografiaPais = entitiesGeografiaPais.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieGeografiaPais.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaPais.Id);
                     }
 
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -154,9 +158,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.PaisId = paisIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieGeografiaProvincia = entitiesGeografiaProvincia.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieGeografiaProvincia.Id);
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaProvincia.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -180,9 +186,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.ProvinciaId = provinciaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieGeografiaCiudad = entitiesGeografiaCiudad.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieGeografiaCiudad.Id);
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaCiudad.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -207,9 +215,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.CiudadId = ciudadIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieGeografiaCodigoPostal = entitiesGeografiaCodigoPostal.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieGeografiaCodigoPostal.Id);
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaCodigoPostal.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -229,9 +239,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in GeografiaZona)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieGeografiaZona = entitiesGeografiaZona.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieGeografiaZona.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaZona.Id);
                     }
 
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -255,9 +267,11 @@ namespace Permaquim.Depositary.Launcher.Model
 
                     foreach (var item in AuditoriaTipoLog)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieAuditoriaTipoLog = entitiesAuditoriaTipoLog.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieAuditoriaTipoLog.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAuditoriaTipoLog.Id);
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
@@ -279,9 +293,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in RegionalizacionLenguaje)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieAuditoriaRegionalizacionLenguaje = entitiesRegionalizacionLenguaje.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieAuditoriaRegionalizacionLenguaje.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAuditoriaRegionalizacionLenguaje.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -306,8 +322,12 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (lenguajeIdOrigen.HasValue)
                         {
                             item.LenguajeId = lenguajeIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieRegionalizacionLenguajeItem = entitiesRegionalizacionLenguajeItem.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieRegionalizacionLenguajeItem.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieRegionalizacionLenguajeItem.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -331,9 +351,11 @@ namespace Permaquim.Depositary.Launcher.Model
 
                     foreach (var item in VisualizacionPerfilTipo)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieVisualizacionPerfilTipo = entitiesVisualizacionPerfilTipo.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieVisualizacionPerfilTipo.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfilTipo.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -357,8 +379,12 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (perfilTipoIdOrigen.HasValue)
                         {
                             item.PerfilTipoId = perfilTipoIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieVisualizacionPerfil = entitiesVisualizacionPerfil.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieVisualizacionPerfil.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfil.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -382,8 +408,12 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (perfilIdOrigen.HasValue)
                         {
                             item.PerfilId = perfilIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieVisualizacionPerfilItem = entitiesVisualizacionPerfilItem.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieVisualizacionPerfilItem.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfilItem.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -406,9 +436,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in BiometriaHuellaDactilar)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieBiometriaHuellaDactilar = entitiesBiometriaHuellaDactilar.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieBiometriaHuellaDactilar.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBiometriaHuellaDactilar.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -432,9 +464,11 @@ namespace Permaquim.Depositary.Launcher.Model
 
                     foreach (var item in SeguridadTipoAplicacion)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieSeguridadTipoAplicacion = entitiesSeguridadTipoAplicacion.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadTipoAplicacion.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoAplicacion.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -458,8 +492,12 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (tipoIdOrigen.HasValue)
                         {
                             item.TipoId = tipoIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadAplicacion = entitiesSeguridadAplicacion.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadAplicacion.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacion.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -483,8 +521,12 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (aplicacionIdOrigen.HasValue)
                         {
                             item.AplicacionId = aplicacionIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadAplicacionParametro = entitiesSeguridadAplicacionParametro.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadAplicacionParametro.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacionParametro.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -509,9 +551,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (aplicacionIdOrigen.HasValue && aplicacionParametroIdOrigen.HasValue)
                         {
                             item.AplicacionId = aplicacionIdOrigen.Value;
+
                             item.ParametroId = aplicacionParametroIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadAplicacionParametroValor = entitiesSeguridadAplicacionParametroValor.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadAplicacionParametroValor.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacionParametroValor.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -534,9 +581,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in ValorTipo)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieValorTipo = entitiesValorTipo.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieValorTipo.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorTipo.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -559,8 +608,12 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (paisIdOrigen.HasValue)
                         {
                             item.PaisId = paisIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieValorMoneda = entitiesValorMoneda.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieValorMoneda.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorMoneda.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -585,9 +638,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
                         {
                             item.MonedaId = monedaIdOrigen.Value;
+
                             item.TipoValorId = tipoValorIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieValorDenominacion = entitiesValorDenominacion.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieValorDenominacion.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorDenominacion.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -612,9 +670,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
                         {
                             item.MonedaId = monedaIdOrigen.Value;
+
                             item.TipoValorId = tipoValorIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
                             var newEntitieValorRelacionMonedaTipoValor = entitiesValorRelacionMonedaTipoValor.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieValorRelacionMonedaTipoValor.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorRelacionMonedaTipoValor.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -633,9 +696,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in OrigenValor)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieValorOrigenValor = entitiesOrigenValor.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieValorOrigenValor.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorOrigenValor.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -658,9 +723,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in EstiloTipoEsquemaDetalle)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieEstiloTipoEsquemaDetalle = entitiesEstiloTipoEsquemaDetalle.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieEstiloTipoEsquemaDetalle.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloTipoEsquemaDetalle.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -679,9 +746,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in EstiloEsquema)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieEstiloEsquema = entitiesEstiloEsquema.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieEstiloEsquema.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloEsquema.Id);
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
@@ -704,10 +773,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (esquemaIdOrigen.HasValue && tipoEsquemaDetalleIdOrigen.HasValue)
                         {
                             item.EsquemaId = esquemaIdOrigen.Value;
+
                             item.TipoEsquemaDetalleId = tipoEsquemaDetalleIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieEstiloEsquemaDetalle = entitiesEstiloEsquemaDetalle.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieEstiloEsquemaDetalle.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloEsquemaDetalle.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -730,9 +803,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in DirectorioGrupo)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieDirectorioGrupo = entitiesDirectorioGrupo.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDirectorioGrupo.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioGrupo.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -758,11 +833,15 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue)
                         {
                             item.GrupoId = grupoIdOrigen.Value;
+
                             item.EstiloEsquemaId = estiloEsquemaIdOrigen.Value;
+
                             item.LenguajeId = lenguajeIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDirectorioEmpresa = entitiesDirectorioEmpresa.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDirectorioEmpresa.Id);
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioEmpresa.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -788,11 +867,15 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (empresaIdOrigen.HasValue && codigoPostalIdOrigen.HasValue && zonaIdOrigen.HasValue)
                         {
                             item.EmpresaId = empresaIdOrigen.Value;
+
                             item.CodigoPostalId = codigoPostalIdOrigen.Value;
+
                             item.ZonaId = zonaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDirectorioSucursal = entitiesDirectorioSucursal.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDirectorioSucursal.Id);
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioSucursal.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -817,8 +900,10 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.SucursalId = sucursalIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDirectorioSector = entitiesDirectorioSector.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDirectorioSector.Id);
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioSector.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -843,10 +928,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (monedaIdOrigen.HasValue && sucursalIdOrigen.HasValue)
                         {
                             item.MonedaId = monedaIdOrigen.Value;
+
                             item.SucursalId = sucursalIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDirectorioRelacionMonedaSucursal = entitiesDirectorioRelacionMonedaSucursal.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDirectorioRelacionMonedaSucursal.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioRelacionMonedaSucursal.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -869,9 +958,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in SeguridadTipoFuncion)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieSeguridadTipoFuncion = entitiesSeguridadTipoFuncion.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadTipoFuncion.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoFuncion.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -890,9 +981,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in SeguridadTipoIdentificador)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieSeguridadTipoIdentificador = entitiesSeguridadTipoIdentificador.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadTipoIdentificador.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoIdentificador.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -911,9 +1004,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in SeguridadTipoMenu)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieSeguridadTipoMenu = entitiesSeguridadTipoMenu.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadTipoMenu.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoMenu.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -939,11 +1034,16 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (empresaIdOrigen.HasValue && lenguajelIdOrigen.HasValue && perfilIdOrigen.HasValue)
                         {
                             item.EmpresaId = empresaIdOrigen.Value;
+
                             item.LenguajeId = lenguajelIdOrigen.Value;
+
                             item.PerfilId = perfilIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadUsuario = entitiesSeguridadUsuario.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadUsuario.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuario.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -968,10 +1068,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (aplicacionIdOrigen.HasValue && tipoFuncionIdOrigen.HasValue)
                         {
                             item.AplicacionId = aplicacionIdOrigen.Value;
+
                             item.TipoId = tipoFuncionIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadFuncion = entitiesSeguridadFuncion.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadFuncion.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadFuncion.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -996,10 +1100,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (usuarioIdOrigen.HasValue && tipoIdentificadorIdOrigen.HasValue)
                         {
                             item.UsuarioId = usuarioIdOrigen.Value;
+
                             item.TipoId = tipoIdentificadorIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadIdentificadorUsuario = entitiesSeguridadIdentificadorUsuario.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadIdentificadorUsuario.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadIdentificadorUsuario.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1023,8 +1131,10 @@ namespace Permaquim.Depositary.Launcher.Model
                             item.DependeDe = dependeDeOrigen;
                         }
 
+                        Int64 origenId = item.Id;
+
                         var newEntitieSeguridadRol = entitiesSeguridadRol.Add(item);
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadRol.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRol.Id);
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
@@ -1049,11 +1159,16 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (aplicacionIdOrigen.HasValue && usuarioIdOrigen.HasValue && rolIdOrigen.HasValue)
                         {
                             item.AplicacionId = aplicacionIdOrigen.Value;
+
                             item.UsuarioId = usuarioIdOrigen.Value;
+
                             item.RolId = rolIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadUsuarioRol = entitiesSeguridadUsuarioRol.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadUsuarioRol.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuarioRol.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1077,10 +1192,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (usuarioIdOrigen.HasValue && usuarioIdOrigen.HasValue)
                         {
                             item.SectorId = sectorIdOrigen.Value;
+
                             item.UsuarioId = usuarioIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadUsuarioSector = entitiesSeguridadUsuarioSector.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadUsuarioSector.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuarioSector.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1104,6 +1223,7 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (tipoIdOrigen.HasValue && funcionIdOrigen.HasValue)
                         {
                             item.TipoId = tipoIdOrigen.Value;
+
                             item.FuncionId = funcionIdOrigen.Value;
 
                             if (item.DependeDe.HasValue)
@@ -1112,8 +1232,11 @@ namespace Permaquim.Depositary.Launcher.Model
                                 item.DependeDe = dependeDeOrigen;
                             }
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadMenu = entitiesSeguridadMenu.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadMenu.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadMenu.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1138,10 +1261,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (funcionIdOrigen.HasValue && rolIdOrigen.HasValue)
                         {
                             item.FuncionId = funcionIdOrigen.Value;
+
                             item.RolId = rolIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieSeguridadRolFuncion = entitiesSeguridadRolFuncion.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieSeguridadRolFuncion.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRolFuncion.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1170,8 +1297,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.PaisId = paisIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieBancaBanco = entitiesBancaBanco.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieBancaBanco.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaBanco.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1190,9 +1320,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in BancaTipoCuenta)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieBancaTipoCuenta = entitiesBancaTipoCuenta.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieBancaTipoCuenta.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaTipoCuenta.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1217,11 +1349,16 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (tipoIdOrigen.HasValue && empresaIdOrigen.HasValue && bancoIdOrigen.HasValue)
                         {
                             item.TipoId = tipoIdOrigen.Value;
+
                             item.EmpresaId = empresaIdOrigen.Value;
+
                             item.BancoId = bancoIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieBancaCuenta = entitiesBancaCuenta.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieBancaCuenta.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaCuenta.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1245,10 +1382,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (usuarioIdOrigen.HasValue && cuentaIdOrigen.HasValue)
                         {
                             item.UsuarioId = usuarioIdOrigen.Value;
+
                             item.CuentaId = cuentaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieBancaUsuarioCuenta = entitiesBancaUsuarioCuenta.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieBancaUsuarioCuenta.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaUsuarioCuenta.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1277,8 +1418,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.AplicacionId = aplicacionIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieAplicacionConfiguracion = entitiesAplicacionConfiguracion.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieAplicacionConfiguracion.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracion.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1303,8 +1447,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.EmpresaId = empresaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieConfiguracionEmpresa = entitiesConfiguracionEmpresa.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieConfiguracionEmpresa.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieConfiguracionEmpresa.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1327,9 +1474,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in DispositivoTipoConfiguracionDepositario)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieDispositivoTipoConfiguracionDepositario = entitiesDispositivoTipoConfiguracionDepositario.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoTipoConfiguracionDepositario.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoConfiguracionDepositario.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1348,9 +1497,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in DispositivoMarca)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieDispositivoMarca = entitiesDispositivoMarca.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoMarca.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoMarca.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1369,9 +1520,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in PlantillaMoneda)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitiePlantillaMoneda = entitiesPlantillaMoneda.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitiePlantillaMoneda.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitiePlantillaMoneda.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1396,10 +1549,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (plantillaMonedaIdOrigen.HasValue && monedaIdOrigen.HasValue)
                         {
                             item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
+
                             item.MonedaId = monedaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitiePlantillaMonedaDetalle = entitiesPlantillaMonedaDetalle.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitiePlantillaMonedaDetalle.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitiePlantillaMonedaDetalle.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1424,10 +1581,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (plantillaMonedaIdOrigen.HasValue && marcaIdOrigen.HasValue)
                         {
                             item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
+
                             item.MarcaId = marcaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoModelo = entitiesDispositivoModelo.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoModelo.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoModelo.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1452,8 +1613,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.ModeloId = plantillaMonedaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoTipoContadora = entitiesDispositivoTipoContadora.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoTipoContadora.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoContadora.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1478,8 +1642,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.ModeloId = plantillaMonedaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoTipoPlaca = entitiesDispositivoTipoPlaca.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoTipoPlaca.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoPlaca.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1504,10 +1671,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue)
                         {
                             item.ModeloId = modeloIdOrigen.Value;
+
                             item.SectorId = sectorIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoDepositario = entitiesDispositivoDepositario.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoDepositario.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositario.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1532,10 +1703,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (depositarioIdOrigen.HasValue && tipoContadoraIdOrigen.HasValue)
                         {
                             item.DepositarioId = depositarioIdOrigen.Value;
+
                             item.TipoContadoraId = tipoContadoraIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoDepositarioContadora = entitiesDispositivoDepositarioContadora.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoDepositarioContadora.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioContadora.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1560,8 +1735,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.DepositarioId = depositarioIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoDepositarioEstado = entitiesDispositivoDepositarioEstado.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoDepositarioEstado.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioEstado.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1586,10 +1764,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (depositarioIdOrigen.HasValue && monedaIdOrigen.HasValue)
                         {
                             item.DepositarioId = depositarioIdOrigen.Value;
+
                             item.MonedaId = monedaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoDepositarioMoneda = entitiesDispositivoDepositarioMoneda.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoDepositarioMoneda.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioMoneda.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1614,10 +1796,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (depositarioIdOrigen.HasValue && tipoPlacaIdOrigen.HasValue)
                         {
                             item.DepositarioId = depositarioIdOrigen.Value;
+
                             item.TipoPlacaId = tipoPlacaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoDepositarioPlaca = entitiesDispositivoDepositarioPlaca.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoDepositarioPlaca.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioPlaca.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1642,8 +1828,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.TipoContadoraId = tipoContadoraIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoComandoContadora = entitiesDispositivoComandoContadora.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoComandoContadora.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoComandoContadora.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1668,8 +1857,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.TipoPlacaId = tipoPlacaIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoComandoPlaca = entitiesDispositivoComandoPlaca.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoComandoPlaca.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoComandoPlaca.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1694,10 +1886,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (depositarioIdOrigen.HasValue)
                         {
                             item.DepositarioId = depositarioIdOrigen.Value;
+
                             item.TipoId = tipoIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieDispositivoConfiguracionDepositario = entitiesDispositivoConfiguracionDepositario.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieDispositivoConfiguracionDepositario.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoConfiguracionDepositario.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1720,9 +1916,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in OperacionTipoContenedor)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieOperacionTipoContenedor = entitiesOperacionTipoContenedor.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieOperacionTipoContenedor.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoContenedor.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1741,9 +1939,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in OperacionTipoEvento)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieOperacionTipoEvento = entitiesOperacionTipoEvento.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieOperacionTipoEvento.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoEvento.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1762,9 +1962,19 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in OperacionTipoTransaccion)
                     {
+                        if (item.FuncionId.HasValue)
+                        {
+                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Funcion", item.FuncionId.Value);
+
+                            if (funcionIdOrigen.HasValue)
+                                item.FuncionId = funcionIdOrigen.Value;
+                        }
+
+                        Int64 origenId = item.Id;
+
                         var newEntitieOperacionTipoTransaccion = entitiesOperacionTipoTransaccion.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieOperacionTipoTransaccion.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoTransaccion.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1787,9 +1997,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in TurnoEsquemaTurno)
                     {
+                        Int64 origenId = item.Id;
+
                         var newEntitieTurnoEsquemaTurno = entitiesTurnoEsquemaTurno.Add(item);
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieTurnoEsquemaTurno.Id);
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoEsquemaTurno.Id);
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1814,8 +2026,11 @@ namespace Permaquim.Depositary.Launcher.Model
                         {
                             item.EsquemaTurnoId = esquemaTurnoIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieTurnoEsquemaDetalleTurno = entitiesTurnoEsquemaDetalleTurno.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieTurnoEsquemaDetalleTurno.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoEsquemaDetalleTurno.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
@@ -1840,10 +2055,14 @@ namespace Permaquim.Depositary.Launcher.Model
                         if (esquemaDetalleTurnoIdOrigen.HasValue && sectorIdOrigen.HasValue)
                         {
                             item.EsquemaDetalleTurnoId = esquemaDetalleTurnoIdOrigen.Value;
+
                             item.SectorId = sectorIdOrigen.Value;
 
+                            Int64 origenId = item.Id;
+
                             var newEntitieTurnoAgendaTurno = entitiesTurnoAgendaTurno.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, item.Id, newEntitieTurnoAgendaTurno.Id);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoAgendaTurno.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);

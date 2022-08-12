@@ -29,7 +29,7 @@ namespace Permaquim.Depositary.Launcher
                 try
                 {
                     InitializationController.InitializeDepositary();
-
+                    Application.Exit();
                 }
                 catch (Exception ex)
                 {
@@ -40,7 +40,7 @@ namespace Permaquim.Depositary.Launcher
             {
                 //TODO: Verificar actualización
                 // Llamar a la aplicación desktop
-                Process.Start(Directory.GetCurrentDirectory() + APPLICATION);
+                //Process.Start(Directory.GetCurrentDirectory() + APPLICATION);
             }
         }
     }

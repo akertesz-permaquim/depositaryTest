@@ -27982,6 +27982,7 @@ using System.Text;
 					EsquemaTurnoId,
 					Nombre,
 					Secuencia,
+					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -28030,14 +28031,15 @@ using System.Text;
          /// <param name='EsquemaTurnoId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Secuencia'></param>
+         /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Turno.EsquemaDetalleTurno</returns>
-			public Entities.Tables.Turno.EsquemaDetalleTurno Add(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Turno.EsquemaDetalleTurno Add(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Turno.EsquemaDetalleTurno)base.Add(new Entities.Tables.Turno.EsquemaDetalleTurno(EsquemaTurnoId,Nombre,Secuencia,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Turno.EsquemaDetalleTurno)base.Add(new Entities.Tables.Turno.EsquemaDetalleTurno(EsquemaTurnoId,Nombre,Secuencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Turno.EsquemaDetalleTurno> Items()
             {
@@ -28073,12 +28075,13 @@ using System.Text;
             /// <param name="EsquemaTurnoId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Secuencia"></param>
+            /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Turno.EsquemaDetalleTurno> Items(Int64? Id,Int64? EsquemaTurnoId,String Nombre,Int32? Secuencia,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Turno.EsquemaDetalleTurno> Items(Int64? Id,Int64? EsquemaTurnoId,String Nombre,Int32? Secuencia,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -28126,6 +28129,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Secuencia, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Secuencia);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
                     }
                    
                 }
@@ -28220,14 +28235,15 @@ using System.Text;
             /// <param name="EsquemaTurnoId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Secuencia"></param>
+            /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 esquematurnoid,String nombre,Int32 secuencia,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 esquematurnoid,String nombre,Int32 secuencia,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Turno.EsquemaDetalleTurno {Id = id,EsquemaTurnoId = esquematurnoid,Nombre = nombre,Secuencia = secuencia,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Turno.EsquemaDetalleTurno {Id = id,EsquemaTurnoId = esquematurnoid,Nombre = nombre,Secuencia = secuencia,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Turno.EsquemaDetalleTurno
@@ -28330,6 +28346,7 @@ using System.Text;
                 {
 					Id,
 					Nombre,
+					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -28376,14 +28393,15 @@ using System.Text;
          /// EsquemaTurno Add Method
          /// </summary>
          /// <param name='Nombre'></param>
+         /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Turno.EsquemaTurno</returns>
-			public Entities.Tables.Turno.EsquemaTurno Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Turno.EsquemaTurno)base.Add(new Entities.Tables.Turno.EsquemaTurno(Nombre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Turno.EsquemaTurno)base.Add(new Entities.Tables.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Turno.EsquemaTurno> Items()
             {
@@ -28417,12 +28435,13 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
+            /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -28446,6 +28465,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
                     }
                    
                 }
@@ -28538,14 +28569,15 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
+            /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Turno.EsquemaTurno {Id = id,Nombre = nombre,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Turno.EsquemaTurno {Id = id,Nombre = nombre,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Turno.EsquemaTurno

@@ -25,7 +25,8 @@ namespace Permaquim.Depositary.Launcher.Controllers
 
                 eSincronizacionEntidadCabecera.EntidadId = entidadSincronizacion.Id;
                 eSincronizacionEntidadCabecera.Fechainicio = DateTime.Now;
-                eSincronizacionEntidadCabecera.DepositarioId = DatabaseController.CurrentDepositary != null ? DatabaseController.CurrentDepositary.Id : null;
+                eSincronizacionEntidadCabecera.DepositarioId = null;
+                //eSincronizacionEntidadCabecera.DepositarioId = DatabaseController.CurrentDepositary != null ? DatabaseController.CurrentDepositary.Id : null;
                 eSincronizacionEntidadCabecera.Valor = entidadSincronizacion.Nombre;
 
                 try
@@ -118,7 +119,8 @@ namespace Permaquim.Depositary.Launcher.Controllers
 
                 Depositario.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new();
                 oSincronizacionEntidadCabecera.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, Depositario.sqlEnum.OperandEnum.Equal, pEntidadId);
-                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary != null ? DatabaseController.CurrentDepositary.Id : null);
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.IsNull, null);
+                //oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary != null ? DatabaseController.CurrentDepositary.Id : null);
 
                 oSincronizacionEntidadCabecera.Items();
 

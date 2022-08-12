@@ -16,13 +16,50 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             GeografiaModel data = new();
 
+            Int64 depositarioId = 2;
+
             try
             {
-                data.Paises = ObtenerPaisesBD();
-                data.Provincias = ObtenerProvinciasBD();
-                data.Ciudades = ObtenerCiudadesBD();
-                data.CodigosPostales = ObtenerCodigosPostalesBD();
-                data.Zonas = ObtenerZonasBD();
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroGeografiaPaisId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Pais");
+
+                if (SincroGeografiaPaisId.HasValue)
+                {
+                    data.Paises = ObtenerPaisesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Pais"));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaPaisId.Value);
+                }
+
+                Int64? SincroGeografiaProvinciaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Provincia");
+
+                if (SincroGeografiaProvinciaId.HasValue)
+                {
+                    data.Provincias = ObtenerProvinciasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Provincia"));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaProvinciaId.Value);
+                }
+
+                Int64? SincroGeografiaCiudadId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Ciudad");
+
+                if (SincroGeografiaCiudadId.HasValue)
+                {
+                    data.Ciudades = ObtenerCiudadesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Ciudad"));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaCiudadId.Value);
+                }
+
+                Int64? SincroGeografiaCodigoPostalId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.CodigoPostal");
+
+                if (SincroGeografiaCodigoPostalId.HasValue)
+                {
+                    data.CodigosPostales = ObtenerCodigosPostalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.CodigoPostal"));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaCodigoPostalId.Value);
+                }
+
+                Int64? SincroGeografiaZonaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Zona");
+
+                if (SincroGeografiaZonaId.HasValue)
+                {
+                    data.Zonas = ObtenerZonasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Zona"));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaZonaId.Value);
+                }
             }
             catch (Exception ex)
             {
@@ -39,16 +76,32 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             GeografiaPaisModel data = new();
 
-            try
+            Int64 depositarioId = 2;
+
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Pais");
+
+            if (SincronizacionId.HasValue)
             {
-                data.Paises = ObtenerPaisesBD();
+                try
+                {
+                    data.Paises = ObtenerPaisesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Pais"));
+
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                //Cerramos el registro de sincronizacion de la entidad.
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
             }
 
-            return Ok(data);
         }
 
         [HttpGet]
@@ -58,13 +111,29 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             GeografiaProvinciaModel data = new();
 
-            try
+            Int64 depositarioId = 2;
+
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Provincia");
+
+            if (SincronizacionId.HasValue)
             {
-                data.Provincias = ObtenerProvinciasBD();
+                try
+                {
+
+                    data.Provincias = ObtenerProvinciasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Provincia"));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+                //Cerramos el registro de sincronizacion de la entidad.
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
             }
 
             return Ok(data);
@@ -77,13 +146,30 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             GeografiaCiudadModel data = new();
 
-            try
+            Int64 depositarioId = 2;
+
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Ciudad");
+
+            if (SincronizacionId.HasValue)
             {
-                data.Ciudades = ObtenerCiudadesBD();
+                try
+                {
+                    data.Ciudades = ObtenerCiudadesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Ciudad"));
+
+                    //Cerramos el registro de sincronizacion de la entidad.
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+
+                    return Ok(data);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
             }
 
             return Ok(data);
@@ -95,17 +181,31 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         public async Task<IActionResult> ObtenerZonas()
         {
             GeografiaZonaModel data = new();
+            Int64 depositarioId = 2;
 
-            try
-            {
-                data.Zonas = ObtenerZonasBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Zona");
 
-            return Ok(data);
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.Zonas = ObtenerZonasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Zona"));
+
+                    //Cerramos el registro de sincronizacion de la entidad.
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+
+                    return Ok(data);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -115,25 +215,43 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             GeografiaCodigoPostalModel data = new();
 
-            try
+            Int64 depositarioId = 2;
+
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, "Geografia.Zona");
+
+            if (SincronizacionId.HasValue)
             {
-                data.CodigosPostales = ObtenerCodigosPostalesBD();
+                try
+                {
+                    data.CodigosPostales = ObtenerCodigosPostalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, "Geografia.Pais"));
+                    
+                    //Cerramos el registro de sincronizacion de la entidad.
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+
+                    return Ok(data);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
             }
 
-            return Ok(data);
         }
 
         #endregion
 
         #region Controllers
-        private List<DepositaryWebApi.Entities.Tables.Geografia.Pais> ObtenerPaisesBD()
+        private List<DepositaryWebApi.Entities.Tables.Geografia.Pais> ObtenerPaisesBD(DateTime fechaUltimosCambios)
         {
             List<DepositaryWebApi.Entities.Tables.Geografia.Pais> result = new();
             DepositaryWebApi.Business.Tables.Geografia.Pais oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Geografia.Pais.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Geografia.Pais.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
 
             try
             {
@@ -153,10 +271,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return result;
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Geografia.Provincia> ObtenerProvinciasBD()
+        private List<DepositaryWebApi.Entities.Tables.Geografia.Provincia> ObtenerProvinciasBD(DateTime fechaUltimosCambios)
         {
             List<DepositaryWebApi.Entities.Tables.Geografia.Provincia> result = new();
             DepositaryWebApi.Business.Tables.Geografia.Provincia oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Geografia.Provincia.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Geografia.Provincia.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
 
             try
             {
@@ -176,10 +296,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return result;
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Geografia.Ciudad> ObtenerCiudadesBD()
+        private List<DepositaryWebApi.Entities.Tables.Geografia.Ciudad> ObtenerCiudadesBD(DateTime fechaUltimosCambios)
         {
             List<DepositaryWebApi.Entities.Tables.Geografia.Ciudad> result = new();
             DepositaryWebApi.Business.Tables.Geografia.Ciudad oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Geografia.Ciudad.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Geografia.Ciudad.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
 
             try
             {
@@ -199,10 +321,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return result;
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Geografia.Zona> ObtenerZonasBD()
+        private List<DepositaryWebApi.Entities.Tables.Geografia.Zona> ObtenerZonasBD(DateTime fechaUltimosCambios)
         {
             List<DepositaryWebApi.Entities.Tables.Geografia.Zona> result = new();
             DepositaryWebApi.Business.Tables.Geografia.Zona oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Geografia.Zona.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Geografia.Zona.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
 
             try
             {
@@ -222,10 +346,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return result;
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Geografia.CodigoPostal> ObtenerCodigosPostalesBD()
+        private List<DepositaryWebApi.Entities.Tables.Geografia.CodigoPostal> ObtenerCodigosPostalesBD(DateTime fechaUltimosCambios)
         {
             List<DepositaryWebApi.Entities.Tables.Geografia.CodigoPostal> result = new();
             DepositaryWebApi.Business.Tables.Geografia.CodigoPostal oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Geografia.CodigoPostal.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Geografia.CodigoPostal.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimosCambios);
 
             try
             {

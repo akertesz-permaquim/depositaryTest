@@ -13,6 +13,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "DepositaryCode is required")]
+        public string DepositaryCode { get; set; }
         public LoginModel()
         {
             DatabaseController DatabaseController = new();
@@ -34,7 +37,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             throw new NotImplementedException();
         }
 
-   
+
     }
 
 
