@@ -42,7 +42,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _sw = new Stopwatch();
             _sw.Start();
             _isTimeOut = false;
-            _timeOut = Convert.ToInt64(DatabaseController.GetApplicationParameterValue(TIMEOUT_GENERAL));
+            _timeOut = Convert.ToInt64(DatabaseController.GetEnterpriseParameterValue(TIMEOUT_GENERAL));
         }
         public static void Stop()
         {

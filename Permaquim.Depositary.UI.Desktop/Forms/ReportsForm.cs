@@ -78,6 +78,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadOperationsHistoryButton();
             if (SecurityController.IsFunctionenabled(FunctionEnum.BagContent))
                 LoadBagContentButton();
+            if (SecurityController.IsFunctionenabled(FunctionEnum.BagHistory))
+                LoadBagHistoryButton();
 
             LoadBackButton();
         }
@@ -111,6 +113,21 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BagContentButton_Click(object sender, EventArgs e)
         {
             FormsController.OpenChildForm(this, new BagContentForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+        }
+        #endregion
+        #region Baghistory
+        private void LoadBagHistoryButton()
+        {
+            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+                "BagHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_BOLSA), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(OperationsButton);
+            OperationsButton.Click += new System.EventHandler(BagHistoryButton_Click);
+        }
+        private void BagHistoryButton_Click(object sender, EventArgs e)
+        {
+            FormsController.OpenChildForm(this, new BagHistoryForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
         #endregion

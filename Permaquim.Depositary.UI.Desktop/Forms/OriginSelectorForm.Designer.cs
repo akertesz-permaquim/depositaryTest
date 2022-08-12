@@ -1,6 +1,6 @@
 ﻿namespace Permaquim.Depositary.UI.Desktop
 {
-    partial class OperationForm
+    partial class OriginSelectorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -34,27 +34,24 @@
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Enabled = false;
-            this.MainPanel.Location = new System.Drawing.Point(250, 32);
+            this.MainPanel.BackColor = System.Drawing.Color.White;
+            this.MainPanel.Location = new System.Drawing.Point(32, 20);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 544);
-            this.MainPanel.TabIndex = 0;
+            this.MainPanel.Size = new System.Drawing.Size(720, 560);
+            this.MainPanel.TabIndex = 1;
             // 
-            // OperationForm
+            // OriginSelectorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(798, 598);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.ControlBox = false;
             this.Controls.Add(this.MainPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.KeyPreview = true;
-            this.Name = "OperationForm";
-            this.Load += new System.EventHandler(this.OperationForm_Load);
-            this.VisibleChanged += new System.EventHandler(this.OperationForm_VisibleChanged);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperationForm_MouseClick);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "OriginSelectorForm";
+            this.VisibleChanged += new System.EventHandler(this.OriginSelectorForm_VisibleChanged);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OriginSelectorForm_MouseClick);
             this.ResumeLayout(false);
 
         }
@@ -62,6 +59,5 @@
         #endregion
 
         private FlowLayoutPanel MainPanel;
-        private CustomButton customButton1;
     }
 }

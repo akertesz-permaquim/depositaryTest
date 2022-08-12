@@ -30,24 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.InformationLabel = new System.Windows.Forms.Label();
             this.DenominationsGridView = new System.Windows.Forms.DataGridView();
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // InformationLabel
-            // 
-            this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(8, 432);
-            this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(760, 64);
-            this.InformationLabel.TabIndex = 148;
-            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DenominationsGridView
             // 
@@ -95,9 +81,9 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(176, 528);
+            this.MainPanel.Location = new System.Drawing.Point(176, 440);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(448, 55);
+            this.MainPanel.Size = new System.Drawing.Size(448, 80);
             this.MainPanel.TabIndex = 188;
             // 
             // DailyClosingForm
@@ -107,7 +93,6 @@
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.DenominationsGridView);
-            this.Controls.Add(this.InformationLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DailyClosingForm";
             this.Text = "DailyClosingForm";
@@ -120,8 +105,6 @@
         }
 
         #endregion
-
-        private Label InformationLabel;
         private DataGridViewTextBoxColumn Currency;
         private DataGridViewTextBoxColumn Type;
         private DataGridViewTextBoxColumn Validated;

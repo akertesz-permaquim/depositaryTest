@@ -152,6 +152,7 @@
             FALTA_USUARIO_PASSWORD,
             USUARIO_NO_REGISTRADO,
             SIN_TURNO,
+            EXISTEN_TURNOS_ABIERTOS,
             SIN_BOLSA,
             SIN_BOLSA_ACTIVA,
             VOLVER,
@@ -217,15 +218,19 @@
             CANTIDADUNIDADES,
             TRANSACCIONES_TURNO,
             CONFIRMA_CIERRE_TURNO,
+            CONFIRMA_CIERRE_ULTIMO_TURNO,
             CONFIRMA_CIERRE_DIARIO,
             CIERRE_DIARIO,
             CANTIDADDECLARADA,
             CAMBIO_TURNO,
             REPORTES,
             CONTENIDO_BOLSA,
+            HISTORICO_BOLSA,
             CANTIDADOPERACIONES,
             SUCURSAL,
+            SECTOR,
             DEPOSITARIO,
+            CODIGO,
             SOLICITAR_MAS_TIEMPO,
             REQUIERE_IDENTIFICADOR_SOBRE,
             EJECUTAR,
@@ -267,7 +272,8 @@
             Support = 107,
             TurnChange = 108,
             ViewEvents = 109,
-            Reports = 110
+            Reports = 110,
+            BagHistory = 111 
         }
 
         public enum LogTypeEnum

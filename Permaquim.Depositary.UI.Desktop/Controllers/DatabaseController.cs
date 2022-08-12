@@ -1,25 +1,25 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class DatabaseController
     {
-        private static Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario _currentDepositary = null;
-        private static Permaquim.Depositario.Entities.Relations.Dispositivo.DepositarioContadora _currentDepositaryCounter = null;
-        private static Permaquim.Depositario.Entities.Relations.Dispositivo.DepositarioPlaca _currentDepositaryIoboard = null;
-        private static Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion _currentOperation;
-        private static List<Permaquim.Depositario.Entities.Relations.Dispositivo.ComandoContadora> _currentDepositaryCounterCommands = null;
-        private static List<Permaquim.Depositario.Entities.Relations.Dispositivo.ComandoPlaca> _currentDepositaryIoBoardCommands = null;
-        private static Permaquim.Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
+        private static Depositario.Entities.Relations.Dispositivo.Depositario _currentDepositary = null;
+        private static Depositario.Entities.Relations.Dispositivo.DepositarioContadora _currentDepositaryCounter = null;
+        private static Depositario.Entities.Relations.Dispositivo.DepositarioPlaca _currentDepositaryIoboard = null;
+        private static Depositario.Entities.Relations.Operacion.TipoTransaccion _currentOperation;
+        private static List<Depositario.Entities.Relations.Dispositivo.ComandoContadora> _currentDepositaryCounterCommands = null;
+        private static List<Depositario.Entities.Relations.Dispositivo.ComandoPlaca> _currentDepositaryIoBoardCommands = null;
+        private static Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
 
         private const string CIERRE_DIARIO = "Cierre diario";
+
+        public static int AvailableTurnsCount { get; set; }
+
+        public static Depositario.Entities.Relations.Valor.OrigenValor CurrentDepositOrigin { get; set; }
+
         /// <summary>
         /// Representa el usuario registrado en el Sistema
         /// </summary>
@@ -28,6 +28,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         /// Representa la sesión actual
         /// </summary>
         public static Permaquim.Depositario.Entities.Tables.Operacion.Sesion CurrentSession { get; private set; }
+
+
+        public static Permaquim.Depositario.Entities.Relations.Operacion.Turno _currentTurn { get; private set; }
         /// <summary>
         /// Representa el turno actual
         /// </summary>
@@ -35,39 +38,31 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                Permaquim.Depositario.Business.Relations.Operacion.Turno entity = new();
-                entity.Where.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.Id,
-                    Depositario.sqlEnum.OperandEnum.NotEqual, 0);
-                entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                    Depositario.Business.Relations.Operacion.Turno.ColumnEnum.FechaCierre,
-                    Depositario.sqlEnum.OperandEnum.IsNull, 0);
-                entity.Items();
 
-                if (entity.Result.Count > 0)
-                    return entity.Result.FirstOrDefault();
-                else
+                if (_currentTurn == null)
                 {
-                    Depositario.Business.Tables.Operacion.Turno entityTables = new();
-                    entityTables.Add(new Depositario.Entities.Tables.Operacion.Turno()
+                    // Verifica que eista un turno disponible para el depositario / sector
+                    Permaquim.Depositario.Business.Relations.Operacion.Turno entities = new();
+                    entities.Where.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.Habilitado,
+                        Depositario.sqlEnum.OperandEnum.Equal, true);
+                    entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                        Depositario.Business.Relations.Operacion.Turno.ColumnEnum.DepositarioId,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.Id);
+                    entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                        Depositario.Business.Relations.Operacion.Turno.ColumnEnum.SectorId,
+                        Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.Id);
+                    entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                        Depositario.Business.Relations.Operacion.Turno.ColumnEnum.FechaCierre,
+                    Depositario.sqlEnum.OperandEnum.IsNull, 0);
+                    entities.Items();
+
+                    if (entities.Result.Count != 0)
                     {
-                        CierreDiarioId = CurrentDailyClosing.Id,
-                        // FALTA VER CON MATI
-                        FechaApertura = DateTime.Now,
-                        Habilitado = true,
-                        DepositarioId = CurrentDepositary.Id,
-                        FechaCreacion = DateTime.Now,
-                        UsuarioCreacion = CurrentUser.Id,
-                        SectorId = CurrentDepositary.SectorId.Id,
-                        Observaciones = "Generado automáticamente",
-                        Secuencia = 1,
-                        TurnoDepositarioId = CurrentTurn.DepositarioId.Id,
+                        _currentTurn = entities.Result.FirstOrDefault();
+                    }
 
-
-
-                    }); ; ;
-
-                    return CurrentTurn;
                 }
+                return _currentTurn;
             }
         }
 
@@ -398,7 +393,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return entities.Items();
         }
 
+        /// <summary>
+        /// Origenes del depósito
+        /// </summary>
+        /// <returns></returns>
+        public static List<Permaquim.Depositario.Entities.Relations.Valor.OrigenValor> GetDepositOrigin()
+        {
+            Permaquim.Depositario.Business.Relations.Valor.OrigenValor entities = new();
+            entities.Where.Add(Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Habilitado,
+                Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
 
+            entities.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
+                Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Id,
+            Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
+            return entities.Items();
+        }
         public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor CreateContainer()
         {
             Permaquim.Depositario.Entities.Tables.Operacion.Contenedor returnValue = new();
@@ -512,15 +521,18 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static List<Permaquim.Depositario.Entities.Relations.Operacion.Transaccion> GetCurrentTurnOperationsHeaders()
         {
-
+            List<Permaquim.Depositario.Entities.Relations.Operacion.Transaccion> returnValue;
             Permaquim.Depositario.Business.Relations.Operacion.Transaccion transaccion = new();
-            transaccion.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
-                Depositario.sqlEnum.OperandEnum.Equal, CurrentTurn.Id);
-            transaccion.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
-                Depositario.sqlEnum.DirEnum.DESC);
 
-            transaccion.Items();
+            if (DatabaseController.AvailableTurnsCount > 0)
+            {
+                transaccion.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentTurn.Id);
+                transaccion.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
+                    Depositario.sqlEnum.DirEnum.DESC);
 
+                returnValue = transaccion.Items();
+            }
             return transaccion.Result;
 
         }
@@ -589,7 +601,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static Permaquim.Depositario.Entities.Tables.Operacion.Turno GetTurnSchedule()
         {
-            Permaquim.Depositario.Entities.Tables.Operacion.Turno newTurn = new();
+
+            // Verifica que eista un turno disponible para el depositario / sector
+            // 
+
+            Permaquim.Depositario.Entities.Tables.Operacion.Turno? newTurn = new();
 
             Permaquim.Depositario.Business.Tables.Operacion.Turno entities = new();
             entities.Where.Add(Depositario.Business.Tables.Operacion.Turno.ColumnEnum.Habilitado,
@@ -598,37 +614,111 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Depositario.Business.Tables.Operacion.Turno.ColumnEnum.DepositarioId,
             Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.Id);
             entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Operacion.Turno.ColumnEnum.SectorId,
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.Id);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Tables.Operacion.Turno.ColumnEnum.FechaCierre,
             Depositario.sqlEnum.OperandEnum.IsNull, 0);
+
+            
             entities.Items();
 
-            //if (entities.Result.Count == 0)
-            //{
-            //    newTurn = entities.Add(new Permaquim.Depositario.Entities.Tables.Operacion.Turno()
-            //    {
-            //        CierreDiarioId = null,
-            //        DepositarioId = CurrentDepositary.Id,
-            //        Fecha = DateTime.Now,
-            //        FechaApertura = DateTime.Now,
-            //        FechaCierre = null,
-            //        FechaCreacion = DateTime.Now,
-            //        FechaModificacion = null,
-            //        Habilitado = true,
-            //        Observaciones = "Apertura automática por inicio de sesión.",
-            //        Secuencia = 0,
-            //        SectorId = CurrentDepositary.SectorId.Id,
-            //        TurnoDepositarioId = CurrentTurn.TurnoDepositarioId.,
-            //        UsuarioCreacion = CurrentUser.Id,
-            //        UsuarioModificacion = null
-            //    });
-            //}
-            //else
-            //{
-            //    newTurn = entities.Result.FirstOrDefault();
-            //}
+            AvailableTurnsCount = entities.Result.Count;
 
+            if (entities.Result.Count == 0)
+            {
+
+                // No encuentro, entonces busco en Agenda turno si hay un turno disponible para
+                // hoy y para mi sector
+
+                Permaquim.Depositario.Business.Tables.Turno.AgendaTurno entitiesAgendaTurno = new();
+
+                entitiesAgendaTurno.Where.Add(Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.Id);
+                entitiesAgendaTurno.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha,
+                    Depositario.sqlEnum.OperandEnum.Equal, DateTime.Now.Date);
+                entitiesAgendaTurno.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado,
+                    Depositario.sqlEnum.OperandEnum.Equal, true);
+
+                entitiesAgendaTurno.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Id,
+                    Depositario.sqlEnum.OperandEnum.NotIn, GetUsedTurns());
+
+                entitiesAgendaTurno.OrderBy.Add(Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Secuencia,
+                    Depositario.sqlEnum.DirEnum.ASC);
+
+
+
+                entitiesAgendaTurno.Items();
+
+                if (entitiesAgendaTurno.Result.Count == 0)
+                {
+                    // No eisten turnos dados de alta para el depositario,
+                    // no se puede depositar.
+                    AvailableTurnsCount = entitiesAgendaTurno.Result.Count;
+                    newTurn = null;
+                    _currentTurn = null;
+                }
+                else
+                {
+                    var availableTurn = entitiesAgendaTurno.Result.FirstOrDefault();
+
+                    newTurn = entities.Add(new Permaquim.Depositario.Entities.Tables.Operacion.Turno()
+                    {
+                        CierreDiarioId = null,
+                        DepositarioId = CurrentDepositary.Id,
+                        Fecha = DateTime.Now,
+                        FechaApertura = DateTime.Now,
+                        FechaCierre = null,
+                        FechaCreacion = DateTime.Now,
+                        FechaModificacion = null,
+                        Habilitado = true,
+                        Observaciones = "Apertura automática por inicio de sesión.",
+                        Secuencia = availableTurn.Secuencia,
+                        SectorId = CurrentDepositary.SectorId.Id,
+                        TurnoDepositarioId = availableTurn.Id,
+                        UsuarioCreacion = CurrentUser.Id,
+                        UsuarioModificacion = null
+                    });
+
+                    _currentTurn = null;
+
+                    AvailableTurnsCount = entitiesAgendaTurno.Result.Count;
+                }
+
+            }
+            else
+            {
+                newTurn = entities.Result.FirstOrDefault();
+            }
 
             return newTurn;
+        }
+
+        private static List<long> GetUsedTurns()
+        {
+            List<long> resultValue = new();
+
+            Permaquim.Depositario.Business.Tables.Operacion.Turno entities = new();
+            entities.Where.Add(Depositario.Business.Tables.Operacion.Turno.ColumnEnum.Habilitado,
+                Depositario.sqlEnum.OperandEnum.Equal, true);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Operacion.Turno.ColumnEnum.DepositarioId,
+            Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.Id);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Operacion.Turno.ColumnEnum.SectorId,
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.Id);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Operacion.Turno.ColumnEnum.FechaCierre,
+            Depositario.sqlEnum.OperandEnum.IsNotNull, 0);
+            entities.Items();
+
+            foreach (var item in entities.Result)
+            {
+                resultValue.Add(item.TurnoDepositarioId);
+            }
+
+            return resultValue;
+
         }
 
         public static Permaquim.Depositario.Entities.Tables.Operacion.Turno CloseCurrentTurn()
@@ -643,42 +733,27 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 CurrentTurn.FechaCierre = DateTime.Now;
                 entities.Update(new Depositario.Entities.Tables.Operacion.Turno()
                 {
-                    CierreDiarioId = CurrentTurn.CierreDiarioId.Id,
+                    Id = CurrentTurn.Id,
+                    //CierreDiarioId = CurrentTurn.CierreDiarioId.Id,
                     DepositarioId = CurrentTurn.DepositarioId.Id,
                     Fecha = CurrentTurn.Fecha,
                     FechaApertura = CurrentTurn.FechaApertura,
                     FechaCierre = DateTime.Now,
                     FechaCreacion = CurrentTurn.FechaCreacion,
-                    FechaModificacion = CurrentTurn.FechaModificacion,
+
                     Habilitado = CurrentTurn.Habilitado,
-                    Id = CurrentTurn.Id,
                     Observaciones = CurrentTurn.Observaciones,
                     SectorId = CurrentTurn.SectorId,
                     Secuencia = CurrentTurn.Secuencia,
                     TurnoDepositarioId = CurrentTurn.TurnoDepositarioId.Id,
                     UsuarioCreacion = CurrentTurn.UsuarioCreacion.Id,
-                    UsuarioModificacion = CurrentTurn.UsuarioModificacion.Id
+                    UsuarioModificacion = CurrentTurn.UsuarioModificacion.Id,
+                    FechaModificacion = DateTime.Now
 
                 });
 
 
-                newTurn = entities.Add(new Permaquim.Depositario.Entities.Tables.Operacion.Turno()
-                {
-                    CierreDiarioId = null,
-                    DepositarioId = CurrentDepositary.Id,
-                    Fecha = DateTime.Now,
-                    FechaApertura = DateTime.Now,
-                    FechaCierre = null,
-                    FechaCreacion = DateTime.Now,
-                    FechaModificacion = null,
-                    Habilitado = true,
-                    Observaciones = "Apertura automática por inicio de sesión.",
-                    Secuencia = 0,
-                    SectorId = CurrentDepositary.SectorId.Id,
-                    TurnoDepositarioId = CurrentDepositary.Id,
-                    UsuarioCreacion = CurrentUser.Id,
-                    UsuarioModificacion = null
-                });
+                newTurn = GetTurnSchedule();
 
 
                 return newTurn;
@@ -716,6 +791,19 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 UsuarioModificacion = null
             });
 
+            Depositario.Business.Tables.Operacion.Turno turnos = new();
+
+            turnos.Where.Add(Depositario.Business.Tables.Operacion.Turno.ColumnEnum.DepositarioId,
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.Id);
+            turnos.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Operacion.Turno.ColumnEnum.CierreDiarioId,
+                 Depositario.sqlEnum.OperandEnum.IsNull, 0);
+
+            foreach (var item in turnos.Items())
+            {
+                item.CierreDiarioId = newClosing.Id;
+                turnos.Update(item);
+            }
 
             return newClosing;
         }
@@ -725,6 +813,20 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             Permaquim.Depositario.Business.Tables.Aplicacion.Configuracion entities = new();
             entities.Where.Add(Depositario.Business.Tables.Aplicacion.Configuracion.ColumnEnum.Clave,
+                Depositario.sqlEnum.OperandEnum.Equal, key);
+            entities.Items();
+            if (entities.Result.Count > 0)
+                return entities.Result.FirstOrDefault().Valor;
+
+            return returnValue;
+        }
+
+        public static string GetEnterpriseParameterValue(string key)
+        {
+            string returnValue = string.Empty;
+
+            Permaquim.Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entities = new();
+            entities.Where.Add(Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave,
                 Depositario.sqlEnum.OperandEnum.Equal, key);
             entities.Items();
             if (entities.Result.Count > 0)
@@ -828,12 +930,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             sesion.Add(CurrentDepositary.Id, DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
         }
 
-        public static List<BagHistoryItem> GetBaghistoryItems()
+        public static List<Depositario.Entities.Views.Reporte.Contenedores> GetBaghistoryItems()
         {
-            List<BagHistoryItem> returnValue = new();
-            BagHistoryItem newItem = null;
+            Depositario.Business.Views.Reporte.Contenedores entities = new();
+           
 
-            return returnValue;
+            return entities.Items();
         }
         public static List<DailyClosingItem> GetDailyClosingItems()
         {

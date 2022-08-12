@@ -18,7 +18,8 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             LoadStyles();
             LoadMultiLanguageItems();
-            LoadTurnChangeButton();
+            if(DatabaseController.AvailableTurnsCount > 0)
+                LoadTurnChangeButton();
             LoadBackButton();
             InitializeOperationsHeaderGridView();
             TimeOutController.Reset();
@@ -27,6 +28,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
+
+
+            
         }
 
         private void PollingTimer_Tick(object? sender, EventArgs e)
@@ -37,6 +41,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 DatabaseController.LogOff(true);
                 FormsController.LogOff();
             }
+            SetinformationMessage();
         }
         private void TurnChangeForm_Load(object sender, EventArgs e)
         {
@@ -74,10 +79,6 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadMultiLanguageItems()
         {
-            string message = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_TURNO)
-             + Environment.NewLine + "Turno actual: "
-                + DatabaseController.CurrentTurn.TurnoDepositarioId.Nombre;
-            FormsController.SetInformationMessage(InformationTypeEnum.Information, message);
  
             TurnLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TRANSACCIONES_TURNO);
         }
@@ -129,7 +130,23 @@ namespace Permaquim.Depositary.UI.Desktop
                 InitializeLocals();
             }
 
-            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+            //FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+        }
+
+        private static void SetinformationMessage()
+        {
+            string message = string.Empty;
+
+            if (DatabaseController.AvailableTurnsCount > 1)
+                message = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_TURNO)
+                    + ": " + DatabaseController.CurrentTurn.TurnoDepositarioId.
+                        EsquemaDetalleTurnoId.Nombre;
+            else if (DatabaseController.AvailableTurnsCount == 1)
+                message = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_ULTIMO_TURNO);
+            else
+                message += MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
+
+            FormsController.SetInformationMessage(InformationTypeEnum.Information, message);
         }
 
         #region Datagrid        

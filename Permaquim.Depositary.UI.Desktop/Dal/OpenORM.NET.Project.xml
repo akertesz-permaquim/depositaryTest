@@ -22,6 +22,10 @@
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
     <string>Operacion.VistaTransaccionMonedaDefaultSucursal</string>
+    <string>Reporte.Contenedores</string>
+    <string>Reporte.DetalleTransacciones</string>
+    <string>Reporte.DetalleTransaccionesSobre</string>
+    <string>Reporte.Transacciones</string>
     <string>Valor.VistaDenominacion</string>
   </SelectedViews>
   <SelectedStoredProcedures />
@@ -268,6 +272,7 @@
   </MappedStoredProcedures>
   <SelectedTables>
     <string>Aplicacion.Configuracion</string>
+    <string>Aplicacion.ConfiguracionEmpresa</string>
     <string>Auditoria.Log</string>
     <string>Auditoria.TipoLog</string>
     <string>Banca.Banco</string>
@@ -342,6 +347,7 @@
     <string>Turno.EsquemaTurno</string>
     <string>Valor.Denominacion</string>
     <string>Valor.Moneda</string>
+    <string>Valor.OrigenValor</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
     <string>Visualizacion.Perfil</string>
@@ -351,7 +357,6 @@
   <SelectedDatabase>Depositario</SelectedDatabase>
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
-    <string>353e226c-6bf1-4079-a822-ba12163b71c9</string>
   </SelectedTemplates>
   <Location>\</Location>
   <DatasourceServer />
