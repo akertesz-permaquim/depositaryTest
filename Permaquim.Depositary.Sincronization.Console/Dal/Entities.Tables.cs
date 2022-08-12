@@ -1422,6 +1422,8 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
              public Int64 Id { get; set; }
              [DataItemAttributeFieldName("TipoId","TipoId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("TipoConfiguracionDepositario")]// Object name in Database
              public Int64 TipoId { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
@@ -1818,6 +1820,8 @@ using System.Text;
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
              public Int64 DepositarioId { get; set; }
              [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
              public Int64 MonedaId { get; set; }
              [DataItemAttributeFieldName("IndiceEnContadora","IndiceEnContadora")]
              public Int32 IndiceEnContadora { get; set; }
@@ -6061,7 +6065,7 @@ using System.Text;
                 public EntidadCabecera()
                 {
                 }
-                public  EntidadCabecera(Int64 EntidadId,Int64 DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin)
+                public  EntidadCabecera(Int64 EntidadId,Int64? DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin)
                 {
                     this.Id = Id;
                     this.EntidadId = EntidadId;
@@ -6081,7 +6085,7 @@ using System.Text;
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
-             public Int64 DepositarioId { get; set; }
+             public Int64? DepositarioId { get; set; }
              [DataItemAttributeFieldName("Valor","Valor")]
              public String Valor { get; set; }
              [DataItemAttributeFieldName("Fechainicio","Fechainicio")]
@@ -6250,6 +6254,7 @@ using System.Text;
 					public const string EsquemaTurnoId = "EsquemaTurnoId";
 					public const string Nombre = "Nombre";
 					public const string Secuencia = "Secuencia";
+					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
 					public const string UsuarioModificacion = "UsuarioModificacion";
@@ -6261,6 +6266,7 @@ using System.Text;
 					EsquemaTurnoId,
 					Nombre,
 					Secuencia,
+					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -6272,12 +6278,13 @@ using System.Text;
                 public EsquemaDetalleTurno()
                 {
                 }
-                public  EsquemaDetalleTurno(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  EsquemaDetalleTurno(Int64 EsquemaTurnoId,String Nombre,Int32 Secuencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EsquemaTurnoId = EsquemaTurnoId;
                     this.Nombre = Nombre;
                     this.Secuencia = Secuencia;
+                    this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
                     this.UsuarioModificacion = UsuarioModificacion;
@@ -6296,6 +6303,8 @@ using System.Text;
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Secuencia","Secuencia")]
              public Int32 Secuencia { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
@@ -6323,6 +6332,7 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string Nombre = "Nombre";
+					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
 					public const string UsuarioModificacion = "UsuarioModificacion";
@@ -6332,6 +6342,7 @@ using System.Text;
                 {
 					Id,
 					Nombre,
+					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
@@ -6343,10 +6354,11 @@ using System.Text;
                 public EsquemaTurno()
                 {
                 }
-                public  EsquemaTurno(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  EsquemaTurno(String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
+                    this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
                     this.UsuarioModificacion = UsuarioModificacion;
@@ -6359,6 +6371,8 @@ using System.Text;
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database

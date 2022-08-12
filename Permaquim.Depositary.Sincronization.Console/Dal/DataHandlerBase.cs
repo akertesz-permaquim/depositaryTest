@@ -414,7 +414,7 @@ public class DataHandlerBase: IDataHandler
                  // Create a  connection of the type
                  _connection = (IDbConnection)Activator.CreateInstance(_adoNetAssemblyName, _adoNetConnectionTypeName).Unwrap();
                  // Retrieve the Connection String    
-                 _connection.ConnectionString = ConfigurationHandler.ConnectionString;
+                 _connection.ConnectionString = Permaquim.Depositario.Crypto.Decrypt(ConfigurationHandler.ConnectionString ,ConfigurationHandler.PasswordKey);
                  _connection.Open();
               }
         }
