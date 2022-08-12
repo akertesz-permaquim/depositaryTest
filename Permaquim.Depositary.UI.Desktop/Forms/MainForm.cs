@@ -68,7 +68,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInformationMessage(InformationTypeEnum.Error, ex.Message);
             }
             catch (System.FormatException ex)
@@ -78,7 +78,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 AuditController.Log(ex);
                 SetInformationMessage(InformationTypeEnum.Error, ex.Message);
             }

@@ -30,41 +30,26 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
-            DepositaryWebApi.Business.Relations.Seguridad.Usuario usuarios = new();
-            usuarios.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.Usuario.ColumnEnum.NickName,
-                DepositaryWebApi.sqlEnum.OperandEnum.Equal, model.UserName);
-            usuarios.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,
-                DepositaryWebApi.Business.Relations.Seguridad.Usuario.ColumnEnum.Password, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Cryptography.Hash(model.Password));
-            usuarios.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,
-                DepositaryWebApi.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
-            usuarios.Items();
+            DepositaryWebApi.Business.Relations.Dispositivo.Depositario entities = new();
+            entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
+                DepositaryWebApi.sqlEnum.OperandEnum.Equal, Cryptography.Decrypt(model.DepositaryCode,_configuration["AppSettings:PasswordKey"]));
+            entities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,
+                DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
+            entities.Items();
+
+          
 
             //Si se encuentra un usuario con ese password se devuelve el token, si no un BadRequest con mensaje de error.
-            if(usuarios.Result.Count>0)
+            if(entities.Result.Count>0)
             {
-                var usuario = usuarios.Result.FirstOrDefault();
+                var usuario = entities.Result.FirstOrDefault();
 
                 var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, usuario.Nombre),
-                    new Claim(ClaimTypes.Surname, usuario.Apellido),
-                    new Claim(ClaimTypes.Email, usuario.Mail),
-                    new Claim(JwtRegisteredClaimNames.Jti, usuario.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, model.DepositaryCode),
                 };
 
-                DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol usuarioRol = new();
-
-                usuarioRol.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId,
-                    DepositaryWebApi.sqlEnum.OperandEnum.Equal, usuarios.Result.FirstOrDefault().Id);
-
-                var userRoles = usuarioRol.Items();
-
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole.RolId.Nombre));
-                }
-
-                var token = new JwtSecurityToken(
+                 var token = new JwtSecurityToken(
                     issuer: _configuration["JWT:ValidIssuer"],
                     audience: _configuration["JWT:ValidAudience"],
                     expires: DateTime.Now.AddHours(Convert.ToInt32(_configuration["JWT:Hours"])),
@@ -81,7 +66,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             else
             {
-                return BadRequest("Usuario o contraseña invalidos.");
+                return BadRequest("Código de depositario inválido.");
             }
         }
 

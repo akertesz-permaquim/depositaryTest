@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Permaquim.Depositary.Web.Api.Model;
+using Permaquim.Depositary.Web.Api.Security;
+using System.Security.Claims;
 
 namespace Permaquim.Depositary.Web.Api.Controllers
 {
@@ -8,11 +10,22 @@ namespace Permaquim.Depositary.Web.Api.Controllers
     [ApiController]
     public class ConfiguracionController : ControllerBase
     {
+
+        private readonly IConfiguration _configuration;
+
+        public ConfiguracionController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpGet]
         [Route("ObtenerConfiguracion")]
         [Authorize]
         public async Task<IActionResult> ObtenerConfiguraciones()
         {
+
+            string DepositaryCode = JwtController.GetDepositaryCode(HttpContext, _configuration);
+
             ConfiguracionModel data = new();
 
                 data.ConfiguracionAplicacion = ObtenerConfiguracionAplicacion();
