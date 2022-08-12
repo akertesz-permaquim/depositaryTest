@@ -283,7 +283,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
         }
 
-        private void VerifyUserData()
+        public void VerifyUserData()
         {
             if (DatabaseController.CurrentUser != null)
             {
@@ -293,13 +293,22 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " + 
                 DatabaseController.CurrentUser.EmpresaId.Nombre;
 
-                SucursalInfoLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": " 
-                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + " - " 
-                    + MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": " 
-                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + " - "
-                    + DatabaseController.CurrentDepositary.CodigoExterno + " - "
-                    + MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : " 
-                    + DatabaseController.CurrentTurn.TurnoDepositarioId.Nombre;
+                SucursalInfoLabel.Text =
+                    MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
+                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + "  "
+                    + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
+                    + DatabaseController.CurrentDepositary.SectorId.Nombre + "  "
+                    + MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
+                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + "  "
+                    + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
+                    + DatabaseController.CurrentDepositary.CodigoExterno + "  "
+                    + MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : ";
+
+                if (DatabaseController.CurrentTurn == null)
+                    SucursalInfoLabel.Text += MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
+                else
+                    SucursalInfoLabel.Text += DatabaseController.CurrentTurn.TurnoDepositarioId.
+                    EsquemaDetalleTurnoId.Nombre;
 
             }
             else

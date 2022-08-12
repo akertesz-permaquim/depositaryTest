@@ -107,8 +107,15 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void TurnButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new TurnChangeForm(),
-              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            if (DatabaseController.AvailableTurnsCount > 0)
+            {
+                FormsController.OpenChildForm(this, new TurnChangeForm(),
+                  (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
+            else
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+            }
         }
         #endregion
 
@@ -125,8 +132,16 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this, new DailyClosingForm(),
+            if (DatabaseController.AvailableTurnsCount == 0)
+            {
+                FormsController.OpenChildForm(this, new DailyClosingForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
+            else
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                    MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_ABIERTOS));
+            }
         }
         #endregion
 

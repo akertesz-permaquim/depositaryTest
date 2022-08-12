@@ -107,7 +107,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this, new OtherOperationsForm(), _device);
+            FormsController.OpenChildForm(this, new ReportsForm(), _device);
         }
         #endregion
         #region Data    

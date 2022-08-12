@@ -20,7 +20,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetApplicationParameterValue("TIMEOUT_ROJO"));
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_ROJO"));
             }
 
         }
@@ -28,7 +28,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetApplicationParameterValue("TIMEOUT_AMARILLO"));
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_AMARILLO"));
             }
 
         }
@@ -36,7 +36,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetApplicationParameterValue("TIMEOUT_VERDE"));
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_VERDE"));
             }
 
         }
@@ -44,7 +44,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("REQUIERE_IDENTIFICADOR_BOLSA"));
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("REQUIERE_IDENTIFICADOR_BOLSA"));
             }
 
         }
@@ -52,7 +52,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("REQUIERE_IDENTIFICADOR_SOBRE"));
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("REQUIERE_IDENTIFICADOR_SOBRE"));
             }
 
         }
@@ -61,7 +61,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("IMPRIME_TICKET_DEPOSITO_BILLETE"));
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_BILLETE"));
             }
 
         }
@@ -69,7 +69,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("IMPRIME_TICKET_DEPOSITO_SOBRE"));
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_SOBRE"));
             }
 
         }
@@ -77,7 +77,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("IMPRIME_TICKET_DEPOSITO_MONEDA"));
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_MONEDA"));
             }
 
         }

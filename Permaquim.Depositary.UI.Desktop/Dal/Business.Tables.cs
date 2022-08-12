@@ -327,6 +327,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -355,6 +367,372 @@ using System.Text;
                  }
             }
         } // class Configuracion
+	} //namespace Permaquim.Depositario.Business.Tables.Aplicacion
+	namespace Permaquim.Depositario.Business.Tables.Aplicacion {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class ConfiguracionEmpresa : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					EmpresaId,
+					Clave,
+					Valor,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> _entities = new List<Entities.Tables.Aplicacion.ConfiguracionEmpresa>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public ConfiguracionEmpresa() : base()
+            {
+                base._dataItem = new Entities.Tables.Aplicacion.ConfiguracionEmpresa();
+            }
+            public ConfiguracionEmpresa(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Aplicacion.ConfiguracionEmpresa();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// ConfiguracionEmpresa Add Method
+         /// </summary>
+         /// <param name='EmpresaId'></param>
+         /// <param name='Clave'></param>
+         /// <param name='Valor'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Aplicacion.ConfiguracionEmpresa</returns>
+			public Entities.Tables.Aplicacion.ConfiguracionEmpresa Add(Int64 EmpresaId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Aplicacion.ConfiguracionEmpresa)base.Add(new Entities.Tables.Aplicacion.ConfiguracionEmpresa(EmpresaId,Clave,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Tables.Aplicacion.ConfiguracionEmpresa>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Aplicacion.ConfiguracionEmpresa items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Aplicacion.ConfiguracionEmpresa items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EmpresaId"></param>
+            /// <param name="Clave"></param>
+            /// <param name="Valor"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Items(Int64? Id,Int64? EmpresaId,String Clave,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (EmpresaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EmpresaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                   
+                }
+                if (Clave != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Clave, sqlEnum.OperandEnum.Equal, Clave);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Clave, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Clave);
+                    }
+                   
+                }
+                if (Valor != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Aplicacion.ConfiguracionEmpresa Add(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                return (Entities.Tables.Aplicacion.ConfiguracionEmpresa)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Aplicacion.ConfiguracionEmpresa AddOrUpdate(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Aplicacion.ConfiguracionEmpresa)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EmpresaId"></param>
+            /// <param name="Clave"></param>
+            /// <param name="Valor"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64 empresaid,String clave,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Aplicacion.ConfiguracionEmpresa {Id = id,EmpresaId = empresaid,Clave = clave,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Aplicacion.ConfiguracionEmpresa
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Aplicacion.ConfiguracionEmpresa with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Aplicacion.ConfiguracionEmpresa {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class ConfiguracionEmpresa
 	} //namespace Permaquim.Depositario.Business.Tables.Aplicacion
 	namespace Permaquim.Depositario.Business.Tables.Auditoria {
 	    /// <summary>
@@ -680,6 +1058,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -1018,6 +1408,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -1389,6 +1791,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -1428,6 +1842,7 @@ using System.Text;
                 {
 					Id,
 					TipoId,
+					EmpresaId,
 					Nombre,
 					Numero,
 					BancoId,
@@ -1479,6 +1894,7 @@ using System.Text;
          /// Cuenta Add Method
          /// </summary>
          /// <param name='TipoId'></param>
+         /// <param name='EmpresaId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Numero'></param>
          /// <param name='BancoId'></param>
@@ -1489,9 +1905,9 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Banca.Cuenta</returns>
-			public Entities.Tables.Banca.Cuenta Add(Int64 TipoId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Banca.Cuenta Add(Int64 TipoId,Int64 EmpresaId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Banca.Cuenta)base.Add(new Entities.Tables.Banca.Cuenta(TipoId,Nombre,Numero,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Banca.Cuenta)base.Add(new Entities.Tables.Banca.Cuenta(TipoId,EmpresaId,Nombre,Numero,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Banca.Cuenta> Items()
             {
@@ -1525,6 +1941,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="TipoId"></param>
+            /// <param name="EmpresaId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Numero"></param>
             /// <param name="BancoId"></param>
@@ -1535,7 +1952,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,String Nombre,String Numero,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,Int64? EmpresaId,String Nombre,String Numero,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -1559,6 +1976,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                   
+                }
+                if (EmpresaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EmpresaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EmpresaId);
                     }
                    
                 }
@@ -1711,6 +2140,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="TipoId"></param>
+            /// <param name="EmpresaId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Numero"></param>
             /// <param name="BancoId"></param>
@@ -1721,9 +2151,9 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String numero,Int64 bancoid,String sucursalbancaria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 empresaid,String nombre,String numero,Int64 bancoid,String sucursalbancaria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Banca.Cuenta {Id = id,TipoId = tipoid,Nombre = nombre,Numero = numero,BancoId = bancoid,SucursalBancaria = sucursalbancaria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Banca.Cuenta {Id = id,TipoId = tipoid,EmpresaId = empresaid,Nombre = nombre,Numero = numero,BancoId = bancoid,SucursalBancaria = sucursalbancaria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Banca.Cuenta
@@ -1774,6 +2204,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -2113,6 +2555,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -2450,6 +2904,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -2804,6 +3270,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -3255,6 +3733,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -3608,6 +4098,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -3963,6 +4465,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -4316,6 +4830,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -4735,6 +5261,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -5136,6 +5674,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -5539,6 +6089,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -5892,6 +6454,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -6294,6 +6868,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -6793,6 +7379,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -7195,6 +7793,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -7548,6 +8158,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -8191,6 +8813,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -8528,6 +9162,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -8915,6 +9561,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -9252,6 +9910,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -9639,6 +10309,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -9992,6 +10674,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -10490,6 +11184,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -11149,6 +11855,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -11502,6 +12220,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -11921,6 +12651,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -12258,6 +13000,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -12629,6 +13383,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -12998,6 +13764,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -13369,6 +14147,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -13739,6 +14529,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -14093,6 +14895,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -14446,6 +15260,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -14849,6 +15675,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -15171,6 +16009,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -15476,6 +16326,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -15831,6 +16693,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -16184,6 +17058,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -16539,6 +17425,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -16592,7 +17490,8 @@ using System.Text;
 					TotalAValidar,
 					Fecha,
 					Finalizada,
-					EsDepositoAutomatico
+					EsDepositoAutomatico,
+					OrigenValorId
 				}
          protected List<Entities.Tables.Operacion.Transaccion> _entities = new List<Entities.Tables.Operacion.Transaccion>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -16650,10 +17549,11 @@ using System.Text;
          /// <param name='Fecha'></param>
          /// <param name='Finalizada'></param>
          /// <param name='EsDepositoAutomatico'></param>
+         /// <param name='OrigenValorId'></param>
          /// <returns>Entities.Tables.Operacion.Transaccion</returns>
-			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico) 
+			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64 OrigenValorId) 
 			{
-			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico));
+			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,UsuarioCuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico,OrigenValorId));
 			}
             public new List<Entities.Tables.Operacion.Transaccion> Items()
             {
@@ -16702,8 +17602,9 @@ using System.Text;
             /// <param name="Fecha"></param>
             /// <param name="Finalizada"></param>
             /// <param name="EsDepositoAutomatico"></param>
+            /// <param name="OrigenValorId"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico)
+            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? UsuarioCuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico,Int64? OrigenValorId)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -16910,6 +17811,18 @@ using System.Text;
                     }
                    
                 }
+                if (OrigenValorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OrigenValorId, sqlEnum.OperandEnum.Equal, OrigenValorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.OrigenValorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OrigenValorId);
+                    }
+                   
+                }
                 return this.Items();
             }
             /// <summary>
@@ -16966,10 +17879,11 @@ using System.Text;
             /// <param name="Fecha"></param>
             /// <param name="Finalizada"></param>
             /// <param name="EsDepositoAutomatico"></param>
+            /// <param name="OrigenValorId"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? usuariocuentaid,Int64 contenedorid,Int64 sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? usuariocuentaid,Int64 contenedorid,Int64 sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64 origenvalorid)
             {
-                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,UsuarioCuentaId = usuariocuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico});
+                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,UsuarioCuentaId = usuariocuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico,OrigenValorId = origenvalorid});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Operacion.Transaccion
@@ -17020,6 +17934,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -17311,6 +18237,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -17584,6 +18522,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -17890,6 +18840,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -18341,6 +19303,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -18678,6 +19652,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -19049,6 +20035,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -19419,6 +20417,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -19773,6 +20783,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -20110,6 +21132,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -20464,6 +21498,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -20851,6 +21897,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -21204,6 +22262,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -21607,6 +22677,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -21960,6 +23042,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -22379,6 +23473,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -22717,6 +23823,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -23054,6 +24172,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -23409,6 +24539,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -23746,6 +24888,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -24357,6 +25511,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -24711,6 +25877,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -25048,6 +26226,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -25387,6 +26577,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -25709,6 +26911,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -26015,6 +27229,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -26304,6 +27530,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -26691,6 +27929,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -27029,6 +28279,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -27334,6 +28596,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -27753,6 +29027,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -28123,6 +29409,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -28151,6 +29449,356 @@ using System.Text;
                  }
             }
         } // class Moneda
+	} //namespace Permaquim.Depositario.Business.Tables.Valor
+	namespace Permaquim.Depositario.Business.Tables.Valor {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class OrigenValor : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Nombre,
+					Descripcion,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Valor.OrigenValor> _entities = new List<Entities.Tables.Valor.OrigenValor>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public OrigenValor() : base()
+            {
+                base._dataItem = new Entities.Tables.Valor.OrigenValor();
+            }
+            public OrigenValor(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Valor.OrigenValor();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Valor.OrigenValor item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// OrigenValor Add Method
+         /// </summary>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Valor.OrigenValor</returns>
+			public Entities.Tables.Valor.OrigenValor Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Valor.OrigenValor)base.Add(new Entities.Tables.Valor.OrigenValor(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Valor.OrigenValor> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                _entities = dh.Items().Cast<Entities.Tables.Valor.OrigenValor>().ToList<Entities.Tables.Valor.OrigenValor>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Valor.OrigenValor items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Valor.OrigenValor> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Valor.OrigenValor items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Valor.OrigenValor> Items(Int64? Id,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Descripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Descripcion, sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Valor.OrigenValor Add(Entities.Tables.Valor.OrigenValor item)
+            {
+                return (Entities.Tables.Valor.OrigenValor)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Valor.OrigenValor AddOrUpdate(Entities.Tables.Valor.OrigenValor item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Valor.OrigenValor)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Valor.OrigenValor item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Valor.OrigenValor with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Valor.OrigenValor {Id = id,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Valor.OrigenValor
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Valor.OrigenValor item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Valor.OrigenValor with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Valor.OrigenValor {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Valor.OrigenValor> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class OrigenValor
 	} //namespace Permaquim.Depositario.Business.Tables.Valor
 	namespace Permaquim.Depositario.Business.Tables.Valor {
 	    /// <summary>
@@ -28460,6 +30108,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -28815,6 +30475,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -29169,6 +30841,18 @@ using System.Text;
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
                  }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
@@ -29506,6 +31190,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {
@@ -29860,6 +31556,18 @@ using System.Text;
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
                  {
                      base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
                  }
                  public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
                  {

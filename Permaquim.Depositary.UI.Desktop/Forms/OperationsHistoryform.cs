@@ -86,7 +86,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new OtherOperationsForm(),
+            FormsController.OpenChildForm(this,new ReportsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 

@@ -81,6 +81,85 @@ using System.Text;
 				
 			} //Class Configuracion 
 } //namespace Permaquim.Depositario.Entities.Tables.Aplicacion
+		namespace Permaquim.Depositario.Entities.Tables.Aplicacion {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Aplicacion")]  // Database Schema Name
+			[DataItemAttributeObjectName("ConfiguracionEmpresa","ConfiguracionEmpresa")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class ConfiguracionEmpresa : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string EmpresaId = "EmpresaId";
+					public const string Clave = "Clave";
+					public const string Valor = "Valor";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					EmpresaId,
+					Clave,
+					Valor,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public ConfiguracionEmpresa()
+                {
+                }
+                public  ConfiguracionEmpresa(Int64 EmpresaId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.EmpresaId = EmpresaId;
+                    this.Clave = Clave;
+                    this.Valor = Valor;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Empresa")]// Object name in Database
+             public Int64 EmpresaId { get; set; }
+             [DataItemAttributeFieldName("Clave","Clave")]
+             public String Clave { get; set; }
+             [DataItemAttributeFieldName("Valor","Valor")]
+             public String Valor { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64? UsuarioModificacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+				
+			} //Class ConfiguracionEmpresa 
+} //namespace Permaquim.Depositario.Entities.Tables.Aplicacion
 		namespace Permaquim.Depositario.Entities.Tables.Auditoria {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Auditoria")]  // Database Schema Name
@@ -328,6 +407,7 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string TipoId = "TipoId";
+					public const string EmpresaId = "EmpresaId";
 					public const string Nombre = "Nombre";
 					public const string Numero = "Numero";
 					public const string BancoId = "BancoId";
@@ -342,6 +422,7 @@ using System.Text;
                 {
 					Id,
 					TipoId,
+					EmpresaId,
 					Nombre,
 					Numero,
 					BancoId,
@@ -358,10 +439,11 @@ using System.Text;
                 public Cuenta()
                 {
                 }
-                public  Cuenta(Int64 TipoId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Cuenta(Int64 TipoId,Int64 EmpresaId,String Nombre,String Numero,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
+                    this.EmpresaId = EmpresaId;
                     this.Nombre = Nombre;
                     this.Numero = Numero;
                     this.BancoId = BancoId;
@@ -380,6 +462,10 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("TipoCuenta")]// Object name in Database
              public Int64 TipoId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Empresa")]// Object name in Database
+             public Int64 EmpresaId { get; set; }
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
@@ -1732,6 +1818,8 @@ using System.Text;
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
              public Int64 DepositarioId { get; set; }
              [DataItemAttributeFieldName("MonedaId","MonedaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Moneda")]// Object name in Database
              public Int64 MonedaId { get; set; }
              [DataItemAttributeFieldName("IndiceEnContadora","IndiceEnContadora")]
              public Int32 IndiceEnContadora { get; set; }
@@ -3861,6 +3949,7 @@ using System.Text;
 					public const string Fecha = "Fecha";
 					public const string Finalizada = "Finalizada";
 					public const string EsDepositoAutomatico = "EsDepositoAutomatico";
+					public const string OrigenValorId = "OrigenValorId";
 				}
 				public enum FieldEnum : int
                 {
@@ -3880,7 +3969,8 @@ using System.Text;
 					TotalAValidar,
 					Fecha,
 					Finalizada,
-					EsDepositoAutomatico
+					EsDepositoAutomatico,
+					OrigenValorId
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -3888,7 +3978,7 @@ using System.Text;
                 public Transaccion()
                 {
                 }
-                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico)
+                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? UsuarioCuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64 OrigenValorId)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -3907,6 +3997,7 @@ using System.Text;
                     this.Fecha = Fecha;
                     this.Finalizada = Finalizada;
                     this.EsDepositoAutomatico = EsDepositoAutomatico;
+                    this.OrigenValorId = OrigenValorId;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -3966,6 +4057,10 @@ using System.Text;
              public Boolean Finalizada { get; set; }
              [DataItemAttributeFieldName("EsDepositoAutomatico","EsDepositoAutomatico")]
              public Boolean EsDepositoAutomatico { get; set; }
+             [DataItemAttributeFieldName("OrigenValorId","OrigenValorId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("OrigenValor")]// Object name in Database
+             public Int64 OrigenValorId { get; set; }
 				
 			} //Class Transaccion 
 } //namespace Permaquim.Depositario.Entities.Tables.Operacion
@@ -6467,6 +6562,75 @@ using System.Text;
              public DateTime? FechaModificacion { get; set; }
 				
 			} //Class Moneda 
+} //namespace Permaquim.Depositario.Entities.Tables.Valor
+		namespace Permaquim.Depositario.Entities.Tables.Valor {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Valor")]  // Database Schema Name
+			[DataItemAttributeObjectName("OrigenValor","OrigenValor")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class OrigenValor : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string Nombre = "Nombre";
+					public const string Descripcion = "Descripcion";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					Nombre,
+					Descripcion,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public OrigenValor()
+                {
+                }
+                public  OrigenValor(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.Nombre = Nombre;
+                    this.Descripcion = Descripcion;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("Descripcion","Descripcion")]
+             public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             public Int64? UsuarioModificacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+				
+			} //Class OrigenValor 
 } //namespace Permaquim.Depositario.Entities.Tables.Valor
 		namespace Permaquim.Depositario.Entities.Tables.Valor {
 			[Serializable()]                         //

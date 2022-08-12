@@ -103,11 +103,53 @@ namespace Permaquim.Depositary.UI.Desktop
             {
 
                 case (int)OperationTypeEnum.BillDeposit:
+
+                    if (DatabaseController.AvailableTurnsCount > 0)
+                    {
+                        if (DatabaseController.GetCurrencies().Count == 1)
+                        {
+                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                        else
+                        {
+                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                            FormsController.OpenChildForm(this, new BillDepositForm(),
+                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                    }
+                    else
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                    }
+                    break;
                 case (int)OperationTypeEnum.EnvelopeDeposit:
-                    if(_device != null)
-                        _device.RemoteCancel();
-                    FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+
+                    if (DatabaseController.AvailableTurnsCount > 0)
+                    {
+
+                        if (DatabaseController.GetCurrencies().Count == 1)
+                        {
+                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                        else
+                        {
+                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                    }
+                    else
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                    }
                     break;
                 case (int)OperationTypeEnum.ValueExtraction:
                     FormsController.OpenChildForm(this, new BagExtractionForm(),

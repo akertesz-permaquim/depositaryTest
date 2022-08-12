@@ -7,16 +7,19 @@ public class ParameterItem
     public string Name { get; set; }
     public List<ParameterItemValue> Values {get;set;}
 	public string FullQuery  {get;set;}
-    public ParameterItem(String fullQuery)
+	public bool IsFieldParameter  {get;set;} = true;
+    public ParameterItem(String fullQuery, bool isFieldParameter = true)
 	{
 		FullQuery = fullQuery;
+		IsFieldParameter = isFieldParameter;
 	}
-    public ParameterItem(string fullQuery, string column, string operand, string name, List<ParameterItemValue> values)
+    public ParameterItem(string fullQuery, string column, string operand, string name, List<ParameterItemValue> values, bool isFieldParameter = true)
 	{
 		Operand   = operand;
 		Values     = values;
         Name = name;
 		FullQuery = fullQuery;
+		IsFieldParameter = isFieldParameter;
 	}
 }
 public class ParameterItemValue
@@ -419,6 +422,18 @@ public class WhereParameter : WhereParameterBase
         {
             throw new Exception("Add: Overload Error.");
         }
+    }
+    internal void OpenParentheses()
+    {
+        _whereParameters.Add(new ParameterItem(Constants.SQL_OPENPARENTHESES, false));
+    }
+    internal void CloseParentheses()
+    {
+        _whereParameters.Add(new ParameterItem(Constants.SQL_CLOSEPARENTHESES, false));
+    }
+    internal void AddConjunction(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+    {
+        _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositario.sqlEnum.ConjunctionEnum), Conjunction) + " ", false));
     }
 }
 public class OrderByParameter : OrderByParameterBase

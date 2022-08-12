@@ -73,7 +73,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static void HideInstance(Form instance)
         {
-            MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
             instance.Hide();
         }
         public static void LogOff()

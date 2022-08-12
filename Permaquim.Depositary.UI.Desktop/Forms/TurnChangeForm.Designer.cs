@@ -36,7 +36,7 @@
             this.OperationsHeaderGridView = new System.Windows.Forms.DataGridView();
             this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
             this.TurnLabel = new System.Windows.Forms.Label();
-            this.MainPanel = new System.Windows.Forms.Panel();
+            this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +71,7 @@
             this.OperationsHeaderGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.OperationsHeaderGridView.EnableHeadersVisualStyles = false;
             this.OperationsHeaderGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsHeaderGridView.Location = new System.Drawing.Point(13, 32);
+            this.OperationsHeaderGridView.Location = new System.Drawing.Point(13, 64);
             this.OperationsHeaderGridView.Name = "OperationsHeaderGridView";
             this.OperationsHeaderGridView.RowHeadersVisible = false;
             this.OperationsHeaderGridView.RowTemplate.DividerHeight = 1;
@@ -113,7 +113,7 @@
             this.OperationsDetailGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.OperationsDetailGridView.EnableHeadersVisualStyles = false;
             this.OperationsDetailGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsDetailGridView.Location = new System.Drawing.Point(13, 221);
+            this.OperationsDetailGridView.Location = new System.Drawing.Point(13, 253);
             this.OperationsDetailGridView.Name = "OperationsDetailGridView";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -138,7 +138,7 @@
             this.TurnLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.TurnLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TurnLabel.ForeColor = System.Drawing.Color.White;
-            this.TurnLabel.Location = new System.Drawing.Point(13, 0);
+            this.TurnLabel.Location = new System.Drawing.Point(13, 32);
             this.TurnLabel.Name = "TurnLabel";
             this.TurnLabel.Size = new System.Drawing.Size(776, 27);
             this.TurnLabel.TabIndex = 190;
@@ -146,9 +146,11 @@
             // 
             // MainPanel
             // 
-            this.MainPanel.Location = new System.Drawing.Point(232, 464);
+            this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
+            this.MainPanel.Location = new System.Drawing.Point(176, 448);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(336, 64);
+            this.MainPanel.Size = new System.Drawing.Size(448, 88);
             this.MainPanel.TabIndex = 191;
             // 
             // TurnChangeForm
@@ -176,6 +178,6 @@
         private DataGridView OperationsHeaderGridView;
         private DataGridView OperationsDetailGridView;
         private Label TurnLabel;
-        private Panel MainPanel;
+        private FlowLayoutPanel MainPanel;
     }
 }
