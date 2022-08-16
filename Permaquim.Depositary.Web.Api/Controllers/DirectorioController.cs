@@ -8,6 +8,19 @@ namespace Permaquim.Depositary.Web.Api.Controllers
     [ApiController]
     public class DirectorioController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        public DirectorioController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        private const string ENTIDAD_GRUPO = "Directorio.Grupo";
+        private const string ENTIDAD_EMPRESA = "Directorio.Empresa";
+        private const string ENTIDAD_SUCURSAL = "Directorio.Sucursal";
+        private const string ENTIDAD_SECTOR = "Directorio.Sector";
+        private const string ENTIDAD_RELACIONMONEDASUCURSAL = "Directorio.RelacionMonedaSucursal";
+
         #region Endpoints
 
         [HttpGet]
@@ -17,15 +30,53 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             DirectorioModel data = new();
 
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
+
             try
             {
-                data.Grupos = ObtenerGruposBD();
-                data.Empresas = ObtenerEmpresasBD();
-                data.Sucursales = ObtenerSucursalesBD();
-                data.Sectores = ObtenerSectoresBD();
-                data.TiposIdentificador = ObtenerTiposIdentificadoresBD();
-                data.IdentificadoresUsuario = ObtenerIdentificadoresUsuariosBD();
-                data.RelacionesMonedasSucursales = ObtenerRelacionesMonedasSucursalesBD();
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroDirectorioGrupoId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_GRUPO);
+
+                if (SincroDirectorioGrupoId.HasValue)
+                {
+                    data.Grupos = ObtenerGruposBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_GRUPO));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroDirectorioGrupoId.Value);
+                }
+
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroDirectorioEmpresaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_EMPRESA);
+
+                if (SincroDirectorioEmpresaId.HasValue)
+                {
+                    data.Empresas = ObtenerEmpresasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_EMPRESA));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroDirectorioEmpresaId.Value);
+                }
+
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroDirectorioSucursalId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_SUCURSAL);
+
+                if (SincroDirectorioSucursalId.HasValue)
+                {
+                    data.Sucursales = ObtenerSucursalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_SUCURSAL));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroDirectorioSucursalId.Value);
+                }
+
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroDirectorioSectorId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_SECTOR);
+
+                if (SincroDirectorioSectorId.HasValue)
+                {
+                    data.Sectores = ObtenerSectoresBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_SECTOR));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroDirectorioSectorId.Value);
+                }
+
+                Int64? SincroDirectorioRelacionMonedaSucursalId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_RELACIONMONEDASUCURSAL);
+
+                if (SincroDirectorioRelacionMonedaSucursalId.HasValue)
+                {
+                    data.RelacionesMonedasSucursales = ObtenerRelacionesMonedasSucursalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_RELACIONMONEDASUCURSAL));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroDirectorioRelacionMonedaSucursalId.Value);
+                }
 
             }
             catch (Exception ex)
@@ -43,16 +94,30 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             DirectorioGrupoModel data = new();
 
-            try
-            {
-                data.Grupos = ObtenerGruposBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            return Ok(data);
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_GRUPO);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.Grupos = ObtenerGruposBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_GRUPO));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                //Cerramos el registro de sincronizacion de la entidad.
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -62,16 +127,29 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             DirectorioEmpresaModel data = new();
 
-            try
-            {
-                data.Empresas = ObtenerEmpresasBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            return Ok(data);
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_EMPRESA);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.Empresas = ObtenerEmpresasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_EMPRESA));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -81,16 +159,29 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             DirectorioSucursalModel data = new();
 
-            try
-            {
-                data.Sucursales = ObtenerSucursalesBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            return Ok(data);
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_SUCURSAL);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.Sucursales = ObtenerSucursalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_SUCURSAL));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -100,35 +191,29 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             DirectorioSectorModel data = new();
 
-            try
-            {
-                data.Sectores = ObtenerSectoresBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            return Ok(data);
-        }
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_SECTOR);
 
-        [HttpGet]
-        [Route("ObtenerTiposIdentificadores")]
-        [Authorize]
-        public async Task<IActionResult> ObtenerTiposIdentificadores()
-        {
-            DirectorioTipoIdentificadorModel data = new();
-
-            try
+            if (SincronizacionId.HasValue)
             {
-                data.TiposIdentificador = ObtenerTiposIdentificadoresBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                try
+                {
+                    data.Sectores = ObtenerSectoresBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_SECTOR));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
 
-            return Ok(data);
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -138,45 +223,41 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             DirectorioRelacionMonedaSucursalModel data = new();
 
-            try
-            {
-                data.RelacionesMonedasSucursales = ObtenerRelacionesMonedasSucursalesBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            return Ok(data);
-        }
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_RELACIONMONEDASUCURSAL);
 
-        [HttpGet]
-        [Route("ObtenerIdentificadoresUsuario")]
-        [Authorize]
-        public async Task<IActionResult> ObtenerIdentificadoresUsuario()
-        {
-            DirectorioIdentificadorUsuarioModel data = new();
-
-            try
+            if (SincronizacionId.HasValue)
             {
-                data.IdentificadoresUsuario = ObtenerIdentificadoresUsuariosBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                try
+                {
+                    data.RelacionesMonedasSucursales = ObtenerRelacionesMonedasSucursalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_RELACIONMONEDASUCURSAL));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
 
-            return Ok(data);
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         #endregion
 
         #region Controllers
 
-        private List<DepositaryWebApi.Entities.Tables.Directorio.Grupo> ObtenerGruposBD()
+        private List<DepositaryWebApi.Entities.Tables.Directorio.Grupo> ObtenerGruposBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Directorio.Grupo> result = new();
             DepositaryWebApi.Business.Tables.Directorio.Grupo oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Directorio.Grupo.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Directorio.Grupo.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {
@@ -195,10 +276,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Directorio.Empresa> ObtenerEmpresasBD()
+        private List<DepositaryWebApi.Entities.Tables.Directorio.Empresa> ObtenerEmpresasBD(DateTime fechaUltimaSincronizacion)
         {
-            List < DepositaryWebApi.Entities.Tables.Directorio.Empresa> result = new();
+            List<DepositaryWebApi.Entities.Tables.Directorio.Empresa> result = new();
             DepositaryWebApi.Business.Tables.Directorio.Empresa oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Directorio.Empresa.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Directorio.Empresa.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {
@@ -217,10 +300,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Directorio.Sucursal> ObtenerSucursalesBD()
+        private List<DepositaryWebApi.Entities.Tables.Directorio.Sucursal> ObtenerSucursalesBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Directorio.Sucursal> result = new();
             DepositaryWebApi.Business.Tables.Directorio.Sucursal oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Directorio.Sucursal.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Directorio.Sucursal.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {
@@ -239,10 +324,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Directorio.Sector> ObtenerSectoresBD()
+        private List<DepositaryWebApi.Entities.Tables.Directorio.Sector> ObtenerSectoresBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Directorio.Sector> result = new();
             DepositaryWebApi.Business.Tables.Directorio.Sector oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Directorio.Sector.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Directorio.Sector.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {
@@ -261,54 +348,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> ObtenerTiposIdentificadoresBD()
-        {
-            List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> result = new();
-            DepositaryWebApi.Business.Tables.Seguridad.TipoIdentificador oEntities = new();
-
-            try
-            {
-                oEntities.Items();
-                if (oEntities.Result.Count > 0)
-                {
-                    foreach (var item in oEntities.Result)
-                    {
-                        result.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return result;
-        }
-        private List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> ObtenerIdentificadoresUsuariosBD()
-        {
-            List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> result = new();
-            DepositaryWebApi.Business.Tables.Seguridad.IdentificadorUsuario oEntities = new();
-
-            try
-            {
-                oEntities.Items();
-                if (oEntities.Result.Count > 0)
-                {
-                    foreach (var item in oEntities.Result)
-                    {
-                        result.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return result;
-        }
-        private List<DepositaryWebApi.Entities.Tables.Directorio.RelacionMonedaSucursal> ObtenerRelacionesMonedasSucursalesBD()
+        private List<DepositaryWebApi.Entities.Tables.Directorio.RelacionMonedaSucursal> ObtenerRelacionesMonedasSucursalesBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Directorio.RelacionMonedaSucursal> result = new();
             DepositaryWebApi.Business.Tables.Directorio.RelacionMonedaSucursal oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Directorio.RelacionMonedaSucursal.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {

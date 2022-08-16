@@ -37,8 +37,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
             entities.Items();
 
-          
-
             //Si se encuentra un usuario con ese password se devuelve el token, si no un BadRequest con mensaje de error.
             if(entities.Result.Count>0)
             {

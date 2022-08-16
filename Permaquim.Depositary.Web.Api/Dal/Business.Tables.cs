@@ -7439,6 +7439,10 @@ using System.Text;
 					Contenedor,
 					FueraDeServicio,
 					Observaciones,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
 					FechaModificacion
 				}
          protected List<Entities.Tables.Dispositivo.DepositarioEstado> _entities = new List<Entities.Tables.Dispositivo.DepositarioEstado>();
@@ -7491,11 +7495,15 @@ using System.Text;
          /// <param name='Contenedor'></param>
          /// <param name='FueraDeServicio'></param>
          /// <param name='Observaciones'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.DepositarioEstado</returns>
-			public Entities.Tables.Dispositivo.DepositarioEstado Add(Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,DateTime? FechaModificacion) 
+			public Entities.Tables.Dispositivo.DepositarioEstado Add(Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Dispositivo.DepositarioEstado)base.Add(new Entities.Tables.Dispositivo.DepositarioEstado(DepositarioId,SectorId,SucursalId,ContadoraA,ContadoraB,Placa,Puerta,Contenedor,FueraDeServicio,Observaciones,FechaModificacion));
+			  return (Entities.Tables.Dispositivo.DepositarioEstado)base.Add(new Entities.Tables.Dispositivo.DepositarioEstado(DepositarioId,SectorId,SucursalId,ContadoraA,ContadoraB,Placa,Puerta,Contenedor,FueraDeServicio,Observaciones,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Dispositivo.DepositarioEstado> Items()
             {
@@ -7538,9 +7546,13 @@ using System.Text;
             /// <param name="Contenedor"></param>
             /// <param name="FueraDeServicio"></param>
             /// <param name="Observaciones"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Dispositivo.DepositarioEstado> Items(Int64? Id,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean? FueraDeServicio,String Observaciones,DateTime? FechaModificacion)
+            public List<Entities.Tables.Dispositivo.DepositarioEstado> Items(Int64? Id,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean? FueraDeServicio,String Observaciones,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -7675,6 +7687,54 @@ using System.Text;
                     }
                    
                 }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
                 if (FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
@@ -7737,11 +7797,15 @@ using System.Text;
             /// <param name="Contenedor"></param>
             /// <param name="FueraDeServicio"></param>
             /// <param name="Observaciones"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,String contadoraa,String contadorab,String placa,String puerta,String contenedor,Boolean fueradeservicio,String observaciones,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,String contadoraa,String contadorab,String placa,String puerta,String contenedor,Boolean fueradeservicio,String observaciones,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioEstado {Id = id,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,ContadoraA = contadoraa,ContadoraB = contadorab,Placa = placa,Puerta = puerta,Contenedor = contenedor,FueraDeServicio = fueradeservicio,Observaciones = observaciones,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Dispositivo.DepositarioEstado {Id = id,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,ContadoraA = contadoraa,ContadoraB = contadorab,Placa = placa,Puerta = puerta,Contenedor = contenedor,FueraDeServicio = fueradeservicio,Observaciones = observaciones,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Dispositivo.DepositarioEstado

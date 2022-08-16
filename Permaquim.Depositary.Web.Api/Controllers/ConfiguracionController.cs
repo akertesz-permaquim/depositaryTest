@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Permaquim.Depositary.Web.Api.Model;
-using Permaquim.Depositary.Web.Api.Security;
-using System.Security.Claims;
 
 namespace Permaquim.Depositary.Web.Api.Controllers
 {
@@ -10,7 +8,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
     [ApiController]
     public class ConfiguracionController : ControllerBase
     {
-
         private readonly IConfiguration _configuration;
 
         public ConfiguracionController(IConfiguration configuration)
@@ -23,23 +20,19 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerConfiguraciones()
         {
-
             string DepositaryCode = JwtController.GetDepositaryCode(HttpContext, _configuration);
 
             ConfiguracionModel data = new();
 
-                data.ConfiguracionAplicacion = ObtenerConfiguracionAplicacion();
-                data.ConfiguracionDepositario = ObtenerConfiguracionDepositario();
+            data.ConfiguracionAplicacion = ObtenerConfiguracionAplicacion();
+            data.ConfiguracionDepositario = ObtenerConfiguracionDepositario();
 
             return Ok(data);
-
         }
-        private  List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> ObtenerConfiguracionAplicacion()
+        private List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> ObtenerConfiguracionAplicacion()
         {
-
             DepositaryWebApi.Business.Tables.Aplicacion.Configuracion entities = new();
             return entities.Items();
-
 
         }
         private List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> ObtenerConfiguracionDepositario()

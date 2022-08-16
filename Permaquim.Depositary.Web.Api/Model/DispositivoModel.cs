@@ -15,6 +15,8 @@
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoContadora> ComandosContadoras { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> MonedasDepositarios { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> EstadosDepositarios { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMoneda> PlantillasMonedas { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> PlantillasMonedasDetalles { get; set; } = new();
     }
 
     public class DispositivoDepositarioModel
@@ -57,7 +59,7 @@
     {
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> PlacasDepositarios { get; set; } = new();
     }
-    public class DispositivoDepositarioValorModel
+    public class DispositivoDepositarioMonedaModel
     {
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> MonedasDepositarios { get; set; } = new();
     }
@@ -68,6 +70,14 @@
     public class DispositivoTipoContadoraModel
     {
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.TipoContadora> TiposContadoras { get; set; } = new();
+    }
+    public class DispositivoPlantillaMonedaModel
+    {
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMoneda> PlantillasMonedas { get; set; } = new();
+    }
+    public class DispositivoPlantillaMonedaDetalleModel
+    {
+        public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> PlantillasMonedasDetalles { get; set; } = new();
     }
 
 }

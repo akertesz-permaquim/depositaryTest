@@ -72,7 +72,7 @@
         public static DateTime obtenerFechaUltimaSincronizacion(Int64 pDepositarioId, string pNombreEntidad)
         {
             //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaUltimaSincronizacion = DateTime.MinValue;
+            DateTime fechaUltimaSincronizacion = new(1900,1,1);
 
             //En funcion del nombre recibido buscamos la entidad y obtenemos el id
             DepositaryWebApi.Business.Tables.Sincronizacion.Entidad oSincronizacionEntidad = new();
@@ -83,8 +83,9 @@
             {
                 //Buscamos la ultima sincro que realizo el depositario en cuestion
                 DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new();
-                oSincronizacionEntidadCabecera.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, oSincronizacionEntidadCabecera.Result.FirstOrDefault().Id);
+                oSincronizacionEntidadCabecera.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, oSincronizacionEntidad.Result.FirstOrDefault().Id);
                 oSincronizacionEntidadCabecera.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pDepositarioId);
+                oSincronizacionEntidadCabecera.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, DepositaryWebApi.sqlEnum.OperandEnum.IsNotNull, null);
                 oSincronizacionEntidadCabecera.OrderBy.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id, DepositaryWebApi.sqlEnum.DirEnum.DESC);
                 oSincronizacionEntidadCabecera.Items();
 

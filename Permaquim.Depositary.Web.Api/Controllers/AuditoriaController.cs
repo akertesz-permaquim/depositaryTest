@@ -6,60 +6,64 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BiometriaController : ControllerBase
+    public class AuditoriaController : ControllerBase
     {
         private readonly IConfiguration _configuration;
 
-        public BiometriaController(IConfiguration configuration)
+        public AuditoriaController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        private const string ENTIDAD_HUELLADACTILAR = "Biometria.HuellaDactilar";
+        private const string ENTIDAD_TIPOLOG = "Auditoria.TipoLog";
 
         #region Endpoints
+
         [HttpGet]
-        [Route("ObtenerHuellasDactilares")]
+        [Route("ObtenerTiposLog")]
         [Authorize]
-        public async Task<IActionResult> ObtenerHuellasDactilares()
+        public async Task<IActionResult> ObtenerTiposLog()
         {
-            BiometriaHuellaDactilarModel data = new();
+            AuditoriaTipoLogModel data = new();
 
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_HUELLADACTILAR);
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOLOG);
 
             if (SincronizacionId.HasValue)
             {
-
                 try
                 {
-                    data.HuellasDactilares = ObtenerHuellasDactilaresBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_HUELLADACTILAR));
+                    data.TiposLog = ObtenerTiposLogBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOLOG));
+
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
 
+                //Cerramos el registro de sincronizacion de la entidad.
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
             {
                 return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
             }
+
         }
 
         #endregion
 
         #region Controllers
 
-        private List<DepositaryWebApi.Entities.Tables.Biometria.HuellaDactilar> ObtenerHuellasDactilaresBD(DateTime fechaUltimaSincronizacion)
+        private List<DepositaryWebApi.Entities.Tables.Auditoria.TipoLog> ObtenerTiposLogBD(DateTime fechaUltimaSincronizacion)
         {
-            List<DepositaryWebApi.Entities.Tables.Biometria.HuellaDactilar> result = new();
-            DepositaryWebApi.Business.Tables.Biometria.HuellaDactilar oEntities = new();
-            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Biometria.HuellaDactilar.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
-            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Biometria.HuellaDactilar.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            List<DepositaryWebApi.Entities.Tables.Auditoria.TipoLog> result = new();
+            DepositaryWebApi.Business.Tables.Auditoria.TipoLog oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Auditoria.TipoLog.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Auditoria.TipoLog.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {
@@ -80,5 +84,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         #endregion
+
     }
 }

@@ -15,8 +15,8 @@
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Usuario> Usuarios { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioRol> UsuariosRoles { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioSector> UsuariosSectores { get; set; } = new();
-
-
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> IdentificadoresUsuarios { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> TiposIdentificadores { get; set; } = new();
     }
     public class SeguridadUsuarioModel
     {
@@ -69,5 +69,13 @@
     public class SeguridadUsuarioSectorModel
     {
         public List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioSector> UsuariosSectores { get; set; } = new();
+    }
+    public class SeguridadIdentificadorUsuarioModel
+    {
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> IdentificadoresUsuarios { get; set; } = new();
+    }
+    public class SeguridadTipoIdentificadorModel
+    {
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> TiposIdentificadores { get; set; } = new();
     }
 }

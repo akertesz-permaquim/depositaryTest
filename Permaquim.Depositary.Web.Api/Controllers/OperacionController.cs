@@ -9,6 +9,16 @@ namespace Permaquim.Depositary.Web.Api.Controllers
     [ApiController]
     public class OperacionController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        public OperacionController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        private const string ENTIDAD_TIPOTRANSACCION = "Operacion.TipoTransaccion";
+        private const string ENTIDAD_TIPOEVENTO = "Operacion.TipoEvento";
+        private const string ENTIDAD_TIPOCONTENEDOR = "Operacion.TipoContenedor";
 
         public enum OperationTypeEnum
         {
@@ -562,15 +572,41 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region GetEndpoints
 
         [HttpGet]
-        [Route("ObtenerTiposTransacciones")]
+        [Route("ObtenerOperacion")]
         [Authorize]
-        public async Task<IActionResult> ObtenerTiposTransacciones()
+        public async Task<IActionResult> ObtenerOperacion()
         {
-            OperacionTipoTransaccionModel data = new();
+            OperacionModel data = new();
+
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             try
             {
-                data.TiposTransacciones = ObtenerTiposTransaccionesBD();
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroOperacionTipoEventoId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOEVENTO);
+
+                if (SincroOperacionTipoEventoId.HasValue)
+                {
+                    data.TiposEventos = ObtenerTiposEventosBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOEVENTO));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroOperacionTipoEventoId.Value);
+                }
+
+                Int64? SincroOperacionTipoContenedorId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCONTENEDOR);
+
+                if (SincroOperacionTipoContenedorId.HasValue)
+                {
+                    data.TiposContenedores = ObtenerTiposContenedoresBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOCONTENEDOR));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroOperacionTipoContenedorId.Value);
+                }
+
+                Int64? SincroOperacionTipoTransaccionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOTRANSACCION);
+
+                if (SincroOperacionTipoTransaccionId.HasValue)
+                {
+                    data.TiposTransacciones = ObtenerTiposTransaccionesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOTRANSACCION));
+                    SincronizacionController.finalizarCabeceraSincronizacion(SincroOperacionTipoTransaccionId.Value);
+                }
+
             }
             catch (Exception ex)
             {
@@ -578,6 +614,38 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
 
             return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("ObtenerTiposTransacciones")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerTiposTransacciones()
+        {
+            OperacionTipoTransaccionModel data = new();
+
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
+
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOTRANSACCION);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.TiposTransacciones = ObtenerTiposTransaccionesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOTRANSACCION));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -587,16 +655,29 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             OperacionTipoContenedorModel data = new();
 
-            try
-            {
-                data.TiposContenedores = ObtenerTiposContenedoresBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            return Ok(data);
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCONTENEDOR);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.TiposContenedores = ObtenerTiposContenedoresBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOCONTENEDOR));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -606,26 +687,41 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             OperacionTipoEventoModel data = new();
 
-            try
-            {
-                data.TiposEventos = ObtenerTiposEventosBD();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            return Ok(data);
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOEVENTO);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.TiposEventos = ObtenerTiposEventosBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOEVENTO));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         #endregion
 
         #region Controllers
 
-        private List<DepositaryWebApi.Entities.Tables.Operacion.TipoTransaccion> ObtenerTiposTransaccionesBD()
+        private List<DepositaryWebApi.Entities.Tables.Operacion.TipoTransaccion> ObtenerTiposTransaccionesBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Operacion.TipoTransaccion> result = new();
             DepositaryWebApi.Business.Tables.Operacion.TipoTransaccion oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Operacion.TipoTransaccion.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Operacion.TipoTransaccion.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {
@@ -644,10 +740,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Operacion.TipoContenedor> ObtenerTiposContenedoresBD()
+        private List<DepositaryWebApi.Entities.Tables.Operacion.TipoContenedor> ObtenerTiposContenedoresBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Operacion.TipoContenedor> result = new();
             DepositaryWebApi.Business.Tables.Operacion.TipoContenedor oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Operacion.TipoContenedor.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Operacion.TipoContenedor.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {
@@ -666,10 +764,12 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Operacion.TipoEvento> ObtenerTiposEventosBD()
+        private List<DepositaryWebApi.Entities.Tables.Operacion.TipoEvento> ObtenerTiposEventosBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Operacion.TipoEvento> result = new();
             DepositaryWebApi.Business.Tables.Operacion.TipoEvento oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Operacion.TipoEvento.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Operacion.TipoEvento.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
             try
             {

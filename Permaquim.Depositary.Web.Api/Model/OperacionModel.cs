@@ -13,6 +13,13 @@
         public List<NuevaTransaccionSobreDetalle> TransaccionesSobresDetalles { get; set; }
     }
 
+    public class OperacionModel
+    {
+        public List<DepositaryWebApi.Entities.Tables.Operacion.TipoContenedor> TiposContenedores { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Operacion.TipoEvento> TiposEventos { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Operacion.TipoTransaccion> TiposTransacciones { get; set; } = new();
+    }
+
     public class NuevaSesion : DepositaryWebApi.Entities.Tables.Operacion.Sesion
     {
         public Int64? OrigenSesion_Id { get; set; }

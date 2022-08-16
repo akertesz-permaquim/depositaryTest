@@ -2862,6 +2862,10 @@ using System.Text;
 					public const string Contenedor = "Contenedor";
 					public const string FueraDeServicio = "FueraDeServicio";
 					public const string Observaciones = "Observaciones";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
 					public const string FechaModificacion = "FechaModificacion";
 				}
 				public enum FieldEnum : int
@@ -2877,6 +2881,10 @@ using System.Text;
 					Contenedor,
 					FueraDeServicio,
 					Observaciones,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
 					FechaModificacion
 				}
 	               /// <summary>
@@ -2885,7 +2893,7 @@ using System.Text;
                 public DepositarioEstado()
                 {
                 }
-                public  DepositarioEstado(DepositaryWebApi.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,DateTime? FechaModificacion)
+                public  DepositarioEstado(DepositaryWebApi.Entities.Relations.Dispositivo.Depositario DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.DepositarioId = DepositarioId;
@@ -2898,6 +2906,10 @@ using System.Text;
                     this.Contenedor = Contenedor;
                     this.FueraDeServicio = FueraDeServicio;
                     this.Observaciones = Observaciones;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
                     this.FechaModificacion = FechaModificacion;
                 }
              [DataItemAttributeFieldName("Id","Id")]
@@ -2938,6 +2950,14 @@ using System.Text;
              public Boolean FueraDeServicio { get; set; }
              [DataItemAttributeFieldName("Observaciones","Observaciones")]
              public String Observaciones { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
 				

@@ -1,4 +1,6 @@
 ﻿using Permaquim.Depositary.Sincronization.Console.Interfaces;
+using Permaquim.Depositary.Sincronization.Console.Controllers;
+
 
 namespace Permaquim.Depositary.Sincronization.Console
 {
@@ -12,39 +14,88 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             try
             {
-                Depositario.Business.Tables.Regionalizacion.Lenguaje lenguaje = new();
-                foreach (var item in Lenguaje)
+                if (Lenguaje.Count > 0)
                 {
-                    lenguaje.Where.Clear();
-                    lenguaje.Where.Add(Depositario.Business.Tables.Regionalizacion.Lenguaje.ColumnEnum.Nombre,
-                        Depositario.sqlEnum.OperandEnum.Equal, item.Nombre);
-                    lenguaje.Items();
+                    Depositario.Business.Tables.Regionalizacion.Lenguaje lenguaje = new();
 
-                    if (lenguaje.Result.Count == 0)
-                        lenguaje.Add(item);
-                    else
-                        lenguaje.Update(item);
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.Lenguaje");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in Lenguaje)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.Id);
+
+                            //Guardo el id que venia del server.
+                            Int64 origenId = item.Id;
+
+                            //Si se sincronizo antes entonces hago un update con el id propio.
+                            if (lenguajeIdOrigen.HasValue)
+                            {
+                                item.Id = lenguajeIdOrigen.Value;
+                                lenguaje.Update(item);
+                            }
+                            else
+                            {
+                                lenguaje.Add(item);
+                            }
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
                 }
 
-                Depositario.Business.Tables.Regionalizacion.LenguajeItem lenguajeItem = new();
-                foreach (var item in LenguajeItems)
+
+                if (LenguajeItems.Count > 0)
                 {
-                    lenguajeItem.Where.Clear();
-                    lenguajeItem.Where.Add(Depositario.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId,
-                        Depositario.sqlEnum.OperandEnum.Equal, item.LenguajeId);
-                    lenguajeItem.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                        Depositario.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.Clave,
-                                Depositario.sqlEnum.OperandEnum.Equal, item.Clave);
-                    lenguajeItem.Items();
-                    if(lenguajeItem.Result.Count == 0)
-                    lenguajeItem.Add(item);
-                    else
-                        lenguajeItem.Update(item);
+                    Depositario.Business.Tables.Regionalizacion.LenguajeItem lenguajeItem = new();
+
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.LenguajeItem");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in LenguajeItems)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? lenguajeItemIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.LenguajeItem", item.Id);
+
+                            Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
+
+                            if (lenguajeIdOrigen.HasValue)
+                            {
+                                //Guardo el id que venia del server.
+                                Int64 origenId = item.Id;
+
+                                //Reemplazo los id de FK por id propio.
+                                item.LenguajeId = lenguajeIdOrigen.Value;
+
+                                //Si se sincronizo antes entonces hago un update con el id propio.
+                                if (lenguajeIdOrigen.HasValue)
+                                {
+                                    item.Id = lenguajeIdOrigen.Value;
+                                    lenguajeItem.Update(item);
+                                }
+                                else
+                                {
+                                    lenguajeItem.Add(item);
+                                }
+
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                            }
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
                 }
+
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -57,6 +108,6 @@ namespace Permaquim.Depositary.Sincronization.Console
             throw new NotImplementedException();
         }
 
- 
+
     }
 }

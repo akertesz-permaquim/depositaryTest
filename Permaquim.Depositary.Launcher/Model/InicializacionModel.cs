@@ -7,6 +7,7 @@ namespace Permaquim.Depositary.Launcher.Model
         public string CodigoExternoDepositario { get; set; }
 
         public List<Depositario.Entities.Tables.Aplicacion.Configuracion> AplicacionConfiguracion { get; set; } = new();
+        public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ConfiguracionEmpresa { get; set; } = new();
         public List<Depositario.Entities.Tables.Auditoria.TipoLog> AuditoriaTipoLog { get; set; } = new();
         public List<Depositario.Entities.Tables.Banca.Banco> BancaBanco { get; set; } = new();
         public List<Depositario.Entities.Tables.Banca.Cuenta> BancaCuenta { get; set; } = new();
@@ -71,7 +72,6 @@ namespace Permaquim.Depositary.Launcher.Model
         public List<Depositario.Entities.Tables.Visualizacion.Perfil> VisualizacionPerfil { get; set; } = new();
         public List<Depositario.Entities.Tables.Visualizacion.PerfilItem> VisualizacionPerfilItem { get; set; } = new();
         public List<Depositario.Entities.Tables.Visualizacion.PerfilTipo> VisualizacionPerfilTipo { get; set; } = new();
-        public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ConfiguracionEmpresa { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.PlantillaMoneda> PlantillaMoneda { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> PlantillaMonedaDetalle { get; set; } = new();
         public List<Depositario.Entities.Tables.Valor.OrigenValor> OrigenValor { get; set; } = new();
