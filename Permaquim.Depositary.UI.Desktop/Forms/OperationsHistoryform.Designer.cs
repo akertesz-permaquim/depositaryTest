@@ -37,10 +37,10 @@
             this.OperationsHeaderGridView = new System.Windows.Forms.DataGridView();
             this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
             this.FilterPanel = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.RemainingTimeLabel = new System.Windows.Forms.Label();
+            this.UserLabel = new System.Windows.Forms.Label();
+            this.TurnLabel = new System.Windows.Forms.Label();
+            this.ToDateTimeLabel = new System.Windows.Forms.Label();
+            this.FromDateTimeLabel = new System.Windows.Forms.Label();
             this.ExecuteButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.UserComboBox = new System.Windows.Forms.ComboBox();
             this.TurnComboBox = new System.Windows.Forms.ComboBox();
@@ -63,7 +63,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(392, 608);
+            this.BackButton.Location = new System.Drawing.Point(392, 592);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(160, 55);
             this.BackButton.TabIndex = 179;
@@ -102,14 +102,14 @@
             this.OperationsHeaderGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.OperationsHeaderGridView.EnableHeadersVisualStyles = false;
             this.OperationsHeaderGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsHeaderGridView.Location = new System.Drawing.Point(16, 96);
+            this.OperationsHeaderGridView.Location = new System.Drawing.Point(16, 152);
             this.OperationsHeaderGridView.Name = "OperationsHeaderGridView";
             this.OperationsHeaderGridView.RowHeadersVisible = false;
             this.OperationsHeaderGridView.RowTemplate.DividerHeight = 1;
             this.OperationsHeaderGridView.RowTemplate.Height = 30;
             this.OperationsHeaderGridView.RowTemplate.ReadOnly = true;
             this.OperationsHeaderGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OperationsHeaderGridView.Size = new System.Drawing.Size(925, 256);
+            this.OperationsHeaderGridView.Size = new System.Drawing.Size(925, 184);
             this.OperationsHeaderGridView.TabIndex = 181;
             this.OperationsHeaderGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OperationsHeaderGridView_CellClick);
             this.OperationsHeaderGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
@@ -144,7 +144,7 @@
             this.OperationsDetailGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.OperationsDetailGridView.EnableHeadersVisualStyles = false;
             this.OperationsDetailGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsDetailGridView.Location = new System.Drawing.Point(16, 360);
+            this.OperationsDetailGridView.Location = new System.Drawing.Point(16, 344);
             this.OperationsDetailGridView.Name = "OperationsDetailGridView";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -159,17 +159,17 @@
             this.OperationsDetailGridView.RowTemplate.Height = 30;
             this.OperationsDetailGridView.RowTemplate.ReadOnly = true;
             this.OperationsDetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OperationsDetailGridView.Size = new System.Drawing.Size(925, 240);
+            this.OperationsDetailGridView.Size = new System.Drawing.Size(925, 208);
             this.OperationsDetailGridView.TabIndex = 182;
             this.OperationsDetailGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OperationsDetailGridView_CellClick);
             this.OperationsDetailGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
             // 
             // FilterPanel
             // 
-            this.FilterPanel.Controls.Add(this.label3);
-            this.FilterPanel.Controls.Add(this.label2);
-            this.FilterPanel.Controls.Add(this.label1);
-            this.FilterPanel.Controls.Add(this.RemainingTimeLabel);
+            this.FilterPanel.Controls.Add(this.UserLabel);
+            this.FilterPanel.Controls.Add(this.TurnLabel);
+            this.FilterPanel.Controls.Add(this.ToDateTimeLabel);
+            this.FilterPanel.Controls.Add(this.FromDateTimeLabel);
             this.FilterPanel.Controls.Add(this.ExecuteButton);
             this.FilterPanel.Controls.Add(this.UserComboBox);
             this.FilterPanel.Controls.Add(this.TurnComboBox);
@@ -181,49 +181,49 @@
             this.FilterPanel.Size = new System.Drawing.Size(953, 88);
             this.FilterPanel.TabIndex = 183;
             // 
-            // label3
+            // UserLabel
             // 
-            this.label3.BackColor = System.Drawing.Color.SteelBlue;
-            this.label3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(616, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 27);
-            this.label3.TabIndex = 201;
-            this.label3.Text = "*";
+            this.UserLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.UserLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UserLabel.ForeColor = System.Drawing.Color.White;
+            this.UserLabel.Location = new System.Drawing.Point(616, 13);
+            this.UserLabel.Name = "UserLabel";
+            this.UserLabel.Size = new System.Drawing.Size(176, 27);
+            this.UserLabel.TabIndex = 201;
+            this.UserLabel.Text = "*";
             // 
-            // label2
+            // TurnLabel
             // 
-            this.label2.BackColor = System.Drawing.Color.SteelBlue;
-            this.label2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(432, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 27);
-            this.label2.TabIndex = 200;
-            this.label2.Text = "*";
+            this.TurnLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.TurnLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TurnLabel.ForeColor = System.Drawing.Color.White;
+            this.TurnLabel.Location = new System.Drawing.Point(432, 13);
+            this.TurnLabel.Name = "TurnLabel";
+            this.TurnLabel.Size = new System.Drawing.Size(176, 27);
+            this.TurnLabel.TabIndex = 200;
+            this.TurnLabel.Text = "*";
             // 
-            // label1
+            // ToDateTimeLabel
             // 
-            this.label1.BackColor = System.Drawing.Color.SteelBlue;
-            this.label1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(224, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 27);
-            this.label1.TabIndex = 199;
-            this.label1.Text = "*";
+            this.ToDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.ToDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ToDateTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.ToDateTimeLabel.Location = new System.Drawing.Point(224, 13);
+            this.ToDateTimeLabel.Name = "ToDateTimeLabel";
+            this.ToDateTimeLabel.Size = new System.Drawing.Size(200, 27);
+            this.ToDateTimeLabel.TabIndex = 199;
+            this.ToDateTimeLabel.Text = "*";
             // 
-            // RemainingTimeLabel
+            // FromDateTimeLabel
             // 
-            this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(16, 13);
-            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(200, 27);
-            this.RemainingTimeLabel.TabIndex = 198;
-            this.RemainingTimeLabel.Text = "*";
+            this.FromDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.FromDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FromDateTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.FromDateTimeLabel.Location = new System.Drawing.Point(16, 13);
+            this.FromDateTimeLabel.Name = "FromDateTimeLabel";
+            this.FromDateTimeLabel.Size = new System.Drawing.Size(200, 27);
+            this.FromDateTimeLabel.TabIndex = 198;
+            this.FromDateTimeLabel.Text = "*";
             // 
             // ExecuteButton
             // 
@@ -247,6 +247,7 @@
             // 
             // UserComboBox
             // 
+            this.UserComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.UserComboBox.FormattingEnabled = true;
             this.UserComboBox.Location = new System.Drawing.Point(616, 45);
             this.UserComboBox.Name = "UserComboBox";
@@ -255,6 +256,7 @@
             // 
             // TurnComboBox
             // 
+            this.TurnComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TurnComboBox.FormattingEnabled = true;
             this.TurnComboBox.Location = new System.Drawing.Point(432, 45);
             this.TurnComboBox.Name = "TurnComboBox";
@@ -301,10 +303,10 @@
         private DataGridView OperationsHeaderGridView;
         private DataGridView OperationsDetailGridView;
         private Panel FilterPanel;
-        private Label label3;
-        private Label label2;
-        private Label label1;
-        private Label RemainingTimeLabel;
+        private Label UserLabel;
+        private Label TurnLabel;
+        private Label ToDateTimeLabel;
+        private Label FromDateTimeLabel;
         private ComboBox UserComboBox;
         private ComboBox TurnComboBox;
         private DateTimePicker ToDateTimePicker;

@@ -508,6 +508,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.UsuarioId,
                     Depositario.sqlEnum.OperandEnum.Equal, userId);
             }
+
+            if (turnId > -1)
+            {
+                transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
+                    Depositario.sqlEnum.OperandEnum.Equal, turnId);
+            }
+
             //transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, 
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
             //    Depositario.sqlEnum.OperandEnum.Equal, turnId);
@@ -911,6 +919,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             entities.Where.Add(Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado,
                 Depositario.sqlEnum.OperandEnum.Equal, true);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId,
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.Id);
             entities.Items();
 
             return entities.Result;

@@ -206,6 +206,8 @@
             HISTORICO_OPERACIONES,
             FINALIZADA,
             FECHA,
+            FECHA_DESDE,
+            FECHA_HASTA,
             ESCROW_LLENO,
             CANCELAR_DEPOSITO,
             EMPRESA,

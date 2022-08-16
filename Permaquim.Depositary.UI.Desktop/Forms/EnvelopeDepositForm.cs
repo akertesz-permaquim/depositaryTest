@@ -72,6 +72,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 X = DenominationsGridView.Location.X,
                 Y = ButtonsPanel.Location.Y
             };
+            BackButton.Location = new Point()
+            {
+                X = MainPanel.Width / 2 - BackButton.Width / 2,
+                Y = ButtonsPanel.Location.Y
+            };
 
         }
         private void LoadStyles()
@@ -107,6 +112,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD);
             DenominationsGridView.Columns["Amount"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMPORTE);
             EnvelopeTextBox.PlaceholderText = MultilanguangeController.GetText(MultiLanguageEnum.ENVELOPE_TEXTBOX_PLACEHOLDER);
+            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
 
         }
 
@@ -218,6 +224,10 @@ namespace Permaquim.Depositary.UI.Desktop
                         ProcessDeviceStatus();
                     }
                 }
+            }
+            else
+            {
+                VerifyButtonsVisibility();
             }
 
             SetTotals();
@@ -375,25 +385,33 @@ namespace Permaquim.Depositary.UI.Desktop
         /// Habilita la visualización de los botones de acuerdo a los estados del hardware
         /// </summary>
         private void VerifyButtonsVisibility()
-        { 
-            //Solo se habilita el botón de volver si no hay dinero en el escrow
-            ConfirmAndExitDepositButton.Visible =
-                !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _totalQuantity > 0;//&& _totalAmount > 0;
+        {
+            if (!_operationStatus.DepositConfirmed)
+            {
+                //Solo se habilita el botón de volver si no hay dinero en el escrow
+                ConfirmAndExitDepositButton.Visible =
+                    !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                    && _totalQuantity > 0 && !_device.StateResultProperty.DoorStateInformation.Escrow;
 
-            CancelDepositButton.Visible =
-           !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                && _totalQuantity >= 0;//&& _totalAmount > 0;
+                CancelDepositButton.Visible = true;
+               //!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+               //     && _totalQuantity >= 0;//&& _totalAmount > 0;
 
-            EnvelopeTextBox.Visible = ParameterController.RequiresEnvelopeIdentifier
-                && ConfirmAndExitDepositButton.Visible;
+                EnvelopeTextBox.Visible = ParameterController.RequiresEnvelopeIdentifier
+                    && ConfirmAndExitDepositButton.Visible;
 
-            ButtonsPanel.Visible = _totalQuantity > 0;
+                ButtonsPanel.Visible = _totalQuantity > 0;
+
+                BackButton.Visible = !ButtonsPanel.Visible;
+            }
+            else
+            {
+                EnableDisableControls(false);
+            }
 
         }
         private void ShowInformation()
         {
-            InformationLabel.Text = String.Empty;
 
             if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
              && _operationStatus.CurrentTransactionQuantity == 0)
@@ -409,6 +427,19 @@ namespace Permaquim.Depositary.UI.Desktop
                 FormsController.SetInformationMessage(InformationTypeEnum.Error,
                 MultilanguangeController.GetText(MultiLanguageEnum.RETIRAR_SOBRE));
             }
+
+            if(_operationStatus.DepositConfirmed)
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Event,
+                                MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO));
+            }
+
+            if (_device.StateResultProperty.EndInformation.StoreEnd)
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                    MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
+            }
+
         }
 
         /// <summary>
@@ -674,6 +705,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CancelDepositButton_Click(object sender, EventArgs e)
         {
 
+            _operationStatus.DepositConfirmed = false;
+            _device.CloseEscrow();
+
             if (_device.CounterConnected)
                 _device.RemoteCancel();
             FormsController.OpenChildForm(this, new OperationForm(), _device);
@@ -697,6 +731,16 @@ namespace Permaquim.Depositary.UI.Desktop
                 EnvelopeTextBox.Texts = inputForm.ReturnTextValue
                     .Replace("{ENTER}","");
             }
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            if (_device != null)
+            {
+                if (_device.CounterConnected)
+                    _device.RemoteCancel();
+            }
+            FormsController.OpenChildForm(this, new OperationForm(), _device);
         }
     }
 }

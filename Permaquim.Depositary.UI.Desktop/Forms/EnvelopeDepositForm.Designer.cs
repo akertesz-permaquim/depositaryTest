@@ -36,6 +36,7 @@
             this.ButtonsPanel = new System.Windows.Forms.Panel();
             this.ConfirmAndExitDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.DenominationsGridView = new System.Windows.Forms.DataGridView();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.Denomination = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,7 +44,6 @@
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EnvelopeTextBox = new CustomTextBox();
-            this.InformationLabel = new System.Windows.Forms.Label();
             this.RemainingTimeLabel = new System.Windows.Forms.Label();
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
@@ -71,9 +71,9 @@
             // 
             this.MainPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MainPanel.Controls.Add(this.ButtonsPanel);
+            this.MainPanel.Controls.Add(this.BackButton);
             this.MainPanel.Controls.Add(this.DenominationsGridView);
             this.MainPanel.Controls.Add(this.EnvelopeTextBox);
-            this.MainPanel.Controls.Add(this.InformationLabel);
             this.MainPanel.Controls.Add(this.RemainingTimeLabel);
             this.MainPanel.Controls.Add(this.SubtotalLabel);
             this.MainPanel.Controls.Add(this.CurrencyLabel);
@@ -135,6 +135,29 @@
             this.CancelDepositButton.UseVisualStyleBackColor = false;
             this.CancelDepositButton.Visible = false;
             this.CancelDepositButton.Click += new System.EventHandler(this.CancelDepositButton_Click);
+            // 
+            // BackButton
+            // 
+            this.BackButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BackButton.BorderRadius = 5;
+            this.BackButton.BorderSize = 0;
+            this.BackButton.FlatAppearance.BorderSize = 0;
+            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BackButton.ForeColor = System.Drawing.Color.White;
+            this.BackButton.Location = new System.Drawing.Point(240, 552);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(228, 55);
+            this.BackButton.TabIndex = 182;
+            this.BackButton.Text = "*";
+            this.BackButton.TextColor = System.Drawing.Color.White;
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // DenominationsGridView
             // 
@@ -251,21 +274,11 @@
             this.EnvelopeTextBox.SelectionStart = 0;
             this.EnvelopeTextBox.Size = new System.Drawing.Size(702, 45);
             this.EnvelopeTextBox.TabIndex = 159;
+            this.EnvelopeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.EnvelopeTextBox.Texts = "";
             this.EnvelopeTextBox.UnderlinedStyle = false;
             this.EnvelopeTextBox.Visible = false;
             this.EnvelopeTextBox.Click += new System.EventHandler(this.EnvelopeTextBox_Click);
-            // 
-            // InformationLabel
-            // 
-            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
-            this.InformationLabel.Location = new System.Drawing.Point(12, 560);
-            this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(704, 65);
-            this.InformationLabel.TabIndex = 158;
-            this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RemainingTimeLabel
             // 
@@ -551,5 +564,6 @@
         private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn Amount;
         private DataGridViewTextBoxColumn Id;
+        private CustomButton BackButton;
     }
 }

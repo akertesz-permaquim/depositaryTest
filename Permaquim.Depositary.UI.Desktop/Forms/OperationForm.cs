@@ -34,8 +34,15 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
-            MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
+            if (!ConfigurationController.IsDevelopment())
+            {
+                MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
                 == ModeStateInformation.Mode.Neutral_SettingMode;
+            }
+            else
+            {
+                MainPanel.Enabled = true;
+            }
 
             if (TimeOutController.IsTimeOut())
             {
@@ -44,8 +51,14 @@ namespace Permaquim.Depositary.UI.Desktop
                 FormsController.LogOff();
             }
 
-            if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
-                _device.RemoteCancel();
+            if (!ConfigurationController.IsDevelopment())
+            {
+                if (_device.StateResultProperty.DoorStateInformation.Escrow)
+                    _device.CloseEscrow();
+
+                if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                    _device.RemoteCancel();
+            }
             
 
         }
@@ -218,8 +231,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 _transactions = DatabaseController.GetTransactionTypes();
                 LoadTransactionButtons();
                 LoadOtherOperationsButton();
-                LoadBackButton();;
-                _device.RemoteCancel();
+                LoadBackButton();
+                if(!ConfigurationController.IsDevelopment())
+                    _device.RemoteCancel();
             }
 
          //FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);

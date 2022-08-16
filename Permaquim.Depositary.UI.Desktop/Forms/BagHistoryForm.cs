@@ -20,21 +20,21 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadStyles();
             LoadBackButton();
             TimeOutController.Reset();
-            _pollingTimer = new System.Windows.Forms.Timer()
-            {
-                Interval = DeviceController.GetPollingInterval()
-            };
-            _pollingTimer.Tick += PollingTimer_Tick;
+            //_pollingTimer = new System.Windows.Forms.Timer()
+            //{
+            //    Interval = DeviceController.GetPollingInterval()
+            //};
+            //_pollingTimer.Tick += PollingTimer_Tick;
         }
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams CP = base.CreateParams;
-                CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
-                return CP;
-            }
-        }
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams CP = base.CreateParams;
+        //        CP.ExStyle = CP.ExStyle | 0x01500000; // WS_EX_COMPOSITED
+        //        return CP;
+        //    }
+        //}
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -74,8 +74,8 @@ namespace Permaquim.Depositary.UI.Desktop
         #region BackButton
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildCancelButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width / 2 - 5, 55);
+            CustomButton backButton = ControlBuilder.BuildExitButton(
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width / 2 - 5, 55);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -93,15 +93,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             MainGridView.Columns.Clear();
 
-
-
             MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "Identificador",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CODIGO),
                 Name = "Identificador",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -112,7 +110,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
                 Name = "FechaApertura",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -123,7 +121,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
                 Name = "FechaCierre",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -134,7 +132,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO),
                 Name = "Depositario",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -145,7 +143,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADOPERACIONES),
                 Name = "CantidadTransacciones",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -156,7 +154,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES),
                 Name = "CantidadBilletes",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -166,7 +164,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.SOBRES),
                 Name = "CantidadSobres",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -176,7 +174,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD),
                 Name = "CantidadTotalDineroMonedaDefault",
                 Visible = true,
-                Width = 260,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });

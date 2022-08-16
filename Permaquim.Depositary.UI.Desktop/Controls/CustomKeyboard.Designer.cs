@@ -105,7 +105,6 @@
             this.Button_Delete.TextColor = System.Drawing.Color.White;
             this.Button_Delete.UseVisualStyleBackColor = false;
             this.Button_Delete.Click += new System.EventHandler(this.Delete);
-     
             // 
             // Button_Star
             // 
@@ -338,6 +337,7 @@
             this.PasswordTexbox.SelectionStart = 0;
             this.PasswordTexbox.Size = new System.Drawing.Size(352, 45);
             this.PasswordTexbox.TabIndex = 81;
+            this.PasswordTexbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.PasswordTexbox.Texts = "";
             this.PasswordTexbox.UnderlinedStyle = false;
             this.PasswordTexbox.Enter += new System.EventHandler(this.PasswordTexbox_Enter);
@@ -364,6 +364,7 @@
             this.UsernameTextBox.SelectionStart = 0;
             this.UsernameTextBox.Size = new System.Drawing.Size(352, 45);
             this.UsernameTextBox.TabIndex = 80;
+            this.UsernameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.UsernameTextBox.Texts = "";
             this.UsernameTextBox.UnderlinedStyle = false;
             this.UsernameTextBox.Enter += new System.EventHandler(this.UsernameTextBox_Enter);
@@ -384,7 +385,7 @@
             this.Button_Space.Name = "Button_Space";
             this.Button_Space.Size = new System.Drawing.Size(581, 55);
             this.Button_Space.TabIndex = 79;
-            this.Button_Space.Tag = "{SPACE}";
+            this.Button_Space.Tag = " ";
             this.Button_Space.Text = " Espacio";
             this.Button_Space.TextColor = System.Drawing.Color.White;
             this.Button_Space.UseVisualStyleBackColor = false;

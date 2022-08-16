@@ -17,6 +17,7 @@ namespace Permaquim.Depositary.UI.Desktop
             InitializeComponent();
             CenterPanel();
             LoadStyles();
+            LoadMultilanguageItems();
             LoadFilterControls();
             InitializeOperationsHeaderGridView();
 
@@ -77,13 +78,18 @@ namespace Permaquim.Depositary.UI.Desktop
             ExecuteButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             ExecuteButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
-            ExecuteButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EJECUTAR);
-
             StyleController.SetControlStyle(OperationsHeaderGridView);
             StyleController.SetControlStyle(OperationsDetailGridView);
         }
 
-
+        private void LoadMultilanguageItems()
+        {
+            FromDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_DESDE);
+            ToDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_HASTA);
+            TurnLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO);
+            UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO);
+            ExecuteButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EJECUTAR);
+        }
         private void BackButton_Click(object sender, EventArgs e)
         {
             FormsController.OpenChildForm(this,new ReportsForm(),
@@ -105,7 +111,15 @@ namespace Permaquim.Depositary.UI.Desktop
             UserComboBox.DisplayMember = NICKNAME;
             UserComboBox.ValueMember = ID;
 
-            TurnComboBox.DataSource = DatabaseController.GetTurnList();
+            var turnList = DatabaseController.GetTurnList();
+
+            turnList.Insert(0, new Depositario.Entities.Tables.Turno.AgendaTurno()
+            {
+                Nombre  = TODOS,
+                Id = -1
+            });
+
+            TurnComboBox.DataSource = turnList;
 
             TurnComboBox.DisplayMember = NOMBRE;
             TurnComboBox.ValueMember = ID;
@@ -360,6 +374,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             OperationsHeaderGridView.DataSource = null;
+            OperationsDetailGridView.DataSource = null;
+            InitializeOperationsHeaderGridView();
 
             var operations = DatabaseController.GetOperationsHeaders(
                 FromDateTimePicker.Value,
@@ -397,6 +413,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OperationsHeaderGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
+
+            OperationsDetailGridView.DataSource  = null;
             if (e.RowIndex > -1)
             {
 

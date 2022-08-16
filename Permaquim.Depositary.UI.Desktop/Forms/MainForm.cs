@@ -397,19 +397,27 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void MainPictureBox_Click(object sender, EventArgs e)
         {
-            if (VerifySchedule())
-                if (_counterDevice.CounterConnected && _counterDevice.IoBoardConnected)
-                {
-                    Login();
-                }
-                else
-                {
-                    SetInformationMessage(InformationTypeEnum.Error,
-                            MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO));
-                }
+            if (ConfigurationController.IsDevelopment())
+                Login();
             else
-                SetInformationMessage(InformationTypeEnum.Error,
-                MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+            {
+
+                if (VerifySchedule())
+                    if (_counterDevice.CounterConnected && _counterDevice.IoBoardConnected)
+                    {
+                        Login();
+                    }
+                    else
+                    {
+
+
+                        SetInformationMessage(InformationTypeEnum.Error,
+                                MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO));
+                    }
+                else
+                    SetInformationMessage(InformationTypeEnum.Error,
+                    MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+            }
         }
 
         private void LogoPictureBox_Click(object sender, EventArgs e)

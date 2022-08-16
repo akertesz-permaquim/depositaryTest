@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Permaquim.Depositary.UI.Desktop.Model;
 using Permaquim.Depositary.UI.Desktop.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
@@ -57,6 +52,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             IConfigurationRoot configuration = builder.Build();
 
             return configuration.GetSection("AppSettings").GetSection(configurationEntry).Value.ToString();
+        }
+
+        public static bool IsDevelopment()
+        {
+            try
+            {
+                return Convert.ToBoolean(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("DEVELOPMENT"));
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+            
         }
     }
 }
