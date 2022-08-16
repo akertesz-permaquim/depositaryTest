@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Permaquim.Depositary.Sincronization.Console.Controllers;
 using Permaquim.Depositary.Sincronization.Console.Interfaces;
 using System.Diagnostics;
 using System.Net.Http.Headers;
@@ -15,6 +16,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         private const string WEBAPI_BASE_URL = "WEBAPI_BASE_URL";
         private const string SINCRONIZATION_DELAY = "SINCRONIZATION_DELAY";
         private const string SECURITY_SCHEME = "Bearer";
+        private const string WEBAPIURL = "WebApiUrl";
         private readonly ILogger<Worker> _logger;
         private HttpClient _httpClient = new();
         private JwtTokenModel _jwToken;
@@ -30,10 +32,10 @@ namespace Permaquim.Depositary.Sincronization.Console
             _logger = logger;
 
 
-        _baseUrl = DatabaseController.GetApplicationParameterValue(WEBAPI_BASE_URL);
-        _delaytime = DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY) == String.Empty ? "10000" : DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY);
+            _baseUrl = ConfigurationController.GetConfiguration(WEBAPIURL);
+            _delaytime = DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY) == String.Empty ? "10000" : DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY);
 
-    }
+        }
     public override Task StartAsync(CancellationToken cancellationToken)
         {
             _workerTasks = AppConfiguration.GetWorkerTasks();

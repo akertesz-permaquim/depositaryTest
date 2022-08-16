@@ -6,23 +6,17 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class LoginModel : IModel
     {
-        private const string WEBAPI_USER = "WEBAPI_USER";
-        private const string WEBAPI_PASSWORD = "WEBAPI_PASSWORD";
+        private const string CODIGODEPOSITARIO = "CodigoDepositario";
 
-        [Required(ErrorMessage = "User Name is required")]
-        public string UserName { get; set; }
-
-        [Required(ErrorMessage = "Password is required")]
-        public string Password { get; set; }
 
         [Required(ErrorMessage = "DepositaryCode is required")]
         public string DepositaryCode { get; set; }
         public LoginModel()
         {
             DatabaseController DatabaseController = new();
-            this.UserName = DatabaseController.GetApplicationParameterValue(WEBAPI_USER);
-            this.Password = DatabaseController.GetApplicationParameterValue(WEBAPI_PASSWORD);
-            this.DepositaryCode = ConfigurationController.GetCurrentDepositaryCode();
+            //this.UserName = DatabaseController.GetApplicationParameterValue(WEBAPI_USER);
+            //this.Password = DatabaseController.GetApplicationParameterValue(WEBAPI_PASSWORD);
+            this.DepositaryCode = ConfigurationController.GetConfiguration(CODIGODEPOSITARIO);
         }
 
         public void Process()
