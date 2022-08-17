@@ -17,9 +17,9 @@ namespace Permaquim.Depositary.Sincronization.Console.Model
         public List<Depositario.Entities.Tables.Seguridad.Usuario> Usuarios { get; set; } = new();
         public List<Depositario.Entities.Tables.Seguridad.UsuarioRol> UsuariosRoles { get; set; } = new();
         public List<Depositario.Entities.Tables.Seguridad.UsuarioSector> UsuariosSectores { get; set; } = new();
+        public DateTime? SincroDate { get; set; }
 
-
-    public void Persist()
+        public void Persist()
         {
             throw new NotImplementedException();
         }
@@ -194,12 +194,9 @@ namespace Permaquim.Depositary.Sincronization.Console.Model
                 else
                     userSector.Update(item);
             }
+            this.SincroDate = DateTime.Now;
 
         }
 
-        public void Process(DateTime dateTime)
-        {
-            throw new NotImplementedException();
-        }
-    }
+     }
 }

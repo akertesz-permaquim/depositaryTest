@@ -9,7 +9,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Interfaces
     internal interface IModel 
     {
         public void Process();
-        public void Process(DateTime dateTime);
+        public DateTime? SincroDate { get; set; } 
         public void Persist();
   
     }
