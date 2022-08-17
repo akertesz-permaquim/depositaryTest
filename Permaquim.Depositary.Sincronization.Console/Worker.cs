@@ -98,7 +98,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                 {
 
 
-                    var getResponse = await _httpClient.GetStringAsync(_baseUrl + item.Endpoint);
+                    var getResponse = await _httpClient.GetStringAsync(_baseUrl + item.Endpoint
+
+                    + (item.SendsDate == true ? "/" + DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss") : String.Empty));
 
                     string getRresult = getResponse.ToString();
 

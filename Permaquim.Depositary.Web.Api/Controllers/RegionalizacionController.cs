@@ -21,11 +21,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
 
         [HttpGet]
-        [Route("ObtenerRegionalizacion")]
+        [Route("ObtenerRegionalizacion/{dateTime}")]
         [Authorize]
-        public async Task<IActionResult> ObtenerRegionalizacion()
+        public async Task<IActionResult> ObtenerRegionalizacion(string dateTime)
         {
             RegionalizacionModel data = new();
+
+            var x = dateTime;
 
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 

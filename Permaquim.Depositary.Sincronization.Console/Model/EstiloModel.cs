@@ -8,6 +8,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         public List<Depositario.Entities.Tables.Estilo.EsquemaDetalle> EsquemaDetalle { get; set; } = new();
         public List<Depositario.Entities.Tables.Estilo.TipoEsquemaDetalle> TipoEsquemaDetalle { get; set; } = new();
+        public DateTime? SincroDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Process(DateTime dateTime)
         {

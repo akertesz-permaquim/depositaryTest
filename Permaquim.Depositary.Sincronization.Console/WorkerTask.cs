@@ -15,6 +15,8 @@
 
         public string Entity { get; set; }
 
+        public bool SendsDate { get; set; }
+
         public bool Log { get; set; }
 
     }

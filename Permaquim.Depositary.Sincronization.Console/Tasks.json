@@ -1,31 +1,35 @@
 [
   {
     "ExecutionOrder": 1,
-    "Endpoint": "/autenticacion/obtenertoken",
+    "Endpoint": "autenticacion/obtenertoken",
     "WorkerTaskType": 1,
     "Entity": "Permaquim.Depositary.Sincronization.Console.LoginModel",
+    "SendsDate": "false",
     "Log": "false"
   }
   ,
+  //{
+  //  "ExecutionOrder": 3,
+  //  "Endpoint": "/configuracion/ObtenerConfiguracion",
+  //  "WorkerTaskType": 3,
+  //  "Entity": "Permaquim.Depositary.Sincronization.Console.ConfiguracionModel",
+  //  "SendsDate": "true",
+  //  "Log": "false"
+  //},
+  //{
+  //  "ExecutionOrder": 3,
+  //  "Endpoint": "/estilo/Obtenerestilo",
+  //  "WorkerTaskType": 3,
+  //  "Entity": "Permaquim.Depositary.Sincronization.Console.EstiloModel",
+  //  "SendsDate": "true",
+  //  "Log": "false"
+  //},
   {
     "ExecutionOrder": 3,
-    "Endpoint": "/configuracion/ObtenerConfiguracion",
-    "WorkerTaskType": 3,
-    "Entity": "Permaquim.Depositary.Sincronization.Console.ConfiguracionModel",
-    "Log": "false"
-  },
-  {
-    "ExecutionOrder": 3,
-    "Endpoint": "/estilo/Obtenerestilo",
-    "WorkerTaskType": 3,
-    "Entity": "Permaquim.Depositary.Sincronization.Console.EstiloModel",
-    "Log": "false"
-  },
-  {
-    "ExecutionOrder": 3,
-    "Endpoint": "/Regionalizacion/ObtenerRegionalizacion",
+    "Endpoint": "Regionalizacion/ObtenerRegionalizacion",
     "WorkerTaskType": 3,
     "Entity": "Permaquim.Depositary.Sincronization.Console.RegionalizacionModel",
+    "SendsDate": "true",
     "Log": "false"
   },
   {
@@ -33,6 +37,7 @@
     "Endpoint": "/Operacion/SincronizarTransacciones",
     "WorkerTaskType": 2,
     "Entity": "Permaquim.Depositary.Sincronization.Console.OperacionModel",
+    "SendsDate": "false",
     "Log": "false"
   }
 

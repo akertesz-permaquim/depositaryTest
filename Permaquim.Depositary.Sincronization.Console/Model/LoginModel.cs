@@ -11,6 +11,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         [Required(ErrorMessage = "DepositaryCode is required")]
         public string DepositaryCode { get; set; }
+ 
         public LoginModel()
         {
             DatabaseController DatabaseController = new();

@@ -9,6 +9,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Regionalizacion.Lenguaje> Lenguaje { get; set; } = new();
 
         public List<Depositario.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItems { get; set; } = new();
+        public DateTime? SincroDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         void IModel.Process()
         {
@@ -98,10 +99,6 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 throw ex;
             }
-        }
-        void IModel.Process(DateTime dateTime)
-        {
-            throw new NotImplementedException();
         }
         public void Persist()
         {

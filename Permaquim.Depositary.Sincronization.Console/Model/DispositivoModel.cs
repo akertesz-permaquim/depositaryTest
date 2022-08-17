@@ -22,6 +22,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Model
         public List<Depositario.Entities.Tables.Dispositivo.ComandoContadora> ComandosContadoras { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.DepositarioMoneda> MonedasDepositario { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.DepositarioEstado> EstadosDepositarios { get; set; } = new();
+        public DateTime? SincroDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Persist()
         {
