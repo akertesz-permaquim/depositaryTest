@@ -86,40 +86,64 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void CurrencyButton_Click(object sender, EventArgs e)
         {
+            // Resetea al timeout por actividad
+            TimeOutController.Reset();
+            
+            // Obtiene la moneda que seleccionó el usuario
             DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
-            if(_device != null)
-                _device.SwitchCurrency(DatabaseController.GetCurrencySequence());
 
-             if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
+            // Valida que la moneda seleccionada eista en la plantilla del modelo del depositario
+            // para evitar inconsistencia
+
+            if (DatabaseController.IsCurrencyInTemplate)
             {
-                if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
+                // Luego valida que tenga denominaciones configuradas para dicha moneda
+
+                if (DatabaseController.CurrencyHasDenominations)
                 {
-                     FormsController.OpenChildForm(this,new BillDepositForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                    if (_device != null)
+                        _device.SwitchCurrency(DatabaseController.GetCurrencySequence());
+
+                    if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
+                    {
+                        if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
+                        {
+                            FormsController.OpenChildForm(this, new BillDepositForm(),
+                           (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                        else
+                        {
+                            FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                    }
+                    if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+                    {
+
+                        if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
+                        {
+
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                        else
+                        {
+                            FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                    }
                 }
                 else
                 {
-                    FormsController.OpenChildForm(this,new BankAccountSelectorForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                        MultilanguangeController.GetText(MultiLanguageEnum.MONEDA_SIN_DENOMINACIONES));
                 }
             }
-            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+            else
             {
-
-                if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
-                {
-
-                    FormsController.OpenChildForm(this,new EnvelopeDepositForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                }
-                else
-                {
-                    FormsController.OpenChildForm(this,new BankAccountSelectorForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                }
-
+                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                    MultilanguangeController.GetText(MultiLanguageEnum.MONEDA_NO_EXISTENTE_EN_DEPOSITARIO));
             }
-
         }
         #endregion
 

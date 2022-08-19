@@ -194,6 +194,8 @@
             BILLETE,
             BILLETES,
             MONEDA,
+            MONEDA_NO_EXISTENTE_EN_DEPOSITARIO,
+            MONEDA_SIN_DENOMINACIONES,
             SOBRE,
             SOBRES,
             RETIRAR_SOBRE,
@@ -275,7 +277,23 @@
             TurnChange = 108,
             ViewEvents = 109,
             Reports = 110,
-            BagHistory = 111 
+            BagHistory = 111
+
+            //TurnChangeForm,
+            //DailyClosingForm,
+            //BagContentForm,
+            //BillDepositForm,
+            //CoinDepositForm,
+            //EnvelopeDepositForm,
+            //BagExtractionForm,
+            //BagHistoryForm,
+            //OtherOperationsForm,
+            //ReportsForm,
+            //SupportForm,
+            //OperationsHistoryform,
+            //VER_EVENTOS
+
+
         }
 
         public enum LogTypeEnum

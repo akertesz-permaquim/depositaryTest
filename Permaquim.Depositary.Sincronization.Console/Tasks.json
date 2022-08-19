@@ -24,17 +24,17 @@
   //  "SendsDate": "true",
   //  "Log": "false"
   //},
-  {
-    "ExecutionOrder": 3,
-    "Endpoint": "Regionalizacion/ObtenerRegionalizacion",
-    "WorkerTaskType": 3,
-    "Entity": "Permaquim.Depositary.Sincronization.Console.RegionalizacionModel",
-    "SendsDate": "true",
-    "Log": "false"
-  },
+  //{
+  //  "ExecutionOrder": 3,
+  //  "Endpoint": "Regionalizacion/ObtenerRegionalizacion",
+  //  "WorkerTaskType": 3,
+  //  "Entity": "Permaquim.Depositary.Sincronization.Console.RegionalizacionModel",
+  //  "SendsDate": "true",
+  //  "Log": "false"
+  //},
   {
     "ExecutionOrder": 2,
-    "Endpoint": "/Operacion/SincronizarTransacciones",
+    "Endpoint": "Operacion/SincronizarTransacciones",
     "WorkerTaskType": 2,
     "Entity": "Permaquim.Depositary.Sincronization.Console.OperacionModel",
     "SendsDate": "false",

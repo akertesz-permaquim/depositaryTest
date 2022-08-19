@@ -843,6 +843,47 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return returnValue;
         }
 
+        public static bool IsCurrencyInTemplate
+        {
+            get
+            {
+                bool returnValue = false;
+
+                Permaquim.Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle entities = new();
+
+                entities.Where.Add(Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle.ColumnEnum.MonedaId,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentCurrency.Id);
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle.ColumnEnum.PlantillaMonedaId,
+                   Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.ModeloId.PlantillaMonedaId.Id);
+                entities.Items();
+
+                returnValue = entities.Result.Count > 0;
+
+                return returnValue;
+            }
+        }
+
+
+        public static bool CurrencyHasDenominations
+        {
+            get
+            {
+                bool returnValue = false;
+
+                Permaquim.Depositario.Business.Tables.Valor.Denominacion entities = new();
+
+                entities.Where.Add(Depositario.Business.Tables.Valor.Denominacion.ColumnEnum.MonedaId,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentCurrency.Id);
+
+                entities.Items();
+
+                returnValue = entities.Result.Count > 0;
+
+                return returnValue;
+            }
+        }
+
         public static bool IsFuntionEnabled(long functionId)
         {
             bool returnValue = false;

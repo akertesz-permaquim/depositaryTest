@@ -70,7 +70,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
-
+        public static int ActiveFormscount
+        {
+            get
+            {
+                return _formList.Count;
+            }
+        }
         public static void HideInstance(Form instance)
         {
             instance.Hide();

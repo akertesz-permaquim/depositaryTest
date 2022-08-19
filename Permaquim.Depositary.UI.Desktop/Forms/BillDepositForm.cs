@@ -206,6 +206,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (TimeOutController.IsTimeOut())
             {
+                _device.StopCounting();
                 if (_device.StateResultProperty != null &&_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     || _currentCountingAmount > 0)
                 {
@@ -217,8 +218,15 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 else
                 {
-                    DatabaseController.LogOff(true);
-                    FormsController.LogOff();
+                    if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    {
+                        DatabaseController.LogOff(true);
+                        FormsController.LogOff();
+                    }
+                    else
+                    {
+                        TimeOutController.Reset();
+                    }
                 }
             }
             else
@@ -637,6 +645,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ConfirmDeposit()
         {
+            TimeOutController.Reset();
             CancelDepositButton.Visible = false;
             _device.StoringStart();
             _device.PreviousState = StatusInformation.State.PQStoring;
@@ -644,7 +653,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            if(_device != null){
+            TimeOutController.Reset();
+            if (_device != null){
                 if (_device.CounterConnected)
                     _device.RemoteCancel();
             }

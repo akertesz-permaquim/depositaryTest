@@ -53,8 +53,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId.Id);
 
                     _selectedSchemaDetail = entities.Items();
-
                 }
+
                 return _selectedSchemaDetail;
             }
         }

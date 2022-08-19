@@ -42,6 +42,7 @@ namespace Permaquim.Depositary.UI.Desktop
             else
             {
                 MainPanel.Enabled = true;
+
             }
 
             if (TimeOutController.IsTimeOut())
@@ -57,7 +58,11 @@ namespace Permaquim.Depositary.UI.Desktop
                     _device.CloseEscrow();
 
                 if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                {
                     _device.RemoteCancel();
+                    FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
+
+                }
             }
             
 
@@ -94,7 +99,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _transactions)
             {
 
-                if (SecurityController.IsFunctionenabled((long)item.FuncionId))
+                if (SecurityController.IsFunctionenabled(((long)item.FuncionId)))
                 {
                     CustomButton newButton = ControlBuilder.BuildStandardButton(
                         "TransactionButton" + item.Id.ToString(),

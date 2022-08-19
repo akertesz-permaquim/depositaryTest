@@ -566,6 +566,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
 
+            TimeOutController.Reset();
+
             if (ParameterController.RequiresEnvelopeIdentifier && EnvelopeTextBox.Texts.Trim().Equals(String.Empty))
             {
                 FormsController.SetInformationMessage(InformationTypeEnum.Error,
@@ -704,7 +706,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void CancelDepositButton_Click(object sender, EventArgs e)
         {
-
+            TimeOutController.Reset();
             _operationStatus.DepositConfirmed = false;
             _device.CloseEscrow();
 
@@ -735,6 +737,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             if (_device != null)
             {
                 if (_device.CounterConnected)
