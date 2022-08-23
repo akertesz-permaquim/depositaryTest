@@ -30,6 +30,7 @@
   </SelectedViews>
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
+    <string>dbo.FinalizarPrimeraSincronizacion</string>
     <string>dbo.fn_diagramobjects</string>
     <string>dbo.sp_alterdiagram</string>
     <string>dbo.sp_creatediagram</string>
@@ -308,6 +309,8 @@
     <string>Geografia.Pais</string>
     <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
+    <string>Impresion.Ticket</string>
+    <string>Impresion.TipoTicket</string>
     <string>Operacion.CierreDiario</string>
     <string>Operacion.Contenedor</string>
     <string>Operacion.Evento</string>

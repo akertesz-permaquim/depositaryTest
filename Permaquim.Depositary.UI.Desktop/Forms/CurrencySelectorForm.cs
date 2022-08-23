@@ -106,25 +106,41 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
                     {
-                        if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
+                        if (ParameterController.UsesBankAccount == true)
                         {
-                            FormsController.OpenChildForm(this, new BillDepositForm(),
-                           (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            if (DatabaseController.GetUserBankAccounts().Count != 0)
+                            {
+                                FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
+                            else
+                            {
+                                FormsController.OpenChildForm(this, new BillDepositForm(),
+                                 (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
                         }
                         else
                         {
-                            FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                            FormsController.OpenChildForm(this, new BillDepositForm(),
                             (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                     }
+
                     if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
                     {
 
-                        if (DatabaseController.GetUserBankAccounts().Count == 0 && ParameterController.UsesBankAccount == false)
+                        if (ParameterController.UsesBankAccount == false)
                         {
-
-                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
-                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            if (DatabaseController.GetUserBankAccounts().Count == 0)
+                            {
+                                FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
+                            else
+                            {
+                                FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
                         }
                         else
                         {

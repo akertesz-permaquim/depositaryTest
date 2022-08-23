@@ -80,7 +80,7 @@
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.Black;
             this.RemainingTimeLabel.Location = new System.Drawing.Point(288, 3);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(344, 48);
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(304, 48);
             this.RemainingTimeLabel.TabIndex = 111;
             this.RemainingTimeLabel.Text = "**********";
             this.RemainingTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

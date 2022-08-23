@@ -23,6 +23,10 @@ namespace Permaquim.Depositary.UI.Desktop
         private int _yellowStatusIndicator;
         private int _redStatusIndicator;
 
+        private bool _alreadyPrinted = false;
+        List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
+        List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> _detailTransactions = new();
+
         /// <summary>
         /// Máquina de estado
         /// </summary>
@@ -744,6 +748,20 @@ namespace Permaquim.Depositary.UI.Desktop
                     _device.RemoteCancel();
             }
             FormsController.OpenChildForm(this, new OperationForm(), _device);
+        }
+        private void PrintTicket()
+        {
+
+
+            if (ParameterController.PrintsEnvelopeDeposit)
+            {
+                if (!_alreadyPrinted)
+                {
+                    ReportController.PrintReport(ReportTypeEnum.BillDeposit,
+                        _headerTransaction.FirstOrDefault());
+                    _alreadyPrinted = true;
+                }
+            }
         }
     }
 }

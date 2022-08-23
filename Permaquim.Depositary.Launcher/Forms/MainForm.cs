@@ -29,11 +29,14 @@ namespace Permaquim.Depositary.Launcher
                 try
                 {
                     InitializationController.InitializeDepositary();
-                    Application.Exit();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    Application.Exit();
                 }
             }
             else

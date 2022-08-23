@@ -344,6 +344,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> GetCurrencies()
         {
 
+            List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> returnValue = new();
+
             Permaquim.Depositario.Business.Relations.Directorio.RelacionMonedaSucursal monedasucursal = new();
             monedasucursal.Where.Add(Depositario.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId,
                 Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.SucursalId.Id);
@@ -368,10 +370,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 currencies.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
                 Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Id,
                 Permaquim.Depositario.sqlEnum.OperandEnum.In, monedas);
-                return currencies.Items();
+                returnValue =  currencies.Items();
             }
 
-            return currencies.Items();
+            return returnValue;
 
         }
         /// <summary>
@@ -490,7 +492,29 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         }
 
-        public static List<Permaquim.Depositario.Entities.Relations.Operacion.Transaccion> GetOperationsHeaders(
+        public static Depositario.Entities.Relations.Operacion.Transaccion GetTransactionHeader(
+        long transactionId)
+        {
+            Depositario.Business.Relations.Operacion.Transaccion transaction = new();
+            transaction.Items(transactionId);
+
+            return transaction.Result.FirstOrDefault();
+
+        }
+
+        public static List<Depositario.Entities.Relations.Operacion.TransaccionDetalle> GetTransactionDetails(
+            long transactionId)
+        {
+            Depositario.Business.Relations.Operacion.TransaccionDetalle transaction = new();
+            transaction.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
+                Depositario.sqlEnum.OperandEnum.Equal, transactionId);
+            transaction.Items();
+
+            return transaction.Result;
+
+        }
+
+        public static List<Depositario.Entities.Relations.Operacion.Transaccion> GetOperationsHeaders(
             DateTime dateFrom, DateTime dateTo, long userId, long turnId)
         {
 

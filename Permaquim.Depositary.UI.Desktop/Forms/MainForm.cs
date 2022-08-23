@@ -324,7 +324,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     + DatabaseController.CurrentDepositary.SectorId.Nombre;
 
                 DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
-                 + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
+                 + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
                  + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
                  + DatabaseController.CurrentDepositary.CodigoExterno;
 
