@@ -21,7 +21,20 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static List<Depositario.Entities.Relations.Operacion.TransaccionDetalle> _details;
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
 
-        public static void PrintReport(ReportTypeEnum report,
+
+        public static void PrintDailyclosingReport(Depositario.Entities.Tables.Operacion.CierreDiario closing)
+        {
+
+        }
+        public static void PrintTurnChangeReport( Permaquim.Depositario.Entities.Tables.Operacion.Turno turn)
+        {
+
+        }
+        public static void PrintBagExtractionReport(Permaquim.Depositario.Entities.Tables.Operacion.Contenedor container)
+        {
+
+        }
+        public static void PrintDepositReport(ReportTypeEnum reportType,
             Depositario.Entities.Tables.Operacion.Transaccion header)
         {
              _header = DatabaseController.GetTransactionHeader(header.Id);
@@ -66,13 +79,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             printDocument.DefaultPageSettings.PaperSize = paperSize;
 
-            printDocument.PrintPage += PrintDocument_PrintPage;
+            if(reportType == ReportTypeEnum.BillDeposit)
+                printDocument.PrintPage += PrintDocument_BillDepositPrintPage;
 
             printDocument.Print();
 
         }
 
-        private static void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        private static void PrintDocument_BillDepositPrintPage(object sender, PrintPageEventArgs e)
         {
 
             decimal amount = 0;
@@ -164,7 +178,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             e.Graphics.DrawString(
                 //"DENOMINACION CANTIDAD TOTAL"
-                String.Format("{0,-10}\t{1,-10}\t{2,5}",
+                String.Format("{0,1}\t{1,5}\t{2,5}",
                 MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION),
                 MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD),
                 MultilanguangeController.GetText(MultiLanguageEnum.TOTAL))
@@ -190,7 +204,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString().Length );
 
                 e.Graphics.DrawString(
-                String.Format("{0,-10}\t{1,-10}\t{2,-10}\t{3,5}",
+                String.Format("{0,1}\t{1,10}\t{2,10}\t{3,10}",
                     _details[i].DenominacionId.MonedaId.Codigo, 
                     _details[i].DenominacionId.Nombre, 
                     _details[i].CantidadUnidades.ToString(),

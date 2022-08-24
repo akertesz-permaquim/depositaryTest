@@ -14,6 +14,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static List<Depositario.Entities.Relations.Dispositivo.ComandoPlaca> _currentDepositaryIoBoardCommands = null;
         private static Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
 
+
         private const string CIERRE_DIARIO = "Cierre diario";
 
         public static int AvailableTurnsCount { get; set; }

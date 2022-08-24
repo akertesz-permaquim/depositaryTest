@@ -12,6 +12,7 @@ namespace Permaquim.Depositary.UI.Desktop
         public CounterDevice _device { get; set; }
 
         private bool _bagAlreadyExtracted = false;
+        private bool _alreadyPrinted = false;
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
@@ -135,7 +136,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_9
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_10
                 )
-                System.Diagnostics.Debug.Print("");
+    
 
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
             {
@@ -358,6 +359,21 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BagExtractionForm_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
+        }
+        private void PrintTicket()
+        {
+
+            if (ParameterController.PrintsTurnChange)
+            {
+                if (!_alreadyPrinted)
+                {
+                    for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
+                    {
+                        ReportController.PrintBagExtractionReport(_newContainer);
+                        _alreadyPrinted = true;
+                    }
+                }
+            }
         }
     }
 }

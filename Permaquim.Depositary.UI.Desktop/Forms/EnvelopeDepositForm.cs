@@ -156,6 +156,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _totalQuantity = 0;
             _totalAmount = 0;
             _operationStatus = new();
+            _alreadyPrinted = false;
         }
         public void LoadDenominations()
         {
@@ -757,9 +758,12 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 if (!_alreadyPrinted)
                 {
-                    ReportController.PrintReport(ReportTypeEnum.BillDeposit,
+                    for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
+                    {
+                        ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDeposit,
                         _headerTransaction.FirstOrDefault());
-                    _alreadyPrinted = true;
+                        _alreadyPrinted = true;
+                    }
                 }
             }
         }

@@ -125,6 +125,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _currentCountingAmount = 0;
             _currentCountingQuantity = 0;
             _alreadyPrinted = false;
+            _alreadyPrinted = false;
             FormsController.SetInformationMessage(InformationTypeEnum.None,string.Empty);
         }
          private void CenterPanel()
@@ -835,8 +836,11 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 if (!_alreadyPrinted)
                 {
-                    ReportController.PrintReport(ReportTypeEnum.BillDeposit,_headerTransaction.FirstOrDefault());
-                    _alreadyPrinted = true;
+                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                    {
+                        ReportController.PrintDepositReport(ReportTypeEnum.BillDeposit, _headerTransaction.FirstOrDefault());
+                        _alreadyPrinted = true;
+                    }
                 }
             }
         }
