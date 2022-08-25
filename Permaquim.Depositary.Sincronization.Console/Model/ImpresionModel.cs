@@ -1,46 +1,44 @@
 ﻿using Permaquim.Depositary.Sincronization.Console.Interfaces;
 using Permaquim.Depositary.Sincronization.Console.Controllers;
 
-
 namespace Permaquim.Depositary.Sincronization.Console
 {
-    public class RegionalizacionModel : IModel
+    public class ImpresionModel : IModel
     {
-        public List<Depositario.Entities.Tables.Regionalizacion.Lenguaje> Lenguajes { get; set; } = new();
-
-        public List<Depositario.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItems { get; set; } = new();
+        public List<Depositario.Entities.Tables.Impresion.TipoTicket> TiposTickets { get; set; } = new();
+        public List<Depositario.Entities.Tables.Impresion.Ticket> Tickets { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
 
         void IModel.Process()
         {
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroLenguaje = SynchronizationController.obtenerFechaUltimaSincronizacion("Regionalizacion.Lenguaje");
+            DateTime fechaSincroTipoTicket = SynchronizationController.obtenerFechaUltimaSincronizacion("Impresion.TipoTicket");
 
-            SincroDates.Add("Regionalizacion.Lenguaje", fechaSincroLenguaje);
+            SincroDates.Add("Impresion.TipoTicket", fechaSincroTipoTicket);
 
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroLenguajeItem = SynchronizationController.obtenerFechaUltimaSincronizacion("Regionalizacion.LenguajeItem");
+            DateTime fechaSincroTicket = SynchronizationController.obtenerFechaUltimaSincronizacion("Impresion.Ticket");
 
-            SincroDates.Add("Regionalizacion.LenguajeItem", fechaSincroLenguajeItem);
+            SincroDates.Add("Impresion.Ticket", fechaSincroTicket);
         }
         public void Persist()
         {
             try
             {
-                if (Lenguajes.Count > 0)
+                if (TiposTickets.Count > 0)
                 {
-                    Depositario.Business.Tables.Regionalizacion.Lenguaje lenguaje = new();
+                    Depositario.Business.Tables.Impresion.TipoTicket tipoTicket = new();
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.Lenguaje");
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.TipoTicket");
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
-                        foreach (var item in Lenguajes)
+                        foreach (var item in TiposTickets)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.Id);
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.Id);
 
                             //Guardo el id que venia del server.
                             Int64 origenId = item.Id;
@@ -49,11 +47,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                             if (idDestino.HasValue)
                             {
                                 item.Id = idDestino.Value;
-                                lenguaje.Update(item);
+                                tipoTicket.Update(item);
                             }
                             else
                             {
-                                lenguaje.Add(item);
+                                tipoTicket.Add(item);
                             }
 
                             SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
@@ -62,41 +60,42 @@ namespace Permaquim.Depositary.Sincronization.Console
                     }
                 }
 
-
-                if (LenguajeItems.Count > 0)
+                if (Tickets.Count > 0)
                 {
-                    Depositario.Business.Tables.Regionalizacion.LenguajeItem lenguajeItem = new();
+                    Depositario.Business.Tables.Impresion.Ticket ticket = new();
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.LenguajeItem");
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.Ticket");
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
-                        foreach (var item in LenguajeItems)
+                        foreach (var item in Tickets)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.LenguajeItem", item.Id);
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.Ticket", item.Id);
 
-                            Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
+                            Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.TipoId);
+                            Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.DepositarioModeloId);
 
-                            if (lenguajeIdOrigen.HasValue)
+                            if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
-                                item.LenguajeId = lenguajeIdOrigen.Value;
+                                item.TipoId = tipoIdOrigen.Value;
+                                item.DepositarioModeloId = depositarioModeloIdOrigen.Value;
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
                                 {
                                     item.Id = idDestino.Value;
-                                    lenguajeItem.Update(item);
+                                    ticket.Update(item);
                                 }
                                 else
                                 {
-                                    lenguajeItem.Add(item);
+                                    ticket.Add(item);
                                 }
 
                                 SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
@@ -105,13 +104,12 @@ namespace Permaquim.Depositary.Sincronization.Console
                         SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                     }
                 }
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
-
     }
 }

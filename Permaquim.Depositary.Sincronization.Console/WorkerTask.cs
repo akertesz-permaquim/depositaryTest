@@ -7,7 +7,8 @@
             None,
             GetToken,
             Send,
-            Receive
+            Receive,
+            SendAndReceive
         }
         public int ExecutionOrder { get; set; }
         public string Endpoint { get; set; }

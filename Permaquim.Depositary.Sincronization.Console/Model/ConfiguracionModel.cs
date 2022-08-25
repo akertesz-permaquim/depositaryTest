@@ -8,7 +8,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Aplicacion.Configuracion> ConfiguracionAplicacion { get; set; } = new();
 
         public List<Depositario.Entities.Tables.Dispositivo.ConfiguracionDepositario> ConfiguracionDispositivo { get; set; } = new();
-        public DateTime? SincroDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
 
         public void Process()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Permaquim.Depositary.Sincronization.Console.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,9 @@ using static Permaquim.Depositary.Sincronization.Console.Enumerations;
 
 namespace Permaquim.Depositary.Sincronization.Console
 {
-    internal  class DatabaseController
+    internal class DatabaseController
     {
-        public  string GetApplicationParameterValue(string key)
+        public string GetApplicationParameterValue(string key)
         {
             string returnValue = string.Empty;
 
@@ -22,7 +23,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             return returnValue;
         }
-        public  Permaquim.Depositario.Entities.Tables.Dispositivo.Depositario CurrentDepositary
+        public Permaquim.Depositario.Entities.Tables.Dispositivo.Depositario CurrentDepositary
         {
             get
             {
@@ -35,9 +36,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                 return entity.Items().FirstOrDefault();
             }
         }
-        public  DateTime GetLastSincronizationDate(EntitiesEnum entity)
+        public DateTime GetLastSincronizationDate(EntitiesEnum entity)
         {
-            DateTime returnValue = new DateTime(1999,11,11,9,0,0,0); // Hasar!
+            DateTime returnValue = new DateTime(1999, 11, 11, 9, 0, 0, 0); // Hasar!
 
             Depositario.Business.Tables.Sincronizacion.Entidad entities = new();
             entities.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre,
@@ -62,7 +63,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         }
 
-        public  List<Depositario.Entities.Tables.Operacion.Sesion> GetSessions()
+        public List<Depositario.Entities.Tables.Operacion.Sesion> GetSessions()
         {
             var lastSincronizationDate = GetLastSincronizationDate(EntitiesEnum.Operacion_Sesion);
 
@@ -72,10 +73,30 @@ namespace Permaquim.Depositary.Sincronization.Console
             session.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Sesion.ColumnEnum.FechaCierre,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
-            return session.Items();
+            session.Items();
+
+            //Map master id's
+            if (session.Result.Count > 0)
+            {
+                foreach (var sessionRow in session.Result)
+                {
+                    Int64? mapDepositarioId = null;
+                    if (sessionRow.DepositarioId.HasValue)
+                        mapDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Dispositivo.Depositario", sessionRow.DepositarioId.Value);
+                    Int64? mapUsuarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", sessionRow.UsuarioId);
+
+                    if (mapUsuarioId.HasValue && mapDepositarioId.HasValue)
+                    {
+                        sessionRow.DepositarioId = mapDepositarioId;
+                        sessionRow.UsuarioId = mapUsuarioId.Value;
+                    }
+                }
+            }
+
+            return session.Result;
         }
 
-        public  List<Depositario.Entities.Tables.Operacion.CierreDiario> GetDailyclosingItems()
+        public List<Depositario.Entities.Tables.Operacion.CierreDiario> GetDailyclosingItems()
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_CierreDiario);
             Depositario.Business.Tables.Operacion.CierreDiario dailyclosing = new();
@@ -84,11 +105,34 @@ namespace Permaquim.Depositary.Sincronization.Console
             dailyclosing.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.CierreDiario.ColumnEnum.Fecha,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
-            return dailyclosing.Items();
+            dailyclosing.Items();
 
+            //Map master id's
+            if (dailyclosing.Result.Count > 0)
+            {
+                foreach (var dailyClosingRow in dailyclosing.Result)
+                {
+                    Int64? mapDepositarioId = null;
+                    if (dailyClosingRow.DepositarioId.HasValue)
+                        mapDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Dispositivo.Depositario", dailyClosingRow.DepositarioId.Value);
+                    Int64? mapUsuarioCreacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", dailyClosingRow.UsuarioCreacion);
+                    Int64? mapUsuarioModificacionId = null;
+                    if (dailyClosingRow.UsuarioModificacion.HasValue)
+                        mapUsuarioModificacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", dailyClosingRow.UsuarioModificacion.Value);
+
+                    if (mapDepositarioId.HasValue && mapUsuarioCreacionId.HasValue)
+                    {
+                        dailyClosingRow.DepositarioId = mapDepositarioId;
+                        dailyClosingRow.UsuarioCreacion = mapUsuarioCreacionId.Value;
+                        dailyClosingRow.UsuarioModificacion = mapUsuarioModificacionId;
+                    }
+                }
+            }
+
+            return dailyclosing.Result;
         }
 
-        public  List<Depositario.Entities.Tables.Operacion.Turno> GetTurns()
+        public List<Depositario.Entities.Tables.Operacion.Turno> GetTurns()
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Turno);
             Depositario.Business.Tables.Operacion.Turno turn = new();
@@ -97,10 +141,33 @@ namespace Permaquim.Depositary.Sincronization.Console
             turn.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Turno.ColumnEnum.Fecha,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
+            turn.Items();
 
-            return turn.Items();
+            //Map master id's
+            if (turn.Result.Count > 0)
+            {
+                foreach (var turnRow in turn.Result)
+                {
+                    Int64? mapDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Dispositivo.Depositario", turnRow.DepositarioId);
+                    Int64? mapTurnoDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Turno.AgendaTurno", turnRow.TurnoDepositarioId);
+                    Int64? mapUsuarioCreacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", turnRow.UsuarioCreacion);
+                    Int64? mapUsuarioModificacionId = null;
+                    if (turnRow.UsuarioModificacion.HasValue)
+                        mapUsuarioModificacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", turnRow.UsuarioModificacion.Value);
+
+                    if (mapDepositarioId.HasValue && mapUsuarioCreacionId.HasValue && mapTurnoDepositarioId.HasValue)
+                    {
+                        turnRow.DepositarioId = mapDepositarioId.Value;
+                        turnRow.UsuarioCreacion = mapUsuarioCreacionId.Value;
+                        turnRow.TurnoDepositarioId = mapTurnoDepositarioId.Value;
+                        turnRow.UsuarioModificacion = mapUsuarioModificacionId;
+                    }
+                }
+            }
+
+            return turn.Result;
         }
-        public  List<Depositario.Entities.Tables.Operacion.Contenedor> GetContainers()
+        public List<Depositario.Entities.Tables.Operacion.Contenedor> GetContainers()
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Contenedor);
             Depositario.Business.Tables.Operacion.Contenedor container = new();
@@ -109,54 +176,146 @@ namespace Permaquim.Depositary.Sincronization.Console
             container.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Contenedor.ColumnEnum.FechaCierre,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
-            return container.Items();
+            container.Items();
+
+            //Map master id's
+            if (container.Result.Count > 0)
+            {
+                foreach (var containerRow in container.Result)
+                {
+                    Int64? mapDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Dispositivo.Depositario", containerRow.DepositarioId);
+                    Int64? mapTipoId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Operacion.TipoContenedor", containerRow.TipoId);
+                    Int64? mapUsuarioCreacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", containerRow.UsuarioCreacion);
+                    Int64? mapUsuarioModificacionId = null;
+                    if (containerRow.UsuarioModificacion.HasValue)
+                        mapUsuarioModificacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", containerRow.UsuarioModificacion.Value);
+
+                    if (mapDepositarioId.HasValue && mapUsuarioCreacionId.HasValue && mapTipoId.HasValue)
+                    {
+                        containerRow.DepositarioId = mapDepositarioId.Value;
+                        containerRow.UsuarioCreacion = mapUsuarioCreacionId.Value;
+                        containerRow.TipoId = mapTipoId.Value;
+                        containerRow.UsuarioModificacion = mapUsuarioModificacionId;
+                    }
+                }
+            }
+
+            return container.Result;
         }
 
-        public  List<Depositario.Entities.Tables.Operacion.Transaccion> GetTransactions()
+        public List<Depositario.Entities.Tables.Operacion.Transaccion> GetTransactions()
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Transaccion);
-            Depositario.Business.Tables.Operacion.Transaccion transaccion = new();
-            transaccion.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha,
+            Depositario.Business.Tables.Operacion.Transaccion transaction = new();
+            transaction.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
-            return transaccion.Items();
+            transaction.Items();
+
+            //Map master id's
+            if (transaction.Result.Count > 0)
+            {
+                foreach (var transactionRow in transaction.Result)
+                {
+                    Int64? mapTipoId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Operacion.TipoTransaccion", transactionRow.TipoId);
+                    Int64? mapDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Dispositivo.Depositario", transactionRow.DepositarioId);
+                    Int64? mapSectorId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Directorio.Sector", transactionRow.SectorId);
+                    Int64? mapSucursalId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Directorio.Sucursal", transactionRow.SucursalId);
+                    Int64? mapMonedaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Valor.Moneda", transactionRow.MonedaId);
+                    Int64? mapUsuarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", transactionRow.UsuarioId);
+
+                    Int64? mapUsuarioCuentaId = null;
+                    if (transactionRow.UsuarioCuentaId.HasValue)
+                        mapUsuarioCuentaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Cuenta.UsuarioCuenta", transactionRow.UsuarioCuentaId.Value);
+
+                    if (mapTipoId.HasValue && mapDepositarioId.HasValue && mapSectorId.HasValue && mapSucursalId.HasValue && mapMonedaId.HasValue && mapUsuarioId.HasValue)
+                    {
+                        transactionRow.TipoId = mapTipoId.Value;
+                        transactionRow.DepositarioId = mapDepositarioId.Value;
+                        transactionRow.SectorId = mapSectorId.Value;
+                        transactionRow.UsuarioCuentaId = mapUsuarioCuentaId;
+                        transactionRow.SucursalId = mapSucursalId.Value;
+                        transactionRow.MonedaId = mapMonedaId.Value;
+                        transactionRow.UsuarioId = mapUsuarioId.Value;
+                    }
+                }
+            }
+
+            return transaction.Result;
         }
 
-        public  List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> GetTransactionDetails()
+        public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> GetTransactionDetails()
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionDetalle);
-            Depositario.Business.Tables.Operacion.TransaccionDetalle transaccionDetalle = new();
-            transaccionDetalle.Where.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.Fecha,
+            Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetail = new();
+            transactionDetail.Where.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.Fecha,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
-            transaccionDetalle.OrderBy.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId);
+            transactionDetail.OrderBy.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId);
 
-            return transaccionDetalle.Items();
+            transactionDetail.Items();
+
+            //Map master id's
+            if (transactionDetail.Result.Count > 0)
+            {
+                foreach (var transactionDetailRow in transactionDetail.Result)
+                {
+                    Int64? mapDenominacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Valor.Denominacion", transactionDetailRow.DenominacionId);
+
+                    if (mapDenominacionId.HasValue)
+                    {
+                        transactionDetailRow.DenominacionId = mapDenominacionId.Value;
+                    }
+                }
+            }
+
+            return transactionDetail.Result;
         }
-        public  List<Depositario.Entities.Tables.Operacion.TransaccionSobre> GetEnvelopeTransaction()
+        public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> GetEnvelopeTransaction()
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionSobre);
-            Depositario.Business.Tables.Operacion.TransaccionSobre transaccionSobre = new();
-            transaccionSobre.Where.Add(Depositario.Business.Tables.Operacion.TransaccionSobre.ColumnEnum.Fecha,
+            Depositario.Business.Tables.Operacion.TransaccionSobre envelopeTransaction = new();
+            envelopeTransaction.Where.Add(Depositario.Business.Tables.Operacion.TransaccionSobre.ColumnEnum.Fecha,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
-            return transaccionSobre.Items();
+            envelopeTransaction.Items();
+
+            return envelopeTransaction.Result;
         }
 
-        public  List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> GetEnvelopeTransactionDetails()
+        public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> GetEnvelopeTransactionDetails()
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle);
-            Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transaccionSobreDetalle = new();
-            transaccionSobreDetalle.Where.Add(Depositario.Business.Tables.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha,
+            Depositario.Business.Tables.Operacion.TransaccionSobreDetalle envelopeTransactionDetail = new();
+            envelopeTransactionDetail.Where.Add(Depositario.Business.Tables.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
-            return transaccionSobreDetalle.Items();
+
+            envelopeTransactionDetail.Items();
+
+            //Map master id's
+            if (envelopeTransactionDetail.Result.Count > 0)
+            {
+                foreach (var envelopeTransactionDetailRow in envelopeTransactionDetail.Result)
+                {
+                    Int64? mapRelacionMonedaTipoValorId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Valor.RelacionMonedaTipoValor", envelopeTransactionDetailRow.RelacionMonedaTipoValorId);
+
+                    if (mapRelacionMonedaTipoValorId.HasValue)
+                    {
+                        envelopeTransactionDetailRow.RelacionMonedaTipoValorId = mapRelacionMonedaTipoValorId.Value;
+                    }
+                }
+            }
+
+            return envelopeTransactionDetail.Result;
         }
 
-        public  void SaveEntitySincronizationDate(EntitiesEnum entity,DateTime startDate,DateTime endDate)
+        public void SaveEntitySincronizationDate(EntitiesEnum entity, DateTime startDate, DateTime endDate)
         {
             Depositario.Business.Tables.Sincronizacion.Entidad entities = new();
             entities.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre,
                 Depositario.sqlEnum.OperandEnum.Equal, Enum.GetName(entity).Replace("_", "."));
             entities.Items();
+
+            var depositarioId = ConfigurationController.GetCurrentDepositaryId();
 
             if (entities.Result.Count > 0)
             {
@@ -165,12 +324,12 @@ namespace Permaquim.Depositary.Sincronization.Console
                     Depositario.sqlEnum.OperandEnum.Equal, entities.Result.FirstOrDefault().Id);
                 headerEntities.Add(new Depositario.Entities.Tables.Sincronizacion.EntidadCabecera()
                 {
-                    DepositarioId = CurrentDepositary.Id,
+                    DepositarioId = depositarioId,
                     EntidadId = entities.Result.FirstOrDefault().Id,
                     Fechafin = endDate,
                     Fechainicio = startDate,
                     Valor = String.Empty
-                }); 
+                });
 
             }
         }

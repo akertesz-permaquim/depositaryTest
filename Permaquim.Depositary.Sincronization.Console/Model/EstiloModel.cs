@@ -1,73 +1,157 @@
 ﻿using Permaquim.Depositary.Sincronization.Console.Interfaces;
+using Permaquim.Depositary.Sincronization.Console.Controllers;
 
 namespace Permaquim.Depositary.Sincronization.Console
 {
     public class EstiloModel : IModel
     {
-        public List<Depositario.Entities.Tables.Estilo.Esquema> Esquema { get; set; } = new();
 
+        public List<Depositario.Entities.Tables.Estilo.Esquema> Esquema { get; set; } = new();
         public List<Depositario.Entities.Tables.Estilo.EsquemaDetalle> EsquemaDetalle { get; set; } = new();
         public List<Depositario.Entities.Tables.Estilo.TipoEsquemaDetalle> TipoEsquemaDetalle { get; set; } = new();
-        public DateTime? SincroDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void Process(DateTime dateTime)
-        {
-            throw new NotImplementedException();
-        }
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
 
         void IModel.Process()
         {
+            //Obtenemos la fecha de ultima sincronizacion de la entidad
+            DateTime fechaSincroEsquema = SynchronizationController.obtenerFechaUltimaSincronizacion("Estilo.Esquema");
+
+            SincroDates.Add("Estilo.Esquema", fechaSincroEsquema);
+
+            //Obtenemos la fecha de ultima sincronizacion de la entidad
+            DateTime fechaSincroEsquemaDetalle = SynchronizationController.obtenerFechaUltimaSincronizacion("Estilo.EsquemaDetalle");
+
+            SincroDates.Add("Estilo.EsquemaDetalle", fechaSincroEsquemaDetalle);
+
+            //Obtenemos la fecha de ultima sincronizacion de la entidad
+            DateTime fechaSincroTipoEsquemaDetalle = SynchronizationController.obtenerFechaUltimaSincronizacion("Estilo.TipoEsquemaDetalle");
+
+            SincroDates.Add("Estilo.TipoEsquemaDetalle", fechaSincroTipoEsquemaDetalle);
+        }
+
+        public void Persist()
+        {
             try
             {
-
-                Depositario.Business.Tables.Estilo.Esquema esquema = new();
-                foreach (var item in Esquema)
+                if (TipoEsquemaDetalle.Count > 0)
                 {
-                    esquema.Where.Clear();
-                    esquema.Where.Add(Depositario.Business.Tables.Estilo.Esquema.ColumnEnum.Nombre,
-                        Depositario.sqlEnum.OperandEnum.Equal, item.Nombre);
-                    esquema.Items();
-                    if (esquema.Result.Count == 0)
-                        esquema.Add(item);
-                    else
-                        esquema.Update(item);
+                    Depositario.Business.Tables.Estilo.TipoEsquemaDetalle oTipoEsquemaDetalle = new();
+
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Estilo.TipoEsquemaDetalle");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TipoEsquemaDetalle)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.TipoEsquemaDetalle", item.Id);
+
+                            //Guardo el id que venia del server.
+                            Int64 origenId = item.Id;
+
+                            //Si se sincronizo antes entonces hago un AddOrUpdate con el id propio.
+                            if (idDestino.HasValue)
+                            {
+                                item.Id = idDestino.Value;
+                                oTipoEsquemaDetalle.AddOrUpdate(item);
+                            }
+                            else
+                            {
+                                oTipoEsquemaDetalle.Add(item);
+                            }
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
                 }
 
-                Depositario.Business.Tables.Estilo.TipoEsquemaDetalle tipoEsquemaDetalle = new();
-                foreach (var item in TipoEsquemaDetalle)
+                if (Esquema.Count > 0)
                 {
-                    tipoEsquemaDetalle.Where.Clear();
-                    tipoEsquemaDetalle.Where.Add(Depositario.Business.Tables.Estilo.TipoEsquemaDetalle.ColumnEnum.Nombre,
-                        Depositario.sqlEnum.OperandEnum.Equal, item.Nombre);
-                    tipoEsquemaDetalle.Items();
-                    if (tipoEsquemaDetalle.Result.Count == 0)
-                        tipoEsquemaDetalle.Add(item);
-                    else
-                        tipoEsquemaDetalle.Update(item);
+                    Depositario.Business.Tables.Estilo.Esquema oEsquema = new();
+
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Estilo.Esquema");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in Esquema)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.Esquema", item.Id);
+
+                            //Guardo el id que venia del server.
+                            Int64 origenId = item.Id;
+
+                            //Si se sincronizo antes entonces hago un AddOrUpdate con el id propio.
+                            if (idDestino.HasValue)
+                            {
+                                item.Id = idDestino.Value;
+                                oEsquema.AddOrUpdate(item);
+                            }
+                            else
+                            {
+                                oEsquema.Add(item);
+                            }
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
                 }
 
-                Depositario.Business.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
-                foreach (var item in EsquemaDetalle)
+                if (EsquemaDetalle.Count > 0)
                 {
-                    esquemaDetalle.Where.Clear();
-                    esquemaDetalle.Where.Add(Depositario.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Nombre,
-                        Depositario.sqlEnum.OperandEnum.Equal, item.Nombre);
-                    esquemaDetalle.Items();
-                    if (esquemaDetalle.Result.Count == 0)
-                        esquemaDetalle.Add(item);
-                    else
-                        esquemaDetalle.Update(item);
+                    Depositario.Business.Tables.Estilo.EsquemaDetalle oEsquemaDetalle = new();
+
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Estilo.EsquemaDetalle");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in EsquemaDetalle)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.EsquemaDetalle", item.Id);
+
+                            Int64? esquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.Esquema", item.EsquemaId);
+                            Int64? tipoEsquemaDetalleIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.TipoEsquemaDetalle", item.TipoEsquemaDetalleId);
+
+                            if (esquemaIdOrigen.HasValue && tipoEsquemaDetalleIdOrigen.HasValue)
+                            {
+                                //Guardo el id que venia del server.
+                                Int64 origenId = item.Id;
+
+                                //Reemplazo los id de FK por id propio.
+                                item.EsquemaId = esquemaIdOrigen.Value;
+                                item.TipoEsquemaDetalleId = tipoEsquemaDetalleIdOrigen.Value;
+
+                                //Si se sincronizo antes entonces hago un AddOrUpdate con el id propio.
+                                if (idDestino.HasValue)
+                                {
+                                    item.Id = idDestino.Value;
+                                    oEsquemaDetalle.AddOrUpdate(item);
+                                }
+                                else
+                                {
+                                    oEsquemaDetalle.Add(item);
+                                }
+
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                            }
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-        }
-        public void Persist()
-        {
-            throw new NotImplementedException();
         }
 
     }

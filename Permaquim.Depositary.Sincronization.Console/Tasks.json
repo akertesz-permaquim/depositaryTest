@@ -4,40 +4,118 @@
     "Endpoint": "autenticacion/obtenertoken",
     "WorkerTaskType": 1,
     "Entity": "Permaquim.Depositary.Sincronization.Console.LoginModel",
-    "SendsDate": "false",
     "Log": "false"
-  }
-  ,
-  //{
-  //  "ExecutionOrder": 3,
-  //  "Endpoint": "/configuracion/ObtenerConfiguracion",
-  //  "WorkerTaskType": 3,
-  //  "Entity": "Permaquim.Depositary.Sincronization.Console.ConfiguracionModel",
-  //  "SendsDate": "true",
-  //  "Log": "false"
-  //},
-  //{
-  //  "ExecutionOrder": 3,
-  //  "Endpoint": "/estilo/Obtenerestilo",
-  //  "WorkerTaskType": 3,
-  //  "Entity": "Permaquim.Depositary.Sincronization.Console.EstiloModel",
-  //  "SendsDate": "true",
-  //  "Log": "false"
-  //},
-  //{
-  //  "ExecutionOrder": 3,
-  //  "Endpoint": "Regionalizacion/ObtenerRegionalizacion",
-  //  "WorkerTaskType": 3,
-  //  "Entity": "Permaquim.Depositary.Sincronization.Console.RegionalizacionModel",
-  //  "SendsDate": "true",
-  //  "Log": "false"
-  //},
+  },
   {
     "ExecutionOrder": 2,
-    "Endpoint": "Operacion/SincronizarTransacciones",
+    "Endpoint": "Sincronizacion/ObtenerSincronizacion",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.SincronizacionModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 3,
+    "Endpoint": "Geografia/ObtenerGeografia",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.GeografiaModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 4,
+    "Endpoint": "Auditoria/ObtenerAuditoria",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.AuditoriaModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 5,
+    "Endpoint": "Regionalizacion/ObtenerRegionalizacion",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.RegionalizacionModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 6,
+    "Endpoint": "Visualizacion/ObtenerVisualizacion",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.VisualizacionModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 7,
+    "Endpoint": "Biometria/ObtenerBiometria",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.BiometriaModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 8,
+    "Endpoint": "Seguridad/ObtenerSeguridad",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.SeguridadModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 9,
+    "Endpoint": "Valor/ObtenerValor",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.ValorModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 10,
+    "Endpoint": "Estilo/ObtenerEstilo",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.EstiloModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 11,
+    "Endpoint": "Directorio/ObtenerDirectorio",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.DirectorioModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 12,
+    "Endpoint": "Banca/ObtenerBanca",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.BancaModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 13,
+    "Endpoint": "Aplicacion/ObtenerAplicacion",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.AplicacionModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 14,
+    "Endpoint": "Dispositivo/ObtenerDispositivo",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.DispositivoModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 15,
+    "Endpoint": "Turno/ObtenerTurno",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.TurnoModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 16,
+    "Endpoint": "Impresion/ObtenerImpresion",
+    "WorkerTaskType": 4,
+    "Entity": "Permaquim.Depositary.Sincronization.Console.ImpresionModel",
+    "Log": "false"
+  },
+  {
+    "ExecutionOrder": 17,
+    "Endpoint": "Transaccion/SincronizarTransacciones",
     "WorkerTaskType": 2,
-    "Entity": "Permaquim.Depositary.Sincronization.Console.OperacionModel",
-    "SendsDate": "false",
+    "Entity": "Permaquim.Depositary.Sincronization.Console.TransaccionModel",
     "Log": "false"
   }
 

@@ -25,8 +25,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
 
                 eSincronizacionEntidadCabecera.EntidadId = entidadSincronizacion.Id;
                 eSincronizacionEntidadCabecera.Fechainicio = DateTime.Now;
-                eSincronizacionEntidadCabecera.DepositarioId = null;
-                //eSincronizacionEntidadCabecera.DepositarioId = DatabaseController.CurrentDepositary != null ? DatabaseController.CurrentDepositary.Id : null;
+                eSincronizacionEntidadCabecera.DepositarioId = ConfigurationController.GetCurrentDepositaryId();
                 eSincronizacionEntidadCabecera.Valor = entidadSincronizacion.Nombre;
 
                 try
@@ -76,6 +75,34 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
             return resultado;
         }
 
+        public static DateTime obtenerFechaUltimaSincronizacion(string pNombreEntidad)
+        {
+            //Por defecto se indica una fecha minima para no usar nulos
+            DateTime fechaUltimaSincronizacion = new(1900, 1, 1);
+
+            //En funcion del nombre recibido buscamos la entidad y obtenemos el id
+            Depositario.Business.Tables.Sincronizacion.Entidad oSincronizacionEntidad = new();
+            oSincronizacionEntidad.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, Depositario.sqlEnum.OperandEnum.Equal, pNombreEntidad);
+            oSincronizacionEntidad.Items();
+
+            if (oSincronizacionEntidad.Result.Count > 0)
+            {
+                //Buscamos la ultima sincro que realizo el depositario en cuestion
+                Depositario.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new();
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, Depositario.sqlEnum.OperandEnum.Equal, oSincronizacionEntidad.Result.FirstOrDefault().Id);
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, Depositario.sqlEnum.OperandEnum.IsNotNull, null);
+                oSincronizacionEntidadCabecera.OrderBy.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id, Depositario.sqlEnum.DirEnum.DESC);
+                oSincronizacionEntidadCabecera.Items();
+
+                if (oSincronizacionEntidadCabecera.Result.Count > 0)
+                {
+                    fechaUltimaSincronizacion = oSincronizacionEntidadCabecera.Result.FirstOrDefault().Fechainicio;
+                }
+            }
+
+            return fechaUltimaSincronizacion;
+        }
+
         public static Int64? GuardarDetalleSincronizacion(Int64 pEntidadCabeceraId, Int64 pOrigenId, Int64 pDestinoId)
         {
             Int64? resultado = null;
@@ -119,8 +146,8 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
 
                 Depositario.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new();
                 oSincronizacionEntidadCabecera.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, Depositario.sqlEnum.OperandEnum.Equal, pEntidadId);
-                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.IsNull, null);
-                //oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary != null ? DatabaseController.CurrentDepositary.Id : null);
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.Equal, ConfigurationController.GetCurrentDepositaryId());
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, Depositario.sqlEnum.OperandEnum.IsNotNull, null);
 
                 oSincronizacionEntidadCabecera.Items();
 
@@ -136,6 +163,46 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
 
                         if (oSincronizacionEntidadDetalle.Result.Count > 0)
                             return oSincronizacionEntidadDetalle.Result.FirstOrDefault().DestinoId;
+                    }
+                }
+            }
+
+            return resultado;
+        }
+
+        public static Int64? ObtenerIdOrigenDetalleSincronizacion(string pEntidadNombre, Int64 pIdDestino)
+        {
+            Int64? resultado = null;
+
+            //En funcion del nombre recibido buscamos la entidad y obtenemos el id con el que se guardo
+            Depositario.Business.Tables.Sincronizacion.Entidad oSincronizacionEntidad = new();
+            oSincronizacionEntidad.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, Depositario.sqlEnum.OperandEnum.Equal, pEntidadNombre);
+
+            oSincronizacionEntidad.Items();
+
+            if (oSincronizacionEntidad.Result.Count > 0)
+            {
+                Int64 pEntidadId = oSincronizacionEntidad.Result.FirstOrDefault().Id;
+
+                Depositario.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new();
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, Depositario.sqlEnum.OperandEnum.Equal, pEntidadId);
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.Equal, ConfigurationController.GetCurrentDepositaryId());
+                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, Depositario.sqlEnum.OperandEnum.IsNotNull, null);
+
+                oSincronizacionEntidadCabecera.Items();
+
+                if (oSincronizacionEntidadCabecera.Result.Count > 0)
+                {
+                    foreach (var entidadCabecera in oSincronizacionEntidadCabecera.Result)
+                    {
+                        Depositario.Business.Tables.Sincronizacion.EntidadDetalle oSincronizacionEntidadDetalle = new();
+                        oSincronizacionEntidadDetalle.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.EntidadCabeceraId, Depositario.sqlEnum.OperandEnum.Equal, entidadCabecera.Id);
+                        oSincronizacionEntidadDetalle.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.DestinoId, Depositario.sqlEnum.OperandEnum.Equal, pIdDestino);
+
+                        oSincronizacionEntidadDetalle.Items();
+
+                        if (oSincronizacionEntidadDetalle.Result.Count > 0)
+                            return oSincronizacionEntidadDetalle.Result.FirstOrDefault().OrigenId;
                     }
                 }
             }

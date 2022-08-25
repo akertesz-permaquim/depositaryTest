@@ -36,7 +36,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             _delaytime = DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY) == String.Empty ? "10000" : DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY);
 
         }
-    public override Task StartAsync(CancellationToken cancellationToken)
+        public override Task StartAsync(CancellationToken cancellationToken)
         {
             _workerTasks = AppConfiguration.GetWorkerTasks();
             return base.StartAsync(cancellationToken);
@@ -60,10 +60,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                             await GetToken(item);
                             break;
                         case WorkerTask.WorkerTaskTypeEnum.Receive:
-                             await ReceiveData(item);
+                            await ReceiveData(item);
                             break;
                         case WorkerTask.WorkerTaskTypeEnum.Send:
                             await SendData(item);
+                            break;
+                        case WorkerTask.WorkerTaskTypeEnum.SendAndReceive:
+                            await SendAndReceiveData(item);
                             break;
                         default:
                             break;
@@ -71,14 +74,14 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     model = null;
 
-                    
+
 
                     await Task.Delay(5000, stoppingToken);
 
                     GC.Collect();
 
                 }
-                
+
                 await Task.Delay(Convert.ToInt32(_delaytime), stoppingToken);
             }
         }
@@ -96,21 +99,18 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                 try
                 {
+                    var model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
 
+                    var getResponse = await _httpClient.GetStringAsync(_baseUrl + item.Endpoint);
 
-                    var getResponse = await _httpClient.GetStringAsync(_baseUrl + item.Endpoint
-
-                    + (item.SendsDate == true ? "/" + DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss") : String.Empty));
 
                     string getRresult = getResponse.ToString();
-
-                    var model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
 
                     var ret = JsonConvert.DeserializeObject(getRresult, model.GetType());
 
                     ((IModel)ret).Process();
 
-  
+
                 }
                 catch (Exception ex)
                 {
@@ -124,7 +124,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         }
         private async Task SendData(WorkerTask item)
         {
-            model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name,item.Entity).Unwrap();
+            model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
 
             model.Process();
 
@@ -150,7 +150,6 @@ namespace Permaquim.Depositary.Sincronization.Console
                     var postResult = postResponse.Result;
 
                     _logger.LogInformation(postResult.ToString() + " At endpoint: " + _httpClient.BaseAddress);
-
 
 
                     if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -183,6 +182,62 @@ namespace Permaquim.Depositary.Sincronization.Console
                 Log(ex);
             }
         }
+
+        private async Task SendAndReceiveData(WorkerTask item)
+        {
+            if (_jwToken != null)
+            {
+                try
+                {
+                    model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
+
+                    model.Process();
+
+                    _logger.Log(LogLevel.Information, "Sending and receiving data: " + item.Entity);
+
+                    if (model.SincroDates.Count > 0)
+                    {
+                        foreach (var date in model.SincroDates)
+                        {
+                            _logger.Log(LogLevel.Information, date.Key + " " + date.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                        }
+                    }
+
+                    var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+
+                    string jsonToSend = JsonConvert.SerializeObject(model);
+
+                    _httpClient.DefaultRequestHeaders.Accept.Clear();
+                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
+
+                    var postResponse = _httpClient.PostAsync(_baseUrl + item.Endpoint, content);
+                    var postResult = postResponse.Result;
+
+                    if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var jsonResult = await postResult.Content.ReadAsStringAsync();
+
+                        var ret = JsonConvert.DeserializeObject(jsonResult, model.GetType());
+
+                        ((IModel)ret).Persist();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    Log(ex);
+                }
+
+            }
+            else
+            {
+                _logger.Log(LogLevel.Information, "JwToken is null, POST was cancelled!");
+            }
+
+        }
+
         private async Task GetToken(WorkerTask item)
         {
 
@@ -198,7 +253,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                     var postResponse = _httpClient.PostAsync(_baseUrl + item.Endpoint, content);
                     var postResult = postResponse.Result;
                     var jsonResult = await postResult.Content.ReadAsStringAsync();
-                    if(postResult.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                    if (postResult.StatusCode == System.Net.HttpStatusCode.InternalServerError)
                     {
                         _logger.Log(LogLevel.Information, "Received: InternalServerError");
                     }
@@ -210,7 +265,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 {
                     Log(ex);
                 }
-             }
+            }
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)
@@ -228,11 +283,11 @@ namespace Permaquim.Depositary.Sincronization.Console
             string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".Exception.log";
 
             System.IO.StreamWriter file = new(filename, true);
-            file.WriteLine("Message : " + ex.Message + Environment.NewLine 
+            file.WriteLine("Message : " + ex.Message + Environment.NewLine
                 + "StackTrace :" + ex.StackTrace); ;
             file.Close();
         }
-            private void Log(string message)
+        private void Log(string message)
         {
             string logDirectory = System.IO.Directory.GetCurrentDirectory() + @"\Logs\";
             if (!System.IO.Directory.Exists(logDirectory))

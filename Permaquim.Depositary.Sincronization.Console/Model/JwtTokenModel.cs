@@ -7,7 +7,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         public DateTime Expiration { get; set; }
 
         public string Token { get; set; }
-        public DateTime? SincroDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
 
         public void Process()
         {
@@ -23,5 +23,5 @@ namespace Permaquim.Depositary.Sincronization.Console
             throw new NotImplementedException();
         }
 
-      }
+    }
 }

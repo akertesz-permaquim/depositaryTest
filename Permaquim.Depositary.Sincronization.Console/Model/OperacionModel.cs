@@ -1,72 +1,154 @@
 ﻿using Permaquim.Depositary.Sincronization.Console.Interfaces;
+using Permaquim.Depositary.Sincronization.Console.Controllers;
 
 namespace Permaquim.Depositary.Sincronization.Console
 {
-    public class OperacionModel:IModel
+    public class OperacionModel : IModel
     {
-        private DateTime _startDateTime = DateTime.MinValue;
-        DatabaseController DatabaseController = new();
-        public string CodigoExternoDepositario { get; set; }
-        public List<Depositario.Entities.Tables.Operacion.Sesion> Sesiones { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.CierreDiario> CierresDiarios { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.Turno> Turnos { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.Contenedor> Contenedores { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.Transaccion> Transacciones { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> TransaccionesDetalles { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> TransaccionesSobres { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionesSobresDetalles { get; set; } = new();
-
-        public void Process(DateTime dateTime)
-        {
-            throw new NotImplementedException();
-        }
+        public List<Depositario.Entities.Tables.Operacion.TipoContenedor> TiposContenedores { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.TipoEvento> TiposEventos { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.TipoTransaccion> TiposTransacciones { get; set; } = new();
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
 
         void IModel.Process()
         {
-            _startDateTime = DateTime.Now;
-            DateTime lastSincronizationDate;
 
-            CodigoExternoDepositario = DatabaseController.CurrentDepositary.CodigoExterno;
+            //Obtenemos la fecha de ultima sincronizacion de la entidad
+            DateTime fechaSincroTipoTransaccion = SynchronizationController.obtenerFechaUltimaSincronizacion("Operacion.TipoTransaccion");
 
-            Sesiones = DatabaseController.GetSessions();
+            SincroDates.Add("Operacion.TipoTransaccion", fechaSincroTipoTransaccion);
 
-            CierresDiarios = DatabaseController.GetDailyclosingItems();
- 
-            Turnos = DatabaseController.GetTurns();
+            //Obtenemos la fecha de ultima sincronizacion de la entidad
+            DateTime fechaSincroTipoEvento = SynchronizationController.obtenerFechaUltimaSincronizacion("Operacion.TipoEvento");
 
-            Contenedores = DatabaseController.GetContainers();
+            SincroDates.Add("Operacion.TipoEvento", fechaSincroTipoEvento);
 
-            Transacciones = DatabaseController.GetTransactions();
+            //Obtenemos la fecha de ultima sincronizacion de la entidad
+            DateTime fechaSincroTipoContenedor = SynchronizationController.obtenerFechaUltimaSincronizacion("Operacion.TipoContenedor");
 
-            TransaccionesDetalles = DatabaseController.GetTransactionDetails();
+            SincroDates.Add("Operacion.TipoContenedor", fechaSincroTipoContenedor);
 
-            TransaccionesSobres = DatabaseController.GetEnvelopeTransaction();
-
-            TransaccionesSobresDetalles = DatabaseController.GetEnvelopeTransactionDetails();
         }
+
         public void Persist()
         {
-            DateTime endSincronizationDate = DateTime.Now;
+            try
+            {
+                if (TiposEventos.Count > 0)
+                {
+                    Depositario.Business.Tables.Operacion.TipoEvento tipoEvento = new();
 
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Sesion, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_CierreDiario, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Turno, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Contenedor, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Transaccion, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_TransaccionDetalle, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_TransaccionSobre, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle, _startDateTime, endSincronizationDate);
+                    Int64? sincronizacionCabeceraId = null;
 
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Operacion.TipoEvento");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TiposEventos)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Operacion.TipoEvento", item.Id);
+
+                            //Guardo el id que venia del server.
+                            Int64 origenId = item.Id;
+
+                            //Si se sincronizo antes entonces hago un update con el id propio.
+                            if (idDestino.HasValue)
+                            {
+                                item.Id = idDestino.Value;
+                                tipoEvento.Update(item);
+                            }
+                            else
+                            {
+                                tipoEvento.Add(item);
+                            }
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                if (TiposContenedores.Count > 0)
+                {
+                    Depositario.Business.Tables.Operacion.TipoContenedor tipoContenedor = new();
+
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Operacion.TipoContenedor");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TiposContenedores)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Operacion.TipoContenedor", item.Id);
+
+                            //Guardo el id que venia del server.
+                            Int64 origenId = item.Id;
+
+                            //Si se sincronizo antes entonces hago un update con el id propio.
+                            if (idDestino.HasValue)
+                            {
+                                item.Id = idDestino.Value;
+                                tipoContenedor.Update(item);
+                            }
+                            else
+                            {
+                                tipoContenedor.Add(item);
+                            }
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                if (TiposTransacciones.Count > 0)
+                {
+                    Depositario.Business.Tables.Operacion.TipoTransaccion tipoTransaccion = new();
+
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Operacion.TipoTransaccion");
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TiposTransacciones)
+                        {
+                            //Verifico si este registro se sincronizo anteriormente
+                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Operacion.TipoTransaccion", item.Id);
+
+                            if (item.FuncionId.HasValue)
+                            {
+                                Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Funcion", item.FuncionId.Value);
+                                item.FuncionId = funcionIdOrigen;
+                            }
+
+                            //Guardo el id que venia del server.
+                            Int64 origenId = item.Id;
+
+                            //Si se sincronizo antes entonces hago un update con el id propio.
+                            if (idDestino.HasValue)
+                            {
+                                item.Id = idDestino.Value;
+                                tipoTransaccion.Update(item);
+                            }
+                            else
+                            {
+                                tipoTransaccion.Add(item);
+                            }
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                        }
+                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
-   
     }
 }
