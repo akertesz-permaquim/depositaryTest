@@ -23,6 +23,10 @@ namespace Permaquim.Depositary.UI.Desktop
         private int _yellowStatusIndicator;
         private int _redStatusIndicator;
 
+        private bool _alreadyPrinted = false;
+        List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
+        List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> _detailTransactions = new();
+
         /// <summary>
         /// Máquina de estado
         /// </summary>
@@ -152,6 +156,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _totalQuantity = 0;
             _totalAmount = 0;
             _operationStatus = new();
+            _alreadyPrinted = false;
         }
         public void LoadDenominations()
         {
@@ -566,6 +571,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
 
+            TimeOutController.Reset();
+
             if (ParameterController.RequiresEnvelopeIdentifier && EnvelopeTextBox.Texts.Trim().Equals(String.Empty))
             {
                 FormsController.SetInformationMessage(InformationTypeEnum.Error,
@@ -704,7 +711,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void CancelDepositButton_Click(object sender, EventArgs e)
         {
-
+            TimeOutController.Reset();
             _operationStatus.DepositConfirmed = false;
             _device.CloseEscrow();
 
@@ -735,12 +742,30 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             if (_device != null)
             {
                 if (_device.CounterConnected)
                     _device.RemoteCancel();
             }
             FormsController.OpenChildForm(this, new OperationForm(), _device);
+        }
+        private void PrintTicket()
+        {
+
+
+            if (ParameterController.PrintsEnvelopeDeposit)
+            {
+                if (!_alreadyPrinted)
+                {
+                    for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
+                    {
+                        ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositFirstReport,
+                        _headerTransaction.FirstOrDefault());
+                        _alreadyPrinted = true;
+                    }
+                }
+            }
         }
     }
 }

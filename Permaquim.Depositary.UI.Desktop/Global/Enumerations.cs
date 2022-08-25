@@ -51,10 +51,11 @@
         }
         public enum ReportTypeEnum
         {
-            None,
+            None = 0,
             BillDeposit,
             CoinDeposit,
-            EnvelopeDeposit,
+            EnvelopeDepositFirstReport,
+            EnvelopeDepositSecondReport,
             ValueExtraction,
             DailyClosing,
             TurnChange
@@ -194,6 +195,9 @@
             BILLETE,
             BILLETES,
             MONEDA,
+            MONEDAS_SIN_ASOCIAR_EN_SUCURSAL,
+            MONEDA_NO_EXISTENTE_EN_DEPOSITARIO,
+            MONEDA_SIN_DENOMINACIONES,
             SOBRE,
             SOBRES,
             RETIRAR_SOBRE,
@@ -275,7 +279,23 @@
             TurnChange = 108,
             ViewEvents = 109,
             Reports = 110,
-            BagHistory = 111 
+            BagHistory = 111
+
+            //TurnChangeForm,
+            //DailyClosingForm,
+            //BagContentForm,
+            //BillDepositForm,
+            //CoinDepositForm,
+            //EnvelopeDepositForm,
+            //BagExtractionForm,
+            //BagHistoryForm,
+            //OtherOperationsForm,
+            //ReportsForm,
+            //SupportForm,
+            //OperationsHistoryform,
+            //VER_EVENTOS
+
+
         }
 
         public enum LogTypeEnum

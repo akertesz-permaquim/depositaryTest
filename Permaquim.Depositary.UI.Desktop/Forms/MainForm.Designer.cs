@@ -36,10 +36,11 @@
             this.UserLabel = new System.Windows.Forms.Label();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.TurnAndDateTimeLabel = new System.Windows.Forms.Label();
+            this.DepositaryLabel = new System.Windows.Forms.Label();
             this.SucursalInfoLabel = new System.Windows.Forms.Label();
             this.IoBoardPictureBox = new System.Windows.Forms.PictureBox();
             this.CounterPictureBox = new System.Windows.Forms.PictureBox();
-            this.DateTimeLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.BreadcrumbLabel = new System.Windows.Forms.Label();
@@ -79,21 +80,21 @@
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.Black;
             this.RemainingTimeLabel.Location = new System.Drawing.Point(288, 3);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(344, 48);
+            this.RemainingTimeLabel.Size = new System.Drawing.Size(304, 48);
             this.RemainingTimeLabel.TabIndex = 111;
             this.RemainingTimeLabel.Text = "**********";
             this.RemainingTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EnterpriseLabel
             // 
-            this.EnterpriseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.EnterpriseLabel.AutoSize = true;
+            this.EnterpriseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.EnterpriseLabel.BackColor = System.Drawing.Color.Transparent;
             this.EnterpriseLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.EnterpriseLabel.ForeColor = System.Drawing.Color.White;
-            this.EnterpriseLabel.Location = new System.Drawing.Point(640, 5);
+            this.EnterpriseLabel.Location = new System.Drawing.Point(696, 5);
             this.EnterpriseLabel.Name = "EnterpriseLabel";
-            this.EnterpriseLabel.Size = new System.Drawing.Size(37, 15);
+            this.EnterpriseLabel.Size = new System.Drawing.Size(112, 19);
             this.EnterpriseLabel.TabIndex = 110;
             this.EnterpriseLabel.Text = "------";
             this.EnterpriseLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -112,14 +113,14 @@
             // 
             // UserLabel
             // 
-            this.UserLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UserLabel.AutoSize = true;
+            this.UserLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.UserLabel.BackColor = System.Drawing.Color.Transparent;
             this.UserLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.UserLabel.ForeColor = System.Drawing.Color.White;
-            this.UserLabel.Location = new System.Drawing.Point(640, 32);
+            this.UserLabel.Location = new System.Drawing.Point(696, 29);
             this.UserLabel.Name = "UserLabel";
-            this.UserLabel.Size = new System.Drawing.Size(37, 15);
+            this.UserLabel.Size = new System.Drawing.Size(112, 24);
             this.UserLabel.TabIndex = 101;
             this.UserLabel.Text = "------";
             this.UserLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -137,28 +138,55 @@
             // BottomPanel
             // 
             this.BottomPanel.BackColor = System.Drawing.Color.White;
+            this.BottomPanel.Controls.Add(this.TurnAndDateTimeLabel);
+            this.BottomPanel.Controls.Add(this.DepositaryLabel);
             this.BottomPanel.Controls.Add(this.SucursalInfoLabel);
             this.BottomPanel.Controls.Add(this.IoBoardPictureBox);
             this.BottomPanel.Controls.Add(this.CounterPictureBox);
-            this.BottomPanel.Controls.Add(this.DateTimeLabel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 445);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(873, 47);
             this.BottomPanel.TabIndex = 2;
             // 
+            // TurnAndDateTimeLabel
+            // 
+            this.TurnAndDateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TurnAndDateTimeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.TurnAndDateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TurnAndDateTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.TurnAndDateTimeLabel.Location = new System.Drawing.Point(648, 8);
+            this.TurnAndDateTimeLabel.Name = "TurnAndDateTimeLabel";
+            this.TurnAndDateTimeLabel.Size = new System.Drawing.Size(216, 32);
+            this.TurnAndDateTimeLabel.TabIndex = 104;
+            this.TurnAndDateTimeLabel.Text = "------";
+            this.TurnAndDateTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // DepositaryLabel
+            // 
+            this.DepositaryLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DepositaryLabel.BackColor = System.Drawing.Color.Transparent;
+            this.DepositaryLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.DepositaryLabel.ForeColor = System.Drawing.Color.White;
+            this.DepositaryLabel.Location = new System.Drawing.Point(368, 8);
+            this.DepositaryLabel.Name = "DepositaryLabel";
+            this.DepositaryLabel.Size = new System.Drawing.Size(264, 32);
+            this.DepositaryLabel.TabIndex = 103;
+            this.DepositaryLabel.Text = "------";
+            this.DepositaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // SucursalInfoLabel
             // 
-            this.SucursalInfoLabel.AutoSize = true;
             this.SucursalInfoLabel.BackColor = System.Drawing.Color.Transparent;
             this.SucursalInfoLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.SucursalInfoLabel.ForeColor = System.Drawing.Color.White;
-            this.SucursalInfoLabel.Location = new System.Drawing.Point(112, 16);
+            this.SucursalInfoLabel.Location = new System.Drawing.Point(112, 8);
             this.SucursalInfoLabel.Name = "SucursalInfoLabel";
-            this.SucursalInfoLabel.Size = new System.Drawing.Size(37, 15);
+            this.SucursalInfoLabel.Size = new System.Drawing.Size(240, 32);
             this.SucursalInfoLabel.TabIndex = 102;
             this.SucursalInfoLabel.Text = "------";
-            this.SucursalInfoLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.SucursalInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // IoBoardPictureBox
             // 
@@ -184,20 +212,6 @@
             this.CounterPictureBox.TabIndex = 19;
             this.CounterPictureBox.TabStop = false;
             // 
-            // DateTimeLabel
-            // 
-            this.DateTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DateTimeLabel.AutoSize = true;
-            this.DateTimeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.DateTimeLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DateTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.DateTimeLabel.Location = new System.Drawing.Point(677, 16);
-            this.DateTimeLabel.Name = "DateTimeLabel";
-            this.DateTimeLabel.Size = new System.Drawing.Size(57, 15);
-            this.DateTimeLabel.TabIndex = 1;
-            this.DateTimeLabel.Text = "**********";
-            this.DateTimeLabel.Click += new System.EventHandler(this.DateTimeLabel_Click);
-            // 
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -217,6 +231,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPictureBox.ErrorImage = null;
+            this.MainPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("MainPictureBox.Image")));
             this.MainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.MainPictureBox.Name = "MainPictureBox";
             this.MainPictureBox.Size = new System.Drawing.Size(873, 261);
@@ -273,11 +288,9 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.HeadPanel.ResumeLayout(false);
-            this.HeadPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).EndInit();
             this.BottomPanel.ResumeLayout(false);
-            this.BottomPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IoBoardPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CounterPictureBox)).EndInit();
             this.MainPanel.ResumeLayout(false);
@@ -291,7 +304,6 @@
         private Panel BottomPanel;
         private PictureBox LogoPictureBox;
         public Panel MainPanel;
-        private Label DateTimeLabel;
         private Label UserLabel;
         private PictureBox AvatarPicturebox;
         private Label EnterpriseLabel;
@@ -302,5 +314,7 @@
         private Label BreadcrumbLabel;
         private Label InformationLabel;
         private Label RemainingTimeLabel;
+        private Label DepositaryLabel;
+        private Label TurnAndDateTimeLabel;
     }
 }

@@ -26,7 +26,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         /// <summary>
         /// Instancias de los componentes que gestionan dispositivos
         /// </summary>
-        CounterDevice _counterDevice = new();
+        CounterDevice _device = new();
         DEXDevice? _deXDevice = null;
 
         SystemBlockingDialog _blockingDialog = null;
@@ -136,12 +136,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             try
             {
-                _counterDevice = new CounterDevice(device);
+                _device = new CounterDevice(device);
                 _pollingTimer.Enabled = true;
 
-                _counterDevice.SleepTimeout = DeviceController.GetSleepInterval();
+                _device.SleepTimeout = DeviceController.GetSleepInterval();
 
-                this.Tag = _counterDevice;
+                this.Tag = _device;
 
 
                 // Evaluación de estado de la contadora y el ioBoard
@@ -153,25 +153,25 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
                 // Operación anterior.
 
-                if (_counterDevice.CounterConnected)
+                if (_device.CounterConnected)
                 {
-                    StatesResult statesResult = _counterDevice.Sense();
+                    StatesResult statesResult = _device.Sense();
                     if (statesResult != null)
                     {
-                        _counterDevice.PreviousState = statesResult.StatusInformation.OperatingState;
+                        _device.PreviousState = statesResult.StatusInformation.OperatingState;
 
                         // Si el escrow está abierto se debe cerrar
-                        if (_counterDevice.StateResultProperty.StatusInformation.OperatingState ==
+                        if (_device.StateResultProperty.StatusInformation.OperatingState ==
                                 StatusInformation.State.EscrowOpen ||
-                                _counterDevice.StateResultProperty.StatusInformation.OperatingState ==
+                                _device.StateResultProperty.StatusInformation.OperatingState ==
                                 StatusInformation.State.PQWaitingTocloseEscrow)
 
-                            _counterDevice.CloseEscrow();
+                            _device.CloseEscrow();
 
                         // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                        if (_counterDevice.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                        if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
                         {
-                            _counterDevice.RemoteCancel();
+                             _device.RemoteCancel();
                         }
                     }
                 }
@@ -191,51 +191,100 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
 
-            DateTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
-
             VerifyUserData();
+
+            VerifyBasicConfigurations();
 
             VerifyTimeout();
 
             VerifyAvatar();
 
-            _counterDevice.Status();
-            if (_counterDevice.IoBoardConnected)
+            _device.Status();
+            if (_device.IoBoardConnected)
             {
+                VerifyOpenDoor();
 
-                // Verificación de puerta abierta
+                VerifyConnections();
 
-                if (_counterDevice.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+                VerifyPreviousFailedoperation();
+            }
+
+        }
+        private void VerifyBasicConfigurations()
+        {
+            string message = DatabaseController.GetBasicconfigurationMessage();
+            if(message.Length > 0)
+            {
                 {
-                    VerifyConnections();
-                }
-                else
-                {
-                    if (_blockingDialog == null &&
-                        (DatabaseController.CurrentOperation == null ||
-                        DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
+                    if (_blockingDialog == null)
                     {
                         _blockingDialog = new SystemBlockingDialog()
                         {
-                            Tag = this.Tag
+                            Tag = this.Tag,
+                            MessageText = message
                         };
                         _blockingDialog.LoadStyles();
                         _blockingDialog.ShowDialog();
                         _blockingDialog = null;
                     }
-                }
 
+                }
+            }
+        }
+        private void VerifyOpenDoor()
+        {
+            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+            {
                 VerifyConnections();
+            }
+            else
+            {
+                if (_blockingDialog == null &&
+                    (DatabaseController.CurrentOperation == null ||
+                    DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
+                {
+                    _blockingDialog = new SystemBlockingDialog()
+                    {
+                        Tag = this.Tag,
+                        MessageText = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA)
+                    };
+                    _blockingDialog.LoadStyles();
+                    _blockingDialog.ShowDialog();
+                    _blockingDialog = null;
+                }
+            }
+        }
+
+        private void VerifyPreviousFailedoperation()
+        {
+            if(FormsController.ActiveFormscount == 0)
+            {
+                // si quedó contenido en el escrow debe ser retirado
+                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                {
+                    _device.OpenEscrow();
+                    _pollingTimer.Enabled = false;
+                    if (MessageBox.Show(
+                        "Retire el contenido de la pre-bóveda para poder iniciar la operación",
+                        "Error en operación previa", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                    {
+                        _pollingTimer.Enabled = false;
+                        _device.CloseEscrow();
+                    }
+
+                }
+                _device.RemoteCancel();
             }
         }
 
         private void VerifyConnections()
         {
          
-            _counterDevice.Sense();
+            _device.Sense();
             // consulta el estado de la contadora si está conectada
 
-            if (_counterDevice.CounterConnected)
+            if (_device.CounterConnected)
             {
                 CounterPictureBox.Image = _greenLedImage;
             }
@@ -245,10 +294,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 //_device.CounterBoardReconnect();
             }
 
-            IoBoardStatus ioBoardStatus = _counterDevice.Status();
+            IoBoardStatus ioBoardStatus = _device.Status();
 
             // consulta el estado de la ioboard  si está conectada
-            if (_counterDevice.IoBoardConnected)
+            if (_device.IoBoardConnected)
             {
                 IoBoardPictureBox.Image = _greenLedImage;
             }
@@ -290,25 +339,20 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " +
                 DatabaseController.CurrentUser.Apellido + " " + DatabaseController.CurrentUser.Nombre;
 
-                EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " + 
+                EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " +
                 DatabaseController.CurrentUser.EmpresaId.Nombre;
 
                 SucursalInfoLabel.Text =
                     MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
-                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + "  "
+                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
                     + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
-                    + DatabaseController.CurrentDepositary.SectorId.Nombre + "  "
-                    + MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
-                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + "  "
-                    + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
-                    + DatabaseController.CurrentDepositary.CodigoExterno + "  "
-                    + MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : ";
+                    + DatabaseController.CurrentDepositary.SectorId.Nombre;
 
-                if (DatabaseController.CurrentTurn == null)
-                    SucursalInfoLabel.Text += MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
-                else
-                    SucursalInfoLabel.Text += DatabaseController.CurrentTurn.TurnoDepositarioId.
-                    EsquemaDetalleTurnoId.Nombre;
+                DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
+                 + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
+                 + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
+                 + DatabaseController.CurrentDepositary.CodigoExterno;
+
 
             }
             else
@@ -317,7 +361,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 EnterpriseLabel.Text = String.Empty;
                 SucursalInfoLabel.Text = String.Empty;
                 RemainingTimeLabel.Text = String.Empty;
+                DepositaryLabel.Text = String.Empty;
+                TurnAndDateTimeLabel.Text = String.Empty;
             }
+            
+            SetTurnAndDateTimeLabel();
+        }
+
+        private void SetTurnAndDateTimeLabel()
+        {
+            TurnAndDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : ";
+
+            if (DatabaseController.CurrentTurn == null)
+                TurnAndDateTimeLabel.Text += MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
+            else
+                TurnAndDateTimeLabel.Text += DatabaseController.CurrentTurn.TurnoDepositarioId.
+                EsquemaDetalleTurnoId.Nombre;
+
+            TurnAndDateTimeLabel.Text += Environment.NewLine +  DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
         }
 
         private void MainPanel_MouseClick(object sender, MouseEventArgs e)
@@ -357,7 +418,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             UserLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             EnterpriseLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            DateTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            TurnAndDateTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             BreadcrumbLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Breadcrumb);
             BreadcrumbLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
@@ -403,7 +464,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
 
                 if (VerifySchedule())
-                    if (_counterDevice.CounterConnected && _counterDevice.IoBoardConnected)
+                    if (_device.CounterConnected && _device.IoBoardConnected)
                     {
                         Login();
                     }

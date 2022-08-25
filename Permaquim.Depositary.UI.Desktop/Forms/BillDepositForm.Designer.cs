@@ -340,7 +340,7 @@
             this.MonitorGroupBox.Controls.Add(this.DeviceModeLabel);
             this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(720, 120);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(744, 120);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
             this.MonitorGroupBox.Size = new System.Drawing.Size(152, 448);
             this.MonitorGroupBox.TabIndex = 140;
@@ -560,12 +560,13 @@
             this.MonitorGroupcheckbox.BackColor = System.Drawing.Color.Transparent;
             this.MonitorGroupcheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonitorGroupcheckbox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(728, 80);
+            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(760, 80);
             this.MonitorGroupcheckbox.Name = "MonitorGroupcheckbox";
             this.MonitorGroupcheckbox.Size = new System.Drawing.Size(71, 17);
             this.MonitorGroupcheckbox.TabIndex = 141;
             this.MonitorGroupcheckbox.Text = "Eventos";
             this.MonitorGroupcheckbox.UseVisualStyleBackColor = false;
+            this.MonitorGroupcheckbox.Visible = false;
             this.MonitorGroupcheckbox.CheckStateChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
             // 
             // BillDepositForm

@@ -11,6 +11,9 @@ namespace Permaquim.Depositary.UI.Desktop
     {
         CounterDevice _device = null;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
+        private bool _alreadyPrinted;
+
+        private Permaquim.Depositario.Entities.Tables.Operacion.Turno _turnChange = new();
 
         public TurnChangeForm()
         {
@@ -96,8 +99,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void TurnchangeButton_Click(object sender, EventArgs e)
         {
-            DatabaseController.CloseCurrentTurn();
-
+            _turnChange = DatabaseController.CloseCurrentTurn();
+            PrintTicket();
             FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
         }
         #endregion
@@ -502,11 +505,27 @@ namespace Permaquim.Depositary.UI.Desktop
             // inicializar variables locales.
             OperationsHeaderGridView.DataSource = null;
             OperationsDetailGridView.DataSource = null;
+            _alreadyPrinted = false;
         }
 
         private void TurnChangeForm_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
+        }
+        private void PrintTicket()
+        {
+
+            if (ParameterController.PrintsTurnChange)
+            {
+                if (!_alreadyPrinted)
+                {
+                    for (int i = 0; i < ParameterController.PrintDailyTurnChangeQuantity; i++)
+                    {
+                        ReportController.PrintTurnChangeReport(_turnChange);
+                        _alreadyPrinted = true;
+                    }
+                }
+            }
         }
     }
 }

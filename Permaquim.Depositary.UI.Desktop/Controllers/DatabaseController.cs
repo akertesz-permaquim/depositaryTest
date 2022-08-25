@@ -1,5 +1,6 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Security;
+using System.Text;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
@@ -13,6 +14,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static List<Depositario.Entities.Relations.Dispositivo.ComandoContadora> _currentDepositaryCounterCommands = null;
         private static List<Depositario.Entities.Relations.Dispositivo.ComandoPlaca> _currentDepositaryIoBoardCommands = null;
         private static Depositario.Entities.Relations.Valor.Moneda _currentCurrency;
+
 
         private const string CIERRE_DIARIO = "Cierre diario";
 
@@ -344,6 +346,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> GetCurrencies()
         {
 
+            List<Permaquim.Depositario.Entities.Relations.Valor.Moneda> returnValue = new();
+
             Permaquim.Depositario.Business.Relations.Directorio.RelacionMonedaSucursal monedasucursal = new();
             monedasucursal.Where.Add(Depositario.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId,
                 Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.SucursalId.Id);
@@ -368,10 +372,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 currencies.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
                 Permaquim.Depositario.Business.Relations.Valor.Moneda.ColumnEnum.Id,
                 Permaquim.Depositario.sqlEnum.OperandEnum.In, monedas);
-                return currencies.Items();
+                returnValue =  currencies.Items();
             }
 
-            return currencies.Items();
+            return returnValue;
 
         }
         /// <summary>
@@ -490,7 +494,29 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         }
 
-        public static List<Permaquim.Depositario.Entities.Relations.Operacion.Transaccion> GetOperationsHeaders(
+        public static Depositario.Entities.Relations.Operacion.Transaccion GetTransactionHeader(
+        long transactionId)
+        {
+            Depositario.Business.Relations.Operacion.Transaccion transaction = new();
+            transaction.Items(transactionId);
+
+            return transaction.Result.FirstOrDefault();
+
+        }
+
+        public static List<Depositario.Entities.Relations.Operacion.TransaccionDetalle> GetTransactionDetails(
+            long transactionId)
+        {
+            Depositario.Business.Relations.Operacion.TransaccionDetalle transaction = new();
+            transaction.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
+                Depositario.sqlEnum.OperandEnum.Equal, transactionId);
+            transaction.Items();
+
+            return transaction.Result;
+
+        }
+
+        public static List<Depositario.Entities.Relations.Operacion.Transaccion> GetOperationsHeaders(
             DateTime dateFrom, DateTime dateTo, long userId, long turnId)
         {
 
@@ -843,6 +869,47 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return returnValue;
         }
 
+        public static bool IsCurrencyInTemplate
+        {
+            get
+            {
+                bool returnValue = false;
+
+                Permaquim.Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle entities = new();
+
+                entities.Where.Add(Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle.ColumnEnum.MonedaId,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentCurrency.Id);
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle.ColumnEnum.PlantillaMonedaId,
+                   Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.ModeloId.PlantillaMonedaId.Id);
+                entities.Items();
+
+                returnValue = entities.Result.Count > 0;
+
+                return returnValue;
+            }
+        }
+
+
+        public static bool CurrencyHasDenominations
+        {
+            get
+            {
+                bool returnValue = false;
+
+                Permaquim.Depositario.Business.Tables.Valor.Denominacion entities = new();
+
+                entities.Where.Add(Depositario.Business.Tables.Valor.Denominacion.ColumnEnum.MonedaId,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentCurrency.Id);
+
+                entities.Items();
+
+                returnValue = entities.Result.Count > 0;
+
+                return returnValue;
+            }
+        }
+
         public static bool IsFuntionEnabled(long functionId)
         {
             bool returnValue = false;
@@ -1107,5 +1174,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                return returnValue;
         }
+        public static string GetBasicconfigurationMessage()
+        {
+            StringBuilder builder = new();
+
+            if (GetCurrencies().Count == 0)
+                builder.AppendLine(MultilanguangeController.GetText(MultiLanguageEnum.MONEDAS_SIN_ASOCIAR_EN_SUCURSAL));
+
+
+
+            return builder.ToString();
+        } 
     }
 }

@@ -1,10 +1,8 @@
-﻿using Microsoft.Reporting.WinForms;
-using Permaquim.Depositario.Entities.Tables.Operacion;
+﻿using Permaquim.Depositario.Entities.Tables.Operacion;
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
 using System.Text;
-using Permaquim.Depositario;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -127,6 +125,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _currentCountingAmount = 0;
             _currentCountingQuantity = 0;
             _alreadyPrinted = false;
+            _alreadyPrinted = false;
             FormsController.SetInformationMessage(InformationTypeEnum.None,string.Empty);
         }
          private void CenterPanel()
@@ -206,6 +205,12 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (TimeOutController.IsTimeOut())
             {
+
+                if (_device.StateResultProperty.DeviceStateInformation.HopperBillPresent)
+                {
+                    TimeOutController.Reset();
+                    return;
+                }
                 if (_device.StateResultProperty != null &&_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     || _currentCountingAmount > 0)
                 {
@@ -217,8 +222,15 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 else
                 {
-                    DatabaseController.LogOff(true);
-                    FormsController.LogOff();
+                    if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    {
+                        DatabaseController.LogOff(true);
+                        FormsController.LogOff();
+                    }
+                    else
+                    {
+                        TimeOutController.Reset();
+                    }
                 }
             }
             else
@@ -269,6 +281,10 @@ namespace Permaquim.Depositary.UI.Desktop
             _operationStatus.GeneralStatus = _device.CurrentStatus;
 
             _device.CountingDataRequest();
+
+
+            if (_device.StateResultProperty.DeviceStateInformation.HopperBillPresent)
+                TimeOutController.Reset();
 
             VerifySaveToDatabase();
 
@@ -464,6 +480,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_operationStatus.GeneralStatus == StatusInformation.State.BeingSet
                 || _operationStatus.GeneralStatus == StatusInformation.State.BeingReset)
             {
+                TimeOutController.Reset();
                 _device.BatchDataTransmission();
             }
         }
@@ -637,6 +654,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ConfirmDeposit()
         {
+            TimeOutController.Reset();
             CancelDepositButton.Visible = false;
             _device.StoringStart();
             _device.PreviousState = StatusInformation.State.PQStoring;
@@ -644,7 +662,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            if(_device != null){
+            TimeOutController.Reset();
+            if (_device != null){
                 if (_device.CounterConnected)
                     _device.RemoteCancel();
             }
@@ -777,6 +796,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 };
                 _headerTransaction.Add(transactions.Add(transaction));
                 _operationStatus.CurrentTransactionId = transaction.Id;
+                
             }
             else
             {
@@ -811,16 +831,16 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PrintTicket()
         {
-            ReportDataSource rdsHeaderTransaction = new ReportDataSource("Transaccion", _headerTransaction);
-            ReportDataSource rdsDetailTransactions = new ReportDataSource("TransaccionDetalle", _detailTransactions);
-
-            if (ParameterController.PrintsEnvelopeDeposit)
+            
+            if (ParameterController.PrintsBillDeposit)
             {
                 if (!_alreadyPrinted)
                 {
-                    ReportController.PrintReport(ReportTypeEnum.BillDeposit,
-                        new List<ReportDataSource>() { rdsHeaderTransaction, rdsDetailTransactions }, null);
-                    _alreadyPrinted = true;
+                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                    {
+                        ReportController.PrintDepositReport(ReportTypeEnum.BillDeposit, _headerTransaction.FirstOrDefault());
+                        _alreadyPrinted = true;
+                    }
                 }
             }
         }

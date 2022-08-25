@@ -41,6 +41,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return resultImage;
         }
 
+        //public static Image GetImageResourceFromfile(string fileResourceName)
+        //{
+
+        //}
         public static List<Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalle> StyleItems
         {
             get {
@@ -53,8 +57,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId.Id);
 
                     _selectedSchemaDetail = entities.Items();
-
                 }
+
                 return _selectedSchemaDetail;
             }
         }

@@ -65,6 +65,70 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        public static bool PrintsDailyClosing
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CIERRE_DIARIO"));
+            }
+
+        }
+        public static bool PrintsTurnChange
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CAMBIO_TURNO"));
+            }
+
+        }
+        public static bool PrintsBagExtraction
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CAMBIO_BOLSA"));
+            }
+
+        }
+        public static int PrintDailyTurnChangeQuantity
+        {
+            get
+            {
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CAMBIO_TURNO"));
+            }
+
+        }
+        public static int PrintBagExtractionQuantity
+        {
+            get
+            {
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CAMBIO_BOLSA"));
+            }
+
+        }
+        public static int PrintDailyClosingQuantity
+        {
+            get
+            {
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CIERRE_DIARIO"));
+            }
+
+        }
+        public static int PrintBillDepositQuantity
+        {
+            get
+            {
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_DEPOSITO_BILLETE"));
+            }
+
+        }
+        public static int PrintEnvelopeDepositQuantity
+        {
+            get
+            {
+                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_DEPOSITO_SOBRE"));
+            }
+
+        }
         public static bool PrintsEnvelopeDeposit
         {
             get
