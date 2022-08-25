@@ -58,7 +58,7 @@
                     <Columns>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Menu" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                             <HeaderTemplate>
-                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadMenu",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadMenu",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                                 </RadzenButton>
                             </HeaderTemplate>
                             <Template Context="element">
@@ -91,7 +91,7 @@
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Menu" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Menu" Title=@MultilenguajeController.ObtenerTextoPorClave("FUNCIONID",dataLenguaje)  Property="FuncionId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_FuncionId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Menu" Title=@MultilenguajeController.ObtenerTextoPorClave("FUNCIONID",dataLenguaje) Property="FuncionId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_FuncionId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Funcion_FuncionId_entities.FirstOrDefault(c => c.Id == @context.FuncionId) != null)
                                 {
@@ -333,9 +333,9 @@
                         </div>
                         <div class="row">
                             <div class="col offset-sm-3">
-                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
                                 </RadzenButton>
-                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                                 </RadzenButton>
                             </div>
                         </div>

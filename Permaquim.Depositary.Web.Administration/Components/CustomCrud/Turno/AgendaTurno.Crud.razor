@@ -58,7 +58,7 @@
                     <Columns>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Turno.AgendaTurno" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                             <HeaderTemplate>
-                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("TurnoAgendaTurno",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("TurnoAgendaTurno",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                                 </RadzenButton>
                             </HeaderTemplate>
                             <Template Context="element">
@@ -235,9 +235,9 @@
                         </div>
                         <div class="row">
                             <div class="col offset-sm-3">
-                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
                                 </RadzenButton>
-                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                                 </RadzenButton>
                             </div>
                         </div>
@@ -412,9 +412,9 @@
                         </div>
                         <div class="row">
                             <div class="col offset-sm-3">
-                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
                                 </RadzenButton>
-                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                                 </RadzenButton>
                             </div>
                         </div>
@@ -806,7 +806,7 @@ else
             {
                 switch (nodo.GetType().ToString())
                 {
-                    case "Permaquim.Depositary.Web.Administration.Entities.GrupoTurno":
+                    case "Permaquim.Depositary.Web.Administration.TurnoEntities.GrupoTurno":
                         TurnoEntities.GrupoTurno grupoTurno = new();
                         grupoTurno = (TurnoEntities.GrupoTurno)nodo;
                         if (grupoTurno.Empresas.Count > 0)
@@ -831,7 +831,7 @@ else
                             }
                         }
                         break;
-                    case "Permaquim.Depositary.Web.Administration.Entities.EmpresaTurno":
+                    case "Permaquim.Depositary.Web.Administration.TurnoEntities.EmpresaTurno":
                         TurnoEntities.EmpresaTurno empresaTurno = new();
                         empresaTurno = (TurnoEntities.EmpresaTurno)nodo;
                         if (empresaTurno.Sucursales.Count > 0)
@@ -850,7 +850,7 @@ else
                             }
                         }
                         break;
-                    case "Permaquim.Depositary.Web.Administration.Entities.SucursalTurno":
+                    case "Permaquim.Depositary.Web.Administration.TurnoEntities.SucursalTurno":
                         TurnoEntities.SucursalTurno sucursalTurno = new();
                         sucursalTurno = (TurnoEntities.SucursalTurno)nodo;
                         if (sucursalTurno.Sectores.Count > 0)
@@ -863,7 +863,7 @@ else
                             }
                         }
                         break;
-                    case "Permaquim.Depositary.Web.Administration.Entities.SectorTurno":
+                    case "Permaquim.Depositary.Web.Administration.TurnoEntities.SectorTurno":
                         TurnoEntities.SectorTurno sectorTurno = new();
                         sectorTurno = (TurnoEntities.SectorTurno)nodo;
                         var sector = agendaTurnoABM.Sectores.FirstOrDefault(x => x.SectorId == sectorTurno.SectorId);

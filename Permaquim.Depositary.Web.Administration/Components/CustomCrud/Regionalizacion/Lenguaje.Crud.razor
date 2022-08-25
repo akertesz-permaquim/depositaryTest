@@ -58,7 +58,7 @@
                     <Columns>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.Lenguaje" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                             <HeaderTemplate>
-                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("RegionalizacionLenguaje",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("RegionalizacionLenguaje",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                                 </RadzenButton>
                             </HeaderTemplate>
                             <Template Context="element">
@@ -139,7 +139,7 @@
                         </RadzenDataGridColumn>
                     </Columns>
                     <Template Context="lenguaje">
-                        <LenguajeItem_Crud LenguajeId="@(lenguaje.Id)"></LenguajeItem_Crud>
+                        <LenguajeItem_Crud LenguajeId="@(lenguaje.Id)" EsDefault="@(lenguaje.EsDefault)"></LenguajeItem_Crud>
                     </Template>
                 </RadzenDataGrid>
                 <hr>
@@ -225,9 +225,9 @@
                         </div>
                         <div class="row">
                             <div class="col offset-sm-3">
-                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("ACCEPT_BUTTON",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
                                 </RadzenButton>
-                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("CANCEL_BUTTON",dataLenguaje) Click="Cancel">
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                                 </RadzenButton>
                             </div>
                         </div>
@@ -294,6 +294,8 @@ else
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
     private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
     private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
+
+    private Depositary.Entities.Tables.Regionalizacion.Lenguaje? lenguajeDefault = null;
 
     /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
@@ -425,54 +427,90 @@ else
                     break;
             }
         }
-        switch (crudMode)
+        if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit)
         {
-            case CrudMode.Add:
-                try
+            lenguajeDefault = ObtenerLenguajeDefault();
+
+            if (Lenguaje_entity.EsDefault && lenguajeDefault != null)
+            {
+                summary = "Error al procesar.";
+                actionInformation = "No se puede guardar/editar este lenguaje como default debido a que ya existe uno.";
+                severityType = NotificationSeverity.Error;
+            }
+            else
+            {
+                switch (crudMode)
                 {
-                    crud.Add(Lenguaje_entity);
-                    summary = "El registro se ha ";
-                    actionInformation = "agregado.";
-                    severityType = NotificationSeverity.Success;
+                    case CrudMode.Add:
+                        try
+                        {
+                            crud.Add(Lenguaje_entity);
+
+                            //Si se agrego un esquema no default y ademas existia un esquema default entonces le cargamos los items del esquema default
+                            if (!Lenguaje_entity.EsDefault && lenguajeDefault != null)
+                            {
+                                if (!InsertarItemsLenguajeDefault())
+                                {
+                                    summary = "Error al procesar.";
+                                    actionInformation = "Se pudo generar el lenguaje pero no se pudieron insertar los items del lenguaje default";
+                                    severityType = NotificationSeverity.Warning;
+                                }
+                                else
+                                {
+                                    summary = "Exito.";
+                                    actionInformation = "Se genero el lenguaje y se heredaron los items usando el lenguaje default.";
+                                    severityType = NotificationSeverity.Success;
+                                }
+                            }
+                            else
+                            {
+                                summary = "El registro se ha ";
+                                actionInformation = "agregado.";
+                                severityType = NotificationSeverity.Success;
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            summary = "Error al procesar.";
+                            actionInformation = ex.Message;
+                            severityType = NotificationSeverity.Error;
+                        }
+                        break;
+                    case CrudMode.Edit:
+                        try
+                        {
+                            crud.Update(Lenguaje_entity);
+                            summary = "El registro se ha ";
+                            actionInformation = "modificado.";
+                            severityType = NotificationSeverity.Success;
+                        }
+                        catch (Exception ex)
+                        {
+                            summary = "Error al procesar.";
+                            actionInformation = ex.Message;
+                            severityType = NotificationSeverity.Error;
+                        }
+                        break;
                 }
-                catch (Exception ex)
-                {
-                    summary = "Error al procesar.";
-                    actionInformation = ex.Message;
-                    severityType = NotificationSeverity.Error;
-                }
-                break;
-            case CrudMode.Edit:
-                try
-                {
-                    crud.Update(Lenguaje_entity);
-                    summary = "El registro se ha ";
-                    actionInformation = "modificado.";
-                    severityType = NotificationSeverity.Success;
-                }
-                catch (Exception ex)
-                {
-                    summary = "Error al procesar.";
-                    actionInformation = ex.Message;
-                    severityType = NotificationSeverity.Error;
-                }
-                break;
-            case CrudMode.Delete:
-                try
-                {
-                    Lenguaje_entity.Habilitado = false;
-                    crud.Update(Lenguaje_entity);
-                    summary = "El registro se ha ";
-                    actionInformation = "eliminado.";
-                    severityType = NotificationSeverity.Success;
-                }
-                catch (Exception ex)
-                {
-                    summary = "Error al procesar.";
-                    actionInformation = ex.Message;
-                    severityType = NotificationSeverity.Error;
-                }
-                break;
+            }
+        }
+        else
+        {
+            try
+            {
+                Lenguaje_entity.Habilitado = false;
+                crud.Update(Lenguaje_entity);
+                summary = "El registro se ha ";
+                actionInformation = "eliminado.";
+                severityType = NotificationSeverity.Success;
+            }
+            catch (Exception ex)
+            {
+                summary = "Error al procesar.";
+                actionInformation = ex.Message;
+                severityType = NotificationSeverity.Error;
+            }
         }
 
         //Recargamos el set de datos del lenguaje en el session storage.
@@ -494,6 +532,66 @@ else
 
         await Task.Run(LoadMainEntityData);
     }
+
+    #region Validaciones
+
+    private Depositary.Entities.Tables.Regionalizacion.Lenguaje? ObtenerLenguajeDefault()
+    {
+        Depositary.Entities.Tables.Regionalizacion.Lenguaje? resultado = null;
+
+        Depositary.Business.Tables.Regionalizacion.Lenguaje oLenguaje = new();
+        oLenguaje.Where.Add(Depositary.Business.Tables.Regionalizacion.Lenguaje.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
+        oLenguaje.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Regionalizacion.Lenguaje.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+        if (crudMode == CrudMode.Edit)
+            oLenguaje.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Regionalizacion.Lenguaje.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.NotEqual, Lenguaje_entity.Id);
+
+        oLenguaje.Items();
+
+        if (oLenguaje.Result.Count > 0)
+            resultado = oLenguaje.Result.FirstOrDefault();
+
+        return resultado;
+    }
+
+    private bool InsertarItemsLenguajeDefault()
+    {
+        Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItemNuevo = new();
+        Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItemDefault = new();
+
+        oLenguajeItemDefault.Where.Add(Depositary.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId, Depositary.sqlEnum.OperandEnum.Equal, lenguajeDefault.Id);
+
+        oLenguajeItemDefault.Items();
+
+        if (oLenguajeItemDefault.Result.Count > 0)
+        {
+            foreach (var lenguajeItem in oLenguajeItemDefault.Result)
+            {
+                Depositary.Entities.Tables.Regionalizacion.LenguajeItem eLenguajeItemNuevo = new();
+
+                eLenguajeItemNuevo.Clave = lenguajeItem.Clave;
+                eLenguajeItemNuevo.Texto = lenguajeItem.Texto + "**"; //Se le anexan asteriscos para que se sepa que se heredo y no se toco.
+                eLenguajeItemNuevo.LenguajeId = Lenguaje_entity.Id;
+                eLenguajeItemNuevo.FechaCreacion = DateTime.Now;
+                eLenguajeItemNuevo.Habilitado = lenguajeItem.Habilitado;
+                eLenguajeItemNuevo.LargoMaximo = lenguajeItem.LargoMaximo;
+                eLenguajeItemNuevo.UsuarioCreacion = Lenguaje_entity.UsuarioCreacion;
+
+                try
+                {
+                    oLenguajeItemNuevo.Add(eLenguajeItemNuevo);
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
+
+    #endregion
 
     #region Grid events
 

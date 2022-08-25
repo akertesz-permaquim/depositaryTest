@@ -1,15 +1,14 @@
-@page "/VisualizacionPerfilCustomCrud"
+@page "/GeografiaProvinciaCustomCrud/{PaisId}"
 @using Permaquim.Depositary.Web.Administration.Controllers;
-
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
 @if (dataFunciones != null)
 {
-    @if (SeguridadController.VerificarPermisoFuncion("VisualizacionPerfil", dataFunciones, "PuedeVisualizar"))
+    @if (SeguridadController.VerificarPermisoFuncion("GeografiaProvincia", dataFunciones, "PuedeVisualizar"))
     {
-        @if (Perfil_entities == null)
+        @if (Provincia_entities == null)
         {
             <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
         }
@@ -20,21 +19,21 @@
                 case CrudMode.Add:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Visualizacion.Perfil",dataLenguaje)</h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Geografia.Provincia",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Delete:
                     <RadzenBadge BadgeStyle="BadgeStyle.Warning">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Visualizacion.Perfil",dataLenguaje)</h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Geografia.Provincia",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Edit:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Visualizacion.Perfil",dataLenguaje)</h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Geografia.Provincia",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
@@ -42,7 +41,7 @@
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
                             <div>
-                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Visualizacion.Perfil",dataLenguaje)</h4>
+                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Geografia.Provincia",dataLenguaje)</h4>
                             </div>
                         </ChildContent>
                     </RadzenBadge>
@@ -51,62 +50,64 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" RowExpand="@expandirPerfil" RowRender="@perfilRowRender" RowCollapse="@colapsarPerfil" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@Perfil_entities" TItem="Depositary.Entities.Tables.Visualizacion.Perfil" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
+                <RadzenDataGrid AllowColumnPicking="true" CellRender="@ProvinciaCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@Provincia_entities" TItem="Depositary.Entities.Tables.Geografia.Provincia" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
                     </EmptyTemplate>
                     <Columns>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                             <HeaderTemplate>
-                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("VisualizacionPerfil",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
+                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("GeografiaProvincia",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                                 </RadzenButton>
                             </HeaderTemplate>
                             <Template Context="element">
-                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("VisualizacionPerfil",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                                <RadzenButton Icon="format_list_numbered_rtl" title=@MultilenguajeController.ObtenerTextoPorClave("TooltipCiudades",dataLenguaje) ButtonStyle="ButtonStyle.Primary" Visible=@SeguridadController.VerificarPermisoFuncion("GeografiaCiudad",dataFunciones,"PuedeVisualizar") Class="m-1" Click="@(args => ObtenerCiudades(element))" @onclick:stopPropagation="true">
                                 </RadzenButton>
-                                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("VisualizacionPerfil",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("GeografiaProvincia",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                                </RadzenButton>
+                                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("GeografiaProvincia",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                                 </RadzenButton>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Title=@MultilenguajeController.ObtenerTextoPorClave("PERFILTIPOID",dataLenguaje) Property="PerfilTipoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_PerfilTipoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Title=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Property="PaisId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_PaisId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
-                                @if (PerfilTipo_entities.FirstOrDefault(c => c.Id == @context.PerfilTipoId) != null)
+                                @if (Pais_PaisId_entities.FirstOrDefault(c => c.Id == @context.PaisId) != null)
                                 {
-                                    <RadzenLabel Text="@PerfilTipo_entities.FirstOrDefault( c => c.Id == @context.PerfilTipoId).Nombre" Component="PerfilTipoId" style="width: 100%">
+                                    <RadzenLabel Text="@Pais_PaisId_entities.FirstOrDefault( c => c.Id == @context.PaisId).Nombre" Component="PaisId" style="width: 100%">
                                     </RadzenLabel>
                                 }
                                 else
                                 {
-                                    <RadzenLabel Text="No data available" Component="PerfilTipoId" style="width: 100%">
+                                    <RadzenLabel Text="No data available" Component="PaisId" style="width: 100%">
                                     </RadzenLabel>
                                 }
                             </Template>
                             <FilterTemplate>
                                 <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                                <RadzenDropDown @bind-Value=@selectedFilter_PerfilTipoId Data="@PerfilTipo_PerfilTipoId_filter" Change="OnSelectedFilter_PerfilTipoId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                                <RadzenDropDown @bind-Value=@selectedFilter_PaisId Data="@Pais_PaisId_filter" Change="OnSelectedFilter_PaisId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Property="CodigoExterno" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="UsuarioCreacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @{
                                     var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
                                     if (usuario != null)
                                     {
-                                        var usuarioTexto = usuario.Nombre + " " + usuario.Apellido;
-
-                                        <RadzenLabel Text=@usuarioTexto Component="UsuarioCreacion" style="width: 100%">
+                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
                                         </RadzenLabel>
                                     }
                                     else
@@ -121,17 +122,15 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="UsuarioModificacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @{
                                     var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion);
                                     if (usuario != null)
                                     {
-                                        var usuarioTexto = usuario.Nombre + " " + usuario.Apellido;
-
-                                        <RadzenLabel Text=@usuarioTexto Component="UsuarioModificacion" style="width: 100%">
+                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
                                         </RadzenLabel>
                                     }
                                     else
@@ -146,19 +145,16 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Provincia" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
                     </Columns>
-                    <Template Context="perfil">
-                        <PerfilItem_Crud PerfilId="@(perfil.Id)"></PerfilItem_Crud>
-                    </Template>
                 </RadzenDataGrid>
                 <hr>
             }
 
             if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
             {
-                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Visualizacion.Perfil" Data="@Perfil_entity" @bind-Value="Perfil_entity" Submit="Save" Visible="@(Perfil_entity != null)">
+                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Geografia.Provincia" Data="@Provincia_entity" @bind-Value="Provincia_entity" Submit="Save" Visible="@(Provincia_entity != null)">
                     <ChildContent>
                         @if (crudMode != CrudMode.Add)
                         {
@@ -168,7 +164,7 @@
                                     </RadzenLabel>
                                 </div>
                                 <div class="col-md-9">
-                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Perfil_entity.Id)" Name="Id" Disabled="true">
+                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Provincia_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
                             </div>
@@ -179,7 +175,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Perfil_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Provincia_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
@@ -194,7 +190,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Perfil_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Provincia_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
@@ -205,23 +201,27 @@
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PERFILTIPOID",dataLenguaje) Component="PerfilTipoId" style="width: 100%">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Component="PaisId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                @if ((@PerfilTipo_entities.Count > 0 && @PerfilTipo_entities.FirstOrDefault(c => c.Id == @Perfil_entity.PerfilTipoId) != null) || crudMode != CrudMode.Delete)
+                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@ParametroPaisId"
+                                Data=@Pais_PaisId_entities TextProperty="Nombre" ValueProperty="Id"
+                                Disabled="true" />
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Component="CodigoExterno" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Provincia_entity.CodigoExterno)" Name="CodigoExterno" Disabled="@(crudMode==CrudMode.Delete)">
+                                </RadzenTextBox>
+                                @if (@crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Perfil_entity.PerfilTipoId)"
-                                Data=@PerfilTipo_entities TextProperty="Nombre" ValueProperty="Id"
-                                Change=@(args => SelectPerfilTipoValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
-                                }
-                                else
-                                {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
-                                Data=@PerfilTipo_entities TextProperty="Nombre" ValueProperty="Id"
-                                Change=@(args => SelectPerfilTipoValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
+                                    <RadzenRequiredValidator Component="CodigoExterno" Text="CodigoExterno is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
                                 }
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                             </div>
                             <div class="col-md-9">
-                                <RadzenCheckBox @bind-Value=@Perfil_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Perfil_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                                <RadzenCheckBox @bind-Value=@Provincia_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Provincia_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
                             </div>
                         </div>
                         <div class="row">
@@ -260,6 +260,11 @@ else
 }
 
 @code {
+    [Parameter]
+    public string PaisId { get; set; }
+
+    private Int64 ParametroPaisId;
+
     /// <summary>
     /// Crud Mode Enum
     /// </summary>
@@ -273,15 +278,14 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private Depositary.Entities.Tables.Visualizacion.Perfil Perfil_entity = new();
-    private List<Depositary.Entities.Tables.Visualizacion.Perfil> Perfil_entities = null;
-
-    private List<Depositary.Entities.Tables.Visualizacion.Perfil> rowsPerfilesExpandidos = new List<Depositary.Entities.Tables.Visualizacion.Perfil>();
+    private Depositary.Entities.Tables.Geografia.Provincia Provincia_entity = new();
+    private List<Depositary.Entities.Tables.Geografia.Provincia> Provincia_entities = null;
 
     /// <summary>
-    /// Variables to multilanguaje
+    /// Variables to store multilanguaje
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
+
 
     /// <summary>
     /// Variables to store permissions
@@ -289,15 +293,15 @@ else
     private List<SeguridadEntities.FuncionRol> dataFunciones;
 
     /// <summary>
-    /// Variables to handle Relation between Perfil.PerfilTipoId and PerfilTipo.Id
+    /// Variables to handle Relation between Provincia.PaisId and Pais.Id
     /// </summary>
-    private Depositary.Entities.Tables.Visualizacion.PerfilTipo PerfilTipo_entity = new();
-    private List<Depositary.Entities.Tables.Visualizacion.PerfilTipo>? PerfilTipo_entities;
-    private List<Depositary.Entities.Tables.Visualizacion.PerfilTipo> PerfilTipo_PerfilTipoId_filter;
-    private IEnumerable<Int64> selectedFilter_PerfilTipoId;
+    private Depositary.Entities.Tables.Geografia.Pais Pais_PaisId_entity = new();
+    private List<Depositary.Entities.Tables.Geografia.Pais>? Pais_PaisId_entities;
+    private List<Depositary.Entities.Tables.Geografia.Pais> Pais_PaisId_filter;
+    private IEnumerable<Int64> selectedFilter_PaisId;
 
     /// <summary>
-    /// Variables to handle Relation between Cuenta.UsuarioCreacion and Usuario.Id
+    /// Variables to handle Relation between Provincia.UsuarioCreacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
@@ -305,7 +309,7 @@ else
     private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
 
     /// <summary>
-    /// Variables to handle Relation between Cuenta.UsuarioModificacion and Usuario.Id
+    /// Variables to handle Relation between Provincia.UsuarioModificacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
@@ -324,6 +328,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        ParametroPaisId = Int64.Parse(PaisId);
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
@@ -338,25 +343,27 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        Depositary.Business.Tables.Visualizacion.Perfil entity = new();
-        Perfil_entities = entity.Items();
+        Depositary.Business.Tables.Geografia.Provincia entity = new();
+        entity.Where.Add(Business.Tables.Geografia.Provincia.ColumnEnum.PaisId, sqlEnum.OperandEnum.Equal, ParametroPaisId);
+        Provincia_entities = entity.Items();
     }
     /// <summary>
     /// Loads Type Tables data
     /// </summary>
     private void LoadTypesData()
     {
-        Depositary.Business.Tables.Visualizacion.PerfilTipo PerfilTipo_local = new();
-        PerfilTipo_entities = PerfilTipo_local.Items();
-        PerfilTipo_PerfilTipoId_filter = PerfilTipo_entities.Where(x => Perfil_entities.Select(x => x.PerfilTipoId).Distinct().Contains(x.Id)).ToList();
+        Depositary.Business.Tables.Geografia.Pais Pais_PaisId_local = new();
+        Pais_PaisId_entities = Pais_PaisId_local.Items();
+        Pais_PaisId_filter = Pais_PaisId_entities.Where(x => Provincia_entities.Select(x => x.PaisId).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
-        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Perfil_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Provincia_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
         Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
-        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => Perfil_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => Provincia_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
+
     }
 
     #endregion
@@ -367,23 +374,38 @@ else
     private void Add()
     {
         //Main entity initialization
-        Perfil_entity = new();
+        Provincia_entity = new();
         //Relations entities initialization
-        PerfilTipo_entity = new();
+        Pais_PaisId_entity = new();
+        Usuario_UsuarioCreacion_entity = new();
+        Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
     }
     /// <summary>
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(Depositary.Entities.Tables.Visualizacion.Perfil item, bool delete)
+    private void Edit(Depositary.Entities.Tables.Geografia.Provincia item, bool delete)
     {
-        Perfil_entity = item;
-        PerfilTipo_entity = new()
+        Provincia_entity = item;
+        Pais_PaisId_entity = new()
             {
-                Id = PerfilTipo_entities.FirstOrDefault(c => c.Id == Perfil_entity.PerfilTipoId).Id,
-                Nombre = PerfilTipo_entities.FirstOrDefault(c => c.Id == Perfil_entity.PerfilTipoId).Nombre
+                Id = Pais_PaisId_entities.FirstOrDefault(c => c.Id == Provincia_entity.PaisId).Id,
+                Nombre = Pais_PaisId_entities.FirstOrDefault(c => c.Id == Provincia_entity.PaisId).Nombre
             };
+        Usuario_UsuarioCreacion_entity = new()
+            {
+                Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Provincia_entity.UsuarioCreacion).Id,
+                Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Provincia_entity.UsuarioCreacion).Nombre
+            };
+        if (Usuario_UsuarioModificacion_entities.Exists(c => c.Id == Provincia_entity.UsuarioModificacion))
+        {
+            Usuario_UsuarioModificacion_entity = new()
+                {
+                    Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Provincia_entity.UsuarioModificacion).Id,
+                    Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Provincia_entity.UsuarioModificacion).Nombre
+                };
+        }
         if (delete)
             crudMode = CrudMode.Delete;
         else
@@ -397,41 +419,42 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        Depositary.Business.Tables.Visualizacion.Perfil crud = new();
-        foreach (var property in Perfil_entity.GetType().GetProperties())
+        Depositary.Business.Tables.Geografia.Provincia crud = new();
+        Provincia_entity.PaisId = ParametroPaisId;
+        foreach (var property in Provincia_entity.GetType().GetProperties())
         {
             switch (property.Name)
             {
                 case "FechaModificacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        Perfil_entity.FechaModificacion = null;
+                        Provincia_entity.FechaModificacion = null;
                     }
                     else
                     {
-                        Perfil_entity.FechaModificacion = DateTime.Now;
+                        Provincia_entity.FechaModificacion = DateTime.Now;
                     }
                     break;
                 case "FechaCreacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        Perfil_entity.FechaCreacion = DateTime.Now;
+                        Provincia_entity.FechaCreacion = DateTime.Now;
                     }
                     break;
                 case "UsuarioCreacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        Perfil_entity.UsuarioCreacion = dataUsuario.Id;
+                        Provincia_entity.UsuarioCreacion = dataUsuario.Id;
                     }
                     break;
                 case "UsuarioModificacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        Perfil_entity.UsuarioModificacion = null;
+                        Provincia_entity.UsuarioModificacion = null;
                     }
                     else
                     {
-                        Perfil_entity.UsuarioModificacion = dataUsuario.Id;
+                        Provincia_entity.UsuarioModificacion = dataUsuario.Id;
                     }
                     break;
             }
@@ -441,7 +464,7 @@ else
             case CrudMode.Add:
                 try
                 {
-                    crud.Add(Perfil_entity);
+                    crud.Add(Provincia_entity);
                     summary = "El registro se ha ";
                     actionInformation = "agregado.";
                     severityType = NotificationSeverity.Success;
@@ -456,7 +479,7 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(Perfil_entity);
+                    crud.Update(Provincia_entity);
                     summary = "El registro se ha ";
                     actionInformation = "modificado.";
                     severityType = NotificationSeverity.Success;
@@ -471,8 +494,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                    Perfil_entity.Habilitado = false;
-                    crud.Update(Perfil_entity);
+                    Provincia_entity.Habilitado = false;
+                    crud.Update(Provincia_entity);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;
@@ -499,33 +522,6 @@ else
 
         await Task.Run(LoadMainEntityData);
     }
-
-    #region Grid events
-
-    protected async Task expandirPerfil(Depositary.Entities.Tables.Visualizacion.Perfil args)
-    {
-        rowsPerfilesExpandidos.Add(args);
-    }
-
-    protected async Task colapsarPerfil(Depositary.Entities.Tables.Visualizacion.Perfil args)
-    {
-        rowsPerfilesExpandidos.RemoveAll(x => x.Id == args.Id);
-    }
-
-    void perfilRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Visualizacion.Perfil> args)
-    {
-        if (rowsPerfilesExpandidos.Where(x => x.Id == args.Data.Id).ToList().Count > 0)
-        {
-            args.Attributes.Add("class", "row-highlight");
-        }
-        else
-        {
-            args.Attributes.Add("class", "rz-datatable-even");
-        }
-    }
-
-    #endregion
-
     /// <summary>
     /// Crud mode cancellation and default mode
     /// </summary>
@@ -563,34 +559,51 @@ else
     }
 
     #endregion
+
+    #region Grid events
+
+    private void ObtenerCiudades(Depositary.Entities.Tables.Geografia.Provincia item)
+    {
+        NavManager.NavigateTo("GeografiaCiudadCustomCrud/" + item.Id, true);
+    }
+
+    void ProvinciaCellRender(DataGridCellRenderEventArgs<Depositary.Entities.Tables.Geografia.Provincia> args)
+    {
+        if (args.Column.Property == "PaisId")
+        {
+            args.Attributes.Add("style", $"background-color: orange;");
+        }
+    }
+
+    #endregion
+
     #region Selection events
     /// <summary>
-    /// PerfilTipo value changed
+    /// Pais_PaisId value changed
     /// </summary>
     /// <param name="item"></param>
-    private void SelectPerfilTipoValueChanged(object item)
+    private void SelectPais_PaisIdValueChanged(object item)
     {
     }
 
     /// <summary>
-    /// Entity is binded, however it sets anyway.
-    /// </summary>
-    /// <returns></returns>
-    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Visualizacion.Perfil item)
-    {
-        Perfil_entity = item;
-    }
-
-    /// <summary>
-    /// selectedFilter_PerfilTipoId value changed
+    /// selectedFilter_PaisId value changed
     /// </summary>
     /// <param name="item"></param>
-    private void OnSelectedFilter_PerfilTipoId_Changed(object value)
+    private void OnSelectedFilter_PaisId_Changed(object value)
     {
-        if (selectedFilter_PerfilTipoId != null && !selectedFilter_PerfilTipoId.Any())
+        if (selectedFilter_PaisId != null && !selectedFilter_PaisId.Any())
         {
-            selectedFilter_PerfilTipoId = null;
+            selectedFilter_PaisId = null;
         }
+    }
+
+    /// <summary>
+    /// Usuario_UsuarioCreacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectUsuario_UsuarioCreacionValueChanged(object item)
+    {
     }
 
     /// <summary>
@@ -606,6 +619,14 @@ else
     }
 
     /// <summary>
+    /// Usuario_UsuarioModificacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectUsuario_UsuarioModificacionValueChanged(object item)
+    {
+    }
+
+    /// <summary>
     /// selectedFilter_UsuarioModificacion value changed
     /// </summary>
     /// <param name="item"></param>
@@ -615,6 +636,15 @@ else
         {
             selectedFilter_UsuarioModificacion = null;
         }
+    }
+
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Geografia.Provincia item)
+    {
+        Provincia_entity = item;
     }
     #endregion
 

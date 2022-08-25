@@ -97,7 +97,8 @@
                             {
                                 try
                                 {
-                                    oAgendaTurno.Add(pAgendaTurnoABM.NombreAgenda, esquemaDetalle.Id, auxFecha, sector.SectorId, esquemaDetalle.Secuencia, pAgendaTurnoABM.UsuarioId, DateTime.Now, null, null, true);
+                                    DateTime fechaTurno = new(auxFecha.Year, auxFecha.Month, auxFecha.Day, 0, 0, 0);
+                                    oAgendaTurno.Add(pAgendaTurnoABM.NombreAgenda, esquemaDetalle.Id, fechaTurno, sector.SectorId, esquemaDetalle.Secuencia, pAgendaTurnoABM.UsuarioId, DateTime.Now, null, null, true);
                                 }
                                 catch (Exception ex)
                                 {

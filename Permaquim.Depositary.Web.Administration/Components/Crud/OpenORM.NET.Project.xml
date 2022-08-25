@@ -22,6 +22,7 @@
   <SelectedViews />
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
+    <string>dbo.FinalizarPrimeraSincronizacion</string>
     <string>dbo.fn_diagramobjects</string>
     <string>dbo.sp_alterdiagram</string>
     <string>dbo.sp_creatediagram</string>
@@ -52,12 +53,10 @@
   </UnselectedStoredProcedures>
   <MappedStoredProcedures />
   <SelectedTables>
+    <string>Aplicacion.Configuracion</string>
     <string>Banca.Banco</string>
     <string>Banca.Cuenta</string>
     <string>Banca.TipoCuenta</string>
-    <string>Directorio.Empresa</string>
-    <string>Directorio.Grupo</string>
-    <string>Directorio.Sector</string>
     <string>Dispositivo.ComandoContadora</string>
     <string>Dispositivo.ComandoPlaca</string>
     <string>Dispositivo.ConfiguracionDepositario</string>
@@ -67,11 +66,9 @@
     <string>Dispositivo.TipoContadora</string>
     <string>Dispositivo.TipoPlaca</string>
     <string>Estilo.TipoEsquemaDetalle</string>
-    <string>Geografia.Ciudad</string>
-    <string>Geografia.CodigoPostal</string>
-    <string>Geografia.Pais</string>
-    <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
+    <string>Impresion.Ticket</string>
+    <string>Impresion.TipoTicket</string>
     <string>Operacion.Contenedor</string>
     <string>Operacion.TipoContenedor</string>
     <string>Operacion.TipoEvento</string>
@@ -84,6 +81,7 @@
     <string>Seguridad.TipoMenu</string>
     <string>Sincronizacion.Configuracion</string>
     <string>Sincronizacion.Entidad</string>
+    <string>Valor.OrigenValor</string>
     <string>Valor.RelacionMonedaTipoValor</string>
     <string>Valor.Tipo</string>
   </SelectedTables>

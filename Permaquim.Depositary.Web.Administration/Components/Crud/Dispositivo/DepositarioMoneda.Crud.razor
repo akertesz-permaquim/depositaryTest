@@ -86,8 +86,23 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_DepositarioId Data="@Depositario_DepositarioId_filter" Change="OnSelectedFilter_DepositarioId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="MonedaId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Property="MonedaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_MonedaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                 <Template>
+                     @if(Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @context.MonedaId) != null){
+                         <RadzenLabel Text="@Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @context.MonedaId).Nombre" Component="MonedaId" style="width: 100%">
+                             </RadzenLabel>
+                         }
+                         else
+                         {
+                         <RadzenLabel Text="No data available" Component="MonedaId" style="width: 100%">
+                             </RadzenLabel>                        
+                         }
+                 </Template>
+                 <FilterTemplate>
+                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                     <RadzenDropDown @bind-Value=@selectedFilter_MonedaId Data="@Moneda_MonedaId_filter" Change="OnSelectedFilter_MonedaId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
+                 </FilterTemplate>
+             </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="IndiceEnContadora" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
@@ -186,16 +201,28 @@
                     }
                 </div>
               </div>
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Component="MonedaId" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                     <div class="col-md-9">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioMoneda_entity.MonedaId)" Name="MonedaId" Disabled="@(crudMode==CrudMode.Delete)" >
-                     </RadzenNumeric>
-                     </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Component ="MonedaId" style="width: 100%">
+                 </RadzenLabel>
                  </div>
+                 <div class="col-md-9">
+                     @if((@Moneda_MonedaId_entities.Count > 0 && @Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @DepositarioMoneda_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioMoneda_entity.MonedaId)"
+                                     Data=@Moneda_MonedaId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectMoneda_MonedaIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                     }
+                     else
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                     Data=@Moneda_MonedaId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectMoneda_MonedaIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                    }
+                </div>
+              </div>
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
                          <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Component="IndiceEnContadora" style="width: 100%">
@@ -277,6 +304,14 @@ else
     private IEnumerable<Int64> selectedFilter_DepositarioId;
  
     /// <summary>
+    /// Variables to handle Relation between DepositarioMoneda.MonedaId and Moneda.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Valor.Moneda Moneda_MonedaId_entity = new();
+    private List<Depositary.Entities.Tables.Valor.Moneda>? Moneda_MonedaId_entities;
+    private List<Depositary.Entities.Tables.Valor.Moneda> Moneda_MonedaId_filter;
+    private IEnumerable<Int64> selectedFilter_MonedaId;
+ 
+    /// <summary>
     /// Variables to handle Relation between DepositarioMoneda.UsuarioCreacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
@@ -330,6 +365,10 @@ else
         Depositario_DepositarioId_entities = Depositario_DepositarioId_local.Items();
         Depositario_DepositarioId_filter = Depositario_DepositarioId_entities.Where(x => DepositarioMoneda_entities.Select(x => x.DepositarioId).Distinct().Contains(x.Id)).ToList();
  
+        Depositary.Business.Tables.Valor.Moneda Moneda_MonedaId_local = new();
+        Moneda_MonedaId_entities = Moneda_MonedaId_local.Items();
+        Moneda_MonedaId_filter = Moneda_MonedaId_entities.Where(x => DepositarioMoneda_entities.Select(x => x.MonedaId).Distinct().Contains(x.Id)).ToList();
+ 
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
         Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => DepositarioMoneda_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
@@ -351,6 +390,7 @@ else
         DepositarioMoneda_entity = new();
         //Relations entities initialization
         Depositario_DepositarioId_entity = new(); 
+        Moneda_MonedaId_entity = new(); 
         Usuario_UsuarioCreacion_entity = new(); 
         Usuario_UsuarioModificacion_entity = new(); 
         crudMode = CrudMode.Add;
@@ -365,6 +405,10 @@ else
             Depositario_DepositarioId_entity = new() { 
             Id = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == DepositarioMoneda_entity.DepositarioId).Id, 
             Nombre = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == DepositarioMoneda_entity.DepositarioId).Nombre
+            };
+            Moneda_MonedaId_entity = new() { 
+            Id = Moneda_MonedaId_entities.FirstOrDefault(c => c.Id == DepositarioMoneda_entity.MonedaId).Id, 
+            Nombre = Moneda_MonedaId_entities.FirstOrDefault(c => c.Id == DepositarioMoneda_entity.MonedaId).Nombre
             };
             Usuario_UsuarioCreacion_entity = new() { 
             Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == DepositarioMoneda_entity.UsuarioCreacion).Id, 
@@ -545,6 +589,26 @@ else
          if(selectedFilter_DepositarioId!=null && !selectedFilter_DepositarioId.Any())
          {
              selectedFilter_DepositarioId=null;
+         }
+    }
+ 
+    /// <summary>
+    /// Moneda_MonedaId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectMoneda_MonedaIdValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// selectedFilter_MonedaId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_MonedaId_Changed(object value)
+    {
+         if(selectedFilter_MonedaId!=null && !selectedFilter_MonedaId.Any())
+         {
+             selectedFilter_MonedaId=null;
          }
     }
  

@@ -1,14 +1,14 @@
+@page "/AplicacionConfiguracionEmpresaCustomCrud"
 @using Permaquim.Depositary.Web.Administration.Controllers;
-
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
 @if (dataFunciones != null)
 {
-    @if (SeguridadController.VerificarPermisoFuncion("RegionalizacionLenguajeItem", dataFunciones, "PuedeVisualizar"))
+    @if (SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionEmpresa", dataFunciones, "PuedeVisualizar"))
     {
-        @if (LenguajeItem_entities == null)
+        @if (ConfiguracionEmpresa_entities == null)
         {
             <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
         }
@@ -19,21 +19,21 @@
                 case CrudMode.Add:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Regionalizacion.LenguajeItem",dataLenguaje)</h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Aplicacion.ConfiguracionEmpresa",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Delete:
                     <RadzenBadge BadgeStyle="BadgeStyle.Warning">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Regionalizacion.LenguajeItem",dataLenguaje)</h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Aplicacion.ConfiguracionEmpresa",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
                 case CrudMode.Edit:
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Regionalizacion.LenguajeItem",dataLenguaje)</h4>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Aplicacion.ConfiguracionEmpresa",dataLenguaje)</h4>
                         </ChildContent>
                     </RadzenBadge>
                     break;
@@ -41,7 +41,7 @@
                     <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                         <ChildContent>
                             <div>
-                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Regionalizacion.LenguajeItem",dataLenguaje)</h4>
+                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Aplicacion.ConfiguracionEmpresa",dataLenguaje)</h4>
                             </div>
                         </ChildContent>
                     </RadzenBadge>
@@ -50,60 +50,60 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@LenguajeItem_entities" TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+                <RadzenDataGrid AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@ConfiguracionEmpresa_entities" TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
                     </EmptyTemplate>
                     <Columns>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                             <HeaderTemplate>
-                                <RadzenButton Icon="add_circle_outline" Disabled="@(!EsDefault)" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("RegionalizacionLenguajeItem",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
+                                <RadzenButton Disabled="@(!EsDefault)" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionEmpresa",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                                 </RadzenButton>
                             </HeaderTemplate>
                             <Template Context="element">
-                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("RegionalizacionLenguajeItem",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionEmpresa",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                                 </RadzenButton>
-                                <RadzenButton Icon="delete" Disabled="@(!EsDefault)" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("RegionalizacionLenguajeItem",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                                <RadzenButton Icon="delete" Disabled="@(!EsDefault)" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionEmpresa",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                                 </RadzenButton>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn Visible="false" Pickable="false" TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Title=@MultilenguajeController.ObtenerTextoPorClave("LENGUAJEID",dataLenguaje) Property="LenguajeId" Width="100px">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Title=@MultilenguajeController.ObtenerTextoPorClave("EMPRESAID",dataLenguaje) Property="EmpresaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_EmpresaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
-                                @if (Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @context.LenguajeId) != null)
+                                @if (Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == @context.EmpresaId) != null)
                                 {
-                                    <RadzenLabel Text="@Lenguaje_LenguajeId_entities.FirstOrDefault( c => c.Id == @context.LenguajeId).Nombre" Component="LenguajeId" style="width: 100%">
+                                    <RadzenLabel Text="@Empresa_EmpresaId_entities.FirstOrDefault( c => c.Id == @context.EmpresaId).Nombre" Component="EmpresaId" style="width: 100%">
                                     </RadzenLabel>
                                 }
                                 else
                                 {
-                                    <RadzenLabel Text="No data available" Component="LenguajeId" style="width: 100%">
+                                    <RadzenLabel Text="No data available" Component="EmpresaId" style="width: 100%">
                                     </RadzenLabel>
                                 }
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_EmpresaId Data="@Empresa_EmpresaId_filter" Change="OnSelectedFilter_EmpresaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Clave" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Clave" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Texto" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("TEXTO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Valor" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="LargoMaximo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("LARGOMAXIMO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @{
                                     var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
                                     if (usuario != null)
                                     {
-                                        var usuarioTexto = usuario.Nombre + " " + usuario.Apellido;
-
-                                        <RadzenLabel Text=@usuarioTexto Component="UsuarioCreacion" style="width: 100%">
+                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
                                         </RadzenLabel>
                                     }
                                     else
@@ -118,17 +118,15 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.Or">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @{
                                     var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion);
                                     if (usuario != null)
                                     {
-                                        var usuarioTexto = usuario.Nombre + " " + usuario.Apellido;
-
-                                        <RadzenLabel Text=@usuarioTexto Component="UsuarioModificacion" style="width: 100%">
+                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
                                         </RadzenLabel>
                                     }
                                     else
@@ -143,7 +141,7 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
                     </Columns>
                 </RadzenDataGrid>
@@ -152,7 +150,7 @@
 
             if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
             {
-                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Data="@LenguajeItem_entity" @bind-Value="LenguajeItem_entity" Submit="Save" Visible="@(LenguajeItem_entity != null)">
+                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Data="@ConfiguracionEmpresa_entity" @bind-Value="ConfiguracionEmpresa_entity" Submit="Save" Visible="@(ConfiguracionEmpresa_entity != null)">
                     <ChildContent>
                         @if (crudMode != CrudMode.Add)
                         {
@@ -162,19 +160,19 @@
                                     </RadzenLabel>
                                 </div>
                                 <div class="col-md-9">
-                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.Id)" Name="Id" Disabled="true">
+                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(ConfiguracionEmpresa_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
                             </div>
                         }
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LENGUAJEID",dataLenguaje) Component="LenguajeId" style="width: 100%">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("EMPRESAID",dataLenguaje) Component="EmpresaId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@LenguajeId"
-                                Data=@Lenguaje_LenguajeId_entities TextProperty="Nombre" ValueProperty="Id"
+                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@EmpresaId"
+                                Data=@Empresa_EmpresaId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
                             </div>
                         </div>
@@ -184,7 +182,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(LenguajeItem_entity.Clave)" Name="Clave" Disabled="@(crudMode==CrudMode.Delete || !EsDefault)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(ConfiguracionEmpresa_entity.Clave)" Name="Clave" Disabled="@(crudMode == CrudMode.Delete || !EsDefault)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
@@ -195,15 +193,15 @@
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TEXTO",dataLenguaje) Component="Texto" style="width: 100%">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje) Component="Valor" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(LenguajeItem_entity.Texto)" Name="Texto" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(ConfiguracionEmpresa_entity.Valor)" Name="Valor" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenRequiredValidator Component="Texto" Text="Texto is required" Style="position: absolute">
+                                    <RadzenRequiredValidator Component="Valor" Text="Valor is required" Style="position: absolute">
                                     </RadzenRequiredValidator>
                                 }
                             </div>
@@ -213,17 +211,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                             </div>
                             <div class="col-md-9">
-                                <RadzenCheckBox @bind-Value=@LenguajeItem_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @LenguajeItem_entity)) Disabled="@(crudMode == CrudMode.Delete || !EsDefault)" />
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LARGOMAXIMO",dataLenguaje) Component="LargoMaximo" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col-md-9">
-                                <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.LargoMaximo)" Name="LargoMaximo" Disabled="@(crudMode==CrudMode.Delete)">
-                                </RadzenNumeric>
+                                <RadzenCheckBox @bind-Value=@ConfiguracionEmpresa_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @ConfiguracionEmpresa_entity)) Disabled="@(crudMode == CrudMode.Delete || !EsDefault)" />
                             </div>
                         </div>
                         <div class="row">
@@ -253,6 +241,11 @@ else
 }
 
 @code {
+    [Parameter]
+    public Int64 EmpresaId { get; set; }
+
+    [Parameter]
+    public bool EsDefault { get; set; }
     /// <summary>
     /// Crud Mode Enum
     /// </summary>
@@ -263,14 +256,15 @@ else
         Edit,
         Delete
     }
+
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private Depositary.Entities.Tables.Regionalizacion.LenguajeItem LenguajeItem_entity = new();
-    private List<Depositary.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItem_entities = null;
+    private Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa ConfiguracionEmpresa_entity = new();
+    private List<Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ConfiguracionEmpresa_entities = null;
 
     /// <summary>
-    /// Variables to multilanguaje
+    /// Variables to store multilanguaje
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
 
@@ -280,26 +274,28 @@ else
     private List<SeguridadEntities.FuncionRol> dataFunciones;
 
     /// <summary>
-    /// Variables to handle Relation between LenguajeItem.LenguajeId and Lenguaje.Id
+    /// Variables to handle Relation between ConfiguracionEmpresa.EmpresaId and Empresa.Id
     /// </summary>
-    private Depositary.Entities.Tables.Regionalizacion.Lenguaje Lenguaje_LenguajeId_entity = new();
-    private List<Depositary.Entities.Tables.Regionalizacion.Lenguaje>? Lenguaje_LenguajeId_entities;
+    private Depositary.Entities.Tables.Directorio.Empresa Empresa_EmpresaId_entity = new();
+    private List<Depositary.Entities.Tables.Directorio.Empresa>? Empresa_EmpresaId_entities;
+    private List<Depositary.Entities.Tables.Directorio.Empresa> Empresa_EmpresaId_filter;
+    private IEnumerable<Int64> selectedFilter_EmpresaId;
+
+    /// <summary>
+    /// Variables to handle Relation between ConfiguracionEmpresa.UsuarioCreacion and Usuario.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
     private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioCreacion_filter;
     private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
 
     /// <summary>
-    /// Variables to handle Relation between LenguajeItem.UsuarioCreacion and Usuario.Id
-    /// </summary>
-    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
-    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
-    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
-    private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
-
-    /// <summary>
-    /// Variables to handle Relation between LenguajeItem.UsuarioModificacion and Usuario.Id
+    /// Variables to handle Relation between ConfiguracionEmpresa.UsuarioModificacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
+    private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
 
     /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
@@ -310,12 +306,6 @@ else
     ///  Variable to store the user id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
-
-    [Parameter]
-    public Int64 LenguajeId { get; set; }
-
-    [Parameter]
-    public bool EsDefault { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -333,50 +323,52 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        Depositary.Business.Tables.Regionalizacion.LenguajeItem entity = new Depositary.Business.Tables.Regionalizacion.LenguajeItem();
-        entity.Where.Add(Depositary.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId, Depositary.sqlEnum.OperandEnum.Equal, LenguajeId);
-        LenguajeItem_entities = entity.Items();
+        Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa entity = new();
+        entity.Where.Add(Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, EmpresaId);
+        ConfiguracionEmpresa_entities = entity.Items();
     }
     /// <summary>
     /// Loads Type Tables data
     /// </summary>
     private void LoadTypesData()
     {
-        Depositary.Business.Tables.Regionalizacion.Lenguaje Lenguaje_LenguajeId_local = new();
-        Lenguaje_LenguajeId_entities = Lenguaje_LenguajeId_local.Items();
+        Depositary.Business.Tables.Directorio.Empresa Empresa_EmpresaId_local = new();
+        Empresa_EmpresaId_entities = Empresa_EmpresaId_local.Items();
+        Empresa_EmpresaId_filter = Empresa_EmpresaId_entities.Where(x => ConfiguracionEmpresa_entities.Select(x => x.EmpresaId).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
-        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => LenguajeItem_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => ConfiguracionEmpresa_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
         Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
-        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => LenguajeItem_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => ConfiguracionEmpresa_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
+
     }
 
     #endregion
 
-        private List<Depositary.Entities.Tables.Regionalizacion.Lenguaje> ObtenerLenguajesRestantes()
+    private List<Depositary.Entities.Tables.Directorio.Empresa> ObtenerEmpresasConfiguracionRestantes()
     {
-        List<Depositary.Entities.Tables.Regionalizacion.Lenguaje> resultado = new();
+        List<Depositary.Entities.Tables.Directorio.Empresa> resultado = new();
 
-        Depositary.Business.Tables.Regionalizacion.Lenguaje oLenguaje = new();
-        oLenguaje.Where.Add(Depositary.Business.Tables.Regionalizacion.Lenguaje.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.NotEqual, LenguajeId);
+        Depositary.Business.Tables.Directorio.Empresa oEmpresa = new();
+        oEmpresa.Where.Add(Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.NotEqual, EmpresaId);
 
-        resultado = oLenguaje.Items();
+        resultado = oEmpresa.Items();
 
         return resultado;
     }
 
-    private List<Depositary.Entities.Tables.Regionalizacion.LenguajeItem> ObtenerItemsLenguajes(string Clave, Int64 pLenguajeItemId)
+    private List<Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ObtenerRegistrosDeConfiguracionPorClaveRestantes(string Clave)
     {
-        List<Depositary.Entities.Tables.Regionalizacion.LenguajeItem> resultado = new();
+        List<Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa> resultado = new();
 
-        Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new();
-        oLenguajeItem.Where.Add(Depositary.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.NotEqual, pLenguajeItemId);
-        oLenguajeItem.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Equal, Clave);
+        Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
+        oConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.NotEqual, EmpresaId);
+        oConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Equal, Clave);
 
-        resultado = oLenguajeItem.Items();
+        resultado = oConfiguracionEmpresa.Items();
 
         return resultado;
     }
@@ -387,9 +379,9 @@ else
     private void Add()
     {
         //Main entity initialization
-        LenguajeItem_entity = new();
+        ConfiguracionEmpresa_entity = new();
         //Relations entities initialization
-        Lenguaje_LenguajeId_entity = new();
+        Empresa_EmpresaId_entity = new();
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
@@ -398,25 +390,25 @@ else
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(Depositary.Entities.Tables.Regionalizacion.LenguajeItem item, bool delete)
+    private void Edit(Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa item, bool delete)
     {
-        LenguajeItem_entity = item;
-        Lenguaje_LenguajeId_entity = new()
+        ConfiguracionEmpresa_entity = item;
+        Empresa_EmpresaId_entity = new()
             {
-                Id = Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.LenguajeId).Id,
-                Nombre = Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.LenguajeId).Nombre
+                Id = Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == ConfiguracionEmpresa_entity.EmpresaId).Id,
+                Nombre = Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == ConfiguracionEmpresa_entity.EmpresaId).Nombre
             };
         Usuario_UsuarioCreacion_entity = new()
             {
-                Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.UsuarioCreacion).Id,
-                Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.UsuarioCreacion).Nombre
+                Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == ConfiguracionEmpresa_entity.UsuarioCreacion).Id,
+                Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == ConfiguracionEmpresa_entity.UsuarioCreacion).Nombre
             };
-        if (Usuario_UsuarioModificacion_entities.Exists(c => c.Id == LenguajeItem_entity.UsuarioModificacion))
+        if (Usuario_UsuarioModificacion_entities.Exists(c => c.Id == ConfiguracionEmpresa_entity.UsuarioModificacion))
         {
             Usuario_UsuarioModificacion_entity = new()
                 {
-                    Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.UsuarioModificacion).Id,
-                    Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == LenguajeItem_entity.UsuarioModificacion).Nombre
+                    Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == ConfiguracionEmpresa_entity.UsuarioModificacion).Id,
+                    Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == ConfiguracionEmpresa_entity.UsuarioModificacion).Nombre
                 };
         }
         if (delete)
@@ -432,48 +424,46 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        Depositary.Business.Tables.Regionalizacion.LenguajeItem crud = new();
-        foreach (var property in LenguajeItem_entity.GetType().GetProperties())
+        Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa crud = new();
+        ConfiguracionEmpresa_entity.EmpresaId = EmpresaId;
+        foreach (var property in ConfiguracionEmpresa_entity.GetType().GetProperties())
         {
             switch (property.Name)
             {
                 case "FechaModificacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        LenguajeItem_entity.FechaModificacion = null;
+                        ConfiguracionEmpresa_entity.FechaModificacion = null;
                     }
                     else
                     {
-                        LenguajeItem_entity.FechaModificacion = DateTime.Now;
+                        ConfiguracionEmpresa_entity.FechaModificacion = DateTime.Now;
                     }
                     break;
                 case "FechaCreacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        LenguajeItem_entity.FechaCreacion = DateTime.Now;
+                        ConfiguracionEmpresa_entity.FechaCreacion = DateTime.Now;
                     }
                     break;
                 case "UsuarioCreacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        LenguajeItem_entity.UsuarioCreacion = dataUsuario.Id;
+                        ConfiguracionEmpresa_entity.UsuarioCreacion = dataUsuario.Id;
                     }
                     break;
                 case "UsuarioModificacion":
                     if (crudMode == CrudMode.Add)
                     {
-                        LenguajeItem_entity.UsuarioModificacion = null;
+                        ConfiguracionEmpresa_entity.UsuarioModificacion = null;
                     }
                     else
                     {
-                        LenguajeItem_entity.UsuarioModificacion = dataUsuario.Id;
+                        ConfiguracionEmpresa_entity.UsuarioModificacion = dataUsuario.Id;
                     }
                     break;
             }
         }
-
-        LenguajeItem_entity.LenguajeId = LenguajeId;
-
         switch (crudMode)
         {
             case CrudMode.Add:
@@ -483,30 +473,29 @@ else
                     //crud.BeginTransaction();
                     try
                     {
+                        crud.Add(ConfiguracionEmpresa_entity);
 
-                        crud.Add(LenguajeItem_entity);
 
-                        //Obtenemos los ID de todos los lenguajes existentes (salvo este) e insertamos el registro en ellos
-                        var lenguajesRestantes = ObtenerLenguajesRestantes();
+                        //Obtenemos los ID de todas las empresas existentes (salvo este) e insertamos el registro de configuracion en ellas
+                        var empresasConfiguracionRestantes = ObtenerEmpresasConfiguracionRestantes();
 
-                        if (lenguajesRestantes.Count > 0)
+                        if (empresasConfiguracionRestantes.Count > 0)
                         {
-                            foreach (var lenguaje in lenguajesRestantes)
+                            foreach (var empresa in empresasConfiguracionRestantes)
                             {
-                                Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new();
-                                LenguajeItem_entity.LenguajeId = lenguaje.Id;
-                                oLenguajeItem.Add(LenguajeItem_entity);
+                                Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
+                                ConfiguracionEmpresa_entity.EmpresaId = empresa.Id;
+                                oConfiguracionEmpresa.Add(ConfiguracionEmpresa_entity);
                             }
                         }
 
                         //crud.EndTransaction(true);
                         summary = "El registro se ha ";
-                        actionInformation = "agregado a este lenguaje y a los restantes.";
+                        actionInformation = "agregado.";
                         severityType = NotificationSeverity.Success;
                     }
                     catch (Exception ex)
                     {
-                        //crud.EndTransaction(false);
                         summary = "Error al procesar.";
                         actionInformation = ex.Message;
                         severityType = NotificationSeverity.Error;
@@ -516,35 +505,35 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    //Si se modifica el lenguaje default se arrastra el cambio (salvo el texto) al resto de los lenguajes
+                    //Si se modifica la configuracion de la empresa default se arrastra el cambio (salvo el valor y la empresa) al resto de las configuraciones de empresa.
                     if (EsDefault)
                     {
-                        crud.Update(LenguajeItem_entity);
+                        crud.Update(ConfiguracionEmpresa_entity);
 
-                        //Obtenemos los ID de todos los items de lenguajes existentes (salvo este)
-                        var itemsLenguajesRestantes = ObtenerItemsLenguajes(LenguajeItem_entity.Clave, LenguajeItem_entity.Id);
+                        //Obtenemos los ID de todas  las empresas existentes (salvo esta)
+                        var empresasConfiguracionRestantes = ObtenerRegistrosDeConfiguracionPorClaveRestantes(ConfiguracionEmpresa_entity.Clave);
 
-                        if (itemsLenguajesRestantes.Count > 0)
+                        if (empresasConfiguracionRestantes.Count > 0)
                         {
-                            foreach (var lenguajeItem in itemsLenguajesRestantes)
+                            foreach (var registroConfiguracionEmpresa in empresasConfiguracionRestantes)
                             {
-                                Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new();
+                                Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
 
-                                lenguajeItem.Clave = LenguajeItem_entity.Clave;
-                                lenguajeItem.FechaModificacion = DateTime.Now;
-                                lenguajeItem.UsuarioModificacion = dataUsuario.Id;
-                                lenguajeItem.Habilitado = LenguajeItem_entity.Habilitado;
-                                oLenguajeItem.Update(lenguajeItem);
+                                registroConfiguracionEmpresa.Clave = ConfiguracionEmpresa_entity.Clave;
+                                registroConfiguracionEmpresa.FechaModificacion = DateTime.Now;
+                                registroConfiguracionEmpresa.UsuarioModificacion = dataUsuario.Id;
+                                registroConfiguracionEmpresa.Habilitado = ConfiguracionEmpresa_entity.Habilitado;
+                                oConfiguracionEmpresa.Update(registroConfiguracionEmpresa);
                             }
                         }
 
                         summary = "El registro se ha ";
-                        actionInformation = "modificado en este lenguaje y en los restantes.";
+                        actionInformation = "modificado en esta empresa y en las restantes.";
                         severityType = NotificationSeverity.Success;
                     }
                     else
                     {
-                        crud.Update(LenguajeItem_entity);
+                        crud.Update(ConfiguracionEmpresa_entity);
                         summary = "El registro se ha ";
                         actionInformation = "modificado.";
                         severityType = NotificationSeverity.Success;
@@ -562,30 +551,30 @@ else
                 {
                     if (EsDefault)
                     {
-                        crud.Update(LenguajeItem_entity);
+                        crud.Update(ConfiguracionEmpresa_entity);
 
-                        //Obtenemos los ID de todos los detalles de esquemas existentes (salvo este)
-                        var itemsLenguajesRestantes = ObtenerItemsLenguajes(LenguajeItem_entity.Clave, LenguajeItem_entity.Id);
+                        //Obtenemos los ID de todas  las empresas existentes (salvo esta)
+                        var empresasConfiguracionRestantes = ObtenerRegistrosDeConfiguracionPorClaveRestantes(ConfiguracionEmpresa_entity.Clave);
 
-                        if (itemsLenguajesRestantes.Count > 0)
+                        if (empresasConfiguracionRestantes.Count > 0)
                         {
-                            foreach (var lenguajeItem in itemsLenguajesRestantes)
+                            foreach (var registroConfiguracionEmpresa in empresasConfiguracionRestantes)
                             {
-                                Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new();
+                                Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
 
-                                lenguajeItem.Habilitado = false;
-                                oLenguajeItem.Update(lenguajeItem);
+                                registroConfiguracionEmpresa.Habilitado = false;
+                                oConfiguracionEmpresa.Update(registroConfiguracionEmpresa);
                             }
                         }
 
                         summary = "El registro se ha ";
-                        actionInformation = "eliminado en este lenguaje y en los restantes.";
+                        actionInformation = "eliminado en esta empresa y en las restantes.";
                         severityType = NotificationSeverity.Success;
                     }
                     else
                     {
-                        LenguajeItem_entity.Habilitado = false;
-                        crud.Update(LenguajeItem_entity);
+                        ConfiguracionEmpresa_entity.Habilitado = false;
+                        crud.Update(ConfiguracionEmpresa_entity);
                         summary = "El registro se ha ";
                         actionInformation = "eliminado.";
                         severityType = NotificationSeverity.Success;
@@ -599,12 +588,6 @@ else
                 }
                 break;
         }
-
-        //Recargamos el set de datos del lenguaje en el session storage.
-        await sessionStorage.RemoveItemAsync("DataLenguaje");
-        dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
-        await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
-        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
 
         // Sets Crud mode to List
         crudMode = CrudMode.List;
@@ -656,13 +639,26 @@ else
     }
 
     #endregion
+
     #region Selection events
     /// <summary>
-    /// Lenguaje_LenguajeId value changed
+    /// Empresa_EmpresaId value changed
     /// </summary>
     /// <param name="item"></param>
-    private void SelectLenguaje_LenguajeIdValueChanged(object item)
+    private void SelectEmpresa_EmpresaIdValueChanged(object item)
     {
+    }
+
+    /// <summary>
+    /// selectedFilter_EmpresaId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_EmpresaId_Changed(object value)
+    {
+        if (selectedFilter_EmpresaId != null && !selectedFilter_EmpresaId.Any())
+        {
+            selectedFilter_EmpresaId = null;
+        }
     }
 
     /// <summary>
@@ -671,23 +667,6 @@ else
     /// <param name="item"></param>
     private void SelectUsuario_UsuarioCreacionValueChanged(object item)
     {
-    }
-
-    /// <summary>
-    /// Usuario_UsuarioModificacion value changed
-    /// </summary>
-    /// <param name="item"></param>
-    private void SelectUsuario_UsuarioModificacionValueChanged(object item)
-    {
-    }
-
-    /// <summary>
-    /// Entity is binded, however it sets anyway.
-    /// </summary>
-    /// <returns></returns>
-    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Regionalizacion.LenguajeItem item)
-    {
-        LenguajeItem_entity = item;
     }
 
     /// <summary>
@@ -703,6 +682,14 @@ else
     }
 
     /// <summary>
+    /// Usuario_UsuarioModificacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectUsuario_UsuarioModificacionValueChanged(object item)
+    {
+    }
+
+    /// <summary>
     /// selectedFilter_UsuarioModificacion value changed
     /// </summary>
     /// <param name="item"></param>
@@ -712,6 +699,15 @@ else
         {
             selectedFilter_UsuarioModificacion = null;
         }
+    }
+
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
+    {
+        ConfiguracionEmpresa_entity = item;
     }
     #endregion
 

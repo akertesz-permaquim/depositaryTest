@@ -1,4 +1,4 @@
-@page "/DirectorioSucursalCustomCrud"
+@page "/DirectorioSucursalCustomCrud/{EmpresaId}/"
 
 @using Permaquim.Depositary.Web.Administration.Controllers;
 
@@ -53,7 +53,7 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" RowExpand="@expandirSucursal" RowRender="@sucursalRowRender" RowCollapse="@colapsarSucursal"
+                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" CellRender="@SucursalCellRender" AllowColumnPicking="true" AllowFiltering="true" RowExpand="@expandirSucursal" RowRender="@sucursalRowRender" RowCollapse="@colapsarSucursal"
                 AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@Sucursal_entities" TItem="Depositary.Entities.Tables.Directorio.Sucursal" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
@@ -62,20 +62,17 @@
                     <Columns>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="120px">
                             <HeaderTemplate>
-                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioSucursal",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("NEW_BUTTON",dataLenguaje) Click="Add">
+                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioSucursal",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                                 </RadzenButton>
                             </HeaderTemplate>
                             <Template Context="element">
+                                <RadzenButton Icon="format_list_numbered_rtl" title=@MultilenguajeController.ObtenerTextoPorClave("TooltipSectores",dataLenguaje) ButtonStyle="ButtonStyle.Primary" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioSector",dataFunciones,"PuedeVisualizar") Class="m-1" Click="@(args => ObtenerSectores(element))" @onclick:stopPropagation="true">
+                                </RadzenButton>
                                 <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioSucursal",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                                 </RadzenButton>
                                 <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioSucursal",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                                 </RadzenButton>
                             </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Property="Nombre" Filterable="false" Title="Nombre" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Property="Descripcion" Filterable="false" Title="Descripcion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Title="EmpresaId" Property="EmpresaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_EmpresaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
@@ -94,6 +91,11 @@
                                 <div style="margin-top: 1rem;font-weight: 600">Filter</div>
                                 <RadzenDropDown @bind-Value=@selectedFilter_EmpresaId Data="@Empresa_EmpresaId_filter" Change="OnSelectedFilter_EmpresaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Property="Id" Filterable="false" Title="Id" Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Property="Nombre" Filterable="false" Title="Nombre" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Property="Descripcion" Filterable="false" Title="Descripcion" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Sucursal" Property="CodigoExterno" Filterable="false" Title="CodigoExterno" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
@@ -252,20 +254,9 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                @if ((@Empresa_entities.Count > 0 && @Empresa_entities.FirstOrDefault(c => c.Id == @Sucursal_entity.EmpresaId) != null) || crudMode != CrudMode.Delete)
-                                {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.EmpresaId)"
+                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@ParametroEmpresaId"
                                 Data=@Empresa_entities TextProperty="Nombre" ValueProperty="Id"
-                                Change=@(args => SelectEmpresaValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
-                                }
-                                else
-                                {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
-                                Data=@Empresa_entities TextProperty="Nombre" ValueProperty="Id"
-                                Change=@(args => SelectEmpresaValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
-                                }
+                                Disabled="true" />
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
@@ -377,6 +368,10 @@ else
 }
 
 @code {
+    [Parameter]
+    public string EmpresaId { get; set; }
+
+    private Int64 ParametroEmpresaId;
     /// <summary>
     /// Crud Mode Enum
     /// </summary>
@@ -457,6 +452,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        ParametroEmpresaId = Int64.Parse(EmpresaId);
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
@@ -472,6 +468,7 @@ else
     private void LoadMainEntityData()
     {
         Depositary.Business.Tables.Directorio.Sucursal entity = new();
+        entity.Where.Add(Business.Tables.Directorio.Sucursal.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, ParametroEmpresaId);
         Sucursal_entities = entity.Items();
     }
     /// <summary>
@@ -551,6 +548,7 @@ else
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
         Depositary.Business.Tables.Directorio.Sucursal crud = new();
+        Sucursal_entity.EmpresaId = ParametroEmpresaId;
         foreach (var property in Sucursal_entity.GetType().GetProperties())
         {
             switch (property.Name)
@@ -691,6 +689,18 @@ else
     #endregion
 
     #region Grid events
+    private void ObtenerSectores(Depositary.Entities.Tables.Directorio.Sucursal item)
+    {
+        NavManager.NavigateTo("DirectorioSectorCustomCrud/" + item.Id, true);
+    }
+
+    void SucursalCellRender(DataGridCellRenderEventArgs<Depositary.Entities.Tables.Directorio.Sucursal> args)
+    {
+        if (args.Column.Property == "EmpresaId")
+        {
+            args.Attributes.Add("style", $"background-color: orange;");
+        }
+    }
 
     protected async Task expandirSucursal(Depositary.Entities.Tables.Directorio.Sucursal args)
     {

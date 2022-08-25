@@ -129,7 +129,7 @@
                         if (listadoEmpresasId.Count > 0)
                         {
                             oEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                            
+
                             oEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoEmpresasId);
                             oEmpresa.Items();
                             foreach (var empresa in oEmpresa.Result)
@@ -278,10 +278,14 @@
                     monedasNoDefault.Add(monedaDisponible._MonedaId);
                 }
 
-                var transaccionesMonedasNoDefault = OperacionController.ObtenerTransaccionesPorDepositario(depositario.Id, true, monedasNoDefault);
-
-                if (transaccionesMonedasNoDefault.Count > 0)
-                    resultado.DepositoEnOtraMoneda = true;
+                if (monedasNoDefault.Count > 0)
+                {
+                    var transaccionesMonedasNoDefault = OperacionController.ObtenerTransaccionesPorDepositario(depositario.Id, true, monedasNoDefault);
+                    if (transaccionesMonedasNoDefault.Count > 0)
+                        resultado.DepositoEnOtraMoneda = true;
+                    else
+                        resultado.DepositoEnOtraMoneda = false;
+                }
                 else
                     resultado.DepositoEnOtraMoneda = false;
 
@@ -326,7 +330,7 @@
 
             string configuracionValor = AplicacionController.ObtenerConfiguracionEmpresa("PORCENTAJE_MINIMO_CONTENEDOR_CASI_LLENO", pEmpresaId);
 
-            if (configuracionValor!= "")
+            if (configuracionValor != "")
             {
                 if (float.TryParse(configuracionValor, out porcentajeMinimoContenedorCasiLleno))
                 {
@@ -419,7 +423,7 @@
 
             string configuracionValor = AplicacionController.ObtenerConfiguracionEmpresa("TIEMPO_DEPOSITARIO_EN_LINEA_SEGUNDOS", pEmpresaId);
 
-            if (configuracionValor!= "")
+            if (configuracionValor != "")
             {
                 if (int.TryParse(configuracionValor, out tiempoDepositarioEnLineaSegundos))
                 {

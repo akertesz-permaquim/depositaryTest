@@ -20,6 +20,24 @@
     public class Contenedor
     {
         public Int64 ContenedorId { get; set; }
+        public string Nombre { get; set; }
         public string Identificador { get; set; }
+
+        public string NombreIdentificador
+        {
+            get
+            {
+                if (Nombre == String.Empty)
+                {
+                    return Identificador;
+                }
+                else if (Identificador == String.Empty)
+                {
+                    return Nombre;
+                }
+                else
+                    return Nombre + " " + Identificador;
+            }
+        }
     }
 }

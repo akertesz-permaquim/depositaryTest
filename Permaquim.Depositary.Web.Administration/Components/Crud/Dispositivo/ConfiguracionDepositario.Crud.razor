@@ -69,8 +69,23 @@
                  </Template>
                  </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.ConfiguracionDepositario" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.ConfiguracionDepositario" Property="TipoId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.ConfiguracionDepositario" Title=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Property="TipoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_TipoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                 <Template>
+                     @if(TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault( c => c.Id == @context.TipoId) != null){
+                         <RadzenLabel Text="@TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault( c => c.Id == @context.TipoId).Nombre" Component="TipoId" style="width: 100%">
+                             </RadzenLabel>
+                         }
+                         else
+                         {
+                         <RadzenLabel Text="No data available" Component="TipoId" style="width: 100%">
+                             </RadzenLabel>                        
+                         }
+                 </Template>
+                 <FilterTemplate>
+                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                     <RadzenDropDown @bind-Value=@selectedFilter_TipoId Data="@TipoConfiguracionDepositario_TipoId_filter" Change="OnSelectedFilter_TipoId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
+                 </FilterTemplate>
+             </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.ConfiguracionDepositario" Title=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Property="DepositarioId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_DepositarioId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
                      @if(Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @context.DepositarioId) != null){
@@ -164,16 +179,28 @@
                      </div>
                  </div>
                 }
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Component="TipoId" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                     <div class="col-md-9">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(ConfiguracionDepositario_entity.TipoId)" Name="TipoId" Disabled="@(crudMode==CrudMode.Delete)" >
-                     </RadzenNumeric>
-                     </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Component ="TipoId" style="width: 100%">
+                 </RadzenLabel>
                  </div>
+                 <div class="col-md-9">
+                     @if((@TipoConfiguracionDepositario_TipoId_entities.Count > 0 && @TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault( c => c.Id == @ConfiguracionDepositario_entity.TipoId) != null) || crudMode != CrudMode.Delete)
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ConfiguracionDepositario_entity.TipoId)"
+                                     Data=@TipoConfiguracionDepositario_TipoId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectTipoConfiguracionDepositario_TipoIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                     }
+                     else
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                     Data=@TipoConfiguracionDepositario_TipoId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectTipoConfiguracionDepositario_TipoIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                    }
+                </div>
+              </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Component ="DepositarioId" style="width: 100%">
@@ -274,6 +301,14 @@ else
     private List<SeguridadEntities.FuncionRol> dataFunciones;
  
     /// <summary>
+    /// Variables to handle Relation between ConfiguracionDepositario.TipoId and TipoConfiguracionDepositario.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Dispositivo.TipoConfiguracionDepositario TipoConfiguracionDepositario_TipoId_entity = new();
+    private List<Depositary.Entities.Tables.Dispositivo.TipoConfiguracionDepositario>? TipoConfiguracionDepositario_TipoId_entities;
+    private List<Depositary.Entities.Tables.Dispositivo.TipoConfiguracionDepositario> TipoConfiguracionDepositario_TipoId_filter;
+    private IEnumerable<Int64> selectedFilter_TipoId;
+ 
+    /// <summary>
     /// Variables to handle Relation between ConfiguracionDepositario.DepositarioId and Depositario.Id
     /// </summary>
     private Depositary.Entities.Tables.Dispositivo.Depositario Depositario_DepositarioId_entity = new();
@@ -331,6 +366,10 @@ else
     /// </summary>
     private void LoadTypesData()
     {
+        Depositary.Business.Tables.Dispositivo.TipoConfiguracionDepositario TipoConfiguracionDepositario_TipoId_local = new();
+        TipoConfiguracionDepositario_TipoId_entities = TipoConfiguracionDepositario_TipoId_local.Items();
+        TipoConfiguracionDepositario_TipoId_filter = TipoConfiguracionDepositario_TipoId_entities.Where(x => ConfiguracionDepositario_entities.Select(x => x.TipoId).Distinct().Contains(x.Id)).ToList();
+ 
         Depositary.Business.Tables.Dispositivo.Depositario Depositario_DepositarioId_local = new();
         Depositario_DepositarioId_entities = Depositario_DepositarioId_local.Items();
         Depositario_DepositarioId_filter = Depositario_DepositarioId_entities.Where(x => ConfiguracionDepositario_entities.Select(x => x.DepositarioId).Distinct().Contains(x.Id)).ToList();
@@ -355,6 +394,7 @@ else
         //Main entity initialization
         ConfiguracionDepositario_entity = new();
         //Relations entities initialization
+        TipoConfiguracionDepositario_TipoId_entity = new(); 
         Depositario_DepositarioId_entity = new(); 
         Usuario_UsuarioCreacion_entity = new(); 
         Usuario_UsuarioModificacion_entity = new(); 
@@ -367,6 +407,10 @@ else
     private void Edit(Depositary.Entities.Tables.Dispositivo.ConfiguracionDepositario item, bool delete)
     {
              ConfiguracionDepositario_entity = item;
+            TipoConfiguracionDepositario_TipoId_entity = new() { 
+            Id = TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault(c => c.Id == ConfiguracionDepositario_entity.TipoId).Id, 
+            Nombre = TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault(c => c.Id == ConfiguracionDepositario_entity.TipoId).Nombre
+            };
             Depositario_DepositarioId_entity = new() { 
             Id = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == ConfiguracionDepositario_entity.DepositarioId).Id, 
             Nombre = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == ConfiguracionDepositario_entity.DepositarioId).Nombre
@@ -533,6 +577,26 @@ else
  
     #endregion
     #region Selection events
+    /// <summary>
+    /// TipoConfiguracionDepositario_TipoId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectTipoConfiguracionDepositario_TipoIdValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// selectedFilter_TipoId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_TipoId_Changed(object value)
+    {
+         if(selectedFilter_TipoId!=null && !selectedFilter_TipoId.Any())
+         {
+             selectedFilter_TipoId=null;
+         }
+    }
+ 
     /// <summary>
     /// Depositario_DepositarioId value changed
     /// </summary>
