@@ -2,6 +2,7 @@
 {
     public class AplicacionModel
     {
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> Configuraciones { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ConfiguracionesEmpresas { get; set; } = new();
     }

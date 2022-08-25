@@ -19,6 +19,37 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         #region Endpoints
 
+        [HttpPost]
+        [Route("ObtenerAuditoria")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerAuditoria([FromBody] AuditoriaModel data)
+        {
+            //Por defecto se indica una fecha minima para no usar nulos
+            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
+
+            try
+            {
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroAuditoriaTipoLogId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOLOG);
+
+                if (SincroAuditoriaTipoLogId.HasValue)
+                {
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOLOG) ? data.SincroDates[ENTIDAD_TIPOLOG] : fechaSincronizacionDefault;
+                    data.TiposLog = ObtenerTiposLogBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroAuditoriaTipoLogId.Value);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(data);
+        }
+
         [HttpGet]
         [Route("ObtenerTiposLog")]
         [Authorize]
@@ -29,13 +60,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOLOG);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOLOG);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.TiposLog = ObtenerTiposLogBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOLOG));
+                    data.TiposLog = ObtenerTiposLogBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOLOG));
 
                 }
                 catch (Exception ex)
@@ -44,7 +75,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
 
                 //Cerramos el registro de sincronizacion de la entidad.
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else

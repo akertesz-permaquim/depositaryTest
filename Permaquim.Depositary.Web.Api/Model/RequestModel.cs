@@ -10,6 +10,6 @@ namespace Permaquim.Depositary.Web.Api.Model
         [Required(ErrorMessage = "LastSincronizationDate is required")]
         public DateTime LastSincronizationDate { get; set; }
         [Required(ErrorMessage = "DeviceNumber is required")]
-        public string Poronga { get; set; }
+        public string DeviceNumber { get; set; }
     }
 }

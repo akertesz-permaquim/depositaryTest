@@ -87,5 +87,7 @@
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMoneda> PlantillaMoneda { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> PlantillaMonedaDetalle { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Valor.OrigenValor> OrigenValor { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Impresion.TipoTicket> TipoTicket { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Impresion.Ticket> Ticket { get; set; } = new();
     }
 }

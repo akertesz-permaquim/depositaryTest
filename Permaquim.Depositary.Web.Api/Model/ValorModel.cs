@@ -2,6 +2,7 @@
 {
     public class ValorModel
     {
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Valor.Moneda> Monedas { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Valor.Denominacion> Denominaciones { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Valor.Tipo> Tipos { get; set; } = new();

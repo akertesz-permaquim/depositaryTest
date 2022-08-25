@@ -20,32 +20,35 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         #region Endpoints
 
-        [HttpGet]
+        [HttpPost]
         [Route("ObtenerAplicacion")]
         [Authorize]
-        public async Task<IActionResult> ObtenerAplicacion()
+        public async Task<IActionResult> ObtenerAplicacion([FromBody] AplicacionModel data)
         {
-            AplicacionModel data = new();
+            //Por defecto se indica una fecha minima para no usar nulos
+            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
 
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             try
             {
                 //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroAplicacionConfiguracionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACION);
+                Int64? SincroAplicacionConfiguracionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACION);
 
                 if (SincroAplicacionConfiguracionId.HasValue)
                 {
-                    data.Configuraciones = ObtenerConfiguracionesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CONFIGURACION));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroAplicacionConfiguracionId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CONFIGURACION) ? data.SincroDates[ENTIDAD_CONFIGURACION] : fechaSincronizacionDefault;
+                    data.Configuraciones = ObtenerConfiguracionesBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroAplicacionConfiguracionId.Value);
                 }
 
-                Int64? SincroAplicacionConfiguracionEmpresaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONEMPRESA);
+                Int64? SincroAplicacionConfiguracionEmpresaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONEMPRESA);
 
                 if (SincroAplicacionConfiguracionEmpresaId.HasValue)
                 {
-                    data.ConfiguracionesEmpresas = ObtenerConfiguracionesEmpresasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONEMPRESA));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroAplicacionConfiguracionEmpresaId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CONFIGURACIONEMPRESA) ? data.SincroDates[ENTIDAD_CONFIGURACIONEMPRESA] : fechaSincronizacionDefault;
+                    data.ConfiguracionesEmpresas = ObtenerConfiguracionesEmpresasBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroAplicacionConfiguracionEmpresaId.Value);
                 }
             }
             catch (Exception ex)
@@ -66,20 +69,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACION);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACION);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.Configuraciones = ObtenerConfiguracionesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CONFIGURACION));
+                    data.Configuraciones = ObtenerConfiguracionesBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CONFIGURACION));
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
 
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -98,20 +101,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONEMPRESA);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONEMPRESA);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.ConfiguracionesEmpresas = ObtenerConfiguracionesEmpresasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONEMPRESA));
+                    data.ConfiguracionesEmpresas = ObtenerConfiguracionesEmpresasBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONEMPRESA));
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
 
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else

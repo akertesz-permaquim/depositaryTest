@@ -2,6 +2,7 @@
 {
     public class EstiloModel
     {
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Estilo.Esquema> Esquema { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Estilo.EsquemaDetalle> EsquemaDetalle { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Estilo.TipoEsquemaDetalle> TipoEsquemaDetalle { get; set; }

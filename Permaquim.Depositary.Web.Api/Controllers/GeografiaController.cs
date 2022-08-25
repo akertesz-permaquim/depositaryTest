@@ -22,56 +22,62 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private const string ENTIDAD_ZONA = "Geografia.Zona";
 
         #region Endpoints
-        [HttpGet]
+        [HttpPost]
         [Route("ObtenerGeografia")]
         [Authorize]
-        public async Task<IActionResult> ObtenerGeografia()
+        public async Task<IActionResult> ObtenerGeografia([FromBody] GeografiaModel data)
         {
-            GeografiaModel data = new();
+            //Por defecto se indica una fecha minima para no usar nulos
+            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
 
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             try
             {
                 //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroGeografiaPaisId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PAIS);
+                Int64? SincroGeografiaPaisId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PAIS);
 
                 if (SincroGeografiaPaisId.HasValue)
                 {
-                    data.Paises = ObtenerPaisesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PAIS));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaPaisId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_PAIS) ? data.SincroDates[ENTIDAD_PAIS] : fechaSincronizacionDefault;
+                    data.Paises = ObtenerPaisesBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaPaisId.Value);
                 }
 
-                Int64? SincroGeografiaProvinciaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PROVINCIA);
+                Int64? SincroGeografiaProvinciaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PROVINCIA);
 
                 if (SincroGeografiaProvinciaId.HasValue)
                 {
-                    data.Provincias = ObtenerProvinciasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PROVINCIA));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaProvinciaId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_PROVINCIA) ? data.SincroDates[ENTIDAD_PROVINCIA] : fechaSincronizacionDefault;
+                    data.Provincias = ObtenerProvinciasBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaProvinciaId.Value);
                 }
 
-                Int64? SincroGeografiaCiudadId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CIUDAD);
+                Int64? SincroGeografiaCiudadId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CIUDAD);
 
                 if (SincroGeografiaCiudadId.HasValue)
                 {
-                    data.Ciudades = ObtenerCiudadesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CIUDAD));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaCiudadId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CIUDAD) ? data.SincroDates[ENTIDAD_CIUDAD] : fechaSincronizacionDefault;
+                    data.Ciudades = ObtenerCiudadesBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaCiudadId.Value);
                 }
 
-                Int64? SincroGeografiaCodigoPostalId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CODIGOPOSTAL);
+                Int64? SincroGeografiaCodigoPostalId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CODIGOPOSTAL);
 
                 if (SincroGeografiaCodigoPostalId.HasValue)
                 {
-                    data.CodigosPostales = ObtenerCodigosPostalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CODIGOPOSTAL));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaCodigoPostalId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CODIGOPOSTAL) ? data.SincroDates[ENTIDAD_CODIGOPOSTAL] : fechaSincronizacionDefault;
+                    data.CodigosPostales = ObtenerCodigosPostalesBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaCodigoPostalId.Value);
                 }
 
-                Int64? SincroGeografiaZonaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ZONA);
+                Int64? SincroGeografiaZonaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ZONA);
 
                 if (SincroGeografiaZonaId.HasValue)
                 {
-                    data.Zonas = ObtenerZonasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_ZONA));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroGeografiaZonaId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ZONA) ? data.SincroDates[ENTIDAD_ZONA] : fechaSincronizacionDefault;
+                    data.Zonas = ObtenerZonasBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaZonaId.Value);
                 }
             }
             catch (Exception ex)
@@ -92,13 +98,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PAIS);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PAIS);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.Paises = ObtenerPaisesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PAIS));
+                    data.Paises = ObtenerPaisesBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PAIS));
 
                 }
                 catch (Exception ex)
@@ -107,7 +113,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
 
                 //Cerramos el registro de sincronizacion de la entidad.
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -127,21 +133,21 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PROVINCIA);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PROVINCIA);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
 
-                    data.Provincias = ObtenerProvinciasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PROVINCIA));
+                    data.Provincias = ObtenerProvinciasBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PROVINCIA));
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
                 //Cerramos el registro de sincronizacion de la entidad.
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -160,13 +166,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CIUDAD);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CIUDAD);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.Ciudades = ObtenerCiudadesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CIUDAD));
+                    data.Ciudades = ObtenerCiudadesBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CIUDAD));
                 }
                 catch (Exception ex)
                 {
@@ -174,7 +180,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
 
                 //Cerramos el registro de sincronizacion de la entidad.
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -192,13 +198,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ZONA);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ZONA);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.Zonas = ObtenerZonasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_ZONA));
+                    data.Zonas = ObtenerZonasBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_ZONA));
                 }
                 catch (Exception ex)
                 {
@@ -206,7 +212,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
 
                 //Cerramos el registro de sincronizacion de la entidad.
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -225,13 +231,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ZONA);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ZONA);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.CodigosPostales = ObtenerCodigosPostalesBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PAIS));
+                    data.CodigosPostales = ObtenerCodigosPostalesBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_PAIS));
                 }
                 catch (Exception ex)
                 {
@@ -239,7 +245,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
 
                 //Cerramos el registro de sincronizacion de la entidad.
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else

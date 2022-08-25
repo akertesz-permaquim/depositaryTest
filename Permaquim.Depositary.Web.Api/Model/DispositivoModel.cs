@@ -2,6 +2,7 @@
 {
     public class DispositivoModel
     {
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Modelo> Modelos { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Marca> Marcas { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> Depositarios { get; set; } = new();

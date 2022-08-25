@@ -103,6 +103,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 model.VisualizacionPerfil = ObtenerVisualizacionPerfil();
                 model.VisualizacionPerfilItem = ObtenerVisualizacionPerfilItem();
                 model.VisualizacionPerfilTipo = ObtenerVisualizacionPerfilTipo();
+                model.TipoTicket = ObtenerImpresionTipoTicket();
+                model.Ticket = ObtenerImpresionTicket();
 
             }
             catch (Exception ex)
@@ -550,6 +552,18 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilTipo> ObtenerVisualizacionPerfilTipo()
         {
             DepositaryWebApi.Business.Tables.Visualizacion.PerfilTipo entities = new();
+            return entities.Items();
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Impresion.TipoTicket> ObtenerImpresionTipoTicket()
+        {
+            DepositaryWebApi.Business.Tables.Impresion.TipoTicket entities = new();
+            return entities.Items();
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Impresion.Ticket> ObtenerImpresionTicket()
+        {
+            DepositaryWebApi.Business.Tables.Impresion.Ticket entities = new();
             return entities.Items();
         }
 

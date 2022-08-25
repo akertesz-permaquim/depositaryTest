@@ -2,6 +2,7 @@
 {
     public class BancaModel
     {
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Banca.Banco> Bancos { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Banca.TipoCuenta> TiposCuenta { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Banca.Cuenta> Cuentas { get; set; } = new();

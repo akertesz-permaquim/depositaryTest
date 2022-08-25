@@ -18,36 +18,35 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private const string ENTIDAD_HUELLADACTILAR = "Biometria.HuellaDactilar";
 
         #region Endpoints
-        [HttpGet]
+        [HttpPost]
         [Route("ObtenerHuellasDactilares")]
         [Authorize]
-        public async Task<IActionResult> ObtenerHuellasDactilares()
+        public async Task<IActionResult> ObtenerHuellasDactilares([FromBody] BiometriaHuellaDactilarModel data)
         {
-            BiometriaHuellaDactilarModel data = new();
+            //Por defecto se indica una fecha minima para no usar nulos
+            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
 
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_HUELLADACTILAR);
-
-            if (SincronizacionId.HasValue)
+            try
             {
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroBiometriaHuellaDactilarId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_HUELLADACTILAR);
 
-                try
+                if (SincroBiometriaHuellaDactilarId.HasValue)
                 {
-                    data.HuellasDactilares = ObtenerHuellasDactilaresBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_HUELLADACTILAR));
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_HUELLADACTILAR) ? data.SincroDates[ENTIDAD_HUELLADACTILAR] : fechaSincronizacionDefault;
+                    data.HuellasDactilares = ObtenerHuellasDactilaresBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroBiometriaHuellaDactilarId.Value);
                 }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-
-                return Ok(data);
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+                return BadRequest(ex.Message);
             }
+
+            return Ok(data);
+
         }
 
         #endregion

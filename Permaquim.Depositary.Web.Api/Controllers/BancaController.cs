@@ -22,48 +22,53 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         #region Endpoints
 
-        [HttpGet]
+        [HttpPost]
         [Route("ObtenerBanca")]
         [Authorize]
-        public async Task<IActionResult> ObtenerBanca()
+        public async Task<IActionResult> ObtenerBanca([FromBody] BancaModel data)
         {
-            BancaModel data = new();
+            //Por defecto se indica una fecha minima para no usar nulos
+            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
 
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             try
             {
                 //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroBancaBancoId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_BANCO);
+                Int64? SincroBancaBancoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_BANCO);
 
                 if (SincroBancaBancoId.HasValue)
                 {
-                    data.Bancos = ObtenerBancosBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_BANCO));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroBancaBancoId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_BANCO) ? data.SincroDates[ENTIDAD_BANCO] : fechaSincronizacionDefault;
+                    data.Bancos = ObtenerBancosBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroBancaBancoId.Value);
                 }
 
-                Int64? SincroBancaTipoCuentaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCUENTA);
+                Int64? SincroBancaTipoCuentaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCUENTA);
 
                 if (SincroBancaTipoCuentaId.HasValue)
                 {
-                    data.TiposCuenta = ObtenerTiposCuentasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOCUENTA));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroBancaTipoCuentaId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOCUENTA) ? data.SincroDates[ENTIDAD_TIPOCUENTA] : fechaSincronizacionDefault;
+                    data.TiposCuenta = ObtenerTiposCuentasBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroBancaTipoCuentaId.Value);
                 }
 
-                Int64? SincroBancaCuentaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CUENTA);
+                Int64? SincroBancaCuentaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CUENTA);
 
                 if (SincroBancaCuentaId.HasValue)
                 {
-                    data.Cuentas = ObtenerCuentasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CUENTA));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroBancaCuentaId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CUENTA) ? data.SincroDates[ENTIDAD_CUENTA] : fechaSincronizacionDefault;
+                    data.Cuentas = ObtenerCuentasBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroBancaCuentaId.Value);
                 }
 
-                Int64? SincroBancaUsuarioCuentaId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_USUARIOCUENTA);
+                Int64? SincroBancaUsuarioCuentaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_USUARIOCUENTA);
 
                 if (SincroBancaUsuarioCuentaId.HasValue)
                 {
-                    data.UsuariosCuenta = ObtenerUsuariosCuentasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_USUARIOCUENTA));
-                    SincronizacionController.finalizarCabeceraSincronizacion(SincroBancaUsuarioCuentaId.Value);
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_USUARIOCUENTA) ? data.SincroDates[ENTIDAD_USUARIOCUENTA] : fechaSincronizacionDefault;
+                    data.UsuariosCuenta = ObtenerUsuariosCuentasBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroBancaUsuarioCuentaId.Value);
                 }
             }
             catch (Exception ex)
@@ -84,13 +89,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_BANCO);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_BANCO);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.Bancos = ObtenerBancosBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_BANCO));
+                    data.Bancos = ObtenerBancosBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_BANCO));
                 }
                 catch (Exception ex)
                 {
@@ -98,7 +103,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
 
                 //Cerramos el registro de sincronizacion de la entidad.
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -117,20 +122,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CUENTA);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CUENTA);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.Cuentas = ObtenerCuentasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CUENTA));
+                    data.Cuentas = ObtenerCuentasBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_CUENTA));
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
 
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -149,20 +154,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCUENTA);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCUENTA);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.TiposCuenta = ObtenerTiposCuentasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOCUENTA));
+                    data.TiposCuenta = ObtenerTiposCuentasBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOCUENTA));
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
 
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else
@@ -181,20 +186,20 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
             //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SincronizacionController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_USUARIOCUENTA);
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_USUARIOCUENTA);
 
             if (SincronizacionId.HasValue)
             {
                 try
                 {
-                    data.UsuariosCuenta = ObtenerUsuariosCuentasBD(SincronizacionController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_USUARIOCUENTA));
+                    data.UsuariosCuenta = ObtenerUsuariosCuentasBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_USUARIOCUENTA));
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
 
-                SincronizacionController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
                 return Ok(data);
             }
             else

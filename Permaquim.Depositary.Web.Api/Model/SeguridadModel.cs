@@ -2,6 +2,7 @@
 {
     public class SeguridadModel
     {
+        public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoAplicacion> TiposAplicaciones { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Aplicacion> Aplicaciones { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Seguridad.AplicacionParametro> AplicacionesParametros { get; set; } = new();
