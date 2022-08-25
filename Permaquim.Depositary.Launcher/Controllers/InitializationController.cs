@@ -80,6 +80,10 @@ namespace Permaquim.Depositary.Launcher.Controllers
                     model = JsonConvert.DeserializeObject<InicializacionModel>(getRresult);
                     //Persistimos los metodos en la base de datos.
                     model.Persist();
+
+                    //Finalmente ejecutamos la SP que termina de modelar la base de datos
+                    Depositario.Business.Procedures.dbo.FinalizarPrimeraSincronizacion oSP = new();
+                    oSP.Items(ConfigurationController.GetCurrentDepositaryId());
                 }
                 catch (Exception ex)
                 {

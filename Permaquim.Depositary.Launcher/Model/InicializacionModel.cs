@@ -75,6 +75,8 @@ namespace Permaquim.Depositary.Launcher.Model
         public List<Depositario.Entities.Tables.Dispositivo.PlantillaMoneda> PlantillaMoneda { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.PlantillaMonedaDetalle> PlantillaMonedaDetalle { get; set; } = new();
         public List<Depositario.Entities.Tables.Valor.OrigenValor> OrigenValor { get; set; } = new();
+        public List<Depositario.Entities.Tables.Impresion.TipoTicket> TipoTicket { get; set; } = new();
+        public List<Depositario.Entities.Tables.Impresion.Ticket> Ticket { get; set; } = new();
 
         public void Persist()
         {
@@ -686,7 +688,7 @@ namespace Permaquim.Depositary.Launcher.Model
 
             Depositario.Business.Tables.Valor.OrigenValor entitiesOrigenValor = new();
 
-            if (ValorTipo.Count > 0)
+            if (OrigenValor.Count > 0)
             {
                 Int64? sincronizacionCabeceraId = null;
 
@@ -2063,6 +2065,64 @@ namespace Permaquim.Depositary.Launcher.Model
                             var newEntitieTurnoAgendaTurno = entitiesTurnoAgendaTurno.Add(item);
 
                             SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoAgendaTurno.Id);
+                        }
+                    }
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
+            #endregion
+
+            #region Impresion
+
+            Depositario.Business.Tables.Impresion.TipoTicket entitiesImpresionTipoTicket = new();
+
+            if (TipoTicket.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.TipoTicket");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in TipoTicket)
+                    {
+                        Int64 origenId = item.Id;
+
+                        var newEntitieImpresionTipoTicket = entitiesImpresionTipoTicket.Add(item);
+
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieImpresionTipoTicket.Id);
+
+                    }
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
+            Depositario.Business.Tables.Impresion.Ticket entitiesImpresionTicket = new();
+
+            if (Ticket.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.Ticket");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in Ticket)
+                    {
+                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.TipoId);
+                        Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.DepositarioModeloId);
+
+                        if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue)
+                        {
+                            item.TipoId = tipoIdOrigen.Value;
+                            item.DepositarioModeloId = depositarioModeloIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
+                            var newEntitieImpresionTicket = entitiesImpresionTicket.Add(item);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieImpresionTicket.Id);
                         }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);

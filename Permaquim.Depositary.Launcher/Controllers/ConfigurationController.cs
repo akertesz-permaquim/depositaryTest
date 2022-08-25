@@ -10,12 +10,28 @@ namespace Permaquim.Depositary.Launcher.Controllers
 {
     internal static class ConfigurationController
     {
+        private static Int64? _depositaryId;
 
         public static string GetCurrentDepositaryCode()
         {
             return Cryptography.Decrypt(
                 ConfigurationController.GetConfiguration("CodigoDepositario"),
                 ConfigurationController.GetConfiguration("PasswordKey"));
+        }
+
+        public static Int64 GetCurrentDepositaryId()
+        {
+            if (!_depositaryId.HasValue)
+            {
+                Depositario.Business.Tables.Dispositivo.Depositario oDepositario = new();
+                oDepositario.Where.Add(Depositario.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno, Depositario.sqlEnum.OperandEnum.Equal, GetCurrentDepositaryCode());
+                oDepositario.Items();
+
+                if (oDepositario.Result.Count > 0)
+                    _depositaryId = oDepositario.Result[0].Id;
+            }
+
+            return _depositaryId.Value;
         }
 
         private static string GetConfiguration(string configurationEntry)

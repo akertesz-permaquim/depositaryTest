@@ -20,7 +20,9 @@
   <DbDriver>SQL</DbDriver>
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews />
-  <SelectedStoredProcedures />
+  <SelectedStoredProcedures>
+    <string>dbo.FinalizarPrimeraSincronizacion</string>
+  </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
     <string>dbo.fn_diagramobjects</string>
     <string>dbo.sp_alterdiagram</string>
@@ -300,6 +302,8 @@
     <string>Geografia.Pais</string>
     <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
+    <string>Impresion.Ticket</string>
+    <string>Impresion.TipoTicket</string>
     <string>Operacion.CierreDiario</string>
     <string>Operacion.Contenedor</string>
     <string>Operacion.Evento</string>
