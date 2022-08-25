@@ -1,5 +1,6 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Security;
+using System.Text;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
@@ -1173,5 +1174,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                return returnValue;
         }
+        public static string GetBasicconfigurationMessage()
+        {
+            StringBuilder builder = new();
+
+            if (GetCurrencies().Count == 0)
+                builder.AppendLine(MultilanguangeController.GetText(MultiLanguageEnum.MONEDAS_SIN_ASOCIAR_EN_SUCURSAL));
+
+
+
+            return builder.ToString();
+        } 
     }
 }

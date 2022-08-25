@@ -3605,6 +3605,18 @@ using System.Text;
                              return entities.Items();
                          }
                 }
+                 /// <summary>
+                 ///  Represents the child collection of Ticket that have this DepositarioModeloId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_DepositarioModeloId
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -5461,8 +5473,10 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string TipoId = "TipoId";
+					public const string DepositarioModeloId = "DepositarioModeloId";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
+					public const string Impresora = "Impresora";
 					public const string TextoCabecera = "TextoCabecera";
 					public const string NombreFuenteCabecera = "NombreFuenteCabecera";
 					public const string TamanioFuenteCabecera = "TamanioFuenteCabecera";
@@ -5487,8 +5501,10 @@ using System.Text;
                 {
 					Id,
 					TipoId,
+					DepositarioModeloId,
 					Nombre,
 					Descripcion,
+					Impresora,
 					TextoCabecera,
 					NombreFuenteCabecera,
 					TamanioFuenteCabecera,
@@ -5515,12 +5531,14 @@ using System.Text;
                 public Ticket()
                 {
                 }
-                public  Ticket(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,String Nombre,String Descripcion,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,String Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Ticket(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
+                    this.DepositarioModeloId = DepositarioModeloId;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
+                    this.Impresora = Impresora;
                     this.TextoCabecera = TextoCabecera;
                     this.NombreFuenteCabecera = NombreFuenteCabecera;
                     this.TamanioFuenteCabecera = TamanioFuenteCabecera;
@@ -5561,11 +5579,30 @@ using System.Text;
                  set {TipoId_  =  value;}
              }
              static Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId_ = null;
+             [DataItemAttributeFieldName("DepositarioModeloId","DepositarioModeloId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _DepositarioModeloId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Modelo")]// Object name in Database
+             public Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId
+             {
+                 get {
+                     if (DepositarioModeloId_ == null || DepositarioModeloId_.Id != _DepositarioModeloId)
+                         {
+                             DepositarioModeloId = new Permaquim.Depositario.Business.Relations.Dispositivo.Modelo().Items(this._DepositarioModeloId).FirstOrDefault();
+                         }
+                     return DepositarioModeloId_;
+                     }
+                 set {DepositarioModeloId_  =  value;}
+             }
+             static Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId_ = null;
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Descripcion","Descripcion")]
              public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Impresora","Impresora")]
+             public String Impresora { get; set; }
              [DataItemAttributeFieldName("TextoCabecera","TextoCabecera")]
              public String TextoCabecera { get; set; }
              [DataItemAttributeFieldName("NombreFuenteCabecera","NombreFuenteCabecera")]
@@ -5579,7 +5616,7 @@ using System.Text;
              [DataItemAttributeFieldName("NombreFuentePie","NombreFuentePie")]
              public String NombreFuentePie { get; set; }
              [DataItemAttributeFieldName("TamanioFuentePie","TamanioFuentePie")]
-             public Int32? TamanioFuentePie { get; set; }
+             public Int32 TamanioFuentePie { get; set; }
              [DataItemAttributeFieldName("UbicacionTextoPie","UbicacionTextoPie")]
              public String UbicacionTextoPie { get; set; }
              [DataItemAttributeFieldName("Imagen","Imagen")]
@@ -5595,13 +5632,43 @@ using System.Text;
              [DataItemAttributeFieldName("FactorAltoReporte","FactorAltoReporte")]
              public Int32 FactorAltoReporte { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
-             public String Habilitado { get; set; }
+             public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             public Int64 UsuarioCreacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioCreacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion
+             {
+                 get {
+                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
+                         {
+                             UsuarioCreacion = new Permaquim.Depositario.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
+                         }
+                     return UsuarioCreacion_;
+                     }
+                 set {UsuarioCreacion_  =  value;}
+             }
+             static Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public Int64? UsuarioModificacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioModificacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion
+             {
+                 get {
+                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
+                         {
+                             UsuarioModificacion = new Permaquim.Depositario.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
+                         }
+                     return UsuarioModificacion_;
+                     }
+                 set {UsuarioModificacion_  =  value;}
+             }
+             static Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
@@ -5622,6 +5689,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
+					public const string Codigo = "Codigo";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -5633,6 +5701,7 @@ using System.Text;
 					Id,
 					Nombre,
 					Descripcion,
+					Codigo,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -5645,11 +5714,12 @@ using System.Text;
                 public TipoTicket()
                 {
                 }
-                public  TipoTicket(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  TipoTicket(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
+                    this.Codigo = Codigo;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -5664,6 +5734,8 @@ using System.Text;
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Descripcion","Descripcion")]
              public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Codigo","Codigo")]
+             public String Codigo { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -10407,6 +10479,30 @@ using System.Text;
                          }
                 }
                  /// <summary>
+                 ///  Represents the child collection of Ticket that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_UsuarioCreacion
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Ticket that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_UsuarioModificacion
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
                  ///  Represents the child collection of TipoTicket that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11223,18 +11319,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositario.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioCreacion
-                {
-                     get {
-                             Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo entities = new Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo();
-                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of PerfilTipo that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11243,6 +11327,18 @@ using System.Text;
                      get {
                              Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo entities = new Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo();
                              entities.Where.Add(Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioCreacion
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo entities = new Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }

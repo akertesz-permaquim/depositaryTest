@@ -144,7 +144,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         }
                         else
                         {
-                            FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
                             (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                     }

@@ -760,7 +760,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDeposit,
+                        ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositFirstReport,
                         _headerTransaction.FirstOrDefault());
                         _alreadyPrinted = true;
                     }

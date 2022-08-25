@@ -51,10 +51,11 @@
         }
         public enum ReportTypeEnum
         {
-            None,
+            None = 0,
             BillDeposit,
             CoinDeposit,
-            EnvelopeDeposit,
+            EnvelopeDepositFirstReport,
+            EnvelopeDepositSecondReport,
             ValueExtraction,
             DailyClosing,
             TurnChange
@@ -194,6 +195,7 @@
             BILLETE,
             BILLETES,
             MONEDA,
+            MONEDAS_SIN_ASOCIAR_EN_SUCURSAL,
             MONEDA_NO_EXISTENTE_EN_DEPOSITARIO,
             MONEDA_SIN_DENOMINACIONES,
             SOBRE,

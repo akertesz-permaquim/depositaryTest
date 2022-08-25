@@ -13029,8 +13029,10 @@ using System.Text;
                 {
 					Id,
 					TipoId,
+					DepositarioModeloId,
 					Nombre,
 					Descripcion,
+					Impresora,
 					TextoCabecera,
 					NombreFuenteCabecera,
 					TamanioFuenteCabecera,
@@ -13089,8 +13091,10 @@ using System.Text;
          /// Ticket Add Method
          /// </summary>
          /// <param name='Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='Impresora'></param>
          /// <param name='TextoCabecera'></param>
          /// <param name='NombreFuenteCabecera'></param>
          /// <param name='TamanioFuenteCabecera'></param>
@@ -13106,14 +13110,14 @@ using System.Text;
          /// <param name='AnchoReporte'></param>
          /// <param name='FactorAltoReporte'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Impresion.Ticket</returns>
-			public Entities.Relations.Impresion.Ticket Add(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,String Nombre,String Descripcion,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,String Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Impresion.Ticket Add(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Impresion.Ticket)base.Add(new Entities.Relations.Impresion.Ticket(TipoId,Nombre,Descripcion,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Impresion.Ticket)base.Add(new Entities.Relations.Impresion.Ticket(TipoId,DepositarioModeloId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Impresion.Ticket> Items()
             {
@@ -13147,8 +13151,10 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
             /// <param name="TextoCabecera"></param>
             /// <param name="NombreFuenteCabecera"></param>
             /// <param name="TamanioFuenteCabecera"></param>
@@ -13169,7 +13175,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Impresion.Ticket> Items(Int64? Id,Int64? TipoId,String Nombre,String Descripcion,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,String Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Impresion.Ticket> Items(Int64? Id,Int64? TipoId,Int64? DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -13196,6 +13202,18 @@ using System.Text;
                     }
                    
                 }
+                if (DepositarioModeloId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                   
+                }
                 if (Nombre != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
@@ -13217,6 +13235,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Impresora != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
                     }
                    
                 }
@@ -13471,8 +13501,10 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
             /// <param name="TextoCabecera"></param>
             /// <param name="NombreFuenteCabecera"></param>
             /// <param name="TamanioFuenteCabecera"></param>
@@ -13493,13 +13525,15 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 TipoId,String Nombre,String Descripcion,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,String Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Impresion.Ticket item = new Entities.Tables.Impresion.Ticket();
                  item.Id = Id;
                  item.TipoId = TipoId;
+                 item.DepositarioModeloId = DepositarioModeloId;
                  item.Nombre = Nombre;
                  item.Descripcion = Descripcion;
+                 item.Impresora = Impresora;
                  item.TextoCabecera = TextoCabecera;
                  item.NombreFuenteCabecera = NombreFuenteCabecera;
                  item.TamanioFuenteCabecera = TamanioFuenteCabecera;
@@ -13578,6 +13612,7 @@ using System.Text;
 					Id,
 					Nombre,
 					Descripcion,
+					Codigo,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -13623,15 +13658,16 @@ using System.Text;
          /// </summary>
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='Codigo'></param>
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Impresion.TipoTicket</returns>
-			public Entities.Relations.Impresion.TipoTicket Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Impresion.TipoTicket Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Impresion.TipoTicket)base.Add(new Entities.Relations.Impresion.TipoTicket(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Impresion.TipoTicket)base.Add(new Entities.Relations.Impresion.TipoTicket(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Impresion.TipoTicket> Items()
             {
@@ -13666,13 +13702,14 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Codigo"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Impresion.TipoTicket> Items(Int64? Id,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Impresion.TipoTicket> Items(Int64? Id,String Nombre,String Descripcion,String Codigo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -13708,6 +13745,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Codigo != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Codigo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Codigo);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Codigo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Codigo);
                     }
                    
                 }
@@ -13795,18 +13844,20 @@ using System.Text;
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="Codigo"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Impresion.TipoTicket item = new Entities.Tables.Impresion.TipoTicket();
                  item.Id = Id;
                  item.Nombre = Nombre;
                  item.Descripcion = Descripcion;
+                 item.Codigo = Codigo;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;

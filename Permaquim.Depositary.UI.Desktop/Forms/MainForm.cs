@@ -193,6 +193,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             VerifyUserData();
 
+            VerifyBasicConfigurations();
+
             VerifyTimeout();
 
             VerifyAvatar();
@@ -200,34 +202,57 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             _device.Status();
             if (_device.IoBoardConnected)
             {
-
-                // Verificación de puerta abierta
-
-                if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
-                {
-                    VerifyConnections();
-                }
-                else
-                {
-                    if (_blockingDialog == null &&
-                        (DatabaseController.CurrentOperation == null ||
-                        DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
-                    {
-                        _blockingDialog = new SystemBlockingDialog()
-                        {
-                            Tag = this.Tag
-                        };
-                        _blockingDialog.LoadStyles();
-                        _blockingDialog.ShowDialog();
-                        _blockingDialog = null;
-                    }
-                }
+                VerifyOpenDoor();
 
                 VerifyConnections();
 
                 VerifyPreviousFailedoperation();
             }
 
+        }
+        private void VerifyBasicConfigurations()
+        {
+            string message = DatabaseController.GetBasicconfigurationMessage();
+            if(message.Length > 0)
+            {
+                {
+                    if (_blockingDialog == null)
+                    {
+                        _blockingDialog = new SystemBlockingDialog()
+                        {
+                            Tag = this.Tag,
+                            MessageText = message
+                        };
+                        _blockingDialog.LoadStyles();
+                        _blockingDialog.ShowDialog();
+                        _blockingDialog = null;
+                    }
+
+                }
+            }
+        }
+        private void VerifyOpenDoor()
+        {
+            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
+            {
+                VerifyConnections();
+            }
+            else
+            {
+                if (_blockingDialog == null &&
+                    (DatabaseController.CurrentOperation == null ||
+                    DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
+                {
+                    _blockingDialog = new SystemBlockingDialog()
+                    {
+                        Tag = this.Tag,
+                        MessageText = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA)
+                    };
+                    _blockingDialog.LoadStyles();
+                    _blockingDialog.ShowDialog();
+                    _blockingDialog = null;
+                }
+            }
         }
 
         private void VerifyPreviousFailedoperation()

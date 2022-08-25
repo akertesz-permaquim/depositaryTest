@@ -24,6 +24,9 @@ namespace Permaquim.Depositary.UI.Desktop
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
+
+        public String MessageText { get; set; }
+
         /// <summary>
         /// Instancia del dispositivo
         /// </summary>
@@ -50,7 +53,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         public void LoadLanguageItems()
         {
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA);
+            InformationLabel.Text = MessageText;
         }
         private void SystemBlockingDialog_Load(object sender, EventArgs e)
         {
