@@ -25,8 +25,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         }
         public static List<WorkerTask> GetWorkerTasks()
         {
-            string str = File.ReadAllText(Directory.GetCurrentDirectory() + @"\Tasks.Json");
-
+               string str = File.ReadAllText(Directory.GetCurrentDirectory() + @"\Tasks.Json");
             return JsonConvert.DeserializeObject<List<WorkerTask>>(str);
 
         }

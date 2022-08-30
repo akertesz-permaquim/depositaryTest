@@ -8,6 +8,10 @@ namespace Permaquim.Depositary.UI.Desktop
     public partial class SupportForm : Form
     {
         public CounterDevice _device { get; set; }
+
+        private const string COMANDO_SOPORTE = "Comando ejecutado por soporte";
+        private const string COMANDO_EJECUTADO = "Se ejecutó el comando : ";
+
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
@@ -181,6 +185,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 default:
                     break;
             }
+
+            AuditController.Log(LogTypeEnum.Information
+             , COMANDO_SOPORTE
+             , COMANDO_EJECUTADO + CounterCommandComboBox.SelectedItem.ToString().Trim()
+             );
         }
 
         private void BackButton_Click(object sender, EventArgs e)

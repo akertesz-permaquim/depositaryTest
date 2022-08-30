@@ -21,7 +21,7 @@ namespace Permaquim.Depositary.Launcher.Controllers
 
         private static string _webapiUrl = string.Empty;
 
-        public static async void InitializeDepositary()
+        public static async Task InitializeDepositary()
         {
             string webapiUrl = GetConfiguration("WebApiUrl");
             InicializacionModel model = new()
@@ -33,7 +33,7 @@ namespace Permaquim.Depositary.Launcher.Controllers
             //Si obtenemos un token valido empezamos a consultar los metodos get y a llenar las tablas
             if (_jwToken != null && DateTime.Now <= _jwToken.Expiration)
             {
-                ReceiveData(webapiUrl);
+                await ReceiveData(webapiUrl);
             }
         }
 

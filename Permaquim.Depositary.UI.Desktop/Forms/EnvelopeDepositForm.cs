@@ -23,9 +23,17 @@ namespace Permaquim.Depositary.UI.Desktop
         private int _yellowStatusIndicator;
         private int _redStatusIndicator;
 
+        private const string DEPOSITO_SOBRE_CANCELADO = "Deposito de sobre Cancelado";
+
         private bool _alreadyPrinted = false;
         List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
         List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> _detailTransactions = new();
+
+        private enum TicketTypeEnum
+        {
+            First,
+            Second
+        }
 
         /// <summary>
         /// Máquina de estado
@@ -108,8 +116,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadLanguageItems()
         { 
-            ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON);
-            CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON);
+            ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
+            CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION);
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
             DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DESCRIPCION);
@@ -135,14 +143,15 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void EnvelopeDepositForm_VisibleChanged(object sender, EventArgs e)
         {
-            MonitorGroupcheckbox.Visible = SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+            MonitorGroupcheckbox.Visible = false;// SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
 
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
                 LoadDenominations();
                 LoadLanguageItems();
-                //EnableDisableControls(false);
+                //EnableDisableControls(true);
+                DenominationsGridView.Visible = true;
             }
             else
                 InitializeLocals();
@@ -469,6 +478,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
             EnableDisableControls(false);
 
+            PrintTicket(TicketTypeEnum.Second);
+
             SaveTransaction();
 
            _operationStatus.DepositEnded = true;
@@ -580,6 +591,9 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
+                if (ParameterController.PrintsEnvelopeDeposit)
+                    PrintTicket(TicketTypeEnum.First);
+
                 TimeOutController.Reset();
                 _device.OpenEscrow();
                 _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
@@ -714,7 +728,10 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _operationStatus.DepositConfirmed = false;
             _device.CloseEscrow();
-
+            AuditController.Log(LogTypeEnum.Information,
+                DEPOSITO_SOBRE_CANCELADO,
+                DEPOSITO_SOBRE_CANCELADO);
+            ButtonsPanel.Visible = true;
             if (_device.CounterConnected)
                 _device.RemoteCancel();
             FormsController.OpenChildForm(this, new OperationForm(), _device);
@@ -750,19 +767,36 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             FormsController.OpenChildForm(this, new OperationForm(), _device);
         }
-        private void PrintTicket()
+        private void PrintTicket(TicketTypeEnum ticketType)
         {
 
 
             if (ParameterController.PrintsEnvelopeDeposit)
             {
+                var _header = DatabaseController.GetTransactionHeader(_operationStatus.CurrentTransactionId);
+                var _details = DatabaseController.GetTransactionDetails(_operationStatus.CurrentTransactionId);
+
                 if (!_alreadyPrinted)
                 {
                     for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositFirstReport,
-                        _headerTransaction.FirstOrDefault());
-                        _alreadyPrinted = true;
+
+                        switch (ticketType)
+                        {
+                            case TicketTypeEnum.First:
+                                ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositFirstReport,
+                                _header,_details);
+                                _alreadyPrinted = true;
+                                break;
+                            case TicketTypeEnum.Second:
+                                ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositSecondReport,
+                                _header, _details);
+                                _alreadyPrinted = true;
+                                break;
+                            default:
+                                break;
+                        }
+
                     }
                 }
             }

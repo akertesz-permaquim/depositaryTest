@@ -42,10 +42,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadTurnButton();
             if (SecurityController.IsFunctionenabled(FunctionEnum.DailyClosing))
                 LoadDailyClosingButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.Reports))
-                LoadReportsButton();
             if (SecurityController.IsFunctionenabled(FunctionEnum.Support))
                 LoadSupportButton();
+            LoadResetButton();
 
             LoadBackButton();
         }
@@ -145,27 +144,6 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         #endregion
 
-        #region Reports
-
-        private void LoadReportsButton()
-        {
-            CustomButton reportsButton = ControlBuilder.BuildStandardButton(
-                "ReportsButton", MultilanguangeController.GetText(MultiLanguageEnum.REPORTES), MainPanel.Width);
-
-            this.MainPanel.Controls.Add(reportsButton);
-            reportsButton.Click += new System.EventHandler(ReportsButton_Click);
-        }
-
-        private void ReportsButton_Click(object sender, EventArgs e)
-        {
-            FormsController.OpenChildForm(this, new ReportsForm(),
-              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-        }
-        #endregion
-
-
-
-
         #region Support
 
         private void LoadSupportButton()
@@ -181,6 +159,26 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             FormsController.OpenChildForm(this, new SupportForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+        }
+        #endregion
+
+
+
+        #region Reset
+
+        private void LoadResetButton()
+        {
+            CustomButton supportButton = ControlBuilder.BuildAlternateButton(
+                "ResetButton", MultilanguangeController.GetText(MultiLanguageEnum.RESET), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(supportButton);
+            supportButton.Click += new System.EventHandler(ResetButton_Click);
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            if(_device !=null &&_device.CounterConnected)
+                _device.DeviceReset();
         }
         #endregion
 

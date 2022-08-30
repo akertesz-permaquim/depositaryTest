@@ -103,7 +103,7 @@
             this.ConfirmAndExitDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndExitDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndExitDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(472, 4);
+            this.ConfirmAndExitDepositButton.Location = new System.Drawing.Point(1, 4);
             this.ConfirmAndExitDepositButton.Name = "ConfirmAndExitDepositButton";
             this.ConfirmAndExitDepositButton.Size = new System.Drawing.Size(230, 55);
             this.ConfirmAndExitDepositButton.TabIndex = 180;
@@ -125,7 +125,7 @@
             this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CancelDepositButton.ForeColor = System.Drawing.Color.White;
-            this.CancelDepositButton.Location = new System.Drawing.Point(1, 4);
+            this.CancelDepositButton.Location = new System.Drawing.Point(469, 4);
             this.CancelDepositButton.Name = "CancelDepositButton";
             this.CancelDepositButton.Size = new System.Drawing.Size(230, 55);
             this.CancelDepositButton.TabIndex = 179;

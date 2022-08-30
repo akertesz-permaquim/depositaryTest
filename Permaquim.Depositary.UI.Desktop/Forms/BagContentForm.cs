@@ -292,14 +292,21 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BillDepositGridView_SelectionChanged(object sender, EventArgs e)
         {
             BillDepositGridView.ClearSelection();
+            TimeOutController.Reset();
         }
 
         private void EnvelopeDepositGridView_SelectionChanged(object sender, EventArgs e)
         {
             EnvelopeDepositGridView.ClearSelection();
+            TimeOutController.Reset();
         }
 
         private void BagContentForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void BagContentTabControl_TabIndexChanged(object sender, EventArgs e)
         {
             TimeOutController.Reset();
         }

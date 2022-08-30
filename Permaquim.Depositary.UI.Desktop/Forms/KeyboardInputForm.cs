@@ -18,9 +18,9 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadStyles();
             Loadlogo();
            
-            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LOGIN_TITLE);
-            MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.USERTEXTBOXPLACEHOLDER);
-            MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PASSWORDTEXTBOXPLACEHOLDER);
+            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TITULO_LOGIN);
+            MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_USUARIO);
+            MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_PASSWORD);
 
             MainKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
@@ -88,16 +88,22 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     if (currentUser.Id != 0)
                     {
-                        MultilanguangeController.ResetLanguage();
 
-                        DatabaseController.GetTurnSchedule();
-
-                        if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
+                        if (currentUser.DebeCambiarPassword || DatabaseController.UserExpirationDateReached())
                         {
-                            MainKeyboard.ClearCredentials();
-                            FormsController.OpenChildForm(this,new OperationForm(), 
-                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            MultilanguangeController.ResetLanguage();
+
+                            DatabaseController.GetTurnSchedule();
+
+                            if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
+                            {
+                                MainKeyboard.ClearCredentials();
+                                FormsController.OpenChildForm(this, new OperationForm(),
+                                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
                         }
+
+                        MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.DEBECAMBIARPASSWORD));
                     }
                     else
                     {

@@ -4,6 +4,8 @@ using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
 using System.Text;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -14,6 +16,8 @@ namespace Permaquim.Depositary.UI.Desktop
         /// Instancia del dispositivo
         /// </summary>
         public CounterDevice _device { get; set; }
+
+        private const string DEPOSITO_BILLETE_CANCELADO = "Deposito de billete Cancelado";
 
         /// <summary>
         /// Máquina de estado
@@ -91,7 +95,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _pollingTimer.Enabled = this.Visible;
 
-            MonitorGroupcheckbox.Visible = SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+            MonitorGroupcheckbox.Visible = false;// SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
 
             if (this.Visible)
             {
@@ -165,9 +169,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadLanguageItems()
         {
             CurrencyLabel.Text = DatabaseController.CurrentCurrency.Nombre;
-            ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON);
-            ConfirmAndContinueDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTINUE_BUTTON);
-            CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON);
+            ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
+            ConfirmAndContinueDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CONTINUAR);
+            CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
             DenominationsGridView.Columns["Image"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMAGEN);
@@ -631,6 +635,9 @@ namespace Permaquim.Depositary.UI.Desktop
             ButtonsPanel.Visible = false;
             TimeOutController.Stop();
             CancelDeposit();
+            AuditController.Log(LogTypeEnum.Information, 
+                DEPOSITO_BILLETE_CANCELADO, 
+                DEPOSITO_BILLETE_CANCELADO);
             ButtonsPanel.Visible = true;
         }
 
@@ -828,17 +835,18 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
         }
-
         private void PrintTicket()
         {
             
             if (ParameterController.PrintsBillDeposit)
             {
+                var _header = DatabaseController.GetTransactionHeader(_operationStatus.CurrentTransactionId);
+                var _details = DatabaseController.GetTransactionDetails(_operationStatus.CurrentTransactionId);
                 if (!_alreadyPrinted)
                 {
                     for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.BillDeposit, _headerTransaction.FirstOrDefault());
+                        ReportController.PrintDepositReport(ReportTypeEnum.BillDeposit, _header,_details);
                         _alreadyPrinted = true;
                     }
                 }

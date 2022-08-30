@@ -253,10 +253,23 @@ using System.Text;
 					public const string TransaccionId = "TransaccionId";
 					public const string FechaTransaccion = "FechaTransaccion";
 					public const string SectorId = "SectorId";
+					public const string SucursalId = "SucursalId";
+					public const string EmpresaId = "EmpresaId";
+					public const string UsuarioId = "UsuarioId";
+					public const string ContenedorId = "ContenedorId";
+					public const string OrigenId = "OrigenId";
+					public const string DepositarioId = "DepositarioId";
+					public const string EsquemaDetalleTurnoId = "EsquemaDetalleTurnoId";
+					public const string Empresa = "Empresa";
+					public const string Sucursal = "Sucursal";
+					public const string Sector = "Sector";
+					public const string Turno = "Turno";
+					public const string Contenedor = "Contenedor";
+					public const string Usuario = "Usuario";
+					public const string Origen = "Origen";
 					public const string Moneda = "Moneda";
 					public const string Denominacion = "Denominacion";
 					public const string CodigoMoneda = "CodigoMoneda";
-					public const string DepositarioId = "DepositarioId";
 					public const string Depositario = "Depositario";
 					public const string Total = "Total";
 				}
@@ -265,10 +278,23 @@ using System.Text;
 					TransaccionId,
 					FechaTransaccion,
 					SectorId,
+					SucursalId,
+					EmpresaId,
+					UsuarioId,
+					ContenedorId,
+					OrigenId,
+					DepositarioId,
+					EsquemaDetalleTurnoId,
+					Empresa,
+					Sucursal,
+					Sector,
+					Turno,
+					Contenedor,
+					Usuario,
+					Origen,
 					Moneda,
 					Denominacion,
 					CodigoMoneda,
-					DepositarioId,
 					Depositario,
 					Total
 				}
@@ -281,15 +307,28 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,String Moneda,String Denominacion,String CodigoMoneda,Int64 DepositarioId,String Depositario,Decimal Total)
+                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal Total)
                 {
                     this.TransaccionId = TransaccionId;
                     this.FechaTransaccion = FechaTransaccion;
                     this.SectorId = SectorId;
+                    this.SucursalId = SucursalId;
+                    this.EmpresaId = EmpresaId;
+                    this.UsuarioId = UsuarioId;
+                    this.ContenedorId = ContenedorId;
+                    this.OrigenId = OrigenId;
+                    this.DepositarioId = DepositarioId;
+                    this.EsquemaDetalleTurnoId = EsquemaDetalleTurnoId;
+                    this.Empresa = Empresa;
+                    this.Sucursal = Sucursal;
+                    this.Sector = Sector;
+                    this.Turno = Turno;
+                    this.Contenedor = Contenedor;
+                    this.Usuario = Usuario;
+                    this.Origen = Origen;
                     this.Moneda = Moneda;
                     this.Denominacion = Denominacion;
                     this.CodigoMoneda = CodigoMoneda;
-                    this.DepositarioId = DepositarioId;
                     this.Depositario = Depositario;
                     this.Total = Total;
                 }
@@ -299,14 +338,40 @@ using System.Text;
              public DateTime FechaTransaccion { get; set; }
              [DataItemAttributeFieldName("SectorId","SectorId")]
              public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             public Int64 EmpresaId { get; set; }
+             [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
+             public Int64 UsuarioId { get; set; }
+             [DataItemAttributeFieldName("ContenedorId","ContenedorId")]
+             public Int64 ContenedorId { get; set; }
+             [DataItemAttributeFieldName("OrigenId","OrigenId")]
+             public Int64 OrigenId { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("EsquemaDetalleTurnoId","EsquemaDetalleTurnoId")]
+             public Int64 EsquemaDetalleTurnoId { get; set; }
+             [DataItemAttributeFieldName("Empresa","Empresa")]
+             public String Empresa { get; set; }
+             [DataItemAttributeFieldName("Sucursal","Sucursal")]
+             public String Sucursal { get; set; }
+             [DataItemAttributeFieldName("Sector","Sector")]
+             public String Sector { get; set; }
+             [DataItemAttributeFieldName("Turno","Turno")]
+             public String Turno { get; set; }
+             [DataItemAttributeFieldName("Contenedor","Contenedor")]
+             public String Contenedor { get; set; }
+             [DataItemAttributeFieldName("Usuario","Usuario")]
+             public String Usuario { get; set; }
+             [DataItemAttributeFieldName("Origen","Origen")]
+             public String Origen { get; set; }
              [DataItemAttributeFieldName("Moneda","Moneda")]
              public String Moneda { get; set; }
              [DataItemAttributeFieldName("Denominacion","Denominacion")]
              public String Denominacion { get; set; }
              [DataItemAttributeFieldName("CodigoMoneda","CodigoMoneda")]
              public String CodigoMoneda { get; set; }
-             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
-             public Int64 DepositarioId { get; set; }
              [DataItemAttributeFieldName("Depositario","Depositario")]
              public String Depositario { get; set; }
              [DataItemAttributeFieldName("Total","Total")]
@@ -434,6 +499,8 @@ using System.Text;
 					public const string EmpresaId = "EmpresaId";
 					public const string UsuarioId = "UsuarioId";
 					public const string DepositarioId = "DepositarioId";
+					public const string OrigenId = "OrigenId";
+					public const string Origen = "Origen";
 				}
 				public enum FieldEnum : int
                 {
@@ -458,7 +525,9 @@ using System.Text;
 					SucursalId,
 					EmpresaId,
 					UsuarioId,
-					DepositarioId
+					DepositarioId,
+					OrigenId,
+					Origen
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -469,7 +538,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId)
+                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId,Int64 OrigenId,String Origen)
                 {
                     this.TransaccionId = TransaccionId;
                     this.TransaccionTipoId = TransaccionTipoId;
@@ -493,6 +562,8 @@ using System.Text;
                     this.EmpresaId = EmpresaId;
                     this.UsuarioId = UsuarioId;
                     this.DepositarioId = DepositarioId;
+                    this.OrigenId = OrigenId;
+                    this.Origen = Origen;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -538,6 +609,10 @@ using System.Text;
              public Int64 UsuarioId { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("OrigenId","OrigenId")]
+             public Int64 OrigenId { get; set; }
+             [DataItemAttributeFieldName("Origen","Origen")]
+             public String Origen { get; set; }
 				
 			} //Class Transacciones 
 			

@@ -268,7 +268,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             _confirmButton = ControlBuilder.BuildStandardButton(
-            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width,55);
+            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width,55);
 
             _confirmButton.Visible = false;
 
@@ -311,7 +311,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_containerTextBox.Texts.Equals(_containerTextBox.PlaceholderText))
                 inputForm.InputTexboxPlaceholder = _containerTextBox.PlaceholderText;
             else
-                inputForm.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.BAG_CODE_PLACEHOLDER);
+                inputForm.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_CODIGO_CONTENEDOR);
 
             inputForm.ReturnTextValue = _containerTextBox.Texts;
             if (inputForm.ShowDialog() == DialogResult.OK)

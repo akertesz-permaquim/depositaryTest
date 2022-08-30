@@ -22,7 +22,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         public InputBoxForm()
         {
             InitializeComponent();
-            CustomInputBoxKeyboard.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.ALPHANUMERIC_TEXTBOX_PLACEHOLDER);
+            CustomInputBoxKeyboard.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTBOX_ALFANUMERICO);
             CustomInputBoxKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
             CustomInputBoxKeyboard.KeyboardEvent += CustomInputBoxKeyboard_KeyboardEvent;

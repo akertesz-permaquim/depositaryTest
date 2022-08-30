@@ -274,6 +274,8 @@
   <SelectedTables>
     <string>Aplicacion.Configuracion</string>
     <string>Aplicacion.ConfiguracionEmpresa</string>
+    <string>Aplicacion.ConfiguracionTipoDato</string>
+    <string>Aplicacion.ConfiguracionValidacionDato</string>
     <string>Auditoria.Log</string>
     <string>Auditoria.TipoLog</string>
     <string>Banca.Banco</string>

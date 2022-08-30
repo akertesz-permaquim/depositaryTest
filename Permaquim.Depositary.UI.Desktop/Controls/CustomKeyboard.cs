@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Permaquim.Depositary.UI.Desktop.Controls
 {
@@ -115,8 +117,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             else
             {
                 //SendKeys.SendWait(((CustomButton)sender).Tag.ToString());
-                _activeTextbox.Texts += ((CustomButton)sender).Tag.ToString();
-                _activeTextbox.SelectionStart = _activeTextbox.Texts.Length;
+
+                int pos = _activeTextbox.SelectionStart;
+                _activeTextbox.Texts = _activeTextbox.Texts.Insert(pos, ((CustomButton)sender).Tag.ToString());
+                _activeTextbox.SelectionStart = pos +1;
+                //_activeTextbox.Texts += ((CustomButton)sender).Tag.ToString();
+                //_activeTextbox.SelectionStart = _activeTextbox.Texts.Length;
                 _activeTextbox.SelectionLength = 0;
 
                 //Raises event for counter

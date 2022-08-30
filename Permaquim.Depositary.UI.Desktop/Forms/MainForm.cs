@@ -6,16 +6,26 @@ using Permaquim.Depositary.UI.Desktop.Helpers;
 using Permaquim.Depositary.UI.Desktop.CustomExceptions;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 using Permaquim.Depositary.UI.Desktop.Forms;
+using System.Windows.Forms;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
         private const string DEPOSITARIO_NO_INICIALIZADO = "Depositario no inicializado.";
+
+        private const string ERROR = "Error";
+
+        private const string GREENLED = "GREENLED";
+        private const string REDLED = "REDLED";
+
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
+
         private int closingcombination = 0;
+
         private Image _greenLedImage;
         private Image _redLedImage;
+
         private Image _avatarImage;
 
         private int _greenStatusIndicator;
@@ -55,6 +65,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 this.Location = new Point(0, 0);
                 this.Size = new Size(screen.Width, screen.Height);
 
+                if (DatabaseController.CurrentDepositary == null)
+                {
+                    InformationLabel.BackColor = Color.Red;
+                    InformationLabel.Text = "DEPOSITARIO NO INICIALIZADO";
+                    return;
+                }
+
                 _pollingTimer = new System.Windows.Forms.Timer()
                 {
                     Interval = DeviceController.GetPollingInterval(),
@@ -68,19 +85,22 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
-                MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+                AuditController.Log(ex);
             }
             catch (System.FormatException ex)
             {
-                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, ERROR, MessageBoxButtons.OK,MessageBoxIcon.Error);
                 SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+                AuditController.Log(ex);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 AuditController.Log(ex);
                 SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+                AuditController.Log(ex);
             }
         }
         protected override CreateParams CreateParams
@@ -107,11 +127,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             else
             {
-                AuditController.Log(LogTypeEnum.Information, DEPOSITARIO_NO_INICIALIZADO, DEPOSITARIO_NO_INICIALIZADO);
-                SetInformationMessage(InformationTypeEnum.Error, DEPOSITARIO_NO_INICIALIZADO);
+                InformationLabel.BackColor = Color.Red;
+                InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
             }
         }
-
         private void LoadParameters()
         {
             _greenStatusIndicator = ParameterController.GreenStatusIndicator;
@@ -120,8 +139,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void LoadLedImages()
         {
-            _greenLedImage = StyleController.GetImageResource("GREENLED");
-            _redLedImage = StyleController.GetImageResource("REDLED");
+            _greenLedImage = StyleController.GetImageResource(GREENLED);
+            _redLedImage = StyleController.GetImageResource(REDLED);
         }
         private void InitializeDevices()
         {
@@ -215,6 +234,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             string message = DatabaseController.GetBasicconfigurationMessage();
             if(message.Length > 0)
             {
+                AuditController.Log(LogTypeEnum.Exception, message, message);
                 {
                     if (_blockingDialog == null)
                     {
@@ -239,6 +259,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             else
             {
+                AuditController.Log(LogTypeEnum.Exception, MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA), 
+                    MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
                 if (_blockingDialog == null &&
                     (DatabaseController.CurrentOperation == null ||
                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
@@ -253,6 +275,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     _blockingDialog = null;
                 }
             }
+
+        }
+
+        private bool VerifyBagInplace()
+        {
+            return _device.IoBoardStatusProperty.BagState ==
+                IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE;
         }
 
         private void VerifyPreviousFailedoperation()
@@ -262,11 +291,18 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 // si quedó contenido en el escrow debe ser retirado
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                 {
+
+                    AuditController.Log(LogTypeEnum.Exception, 
+                        MultilanguangeController.GetText(MultiLanguageEnum.RETIRE_VALORES_ESCROW),
+                        MultilanguangeController.GetText(MultiLanguageEnum.ERROR_OPERACION_PREVIA));
+
                     _device.OpenEscrow();
                     _pollingTimer.Enabled = false;
                     if (MessageBox.Show(
-                        "Retire el contenido de la pre-bóveda para poder iniciar la operación",
-                        "Error en operación previa", 
+                        //"Retire el contenido de la pre-bóveda para poder iniciar la operación",
+                        MultilanguangeController.GetText(MultiLanguageEnum.RETIRE_VALORES_ESCROW),
+                        //"Error en operación previa", 
+                        MultilanguangeController.GetText(MultiLanguageEnum.ERROR_OPERACION_PREVIA),
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                     {
                         _pollingTimer.Enabled = false;
@@ -373,7 +409,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             TurnAndDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : ";
 
             if (DatabaseController.CurrentTurn == null)
+            {
                 TurnAndDateTimeLabel.Text += MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
+                AuditController.Log(LogTypeEnum.Exception,
+                  MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO),
+                  MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+            }
             else
                 TurnAndDateTimeLabel.Text += DatabaseController.CurrentTurn.TurnoDepositarioId.
                 EsquemaDetalleTurnoId.Nombre;
@@ -386,8 +427,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             if (VerifySchedule())
                 Login();
             else
+            {
                 SetInformationMessage(InformationTypeEnum.Error,
                     MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                AuditController.Log(LogTypeEnum.Exception,
+                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO),
+                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+
+            }
         }
 
         private void Login()
@@ -466,18 +513,36 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 if (VerifySchedule())
                     if (_device.CounterConnected && _device.IoBoardConnected)
                     {
-                        Login();
+                        if (VerifyBagInplace())
+                        {
+                            Login();
+                        }
+                        else
+                        {
+                            SetInformationMessage(InformationTypeEnum.Error,
+                             MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA));
+                            AuditController.Log(LogTypeEnum.Exception,
+                                MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA),
+                                MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA));
+
+                        }
                     }
                     else
                     {
-
-
                         SetInformationMessage(InformationTypeEnum.Error,
                                 MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO));
+                        AuditController.Log(LogTypeEnum.Exception,
+                                             MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO),
+                                             MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO));
                     }
                 else
+                {
                     SetInformationMessage(InformationTypeEnum.Error,
                     MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                    AuditController.Log(LogTypeEnum.Exception,
+                        MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO),
+                        MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                }
             }
         }
 
@@ -533,6 +598,19 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             this.InformationLabel.Text = message;
             this.InformationLabel.Refresh();
+        }
+
+        private void TurnAndDateTimeLabel_Click(object sender, EventArgs e)
+        {
+            if (closingcombination == 3)
+            {
+                Application.Exit();
+                AuditController.Log(LogTypeEnum.Information,
+            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO),
+            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+
+            }
+
         }
     }
 }

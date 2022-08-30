@@ -54,7 +54,7 @@
             this.MainPanel.Controls.Add(this.CounterStatudGroupBox);
             this.MainPanel.Location = new System.Drawing.Point(0, 8);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1232, 632);
+            this.MainPanel.Size = new System.Drawing.Size(1056, 632);
             this.MainPanel.TabIndex = 0;
             this.MainPanel.VisibleChanged += new System.EventHandler(this.MainPanel_VisibleChanged);
             // 
@@ -69,7 +69,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(520, 520);
+            this.BackButton.Location = new System.Drawing.Point(496, 520);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(160, 40);
             this.BackButton.TabIndex = 157;
@@ -86,19 +86,19 @@
             this.IoBoardStatusGroup.Controls.Add(this.IoBoardStatusPropertyGrid);
             this.IoBoardStatusGroup.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.IoBoardStatusGroup.ForeColor = System.Drawing.Color.SteelBlue;
-            this.IoBoardStatusGroup.Location = new System.Drawing.Point(608, 32);
+            this.IoBoardStatusGroup.Location = new System.Drawing.Point(544, 32);
             this.IoBoardStatusGroup.Name = "IoBoardStatusGroup";
-            this.IoBoardStatusGroup.Size = new System.Drawing.Size(600, 481);
+            this.IoBoardStatusGroup.Size = new System.Drawing.Size(488, 481);
             this.IoBoardStatusGroup.TabIndex = 33;
             this.IoBoardStatusGroup.TabStop = false;
             this.IoBoardStatusGroup.Text = "Estado IO Board";
             // 
             // ExecuteIoBoardComandButton
             // 
-            this.ExecuteIoBoardComandButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ExecuteIoBoardComandButton.Location = new System.Drawing.Point(248, 16);
+            this.ExecuteIoBoardComandButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExecuteIoBoardComandButton.Location = new System.Drawing.Point(244, 24);
             this.ExecuteIoBoardComandButton.Name = "ExecuteIoBoardComandButton";
-            this.ExecuteIoBoardComandButton.Size = new System.Drawing.Size(336, 27);
+            this.ExecuteIoBoardComandButton.Size = new System.Drawing.Size(236, 32);
             this.ExecuteIoBoardComandButton.TabIndex = 163;
             this.ExecuteIoBoardComandButton.Text = "Ejecutar";
             this.ExecuteIoBoardComandButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,8 @@
             // IoboardCommandComboBox
             // 
             this.IoboardCommandComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.IoboardCommandComboBox.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.IoboardCommandComboBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.IoboardCommandComboBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.IoboardCommandComboBox.FormattingEnabled = true;
             this.IoboardCommandComboBox.Items.AddRange(new object[] {
             "Open ",
@@ -116,9 +117,9 @@
             "Status ",
             "Empty",
             "Approve"});
-            this.IoboardCommandComboBox.Location = new System.Drawing.Point(8, 16);
+            this.IoboardCommandComboBox.Location = new System.Drawing.Point(4, 24);
             this.IoboardCommandComboBox.Name = "IoboardCommandComboBox";
-            this.IoboardCommandComboBox.Size = new System.Drawing.Size(232, 28);
+            this.IoboardCommandComboBox.Size = new System.Drawing.Size(232, 31);
             this.IoboardCommandComboBox.TabIndex = 162;
             // 
             // IoBoardResponseTextBox
@@ -130,7 +131,7 @@
             this.IoBoardResponseTextBox.BorderSize = 2;
             this.IoBoardResponseTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.IoBoardResponseTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.IoBoardResponseTextBox.Location = new System.Drawing.Point(8, 48);
+            this.IoBoardResponseTextBox.Location = new System.Drawing.Point(4, 72);
             this.IoBoardResponseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.IoBoardResponseTextBox.Multiline = true;
             this.IoBoardResponseTextBox.Name = "IoBoardResponseTextBox";
@@ -140,7 +141,7 @@
             this.IoBoardResponseTextBox.PlaceholderText = "Respuestas de la IO Board";
             this.IoBoardResponseTextBox.SelectionLength = 0;
             this.IoBoardResponseTextBox.SelectionStart = 0;
-            this.IoBoardResponseTextBox.Size = new System.Drawing.Size(232, 424);
+            this.IoBoardResponseTextBox.Size = new System.Drawing.Size(232, 400);
             this.IoBoardResponseTextBox.TabIndex = 161;
             this.IoBoardResponseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.IoBoardResponseTextBox.Texts = "";
@@ -151,9 +152,9 @@
             this.IoBoardStatusPropertyGrid.CategoryForeColor = System.Drawing.Color.SteelBlue;
             this.IoBoardStatusPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(180)))));
             this.IoBoardStatusPropertyGrid.HelpVisible = false;
-            this.IoBoardStatusPropertyGrid.Location = new System.Drawing.Point(248, 51);
+            this.IoBoardStatusPropertyGrid.Location = new System.Drawing.Point(240, 96);
             this.IoBoardStatusPropertyGrid.Name = "IoBoardStatusPropertyGrid";
-            this.IoBoardStatusPropertyGrid.Size = new System.Drawing.Size(336, 421);
+            this.IoBoardStatusPropertyGrid.Size = new System.Drawing.Size(240, 376);
             this.IoBoardStatusPropertyGrid.TabIndex = 0;
             this.IoBoardStatusPropertyGrid.ViewBorderColor = System.Drawing.Color.SteelBlue;
             this.IoBoardStatusPropertyGrid.ViewForeColor = System.Drawing.Color.SteelBlue;
@@ -168,9 +169,9 @@
             this.CounterStatudGroupBox.Controls.Add(this.CounterCommandComboBox);
             this.CounterStatudGroupBox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CounterStatudGroupBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.CounterStatudGroupBox.Location = new System.Drawing.Point(16, 32);
+            this.CounterStatudGroupBox.Location = new System.Drawing.Point(48, 32);
             this.CounterStatudGroupBox.Name = "CounterStatudGroupBox";
-            this.CounterStatudGroupBox.Size = new System.Drawing.Size(584, 481);
+            this.CounterStatudGroupBox.Size = new System.Drawing.Size(488, 481);
             this.CounterStatudGroupBox.TabIndex = 0;
             this.CounterStatudGroupBox.TabStop = false;
             this.CounterStatudGroupBox.Text = "Estado Contadora";
@@ -178,7 +179,7 @@
             // ModeCheckBox
             // 
             this.ModeCheckBox.AutoSize = true;
-            this.ModeCheckBox.Location = new System.Drawing.Point(488, 24);
+            this.ModeCheckBox.Location = new System.Drawing.Point(251, 128);
             this.ModeCheckBox.Name = "ModeCheckBox";
             this.ModeCheckBox.Size = new System.Drawing.Size(75, 18);
             this.ModeCheckBox.TabIndex = 163;
@@ -188,6 +189,7 @@
             // CounterComboBox
             // 
             this.CounterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CounterComboBox.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CounterComboBox.FormattingEnabled = true;
             this.CounterComboBox.Items.AddRange(new object[] {
             "StatusInformation",
@@ -196,9 +198,9 @@
             "ErrorStateInformation",
             "ModeStateInformation ",
             "DoorStateInformation "});
-            this.CounterComboBox.Location = new System.Drawing.Point(248, 56);
+            this.CounterComboBox.Location = new System.Drawing.Point(245, 73);
             this.CounterComboBox.Name = "CounterComboBox";
-            this.CounterComboBox.Size = new System.Drawing.Size(232, 22);
+            this.CounterComboBox.Size = new System.Drawing.Size(230, 31);
             this.CounterComboBox.TabIndex = 162;
             this.CounterComboBox.SelectedIndexChanged += new System.EventHandler(this.CounterComboBox_SelectedIndexChanged);
             // 
@@ -211,7 +213,7 @@
             this.CounterResponseTextBox.BorderSize = 2;
             this.CounterResponseTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CounterResponseTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.CounterResponseTextBox.Location = new System.Drawing.Point(8, 48);
+            this.CounterResponseTextBox.Location = new System.Drawing.Point(8, 72);
             this.CounterResponseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.CounterResponseTextBox.Multiline = true;
             this.CounterResponseTextBox.Name = "CounterResponseTextBox";
@@ -221,7 +223,7 @@
             this.CounterResponseTextBox.PlaceholderText = "Respuestas de la contadora";
             this.CounterResponseTextBox.SelectionLength = 0;
             this.CounterResponseTextBox.SelectionStart = 0;
-            this.CounterResponseTextBox.Size = new System.Drawing.Size(232, 424);
+            this.CounterResponseTextBox.Size = new System.Drawing.Size(232, 400);
             this.CounterResponseTextBox.TabIndex = 161;
             this.CounterResponseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.CounterResponseTextBox.Texts = "";
@@ -229,10 +231,10 @@
             // 
             // ExecuteCounterComandButton
             // 
-            this.ExecuteCounterComandButton.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ExecuteCounterComandButton.Location = new System.Drawing.Point(248, 22);
+            this.ExecuteCounterComandButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExecuteCounterComandButton.Location = new System.Drawing.Point(245, 22);
             this.ExecuteCounterComandButton.Name = "ExecuteCounterComandButton";
-            this.ExecuteCounterComandButton.Size = new System.Drawing.Size(232, 27);
+            this.ExecuteCounterComandButton.Size = new System.Drawing.Size(232, 34);
             this.ExecuteCounterComandButton.TabIndex = 31;
             this.ExecuteCounterComandButton.Text = "Ejecutar";
             this.ExecuteCounterComandButton.UseVisualStyleBackColor = true;
@@ -243,9 +245,9 @@
             this.CounterStatusPropertyGrid.CategoryForeColor = System.Drawing.Color.SteelBlue;
             this.CounterStatusPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(180)))));
             this.CounterStatusPropertyGrid.HelpVisible = false;
-            this.CounterStatusPropertyGrid.Location = new System.Drawing.Point(248, 88);
+            this.CounterStatusPropertyGrid.Location = new System.Drawing.Point(244, 168);
             this.CounterStatusPropertyGrid.Name = "CounterStatusPropertyGrid";
-            this.CounterStatusPropertyGrid.Size = new System.Drawing.Size(328, 384);
+            this.CounterStatusPropertyGrid.Size = new System.Drawing.Size(240, 304);
             this.CounterStatusPropertyGrid.TabIndex = 0;
             this.CounterStatusPropertyGrid.ViewBorderColor = System.Drawing.Color.SteelBlue;
             this.CounterStatusPropertyGrid.ViewForeColor = System.Drawing.Color.SteelBlue;
@@ -253,7 +255,7 @@
             // CounterCommandComboBox
             // 
             this.CounterCommandComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CounterCommandComboBox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CounterCommandComboBox.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CounterCommandComboBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.CounterCommandComboBox.FormattingEnabled = true;
             this.CounterCommandComboBox.Items.AddRange(new object[] {
@@ -278,7 +280,7 @@
             "SwitchToCL"});
             this.CounterCommandComboBox.Location = new System.Drawing.Point(8, 24);
             this.CounterCommandComboBox.Name = "CounterCommandComboBox";
-            this.CounterCommandComboBox.Size = new System.Drawing.Size(232, 22);
+            this.CounterCommandComboBox.Size = new System.Drawing.Size(232, 31);
             this.CounterCommandComboBox.TabIndex = 30;
             // 
             // SupportForm

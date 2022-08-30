@@ -65,6 +65,7 @@
             this.BagContentTabControl.SelectedIndex = 0;
             this.BagContentTabControl.Size = new System.Drawing.Size(776, 408);
             this.BagContentTabControl.TabIndex = 189;
+            this.BagContentTabControl.TabIndexChanged += new System.EventHandler(this.BagContentTabControl_TabIndexChanged);
             // 
             // Billetes
             // 
