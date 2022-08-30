@@ -5,9 +5,10 @@ namespace Permaquim.Depositary.Launcher.Model
     public class InicializacionModel
     {
         public string CodigoExternoDepositario { get; set; }
-
+        public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionTipoDato> AplicacionConfiguracionTipoDato { get; set; } = new();
+        public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> AplicacionConfiguracionValidacionDato { get; set; } = new();
         public List<Depositario.Entities.Tables.Aplicacion.Configuracion> AplicacionConfiguracion { get; set; } = new();
-        public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ConfiguracionEmpresa { get; set; } = new();
+        public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionEmpresa> AplicacionConfiguracionEmpresa { get; set; } = new();
         public List<Depositario.Entities.Tables.Auditoria.TipoLog> AuditoriaTipoLog { get; set; } = new();
         public List<Depositario.Entities.Tables.Banca.Banco> BancaBanco { get; set; } = new();
         public List<Depositario.Entities.Tables.Banca.Cuenta> BancaCuenta { get; set; } = new();
@@ -1127,16 +1128,23 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in SeguridadRol.OrderBy(x => x.DependeDe))
                     {
-                        if (item.DependeDe.HasValue)
+                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
+
+                        if (aplicacionIdOrigen.HasValue)
                         {
-                            Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.DependeDe.Value);
-                            item.DependeDe = dependeDeOrigen;
+                            if (item.DependeDe.HasValue)
+                            {
+                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.DependeDe.Value);
+                                item.DependeDe = dependeDeOrigen;
+                            }
+
+                            item.AplicacionId = aplicacionIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
+                            var newEntitieSeguridadRol = entitiesSeguridadRol.Add(item);
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRol.Id);
                         }
-
-                        Int64 origenId = item.Id;
-
-                        var newEntitieSeguridadRol = entitiesSeguridadRol.Add(item);
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRol.Id);
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
@@ -1154,14 +1162,11 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in SeguridadUsuarioRol)
                     {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
                         Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioId);
                         Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.RolId);
 
-                        if (aplicacionIdOrigen.HasValue && usuarioIdOrigen.HasValue && rolIdOrigen.HasValue)
+                        if (usuarioIdOrigen.HasValue && rolIdOrigen.HasValue)
                         {
-                            item.AplicacionId = aplicacionIdOrigen.Value;
-
                             item.UsuarioId = usuarioIdOrigen.Value;
 
                             item.RolId = rolIdOrigen.Value;
@@ -1322,12 +1327,18 @@ namespace Permaquim.Depositary.Launcher.Model
                 {
                     foreach (var item in BancaTipoCuenta)
                     {
-                        Int64 origenId = item.Id;
+                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
 
-                        var newEntitieBancaTipoCuenta = entitiesBancaTipoCuenta.Add(item);
+                        if (monedaIdOrigen.HasValue)
+                        {
+                            Int64 origenId = item.Id;
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaTipoCuenta.Id);
+                            item.MonedaId = monedaIdOrigen.Value;
 
+                            var newEntitieBancaTipoCuenta = entitiesBancaTipoCuenta.Add(item);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaTipoCuenta.Id);
+                        }
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
@@ -1402,6 +1413,58 @@ namespace Permaquim.Depositary.Launcher.Model
 
             #region Aplicacion
 
+            Depositario.Business.Tables.Aplicacion.ConfiguracionTipoDato entitiesAplicacionConfiguracionTipoDato = new();
+
+            if (AplicacionConfiguracionTipoDato.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Aplicacion.ConfiguracionTipoDato");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in AplicacionConfiguracionTipoDato)
+                    {
+                        Int64 origenId = item.Id;
+
+                        var newEntitieAplicacionConfiguracionTipoDato = entitiesAplicacionConfiguracionTipoDato.Add(item);
+
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracionTipoDato.Id);
+                    }
+
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
+            Depositario.Business.Tables.Aplicacion.ConfiguracionValidacionDato entitiesAplicacionConfiguracionValidacionDato = new();
+
+            if (AplicacionConfiguracionValidacionDato.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Aplicacion.ConfiguracionValidacionDato");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in AplicacionConfiguracionValidacionDato)
+                    {
+                        Int64? tipoDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Aplicacion.ConfiguracionTipoDato", item.TipoDatoId);
+
+                        if (tipoDatoIdOrigen.HasValue)
+                        {
+                            item.TipoDatoId = tipoDatoIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
+                            var newEntitieAplicacionConfiguracionValidacionDato = entitiesAplicacionConfiguracionValidacionDato.Add(item);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracionValidacionDato.Id);
+                        }
+                    }
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
             Depositario.Business.Tables.Aplicacion.Configuracion entitiesAplicacionConfiguracion = new();
 
             if (AplicacionConfiguracion.Count > 0)
@@ -1415,10 +1478,12 @@ namespace Permaquim.Depositary.Launcher.Model
                     foreach (var item in AplicacionConfiguracion)
                     {
                         Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
+                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
 
-                        if (aplicacionIdOrigen.HasValue)
+                        if (aplicacionIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
                         {
                             item.AplicacionId = aplicacionIdOrigen.Value;
+                            item.ValidacionDatoId = validacionDatoIdOrigen.Value;
 
                             Int64 origenId = item.Id;
 
@@ -1433,7 +1498,7 @@ namespace Permaquim.Depositary.Launcher.Model
 
             Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entitiesConfiguracionEmpresa = new();
 
-            if (ConfiguracionEmpresa.Count > 0)
+            if (AplicacionConfiguracionEmpresa.Count > 0)
             {
                 Int64? sincronizacionCabeceraId = null;
 
@@ -1441,13 +1506,15 @@ namespace Permaquim.Depositary.Launcher.Model
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
-                    foreach (var item in ConfiguracionEmpresa)
+                    foreach (var item in AplicacionConfiguracionEmpresa)
                     {
                         Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
+                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
 
-                        if (empresaIdOrigen.HasValue)
+                        if (empresaIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
                         {
                             item.EmpresaId = empresaIdOrigen.Value;
+                            item.ValidacionDatoId = validacionDatoIdOrigen.Value;
 
                             Int64 origenId = item.Id;
 

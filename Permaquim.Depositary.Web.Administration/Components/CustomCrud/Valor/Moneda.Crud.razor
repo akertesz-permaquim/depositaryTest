@@ -187,8 +187,10 @@
                             <div class="col-md-9">
                                 @if ((@Pais_PaisId_entities.Count > 0 && @Pais_PaisId_entities.FirstOrDefault(c => c.Id == @Moneda_entity.PaisId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Moneda_entity.PaisId)"
-                                Data=@Pais_PaisId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Pais_PaisId_entities.Where(x => x.Habilitado == true) : Pais_PaisId_entities.Where(x => x.Habilitado == true || x.Id == Moneda_entity.PaisId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Moneda_entity.PaisId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPais_PaisIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

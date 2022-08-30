@@ -518,27 +518,33 @@ namespace Permaquim.Depositary.Sincronization.Console
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.Id);
 
-                            if (item.DependeDe.HasValue)
-                            {
-                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.DependeDe.Value);
-                                item.DependeDe = dependeDeOrigen;
-                            }
+                            Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
 
-                            //Guardo el id que venia del server.
-                            Int64 origenId = item.Id;
-
-                            //Si se sincronizo antes entonces hago un update con el id propio.
-                            if (idDestino.HasValue)
+                            if (aplicacionIdOrigen.HasValue)
                             {
-                                item.Id = idDestino.Value;
-                                rol.Update(item);
-                            }
-                            else
-                            {
-                                rol.Add(item);
-                            }
+                                if (item.DependeDe.HasValue)
+                                {
+                                    Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.DependeDe.Value);
+                                    item.DependeDe = dependeDeOrigen;
+                                }
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                //Guardo el id que venia del server.
+                                Int64 origenId = item.Id;
+                                item.AplicacionId = aplicacionIdOrigen.Value;
+
+                                //Si se sincronizo antes entonces hago un update con el id propio.
+                                if (idDestino.HasValue)
+                                {
+                                    item.Id = idDestino.Value;
+                                    rol.Update(item);
+                                }
+                                else
+                                {
+                                    rol.Add(item);
+                                }
+
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                            }
                         }
                         SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                     }
@@ -559,17 +565,15 @@ namespace Permaquim.Depositary.Sincronization.Console
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.UsuarioRol", item.Id);
 
-                            Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
                             Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioId);
                             Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.RolId);
 
-                            if (usuarioIdOrigen.HasValue && aplicacionIdOrigen.HasValue && rolIdOrigen.HasValue)
+                            if (usuarioIdOrigen.HasValue && rolIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
-                                item.AplicacionId = aplicacionIdOrigen.Value;
                                 item.UsuarioId = usuarioIdOrigen.Value;
                                 item.RolId = rolIdOrigen.Value;
 

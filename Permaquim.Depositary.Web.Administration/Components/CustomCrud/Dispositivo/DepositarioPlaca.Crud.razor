@@ -259,8 +259,10 @@
                             <div class="col-md-9">
                                 @if ((@TipoPlaca_TipoPlacaId_entities.Count > 0 && @TipoPlaca_TipoPlacaId_entities.FirstOrDefault(c => c.Id == @DepositarioPlaca_entity.TipoPlacaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioPlaca_entity.TipoPlacaId)"
-                                Data=@TipoPlaca_TipoPlacaId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? TipoPlaca_TipoPlacaId_entities.Where(x => x.Habilitado == true) : TipoPlaca_TipoPlacaId_entities.Where(x => x.Habilitado == true || x.Id == DepositarioPlaca_entity.TipoPlacaId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioPlaca_entity.TipoPlacaId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoPlaca_TipoPlacaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -666,7 +668,7 @@ else
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
         Depositary.Business.Tables.Dispositivo.DepositarioPlaca crud = new();
-                DepositarioPlaca_entity.DepositarioId = DepositarioId;
+        DepositarioPlaca_entity.DepositarioId = DepositarioId;
         foreach (var property in DepositarioPlaca_entity.GetType().GetProperties())
         {
             switch (property.Name)

@@ -220,8 +220,10 @@
                             <div class="col-md-9">
                                 @if ((@Tipo_TipoValorId_entities.Count > 0 && @Tipo_TipoValorId_entities.FirstOrDefault(c => c.Id == @Denominacion_entity.TipoValorId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Denominacion_entity.TipoValorId)"
-                                Data=@Tipo_TipoValorId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Tipo_TipoValorId_entities.Where(x => x.Habilitado == true) : Tipo_TipoValorId_entities.Where(x => x.Habilitado == true || x.Id == Denominacion_entity.TipoValorId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Denominacion_entity.TipoValorId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipo_TipoValorIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -271,11 +273,6 @@
                             <div class="col-md-9">
                                 <RadzenTextBox style="display: block" @bind-Value="@(Denominacion_entity.CodigoCcTalk)" Name="CodigoCcTalk" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenTextBox>
-                                @if (@crudMode != CrudMode.Delete)
-                                {
-                                    <RadzenRequiredValidator Component="CodigoCcTalk" Text="CodigoCcTalk is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>
-                                }
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">

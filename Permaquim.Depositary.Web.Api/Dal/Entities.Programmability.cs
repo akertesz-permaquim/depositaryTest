@@ -396,23 +396,9 @@ using System.Text;
 				        
 				public class ColumnNames
 				{
-					public const string Rol = "Rol";
-					public const string DependeDe = "DependeDe";
-					public const string UsuarioCreacion = "UsuarioCreacion";
-					public const string FechaCreacion = "FechaCreacion";
-					public const string UsuarioModificacion = "UsuarioModificacion";
-					public const string FechaModificacion = "FechaModificacion";
-					public const string Aplicacion = "Aplicacion";
 				}
 				public enum FieldEnum : int
                 {
-					Rol,
-					DependeDe,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion,
-					Aplicacion
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -420,20 +406,6 @@ using System.Text;
                 public ObtenerRolesPorUsuario()
                 {
                 }
-             [DataItemAttributeFieldName("Rol","Rol")]
-             public String Rol { get; set; }
-             [DataItemAttributeFieldName("DependeDe","DependeDe")]
-             public String DependeDe { get; set; }
-             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             public String UsuarioCreacion { get; set; }
-             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
-             public DateTime? FechaCreacion { get; set; }
-             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             public String UsuarioModificacion { get; set; }
-             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime? FechaModificacion { get; set; }
-             [DataItemAttributeFieldName("Aplicacion","Aplicacion")]
-             public String Aplicacion { get; set; }
 				
 			} //Class ObtenerRolesPorUsuario 
 			

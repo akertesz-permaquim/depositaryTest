@@ -178,8 +178,9 @@
                  <div class="col-md-9">
                      @if((@TipoContadora_TipoContadoraId_entities.Count > 0 && @TipoContadora_TipoContadoraId_entities.FirstOrDefault( c => c.Id == @ComandoContadora_entity.TipoContadoraId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ComandoContadora_entity.TipoContadoraId)"
-                                     Data=@TipoContadora_TipoContadoraId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? TipoContadora_TipoContadoraId_entities.Where(x => x.Habilitado == true) : TipoContadora_TipoContadoraId_entities.Where(x => x.Habilitado == true || x.Id == ComandoContadora_entity.TipoContadoraId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ComandoContadora_entity.TipoContadoraId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectTipoContadora_TipoContadoraIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }

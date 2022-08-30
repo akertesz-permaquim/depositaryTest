@@ -112,6 +112,10 @@
                  </RadzenCheckBox>
              </Template>
      </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.TipoContadora" Property="PollTime" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("POLLTIME",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+     </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.TipoContadora" Property="Sleeptime" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("SLEEPTIME",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+     </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.TipoContadora" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
              <Template Context="data">
                  <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
@@ -194,8 +198,9 @@
                  <div class="col-md-9">
                      @if((@Modelo_ModeloId_entities.Count > 0 && @Modelo_ModeloId_entities.FirstOrDefault( c => c.Id == @TipoContadora_entity.ModeloId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(TipoContadora_entity.ModeloId)"
-                                     Data=@Modelo_ModeloId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? Modelo_ModeloId_entities.Where(x => x.Habilitado == true) : Modelo_ModeloId_entities.Where(x => x.Habilitado == true || x.Id == TipoContadora_entity.ModeloId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(TipoContadora_entity.ModeloId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectModelo_ModeloIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }
@@ -329,6 +334,26 @@
                      </div>
                      <div class="col-md-9">
                  <RadzenCheckBox @bind-Value=@TipoContadora_entity.RtsEnable  Name="RtsEnableCheckBox" TValue="bool" Change=@(args => RtsEnableChange(args, @TipoContadora_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
+                     </div>
+                 </div>
+                 <div style="margin-bottom: 1rem" class="row">
+                     <div class="col-md-3">
+                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("POLLTIME",dataLenguaje) Component="PollTime" style="width: 100%">
+                         </RadzenLabel>
+                     </div>
+                     <div class="col-md-9">
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoContadora_entity.PollTime)" Name="PollTime" Disabled="@(crudMode==CrudMode.Delete)" >
+                     </RadzenNumeric>
+                     </div>
+                 </div>
+                 <div style="margin-bottom: 1rem" class="row">
+                     <div class="col-md-3">
+                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("SLEEPTIME",dataLenguaje) Component="Sleeptime" style="width: 100%">
+                         </RadzenLabel>
+                     </div>
+                     <div class="col-md-9">
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoContadora_entity.Sleeptime)" Name="Sleeptime" Disabled="@(crudMode==CrudMode.Delete)" >
+                     </RadzenNumeric>
                      </div>
                  </div>
                  <div style="margin-bottom: 1rem" class="row">

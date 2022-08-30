@@ -4,14 +4,11 @@
     {
         public static List<MonitorEntities.DepositarioMonitor> ObtenerDepositarios(Int64 pUsuarioId)
         {
-            //List<Depositary.Entities.Procedures.Dispositivo.ObtenerDepositarios> resultado = new List<Depositary.Entities.Procedures.Dispositivo.ObtenerDepositarios>();
-            //Depositary.Business.Procedures.Dispositivo.ObtenerDepositarios oSP = new Depositary.Business.Procedures.Dispositivo.ObtenerDepositarios();
-
             List<MonitorEntities.DepositarioMonitor> resultado = new();
             List<Depositary.Entities.Relations.Dispositivo.Depositario> depositariosAccesibles = new();
 
             //Obtengo el listado de depositarios que se pueden ver segun el perfil del usuario
-            depositariosAccesibles = ObtenerListadoDepositariosPorPerfil(VisualizacionController.ObtenerPerfilVisualizacionPorUsuario(pUsuarioId).Id);
+            depositariosAccesibles = ObtenerListadoDepositariosPorPerfil(pUsuarioId);
 
             foreach (var depositario in depositariosAccesibles)
             {
@@ -32,12 +29,15 @@
                 MonitorEntities.DepositarioMonitor depositarioMonitor = new();
                 double totalEnBolsa = 0;
 
+                var sector = depositario.SectorId;
+                var sucursal = sector.SucursalId;
+
                 depositarioMonitor.DepositarioId = depositario.Id;
                 depositarioMonitor.Nombre = depositario.Nombre;
                 depositarioMonitor.Descripcion = depositario.Descripcion;
-                depositarioMonitor.Sector = depositario.SectorId.Nombre;
-                depositarioMonitor.Sucursal = depositario.SectorId.SucursalId.Nombre;
-                depositarioMonitor.Empresa = depositario.SectorId.SucursalId.EmpresaId.Nombre;
+                depositarioMonitor.Sector = sector.Nombre;
+                depositarioMonitor.Sucursal = sucursal.Nombre;
+                depositarioMonitor.Empresa = sucursal.EmpresaId.Nombre;
                 depositarioMonitor.NumeroSerie = depositario.NumeroSerie;
                 depositarioMonitor.CodigoExterno = depositario.CodigoExterno;
                 depositarioMonitor.Modelo = depositario.ModeloId.Nombre;
@@ -53,6 +53,28 @@
                     depositarioMonitor.PorcentajeOcupacionbolsa = OperacionController.ObtenerPorcentajeOcupacionBolsa(bolsaColocada.Value);
                 else
                     depositarioMonitor.PorcentajeOcupacionbolsa = 0;
+
+                //Obtenemos la configuracion de porcentajes de bolsa de la empresa
+                string parametroPorcentajeContenedorRojo = AplicacionController.ObtenerConfiguracionEmpresa("PORCENTAJE_CONTENEDOR_ROJO", sucursal._EmpresaId);
+                string parametroPorcentajeContenedorAmarillo = AplicacionController.ObtenerConfiguracionEmpresa("PORCENTAJE_CONTENEDOR_AMARILLO", sucursal._EmpresaId);
+
+                double porcentajeContenedorRojo;
+                double porcentajeContenedorAmarillo;
+
+                double.TryParse(parametroPorcentajeContenedorAmarillo, out porcentajeContenedorAmarillo);
+                double.TryParse(parametroPorcentajeContenedorRojo, out porcentajeContenedorRojo);
+
+                //En funcion del porcentaje de ocupacion de bolsa ponemos el semaforo en rojo, amarillo o verde.
+                if (depositarioMonitor.PorcentajeOcupacionbolsa >= porcentajeContenedorRojo)
+                {
+                    depositarioMonitor.SemaforoOcupacionBolsa = "Rojo";
+                }
+                else if (depositarioMonitor.PorcentajeOcupacionbolsa >= porcentajeContenedorAmarillo)
+                {
+                    depositarioMonitor.SemaforoOcupacionBolsa = "Amarillo";
+                }
+                else
+                    depositarioMonitor.SemaforoOcupacionBolsa = "Verde";
 
 
                 if (transaccion.Count > 0)
@@ -70,71 +92,99 @@
 
             }
 
-            //resultado = oSP.Items();
-
             return resultado;
         }
 
-        public static List<Depositary.Entities.Relations.Dispositivo.Depositario> ObtenerListadoDepositariosPorPerfil(Int64 pPerfilId)
+        public static List<Depositary.Entities.Relations.Dispositivo.Depositario> ObtenerListadoDepositariosPorPerfil(Int64 pUsuarioId)
         {
             List<Depositary.Entities.Relations.Dispositivo.Depositario> resultado = new();
-            Int64 tipoPerfilId = new();
 
-            //Verificamos si es un perfil de admin, grupo, empresa, sucursal o sector
-            Depositary.Business.Relations.Visualizacion.Perfil oPerfil = new();
-            oPerfil.Where.Add(Depositary.Business.Relations.Visualizacion.Perfil.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-            oPerfil.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Visualizacion.Perfil.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, pPerfilId);
+            var perfilVisualizacion = VisualizacionController.ObtenerPerfilVisualizacionPorUsuario(pUsuarioId);
 
-            oPerfil.Items();
-
-            if (oPerfil.Result.Count > 0)
+            if (perfilVisualizacion != null)
             {
-                tipoPerfilId = oPerfil.Result.FirstOrDefault()._PerfilTipoId;
-                Depositary.Business.Relations.Dispositivo.Depositario oDepositario = new();
-                oDepositario.Where.Add(Depositary.Business.Relations.Dispositivo.Depositario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                Int64 tipoPerfilId = new();
+                //Verificamos si es un perfil de admin, grupo, empresa, sucursal o sector
+                Depositary.Business.Relations.Visualizacion.Perfil oPerfil = new();
+                oPerfil.Where.Add(Depositary.Business.Relations.Visualizacion.Perfil.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                oPerfil.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Visualizacion.Perfil.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, perfilVisualizacion.Id);
 
-                Depositary.Business.Tables.Visualizacion.PerfilTipo oPerfilTipo = new();
-                oPerfilTipo.Where.Add(Depositary.Business.Tables.Visualizacion.PerfilTipo.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                oPerfilTipo.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Visualizacion.PerfilTipo.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, tipoPerfilId);
+                oPerfil.Items();
 
-                Depositary.Business.Tables.Visualizacion.PerfilItem oPerfilItem = new();
-                oPerfilItem.Where.Add(Depositary.Business.Tables.Visualizacion.PerfilItem.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                oPerfilItem.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Visualizacion.PerfilItem.ColumnEnum.PerfilId, Depositary.sqlEnum.OperandEnum.Equal, pPerfilId);
-
-                switch (tipoPerfilId)
+                if (oPerfil.Result.Count > 0)
                 {
-                    case 0: //0=No especificado
-                        oPerfilTipo.OrderBy.Add(Depositary.Business.Tables.Visualizacion.PerfilTipo.ColumnEnum.EsAdministrador, Depositary.sqlEnum.DirEnum.DESC);
-                        oPerfilTipo.Items();
+                    tipoPerfilId = oPerfil.Result.FirstOrDefault()._PerfilTipoId;
+                    Depositary.Business.Relations.Dispositivo.Depositario oDepositario = new();
+                    oDepositario.Where.Add(Depositary.Business.Relations.Dispositivo.Depositario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
-                        if (oPerfilTipo.Result.Count > 0)
-                        {
-                            if (oPerfilTipo.Result.FirstOrDefault().EsAdministrador)
+                    Depositary.Business.Tables.Visualizacion.PerfilTipo oPerfilTipo = new();
+                    oPerfilTipo.Where.Add(Depositary.Business.Tables.Visualizacion.PerfilTipo.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                    oPerfilTipo.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Visualizacion.PerfilTipo.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, tipoPerfilId);
+
+                    Depositary.Business.Tables.Visualizacion.PerfilItem oPerfilItem = new();
+                    oPerfilItem.Where.Add(Depositary.Business.Tables.Visualizacion.PerfilItem.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                    oPerfilItem.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Visualizacion.PerfilItem.ColumnEnum.PerfilId, Depositary.sqlEnum.OperandEnum.Equal, perfilVisualizacion.Id);
+
+                    switch (tipoPerfilId)
+                    {
+                        case (Int64)VisualizacionEntities.TipoPerfil.NoEspecificado: //0=No especificado
+                            oPerfilTipo.OrderBy.Add(Depositary.Business.Tables.Visualizacion.PerfilTipo.ColumnEnum.EsAdministrador, Depositary.sqlEnum.DirEnum.DESC);
+                            oPerfilTipo.Items();
+
+                            if (oPerfilTipo.Result.Count > 0)
                             {
-                                resultado = oDepositario.Items();
+                                if (oPerfilTipo.Result.FirstOrDefault().EsAdministrador)
+                                {
+                                    resultado = oDepositario.Items();
+                                }
                             }
-                        }
-                        break;
-                    case 1://1=Grupo
-                        resultado = oDepositario.Items();
-                        break;
-                    case 2://2=Empresa
-                        List<Int64> listadoEmpresasId = new();
-                        oPerfilItem.Items();
-                        foreach (var perfilItem in oPerfilItem.Result)
-                        {
-                            listadoEmpresasId.Add(perfilItem.IdTablaReferencia);
-                        }
-                        Depositary.Business.Relations.Directorio.Empresa oEmpresa = new();
-                        if (listadoEmpresasId.Count > 0)
-                        {
-                            oEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-
-                            oEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoEmpresasId);
-                            oEmpresa.Items();
-                            foreach (var empresa in oEmpresa.Result)
+                            break;
+                        case (Int64)VisualizacionEntities.TipoPerfil.Grupo://1=Grupo
+                            resultado = oDepositario.Items();
+                            break;
+                        case (Int64)VisualizacionEntities.TipoPerfil.Empresa://2=Empresa
+                            List<Int64> listadoEmpresasId = new();
+                            oPerfilItem.Items();
+                            foreach (var perfilItem in oPerfilItem.Result)
                             {
-                                foreach (var sucursal in empresa.ListOf_Sucursal_EmpresaId)
+                                listadoEmpresasId.Add(perfilItem.IdTablaReferencia);
+                            }
+                            Depositary.Business.Relations.Directorio.Empresa oEmpresa = new();
+                            if (listadoEmpresasId.Count > 0)
+                            {
+                                oEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+
+                                oEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoEmpresasId);
+                                oEmpresa.Items();
+                                foreach (var empresa in oEmpresa.Result)
+                                {
+                                    foreach (var sucursal in empresa.ListOf_Sucursal_EmpresaId)
+                                    {
+                                        foreach (var sector in sucursal.ListOf_Sector_SucursalId)
+                                        {
+                                            foreach (var depositario in sector.ListOf_Depositario_SectorId)
+                                            {
+                                                resultado.Add(depositario);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case (Int64)VisualizacionEntities.TipoPerfil.Sucursal://3=Sucursal
+                            List<Int64> listadoSucursalesId = new();
+                            oPerfilItem.Items();
+                            foreach (var perfilItem in oPerfilItem.Result)
+                            {
+                                listadoSucursalesId.Add(perfilItem.IdTablaReferencia);
+                            }
+                            Depositary.Business.Relations.Directorio.Sucursal oSucursal = new();
+                            if (listadoSucursalesId.Count > 0)
+                            {
+                                oSucursal.Where.Add(Depositary.Business.Relations.Directorio.Sucursal.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                                oSucursal.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Sucursal.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoSucursalesId);
+                                oSucursal.Items();
+                                foreach (var sucursal in oSucursal.Result)
                                 {
                                     foreach (var sector in sucursal.ListOf_Sector_SucursalId)
                                     {
@@ -145,24 +195,21 @@
                                     }
                                 }
                             }
-                        }
-                        break;
-                    case 3://3=Sucursal
-                        List<Int64> listadoSucursalesId = new();
-                        oPerfilItem.Items();
-                        foreach (var perfilItem in oPerfilItem.Result)
-                        {
-                            listadoSucursalesId.Add(perfilItem.IdTablaReferencia);
-                        }
-                        Depositary.Business.Relations.Directorio.Sucursal oSucursal = new();
-                        if (listadoSucursalesId.Count > 0)
-                        {
-                            oSucursal.Where.Add(Depositary.Business.Relations.Directorio.Sucursal.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                            oSucursal.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Sucursal.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoSucursalesId);
-                            oSucursal.Items();
-                            foreach (var sucursal in oSucursal.Result)
+                            break;
+                        case (Int64)VisualizacionEntities.TipoPerfil.Sector://4=Sector
+                            List<Int64> listadoSectoresId = new();
+                            oPerfilItem.Items();
+                            foreach (var perfilItem in oPerfilItem.Result)
                             {
-                                foreach (var sector in sucursal.ListOf_Sector_SucursalId)
+                                listadoSectoresId.Add(perfilItem.IdTablaReferencia);
+                            }
+                            Depositary.Business.Relations.Directorio.Sector oSector = new();
+                            if (listadoSectoresId.Count > 0)
+                            {
+                                oSector.Where.Add(Depositary.Business.Relations.Directorio.Sector.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                                oSector.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Sector.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoSectoresId);
+                                oSector.Items();
+                                foreach (var sector in oSector.Result)
                                 {
                                     foreach (var depositario in sector.ListOf_Depositario_SectorId)
                                     {
@@ -170,32 +217,11 @@
                                     }
                                 }
                             }
-                        }
-                        break;
-                    case 4://4=Sector
-                        List<Int64> listadoSectoresId = new();
-                        oPerfilItem.Items();
-                        foreach (var perfilItem in oPerfilItem.Result)
-                        {
-                            listadoSectoresId.Add(perfilItem.IdTablaReferencia);
-                        }
-                        Depositary.Business.Relations.Directorio.Sector oSector = new();
-                        if (listadoSectoresId.Count > 0)
-                        {
-                            oSector.Where.Add(Depositary.Business.Relations.Directorio.Sector.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                            oSector.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Sector.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoSectoresId);
-                            oSector.Items();
-                            foreach (var sector in oSector.Result)
-                            {
-                                foreach (var depositario in sector.ListOf_Depositario_SectorId)
-                                {
-                                    resultado.Add(depositario);
-                                }
-                            }
-                        }
-                        break;
+                            break;
+                    }
                 }
             }
+
             return resultado;
         }
 

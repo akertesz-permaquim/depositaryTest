@@ -103,6 +103,10 @@ a, .btn-link {
     background-color: silver;
 }
 
+.row-highlight-disabled {
+    background-color: burlywood;
+}
+
 .rz-expanded-row-template {
     background-color: silver;
     padding: 0.625rem;

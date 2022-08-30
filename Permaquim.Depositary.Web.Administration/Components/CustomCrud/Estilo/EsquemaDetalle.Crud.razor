@@ -243,8 +243,10 @@
                         <div class="col-md-9">
                             @if ((@TipoEsquemaDetalle_entities.Count > 0 && @TipoEsquemaDetalle_entities.FirstOrDefault(c => c.Id == @EsquemaDetalle_entity.AplicacionId) != null) || crudMode != CrudMode.Delete)
                             {
-                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(EsquemaDetalle_entity.AplicacionId)"
-                                Data=@Aplicacion_entities TextProperty="Nombre" ValueProperty="Id"
+                                var dataSet = crudMode == CrudMode.Add ? TipoEsquemaDetalle_entities.Where(x => x.Habilitado == true) : TipoEsquemaDetalle_entities.Where(x => x.Habilitado == true || x.Id == EsquemaDetalle_entity.AplicacionId);
+                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(EsquemaDetalle_entity.AplicacionId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault)" />
                             }
                             else
@@ -263,8 +265,10 @@
                         <div class="col-md-9">
                             @if ((@TipoEsquemaDetalle_entities.Count > 0 && @TipoEsquemaDetalle_entities.FirstOrDefault(c => c.Id == @EsquemaDetalle_entity.TipoEsquemaDetalleId) != null) || crudMode != CrudMode.Delete)
                             {
-                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(EsquemaDetalle_entity.TipoEsquemaDetalleId)"
-                                Data=@TipoEsquemaDetalle_entities TextProperty="Nombre" ValueProperty="Id"
+                                var dataSet = crudMode == CrudMode.Add ? TipoEsquemaDetalle_entities.Where(x => x.Habilitado == true) : TipoEsquemaDetalle_entities.Where(x => x.Habilitado == true || x.Id == EsquemaDetalle_entity.TipoEsquemaDetalleId);
+                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(EsquemaDetalle_entity.TipoEsquemaDetalleId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoEsquemaDetalleValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault)" />
                             }

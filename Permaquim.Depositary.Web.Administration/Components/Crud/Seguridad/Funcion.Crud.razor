@@ -191,8 +191,9 @@
                  <div class="col-md-9">
                      @if((@Aplicacion_AplicacionId_entities.Count > 0 && @Aplicacion_AplicacionId_entities.FirstOrDefault( c => c.Id == @Funcion_entity.AplicacionId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Funcion_entity.AplicacionId)"
-                                     Data=@Aplicacion_AplicacionId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true) : Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true || x.Id == Funcion_entity.AplicacionId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Funcion_entity.AplicacionId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }
@@ -213,8 +214,9 @@
                  <div class="col-md-9">
                      @if((@TipoFuncion_TipoId_entities.Count > 0 && @TipoFuncion_TipoId_entities.FirstOrDefault( c => c.Id == @Funcion_entity.TipoId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Funcion_entity.TipoId)"
-                                     Data=@TipoFuncion_TipoId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? TipoFuncion_TipoId_entities.Where(x => x.Habilitado == true) : TipoFuncion_TipoId_entities.Where(x => x.Habilitado == true || x.Id == Funcion_entity.TipoId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Funcion_entity.TipoId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectTipoFuncion_TipoIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }

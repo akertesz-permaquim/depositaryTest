@@ -215,8 +215,10 @@
                             <div class="col-md-9">
                                 @if ((@TipoMenu_TipoId_entities.Count > 0 && @TipoMenu_TipoId_entities.FirstOrDefault(c => c.Id == @Menu_entity.TipoId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.TipoId)"
-                                Data=@TipoMenu_TipoId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? TipoMenu_TipoId_entities.Where(x => x.Habilitado == true) : TipoMenu_TipoId_entities.Where(x => x.Habilitado == true || x.Id == Menu_entity.TipoId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.TipoId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoMenu_TipoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -267,8 +269,10 @@
                             <div class="col-md-9">
                                 @if ((@Funcion_FuncionId_entities.Count > 0 && @Funcion_FuncionId_entities.FirstOrDefault(c => c.Id == @Menu_entity.FuncionId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.FuncionId)"
-                                Data=@Funcion_FuncionId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Funcion_FuncionId_entities.Where(x => x.Habilitado == true) : Funcion_FuncionId_entities.Where(x => x.Habilitado == true || x.Id == Menu_entity.FuncionId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Menu_entity.FuncionId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectFuncion_FuncionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -304,8 +308,9 @@
                             <div class="col-md-9">
                                 @if ((@Menu_DependeDe_entities.Count > 0 && @Menu_DependeDe_entities.FirstOrDefault(c => c.Id == @Menu_entity.DependeDe) != null) || crudMode != CrudMode.Delete)
                                 {
+                                    var dataSet = crudMode == CrudMode.Add ? Menu_DependeDe_entities.Where(x => x.Habilitado == true) : Menu_DependeDe_entities.Where(x => x.Habilitado == true || x.Id == Menu_entity.DependeDe);
                                     <RadzenDropDown Name="dropDependeDe" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.Contains" AllowClear="true" TValue="Int64?" Class="w-100" @bind-Value="@(Menu_entity.DependeDe)"
-                                Data=@Menu_DependeDe_entities TextProperty="Nombre" ValueProperty="Id"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMenu_DependeDeValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

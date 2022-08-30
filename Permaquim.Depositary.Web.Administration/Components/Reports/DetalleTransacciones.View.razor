@@ -39,6 +39,7 @@
                             </div>
                             <div class="col col-md-3">
                                 <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesView.fechaDesde) Max="@(parametrosDetalleTransaccionesView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="Fecha desde is required" Style="position: inherit" />
                                 <RadzenCompareValidator Visible=@(parametrosDetalleTransaccionesView.fechaHasta.HasValue) Value=@(parametrosDetalleTransaccionesView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="La fecha desde debe ser menor a la fecha hasta" Style="position: inherit" />
                             </div>
                             <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
@@ -47,6 +48,7 @@
                             </div>
                             <div class="col col-md-3">
                                 <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesView.fechaHasta) Min="@(parametrosDetalleTransaccionesView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="Fecha hasta is required" Style="position: inherit" />
                                 <RadzenCompareValidator Visible=@(parametrosDetalleTransaccionesView.fechaDesde.HasValue) Value=@(parametrosDetalleTransaccionesView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="La fecha hasta debe ser mayor a la fecha desde" Style="position: inherit" />
                             </div>
                         </div>
@@ -57,8 +59,8 @@
                             </div>
                             <div class="col col-md-auto">
                                 <RadzenDropDown AllowClear="true" Name="dropDownEmpresas" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosDetalleTransaccionesView.empresasSeleccionadas) Multiple="true" Placeholder="Seleccione empresas" Data=@dataEmpresasVisiblesUsuario TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
-                                        Change=@(args => OnChangeEmpresas(args)) Class="w-100" />
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.empresaSeleccionada) Placeholder="Seleccione empresa" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
+                                        Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
                             </div>
                             <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
                                 <RadzenLabel Text="Sucursales :" Component="dropDownSucursales" style="width: 100%">
@@ -66,8 +68,8 @@
                             </div>
                             <div class="col col-md-auto">
                                 <RadzenDropDown AllowClear="true" Name="dropDownSucursales" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosDetalleTransaccionesView.sucursalesSeleccionadas) Multiple="true" Placeholder="Seleccione sucursales" Data=@dataSucursalesVisiblesUsuario TextProperty="SucursalNombre" ValueProperty="SucursalId"
-                                        Change=@(args => OnChangeSucursales(args)) Class="w-100" />
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.sucursalSeleccionada) Placeholder="Seleccione sucursal" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
+                                        Change=@(args => OnChangeSucursal(args)) Class="w-100" />
                             </div>
                             <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
                                 <RadzenLabel Text="Sectores :" Component="dropDownSectores" style="width: 100%">
@@ -75,7 +77,56 @@
                             </div>
                             <div class="col col-md-auto">
                                 <RadzenDropDown AllowClear="true" Name="dropDownSectores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosDetalleTransaccionesView.sectoresSeleccionados) Multiple="true" Placeholder="Seleccione sectores" Data=@dataSectoresVisiblesUsuario TextProperty="SectorNombre" ValueProperty="SectorId"
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.sectorSeleccionado) Placeholder="Seleccione sector" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
+                                        Class="w-100" />
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
+                                <RadzenLabel Text="Contenedores :" Component="dropDownContenedores" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col col-md-auto">
+                                <RadzenDropDown AllowClear="true" Name="dropDownContenedores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.contenedoresSeleccionados) Multiple="true" Placeholder="Seleccione contenedores" Data=@dataContenedores TextProperty="NombreIdentificador" ValueProperty="ContenedorId"
+                                        Class="w-100" />
+                            </div>
+                            <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
+                                <RadzenLabel Text="Turnos :" Component="dropDownTurnos" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col col-md-auto">
+                                <RadzenDropDown AllowClear="true" Name="dropDownTurnos" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.turnosSeleccionados) Multiple="true" Placeholder="Seleccione turnos" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
+                                        Class="w-100" />
+                            </div>
+                            <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
+                                <RadzenLabel Text="Usuarios :" Component="dropDownUsuarios" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col col-md-auto">
+                                <RadzenDropDown AllowClear="true" Name="dropDownUsuarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.usuariosSeleccionados) Multiple="true" Placeholder="Seleccione usuarios" Data=@dataUsuarios TextProperty="NombreyApellido" ValueProperty="UsuarioId"
+                                        Class="w-100" />
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
+                                <RadzenLabel Text="Depositarios :" Component="dropDownDepositarios" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col col-md-auto">
+                                <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.depositarioSeleccionado) Placeholder="Seleccione depositario" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
+                                        Class="w-100" />
+                            </div>
+                            <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
+                                <RadzenLabel Text="Origenes :" Component="dropDownOrigenes" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col col-md-auto">
+                                <RadzenDropDown AllowClear="true" Name="dropDownOrigenes" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        @bind-Value=@(parametrosDetalleTransaccionesView.origenesSeleccionados) Multiple="true" Placeholder="Seleccione origenes" Data=@dataOrigenes TextProperty="OrigenNombre" ValueProperty="OrigenId"
                                         Class="w-100" />
                             </div>
                         </div>
@@ -104,11 +155,25 @@
             <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
         </EmptyTemplate>
         <Columns>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Depositario" Title="Depositario" Frozen="false" Sortable="true" Filterable="true" Width="60px">
-            </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="TransaccionId" Title="TransaccionId" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="FechaTransaccion" Title="FechaTransaccion" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Empresa" Title="Empresa" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Sucursal" Title="Sucursal" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Sector" Title="Sector" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Depositario" Title="Depositario" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Usuario" Title="Usuario" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Turno" Title="Turno" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Contenedor" Title="Contenedor" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="10%">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Origen" Title="Origen" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="10%">
             </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransacciones" Property="Moneda" Title="Moneda" Frozen="false" Sortable="true" Filterable="true" Width="60px">
             </RadzenDataGridColumn>
@@ -133,20 +198,38 @@
     {
         public DateTime? fechaDesde { get; set; }
         public DateTime? fechaHasta { get; set; }
-        public IEnumerable<Int64> empresasSeleccionadas = new Int64[] { };
-        public IEnumerable<Int64> sucursalesSeleccionadas = new Int64[] { };
-        public IEnumerable<Int64> sectoresSeleccionados = new Int64[] { };
+        public Int64? empresaSeleccionada { get; set; }
+        public Int64? sucursalSeleccionada { get; set; }
+        public Int64? sectorSeleccionado { get; set; }
+        public Int64? depositarioSeleccionado { get; set; }
+        public IEnumerable<Int64> usuariosSeleccionados = new Int64[] { };
+        public IEnumerable<Int64> contenedoresSeleccionados = new Int64[] { };
+        public IEnumerable<Int64> turnosSeleccionados = new Int64[] { };
+        public IEnumerable<Int64> origenesSeleccionados = new Int64[] { };
     }
 
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
 
-    private List<DirectorioEntities.Empresa> dataEmpresasVisiblesUsuario = new();
-    private List<DirectorioEntities.Sucursal> dataSucursalesVisiblesUsuario = new();
-    private List<DirectorioEntities.Sector> dataSectoresVisiblesUsuario = new();
+
+    private List<DirectorioEntities.Empresa> empresasUsuario = new();
+    private List<DirectorioEntities.Sucursal> sucursalesUsuario = new();
+    private List<DirectorioEntities.Sector> sectoresUsuario = new();
+    private List<DispositivoEntities.Depositario> depositariosUsuario = new();
+
+    private List<DirectorioEntities.Empresa> dataEmpresasCombo = new();
+    private List<DirectorioEntities.Sucursal> dataSucursalesCombo = new();
+    private List<DirectorioEntities.Sector> dataSectoresCombo = new();
+    private List<DispositivoEntities.Depositario> dataDepositariosCombo = new();
+
+    private List<Entities.Origen> dataOrigenes = new();
+    private List<TransaccionEntities.Contenedor> dataContenedores = new();
+    private List<SeguridadEntities.Usuario> dataUsuarios = new();
+    private List<TurnoEntities.TurnoComboReporte> dataTurnos = new();
 
     private parametros parametrosDetalleTransaccionesView = new();
 
@@ -166,8 +249,10 @@
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         if (TransaccionId == null)
         {
-            await Task.Run(CargarPerfilVisualizacion);
+            await Task.Run(CargarCombosBusqueda);
+            //Por defecto las fechas desde y hasta son dia de hoy.
             parametrosDetalleTransaccionesView.fechaDesde = DateTime.Today;
+            parametrosDetalleTransaccionesView.fechaHasta = DateTime.Today;
             estaCargandoParametrosReporte = false;
         }
         else
@@ -175,67 +260,43 @@
     }
 
     #region Form events
-    void OnChangeEmpresas(object value)
+    void OnChangeEmpresa(object value)
     {
-        //Selecciono del combo de sucursales las que estan asociadas a las empresas seleccionadas
-        cargarSucursalesAsociadasEmpresa();
-        cargarSectoresAsociadosSucursal();
-    }
-
-    void OnChangeSucursales(object value)
-    {
-        //Selecciono del combo de sectores los que esten asociados a las sucursales seleccionadas
-        cargarSectoresAsociadosSucursal();
-    }
-
-    void cargarSucursalesAsociadasEmpresa()
-    {
-        List<Int64> sucursalesAsociadasEmpresa = new();
-        parametrosDetalleTransaccionesView.sucursalesSeleccionadas = new Int64[] { };
-        if (parametrosDetalleTransaccionesView.empresasSeleccionadas != null)
+        if (value != null)
         {
-            if (parametrosDetalleTransaccionesView.empresasSeleccionadas.Count() > 0)
-            {
-                foreach (var empresa in parametrosDetalleTransaccionesView.empresasSeleccionadas)
-                {
-                    var sucursalesAsociadas = dataSucursalesVisiblesUsuario.Where(x => x.EmpresaId == empresa);
-                    if (sucursalesAsociadas != null)
-                    {
-                        foreach (var sucursal in sucursalesAsociadas)
-                        {
-                            sucursalesAsociadasEmpresa.Add(sucursal.SucursalId);
-                        }
-                    }
-                }
-            }
+            dataSucursalesCombo = sucursalesUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
         }
-        parametrosDetalleTransaccionesView.sucursalesSeleccionadas = sucursalesAsociadasEmpresa.AsEnumerable();
-    }
-
-    void cargarSectoresAsociadosSucursal()
-    {
-        List<Int64> sectoresAsociadosSucursal = new();
-        parametrosDetalleTransaccionesView.sectoresSeleccionados = new Int64[] { };
-        if (parametrosDetalleTransaccionesView.sucursalesSeleccionadas != null)
+        else
         {
-            if (parametrosDetalleTransaccionesView.sucursalesSeleccionadas.Count() > 0)
-            {
-                foreach (var sucursal in parametrosDetalleTransaccionesView.sucursalesSeleccionadas)
-                {
-                    var sectoresAsociados = dataSectoresVisiblesUsuario.Where(x => x.SucursalId == sucursal);
-                    if (sectoresAsociados != null)
-                    {
-                        foreach (var sector in sectoresAsociados)
-                        {
-                            sectoresAsociadosSucursal.Add(sector.SectorId);
-                        }
-                    }
-                }
-            }
+            dataSucursalesCombo = new();
+            parametrosDetalleTransaccionesView.sucursalSeleccionada = null;
+
+            dataSectoresCombo = new();
+            parametrosDetalleTransaccionesView.sectorSeleccionado = null;
+
+            dataDepositariosCombo = new();
+            parametrosDetalleTransaccionesView.depositarioSeleccionado = null;
         }
-        parametrosDetalleTransaccionesView.sectoresSeleccionados = sectoresAsociadosSucursal.AsEnumerable();
     }
 
+    void OnChangeSucursal(object value)
+    {
+        if (value != null)
+        {
+            dataSectoresCombo = sectoresUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+        }
+        else
+        {
+            dataSectoresCombo = new();
+            parametrosDetalleTransaccionesView.sectorSeleccionado = null;
+
+            dataDepositariosCombo = new();
+            parametrosDetalleTransaccionesView.depositarioSeleccionado = null;
+        }
+
+    }
 
     void resetParametros()
     {
@@ -248,11 +309,18 @@
     /// <summary>
     /// Loads main entity data
     /// </summary>
-    private void CargarPerfilVisualizacion()
+    private void CargarCombosBusqueda()
     {
-        dataEmpresasVisiblesUsuario = DirectorioController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id);
-        dataSucursalesVisiblesUsuario = DirectorioController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id);
-        dataSectoresVisiblesUsuario = DirectorioController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
+        empresasUsuario = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
+        dataEmpresasCombo = empresasUsuario; //El unico combo estatico es el de mayor jerarquia
+        sucursalesUsuario = ReportController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id, true);
+        sectoresUsuario = ReportController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
+        depositariosUsuario = ReportController.ObtenerListadoDepositariosPorPerfil(dataUsuario.Id);
+        dataDepositariosCombo = depositariosUsuario; //En principio vemos todos los depositarios accesibles por perfil.
+        dataUsuarios = ReportController.ObtenerUsuarios(false);
+        dataContenedores = ReportController.ObtenerContenedores(false);
+        dataOrigenes = ReportController.ObtenerOrigenes(false);
+        dataTurnos = ReportController.ObtenerTurnos();
     }
     #endregion
 
@@ -262,42 +330,202 @@
     /// </summary>
     private void LoadMainEntityData()
     {
+        estaCargandoGrillaReporte = true;
+        DetalleTransacciones_entities = new();
         Depositary.Business.Views.Reporte.DetalleTransacciones entity = new();
-        if (TransaccionId.HasValue)
+        List<Depositary.Entities.Views.Reporte.DetalleTransacciones> transacciones = new();
+
+        //Si no tiene empresas ni sucursales ni sectores visibles por perfil entonces le traigo siempre datasource vacio.
+        if (empresasUsuario.Count == 0 && sucursalesUsuario.Count == 0 && sectoresUsuario.Count == 0)
         {
-            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.TransaccionId, Depositary.sqlEnum.OperandEnum.In, TransaccionId.Value);
-            DetalleTransacciones_entities = entity.Items();
+            DetalleTransacciones_entities = new();
         }
-        else if (dataSectoresVisiblesUsuario.Count > 0)
+        else
         {
-            List<Int64> sectoresSeleccionados = new();
+            //Construimos el where general segun las empresas/sucursales/sectores/depositarios que puede ver el usuario
+            entity.Where.OpenParentheses();
+            entity.Where.OpenParentheses();
 
-            if (parametrosDetalleTransaccionesView.sectoresSeleccionados == null)
-                parametrosDetalleTransaccionesView.sectoresSeleccionados = new Int64[] { };
-
-            if (parametrosDetalleTransaccionesView.sectoresSeleccionados.Count() > 0)
+            for (int i = 0; i < sectoresUsuario.Count; i++)
             {
-                sectoresSeleccionados = parametrosDetalleTransaccionesView.sectoresSeleccionados.ToList();
-            }
-            else
-            {
-                foreach (var sector in dataSectoresVisiblesUsuario)
+                if (i > 0)
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
+                entity.Where.OpenParentheses();
+                entity.Where.Add(Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
+                var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
+                if (sucursal != null)
                 {
-                    sectoresSeleccionados.Add(sector.SectorId);
+                    entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
+                    var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
+                    if (empresa != null)
+                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.DetalleTransacciones.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
                 }
+                entity.Where.CloseParentheses();
             }
-            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.In, sectoresSeleccionados);
+
+            entity.Where.CloseParentheses();
+
+            //Construimos el where segun los parametros de los controles
+            if (parametrosDetalleTransaccionesView.empresaSeleccionada.HasValue || parametrosDetalleTransaccionesView.sucursalSeleccionada.HasValue || parametrosDetalleTransaccionesView.sectorSeleccionado.HasValue || parametrosDetalleTransaccionesView.depositarioSeleccionado.HasValue)
+            {
+                entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                entity.Where.OpenParentheses();
+
+                int cantidadFiltrosCustom = 0;
+
+                if (parametrosDetalleTransaccionesView.empresaSeleccionada.HasValue)
+                {
+                    entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, parametrosDetalleTransaccionesView.empresaSeleccionada.Value);
+                    cantidadFiltrosCustom++;
+                }
+
+                if (parametrosDetalleTransaccionesView.sucursalSeleccionada.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosDetalleTransaccionesView.sucursalSeleccionada.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosDetalleTransaccionesView.sucursalSeleccionada.Value);
+                }
+
+                if (parametrosDetalleTransaccionesView.sectorSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosDetalleTransaccionesView.sectorSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosDetalleTransaccionesView.sectorSeleccionado.Value);
+                }
+
+                if (parametrosDetalleTransaccionesView.depositarioSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosDetalleTransaccionesView.depositarioSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosDetalleTransaccionesView.depositarioSeleccionado.Value);
+                }
+
+                entity.Where.CloseParentheses();
+            }
+
+            entity.Where.CloseParentheses();
+
             if (parametrosDetalleTransaccionesView.fechaDesde.HasValue)
+            {
+                parametrosDetalleTransaccionesView.fechaDesde = new DateTime(parametrosDetalleTransaccionesView.fechaDesde.Value.Year, parametrosDetalleTransaccionesView.fechaDesde.Value.Month, parametrosDetalleTransaccionesView.fechaDesde.Value.Day, 0, 0, 0);
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosDetalleTransaccionesView.fechaDesde.Value);
+            }
 
             if (parametrosDetalleTransaccionesView.fechaHasta.HasValue)
+            {
+                parametrosDetalleTransaccionesView.fechaHasta = new DateTime(parametrosDetalleTransaccionesView.fechaHasta.Value.Year, parametrosDetalleTransaccionesView.fechaHasta.Value.Month, parametrosDetalleTransaccionesView.fechaHasta.Value.Day, 23, 59, 59);
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosDetalleTransaccionesView.fechaHasta.Value);
+            }
 
-            DetalleTransacciones_entities = entity.Items();
+            if (parametrosDetalleTransaccionesView.usuariosSeleccionados == null)
+                parametrosDetalleTransaccionesView.usuariosSeleccionados = new Int64[] { };
+            else
+            {
+                if (parametrosDetalleTransaccionesView.usuariosSeleccionados.Count() > 0)
+                {
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                    entity.Where.OpenParentheses();
+
+                    int usuariosFiltrados = 0;
+
+                    foreach (var usuarioId in parametrosDetalleTransaccionesView.usuariosSeleccionados)
+                    {
+                        if (usuariosFiltrados > 0)
+                            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, usuarioId);
+                        else
+                            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, usuarioId);
+
+                        usuariosFiltrados++;
+                    }
+                    entity.Where.CloseParentheses();
+                }
+            }
+
+            if (parametrosDetalleTransaccionesView.contenedoresSeleccionados == null)
+                parametrosDetalleTransaccionesView.contenedoresSeleccionados = new Int64[] { };
+            else
+            {
+                if (parametrosDetalleTransaccionesView.contenedoresSeleccionados.Count() > 0)
+                {
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                    entity.Where.OpenParentheses();
+
+                    int contenedoresFiltrados = 0;
+
+                    foreach (var contenedor in parametrosDetalleTransaccionesView.contenedoresSeleccionados)
+                    {
+                        if (contenedoresFiltrados > 0)
+                            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.ContenedorId, Depositary.sqlEnum.OperandEnum.Equal, contenedor);
+                        else
+                            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.ContenedorId, Depositary.sqlEnum.OperandEnum.Equal, contenedor);
+
+                        contenedoresFiltrados++;
+                    }
+
+                    entity.Where.CloseParentheses();
+                }
+            }
+
+            if (parametrosDetalleTransaccionesView.turnosSeleccionados == null)
+                parametrosDetalleTransaccionesView.turnosSeleccionados = new Int64[] { };
+            else
+            {
+                if (parametrosDetalleTransaccionesView.turnosSeleccionados.Count() > 0)
+                {
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                    entity.Where.OpenParentheses();
+
+                    int turnosFiltrados = 0;
+
+                    foreach (var turno in parametrosDetalleTransaccionesView.turnosSeleccionados)
+                    {
+                        if (turnosFiltrados > 0)
+                            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+                        else
+                            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+
+                        turnosFiltrados++;
+                    }
+
+                    entity.Where.CloseParentheses();
+                }
+            }
+
+            if (parametrosDetalleTransaccionesView.origenesSeleccionados == null)
+                parametrosDetalleTransaccionesView.origenesSeleccionados = new Int64[] { };
+            else
+            {
+                if (parametrosDetalleTransaccionesView.origenesSeleccionados.Count() > 0)
+                {
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                    entity.Where.OpenParentheses();
+
+                    int origenesFiltrados = 0;
+
+                    foreach (var turno in parametrosDetalleTransaccionesView.origenesSeleccionados)
+                    {
+                        if (origenesFiltrados > 0)
+                            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.OrigenId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+                        else
+                            entity.Where.Add(Depositary.Business.Views.Reporte.DetalleTransacciones.ColumnEnum.OrigenId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+
+                        origenesFiltrados++;
+                    }
+
+                    entity.Where.CloseParentheses();
+                }
+            }
+
+            transacciones = entity.Items();
         }
-        else //Si el usuario no tiene sectores accesibles o no se indico una transaccion entonces cargo set vacio.
-            DetalleTransacciones_entities = new();
-
 
     }
     #endregion

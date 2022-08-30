@@ -38,6 +38,7 @@
                             </div>
                             <div class="col col-md-3">
                                 <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesSobreView.fechaDesde) Max="@(parametrosDetalleTransaccionesSobreView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="Fecha desde is required" Style="position: inherit" />
                                 <RadzenCompareValidator Visible=@(parametrosDetalleTransaccionesSobreView.fechaHasta.HasValue) Value=@(parametrosDetalleTransaccionesSobreView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="La fecha desde debe ser menor a la fecha hasta" Style="position: inherit" />
                             </div>
                             <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
@@ -46,6 +47,7 @@
                             </div>
                             <div class="col col-md-3">
                                 <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesSobreView.fechaHasta) Min="@(parametrosDetalleTransaccionesSobreView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="Fecha hasta is required" Style="position: inherit" />
                                 <RadzenCompareValidator Visible=@(parametrosDetalleTransaccionesSobreView.fechaDesde.HasValue) Value=@(parametrosDetalleTransaccionesSobreView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="La fecha hasta debe ser mayor a la fecha desde" Style="position: inherit" />
                             </div>
                         </div>
@@ -169,7 +171,9 @@
         if (TransaccionId == null)
         {
             await Task.Run(CargarPerfilVisualizacion);
+            //Por defecto las fechas desde y hasta son dia de hoy.
             parametrosDetalleTransaccionesSobreView.fechaDesde = DateTime.Today;
+            parametrosDetalleTransaccionesSobreView.fechaHasta = DateTime.Today;
             estaCargandoParametrosReporte = false;
         }
         else
@@ -255,9 +259,9 @@
     /// </summary>
     private void CargarPerfilVisualizacion()
     {
-        dataEmpresasVisiblesUsuario = DirectorioController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id);
-        dataSucursalesVisiblesUsuario = DirectorioController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id);
-        dataSectoresVisiblesUsuario = DirectorioController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
+        dataEmpresasVisiblesUsuario = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id);
+        dataSucursalesVisiblesUsuario = ReportController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id);
+        dataSectoresVisiblesUsuario = ReportController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
     }
     #endregion
     /// <summary>

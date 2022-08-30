@@ -15,4 +15,10 @@
         public DateTime? FechaModificacion { get; set; }
 
     }
+
+    public class Origen
+    {
+        public Int64 OrigenId { get; set; }
+        public string OrigenNombre { get; set; }
+    }
 }

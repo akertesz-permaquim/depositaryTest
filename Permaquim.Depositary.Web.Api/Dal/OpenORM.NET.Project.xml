@@ -19,10 +19,7 @@
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
-  <SelectedViews>
-    <string>Operacion.VistaTransaccion</string>
-    <string>Valor.VistaDenominacion</string>
-  </SelectedViews>
+  <SelectedViews />
   <SelectedStoredProcedures>
     <string>Dispositivo.ObtenerDepositarios</string>
     <string>Operacion.ObtenerDetalleTransaccion</string>
@@ -275,6 +272,8 @@
   <SelectedTables>
     <string>Aplicacion.Configuracion</string>
     <string>Aplicacion.ConfiguracionEmpresa</string>
+    <string>Aplicacion.ConfiguracionTipoDato</string>
+    <string>Aplicacion.ConfiguracionValidacionDato</string>
     <string>Auditoria.Log</string>
     <string>Auditoria.TipoLog</string>
     <string>Banca.Banco</string>

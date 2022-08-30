@@ -54,12 +54,13 @@
   <MappedStoredProcedures />
   <SelectedTables>
     <string>Aplicacion.Configuracion</string>
+    <string>Aplicacion.ConfiguracionTipoDato</string>
+    <string>Aplicacion.ConfiguracionValidacionDato</string>
     <string>Banca.Banco</string>
     <string>Banca.Cuenta</string>
     <string>Banca.TipoCuenta</string>
     <string>Dispositivo.ComandoContadora</string>
     <string>Dispositivo.ComandoPlaca</string>
-    <string>Dispositivo.ConfiguracionDepositario</string>
     <string>Dispositivo.DepositarioEstado</string>
     <string>Dispositivo.DepositarioMoneda</string>
     <string>Dispositivo.TipoConfiguracionDepositario</string>
@@ -69,12 +70,9 @@
     <string>Geografia.Zona</string>
     <string>Impresion.Ticket</string>
     <string>Impresion.TipoTicket</string>
-    <string>Operacion.Contenedor</string>
     <string>Operacion.TipoContenedor</string>
     <string>Operacion.TipoEvento</string>
     <string>Operacion.TipoTransaccion</string>
-    <string>Operacion.Turno</string>
-    <string>Operacion.TurnoUsuario</string>
     <string>Seguridad.Funcion</string>
     <string>Seguridad.TipoAplicacion</string>
     <string>Seguridad.TipoFuncion</string>

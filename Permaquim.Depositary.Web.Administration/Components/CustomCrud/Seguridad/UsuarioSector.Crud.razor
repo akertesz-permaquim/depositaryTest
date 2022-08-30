@@ -200,8 +200,9 @@
                             <div class="col-md-9">
                                 @if ((@Sector_SectorId_entities.Count > 0 && @Sector_SectorId_entities.FirstOrDefault(c => c.Id == @UsuarioSector_entity.SectorId) != null) || crudMode != CrudMode.Delete)
                                 {
+                                    var dataSet = crudMode == CrudMode.Add ? Sector_SectorId_entities.Where(x => x.Habilitado == true) : Sector_SectorId_entities.Where(x => x.Habilitado == true || x.Id == UsuarioSector_entity.SectorId);
                                     <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioSector_entity.SectorId)"
-                                Data=@Sector_SectorId_entities TextProperty="Nombre" ValueProperty="Id"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectSector_SectorIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

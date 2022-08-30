@@ -321,7 +321,7 @@
 
     private void ObtenerListadoEmpresasPorPerfil()
     {
-        dataEmpresasAccesibles = DirectorioController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
+        dataEmpresasAccesibles = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
         //Dejo todas las empresas marcadas
         if (dataEmpresasAccesibles.Count > 0)
         {

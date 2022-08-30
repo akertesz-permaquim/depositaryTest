@@ -17,6 +17,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         private const string ENTIDAD_CONFIGURACION = "Aplicacion.Configuracion";
         private const string ENTIDAD_CONFIGURACIONEMPRESA = "Aplicacion.ConfiguracionEmpresa";
+        private const string ENTIDAD_TIPODATO = "Aplicacion.ConfiguracionTipoDato";
+        private const string ENTIDAD_VALIDACIONDATO = "Aplicacion.ConfiguracionValidacionDato";
 
         #region Endpoints
 
@@ -32,6 +34,26 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
             try
             {
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroAplicacionTipoDatoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPODATO);
+
+                if (SincroAplicacionTipoDatoId.HasValue)
+                {
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPODATO) ? data.SincroDates[ENTIDAD_TIPODATO] : fechaSincronizacionDefault;
+                    data.TiposDatos = ObtenerTiposDatosBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroAplicacionTipoDatoId.Value);
+                }
+
+                //Iniciamos un registro de sincronizacion de la entidad.
+                Int64? SincroAplicacionValidacionDatoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_VALIDACIONDATO);
+
+                if (SincroAplicacionValidacionDatoId.HasValue)
+                {
+                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_VALIDACIONDATO) ? data.SincroDates[ENTIDAD_VALIDACIONDATO] : fechaSincronizacionDefault;
+                    data.ValidacionesDatos = ObtenerValidacionesDatosBD(fechaDiferencial);
+                    SynchronizationController.finalizarCabeceraSincronizacion(SincroAplicacionValidacionDatoId.Value);
+                }
+
                 //Iniciamos un registro de sincronizacion de la entidad.
                 Int64? SincroAplicacionConfiguracionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACION);
 
@@ -57,6 +79,70 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
 
             return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("ObtenerTiposDatos")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerTiposDatos()
+        {
+            AplicacionTipoDatoModel data = new();
+
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
+
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPODATO);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.TiposDatos = ObtenerTiposDatosBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPODATO));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
+        }
+
+        [HttpGet]
+        [Route("ObtenerValidacionesDatos")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerValidacionesDatos()
+        {
+            AplicacionValidacionDatoModel data = new();
+
+            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
+
+            //Iniciamos un registro de sincronizacion de la entidad.
+            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_VALIDACIONDATO);
+
+            if (SincronizacionId.HasValue)
+            {
+                try
+                {
+                    data.ValidacionesDatos = ObtenerValidacionesDatosBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_VALIDACIONDATO));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+
+                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+                return Ok(data);
+            }
+            else
+            {
+                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+            }
         }
 
         [HttpGet]
@@ -126,6 +212,55 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #endregion
 
         #region Controllers
+        private List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionTipoDato> ObtenerTiposDatosBD(DateTime fechaUltimaSincronizacion)
+        {
+            List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionTipoDato> result = new();
+            DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionTipoDato oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionTipoDato.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionTipoDato.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+
+            try
+            {
+                oEntities.Items();
+                if (oEntities.Result.Count > 0)
+                {
+                    foreach (var item in oEntities.Result)
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> ObtenerValidacionesDatosBD(DateTime fechaUltimaSincronizacion)
+        {
+            List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> result = new();
+            DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionValidacionDato oEntities = new();
+            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionValidacionDato.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionValidacionDato.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+
+            try
+            {
+                oEntities.Items();
+                if (oEntities.Result.Count > 0)
+                {
+                    foreach (var item in oEntities.Result)
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
         private List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> ObtenerConfiguracionesBD(DateTime fechaUltimaSincronizacion)
         {
             List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> result = new();

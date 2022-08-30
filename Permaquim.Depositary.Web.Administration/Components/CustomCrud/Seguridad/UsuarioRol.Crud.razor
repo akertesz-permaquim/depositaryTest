@@ -89,24 +89,6 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioId Data="@Usuario_UsuarioId_filter" Change="OnSelectedFilter_UsuarioId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.UsuarioRol" Title=@MultilenguajeController.ObtenerTextoPorClave("APLICACIONID",dataLenguaje) Property="AplicacionId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_AplicacionId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                            <Template>
-                                @if (Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == @context.AplicacionId) != null)
-                                {
-                                    <RadzenLabel Text="@Aplicacion_AplicacionId_entities.FirstOrDefault( c => c.Id == @context.AplicacionId).Nombre" Component="AplicacionId" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                                else
-                                {
-                                    <RadzenLabel Text="No data available" Component="AplicacionId" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                            </Template>
-                            <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                                <RadzenDropDown @bind-Value=@selectedFilter_AplicacionId Data="@Aplicacion_AplicacionId_filter" Change="OnSelectedFilter_AplicacionId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
-                            </FilterTemplate>
-                        </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.UsuarioRol" Title=@MultilenguajeController.ObtenerTextoPorClave("ROLID",dataLenguaje) Property="RolId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_RolId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Rol_RolId_entities.FirstOrDefault(c => c.Id == @context.RolId) != null)
@@ -216,10 +198,12 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                @if ((@Aplicacion_AplicacionId_entities.Count > 0 && @Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == @UsuarioRol_entity.AplicacionId) != null) || crudMode != CrudMode.Delete)
+                                @if ((@Aplicacion_AplicacionId_entities.Count > 0 && @Rol_RolId_entities.FirstOrDefault(c => c.AplicacionId == AplicacionId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioRol_entity.AplicacionId)"
-                                Data=@Aplicacion_AplicacionId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true) : Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true || x.Id == Rol_RolId_entities.Where(x => x.Id == UsuarioRol_entity.RolId).FirstOrDefault().AplicacionId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@AplicacionId"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -240,8 +224,9 @@
                             <div class="col-md-9">
                                 @if ((@Rol_RolId_entities.Count > 0 && @Rol_RolId_entities.FirstOrDefault(c => c.Id == @UsuarioRol_entity.RolId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioRol_entity.RolId)"
-                                Data=@Rol_RolId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioRol_entity.RolId)"
+                                Data=@dataSet_Rol TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectRol_RolIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -319,6 +304,10 @@ else
     /// </summary>
     private List<SeguridadEntities.FuncionRol> dataFunciones;
 
+    private Int64 AplicacionId;
+
+    private List<Depositary.Entities.Tables.Seguridad.Rol> dataSet_Rol;
+
     /// <summary>
     /// Variables to handle Relation between UsuarioRol.UsuarioId and Usuario.Id
     /// </summary>
@@ -332,8 +321,6 @@ else
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Aplicacion Aplicacion_AplicacionId_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Aplicacion>? Aplicacion_AplicacionId_entities;
-    private List<Depositary.Entities.Tables.Seguridad.Aplicacion> Aplicacion_AplicacionId_filter;
-    private IEnumerable<Int64> selectedFilter_AplicacionId;
 
     /// <summary>
     /// Variables to handle Relation between UsuarioRol.RolId and Rol.Id
@@ -400,7 +387,6 @@ else
 
         Depositary.Business.Tables.Seguridad.Aplicacion Aplicacion_AplicacionId_local = new();
         Aplicacion_AplicacionId_entities = Aplicacion_AplicacionId_local.Items();
-        Aplicacion_AplicacionId_filter = Aplicacion_AplicacionId_entities.Where(x => UsuarioRol_entities.Select(x => x.AplicacionId).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Seguridad.Rol Rol_RolId_local = new();
         Rol_RolId_entities = Rol_RolId_local.Items();
@@ -431,6 +417,7 @@ else
         Rol_RolId_entity = new();
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
+        dataSet_Rol = Rol_RolId_entities.Where(x => x.AplicacionId == AplicacionId).ToList();
         crudMode = CrudMode.Add;
     }
     /// <summary>
@@ -440,16 +427,17 @@ else
     private void Edit(Depositary.Entities.Tables.Seguridad.UsuarioRol item, bool delete)
     {
         UsuarioRol_entity = item;
+        dataSet_Rol = Rol_RolId_entities.Where(x => x.Habilitado = true || x.Id == UsuarioRol_entity.RolId).ToList();
         Usuario_UsuarioId_entity = new()
             {
                 Id = Usuario_UsuarioId_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.UsuarioId).Id,
                 Nombre = Usuario_UsuarioId_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.UsuarioId).Nombre
             };
-        Aplicacion_AplicacionId_entity = new()
-            {
-                Id = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.AplicacionId).Id,
-                Nombre = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.AplicacionId).Nombre
-            };
+        //Aplicacion_AplicacionId_entity = new()
+        //    {
+        //        Id = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.AplicacionId).Id,
+        //        Nombre = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.AplicacionId).Nombre
+        //    };
         Rol_RolId_entity = new()
             {
                 Id = Rol_RolId_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.RolId).Id,
@@ -468,6 +456,9 @@ else
                     Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == UsuarioRol_entity.UsuarioModificacion).Nombre
                 };
         }
+
+        AplicacionId = Rol_RolId_entities.FirstOrDefault(x => x.Id == UsuarioRol_entity.RolId).AplicacionId;
+
         if (delete)
             crudMode = CrudMode.Delete;
         else
@@ -648,18 +639,9 @@ else
     /// <param name="item"></param>
     private void SelectAplicacion_AplicacionIdValueChanged(object item)
     {
-    }
-
-    /// <summary>
-    /// selectedFilter_AplicacionId value changed
-    /// </summary>
-    /// <param name="item"></param>
-    private void OnSelectedFilter_AplicacionId_Changed(object value)
-    {
-        if (selectedFilter_AplicacionId != null && !selectedFilter_AplicacionId.Any())
-        {
-            selectedFilter_AplicacionId = null;
-        }
+        var rolesFiltrados = Rol_RolId_entities.Where(x => x.AplicacionId == (Int64)item && x.Habilitado == true).ToList();
+        dataSet_Rol = rolesFiltrados;
+        UsuarioRol_entity.RolId = rolesFiltrados.Count>0 ? rolesFiltrados.FirstOrDefault().Id : 0;
     }
 
     /// <summary>

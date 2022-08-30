@@ -200,8 +200,10 @@
                             <div class="col-md-9">
                                 @if ((@Cuenta_CuentaId_entities.Count > 0 && @Cuenta_CuentaId_entities.FirstOrDefault(c => c.Id == @UsuarioCuenta_entity.CuentaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioCuenta_entity.CuentaId)"
-                                Data=@Cuenta_CuentaId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Cuenta_CuentaId_entities.Where(x => x.Habilitado == true) : Cuenta_CuentaId_entities.Where(x => x.Habilitado == true || x.Id == UsuarioCuenta_entity.CuentaId);
+                                    <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        TValue="Int64" Class="w-100" @bind-Value="@(UsuarioCuenta_entity.CuentaId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectCuenta_CuentaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

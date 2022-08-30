@@ -211,8 +211,10 @@
                             <div class="col-md-9">
                                 @if ((@PerfilTipo_entities.Count > 0 && @PerfilTipo_entities.FirstOrDefault(c => c.Id == @Perfil_entity.PerfilTipoId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Perfil_entity.PerfilTipoId)"
-                                Data=@PerfilTipo_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? PerfilTipo_entities.Where(x => x.Habilitado == true) : PerfilTipo_entities.Where(x => x.Habilitado == true || x.Id == Perfil_entity.PerfilTipoId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Perfil_entity.PerfilTipoId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPerfilTipoValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

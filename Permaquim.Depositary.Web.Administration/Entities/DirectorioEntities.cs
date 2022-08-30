@@ -26,5 +26,7 @@
         public Int64 SectorId { get; set; }
         public string EmpresaSucursalSectorNombre { get; set; }
 
+        public bool Habilitado { get; set; }
+
     }
 }

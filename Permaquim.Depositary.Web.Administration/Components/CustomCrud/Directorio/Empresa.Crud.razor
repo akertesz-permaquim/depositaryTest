@@ -62,7 +62,7 @@
                                 </RadzenButton>
                             </HeaderTemplate>
                             <Template Context="element">
-                                <RadzenButton Icon="format_list_numbered_rtl" title=@MultilenguajeController.ObtenerTextoPorClave("TooltipEmpresas",dataLenguaje) ButtonStyle="ButtonStyle.Primary" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioSucursal",dataFunciones,"PuedeVisualizar") Class="m-1" Click="@(args => ObtenerSucursales(element))" @onclick:stopPropagation="true">
+                                <RadzenButton Icon="format_list_numbered_rtl" title=@MultilenguajeController.ObtenerTextoPorClave("TooltipSucursales",dataLenguaje) ButtonStyle="ButtonStyle.Primary" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioSucursal",dataFunciones,"PuedeVisualizar") Class="m-1" Click="@(args => ObtenerSucursales(element))" @onclick:stopPropagation="true">
                                 </RadzenButton>
                                 <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("DirectorioEmpresa",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                                 </RadzenButton>
@@ -307,8 +307,10 @@
                             <div class="col-md-9">
                                 @if ((@Esquema_EstiloEsquemaId_entities.Count > 0 && @Esquema_EstiloEsquemaId_entities.FirstOrDefault(c => c.Id == @Empresa_entity.EstiloEsquemaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.EstiloEsquemaId)"
-                                Data=@Esquema_EstiloEsquemaId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Esquema_EstiloEsquemaId_entities.Where(x => x.Habilitado == true) : Esquema_EstiloEsquemaId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.EstiloEsquemaId);
+                                    <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.EstiloEsquemaId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEsquema_EstiloEsquemaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -329,8 +331,10 @@
                             <div class="col-md-9">
                                 @if ((@Lenguaje_LenguajeId_entities.Count > 0 && @Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @Empresa_entity.LenguajeId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.LenguajeId)"
-                                Data=@Lenguaje_LenguajeId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true) : Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.LenguajeId);
+                                    <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.LenguajeId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -733,6 +737,7 @@ else
 
         // Sets Crud mode to List
         crudMode = CrudMode.List;
+        rowsEmpresasExpandidas.Clear();
 
         ShowNotification(new NotificationMessage
             {
@@ -815,7 +820,10 @@ else
         }
         else
         {
-            args.Attributes.Add("class", "rz-datatable-even");
+            if (!args.Data.Habilitado)
+                args.Attributes.Add("class", "row-highlight-disabled");
+            else
+                args.Attributes.Add("class", "rz-datatable-even");
         }
     }
 

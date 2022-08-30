@@ -147,12 +147,50 @@
                  </RadzenCheckBox>
              </Template>
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Impresion.Ticket" Property="UsuarioCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Impresion.Ticket" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                 <Template>
+                     @{
+                         var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioCreacion);
+                         if(usuario != null)
+                         {
+                             <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
+                             </RadzenLabel>
+                         }
+                         else
+                         {
+                             <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
+                             </RadzenLabel>                        
+                         }
+                     }
+                 </Template>
+                 <FilterTemplate>
+                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                     <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
+                 </FilterTemplate>
+             </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Impresion.Ticket" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Impresion.Ticket" Property="UsuarioModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Impresion.Ticket" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                 <Template>
+                     @{
+                         var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion);
+                         if(usuario != null)
+                         {
+                             <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
+                             </RadzenLabel>
+                         }
+                         else
+                         {
+                             <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
+                             </RadzenLabel>                        
+                         }
+                     }
+                 </Template>
+                 <FilterTemplate>
+                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                     <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
+                 </FilterTemplate>
+             </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Impresion.Ticket" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
          </Columns>
@@ -185,8 +223,9 @@
                  <div class="col-md-9">
                      @if((@TipoTicket_TipoId_entities.Count > 0 && @TipoTicket_TipoId_entities.FirstOrDefault( c => c.Id == @Ticket_entity.TipoId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.TipoId)"
-                                     Data=@TipoTicket_TipoId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? TipoTicket_TipoId_entities.Where(x => x.Habilitado == true) : TipoTicket_TipoId_entities.Where(x => x.Habilitado == true || x.Id == Ticket_entity.TipoId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.TipoId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectTipoTicket_TipoIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }
@@ -207,8 +246,9 @@
                  <div class="col-md-9">
                      @if((@Modelo_DepositarioModeloId_entities.Count > 0 && @Modelo_DepositarioModeloId_entities.FirstOrDefault( c => c.Id == @Ticket_entity.DepositarioModeloId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.DepositarioModeloId)"
-                                     Data=@Modelo_DepositarioModeloId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? Modelo_DepositarioModeloId_entities.Where(x => x.Habilitado == true) : Modelo_DepositarioModeloId_entities.Where(x => x.Habilitado == true || x.Id == Ticket_entity.DepositarioModeloId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.DepositarioModeloId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectModelo_DepositarioModeloIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }
@@ -493,6 +533,22 @@ else
     private IEnumerable<Int64> selectedFilter_DepositarioModeloId;
  
     /// <summary>
+    /// Variables to handle Relation between Ticket.UsuarioCreacion and Usuario.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioCreacion_filter;
+    private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
+ 
+    /// <summary>
+    /// Variables to handle Relation between Ticket.UsuarioModificacion and Usuario.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
+    private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
+ 
+    /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
@@ -534,6 +590,14 @@ else
         Modelo_DepositarioModeloId_entities = Modelo_DepositarioModeloId_local.Items();
         Modelo_DepositarioModeloId_filter = Modelo_DepositarioModeloId_entities.Where(x => Ticket_entities.Select(x => x.DepositarioModeloId).Distinct().Contains(x.Id)).ToList();
  
+        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
+        Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
+        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Ticket_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
+ 
+        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
+        Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
+        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => Ticket_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
+ 
     }
  
     #endregion
@@ -548,6 +612,8 @@ else
         //Relations entities initialization
         TipoTicket_TipoId_entity = new(); 
         Modelo_DepositarioModeloId_entity = new(); 
+        Usuario_UsuarioCreacion_entity = new(); 
+        Usuario_UsuarioModificacion_entity = new(); 
         crudMode = CrudMode.Add;
     }
     /// <summary>
@@ -565,6 +631,17 @@ else
             Id = Modelo_DepositarioModeloId_entities.FirstOrDefault(c => c.Id == Ticket_entity.DepositarioModeloId).Id, 
             Nombre = Modelo_DepositarioModeloId_entities.FirstOrDefault(c => c.Id == Ticket_entity.DepositarioModeloId).Nombre
             };
+            Usuario_UsuarioCreacion_entity = new() { 
+            Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Ticket_entity.UsuarioCreacion).Id, 
+            Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Ticket_entity.UsuarioCreacion).Nombre
+            };
+            if(Usuario_UsuarioModificacion_entities.Exists(c => c.Id == Ticket_entity.UsuarioModificacion))
+            {
+                 Usuario_UsuarioModificacion_entity = new() { 
+                 Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Ticket_entity.UsuarioModificacion).Id, 
+                 Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Ticket_entity.UsuarioModificacion).Nombre
+                 };
+            }
         if (delete)
             crudMode = CrudMode.Delete;
         else
@@ -769,6 +846,46 @@ else
              Detail = args.Message,
              Duration = 4000
          });
+    }
+ 
+    /// <summary>
+    /// Usuario_UsuarioCreacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectUsuario_UsuarioCreacionValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// selectedFilter_UsuarioCreacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_UsuarioCreacion_Changed(object value)
+    {
+         if(selectedFilter_UsuarioCreacion!=null && !selectedFilter_UsuarioCreacion.Any())
+         {
+             selectedFilter_UsuarioCreacion=null;
+         }
+    }
+ 
+    /// <summary>
+    /// Usuario_UsuarioModificacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectUsuario_UsuarioModificacionValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// selectedFilter_UsuarioModificacion value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_UsuarioModificacion_Changed(object value)
+    {
+         if(selectedFilter_UsuarioModificacion!=null && !selectedFilter_UsuarioModificacion.Any())
+         {
+             selectedFilter_UsuarioModificacion=null;
+         }
     }
  
     /// <summary>

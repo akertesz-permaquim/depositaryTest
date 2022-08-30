@@ -33,9 +33,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             InicializacionModel model = new();
             try
             {
-
+                model.AplicacionConfiguracionTipoDato = ObtenerAplicacionTipoDato();
+                model.AplicacionConfiguracionValidacionDato = ObtenerAplicacionValidacionDato();
                 model.AplicacionConfiguracion = ObtenerAplicacionConfiguracion();
-                model.ConfiguracionEmpresa = ObtenerAplicacionConfiguracionEmpresa();
+                model.AplicacionConfiguracionEmpresa = ObtenerAplicacionConfiguracionEmpresa();
                 model.AuditoriaTipoLog = ObtenerAuditoriaTipoLog();
                 model.BancaBanco = ObtenerBancaBanco();
                 model.BancaCuenta = ObtenerBancaCuenta();
@@ -127,6 +128,18 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionEmpresa> ObtenerAplicacionConfiguracionEmpresa()
         {
             DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionEmpresa entities = new();
+            return entities.Items();
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionTipoDato> ObtenerAplicacionTipoDato()
+        {
+            DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionTipoDato entities = new();
+            return entities.Items();
+        }
+
+        private List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> ObtenerAplicacionValidacionDato()
+        {
+            DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionValidacionDato entities = new();
             return entities.Items();
         }
 

@@ -187,8 +187,9 @@
                  <div class="col-md-9">
                      @if((@Depositario_DepositarioId_entities.Count > 0 && @Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @DepositarioMoneda_entity.DepositarioId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioMoneda_entity.DepositarioId)"
-                                     Data=@Depositario_DepositarioId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? Depositario_DepositarioId_entities.Where(x => x.Habilitado == true) : Depositario_DepositarioId_entities.Where(x => x.Habilitado == true || x.Id == DepositarioMoneda_entity.DepositarioId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioMoneda_entity.DepositarioId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectDepositario_DepositarioIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }
@@ -209,8 +210,9 @@
                  <div class="col-md-9">
                      @if((@Moneda_MonedaId_entities.Count > 0 && @Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @DepositarioMoneda_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioMoneda_entity.MonedaId)"
-                                     Data=@Moneda_MonedaId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? Moneda_MonedaId_entities.Where(x => x.Habilitado == true) : Moneda_MonedaId_entities.Where(x => x.Habilitado == true || x.Id == DepositarioMoneda_entity.MonedaId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioMoneda_entity.MonedaId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectMoneda_MonedaIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }

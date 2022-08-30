@@ -86,6 +86,23 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_AplicacionId Data="@Aplicacion_AplicacionId_filter" Change="OnSelectedFilter_AplicacionId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Title=@MultilenguajeController.ObtenerTextoPorClave("ValidacionDatoId",dataLenguaje) Property="ValidacionDatoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_ValidacionDatoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                 <Template>
+                     @if(ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault( c => c.Id == @context.ValidacionDatoId) != null){
+                         <RadzenLabel Text="@ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault( c => c.Id == @context.ValidacionDatoId).Nombre" Component="ValidacionDatoId" style="width: 100%">
+                             </RadzenLabel>
+                         }
+                         else
+                         {
+                         <RadzenLabel Text="No data available" Component="ValidacionDatoId" style="width: 100%">
+                             </RadzenLabel>                        
+                         }
+                 </Template>
+                 <FilterTemplate>
+                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                     <RadzenDropDown @bind-Value=@selectedFilter_ValidacionDatoId Data="@ConfiguracionValidacionDato_ValidacionDatoId_filter" Change="OnSelectedFilter_ValidacionDatoId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
+                 </FilterTemplate>
+             </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Clave" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Valor" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
@@ -172,8 +189,9 @@
                  <div class="col-md-9">
                      @if((@Aplicacion_AplicacionId_entities.Count > 0 && @Aplicacion_AplicacionId_entities.FirstOrDefault( c => c.Id == @Configuracion_entity.AplicacionId) != null) || crudMode != CrudMode.Delete)
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Configuracion_entity.AplicacionId)"
-                                     Data=@Aplicacion_AplicacionId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                         var dataSet = crudMode == CrudMode.Add ? Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true) : Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true || x.Id == Configuracion_entity.AplicacionId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Configuracion_entity.AplicacionId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                      }
@@ -182,6 +200,29 @@
                          <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
                                      Data=@Aplicacion_AplicacionId_entities TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                    }
+                </div>
+              </div>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ValidacionDatoId",dataLenguaje) Component ="ValidacionDatoId" style="width: 100%">
+                 </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     @if((@ConfiguracionValidacionDato_ValidacionDatoId_entities.Count > 0 && @ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault( c => c.Id == @Configuracion_entity.ValidacionDatoId) != null) || crudMode != CrudMode.Delete)
+                     {
+                         var dataSet = crudMode == CrudMode.Add ? ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true) : ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true || x.Id == Configuracion_entity.ValidacionDatoId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Configuracion_entity.ValidacionDatoId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                     }
+                     else
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                     Data=@ConfiguracionValidacionDato_ValidacionDatoId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete)" />
                     }
                 </div>
@@ -287,6 +328,14 @@ else
     private IEnumerable<Int64> selectedFilter_AplicacionId;
  
     /// <summary>
+    /// Variables to handle Relation between Configuracion.ValidacionDatoId and ConfiguracionValidacionDato.Id
+    /// </summary>
+    private Depositary.Entities.Tables.Aplicacion.ConfiguracionValidacionDato ConfiguracionValidacionDato_ValidacionDatoId_entity = new();
+    private List<Depositary.Entities.Tables.Aplicacion.ConfiguracionValidacionDato>? ConfiguracionValidacionDato_ValidacionDatoId_entities;
+    private List<Depositary.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> ConfiguracionValidacionDato_ValidacionDatoId_filter;
+    private IEnumerable<Int64> selectedFilter_ValidacionDatoId;
+ 
+    /// <summary>
     /// Variables to handle Relation between Configuracion.UsuarioCreacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
@@ -340,6 +389,10 @@ else
         Aplicacion_AplicacionId_entities = Aplicacion_AplicacionId_local.Items();
         Aplicacion_AplicacionId_filter = Aplicacion_AplicacionId_entities.Where(x => Configuracion_entities.Select(x => x.AplicacionId).Distinct().Contains(x.Id)).ToList();
  
+        Depositary.Business.Tables.Aplicacion.ConfiguracionValidacionDato ConfiguracionValidacionDato_ValidacionDatoId_local = new();
+        ConfiguracionValidacionDato_ValidacionDatoId_entities = ConfiguracionValidacionDato_ValidacionDatoId_local.Items();
+        ConfiguracionValidacionDato_ValidacionDatoId_filter = ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => Configuracion_entities.Select(x => x.ValidacionDatoId).Distinct().Contains(x.Id)).ToList();
+ 
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
         Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Configuracion_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
@@ -361,6 +414,7 @@ else
         Configuracion_entity = new();
         //Relations entities initialization
         Aplicacion_AplicacionId_entity = new(); 
+        ConfiguracionValidacionDato_ValidacionDatoId_entity = new(); 
         Usuario_UsuarioCreacion_entity = new(); 
         Usuario_UsuarioModificacion_entity = new(); 
         crudMode = CrudMode.Add;
@@ -375,6 +429,10 @@ else
             Aplicacion_AplicacionId_entity = new() { 
             Id = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == Configuracion_entity.AplicacionId).Id, 
             Nombre = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == Configuracion_entity.AplicacionId).Nombre
+            };
+            ConfiguracionValidacionDato_ValidacionDatoId_entity = new() { 
+            Id = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(c => c.Id == Configuracion_entity.ValidacionDatoId).Id, 
+            Nombre = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(c => c.Id == Configuracion_entity.ValidacionDatoId).Nombre
             };
             Usuario_UsuarioCreacion_entity = new() { 
             Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Configuracion_entity.UsuarioCreacion).Id, 
@@ -555,6 +613,26 @@ else
          if(selectedFilter_AplicacionId!=null && !selectedFilter_AplicacionId.Any())
          {
              selectedFilter_AplicacionId=null;
+         }
+    }
+ 
+    /// <summary>
+    /// ConfiguracionValidacionDato_ValidacionDatoId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(object item)
+    {
+    }
+ 
+    /// <summary>
+    /// selectedFilter_ValidacionDatoId value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelectedFilter_ValidacionDatoId_Changed(object value)
+    {
+         if(selectedFilter_ValidacionDatoId!=null && !selectedFilter_ValidacionDatoId.Any())
+         {
+             selectedFilter_ValidacionDatoId=null;
          }
     }
  

@@ -193,8 +193,10 @@
                             <div class="col-md-9">
                                 @if ((@Moneda_entities.Count > 0 && @Moneda_entities.FirstOrDefault(c => c.Id == @RelacionMonedaSucursal_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaSucursal_entity.MonedaId)"
-                                Data=@Moneda_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Moneda_entities.Where(x => x.Habilitado == true) : Moneda_entities.Where(x => x.Habilitado == true || x.Id == RelacionMonedaSucursal_entity.MonedaId);
+                                    <RadzenDropDown AllowClear="false" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" 
+                                        TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaSucursal_entity.MonedaId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMonedaValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

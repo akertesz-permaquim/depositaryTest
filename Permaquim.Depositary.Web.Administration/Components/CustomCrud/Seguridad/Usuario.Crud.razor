@@ -273,8 +273,10 @@
                             <div class="col-md-9">
                                 @if ((@Empresa_EmpresaId_entities.Count > 0 && @Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.EmpresaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.EmpresaId)"
-                                Data=@Empresa_EmpresaId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Empresa_EmpresaId_entities.Where(x => x.Habilitado == true) : Empresa_EmpresaId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.EmpresaId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.EmpresaId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEmpresa_EmpresaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -295,8 +297,10 @@
                             <div class="col-md-9">
                                 @if ((@Lenguaje_LenguajeId_entities.Count > 0 && @Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.LenguajeId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.LenguajeId)"
-                                Data=@Lenguaje_LenguajeId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true) : Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.LenguajeId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.LenguajeId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -317,8 +321,10 @@
                             <div class="col-md-9">
                                 @if ((@Perfil_PerfilId_entities.Count > 0 && @Perfil_PerfilId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.PerfilId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.PerfilId)"
-                                Data=@Perfil_PerfilId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Perfil_PerfilId_entities.Where(x => x.Habilitado == true) : Perfil_PerfilId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.PerfilId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.PerfilId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPerfil_PerfilIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

@@ -297,8 +297,10 @@
                             <div class="col-md-9">
                                 @if ((@CodigoPostal_entities.Count > 0 && @CodigoPostal_entities.FirstOrDefault(c => c.Id == @Sucursal_entity.CodigoPostalId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.CodigoPostalId)"
-                                Data=@CodigoPostal_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? CodigoPostal_entities.Where(x => x.Habilitado == true) : CodigoPostal_entities.Where(x => x.Habilitado == true || x.Id == Sucursal_entity.CodigoPostalId);
+                                    <RadzenDropDown FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true"
+                                TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.CodigoPostalId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostalValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -319,8 +321,10 @@
                             <div class="col-md-9">
                                 @if ((@Zona_ZonaId_entities.Count > 0 && @Zona_ZonaId_entities.FirstOrDefault(c => c.Id == @Sucursal_entity.ZonaId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.ZonaId)"
-                                Data=@Zona_ZonaId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Zona_ZonaId_entities.Where(x => x.Habilitado == true) : Zona_ZonaId_entities.Where(x => x.Habilitado == true || x.Id == Sucursal_entity.ZonaId);
+                                    <RadzenDropDown FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true"
+                                TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.ZonaId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectZona_ZonaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

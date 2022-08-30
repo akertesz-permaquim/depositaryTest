@@ -212,8 +212,10 @@
                             <div class="col-md-9">
                                 @if ((@Funcion_FuncionId_entities.Count > 0 && @Funcion_FuncionId_entities.FirstOrDefault(c => c.Id == @RolFuncion_entity.FuncionId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RolFuncion_entity.FuncionId)"
-                                Data=@Funcion_FuncionId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Funcion_FuncionId_entities.Where(x => x.Habilitado == true) : Funcion_FuncionId_entities.Where(x => x.Habilitado == true || x.Id == RolFuncion_entity.FuncionId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RolFuncion_entity.FuncionId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectFuncion_FuncionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }

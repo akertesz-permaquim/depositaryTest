@@ -1,4 +1,4 @@
-@page "/OperacionContenedorCrud"
+@page "/SeguridadRolCrud"
 @using Permaquim.Depositary.Web.Administration.Controllers;
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
@@ -6,9 +6,9 @@
  
 @if(dataFunciones != null)
 {
-@if (SeguridadController.VerificarPermisoFuncion("OperacionContenedor",dataFunciones,"PuedeVisualizar"))
+@if (SeguridadController.VerificarPermisoFuncion("SeguridadRol",dataFunciones,"PuedeVisualizar"))
 {
- @if (Contenedor_entities == null)
+ @if (Rol_entities == null)
  {
      <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
  }
@@ -19,21 +19,21 @@
          case CrudMode.Add:
              <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Operacion.Contenedor",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Seguridad.Rol",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;
          case CrudMode.Delete:
              <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Operacion.Contenedor",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Seguridad.Rol",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;
              case CrudMode.Edit:
              <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Operacion.Contenedor",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Seguridad.Rol",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;         
@@ -41,7 +41,7 @@
              <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
                      <div>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Operacion.Contenedor",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Seguridad.Rol",dataLenguaje)</h4>
                      </div>
                  </ChildContent>
              </RadzenBadge>
@@ -51,73 +51,69 @@
      if (crudMode == CrudMode.List)
      {
          <RadzenDataGrid AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-         Data="@Contenedor_entities" TItem="Depositary.Entities.Tables.Operacion.Contenedor" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
+         Data="@Rol_entities" TItem="Depositary.Entities.Tables.Seguridad.Rol" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
          </EmptyTemplate>        
          <Columns>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
                  <HeaderTemplate>
-                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("OperacionContenedor",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
+                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadRol",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                      </RadzenButton>
                      </HeaderTemplate>
                      <Template Context="element">
-                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("OperacionContenedor",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadRol",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                      </RadzenButton>
-                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("OperacionContenedor",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadRol",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                      </RadzenButton>
                  </Template>
                  </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Title=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Property="DepositarioId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_DepositarioId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Title=@MultilenguajeController.ObtenerTextoPorClave("APLICACIONID",dataLenguaje) Property="AplicacionId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_AplicacionId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
-                     @if(Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @context.DepositarioId) != null){
-                         <RadzenLabel Text="@Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @context.DepositarioId).Nombre" Component="DepositarioId" style="width: 100%">
+                     @if(Aplicacion_AplicacionId_entities.FirstOrDefault( c => c.Id == @context.AplicacionId) != null){
+                         <RadzenLabel Text="@Aplicacion_AplicacionId_entities.FirstOrDefault( c => c.Id == @context.AplicacionId).Nombre" Component="AplicacionId" style="width: 100%">
                              </RadzenLabel>
                          }
                          else
                          {
-                         <RadzenLabel Text="No data available" Component="DepositarioId" style="width: 100%">
+                         <RadzenLabel Text="No data available" Component="AplicacionId" style="width: 100%">
                              </RadzenLabel>                        
                          }
                  </Template>
                  <FilterTemplate>
                      <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                     <RadzenDropDown @bind-Value=@selectedFilter_DepositarioId Data="@Depositario_DepositarioId_filter" Change="OnSelectedFilter_DepositarioId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
+                     <RadzenDropDown @bind-Value=@selectedFilter_AplicacionId Data="@Aplicacion_AplicacionId_filter" Change="OnSelectedFilter_AplicacionId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Title=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Property="TipoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_TipoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+     </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+     </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Title=@MultilenguajeController.ObtenerTextoPorClave("DEPENDEDE",dataLenguaje) Property="DependeDe" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_DependeDe" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
-                     @if(TipoContenedor_TipoId_entities.FirstOrDefault( c => c.Id == @context.TipoId) != null){
-                         <RadzenLabel Text="@TipoContenedor_TipoId_entities.FirstOrDefault( c => c.Id == @context.TipoId).Nombre" Component="TipoId" style="width: 100%">
+                     @if(Rol_DependeDe_entities.FirstOrDefault( c => c.Id == @context.DependeDe) != null){
+                         <RadzenLabel Text="@Rol_DependeDe_entities.FirstOrDefault( c => c.Id == @context.DependeDe).Nombre" Component="DependeDe" style="width: 100%">
                              </RadzenLabel>
                          }
                          else
                          {
-                         <RadzenLabel Text="No data available" Component="TipoId" style="width: 100%">
+                         <RadzenLabel Text="No data available" Component="DependeDe" style="width: 100%">
                              </RadzenLabel>                        
                          }
                  </Template>
                  <FilterTemplate>
                      <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                     <RadzenDropDown @bind-Value=@selectedFilter_TipoId Data="@TipoContenedor_TipoId_filter" Change="OnSelectedFilter_TipoId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
+                     <RadzenDropDown @bind-Value=@selectedFilter_DependeDe Data="@Rol_DependeDe_filter" Change="OnSelectedFilter_DependeDe_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="Identificador" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("IDENTIFICADOR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="FechaApertura" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="FechaCierre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACIERRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
              <Template Context="data">
                  <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                  </RadzenCheckBox>
              </Template>
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
                      @{
                          var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioCreacion);
@@ -138,9 +134,9 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
                      @{
                          var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion);
@@ -161,7 +157,7 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.Contenedor" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Rol" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
          </Columns>
          </RadzenDataGrid>
@@ -170,7 +166,7 @@
  
      if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
      {
-             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Operacion.Contenedor" Data="@Contenedor_entity"  @bind-Value="Contenedor_entity" Submit ="Save" Visible ="@(Contenedor_entity != null)">
+             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Seguridad.Rol" Data="@Rol_entity"  @bind-Value="Rol_entity" Submit ="Save" Visible ="@(Rol_entity != null)">
              <ChildContent>
                 @if(crudMode != CrudMode.Add)
                 {
@@ -180,18 +176,41 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-9">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Contenedor_entity.Id)" Name="Id" Disabled="true" >
+                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Rol_entity.Id)" Name="Id" Disabled="true" >
                      </RadzenNumeric>
                      </div>
                  </div>
                 }
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("APLICACIONID",dataLenguaje) Component ="AplicacionId" style="width: 100%">
+                 </RadzenLabel>
+                 </div>
+                 <div class="col-md-9">
+                     @if((@Aplicacion_AplicacionId_entities.Count > 0 && @Aplicacion_AplicacionId_entities.FirstOrDefault( c => c.Id == @Rol_entity.AplicacionId) != null) || crudMode != CrudMode.Delete)
+                     {
+                         var dataSet = crudMode == CrudMode.Add ? Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true) : Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true || x.Id == Rol_entity.AplicacionId);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Rol_entity.AplicacionId)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                     }
+                     else
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                                     Data=@Aplicacion_AplicacionId_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                    }
+                </div>
+              </div>
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
                          <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Component="Nombre" style="width: 100%">
                          </RadzenLabel>
                      </div>
                      <div class="col-md-9">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(Contenedor_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(Rol_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
                          {
@@ -200,91 +219,50 @@
                          }
                      </div>
                  </div>
-             <div style="margin-bottom: 1rem" class="row">
-                 <div class="col-md-3">
-                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Component ="DepositarioId" style="width: 100%">
-                 </RadzenLabel>
-                 </div>
-                 <div class="col-md-9">
-                     @if((@Depositario_DepositarioId_entities.Count > 0 && @Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @Contenedor_entity.DepositarioId) != null) || crudMode != CrudMode.Delete)
-                     {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Contenedor_entity.DepositarioId)"
-                                     Data=@Depositario_DepositarioId_entities TextProperty = "Nombre" ValueProperty = "Id"
-                                     Change=@(args => SelectDepositario_DepositarioIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete)" />
-                     }
-                     else
-                     {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
-                                     Data=@Depositario_DepositarioId_entities TextProperty = "Nombre" ValueProperty = "Id"
-                                     Change=@(args => SelectDepositario_DepositarioIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete)" />
-                    }
-                </div>
-              </div>
-             <div style="margin-bottom: 1rem" class="row">
-                 <div class="col-md-3">
-                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TIPOID",dataLenguaje) Component ="TipoId" style="width: 100%">
-                 </RadzenLabel>
-                 </div>
-                 <div class="col-md-9">
-                     @if((@TipoContenedor_TipoId_entities.Count > 0 && @TipoContenedor_TipoId_entities.FirstOrDefault( c => c.Id == @Contenedor_entity.TipoId) != null) || crudMode != CrudMode.Delete)
-                     {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Contenedor_entity.TipoId)"
-                                     Data=@TipoContenedor_TipoId_entities TextProperty = "Nombre" ValueProperty = "Id"
-                                     Change=@(args => SelectTipoContenedor_TipoIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete)" />
-                     }
-                     else
-                     {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
-                                     Data=@TipoContenedor_TipoId_entities TextProperty = "Nombre" ValueProperty = "Id"
-                                     Change=@(args => SelectTipoContenedor_TipoIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete)" />
-                    }
-                </div>
-              </div>
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("IDENTIFICADOR",dataLenguaje) Component="Identificador" style="width: 100%">
+                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Component="Descripcion" style="width: 100%">
                          </RadzenLabel>
                      </div>
                      <div class="col-md-9">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(Contenedor_entity.Identificador)" Name="Identificador" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(Rol_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
                          {
-                             <RadzenRequiredValidator Component="Identificador" Text="Identificador is required" Style="position: absolute">
+                             <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute">
                              </RadzenRequiredValidator>
                          }
                      </div>
                  </div>
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURA",dataLenguaje) Component="FechaApertura" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                 <div class="col-md-9">
-                     <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Contenedor_entity.FechaApertura)" Name="FechaApertura" Disabled="@(crudMode==CrudMode.Delete)" >
-                     </RadzenDatePicker>
+             <div style="margin-bottom: 1rem" class="row">
+                 <div class="col-md-3">
+                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DEPENDEDE",dataLenguaje) Component ="DependeDe" style="width: 100%">
+                 </RadzenLabel>
                  </div>
-             </div>
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FECHACIERRE",dataLenguaje) Component="FechaCierre" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
                  <div class="col-md-9">
-                     <RadzenDatePicker ShowTime="true" ShowSeconds ="true" style ="width: 25%" @bind-Value="@(Contenedor_entity.FechaCierre)" Name="FechaCierre" Disabled="@(crudMode==CrudMode.Delete)" >
-                     </RadzenDatePicker>
-                 </div>
-             </div>
+                     @if((@Rol_DependeDe_entities.Count > 0 && @Rol_DependeDe_entities.FirstOrDefault( c => c.Id == @Rol_entity.DependeDe) != null) || crudMode != CrudMode.Delete)
+                     {
+                         var dataSet = crudMode == CrudMode.Add ? Rol_DependeDe_entities.Where(x => x.Habilitado == true) : Rol_DependeDe_entities.Where(x => x.Habilitado == true || x.Id == Rol_entity.DependeDe);
+                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64?" Class="w-100" @bind-Value="@(Rol_entity.DependeDe)"
+                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectRol_DependeDeValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                     }
+                     else
+                     {
+                         <RadzenDropDown AllowClear="true" TValue="Int64?" Class="w-100" 
+                                     Data=@Rol_DependeDe_entities TextProperty = "Nombre" ValueProperty = "Id"
+                                     Change=@(args => SelectRol_DependeDeValueChanged(args))
+                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                    }
+                </div>
+              </div>
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                      </div>
                      <div class="col-md-9">
-                 <RadzenCheckBox @bind-Value=@Contenedor_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Contenedor_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
+                 <RadzenCheckBox @bind-Value=@Rol_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Rol_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                      </div>
                  </div>
              <div class="row">
@@ -327,8 +305,8 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private Depositary.Entities.Tables.Operacion.Contenedor Contenedor_entity = new();
-    private List<Depositary.Entities.Tables.Operacion.Contenedor> Contenedor_entities = null;
+    private Depositary.Entities.Tables.Seguridad.Rol Rol_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Rol> Rol_entities = null;
  
     /// <summary>
     /// Variables to store multilanguaje
@@ -342,23 +320,23 @@ else
     private List<SeguridadEntities.FuncionRol> dataFunciones;
  
     /// <summary>
-    /// Variables to handle Relation between Contenedor.DepositarioId and Depositario.Id
+    /// Variables to handle Relation between Rol.AplicacionId and Aplicacion.Id
     /// </summary>
-    private Depositary.Entities.Tables.Dispositivo.Depositario Depositario_DepositarioId_entity = new();
-    private List<Depositary.Entities.Tables.Dispositivo.Depositario>? Depositario_DepositarioId_entities;
-    private List<Depositary.Entities.Tables.Dispositivo.Depositario> Depositario_DepositarioId_filter;
-    private IEnumerable<Int64> selectedFilter_DepositarioId;
+    private Depositary.Entities.Tables.Seguridad.Aplicacion Aplicacion_AplicacionId_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Aplicacion>? Aplicacion_AplicacionId_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Aplicacion> Aplicacion_AplicacionId_filter;
+    private IEnumerable<Int64> selectedFilter_AplicacionId;
  
     /// <summary>
-    /// Variables to handle Relation between Contenedor.TipoId and TipoContenedor.Id
+    /// Variables to handle Relation between Rol.DependeDe and Rol.Id
     /// </summary>
-    private Depositary.Entities.Tables.Operacion.TipoContenedor TipoContenedor_TipoId_entity = new();
-    private List<Depositary.Entities.Tables.Operacion.TipoContenedor>? TipoContenedor_TipoId_entities;
-    private List<Depositary.Entities.Tables.Operacion.TipoContenedor> TipoContenedor_TipoId_filter;
-    private IEnumerable<Int64> selectedFilter_TipoId;
+    private Depositary.Entities.Tables.Seguridad.Rol Rol_DependeDe_entity = new();
+    private List<Depositary.Entities.Tables.Seguridad.Rol>? Rol_DependeDe_entities;
+    private List<Depositary.Entities.Tables.Seguridad.Rol> Rol_DependeDe_filter;
+    private IEnumerable<Int64> selectedFilter_DependeDe;
  
     /// <summary>
-    /// Variables to handle Relation between Contenedor.UsuarioCreacion and Usuario.Id
+    /// Variables to handle Relation between Rol.UsuarioCreacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
@@ -366,7 +344,7 @@ else
     private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
  
     /// <summary>
-    /// Variables to handle Relation between Contenedor.UsuarioModificacion and Usuario.Id
+    /// Variables to handle Relation between Rol.UsuarioModificacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
@@ -399,29 +377,29 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        Depositary.Business.Tables.Operacion.Contenedor entity = new();
-        Contenedor_entities = entity.Items();
+        Depositary.Business.Tables.Seguridad.Rol entity = new();
+        Rol_entities = entity.Items();
     }
     /// <summary>
     /// Loads Type Tables data
     /// </summary>
     private void LoadTypesData()
     {
-        Depositary.Business.Tables.Dispositivo.Depositario Depositario_DepositarioId_local = new();
-        Depositario_DepositarioId_entities = Depositario_DepositarioId_local.Items();
-        Depositario_DepositarioId_filter = Depositario_DepositarioId_entities.Where(x => Contenedor_entities.Select(x => x.DepositarioId).Distinct().Contains(x.Id)).ToList();
+        Depositary.Business.Tables.Seguridad.Aplicacion Aplicacion_AplicacionId_local = new();
+        Aplicacion_AplicacionId_entities = Aplicacion_AplicacionId_local.Items();
+        Aplicacion_AplicacionId_filter = Aplicacion_AplicacionId_entities.Where(x => Rol_entities.Select(x => x.AplicacionId).Distinct().Contains(x.Id)).ToList();
  
-        Depositary.Business.Tables.Operacion.TipoContenedor TipoContenedor_TipoId_local = new();
-        TipoContenedor_TipoId_entities = TipoContenedor_TipoId_local.Items();
-        TipoContenedor_TipoId_filter = TipoContenedor_TipoId_entities.Where(x => Contenedor_entities.Select(x => x.TipoId).Distinct().Contains(x.Id)).ToList();
+        Depositary.Business.Tables.Seguridad.Rol Rol_DependeDe_local = new();
+        Rol_DependeDe_entities = Rol_DependeDe_local.Items();
+        Rol_DependeDe_filter = Rol_DependeDe_entities.Where(x => Rol_entities.Select(x => x.DependeDe).Distinct().Contains(x.Id)).ToList();
  
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
-        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Contenedor_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Rol_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
  
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
         Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
-        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => Contenedor_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => Rol_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
  
     }
  
@@ -433,10 +411,9 @@ else
     private void Add()
     {
         //Main entity initialization
-        Contenedor_entity = new();
+        Rol_entity = new();
         //Relations entities initialization
-        Depositario_DepositarioId_entity = new(); 
-        TipoContenedor_TipoId_entity = new(); 
+        Aplicacion_AplicacionId_entity = new(); 
         Usuario_UsuarioCreacion_entity = new(); 
         Usuario_UsuarioModificacion_entity = new(); 
         crudMode = CrudMode.Add;
@@ -445,26 +422,22 @@ else
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(Depositary.Entities.Tables.Operacion.Contenedor item, bool delete)
+    private void Edit(Depositary.Entities.Tables.Seguridad.Rol item, bool delete)
     {
-             Contenedor_entity = item;
-            Depositario_DepositarioId_entity = new() { 
-            Id = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.DepositarioId).Id, 
-            Nombre = Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.DepositarioId).Nombre
-            };
-            TipoContenedor_TipoId_entity = new() { 
-            Id = TipoContenedor_TipoId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.TipoId).Id, 
-            Nombre = TipoContenedor_TipoId_entities.FirstOrDefault(c => c.Id == Contenedor_entity.TipoId).Nombre
+             Rol_entity = item;
+            Aplicacion_AplicacionId_entity = new() { 
+            Id = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == Rol_entity.AplicacionId).Id, 
+            Nombre = Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == Rol_entity.AplicacionId).Nombre
             };
             Usuario_UsuarioCreacion_entity = new() { 
-            Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Contenedor_entity.UsuarioCreacion).Id, 
-            Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Contenedor_entity.UsuarioCreacion).Nombre
+            Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Rol_entity.UsuarioCreacion).Id, 
+            Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Rol_entity.UsuarioCreacion).Nombre
             };
-            if(Usuario_UsuarioModificacion_entities.Exists(c => c.Id == Contenedor_entity.UsuarioModificacion))
+            if(Usuario_UsuarioModificacion_entities.Exists(c => c.Id == Rol_entity.UsuarioModificacion))
             {
                  Usuario_UsuarioModificacion_entity = new() { 
-                 Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Contenedor_entity.UsuarioModificacion).Id, 
-                 Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Contenedor_entity.UsuarioModificacion).Nombre
+                 Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Rol_entity.UsuarioModificacion).Id, 
+                 Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Rol_entity.UsuarioModificacion).Nombre
                  };
             }
         if (delete)
@@ -480,41 +453,41 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        Depositary.Business.Tables.Operacion.Contenedor crud = new();
-        foreach(var property in Contenedor_entity.GetType().GetProperties())
+        Depositary.Business.Tables.Seguridad.Rol crud = new();
+        foreach(var property in Rol_entity.GetType().GetProperties())
         {
              switch(property.Name)
              {
                  case "FechaModificacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     Contenedor_entity.FechaModificacion=null;
+                     Rol_entity.FechaModificacion=null;
                  }
                  else
                  {
-                     Contenedor_entity.FechaModificacion=DateTime.Now;
+                     Rol_entity.FechaModificacion=DateTime.Now;
                  }
                  break;
                  case "FechaCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     Contenedor_entity.FechaCreacion=DateTime.Now;
+                     Rol_entity.FechaCreacion=DateTime.Now;
                  }
                  break;
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     Contenedor_entity.UsuarioCreacion=dataUsuario.Id;
+                     Rol_entity.UsuarioCreacion=dataUsuario.Id;
                  }
                  break;
                  case "UsuarioModificacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     Contenedor_entity.UsuarioModificacion=null;
+                     Rol_entity.UsuarioModificacion=null;
                  }
                  else
                  {
-                     Contenedor_entity.UsuarioModificacion=dataUsuario.Id;
+                     Rol_entity.UsuarioModificacion=dataUsuario.Id;
                  }
                  break;
              }
@@ -524,7 +497,7 @@ else
             case CrudMode.Add:
                 try
                 {
-                     crud.Add(Contenedor_entity);
+                     crud.Add(Rol_entity);
                      summary = "El registro se ha ";
                      actionInformation = "agregado.";
                      severityType = NotificationSeverity.Success;
@@ -539,7 +512,7 @@ else
             case CrudMode.Edit:
                 try
                 {
-                     crud.Update(Contenedor_entity);
+                     crud.Update(Rol_entity);
                      summary = "El registro se ha ";
                      actionInformation = "modificado.";
                      severityType = NotificationSeverity.Success;
@@ -554,8 +527,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                     Contenedor_entity.Habilitado=false;
-                     crud.Update(Contenedor_entity);
+                     Rol_entity.Habilitado=false;
+                     crud.Update(Rol_entity);
                      summary = "El registro se ha ";
                      actionInformation = "eliminado.";
                      severityType = NotificationSeverity.Success;
@@ -619,42 +592,42 @@ else
     #endregion
     #region Selection events
     /// <summary>
-    /// Depositario_DepositarioId value changed
+    /// Aplicacion_AplicacionId value changed
     /// </summary>
     /// <param name="item"></param>
-    private void SelectDepositario_DepositarioIdValueChanged(object item)
+    private void SelectAplicacion_AplicacionIdValueChanged(object item)
     {
     }
  
     /// <summary>
-    /// selectedFilter_DepositarioId value changed
+    /// selectedFilter_AplicacionId value changed
     /// </summary>
     /// <param name="item"></param>
-    private void OnSelectedFilter_DepositarioId_Changed(object value)
+    private void OnSelectedFilter_AplicacionId_Changed(object value)
     {
-         if(selectedFilter_DepositarioId!=null && !selectedFilter_DepositarioId.Any())
+         if(selectedFilter_AplicacionId!=null && !selectedFilter_AplicacionId.Any())
          {
-             selectedFilter_DepositarioId=null;
+             selectedFilter_AplicacionId=null;
          }
     }
  
     /// <summary>
-    /// TipoContenedor_TipoId value changed
+    /// Rol_DependeDe value changed
     /// </summary>
     /// <param name="item"></param>
-    private void SelectTipoContenedor_TipoIdValueChanged(object item)
+    private void SelectRol_DependeDeValueChanged(object item)
     {
     }
  
     /// <summary>
-    /// selectedFilter_TipoId value changed
+    /// selectedFilter_DependeDe value changed
     /// </summary>
     /// <param name="item"></param>
-    private void OnSelectedFilter_TipoId_Changed(object value)
+    private void OnSelectedFilter_DependeDe_Changed(object value)
     {
-         if(selectedFilter_TipoId!=null && !selectedFilter_TipoId.Any())
+         if(selectedFilter_DependeDe!=null && !selectedFilter_DependeDe.Any())
          {
-             selectedFilter_TipoId=null;
+             selectedFilter_DependeDe=null;
          }
     }
  
@@ -702,9 +675,9 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void HabilitadoChange(bool? value,Depositary.Entities.Tables.Operacion.Contenedor item)
+    void HabilitadoChange(bool? value,Depositary.Entities.Tables.Seguridad.Rol item)
     {
-         Contenedor_entity = item;
+         Rol_entity = item;
     }
     #endregion
  

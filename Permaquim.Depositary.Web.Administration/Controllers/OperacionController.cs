@@ -523,58 +523,5 @@
 
         #endregion
 
-        public static List<TransaccionEntities.Contenedor> ObtenerContenedores(bool obtenerSoloHabilitados = true)
-        {
-            List<TransaccionEntities.Contenedor> resultado = new();
-
-            Depositary.Business.Tables.Operacion.Contenedor oContenedor = new();
-            if (obtenerSoloHabilitados)
-                oContenedor.Where.Add(Depositary.Business.Tables.Operacion.Contenedor.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-
-            oContenedor.Items();
-
-            if (oContenedor.Result.Count > 0)
-            {
-                foreach (var contenedor in oContenedor.Result)
-                {
-                    TransaccionEntities.Contenedor contenedorEntitie = new();
-                    contenedorEntitie.ContenedorId = contenedor.Id;
-                    contenedorEntitie.Nombre = contenedor.Nombre;
-                    contenedorEntitie.Identificador = contenedor.Identificador;
-
-                    resultado.Add(contenedorEntitie);
-                }
-            }
-
-            return resultado;
-        }
-
-        public static List<TurnoEntities.TurnoComboReporte> ObtenerTurnosReporte()
-        {
-            List<TurnoEntities.TurnoComboReporte> resultado = new();
-
-            Depositary.Business.Relations.Turno.EsquemaTurno oEsquemaTurno = new();
-
-            oEsquemaTurno.Items();
-
-            if (oEsquemaTurno.Result.Count > 0)
-            {
-                foreach (var esquema in oEsquemaTurno.Result)
-                {
-                    foreach(var esquemaDetalle in esquema.ListOf_EsquemaDetalleTurno_EsquemaTurnoId)
-                    {
-                        TurnoEntities.TurnoComboReporte turnoComboReporte = new();
-                        turnoComboReporte.NombreEsquema = esquema.Nombre;
-                        turnoComboReporte.NombreEsquemaDetalle = esquemaDetalle.Nombre;
-                        turnoComboReporte.TurnoEsquemaDetalleId = esquemaDetalle.Id;
-
-                        resultado.Add(turnoComboReporte);
-                    }
-                }
-            }
-
-            return resultado;
-        }
-
     }
 }

@@ -3,6 +3,7 @@
     public class DepositarioMonitor
     {
         public Int64 DepositarioId { get; set; }
+        public Int64 EmpresaId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Sector { get; set; }
@@ -19,18 +20,7 @@
         public string ValorTotalEnBolsa { get; set; }
         public string SemaforoOnline { get; set; }
         public string SemaforoAnomalia { get; set; }
-        public string SemaforoOcupacionBolsa
-        {
-            get
-            {
-                if (PorcentajeOcupacionbolsa < 70)
-                    return "Verde";
-                else if (PorcentajeOcupacionbolsa >= 70 && PorcentajeOcupacionbolsa < 90)
-                    return "Amarillo";
-                else
-                    return "Rojo";
-            }
-        }
+        public string SemaforoOcupacionBolsa { get; set; }
         public double PorcentajeOcupacionbolsa { get; set; }
     }
 

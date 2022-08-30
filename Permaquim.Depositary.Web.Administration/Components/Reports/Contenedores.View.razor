@@ -37,6 +37,7 @@ else
                         </div>
                         <div class="col col-md-3">
                             <RadzenDatePicker @bind-Value=@(parametrosContenedoresView.fechaAperturaDesde) Max="@(parametrosContenedoresView.fechaAperturaHasta)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                            <RadzenRequiredValidator Component="fechaAperturaDesde" Text="Fecha apertura desde is required" Style="position: inherit" />
                             <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaAperturaHasta.HasValue) Value=@(parametrosContenedoresView.fechaAperturaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaAperturaDesdeDatePicker" Text="La fecha apertura desde debe ser menor a la fecha apertura hasta" Style="position: inherit" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
@@ -45,6 +46,7 @@ else
                         </div>
                         <div class="col col-md-3">
                             <RadzenDatePicker @bind-Value=@(parametrosContenedoresView.fechaAperturaHasta) Min="@(parametrosContenedoresView.fechaAperturaDesde)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                            <RadzenRequiredValidator Component="fechaAperturaHasta" Text="Fecha apertura hasta is required" Style="position: inherit" />
                             <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaAperturaDesde.HasValue) Value=@(parametrosContenedoresView.fechaAperturaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaAperturaDesdeDatePicker" Text="La fecha apertura hasta debe ser mayor a la fecha apertura desde" Style="position: inherit" />
                         </div>
                     </div>
@@ -204,7 +206,9 @@ else
             NavManager.NavigateTo("login", true);
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         await Task.Run(CargarCombosBusqueda);
+        //Por defecto las fechas desde y hasta son dia de hoy.
         parametrosContenedoresView.fechaAperturaDesde = DateTime.Today;
+        parametrosContenedoresView.fechaAperturaHasta = DateTime.Today;
         estaCargandoParametrosReporte = false;
     }
 
@@ -214,9 +218,9 @@ else
     /// </summary>
     private void CargarCombosBusqueda()
     {
-        dataEmpresasVisiblesUsuario = DirectorioController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id);
-        dataSucursalesVisiblesUsuario = DirectorioController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id);
-        dataSectoresVisiblesUsuario = DirectorioController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
+        dataEmpresasVisiblesUsuario = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id);
+        dataSucursalesVisiblesUsuario = ReportController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id);
+        dataSectoresVisiblesUsuario = ReportController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
         //dataUsuarios = SeguridadController.ObtenerUsuarios(false);
         //dataContenedores = OperacionController.ObtenerContenedores(false);
         //dataTurnos = OperacionController.ObtenerTurnos(false);

@@ -1,4 +1,4 @@
-@page "/OperacionTurnoUsuarioCrud"
+@page "/AplicacionConfiguracionTipoDatoCrud"
 @using Permaquim.Depositary.Web.Administration.Controllers;
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
@@ -6,9 +6,9 @@
  
 @if(dataFunciones != null)
 {
-@if (SeguridadController.VerificarPermisoFuncion("OperacionTurnoUsuario",dataFunciones,"PuedeVisualizar"))
+@if (SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionTipoDato",dataFunciones,"PuedeVisualizar"))
 {
- @if (TurnoUsuario_entities == null)
+ @if (ConfiguracionTipoDato_entities == null)
  {
      <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
  }
@@ -19,21 +19,21 @@
          case CrudMode.Add:
              <RadzenBadge  BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Operacion.TurnoUsuario",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Aplicacion.ConfiguracionTipoDato",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;
          case CrudMode.Delete:
              <RadzenBadge BadgeStyle="BadgeStyle.Warning" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Operacion.TurnoUsuario",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Aplicacion.ConfiguracionTipoDato",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;
              case CrudMode.Edit:
              <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Operacion.TurnoUsuario",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Aplicacion.ConfiguracionTipoDato",dataLenguaje)</h4>
                  </ChildContent>
              </RadzenBadge>
              break;         
@@ -41,7 +41,7 @@
              <RadzenBadge BadgeStyle="BadgeStyle.Secondary" >
                  <ChildContent>
                      <div>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Operacion.TurnoUsuario",dataLenguaje)</h4>
+                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Aplicacion.ConfiguracionTipoDato",dataLenguaje)</h4>
                      </div>
                  </ChildContent>
              </RadzenBadge>
@@ -51,35 +51,35 @@
      if (crudMode == CrudMode.List)
      {
          <RadzenDataGrid AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-         Data="@TurnoUsuario_entities" TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
+         Data="@ConfiguracionTipoDato_entities" TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
          </EmptyTemplate>        
          <Columns>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px" >
                  <HeaderTemplate>
-                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("OperacionTurnoUsuario",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
+                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionTipoDato",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                      </RadzenButton>
                      </HeaderTemplate>
                      <Template Context="element">
-                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("OperacionTurnoUsuario",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionTipoDato",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                      </RadzenButton>
-                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("OperacionTurnoUsuario",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionTipoDato",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                      </RadzenButton>
                  </Template>
                  </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Property="UsuarioId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Property="TurnoId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("TURNOID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
              <Template Context="data">
                  <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                  </RadzenCheckBox>
              </Template>
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
                      @{
                          var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioCreacion);
@@ -100,9 +100,9 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
                      @{
                          var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion);
@@ -123,7 +123,7 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
          </Columns>
          </RadzenDataGrid>
@@ -132,7 +132,7 @@
  
      if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
      {
-             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Operacion.TurnoUsuario" Data="@TurnoUsuario_entity"  @bind-Value="TurnoUsuario_entity" Submit ="Save" Visible ="@(TurnoUsuario_entity != null)">
+             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato" Data="@ConfiguracionTipoDato_entity"  @bind-Value="ConfiguracionTipoDato_entity" Submit ="Save" Visible ="@(ConfiguracionTipoDato_entity != null)">
              <ChildContent>
                 @if(crudMode != CrudMode.Add)
                 {
@@ -142,29 +142,39 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-9">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TurnoUsuario_entity.Id)" Name="Id" Disabled="true" >
+                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(ConfiguracionTipoDato_entity.Id)" Name="Id" Disabled="true" >
                      </RadzenNumeric>
                      </div>
                  </div>
                 }
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje) Component="UsuarioId" style="width: 100%">
+                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Component="Nombre" style="width: 100%">
                          </RadzenLabel>
                      </div>
                      <div class="col-md-9">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TurnoUsuario_entity.UsuarioId)" Name="UsuarioId" Disabled="@(crudMode==CrudMode.Delete)" >
-                     </RadzenNumeric>
+                         <RadzenTextBox  style="display: block" @bind-Value="@(ConfiguracionTipoDato_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                         </RadzenTextBox>
+                         @if(@crudMode!=CrudMode.Delete)
+                         {
+                             <RadzenRequiredValidator Component="Nombre" Text="Nombre is required" Style="position: absolute">
+                             </RadzenRequiredValidator>
+                         }
                      </div>
                  </div>
                  <div style="margin-bottom: 1rem" class="row">
                      <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TURNOID",dataLenguaje) Component="TurnoId" style="width: 100%">
+                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Component="Descripcion" style="width: 100%">
                          </RadzenLabel>
                      </div>
                      <div class="col-md-9">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TurnoUsuario_entity.TurnoId)" Name="TurnoId" Disabled="@(crudMode==CrudMode.Delete)" >
-                     </RadzenNumeric>
+                         <RadzenTextBox  style="display: block" @bind-Value="@(ConfiguracionTipoDato_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
+                         </RadzenTextBox>
+                         @if(@crudMode!=CrudMode.Delete)
+                         {
+                             <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute">
+                             </RadzenRequiredValidator>
+                         }
                      </div>
                  </div>
                  <div style="margin-bottom: 1rem" class="row">
@@ -172,7 +182,7 @@
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                      </div>
                      <div class="col-md-9">
-                 <RadzenCheckBox @bind-Value=@TurnoUsuario_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @TurnoUsuario_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
+                 <RadzenCheckBox @bind-Value=@ConfiguracionTipoDato_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @ConfiguracionTipoDato_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                      </div>
                  </div>
              <div class="row">
@@ -215,8 +225,8 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private Depositary.Entities.Tables.Operacion.TurnoUsuario TurnoUsuario_entity = new();
-    private List<Depositary.Entities.Tables.Operacion.TurnoUsuario> TurnoUsuario_entities = null;
+    private Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato ConfiguracionTipoDato_entity = new();
+    private List<Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato> ConfiguracionTipoDato_entities = null;
  
     /// <summary>
     /// Variables to store multilanguaje
@@ -230,7 +240,7 @@ else
     private List<SeguridadEntities.FuncionRol> dataFunciones;
  
     /// <summary>
-    /// Variables to handle Relation between TurnoUsuario.UsuarioCreacion and Usuario.Id
+    /// Variables to handle Relation between ConfiguracionTipoDato.UsuarioCreacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
@@ -238,7 +248,7 @@ else
     private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
  
     /// <summary>
-    /// Variables to handle Relation between TurnoUsuario.UsuarioModificacion and Usuario.Id
+    /// Variables to handle Relation between ConfiguracionTipoDato.UsuarioModificacion and Usuario.Id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
@@ -271,8 +281,8 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        Depositary.Business.Tables.Operacion.TurnoUsuario entity = new();
-        TurnoUsuario_entities = entity.Items();
+        Depositary.Business.Tables.Aplicacion.ConfiguracionTipoDato entity = new();
+        ConfiguracionTipoDato_entities = entity.Items();
     }
     /// <summary>
     /// Loads Type Tables data
@@ -281,11 +291,11 @@ else
     {
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
-        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => TurnoUsuario_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => ConfiguracionTipoDato_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
  
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
         Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
-        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => TurnoUsuario_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
+        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => ConfiguracionTipoDato_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
  
     }
  
@@ -297,7 +307,7 @@ else
     private void Add()
     {
         //Main entity initialization
-        TurnoUsuario_entity = new();
+        ConfiguracionTipoDato_entity = new();
         //Relations entities initialization
         Usuario_UsuarioCreacion_entity = new(); 
         Usuario_UsuarioModificacion_entity = new(); 
@@ -307,18 +317,18 @@ else
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(Depositary.Entities.Tables.Operacion.TurnoUsuario item, bool delete)
+    private void Edit(Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato item, bool delete)
     {
-             TurnoUsuario_entity = item;
+             ConfiguracionTipoDato_entity = item;
             Usuario_UsuarioCreacion_entity = new() { 
-            Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == TurnoUsuario_entity.UsuarioCreacion).Id, 
-            Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == TurnoUsuario_entity.UsuarioCreacion).Nombre
+            Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == ConfiguracionTipoDato_entity.UsuarioCreacion).Id, 
+            Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == ConfiguracionTipoDato_entity.UsuarioCreacion).Nombre
             };
-            if(Usuario_UsuarioModificacion_entities.Exists(c => c.Id == TurnoUsuario_entity.UsuarioModificacion))
+            if(Usuario_UsuarioModificacion_entities.Exists(c => c.Id == ConfiguracionTipoDato_entity.UsuarioModificacion))
             {
                  Usuario_UsuarioModificacion_entity = new() { 
-                 Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == TurnoUsuario_entity.UsuarioModificacion).Id, 
-                 Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == TurnoUsuario_entity.UsuarioModificacion).Nombre
+                 Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == ConfiguracionTipoDato_entity.UsuarioModificacion).Id, 
+                 Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == ConfiguracionTipoDato_entity.UsuarioModificacion).Nombre
                  };
             }
         if (delete)
@@ -334,41 +344,41 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        Depositary.Business.Tables.Operacion.TurnoUsuario crud = new();
-        foreach(var property in TurnoUsuario_entity.GetType().GetProperties())
+        Depositary.Business.Tables.Aplicacion.ConfiguracionTipoDato crud = new();
+        foreach(var property in ConfiguracionTipoDato_entity.GetType().GetProperties())
         {
              switch(property.Name)
              {
                  case "FechaModificacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     TurnoUsuario_entity.FechaModificacion=null;
+                     ConfiguracionTipoDato_entity.FechaModificacion=null;
                  }
                  else
                  {
-                     TurnoUsuario_entity.FechaModificacion=DateTime.Now;
+                     ConfiguracionTipoDato_entity.FechaModificacion=DateTime.Now;
                  }
                  break;
                  case "FechaCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     TurnoUsuario_entity.FechaCreacion=DateTime.Now;
+                     ConfiguracionTipoDato_entity.FechaCreacion=DateTime.Now;
                  }
                  break;
                  case "UsuarioCreacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     TurnoUsuario_entity.UsuarioCreacion=dataUsuario.Id;
+                     ConfiguracionTipoDato_entity.UsuarioCreacion=dataUsuario.Id;
                  }
                  break;
                  case "UsuarioModificacion":
                  if(crudMode == CrudMode.Add)
                  {
-                     TurnoUsuario_entity.UsuarioModificacion=null;
+                     ConfiguracionTipoDato_entity.UsuarioModificacion=null;
                  }
                  else
                  {
-                     TurnoUsuario_entity.UsuarioModificacion=dataUsuario.Id;
+                     ConfiguracionTipoDato_entity.UsuarioModificacion=dataUsuario.Id;
                  }
                  break;
              }
@@ -378,7 +388,7 @@ else
             case CrudMode.Add:
                 try
                 {
-                     crud.Add(TurnoUsuario_entity);
+                     crud.Add(ConfiguracionTipoDato_entity);
                      summary = "El registro se ha ";
                      actionInformation = "agregado.";
                      severityType = NotificationSeverity.Success;
@@ -393,7 +403,7 @@ else
             case CrudMode.Edit:
                 try
                 {
-                     crud.Update(TurnoUsuario_entity);
+                     crud.Update(ConfiguracionTipoDato_entity);
                      summary = "El registro se ha ";
                      actionInformation = "modificado.";
                      severityType = NotificationSeverity.Success;
@@ -408,8 +418,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                     TurnoUsuario_entity.Habilitado=false;
-                     crud.Update(TurnoUsuario_entity);
+                     ConfiguracionTipoDato_entity.Habilitado=false;
+                     crud.Update(ConfiguracionTipoDato_entity);
                      summary = "El registro se ha ";
                      actionInformation = "eliminado.";
                      severityType = NotificationSeverity.Success;
@@ -516,9 +526,9 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void HabilitadoChange(bool? value,Depositary.Entities.Tables.Operacion.TurnoUsuario item)
+    void HabilitadoChange(bool? value,Depositary.Entities.Tables.Aplicacion.ConfiguracionTipoDato item)
     {
-         TurnoUsuario_entity = item;
+         ConfiguracionTipoDato_entity = item;
     }
     #endregion
  

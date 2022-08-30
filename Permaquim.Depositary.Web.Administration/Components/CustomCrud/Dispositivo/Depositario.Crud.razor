@@ -247,8 +247,11 @@
                             <div class="col-md-9">
                                 @if ((@Sector_Depositario_entities.Count > 0 && @Sector_Depositario_entities.FirstOrDefault(c => c.SectorId == @Depositario_entity.SectorId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.Contains" TValue="Int64" Class="w-100" @bind-Value="@(Depositario_entity.SectorId)"
-                                Data=@Sector_Depositario_entities.OrderBy(x => x.EmpresaSucursalSectorNombre) TextProperty="EmpresaSucursalSectorNombre" ValueProperty="SectorId"
+                                    var dataSet = crudMode == CrudMode.Add ? Sector_Depositario_entities.Where(x => x.Habilitado == true) : Sector_Depositario_entities.Where(x => x.Habilitado == true || x.SectorId == Depositario_entity.SectorId);
+                                    <RadzenDropDown AllowClear="true"
+                                AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.Contains"
+                                TValue="Int64" Class="w-100" @bind-Value="@(Depositario_entity.SectorId)"
+                                Data=@dataSet.OrderBy(x => x.EmpresaSucursalSectorNombre) TextProperty="EmpresaSucursalSectorNombre" ValueProperty="SectorId"
                                 Change=@(args => SelectSector_SectorIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -299,8 +302,10 @@
                             <div class="col-md-9">
                                 @if ((@Modelo_ModeloId_entities.Count > 0 && @Modelo_ModeloId_entities.FirstOrDefault(c => c.Id == @Depositario_entity.ModeloId) != null) || crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Depositario_entity.ModeloId)"
-                                Data=@Modelo_ModeloId_entities TextProperty="Nombre" ValueProperty="Id"
+                                    var dataSet = crudMode == CrudMode.Add ? Modelo_ModeloId_entities.Where(x => x.Habilitado == true) : Modelo_ModeloId_entities.Where(x => x.Habilitado == true || x.Id == Depositario_entity.ModeloId);
+                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Depositario_entity.ModeloId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectModelo_ModeloIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -529,6 +534,7 @@ else
             {
                 DirectorioEntities.SectorDepositario sectorDepositario = new();
                 sectorDepositario.SectorId = sector.Id;
+                sectorDepositario.Habilitado = sector.Habilitado;
 
                 string empresaNombre = sector.SucursalId.EmpresaId.Nombre;
                 string sucursalNombre = sector.SucursalId.Nombre;

@@ -113,32 +113,36 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
         public static Depositary.Entities.Tables.Seguridad.Rol? ObtenerRolesPorUsuario(Int64 pUsuarioId)
         {
-            Depositary.Business.Relations.Seguridad.UsuarioRol oUsuarioRol = new();
+            Depositary.Entities.Tables.Seguridad.Rol? resultado = null;
+            Depositary.Business.Relations.Seguridad.Rol oRol = new();
+            oRol.Where.Add(Depositary.Business.Relations.Seguridad.Rol.ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, true);
+            oRol.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.Rol.ColumnEnum.AplicacionId, Depositary.sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
 
-            oUsuarioRol.Where.Add(Depositary.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, pUsuarioId);
-            oUsuarioRol.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.AplicacionId, Depositary.sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
-            oUsuarioRol.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            oRol.Items();
 
-            oUsuarioRol.Items();
-
-            if (oUsuarioRol.Result.Count > 0)
+            //Si no hay roles para la aplicacion web devuelvo nada.
+            if (oRol.Result.Count > 0)
             {
-                Depositary.Entities.Tables.Seguridad.Rol resultado = new();
-                var rol = oUsuarioRol.Result.FirstOrDefault().RolId;
-                resultado.Id = rol.Id;
-                resultado.DependeDe = rol._DependeDe;
-                resultado.Descripcion = rol.Descripcion;
-                resultado.FechaCreacion = rol.FechaCreacion;
-                resultado.FechaModificacion = rol.FechaModificacion;
-                resultado.Nombre = rol.Nombre;
-                resultado.Habilitado = rol.Habilitado;
-                resultado.UsuarioCreacion = rol._UsuarioCreacion;
-                resultado.UsuarioModificacion = rol._UsuarioModificacion;
-                return resultado;
+                foreach (var rol in oRol.Result)
+                {
+                    var rolUsuario = rol.ListOf_UsuarioRol_RolId.FirstOrDefault(x => x._UsuarioId == pUsuarioId);
+                    if (rolUsuario != null)
+                    {
+                        resultado = new();
+                        resultado.Id = rol.Id;
+                        resultado.DependeDe = rol._DependeDe;
+                        resultado.Descripcion = rol.Descripcion;
+                        resultado.FechaCreacion = rol.FechaCreacion;
+                        resultado.FechaModificacion = rol.FechaModificacion;
+                        resultado.Nombre = rol.Nombre;
+                        resultado.Habilitado = rol.Habilitado;
+                        resultado.UsuarioCreacion = rol._UsuarioCreacion;
+                        resultado.UsuarioModificacion = rol._UsuarioModificacion;
+                    }
+                }
             }
-            else
-                return null;
 
+            return resultado;
         }
 
         public static List<SeguridadEntities.Menu> ObtenerMenuesPorRol(Int64 pRolId)
@@ -226,33 +230,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
             return resultado;
         }
-
-        public static List<SeguridadEntities.Usuario> ObtenerUsuarios(bool obtenerSoloHabilitados = true)
-        {
-            List<SeguridadEntities.Usuario> resultado = new();
-
-            Depositary.Business.Tables.Seguridad.Usuario oUsuario = new();
-            if (obtenerSoloHabilitados)
-                oUsuario.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-
-            oUsuario.Items();
-
-            if (oUsuario.Result.Count > 0)
-            {
-                foreach (var usuario in oUsuario.Result)
-                {
-                    SeguridadEntities.Usuario usuarioEntitie = new();
-                    usuarioEntitie.UsuarioId = usuario.Id;
-                    usuarioEntitie.Nickname = usuario.NickName;
-                    usuarioEntitie.UsuarioNombre = usuario.Nombre;
-                    usuarioEntitie.UsuarioApellido = usuario.Apellido;
-
-                    resultado.Add(usuarioEntitie);
-                }
-            }
-
-            return resultado;
-        }
+        
         public static bool VerificarPermisoFuncion(string pFuncionNombre, List<SeguridadEntities.FuncionRol> pDataFunciones, string pFuncionAccion)
         {
             bool resultado = false;
