@@ -532,7 +532,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintTurnChangeQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.TurnChange,
+                        ReportController.PrintReport(ReportTypeEnum.TurnChange,
                             null, null);
                         _alreadyPrinted = true;
                     }

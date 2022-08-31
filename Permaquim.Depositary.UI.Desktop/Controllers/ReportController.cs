@@ -22,20 +22,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         //private static List<Depositario.Entities.Relations.Operacion.TransaccionDetalle> _details;
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
 
-
-        public static void PrintDailyClosingReport(Depositario.Entities.Tables.Operacion.CierreDiario closing)
-        {
-
-        }
-        public static void PrintTurnChangeReport( Permaquim.Depositario.Entities.Tables.Operacion.Turno turn)
-        {
-
-        }
-        public static void PrintBagExtractionReport(Permaquim.Depositario.Entities.Tables.Operacion.Contenedor container)
-        {
-
-        }
-        public static void PrintDepositReport(ReportTypeEnum reportType,
+        public static void PrintReport(ReportTypeEnum reportType,
             dynamic header,dynamic details)
         {
 
@@ -85,16 +72,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     case ReportTypeEnum.None:
                         break;
                     case ReportTypeEnum.BillDeposit:
-                        //_header = DatabaseController.GetTransactionHeader(header.Id);
-                        //_details = DatabaseController.GetTransactionDetails(header.Id);
                         printDocument.PrintPage += PrintDocument_BillDepositPrintPage;
                         break;
                     case ReportTypeEnum.CoinDeposit:
                         break;
                     case ReportTypeEnum.EnvelopeDepositFirstReport:
-                        //header = DatabaseController.GetTransactionHeader(header.Id);
-                        //details = DatabaseController.GetTransactionDetails(header.Id);
-                        printDocument.PrintPage += PrintDocument_EnvelopeDepositFirstReportPrintPage;
+                          printDocument.PrintPage += PrintDocument_EnvelopeDepositFirstReportPrintPage;
                         break;
                     case ReportTypeEnum.EnvelopeDepositSecondReport:
                         printDocument.PrintPage += PrintDocument_EnvelopeDepositSecondReportPrintPage;
@@ -427,13 +410,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
-            // Graba el texto de cabecera con el offset del alto del gráfico
-            e.Graphics.DrawString(_ticket.TextoCabecera, _font,
-            Brushes.Black,
-            _headerTextStart_X, yOffset, new StringFormat());
-            yOffset += _interlineSpace;
-
-
             // Separador
             e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
                        Brushes.Black,
@@ -557,6 +533,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             int yOffset;
             const int MaxCharacterLenght = 33;
 
+            var currentContainerTransactions = DatabaseController.GetCurrentContainerTransactions();
+
             // dibuja el gráfico
             e.Graphics.DrawImage(_image, _rectangle);
             yOffset = _rectangle.Height + _interlineSpace;
@@ -583,29 +561,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Brushes.Black,
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
-
-            e.Graphics.DrawString(
-            MultilanguangeController.GetText(MultiLanguageEnum.IMPORTE) + ": " + amount.ToString("C2")
-             , _font,
-           Brushes.Black,
-           _headerTextStart_X, yOffset, new StringFormat());
-            yOffset += _interlineSpace;
-
-            // Transacción
-            e.Graphics.DrawString(
-             MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": " + _header.Id.ToString()
-              , _font,
-            Brushes.Black,
-            _headerTextStart_X, yOffset, new StringFormat());
-            yOffset += _interlineSpace;
-
-            // Usuario
-            e.Graphics.DrawString(
-             MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " + _header.UsuarioId.NombreApellido
-              , _font,
-            Brushes.Black,
-            _headerTextStart_X, yOffset, new StringFormat());
-            yOffset += _interlineSpace;
+            if (DatabaseController.CurrentUser != null)
+            {
+                // Usuario
+                e.Graphics.DrawString(
+                 MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " + DatabaseController.CurrentUser.NombreApellido
+                  , _font,
+                Brushes.Black,
+                _headerTextStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+            }
 
             // Sucursal
             e.Graphics.DrawString(
@@ -626,6 +591,24 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             yOffset += _interlineSpace;
 
+
+            e.Graphics.DrawString(
+            MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR) + ": " +
+            ((Permaquim.Depositario.Entities.Relations.Operacion.Contenedor)_header).Nombre
+             , _font,
+           Brushes.Black,
+           _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
+
+
+            e.Graphics.DrawString(
+            MultilanguangeController.GetText(MultiLanguageEnum.FECHA) + ": " +
+            ((Permaquim.Depositario.Entities.Relations.Operacion.Contenedor)_header).FechaApertura.ToString("dd/MM/yyyyy")
+             , _font,
+           Brushes.Black,
+           _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
+
             // Separador
             e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
                         Brushes.Black,
@@ -634,45 +617,41 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             e.Graphics.DrawString(
-                //"DENOMINACION CANTIDAD TOTAL"
-                String.Format("{0,1}\t{1,5}\t{2,5}",
-                MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION),
-                MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD),
-                MultilanguangeController.GetText(MultiLanguageEnum.TOTAL))
-                , _font,
-           Brushes.Black,
-           _detailStart_X, yOffset, new StringFormat());
+           //"DENOMINACION CANTIDAD TOTAL"
+           String.Format("{0,1}\t{1,5}\t{2,5}",
+           MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION),
+           MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD),
+           MultilanguangeController.GetText(MultiLanguageEnum.TOTAL))
+           , _font,
+      Brushes.Black,
+      _detailStart_X, yOffset, new StringFormat());
 
-            yOffset += _interlineSpace;
 
-            // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            foreach (var currentContainerTransactionItem in currentContainerTransactions)
+            {
+
+                if (currentContainerTransactionItem.Cantidad > 0)
+                {
+                    yOffset += _interlineSpace;
+
+
+                    var textLen = MaxCharacterLenght; //- (_details[i].DenominacionId.MonedaId.Codigo.Length +
+                                                      //    _details[i].DenominacionId.Nombre.Length +
+                                                      //    _details[i].CantidadUnidades.ToString().Length +
+                                                      //    (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString().Length);
+
+                    e.Graphics.DrawString(
+                    String.Format("{0,1}\t{1,10}\t{2,10}",
+                        currentContainerTransactionItem.Moneda + ": " + currentContainerTransactionItem.Denominacion,
+                        currentContainerTransactionItem.Cantidad,
+                           (currentContainerTransactionItem.Cantidad * currentContainerTransactionItem.UnidadesDenominacion).ToString("C2"))
+                            , _font,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
-            yOffset += _interlineSpace;
-
-            // Detalles
-            for (int i = 0; i < _details.Count; i++)
-            {
-                var textLen = MaxCharacterLenght - (_details[i].DenominacionId.MonedaId.Codigo.Length +
-                    _details[i].DenominacionId.Nombre.Length +
-                    _details[i].CantidadUnidades.ToString().Length +
-                    (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString().Length);
-
-                e.Graphics.DrawString(
-                String.Format("{0,1}\t{1,10}\t{2,10}\t{3,10}",
-                    _details[i].DenominacionId.MonedaId.Codigo,
-                    _details[i].DenominacionId.Nombre,
-                    _details[i].CantidadUnidades.ToString(),
-                       (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString("C2"))
-                        , _font,
-                    Brushes.Black,
-                    _detailStart_X, yOffset, new StringFormat());
-
-                yOffset += _interlineSpace;
+                    yOffset += _interlineSpace;
+                }
             }
-            yOffset += _interlineSpace;
 
             // Separador
             e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,

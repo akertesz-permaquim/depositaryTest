@@ -500,7 +500,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.DailyClosing,
+                        ReportController.PrintReport(ReportTypeEnum.DailyClosing,
                             _dailyclosingItems,null);
                         _alreadyPrinted = true;
                     }
