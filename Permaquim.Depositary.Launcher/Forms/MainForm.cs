@@ -43,7 +43,7 @@ namespace Permaquim.Depositary.Launcher
                 }
             }
 
-            // TODO: Verificar actualización
+            // TODO: Verificar actualización * 
             // Llamar a la aplicación desktop
 
             if (System.IO.File.Exists(Directory.GetCurrentDirectory() + APPLICATION))

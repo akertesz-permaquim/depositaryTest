@@ -115,6 +115,7 @@
             this.DetailsPanel.Name = "DetailsPanel";
             this.DetailsPanel.Size = new System.Drawing.Size(752, 360);
             this.DetailsPanel.TabIndex = 192;
+            this.DetailsPanel.Visible = false;
             // 
             // AcceptButton
             // 

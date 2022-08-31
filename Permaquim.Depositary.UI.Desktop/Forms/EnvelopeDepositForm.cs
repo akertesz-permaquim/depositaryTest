@@ -480,7 +480,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             PrintTicket(TicketTypeEnum.Second);
 
-            SaveTransaction();
+            //SaveTransaction();
 
            _operationStatus.DepositEnded = true;
 
@@ -557,6 +557,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
             transactions.Update(transaction);
+
+            PrintTicket(TicketTypeEnum.First);
+
         }
         private void EnableDisableControls(bool value)
         {
@@ -591,8 +594,7 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
-                if (ParameterController.PrintsEnvelopeDeposit)
-                    PrintTicket(TicketTypeEnum.First);
+                SaveTransaction();
 
                 TimeOutController.Reset();
                 _device.OpenEscrow();
@@ -774,7 +776,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (ParameterController.PrintsEnvelopeDeposit)
             {
                 var _header = DatabaseController.GetTransactionHeader(_operationStatus.CurrentTransactionId);
-                var _details = DatabaseController.GetTransactionDetails(_operationStatus.CurrentTransactionId);
+                var _details = _header.ListOf_TransaccionSobre_TransaccionId;
 
                 if (!_alreadyPrinted)
                 {

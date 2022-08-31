@@ -1067,8 +1067,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             bool returnValue = false;
 
-            return true;
-
             try
             {
                 if (CurrentUser == null)

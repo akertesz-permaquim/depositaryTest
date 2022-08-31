@@ -70,6 +70,12 @@ namespace Permaquim.Depositary.UI.Desktop
                 Y = OperationsDetailGridView.Location.Y
             };
 
+            DetailPanel.Location = new Point()
+            {
+                X = this.Width / 2 - this.Width / 2,
+                Y = this.Height / 2 - this.Height / 2
+            };
+
             BackButton.Location = new Point()
             {
                 X = this.Width / 2 - BackButton.Width / 2,

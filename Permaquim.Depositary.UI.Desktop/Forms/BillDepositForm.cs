@@ -159,8 +159,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
             CancelDepositButton.Location = new Point()
             {
-                X = 0,
-                Y = 0
+                X = CancelDepositButton.Location.X,
+                Y = CancelDepositButton.Location.Y
             };
 
             CurrencyLabel.Left = DenominationsGridView.Left;

@@ -53,12 +53,12 @@
         {
             None = 0,
             BillDeposit,
-            CoinDeposit,
             EnvelopeDepositFirstReport,
             EnvelopeDepositSecondReport,
             ValueExtraction,
             DailyClosing,
-            TurnChange
+            TurnChange,
+            CoinDeposit
 
         }
         public enum ColorNameEnum
@@ -241,6 +241,8 @@
             REPORTES,
             CONTENIDO_BOLSA,
             HISTORICO_BOLSA,
+            HISTORICO_TURNO,
+            HISTORICO_CIERRE_DIARIO,
             CANTIDADOPERACIONES,
             SUCURSAL,
             SECTOR,
@@ -271,7 +273,8 @@
             TURNCHANGEFORM,
             ERROR_FALTA_DATO,
             ERROR_PUERTO,
-            TOQUE_PANTALLA_PARA_INICIAR
+            TOQUE_PANTALLA_PARA_INICIAR,
+            TICKET_NO_CONFIGURADO
         }
 
         public enum FunctionEnum

@@ -7,7 +7,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class BankAccountSelectorForm : Form
     {
-        private List<Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta> _userBankAccounts = DatabaseController.GetUserBankAccounts();
+        private List<Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta> _userBankAccounts = new(); 
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public BankAccountSelectorForm()
         {
@@ -17,6 +17,7 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadBankAccountsButtons();
             LoadBackButton();
             ChechSingleAccount();
+            LoadStyles();
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -33,6 +34,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
                 return CP;
             }
+        }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
@@ -63,7 +69,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBankAccountsButtons()
         {
-
+            _userBankAccounts = DatabaseController.GetUserBankAccounts();
 
             foreach (var item in _userBankAccounts)
             {
@@ -97,7 +103,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             FormsController.OpenChildForm(this, new BillDepositForm(),
             (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -117,7 +122,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private void InitializeLocals()
         {
             _userBankAccounts = new();
-
         }
 
         private void BankAccountSelectorForm_MouseClick(object sender, MouseEventArgs e)

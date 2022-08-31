@@ -80,6 +80,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 _pollingTimer.Tick += PollingTimer_Tick;
 
                 LoadLogo();
+                
                 _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
             }
@@ -165,32 +166,34 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 // Evaluación de estado de la contadora y el ioBoard
                 // Si está todo en órden, se libera la aplicación
-
-                MainPanel.BringToFront();
-
-                // Ejecuto la primera consulta al dispositivo. 
-                // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
-                // Operación anterior.
-
-                if (_device.CounterConnected)
+                if (VerifyBasicConfigurations())
                 {
-                    StatesResult statesResult = _device.Sense();
-                    if (statesResult != null)
+                    MainPanel.BringToFront();
+
+                    // Ejecuto la primera consulta al dispositivo. 
+                    // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
+                    // Operación anterior.
+
+                    if (_device.CounterConnected)
                     {
-                        _device.PreviousState = statesResult.StatusInformation.OperatingState;
-
-                        // Si el escrow está abierto se debe cerrar
-                        if (_device.StateResultProperty.StatusInformation.OperatingState ==
-                                StatusInformation.State.EscrowOpen ||
-                                _device.StateResultProperty.StatusInformation.OperatingState ==
-                                StatusInformation.State.PQWaitingTocloseEscrow)
-
-                            _device.CloseEscrow();
-
-                        // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                        if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                        StatesResult statesResult = _device.Sense();
+                        if (statesResult != null)
                         {
-                             _device.RemoteCancel();
+                            _device.PreviousState = statesResult.StatusInformation.OperatingState;
+
+                            // Si el escrow está abierto se debe cerrar
+                            if (_device.StateResultProperty.StatusInformation.OperatingState ==
+                                    StatusInformation.State.EscrowOpen ||
+                                    _device.StateResultProperty.StatusInformation.OperatingState ==
+                                    StatusInformation.State.PQWaitingTocloseEscrow)
+
+                                _device.CloseEscrow();
+
+                            // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
+                            if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                            {
+                                _device.RemoteCancel();
+                            }
                         }
                     }
                 }
@@ -212,8 +215,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             VerifyUserData();
 
-            VerifyBasicConfigurations();
-
             VerifyTimeout();
 
             VerifyAvatar();
@@ -229,7 +230,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
 
         }
-        private void VerifyBasicConfigurations()
+        private bool VerifyBasicConfigurations()
         {
             string message = DatabaseController.GetBasicconfigurationMessage();
             if(message.Length > 0)
@@ -250,6 +251,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 }
             }
+            return message.Length == 0;
         }
         private void VerifyOpenDoor()
         {
@@ -309,8 +311,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                         _device.CloseEscrow();
                     }
 
+                    _device.RemoteCancel();
                 }
-                _device.RemoteCancel();
             }
         }
 
@@ -389,6 +391,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                  + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
                  + DatabaseController.CurrentDepositary.CodigoExterno;
 
+                SetTurnAndDateTimeLabel();
 
             }
             else
@@ -401,7 +404,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 TurnAndDateTimeLabel.Text = String.Empty;
             }
             
-            SetTurnAndDateTimeLabel();
         }
 
         private void SetTurnAndDateTimeLabel()

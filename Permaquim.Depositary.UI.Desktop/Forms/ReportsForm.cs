@@ -93,7 +93,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadDailyClosingHistoryButton()
         {
             CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
-                "DailyClosingHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_BOLSA), MainPanel.Width);
+                "DailyClosingHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_CIERRE_DIARIO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
             OperationsButton.Click += new System.EventHandler(DailyClosingHistoryButton_Click);
@@ -109,7 +109,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadTurnsHistoryButton()
         {
             CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
-                "TurnsHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_BOLSA), MainPanel.Width);
+                "TurnsHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_TURNO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
             OperationsButton.Click += new System.EventHandler(TurnsHistoryButton_Click);

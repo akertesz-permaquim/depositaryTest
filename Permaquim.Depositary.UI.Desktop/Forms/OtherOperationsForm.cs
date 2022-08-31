@@ -177,8 +177,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            if(_device !=null &&_device.CounterConnected)
+            if (_device != null && _device.CounterConnected)
+            {
+                _device.NormalErrorRecoveryMode();
+                System.Threading.Thread.Sleep(500);
+                _device.StoringErrorRecoveryMode();
+                System.Threading.Thread.Sleep(500);
                 _device.DeviceReset();
+            }
         }
         #endregion
 
