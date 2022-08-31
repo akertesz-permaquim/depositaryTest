@@ -83,7 +83,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadDailyClosingButton()
         {
             CustomButton backButton = ControlBuilder.BuildStandardButton(
-                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width / 2 - 5, 55);
+                "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width / 2 - 5, 55);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -101,7 +101,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildCancelButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.CANCEL_BUTTON), MainPanel.Width / 2 - 5, 55);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION), MainPanel.Width / 2 - 5, 55);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -232,7 +232,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                     {
-                        ReportController.PrintDailyclosingReport(_currentDailyclosing);
+                        ReportController.PrintDailyClosingReport(_currentDailyclosing);
                         _alreadyPrinted = true;
                     }
                 }

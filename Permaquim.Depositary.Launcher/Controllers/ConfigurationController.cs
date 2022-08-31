@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Launcher.Controllers
             return _depositaryId.Value;
         }
 
-        private static string GetConfiguration(string configurationEntry)
+        public static string GetConfiguration(string configurationEntry)
         {
 
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == null ? String.Empty :

@@ -89,7 +89,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
-        public static int PrintDailyTurnChangeQuantity
+        public static int PrintTurnChangeQuantity
         {
             get
             {

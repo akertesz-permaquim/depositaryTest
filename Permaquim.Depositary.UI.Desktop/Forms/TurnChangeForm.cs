@@ -78,12 +78,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             StyleController.SetControlStyle(OperationsHeaderGridView);
             StyleController.SetControlStyle(OperationsDetailGridView);
+            AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
 
         }
         private void LoadMultiLanguageItems()
         {
- 
             TurnLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TRANSACCIONES_TURNO);
+            AcceptButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
         }
 
 
@@ -91,7 +92,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadTurnChangeButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "TurnchangeButton", MultilanguangeController.GetText(MultiLanguageEnum.ACCEPT_BUTTON), MainPanel.Width /2 -5,55);
+                "TurnchangeButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width /2 -5,55);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -133,7 +134,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 InitializeLocals();
             }
 
-            //FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 
         private static void SetinformationMessage()
@@ -223,7 +223,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Fecha",
@@ -234,7 +233,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-
 
             OperationsHeaderGridView.Columns.Add(new()
             {
@@ -290,9 +288,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-
-
-
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "UsuarioCuenta",
@@ -303,9 +298,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-
-
-
 
             OperationsHeaderGridView.Columns.Add(new()
             {
@@ -402,8 +394,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<TransactionHeaderItem> _transactionHeaderItems = new();
         private List<TransactionDetailItem> _transactionDetailItems = new();
         private List<TransactionEnvelopDetailItem> _transactionEnvelopeDetailItems = new();
-
-
 
         private void OperationsHeaderGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -519,7 +509,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 if (!_alreadyPrinted)
                 {
-                    for (int i = 0; i < ParameterController.PrintDailyTurnChangeQuantity; i++)
+                    for (int i = 0; i < ParameterController.PrintTurnChangeQuantity; i++)
                     {
                         ReportController.PrintTurnChangeReport(_turnChange);
                         _alreadyPrinted = true;
@@ -527,5 +517,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
         }
+
+        private void AcceptButton_Click(object sender, EventArgs e)
+        {
+            DetailsPanel.Visible = false;
+        }
+
     }
 }

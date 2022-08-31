@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Permaquim.Depositary.Sincronization.Console.Controllers;
 using Permaquim.Depositary.Sincronization.Console.Interfaces;
+using Permaquim.Depositary.Sincronization.Console.Security;
 using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Text;
@@ -31,14 +32,44 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             _logger = logger;
 
+            string passwordKey = ConfigurationController.GetConfiguration("PasswordKey");
+            _logger.Log(LogLevel.Information, "PasswordKey is: " + passwordKey);
+
+            Thread.Sleep(1000);
+
+            string connectionstring = Cryptography.Decrypt(ConfigurationController.GetConfiguration("Connectionstring"), passwordKey);
+            _logger.Log(LogLevel.Information, "Connectionstring is: " + connectionstring);
+
+            Thread.Sleep(1000);
+
+            string depositary = Cryptography.Decrypt(ConfigurationController.GetConfiguration("CodigoDepositario"), passwordKey);
+            _logger.Log(LogLevel.Information, "CodigoDepositario is: " + depositary);
+
+            Thread.Sleep(1000);
 
             _baseUrl = ConfigurationController.GetConfiguration(WEBAPIURL);
-            _delaytime = DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY) == String.Empty ? "10000" : DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY);
+            _logger.Log(LogLevel.Information,"Base URL is: " + _baseUrl);
 
+            Thread.Sleep(1000);
+
+            _delaytime = DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY) == String.Empty ? "10000" : DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY);
+            _logger.Log(LogLevel.Information, "Delaytime is: " + _delaytime);
+
+            Thread.Sleep(1000);
         }
         public override Task StartAsync(CancellationToken cancellationToken)
         {
+            try
+            {
             _workerTasks = AppConfiguration.GetWorkerTasks();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                return null;
+            }
+          
             return base.StartAsync(cancellationToken);
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

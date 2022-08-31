@@ -1,12 +1,11 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
-using System.Buffers;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
-    public partial class OperationsHistoryForm : Form
+    public partial class TurnsHistoryForm : Form
     {
         private const string NICKNAME = "NickName";
         private const string NOMBRE = "Nombre";
@@ -19,14 +18,14 @@ namespace Permaquim.Depositary.UI.Desktop
         private long _operationId;
         private long _operationTypeId;
 
-        public OperationsHistoryForm()
+        public TurnsHistoryForm()
         {
             InitializeComponent();
             CenterPanel();
             LoadStyles();
             LoadMultilanguageItems();
             LoadFilterControls();
-            InitializeOperationsHeaderGridView();
+            InitializeTurnsHeaderGridView();
 
             FromDateTimePicker.Value = DateTime.Now.AddDays(-30);
 
@@ -58,16 +57,16 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CenterPanel()
         {
 
-            OperationsHeaderGridView.Location = new Point()
+            TurnsHeaderGridView.Location = new Point()
             {
-                X = OperationsHeaderGridView.Location.X,
-                Y = OperationsHeaderGridView.Location.Y
+                X = TurnsHeaderGridView.Location.X,
+                Y = TurnsHeaderGridView.Location.Y
             };
 
-            OperationsDetailGridView.Location = new Point()
+            TurnsDetailGridView.Location = new Point()
             {
-                X = OperationsDetailGridView.Location.X,
-                Y = OperationsDetailGridView.Location.Y
+                X = TurnsDetailGridView.Location.X,
+                Y = TurnsDetailGridView.Location.Y
             };
 
             BackButton.Location = new Point()
@@ -79,7 +78,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-   
+
             ExecuteButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
@@ -89,8 +88,8 @@ namespace Permaquim.Depositary.UI.Desktop
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             PrintButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
 
-            StyleController.SetControlStyle(OperationsHeaderGridView);
-            StyleController.SetControlStyle(OperationsDetailGridView);
+            StyleController.SetControlStyle(TurnsHeaderGridView);
+            StyleController.SetControlStyle(TurnsDetailGridView);
         }
 
         private void LoadMultilanguageItems()
@@ -107,7 +106,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new ReportsForm(),
+            FormsController.OpenChildForm(this, new ReportsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
@@ -130,7 +129,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             turnList.Insert(0, new Depositario.Entities.Tables.Turno.AgendaTurno()
             {
-                Nombre  = TODOS,
+                Nombre = TODOS,
                 Id = -1
             });
 
@@ -145,12 +144,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
         }
 
-        private void InitializeOperationsHeaderGridView()
+        private void InitializeTurnsHeaderGridView()
         {
-            OperationsHeaderGridView.AutoGenerateColumns = false;
-            OperationsHeaderGridView.Columns.Clear();
+            TurnsHeaderGridView.AutoGenerateColumns = false;
+            TurnsHeaderGridView.Columns.Clear();
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = ID,
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
@@ -161,7 +160,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalValidado",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
@@ -172,7 +171,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "TotalAValidar",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
@@ -184,7 +183,7 @@ namespace Permaquim.Depositary.UI.Desktop
             });
 
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Fecha",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
@@ -196,7 +195,7 @@ namespace Permaquim.Depositary.UI.Desktop
             });
 
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Usuario",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO),
@@ -207,7 +206,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Contenedor",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR),
@@ -218,7 +217,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Tipo",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPO),
@@ -229,7 +228,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Moneda",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
@@ -240,7 +239,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "TipoId",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPOID),
@@ -252,7 +251,7 @@ namespace Permaquim.Depositary.UI.Desktop
             });
 
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "UsuarioCuenta",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
@@ -263,7 +262,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Turno",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TURNO),
@@ -274,7 +273,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "CierreDiario",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CIERREDIARIO),
@@ -285,7 +284,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            OperationsHeaderGridView.Columns.Add(new()
+            TurnsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Finalizada",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FINALIZADA),
@@ -297,14 +296,14 @@ namespace Permaquim.Depositary.UI.Desktop
             });
         }
 
-        private void InitializeOperationsDetailGridView(OperationTypeEnum operationType)
+        private void InitializeTurnsDetailGridView(OperationTypeEnum operationType)
         {
-            OperationsHeaderGridView.AutoGenerateColumns = false;
-            OperationsDetailGridView.Columns.Clear();
+            TurnsHeaderGridView.AutoGenerateColumns = false;
+            TurnsDetailGridView.Columns.Clear();
 
             if (operationType == OperationTypeEnum.BillDeposit)
             {
-                OperationsDetailGridView.Columns.Add(new()
+                TurnsDetailGridView.Columns.Add(new()
                 {
                     DataPropertyName = ID,
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
@@ -315,7 +314,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 });
 
-                OperationsDetailGridView.Columns.Add(new()
+                TurnsDetailGridView.Columns.Add(new()
                 {
                     DataPropertyName = "Denominacion",
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION),
@@ -326,7 +325,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 });
 
-                OperationsDetailGridView.Columns.Add(new()
+                TurnsDetailGridView.Columns.Add(new()
                 {
                     DataPropertyName = "CantidadUnidades",
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
@@ -337,9 +336,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 });
             }
-            if(operationType == OperationTypeEnum.EnvelopeDeposit)
+            if (operationType == OperationTypeEnum.EnvelopeDeposit)
             {
-                OperationsDetailGridView.Columns.Add(new()
+                TurnsDetailGridView.Columns.Add(new()
                 {
                     DataPropertyName = "Sobre",
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.SOBRE),
@@ -350,7 +349,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 });
 
-                OperationsDetailGridView.Columns.Add(new()
+                TurnsDetailGridView.Columns.Add(new()
                 {
                     DataPropertyName = "TipoValor",
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPOVALOR),
@@ -361,7 +360,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 });
 
-                OperationsDetailGridView.Columns.Add(new()
+                TurnsDetailGridView.Columns.Add(new()
                 {
                     DataPropertyName = "CantidadDeclarada",
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADDECLARADA),
@@ -373,7 +372,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 });
             }
 
-            OperationsDetailGridView.Columns.Add(new()
+            TurnsDetailGridView.Columns.Add(new()
             {
                 DataPropertyName = "Fecha",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
@@ -385,125 +384,106 @@ namespace Permaquim.Depositary.UI.Desktop
             });
         }
 
-        private void LoadOperationsHeader()
+        private void LoadTurnsHeader()
         {
 
-            OperationsHeaderGridView.DataSource = null;
-            OperationsDetailGridView.DataSource = null;
-            InitializeOperationsHeaderGridView();
+            TurnsHeaderGridView.DataSource = null;
+            TurnsDetailGridView.DataSource = null;
+            InitializeTurnsHeaderGridView();
 
-            var operations = DatabaseController.GetOperationsHeaders(
+            var Turns = DatabaseController.GetTurnChangeHeaders(
                 FromDateTimePicker.Value,
                 ToDateTimePicker.Value,
-                (long)UserComboBox.SelectedValue,
-                (long)TurnComboBox.SelectedValue
+                (long)UserComboBox.SelectedValue
                 );
 
             _transactionHeaderItems.Clear();
 
-            foreach (var item in operations)
+            foreach (var item in Turns)
             {
-                _transactionHeaderItems.Add(new TransactionHeaderItem()
+                _transactionHeaderItems.Add(new TurnItem()
                 {
-                    Cierrediario = item.CierreDiarioId.Nombre,
-                    Contenedor = item.ContenedorId.Identificador,
-                    Fecha = item.Fecha,
-                    Finalizada = item.Finalizada,
-                    Id = item.Id,
-                    Moneda = item.MonedaId.Nombre,
-                    Tipo = item.TipoId.Nombre,
-                    TipoId = item.TipoId.Id,
-                    TotalAValidar = item.TotalAValidar,
-                    TotalValidado = item.TotalValidado,
-                    Turno = item.TurnoId.ToString(),
-                    Usuario = item.UsuarioId.ToString(),
-                    UsuarioCuenta = item.UsuarioCuentaId.CuentaId.Numero
+
+
+
+                    //Cierrediario = item.CierreDiarioId.Nombre,
+                    //Contenedor = item.ContenedorId.Identificador,
+                    //Fecha = item.Fecha,
+                    //Finalizada = item.Finalizada,
+                    //Id = item.Id,
+                    //Moneda = item.MonedaId.Nombre,
+                    //Tipo = item.TipoId.Nombre,
+                    //TipoId = item.TipoId.Id,
+                    //TotalAValidar = item.TotalAValidar,
+                    //TotalValidado = item.TotalValidado,
+                    //Turno = item.TurnoId.ToString(),
+                    //Usuario = item.UsuarioId.ToString(),
+                    //UsuarioCuenta = item.UsuarioCuentaId.CuentaId.Numero
                 });
             }
 
-            OperationsHeaderGridView.DataSource = _transactionHeaderItems;
+            TurnsHeaderGridView.DataSource = _transactionHeaderItems;
 
 
         }
-        private void OperationsHeaderGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void TurnsHeaderGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
 
             DetailPanel.Visible = true;
 
-            OperationsDetailGridView.DataSource  = null;
+            TurnsDetailGridView.DataSource = null;
             if (e.RowIndex > -1)
             {
 
-                _operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells[ID].Value;
-                _operationTypeId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["TipoId"].Value;
+                _operationId = (long)TurnsHeaderGridView.Rows[e.RowIndex].Cells[ID].Value;
+                _operationTypeId = (long)TurnsHeaderGridView.Rows[e.RowIndex].Cells["TipoId"].Value;
 
-                InitializeOperationsDetailGridView((OperationTypeEnum)_operationTypeId);
+                InitializeTurnsDetailGridView((OperationTypeEnum)_operationTypeId);
 
-                if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.BillDeposit)
-                {
-                    var operationDetails = DatabaseController.GetOperationsDetails(_operationId);
+                //if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.)
+                //{
+                //var operationDetails = DatabaseController.GetTurnsDetails(_operationId);
 
-                    _transactionDetailItems.Clear();
+                //_transactionDetailItems.Clear();
 
-                    foreach (var item in operationDetails)
-                    {
-                        _transactionDetailItems.Add(new TransactionDetailItem()
-                        {
-                            CantidadUnidades = item.CantidadUnidades,
-                            Denominacion = item.DenominacionId.Nombre,
-                            Fecha = item.Fecha,
-                            Id = item.Id
-                        });
-                    }
+                //foreach (var item in operationDetails)
+                //{
+                //    _transactionDetailItems.Add(new TransactionDetailItem()
+                //    {
+                //        CantidadUnidades = item.CantidadUnidades,
+                //        Denominacion = item.DenominacionId.Nombre,
+                //        Fecha = item.Fecha,
+                //        Id = item.Id
+                //    });
+                //}
 
-                    OperationsDetailGridView.DataSource = _transactionDetailItems;
-
-
-                }
-                if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.EnvelopeDeposit)
-                {
-                    var operationEnvelopeDetails = DatabaseController.GetEnvelopeOperationsDetails(_operationId);
-
-                    _transactionEnvelopeDetailItems.Clear();
-
-                    foreach (var item in operationEnvelopeDetails)
-                    {
-                        _transactionEnvelopeDetailItems.Add(new TransactionEnvelopDetailItem()
-                        {
-                            CantidadDeclarada = item.CantidadDeclarada,
-                            Sobre = item.SobreId.CodigoSobre,
-                            Fecha = item.Fecha,
-                            TipoValor = item.RelacionMonedaTipoValorId.TipoValorId.Nombre
-
-                        });
-                    }
+                //TurnsDetailGridView.DataSource = _transactionDetailItems;
 
 
-                    OperationsDetailGridView.DataSource = _transactionEnvelopeDetailItems;
-                }
+                //}
 
-             }
+            }
         }
 
 
-        private List<TransactionHeaderItem> _transactionHeaderItems = new();
+        private List<TurnItem> _transactionHeaderItems = new();
         private List<TransactionDetailItem> _transactionDetailItems = new();
         private List<TransactionEnvelopDetailItem> _transactionEnvelopeDetailItems = new();
 
 
- 
-        private void OperationsHeaderGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+
+        private void TurnsHeaderGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             System.Diagnostics.Debug.Print("");
         }
 
-        private void OperationsHistoryform_VisibleChanged(object sender, EventArgs e)
+        private void TurnsHistoryform_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
-                LoadOperationsHeader();
+                LoadTurnsHeader();
             }
             else
             {
@@ -515,22 +495,22 @@ namespace Permaquim.Depositary.UI.Desktop
         private void InitializeLocals()
         {
             // inicializar variables locales
-            OperationsHeaderGridView.DataSource = null;
-            OperationsDetailGridView.DataSource = null;
+            TurnsHeaderGridView.DataSource = null;
+            TurnsDetailGridView.DataSource = null;
         }
-        private void OperationsDetailGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void TurnsDetailGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
         }
 
-        private void OperationsHistoryform_MouseClick(object sender, MouseEventArgs e)
+        private void TurnsHistoryform_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
         }
 
         private void ExecuteButton_Click(object sender, EventArgs e)
         {
-            LoadOperationsHeader();
+            LoadTurnsHeader();
         }
 
         private void AcceptButton_Click(object sender, EventArgs e)
@@ -540,48 +520,25 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.BillDeposit)
-                PrintBillDepositTicket();
-            if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.EnvelopeDeposit)
-                PrintEnvelopeTicket();
+            PrintTicket();
         }
 
-        private void PrintBillDepositTicket()
+        private void PrintTicket()
         {
 
-            if (ParameterController.PrintsBillDeposit)
+            if (ParameterController.PrintsTurnChange)
             {
-                var _header = DatabaseController.GetTransactionHeader(_operationId);
-                var _details = DatabaseController.GetTransactionDetails(_operationId);
                 if (!_alreadyPrinted)
                 {
-                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                    for (int i = 0; i < ParameterController.PrintTurnChangeQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.BillDeposit,
-                            _header, _details);
+                        ReportController.PrintDepositReport(ReportTypeEnum.TurnChange,
+                            null, null);
                         _alreadyPrinted = true;
                     }
                 }
             }
         }
 
-        private void PrintEnvelopeTicket()
-        {
-
-
-            if (ParameterController.PrintsEnvelopeDeposit)
-            {
-                var _header = DatabaseController.GetTransactionHeader(_operationId);
-                var _details = DatabaseController.GetTransactionDetails(_operationId);
-                if (!_alreadyPrinted)
-                {
-                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
-                    {
-                        ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositSecondReport, _header, _details);
-                        _alreadyPrinted = true;
-                    }
-                }
-            }
-        }
     }
 }

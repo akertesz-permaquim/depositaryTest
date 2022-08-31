@@ -55,6 +55,7 @@
             this.Name = "Mainform";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Permaquim";
+            this.Load += new System.EventHandler(this.Mainform_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MainPicturebox)).EndInit();
             this.ResumeLayout(false);
 

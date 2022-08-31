@@ -75,6 +75,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_device != null &&_device.CounterConnected)
                 SetDeviceToNeutralMode();
             LoadTransactionButtons();
+            LoadReportsButton();
             LoadOtherOperationsButton();
             LoadBackButton();
 
@@ -174,19 +175,45 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.EXIT_BUTTON), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_SALIR), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
         }
 
+        #region Reports
+
+        private void LoadReportsButton()
+        {
+            if (SecurityController.IsFunctionenabled(FunctionEnum.Reports))
+            {
+                CustomButton reportsButton = ControlBuilder.BuildStandardButton(
+                    "ReportsButton", MultilanguangeController.GetText(MultiLanguageEnum.REPORTES), MainPanel.Width);
+
+                this.MainPanel.Controls.Add(reportsButton);
+                reportsButton.Click += new System.EventHandler(ReportsButton_Click);
+            }
+        }
+
+        private void ReportsButton_Click(object sender, EventArgs e)
+        {
+            FormsController.OpenChildForm(this, new ReportsForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+        }
+        #endregion
+
         #region Other Operations
         private void LoadOtherOperationsButton()
         {
-            if (SecurityController.IsFunctionenabled(FunctionEnum.OtherOperations))
+            if (
+                SecurityController.IsFunctionenabled(FunctionEnum.TurnChange)
+                || SecurityController.IsFunctionenabled(FunctionEnum.DailyClosing)
+                || SecurityController.IsFunctionenabled(FunctionEnum.Support)
+             )
             {
                 CustomButton otherOperationsButton = ControlBuilder.BuildAlternateButton(
-                    "OtherOperationsButton", MultilanguangeController.GetText(MultiLanguageEnum.OTRAS_OPERACIONES), MainPanel.Width);
+                    "OtherOperationsButton", 
+                    MultilanguangeController.GetText(MultiLanguageEnum.OTRAS_OPERACIONES), MainPanel.Width);
 
                 this.MainPanel.Controls.Add(otherOperationsButton);
                 otherOperationsButton.Click += new System.EventHandler(OtherOperationButton_Click);
@@ -236,6 +263,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _transactions = DatabaseController.GetTransactionTypes();
                 LoadTransactionButtons();
                 LoadOtherOperationsButton();
+                LoadReportsButton();
                 LoadBackButton();
                 if(!ConfigurationController.IsDevelopment())
                     _device.RemoteCancel();

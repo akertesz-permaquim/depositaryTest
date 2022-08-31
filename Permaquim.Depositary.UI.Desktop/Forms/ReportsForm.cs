@@ -81,8 +81,46 @@ namespace Permaquim.Depositary.UI.Desktop
             if (SecurityController.IsFunctionenabled(FunctionEnum.BagHistory))
                 LoadBagHistoryButton();
 
+            if (SecurityController.IsFunctionenabled(FunctionEnum.TurnsHistoryForm))
+                LoadTurnsHistoryButton();
+            if (SecurityController.IsFunctionenabled(FunctionEnum.DailyClosingHistoryForm))
+                LoadDailyClosingHistoryButton();
+
             LoadBackButton();
         }
+
+        #region DailyClosingHistory
+        private void LoadDailyClosingHistoryButton()
+        {
+            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+                "DailyClosingHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_BOLSA), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(OperationsButton);
+            OperationsButton.Click += new System.EventHandler(DailyClosingHistoryButton_Click);
+        }
+        private void DailyClosingHistoryButton_Click(object sender, EventArgs e)
+        {
+            FormsController.OpenChildForm(this, new DailyClosingHistoryForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+        }
+        #endregion
+
+        #region TurnsHistory
+        private void LoadTurnsHistoryButton()
+        {
+            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+                "TurnsHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_BOLSA), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(OperationsButton);
+            OperationsButton.Click += new System.EventHandler(TurnsHistoryButton_Click);
+        }
+        private void TurnsHistoryButton_Click(object sender, EventArgs e)
+        {
+            FormsController.OpenChildForm(this, new TurnsHistoryForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+        }
+        #endregion
+
         #region Operations
 
         private void LoadOperationsHistoryButton()
@@ -96,11 +134,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OperationsButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this, new OperationsHistoryform(),
+            FormsController.OpenChildForm(this, new OperationsHistoryForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
         #endregion
-
         #region BagContent
         private void LoadBagContentButton()
         {

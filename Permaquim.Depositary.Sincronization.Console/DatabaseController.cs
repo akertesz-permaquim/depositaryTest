@@ -14,24 +14,28 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             string returnValue = string.Empty;
 
-            Permaquim.Depositario.Business.Tables.Aplicacion.Configuracion entities = new();
-            entities.Where.Add(Depositario.Business.Tables.Aplicacion.Configuracion.ColumnEnum.Clave,
+            Permaquim.Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entities = new();
+            entities.Where.Add(Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave,
                 Depositario.sqlEnum.OperandEnum.Equal, key);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId,
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.SucursalId.EmpresaId.Id);
+
             entities.Items();
             if (entities.Result.Count > 0)
                 return entities.Result.FirstOrDefault().Valor;
 
             return returnValue;
         }
-        public Permaquim.Depositario.Entities.Tables.Dispositivo.Depositario CurrentDepositary
+        public Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario CurrentDepositary
         {
             get
             {
-                Permaquim.Depositario.Business.Tables.Dispositivo.Depositario entity = new();
-                entity.Where.Add(Depositario.Business.Tables.Dispositivo.Depositario.ColumnEnum.Id,
+                Permaquim.Depositario.Business.Relations.Dispositivo.Depositario entity = new();
+                entity.Where.Add(Depositario.Business.Relations.Dispositivo.Depositario.ColumnEnum.Id,
                     Depositario.sqlEnum.OperandEnum.NotEqual, 0);
                 entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                    Depositario.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado,
+                    Depositario.Business.Relations.Dispositivo.Depositario.ColumnEnum.Habilitado,
                   Depositario.sqlEnum.OperandEnum.Equal, true);
                 return entity.Items().FirstOrDefault();
             }

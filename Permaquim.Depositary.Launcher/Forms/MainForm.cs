@@ -1,4 +1,5 @@
 using Permaquim.Depositary.Launcher.Controllers;
+using Permaquim.Depositary.Launcher.Security;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -23,28 +24,36 @@ namespace Permaquim.Depositary.Launcher
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+    
+        }
+
+        private async void Mainform_Load(object sender, EventArgs e)
+        {
+
 
             if (DatabaseController.CurrentDepositary == null)
             {
                 try
                 {
-                    InitializationController.InitializeDepositary();
+                    await InitializationController.InitializeDepositary();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                finally
-                {
-                    Application.Exit();
-                }
             }
+
+            // TODO: Verificar actualización
+            // Llamar a la aplicación desktop
+
+            if (System.IO.File.Exists(Directory.GetCurrentDirectory() + APPLICATION))
+                Process.Start(Directory.GetCurrentDirectory() + APPLICATION);
             else
-            {
-                //TODO: Verificar actualización
-                // Llamar a la aplicación desktop
-                //Process.Start(Directory.GetCurrentDirectory() + APPLICATION);
-            }
+                MessageBox.Show("El archivo " + Directory.GetCurrentDirectory() + APPLICATION + " no existe.",
+                    "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+            Application.Exit();
+
         }
     }
 }

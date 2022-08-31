@@ -11,19 +11,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
     internal static class DeviceController
     {
-      public static int GetPollingInterval()
+        public static int GetPollingInterval()
         {
-            
-            int returnValue = Int32.Parse( ConfigurationController.
-                GetDepositaryConfigurationItem(Global.Enumerations.DepositaryConfigurationEnum.POLLTIME));
-            return returnValue;
+            return DatabaseController.CurrentDepositaryCounter.PollTime;
         }
         public static int GetSleepInterval()
         {
-
-            int returnValue = Int32.Parse(ConfigurationController.
-                GetDepositaryConfigurationItem(Global.Enumerations.DepositaryConfigurationEnum.SLEEPTIME));
-            return returnValue;
+            return DatabaseController.CurrentDepositaryIoboard.Sleeptime;
         }
 
 

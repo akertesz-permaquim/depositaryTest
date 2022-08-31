@@ -34,10 +34,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.OperationsHeaderGridView = new System.Windows.Forms.DataGridView();
-            this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
             this.TurnLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.DetailsPanel = new System.Windows.Forms.Panel();
+            this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).BeginInit();
+            this.DetailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,10 +81,61 @@
             this.OperationsHeaderGridView.RowTemplate.Height = 30;
             this.OperationsHeaderGridView.RowTemplate.ReadOnly = true;
             this.OperationsHeaderGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OperationsHeaderGridView.Size = new System.Drawing.Size(776, 178);
+            this.OperationsHeaderGridView.Size = new System.Drawing.Size(760, 360);
             this.OperationsHeaderGridView.TabIndex = 188;
             this.OperationsHeaderGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OperationsHeaderGridView_CellClick);
             this.OperationsHeaderGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
+            // 
+            // TurnLabel
+            // 
+            this.TurnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.TurnLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.TurnLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TurnLabel.ForeColor = System.Drawing.Color.White;
+            this.TurnLabel.Location = new System.Drawing.Point(13, 32);
+            this.TurnLabel.Name = "TurnLabel";
+            this.TurnLabel.Size = new System.Drawing.Size(760, 27);
+            this.TurnLabel.TabIndex = 190;
+            this.TurnLabel.Text = "*";
+            // 
+            // MainPanel
+            // 
+            this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
+            this.MainPanel.Location = new System.Drawing.Point(168, 448);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(448, 88);
+            this.MainPanel.TabIndex = 191;
+            // 
+            // DetailsPanel
+            // 
+            this.DetailsPanel.Controls.Add(this.AcceptButton);
+            this.DetailsPanel.Controls.Add(this.OperationsDetailGridView);
+            this.DetailsPanel.Location = new System.Drawing.Point(16, 64);
+            this.DetailsPanel.Name = "DetailsPanel";
+            this.DetailsPanel.Size = new System.Drawing.Size(752, 360);
+            this.DetailsPanel.TabIndex = 192;
+            // 
+            // AcceptButton
+            // 
+            this.AcceptButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AcceptButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.AcceptButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.AcceptButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.AcceptButton.BorderRadius = 5;
+            this.AcceptButton.BorderSize = 0;
+            this.AcceptButton.FlatAppearance.BorderSize = 0;
+            this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AcceptButton.ForeColor = System.Drawing.Color.White;
+            this.AcceptButton.Location = new System.Drawing.Point(316, 288);
+            this.AcceptButton.Name = "AcceptButton";
+            this.AcceptButton.Size = new System.Drawing.Size(160, 55);
+            this.AcceptButton.TabIndex = 191;
+            this.AcceptButton.Text = "Salir";
+            this.AcceptButton.TextColor = System.Drawing.Color.White;
+            this.AcceptButton.UseVisualStyleBackColor = false;
+            this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
             // OperationsDetailGridView
             // 
@@ -113,7 +167,7 @@
             this.OperationsDetailGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.OperationsDetailGridView.EnableHeadersVisualStyles = false;
             this.OperationsDetailGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsDetailGridView.Location = new System.Drawing.Point(13, 253);
+            this.OperationsDetailGridView.Location = new System.Drawing.Point(8, 8);
             this.OperationsDetailGridView.Name = "OperationsDetailGridView";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -128,40 +182,18 @@
             this.OperationsDetailGridView.RowTemplate.Height = 30;
             this.OperationsDetailGridView.RowTemplate.ReadOnly = true;
             this.OperationsDetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OperationsDetailGridView.Size = new System.Drawing.Size(776, 180);
-            this.OperationsDetailGridView.TabIndex = 189;
-            this.OperationsDetailGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OperationsHeaderGridView_DataError);
-            // 
-            // TurnLabel
-            // 
-            this.TurnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TurnLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.TurnLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TurnLabel.ForeColor = System.Drawing.Color.White;
-            this.TurnLabel.Location = new System.Drawing.Point(13, 32);
-            this.TurnLabel.Name = "TurnLabel";
-            this.TurnLabel.Size = new System.Drawing.Size(776, 27);
-            this.TurnLabel.TabIndex = 190;
-            this.TurnLabel.Text = "*";
-            // 
-            // MainPanel
-            // 
-            this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(176, 448);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(448, 88);
-            this.MainPanel.TabIndex = 191;
+            this.OperationsDetailGridView.Size = new System.Drawing.Size(736, 264);
+            this.OperationsDetailGridView.TabIndex = 190;
             // 
             // TurnChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(784, 600);
+            this.Controls.Add(this.DetailsPanel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.TurnLabel);
             this.Controls.Add(this.OperationsHeaderGridView);
-            this.Controls.Add(this.OperationsDetailGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TurnChangeForm";
             this.Text = "TurnChangeForm";
@@ -169,6 +201,7 @@
             this.VisibleChanged += new System.EventHandler(this.TurnChangeForm_VisibleChanged);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TurnChangeForm_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).EndInit();
+            this.DetailsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -176,8 +209,10 @@
 
         #endregion
         private DataGridView OperationsHeaderGridView;
-        private DataGridView OperationsDetailGridView;
         private Label TurnLabel;
         private FlowLayoutPanel MainPanel;
+        private Panel DetailsPanel;
+        private DataGridView OperationsDetailGridView;
+        private CustomButton AcceptButton;
     }
 }

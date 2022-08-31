@@ -161,6 +161,7 @@
             this.TurnAndDateTimeLabel.TabIndex = 104;
             this.TurnAndDateTimeLabel.Text = "------";
             this.TurnAndDateTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TurnAndDateTimeLabel.Click += new System.EventHandler(this.TurnAndDateTimeLabel_Click);
             // 
             // DepositaryLabel
             // 
