@@ -140,6 +140,15 @@ namespace Permaquim.Depositary.UI.Desktop
 
             _operationStatus = new();
             CurrencyLabel.Text = DatabaseController.CurrentCurrency.Nombre;
+
+            // Le agrega el número de cuenta bancaria al texto del breadcrumb 
+            if (DatabaseController.CurrentUserBankAccount != null)
+            {
+                FormsController.AppendtoBreadcrumbText(" - " +
+                    MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
+                    ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero
+                    );
+            }
         }
         private void EnvelopeDepositForm_VisibleChanged(object sender, EventArgs e)
         {

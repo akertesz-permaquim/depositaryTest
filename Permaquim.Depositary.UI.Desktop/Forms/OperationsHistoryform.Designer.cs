@@ -237,7 +237,7 @@
             this.DetailPanel.Controls.Add(this.PrintButton);
             this.DetailPanel.Controls.Add(this.AcceptButton);
             this.DetailPanel.Controls.Add(this.OperationsDetailGridView);
-            this.DetailPanel.Location = new System.Drawing.Point(16, 152);
+            this.DetailPanel.Location = new System.Drawing.Point(16, 272);
             this.DetailPanel.Name = "DetailPanel";
             this.DetailPanel.Size = new System.Drawing.Size(920, 392);
             this.DetailPanel.TabIndex = 184;

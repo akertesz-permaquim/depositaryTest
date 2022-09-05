@@ -45,7 +45,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         public string BreadCrumbText
         {
             get { return BreadcrumbLabel.Text; }
-            set { BreadcrumbLabel.Text = value; }
+            set { BreadcrumbLabel.Text = value;
+                BreadcrumbLabel.Refresh();
+            }
         }
 
 
@@ -119,7 +121,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             if (DatabaseController.CurrentDepositary != null)
             {
-
                 InitializeDevices();
                 LoadLedImages();
                 VerifyUserData();
@@ -150,7 +151,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             _deXDevice = device;
 
-            this.Text = MultilanguangeController.GetText(MultiLanguageEnum.DISPOSITIVO) + ": " + device.DeviceName;
+            this.Text = MultilanguangeController.GetText(MultiLanguageEnum.DISPOSITIVO) 
+                + ": " + DatabaseController.CurrentDepositary.ModeloId.Nombre;
             
             LoadStyles();
 
@@ -263,6 +265,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 AuditController.Log(LogTypeEnum.Exception, MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA), 
                     MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
+
+                // Se asume retiro de bolsa
+                DatabaseController.CreateContainer();
+                ReportController.PrintReport(ReportTypeEnum.ValueExtraction, null, null);
+
                 if (_blockingDialog == null &&
                     (DatabaseController.CurrentOperation == null ||
                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
@@ -617,10 +624,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var _bagContentItems = DatabaseController.GetBillBagContentItems();
-            _bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
-            ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                                       DatabaseController.CurrentContainer, _bagContentItems);
+            //var _bagContentItems = DatabaseController.GetBillBagContentItems();
+            //_bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
+            //ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+            //                           DatabaseController.CurrentContainer, _bagContentItems);
+
+            ReportController.PrintReport(ReportTypeEnum.DailyClosing,
+                                   DatabaseController.CurrentDailyClosing, DatabaseController.GetCurrentDailyClosingTransactions());
 
         }
     }

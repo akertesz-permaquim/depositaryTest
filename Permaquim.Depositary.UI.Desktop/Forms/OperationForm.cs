@@ -100,7 +100,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _transactions)
             {
 
-                if (SecurityController.IsFunctionenabled(((long)item.FuncionId)))
+                if (SecurityController.IsOperationEnabled(((long)item.FuncionId)))
                 {
                     CustomButton newButton = ControlBuilder.BuildStandardButton(
                         "TransactionButton" + item.Id.ToString(),
@@ -185,7 +185,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadReportsButton()
         {
-            if (SecurityController.IsFunctionenabled(FunctionEnum.Reports))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.Reportes))
             {
                 CustomButton reportsButton = ControlBuilder.BuildStandardButton(
                     "ReportsButton", MultilanguangeController.GetText(MultiLanguageEnum.REPORTES), MainPanel.Width);
@@ -206,9 +206,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadOtherOperationsButton()
         {
             if (
-                SecurityController.IsFunctionenabled(FunctionEnum.TurnChange)
-                || SecurityController.IsFunctionenabled(FunctionEnum.DailyClosing)
-                || SecurityController.IsFunctionenabled(FunctionEnum.Support)
+                SecurityController.IsFunctionEnabled(FunctionEnum.CambioDeTurno)
+                || SecurityController.IsFunctionEnabled(FunctionEnum.CierreDiario)
+                || SecurityController.IsFunctionEnabled(FunctionEnum.Soporte)
              )
             {
                 CustomButton otherOperationsButton = ControlBuilder.BuildAlternateButton(

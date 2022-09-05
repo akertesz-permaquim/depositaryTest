@@ -15,6 +15,23 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static Form _activeForm = null;
 
         /// <summary>
+        /// Hides 'instance', shows 'childForm' and appends breadCrumbText
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="childForm"></param>
+        /// <param name="device"></param>
+        public static void OpenChildForm(Form instance, Form childForm,
+       Permaquim.Depositary.UI.Desktop.Components.CounterDevice device,string breadCrumbText)
+        {
+            HideInstance(instance);
+            OpenChildForm(childForm, device);
+            MainFormInstance.BreadCrumbText =
+                 MultilanguangeController.GetText(childForm.Name) + breadCrumbText;
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+        }
+
+
+        /// <summary>
         /// Hides 'instance' and shows 'childForm'
         /// </summary>
         /// <param name="instance"></param>
@@ -69,6 +86,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             };
 
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+        }
+
+        public static void AppendtoBreadcrumbText(string textToAppend)
+        {
+            MainFormInstance.BreadCrumbText += textToAppend;
         }
         public static int ActiveFormscount
         {

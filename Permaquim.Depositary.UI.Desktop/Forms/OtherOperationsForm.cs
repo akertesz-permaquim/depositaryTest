@@ -38,11 +38,11 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.MainPanel.Controls.Clear();
 
-            if (SecurityController.IsFunctionenabled(FunctionEnum.TurnChange))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.CambioDeTurno))
                 LoadTurnButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.DailyClosing))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.CierreDiario))
                 LoadDailyClosingButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.Support))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.Soporte))
                 LoadSupportButton();
             LoadResetButton();
 

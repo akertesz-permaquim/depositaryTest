@@ -412,7 +412,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 _transactionHeaderItems.Add(new TransactionHeaderItem()
                 {
                     Cierrediario = item.CierreDiarioId.Nombre,
-                    Contenedor = item.ContenedorId.Identificador,
+                    Contenedor = item.ContenedorId.Nombre + 
+                        (item.ContenedorId.Identificador.Length == 0 ? "": " (" + item.ContenedorId.Identificador + " )"),
                     Fecha = item.Fecha,
                     Finalizada = item.Finalizada,
                     Id = item.Id,
@@ -422,7 +423,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalAValidar = item.TotalAValidar,
                     TotalValidado = item.TotalValidado,
                     Turno = item.TurnoId.ToString(),
-                    Usuario = item.UsuarioId.ToString(),
+                    Usuario = item.UsuarioId.NombreApellido,
                     UsuarioCuenta = item.UsuarioCuentaId.CuentaId.Numero
                 });
             }
@@ -435,9 +436,14 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
+            DetailPanel.Location = new Point(
+               this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
+               this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
+            DetailPanel.Anchor = AnchorStyles.None;
+
             DetailPanel.Visible = true;
 
-            OperationsDetailGridView.DataSource  = null;
+            OperationsDetailGridView.DataSource = null;
             if (e.RowIndex > -1)
             {
 
@@ -489,7 +495,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     OperationsDetailGridView.DataSource = _transactionEnvelopeDetailItems;
                 }
 
-             }
+            }
         }
 
 

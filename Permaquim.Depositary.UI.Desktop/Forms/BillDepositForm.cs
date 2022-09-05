@@ -60,6 +60,8 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             Loadparameters();
             TimeOutController.Reset();
+ 
+
         }
         private void BillDepositForm_Load(object sender, EventArgs e)
         {
@@ -796,10 +798,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalValidado = _operationStatus.CurrentTransactionAmount,
                     TurnoId = DatabaseController.CurrentTurn.Id,
                     UsuarioCuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
-                    DatabaseController.CurrentUserBankAccount.CuentaId.Id,
+                    DatabaseController.CurrentUserBankAccount.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id,
-
-
                 };
                 _headerTransaction.Add(transactions.Add(transaction));
                 _operationStatus.CurrentTransactionId = transaction.Id;
@@ -897,6 +897,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
         }
+
     }
 
     public class Operationstatus

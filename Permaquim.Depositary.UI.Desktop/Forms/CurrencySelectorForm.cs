@@ -108,15 +108,30 @@ namespace Permaquim.Depositary.UI.Desktop
                     {
                         if (ParameterController.UsesBankAccount == true)
                         {
-                            if (DatabaseController.GetUserBankAccounts().Count != 0)
+
+                            var _userBankAccounts = DatabaseController.GetUserBankAccounts();
+
+                            if (_userBankAccounts.Count != 0)
                             {
-                                FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
-                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                                if (_userBankAccounts.Count == 1)
+                                {
+                                    DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
+                                  string userBankAccountText = " - " +
+                                        MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
+                                    ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero;
+                                    FormsController.OpenChildForm(this, new BillDepositForm(),
+                                     (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag, userBankAccountText);
+                                }
+                                else
+                                {
+                                    FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                                }
                             }
                             else
                             {
-                                FormsController.OpenChildForm(this, new BillDepositForm(),
-                                 (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                                     MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_BANCARIA_OBLIGATORIA));
                             }
                         }
                         else

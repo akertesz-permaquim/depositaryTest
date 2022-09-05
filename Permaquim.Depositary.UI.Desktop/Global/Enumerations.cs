@@ -224,6 +224,7 @@
             ESCROW_LLENO,
             CANCELAR_DEPOSITO,
             EMPRESA,
+            CUENTA_BANCARIA_OBLIGATORIA,
             DISPOSITIVO,
             BOTON_CONTINUAR,
             CONTENEDOR,
@@ -272,6 +273,7 @@
             SYSTEMBLOCKINGDIALOG,
             TURNCHANGEFORM,
             ERROR_FALTA_DATO,
+            ERROR_DATO,
             ERROR_PUERTO,
             TOQUE_PANTALLA_PARA_INICIAR,
             TICKET_NO_CONFIGURADO
@@ -279,36 +281,21 @@
 
         public enum FunctionEnum
         {
-            BillDeposit = 99,
-            CoinDeposit = 100,
-            EnvelopeDeposit = 101,
-            OtherOperations = 102,
-            BagContent = 103,
-            BagExtraction = 104,
-            DailyClosing = 105,
-            Transactions = 106,
-            Support = 107,
-            TurnChange = 108,
-            ViewEvents = 109,
-            Reports = 110,
-            BagHistory = 111,
-            TurnsHistoryForm = 120,
-            DailyClosingHistoryForm = 121
-
-            //TurnChangeForm,
-            //DailyClosingForm,
-            //BagContentForm,
-            //BillDepositForm,
-            //CoinDepositForm,
-            //EnvelopeDepositForm,
-            //BagExtractionForm,
-            //BagHistoryForm,
-            //OtherOperationsForm,
-            //ReportsForm,
-            //SupportForm,
-            //OperationsHistoryform,
-            //VER_EVENTOS
-
+            DepositoDeBilletes,
+            DepositoDeMonedas,
+            DepositoDeSobres,
+            OtrasOperaciones,
+            ContenidoDeBolsa,
+            ExtraccionDeValores,
+            CierreDiario,
+            Transacciones,
+            Soporte,
+            CambioDeTurno,
+            VerEventos,
+            Reportes,
+            HistoricoDeBolsas,
+            HistoricoDeTurnos ,
+            HistoricoDeCierreDiario
 
         }
 

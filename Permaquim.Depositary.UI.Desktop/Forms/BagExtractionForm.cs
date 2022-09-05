@@ -31,7 +31,7 @@ namespace Permaquim.Depositary.UI.Desktop
         public BagExtractionForm()
         {
             InitializeComponent();
-            EventCheckbox.Visible = SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+            EventCheckbox.Visible = SecurityController.IsFunctionEnabled(FunctionEnum.VerEventos);
 
             TimeOutController.Reset();
         }

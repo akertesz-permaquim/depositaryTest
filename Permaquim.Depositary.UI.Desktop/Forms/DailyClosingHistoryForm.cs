@@ -419,6 +419,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void DailyClosingHeaderGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
+            DetailPanel.Location = new Point(
+            this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
+            this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
+            DetailPanel.Anchor = AnchorStyles.None;
+
 
             DetailPanel.Visible = true;
 
