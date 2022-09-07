@@ -18,7 +18,6 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             LoadOriginButtons();
             LoadBackButton();
-            ChechSingleOrigin();
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -44,13 +43,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 DatabaseController.LogOff(true);
                 FormsController.LogOff();
             }
-        }
-        private void ChechSingleOrigin()
-        {
-            if (_depositOrigin.Count <= 1)
-                DatabaseController.CurrentDepositOrigin = _depositOrigin.FirstOrDefault();
-            FormsController.OpenChildForm(this, new BillDepositForm(),
-             (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
         private void CenterPanel()
@@ -95,8 +87,17 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentDepositOrigin = (Permaquim.Depositario.Entities.Relations.Valor.OrigenValor)((CustomButton)sender).Tag;
 
-            FormsController.OpenChildForm(this, new BillDepositForm(),
-            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
+            {
+                FormsController.OpenChildForm(this, new BillDepositForm(),
+                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
+            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+            {
+                FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
+
 
         }
 

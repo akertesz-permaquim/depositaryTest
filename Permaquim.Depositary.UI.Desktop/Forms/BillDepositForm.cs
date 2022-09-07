@@ -176,6 +176,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+
             DenominationsGridView.Columns["Image"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMAGEN);
             DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION);
             DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD);
@@ -196,10 +197,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             ConfirmAndExitDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmAndExitDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
             ConfirmAndContinueDepositButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmAndContinueDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
             CancelDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
             CancelDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
             BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
             BackButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
@@ -797,9 +801,12 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalAValidar = 0,
                     TotalValidado = _operationStatus.CurrentTransactionAmount,
                     TurnoId = DatabaseController.CurrentTurn.Id,
-                    UsuarioCuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
-                    DatabaseController.CurrentUserBankAccount.Id,
+                    CuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
+                        DatabaseController.CurrentUserBankAccount.CuentaId.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id,
+                    CodigoOperacion =
+                        DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
+                    OrigenValorId = DatabaseController.CurrentDepositOrigin.Id
                 };
                 _headerTransaction.Add(transactions.Add(transaction));
                 _operationStatus.CurrentTransactionId = transaction.Id;

@@ -424,7 +424,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalValidado = item.TotalValidado,
                     Turno = item.TurnoId.ToString(),
                     Usuario = item.UsuarioId.NombreApellido,
-                    UsuarioCuenta = item.UsuarioCuentaId.CuentaId.Numero
+                    UsuarioCuenta = item.CuentaId.Numero
                 });
             }
 

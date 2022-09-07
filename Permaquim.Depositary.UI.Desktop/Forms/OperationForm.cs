@@ -139,7 +139,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
                     }
                     break;
                 case (int)OperationTypeEnum.EnvelopeDeposit:

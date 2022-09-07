@@ -16,6 +16,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
                 
         }
+        public static bool UsesValueOrigin
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_ORIGEN_VALOR"));
+            }
+
+        }
         public static int RedStatusIndicator
         {
             get
@@ -145,5 +153,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+
+        public static decimal RedBagPercent
+        {
+            get
+            {
+                return Convert.ToDecimal(DatabaseController.GetEnterpriseParameterValue("PORCENTAJE_CONTENEDOR_ROJO"));
+            }
+
+        }
+
+
+        
     }
 }

@@ -88,22 +88,31 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     if (currentUser.Id != 0)
                     {
-
-                        if (currentUser.DebeCambiarPassword || DatabaseController.UserExpirationDateReached())
+                        if (DatabaseController.UserAllowedInSector())
                         {
-                            MultilanguangeController.ResetLanguage();
-
-                            DatabaseController.GetTurnSchedule();
-
-                            if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
+                            if (currentUser.DebeCambiarPassword || DatabaseController.UserExpirationDateReached())
                             {
-                                MainKeyboard.ClearCredentials();
-                                FormsController.OpenChildForm(this, new OperationForm(),
-                                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.DEBECAMBIARPASSWORD));
+                            }
+                            else
+                            {
+                                MultilanguangeController.ResetLanguage();
+
+                                DatabaseController.GetTurnSchedule();
+
+                                if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
+                                {
+                                    MainKeyboard.ClearCredentials();
+                                    FormsController.OpenChildForm(this, new OperationForm(),
+                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                                }
                             }
                         }
+                        else
+                        {
+                            MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_HABILITADO_EN_SECTOR));
+                        }
 
-                        MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.DEBECAMBIARPASSWORD));
                     }
                     else
                     {

@@ -1,14 +1,12 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Helpers;
-using System.Drawing;
 using System.Drawing.Printing;
-using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class ReportController
     {
+        private const string TICKET = "TICKET: ";
         private static Image _image;
         private static Font _font;
         private static Font _totalFont;
@@ -18,8 +16,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static int _interlineSpace;
         static dynamic _header;
         static dynamic _details;
-        //private static Depositario.Entities.Relations.Operacion.Transaccion _header;
-        //private static List<Depositario.Entities.Relations.Operacion.TransaccionDetalle> _details;
+
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
 
         public static void PrintReport(ReportTypeEnum reportType,
@@ -28,7 +25,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             if(header ==null || details == null)
             {
-                FormsController.SetInformationMessage(InformationTypeEnum.Error,"TICKET: " + 
+                FormsController.SetInformationMessage(InformationTypeEnum.Error, TICKET + 
                     MultilanguangeController.GetText(MultiLanguageEnum.ERROR_DATO));
                 return; 
             }
@@ -39,7 +36,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Depositario.Business.Tables.Impresion.Ticket ticket = new();
             ticket.Where.Add(Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.TipoId,
                 Depositario.sqlEnum.OperandEnum.Equal, (int)reportType);
-            ticket.Items();
+            ticket.Items(); 
             if (ticket.Result.Count > 0)
             {
                 _ticket = ticket.Result.FirstOrDefault();

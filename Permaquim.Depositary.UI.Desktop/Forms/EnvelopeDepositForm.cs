@@ -160,7 +160,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadDenominations();
                 LoadLanguageItems();
                 DenominationsGridView.Enabled = true;
-                DenominationsGridView.Enabled = true;
+                DenominationsGridView.Visible = true;
                 CurrencyLabel.Enabled = true;
                 RemainingTimeLabel.Enabled = true;
                 SubtotalLabel.Enabled = true;
@@ -417,14 +417,14 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (!_operationStatus.DepositConfirmed)
             {
-                //Solo se habilita el botón de volver si no hay dinero en el escrow
-                ConfirmAndExitDepositButton.Visible =
-                    !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                    && _totalQuantity > 0 && !_device.StateResultProperty.DoorStateInformation.Escrow;
-
+                if (_device != null)
+                {
+                    //Solo se habilita el botón de volver si no hay dinero en el escrow
+                    ConfirmAndExitDepositButton.Visible =
+                        !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                        && _totalQuantity > 0 && !_device.StateResultProperty.DoorStateInformation.Escrow;
+                }
                 CancelDepositButton.Visible = true;
-               //!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-               //     && _totalQuantity >= 0;//&& _totalAmount > 0;
 
                 EnvelopeTextBox.Visible = ParameterController.RequiresEnvelopeIdentifier
                     && ConfirmAndExitDepositButton.Visible;
@@ -537,11 +537,13 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalAValidar = _totalQuantity,
                     TotalValidado = 0,
                     TurnoId = DatabaseController.CurrentTurn.Id,
-                    UsuarioCuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
-                    DatabaseController.CurrentUserBankAccount.CuentaId.Id,
-                    UsuarioId = DatabaseController.CurrentUser.Id
-
-                };
+                    CuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
+                        DatabaseController.CurrentUserBankAccount.CuentaId.Id,
+                    UsuarioId = DatabaseController.CurrentUser.Id,
+                    CodigoOperacion =
+                        DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
+                    OrigenValorId = DatabaseController.CurrentDepositOrigin.Id
+            };
                 transactions.Add(transaction);
                 _operationStatus.CurrentTransactionId = transaction.Id;
 

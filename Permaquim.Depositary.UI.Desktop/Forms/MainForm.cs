@@ -18,7 +18,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private const string GREENLED = "GREENLED";
         private const string REDLED = "REDLED";
-
+        private const string PRESENTACION = "Presentacion.gif";
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private int closingcombination = 0;
@@ -32,6 +32,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private int _yellowStatusIndicator;
         private int _redStatusIndicator;
         private string _remainingTimeText;
+
+
+        private bool _bagRemoved = false;
 
         /// <summary>
         /// Instancias de los componentes que gestionan dispositivos
@@ -85,6 +88,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 
                 _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
+                this.DoubleBuffered = true;
+
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -113,6 +118,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 CreateParams CP = base.CreateParams;
                 CP.ExStyle = CP.ExStyle | 0x02000000; // WS_EX_COMPOSITED
                 return CP;
+
             }
         }
         private void MainForm_Load(object sender, EventArgs e)
@@ -226,6 +232,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 VerifyOpenDoor();
 
+                VerifyBagExtracted();
+
                 VerifyConnections();
 
                 VerifyPreviousFailedoperation();
@@ -234,7 +242,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private bool VerifyBasicConfigurations()
         {
-            string message = DatabaseController.GetBasicconfigurationMessage();
+            string message = DatabaseController.GetBasicConfigurationMessage();
             if(message.Length > 0)
             {
                 AuditController.Log(LogTypeEnum.Exception, message, message);
@@ -266,14 +274,15 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 AuditController.Log(LogTypeEnum.Exception, MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA), 
                     MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
 
-                // Se asume retiro de bolsa
-                DatabaseController.CreateContainer();
+
                 ReportController.PrintReport(ReportTypeEnum.ValueExtraction, null, null);
 
                 if (_blockingDialog == null &&
                     (DatabaseController.CurrentOperation == null ||
                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
                 {
+
+
                     _blockingDialog = new SystemBlockingDialog()
                     {
                         Tag = this.Tag,
@@ -286,6 +295,20 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
 
         }
+        private void VerifyBagExtracted()
+        {
+            if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
+            {
+                if(!_bagRemoved)
+                    // Se asume retiro de bolsa
+                    DatabaseController.CreateContainer();
+                _bagRemoved = true;
+            }
+            if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)
+            {
+                _bagRemoved = false;
+            }
+        }
 
         private bool VerifyBagInplace()
         {
@@ -295,6 +318,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void VerifyPreviousFailedoperation()
         {
+            try
+            {
+
+   
             if(FormsController.ActiveFormscount == 0)
             {
                 // si quedó contenido en el escrow debe ser retirado
@@ -320,6 +347,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                     _device.RemoteCancel();
                 }
+            }
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                SetInformationMessage(InformationTypeEnum.Error,ex.Message);
+
+
             }
         }
 
@@ -479,7 +514,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             BreadcrumbLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Breadcrumb);
             BreadcrumbLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
-            MainPictureBox.Image = StyleController.GetImageResource("Presentacion");
+            LoadPresentation();
+        }
+
+        public void LoadPresentation()
+        {
+            MainPictureBox.Image = StyleController.GetImageResourceFromfile(PRESENTACION);
         }
         private void LoadLogo()
         {
