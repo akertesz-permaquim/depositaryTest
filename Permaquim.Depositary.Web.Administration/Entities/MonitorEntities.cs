@@ -55,8 +55,8 @@
         public DateTime FechaTransaccion { get; set; }
         public string TipoTransaccion { get; set; }
         public string Moneda { get; set; }
+        public string OrigenValor { get; set; }
         public string UsuarioTransaccion { get; set; }
-        public string UsuarioCuenta { get; set; }
         public string Cuenta { get; set; }
         public string Banco { get; set; }
         public string TotalValidado { get; set; }
@@ -91,7 +91,7 @@
         public DateTime FechaTransaccionSobre { get; set; }
         public string TipoTransaccion { get; set; }
         public string UsuarioTransaccion { get; set; }
-        public string UsuarioCuenta { get; set; }
+        public string OrigenValor { get; set; }
         public string Cuenta { get; set; }
         public string Banco { get; set; }
         public string CodigoSobre { get; set; }

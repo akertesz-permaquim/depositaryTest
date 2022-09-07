@@ -50,7 +50,7 @@
      <hr>
      if (crudMode == CrudMode.List)
      {
-         <RadzenDataGrid AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         <RadzenDataGrid FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" RowRender=@ConfiguracionRowRender AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
          Data="@Configuracion_entities" TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -86,7 +86,7 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_AplicacionId Data="@Aplicacion_AplicacionId_filter" Change="OnSelectedFilter_AplicacionId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Title=@MultilenguajeController.ObtenerTextoPorClave("ValidacionDatoId",dataLenguaje) Property="ValidacionDatoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_ValidacionDatoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Title=@MultilenguajeController.ObtenerTextoPorClave("VALIDACIONDATOID",dataLenguaje) Property="ValidacionDatoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_ValidacionDatoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
                      @if(ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault( c => c.Id == @context.ValidacionDatoId) != null){
                          <RadzenLabel Text="@ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault( c => c.Id == @context.ValidacionDatoId).Nombre" Component="ValidacionDatoId" style="width: 100%">
@@ -103,15 +103,22 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_ValidacionDatoId Data="@ConfiguracionValidacionDato_ValidacionDatoId_filter" Change="OnSelectedFilter_ValidacionDatoId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Clave" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Clave" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Valor" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Valor" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
              <Template Context="data">
                  <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                  </RadzenCheckBox>
              </Template>
+             <FilterTemplate>
+                 <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                 <div>
+                     @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                     <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true"/>
+                 </div>
+             </FilterTemplate>
      </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
@@ -134,7 +141,7 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="FechaCreacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
@@ -157,7 +164,7 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="FechaModificacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
          </Columns>
          </RadzenDataGrid>
@@ -186,7 +193,7 @@
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("APLICACIONID",dataLenguaje) Component ="AplicacionId" style="width: 100%">
                  </RadzenLabel>
                  </div>
-                 <div class="col-md-9">
+                 <div class="col-md-4">
                      @if((@Aplicacion_AplicacionId_entities.Count > 0 && @Aplicacion_AplicacionId_entities.FirstOrDefault( c => c.Id == @Configuracion_entity.AplicacionId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true) : Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true || x.Id == Configuracion_entity.AplicacionId);
@@ -206,10 +213,10 @@
               </div>
              <div style="margin-bottom: 1rem" class="row">
                  <div class="col-md-3">
-                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ValidacionDatoId",dataLenguaje) Component ="ValidacionDatoId" style="width: 100%">
+                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("VALIDACIONDATOID",dataLenguaje) Component ="ValidacionDatoId" style="width: 100%">
                  </RadzenLabel>
                  </div>
-                 <div class="col-md-9">
+                 <div class="col-md-4">
                      @if((@ConfiguracionValidacionDato_ValidacionDatoId_entities.Count > 0 && @ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault( c => c.Id == @Configuracion_entity.ValidacionDatoId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true) : ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true || x.Id == Configuracion_entity.ValidacionDatoId);
@@ -334,6 +341,10 @@ else
     private List<Depositary.Entities.Tables.Aplicacion.ConfiguracionValidacionDato>? ConfiguracionValidacionDato_ValidacionDatoId_entities;
     private List<Depositary.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> ConfiguracionValidacionDato_ValidacionDatoId_filter;
     private IEnumerable<Int64> selectedFilter_ValidacionDatoId;
+ 
+    /// <summary>
+    /// Variables to handle column filter for field Configuracion.Habilitado
+    private bool? Habilitado_filter;
  
     /// <summary>
     /// Variables to handle Relation between Configuracion.UsuarioCreacion and Usuario.Id
@@ -684,6 +695,18 @@ else
     {
          Configuracion_entity = item;
     }
+    /// <summary>
+    /// ConfiguracionRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void ConfiguracionRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Aplicacion.Configuracion> args)
+    {
+         if(!args.Data.Habilitado)
+             args.Attributes.Add("class", "row-highlight-disabled");
+         else
+             args.Attributes.Add("class", "rz-datatable-even");
+    }
+ 
     #endregion
  
     #region Export

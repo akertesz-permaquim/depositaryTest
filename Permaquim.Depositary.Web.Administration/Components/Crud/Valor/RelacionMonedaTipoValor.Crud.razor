@@ -50,7 +50,7 @@
      <hr>
      if (crudMode == CrudMode.List)
      {
-         <RadzenDataGrid AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         <RadzenDataGrid FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" RowRender=@RelacionMonedaTipoValorRowRender AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
          Data="@RelacionMonedaTipoValor_entities" TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -103,11 +103,18 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_TipoValorId Data="@Tipo_TipoValorId_filter" Change="OnSelectedFilter_TipoValorId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
              <Template Context="data">
                  <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                  </RadzenCheckBox>
              </Template>
+             <FilterTemplate>
+                 <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                 <div>
+                     @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                     <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true"/>
+                 </div>
+             </FilterTemplate>
      </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
@@ -130,7 +137,7 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="FechaCreacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                  <Template>
@@ -153,7 +160,7 @@
                      <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
                  </FilterTemplate>
              </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor" Property="FechaModificacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
          </Columns>
          </RadzenDataGrid>
@@ -182,7 +189,7 @@
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Component ="MonedaId" style="width: 100%">
                  </RadzenLabel>
                  </div>
-                 <div class="col-md-9">
+                 <div class="col-md-4">
                      @if((@Moneda_MonedaId_entities.Count > 0 && @Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @RelacionMonedaTipoValor_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? Moneda_MonedaId_entities.Where(x => x.Habilitado == true) : Moneda_MonedaId_entities.Where(x => x.Habilitado == true || x.Id == RelacionMonedaTipoValor_entity.MonedaId);
@@ -205,7 +212,7 @@
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TIPOVALORID",dataLenguaje) Component ="TipoValorId" style="width: 100%">
                  </RadzenLabel>
                  </div>
-                 <div class="col-md-9">
+                 <div class="col-md-4">
                      @if((@Tipo_TipoValorId_entities.Count > 0 && @Tipo_TipoValorId_entities.FirstOrDefault( c => c.Id == @RelacionMonedaTipoValor_entity.TipoValorId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? Tipo_TipoValorId_entities.Where(x => x.Habilitado == true) : Tipo_TipoValorId_entities.Where(x => x.Habilitado == true || x.Id == RelacionMonedaTipoValor_entity.TipoValorId);
@@ -300,6 +307,10 @@ else
     private List<Depositary.Entities.Tables.Valor.Tipo>? Tipo_TipoValorId_entities;
     private List<Depositary.Entities.Tables.Valor.Tipo> Tipo_TipoValorId_filter;
     private IEnumerable<Int64> selectedFilter_TipoValorId;
+ 
+    /// <summary>
+    /// Variables to handle column filter for field RelacionMonedaTipoValor.Habilitado
+    private bool? Habilitado_filter;
  
     /// <summary>
     /// Variables to handle Relation between RelacionMonedaTipoValor.UsuarioCreacion and Usuario.Id
@@ -650,6 +661,18 @@ else
     {
          RelacionMonedaTipoValor_entity = item;
     }
+    /// <summary>
+    /// RelacionMonedaTipoValorRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void RelacionMonedaTipoValorRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Valor.RelacionMonedaTipoValor> args)
+    {
+         if(!args.Data.Habilitado)
+             args.Attributes.Add("class", "row-highlight-disabled");
+         else
+             args.Attributes.Add("class", "rz-datatable-even");
+    }
+ 
     #endregion
  
     #region Export

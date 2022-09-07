@@ -65,6 +65,51 @@
             return resultado;
         }
 
+        public static bool ValidarExistenciaTurnos(TurnoEntities.AgendaTurnoABM pAgendaTurnoABM)
+        {
+            DateTime fechaDesdeFormateada = new DateTime(pAgendaTurnoABM.FechaDesde.Year, pAgendaTurnoABM.FechaDesde.Month, pAgendaTurnoABM.FechaDesde.Day, 0, 0, 0);
+            DateTime fechaHastaFormateada = new DateTime(pAgendaTurnoABM.FechaDesde.Year, pAgendaTurnoABM.FechaDesde.Month, pAgendaTurnoABM.FechaDesde.Day, 23, 59, 59);
+
+            //Verificamos sector por sector de los seleccionados.
+            foreach (var sector in pAgendaTurnoABM.Sectores)
+            {
+                Depositary.Business.Tables.Turno.AgendaTurno oAgendaTurno = new();
+                oAgendaTurno.Where.Add(Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.Between, fechaDesdeFormateada, fechaHastaFormateada);
+                oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, sector.SectorId);
+
+                oAgendaTurno.Items();
+
+                if(oAgendaTurno.Result.Count>0)
+                {
+                    return true;
+                }    
+            }
+
+            return false; //Si se llega hasta aca no existen turnos.
+        }
+
+        public static bool ValidarExistenciaTurnos(Int64 sectorId, DateTime fecha)
+        {
+            DateTime fechaDesdeFormateada = new DateTime(fecha.Year, fecha.Month, fecha.Day, 0, 0, 0);
+            DateTime fechaHastaFormateada = new DateTime(fecha.Year, fecha.Month, fecha.Day, 23, 59, 59);
+
+
+            Depositary.Business.Tables.Turno.AgendaTurno oAgendaTurno = new();
+            oAgendaTurno.Where.Add(Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.Between, fechaDesdeFormateada, fechaHastaFormateada);
+            oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, sectorId);
+
+            oAgendaTurno.Items();
+
+            if (oAgendaTurno.Result.Count > 0)
+            {
+                return true;
+            }
+
+            return false; //Si se llega hasta aca no existen turnos.
+        }
+
         public static string GuardarAgenda(TurnoEntities.AgendaTurnoABM pAgendaTurnoABM)
         {
             string resultado = "";
@@ -87,6 +132,7 @@
                         {
                             Depositary.Business.Tables.Turno.AgendaTurno oAgendaTurno = new();
                             oAgendaTurno.Where.Add(Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Id);
+                            oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
                             oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.Equal, auxFecha);
                             oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Secuencia, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Secuencia);
                             oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, sector.SectorId);

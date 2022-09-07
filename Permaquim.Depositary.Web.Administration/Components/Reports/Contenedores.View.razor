@@ -9,7 +9,7 @@
 <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
     <ChildContent>
         <div>
-            <h4 style="color:white;">Contenedores</h4>
+            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_CONTENEDORES",dataLenguaje)</h4>
         </div>
     </ChildContent>
 </RadzenBadge>
@@ -24,7 +24,7 @@ else
     <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
         <HeaderTemplate>
             <h4 class="m-0 d-flex align-items-center">
-                <RadzenIcon Icon="account_box" Class="mr-1" /><b>Parametros de busqueda</b>
+                <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
             </h4>
         </HeaderTemplate>
         <ChildContent>
@@ -32,78 +32,96 @@ else
                 <ChildContent>
                     <div style="margin-bottom: 1rem" class="row">
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Fecha apertura desde:" Component="fechaAperturaDesdeDatePicker" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURADESDE",dataLenguaje)" Component="fechaAperturaDesdeDatePicker" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-3">
                             <RadzenDatePicker @bind-Value=@(parametrosContenedoresView.fechaAperturaDesde) Max="@(parametrosContenedoresView.fechaAperturaHasta)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenRequiredValidator Component="fechaAperturaDesde" Text="Fecha apertura desde is required" Style="position: inherit" />
-                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaAperturaHasta.HasValue) Value=@(parametrosContenedoresView.fechaAperturaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaAperturaDesdeDatePicker" Text="La fecha apertura desde debe ser menor a la fecha apertura hasta" Style="position: inherit" />
+                            <RadzenRequiredValidator Component="fechaAperturaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaAperturaHasta.HasValue) Value=@(parametrosContenedoresView.fechaAperturaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaAperturaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURADESDE_MENOR_FECHAAPERTURAHASTA",dataLenguaje)" Style="position: inherit" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Fecha apertura hasta:" Component="fechaAperturaHastaDatePicker" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURAHASTA",dataLenguaje)" Component="fechaAperturaHastaDatePicker" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-3">
-                            <RadzenDatePicker @bind-Value=@(parametrosContenedoresView.fechaAperturaHasta) Min="@(parametrosContenedoresView.fechaAperturaDesde)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenRequiredValidator Component="fechaAperturaHasta" Text="Fecha apertura hasta is required" Style="position: inherit" />
-                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaAperturaDesde.HasValue) Value=@(parametrosContenedoresView.fechaAperturaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaAperturaDesdeDatePicker" Text="La fecha apertura hasta debe ser mayor a la fecha apertura desde" Style="position: inherit" />
+                            <RadzenDatePicker @bind-Value=@(parametrosContenedoresView.fechaAperturaHasta) Min="@(parametrosContenedoresView.fechaAperturaDesde)" Name="fechaAperturaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                            <RadzenRequiredValidator Component="fechaAperturaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaAperturaDesde.HasValue) Value=@(parametrosContenedoresView.fechaAperturaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaAperturaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURAHASTA_MAYOR_FECHAAPERTURADESDE",dataLenguaje)" Style="position: inherit" />
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row">
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Fecha cierre desde:" Component="fechaCierreDesdeDatePicker" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREDESDE",dataLenguaje)" Component="fechaCierreDesdeDatePicker" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-3">
                             <RadzenDatePicker @bind-Value=@(parametrosContenedoresView.fechaCierreDesde) Max="@(parametrosContenedoresView.fechaCierreHasta)" Name="fechaCierreDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaCierreHasta.HasValue) Value=@(parametrosContenedoresView.fechaCierreHasta) Operator="CompareOperator.LessThanEqual" Component="fechaCierreDesdeDatePicker" Text="La fecha cierre desde debe ser menor a la fecha cierre hasta" Style="position: inherit" />
+                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaCierreHasta.HasValue) Value=@(parametrosContenedoresView.fechaCierreHasta) Operator="CompareOperator.LessThanEqual" Component="fechaCierreDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREDESDE_MENOR_FECHACIERREHASTA",dataLenguaje)" Style="position: inherit" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Fecha cierre hasta:" Component="fechaCierreHastaDatePicker" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREHASTA",dataLenguaje)" Component="fechaCierreHastaDatePicker" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-3">
                             <RadzenDatePicker @bind-Value=@(parametrosContenedoresView.fechaCierreHasta) Min="@(parametrosContenedoresView.fechaCierreDesde)" Name="fechaCierreHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaCierreDesde.HasValue) Value=@(parametrosContenedoresView.fechaCierreDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaCierreHastaDatePicker" Text="La fecha cierre hasta debe ser mayor a la fecha cierre desde" Style="position: inherit" />
+                            <RadzenCompareValidator Visible=@(parametrosContenedoresView.fechaCierreDesde.HasValue) Value=@(parametrosContenedoresView.fechaCierreDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaCierreHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREHASTA_MAYOR_FECHACIERREDESDE",dataLenguaje)" Style="position: inherit" />
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row">
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Empresas :" Component="dropDownEmpresas" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_EMPRESAS",dataLenguaje)" Component="dropDownEmpresas" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownEmpresas" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosContenedoresView.empresasSeleccionadas) Multiple="true" Placeholder="Seleccione empresas" Data=@dataEmpresasVisiblesUsuario TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
-                                        Change=@(args => OnChangeEmpresas(args)) Class="w-100" />
+                                        @bind-Value=@(parametrosContenedoresView.empresaSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_EMPRESA",dataLenguaje)" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
+                                        Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Sucursales :" Component="dropDownSucursales" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SUCURSALES",dataLenguaje)" Component="dropDownSucursales" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownSucursales" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosContenedoresView.sucursalesSeleccionadas) Multiple="true" Placeholder="Seleccione sucursales" Data=@dataSucursalesVisiblesUsuario TextProperty="SucursalNombre" ValueProperty="SucursalId"
-                                        Change=@(args => OnChangeSucursales(args)) Class="w-100" />
+                                        @bind-Value=@(parametrosContenedoresView.sucursalSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SUCURSAL",dataLenguaje)" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
+                                        Change=@(args => OnChangeSucursal(args)) Class="w-100" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Sectores :" Component="dropDownSectores" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SECTORES",dataLenguaje)" Component="dropDownSectores" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownSectores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosContenedoresView.sectoresSeleccionados) Multiple="true" Placeholder="Seleccione sectores" Data=@dataSectoresVisiblesUsuario TextProperty="SectorNombre" ValueProperty="SectorId"
+                                        @bind-Value=@(parametrosContenedoresView.sectorSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SECTOR",dataLenguaje)" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
+                                        Change=@(args => OnChangeSector(args)) Class="w-100" />
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_DEPOSITARIOS",dataLenguaje)" Component="dropDownDepositarios" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col col-md-auto">
+                            <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                        @bind-Value=@(parametrosContenedoresView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
                                         Class="w-100" />
+                        </div>
+                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_IDENTIFICADOR",dataLenguaje)" Component="txtIdentificador" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col col-md-6">
+                            <RadzenTextBox @bind-Value=@(parametrosContenedoresView.identificador) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_IDENTIFICADOR",dataLenguaje)" Name="txtIdentificador"></RadzenTextBox>
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row justify-content-center">
                         <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="Buscar" ButtonStyle="ButtonStyle.Primary">
+                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
                             </RadzenButton>
                         </div>
                         <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="Limpiar" ButtonStyle="ButtonStyle.Secondary">
+                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
                             </RadzenButton>
                         </div>
                     </div>
@@ -122,23 +140,29 @@ else
                 <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
             </EmptyTemplate>
             <Columns>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Depositario" Title="Depositario" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="ContenedorId" Title="ContenedorId" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Identificador" Title="Identificador" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaApertura" Title="FechaApertura" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Depositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaCierre" Title="FechaCierre" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="ContenedorId" Title="@MultilenguajeController.ObtenerTextoPorClave("CONTENEDORID",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadTransacciones" Title="CantidadTransacciones" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Identificador" Title="@MultilenguajeController.ObtenerTextoPorClave("IDENTIFICADOR",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadBilletes" Title="CantidadBilletes" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaApertura" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadSobres" Title="CantidadSobres" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaCierre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHACIERRE",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadTotalDineroMonedaDefault" Title="CantidadTotalDineroMonedaDefault" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadTransacciones" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADTRANSACCIONES",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadBilletes" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADBILLETES",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadSobres" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADSOBRES",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadTotalDineroMonedaDefault" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADTOTALDINEROMONEDADEFAULT",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>
@@ -155,11 +179,11 @@ else
         public DateTime? fechaAperturaHasta { get; set; }
         public DateTime? fechaCierreDesde { get; set; }
         public DateTime? fechaCierreHasta { get; set; }
-        public IEnumerable<Int64> empresasSeleccionadas = new Int64[] { };
-        public IEnumerable<Int64> sucursalesSeleccionadas = new Int64[] { };
-        public IEnumerable<Int64> sectoresSeleccionados = new Int64[] { };
-        //public IEnumerable<Int64> usuariosSeleccionados = new Int64[] { };
-        //public IEnumerable<Int64> contenedoresSeleccionados = new Int64[] { };
+        public Int64? empresaSeleccionada { get; set; }
+        public Int64? sucursalSeleccionada { get; set; }
+        public Int64? sectorSeleccionado { get; set; }
+        public Int64? depositarioSeleccionado { get; set; }
+        public string identificador { get; set; }
     }
 
     //Clase creada para sortear algunas cuestiones de la vista que traemos de SQL
@@ -170,12 +194,13 @@ else
         public DateTime FechaApertura { get; set; }
         public DateTime? FechaCierre { get; set; }
         public int CantidadTransacciones { get; set; }
-        public Int64 SectorId { get; set; }
+        public string Sector { get; set; }
+        public string Sucursal { get; set; }
+        public string Empresa { get; set; }
+        public string Depositario { get; set; }
         public Int64 CantidadBilletes { get; set; }
         public int CantidadSobres { get; set; }
         public Double CantidadTotalDineroMonedaDefault { get; set; }
-        public Int64 DepositarioId { get; set; }
-        public string Depositario { get; set; }
     }
 
     private List<ResultReporte> dataContenedoresView;
@@ -187,20 +212,34 @@ else
     private List<Depositary.Entities.Views.Reporte.Contenedores>? Contenedores_entities;
 
     /// <summary>
+    /// Variables to store multilanguaje
+    /// </summary>
+    private List<Entities.TextoLenguaje> dataLenguaje;
+
+    /// <summary>
     ///  Variable to store the user id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
 
-    private List<DirectorioEntities.Empresa> dataEmpresasVisiblesUsuario = new();
-    private List<DirectorioEntities.Sucursal> dataSucursalesVisiblesUsuario = new();
-    private List<DirectorioEntities.Sector> dataSectoresVisiblesUsuario = new();
+    //Datasource para dropdown
+    private List<DirectorioEntities.Empresa> empresasUsuario = new();
+    private List<DirectorioEntities.Sucursal> sucursalesUsuario = new();
+    private List<DirectorioEntities.Sector> sectoresUsuario = new();
+    private List<DispositivoEntities.Depositario> depositariosUsuario = new();
+
+    private List<DirectorioEntities.Empresa> dataEmpresasCombo = new();
+    private List<DirectorioEntities.Sucursal> dataSucursalesCombo = new();
+    private List<DirectorioEntities.Sector> dataSectoresCombo = new();
+    private List<DispositivoEntities.Depositario> dataDepositariosCombo = new();
+
     private bool estaCargandoParametrosReporte = true;
 
     private parametros parametrosContenedoresView = new();
 
     protected override async Task OnInitializedAsync()
     {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
@@ -218,81 +257,80 @@ else
     /// </summary>
     private void CargarCombosBusqueda()
     {
-        dataEmpresasVisiblesUsuario = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id);
-        dataSucursalesVisiblesUsuario = ReportController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id);
-        dataSectoresVisiblesUsuario = ReportController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
-        //dataUsuarios = SeguridadController.ObtenerUsuarios(false);
-        //dataContenedores = OperacionController.ObtenerContenedores(false);
-        //dataTurnos = OperacionController.ObtenerTurnos(false);
+        empresasUsuario = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
+        dataEmpresasCombo = empresasUsuario; //El unico combo estatico es el de mayor jerarquia
+        sucursalesUsuario = ReportController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id, true);
+        sectoresUsuario = ReportController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
+        depositariosUsuario = ReportController.ObtenerListadoDepositariosPorPerfil(dataUsuario.Id);
+        dataDepositariosCombo = depositariosUsuario; //En principio vemos todos los depositarios accesibles por perfil.
     }
     #endregion
 
     #region Form events
-    void OnChangeEmpresas(object value)
+    void OnChangeEmpresa(object value)
     {
-        //Selecciono del combo de sucursales las que estan asociadas a las empresas seleccionadas
-        cargarSucursalesAsociadasEmpresa();
-        cargarSectoresAsociadosSucursal();
-    }
-
-    void OnChangeSucursales(object value)
-    {
-        //Selecciono del combo de sectores los que esten asociados a las sucursales seleccionadas
-        cargarSectoresAsociadosSucursal();
-    }
-
-    void cargarSucursalesAsociadasEmpresa()
-    {
-        List<Int64> sucursalesAsociadasEmpresa = new();
-        parametrosContenedoresView.sucursalesSeleccionadas = new Int64[] { };
-        if (parametrosContenedoresView.empresasSeleccionadas != null)
+        if (value != null)
         {
-            if (parametrosContenedoresView.empresasSeleccionadas.Count() > 0)
-            {
-                foreach (var empresa in parametrosContenedoresView.empresasSeleccionadas)
-                {
-                    var sucursalesAsociadas = dataSucursalesVisiblesUsuario.Where(x => x.EmpresaId == empresa);
-                    if (sucursalesAsociadas != null)
-                    {
-                        foreach (var sucursal in sucursalesAsociadas)
-                        {
-                            sucursalesAsociadasEmpresa.Add(sucursal.SucursalId);
-                        }
-                    }
-                }
-            }
+            dataSucursalesCombo = sucursalesUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
         }
-        parametrosContenedoresView.sucursalesSeleccionadas = sucursalesAsociadasEmpresa.AsEnumerable();
-    }
-
-    void cargarSectoresAsociadosSucursal()
-    {
-        List<Int64> sectoresAsociadosSucursal = new();
-        parametrosContenedoresView.sectoresSeleccionados = new Int64[] { };
-        if (parametrosContenedoresView.sucursalesSeleccionadas != null)
+        else
         {
-            if (parametrosContenedoresView.sucursalesSeleccionadas.Count() > 0)
-            {
-                foreach (var sucursal in parametrosContenedoresView.sucursalesSeleccionadas)
-                {
-                    var sectoresAsociados = dataSectoresVisiblesUsuario.Where(x => x.SucursalId == sucursal);
-                    if (sectoresAsociados != null)
-                    {
-                        foreach (var sector in sectoresAsociados)
-                        {
-                            sectoresAsociadosSucursal.Add(sector.SectorId);
-                        }
-                    }
-                }
-            }
+            dataSucursalesCombo = new();
+            parametrosContenedoresView.sucursalSeleccionada = null;
+
+            dataSectoresCombo = new();
+            parametrosContenedoresView.sectorSeleccionado = null;
+
+            dataDepositariosCombo = depositariosUsuario;
+            parametrosContenedoresView.depositarioSeleccionado = null;
         }
-        parametrosContenedoresView.sectoresSeleccionados = sectoresAsociadosSucursal.AsEnumerable();
     }
 
+    void OnChangeSucursal(object value)
+    {
+        if (value != null)
+        {
+            dataSectoresCombo = sectoresUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+        }
+        else
+        {
+            dataSectoresCombo = new();
+            parametrosContenedoresView.sectorSeleccionado = null;
+
+            if (parametrosContenedoresView.empresaSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == parametrosContenedoresView.empresaSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
+
+            parametrosContenedoresView.depositarioSeleccionado = null;
+        }
+
+    }
+
+    void OnChangeSector(object value)
+    {
+        if (value != null)
+        {
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SectorId == (Int64)value).ToList();
+        }
+        else
+        {
+            if (parametrosContenedoresView.sucursalSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == parametrosContenedoresView.sucursalSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
+        }
+
+    }
 
     void resetParametros()
     {
         parametrosContenedoresView = new();
+        dataSectoresCombo = new();
+        dataSucursalesCombo = new();
+        dataDepositariosCombo = depositariosUsuario;
     }
 
     #endregion
@@ -304,40 +342,109 @@ else
     private void LoadMainEntityData()
     {
         dataContenedoresView = new();
-        if (dataSectoresVisiblesUsuario.Count > 0)
+        Depositary.Business.Views.Reporte.Contenedores entity = new();
+        List<Depositary.Entities.Views.Reporte.Contenedores> contenedores = new();
+
+        //Si no tiene empresas ni sucursales ni sectores visibles por perfil entonces le traigo siempre datasource vacio.
+        if (empresasUsuario.Count == 0 && sucursalesUsuario.Count == 0 && sectoresUsuario.Count == 0)
         {
-            List<Int64> sectoresSeleccionados = new();
-            Depositary.Business.Views.Reporte.Contenedores entity = new();
-            List<Depositary.Entities.Views.Reporte.Contenedores> contenedores = new();
+            dataContenedoresView = new();
+        }
+        else
+        {
+            //Construimos el where general segun las empresas/sucursales/sectores/depositarios que puede ver el usuario
+            entity.Where.OpenParentheses();
+            entity.Where.OpenParentheses();
 
-            if (parametrosContenedoresView.sectoresSeleccionados == null)
-                parametrosContenedoresView.sectoresSeleccionados = new Int64[] { };
-
-            //Si no se seleccionaron sectores en el combo de sectores entonces buscamos por todos los sectores permitidos
-            if (parametrosContenedoresView.sectoresSeleccionados.Count() > 0)
+            for (int i = 0; i < sectoresUsuario.Count; i++)
             {
-                sectoresSeleccionados = parametrosContenedoresView.sectoresSeleccionados.ToList();
-            }
-            else
-            {
-                foreach (var sector in dataSectoresVisiblesUsuario)
+                if (i > 0)
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
+                entity.Where.OpenParentheses();
+                entity.Where.Add(Business.Views.Reporte.Contenedores.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
+                var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
+                if (sucursal != null)
                 {
-                    sectoresSeleccionados.Add(sector.SectorId);
+                    entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Contenedores.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
+                    var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
+                    if (empresa != null)
+                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Contenedores.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
                 }
+                entity.Where.CloseParentheses();
             }
-            entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.In, sectoresSeleccionados);
+
+            entity.Where.CloseParentheses();
+
+            //Construimos el where segun los parametros de los controles
+            if (parametrosContenedoresView.empresaSeleccionada.HasValue || parametrosContenedoresView.sucursalSeleccionada.HasValue || parametrosContenedoresView.sectorSeleccionado.HasValue || parametrosContenedoresView.depositarioSeleccionado.HasValue)
+            {
+                entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                entity.Where.OpenParentheses();
+
+                int cantidadFiltrosCustom = 0;
+
+                if (parametrosContenedoresView.empresaSeleccionada.HasValue)
+                {
+                    entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, parametrosContenedoresView.empresaSeleccionada.Value);
+                    cantidadFiltrosCustom++;
+                }
+
+                if (parametrosContenedoresView.sucursalSeleccionada.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosContenedoresView.sucursalSeleccionada.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosContenedoresView.sucursalSeleccionada.Value);
+                }
+
+                if (parametrosContenedoresView.sectorSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosContenedoresView.sectorSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosContenedoresView.sectorSeleccionado.Value);
+                }
+
+                if (parametrosContenedoresView.depositarioSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosContenedoresView.depositarioSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosContenedoresView.depositarioSeleccionado.Value);
+                }
+
+                entity.Where.CloseParentheses();
+            }
+
+            entity.Where.CloseParentheses();
 
             if (parametrosContenedoresView.fechaAperturaDesde.HasValue)
+            {
+                parametrosContenedoresView.fechaAperturaDesde = new DateTime(parametrosContenedoresView.fechaAperturaDesde.Value.Year, parametrosContenedoresView.fechaAperturaDesde.Value.Month, parametrosContenedoresView.fechaAperturaDesde.Value.Day, 0, 0, 0);
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaAperturaDesde.Value);
+            }
 
             if (parametrosContenedoresView.fechaAperturaHasta.HasValue)
+            {
+                parametrosContenedoresView.fechaAperturaHasta = new DateTime(parametrosContenedoresView.fechaAperturaHasta.Value.Year, parametrosContenedoresView.fechaAperturaHasta.Value.Month, parametrosContenedoresView.fechaAperturaHasta.Value.Day, 23, 59, 59);
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaAperturaHasta.Value);
+            }
 
             if (parametrosContenedoresView.fechaCierreDesde.HasValue)
+            {
+                parametrosContenedoresView.fechaCierreDesde = new DateTime(parametrosContenedoresView.fechaCierreDesde.Value.Year, parametrosContenedoresView.fechaCierreDesde.Value.Month, parametrosContenedoresView.fechaCierreDesde.Value.Day, 0, 0, 0);
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaCierreDesde.Value);
+            }
 
             if (parametrosContenedoresView.fechaCierreHasta.HasValue)
+            {
+                parametrosContenedoresView.fechaCierreHasta = new DateTime(parametrosContenedoresView.fechaCierreHasta.Value.Year, parametrosContenedoresView.fechaCierreHasta.Value.Month, parametrosContenedoresView.fechaCierreHasta.Value.Day, 23, 59, 59);
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaCierreHasta.Value);
+            }
+
+            if (parametrosContenedoresView.identificador != string.Empty && parametrosContenedoresView.identificador != null)
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosContenedoresView.identificador + "%");
 
             contenedores = entity.Items();
 
@@ -346,24 +453,24 @@ else
                 foreach (var contenedor in contenedores)
                 {
                     ResultReporte resultReporte = new();
+                    resultReporte.Sector = contenedor.Sector;
                     resultReporte.ContenedorId = contenedor.ContenedorId;
-                    resultReporte.FechaApertura = contenedor.FechaApertura;
-                    resultReporte.FechaCierre = contenedor.FechaCierre.Year == 1 ? null : contenedor.FechaCierre;
-                    resultReporte.SectorId = contenedor.SectorId;
-                    resultReporte.CantidadTotalDineroMonedaDefault = contenedor.CantidadTotalDineroMonedaDefault;
+                    resultReporte.Empresa = contenedor.Empresa;
+                    resultReporte.Sucursal = contenedor.Sucursal;
+                    resultReporte.Depositario = contenedor.Depositario;
                     resultReporte.CantidadBilletes = contenedor.CantidadBilletes;
                     resultReporte.CantidadSobres = contenedor.CantidadSobres;
+                    resultReporte.CantidadTotalDineroMonedaDefault = contenedor.CantidadTotalDineroMonedaDefault;
                     resultReporte.CantidadTransacciones = contenedor.CantidadTransacciones;
+                    resultReporte.FechaApertura = contenedor.FechaApertura;
+                    resultReporte.FechaCierre = contenedor.FechaCierre.Year == 1 ? null : contenedor.FechaCierre;
                     resultReporte.Identificador = contenedor.Identificador;
-                    resultReporte.DepositarioId = contenedor.DepositarioId;
-                    resultReporte.Depositario = contenedor.Depositario;
 
                     dataContenedoresView.Add(resultReporte);
                 }
             }
         }
-        else //Si el usuario no tiene sectores accesibles entonces cargo set vacio.
-            dataContenedoresView = new();
     }
+
     #endregion
     }

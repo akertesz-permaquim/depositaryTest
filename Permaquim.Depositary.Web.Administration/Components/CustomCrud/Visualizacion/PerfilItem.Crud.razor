@@ -51,7 +51,7 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@PerfilItemRowRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@PerfilItem_entities" TItem="Depositary.Entities.Tables.Visualizacion.PerfilItem" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -84,7 +84,7 @@
                                 }
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.PerfilItem" Property="IdTablaReferencia" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("IDTABLAREFERENCIA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.PerfilItem" Property="IdTablaReferencia" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("IDTABLAREFERENCIA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template>
                                 @if (dataPerfilTablaReferencia.FirstOrDefault(c => c.Id == @context.IdTablaReferencia) != null)
                                 {
@@ -98,11 +98,18 @@
                                 }
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.PerfilItem" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.PerfilItem" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Visualizacion.PerfilItem" Property="UsuarioCreacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
@@ -181,7 +188,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PERFILID",dataLenguaje) Component="PerfilId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@PerfilId"
                                 Data=@Perfil_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
@@ -192,8 +199,9 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("IDTABLAREFERENCIA",dataLenguaje) Component="IdTablaReferencia" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(PerfilItem_entity.IdTablaReferencia)"
+                            <div class="col-md-4">
+                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(PerfilItem_entity.IdTablaReferencia)"
                                 Data=@dataPerfilTablaReferencia TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="@(crudMode == CrudMode.Delete)" />
                             </div>
@@ -243,6 +251,11 @@ else
         Edit,
         Delete
     }
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Habilitado_filter;
+
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
@@ -558,6 +571,18 @@ else
         {
             selectedFilter_UsuarioModificacion = null;
         }
+    }
+
+    /// <summary>
+    /// PerfilItemRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void PerfilItemRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Visualizacion.PerfilItem> args)
+    {
+        if (!args.Data.Habilitado)
+            args.Attributes.Add("class", "row-highlight-disabled");
+        else
+            args.Attributes.Add("class", "rz-datatable-even");
     }
     #endregion
 

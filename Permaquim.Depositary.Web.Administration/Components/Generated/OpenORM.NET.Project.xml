@@ -19,7 +19,10 @@
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
-  <SelectedViews />
+  <SelectedViews>
+    <string>Reporte.CierresDiarios</string>
+    <string>Reporte.Turnos</string>
+  </SelectedViews>
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
@@ -57,7 +60,6 @@
     <string>Aplicacion.ConfiguracionTipoDato</string>
     <string>Aplicacion.ConfiguracionValidacionDato</string>
     <string>Banca.Banco</string>
-    <string>Banca.Cuenta</string>
     <string>Banca.TipoCuenta</string>
     <string>Dispositivo.ComandoContadora</string>
     <string>Dispositivo.ComandoPlaca</string>

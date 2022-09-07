@@ -8,7 +8,7 @@
 <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
     <ChildContent>
         <div>
-            <h4 style="color:white;">Informe de transacciones por fecha</h4>
+            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_TRANSACCIONES",dataLenguaje)</h4>
         </div>
     </ChildContent>
 </RadzenBadge>
@@ -23,7 +23,7 @@ else
     <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
         <HeaderTemplate>
             <h4 class="m-0 d-flex align-items-center">
-                <RadzenIcon Icon="account_box" Class="mr-1" /><b>Parametros de busqueda</b>
+                <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
             </h4>
         </HeaderTemplate>
         <ChildContent>
@@ -31,109 +31,109 @@ else
                 <ChildContent>
                     <div style="margin-bottom: 1rem" class="row">
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Fecha desde:" Component="fechaDesdeDatePicker" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHADESDE",dataLenguaje)" Component="fechaDesdeDatePicker" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-3">
                             <RadzenDatePicker @bind-Value=@(parametrosTransaccionesView.fechaDesde) Max="@(parametrosTransaccionesView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="Fecha desde is required" Style="position: inherit" />
-                            <RadzenCompareValidator Visible=@(parametrosTransaccionesView.fechaHasta.HasValue) Value=@(parametrosTransaccionesView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="La fecha desde debe ser menor a la fecha hasta" Style="position: inherit" />
+                            <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                            <RadzenCompareValidator Visible=@(parametrosTransaccionesView.fechaHasta.HasValue) Value=@(parametrosTransaccionesView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_MENOR_FECHAHASTA",dataLenguaje)" Style="position: inherit" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Fecha hasta:" Component="fechaHastaDatePicker" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAHASTA",dataLenguaje)" Component="fechaHastaDatePicker" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-3">
                             <RadzenDatePicker @bind-Value=@(parametrosTransaccionesView.fechaHasta) Min="@(parametrosTransaccionesView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="Fecha hasta is required" Style="position: inherit" />
-                            <RadzenCompareValidator Visible=@(parametrosTransaccionesView.fechaDesde.HasValue) Value=@(parametrosTransaccionesView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="La fecha hasta debe ser mayor a la fecha desde" Style="position: inherit" />
+                            <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                            <RadzenCompareValidator Visible=@(parametrosTransaccionesView.fechaDesde.HasValue) Value=@(parametrosTransaccionesView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_MAYOR_FECHADESDE",dataLenguaje)" Style="position: inherit" />
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row">
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Empresas :" Component="dropDownEmpresas" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_EMPRESAS",dataLenguaje)" Component="dropDownEmpresas" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownEmpresas" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.empresaSeleccionada) Placeholder="Seleccione empresa" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
+                                        @bind-Value=@(parametrosTransaccionesView.empresaSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_EMPRESA",dataLenguaje)" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
                                         Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Sucursales :" Component="dropDownSucursales" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SUCURSALES",dataLenguaje)" Component="dropDownSucursales" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownSucursales" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.sucursalSeleccionada) Placeholder="Seleccione sucursal" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
+                                        @bind-Value=@(parametrosTransaccionesView.sucursalSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SUCURSAL",dataLenguaje)" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
                                         Change=@(args => OnChangeSucursal(args)) Class="w-100" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Sectores :" Component="dropDownSectores" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SECTORES",dataLenguaje)" Component="dropDownSectores" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownSectores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.sectorSeleccionado) Placeholder="Seleccione sector" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
-                                        Class="w-100" />
+                                        @bind-Value=@(parametrosTransaccionesView.sectorSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SECTOR",dataLenguaje)" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
+                                        Change=@(args => OnChangeSector(args)) Class="w-100" />
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row">
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Contenedores :" Component="dropDownContenedores" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_CONTENEDORES",dataLenguaje)" Component="dropDownContenedores" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownContenedores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.contenedoresSeleccionados) Multiple="true" Placeholder="Seleccione contenedores" Data=@dataContenedores TextProperty="NombreIdentificador" ValueProperty="ContenedorId"
+                                        @bind-Value=@(parametrosTransaccionesView.contenedoresSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_CONTENEDORES",dataLenguaje)" Data=@dataContenedores TextProperty="NombreIdentificador" ValueProperty="ContenedorId"
                                         Class="w-100" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Turnos :" Component="dropDownTurnos" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_TURNOS",dataLenguaje)" Component="dropDownTurnos" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownTurnos" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.turnosSeleccionados) Multiple="true" Placeholder="Seleccione turnos" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
+                                        @bind-Value=@(parametrosTransaccionesView.turnosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_TURNOS",dataLenguaje)" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
                                         Class="w-100" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Usuarios :" Component="dropDownUsuarios" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_USUARIOS",dataLenguaje)" Component="dropDownUsuarios" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownUsuarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.usuariosSeleccionados) Multiple="true" Placeholder="Seleccione usuarios" Data=@dataUsuarios TextProperty="NombreyApellido" ValueProperty="UsuarioId"
+                                        @bind-Value=@(parametrosTransaccionesView.usuariosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_USUARIOS",dataLenguaje)" Data=@dataUsuarios TextProperty="NombreyApellido" ValueProperty="UsuarioId"
                                         Class="w-100" />
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row">
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Depositarios :" Component="dropDownDepositarios" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_DEPOSITARIOS",dataLenguaje)" Component="dropDownDepositarios" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.depositarioSeleccionado) Placeholder="Seleccione depositario" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
+                                        @bind-Value=@(parametrosTransaccionesView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
                                         Class="w-100" />
                         </div>
                         <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="Origenes :" Component="dropDownOrigenes" style="width: 100%">
+                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_ORIGENES",dataLenguaje)" Component="dropDownOrigenes" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col col-md-auto">
                             <RadzenDropDown AllowClear="true" Name="dropDownOrigenes" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTransaccionesView.origenesSeleccionados) Multiple="true" Placeholder="Seleccione origenes" Data=@dataOrigenes TextProperty="OrigenNombre" ValueProperty="OrigenId"
+                                        @bind-Value=@(parametrosTransaccionesView.origenesSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_ORIGENES",dataLenguaje)" Data=@dataOrigenes TextProperty="OrigenNombre" ValueProperty="OrigenId"
                                         Class="w-100" />
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row justify-content-center">
                         <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="Buscar" ButtonStyle="ButtonStyle.Primary">
+                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
                             </RadzenButton>
                         </div>
                         <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="Limpiar" ButtonStyle="ButtonStyle.Secondary">
+                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
                             </RadzenButton>
                         </div>
                     </div>
@@ -152,33 +152,33 @@ else
                 <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
             </EmptyTemplate>
             <Columns>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="Empresa" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Sucursal" Title="Sucursal" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Sector" Title="Sector" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Depositario" Title="Depositario" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Depositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="TipoTransaccion" Title="Tipo" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaTransaccion" Title="Fecha" FormatString="{0:dd/MM/yyyy HH:mm:ss}" Frozen="false" Sortable="true" Filterable="true" Width="12%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHATRANSACCION",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" Frozen="false" Sortable="true" Filterable="true" Width="12%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Usuario" Title="Usuario" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Usuario" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Turno" Title="Turno" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Turno" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNO",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Contenedor" Title="Contenedor" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="10%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Contenedor" Title="@MultilenguajeController.ObtenerTextoPorClave("CONTENEDOR",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="10%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Origen" Title="Origen" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="10%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Origen" Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Visible="true" Frozen="false" Sortable="true" Filterable="true" Width="10%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaRetiroBolsa" Title="Fecha retiro" FormatString="{0:dd/MM/yyyy HH:mm:ss}" Frozen="false" Sortable="true" Filterable="true" Width="12%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaRetiroBolsa" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHARETIROBOLSA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" Frozen="false" Sortable="true" Filterable="true" Width="12%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Moneda" Title="Moneda" Frozen="false" Sortable="true" Filterable="true" Width="10%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="10%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalValidado" Title="TotalValidado" Frozen="false" Sortable="true" TextAlign="TextAlign.Right" Filterable="true" Width="9%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalValidado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" Frozen="false" Sortable="true" TextAlign="TextAlign.Right" Filterable="true" Width="9%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalAValidar" Title="TotalAValidar" Frozen="false" Sortable="true" TextAlign="TextAlign.Right" Filterable="true" Width="9%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalAValidar" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" Frozen="false" Sortable="true" TextAlign="TextAlign.Right" Filterable="true" Width="9%">
                 </RadzenDataGridColumn>
             </Columns>
             <Template>
@@ -226,7 +226,6 @@ else
         public string Moneda { get; set; }
         public double TotalValidado { get; set; }
         public double TotalAValidar { get; set; }
-        public Int64 SectorId { get; set; }
         public string Sector { get; set; }
         public Int64 ContenedorId { get; set; }
         public string Contenedor { get; set; }
@@ -236,12 +235,10 @@ else
         public string Sucursal { get; set; }
         public Int64 TipoTransaccionId { get; set; }
         public string TipoTransaccion { get; set; }
-        public Int64 DepositarioId { get; set; }
         public string Depositario { get; set; }
-        public Int64 OrigenId { get; set; }
         public string Origen { get; set; }
     }
-    
+
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
@@ -260,6 +257,11 @@ else
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+
+    /// <summary>
+    /// Variables to store multilanguaje
+    /// </summary>
+    private List<Entities.TextoLenguaje> dataLenguaje;
 
     //Datasource para dropdown
     private List<DirectorioEntities.Empresa> empresasUsuario = new();
@@ -284,6 +286,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
@@ -310,7 +313,7 @@ else
             dataSectoresCombo = new();
             parametrosTransaccionesView.sectorSeleccionado = null;
 
-            dataDepositariosCombo = new();
+            dataDepositariosCombo = depositariosUsuario;
             parametrosTransaccionesView.depositarioSeleccionado = null;
         }
     }
@@ -327,8 +330,28 @@ else
             dataSectoresCombo = new();
             parametrosTransaccionesView.sectorSeleccionado = null;
 
-            dataDepositariosCombo = new();
+            if (parametrosTransaccionesView.empresaSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == parametrosTransaccionesView.empresaSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
+
             parametrosTransaccionesView.depositarioSeleccionado = null;
+        }
+
+    }
+
+    void OnChangeSector(object value)
+    {
+        if (value != null)
+        {
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SectorId == (Int64)value).ToList();
+        }
+        else
+        {
+            if (parametrosTransaccionesView.sucursalSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == parametrosTransaccionesView.sucursalSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
         }
 
     }
@@ -336,6 +359,9 @@ else
     void resetParametros()
     {
         parametrosTransaccionesView = new();
+        dataSectoresCombo = new();
+        dataSucursalesCombo = new();
+        dataDepositariosCombo = depositariosUsuario;
     }
 
     #endregion
@@ -595,7 +621,6 @@ else
                     resultReporte.TransaccionId = transaccion.TransaccionId;
                     resultReporte.FechaTransaccion = transaccion.FechaTransaccion;
                     resultReporte.Moneda = transaccion.Moneda;
-                    resultReporte.SectorId = transaccion.SectorId;
                     resultReporte.Sector = transaccion.Sector;
                     resultReporte.TotalAValidar = transaccion.TotalAValidar;
                     resultReporte.TotalValidado = transaccion.TotalValidado;
@@ -609,9 +634,7 @@ else
                     resultReporte.Sucursal = transaccion.Sucursal;
                     resultReporte.TipoTransaccionId = transaccion.TransaccionTipoId;
                     resultReporte.TipoTransaccion = transaccion.TransaccionTipo;
-                    resultReporte.DepositarioId = transaccion.DepositarioId;
                     resultReporte.Depositario = transaccion.Depositario;
-                    resultReporte.OrigenId = transaccion.OrigenId;
                     resultReporte.Origen = transaccion.Origen;
 
                     dataTransaccionesView.Add(resultReporte);
