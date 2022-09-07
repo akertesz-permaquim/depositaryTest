@@ -92,21 +92,28 @@ namespace Permaquim.Depositary.Sincronization.Console
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.OrigenValor", item.Id);
 
-                            //Guardo el id que venia del server.
-                            Int64 origenId = item.Id;
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
 
-                            //Si se sincronizo antes entonces hago un update con el id propio.
-                            if (idDestino.HasValue)
+                            if (empresaIdOrigen.HasValue)
                             {
-                                item.Id = idDestino.Value;
-                                origenValor.Update(item);
-                            }
-                            else
-                            {
-                                origenValor.Add(item);
-                            }
+                                //Guardo el id que venia del server.
+                                Int64 origenId = item.Id;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                item.EmpresaId = empresaIdOrigen.Value;
+
+                                //Si se sincronizo antes entonces hago un update con el id propio.
+                                if (idDestino.HasValue)
+                                {
+                                    item.Id = idDestino.Value;
+                                    origenValor.Update(item);
+                                }
+                                else
+                                {
+                                    origenValor.Add(item);
+                                }
+
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                            }
                         }
                         SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                     }
