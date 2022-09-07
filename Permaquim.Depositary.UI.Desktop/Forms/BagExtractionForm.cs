@@ -1,6 +1,7 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Builders;
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Forms;
 using Permaquim.Depositary.UI.Desktop.Global;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
@@ -363,13 +364,18 @@ namespace Permaquim.Depositary.UI.Desktop
         private void PrintTicket()
         {
 
-            if (ParameterController.PrintsTurnChange)
+            if (ParameterController.PrintsBagExtraction)
             {
+                var _bagContentItems = DatabaseController.GetBillBagContentItems();
+                _bagContentItems.AddRange( DatabaseController.GetEnvelopeBagContentItems());
+
+
                 if (!_alreadyPrinted)
                 {
                     for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                     {
-                        ReportController.PrintBagExtractionReport(_newContainer);
+                        ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+                            DatabaseController.CurrentContainer, _bagContentItems);
                         _alreadyPrinted = true;
                     }
                 }

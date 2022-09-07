@@ -150,8 +150,12 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 LoadDenominations();
                 LoadLanguageItems();
-                //EnableDisableControls(true);
-                DenominationsGridView.Visible = true;
+                DenominationsGridView.Enabled = true;
+                DenominationsGridView.Enabled = true;
+                CurrencyLabel.Enabled = true;
+                RemainingTimeLabel.Enabled = true;
+                SubtotalLabel.Enabled = true;
+
             }
             else
                 InitializeLocals();
@@ -166,6 +170,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _totalAmount = 0;
             _operationStatus = new();
             _alreadyPrinted = false;
+        
         }
         public void LoadDenominations()
         {
@@ -391,6 +396,7 @@ namespace Permaquim.Depositary.UI.Desktop
              {
                 _operationStatus.DepositConfirmed = true;
                 _device.CloseEscrow();
+                PrintTicket(TicketTypeEnum.Second);
                 _device.PreviousState = StatusInformation.State.PQClosingEscrow;
                 ButtonsPanel.Visible = false;
             }
@@ -491,10 +497,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void SaveTransaction()
         {
 
-            DenominationsGridView.Visible = false;
-            CurrencyLabel.Visible = false;
-            RemainingTimeLabel.Visible = false;
-            SubtotalLabel.Visible = false;
+            DenominationsGridView.Enabled = false;
+            CurrencyLabel.Enabled = false;
+            RemainingTimeLabel.Enabled = false;
+            SubtotalLabel.Enabled = false;
+
             FormsController.SetInformationMessage(InformationTypeEnum.Information,
             MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO));
 
@@ -561,6 +568,28 @@ namespace Permaquim.Depositary.UI.Desktop
             PrintTicket(TicketTypeEnum.First);
 
         }
+        
+        private void DeleteTransaction()
+        {
+            Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
+
+            transactions.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Id,
+                Depositario.sqlEnum.OperandEnum.Equal, _operationStatus.CurrentTransactionId);
+            transactions.Items();
+            if (transactions.Result.Count > 0)
+            {
+                var previousTransacion = transactions.Result.FirstOrDefault();
+
+                previousTransacion.Finalizada = false;
+
+                transactions.Update(previousTransacion);
+
+            }
+
+
+
+        }
+        
         private void EnableDisableControls(bool value)
         {
             DenominationsGridView.Visible = value;
@@ -728,6 +757,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CancelDepositButton_Click(object sender, EventArgs e)
         {
             TimeOutController.Reset();
+
+            SaveTransaction();  
+
             _operationStatus.DepositConfirmed = false;
             _device.CloseEscrow();
             AuditController.Log(LogTypeEnum.Information,
@@ -778,20 +810,20 @@ namespace Permaquim.Depositary.UI.Desktop
                 var _header = DatabaseController.GetTransactionHeader(_operationStatus.CurrentTransactionId);
                 var _details = _header.ListOf_TransaccionSobre_TransaccionId;
 
-                if (!_alreadyPrinted)
-                {
+                //if (!_alreadyPrinted)
+                //{
                     for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
                     {
 
                         switch (ticketType)
                         {
                             case TicketTypeEnum.First:
-                                ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositFirstReport,
+                                ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositFirstReport,
                                 _header,_details);
                                 _alreadyPrinted = true;
                                 break;
                             case TicketTypeEnum.Second:
-                                ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositSecondReport,
+                                ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport,
                                 _header, _details);
                                 _alreadyPrinted = true;
                                 break;
@@ -800,7 +832,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         }
 
                     }
-                }
+                //}
             }
         }
     }

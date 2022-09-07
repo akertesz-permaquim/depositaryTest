@@ -614,5 +614,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var _bagContentItems = DatabaseController.GetBillBagContentItems();
+            _bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
+            ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+                                       DatabaseController.CurrentContainer, _bagContentItems);
+
+        }
     }
 }

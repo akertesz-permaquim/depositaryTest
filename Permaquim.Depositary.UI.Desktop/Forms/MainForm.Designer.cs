@@ -45,6 +45,7 @@
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.BreadcrumbLabel = new System.Windows.Forms.Label();
             this.InformationLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPicturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
@@ -82,7 +83,6 @@
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
             this.RemainingTimeLabel.Size = new System.Drawing.Size(304, 48);
             this.RemainingTimeLabel.TabIndex = 111;
-            this.RemainingTimeLabel.Text = "**********";
             this.RemainingTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EnterpriseLabel
@@ -219,6 +219,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPanel.BackColor = System.Drawing.Color.White;
+            this.MainPanel.Controls.Add(this.button1);
             this.MainPanel.Controls.Add(this.MainPictureBox);
             this.MainPanel.Location = new System.Drawing.Point(0, 96);
             this.MainPanel.Name = "MainPanel";
@@ -232,7 +233,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPictureBox.ErrorImage = null;
-            this.MainPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("MainPictureBox.Image")));
             this.MainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.MainPictureBox.Name = "MainPictureBox";
             this.MainPictureBox.Size = new System.Drawing.Size(873, 261);
@@ -252,7 +252,6 @@
             this.BreadcrumbLabel.Name = "BreadcrumbLabel";
             this.BreadcrumbLabel.Size = new System.Drawing.Size(873, 42);
             this.BreadcrumbLabel.TabIndex = 111;
-            this.BreadcrumbLabel.Text = "Breadcrumb";
             this.BreadcrumbLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InformationLabel
@@ -267,6 +266,16 @@
             this.InformationLabel.TabIndex = 113;
             this.InformationLabel.Text = "...";
             this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(424, 272);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
@@ -317,5 +326,6 @@
         private Label RemainingTimeLabel;
         private Label DepositaryLabel;
         private Label TurnAndDateTimeLabel;
+        private Button button1;
     }
 }

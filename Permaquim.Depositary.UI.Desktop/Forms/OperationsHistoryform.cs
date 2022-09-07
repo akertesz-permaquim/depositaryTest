@@ -563,7 +563,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.BillDeposit,
+                        ReportController.PrintReport(ReportTypeEnum.BillDeposit,
                             _header, _details);
                         _alreadyPrinted = true;
                     }
@@ -583,7 +583,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.EnvelopeDepositSecondReport, _header, _details);
+                        ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport, _header, _details);
                         _alreadyPrinted = true;
                     }
                 }

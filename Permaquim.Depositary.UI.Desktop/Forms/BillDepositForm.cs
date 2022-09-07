@@ -846,7 +846,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
                     {
-                        ReportController.PrintDepositReport(ReportTypeEnum.BillDeposit, _header,_details);
+                        ReportController.PrintReport(ReportTypeEnum.BillDeposit, _header,_details);
                         _alreadyPrinted = true;
                     }
                 }
