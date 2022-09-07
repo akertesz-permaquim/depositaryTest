@@ -256,29 +256,9 @@ using System.Text;
 				        
 				public class ColumnNames
 				{
-					public const string TransaccionId = "TransaccionId";
-					public const string FechaTransaccion = "FechaTransaccion";
-					public const string TipoTransaccion = "TipoTransaccion";
-					public const string UsuarioTransaccion = "UsuarioTransaccion";
-					public const string UsuarioCuenta = "UsuarioCuenta";
-					public const string Cuenta = "Cuenta";
-					public const string Banco = "Banco";
-					public const string Contenedor = "Contenedor";
-					public const string TotalValidado = "TotalValidado";
-					public const string DepositarioId = "DepositarioId";
 				}
 				public enum FieldEnum : int
                 {
-					TransaccionId,
-					FechaTransaccion,
-					TipoTransaccion,
-					UsuarioTransaccion,
-					UsuarioCuenta,
-					Cuenta,
-					Banco,
-					Contenedor,
-					TotalValidado,
-					DepositarioId
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -286,26 +266,6 @@ using System.Text;
                 public ObtenerTransaccionesPorDepositario()
                 {
                 }
-             [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
-             public Int64? TransaccionId { get; set; }
-             [DataItemAttributeFieldName("FechaTransaccion","FechaTransaccion")]
-             public DateTime? FechaTransaccion { get; set; }
-             [DataItemAttributeFieldName("TipoTransaccion","TipoTransaccion")]
-             public String TipoTransaccion { get; set; }
-             [DataItemAttributeFieldName("UsuarioTransaccion","UsuarioTransaccion")]
-             public String UsuarioTransaccion { get; set; }
-             [DataItemAttributeFieldName("UsuarioCuenta","UsuarioCuenta")]
-             public String UsuarioCuenta { get; set; }
-             [DataItemAttributeFieldName("Cuenta","Cuenta")]
-             public String Cuenta { get; set; }
-             [DataItemAttributeFieldName("Banco","Banco")]
-             public String Banco { get; set; }
-             [DataItemAttributeFieldName("Contenedor","Contenedor")]
-             public String Contenedor { get; set; }
-             [DataItemAttributeFieldName("TotalValidado","TotalValidado")]
-             public String TotalValidado { get; set; }
-             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
-             public Int64? DepositarioId { get; set; }
 				
 			} //Class ObtenerTransaccionesPorDepositario 
 			
@@ -320,35 +280,9 @@ using System.Text;
 				        
 				public class ColumnNames
 				{
-					public const string TransaccionId = "TransaccionId";
-					public const string TransaccionSobreId = "TransaccionSobreId";
-					public const string FechaTransaccion = "FechaTransaccion";
-					public const string FechaTransaccionSobre = "FechaTransaccionSobre";
-					public const string TipoTransaccion = "TipoTransaccion";
-					public const string UsuarioTransaccion = "UsuarioTransaccion";
-					public const string UsuarioCuenta = "UsuarioCuenta";
-					public const string Cuenta = "Cuenta";
-					public const string Banco = "Banco";
-					public const string Contenedor = "Contenedor";
-					public const string CodigoSobre = "CodigoSobre";
-					public const string DepositarioId = "DepositarioId";
-					public const string TotalAValidar = "TotalAValidar";
 				}
 				public enum FieldEnum : int
                 {
-					TransaccionId,
-					TransaccionSobreId,
-					FechaTransaccion,
-					FechaTransaccionSobre,
-					TipoTransaccion,
-					UsuarioTransaccion,
-					UsuarioCuenta,
-					Cuenta,
-					Banco,
-					Contenedor,
-					CodigoSobre,
-					DepositarioId,
-					TotalAValidar
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -356,32 +290,6 @@ using System.Text;
                 public ObtenerTransaccionesSobrePorDepositario()
                 {
                 }
-             [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
-             public Int64? TransaccionId { get; set; }
-             [DataItemAttributeFieldName("TransaccionSobreId","TransaccionSobreId")]
-             public Int64? TransaccionSobreId { get; set; }
-             [DataItemAttributeFieldName("FechaTransaccion","FechaTransaccion")]
-             public DateTime? FechaTransaccion { get; set; }
-             [DataItemAttributeFieldName("FechaTransaccionSobre","FechaTransaccionSobre")]
-             public DateTime? FechaTransaccionSobre { get; set; }
-             [DataItemAttributeFieldName("TipoTransaccion","TipoTransaccion")]
-             public String TipoTransaccion { get; set; }
-             [DataItemAttributeFieldName("UsuarioTransaccion","UsuarioTransaccion")]
-             public String UsuarioTransaccion { get; set; }
-             [DataItemAttributeFieldName("UsuarioCuenta","UsuarioCuenta")]
-             public String UsuarioCuenta { get; set; }
-             [DataItemAttributeFieldName("Cuenta","Cuenta")]
-             public String Cuenta { get; set; }
-             [DataItemAttributeFieldName("Banco","Banco")]
-             public String Banco { get; set; }
-             [DataItemAttributeFieldName("Contenedor","Contenedor")]
-             public String Contenedor { get; set; }
-             [DataItemAttributeFieldName("CodigoSobre","CodigoSobre")]
-             public String CodigoSobre { get; set; }
-             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
-             public Int64? DepositarioId { get; set; }
-             [DataItemAttributeFieldName("TotalAValidar","TotalAValidar")]
-             public Double? TotalAValidar { get; set; }
 				
 			} //Class ObtenerTransaccionesSobrePorDepositario 
 			

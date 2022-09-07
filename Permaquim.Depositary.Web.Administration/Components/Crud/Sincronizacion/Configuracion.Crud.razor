@@ -50,7 +50,7 @@
      <hr>
      if (crudMode == CrudMode.List)
      {
-         <RadzenDataGrid AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         <RadzenDataGrid FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" RowRender=@ConfiguracionRowRender AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
          Data="@Configuracion_entities" TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -69,23 +69,30 @@
                  </Template>
                  </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="EntidadId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ENTIDADID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="EntidadId" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("ENTIDADID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Segundos" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("SEGUNDOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Segundos" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("SEGUNDOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
              <Template Context="data">
                  <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
                  </RadzenCheckBox>
              </Template>
+             <FilterTemplate>
+                 <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                 <div>
+                     @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                     <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true"/>
+                 </div>
+             </FilterTemplate>
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioCreacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="FechaCreacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="UsuarioModificacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Sincronizacion.Configuracion" Property="FechaModificacion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false" >
      </RadzenDataGridColumn>
          </Columns>
          </RadzenDataGrid>
@@ -190,6 +197,10 @@ else
     /// Variables to store permissions
     /// </summary>
     private List<SeguridadEntities.FuncionRol> dataFunciones;
+ 
+    /// <summary>
+    /// Variables to handle column filter for field Configuracion.Habilitado
+    private bool? Habilitado_filter;
  
     /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
@@ -405,6 +416,18 @@ else
     {
          Configuracion_entity = item;
     }
+    /// <summary>
+    /// ConfiguracionRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void ConfiguracionRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Sincronizacion.Configuracion> args)
+    {
+         if(!args.Data.Habilitado)
+             args.Attributes.Add("class", "row-highlight-disabled");
+         else
+             args.Attributes.Add("class", "rz-datatable-even");
+    }
+ 
     #endregion
  
     #region Export

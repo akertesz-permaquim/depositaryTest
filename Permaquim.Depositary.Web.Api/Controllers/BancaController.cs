@@ -16,9 +16,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         private const string ENTIDAD_BANCO = "Banca.Banco";
-        private const string ENTIDAD_CUENTA = "Banca.Provincia";
-        private const string ENTIDAD_TIPOCUENTA = "Banca.Ciudad";
-        private const string ENTIDAD_USUARIOCUENTA = "Banca.CodigoPostal";
+        private const string ENTIDAD_CUENTA = "Banca.Cuenta";
+        private const string ENTIDAD_TIPOCUENTA = "Banca.TipoCuenta";
+        private const string ENTIDAD_USUARIOCUENTA = "Banca.UsuarioCuenta";
 
         #region Endpoints
 

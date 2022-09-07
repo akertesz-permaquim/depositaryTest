@@ -50,7 +50,7 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirUsuario" RowRender="@usuarioRowRender" RowCollapse="@colapsarUsuario" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirUsuario" RowRender="@usuarioRowRender" RowCollapse="@colapsarUsuario" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@Usuario_entities" TItem="Depositary.Entities.Tables.Seguridad.Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -123,53 +123,74 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_PerfilId Data="@Perfil_PerfilId_filter" Change="OnSelectedFilter_PerfilId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Nombre" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Apellido" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("APELLIDO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Apellido" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("APELLIDO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Documento" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DOCUMENTO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Documento" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("DOCUMENTO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Legajo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("LEGAJO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Legajo" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("LEGAJO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Mail" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("MAIL",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Mail" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("MAIL",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaIngreso" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAINGRESO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaIngreso" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAINGRESO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="NickName" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NICKNAME",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="NickName" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("NICKNAME",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Visible="false" Property="Password" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Visible="false" Property="Password" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("PASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn Visible="false" TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Token" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("TOKEN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn Visible="false" TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Token" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("TOKEN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Avatar" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("AVATAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Avatar" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("AVATAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenImage Path="@data.Avatar" style="width: 40px; height: 40px; border-radius: 8px;">
                                 </RadzenImage>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaUltimoLogin" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMOLOGIN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaUltimoLogin" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMOLOGIN",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaExpiracion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAEXPIRACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="FechaExpiracion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAEXPIRACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="DebeCambiarPassword" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DEBECAMBIARPASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="DebeCambiarPassword" Filterable="true" FilterValue="@DebeCambiarPassword_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("DEBECAMBIARPASSWORD",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.DebeCambiarPassword Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("DEBECAMBIARPASSWORD",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="DebeCambiarPassword_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="CantidadLogueosIncorrectos" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CANTIDADLOGUEOSINCORRECTOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="CantidadLogueosIncorrectos" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CANTIDADLOGUEOSINCORRECTOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Bloqueado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Bloqueado" Filterable="true" FilterValue="@Bloqueado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Bloqueado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Bloqueado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false">
                             <Template>
@@ -223,26 +244,40 @@
                         </RadzenDataGridColumn>
                     </Columns>
                     <Template>
-                        <RadzenTabs>
-                            <Tabs>
-                                <RadzenTabsItem Text="Roles">
-                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioRol_Crud UsuarioId="@context.Id">
-                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioRol_Crud>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Text="Sectores">
-                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud UsuarioId="@context.Id">
-                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Text="Cuentas">
-                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud UsuarioId="@context.Id" EmpresaId="@context.EmpresaId">
-                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Text="Identificadores">
-                                    <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.IdentificadorUsuario_Crud UsuarioId="@context.Id">
-                                    </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.IdentificadorUsuario_Crud>
-                                </RadzenTabsItem>
-                            </Tabs>
-                        </RadzenTabs>
+                        @{
+                            var permisoUsuarioRol = SeguridadController.VerificarPermisoFuncion("SeguridadUsuarioRol", dataFunciones, "PuedeVisualizar");
+                            var permisoUsuarioSector = SeguridadController.VerificarPermisoFuncion("SeguridadUsuarioSector", dataFunciones, "PuedeVisualizar");
+                            var permisoUsuarioCuenta = SeguridadController.VerificarPermisoFuncion("BancaUsuarioCuenta", dataFunciones, "PuedeVisualizar");
+                            var permisoIdentificadorUsuario = SeguridadController.VerificarPermisoFuncion("SeguridadIdentificadorUsuario", dataFunciones, "PuedeVisualizar");
+
+                            if (!permisoUsuarioRol && !permisoUsuarioSector && !permisoUsuarioCuenta && !permisoIdentificadorUsuario)
+                            {
+                                <p>No posee permisos para visualizar esta información</p>
+                            }
+                            else
+                            {
+                                <RadzenTabs>
+                                    <Tabs>
+                                        <RadzenTabsItem Visible="@permisoUsuarioRol" Text="Roles">
+                                            <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioRol_Crud UsuarioId="@context.Id">
+                                            </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioRol_Crud>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Visible="@permisoUsuarioSector" Text="Sectores">
+                                            <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud UsuarioId="@context.Id" EmpresaId="@context.EmpresaId">
+                                            </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Visible="@permisoUsuarioCuenta" Text="Cuentas">
+                                            <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud UsuarioId="@context.Id" EmpresaId="@context.EmpresaId">
+                                            </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Visible="@permisoIdentificadorUsuario" Text="Identificadores">
+                                            <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.IdentificadorUsuario_Crud UsuarioId="@context.Id">
+                                            </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.IdentificadorUsuario_Crud>
+                                        </RadzenTabsItem>
+                                    </Tabs>
+                                </RadzenTabs>
+                            }
+                        }
                     </Template>
                 </RadzenDataGrid>
                 <hr>
@@ -270,7 +305,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("EMPRESAID",dataLenguaje) Component="EmpresaId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 @if ((@Empresa_EmpresaId_entities.Count > 0 && @Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.EmpresaId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Empresa_EmpresaId_entities.Where(x => x.Habilitado == true) : Empresa_EmpresaId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.EmpresaId);
@@ -294,7 +329,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LENGUAJEID",dataLenguaje) Component="LenguajeId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 @if ((@Lenguaje_LenguajeId_entities.Count > 0 && @Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.LenguajeId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true) : Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.LenguajeId);
@@ -318,12 +353,12 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PERFILID",dataLenguaje) Component="PerfilId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 @if ((@Perfil_PerfilId_entities.Count > 0 && @Perfil_PerfilId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.PerfilId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Perfil_PerfilId_entities.Where(x => x.Habilitado == true) : Perfil_PerfilId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.PerfilId);
                                     <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.PerfilId)"
+                                AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.PerfilId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPerfil_PerfilIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -529,6 +564,19 @@ else
         Edit,
         Delete
     }
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Habilitado_filter;
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Bloqueado_filter;
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? DebeCambiarPassword_filter;
+
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
@@ -1069,7 +1117,10 @@ else
         }
         else
         {
-            args.Attributes.Add("class", "rz-datatable-even");
+            if (!args.Data.Habilitado)
+                args.Attributes.Add("class", "row-highlight-disabled");
+            else
+                args.Attributes.Add("class", "rz-datatable-even");
         }
     }
     #endregion

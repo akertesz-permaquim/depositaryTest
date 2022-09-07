@@ -153,17 +153,19 @@ namespace Permaquim.Depositary.Sincronization.Console
                 foreach (var turnRow in turn.Result)
                 {
                     Int64? mapDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Dispositivo.Depositario", turnRow.DepositarioId);
+                    Int64? mapSectorId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Directorio.Sector", turnRow.SectorId);
                     Int64? mapTurnoDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Turno.AgendaTurno", turnRow.TurnoDepositarioId);
                     Int64? mapUsuarioCreacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", turnRow.UsuarioCreacion);
                     Int64? mapUsuarioModificacionId = null;
                     if (turnRow.UsuarioModificacion.HasValue)
                         mapUsuarioModificacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", turnRow.UsuarioModificacion.Value);
 
-                    if (mapDepositarioId.HasValue && mapUsuarioCreacionId.HasValue && mapTurnoDepositarioId.HasValue)
+                    if (mapDepositarioId.HasValue && mapUsuarioCreacionId.HasValue && mapTurnoDepositarioId.HasValue && mapSectorId.HasValue)
                     {
                         turnRow.DepositarioId = mapDepositarioId.Value;
                         turnRow.UsuarioCreacion = mapUsuarioCreacionId.Value;
                         turnRow.TurnoDepositarioId = mapTurnoDepositarioId.Value;
+                        turnRow.SectorId = mapSectorId.Value;
                         turnRow.UsuarioModificacion = mapUsuarioModificacionId;
                     }
                 }
@@ -228,16 +230,16 @@ namespace Permaquim.Depositary.Sincronization.Console
                     Int64? mapMonedaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Valor.Moneda", transactionRow.MonedaId);
                     Int64? mapUsuarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", transactionRow.UsuarioId);
 
-                    Int64? mapUsuarioCuentaId = null;
-                    if (transactionRow.UsuarioCuentaId.HasValue)
-                        mapUsuarioCuentaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Cuenta.UsuarioCuenta", transactionRow.UsuarioCuentaId.Value);
+                    Int64? mapCuentaId = null;
+                    if (transactionRow.CuentaId.HasValue)
+                        mapCuentaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Banca.Cuenta", transactionRow.CuentaId.Value);
 
                     if (mapTipoId.HasValue && mapDepositarioId.HasValue && mapSectorId.HasValue && mapSucursalId.HasValue && mapMonedaId.HasValue && mapUsuarioId.HasValue)
                     {
                         transactionRow.TipoId = mapTipoId.Value;
                         transactionRow.DepositarioId = mapDepositarioId.Value;
                         transactionRow.SectorId = mapSectorId.Value;
-                        transactionRow.UsuarioCuentaId = mapUsuarioCuentaId;
+                        transactionRow.CuentaId = mapCuentaId;
                         transactionRow.SucursalId = mapSucursalId.Value;
                         transactionRow.MonedaId = mapMonedaId.Value;
                         transactionRow.UsuarioId = mapUsuarioId.Value;

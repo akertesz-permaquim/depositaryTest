@@ -50,7 +50,7 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@RelacionMonedaSucursalRowRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@RelacionMonedaSucursal_entities" TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -105,17 +105,31 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_SucursalId Data="@Sucursal_SucursalId_filter" Change="OnSelectedFilter_SucursalId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="EsDefault" Filterable="false" Title="EsDefault" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="EsDefault" Filterable="true" FilterValue="@EsDefault_filter" Title="EsDefault" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.EsDefault Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="EsDefault_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Habilitado" Filterable="false" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title="Habilitado" Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
@@ -190,12 +204,12 @@
                                 <RadzenLabel Text="MonedaId" Component="MonedaId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 @if ((@Moneda_entities.Count > 0 && @Moneda_entities.FirstOrDefault(c => c.Id == @RelacionMonedaSucursal_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Moneda_entities.Where(x => x.Habilitado == true) : Moneda_entities.Where(x => x.Habilitado == true || x.Id == RelacionMonedaSucursal_entity.MonedaId);
-                                    <RadzenDropDown AllowClear="false" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" 
-                                        TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaSucursal_entity.MonedaId)"
+                                    <RadzenDropDown AllowClear="false" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaSucursal_entity.MonedaId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMonedaValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -214,7 +228,7 @@
                                 <RadzenLabel Text="SucursalId" Component="SucursalId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@SucursalId"
                                 Data=@Sucursal_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
@@ -286,6 +300,14 @@ else
     private List<Depositary.Entities.Tables.Valor.Moneda>? Moneda_entities;
     private List<Depositary.Entities.Tables.Valor.Moneda> Moneda_MonedaId_filter;
     private IEnumerable<Int64> selectedFilter_MonedaId;
+
+        /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Habilitado_filter;
+
+        /// <summary>
+    /// Variables to handle column filter for field Banco.EsDefault
+    private bool? EsDefault_filter;
 
     /// <summary>
     /// Variables to handle Relation between RelacionMonedaSucursal.SucursalId and Sucursal.Id
@@ -680,6 +702,18 @@ else
         {
             selectedFilter_MonedaId = null;
         }
+    }
+
+    /// <summary>
+    /// RelacionMonedaSucursalRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void RelacionMonedaSucursalRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal> args)
+    {
+        if (!args.Data.Habilitado)
+            args.Attributes.Add("class", "row-highlight-disabled");
+        else
+            args.Attributes.Add("class", "rz-datatable-even");
     }
     #endregion
 

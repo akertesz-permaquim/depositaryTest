@@ -689,27 +689,6 @@ namespace Permaquim.Depositary.Launcher.Model
 
             Depositario.Business.Tables.Valor.OrigenValor entitiesOrigenValor = new();
 
-            if (OrigenValor.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Valor.OrigenValor");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OrigenValor)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieValorOrigenValor = entitiesOrigenValor.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorOrigenValor.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
             #endregion
 
             #region Estilo
@@ -940,6 +919,38 @@ namespace Permaquim.Depositary.Launcher.Model
 
                             SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioRelacionMonedaSucursal.Id);
                         }
+                    }
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
+            #endregion
+
+            #region Valor.OrigenValor
+
+            if (OrigenValor.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Valor.OrigenValor");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in OrigenValor)
+                    {
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
+
+                        if (empresaIdOrigen.HasValue)
+                        {
+                            item.EmpresaId = empresaIdOrigen.Value;
+
+                            Int64 origenId = item.Id;
+
+                            var newEntitieValorOrigenValor = entitiesOrigenValor.Add(item);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorOrigenValor.Id);
+                        }
+
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }

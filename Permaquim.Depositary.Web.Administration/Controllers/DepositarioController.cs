@@ -38,6 +38,7 @@
                 depositarioMonitor.Sector = sector.Nombre;
                 depositarioMonitor.Sucursal = sucursal.Nombre;
                 depositarioMonitor.Empresa = sucursal.EmpresaId.Nombre;
+                depositarioMonitor.EmpresaId = sucursal._EmpresaId;
                 depositarioMonitor.NumeroSerie = depositario.NumeroSerie;
                 depositarioMonitor.CodigoExterno = depositario.CodigoExterno;
                 depositarioMonitor.Modelo = depositario.ModeloId.Nombre;
