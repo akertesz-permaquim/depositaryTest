@@ -106,7 +106,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void TurnButton_Click(object sender, EventArgs e)
         {
-            if (DatabaseController.AvailableTurnsCount > 0)
+            if (DatabaseController.GetAvailableTurns() > 0)
             {
                 FormsController.OpenChildForm(this, new TurnChangeForm(),
                   (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
@@ -131,7 +131,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
-            if (DatabaseController.AvailableTurnsCount == 0)
+            if (DatabaseController.GetAvailableTurns() == 0)
             {
                 FormsController.OpenChildForm(this, new DailyClosingForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);

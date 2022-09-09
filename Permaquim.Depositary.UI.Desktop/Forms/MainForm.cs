@@ -339,9 +339,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                         MultilanguangeController.GetText(MultiLanguageEnum.RETIRE_VALORES_ESCROW),
                         //"Error en operación previa", 
                         MultilanguangeController.GetText(MultiLanguageEnum.ERROR_OPERACION_PREVIA),
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
                     {
                         _pollingTimer.Enabled = false;
+                            
                         _device.CloseEscrow();
                     }
 
@@ -416,24 +417,27 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             if (DatabaseController.CurrentUser != null)
             {
-                UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " +
+                if (DatabaseController.UserAllowedInSector())
+                {
+                    UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " +
                 DatabaseController.CurrentUser.Apellido + " " + DatabaseController.CurrentUser.Nombre;
 
-                EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " +
-                DatabaseController.CurrentUser.EmpresaId.Nombre;
+                    EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " +
+                    DatabaseController.CurrentUser.EmpresaId.Nombre;
 
-                SucursalInfoLabel.Text =
-                    MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
-                    + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
-                    + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
-                    + DatabaseController.CurrentDepositary.SectorId.Nombre;
+                    SucursalInfoLabel.Text =
+                        MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
+                        + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
+                        + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
+                        + DatabaseController.CurrentDepositary.SectorId.Nombre;
 
-                DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
-                 + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
-                 + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
-                 + DatabaseController.CurrentDepositary.CodigoExterno;
+                    DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
+                     + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
+                     + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
+                     + DatabaseController.CurrentDepositary.CodigoExterno;
 
-                SetTurnAndDateTimeLabel();
+                    SetTurnAndDateTimeLabel();
+                }
 
             }
             else
@@ -531,11 +535,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             if (DatabaseController.CurrentUser != null )
             {
-                if (AvatarPicturebox.Image == null)
+                if (DatabaseController.UserAllowedInSector())
                 {
-                    _avatarImage = ImageFromBase64Helper.
-                        GetImageFromBase64String(DatabaseController.CurrentUser.Avatar);
-                    AvatarPicturebox.Image = _avatarImage;
+                    if (AvatarPicturebox.Image == null)
+                    {
+                        _avatarImage = ImageFromBase64Helper.
+                            GetImageFromBase64String(DatabaseController.CurrentUser.Avatar);
+                        AvatarPicturebox.Image = _avatarImage;
+                    }
                 }
             }
             else
@@ -562,18 +569,25 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 if (VerifySchedule())
                     if (_device.CounterConnected && _device.IoBoardConnected)
                     {
-                        if (VerifyBagInplace())
+                        if (ParameterController.ValidatesBagInplace)
                         {
-                            Login();
+                            if (VerifyBagInplace())
+                            {
+                                Login();
+                            }
+                            else
+                            {
+                                SetInformationMessage(InformationTypeEnum.Error,
+                                 MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA));
+                                AuditController.Log(LogTypeEnum.Exception,
+                                    MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA),
+                                    MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA));
+
+                            }
                         }
                         else
                         {
-                            SetInformationMessage(InformationTypeEnum.Error,
-                             MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA));
-                            AuditController.Log(LogTypeEnum.Exception,
-                                MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA),
-                                MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA));
-
+                             Login();
                         }
                     }
                     else

@@ -490,7 +490,6 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_operationStatus.GeneralStatus == StatusInformation.State.BeingSet
                 || _operationStatus.GeneralStatus == StatusInformation.State.BeingReset)
             {
-                TimeOutController.Reset();
                 _device.BatchDataTransmission();
             }
         }
@@ -801,12 +800,13 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalAValidar = 0,
                     TotalValidado = _operationStatus.CurrentTransactionAmount,
                     TurnoId = DatabaseController.CurrentTurn.Id,
-                    CuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
+                    CuentaId = DatabaseController.CurrentUserBankAccount == null ?  null:
                         DatabaseController.CurrentUserBankAccount.CuentaId.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id,
                     CodigoOperacion =
                         DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
-                    OrigenValorId = DatabaseController.CurrentDepositOrigin.Id
+                    OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? 0 : 
+                    DatabaseController.CurrentDepositOrigin.Id
                 };
                 _headerTransaction.Add(transactions.Add(transaction));
                 _operationStatus.CurrentTransactionId = transaction.Id;

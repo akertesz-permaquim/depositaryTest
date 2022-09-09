@@ -12,6 +12,12 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         DateTime CreationDate { get; set; }
         DateTime closingDate { get; set; }
 
-        string Observations { get; set; }   
+        string Observations { get; set; }
+    }
+
+    internal class TurnItemElement
+    {
+        public long Value { get; set; }
+        public string Text { get; set; }
     }
 }

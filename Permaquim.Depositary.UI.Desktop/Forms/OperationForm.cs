@@ -12,6 +12,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> _transactions = DatabaseController.GetTransactionTypes();
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
+        private CustomButton _backButton;
+
         CounterDevice _device = null;
         public OperationForm()
         {
@@ -44,6 +46,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 MainPanel.Enabled = true;
 
             }
+            _backButton.Enabled = true;
 
             if (TimeOutController.IsTimeOut())
             {
@@ -123,7 +126,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.BillDeposit:
 
-                    if (DatabaseController.AvailableTurnsCount > 0)
+                    if (DatabaseController.GetAvailableTurns() > 0)
                     {
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
@@ -145,7 +148,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
                 case (int)OperationTypeEnum.EnvelopeDeposit:
 
-                    if (DatabaseController.AvailableTurnsCount > 0)
+                    if (DatabaseController.GetAvailableTurns() > 0)
                     {
 
                         if (DatabaseController.GetCurrencies().Count == 1)
@@ -175,11 +178,11 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
+            _backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_SALIR), MainPanel.Width);
 
-            this.MainPanel.Controls.Add(backButton);
-            backButton.Click += new System.EventHandler(BackButton_Click);
+            this.MainPanel.Controls.Add(_backButton);
+            _backButton.Click += new System.EventHandler(BackButton_Click);
         }
 
         #region Reports
@@ -256,6 +259,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OperationForm_VisibleChanged(object sender, EventArgs e)
         {
             MainPanel.Enabled = false;
+            _backButton.Enabled = true;
             _pollingTimer.Enabled = this.Visible;
             if (!this.Visible)
                 InitializeLocals();

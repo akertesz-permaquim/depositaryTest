@@ -67,7 +67,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 CustomButton newButton = ControlBuilder.BuildStandardButton(
                 "ValueOriginButton" + item.Id.ToString(),
-                item.Nombre 
+                item.Nombre
                 , MainPanel.Width);
 
                 newButton.Click += new System.EventHandler(ValueOriginButton_Click);
@@ -80,7 +80,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildStandardButton(
+            CustomButton backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
 
@@ -92,7 +92,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentDepositOrigin = (Permaquim.Depositario.Entities.Relations.Valor.OrigenValor)((CustomButton)sender).Tag;
 
-            ValidateUserBankAccount();
+            ValidateDepositOrigin();
 
         }
 
@@ -120,45 +120,29 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
         }
-        private void ValidateUserBankAccount()
+        private void ValidateDepositOrigin()
         {
-            if (ParameterController.UsesBankAccount == true)
+            string envelopeDepositFormBreadcrumbText = " - ";
+            if (DatabaseController.CurrentDepositOrigin != null)
             {
-
-                var _userBankAccounts = DatabaseController.GetUserBankAccounts();
-
-                if (_userBankAccounts.Count != 0)
-                {
-                    if (_userBankAccounts.Count == 1)
-                    {
-                        DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
-                        string billDepositFormBreadcrumbText = " - " +
-                              MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
-                          ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero;
-                        if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
-                            FormsController.OpenChildForm(this, new BillDepositForm(),
-                            (CounterDevice)this.Tag, billDepositFormBreadcrumbText);
-                        if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
-                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
-                            (CounterDevice)this.Tag, billDepositFormBreadcrumbText);
-                    }
-                    else
-                    {
-                        FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
-                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                    }
-                }
-                else
-                {
-                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                         MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_BANCARIA_OBLIGATORIA));
-                }
+                envelopeDepositFormBreadcrumbText += MultilanguangeController.GetText(MultiLanguageEnum.ORIGEN_VALOR) +
+                          ":" + DatabaseController.CurrentDepositOrigin.Nombre;
             }
-            else
+            if (DatabaseController.CurrentUserBankAccount != null)
             {
+                envelopeDepositFormBreadcrumbText += " " +
+            MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
+              ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero;
+            }
+            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
                 FormsController.OpenChildForm(this, new BillDepositForm(),
-                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-            }
+                (CounterDevice)this.Tag, envelopeDepositFormBreadcrumbText);
+
+            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+                FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                (CounterDevice)this.Tag, envelopeDepositFormBreadcrumbText);
+
+
         }
     }
 }

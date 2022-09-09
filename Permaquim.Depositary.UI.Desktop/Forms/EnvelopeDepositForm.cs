@@ -537,7 +537,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalAValidar = _totalQuantity,
                     TotalValidado = 0,
                     TurnoId = DatabaseController.CurrentTurn.Id,
-                    CuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
+                    CuentaId = DatabaseController.CurrentUserBankAccount == null ? null :
                         DatabaseController.CurrentUserBankAccount.CuentaId.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id,
                     CodigoOperacion =
@@ -769,8 +769,6 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
-            SaveTransaction();  
-
             _operationStatus.DepositConfirmed = false;
             _device.CloseEscrow();
             AuditController.Log(LogTypeEnum.Information,
@@ -779,6 +777,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ButtonsPanel.Visible = true;
             if (_device.CounterConnected)
                 _device.RemoteCancel();
+
             FormsController.OpenChildForm(this, new OperationForm(), _device);
 
         }

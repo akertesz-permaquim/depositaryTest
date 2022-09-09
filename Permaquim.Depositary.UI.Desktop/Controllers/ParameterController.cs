@@ -162,8 +162,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        public static bool ValidatesBagInplace
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("VALIDA_EXISTENCIA_BOLSA"));
+            }
 
-
+        }
         
+
     }
 }

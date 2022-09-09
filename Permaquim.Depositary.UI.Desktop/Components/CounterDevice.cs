@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.CustomExceptions;
 using System.Collections;
 using System.IO.Ports;
@@ -1302,6 +1303,9 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                     if (statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming)
                     {
+                        AuditController.Log(Global.Enumerations.LogTypeEnum.Exception,
+                        statesResult.ErrorStateInformation.AbnormalDevice.ToString() + " || " + statesResult.ErrorStateInformation.Jamming.ToString(),
+                        "statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming");
                         // ISSUE: reference to a compiler-generated field
                         ECError((object)_counterPort, new ECErrorArgs()
                         {
@@ -1310,19 +1314,25 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     }
                     if (statesResult.ErrorStateInformation.AbnormalStorage)
                     {
+                        AuditController.Log(Global.Enumerations.LogTypeEnum.Exception,
+                        statesResult.ErrorStateInformation.AbnormalStorage.ToString(),
+                        "statesResult.ErrorStateInformation.AbnormalStorage");
                         // ISSUE: reference to a compiler-generated field
-                        ECError((object)_counterPort, new ECErrorArgs()
-                        {
-                            Errorcode = 1
-                        });
+                        //ECError((object)_counterPort, new ECErrorArgs()
+                        //{
+                        //    Errorcode = 1
+                        //});
                     }
                     if (statesResult.ErrorStateInformation.CountingError)
                     {
+                        AuditController.Log(Global.Enumerations.LogTypeEnum.Exception,
+                            statesResult.ErrorStateInformation.CountingError.ToString(),
+                            "statesResult.ErrorStateInformation.CountingError");
                         // ISSUE: reference to a compiler-generated field
-                        ECError((object)_counterPort, new ECErrorArgs()
-                        {
-                            Errorcode = 3
-                        });
+                        //ECError((object)_counterPort, new ECErrorArgs()
+                        //{
+                        //    Errorcode = 3
+                        //});
                     }
 
                 }
