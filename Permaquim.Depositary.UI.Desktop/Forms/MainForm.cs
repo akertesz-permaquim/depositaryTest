@@ -265,23 +265,19 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void VerifyOpenDoor()
         {
-            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED)
-            {
-                VerifyConnections();
-            }
-            else
-            {
-                AuditController.Log(LogTypeEnum.Exception, MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA), 
-                    MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
+            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN)
 
+            {
 
-                ReportController.PrintReport(ReportTypeEnum.ValueExtraction, null, null);
+                //if (ParameterController.PrintsBagExtraction)
+                //    ReportController.PrintReport(ReportTypeEnum.ValueExtraction, null, null);
 
                 if (_blockingDialog == null &&
                     (DatabaseController.CurrentOperation == null ||
                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
                 {
-
+                    AuditController.Log(LogTypeEnum.Exception, MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA),
+                    MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
 
                     _blockingDialog = new SystemBlockingDialog()
                     {
@@ -293,6 +289,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     _blockingDialog = null;
                 }
             }
+            else
+            {
+                VerifyConnections();
+            }
+ 
 
         }
         private void VerifyBagExtracted()
@@ -301,7 +302,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 if(!_bagRemoved)
                     // Se asume retiro de bolsa
-                    DatabaseController.CreateContainer();
+                    //DatabaseController.CreateContainer();
                 _bagRemoved = true;
             }
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)

@@ -80,6 +80,7 @@
             this.MainGridView.RowTemplate.DividerHeight = 1;
             this.MainGridView.RowTemplate.Height = 30;
             this.MainGridView.RowTemplate.ReadOnly = true;
+            this.MainGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.MainGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MainGridView.Size = new System.Drawing.Size(924, 360);
             this.MainGridView.TabIndex = 192;

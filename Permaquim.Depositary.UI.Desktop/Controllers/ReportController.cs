@@ -1,5 +1,6 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Helpers;
 using System.Drawing.Printing;
+using System.Reflection.Metadata.Ecma335;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
@@ -23,7 +24,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             dynamic header,dynamic details)
         {
 
-            if(header ==null || details == null)
+                if (header ==null || details == null)
             {
                 FormsController.SetInformationMessage(InformationTypeEnum.Error, TICKET + 
                     MultilanguangeController.GetText(MultiLanguageEnum.ERROR_DATO));
@@ -36,6 +37,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Depositario.Business.Tables.Impresion.Ticket ticket = new();
             ticket.Where.Add(Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.TipoId,
                 Depositario.sqlEnum.OperandEnum.Equal, (int)reportType);
+            ticket.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.DepositarioModeloId,
+               Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary.ModeloId.Id);
+
             ticket.Items(); 
             if (ticket.Result.Count > 0)
             {

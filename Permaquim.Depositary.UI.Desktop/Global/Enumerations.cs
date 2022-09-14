@@ -293,14 +293,15 @@
             ContenidoDeBolsa,
             ExtraccionDeValores,
             CierreDiario,
-            Transacciones,
+            HistoricoTransacciones,
             Soporte,
             CambioDeTurno,
             VerEventos,
             Reportes,
             HistoricoDeBolsas,
             HistoricoDeTurnos ,
-            HistoricoDeCierreDiario
+            HistoricoDeCierreDiario,
+            Reset
 
         }
 

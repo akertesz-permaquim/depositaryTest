@@ -152,7 +152,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void EnvelopeDepositForm_VisibleChanged(object sender, EventArgs e)
         {
-            MonitorGroupcheckbox.Visible = false;// SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+            MonitorGroupcheckbox.Visible = true;// SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
 
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
@@ -164,6 +164,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 CurrencyLabel.Enabled = true;
                 RemainingTimeLabel.Enabled = true;
                 SubtotalLabel.Enabled = true;
+
 
             }
             else
@@ -240,7 +241,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (_device != null && _device.CounterConnected)
                 {
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode)
+                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode
+                        && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.Waiting)
                     {
                         _device.ManualDepositMode();
                     }
@@ -258,6 +260,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 VerifyButtonsVisibility();
             }
 
+ 
             SetTotals();
         }
         private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -482,6 +485,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.PreviousState == StatusInformation.State.PQClosingEscrow
                 )
             {
+                if (ParameterController.UsesShutter)
+                    _device.Open();
+
                 _device.StoringStart();
                 _device.PreviousState = StatusInformation.State.PQStoring;
                 ExitEnvelopeDepositForm();
@@ -496,8 +502,9 @@ namespace Permaquim.Depositary.UI.Desktop
             PrintTicket(TicketTypeEnum.Second);
 
             //SaveTransaction();
+            _device.RemoteCancel();
 
-           _operationStatus.DepositEnded = true;
+            _operationStatus.DepositEnded = true;
 
         }
         /// <summary>
@@ -542,7 +549,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     UsuarioId = DatabaseController.CurrentUser.Id,
                     CodigoOperacion =
                         DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
-                    OrigenValorId = DatabaseController.CurrentDepositOrigin.Id
+                    OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? 0 :
+                    DatabaseController.CurrentDepositOrigin.Id
             };
                 transactions.Add(transaction);
                 _operationStatus.CurrentTransactionId = transaction.Id;

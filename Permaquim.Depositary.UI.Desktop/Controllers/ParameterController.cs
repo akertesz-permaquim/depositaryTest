@@ -8,6 +8,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class ParameterController
     {
+        public static bool UsesShutter
+        {
+            get
+            {
+                return true;// Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_SHUTTER"));
+            }
+
+        }
+
         public static bool UsesBankAccount
         {
             get

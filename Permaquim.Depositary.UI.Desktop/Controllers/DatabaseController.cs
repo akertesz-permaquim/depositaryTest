@@ -210,7 +210,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 entity.Items();
 
                 if (entity.Result.Count > 0)
-                    return entity.Result.FirstOrDefault();
+                    return entity.Result.LastOrDefault();
                 else
                 {
 
@@ -443,7 +443,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //Luego genera una nueva
             Permaquim.Depositario.Business.Tables.Operacion.TipoContenedor typesOfContainer = new();
 
-            entities.Add(new Depositario.Entities.Tables.Operacion.Contenedor()
+            var newcontainer = entities.Add(new Depositario.Entities.Tables.Operacion.Contenedor()
             {
                 FechaApertura = DateTime.Now,
                 FechaCierre = null,
@@ -484,7 +484,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     Nombre = bagIdentifier,
                     TipoId = CurrentContainer.TipoId.Id,
                     UsuarioCreacion = CurrentContainer.UsuarioCreacion.Id,
-                    UsuarioModificacion = CurrentUser.Id
+                    UsuarioModificacion = CurrentUser.Id,
+                    DepositarioId = CurrentDepositary.Id,
 
                 });
             }
@@ -1461,7 +1462,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static bool IsFuntionEnabled(long functionId)
         {
             bool returnValue = false;
-            return true;
+
             try
             {
                 if (CurrentUser == null)

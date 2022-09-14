@@ -55,7 +55,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 FormsController.LogOff();
             }
 
-            if (!ConfigurationController.IsDevelopment())
+            if (!ConfigurationController.IsDevelopment()) 
             {
                 if (_device.StateResultProperty.DoorStateInformation.Escrow)
                     _device.CloseEscrow();
@@ -67,7 +67,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 }
             }
-            
+
 
         }
         private void OperationForm_Load(object sender, EventArgs e)
@@ -189,7 +189,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadReportsButton()
         {
-            if (SecurityController.IsFunctionEnabled(FunctionEnum.Reportes))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoTransacciones)
+                || SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeCierreDiario)
+                || SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeBolsas)
+                )
             {
                 CustomButton reportsButton = ControlBuilder.BuildStandardButton(
                     "ReportsButton", MultilanguangeController.GetText(MultiLanguageEnum.REPORTES), MainPanel.Width);

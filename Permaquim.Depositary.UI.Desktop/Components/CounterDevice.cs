@@ -1307,10 +1307,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                         statesResult.ErrorStateInformation.AbnormalDevice.ToString() + " || " + statesResult.ErrorStateInformation.Jamming.ToString(),
                         "statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming");
                         // ISSUE: reference to a compiler-generated field
-                        ECError((object)_counterPort, new ECErrorArgs()
-                        {
-                            Errorcode = 8
-                        });
+                        //ECError((object)_counterPort, new ECErrorArgs()
+                        //{
+                        //    Errorcode = 8
+                        //});
                     }
                     if (statesResult.ErrorStateInformation.AbnormalStorage)
                     {

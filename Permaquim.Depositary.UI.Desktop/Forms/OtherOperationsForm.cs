@@ -44,7 +44,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadDailyClosingButton();
             if (SecurityController.IsFunctionEnabled(FunctionEnum.Soporte))
                 LoadSupportButton();
-            LoadResetButton();
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.Reset))
+                LoadResetButton();
 
             LoadBackButton();
         }

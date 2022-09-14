@@ -668,9 +668,14 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
             CancelDepositButton.Visible = false;
+            if (ParameterController.UsesShutter)
+                _device.Open();
+
             _device.StoringStart();
+
             _device.PreviousState = StatusInformation.State.PQStoring;
         }
+
 
         private void BackButton_Click(object sender, EventArgs e)
         {
@@ -699,7 +704,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CleanDetectedBills();
 
             PrintTicket();
-
+            _device.Close();
             FormsController.OpenChildForm(this,new OperationForm(), _device);
         }
 
