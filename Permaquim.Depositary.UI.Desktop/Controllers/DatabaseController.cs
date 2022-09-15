@@ -916,49 +916,51 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             var txs = transactions.Result.DistinctBy(x => x.Id).Select(x => x.Id).ToList();
 
-            if (depositType == OperationTypeEnum.BillDeposit)
+            if (txs.Count != 0)
             {
-                Permaquim.Depositario.Business.Relations.Operacion.TransaccionDetalle transactionDetails = new();
-                transactionDetails.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
-                    Depositario.sqlEnum.OperandEnum.In, txs);
-                transactionDetails.Items();
-
-                foreach (var transactionDetailItem in transactionDetails.Result)
+                if (depositType == OperationTypeEnum.BillDeposit)
                 {
-                    var element =
-                    returnValue.Find(x => x.Moneda ==
-                    transactionDetailItem.DenominacionId.MonedaId.Codigo);
-                    element.Total +=
-                    transactionDetailItem.CantidadUnidades * transactionDetailItem.DenominacionId.Unidades;
-                    element.FormattedTotal = transactionDetailItem.TransaccionId.MonedaId.Simbolo +
-                            " " + element.Total;
+                    Permaquim.Depositario.Business.Relations.Operacion.TransaccionDetalle transactionDetails = new();
+                    transactionDetails.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
+                        Depositario.sqlEnum.OperandEnum.In, txs);
+                    transactionDetails.Items();
 
-                }
-            }
-            if (depositType == OperationTypeEnum.EnvelopeDeposit)
-            {
-                Permaquim.Depositario.Business.Relations.Operacion.TransaccionSobre transactionEnvelopes = new();
-                transactionEnvelopes.Where.Add(Depositario.Business.Relations.Operacion.TransaccionSobre.ColumnEnum.TransaccionId,
-                    Depositario.sqlEnum.OperandEnum.In, txs);
-                transactionEnvelopes.Items();
-
-                foreach (var transactionEnvelopeItem in transactionEnvelopes.Result)
-                {
-
-                    foreach (var transaccionSobreDetalleItem in
-                        transactionEnvelopeItem.ListOf_TransaccionSobreDetalle_SobreId)
+                    foreach (var transactionDetailItem in transactionDetails.Result)
                     {
                         var element =
                         returnValue.Find(x => x.Moneda ==
-                        transaccionSobreDetalleItem.RelacionMonedaTipoValorId.MonedaId.Codigo);
-                        element.Total += transaccionSobreDetalleItem.CantidadDeclarada;
-                        element.FormattedTotal = transaccionSobreDetalleItem.RelacionMonedaTipoValorId.MonedaId.Simbolo +
-                            " " + element.Total;
+                        transactionDetailItem.DenominacionId.MonedaId.Codigo);
+                        element.Total +=
+                        transactionDetailItem.CantidadUnidades * transactionDetailItem.DenominacionId.Unidades;
+                        element.FormattedTotal = transactionDetailItem.TransaccionId.MonedaId.Simbolo +
+                                " " + element.Total;
+
                     }
                 }
+                if (depositType == OperationTypeEnum.EnvelopeDeposit)
+                {
+                    Permaquim.Depositario.Business.Relations.Operacion.TransaccionSobre transactionEnvelopes = new();
+                    transactionEnvelopes.Where.Add(Depositario.Business.Relations.Operacion.TransaccionSobre.ColumnEnum.TransaccionId,
+                        Depositario.sqlEnum.OperandEnum.In, txs);
+                    transactionEnvelopes.Items();
 
+                    foreach (var transactionEnvelopeItem in transactionEnvelopes.Result)
+                    {
+
+                        foreach (var transaccionSobreDetalleItem in
+                            transactionEnvelopeItem.ListOf_TransaccionSobreDetalle_SobreId)
+                        {
+                            var element =
+                            returnValue.Find(x => x.Moneda ==
+                            transaccionSobreDetalleItem.RelacionMonedaTipoValorId.MonedaId.Codigo);
+                            element.Total += transaccionSobreDetalleItem.CantidadDeclarada;
+                            element.FormattedTotal = transaccionSobreDetalleItem.RelacionMonedaTipoValorId.MonedaId.Simbolo +
+                                " " + element.Total;
+                        }
+                    }
+
+                }
             }
-
             return returnValue;
 
         }

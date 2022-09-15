@@ -95,7 +95,7 @@ namespace Permaquim.Depositary.UI.Desktop
             MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "FechaApertura",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_APERTURA),
                 Name = "FechaApertura",
                 Visible = true,
                 Width = 150,
@@ -106,7 +106,7 @@ namespace Permaquim.Depositary.UI.Desktop
             MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "FechaCierre",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE),
                 Name = "FechaCierre",
                 Visible = true,
                 Width = 150,

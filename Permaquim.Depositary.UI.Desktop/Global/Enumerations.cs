@@ -223,6 +223,8 @@
             HISTORICO_OPERACIONES,
             FINALIZADA,
             FECHA,
+            FECHA_APERTURA,
+            FECHA_CIERRE,
             FECHA_DESDE,
             FECHA_HASTA,
             ESCROW_LLENO,
