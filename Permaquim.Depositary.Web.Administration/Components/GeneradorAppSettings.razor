@@ -3,10 +3,14 @@
 @using Permaquim.Depositary.Web.Administration.Controllers
 @using Newtonsoft.Json
 @using System.Text
+@using BlazorDownloadFile
+
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 @inject DialogService DialogService
+
+@inject IBlazorDownloadFileService BlazorDownloadFileService
 
 @if (dataFunciones != null)
 {
@@ -499,6 +503,12 @@ else
         {
             //FileController fileController = new();
             //fileController.DescargarArchivo(jsonAppSettings, "appSettings.json");
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonAppSettings);
+
+            var stream = new System.IO.MemoryStream(bytes);
+
+            BlazorDownloadFileService.DownloadFile("appSettings.json", stream, "application/octet-stream");
+
         }
     }
 

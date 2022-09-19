@@ -995,6 +995,8 @@ using System.Text;
              [DataItemAttributeFieldName("Direccion","Direccion")]
              public String Direccion { get; set; }
              [DataItemAttributeFieldName("CodigoPostalId","CodigoPostalId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("CodigoPostal")]// Object name in Database
              public Int64 CodigoPostalId { get; set; }
              [DataItemAttributeFieldName("EstiloEsquemaId","EstiloEsquemaId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
@@ -3650,6 +3652,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string TipoId = "TipoId";
 					public const string DepositarioModeloId = "DepositarioModeloId";
+					public const string EmpresaId = "EmpresaId";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
 					public const string Impresora = "Impresora";
@@ -3678,6 +3681,7 @@ using System.Text;
 					Id,
 					TipoId,
 					DepositarioModeloId,
+					EmpresaId,
 					Nombre,
 					Descripcion,
 					Impresora,
@@ -3707,11 +3711,12 @@ using System.Text;
                 public Ticket()
                 {
                 }
-                public  Ticket(Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Ticket(Int64 TipoId,Int64 DepositarioModeloId,Int64 EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
                     this.DepositarioModeloId = DepositarioModeloId;
+                    this.EmpresaId = EmpresaId;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
                     this.Impresora = Impresora;
@@ -3747,6 +3752,10 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Modelo")]// Object name in Database
              public Int64 DepositarioModeloId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Empresa")]// Object name in Database
+             public Int64 EmpresaId { get; set; }
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }

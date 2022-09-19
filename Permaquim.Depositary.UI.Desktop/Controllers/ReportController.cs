@@ -39,7 +39,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Depositario.sqlEnum.OperandEnum.Equal, (int)reportType);
             ticket.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.DepositarioModeloId,
-               Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary.ModeloId.Id);
+                Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary.ModeloId.Id);
+            ticket.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.EmpresaId,
+            Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.Id);
 
             ticket.Items(); 
             if (ticket.Result.Count > 0)
