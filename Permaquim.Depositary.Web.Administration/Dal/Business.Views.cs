@@ -336,7 +336,8 @@ using System.Text;
 					CantidadTransacciones,
 					TotalValidado,
 					TotalAValidar,
-					Moneda
+					Moneda,
+					CodigoCierreDiario
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -380,9 +381,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.CierresDiarios Add(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64 TurnoId,String Turno,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda) 
+			public Entities.Views.Reporte.CierresDiarios Add(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64 TurnoId,String Turno,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoCierreDiario) 
 			{
-			  return (Entities.Views.Reporte.CierresDiarios)base.Add(new Entities.Views.Reporte.CierresDiarios(CierreDiarioId,DepositarioId,SectorId,SucursalId,EmpresaId,UsuarioId,Usuario,Fecha,CierreDiario,Empresa,Sucursal,Sector,TurnoId,Turno,Depositario,CantidadTransacciones,TotalValidado,TotalAValidar,Moneda));
+			  return (Entities.Views.Reporte.CierresDiarios)base.Add(new Entities.Views.Reporte.CierresDiarios(CierreDiarioId,DepositarioId,SectorId,SucursalId,EmpresaId,UsuarioId,Usuario,Fecha,CierreDiario,Empresa,Sucursal,Sector,TurnoId,Turno,Depositario,CantidadTransacciones,TotalValidado,TotalAValidar,Moneda,CodigoCierreDiario));
 			}
             public new List<Entities.Views.Reporte.CierresDiarios> Items()
             {
@@ -416,8 +417,9 @@ using System.Text;
             /// <param name="TotalValidado"></param>
             /// <param name="TotalAValidar"></param>
             /// <param name="Moneda"></param>
+            /// <param name="CodigoCierreDiario"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.CierresDiarios> Items(Int64? CierreDiarioId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,String Usuario,DateTime? Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64? TurnoId,String Turno,String Depositario,Int32? CantidadTransacciones,Double? TotalValidado,Double? TotalAValidar,String Moneda)
+            public List<Entities.Views.Reporte.CierresDiarios> Items(Int64? CierreDiarioId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,String Usuario,DateTime? Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64? TurnoId,String Turno,String Depositario,Int32? CantidadTransacciones,Double? TotalValidado,Double? TotalAValidar,String Moneda,String CodigoCierreDiario)
             {
                 this.Where.whereParameter.Clear();
                 if (CierreDiarioId != null)
@@ -645,6 +647,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
+                    }
+                   
+                }
+                if (CodigoCierreDiario != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoCierreDiario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoCierreDiario);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoCierreDiario, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoCierreDiario);
                     }
                    
                 }
@@ -1081,7 +1095,8 @@ using System.Text;
 					Denominacion,
 					CodigoMoneda,
 					Depositario,
-					Total
+					Total,
+					CodigoOperacion
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -1125,9 +1140,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.DetalleTransacciones Add(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal Total) 
+			public Entities.Views.Reporte.DetalleTransacciones Add(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal Total,String CodigoOperacion) 
 			{
-			  return (Entities.Views.Reporte.DetalleTransacciones)base.Add(new Entities.Views.Reporte.DetalleTransacciones(TransaccionId,FechaTransaccion,SectorId,SucursalId,EmpresaId,UsuarioId,ContenedorId,OrigenId,DepositarioId,EsquemaDetalleTurnoId,Empresa,Sucursal,Sector,Turno,Contenedor,Usuario,Origen,Moneda,Denominacion,CodigoMoneda,Depositario,Total));
+			  return (Entities.Views.Reporte.DetalleTransacciones)base.Add(new Entities.Views.Reporte.DetalleTransacciones(TransaccionId,FechaTransaccion,SectorId,SucursalId,EmpresaId,UsuarioId,ContenedorId,OrigenId,DepositarioId,EsquemaDetalleTurnoId,Empresa,Sucursal,Sector,Turno,Contenedor,Usuario,Origen,Moneda,Denominacion,CodigoMoneda,Depositario,Total,CodigoOperacion));
 			}
             public new List<Entities.Views.Reporte.DetalleTransacciones> Items()
             {
@@ -1164,8 +1179,9 @@ using System.Text;
             /// <param name="CodigoMoneda"></param>
             /// <param name="Depositario"></param>
             /// <param name="Total"></param>
+            /// <param name="CodigoOperacion"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.DetalleTransacciones> Items(Int64? TransaccionId,DateTime? FechaTransaccion,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,Int64? ContenedorId,Int64? OrigenId,Int64? DepositarioId,Int64? EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal? Total)
+            public List<Entities.Views.Reporte.DetalleTransacciones> Items(Int64? TransaccionId,DateTime? FechaTransaccion,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,Int64? ContenedorId,Int64? OrigenId,Int64? DepositarioId,Int64? EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal? Total,String CodigoOperacion)
             {
                 this.Where.whereParameter.Clear();
                 if (TransaccionId != null)
@@ -1432,6 +1448,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoOperacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoOperacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoOperacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoOperacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoOperacion);
+                    }
+                   
+                }
                 return this.Items();
             }
             public new IDataItem Add(IDataItem item)
@@ -1514,7 +1542,9 @@ using System.Text;
 					Contenedor,
 					Usuario,
 					Origen,
-					Depositario
+					Depositario,
+					CodigoOperacion,
+					Moneda
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -1558,9 +1588,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.DetalleTransaccionesSobre Add(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 Cantidad,String TipoValor,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Depositario) 
+			public Entities.Views.Reporte.DetalleTransaccionesSobre Add(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 Cantidad,String TipoValor,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Depositario,String CodigoOperacion,String Moneda) 
 			{
-			  return (Entities.Views.Reporte.DetalleTransaccionesSobre)base.Add(new Entities.Views.Reporte.DetalleTransaccionesSobre(TransaccionId,FechaTransaccion,CodigoSobre,Cantidad,TipoValor,SectorId,SucursalId,EmpresaId,UsuarioId,ContenedorId,OrigenId,DepositarioId,EsquemaDetalleTurnoId,Empresa,Sucursal,Sector,Turno,Contenedor,Usuario,Origen,Depositario));
+			  return (Entities.Views.Reporte.DetalleTransaccionesSobre)base.Add(new Entities.Views.Reporte.DetalleTransaccionesSobre(TransaccionId,FechaTransaccion,CodigoSobre,Cantidad,TipoValor,SectorId,SucursalId,EmpresaId,UsuarioId,ContenedorId,OrigenId,DepositarioId,EsquemaDetalleTurnoId,Empresa,Sucursal,Sector,Turno,Contenedor,Usuario,Origen,Depositario,CodigoOperacion,Moneda));
 			}
             public new List<Entities.Views.Reporte.DetalleTransaccionesSobre> Items()
             {
@@ -1596,8 +1626,10 @@ using System.Text;
             /// <param name="Usuario"></param>
             /// <param name="Origen"></param>
             /// <param name="Depositario"></param>
+            /// <param name="CodigoOperacion"></param>
+            /// <param name="Moneda"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.DetalleTransaccionesSobre> Items(Int64? TransaccionId,DateTime? FechaTransaccion,String CodigoSobre,Int64? Cantidad,String TipoValor,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,Int64? ContenedorId,Int64? OrigenId,Int64? DepositarioId,Int64? EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Depositario)
+            public List<Entities.Views.Reporte.DetalleTransaccionesSobre> Items(Int64? TransaccionId,DateTime? FechaTransaccion,String CodigoSobre,Int64? Cantidad,String TipoValor,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,Int64? ContenedorId,Int64? OrigenId,Int64? DepositarioId,Int64? EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Depositario,String CodigoOperacion,String Moneda)
             {
                 this.Where.whereParameter.Clear();
                 if (TransaccionId != null)
@@ -1852,6 +1884,30 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoOperacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoOperacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoOperacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoOperacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoOperacion);
+                    }
+                   
+                }
+                if (Moneda != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
+                    }
+                   
+                }
                 return this.Items();
             }
             public new IDataItem Add(IDataItem item)
@@ -1937,7 +1993,8 @@ using System.Text;
 					UsuarioId,
 					DepositarioId,
 					OrigenId,
-					Origen
+					Origen,
+					CodigoOperacion
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -1981,9 +2038,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.Transacciones Add(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId,Int64 OrigenId,String Origen) 
+			public Entities.Views.Reporte.Transacciones Add(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId,Int64 OrigenId,String Origen,String CodigoOperacion) 
 			{
-			  return (Entities.Views.Reporte.Transacciones)base.Add(new Entities.Views.Reporte.Transacciones(TransaccionId,TransaccionTipoId,TransaccionTipo,Usuario,FechaTransaccion,FechaRetiroBolsa,Moneda,TotalValidado,TotalAValidar,Empresa,Sucursal,Sector,Turno,Depositario,Contenedor,ContenedorId,EsquemaDetalleTurnoId,SectorId,SucursalId,EmpresaId,UsuarioId,DepositarioId,OrigenId,Origen));
+			  return (Entities.Views.Reporte.Transacciones)base.Add(new Entities.Views.Reporte.Transacciones(TransaccionId,TransaccionTipoId,TransaccionTipo,Usuario,FechaTransaccion,FechaRetiroBolsa,Moneda,TotalValidado,TotalAValidar,Empresa,Sucursal,Sector,Turno,Depositario,Contenedor,ContenedorId,EsquemaDetalleTurnoId,SectorId,SucursalId,EmpresaId,UsuarioId,DepositarioId,OrigenId,Origen,CodigoOperacion));
 			}
             public new List<Entities.Views.Reporte.Transacciones> Items()
             {
@@ -2022,8 +2079,9 @@ using System.Text;
             /// <param name="DepositarioId"></param>
             /// <param name="OrigenId"></param>
             /// <param name="Origen"></param>
+            /// <param name="CodigoOperacion"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.Transacciones> Items(Int64? TransaccionId,Int64? TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime? FechaTransaccion,DateTime? FechaRetiroBolsa,String Moneda,Double? TotalValidado,Double? TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64? ContenedorId,Int64? EsquemaDetalleTurnoId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,Int64? DepositarioId,Int64? OrigenId,String Origen)
+            public List<Entities.Views.Reporte.Transacciones> Items(Int64? TransaccionId,Int64? TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime? FechaTransaccion,DateTime? FechaRetiroBolsa,String Moneda,Double? TotalValidado,Double? TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64? ContenedorId,Int64? EsquemaDetalleTurnoId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,Int64? DepositarioId,Int64? OrigenId,String Origen,String CodigoOperacion)
             {
                 this.Where.whereParameter.Clear();
                 if (TransaccionId != null)
@@ -2314,6 +2372,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoOperacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoOperacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoOperacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoOperacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoOperacion);
+                    }
+                   
+                }
                 return this.Items();
             }
             public new IDataItem Add(IDataItem item)
@@ -2395,7 +2465,8 @@ using System.Text;
 					CantidadTransacciones,
 					TotalValidado,
 					TotalAValidar,
-					Moneda
+					Moneda,
+					CodigoTurno
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where { get; set; }
@@ -2439,9 +2510,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.Turnos Add(Int64 TurnoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 EsquemaDetalleTurnoId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,String Turno,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda) 
+			public Entities.Views.Reporte.Turnos Add(Int64 TurnoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 EsquemaDetalleTurnoId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,String Turno,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoTurno) 
 			{
-			  return (Entities.Views.Reporte.Turnos)base.Add(new Entities.Views.Reporte.Turnos(TurnoId,DepositarioId,SectorId,SucursalId,EmpresaId,EsquemaDetalleTurnoId,FechaApertura,FechaCierre,Fecha,Secuencia,Turno,CierreDiario,Empresa,Sucursal,Sector,Depositario,CantidadTransacciones,TotalValidado,TotalAValidar,Moneda));
+			  return (Entities.Views.Reporte.Turnos)base.Add(new Entities.Views.Reporte.Turnos(TurnoId,DepositarioId,SectorId,SucursalId,EmpresaId,EsquemaDetalleTurnoId,FechaApertura,FechaCierre,Fecha,Secuencia,Turno,CierreDiario,Empresa,Sucursal,Sector,Depositario,CantidadTransacciones,TotalValidado,TotalAValidar,Moneda,CodigoTurno));
 			}
             public new List<Entities.Views.Reporte.Turnos> Items()
             {
@@ -2476,8 +2547,9 @@ using System.Text;
             /// <param name="TotalValidado"></param>
             /// <param name="TotalAValidar"></param>
             /// <param name="Moneda"></param>
+            /// <param name="CodigoTurno"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.Turnos> Items(Int64? TurnoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? EsquemaDetalleTurnoId,DateTime? FechaApertura,DateTime? FechaCierre,DateTime? Fecha,Int32? Secuencia,String Turno,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32? CantidadTransacciones,Double? TotalValidado,Double? TotalAValidar,String Moneda)
+            public List<Entities.Views.Reporte.Turnos> Items(Int64? TurnoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? EsquemaDetalleTurnoId,DateTime? FechaApertura,DateTime? FechaCierre,DateTime? Fecha,Int32? Secuencia,String Turno,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32? CantidadTransacciones,Double? TotalValidado,Double? TotalAValidar,String Moneda,String CodigoTurno)
             {
                 this.Where.whereParameter.Clear();
                 if (TurnoId != null)
@@ -2717,6 +2789,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Moneda, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Moneda);
+                    }
+                   
+                }
+                if (CodigoTurno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoTurno, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoTurno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoTurno, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, CodigoTurno);
                     }
                    
                 }

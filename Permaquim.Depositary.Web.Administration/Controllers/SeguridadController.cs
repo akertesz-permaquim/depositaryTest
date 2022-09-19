@@ -176,8 +176,52 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                     }
                 }
             }
+
+            if (resultado.Count > 0)
+            {
+                //Verifico cuantos menues dependen de otros y si no estan en la lista los agrego.
+                var menuesDependientes = resultado.Where(x => x.DependeDe != null).ToList();
+
+                if (menuesDependientes.Count > 0)
+                {
+                    foreach (var menuDependiente in menuesDependientes)
+                    {
+                        if (!resultado.Exists(x => x.MenuId == menuDependiente.DependeDe.Value))
+                        {
+                            Depositary.Business.Relations.Seguridad.Menu oMenu = new();
+                            oMenu.Where.Add(Business.Relations.Seguridad.Menu.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, menuDependiente.DependeDe.Value);
+                            oMenu.Items();
+
+                            if (oMenu.Result.Count > 0)
+                            {
+                                var menuPadre = oMenu.Result.FirstOrDefault();
+
+                                SeguridadEntities.Menu menu = new();
+                                menu.MenuId = menuPadre.Id;
+                                menu.DependeDe = menuPadre._DependeDe == 0 ? null : menuPadre._DependeDe;
+                                menu.MenuDescripcion = menuPadre.Descripcion;
+                                menu.MenuNombre = menuPadre.Nombre;
+                                menu.TipoMenuId = menuPadre._TipoId;
+                                menu.Imagen = menuPadre.Imagen;
+                                menu.Referencia = menuPadre.FuncionId.Referencia;
+
+                                //Si este nuevo menu tiene un padre lo agrego a la lista asi se lo busca despues.
+                                if (menu.DependeDe.HasValue)
+                                {
+                                    menuesDependientes.Add(menu);
+                                }
+
+                                resultado.Add(menu);
+                            }
+                        }
+                    }
+                }
+            }
+
             return resultado;
         }
+
+
 
         public static List<SeguridadEntities.FuncionRol> ObtenerFuncionesPorRol(Int64 pRolId)
         {
@@ -230,7 +274,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
             return resultado;
         }
-        
+
         public static bool VerificarPermisoFuncion(string pFuncionNombre, List<SeguridadEntities.FuncionRol> pDataFunciones, string pFuncionAccion)
         {
             bool resultado = false;
@@ -281,6 +325,44 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             MD5CryptoServiceProvider _md5 = new MD5CryptoServiceProvider();
             byte[] _hashbyte = _md5.ComputeHash(_data);
             return BitConverter.ToString(_hashbyte);
+        }
+
+        internal static string Encrypt(string textToEncrypt, string key)
+        {
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentException("Key must have valid value.", nameof(key));
+            if (string.IsNullOrEmpty(textToEncrypt))
+                throw new ArgumentException("The text must have valid value.", nameof(textToEncrypt));
+
+            var buffer = Encoding.UTF8.GetBytes(textToEncrypt);
+            var hash = SHA512.Create();
+            var aesKey = new byte[24];
+            Buffer.BlockCopy(hash.ComputeHash(Encoding.UTF8.GetBytes(key)), 0, aesKey, 0, 24);
+
+            using (var aes = Aes.Create())
+            {
+                if (aes == null)
+                    throw new ArgumentException("Parameter must not be null.", nameof(aes));
+
+                aes.Key = aesKey;
+
+                using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                using (var resultStream = new MemoryStream())
+                {
+                    using (var aesStream = new CryptoStream(resultStream, encryptor, CryptoStreamMode.Write))
+                    using (var plainStream = new MemoryStream(buffer))
+                    {
+                        plainStream.CopyTo(aesStream);
+                    }
+
+                    var result = resultStream.ToArray();
+                    var combined = new byte[aes.IV.Length + result.Length];
+                    Array.ConstrainedCopy(aes.IV, 0, combined, 0, aes.IV.Length);
+                    Array.ConstrainedCopy(result, 0, combined, aes.IV.Length, result.Length);
+
+                    return Convert.ToBase64String(combined);
+                }
+            }
         }
     }
 }

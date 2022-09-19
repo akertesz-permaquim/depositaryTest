@@ -28,10 +28,11 @@
                     var cuenta = transaccion.CuentaId;
                     if (cuenta != null)
                     {
-                        transaccionValidadaMonitor.Banco = cuenta.BancoId.Nombre;
+                        transaccionValidadaMonitor.Banco = cuenta.Nombre;
                         transaccionValidadaMonitor.Cuenta = cuenta.Nombre;
                     }
                     transaccionValidadaMonitor.TransaccionId = transaccion.Id;
+                    transaccionValidadaMonitor.CodigoOperacion = transaccion.CodigoOperacion;
                     transaccionValidadaMonitor.TipoTransaccion = transaccion.TipoId.Nombre;
                     transaccionValidadaMonitor.OrigenValor = transaccion.OrigenValorId.Nombre;
                     transaccionValidadaMonitor.DepositarioId = transaccion._DepositarioId;
@@ -194,6 +195,7 @@
                     transaccionAValidarMonitor.TotalAValidar = moneda.Codigo + " " + transaccion.TotalAValidar.ToString();
                     transaccionAValidarMonitor.UsuarioTransaccion = usuarioTransaccion.Nombre + " " + usuarioTransaccion.Apellido;
                     transaccionAValidarMonitor.TransaccionId = transaccion.Id;
+                    transaccionAValidarMonitor.CodigoOperacion = transaccion.CodigoOperacion;
                     transaccionAValidarMonitor.TransaccionSobreId = transaccionSobre.Id;
                     transaccionAValidarMonitor.Moneda = moneda.Nombre;
                     resultado.Add(transaccionAValidarMonitor);
@@ -417,6 +419,7 @@
                     {
                         MonitorEntities.TotalGeneral totalGeneral = new();
 
+                        totalGeneral.CodigoMoneda = moneda.Codigo;
                         totalGeneral.TotalAValidar = transaccion.TotalAValidar;
                         totalGeneral.TotalValidado = transaccion.TotalValidado;
                         totalGeneral.Moneda = moneda.Nombre;

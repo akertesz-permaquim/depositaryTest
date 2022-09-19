@@ -201,7 +201,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-auto">
                                 <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Id)" Name="Id" Disabled="true">
                                 </RadzenNumeric>
                             </div>
@@ -277,7 +277,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PARITY",dataLenguaje) Component="Parity" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete)">
                             </RadzenNumeric>
                         </div>
@@ -287,7 +287,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DATABITS",dataLenguaje) Component="DataBits" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete)">
                             </RadzenNumeric>
                         </div>
@@ -297,7 +297,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("READBUFFERSIZE",dataLenguaje) Component="ReadBufferSize" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete)">
                             </RadzenNumeric>
                         </div>
@@ -307,7 +307,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("STOPBITS",dataLenguaje) Component="StopBits" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete)">
                             </RadzenNumeric>
                         </div>
@@ -317,7 +317,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("READTIMEOUT",dataLenguaje) Component="ReadTimeout" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete)">
                             </RadzenNumeric>
                         </div>
@@ -327,7 +327,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HANDSHAKE",dataLenguaje) Component="Handshake" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete)">
                             </RadzenNumeric>
                         </div>
@@ -337,7 +337,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("BAUDRATE",dataLenguaje) Component="BaudRate" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete)">
                             </RadzenNumeric>
                         </div>

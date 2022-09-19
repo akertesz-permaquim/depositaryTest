@@ -50,12 +50,12 @@
             if (crudMode == CrudMode.List)
             {
                 <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@UsuarioCuentaRowRender" AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@UsuarioCuenta_entities" TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
+                Data="@UsuarioCuenta_entities" TItem="UsuarioCuenta" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
                     </EmptyTemplate>
                     <Columns>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
                             <HeaderTemplate>
                                 <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("BancaUsuarioCuenta",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                                 </RadzenButton>
@@ -67,8 +67,8 @@
                                 </RadzenButton>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje) Property="UsuarioId" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje) Property="UsuarioId" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @{
                                     var usuario = Usuario_UsuarioId_entities.FirstOrDefault(c => c.Id == @context.UsuarioId);
@@ -89,27 +89,9 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioId Data="@Usuario_UsuarioId_filter" Change="OnSelectedFilter_UsuarioId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Cuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("BANCOID",dataLenguaje) Property="Id" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_BancoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                            <Template>
-                                @{
-                                    var cuenta = Cuenta_CuentaId_entities.FirstOrDefault(c => c.Id == @context.Id);
-                                    if (cuenta != null)
-                                    {
-                                        var banco = Banco_entities.FirstOrDefault(c => c.Id == cuenta.BancoId);
-                                        if (banco != null)
-                                        {
-                                            <RadzenLabel Text="@banco.Nombre" Component="CuentaId" style="width: 100%">
-                                            </RadzenLabel>
-                                        }
-                                    }
-                                }
-                            </Template>
-                            <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>Filterable
-                                <RadzenDropDown @bind-Value=@selectedFilter_BancoId Data="@Banco_BancoId_filter" Change="OnSelectedFilter_BancoId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
-                            </FilterTemplate>
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("BANCOID",dataLenguaje) Property="BancoNombre" Width="100px" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("CUENTAID",dataLenguaje) Property="CuentaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_CuentaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("CUENTAID",dataLenguaje) Property="CuentaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_CuentaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @if (Cuenta_CuentaId_entities.FirstOrDefault(c => c.Id == @context.CuentaId) != null)
                                 {
@@ -127,7 +109,7 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_CuentaId Data="@Cuenta_CuentaId_filter" Change="OnSelectedFilter_CuentaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
@@ -140,7 +122,7 @@
                                 </div>
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @{
                                     var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
@@ -161,9 +143,9 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
                                 @{
                                     var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion);
@@ -184,7 +166,7 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                        <RadzenDataGridColumn TItem="UsuarioCuenta" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
                         </RadzenDataGridColumn>
                     </Columns>
                 </RadzenDataGrid>
@@ -193,7 +175,7 @@
 
             if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
             {
-                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Banca.UsuarioCuenta" Data="@UsuarioCuenta_entity" @bind-Value="UsuarioCuenta_entity" Submit="Save" Visible="@(UsuarioCuenta_entity != null)">
+                <RadzenTemplateForm TItem="UsuarioCuenta" Data="@UsuarioCuenta_entity" @bind-Value="UsuarioCuenta_entity" Submit="Save" Visible="@(UsuarioCuenta_entity != null)">
                     <ChildContent>
                         @if (crudMode != CrudMode.Add)
                         {
@@ -202,7 +184,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(UsuarioCuenta_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -230,14 +212,14 @@
                                     var dataSet = crudMode == CrudMode.Add ? Cuenta_CuentaId_entities.Where(x => x.Habilitado == true) : Cuenta_CuentaId_entities.Where(x => x.Habilitado == true || x.Id == UsuarioCuenta_entity.CuentaId);
                                     <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 TValue="Int64" Class="w-100" @bind-Value="@(UsuarioCuenta_entity.CuentaId)"
-                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
+                                Data=@dataSet TextProperty="NombreCuentaBanco" ValueProperty="Id"
                                 Change=@(args => SelectCuenta_CuentaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
                                     <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
-                                Data=@Cuenta_CuentaId_entities TextProperty="Nombre" ValueProperty="Id"
+                                Data=@Cuenta_CuentaId_entities TextProperty="NombreCuentaBanco" ValueProperty="Id"
                                 Change=@(args => SelectCuenta_CuentaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -278,6 +260,29 @@ else
 }
 
 @code {
+    //Estas clases se crearon para poder utilizar campos que no pertenecen a las tablas de forma nativa.
+    public class UsuarioCuenta
+    {
+        public Int64 Id { get; set; }
+        public Int64 CuentaId { get; set; }
+        public Int64 UsuarioId { get; set; }
+        public string BancoNombre { get; set; }
+        public bool Habilitado { get; set; }
+        public Int64 UsuarioCreacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public Int64? UsuarioModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+    }
+
+    public class Cuenta
+    {
+        public Int64 Id { get; set; }
+        public string NombreCuentaBanco { get; set; }
+        public string Nombre { get; set; }
+        public Int64 BancoId { get; set; }
+        public bool Habilitado { get; set; }
+    }
+
     [Parameter]
     public Int64 UsuarioId { get; set; }
 
@@ -297,8 +302,8 @@ else
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
-    private Depositary.Entities.Tables.Banca.UsuarioCuenta UsuarioCuenta_entity = new();
-    private List<Depositary.Entities.Tables.Banca.UsuarioCuenta> UsuarioCuenta_entities = null;
+    private UsuarioCuenta UsuarioCuenta_entity = new();
+    private List<UsuarioCuenta> UsuarioCuenta_entities = new();
 
     /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
@@ -327,8 +332,8 @@ else
     /// Variables to handle Relation between UsuarioCuenta.CuentaId and Cuenta.Id
     /// </summary>
     private Depositary.Entities.Tables.Banca.Cuenta Cuenta_CuentaId_entity = new();
-    private List<Depositary.Entities.Tables.Banca.Cuenta>? Cuenta_CuentaId_entities;
-    private List<Depositary.Entities.Tables.Banca.Cuenta> Cuenta_CuentaId_filter;
+    private List<Cuenta>? Cuenta_CuentaId_entities;
+    private List<Cuenta> Cuenta_CuentaId_filter;
     private IEnumerable<Int64> selectedFilter_CuentaId;
 
     private List<Depositary.Entities.Tables.Banca.Banco>? Banco_entities;
@@ -377,9 +382,28 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
-        Depositary.Business.Tables.Banca.UsuarioCuenta entity = new();
-        entity.Where.Add(Depositary.Business.Tables.Banca.UsuarioCuenta.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
-        UsuarioCuenta_entities = entity.Items();
+        Depositary.Business.Relations.Banca.UsuarioCuenta entity = new();
+        entity.Where.Add(Depositary.Business.Relations.Banca.UsuarioCuenta.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
+        entity.Items();
+
+        if (entity.Result.Count > 0)
+        {
+            foreach (var entitie in entity.Result)
+            {
+                UsuarioCuenta usuarioCuenta = new();
+                usuarioCuenta.BancoNombre = entitie.CuentaId.BancoId.Nombre;
+                usuarioCuenta.CuentaId = entitie._CuentaId;
+                usuarioCuenta.FechaCreacion = entitie.FechaCreacion;
+                usuarioCuenta.FechaModificacion = entitie.FechaModificacion;
+                usuarioCuenta.Habilitado = entitie.Habilitado;
+                usuarioCuenta.UsuarioCreacion = entitie._UsuarioCreacion;
+                usuarioCuenta.Id = entitie.Id;
+                usuarioCuenta.UsuarioId = entitie._UsuarioId;
+                usuarioCuenta.UsuarioModificacion = entitie._UsuarioModificacion;
+
+                UsuarioCuenta_entities.Add(usuarioCuenta);
+            }
+        }
     }
     /// <summary>
     /// Loads Type Tables data
@@ -390,15 +414,27 @@ else
         Usuario_UsuarioId_entities = Usuario_UsuarioId_local.Items();
         Usuario_UsuarioId_filter = Usuario_UsuarioId_entities.Where(x => UsuarioCuenta_entities.Select(x => x.UsuarioId).Distinct().Contains(x.Id)).ToList();
 
-        Depositary.Business.Tables.Banca.Cuenta Cuenta_CuentaId_local = new();
-        Cuenta_CuentaId_local.Where.Add(Depositary.Business.Tables.Banca.Cuenta.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, EmpresaId);
-        Cuenta_CuentaId_local.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Tables.Banca.Cuenta.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, 0);
-        Cuenta_CuentaId_entities = Cuenta_CuentaId_local.Items();
-        Cuenta_CuentaId_filter = Cuenta_CuentaId_entities.Where(x => UsuarioCuenta_entities.Select(x => x.CuentaId).Distinct().Contains(x.Id)).ToList();
+        Depositary.Business.Relations.Banca.Cuenta Cuenta_CuentaId_local = new();
+        Cuenta_CuentaId_local.Where.Add(Depositary.Business.Relations.Banca.Cuenta.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, EmpresaId);
+        Cuenta_CuentaId_local.Items();
 
-        Depositary.Business.Tables.Banca.Banco Banco_local = new();
-        Banco_entities = Banco_local.Items();
-        Banco_BancoId_filter = Banco_entities.Where(x => Cuenta_CuentaId_filter.Select(x => x.BancoId).Distinct().Contains(x.Id)).ToList();
+        if(Cuenta_CuentaId_local.Result.Count>0)
+        {
+            Cuenta_CuentaId_entities = new();
+            foreach(var cuentaEntitie in Cuenta_CuentaId_local.Result)
+            {
+                Cuenta cuenta=new();
+                cuenta.Id = cuentaEntitie.Id;
+                cuenta.Habilitado = cuentaEntitie.Habilitado;
+                cuenta.Nombre = cuentaEntitie.Nombre;
+                cuenta.NombreCuentaBanco = cuentaEntitie.BancoId.Nombre + " -> " + cuentaEntitie.Nombre;
+                cuenta.BancoId = cuentaEntitie._BancoId;
+
+                Cuenta_CuentaId_entities.Add(cuenta);
+            }
+        }
+
+        Cuenta_CuentaId_filter = Cuenta_CuentaId_entities.Where(x => UsuarioCuenta_entities.Select(x => x.CuentaId).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
@@ -430,7 +466,7 @@ else
     /// <summary>
     /// Initializations for editing an entity
     /// </summary>
-    private void Edit(Depositary.Entities.Tables.Banca.UsuarioCuenta item, bool delete)
+    private void Edit(UsuarioCuenta item, bool delete)
     {
         UsuarioCuenta_entity = item;
         Usuario_UsuarioId_entity = new()
@@ -470,6 +506,9 @@ else
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
         Depositary.Business.Tables.Banca.UsuarioCuenta crud = new();
+
+        Depositary.Entities.Tables.Banca.UsuarioCuenta usuarioCuenta_entitie = new();
+
         UsuarioCuenta_entity.UsuarioId = UsuarioId;
         foreach (var property in UsuarioCuenta_entity.GetType().GetProperties())
         {
@@ -509,12 +548,22 @@ else
                     break;
             }
         }
+
+        usuarioCuenta_entitie.CuentaId = UsuarioCuenta_entity.CuentaId;
+        usuarioCuenta_entitie.UsuarioId = UsuarioCuenta_entity.UsuarioId;
+        usuarioCuenta_entitie.Habilitado = UsuarioCuenta_entity.Habilitado;
+        usuarioCuenta_entitie.Id = UsuarioCuenta_entity.Id;
+        usuarioCuenta_entitie.UsuarioModificacion = UsuarioCuenta_entity.UsuarioModificacion;
+        usuarioCuenta_entitie.UsuarioCreacion = UsuarioCuenta_entity.UsuarioCreacion;
+        usuarioCuenta_entitie.FechaCreacion = UsuarioCuenta_entity.FechaCreacion;
+        usuarioCuenta_entitie.FechaModificacion = UsuarioCuenta_entity.FechaModificacion;
+
         switch (crudMode)
         {
             case CrudMode.Add:
                 try
                 {
-                    crud.Add(UsuarioCuenta_entity);
+                    crud.Add(usuarioCuenta_entitie);
                     summary = "El registro se ha ";
                     actionInformation = "agregado.";
                     severityType = NotificationSeverity.Success;
@@ -529,7 +578,7 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(UsuarioCuenta_entity);
+                    crud.Update(usuarioCuenta_entitie);
                     summary = "El registro se ha ";
                     actionInformation = "modificado.";
                     severityType = NotificationSeverity.Success;
@@ -544,8 +593,8 @@ else
             case CrudMode.Delete:
                 try
                 {
-                    UsuarioCuenta_entity.Habilitado = false;
-                    crud.Update(UsuarioCuenta_entity);
+                    usuarioCuenta_entitie.Habilitado = false;
+                    crud.Update(usuarioCuenta_entitie);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;
@@ -706,7 +755,7 @@ else
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Banca.UsuarioCuenta item)
+    void HabilitadoChange(bool? value, UsuarioCuenta item)
     {
         UsuarioCuenta_entity = item;
     }
@@ -715,7 +764,7 @@ else
     /// UsuarioCuentaRowRender event
     /// </summary>
     /// <param name="args"></param>
-    private void UsuarioCuentaRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Banca.UsuarioCuenta> args)
+    private void UsuarioCuentaRowRender(RowRenderEventArgs<UsuarioCuenta> args)
     {
         if (!args.Data.Habilitado)
             args.Attributes.Add("class", "row-highlight-disabled");

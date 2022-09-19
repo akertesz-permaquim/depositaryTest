@@ -86,7 +86,7 @@
                             <RadzenDropDown @bind-Value=@selectedFilter_EmpresaId Data="@Empresa_EmpresaId_filter" Change="OnSelectedFilter_EmpresaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                         </FilterTemplate>
                     </RadzenDataGridColumn>
-                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Title=@MultilenguajeController.ObtenerTextoPorClave("ValidacionDatoId",dataLenguaje) Property="ValidacionDatoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_ValidacionDatoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Title=@MultilenguajeController.ObtenerTextoPorClave("VALIDACIONDATOID",dataLenguaje) Property="ValidacionDatoId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_ValidacionDatoId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                         <Template>
                             @if (ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(c => c.Id == @context.ValidacionDatoId) != null)
                             {
@@ -107,6 +107,26 @@
                     <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Clave" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                     </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Valor" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <Template>
+                            @{
+                                var validacionDato = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(x => x.Id == context.ValidacionDatoId);
+
+                                if (validacionDato != null)
+                                {
+                                    switch (validacionDato.TipoDatoId)
+                                    {
+                                        case (Int64)AplicacionEntities.TipoDato.Bool:
+                                            Boolean valor = Convert.ToBoolean(context.Valor);
+                                            <RadzenCheckBox Value="valor" Disabled="true">
+                                            </RadzenCheckBox>
+                                            break;
+                                        default:
+                                            <span>@context.Valor</span>
+                                            break;
+                                    }
+                                }
+                            }
+                        </Template>
                     </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         <Template Context="data">
@@ -183,7 +203,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-auto">
                                 <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(ConfiguracionEmpresa_entity.Id)" Name="Id" Disabled="true">
                                 </RadzenNumeric>
                             </div>
@@ -202,7 +222,7 @@
                     </div>
                     <div style="margin-bottom: 1rem" class="row">
                         <div class="col-md-3">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ValidacionDatoId",dataLenguaje) Component="ValidacionDatoId" style="width: 100%">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("VALIDACIONDATOID",dataLenguaje) Component="ValidacionDatoId" style="width: 100%">
                             </RadzenLabel>
                         </div>
                         <div class="col-md-4">
@@ -243,11 +263,69 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje) Component="Valor" style="width: 100%">
                             </RadzenLabel>
                         </div>
-                        <div class="col-md-9">
-                            <RadzenTextBox style="display: block" @bind-Value="@(ConfiguracionEmpresa_entity.Valor)" Name="Valor" Disabled="@(crudMode==CrudMode.Delete)">
-                            </RadzenTextBox>
-                            @if (@crudMode != CrudMode.Delete)
-                            {
+                        <div class="col-md-auto">
+                            @{
+                                //En funcion de la validacion a aplicar cargamos el tipo de control que tendra el dato.
+                                var validacionDato = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(x => x.Id == ConfiguracionEmpresa_entity.ValidacionDatoId);
+
+                                if (validacionDato != null)
+                                {
+                                    string claveTextoValidacion = "VALIDACION_" + validacionDato.Nombre.ToUpper().Replace(" ","");
+                                    switch (validacionDato.TipoDatoId)
+                                    {
+                                        case (Int64)AplicacionEntities.TipoDato.Bool:
+                                            bool conversionBool;
+                                            if (bool.TryParse(ConfiguracionEmpresa_entity.Valor, out conversionBool))
+                                            {
+                                                <RadzenCheckBox TValue="bool" @bind-Value="@valorBool" Disabled="@(crudMode == CrudMode.Delete)" Change=@(args => ValorBoolChange(args))>
+                                                </RadzenCheckBox>
+                                                <RadzenRegexValidator Component="Valor" Text="@MultilenguajeController.ObtenerTextoPorClave(claveTextoValidacion,dataLenguaje)" Pattern="@(validacionDato.ExpresionRegular)" />
+                                                <RadzenTextBox Visible="false" @bind-Value="@(ConfiguracionEmpresa_entity.Valor)" Name="Valor">
+                                                </RadzenTextBox>
+                                            }
+                                            break;
+                                        case (Int64)AplicacionEntities.TipoDato.String:
+                                            <RadzenTextBox style="display: block" @bind-Value="@(ConfiguracionEmpresa_entity.Valor)" Name="Valor" Disabled="@(crudMode == CrudMode.Delete)">
+                                            </RadzenTextBox>
+                                            <RadzenRegexValidator Component="Valor" Text="@MultilenguajeController.ObtenerTextoPorClave(claveTextoValidacion,dataLenguaje)" Pattern="@(validacionDato.ExpresionRegular)" />
+                                            break;
+                                        case (Int64)AplicacionEntities.TipoDato.Decimal:
+                                            decimal conversionDecimal;
+                                            if (decimal.TryParse(ConfiguracionEmpresa_entity.Valor, out conversionDecimal))
+                                            {
+                                                <RadzenNumeric Step="0.01" TValue="decimal" Format="N2" style="display: block" @bind-Value="@valorDecimal" Change=@(args => ValorDecimalChange(args)) Disabled="@(crudMode == CrudMode.Delete)">
+                                                </RadzenNumeric>
+                                                <RadzenTextBox Visible="false" @bind-Value="@(ConfiguracionEmpresa_entity.Valor)" Name="Valor">
+                                                </RadzenTextBox>
+                                                <RadzenRegexValidator Component="Valor" Text="@MultilenguajeController.ObtenerTextoPorClave(claveTextoValidacion,dataLenguaje)" Pattern="@(validacionDato.ExpresionRegular)" />
+                                            }
+                                            break;
+                                        case (Int64)AplicacionEntities.TipoDato.Int:
+                                            int conversionInt;
+                                            if (int.TryParse(ConfiguracionEmpresa_entity.Valor, out conversionInt))
+                                            {
+                                                <RadzenNumeric style="display: block" TValue="int" @bind-Value="@valorInt" Disabled="@(crudMode == CrudMode.Delete)">
+                                                </RadzenNumeric>
+                                                <RadzenTextBox Visible="false" @bind-Value="@(ConfiguracionEmpresa_entity.Valor)" Name="Valor">
+                                                </RadzenTextBox>
+                                                <RadzenRegexValidator Component="Valor" Text="@MultilenguajeController.ObtenerTextoPorClave(claveTextoValidacion,dataLenguaje)" Pattern="@(validacionDato.ExpresionRegular)" />
+                                            }
+                                            break;
+                                        case (Int64)AplicacionEntities.TipoDato.DateTime:
+                                            DateTime conversionDateTime;
+                                            if (DateTime.TryParse(ConfiguracionEmpresa_entity.Valor, out conversionDateTime))
+                                            {
+                                                <RadzenDatePicker @bind-Value=@(ConfiguracionEmpresa_entity.Valor) Name="Valor" AllowClear="true" DateFormat="d" Class="w-100" />
+                                                <RadzenRegexValidator Component="Valor" Text="@MultilenguajeController.ObtenerTextoPorClave(claveTextoValidacion,dataLenguaje)" Pattern="@(validacionDato.ExpresionRegular)" />
+                                            }
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    <RadzenTextBox style="display: block" @bind-Value="@(ConfiguracionEmpresa_entity.Valor)" Name="Valor" Disabled="@(crudMode == CrudMode.Delete)">
+                                    </RadzenTextBox>
+                                }
                                 <RadzenRequiredValidator Component="Valor" Text="Valor is required" Style="position: absolute">
                                 </RadzenRequiredValidator>
                             }
@@ -298,6 +376,12 @@ else
         Edit,
         Delete
     }
+
+    private bool valorBool { get; set; } = false;
+    private decimal valorDecimal { get; set; } = 0;
+    private int valorInt { get; set; } = 0;
+    private DateTime valorDateTime { get; set; } = DateTime.Now.Date;
+
 
     /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
@@ -357,7 +441,6 @@ else
     private CrudMode crudMode = CrudMode.List;
 
     string claveAnteriorConfiguracionEmpresa = "";
-
 
     /// <summary>
     ///  Variable to store the user id
@@ -485,6 +568,31 @@ else
             crudMode = CrudMode.Edit;
             claveAnteriorConfiguracionEmpresa = ConfiguracionEmpresa_entity.Clave;
         }
+
+        var validacionConfiguracion = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(x => x.Id == ConfiguracionEmpresa_entity.ValidacionDatoId);
+
+        if (validacionConfiguracion != null)
+        {
+            //Cargamos los valores en funcion del tipo de dato de la validacion
+            switch (validacionConfiguracion.TipoDatoId)
+            {
+                case (Int64)AplicacionEntities.TipoDato.Bool:
+                    valorBool = bool.Parse(item.Valor);
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.String:
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.Decimal:
+                    valorDecimal = decimal.Parse(item.Valor);
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.Int:
+                    valorInt = int.Parse(item.Valor);
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.DateTime:
+                    valorDateTime = DateTime.Parse(item.Valor);
+                    break;
+            }
+        }
+
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -737,7 +845,29 @@ else
     /// <param name="item"></param>
     private void SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(object item)
     {
+        var validacionDato = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(x => x.Id == (Int64)item);
+        ConfiguracionEmpresa_entity.Valor = "";
 
+        if (validacionDato != null)
+        {
+            switch (validacionDato.TipoDatoId)
+            {
+                case (Int64)AplicacionEntities.TipoDato.Bool:
+                    ConfiguracionEmpresa_entity.Valor = "false";
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.Int:
+                    ConfiguracionEmpresa_entity.Valor = "0";
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.Decimal:
+                    ConfiguracionEmpresa_entity.Valor = "0.00";
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.DateTime:
+                    ConfiguracionEmpresa_entity.Valor = DateTime.Now.Date.ToString();
+                    break;
+            }
+        }
+
+        StateHasChanged();
     }
 
     /// <summary>
@@ -799,6 +929,28 @@ else
     void HabilitadoChange(bool? value, Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa item)
     {
         ConfiguracionEmpresa_entity = item;
+    }
+
+    /// <summary>
+    /// Entity is binded, however it sets anyway.
+    /// </summary>
+    /// <returns></returns>
+    void ValorBoolChange(bool value)
+    {
+        if (value)
+            ConfiguracionEmpresa_entity.Valor = "true";
+        else
+            ConfiguracionEmpresa_entity.Valor = "false";
+    }
+
+    void ValorDecimalChange(decimal value)
+    {
+        ConfiguracionEmpresa_entity.Valor = value.ToString();
+    }
+
+    void ValorIntChange(int value)
+    {
+        ConfiguracionEmpresa_entity.Valor = value.ToString();
     }
 
     /// <summary>

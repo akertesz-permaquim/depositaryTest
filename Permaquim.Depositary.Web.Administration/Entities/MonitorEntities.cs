@@ -53,6 +53,7 @@
     {
         public Int64 TransaccionId { get; set; }
         public DateTime FechaTransaccion { get; set; }
+        public string CodigoOperacion { get; set; }
         public string TipoTransaccion { get; set; }
         public string Moneda { get; set; }
         public string OrigenValor { get; set; }
@@ -89,6 +90,7 @@
         public Int64 TransaccionSobreId { get; set; }
         public DateTime FechaTransaccion { get; set; }
         public DateTime FechaTransaccionSobre { get; set; }
+        public string CodigoOperacion { get; set; }
         public string TipoTransaccion { get; set; }
         public string UsuarioTransaccion { get; set; }
         public string OrigenValor { get; set; }
@@ -142,14 +144,29 @@
         public Int64 DepositarioId { get; set; }
         public double TotalValidado { get; set; }
         public double TotalAValidar { get; set; }
-        public double Total
+        public string TotalValidadoFormateado
         {
             get
             {
-                return TotalValidado + TotalAValidar;
+                return CodigoMoneda + " " + TotalValidado.ToString();
+            }
+        }
+        public string TotalAValidarFormateado
+        {
+            get
+            {
+                return CodigoMoneda + " " + TotalAValidar.ToString();
+            }
+        }
+        public string Total
+        {
+            get
+            {
+                return CodigoMoneda + " " + (TotalValidado + TotalAValidar).ToString();
             }
         }
         public Int64 MonedaId { get; set; }
+        public string CodigoMoneda { get; set; }
         public string Moneda { get; set; }
     }
 

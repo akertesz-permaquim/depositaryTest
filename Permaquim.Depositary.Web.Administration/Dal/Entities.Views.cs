@@ -127,6 +127,7 @@ using System.Text;
 					public const string TotalValidado = "TotalValidado";
 					public const string TotalAValidar = "TotalAValidar";
 					public const string Moneda = "Moneda";
+					public const string CodigoCierreDiario = "CodigoCierreDiario";
 				}
 				public enum FieldEnum : int
                 {
@@ -148,7 +149,8 @@ using System.Text;
 					CantidadTransacciones,
 					TotalValidado,
 					TotalAValidar,
-					Moneda
+					Moneda,
+					CodigoCierreDiario
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -159,7 +161,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  CierresDiarios(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64 TurnoId,String Turno,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda)
+                public  CierresDiarios(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64 TurnoId,String Turno,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoCierreDiario)
                 {
                     this.CierreDiarioId = CierreDiarioId;
                     this.DepositarioId = DepositarioId;
@@ -180,6 +182,7 @@ using System.Text;
                     this.TotalValidado = TotalValidado;
                     this.TotalAValidar = TotalAValidar;
                     this.Moneda = Moneda;
+                    this.CodigoCierreDiario = CodigoCierreDiario;
                 }
              [DataItemAttributeFieldName("CierreDiarioId","CierreDiarioId")]
              public Int64 CierreDiarioId { get; set; }
@@ -219,6 +222,8 @@ using System.Text;
              public Double TotalAValidar { get; set; }
              [DataItemAttributeFieldName("Moneda","Moneda")]
              public String Moneda { get; set; }
+             [DataItemAttributeFieldName("CodigoCierreDiario","CodigoCierreDiario")]
+             public String CodigoCierreDiario { get; set; }
 				
 			} //Class CierresDiarios 
 			
@@ -367,6 +372,7 @@ using System.Text;
 					public const string CodigoMoneda = "CodigoMoneda";
 					public const string Depositario = "Depositario";
 					public const string Total = "Total";
+					public const string CodigoOperacion = "CodigoOperacion";
 				}
 				public enum FieldEnum : int
                 {
@@ -391,7 +397,8 @@ using System.Text;
 					Denominacion,
 					CodigoMoneda,
 					Depositario,
-					Total
+					Total,
+					CodigoOperacion
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -402,7 +409,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal Total)
+                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal Total,String CodigoOperacion)
                 {
                     this.TransaccionId = TransaccionId;
                     this.FechaTransaccion = FechaTransaccion;
@@ -426,6 +433,7 @@ using System.Text;
                     this.CodigoMoneda = CodigoMoneda;
                     this.Depositario = Depositario;
                     this.Total = Total;
+                    this.CodigoOperacion = CodigoOperacion;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -471,6 +479,8 @@ using System.Text;
              public String Depositario { get; set; }
              [DataItemAttributeFieldName("Total","Total")]
              public Decimal Total { get; set; }
+             [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
+             public String CodigoOperacion { get; set; }
 				
 			} //Class DetalleTransacciones 
 			
@@ -507,6 +517,8 @@ using System.Text;
 					public const string Usuario = "Usuario";
 					public const string Origen = "Origen";
 					public const string Depositario = "Depositario";
+					public const string CodigoOperacion = "CodigoOperacion";
+					public const string Moneda = "Moneda";
 				}
 				public enum FieldEnum : int
                 {
@@ -530,7 +542,9 @@ using System.Text;
 					Contenedor,
 					Usuario,
 					Origen,
-					Depositario
+					Depositario,
+					CodigoOperacion,
+					Moneda
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -541,7 +555,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  DetalleTransaccionesSobre(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 Cantidad,String TipoValor,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Depositario)
+                public  DetalleTransaccionesSobre(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 Cantidad,String TipoValor,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Depositario,String CodigoOperacion,String Moneda)
                 {
                     this.TransaccionId = TransaccionId;
                     this.FechaTransaccion = FechaTransaccion;
@@ -564,6 +578,8 @@ using System.Text;
                     this.Usuario = Usuario;
                     this.Origen = Origen;
                     this.Depositario = Depositario;
+                    this.CodigoOperacion = CodigoOperacion;
+                    this.Moneda = Moneda;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -607,6 +623,10 @@ using System.Text;
              public String Origen { get; set; }
              [DataItemAttributeFieldName("Depositario","Depositario")]
              public String Depositario { get; set; }
+             [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
+             public String CodigoOperacion { get; set; }
+             [DataItemAttributeFieldName("Moneda","Moneda")]
+             public String Moneda { get; set; }
 				
 			} //Class DetalleTransaccionesSobre 
 			
@@ -646,6 +666,7 @@ using System.Text;
 					public const string DepositarioId = "DepositarioId";
 					public const string OrigenId = "OrigenId";
 					public const string Origen = "Origen";
+					public const string CodigoOperacion = "CodigoOperacion";
 				}
 				public enum FieldEnum : int
                 {
@@ -672,7 +693,8 @@ using System.Text;
 					UsuarioId,
 					DepositarioId,
 					OrigenId,
-					Origen
+					Origen,
+					CodigoOperacion
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -683,7 +705,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId,Int64 OrigenId,String Origen)
+                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId,Int64 OrigenId,String Origen,String CodigoOperacion)
                 {
                     this.TransaccionId = TransaccionId;
                     this.TransaccionTipoId = TransaccionTipoId;
@@ -709,6 +731,7 @@ using System.Text;
                     this.DepositarioId = DepositarioId;
                     this.OrigenId = OrigenId;
                     this.Origen = Origen;
+                    this.CodigoOperacion = CodigoOperacion;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -758,6 +781,8 @@ using System.Text;
              public Int64 OrigenId { get; set; }
              [DataItemAttributeFieldName("Origen","Origen")]
              public String Origen { get; set; }
+             [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
+             public String CodigoOperacion { get; set; }
 				
 			} //Class Transacciones 
 			
@@ -793,6 +818,7 @@ using System.Text;
 					public const string TotalValidado = "TotalValidado";
 					public const string TotalAValidar = "TotalAValidar";
 					public const string Moneda = "Moneda";
+					public const string CodigoTurno = "CodigoTurno";
 				}
 				public enum FieldEnum : int
                 {
@@ -815,7 +841,8 @@ using System.Text;
 					CantidadTransacciones,
 					TotalValidado,
 					TotalAValidar,
-					Moneda
+					Moneda,
+					CodigoTurno
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -826,7 +853,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  Turnos(Int64 TurnoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 EsquemaDetalleTurnoId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,String Turno,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda)
+                public  Turnos(Int64 TurnoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 EsquemaDetalleTurnoId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,String Turno,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoTurno)
                 {
                     this.TurnoId = TurnoId;
                     this.DepositarioId = DepositarioId;
@@ -848,6 +875,7 @@ using System.Text;
                     this.TotalValidado = TotalValidado;
                     this.TotalAValidar = TotalAValidar;
                     this.Moneda = Moneda;
+                    this.CodigoTurno = CodigoTurno;
                 }
              [DataItemAttributeFieldName("TurnoId","TurnoId")]
              public Int64 TurnoId { get; set; }
@@ -889,6 +917,8 @@ using System.Text;
              public Double TotalAValidar { get; set; }
              [DataItemAttributeFieldName("Moneda","Moneda")]
              public String Moneda { get; set; }
+             [DataItemAttributeFieldName("CodigoTurno","CodigoTurno")]
+             public String CodigoTurno { get; set; }
 				
 			} //Class Turnos 
 			

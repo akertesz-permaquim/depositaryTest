@@ -31,111 +31,170 @@ else
         <ChildContent>
             <RadzenTemplateForm TItem="parametros" Data="@parametrosTurnosView" @bind-Value="parametrosTurnosView" Submit="LoadMainEntityData">
                 <ChildContent>
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHADESDE",dataLenguaje)" Component="fechaDesdeDatePicker" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-3">
-                            <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaDesde) Max="@(parametrosTurnosView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
-                            <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaHasta.HasValue) Value=@(parametrosTurnosView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_MENOR_FECHAHASTA",dataLenguaje)" Style="position: inherit" />
-                        </div>
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAHASTA",dataLenguaje)" Component="fechaHastaDatePicker" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-3">
-                            <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaHasta) Min="@(parametrosTurnosView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
-                            <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaDesde.HasValue) Value=@(parametrosTurnosView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_MAYOR_FECHADESDE",dataLenguaje)" Style="position: inherit" />
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURADESDE",dataLenguaje)" Component="fechaAperturaDesdeDatePicker" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-3">
-                            <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaDesde) Max="@(parametrosTurnosView.fechaAperturaHasta)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaHasta.HasValue) Value=@(parametrosTurnosView.fechaAperturaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaAperturaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURADESDE_MENOR_FECHAAPERTURAHASTA",dataLenguaje)" Style="position: inherit" />
-                        </div>
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURAHASTA",dataLenguaje)" Component="fechaAperturaHastaDatePicker" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-3">
-                            <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaHasta) Min="@(parametrosTurnosView.fechaAperturaDesde)" Name="fechaAperturaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaDesde.HasValue) Value=@(parametrosTurnosView.fechaAperturaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaAperturaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURAHASTA_MAYOR_FECHAAPERTURADESDE",dataLenguaje)" Style="position: inherit" />
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREDESDE",dataLenguaje)" Component="fechaCierreDesdeDatePicker" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-3">
-                            <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreDesde) Max="@(parametrosTurnosView.fechaCierreHasta)" Name="fechaCierreDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreHasta.HasValue) Value=@(parametrosTurnosView.fechaCierreHasta) Operator="CompareOperator.LessThanEqual" Component="fechaCierreDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREDESDE_MENOR_FECHACIERREHASTA",dataLenguaje)" Style="position: inherit" />
-                        </div>
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREHASTA",dataLenguaje)" Component="fechaCierreHastaDatePicker" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-3">
-                            <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreHasta) Min="@(parametrosTurnosView.fechaCierreDesde)" Name="fechaCierreHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
-                            <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreDesde.HasValue) Value=@(parametrosTurnosView.fechaCierreDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaCierreHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREHASTA_MAYOR_FECHACIERREDESDE",dataLenguaje)" Style="position: inherit" />
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_EMPRESAS",dataLenguaje)" Component="dropDownEmpresas" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-auto">
-                            <RadzenDropDown AllowClear="true" Name="dropDownEmpresas" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTurnosView.empresaSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_EMPRESA",dataLenguaje)" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
-                                        Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
-                        </div>
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SUCURSALES",dataLenguaje)" Component="dropDownSucursales" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-auto">
-                            <RadzenDropDown AllowClear="true" Name="dropDownSucursales" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTurnosView.sucursalSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SUCURSAL",dataLenguaje)" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
-                                        Change=@(args => OnChangeSucursal(args)) Class="w-100" />
-                        </div>
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SECTORES",dataLenguaje)" Component="dropDownSectores" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-auto">
-                            <RadzenDropDown AllowClear="true" Name="dropDownSectores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTurnosView.sectorSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SECTOR",dataLenguaje)" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
-                                        Change=@(args => OnChangeSector(args)) Class="w-100" />
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_DEPOSITARIOS",dataLenguaje)" Component="dropDownDepositarios" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-auto">
-                            <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTurnosView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
-                                        Class="w-100" />
-                        </div>
-                        <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                            <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_TURNOS",dataLenguaje)" Component="dropDownTurnos" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col col-md-auto">
-                            <RadzenDropDown AllowClear="true" Name="dropDownTurnos" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        @bind-Value=@(parametrosTurnosView.turnosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_TURNOS",dataLenguaje)" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
-                                        Class="w-100" />
-                        </div>
-                    </div>
+                    <table class="table table-borderless w-auto">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHADESDE",dataLenguaje)" Component="fechaDesdeDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaDesde) Max="@(parametrosTurnosView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaHasta.HasValue) Value=@(parametrosTurnosView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_MENOR_FECHAHASTA",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAHASTA",dataLenguaje)" Component="fechaHastaDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaHasta) Min="@(parametrosTurnosView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaDesde.HasValue) Value=@(parametrosTurnosView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_MAYOR_FECHADESDE",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURADESDE",dataLenguaje)" Component="fechaAperturaDesdeDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaDesde) Max="@(parametrosTurnosView.fechaAperturaHasta)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaHasta.HasValue) Value=@(parametrosTurnosView.fechaAperturaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaAperturaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURADESDE_MENOR_FECHAAPERTURAHASTA",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURAHASTA",dataLenguaje)" Component="fechaAperturaHastaDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaHasta) Min="@(parametrosTurnosView.fechaAperturaDesde)" Name="fechaAperturaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaDesde.HasValue) Value=@(parametrosTurnosView.fechaAperturaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaAperturaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURAHASTA_MAYOR_FECHAAPERTURADESDE",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREDESDE",dataLenguaje)" Component="fechaCierreDesdeDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreDesde) Max="@(parametrosTurnosView.fechaCierreHasta)" Name="fechaCierreDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreHasta.HasValue) Value=@(parametrosTurnosView.fechaCierreHasta) Operator="CompareOperator.LessThanEqual" Component="fechaCierreDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREDESDE_MENOR_FECHACIERREHASTA",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREHASTA",dataLenguaje)" Component="fechaCierreHastaDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreHasta) Min="@(parametrosTurnosView.fechaCierreDesde)" Name="fechaCierreHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreDesde.HasValue) Value=@(parametrosTurnosView.fechaCierreDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaCierreHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREHASTA_MAYOR_FECHACIERREDESDE",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_EMPRESAS",dataLenguaje)" Component="dropDownEmpresas" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownEmpresas" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.empresaSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_EMPRESA",dataLenguaje)" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
+                                                    Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SUCURSALES",dataLenguaje)" Component="dropDownSucursales" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownSucursales" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.sucursalSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SUCURSAL",dataLenguaje)" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
+                                                    Change=@(args => OnChangeSucursal(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SECTORES",dataLenguaje)" Component="dropDownSectores" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownSectores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.sectorSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SECTOR",dataLenguaje)" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
+                                                    Change=@(args => OnChangeSector(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_DEPOSITARIOS",dataLenguaje)" Component="dropDownDepositarios" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
+                                                    Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_TURNOS",dataLenguaje)" Component="dropDownTurnos" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownTurnos" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.turnosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_TURNOS",dataLenguaje)" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
+                                                    Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_CODIGOTURNO",dataLenguaje)" Component="txtcodigoTurno" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenTextBox @bind-Value=@(parametrosTurnosView.codigoTurno) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_CODIGOTURNO",dataLenguaje)" Name="txtcodigoTurno"></RadzenTextBox>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div style="margin-bottom: 1rem" class="row justify-content-center">
                         <div class="col col-md-auto">
                             <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
@@ -155,7 +214,9 @@ else
 <div>
     @if (dataTurnosView != null)
     {
-        <RadzenDataGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        <RadzenButton Text="Export XLS" Icon="grid_on" Click="@(args => Export("excel"))" Class="mb-4 mr-2" />
+        <RadzenButton Text="Export CSV" Icon="wrap_text" Click="@(args => Export("csv"))" Class="mb-4" />
+        <RadzenDataGrid @ref="gridTurnosView" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                     Data="@dataTurnosView" TItem="ResultReporte" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
             <EmptyTemplate>
                 <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -164,6 +225,8 @@ else
                 <RadzenDataGridColumn TItem="ResultReporte" Property="TurnoId" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNOID",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="ResultReporte" Property="Fecha" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CodigoTurno" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOTURNO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="ResultReporte" Property="FechaApertura" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
                 </RadzenDataGridColumn>
@@ -215,7 +278,7 @@ else
         public Int64? sectorSeleccionado { get; set; }
         public Int64? depositarioSeleccionado { get; set; }
         public IEnumerable<Int64> turnosSeleccionados = new Int64[] { };
-
+        public string codigoTurno { get; set; }
     }
 
     //Clase creada para sortear algunas cuestiones de la vista que traemos de SQL
@@ -242,7 +305,10 @@ else
         public string Empresa { get; set; }
         public string Sucursal { get; set; }
         public string Depositario { get; set; }
+        public string CodigoTurno { get; set; }
     }
+
+    RadzenDataGrid<ResultReporte> gridTurnosView;
 
     /// <summary>
     /// Variables to handle main entity
@@ -523,6 +589,10 @@ else
                 }
             }
 
+            if (parametrosTurnosView.codigoTurno != string.Empty && parametrosTurnosView.codigoTurno != null)
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.CodigoTurno, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosTurnosView.codigoTurno + "%");
+
+
             turnos = entity.Items();
 
             if (turnos.Count > 0)
@@ -544,11 +614,26 @@ else
                     resultReporte.TotalValidado = turno.TotalValidado;
                     resultReporte.Turno = turno.Turno;
                     resultReporte.TurnoId = turno.TurnoId;
+                    resultReporte.CodigoTurno = turno.CodigoTurno;
 
                     dataTurnosView.Add(resultReporte);
                 }
             }
         }
     }
+    #endregion
+
+    #region Export
+
+    public void Export(string type)
+    {
+        //service.Export("OrderDetails", type, new Query()
+        //    {
+        //        OrderBy = grid.Query.OrderBy,
+        //        Filter = grid.Query.Filter,
+        //        Select = string.Join(",", gridTurnosView.ColumnsCollection.Where(c => c.GetVisible()).Select(c => c.Property))
+        //    });
+    }
+
     #endregion
 }

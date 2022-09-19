@@ -5103,7 +5103,9 @@ ul.rz-profile-menu {
 
 .rz-dropdown-panel {
   box-sizing: content-box;
-  padding: 0 0.625rem; }
+  padding: 0 0.625rem;
+  width: fit-content;
+}
 
 .rz-multiselect-panel {
   box-sizing: content-box;
@@ -7990,3 +7992,7 @@ body:not(.rz-default-scrollbars) ::-webkit-scrollbar-corner {
   margin: 4px;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.25) 0px 0px 4px inset; }
+
+.rz-datatable td {
+    padding: 0px;
+}

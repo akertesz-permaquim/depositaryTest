@@ -208,7 +208,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Menu_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -327,11 +327,6 @@
                                 Data=@Menu_DependeDe_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMenu_DependeDeValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
-                                }
-                                @if (@crudMode != CrudMode.Delete)
-                                {
-                                    <RadzenRequiredValidator Component="dropDependeDe" Text="Depende de is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>
                                 }
                             </div>
                         </div>

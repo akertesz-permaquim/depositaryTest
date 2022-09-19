@@ -170,7 +170,7 @@
                         </RadzenDataGridColumn>
                     </Columns>
                     <Template>
-                        <RolFuncion_Crud RolId="@context.Id"></RolFuncion_Crud>
+                        <RolFuncion_Crud RolId="@context.Id" AplicacionId="@context.AplicacionId"></RolFuncion_Crud>
                     </Template>
                 </RadzenDataGrid>
                 <hr>
@@ -187,7 +187,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Rol_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>

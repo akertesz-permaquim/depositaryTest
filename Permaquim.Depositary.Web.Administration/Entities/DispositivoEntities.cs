@@ -8,4 +8,16 @@
         public Int64 SucursalId { get; set; }
         public Int64 EmpresaId { get; set; }
     }
+
+    public class DepositarioABM
+    {
+        public Depositary.Entities.Tables.Dispositivo.Depositario Depositario { get; set; }
+        public string MensajeValidacion { get; set; }
+
+        public DepositarioABM()
+        {
+            Depositario = new();
+            MensajeValidacion = "";
+        }
+    }
 }

@@ -34,6 +34,7 @@
     <string>dbo.sp_helpdiagrams</string>
     <string>dbo.sp_renamediagram</string>
     <string>dbo.sp_upgraddiagrams</string>
+    <string>dbo.splitCapital</string>
     <string>Desarrollo.ActualizarLenguajeItem</string>
     <string>Desarrollo.GenerarTablaModelo</string>
     <string>Desarrollo.GenerarTablaTipoModelo</string>
@@ -56,7 +57,6 @@
   </UnselectedStoredProcedures>
   <MappedStoredProcedures />
   <SelectedTables>
-    <string>Aplicacion.Configuracion</string>
     <string>Aplicacion.ConfiguracionTipoDato</string>
     <string>Aplicacion.ConfiguracionValidacionDato</string>
     <string>Banca.Banco</string>

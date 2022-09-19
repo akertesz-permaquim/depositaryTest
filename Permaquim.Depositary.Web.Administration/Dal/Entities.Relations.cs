@@ -1498,7 +1498,7 @@ using System.Text;
                 public Empresa()
                 {
                 }
-                public  Empresa(String Nombre,String Descripcion,Permaquim.Depositary.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Permaquim.Depositary.Entities.Relations.Estilo.Esquema EstiloEsquemaId,Permaquim.Depositary.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  Empresa(String Nombre,String Descripcion,Permaquim.Depositary.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Permaquim.Depositary.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Permaquim.Depositary.Entities.Relations.Estilo.Esquema EstiloEsquemaId,Permaquim.Depositary.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -1546,7 +1546,22 @@ using System.Text;
              [DataItemAttributeFieldName("Direccion","Direccion")]
              public String Direccion { get; set; }
              [DataItemAttributeFieldName("CodigoPostalId","CodigoPostalId")]
-             public Int64 CodigoPostalId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _CodigoPostalId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("CodigoPostal")]// Object name in Database
+             public Permaquim.Depositary.Entities.Relations.Geografia.CodigoPostal CodigoPostalId
+             {
+                 get {
+                     if (CodigoPostalId_ == null || CodigoPostalId_.Id != _CodigoPostalId)
+                         {
+                             CodigoPostalId = new Permaquim.Depositary.Business.Relations.Geografia.CodigoPostal().Items(this._CodigoPostalId).FirstOrDefault();
+                         }
+                     return CodigoPostalId_;
+                     }
+                 set {CodigoPostalId_  =  value;}
+             }
+             static Permaquim.Depositary.Entities.Relations.Geografia.CodigoPostal CodigoPostalId_ = null;
              [DataItemAttributeFieldName("EstiloEsquemaId","EstiloEsquemaId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
              internal Int64 _EstiloEsquemaId { get; set; }
@@ -5469,6 +5484,18 @@ using System.Text;
              static Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of Empresa that have this CodigoPostalId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositary.Entities.Relations.Directorio.Empresa> ListOf_Empresa_CodigoPostalId
+                {
+                     get {
+                             Permaquim.Depositary.Business.Relations.Directorio.Empresa entities = new Permaquim.Depositary.Business.Relations.Directorio.Empresa();
+                             entities.Where.Add(Permaquim.Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.CodigoPostalId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
                  /// <summary>
                  ///  Represents the child collection of Sucursal that have this CodigoPostalId value.
                  /// </summary>
@@ -11842,18 +11869,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Perfil that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositary.Entities.Relations.Visualizacion.Perfil> ListOf_Perfil_UsuarioCreacion
-                {
-                     get {
-                             Permaquim.Depositary.Business.Relations.Visualizacion.Perfil entities = new Permaquim.Depositary.Business.Relations.Visualizacion.Perfil();
-                             entities.Where.Add(Permaquim.Depositary.Business.Relations.Visualizacion.Perfil.ColumnEnum.UsuarioCreacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Perfil that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11862,6 +11877,18 @@ using System.Text;
                      get {
                              Permaquim.Depositary.Business.Relations.Visualizacion.Perfil entities = new Permaquim.Depositary.Business.Relations.Visualizacion.Perfil();
                              entities.Where.Add(Permaquim.Depositary.Business.Relations.Visualizacion.Perfil.ColumnEnum.UsuarioModificacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Perfil that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositary.Entities.Relations.Visualizacion.Perfil> ListOf_Perfil_UsuarioCreacion
+                {
+                     get {
+                             Permaquim.Depositary.Business.Relations.Visualizacion.Perfil entities = new Permaquim.Depositary.Business.Relations.Visualizacion.Perfil();
+                             entities.Where.Add(Permaquim.Depositary.Business.Relations.Visualizacion.Perfil.ColumnEnum.UsuarioCreacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11890,18 +11917,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositary.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioCreacion
-                {
-                     get {
-                             Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo entities = new Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo();
-                             entities.Where.Add(Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioCreacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of PerfilTipo that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11910,6 +11925,18 @@ using System.Text;
                      get {
                              Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo entities = new Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo();
                              entities.Where.Add(Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioModificacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositary.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioCreacion
+                {
+                     get {
+                             Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo entities = new Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo();
+                             entities.Where.Add(Permaquim.Depositary.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioCreacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }

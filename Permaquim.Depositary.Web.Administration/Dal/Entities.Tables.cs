@@ -995,6 +995,8 @@ using System.Text;
              [DataItemAttributeFieldName("Direccion","Direccion")]
              public String Direccion { get; set; }
              [DataItemAttributeFieldName("CodigoPostalId","CodigoPostalId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("CodigoPostal")]// Object name in Database
              public Int64 CodigoPostalId { get; set; }
              [DataItemAttributeFieldName("EstiloEsquemaId","EstiloEsquemaId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key

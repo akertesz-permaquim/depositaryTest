@@ -148,7 +148,7 @@
                          <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                          </RadzenLabel>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-auto">
                          <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(TipoEsquemaDetalle_entity.Id)" Name="Id" Disabled="true" >
                      </RadzenNumeric>
                      </div>
@@ -159,7 +159,7 @@
                          <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Component="Nombre" style="width: 100%">
                          </RadzenLabel>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-auto">
                          <RadzenTextBox  style="display: block" @bind-Value="@(TipoEsquemaDetalle_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
@@ -174,7 +174,7 @@
                          <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Component="Descripcion" style="width: 100%">
                          </RadzenLabel>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-auto">
                          <RadzenTextBox  style="display: block" @bind-Value="@(TipoEsquemaDetalle_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
@@ -188,7 +188,7 @@
                      <div class="col-md-3">
                  <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-auto">
                  <RadzenCheckBox @bind-Value=@TipoEsquemaDetalle_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @TipoEsquemaDetalle_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
                      </div>
                  </div>

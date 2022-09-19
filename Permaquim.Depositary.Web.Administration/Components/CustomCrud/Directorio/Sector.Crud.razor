@@ -1,4 +1,4 @@
-@page "/DirectorioSectorCustomCrud/{EmpresaId}/{SucursalId}/"
+@page "/DirectorioSectorCustomCrud/{SucursalId}/"
 @using Permaquim.Depositary.Web.Administration.Controllers;
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
@@ -49,14 +49,17 @@
             }
             <hr>
 
-            <RadzenBreadCrumb>
-                <RadzenBreadCrumbItem Path="DirectorioGrupoCustomCrud" Text="Grupo" />
-                <RadzenBreadCrumbItem Path="@PathPaginaPreviaAnterior" Text="Empresa" />
-                <RadzenBreadCrumbItem Path="@PathPaginaAnterior" Text="Sucursal" />
-                <RadzenBreadCrumbItem Text="Sector" />
-            </RadzenBreadCrumb>
+            if (PathPaginaAnterior != "" && PathPaginaPreviaAnterior != "")
+            {
+                <RadzenBreadCrumb>
+                    <RadzenBreadCrumbItem Path="DirectorioGrupoCustomCrud" Text="Grupo" />
+                    <RadzenBreadCrumbItem Path="@PathPaginaPreviaAnterior" Text="Empresa" />
+                    <RadzenBreadCrumbItem Path="@PathPaginaAnterior" Text="Sucursal" />
+                    <RadzenBreadCrumbItem Text="Sector" />
+                </RadzenBreadCrumb>
+                <hr>
+            }
 
-            <hr>
             if (crudMode == CrudMode.List)
             {
                 <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@SectorRowRender" AllowColumnPicking="true" CellRender="@SectorCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
@@ -175,7 +178,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Sector_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -273,13 +276,10 @@ else
     [Parameter]
     public string SucursalId { get; set; }
 
-    [Parameter]
-    public string EmpresaId { get; set; }
-
     private Int64 ParametroSucursalId;
 
-    private string PathPaginaAnterior { get; set; }
-    private string PathPaginaPreviaAnterior { get; set; }
+    private string PathPaginaAnterior { get; set; } = "";
+    private string PathPaginaPreviaAnterior { get; set; } = "";
 
     /// <summary>
     /// Variables to handle column filter for field Sector.Habilitado
@@ -349,8 +349,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         ParametroSucursalId = Int64.Parse(SucursalId);
-        PathPaginaAnterior = "DirectorioSucursalCustomCrud/" + SucursalId;
-        PathPaginaPreviaAnterior = "DirectorioEmpresaCustomCrud/" + EmpresaId;
+        ReconstruirPathPaginasAnteriores();
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
@@ -359,7 +358,26 @@ else
         if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
     }
+
+    #region Navigation
+
+    private void ReconstruirPathPaginasAnteriores()
+    {
+        Depositary.Business.Relations.Directorio.Sucursal sucursal = new();
+        sucursal.Where.Add(Business.Relations.Directorio.Sucursal.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, ParametroSucursalId);
+        sucursal.Items();
+
+        if (sucursal.Result.Count > 0)
+        {
+            PathPaginaAnterior = "DirectorioSucursalCustomCrud/" + sucursal.Result.FirstOrDefault()._EmpresaId;
+            PathPaginaPreviaAnterior = "DirectorioEmpresaCustomCrud/" + sucursal.Result.FirstOrDefault().EmpresaId._GrupoId;
+        }
+    }
+
+    #endregion
+
     #region Loading entities data
+
     /// <summary>
     /// Loads main entity data
     /// </summary>
@@ -681,4 +699,4 @@ else
 
     #endregion
 
-}
+    }

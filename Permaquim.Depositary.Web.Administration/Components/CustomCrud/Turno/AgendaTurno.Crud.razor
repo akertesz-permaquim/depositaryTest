@@ -261,7 +261,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-auto">
                                 <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(AgendaTurno_entity.Id)" Name="Id" Disabled="true">
                                 </RadzenNumeric>
                             </div>
@@ -344,7 +344,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("SECUENCIA",dataLenguaje) Component="Secuencia" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-auto">
                                 <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(AgendaTurno_entity.Secuencia)" Name="Secuencia" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenNumeric>
                             </div>

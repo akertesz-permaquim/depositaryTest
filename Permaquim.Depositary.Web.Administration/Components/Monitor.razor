@@ -73,6 +73,8 @@
 
 
 
+
+
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Property="Sucursal">
@@ -104,6 +106,8 @@
 
 
 
+
+
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector">
@@ -116,6 +120,8 @@
                                 }
                                 else
                                     @context.Sector
+
+
 
 
 
@@ -305,6 +311,7 @@
                                             Data="@dataTransaccionesDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                         <Columns>
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible="false" Property="TransaccionId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONID",dataLenguaje)" />
+                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible="true" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" />
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="FechaTransaccion" Sortable="true" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)" />
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="UsuarioTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje)" />
@@ -356,6 +363,7 @@
                                             Data="@dataTransaccionesSobreDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                         <Columns>
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible="false" Property="TransaccionSobreId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONSOBREID",dataLenguaje)" />
+                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" />
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="FechaTransaccionSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)" />
                                             <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOSOBRE",dataLenguaje)" />
@@ -439,8 +447,8 @@
                                             Data="@dataTotalesGeneralesDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                         <Columns>
                                             <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalValidado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalAValidar" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" />
+                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalValidadoFormateado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" />
+                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalAValidarFormateado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" />
                                             <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALGENERAL",dataLenguaje)" />
                                         </Columns>
                                     </RadzenDataGrid>
@@ -557,14 +565,7 @@
     {
         estaCargandoGridDepositarios = true;
         await Task.Run(obtenerDepositarios);
-        //await InvokeAsync(StateHasChanged);
-        //foreach (var item in rowsDepositariosExpandidas)
-        //{
-        //await InvokeAsync(StateHasChanged);
-        //await InvokeAsync(gridDepositarios.Reload);
-        //else
-        //    await InvokeAsync(StateHasChanged);
-        //}
+
     }
 
     private void obtenerDepositarios()
@@ -576,7 +577,7 @@
     protected async Task expandirDepositario(MonitorEntities.DepositarioMonitor args)
     {
         //rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
-
+        estaCargandoGridDepositarios = true;
         //Verificamos si la empresa del depositario trabaja con cuenta bancaria.
         string valorConfiguracionCuentaBancaria = "";
         valorConfiguracionCuentaBancaria = AplicacionController.ObtenerConfiguracionEmpresa("USA_CUENTA_BANCARIA", args.EmpresaId);

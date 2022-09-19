@@ -233,7 +233,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="short" style="display: block; width: 100%" @bind-Value="@(RolFuncion_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -359,6 +359,9 @@ else
     [Parameter]
     public Int64 RolId { get; set; }
 
+    [Parameter]
+    public Int64 AplicacionId { get; set; }
+
     /// <summary>
     /// Crud Mode Enum
     /// </summary>
@@ -386,23 +389,23 @@ else
     /// </summary>
     private List<SeguridadEntities.FuncionRol> dataFunciones;
 
-        /// <summary>
+    /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? Habilitado_filter;
 
-        /// <summary>
+    /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? PuedeAgregar_filter;
 
-        /// <summary>
+    /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? PuedeVisualizar_filter;
 
-        /// <summary>
+    /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? PuedeModificar_filter;
 
-        /// <summary>
+    /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? PuedeEliminar_filter;
 
@@ -474,6 +477,7 @@ else
     private void LoadTypesData()
     {
         Depositary.Business.Tables.Seguridad.Funcion Funcion_FuncionId_local = new();
+        Funcion_FuncionId_local.Where.Add(Business.Tables.Seguridad.Funcion.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, AplicacionId);
         Funcion_FuncionId_entities = Funcion_FuncionId_local.Items();
         Funcion_FuncionId_filter = Funcion_FuncionId_entities.Where(x => RolFuncion_entities.Select(x => x.FuncionId).Distinct().Contains(x.Id)).ToList();
 

@@ -3580,7 +3580,7 @@ using System.Text;
          /// <param name='Permaquim.Depositary.Entities.Relations.Directorio.Grupo GrupoId'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Direccion'></param>
-         /// <param name='CodigoPostalId'></param>
+         /// <param name='Permaquim.Depositary.Entities.Relations.Geografia.CodigoPostal CodigoPostalId'></param>
          /// <param name='Permaquim.Depositary.Entities.Relations.Estilo.Esquema EstiloEsquemaId'></param>
          /// <param name='Permaquim.Depositary.Entities.Relations.Regionalizacion.Lenguaje LenguajeId'></param>
          /// <param name='Habilitado'></param>
@@ -3590,7 +3590,7 @@ using System.Text;
          /// <param name='Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Empresa</returns>
-			public Entities.Relations.Directorio.Empresa Add(String Nombre,String Descripcion,Permaquim.Depositary.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Int64 CodigoPostalId,Permaquim.Depositary.Entities.Relations.Estilo.Esquema EstiloEsquemaId,Permaquim.Depositary.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Empresa Add(String Nombre,String Descripcion,Permaquim.Depositary.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Permaquim.Depositary.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Permaquim.Depositary.Entities.Relations.Estilo.Esquema EstiloEsquemaId,Permaquim.Depositary.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Empresa)base.Add(new Entities.Relations.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,LenguajeId,Habilitado,EsDefault,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
