@@ -12,10 +12,12 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         public string Denominacion { get; set; }
         public long Cantidad { get; set; }
         public decimal Total { get; set; }
-   
+
+        public string FormattedTotal { get; set; }
+
     }
 
-    internal class BagBillContentResumeItem
+    internal class BillContentResumeItem
     {
         public string Moneda { get; set; }
         public long MonedaId { get; set; }
@@ -24,6 +26,24 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
 
         public decimal UnidadesDenominacion { get; set; }
         public long Cantidad { get; set; }
+        public decimal Total { get; set; }
+
+    }
+
+    internal class BagBillContentResume
+    {
+        public long MonedaId { get; set; }
+        public string Moneda { get; set; }
+        public decimal Total { get; set; }
+
+        public string FormattedTotal { get; set; }
+
+    }
+
+    internal class BagEnvelope
+    {
+        public long MonedaId { get; set; }
+        public string Moneda { get; set; }
         public decimal Total { get; set; }
 
     }

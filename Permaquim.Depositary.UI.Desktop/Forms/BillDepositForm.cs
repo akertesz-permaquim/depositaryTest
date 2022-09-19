@@ -60,6 +60,8 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             Loadparameters();
             TimeOutController.Reset();
+ 
+
         }
         private void BillDepositForm_Load(object sender, EventArgs e)
         {
@@ -174,6 +176,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+
             DenominationsGridView.Columns["Image"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMAGEN);
             DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION);
             DenominationsGridView.Columns["Quantity"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD);
@@ -194,10 +197,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             ConfirmAndExitDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmAndExitDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
             ConfirmAndContinueDepositButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmAndContinueDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
             CancelDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
             CancelDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
             BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
             BackButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
@@ -484,7 +490,6 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_operationStatus.GeneralStatus == StatusInformation.State.BeingSet
                 || _operationStatus.GeneralStatus == StatusInformation.State.BeingReset)
             {
-                TimeOutController.Reset();
                 _device.BatchDataTransmission();
             }
         }
@@ -663,9 +668,14 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
             CancelDepositButton.Visible = false;
+            if (ParameterController.UsesShutter)
+                _device.Open();
+
             _device.StoringStart();
+
             _device.PreviousState = StatusInformation.State.PQStoring;
         }
+
 
         private void BackButton_Click(object sender, EventArgs e)
         {
@@ -694,7 +704,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CleanDetectedBills();
 
             PrintTicket();
-
+            _device.Close();
             FormsController.OpenChildForm(this,new OperationForm(), _device);
         }
 
@@ -795,11 +805,13 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalAValidar = 0,
                     TotalValidado = _operationStatus.CurrentTransactionAmount,
                     TurnoId = DatabaseController.CurrentTurn.Id,
-                    UsuarioCuentaId = DatabaseController.CurrentUserBankAccount == null ? 0 :
-                    DatabaseController.CurrentUserBankAccount.CuentaId.Id,
+                    CuentaId = DatabaseController.CurrentUserBankAccount == null ?  null:
+                        DatabaseController.CurrentUserBankAccount.CuentaId.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id,
-
-
+                    CodigoOperacion =
+                        DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
+                    OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? 0 : 
+                    DatabaseController.CurrentDepositOrigin.Id
                 };
                 _headerTransaction.Add(transactions.Add(transaction));
                 _operationStatus.CurrentTransactionId = transaction.Id;
@@ -897,6 +909,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
         }
+
     }
 
     public class Operationstatus

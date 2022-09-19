@@ -1,7 +1,9 @@
-﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+﻿using Microsoft.Extensions.Primitives;
+using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -11,6 +13,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private const string NOMBRE = "Nombre";
         private const string ID = "Id";
         private const string TODOS = "Todos";
+        private const string TEXT = "Text";
+        private const string VALUE = "Value";
+
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private bool _alreadyPrinted;
@@ -127,16 +132,20 @@ namespace Permaquim.Depositary.UI.Desktop
 
             var turnList = DatabaseController.GetTurnList();
 
-            turnList.Insert(0, new Depositario.Entities.Tables.Turno.AgendaTurno()
+            List<TurnItemElement> turnItemList = new();
+
+
+            turnItemList.Add(new TurnItemElement() { Value = -1, Text = "Todos" });
+
+            foreach (var item in turnList)
             {
-                Nombre = TODOS,
-                Id = -1
-            });
+                turnItemList.Add(new TurnItemElement()
+                { Value = item.Id, Text = item.Nombre + " " + item.EsquemaDetalleTurnoId.Nombre });
+            }
 
-            TurnComboBox.DataSource = turnList;
-
-            TurnComboBox.DisplayMember = NOMBRE;
-            TurnComboBox.ValueMember = ID;
+            TurnComboBox.DisplayMember = TEXT;
+            TurnComboBox.ValueMember = VALUE;
+            TurnComboBox.DataSource = turnItemList;
         }
 
         private void OperationHistoryForm_Load(object sender, EventArgs e)

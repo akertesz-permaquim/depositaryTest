@@ -74,16 +74,16 @@ namespace Permaquim.Depositary.UI.Desktop
             this.MainPanel.Controls.Clear();
 
 
-            if (SecurityController.IsFunctionenabled(FunctionEnum.Transactions))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoTransacciones))
                 LoadOperationsHistoryButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.BagContent))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.ContenidoDeBolsa))
                 LoadBagContentButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.BagHistory))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeBolsas))
                 LoadBagHistoryButton();
 
-            if (SecurityController.IsFunctionenabled(FunctionEnum.TurnsHistoryForm))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeTurnos))
                 LoadTurnsHistoryButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.DailyClosingHistoryForm))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeCierreDiario))
                 LoadDailyClosingHistoryButton();
 
             LoadBackButton();
@@ -186,7 +186,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this, new OtherOperationsForm(),
+            FormsController.OpenChildForm(this, new OperationForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
         #endregion

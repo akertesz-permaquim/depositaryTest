@@ -9,13 +9,18 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class SecurityController
     {
-        public static bool IsFunctionenabled(long functionId)
+        public static bool IsFunctionEnabled(long functionId)
         {
             return DatabaseController.IsFuntionEnabled(functionId);
         }
-        public static bool IsFunctionenabled(FunctionEnum function)
+        public static bool IsFunctionEnabled(FunctionEnum function)
         {
-            return IsFunctionenabled((long)function);
+            return DatabaseController.IsFuntionEnabled(Enum.GetName(function));
         }
+        public static bool IsOperationEnabled(long functionId)
+        {
+            return IsFunctionEnabled(functionId);
+        }
+
     }
 }

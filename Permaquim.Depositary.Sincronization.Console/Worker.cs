@@ -107,9 +107,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 
 
 
-                    await Task.Delay(5000, stoppingToken);
+                    await Task.Delay(100, stoppingToken);
 
-                    GC.Collect();
+                    //GC.Collect();
 
                 }
 
@@ -146,6 +146,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                 catch (Exception ex)
                 {
                     Log(ex);
+                }
+                finally
+                {
+                    model = null;
                 }
             }
             else
@@ -212,6 +216,10 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                 Log(ex);
             }
+            finally
+            {
+                model = null;
+            }
         }
 
         private async Task SendAndReceiveData(WorkerTask item)
@@ -260,12 +268,17 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Log(ex);
                 }
+                finally
+                {
+                    model = null;
+                }
 
             }
             else
             {
                 _logger.Log(LogLevel.Information, "JwToken is null, POST was cancelled!");
             }
+
 
         }
 

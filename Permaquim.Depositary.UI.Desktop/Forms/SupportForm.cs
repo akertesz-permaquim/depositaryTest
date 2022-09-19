@@ -58,8 +58,8 @@ namespace Permaquim.Depositary.UI.Desktop
             _device.IOboardDeviceDataReceived += IOboardDeviceDataReceived;
 
             TimeOutController.Stop();
-
         }
+
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
             IoBoardStatusPropertyGrid.SelectedObject = _device.Status();

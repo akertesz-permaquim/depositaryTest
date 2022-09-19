@@ -41,10 +41,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return resultImage;
         }
 
-        //public static Image GetImageResourceFromfile(string fileResourceName)
-        //{
-
-        //}
+        public static Image GetImageResourceFromfile(string fileResourceName)
+        {
+            if(File.Exists(Directory.GetCurrentDirectory() + "\\Resources\\Images\\" + fileResourceName)) 
+                return  Image.FromFile(Directory.GetCurrentDirectory() + "\\Resources\\Images\\" + fileResourceName);
+            else
+                return null;
+        }
         public static List<Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalle> StyleItems
         {
             get {

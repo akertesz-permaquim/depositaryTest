@@ -27,7 +27,13 @@
 
   <ItemGroup>
     <Compile Remove="Controls\BillDepositDialog.Designer.cs" />
+    <Compile Remove="Forms\OriginSelectorForm.cs" />
+    <Compile Remove="Forms\OriginSelectorForm.Designer.cs" />
     <Compile Remove="Model\User.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Forms\OriginSelectorForm.resx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +41,7 @@
     <None Remove="appsettings.json" />
     <None Remove="Resources\Images\Login.png" />
     <None Remove="Resources\Images\logo.png" />
+    <None Remove="Resources\Images\Presentacion.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +61,9 @@
     </Content>
     <Content Include="Resources\Images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Presentacion.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

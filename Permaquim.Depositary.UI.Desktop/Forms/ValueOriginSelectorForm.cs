@@ -1,4 +1,5 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Builders;
+using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
@@ -16,7 +17,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             LoadValueOriginsButtons();
             LoadBackButton();
-            ChechSingleOrigin();
+            LoadStyles();
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -43,15 +44,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 FormsController.LogOff();
             }
         }
-        private void ChechSingleOrigin()
-        {
-            if (_valueOrigins.Count <= 1)
-                DatabaseController.CurrentDepositOrigin = _valueOrigins.FirstOrDefault();
-            FormsController.OpenChildForm(this, new BillDepositForm(),
-             (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-
-        }
-
         private void CenterPanel()
         {
 
@@ -61,6 +53,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 Y = this.Height / 2 - MainPanel.Height / 2
             };
         }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+        }
+
         private void LoadValueOriginsButtons()
         {
 
@@ -70,7 +67,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 CustomButton newButton = ControlBuilder.BuildStandardButton(
                 "ValueOriginButton" + item.Id.ToString(),
-                item.Nombre 
+                item.Nombre
                 , MainPanel.Width);
 
                 newButton.Click += new System.EventHandler(ValueOriginButton_Click);
@@ -83,7 +80,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildStandardButton(
+            CustomButton backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
 
@@ -95,8 +92,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentDepositOrigin = (Permaquim.Depositario.Entities.Relations.Valor.OrigenValor)((CustomButton)sender).Tag;
 
-            FormsController.OpenChildForm(this, new BillDepositForm(),
-            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            ValidateDepositOrigin();
 
         }
 
@@ -123,6 +119,30 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ValueOriginSelectorForm_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
+        }
+        private void ValidateDepositOrigin()
+        {
+            string envelopeDepositFormBreadcrumbText = " - ";
+            if (DatabaseController.CurrentDepositOrigin != null)
+            {
+                envelopeDepositFormBreadcrumbText += MultilanguangeController.GetText(MultiLanguageEnum.ORIGEN_VALOR) +
+                          ":" + DatabaseController.CurrentDepositOrigin.Nombre;
+            }
+            if (DatabaseController.CurrentUserBankAccount != null)
+            {
+                envelopeDepositFormBreadcrumbText += " " +
+            MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
+              ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero;
+            }
+            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
+                FormsController.OpenChildForm(this, new BillDepositForm(),
+                (CounterDevice)this.Tag, envelopeDepositFormBreadcrumbText);
+
+            if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+                FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                (CounterDevice)this.Tag, envelopeDepositFormBreadcrumbText);
+
+
         }
     }
 }

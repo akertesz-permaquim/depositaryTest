@@ -34,10 +34,11 @@
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.MainPanel.BackColor = System.Drawing.Color.White;
-            this.MainPanel.Location = new System.Drawing.Point(32, 20);
+            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
+            this.MainPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.MainPanel.Location = new System.Drawing.Point(32, 16);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(720, 560);
+            this.MainPanel.Size = new System.Drawing.Size(720, 564);
             this.MainPanel.TabIndex = 1;
             // 
             // BankAccountSelectorForm

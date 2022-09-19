@@ -78,9 +78,9 @@
             this.MainPanel.Controls.Add(this.RemainingTimeLabel);
             this.MainPanel.Controls.Add(this.SubtotalLabel);
             this.MainPanel.Controls.Add(this.CurrencyLabel);
-            this.MainPanel.Location = new System.Drawing.Point(1, 8);
+            this.MainPanel.Location = new System.Drawing.Point(1, 40);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(704, 644);
+            this.MainPanel.Size = new System.Drawing.Size(704, 612);
             this.MainPanel.TabIndex = 0;
             // 
             // ButtonsPanel
@@ -89,7 +89,7 @@
             this.ButtonsPanel.Controls.Add(this.BackButton);
             this.ButtonsPanel.Controls.Add(this.ConfirmAndExitDepositButton);
             this.ButtonsPanel.Controls.Add(this.CancelDepositButton);
-            this.ButtonsPanel.Location = new System.Drawing.Point(3, 508);
+            this.ButtonsPanel.Location = new System.Drawing.Point(3, 488);
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.Size = new System.Drawing.Size(705, 56);
             this.ButtonsPanel.TabIndex = 146;
@@ -225,7 +225,7 @@
             this.DenominationsGridView.Enabled = false;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
-            this.DenominationsGridView.Location = new System.Drawing.Point(4, 61);
+            this.DenominationsGridView.Location = new System.Drawing.Point(4, 41);
             this.DenominationsGridView.Name = "DenominationsGridView";
             this.DenominationsGridView.RowHeadersVisible = false;
             this.DenominationsGridView.RowTemplate.DividerHeight = 1;
@@ -290,7 +290,7 @@
             this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(451, 32);
+            this.RemainingTimeLabel.Location = new System.Drawing.Point(451, 12);
             this.RemainingTimeLabel.Name = "RemainingTimeLabel";
             this.RemainingTimeLabel.Size = new System.Drawing.Size(250, 27);
             this.RemainingTimeLabel.TabIndex = 141;
@@ -302,7 +302,7 @@
             this.SubtotalLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
-            this.SubtotalLabel.Location = new System.Drawing.Point(203, 32);
+            this.SubtotalLabel.Location = new System.Drawing.Point(203, 12);
             this.SubtotalLabel.Name = "SubtotalLabel";
             this.SubtotalLabel.Size = new System.Drawing.Size(248, 27);
             this.SubtotalLabel.TabIndex = 140;
@@ -313,7 +313,7 @@
             this.CurrencyLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
-            this.CurrencyLabel.Location = new System.Drawing.Point(1, 32);
+            this.CurrencyLabel.Location = new System.Drawing.Point(1, 12);
             this.CurrencyLabel.Name = "CurrencyLabel";
             this.CurrencyLabel.Size = new System.Drawing.Size(201, 27);
             this.CurrencyLabel.TabIndex = 139;

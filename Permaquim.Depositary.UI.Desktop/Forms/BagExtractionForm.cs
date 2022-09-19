@@ -4,6 +4,7 @@ using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Forms;
 using Permaquim.Depositary.UI.Desktop.Global;
+using System.Diagnostics;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -13,7 +14,10 @@ namespace Permaquim.Depositary.UI.Desktop
         public CounterDevice _device { get; set; }
 
         private bool _bagAlreadyExtracted = false;
+
+        private bool _bagAlreadyInserted = false;
         private bool _alreadyPrinted = false;
+        
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
@@ -31,7 +35,7 @@ namespace Permaquim.Depositary.UI.Desktop
         public BagExtractionForm()
         {
             InitializeComponent();
-            EventCheckbox.Visible = SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+            EventCheckbox.Visible = SecurityController.IsFunctionEnabled(FunctionEnum.VerEventos);
 
             TimeOutController.Reset();
         }
@@ -102,6 +106,10 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ProcessDeviceStatus()
         {
+
+            if (_bagExtractionProcess == BagExtractionProcessEnum.BagExtracted)
+                Debug.Print("");
+
             if ((_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_0)
                 && _bagExtractionProcess == BagExtractionProcessEnum.ProcessFinished)
@@ -136,6 +144,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_8
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_9
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_10
+                || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN
                 )
     
 
@@ -144,10 +153,10 @@ namespace Permaquim.Depositary.UI.Desktop
                 _bagExtractionProcess = BagExtractionProcessEnum.BagExtracted;
                 // Debido a que los sensores pueden disparar la extracción más de una vez durante el proceso,
                 // Se marca con este flag el 
-                if (!_bagAlreadyExtracted)
+                if (!_bagAlreadyInserted)
                 {
                     DatabaseController.CreateContainer();
-                    _bagAlreadyExtracted = true;
+                        _bagAlreadyInserted = true;
                 }
             }
 
@@ -211,7 +220,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 case BagExtractionProcessEnum.GateReleased:
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
                     MultilanguangeController.GetText(MultiLanguageEnum.PUEDE_RETIRAR_BOLSA) 
-                    + DatabaseController.CurrentContainer.Nombre);
+                    + " : " + DatabaseController.CurrentContainer.Nombre);
                     break;
                 case BagExtractionProcessEnum.BagExtracting:
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
@@ -240,15 +249,18 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void VerifyContainerCodeVisibility()
         {
-            _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending;
+           // _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending;
+            _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted;
         }
         private void VerifyButtonsVisibility()
         {
   
             _gateButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None;
             _backButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None 
-                || _bagExtractionProcess == BagExtractionProcessEnum.BagError;
-            _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending 
+                || _bagExtractionProcess == BagExtractionProcessEnum.BagError
+                || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_ERROR;
+            //_confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending 
+            _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted
                 && ParameterController.RequiresContainerIdentifier;
 
         }
@@ -355,6 +367,8 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             _bagAlreadyExtracted = false;
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+            if (!this.Visible)
+                _bagAlreadyInserted = false;
         }
 
         private void BagExtractionForm_MouseClick(object sender, MouseEventArgs e)

@@ -22,10 +22,12 @@
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
     <string>Operacion.VistaTransaccionMonedaDefaultSucursal</string>
+    <string>Reporte.CierresDiarios</string>
     <string>Reporte.Contenedores</string>
     <string>Reporte.DetalleTransacciones</string>
     <string>Reporte.DetalleTransaccionesSobre</string>
     <string>Reporte.Transacciones</string>
+    <string>Reporte.Turnos</string>
     <string>Valor.VistaDenominacion</string>
   </SelectedViews>
   <SelectedStoredProcedures />
