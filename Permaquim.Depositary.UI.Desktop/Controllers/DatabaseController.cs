@@ -1177,6 +1177,26 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         }
 
+        public static int GetPreviousDaysTurns()
+        {
+            Permaquim.Depositario.Business.Tables.Turno.AgendaTurno entitiesAgendaTurno = new();
+
+            entitiesAgendaTurno.Where.Add(Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId,
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.Id);
+            entitiesAgendaTurno.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha,
+                Depositario.sqlEnum.OperandEnum.LessThan, DateTime.Now.Date);
+            entitiesAgendaTurno.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado,
+                Depositario.sqlEnum.OperandEnum.Equal, true);
+
+            entitiesAgendaTurno.OrderBy.Add(Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Secuencia,
+                Depositario.sqlEnum.DirEnum.ASC);
+            entitiesAgendaTurno.Items();
+
+ 
+            return entitiesAgendaTurno.Result.Count;
+
+        }
+
         private static List<long> GetUsedTurns()
         {
             List<long> resultValue = new();

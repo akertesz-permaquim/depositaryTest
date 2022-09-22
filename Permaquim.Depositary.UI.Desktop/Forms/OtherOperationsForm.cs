@@ -107,7 +107,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void TurnButton_Click(object sender, EventArgs e)
         {
-            if (DatabaseController.GetAvailableTurns() > 0)
+            if (DatabaseController.GetAvailableTurns() > 0 || DatabaseController.GetPreviousDaysTurns() > 0 )
             {
                 FormsController.OpenChildForm(this, new TurnChangeForm(),
                   (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);

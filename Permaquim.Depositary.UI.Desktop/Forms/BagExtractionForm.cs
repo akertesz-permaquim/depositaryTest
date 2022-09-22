@@ -249,8 +249,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void VerifyContainerCodeVisibility()
         {
-           // _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending;
-            _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted;
+           _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending; // ARG
+            //_containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted; // CHILE
         }
         private void VerifyButtonsVisibility()
         {
@@ -259,8 +259,8 @@ namespace Permaquim.Depositary.UI.Desktop
             _backButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None 
                 || _bagExtractionProcess == BagExtractionProcessEnum.BagError
                 || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_ERROR;
-            //_confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending 
-            _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted
+            _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending // ARG
+            //_confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted // CHILE
                 && ParameterController.RequiresContainerIdentifier;
 
         }
@@ -389,7 +389,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                     {
                         ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                            DatabaseController.CurrentContainer, _bagContentItems);
+                            DatabaseController.CurrentContainer, _bagContentItems,i);
                         _alreadyPrinted = true;
                     }
                 }

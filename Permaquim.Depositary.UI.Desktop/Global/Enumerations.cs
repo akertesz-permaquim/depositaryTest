@@ -155,6 +155,7 @@
             USUARIO_NO_HABILITADO_EN_SECTOR,
             SIN_TURNO,
             EXISTEN_TURNOS_ABIERTOS,
+            EXISTEN_TURNOS_PREVIOS_A_LA_FECHA,
             SIN_BOLSA,
             SIN_BOLSA_ACTIVA,
             LIMITE_BOLSA_ALCANZADO,

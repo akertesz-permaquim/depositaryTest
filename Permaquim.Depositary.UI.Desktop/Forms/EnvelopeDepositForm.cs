@@ -837,12 +837,12 @@ namespace Permaquim.Depositary.UI.Desktop
                         {
                             case TicketTypeEnum.First:
                                 ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositFirstReport,
-                                _header,_details);
+                                _header,_details, i);
                                 _alreadyPrinted = true;
                                 break;
                             case TicketTypeEnum.Second:
                                 ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport,
-                                _header, _details);
+                                _header, _details, i);
                                 _alreadyPrinted = true;
                                 break;
                             default:

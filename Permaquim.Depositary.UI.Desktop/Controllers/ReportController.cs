@@ -8,6 +8,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
     internal static class ReportController
     {
         private const string TICKET = "TICKET: ";
+        private const char LINE = '_';
         private static Image _image;
         private static Font _font;
         private static Font _totalFont;
@@ -17,18 +18,24 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static int _interlineSpace;
         static dynamic _header;
         static dynamic _details;
+        private static string _copyInstance = string.Empty;
 
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
 
         public static void PrintReport(ReportTypeEnum reportType,
-            dynamic header,dynamic details)
+            dynamic header,dynamic details,int copyIndex)
         {
+            if (copyIndex == 0)
+                _copyInstance = "ORIGINAL";
+            else
+                _copyInstance = "COPY";
 
-                if (header ==null || details == null)
+
+            if (header == null || details == null)
             {
-                FormsController.SetInformationMessage(InformationTypeEnum.Error, TICKET + 
+                FormsController.SetInformationMessage(InformationTypeEnum.Error, TICKET +
                     MultilanguangeController.GetText(MultiLanguageEnum.ERROR_DATO));
-                return; 
+                return;
             }
 
             _header = header;
@@ -89,7 +96,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     case ReportTypeEnum.CoinDeposit:
                         break;
                     case ReportTypeEnum.EnvelopeDepositFirstReport:
-                          printDocument.PrintPage += PrintDocument_EnvelopeDepositFirstReportPrintPage;
+                        printDocument.PrintPage += PrintDocument_EnvelopeDepositFirstReportPrintPage;
                         break;
                     case ReportTypeEnum.EnvelopeDepositSecondReport:
                         printDocument.PrintPage += PrintDocument_EnvelopeDepositSecondReportPrintPage;
@@ -118,6 +125,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         }
 
+ 
         private static void PrintDocument_BillDepositPrintPage(object sender, PrintPageEventArgs e)
         {
 
@@ -136,9 +144,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset  , new StringFormat());
             yOffset += _interlineSpace;
 
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
 
             // Separador
-             e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -153,19 +166,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
-            // e.Graphics.DrawString(
-            // MultilanguangeController.GetText(MultiLanguageEnum.IMPORTE) + ": " + amount.ToString("C2")
-            //  , _font,
-            //Brushes.Black,
-            //_headerTextStart_X, yOffset, new StringFormat());
-            //yOffset += _interlineSpace;
-
             // Transacción
             e.Graphics.DrawString(
              MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": " + 
+       
              ((Depositario.Entities.Relations.Operacion.Transaccion)_header).Id.ToString()
-              , _font,
-            Brushes.Black,
+              , _font,  Brushes.Black,
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
@@ -197,7 +203,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -216,7 +222,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -248,7 +254,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                     Brushes.Black,
                     _detailStart_X, yOffset, new StringFormat());
 
@@ -262,16 +268,30 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
             
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                      Brushes.Black,
                      _detailStart_X, yOffset, new StringFormat());
 
+            yOffset += _interlineSpace;
+
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
             //Pie
             e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie, 
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
+
+            for (int i = 0; i < _ticket.LineasAlFinal; i++)
+            {
+                e.Graphics.DrawString(new String(' ', _ticket.AnchoDetalle), _totalFont,
+                    Brushes.Black,
+                    _detailStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+            }
 
         }
 
@@ -291,9 +311,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                        Brushes.Black,
                        _detailStart_X, yOffset, new StringFormat());
 
@@ -352,7 +377,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -383,7 +408,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 yOffset += _interlineSpace;
             }
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                     Brushes.Black,
                     _detailStart_X, yOffset, new StringFormat());
 
@@ -393,10 +418,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                      Brushes.Black,
                      _detailStart_X, yOffset, new StringFormat());
 
+            yOffset += _interlineSpace;
+
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
             //Pie
@@ -404,6 +435,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 
+            for (int i = 0; i < _ticket.LineasAlFinal; i++)
+            {
+                e.Graphics.DrawString(new String(' ', _ticket.AnchoDetalle), _totalFont,
+                    Brushes.Black,
+                    _detailStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+            }
         }
 
         private static void PrintDocument_EnvelopeDepositSecondReportPrintPage(object sender, PrintPageEventArgs e)
@@ -422,8 +460,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
+
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                        Brushes.Black,
                        _detailStart_X, yOffset, new StringFormat());
 
@@ -482,7 +526,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -513,7 +557,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 yOffset += _interlineSpace;
             }
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                     Brushes.Black,
                     _detailStart_X, yOffset, new StringFormat());
 
@@ -523,10 +567,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                      Brushes.Black,
                      _detailStart_X, yOffset, new StringFormat());
 
+            yOffset += _interlineSpace;
+
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
             //Pie
@@ -534,7 +584,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 
-
+            for (int i = 0; i < _ticket.LineasAlFinal; i++)
+            {
+                e.Graphics.DrawString(new String(' ', _ticket.AnchoDetalle), _totalFont,
+                    Brushes.Black,
+                    _detailStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+            }
 
         }
 
@@ -557,9 +613,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                        Brushes.Black,
                        _detailStart_X, yOffset, new StringFormat());
 
@@ -622,7 +683,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -666,7 +727,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                     Brushes.Black,
                     _detailStart_X, yOffset, new StringFormat());
 
@@ -680,16 +741,30 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                      Brushes.Black,
                      _detailStart_X, yOffset, new StringFormat());
 
+            yOffset += _interlineSpace;
+
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
             //Pie
             e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
+
+            for (int i = 0; i < _ticket.LineasAlFinal; i++)
+            {
+                e.Graphics.DrawString(new String(' ', _ticket.AnchoDetalle), _totalFont,
+                    Brushes.Black,
+                    _detailStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+            }
 
         }
 
@@ -712,9 +787,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                        Brushes.Black,
                        _detailStart_X, yOffset, new StringFormat());
 
@@ -761,7 +841,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -805,7 +885,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
                 // Separador
-                e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+                e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                     Brushes.Black,
                     _detailStart_X, yOffset, new StringFormat());
 
@@ -819,16 +899,30 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                      Brushes.Black,
                      _detailStart_X, yOffset, new StringFormat());
 
+            yOffset += _interlineSpace;
+
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
             //Pie
             e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
+
+            for (int i = 0; i < _ticket.LineasAlFinal; i++)
+            {
+                e.Graphics.DrawString(new String(' ', _ticket.AnchoDetalle), _totalFont,
+                    Brushes.Black,
+                    _detailStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+            }
 
         }
 
@@ -851,9 +945,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
+            yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                        Brushes.Black,
                        _detailStart_X, yOffset, new StringFormat());
 
@@ -916,7 +1015,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                         Brushes.Black,
                         _detailStart_X, yOffset, new StringFormat());
 
@@ -960,7 +1059,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                     Brushes.Black,
                     _detailStart_X, yOffset, new StringFormat());
 
@@ -974,16 +1073,24 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Separador
-            e.Graphics.DrawString(new String('_', MaxCharacterLenght), _totalFont,
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _totalFont,
                      Brushes.Black,
                      _detailStart_X, yOffset, new StringFormat());
 
+            yOffset += _interlineSpace;
+
+            // Instancia (ORIGINAL / COPIA)
+            e.Graphics.DrawString(_copyInstance, _font,
+            Brushes.Black,
+            _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
             //Pie
             e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
+
+
 
         }
 

@@ -62,6 +62,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public event DeviceDataReceivedEventHandler CounterDeviceDataReceived;
         public event DeviceDataReceivedEventHandler IOboardDeviceDataReceived;
 
+        public delegate void DeviceErrorReceivedEventHandler(object sender, DeviceErrorEventArgs args);
+
+        public event DeviceErrorReceivedEventHandler DeviceErrorReceived;
+
         #endregion
 
         #region Constants
@@ -401,6 +405,18 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
 
                 _buffer.Clear();
+
+                if (CounterDeviceDataReceived != null)
+                {
+                    _readbuffer = string.Empty;
+                    // Instantiates the DeviceDataReceivedEventArgs object.
+                    DeviceDataReceivedEventArgs args = new()
+                    {
+                        ComPort = _device.CounterComPort.PortName,
+                        Message = Encoding.Default.GetString(_buffer.ToArray<byte>())
+                    };
+                    CounterDeviceDataReceived(this, args);
+                }
 
 
                 return StateResultProperty;
@@ -1301,38 +1317,61 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     string CurrencyInput = (CountryCodeBitArray[0] ? 1 : 0).ToString() + (object)(CountryCodeBitArray[1] ? 1 : 0) + (object)(CountryCodeBitArray[2] ? 1 : 0);
                     statesResult.CountryCode.CurrencyStateInformation = (CountryCode.Currency)BinaryToDecimal(CurrencyInput);
 
-                    if (statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming)
+                    if (statesResult.ErrorStateInformation.AbnormalDevice)
                     {
-                        AuditController.Log(Global.Enumerations.LogTypeEnum.Exception,
-                        statesResult.ErrorStateInformation.AbnormalDevice.ToString() + " || " + statesResult.ErrorStateInformation.Jamming.ToString(),
-                        "statesResult.ErrorStateInformation.AbnormalDevice || statesResult.ErrorStateInformation.Jamming");
-                        // ISSUE: reference to a compiler-generated field
-                        //ECError((object)_counterPort, new ECErrorArgs()
-                        //{
-                        //    Errorcode = 8
-                        //});
+                        if (DeviceErrorReceived != null)
+                        {
+
+                            DeviceErrorEventArgs args = new()
+                            {
+                                ErrorCode = "FF02",
+                                ErrorDescription = "AbnormalDevice"
+                            };
+
+                            DeviceErrorReceived(this, args);
+                        }
+
                     }
+
+                    if (statesResult.ErrorStateInformation.Jamming)
+                    {
+                        if (DeviceErrorReceived != null)
+                        {
+
+                            DeviceErrorEventArgs args = new()
+                            {
+                                ErrorCode = "Jamming",
+                                ErrorDescription = "Jamming"
+                            };
+                            DeviceErrorReceived(this, args);
+                        }
+                    }
+
                     if (statesResult.ErrorStateInformation.AbnormalStorage)
                     {
-                        AuditController.Log(Global.Enumerations.LogTypeEnum.Exception,
-                        statesResult.ErrorStateInformation.AbnormalStorage.ToString(),
-                        "statesResult.ErrorStateInformation.AbnormalStorage");
-                        // ISSUE: reference to a compiler-generated field
-                        //ECError((object)_counterPort, new ECErrorArgs()
-                        //{
-                        //    Errorcode = 1
-                        //});
+                        if (DeviceErrorReceived != null)
+                        {
+
+                            DeviceErrorEventArgs args = new()
+                            {
+                                ErrorCode = "AbnormalStorage",
+                                ErrorDescription = "AbnormalStorage"
+                            };
+                            DeviceErrorReceived(this, args);
+                        }
                     }
                     if (statesResult.ErrorStateInformation.CountingError)
                     {
-                        AuditController.Log(Global.Enumerations.LogTypeEnum.Exception,
-                            statesResult.ErrorStateInformation.CountingError.ToString(),
-                            "statesResult.ErrorStateInformation.CountingError");
-                        // ISSUE: reference to a compiler-generated field
-                        //ECError((object)_counterPort, new ECErrorArgs()
-                        //{
-                        //    Errorcode = 3
-                        //});
+                        if (DeviceErrorReceived != null)
+                        {
+
+                            DeviceErrorEventArgs args = new()
+                            {
+                                ErrorCode = "CountingError",
+                                ErrorDescription = "CountingError"
+                            };
+                            DeviceErrorReceived(this, args);
+                        }
                     }
 
                 }
@@ -1562,6 +1601,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         // Received message
         public string Message = string.Empty;
+    }
+
+    public class DeviceErrorEventArgs : EventArgs
+    {
+        public string ErrorCode = string.Empty;
+        public string ErrorDescription = string.Empty;
+
     }
     public class ECErrorArgs : EventArgs
     {

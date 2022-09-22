@@ -81,9 +81,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 MainFormInstance.BreadCrumbText =
                     MultilanguangeController.GetText(childForm.Name);
             }
-            childForm.Show();
-
-            
 
             childForm.Location = new Point()
             {
@@ -91,6 +88,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Y = MainFormInstance.MainPanel.Height / 2 - childForm.Height / 2
             };
 
+            childForm.Show();
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 

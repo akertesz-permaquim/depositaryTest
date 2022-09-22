@@ -62,6 +62,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
+            _device.Sense();
+            if (_device.StateResultProperty != null)
+            {
+                SetCounterPropertyGridValue();
+
+            }
+
             IoBoardStatusPropertyGrid.SelectedObject = _device.Status();
             SetCounterPropertyGridValue();
         }
@@ -232,7 +239,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     if (ModeCheckBox.Checked)
                         CounterResponseTextBox.Text = CounterResponseTextBox.Text + Environment.NewLine + args.Message;
                     else
-                        CounterResponseTextBox.Text = args.Message;
+                    {
+                        if (args.Message.Length > 0)
+                            CounterResponseTextBox.Text = args.Message;
+                    }
 
                 });
             }

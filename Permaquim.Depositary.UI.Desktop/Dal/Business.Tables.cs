@@ -15966,9 +15966,11 @@ using System.Text;
 					Imagen,
 					UbicacionImagen,
 					UbicacionTextoDetalle,
+					AnchoDetalle,
 					TamanioEntreLineas,
 					AnchoReporte,
 					FactorAltoReporte,
+					LineasAlFinal,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -16032,18 +16034,20 @@ using System.Text;
          /// <param name='Imagen'></param>
          /// <param name='UbicacionImagen'></param>
          /// <param name='UbicacionTextoDetalle'></param>
+         /// <param name='AnchoDetalle'></param>
          /// <param name='TamanioEntreLineas'></param>
          /// <param name='AnchoReporte'></param>
          /// <param name='FactorAltoReporte'></param>
+         /// <param name='LineasAlFinal'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Impresion.Ticket</returns>
-			public Entities.Tables.Impresion.Ticket Add(Int64 TipoId,Int64 DepositarioModeloId,Int64 EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Impresion.Ticket Add(Int64 TipoId,Int64 DepositarioModeloId,Int64 EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Impresion.Ticket)base.Add(new Entities.Tables.Impresion.Ticket(TipoId,DepositarioModeloId,EmpresaId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Impresion.Ticket)base.Add(new Entities.Tables.Impresion.Ticket(TipoId,DepositarioModeloId,EmpresaId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,AnchoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,LineasAlFinal,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Impresion.Ticket> Items()
             {
@@ -16093,16 +16097,18 @@ using System.Text;
             /// <param name="Imagen"></param>
             /// <param name="UbicacionImagen"></param>
             /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
             /// <param name="TamanioEntreLineas"></param>
             /// <param name="AnchoReporte"></param>
             /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Impresion.Ticket> Items(Int64? Id,Int64? TipoId,Int64? DepositarioModeloId,Int64? EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Impresion.Ticket> Items(Int64? Id,Int64? TipoId,Int64? DepositarioModeloId,Int64? EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? AnchoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,Int32? LineasAlFinal,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -16321,6 +16327,18 @@ using System.Text;
                     }
                    
                 }
+                if (AnchoDetalle != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoDetalle, sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                   
+                }
                 if (TamanioEntreLineas != null)
                 {
                     if (this.Where.Count == 0)
@@ -16354,6 +16372,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
+                    }
+                   
+                }
+                if (LineasAlFinal != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.LineasAlFinal, sqlEnum.OperandEnum.Equal, LineasAlFinal);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
                     }
                    
                 }
@@ -16474,18 +16504,20 @@ using System.Text;
             /// <param name="Imagen"></param>
             /// <param name="UbicacionImagen"></param>
             /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
             /// <param name="TamanioEntreLineas"></param>
             /// <param name="AnchoReporte"></param>
             /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositariomodeloid,Int64 empresaid,String nombre,String descripcion,String impresora,String textocabecera,String nombrefuentecabecera,Int32 tamaniofuentecabecera,Int32 ubicaciontextocabecera,String textopie,String nombrefuentepie,Int32 tamaniofuentepie,String ubicaciontextopie,String imagen,String ubicacionimagen,Int32 ubicaciontextodetalle,Int32 tamanioentrelineas,Int32 anchoreporte,Int32 factoraltoreporte,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositariomodeloid,Int64 empresaid,String nombre,String descripcion,String impresora,String textocabecera,String nombrefuentecabecera,Int32 tamaniofuentecabecera,Int32 ubicaciontextocabecera,String textopie,String nombrefuentepie,Int32 tamaniofuentepie,String ubicaciontextopie,String imagen,String ubicacionimagen,Int32 ubicaciontextodetalle,Int32 anchodetalle,Int32 tamanioentrelineas,Int32 anchoreporte,Int32 factoraltoreporte,Int32 lineasalfinal,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Impresion.Ticket {Id = id,TipoId = tipoid,DepositarioModeloId = depositariomodeloid,EmpresaId = empresaid,Nombre = nombre,Descripcion = descripcion,Impresora = impresora,TextoCabecera = textocabecera,NombreFuenteCabecera = nombrefuentecabecera,TamanioFuenteCabecera = tamaniofuentecabecera,UbicacionTextoCabecera = ubicaciontextocabecera,TextoPie = textopie,NombreFuentePie = nombrefuentepie,TamanioFuentePie = tamaniofuentepie,UbicacionTextoPie = ubicaciontextopie,Imagen = imagen,UbicacionImagen = ubicacionimagen,UbicacionTextoDetalle = ubicaciontextodetalle,TamanioEntreLineas = tamanioentrelineas,AnchoReporte = anchoreporte,FactorAltoReporte = factoraltoreporte,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Impresion.Ticket {Id = id,TipoId = tipoid,DepositarioModeloId = depositariomodeloid,EmpresaId = empresaid,Nombre = nombre,Descripcion = descripcion,Impresora = impresora,TextoCabecera = textocabecera,NombreFuenteCabecera = nombrefuentecabecera,TamanioFuenteCabecera = tamaniofuentecabecera,UbicacionTextoCabecera = ubicaciontextocabecera,TextoPie = textopie,NombreFuentePie = nombrefuentepie,TamanioFuentePie = tamaniofuentepie,UbicacionTextoPie = ubicaciontextopie,Imagen = imagen,UbicacionImagen = ubicacionimagen,UbicacionTextoDetalle = ubicaciontextodetalle,AnchoDetalle = anchodetalle,TamanioEntreLineas = tamanioentrelineas,AnchoReporte = anchoreporte,FactorAltoReporte = factoraltoreporte,LineasAlFinal = lineasalfinal,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Impresion.Ticket

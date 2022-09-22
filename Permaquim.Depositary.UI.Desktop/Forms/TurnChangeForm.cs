@@ -21,7 +21,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             LoadStyles();
             LoadMultiLanguageItems();
-            if(DatabaseController.GetAvailableTurns() > 0)
+            if(DatabaseController.GetAvailableTurns() > 0 || DatabaseController.GetPreviousDaysTurns() > 0)
                 LoadTurnChangeButton();
             LoadBackButton();
             InitializeOperationsHeaderGridView();
@@ -91,12 +91,12 @@ namespace Permaquim.Depositary.UI.Desktop
         #region TurnchangeButton
         private void LoadTurnChangeButton()
         {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
+            CustomButton turnchangeButton = ControlBuilder.BuildExitButton(
                 "TurnchangeButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width /2 -5,55);
 
-            this.MainPanel.Controls.Add(backButton);
+            this.MainPanel.Controls.Add(turnchangeButton);
 
-            backButton.Click += new System.EventHandler(TurnchangeButton_Click);
+            turnchangeButton.Click += new System.EventHandler(TurnchangeButton_Click);
         }
         private void TurnchangeButton_Click(object sender, EventArgs e)
         {
@@ -509,7 +509,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintTurnChangeQuantity; i++)
                     {
-                        ReportController.PrintReport(ReportTypeEnum.TurnChange, _turnChange,null);
+                        ReportController.PrintReport(ReportTypeEnum.TurnChange, _turnChange,null, i);
                         _alreadyPrinted = true;
                     }
                 }

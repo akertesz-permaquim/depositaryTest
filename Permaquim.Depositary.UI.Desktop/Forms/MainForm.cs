@@ -7,6 +7,7 @@ using Permaquim.Depositary.UI.Desktop.CustomExceptions;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 using Permaquim.Depositary.UI.Desktop.Forms;
 using System.Windows.Forms;
+using Permaquim.Depositary.UI.Desktop.Entities;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
@@ -124,7 +125,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-
             if (DatabaseController.CurrentDepositary != null)
             {
                 InitializeDevices();
@@ -138,6 +138,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 InformationLabel.BackColor = Color.Red;
                 InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
             }
+        }
+        private void DeviceErrorEventReceived(object sender, DeviceErrorEventArgs args)
+        {
+            AuditController.Log(LogTypeEnum.Exception,args.ErrorCode,args.ErrorDescription);
+            FormsController.OpenChildForm(new DeviceErrorForm(),
+                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+
         }
         private void LoadParameters()
         {
@@ -165,6 +172,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             try
             {
                 _device = new CounterDevice(device);
+
+                _device.DeviceErrorReceived += DeviceErrorEventReceived;
+
                 _pollingTimer.Enabled = true;
 
                 _device.SleepTimeout = DeviceController.GetSleepInterval();
@@ -198,7 +208,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                                 _device.CloseEscrow();
 
                             // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                            if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode)
+                            if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode
+                                || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.InitialMode)
                             {
                                 _device.RemoteCancel();
                             }
@@ -269,15 +280,23 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             {
 
-                //if (ParameterController.PrintsBagExtraction)
-                //    ReportController.PrintReport(ReportTypeEnum.ValueExtraction, null, null);
-
                 if (_blockingDialog == null &&
                     (DatabaseController.CurrentOperation == null ||
                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
                 {
                     AuditController.Log(LogTypeEnum.Exception, MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA),
                     MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
+
+                    if (ParameterController.PrintsBagExtraction)
+                    {
+                        for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
+                        {
+                            var _bagContentItems = DatabaseController.GetBillBagContentItems();
+                            _bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
+                            ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+                            DatabaseController.CurrentContainer, _bagContentItems, 0);
+                        }
+                    }
 
                     _blockingDialog = new SystemBlockingDialog()
                     {
@@ -322,41 +341,38 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             try
             {
 
-   
-            if(FormsController.ActiveFormscount == 0)
-            {
-                // si quedó contenido en el escrow debe ser retirado
-                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                if (FormsController.ActiveFormscount == 0)
                 {
-
-                    AuditController.Log(LogTypeEnum.Exception, 
-                        MultilanguangeController.GetText(MultiLanguageEnum.RETIRE_VALORES_ESCROW),
-                        MultilanguangeController.GetText(MultiLanguageEnum.ERROR_OPERACION_PREVIA));
-
-                    _device.OpenEscrow();
-                    _pollingTimer.Enabled = false;
-                    if (MessageBox.Show(
-                        //"Retire el contenido de la pre-bóveda para poder iniciar la operación",
-                        MultilanguangeController.GetText(MultiLanguageEnum.RETIRE_VALORES_ESCROW),
-                        //"Error en operación previa", 
-                        MultilanguangeController.GetText(MultiLanguageEnum.ERROR_OPERACION_PREVIA),
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                    // si quedó contenido en el escrow debe ser retirado
+                    if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                     {
-                        _pollingTimer.Enabled = false;
-                            
-                        _device.CloseEscrow();
-                    }
 
-                    _device.RemoteCancel();
+                        AuditController.Log(LogTypeEnum.Exception,
+                            MultilanguangeController.GetText(MultiLanguageEnum.RETIRE_VALORES_ESCROW),
+                            MultilanguangeController.GetText(MultiLanguageEnum.ERROR_OPERACION_PREVIA));
+
+                        _device.OpenEscrow();
+                        _pollingTimer.Enabled = false;
+                        if (MessageBox.Show(
+                            //"Retire el contenido de la pre-bóveda para poder iniciar la operación",
+                            MultilanguangeController.GetText(MultiLanguageEnum.RETIRE_VALORES_ESCROW),
+                            //"Error en operación previa", 
+                            MultilanguangeController.GetText(MultiLanguageEnum.ERROR_OPERACION_PREVIA),
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                        {
+                            _pollingTimer.Enabled = false;
+
+                            _device.CloseEscrow();
+                        }
+
+                        _device.RemoteCancel();
+                    }
                 }
-            }
             }
             catch (Exception ex)
             {
                 AuditController.Log(ex);
-                SetInformationMessage(InformationTypeEnum.Error,ex.Message);
-
-
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
             }
         }
 
@@ -465,8 +481,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                   MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
             }
             else
+            {
+                string turnDate = string.Empty;
+                if(DatabaseController.CurrentTurn.Fecha != null)
+                    turnDate = " - " + ((DateTime)DatabaseController.CurrentTurn.Fecha).ToString("dd/MM/yyyy");
                 TurnAndDateTimeLabel.Text += DatabaseController.CurrentTurn.TurnoDepositarioId.
-                EsquemaDetalleTurnoId.Nombre;
+                EsquemaDetalleTurnoId.Nombre + turnDate;
+            }
+               
 
             TurnAndDateTimeLabel.Text += Environment.NewLine +  DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
         }
@@ -562,6 +584,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void MainPictureBox_Click(object sender, EventArgs e)
         {
+
             if (ConfigurationController.IsDevelopment())
                 Login();
             else
@@ -684,8 +707,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             //ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
             //                           DatabaseController.CurrentContainer, _bagContentItems);
 
-            ReportController.PrintReport(ReportTypeEnum.DailyClosing,
-                                   DatabaseController.CurrentDailyClosing, DatabaseController.GetCurrentDailyClosingTransactions());
+            ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+                                   DatabaseController.CurrentContainer,
+                                   DatabaseController.GetBillBagContentItems(), 0); 
 
         }
     }
