@@ -57,23 +57,34 @@ namespace Permaquim.Depositary.UI.Desktop
             _device.CounterDeviceDataReceived += CounterDeviceDataReceived;
             _device.IOboardDeviceDataReceived += IOboardDeviceDataReceived;
 
-            TimeOutController.Stop();
+            TimeOutController.Reset();
         }
 
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
-            _device.Sense();
-            if (_device.StateResultProperty != null)
+
+            if (TimeOutController.IsTimeOut())
             {
-                SetCounterPropertyGridValue();
-
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                FormsController.LogOff();
             }
+            else
+            {
+                _device.Sense();
+                if (_device.StateResultProperty != null)
+                {
+                    SetCounterPropertyGridValue();
+                }
 
-            IoBoardStatusPropertyGrid.SelectedObject = _device.Status();
-            SetCounterPropertyGridValue();
+                IoBoardStatusPropertyGrid.SelectedObject = _device.Status();
+                SetCounterPropertyGridValue();
+            }
         }
         private void ExecuteIoBoardComandButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
+
             switch (IoboardCommandComboBox.SelectedItem.ToString().Trim())
             {
                 case "Open":
@@ -131,6 +142,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ExecuteCounterComandButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
+
             switch (CounterCommandComboBox.SelectedItem.ToString().Trim())
             {
                 case "OpenEscrow":
@@ -266,6 +279,32 @@ namespace Permaquim.Depositary.UI.Desktop
         private void InitializeLocals()
         {
             // inicializar variables locales.
+            TimeOutController.Reset();
+        }
+
+        private void MainPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void CounterStatusPropertyGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void IoBoardStatusPropertyGrid_MouseClick(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void CounterResponseTextBox_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void IoBoardResponseTextBox_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

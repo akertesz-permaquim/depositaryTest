@@ -13,7 +13,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static List<Form> _formList = new();
         public static MainForm MainFormInstance { get; set; }
 
-        private static Form _activeForm = null;
+        public static Form ActiveForm { get; set; }
 
         /// <summary>
         /// Hides 'instance', shows 'childForm' and appends breadCrumbText
@@ -89,6 +89,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             };
 
             childForm.Show();
+            ActiveForm = childForm;
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 

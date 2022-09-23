@@ -42,36 +42,41 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
-  
 
-            if (!_device.StateResultProperty.ErrorStateInformation.AbnormalDevice
-                && !_device.StateResultProperty.ErrorStateInformation.AbnormalStorage
-                && !_device.StateResultProperty.ErrorStateInformation.CountingError
-                && !_device.StateResultProperty.ErrorStateInformation.Jamming
-                )
+            if (_device.StateResultProperty != null)
             {
-                this.DialogResult = DialogResult.None;
-                FormsController.HideInstance(this);
-            }
-            else
-            {
-                if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent 
-                    && _device.StateResultProperty.DoorStateInformation.Escrow)
+                if (!_device.StateResultProperty.ErrorStateInformation.AbnormalDevice
+                    && !_device.StateResultProperty.ErrorStateInformation.AbnormalStorage
+                    && !_device.StateResultProperty.ErrorStateInformation.CountingError
+                    && !_device.StateResultProperty.ErrorStateInformation.Jamming
+                    )
                 {
-                    _device.CloseEscrow();
-                    Thread.Sleep(500);
-                }
+                    _pollingTimer.Enabled = false;
 
-                if (!_device.StateResultProperty.DoorStateInformation.Escrow)
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
                 {
-                    _device.NormalErrorRecoveryMode();
-                    Thread.Sleep(500);
-                   // _device.StoringErrorRecoveryMode();
-                    Thread.Sleep(500);
-                    _device.DeviceReset();
+                    if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                        && _device.StateResultProperty.DoorStateInformation.Escrow)
+                    {
+                        _device.CloseEscrow();
+                        Thread.Sleep(500);
+                    }
+
+                    if (!_device.StateResultProperty.DoorStateInformation.Escrow)
+                    {
+                        _device.NormalErrorRecoveryMode();
+                        Thread.Sleep(500);
+                        _device.DeviceReset();
+                        Thread.Sleep(500);
+                    }
+
+                    _pollingTimer.Enabled = false;
+                    this.DialogResult=DialogResult.OK;
+
                 }
             }
-
         }
         private void CenterPanel()
         {
@@ -107,7 +112,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         private void LoadUnJamButton()
         {
             CustomButton unJamButton = ControlBuilder.BuildStandardButton(
-                "UnJamButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
+                "UnJamButton", MultilanguangeController.GetText(MultiLanguageEnum.RESET), MainPanel.Width);
 
             this.MainPanel.Controls.Add(unJamButton);
             unJamButton.Click += new System.EventHandler(UnJamButton_Click);
@@ -115,13 +120,11 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
         private void UnJamButton_Click(object sender, EventArgs e)
         {
-            _pollingTimer.Enabled = true;
-
             if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
             {
                 _device.OpenEscrow();
             }
-           
+            _pollingTimer.Enabled = true;
         }
         #endregion
     }

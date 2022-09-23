@@ -171,6 +171,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        public static int BagSensorBehaviour
+        {
+            get
+            {
+                return Convert.ToInt16(DatabaseController.GetEnterpriseParameterValue("COMPORTAMIENTO_SENSORES_CONTENEDOR"));
+            }
+
+        }
         public static bool ValidatesBagInplace
         {
             get

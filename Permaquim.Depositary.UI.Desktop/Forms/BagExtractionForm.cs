@@ -17,7 +17,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private bool _bagAlreadyInserted = false;
         private bool _alreadyPrinted = false;
-        
+
+        private enum BagSensorBehaviourEnum
+        {
+            Ninguno,
+            Argentina,
+            Chile
+        }
+
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
@@ -57,6 +64,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollTimer_Tick;
+            
+            _pollingTimer.Enabled = true;
 
             CenterPanel();
 
@@ -79,16 +88,22 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PollTimer_Tick(object? sender, EventArgs e)
         {
-
-            TimeOutController.Stop();
-
-            if (_device != null && _device.IoBoardConnected)
+            if (TimeOutController.IsTimeOut())
             {
-                // Muestra el estado del hardware
-                ShowHardwareMonitorData();
-                // Procesa los estados 
-                ProcessDeviceStatus();
-                ShowInformation();
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                FormsController.LogOff();
+            }
+            else
+            {
+                if (_device != null && _device.IoBoardConnected)
+                {
+                    // Muestra el estado del hardware
+                    ShowHardwareMonitorData();
+                    // Procesa los estados 
+                    ProcessDeviceStatus();
+                    ShowInformation();
+                }
             }
         }
         private void ShowHardwareMonitorData()
@@ -249,8 +264,10 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void VerifyContainerCodeVisibility()
         {
-           _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending; // ARG
-            //_containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted; // CHILE
+            if(ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Argentina)
+                _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending;
+            if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Chile)
+                _containerTextBox.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted;
         }
         private void VerifyButtonsVisibility()
         {
@@ -259,9 +276,17 @@ namespace Permaquim.Depositary.UI.Desktop
             _backButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None 
                 || _bagExtractionProcess == BagExtractionProcessEnum.BagError
                 || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_ERROR;
-            _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending // ARG
-            //_confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted // CHILE
+
+            if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Argentina)
+            {
+                _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending
+                 && ParameterController.RequiresContainerIdentifier;
+            }
+            if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Chile)
+            {
+                _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted
                 && ParameterController.RequiresContainerIdentifier;
+            }
 
         }
         private void LoadGateButton()

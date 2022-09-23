@@ -38,9 +38,10 @@
             // 
             this.MainPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MainPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("MainPictureBox.Image")));
-            this.MainPictureBox.Location = new System.Drawing.Point(272, 16);
+            this.MainPictureBox.Location = new System.Drawing.Point(360, 98);
             this.MainPictureBox.Name = "MainPictureBox";
-            this.MainPictureBox.Size = new System.Drawing.Size(416, 344);
+            this.MainPictureBox.Size = new System.Drawing.Size(304, 248);
+            this.MainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.MainPictureBox.TabIndex = 0;
             this.MainPictureBox.TabStop = false;
             // 
@@ -48,7 +49,7 @@
             // 
             this.MainPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(328, 376);
+            this.MainPanel.Location = new System.Drawing.Point(363, 378);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(300, 155);
             this.MainPanel.TabIndex = 2;
@@ -57,7 +58,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 539);
+            this.ClientSize = new System.Drawing.Size(1027, 591);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainPictureBox);
             this.DoubleBuffered = true;

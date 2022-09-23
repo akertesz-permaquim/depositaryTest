@@ -44,6 +44,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         DEXDevice? _deXDevice = null;
 
         SystemBlockingDialog _blockingDialog = null;
+        DeviceErrorForm _errorForm = null;
  
 
         public string BreadCrumbText
@@ -141,9 +142,15 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void DeviceErrorEventReceived(object sender, DeviceErrorEventArgs args)
         {
-            AuditController.Log(LogTypeEnum.Exception,args.ErrorCode,args.ErrorDescription);
-            FormsController.OpenChildForm(new DeviceErrorForm(),
-                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+           
+            if (_errorForm == null)
+            {
+                 AuditController.Log(LogTypeEnum.Exception, args.ErrorCode, args.ErrorDescription);
+                _errorForm = new DeviceErrorForm();
+                _errorForm.Tag = _device;
+                _errorForm.ShowDialog();
+                _errorForm = null;
+            }
 
         }
         private void LoadParameters()

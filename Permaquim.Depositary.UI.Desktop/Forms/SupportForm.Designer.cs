@@ -57,6 +57,7 @@
             this.MainPanel.Size = new System.Drawing.Size(1056, 632);
             this.MainPanel.TabIndex = 0;
             this.MainPanel.VisibleChanged += new System.EventHandler(this.MainPanel_VisibleChanged);
+            this.MainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainPanel_MouseClick);
             // 
             // BackButton
             // 
@@ -134,6 +135,7 @@
             this.IoBoardResponseTextBox.PlaceholderText = "Respuestas de la IO Board";
             this.IoBoardResponseTextBox.Size = new System.Drawing.Size(476, 128);
             this.IoBoardResponseTextBox.TabIndex = 161;
+            this.IoBoardResponseTextBox.Click += new System.EventHandler(this.IoBoardResponseTextBox_Click);
             // 
             // IoBoardStatusPropertyGrid
             // 
@@ -146,6 +148,7 @@
             this.IoBoardStatusPropertyGrid.TabIndex = 0;
             this.IoBoardStatusPropertyGrid.ViewBorderColor = System.Drawing.Color.SteelBlue;
             this.IoBoardStatusPropertyGrid.ViewForeColor = System.Drawing.Color.SteelBlue;
+            this.IoBoardStatusPropertyGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.IoBoardStatusPropertyGrid_MouseClick);
             // 
             // CounterStatudGroupBox
             // 
@@ -206,6 +209,7 @@
             this.CounterResponseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.CounterResponseTextBox.Size = new System.Drawing.Size(480, 88);
             this.CounterResponseTextBox.TabIndex = 161;
+            this.CounterResponseTextBox.Click += new System.EventHandler(this.CounterResponseTextBox_Click);
             // 
             // ExecuteCounterComandButton
             // 
@@ -229,6 +233,7 @@
             this.CounterStatusPropertyGrid.TabIndex = 0;
             this.CounterStatusPropertyGrid.ViewBorderColor = System.Drawing.Color.SteelBlue;
             this.CounterStatusPropertyGrid.ViewForeColor = System.Drawing.Color.SteelBlue;
+            this.CounterStatusPropertyGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CounterStatusPropertyGrid_MouseClick);
             // 
             // CounterCommandComboBox
             // 
