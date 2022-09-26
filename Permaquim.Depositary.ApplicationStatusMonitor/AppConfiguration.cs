@@ -1,13 +1,16 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace Permaquim.Depositary.ApplicationStatusMonitor
 {
     internal class AppConfiguration
     {
 
-        internal static String ConnectionString
+        /*internal static String ConnectionString
         {
             get { return getConfiguration("ConnectionString"); }
-        }
+        }*/
+
         private static string getConfiguration(string configurationEntry)
         {
 
@@ -22,9 +25,9 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
             return configuration.GetSection("AppSettings").GetSection(configurationEntry).Value.ToString();
         }
-        public static List<WorkerTask> GetWorkerTasks()
+        public static List<WorkerTask> GetWorkerTasks(string tasksJson)
         {
-            string str = File.ReadAllText(Directory.GetCurrentDirectory() + @"\Tasks.Json");
+            string str = File.ReadAllText(tasksJson);
 
             return JsonConvert.DeserializeObject<List<WorkerTask>>(str);
 
