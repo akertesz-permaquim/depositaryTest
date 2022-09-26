@@ -811,14 +811,17 @@ namespace Permaquim.Depositary.Launcher.Model
                         Int64? grupoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Grupo", item.GrupoId);
                         Int64? estiloEsquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.Esquema", item.EstiloEsquemaId);
                         Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
+                        Int64? codigoPostalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.CodigoPostal", item.CodigoPostalId);
 
-                        if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue)
+                        if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue && codigoPostalIdOrigen.HasValue)
                         {
                             item.GrupoId = grupoIdOrigen.Value;
 
                             item.EstiloEsquemaId = estiloEsquemaIdOrigen.Value;
 
                             item.LenguajeId = lenguajeIdOrigen.Value;
+
+                            item.CodigoPostalId = codigoPostalIdOrigen.Value;
 
                             Int64 origenId = item.Id;
 
@@ -2189,12 +2192,14 @@ namespace Permaquim.Depositary.Launcher.Model
                     foreach (var item in Ticket)
                     {
                         Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.TipoId);
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
                         Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.DepositarioModeloId);
 
-                        if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue)
+                        if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue && empresaIdOrigen.HasValue)
                         {
                             item.TipoId = tipoIdOrigen.Value;
                             item.DepositarioModeloId = depositarioModeloIdOrigen.Value;
+                            item.EmpresaId = empresaIdOrigen.Value;
 
                             Int64 origenId = item.Id;
 

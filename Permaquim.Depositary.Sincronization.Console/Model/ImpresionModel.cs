@@ -77,8 +77,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                             Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.TipoId);
                             Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.DepositarioModeloId);
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
 
-                            if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue)
+                            if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue && empresaIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -86,6 +87,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.TipoId = tipoIdOrigen.Value;
                                 item.DepositarioModeloId = depositarioModeloIdOrigen.Value;
+                                item.EmpresaId = empresaIdOrigen.Value;
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
