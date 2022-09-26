@@ -55,16 +55,31 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                 break;
 
                             case WorkerTask.WorkerTaskTypeEnum.Executable:
-                                
-                                var process = Process.GetProcessById(item.ProcessId);
-                                if (item.ProcessId == 0 || process.HasExited)
+
+                                bool isUp = true;
+
+                                try
                                 {
-                                    var startInfo = new ProcessStartInfo();
-                                    startInfo.WorkingDirectory = Path.GetDirectoryName(item.Target);
-                                    startInfo.UserName = "PERMAQUIM\\Akertesz";
-                                    startInfo.FileName = item.Target;
-                                    item.ProcessId = Process.Start("CMD.exe","/C "+item.Target).Id;
-                                    Log("Detected Process " + item.ProcessName + " NO LONGER RUNNING, STARTING...");
+                                    if (item.ProcessId != 0)
+                                    {
+                                        
+                                        var process = Process.GetProcessById(item.ProcessId);
+                                        if (process.HasExited) isUp = false;
+                                    }
+                                    else
+                                    {
+                                        isUp = false;
+                                    }
+                                }
+                                catch(ArgumentException argex)
+                                {
+                                    isUp = false;
+                                }
+                                
+                                if (!isUp)
+                                {
+                                    if (item.ProcessId == 0) Log("Starting process " + item.ProcessName + "...");
+                                    item.ProcessId = Process.Start(item.Target).Id;
                                 }
                                 break;
 
