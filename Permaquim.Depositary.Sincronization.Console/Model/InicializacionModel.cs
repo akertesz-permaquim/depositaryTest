@@ -99,7 +99,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                         Int64? sincronizacionCabeceraId = null;
 
-                        sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Sincronizacion.Configuracion");
+                        sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Sincronizacion.Configuracion");
 
                         if (sincronizacionCabeceraId != null)
                         {
@@ -129,7 +129,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Geografia.Pais");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Pais");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -151,13 +151,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Geografia.Provincia");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Provincia");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in GeografiaProvincia)
                     {
-                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.Pais", item.PaisId);
+                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Pais", item.PaisId);
 
                         if (paisIdOrigen.HasValue)
                         {
@@ -179,13 +179,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Geografia.Ciudad");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Ciudad");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in GeografiaCiudad)
                     {
-                        Int64? provinciaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.Provincia", item.ProvinciaId);
+                        Int64? provinciaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Provincia", item.ProvinciaId);
 
                         if (provinciaIdOrigen.HasValue)
                         {
@@ -208,13 +208,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Geografia.CodigoPostal");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.CodigoPostal");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in GeografiaCodigoPostal)
                     {
-                        Int64? ciudadIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.Ciudad", item.CiudadId);
+                        Int64? ciudadIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Ciudad", item.CiudadId);
 
                         if (ciudadIdOrigen.HasValue)
                         {
@@ -238,7 +238,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Geografia.Zona");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Zona");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -265,7 +265,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Auditoria.TipoLog");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Auditoria.TipoLog");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -292,7 +292,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.Lenguaje");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Regionalizacion.Lenguaje");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -315,14 +315,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.LenguajeItem");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Regionalizacion.LenguajeItem");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
 
                     foreach (var item in RegionalizacionLenguajeItem)
                     {
-                        Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
+                        Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Regionalizacion.Lenguaje", item.LenguajeId);
 
                         if (lenguajeIdOrigen.HasValue)
                         {
@@ -349,7 +349,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Visualizacion.PerfilTipo");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Visualizacion.PerfilTipo");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -373,13 +373,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Visualizacion.Perfil");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Visualizacion.Perfil");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in VisualizacionPerfil)
                     {
-                        Int64? perfilTipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.PerfilTipo", item.PerfilTipoId);
+                        Int64? perfilTipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Visualizacion.PerfilTipo", item.PerfilTipoId);
 
                         if (perfilTipoIdOrigen.HasValue)
                         {
@@ -402,13 +402,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Visualizacion.PerfilItem");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Visualizacion.PerfilItem");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in VisualizacionPerfilItem)
                     {
-                        Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.Perfil", item.PerfilId);
+                        Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Visualizacion.Perfil", item.PerfilId);
 
                         if (perfilIdOrigen.HasValue)
                         {
@@ -435,7 +435,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Biometria.HuellaDactilar");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Biometria.HuellaDactilar");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -462,7 +462,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.TipoAplicacion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoAplicacion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -486,13 +486,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.Aplicacion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Aplicacion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadAplicacion)
                     {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.TipoAplicacion", item.TipoId);
+                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoAplicacion", item.TipoId);
 
                         if (tipoIdOrigen.HasValue)
                         {
@@ -515,13 +515,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.AplicacionParametro");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.AplicacionParametro");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadAplicacionParametro)
                     {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
+                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
 
                         if (aplicacionIdOrigen.HasValue)
                         {
@@ -544,14 +544,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.AplicacionParametroValor");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.AplicacionParametroValor");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadAplicacionParametroValor)
                     {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
-                        Int64? aplicacionParametroIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.AplicacionParametro", item.ParametroId);
+                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
+                        Int64? aplicacionParametroIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.AplicacionParametro", item.ParametroId);
 
                         if (aplicacionIdOrigen.HasValue && aplicacionParametroIdOrigen.HasValue)
                         {
@@ -580,7 +580,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Valor.Tipo");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.Tipo");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -602,13 +602,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Valor.Moneda");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.Moneda");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in ValorMoneda)
                     {
-                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.Pais", item.PaisId);
+                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Pais", item.PaisId);
 
                         if (paisIdOrigen.HasValue)
                         {
@@ -631,14 +631,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Valor.Denominacion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.Denominacion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in ValorDenominacion)
                     {
-                        Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Tipo", item.TipoValorId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
+                        Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Tipo", item.TipoValorId);
+                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
 
                         if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
                         {
@@ -663,14 +663,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Valor.RelacionMonedaTipoValor");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.RelacionMonedaTipoValor");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in ValorRelacionMonedaTipoValor)
                     {
-                        Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Tipo", item.TipoValorId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
+                        Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Tipo", item.TipoValorId);
+                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
 
                         if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
                         {
@@ -701,7 +701,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Estilo.TipoEsquemaDetalle");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Estilo.TipoEsquemaDetalle");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -724,7 +724,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Estilo.Esquema");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Estilo.Esquema");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -745,14 +745,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Estilo.EsquemaDetalle");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Estilo.EsquemaDetalle");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in EstiloEsquemaDetalle)
                     {
-                        Int64? esquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.Esquema", item.EsquemaId);
-                        Int64? tipoEsquemaDetalleIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.TipoEsquemaDetalle", item.TipoEsquemaDetalleId);
+                        Int64? esquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Estilo.Esquema", item.EsquemaId);
+                        Int64? tipoEsquemaDetalleIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Estilo.TipoEsquemaDetalle", item.TipoEsquemaDetalleId);
 
                         if (esquemaIdOrigen.HasValue && tipoEsquemaDetalleIdOrigen.HasValue)
                         {
@@ -781,7 +781,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Directorio.Grupo");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Grupo");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -804,15 +804,15 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Directorio.Empresa");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Empresa");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DirectorioEmpresa)
                     {
-                        Int64? grupoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Grupo", item.GrupoId);
-                        Int64? estiloEsquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.Esquema", item.EstiloEsquemaId);
-                        Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
+                        Int64? grupoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Grupo", item.GrupoId);
+                        Int64? estiloEsquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Estilo.Esquema", item.EstiloEsquemaId);
+                        Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Regionalizacion.Lenguaje", item.LenguajeId);
 
                         if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue)
                         {
@@ -838,15 +838,15 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Directorio.Sucursal");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Sucursal");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DirectorioSucursal)
                     {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
-                        Int64? codigoPostalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.CodigoPostal", item.CodigoPostalId);
-                        Int64? zonaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.Zona", item.ZonaId);
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
+                        Int64? codigoPostalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.CodigoPostal", item.CodigoPostalId);
+                        Int64? zonaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Zona", item.ZonaId);
 
                         if (empresaIdOrigen.HasValue && codigoPostalIdOrigen.HasValue && zonaIdOrigen.HasValue)
                         {
@@ -872,13 +872,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Directorio.Sector");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Sector");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DirectorioSector)
                     {
-                        Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Sucursal", item.SucursalId);
+                        Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sucursal", item.SucursalId);
 
                         if (sucursalIdOrigen.HasValue)
                         {
@@ -900,14 +900,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Directorio.RelacionMonedaSucursal");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.RelacionMonedaSucursal");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DirectorioRelacionMonedaSucursal)
                     {
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
-                        Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Sucursal", item.SucursalId);
+                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
+                        Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sucursal", item.SucursalId);
 
                         if (monedaIdOrigen.HasValue && sucursalIdOrigen.HasValue)
                         {
@@ -934,13 +934,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Valor.OrigenValor");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.OrigenValor");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in OrigenValor)
                     {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
 
                         if (empresaIdOrigen.HasValue)
                         {
@@ -968,7 +968,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.TipoFuncion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoFuncion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -991,7 +991,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.TipoIdentificador");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoIdentificador");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -1014,7 +1014,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.TipoMenu");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoMenu");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -1037,15 +1037,15 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.Usuario");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Usuario");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadUsuario)
                     {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
-                        Int64? lenguajelIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
-                        Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.Perfil", item.PerfilId);
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
+                        Int64? lenguajelIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Regionalizacion.Lenguaje", item.LenguajeId);
+                        Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Visualizacion.Perfil", item.PerfilId);
 
                         if (empresaIdOrigen.HasValue && lenguajelIdOrigen.HasValue && perfilIdOrigen.HasValue)
                         {
@@ -1072,14 +1072,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.Funcion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Funcion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadFuncion)
                     {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
-                        Int64? tipoFuncionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.TipoFuncion", item.TipoId);
+                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
+                        Int64? tipoFuncionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoFuncion", item.TipoId);
 
                         if (aplicacionIdOrigen.HasValue && tipoFuncionIdOrigen.HasValue)
                         {
@@ -1104,14 +1104,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.IdentificadorUsuario");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.IdentificadorUsuario");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadIdentificadorUsuario)
                     {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioId);
-                        Int64? tipoIdentificadorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.TipoIdentificador", item.TipoId);
+                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
+                        Int64? tipoIdentificadorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoIdentificador", item.TipoId);
 
                         if (usuarioIdOrigen.HasValue && tipoIdentificadorIdOrigen.HasValue)
                         {
@@ -1135,19 +1135,19 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.Rol");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Rol");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadRol.OrderBy(x => x.DependeDe))
                     {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
+                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
 
                         if (aplicacionIdOrigen.HasValue)
                         {
                             if (item.DependeDe.HasValue)
                             {
-                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.DependeDe.Value);
+                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.DependeDe.Value);
                                 item.DependeDe = dependeDeOrigen;
                             }
 
@@ -1169,14 +1169,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.UsuarioRol");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.UsuarioRol");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadUsuarioRol)
                     {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioId);
-                        Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.RolId);
+                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
+                        Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.RolId);
 
                         if (usuarioIdOrigen.HasValue && rolIdOrigen.HasValue)
                         {
@@ -1200,14 +1200,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.UsuarioSector");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.UsuarioSector");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadUsuarioSector)
                     {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioId);
-                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Sector", item.SectorId);
+                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
+                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sector", item.SectorId);
 
                         if (usuarioIdOrigen.HasValue && usuarioIdOrigen.HasValue)
                         {
@@ -1231,14 +1231,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.Menu");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Menu");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadMenu)
                     {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.TipoMenu", item.TipoId);
-                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Funcion", item.FuncionId);
+                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoMenu", item.TipoId);
+                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Funcion", item.FuncionId);
 
                         if (tipoIdOrigen.HasValue && funcionIdOrigen.HasValue)
                         {
@@ -1248,7 +1248,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                             if (item.DependeDe.HasValue)
                             {
-                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.DependeDe.Value);
+                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.DependeDe.Value);
                                 item.DependeDe = dependeDeOrigen;
                             }
 
@@ -1269,14 +1269,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Seguridad.RolFuncion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.RolFuncion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in SeguridadRolFuncion)
                     {
-                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Funcion", item.FuncionId);
-                        Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.RolId);
+                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId);
+                        Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.RolId);
 
                         if (funcionIdOrigen.HasValue && rolIdOrigen.HasValue)
                         {
@@ -1305,13 +1305,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.Banco");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.Banco");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in BancaBanco)
                     {
-                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.Pais", item.PaisId);
+                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Pais", item.PaisId);
 
                         if (paisIdOrigen.HasValue)
                         {
@@ -1334,13 +1334,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.TipoCuenta");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.TipoCuenta");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in BancaTipoCuenta)
                     {
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
+                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
 
                         if (monedaIdOrigen.HasValue)
                         {
@@ -1362,15 +1362,15 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.Cuenta");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.Cuenta");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in BancaCuenta)
                     {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.TipoCuenta", item.TipoId);
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
-                        Int64? bancoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.Banco", item.BancoId);
+                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Banca.TipoCuenta", item.TipoId);
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
+                        Int64? bancoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Banca.Banco", item.BancoId);
 
                         if (tipoIdOrigen.HasValue && empresaIdOrigen.HasValue && bancoIdOrigen.HasValue)
                         {
@@ -1396,14 +1396,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.UsuarioCuenta");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.UsuarioCuenta");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in BancaUsuarioCuenta)
                     {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioId);
-                        Int64? cuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.Cuenta", item.CuentaId);
+                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
+                        Int64? cuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Banca.Cuenta", item.CuentaId);
 
                         if (usuarioIdOrigen.HasValue && cuentaIdOrigen.HasValue)
                         {
@@ -1432,7 +1432,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Aplicacion.ConfiguracionTipoDato");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.ConfiguracionTipoDato");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -1455,13 +1455,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Aplicacion.ConfiguracionValidacionDato");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in AplicacionConfiguracionValidacionDato)
                     {
-                        Int64? tipoDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Aplicacion.ConfiguracionTipoDato", item.TipoDatoId);
+                        Int64? tipoDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionTipoDato", item.TipoDatoId);
 
                         if (tipoDatoIdOrigen.HasValue)
                         {
@@ -1484,14 +1484,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Aplicacion.Configuracion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.Configuracion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in AplicacionConfiguracion)
                     {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
-                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
+                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
+                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
 
                         if (aplicacionIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
                         {
@@ -1515,14 +1515,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Aplicacion.ConfiguracionEmpresa");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.ConfiguracionEmpresa");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in AplicacionConfiguracionEmpresa)
                     {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
-                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
+                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
 
                         if (empresaIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
                         {
@@ -1550,7 +1550,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.TipoConfiguracionDepositario");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.TipoConfiguracionDepositario");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -1573,7 +1573,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.Marca");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.Marca");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -1596,7 +1596,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.PlantillaMoneda");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.PlantillaMoneda");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -1619,14 +1619,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.PlantillaMonedaDetalle");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.PlantillaMonedaDetalle");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in PlantillaMonedaDetalle)
                     {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
+                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
+                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
 
                         if (plantillaMonedaIdOrigen.HasValue && monedaIdOrigen.HasValue)
                         {
@@ -1651,14 +1651,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.Modelo");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.Modelo");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoModelo)
                     {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
-                        Int64? marcaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Marca", item.MarcaId);
+                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
+                        Int64? marcaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Marca", item.MarcaId);
 
                         if (plantillaMonedaIdOrigen.HasValue && marcaIdOrigen.HasValue)
                         {
@@ -1683,13 +1683,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.TipoContadora");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.TipoContadora");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoTipoContadora)
                     {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.ModeloId);
+                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.ModeloId);
 
                         if (plantillaMonedaIdOrigen.HasValue)
                         {
@@ -1712,13 +1712,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.TipoPlaca");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.TipoPlaca");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoTipoPlaca)
                     {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.ModeloId);
+                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.ModeloId);
 
                         if (plantillaMonedaIdOrigen.HasValue)
                         {
@@ -1741,14 +1741,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.Depositario");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.Depositario");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoDepositario)
                     {
-                        Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.ModeloId);
-                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Sector", item.SectorId);
+                        Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.ModeloId);
+                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sector", item.SectorId);
 
                         if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue)
                         {
@@ -1773,14 +1773,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.DepositarioContadora");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioContadora");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoDepositarioContadora)
                     {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoContadora", item.TipoContadoraId);
+                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
+                        Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoContadora", item.TipoContadoraId);
 
                         if (depositarioIdOrigen.HasValue && tipoContadoraIdOrigen.HasValue)
                         {
@@ -1805,13 +1805,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.DepositarioEstado");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioEstado");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoDepositarioEstado)
                     {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
+                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
 
                         if (depositarioIdOrigen.HasValue)
                         {
@@ -1834,14 +1834,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.DepositarioMoneda");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioMoneda");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoDepositarioMoneda)
                     {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
+                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
+                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
 
                         if (depositarioIdOrigen.HasValue && monedaIdOrigen.HasValue)
                         {
@@ -1866,14 +1866,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.DepositarioPlaca");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioPlaca");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoDepositarioPlaca)
                     {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoPlaca", item.TipoPlacaId);
+                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
+                        Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoPlaca", item.TipoPlacaId);
 
                         if (depositarioIdOrigen.HasValue && tipoPlacaIdOrigen.HasValue)
                         {
@@ -1898,13 +1898,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.ComandoContadora");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.ComandoContadora");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoComandoContadora)
                     {
-                        Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoContadora", item.TipoContadoraId);
+                        Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoContadora", item.TipoContadoraId);
 
                         if (tipoContadoraIdOrigen.HasValue)
                         {
@@ -1927,13 +1927,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.ComandoPlaca");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.ComandoPlaca");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoComandoPlaca)
                     {
-                        Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoPlaca", item.TipoPlacaId);
+                        Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoPlaca", item.TipoPlacaId);
 
                         if (tipoPlacaIdOrigen.HasValue)
                         {
@@ -1956,14 +1956,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Dispositivo.ConfiguracionDepositario");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.ConfiguracionDepositario");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in DispositivoConfiguracionDepositario)
                     {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoConfiguracionDepositario", item.TipoId);
+                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
+                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoConfiguracionDepositario", item.TipoId);
 
                         if (depositarioIdOrigen.HasValue)
                         {
@@ -1992,7 +1992,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Operacion.TipoContenedor");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoContenedor");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -2015,7 +2015,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Operacion.TipoEvento");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoEvento");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -2038,7 +2038,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Operacion.TipoTransaccion");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoTransaccion");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -2046,7 +2046,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                     {
                         if (item.FuncionId.HasValue)
                         {
-                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Funcion", item.FuncionId.Value);
+                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId.Value);
 
                             if (funcionIdOrigen.HasValue)
                                 item.FuncionId = funcionIdOrigen.Value;
@@ -2073,7 +2073,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Turno.EsquemaTurno");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Turno.EsquemaTurno");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -2096,13 +2096,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Turno.EsquemaDetalleTurno");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Turno.EsquemaDetalleTurno");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in TurnoEsquemaDetalleTurno)
                     {
-                        Int64? esquemaTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Turno.EsquemaTurno", item.EsquemaTurnoId);
+                        Int64? esquemaTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Turno.EsquemaTurno", item.EsquemaTurnoId);
 
                         if (esquemaTurnoIdOrigen.HasValue)
                         {
@@ -2125,14 +2125,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Turno.AgendaTurno");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Turno.AgendaTurno");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in TurnoAgendaTurno)
                     {
-                        Int64? esquemaDetalleTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Turno.EsquemaDetalleTurno", item.EsquemaDetalleTurnoId);
-                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Sector", item.SectorId);
+                        Int64? esquemaDetalleTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Turno.EsquemaDetalleTurno", item.EsquemaDetalleTurnoId);
+                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sector", item.SectorId);
 
                         if (esquemaDetalleTurnoIdOrigen.HasValue && sectorIdOrigen.HasValue)
                         {
@@ -2161,7 +2161,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.TipoTicket");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Impresion.TipoTicket");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
@@ -2184,14 +2184,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.Ticket");
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Impresion.Ticket");
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
                     foreach (var item in Ticket)
                     {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.TipoId);
-                        Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.DepositarioModeloId);
+                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Impresion.TipoTicket", item.TipoId);
+                        Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.DepositarioModeloId);
 
                         if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue)
                         {

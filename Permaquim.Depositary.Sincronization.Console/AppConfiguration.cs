@@ -9,13 +9,17 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             get { return getConfiguration("ConnectionString"); }
         }
+        internal static String WebApiUrl
+        {
+            get { return getConfiguration("WebApiUrl"); }
+        }
         private static string getConfiguration(string configurationEntry)
         {
 
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == null ? String.Empty :
                  Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") + ".";
             var builder = new ConfigurationBuilder()
-                            .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                             .AddJsonFile("appsettings." + env + "json", optional: false, reloadOnChange: true);
 
             IConfigurationRoot configuration = builder.Build();
@@ -24,7 +28,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         }
         public static List<WorkerTask> GetWorkerTasks()
         {
-               string str = File.ReadAllText(Directory.GetCurrentDirectory() + @"\Tasks.Json");
+            string str = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\Tasks.Json");
             return JsonConvert.DeserializeObject<List<WorkerTask>>(str);
 
         }

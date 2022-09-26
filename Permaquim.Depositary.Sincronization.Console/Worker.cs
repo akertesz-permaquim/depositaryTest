@@ -34,7 +34,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             _hostApplicationLifetime = hostApplicationLifetime;
             _logger = logger;
 
-   
+
         }
         public override Task StartAsync(CancellationToken cancellationToken)
         {
@@ -48,7 +48,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 _logger.Log(LogLevel.Error, ex.Message);
                 return null;
             }
-          
+
             return base.StartAsync(cancellationToken);
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -67,6 +67,8 @@ namespace Permaquim.Depositary.Sincronization.Console
                 {
                     foreach (var item in _workerTasks)
                     {
+                        _baseUrl = AppConfiguration.WebApiUrl;
+
                         _logger.Log(LogLevel.Information, "Api endpoint is " + _baseUrl + item.Endpoint);
 
                         switch (item.WorkerTaskType)
@@ -96,7 +98,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                     }
                 }
 
-                await Task.Delay(Convert.ToInt32(_delaytime), stoppingToken);
+                //await Task.Delay(Convert.ToInt32(_delaytime), stoppingToken);
 
                 _hostApplicationLifetime.StopApplication();
 
@@ -270,7 +272,6 @@ namespace Permaquim.Depositary.Sincronization.Console
 
         private async Task GetToken(WorkerTask item)
         {
-
             if (_jwToken == null || DateTime.Now >= _jwToken.Expiration)
             {
                 try

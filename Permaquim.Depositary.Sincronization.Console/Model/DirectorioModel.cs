@@ -98,8 +98,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                             Int64? grupoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Grupo", item.GrupoId);
                             Int64? estiloEsquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Estilo.Esquema", item.EstiloEsquemaId);
                             Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
+                            Int64? codigoPostalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.CodigoPostal", item.CodigoPostalId);
 
-                            if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue)
+                            if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue && codigoPostalIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -108,6 +109,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 item.GrupoId = grupoIdOrigen.Value;
                                 item.EstiloEsquemaId = estiloEsquemaIdOrigen.Value;
                                 item.LenguajeId = lenguajeIdOrigen.Value;
+                                item.CodigoPostalId = codigoPostalIdOrigen.Value;
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
