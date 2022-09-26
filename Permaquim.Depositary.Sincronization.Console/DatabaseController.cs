@@ -72,6 +72,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             var lastSincronizationDate = GetLastSincronizationDate(EntitiesEnum.Operacion_Sesion);
 
             Depositario.Business.Tables.Operacion.Sesion session = new();
+
             session.Where.Add(Depositario.Business.Tables.Operacion.Sesion.ColumnEnum.FechaInicio,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
             session.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Sesion.ColumnEnum.FechaCierre,
@@ -104,10 +105,9 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_CierreDiario);
             Depositario.Business.Tables.Operacion.CierreDiario dailyclosing = new();
-            dailyclosing.Where.Add(Depositario.Business.Tables.Operacion.CierreDiario.ColumnEnum.FechaCreacion,
-            Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
-            dailyclosing.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.CierreDiario.ColumnEnum.Fecha,
-            Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+
+            dailyclosing.Where.Add(Depositario.Business.Tables.Operacion.CierreDiario.ColumnEnum.FechaCreacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+            dailyclosing.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.CierreDiario.ColumnEnum.FechaModificacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
             dailyclosing.Items();
 
@@ -129,6 +129,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                         dailyClosingRow.DepositarioId = mapDepositarioId;
                         dailyClosingRow.UsuarioCreacion = mapUsuarioCreacionId.Value;
                         dailyClosingRow.UsuarioModificacion = mapUsuarioModificacionId;
+                        dailyClosingRow.CodigoCierre = dailyClosingRow.CodigoCierre + "-" + dailyClosingRow.Id.ToString();
                     }
                 }
             }
@@ -140,10 +141,9 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Turno);
             Depositario.Business.Tables.Operacion.Turno turn = new();
-            turn.Where.Add(Depositario.Business.Tables.Operacion.Turno.ColumnEnum.FechaCreacion,
-                Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
-            turn.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Turno.ColumnEnum.Fecha,
-                Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+
+            turn.Where.Add(Depositario.Business.Tables.Operacion.Turno.ColumnEnum.FechaCreacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+            turn.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Turno.ColumnEnum.FechaModificacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
             turn.Items();
 
@@ -167,6 +167,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                         turnRow.TurnoDepositarioId = mapTurnoDepositarioId.Value;
                         turnRow.SectorId = mapSectorId.Value;
                         turnRow.UsuarioModificacion = mapUsuarioModificacionId;
+                        turnRow.CodigoTurno = turnRow.CodigoTurno + "-" + turnRow.Id.ToString();
                     }
                 }
             }
@@ -177,10 +178,9 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Contenedor);
             Depositario.Business.Tables.Operacion.Contenedor container = new();
-            container.Where.Add(Depositario.Business.Tables.Operacion.Contenedor.ColumnEnum.FechaApertura,
-            Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
-            container.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Contenedor.ColumnEnum.FechaCierre,
-                Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+
+            container.Where.Add(Depositario.Business.Tables.Operacion.Contenedor.ColumnEnum.FechaCreacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+            container.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Contenedor.ColumnEnum.FechaModificacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
             container.Items();
 
@@ -213,6 +213,8 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Transaccion);
             Depositario.Business.Tables.Operacion.Transaccion transaction = new();
+
+
             transaction.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
@@ -243,6 +245,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                         transactionRow.SucursalId = mapSucursalId.Value;
                         transactionRow.MonedaId = mapMonedaId.Value;
                         transactionRow.UsuarioId = mapUsuarioId.Value;
+                        transactionRow.CodigoOperacion = transactionRow.CodigoOperacion + "-" + transactionRow.Id.ToString();
                     }
                 }
             }

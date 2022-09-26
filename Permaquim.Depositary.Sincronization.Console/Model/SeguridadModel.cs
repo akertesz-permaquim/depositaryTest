@@ -666,7 +666,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.DependeDe.HasValue)
                                 {
-                                    Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Rol", item.DependeDe.Value);
+                                    Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Menu", item.DependeDe.Value);
                                     item.DependeDe = dependeDeOrigen;
                                 }
 
