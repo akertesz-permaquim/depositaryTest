@@ -1,5 +1,7 @@
 ﻿
 
+using Permaquim.Depositary.Sincronization.Console.Controllers;
+
 namespace Permaquim.Depositary.Sincronization.Console
 {
     public class InicializacionModel

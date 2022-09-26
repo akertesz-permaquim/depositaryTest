@@ -18,7 +18,6 @@ namespace Permaquim.Depositary.Sincronization.Console
                             .SetBasePath(System.IO.Directory.GetCurrentDirectory())
                             .AddJsonFile("appsettings." + env + "json", optional: false, reloadOnChange: true);
 
-
             IConfigurationRoot configuration = builder.Build();
 
             return configuration.GetSection("AppSettings").GetSection(configurationEntry).Value.ToString();

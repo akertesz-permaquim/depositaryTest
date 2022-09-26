@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.Sincronization.Console.Controllers
 {
