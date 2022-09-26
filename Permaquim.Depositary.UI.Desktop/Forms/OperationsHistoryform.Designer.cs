@@ -68,9 +68,9 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(392, 560);
+            this.BackButton.Location = new System.Drawing.Point(360, 560);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(160, 55);
+            this.BackButton.Size = new System.Drawing.Size(240, 55);
             this.BackButton.TabIndex = 179;
             this.BackButton.Text = "Salir";
             this.BackButton.TextColor = System.Drawing.Color.White;

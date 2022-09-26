@@ -513,7 +513,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                     {
                         ReportController.PrintReport(ReportTypeEnum.DailyClosing,
-                            _dailyclosingItems,null);
+                            _dailyclosingItems,null, i);
                         _alreadyPrinted = true;
                     }
                 }

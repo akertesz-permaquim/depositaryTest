@@ -228,7 +228,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         : MultilanguangeController.GetText(MultiLanguageEnum.SOBRE)),
                 Name = "Moneda",
                 Visible = true,
-                Width = 240,
+                Width = 350,
                 CellTemplate = new DataGridViewTextBoxCell()
                 
 
@@ -240,7 +240,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
                 Name = "Total",
                    Visible = true,
-                Width = 180,
+                Width = 350,
                 CellTemplate = new DataGridViewTextBoxCell()
             });
 

@@ -95,11 +95,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 X = this.Width / 2 - MainPanel.Width / 2,
                 Y = this.Height / 2 - MainPanel.Height / 2
             };
+       
         }
         private void LoadTransactionButtons()
         {
             this.MainPanel.Controls.Clear();
-
             foreach (var item in _transactions)
             {
 
@@ -116,6 +116,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     this.MainPanel.Controls.Add(newButton);
                 }
             }
+        
         }
         private void TransactionButton_Click(object sender, EventArgs e)
         {
@@ -125,47 +126,61 @@ namespace Permaquim.Depositary.UI.Desktop
             {
 
                 case (int)OperationTypeEnum.BillDeposit:
-
-                    if (DatabaseController.GetAvailableTurns() > 0)
+                    if (DatabaseController.GetPreviousDaysTurns() >= 0)
                     {
-                        if (DatabaseController.GetCurrencies().Count == 1)
+                        if (DatabaseController.GetAvailableTurns() > 0)
                         {
-                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                            FormsController.OpenChildForm(this, new BillDepositForm(),
-                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            if (DatabaseController.GetCurrencies().Count == 1)
+                            {
+                                DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                                FormsController.OpenChildForm(this, new BillDepositForm(),
+                                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
+                            else
+                            {
+                                FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
                         }
                         else
                         {
-                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                                MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
                         }
                     }
                     else
                     {
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, 
-                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                            MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
                     }
                     break;
                 case (int)OperationTypeEnum.EnvelopeDeposit:
-
-                    if (DatabaseController.GetAvailableTurns() > 0)
+                    if (DatabaseController.GetPreviousDaysTurns() >= 0)
                     {
-
-                        if (DatabaseController.GetCurrencies().Count == 1)
+                        if (DatabaseController.GetAvailableTurns() > 0)
                         {
-                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
-                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+
+                            if (DatabaseController.GetCurrencies().Count == 1)
+                            {
+                                DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                                FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
+                            else
+                            {
+                                FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            }
                         }
                         else
                         {
-                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
                         }
                     }
                     else
                     {
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                            MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
                     }
                     break;
                 case (int)OperationTypeEnum.ValueExtraction:

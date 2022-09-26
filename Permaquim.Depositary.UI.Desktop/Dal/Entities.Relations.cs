@@ -5953,9 +5953,11 @@ using System.Text;
 					public const string Imagen = "Imagen";
 					public const string UbicacionImagen = "UbicacionImagen";
 					public const string UbicacionTextoDetalle = "UbicacionTextoDetalle";
+					public const string AnchoDetalle = "AnchoDetalle";
 					public const string TamanioEntreLineas = "TamanioEntreLineas";
 					public const string AnchoReporte = "AnchoReporte";
 					public const string FactorAltoReporte = "FactorAltoReporte";
+					public const string LineasAlFinal = "LineasAlFinal";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -5982,9 +5984,11 @@ using System.Text;
 					Imagen,
 					UbicacionImagen,
 					UbicacionTextoDetalle,
+					AnchoDetalle,
 					TamanioEntreLineas,
 					AnchoReporte,
 					FactorAltoReporte,
+					LineasAlFinal,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -5997,7 +6001,7 @@ using System.Text;
                 public Ticket()
                 {
                 }
-                public  Ticket(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  Ticket(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -6017,9 +6021,11 @@ using System.Text;
                     this.Imagen = Imagen;
                     this.UbicacionImagen = UbicacionImagen;
                     this.UbicacionTextoDetalle = UbicacionTextoDetalle;
+                    this.AnchoDetalle = AnchoDetalle;
                     this.TamanioEntreLineas = TamanioEntreLineas;
                     this.AnchoReporte = AnchoReporte;
                     this.FactorAltoReporte = FactorAltoReporte;
+                    this.LineasAlFinal = LineasAlFinal;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -6109,12 +6115,16 @@ using System.Text;
              public String UbicacionImagen { get; set; }
              [DataItemAttributeFieldName("UbicacionTextoDetalle","UbicacionTextoDetalle")]
              public Int32 UbicacionTextoDetalle { get; set; }
+             [DataItemAttributeFieldName("AnchoDetalle","AnchoDetalle")]
+             public Int32 AnchoDetalle { get; set; }
              [DataItemAttributeFieldName("TamanioEntreLineas","TamanioEntreLineas")]
              public Int32 TamanioEntreLineas { get; set; }
              [DataItemAttributeFieldName("AnchoReporte","AnchoReporte")]
              public Int32 AnchoReporte { get; set; }
              [DataItemAttributeFieldName("FactorAltoReporte","FactorAltoReporte")]
              public Int32 FactorAltoReporte { get; set; }
+             [DataItemAttributeFieldName("LineasAlFinal","LineasAlFinal")]
+             public Int32 LineasAlFinal { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]

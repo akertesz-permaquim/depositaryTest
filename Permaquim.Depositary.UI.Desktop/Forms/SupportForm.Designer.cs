@@ -33,12 +33,12 @@
             this.IoBoardStatusGroup = new System.Windows.Forms.GroupBox();
             this.ExecuteIoBoardComandButton = new System.Windows.Forms.Button();
             this.IoboardCommandComboBox = new System.Windows.Forms.ComboBox();
-            this.IoBoardResponseTextBox = new CustomTextBox();
+            this.IoBoardResponseTextBox = new System.Windows.Forms.TextBox();
             this.IoBoardStatusPropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.CounterStatudGroupBox = new System.Windows.Forms.GroupBox();
             this.ModeCheckBox = new System.Windows.Forms.CheckBox();
             this.CounterComboBox = new System.Windows.Forms.ComboBox();
-            this.CounterResponseTextBox = new CustomTextBox();
+            this.CounterResponseTextBox = new System.Windows.Forms.TextBox();
             this.ExecuteCounterComandButton = new System.Windows.Forms.Button();
             this.CounterStatusPropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.CounterCommandComboBox = new System.Windows.Forms.ComboBox();
@@ -57,6 +57,7 @@
             this.MainPanel.Size = new System.Drawing.Size(1056, 632);
             this.MainPanel.TabIndex = 0;
             this.MainPanel.VisibleChanged += new System.EventHandler(this.MainPanel_VisibleChanged);
+            this.MainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainPanel_MouseClick);
             // 
             // BackButton
             // 
@@ -69,9 +70,9 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(496, 520);
+            this.BackButton.Location = new System.Drawing.Point(432, 504);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(160, 40);
+            this.BackButton.Size = new System.Drawing.Size(208, 56);
             this.BackButton.TabIndex = 157;
             this.BackButton.Text = "Salir";
             this.BackButton.TextColor = System.Drawing.Color.White;
@@ -86,7 +87,7 @@
             this.IoBoardStatusGroup.Controls.Add(this.IoBoardStatusPropertyGrid);
             this.IoBoardStatusGroup.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.IoBoardStatusGroup.ForeColor = System.Drawing.Color.SteelBlue;
-            this.IoBoardStatusGroup.Location = new System.Drawing.Point(544, 32);
+            this.IoBoardStatusGroup.Location = new System.Drawing.Point(528, 17);
             this.IoBoardStatusGroup.Name = "IoBoardStatusGroup";
             this.IoBoardStatusGroup.Size = new System.Drawing.Size(488, 481);
             this.IoBoardStatusGroup.TabIndex = 33;
@@ -125,39 +126,29 @@
             // IoBoardResponseTextBox
             // 
             this.IoBoardResponseTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.IoBoardResponseTextBox.BorderColor = System.Drawing.Color.SteelBlue;
-            this.IoBoardResponseTextBox.BorderFocusColor = System.Drawing.Color.MediumSlateBlue;
-            this.IoBoardResponseTextBox.BorderRadius = 4;
-            this.IoBoardResponseTextBox.BorderSize = 2;
             this.IoBoardResponseTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.IoBoardResponseTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.IoBoardResponseTextBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.IoBoardResponseTextBox.Location = new System.Drawing.Point(4, 72);
             this.IoBoardResponseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.IoBoardResponseTextBox.Multiline = true;
             this.IoBoardResponseTextBox.Name = "IoBoardResponseTextBox";
-            this.IoBoardResponseTextBox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.IoBoardResponseTextBox.PasswordChar = false;
-            this.IoBoardResponseTextBox.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.IoBoardResponseTextBox.PlaceholderText = "Respuestas de la IO Board";
-            this.IoBoardResponseTextBox.SelectionLength = 0;
-            this.IoBoardResponseTextBox.SelectionStart = 0;
-            this.IoBoardResponseTextBox.Size = new System.Drawing.Size(232, 400);
+            this.IoBoardResponseTextBox.Size = new System.Drawing.Size(476, 128);
             this.IoBoardResponseTextBox.TabIndex = 161;
-            this.IoBoardResponseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.IoBoardResponseTextBox.Texts = "";
-            this.IoBoardResponseTextBox.UnderlinedStyle = false;
+            this.IoBoardResponseTextBox.Click += new System.EventHandler(this.IoBoardResponseTextBox_Click);
             // 
             // IoBoardStatusPropertyGrid
             // 
             this.IoBoardStatusPropertyGrid.CategoryForeColor = System.Drawing.Color.SteelBlue;
             this.IoBoardStatusPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(180)))));
             this.IoBoardStatusPropertyGrid.HelpVisible = false;
-            this.IoBoardStatusPropertyGrid.Location = new System.Drawing.Point(240, 96);
+            this.IoBoardStatusPropertyGrid.Location = new System.Drawing.Point(6, 208);
             this.IoBoardStatusPropertyGrid.Name = "IoBoardStatusPropertyGrid";
-            this.IoBoardStatusPropertyGrid.Size = new System.Drawing.Size(240, 376);
+            this.IoBoardStatusPropertyGrid.Size = new System.Drawing.Size(474, 264);
             this.IoBoardStatusPropertyGrid.TabIndex = 0;
             this.IoBoardStatusPropertyGrid.ViewBorderColor = System.Drawing.Color.SteelBlue;
             this.IoBoardStatusPropertyGrid.ViewForeColor = System.Drawing.Color.SteelBlue;
+            this.IoBoardStatusPropertyGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.IoBoardStatusPropertyGrid_MouseClick);
             // 
             // CounterStatudGroupBox
             // 
@@ -169,7 +160,7 @@
             this.CounterStatudGroupBox.Controls.Add(this.CounterCommandComboBox);
             this.CounterStatudGroupBox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CounterStatudGroupBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.CounterStatudGroupBox.Location = new System.Drawing.Point(48, 32);
+            this.CounterStatudGroupBox.Location = new System.Drawing.Point(32, 17);
             this.CounterStatudGroupBox.Name = "CounterStatudGroupBox";
             this.CounterStatudGroupBox.Size = new System.Drawing.Size(488, 481);
             this.CounterStatudGroupBox.TabIndex = 0;
@@ -179,7 +170,7 @@
             // ModeCheckBox
             // 
             this.ModeCheckBox.AutoSize = true;
-            this.ModeCheckBox.Location = new System.Drawing.Point(251, 128);
+            this.ModeCheckBox.Location = new System.Drawing.Point(8, 80);
             this.ModeCheckBox.Name = "ModeCheckBox";
             this.ModeCheckBox.Size = new System.Drawing.Size(75, 18);
             this.ModeCheckBox.TabIndex = 163;
@@ -190,6 +181,7 @@
             // 
             this.CounterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CounterComboBox.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CounterComboBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.CounterComboBox.FormattingEnabled = true;
             this.CounterComboBox.Items.AddRange(new object[] {
             "StatusInformation",
@@ -207,27 +199,17 @@
             // CounterResponseTextBox
             // 
             this.CounterResponseTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.CounterResponseTextBox.BorderColor = System.Drawing.Color.SteelBlue;
-            this.CounterResponseTextBox.BorderFocusColor = System.Drawing.Color.MediumSlateBlue;
-            this.CounterResponseTextBox.BorderRadius = 4;
-            this.CounterResponseTextBox.BorderSize = 2;
             this.CounterResponseTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CounterResponseTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.CounterResponseTextBox.Location = new System.Drawing.Point(8, 72);
+            this.CounterResponseTextBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.CounterResponseTextBox.Location = new System.Drawing.Point(0, 112);
             this.CounterResponseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.CounterResponseTextBox.Multiline = true;
             this.CounterResponseTextBox.Name = "CounterResponseTextBox";
-            this.CounterResponseTextBox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.CounterResponseTextBox.PasswordChar = false;
-            this.CounterResponseTextBox.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.CounterResponseTextBox.PlaceholderText = "Respuestas de la contadora";
-            this.CounterResponseTextBox.SelectionLength = 0;
-            this.CounterResponseTextBox.SelectionStart = 0;
-            this.CounterResponseTextBox.Size = new System.Drawing.Size(232, 400);
+            this.CounterResponseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.CounterResponseTextBox.Size = new System.Drawing.Size(480, 88);
             this.CounterResponseTextBox.TabIndex = 161;
-            this.CounterResponseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.CounterResponseTextBox.Texts = "";
-            this.CounterResponseTextBox.UnderlinedStyle = false;
+            this.CounterResponseTextBox.Click += new System.EventHandler(this.CounterResponseTextBox_Click);
             // 
             // ExecuteCounterComandButton
             // 
@@ -245,12 +227,13 @@
             this.CounterStatusPropertyGrid.CategoryForeColor = System.Drawing.Color.SteelBlue;
             this.CounterStatusPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(180)))));
             this.CounterStatusPropertyGrid.HelpVisible = false;
-            this.CounterStatusPropertyGrid.Location = new System.Drawing.Point(244, 168);
+            this.CounterStatusPropertyGrid.Location = new System.Drawing.Point(3, 208);
             this.CounterStatusPropertyGrid.Name = "CounterStatusPropertyGrid";
-            this.CounterStatusPropertyGrid.Size = new System.Drawing.Size(240, 304);
+            this.CounterStatusPropertyGrid.Size = new System.Drawing.Size(476, 264);
             this.CounterStatusPropertyGrid.TabIndex = 0;
             this.CounterStatusPropertyGrid.ViewBorderColor = System.Drawing.Color.SteelBlue;
             this.CounterStatusPropertyGrid.ViewForeColor = System.Drawing.Color.SteelBlue;
+            this.CounterStatusPropertyGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CounterStatusPropertyGrid_MouseClick);
             // 
             // CounterCommandComboBox
             // 
@@ -287,7 +270,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1247, 661);
+            this.ClientSize = new System.Drawing.Size(1131, 661);
             this.ControlBox = false;
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -297,6 +280,7 @@
             this.VisibleChanged += new System.EventHandler(this.SupportForm_VisibleChanged);
             this.MainPanel.ResumeLayout(false);
             this.IoBoardStatusGroup.ResumeLayout(false);
+            this.IoBoardStatusGroup.PerformLayout();
             this.CounterStatudGroupBox.ResumeLayout(false);
             this.CounterStatudGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -310,14 +294,14 @@
         private PropertyGrid CounterStatusPropertyGrid;
         private Button ExecuteCounterComandButton;
         private ComboBox CounterCommandComboBox;
-        private CustomTextBox CounterResponseTextBox;
+        private TextBox CounterResponseTextBox;
         private ComboBox CounterComboBox;
         private CustomButton BackButton;
         private GroupBox IoBoardStatusGroup;
         private Button ExecuteIoBoardComandButton;
         private ComboBox IoboardCommandComboBox;
-        private CustomTextBox IoBoardResponseTextBox;
         private PropertyGrid IoBoardStatusPropertyGrid;
         private CheckBox ModeCheckBox;
+        private TextBox IoBoardResponseTextBox;
     }
 }

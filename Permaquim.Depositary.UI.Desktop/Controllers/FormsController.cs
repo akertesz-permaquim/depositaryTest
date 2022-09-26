@@ -13,7 +13,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static List<Form> _formList = new();
         public static MainForm MainFormInstance { get; set; }
 
-        private static Form _activeForm = null;
+        public static Form ActiveForm { get; set; }
 
         /// <summary>
         /// Hides 'instance', shows 'childForm' and appends breadCrumbText
@@ -81,9 +81,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 MainFormInstance.BreadCrumbText =
                     MultilanguangeController.GetText(childForm.Name);
             }
-            childForm.Show();
-
-            
 
             childForm.Location = new Point()
             {
@@ -91,6 +88,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Y = MainFormInstance.MainPanel.Height / 2 - childForm.Height / 2
             };
 
+            childForm.Show();
+            ActiveForm = childForm;
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 
