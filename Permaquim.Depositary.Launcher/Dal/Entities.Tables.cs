@@ -995,6 +995,8 @@ using System.Text;
              [DataItemAttributeFieldName("Direccion","Direccion")]
              public String Direccion { get; set; }
              [DataItemAttributeFieldName("CodigoPostalId","CodigoPostalId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("CodigoPostal")]// Object name in Database
              public Int64 CodigoPostalId { get; set; }
              [DataItemAttributeFieldName("EstiloEsquemaId","EstiloEsquemaId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
@@ -3650,6 +3652,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string TipoId = "TipoId";
 					public const string DepositarioModeloId = "DepositarioModeloId";
+					public const string EmpresaId = "EmpresaId";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
 					public const string Impresora = "Impresora";
@@ -3664,9 +3667,11 @@ using System.Text;
 					public const string Imagen = "Imagen";
 					public const string UbicacionImagen = "UbicacionImagen";
 					public const string UbicacionTextoDetalle = "UbicacionTextoDetalle";
+					public const string AnchoDetalle = "AnchoDetalle";
 					public const string TamanioEntreLineas = "TamanioEntreLineas";
 					public const string AnchoReporte = "AnchoReporte";
 					public const string FactorAltoReporte = "FactorAltoReporte";
+					public const string LineasAlFinal = "LineasAlFinal";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -3678,6 +3683,7 @@ using System.Text;
 					Id,
 					TipoId,
 					DepositarioModeloId,
+					EmpresaId,
 					Nombre,
 					Descripcion,
 					Impresora,
@@ -3692,9 +3698,11 @@ using System.Text;
 					Imagen,
 					UbicacionImagen,
 					UbicacionTextoDetalle,
+					AnchoDetalle,
 					TamanioEntreLineas,
 					AnchoReporte,
 					FactorAltoReporte,
+					LineasAlFinal,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -3707,11 +3715,12 @@ using System.Text;
                 public Ticket()
                 {
                 }
-                public  Ticket(Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Ticket(Int64 TipoId,Int64 DepositarioModeloId,Int64 EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
                     this.DepositarioModeloId = DepositarioModeloId;
+                    this.EmpresaId = EmpresaId;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
                     this.Impresora = Impresora;
@@ -3726,9 +3735,11 @@ using System.Text;
                     this.Imagen = Imagen;
                     this.UbicacionImagen = UbicacionImagen;
                     this.UbicacionTextoDetalle = UbicacionTextoDetalle;
+                    this.AnchoDetalle = AnchoDetalle;
                     this.TamanioEntreLineas = TamanioEntreLineas;
                     this.AnchoReporte = AnchoReporte;
                     this.FactorAltoReporte = FactorAltoReporte;
+                    this.LineasAlFinal = LineasAlFinal;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -3747,6 +3758,10 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Modelo")]// Object name in Database
              public Int64 DepositarioModeloId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Empresa")]// Object name in Database
+             public Int64 EmpresaId { get; set; }
              [DataItemAttributeFieldName("Nombre","Nombre")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
@@ -3776,12 +3791,16 @@ using System.Text;
              public String UbicacionImagen { get; set; }
              [DataItemAttributeFieldName("UbicacionTextoDetalle","UbicacionTextoDetalle")]
              public Int32 UbicacionTextoDetalle { get; set; }
+             [DataItemAttributeFieldName("AnchoDetalle","AnchoDetalle")]
+             public Int32 AnchoDetalle { get; set; }
              [DataItemAttributeFieldName("TamanioEntreLineas","TamanioEntreLineas")]
              public Int32 TamanioEntreLineas { get; set; }
              [DataItemAttributeFieldName("AnchoReporte","AnchoReporte")]
              public Int32 AnchoReporte { get; set; }
              [DataItemAttributeFieldName("FactorAltoReporte","FactorAltoReporte")]
              public Int32 FactorAltoReporte { get; set; }
+             [DataItemAttributeFieldName("LineasAlFinal","LineasAlFinal")]
+             public Int32 LineasAlFinal { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
