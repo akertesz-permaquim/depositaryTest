@@ -4,6 +4,7 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
+@using Permaquim.Depositary.UI.Desktop.Controllers
 @using Permaquim.Depositary.Web.Administration.Controllers;
 @using Radzen
 @using Radzen.Blazor
@@ -321,8 +322,9 @@
 
     private void ObtenerListadoEmpresasPorPerfil()
     {
+
         dataEmpresasAccesibles = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
-        //Dejo todas las empresas marcadas
+       //Dejo todas las empresas marcadas
         if (dataEmpresasAccesibles.Count > 0)
         {
             List<Int64> empresas = new();
