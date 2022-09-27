@@ -78,6 +78,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                 
                                 if (!isUp)
                                 {
+                                    Thread.Sleep(_configuration.GetSection("TaskDelay").Get<int>());
                                     if (item.ProcessId == 0) Log("Starting process " + item.ProcessName + "...");
                                     item.ProcessId = Process.Start(item.Target).Id;
                                 }
@@ -87,7 +88,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                 break;
                         }
 
-                        await Task.Delay(_configuration.GetSection("TaskDelay").Get<int>(), stoppingToken);
+                        await Task.Delay(500, stoppingToken);
                     }
                 }
             }catch (Exception ex)
