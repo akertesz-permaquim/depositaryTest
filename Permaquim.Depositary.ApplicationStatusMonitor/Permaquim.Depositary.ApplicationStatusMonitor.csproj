@@ -5,10 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-Permaquim.Depositary.WorkerService.ApplicationStatusMonitor-80A35094-D7AC-45DB-AB69-2D1996FB1F67</UserSecretsId>
+    <ApplicationIcon>PQLOGO.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="bin\Debug\net6.0\Tasks.json" />
+    <Content Include="PQLOGO.ico" />
   </ItemGroup>
 
   <ItemGroup>
