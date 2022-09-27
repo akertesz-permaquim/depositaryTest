@@ -8,6 +8,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class ParameterController
     {
+        public static bool UsesShutter
+        {
+            get
+            {
+                return true;// Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_SHUTTER"));
+            }
+
+        }
+
         public static bool UsesBankAccount
         {
             get
@@ -15,6 +24,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_CUENTA_BANCARIA"));
             }
                 
+        }
+        public static bool UsesValueOrigin
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_ORIGEN_VALOR"));
+            }
+
         }
         public static int RedStatusIndicator
         {
@@ -145,5 +162,32 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+
+        public static decimal RedBagPercent
+        {
+            get
+            {
+                return Convert.ToDecimal(DatabaseController.GetEnterpriseParameterValue("PORCENTAJE_CONTENEDOR_ROJO"));
+            }
+
+        }
+        public static int BagSensorBehaviour
+        {
+            get
+            {
+                return Convert.ToInt16(DatabaseController.GetEnterpriseParameterValue("COMPORTAMIENTO_SENSORES_CONTENEDOR"));
+            }
+
+        }
+        public static bool ValidatesBagInplace
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("VALIDA_EXISTENCIA_BOLSA"));
+            }
+
+        }
+        
+
     }
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-16"?>
 <GenerationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <NetVersion>NetCore</NetVersion>
-  <SupportedCharacters> .</SupportedCharacters>
-  <ConnectionStringName>Depositario</ConnectionStringName>
-  <ChildrenPrefix>ListOf_</ChildrenPrefix>
-  <EntityDisplayName>Nombre</EntityDisplayName>
+  <NetVersion>Net40</NetVersion>
+  <SupportedCharacters />
+  <ConnectionStringName />
+  <ChildrenPrefix />
+  <EntityDisplayName />
   <DisableNamespaceSchema>false</DisableNamespaceSchema>
   <MultiQuery>true</MultiQuery>
   <UseWithNolock>false</UseWithNolock>
   <IncludeGenerationInformation>false</IncludeGenerationInformation>
   <SerializeEntitiesClases>true</SerializeEntitiesClases>
-  <Namespace>Depositary</Namespace>
+  <Namespace />
   <ShowSystemData>false</ShowSystemData>
   <BuildRelations>true</BuildRelations>
   <ForceNullableDatetime>false</ForceNullableDatetime>
@@ -18,114 +18,13 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
+  <ConnectionString />
   <SelectedViews />
   <SelectedStoredProcedures />
-  <UnselectedStoredProcedures>
-    <string>dbo.FinalizarPrimeraSincronizacion</string>
-    <string>dbo.fn_diagramobjects</string>
-    <string>dbo.sp_alterdiagram</string>
-    <string>dbo.sp_creatediagram</string>
-    <string>dbo.sp_dropdiagram</string>
-    <string>dbo.sp_helpdiagramdefinition</string>
-    <string>dbo.sp_helpdiagrams</string>
-    <string>dbo.sp_renamediagram</string>
-    <string>dbo.sp_upgraddiagrams</string>
-    <string>Desarrollo.ActualizarLenguajeItem</string>
-    <string>Desarrollo.GenerarTablaModelo</string>
-    <string>Desarrollo.GenerarTablaTipoModelo</string>
-    <string>Dispositivo.ObtenerDepositarios</string>
-    <string>Dispositivo.ObtenerInformacionDepositario</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
-    <string>Operacion.ObtenerDetalleTransaccion</string>
-    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
-    <string>Operacion.ObtenerEventosPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasPorDepositario</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
-    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
-    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
-    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
-    <string>Regionalizacion.ObtenerTextosLenguaje</string>
-    <string>Seguridad.ObtenerRolesPorUsuario</string>
-  </UnselectedStoredProcedures>
+  <UnselectedStoredProcedures />
   <MappedStoredProcedures />
-  <SelectedTables>
-    <string>Aplicacion.Configuracion</string>
-    <string>Aplicacion.ConfiguracionTipoDato</string>
-    <string>Aplicacion.ConfiguracionValidacionDato</string>
-    <string>Banca.Banco</string>
-    <string>Banca.Cuenta</string>
-    <string>Banca.TipoCuenta</string>
-    <string>Dispositivo.ComandoContadora</string>
-    <string>Dispositivo.ComandoPlaca</string>
-    <string>Dispositivo.DepositarioEstado</string>
-    <string>Dispositivo.DepositarioMoneda</string>
-    <string>Dispositivo.TipoConfiguracionDepositario</string>
-    <string>Dispositivo.TipoContadora</string>
-    <string>Dispositivo.TipoPlaca</string>
-    <string>Estilo.TipoEsquemaDetalle</string>
-    <string>Geografia.Zona</string>
-    <string>Impresion.Ticket</string>
-    <string>Impresion.TipoTicket</string>
-    <string>Operacion.TipoContenedor</string>
-    <string>Operacion.TipoEvento</string>
-    <string>Operacion.TipoTransaccion</string>
-    <string>Seguridad.Funcion</string>
-    <string>Seguridad.TipoAplicacion</string>
-    <string>Seguridad.TipoFuncion</string>
-    <string>Seguridad.TipoMenu</string>
-    <string>Sincronizacion.Configuracion</string>
-    <string>Sincronizacion.Entidad</string>
-    <string>Valor.OrigenValor</string>
-    <string>Valor.RelacionMonedaTipoValor</string>
-    <string>Valor.Tipo</string>
-  </SelectedTables>
-  <SelectedDatabase>Depositario</SelectedDatabase>
-  <SelectedTemplates>
-    <string>c6884699-f5e7-506c-bc3d-480cd6d425a2</string>
-    <string>c6885891-a6g8-906c-bc3d-123cd6d452a3</string>
-  </SelectedTemplates>
-  <Location>\</Location>
-  <DatasourceServer />
-  <TemplateConfigurationEntries>
-    <TemplateConfigurationEntry>
-      <Template>WebServiceBuilder Template</Template>
-      <Name>Base Web Service</Name>
-      <Value>System.Web.Services.WebService</Value>
-    </TemplateConfigurationEntry>
-    <TemplateConfigurationEntry>
-      <Template>Syncfusion Js CrudBuilder</Template>
-      <Name>Resource Url</Name>
-      <Value />
-    </TemplateConfigurationEntry>
-    <TemplateConfigurationEntry>
-      <Template>MudBlazor CrudBuilder</Template>
-      <Name>MudBlazor Generation folder</Name>
-      <Value />
-    </TemplateConfigurationEntry>
-    <TemplateConfigurationEntry>
-      <Template>RadzenBlazor CrudBuilder</Template>
-      <Name>Radzen Blazor Generation folder</Name>
-      <Value />
-    </TemplateConfigurationEntry>
-    <TemplateConfigurationEntry>
-      <Template>RadzenBlazor CrudBuilder</Template>
-      <Name>Radzen Blazor Treat Field as Image</Name>
-      <Value />
-    </TemplateConfigurationEntry>
-    <TemplateConfigurationEntry>
-      <Template>RadzenBlazor Left Menu Builder</Template>
-      <Name>Radzen Blazor Generation folder</Name>
-      <Value />
-    </TemplateConfigurationEntry>
-    <TemplateConfigurationEntry>
-      <Template>RadzenBlazor View ReportBuilder</Template>
-      <Name>Radzen Blazor Generation folder</Name>
-      <Value />
-    </TemplateConfigurationEntry>
-  </TemplateConfigurationEntries>
+  <SelectedTables />
+  <SelectedTemplates />
+  <Location />
   <UsesEncription>false</UsesEncription>
 </GenerationProject>

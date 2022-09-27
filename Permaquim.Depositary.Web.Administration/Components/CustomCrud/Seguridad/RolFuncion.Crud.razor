@@ -49,7 +49,7 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@RolFuncionRowRender" AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@RolFuncion_entities" TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -104,37 +104,72 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_RolId Data="@Rol_RolId_filter" Change="OnSelectedFilter_RolId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="Descripcion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeAgregar" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEAGREGAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeAgregar" Filterable="true" FilterValue="@PuedeAgregar_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEAGREGAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.PuedeAgregar Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("PUEDEAGREGAR",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="PuedeAgregar_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeModificar" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEMODIFICAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeModificar" Filterable="true" FilterValue="@PuedeModificar_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEMODIFICAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.PuedeModificar Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("PUEDEMODIFICAR",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="PuedeModificar_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeEliminar" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEELIMINAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeEliminar" Filterable="true" FilterValue="@PuedeEliminar_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEELIMINAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.PuedeEliminar Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("PUEDEELIMINAR",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="PuedeEliminar_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeVisualizar" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEVISUALIZAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="PuedeVisualizar" Filterable="true" FilterValue="@PuedeVisualizar_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("PUEDEVISUALIZAR",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.PuedeVisualizar Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("PUEDEVISUALIZAR",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="PuedeVisualizar_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.RolFuncion" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
@@ -198,7 +233,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="short" style="display: block; width: 100%" @bind-Value="@(RolFuncion_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -209,7 +244,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("FUNCIONID",dataLenguaje) Component="FuncionId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 @if ((@Funcion_FuncionId_entities.Count > 0 && @Funcion_FuncionId_entities.FirstOrDefault(c => c.Id == @RolFuncion_entity.FuncionId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Funcion_FuncionId_entities.Where(x => x.Habilitado == true) : Funcion_FuncionId_entities.Where(x => x.Habilitado == true || x.Id == RolFuncion_entity.FuncionId);
@@ -233,7 +268,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ROLID",dataLenguaje) Component="RolId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@RolId"
                                 Data=@Rol_RolId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
@@ -324,6 +359,9 @@ else
     [Parameter]
     public Int64 RolId { get; set; }
 
+    [Parameter]
+    public Int64 AplicacionId { get; set; }
+
     /// <summary>
     /// Crud Mode Enum
     /// </summary>
@@ -350,6 +388,26 @@ else
     /// Variables to store permissions
     /// </summary>
     private List<SeguridadEntities.FuncionRol> dataFunciones;
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Habilitado_filter;
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? PuedeAgregar_filter;
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? PuedeVisualizar_filter;
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? PuedeModificar_filter;
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? PuedeEliminar_filter;
 
     /// <summary>
     /// Variables to handle Relation between RolFuncion.FuncionId and Funcion.Id
@@ -419,6 +477,7 @@ else
     private void LoadTypesData()
     {
         Depositary.Business.Tables.Seguridad.Funcion Funcion_FuncionId_local = new();
+        Funcion_FuncionId_local.Where.Add(Business.Tables.Seguridad.Funcion.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, AplicacionId);
         Funcion_FuncionId_entities = Funcion_FuncionId_local.Items();
         Funcion_FuncionId_filter = Funcion_FuncionId_entities.Where(x => RolFuncion_entities.Select(x => x.FuncionId).Distinct().Contains(x.Id)).ToList();
 
@@ -715,6 +774,9 @@ else
     void PuedeAgregarChange(bool? value, Depositary.Entities.Tables.Seguridad.RolFuncion item)
     {
         RolFuncion_entity = item;
+        if (value.HasValue)
+            if (value.Value)
+                RolFuncion_entity.PuedeVisualizar = true;
     }
     /// <summary>
     /// Entity is binded, however it sets anyway.
@@ -723,6 +785,9 @@ else
     void PuedeModificarChange(bool? value, Depositary.Entities.Tables.Seguridad.RolFuncion item)
     {
         RolFuncion_entity = item;
+        if (value.HasValue)
+            if (value.Value)
+                RolFuncion_entity.PuedeVisualizar = true;
     }
     /// <summary>
     /// Entity is binded, however it sets anyway.
@@ -731,6 +796,10 @@ else
     void PuedeEliminarChange(bool? value, Depositary.Entities.Tables.Seguridad.RolFuncion item)
     {
         RolFuncion_entity = item;
+        if (value.HasValue)
+            if (value.Value)
+                RolFuncion_entity.PuedeVisualizar = true;
+
     }
     /// <summary>
     /// Entity is binded, however it sets anyway.
@@ -747,6 +816,18 @@ else
     void HabilitadoChange(bool? value, Depositary.Entities.Tables.Seguridad.RolFuncion item)
     {
         RolFuncion_entity = item;
+    }
+
+    /// <summary>
+    /// RolFuncionRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void RolFuncionRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Seguridad.RolFuncion> args)
+    {
+        if (!args.Data.Habilitado)
+            args.Attributes.Add("class", "row-highlight-disabled");
+        else
+            args.Attributes.Add("class", "rz-datatable-even");
     }
     #endregion
 

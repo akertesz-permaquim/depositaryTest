@@ -50,7 +50,7 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid RowRender="@LenguajeItemRowRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@LenguajeItem_entities" TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -85,13 +85,20 @@
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Clave" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Texto" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("TEXTO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Texto" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("TEXTO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Regionalizacion.LenguajeItem" Property="LargoMaximo" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("LARGOMAXIMO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
                         </RadzenDataGridColumn>
@@ -161,7 +168,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -172,7 +179,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LENGUAJEID",dataLenguaje) Component="LenguajeId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@LenguajeId"
                                 Data=@Lenguaje_LenguajeId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
@@ -221,7 +228,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LARGOMAXIMO",dataLenguaje) Component="LargoMaximo" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-auto">
                                 <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(LenguajeItem_entity.LargoMaximo)" Name="LargoMaximo" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenNumeric>
                             </div>
@@ -270,6 +277,10 @@ else
     private List<Depositary.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItem_entities = null;
 
     /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Habilitado_filter;
+
+    /// <summary>
     /// Variables to multilanguaje
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
@@ -305,6 +316,8 @@ else
     ///  Page crud mode {List,Add,Edit,Delete}
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
+
+    string claveAnteriorLenguajeItem = "";
 
     /// <summary>
     ///  Variable to store the user id
@@ -356,7 +369,7 @@ else
 
     #endregion
 
-        private List<Depositary.Entities.Tables.Regionalizacion.Lenguaje> ObtenerLenguajesRestantes()
+    private List<Depositary.Entities.Tables.Regionalizacion.Lenguaje> ObtenerLenguajesRestantes()
     {
         List<Depositary.Entities.Tables.Regionalizacion.Lenguaje> resultado = new();
 
@@ -422,7 +435,10 @@ else
         if (delete)
             crudMode = CrudMode.Delete;
         else
+        {
             crudMode = CrudMode.Edit;
+            claveAnteriorLenguajeItem = LenguajeItem_entity.Clave;
+        }
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -522,7 +538,7 @@ else
                         crud.Update(LenguajeItem_entity);
 
                         //Obtenemos los ID de todos los items de lenguajes existentes (salvo este)
-                        var itemsLenguajesRestantes = ObtenerItemsLenguajes(LenguajeItem_entity.Clave, LenguajeItem_entity.Id);
+                        var itemsLenguajesRestantes = ObtenerItemsLenguajes(claveAnteriorLenguajeItem, LenguajeItem_entity.Id);
 
                         if (itemsLenguajesRestantes.Count > 0)
                         {
@@ -712,6 +728,18 @@ else
         {
             selectedFilter_UsuarioModificacion = null;
         }
+    }
+
+    /// <summary>
+    /// LenguajeItemRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void LenguajeItemRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Regionalizacion.LenguajeItem> args)
+    {
+        if (!args.Data.Habilitado)
+            args.Attributes.Add("class", "row-highlight-disabled");
+        else
+            args.Attributes.Add("class", "rz-datatable-even");
     }
     #endregion
 

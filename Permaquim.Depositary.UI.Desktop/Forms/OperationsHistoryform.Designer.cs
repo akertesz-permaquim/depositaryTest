@@ -46,6 +46,7 @@
             this.ToDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FromDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.DetailPanel = new System.Windows.Forms.Panel();
+            this.DetailLabel = new System.Windows.Forms.Label();
             this.PrintButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
@@ -67,9 +68,9 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(392, 592);
+            this.BackButton.Location = new System.Drawing.Point(360, 560);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(160, 55);
+            this.BackButton.Size = new System.Drawing.Size(240, 55);
             this.BackButton.TabIndex = 179;
             this.BackButton.Text = "Salir";
             this.BackButton.TextColor = System.Drawing.Color.White;
@@ -140,7 +141,7 @@
             this.UserLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.UserLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.UserLabel.ForeColor = System.Drawing.Color.White;
-            this.UserLabel.Location = new System.Drawing.Point(616, 13);
+            this.UserLabel.Location = new System.Drawing.Point(520, 13);
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(176, 27);
             this.UserLabel.TabIndex = 201;
@@ -151,7 +152,7 @@
             this.TurnLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.TurnLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TurnLabel.ForeColor = System.Drawing.Color.White;
-            this.TurnLabel.Location = new System.Drawing.Point(432, 13);
+            this.TurnLabel.Location = new System.Drawing.Point(336, 13);
             this.TurnLabel.Name = "TurnLabel";
             this.TurnLabel.Size = new System.Drawing.Size(176, 27);
             this.TurnLabel.TabIndex = 200;
@@ -162,9 +163,9 @@
             this.ToDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.ToDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ToDateTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.ToDateTimeLabel.Location = new System.Drawing.Point(224, 13);
+            this.ToDateTimeLabel.Location = new System.Drawing.Point(176, 13);
             this.ToDateTimeLabel.Name = "ToDateTimeLabel";
-            this.ToDateTimeLabel.Size = new System.Drawing.Size(200, 27);
+            this.ToDateTimeLabel.Size = new System.Drawing.Size(152, 27);
             this.ToDateTimeLabel.TabIndex = 199;
             this.ToDateTimeLabel.Text = "*";
             // 
@@ -175,12 +176,13 @@
             this.FromDateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.FromDateTimeLabel.Location = new System.Drawing.Point(16, 13);
             this.FromDateTimeLabel.Name = "FromDateTimeLabel";
-            this.FromDateTimeLabel.Size = new System.Drawing.Size(200, 27);
+            this.FromDateTimeLabel.Size = new System.Drawing.Size(152, 27);
             this.FromDateTimeLabel.TabIndex = 198;
             this.FromDateTimeLabel.Text = "*";
             // 
             // ExecuteButton
             // 
+            this.ExecuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ExecuteButton.BackColor = System.Drawing.Color.SteelBlue;
             this.ExecuteButton.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.ExecuteButton.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -203,7 +205,7 @@
             // 
             this.UserComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.UserComboBox.FormattingEnabled = true;
-            this.UserComboBox.Location = new System.Drawing.Point(616, 45);
+            this.UserComboBox.Location = new System.Drawing.Point(520, 45);
             this.UserComboBox.Name = "UserComboBox";
             this.UserComboBox.Size = new System.Drawing.Size(175, 23);
             this.UserComboBox.TabIndex = 196;
@@ -212,36 +214,50 @@
             // 
             this.TurnComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TurnComboBox.FormattingEnabled = true;
-            this.TurnComboBox.Location = new System.Drawing.Point(432, 45);
+            this.TurnComboBox.Location = new System.Drawing.Point(336, 45);
             this.TurnComboBox.Name = "TurnComboBox";
             this.TurnComboBox.Size = new System.Drawing.Size(175, 23);
             this.TurnComboBox.TabIndex = 195;
             // 
             // ToDateTimePicker
             // 
-            this.ToDateTimePicker.Location = new System.Drawing.Point(224, 45);
+            this.ToDateTimePicker.CustomFormat = "";
+            this.ToDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.ToDateTimePicker.Location = new System.Drawing.Point(176, 45);
             this.ToDateTimePicker.Name = "ToDateTimePicker";
-            this.ToDateTimePicker.Size = new System.Drawing.Size(200, 23);
+            this.ToDateTimePicker.Size = new System.Drawing.Size(152, 23);
             this.ToDateTimePicker.TabIndex = 194;
             // 
             // FromDateTimePicker
             // 
+            this.FromDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.FromDateTimePicker.Location = new System.Drawing.Point(16, 45);
             this.FromDateTimePicker.Name = "FromDateTimePicker";
-            this.FromDateTimePicker.Size = new System.Drawing.Size(200, 23);
+            this.FromDateTimePicker.Size = new System.Drawing.Size(152, 23);
             this.FromDateTimePicker.TabIndex = 193;
             // 
             // DetailPanel
             // 
             this.DetailPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DetailPanel.Controls.Add(this.DetailLabel);
             this.DetailPanel.Controls.Add(this.PrintButton);
             this.DetailPanel.Controls.Add(this.AcceptButton);
             this.DetailPanel.Controls.Add(this.OperationsDetailGridView);
-            this.DetailPanel.Location = new System.Drawing.Point(16, 152);
+            this.DetailPanel.Location = new System.Drawing.Point(16, 128);
             this.DetailPanel.Name = "DetailPanel";
             this.DetailPanel.Size = new System.Drawing.Size(920, 392);
             this.DetailPanel.TabIndex = 184;
             this.DetailPanel.Visible = false;
+            // 
+            // DetailLabel
+            // 
+            this.DetailLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.DetailLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DetailLabel.ForeColor = System.Drawing.Color.White;
+            this.DetailLabel.Location = new System.Drawing.Point(8, 0);
+            this.DetailLabel.Name = "DetailLabel";
+            this.DetailLabel.Size = new System.Drawing.Size(901, 27);
+            this.DetailLabel.TabIndex = 190;
             // 
             // PrintButton
             // 
@@ -315,7 +331,7 @@
             this.OperationsDetailGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.OperationsDetailGridView.EnableHeadersVisualStyles = false;
             this.OperationsDetailGridView.GridColor = System.Drawing.Color.White;
-            this.OperationsDetailGridView.Location = new System.Drawing.Point(8, 7);
+            this.OperationsDetailGridView.Location = new System.Drawing.Point(8, 32);
             this.OperationsDetailGridView.Name = "OperationsDetailGridView";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -372,5 +388,6 @@
         private CustomButton AcceptButton;
         private DataGridView OperationsDetailGridView;
         private CustomButton PrintButton;
+        private Label DetailLabel;
     }
 }

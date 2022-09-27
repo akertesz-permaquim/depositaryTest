@@ -5,3 +5,6 @@
 
 @import '../../_content/Radzen.Blazor/css/dark.css';
 
+.rz-datatable td {
+    padding: 0px;
+}

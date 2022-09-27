@@ -232,7 +232,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                     {
-                        ReportController.PrintReport(ReportTypeEnum.DailyClosing,null,null);
+                        ReportController.PrintReport(ReportTypeEnum.DailyClosing,null,null, i);
                         _alreadyPrinted = true;
                     }
                 }

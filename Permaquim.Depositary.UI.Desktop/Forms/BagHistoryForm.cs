@@ -20,21 +20,9 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadStyles();
             LoadBackButton();
             TimeOutController.Reset();
-            //_pollingTimer = new System.Windows.Forms.Timer()
-            //{
-            //    Interval = DeviceController.GetPollingInterval()
-            //};
-            //_pollingTimer.Tick += PollingTimer_Tick;
+
         }
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams CP = base.CreateParams;
-        //        CP.ExStyle = CP.ExStyle | 0x01500000; // WS_EX_COMPOSITED
-        //        return CP;
-        //    }
-        //}
+
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -75,7 +63,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width / 2 - 5, 55);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width -3);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -107,7 +95,7 @@ namespace Permaquim.Depositary.UI.Desktop
             MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "FechaApertura",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_APERTURA),
                 Name = "FechaApertura",
                 Visible = true,
                 Width = 150,
@@ -118,7 +106,7 @@ namespace Permaquim.Depositary.UI.Desktop
             MainGridView.Columns.Add(new()
             {
                 DataPropertyName = "FechaCierre",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE),
                 Name = "FechaCierre",
                 Visible = true,
                 Width = 150,

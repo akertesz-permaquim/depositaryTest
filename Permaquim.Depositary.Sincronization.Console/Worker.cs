@@ -27,41 +27,20 @@ namespace Permaquim.Depositary.Sincronization.Console
         private string _delaytime = String.Empty;
 
         IModel model = null;
+        private readonly IHostApplicationLifetime _hostApplicationLifetime;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(IHostApplicationLifetime hostApplicationLifetime, ILogger<Worker> logger)
         {
+            _hostApplicationLifetime = hostApplicationLifetime;
             _logger = logger;
 
-            string passwordKey = ConfigurationController.GetConfiguration("PasswordKey");
-            _logger.Log(LogLevel.Information, "PasswordKey is: " + passwordKey);
 
-            Thread.Sleep(1000);
-
-            string connectionstring = Cryptography.Decrypt(ConfigurationController.GetConfiguration("Connectionstring"), passwordKey);
-            _logger.Log(LogLevel.Information, "Connectionstring is: " + connectionstring);
-
-            Thread.Sleep(1000);
-
-            string depositary = Cryptography.Decrypt(ConfigurationController.GetConfiguration("CodigoDepositario"), passwordKey);
-            _logger.Log(LogLevel.Information, "CodigoDepositario is: " + depositary);
-
-            Thread.Sleep(1000);
-
-            _baseUrl = ConfigurationController.GetConfiguration(WEBAPIURL);
-            _logger.Log(LogLevel.Information,"Base URL is: " + _baseUrl);
-
-            Thread.Sleep(1000);
-
-            _delaytime = DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY) == String.Empty ? "10000" : DatabaseController.GetApplicationParameterValue(SINCRONIZATION_DELAY);
-            _logger.Log(LogLevel.Information, "Delaytime is: " + _delaytime);
-
-            Thread.Sleep(1000);
         }
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
-            _workerTasks = AppConfiguration.GetWorkerTasks();
+                _workerTasks = AppConfiguration.GetWorkerTasks();
 
             }
             catch (Exception ex)
@@ -69,7 +48,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 _logger.Log(LogLevel.Error, ex.Message);
                 return null;
             }
-          
+
             return base.StartAsync(cancellationToken);
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -79,41 +58,50 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                foreach (var item in _workerTasks)
+
+                if (DatabaseController.CurrentDepositary == null)
                 {
-                    _logger.Log(LogLevel.Information, "Api endpoint is " + _baseUrl + item.Endpoint);
-
-                    switch (item.WorkerTaskType)
+                    await InitializationController.InitializeDepositary();
+                }
+                else
+                {
+                    foreach (var item in _workerTasks)
                     {
-                        case WorkerTask.WorkerTaskTypeEnum.None:
-                            break;
-                        case WorkerTask.WorkerTaskTypeEnum.GetToken:
-                            await GetToken(item);
-                            break;
-                        case WorkerTask.WorkerTaskTypeEnum.Receive:
-                            await ReceiveData(item);
-                            break;
-                        case WorkerTask.WorkerTaskTypeEnum.Send:
-                            await SendData(item);
-                            break;
-                        case WorkerTask.WorkerTaskTypeEnum.SendAndReceive:
-                            await SendAndReceiveData(item);
-                            break;
-                        default:
-                            break;
+                        _baseUrl = AppConfiguration.WebApiUrl;
+
+                        _logger.Log(LogLevel.Information, "Api endpoint is " + _baseUrl + item.Endpoint);
+
+                        switch (item.WorkerTaskType)
+                        {
+                            case WorkerTask.WorkerTaskTypeEnum.None:
+                                break;
+                            case WorkerTask.WorkerTaskTypeEnum.GetToken:
+                                await GetToken(item);
+                                break;
+                            case WorkerTask.WorkerTaskTypeEnum.Receive:
+                                await ReceiveData(item);
+                                break;
+                            case WorkerTask.WorkerTaskTypeEnum.Send:
+                                await SendData(item);
+                                break;
+                            case WorkerTask.WorkerTaskTypeEnum.SendAndReceive:
+                                await SendAndReceiveData(item);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        model = null;
+
+                        await Task.Delay(100, stoppingToken);
+
                     }
-
-                    model = null;
-
-
-
-                    await Task.Delay(5000, stoppingToken);
-
-                    GC.Collect();
-
                 }
 
-                await Task.Delay(Convert.ToInt32(_delaytime), stoppingToken);
+                //await Task.Delay(Convert.ToInt32(_delaytime), stoppingToken);
+
+                _hostApplicationLifetime.StopApplication();
+
             }
         }
 
@@ -146,6 +134,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                 catch (Exception ex)
                 {
                     Log(ex);
+                }
+                finally
+                {
+                    model = null;
                 }
             }
             else
@@ -212,6 +204,10 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                 Log(ex);
             }
+            finally
+            {
+                model = null;
+            }
         }
 
         private async Task SendAndReceiveData(WorkerTask item)
@@ -260,6 +256,10 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Log(ex);
                 }
+                finally
+                {
+                    model = null;
+                }
 
             }
             else
@@ -267,11 +267,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                 _logger.Log(LogLevel.Information, "JwToken is null, POST was cancelled!");
             }
 
+
         }
 
         private async Task GetToken(WorkerTask item)
         {
-
             if (_jwToken == null || DateTime.Now >= _jwToken.Expiration)
             {
                 try

@@ -157,6 +157,137 @@ using System.Text;
 		namespace Permaquim.Depositario.Entities.Views.Reporte {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
+			[DataItemAttributeObjectName("CierresDiarios","CierresDiarios")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
+			public class CierresDiarios : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string CierreDiarioId = "CierreDiarioId";
+					public const string DepositarioId = "DepositarioId";
+					public const string SectorId = "SectorId";
+					public const string SucursalId = "SucursalId";
+					public const string EmpresaId = "EmpresaId";
+					public const string UsuarioId = "UsuarioId";
+					public const string Usuario = "Usuario";
+					public const string Fecha = "Fecha";
+					public const string CierreDiario = "CierreDiario";
+					public const string Empresa = "Empresa";
+					public const string Sucursal = "Sucursal";
+					public const string Sector = "Sector";
+					public const string TurnoId = "TurnoId";
+					public const string Turno = "Turno";
+					public const string Depositario = "Depositario";
+					public const string CantidadTransacciones = "CantidadTransacciones";
+					public const string TotalValidado = "TotalValidado";
+					public const string TotalAValidar = "TotalAValidar";
+					public const string Moneda = "Moneda";
+					public const string CodigoCierreDiario = "CodigoCierreDiario";
+				}
+				public enum FieldEnum : int
+                {
+					CierreDiarioId,
+					DepositarioId,
+					SectorId,
+					SucursalId,
+					EmpresaId,
+					UsuarioId,
+					Usuario,
+					Fecha,
+					CierreDiario,
+					Empresa,
+					Sucursal,
+					Sector,
+					TurnoId,
+					Turno,
+					Depositario,
+					CantidadTransacciones,
+					TotalValidado,
+					TotalAValidar,
+					Moneda,
+					CodigoCierreDiario
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public CierresDiarios()
+                {
+                }
+	               /// <summary>
+                /// Constructor with Parameters 
+	               /// <summary>
+                public  CierresDiarios(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64 TurnoId,String Turno,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoCierreDiario)
+                {
+                    this.CierreDiarioId = CierreDiarioId;
+                    this.DepositarioId = DepositarioId;
+                    this.SectorId = SectorId;
+                    this.SucursalId = SucursalId;
+                    this.EmpresaId = EmpresaId;
+                    this.UsuarioId = UsuarioId;
+                    this.Usuario = Usuario;
+                    this.Fecha = Fecha;
+                    this.CierreDiario = CierreDiario;
+                    this.Empresa = Empresa;
+                    this.Sucursal = Sucursal;
+                    this.Sector = Sector;
+                    this.TurnoId = TurnoId;
+                    this.Turno = Turno;
+                    this.Depositario = Depositario;
+                    this.CantidadTransacciones = CantidadTransacciones;
+                    this.TotalValidado = TotalValidado;
+                    this.TotalAValidar = TotalAValidar;
+                    this.Moneda = Moneda;
+                    this.CodigoCierreDiario = CodigoCierreDiario;
+                }
+             [DataItemAttributeFieldName("CierreDiarioId","CierreDiarioId")]
+             public Int64 CierreDiarioId { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("SectorId","SectorId")]
+             public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             public Int64 EmpresaId { get; set; }
+             [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
+             public Int64 UsuarioId { get; set; }
+             [DataItemAttributeFieldName("Usuario","Usuario")]
+             public String Usuario { get; set; }
+             [DataItemAttributeFieldName("Fecha","Fecha")]
+             public DateTime Fecha { get; set; }
+             [DataItemAttributeFieldName("CierreDiario","CierreDiario")]
+             public String CierreDiario { get; set; }
+             [DataItemAttributeFieldName("Empresa","Empresa")]
+             public String Empresa { get; set; }
+             [DataItemAttributeFieldName("Sucursal","Sucursal")]
+             public String Sucursal { get; set; }
+             [DataItemAttributeFieldName("Sector","Sector")]
+             public String Sector { get; set; }
+             [DataItemAttributeFieldName("TurnoId","TurnoId")]
+             public Int64 TurnoId { get; set; }
+             [DataItemAttributeFieldName("Turno","Turno")]
+             public String Turno { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
+             [DataItemAttributeFieldName("CantidadTransacciones","CantidadTransacciones")]
+             public Int32 CantidadTransacciones { get; set; }
+             [DataItemAttributeFieldName("TotalValidado","TotalValidado")]
+             public Double TotalValidado { get; set; }
+             [DataItemAttributeFieldName("TotalAValidar","TotalAValidar")]
+             public Double TotalAValidar { get; set; }
+             [DataItemAttributeFieldName("Moneda","Moneda")]
+             public String Moneda { get; set; }
+             [DataItemAttributeFieldName("CodigoCierreDiario","CodigoCierreDiario")]
+             public String CodigoCierreDiario { get; set; }
+				
+			} //Class CierresDiarios 
+			
+} //namespace Permaquim.Depositario.Entities.Views.Reporte
+//////////////////////////////////////////////////////////////////////////////////
+		namespace Permaquim.Depositario.Entities.Views.Reporte {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
 			[DataItemAttributeObjectName("Contenedores","Contenedores")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
 			public class Contenedores : IDataItem
@@ -168,10 +299,15 @@ using System.Text;
 					public const string Identificador = "Identificador";
 					public const string FechaApertura = "FechaApertura";
 					public const string FechaCierre = "FechaCierre";
-					public const string Depositario = "Depositario";
 					public const string DepositarioId = "DepositarioId";
-					public const string CantidadTransacciones = "CantidadTransacciones";
 					public const string SectorId = "SectorId";
+					public const string SucursalId = "SucursalId";
+					public const string EmpresaId = "EmpresaId";
+					public const string Empresa = "Empresa";
+					public const string Sucursal = "Sucursal";
+					public const string Sector = "Sector";
+					public const string Depositario = "Depositario";
+					public const string CantidadTransacciones = "CantidadTransacciones";
 					public const string CantidadBilletes = "CantidadBilletes";
 					public const string CantidadSobres = "CantidadSobres";
 					public const string CantidadTotalDineroMonedaDefault = "CantidadTotalDineroMonedaDefault";
@@ -182,10 +318,15 @@ using System.Text;
 					Identificador,
 					FechaApertura,
 					FechaCierre,
-					Depositario,
 					DepositarioId,
-					CantidadTransacciones,
 					SectorId,
+					SucursalId,
+					EmpresaId,
+					Empresa,
+					Sucursal,
+					Sector,
+					Depositario,
+					CantidadTransacciones,
 					CantidadBilletes,
 					CantidadSobres,
 					CantidadTotalDineroMonedaDefault
@@ -199,16 +340,21 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  Contenedores(Int64 ContenedorId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,String Depositario,Int64 DepositarioId,Int32 CantidadTransacciones,Int64 SectorId,Int64 CantidadBilletes,Int32 CantidadSobres,Double CantidadTotalDineroMonedaDefault)
+                public  Contenedores(Int64 ContenedorId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Int64 CantidadBilletes,Int32 CantidadSobres,Double CantidadTotalDineroMonedaDefault)
                 {
                     this.ContenedorId = ContenedorId;
                     this.Identificador = Identificador;
                     this.FechaApertura = FechaApertura;
                     this.FechaCierre = FechaCierre;
-                    this.Depositario = Depositario;
                     this.DepositarioId = DepositarioId;
-                    this.CantidadTransacciones = CantidadTransacciones;
                     this.SectorId = SectorId;
+                    this.SucursalId = SucursalId;
+                    this.EmpresaId = EmpresaId;
+                    this.Empresa = Empresa;
+                    this.Sucursal = Sucursal;
+                    this.Sector = Sector;
+                    this.Depositario = Depositario;
+                    this.CantidadTransacciones = CantidadTransacciones;
                     this.CantidadBilletes = CantidadBilletes;
                     this.CantidadSobres = CantidadSobres;
                     this.CantidadTotalDineroMonedaDefault = CantidadTotalDineroMonedaDefault;
@@ -221,14 +367,24 @@ using System.Text;
              public DateTime FechaApertura { get; set; }
              [DataItemAttributeFieldName("FechaCierre","FechaCierre")]
              public DateTime FechaCierre { get; set; }
-             [DataItemAttributeFieldName("Depositario","Depositario")]
-             public String Depositario { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              public Int64 DepositarioId { get; set; }
-             [DataItemAttributeFieldName("CantidadTransacciones","CantidadTransacciones")]
-             public Int32 CantidadTransacciones { get; set; }
              [DataItemAttributeFieldName("SectorId","SectorId")]
              public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             public Int64 EmpresaId { get; set; }
+             [DataItemAttributeFieldName("Empresa","Empresa")]
+             public String Empresa { get; set; }
+             [DataItemAttributeFieldName("Sucursal","Sucursal")]
+             public String Sucursal { get; set; }
+             [DataItemAttributeFieldName("Sector","Sector")]
+             public String Sector { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
+             [DataItemAttributeFieldName("CantidadTransacciones","CantidadTransacciones")]
+             public Int32 CantidadTransacciones { get; set; }
              [DataItemAttributeFieldName("CantidadBilletes","CantidadBilletes")]
              public Int64 CantidadBilletes { get; set; }
              [DataItemAttributeFieldName("CantidadSobres","CantidadSobres")]
@@ -272,6 +428,7 @@ using System.Text;
 					public const string CodigoMoneda = "CodigoMoneda";
 					public const string Depositario = "Depositario";
 					public const string Total = "Total";
+					public const string CodigoOperacion = "CodigoOperacion";
 				}
 				public enum FieldEnum : int
                 {
@@ -296,7 +453,8 @@ using System.Text;
 					Denominacion,
 					CodigoMoneda,
 					Depositario,
-					Total
+					Total,
+					CodigoOperacion
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -307,7 +465,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal Total)
+                public  DetalleTransacciones(Int64 TransaccionId,DateTime FechaTransaccion,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Moneda,String Denominacion,String CodigoMoneda,String Depositario,Decimal Total,String CodigoOperacion)
                 {
                     this.TransaccionId = TransaccionId;
                     this.FechaTransaccion = FechaTransaccion;
@@ -331,6 +489,7 @@ using System.Text;
                     this.CodigoMoneda = CodigoMoneda;
                     this.Depositario = Depositario;
                     this.Total = Total;
+                    this.CodigoOperacion = CodigoOperacion;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -376,6 +535,8 @@ using System.Text;
              public String Depositario { get; set; }
              [DataItemAttributeFieldName("Total","Total")]
              public Decimal Total { get; set; }
+             [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
+             public String CodigoOperacion { get; set; }
 				
 			} //Class DetalleTransacciones 
 			
@@ -394,28 +555,52 @@ using System.Text;
 					public const string TransaccionId = "TransaccionId";
 					public const string FechaTransaccion = "FechaTransaccion";
 					public const string CodigoSobre = "CodigoSobre";
+					public const string Cantidad = "Cantidad";
+					public const string TipoValor = "TipoValor";
+					public const string SectorId = "SectorId";
+					public const string SucursalId = "SucursalId";
+					public const string EmpresaId = "EmpresaId";
 					public const string UsuarioId = "UsuarioId";
 					public const string ContenedorId = "ContenedorId";
-					public const string Cantidad = "Cantidad";
-					public const string Depositario = "Depositario";
-					public const string TipoValor = "TipoValor";
-					public const string TurnoId = "TurnoId";
-					public const string SectorId = "SectorId";
+					public const string OrigenId = "OrigenId";
 					public const string DepositarioId = "DepositarioId";
+					public const string EsquemaDetalleTurnoId = "EsquemaDetalleTurnoId";
+					public const string Empresa = "Empresa";
+					public const string Sucursal = "Sucursal";
+					public const string Sector = "Sector";
+					public const string Turno = "Turno";
+					public const string Contenedor = "Contenedor";
+					public const string Usuario = "Usuario";
+					public const string Origen = "Origen";
+					public const string Depositario = "Depositario";
+					public const string CodigoOperacion = "CodigoOperacion";
+					public const string Moneda = "Moneda";
 				}
 				public enum FieldEnum : int
                 {
 					TransaccionId,
 					FechaTransaccion,
 					CodigoSobre,
+					Cantidad,
+					TipoValor,
+					SectorId,
+					SucursalId,
+					EmpresaId,
 					UsuarioId,
 					ContenedorId,
-					Cantidad,
+					OrigenId,
+					DepositarioId,
+					EsquemaDetalleTurnoId,
+					Empresa,
+					Sucursal,
+					Sector,
+					Turno,
+					Contenedor,
+					Usuario,
+					Origen,
 					Depositario,
-					TipoValor,
-					TurnoId,
-					SectorId,
-					DepositarioId
+					CodigoOperacion,
+					Moneda
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -426,19 +611,31 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  DetalleTransaccionesSobre(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 UsuarioId,Int64 ContenedorId,Int64 Cantidad,String Depositario,String TipoValor,Int64 TurnoId,Int64 SectorId,Int64 DepositarioId)
+                public  DetalleTransaccionesSobre(Int64 TransaccionId,DateTime FechaTransaccion,String CodigoSobre,Int64 Cantidad,String TipoValor,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 ContenedorId,Int64 OrigenId,Int64 DepositarioId,Int64 EsquemaDetalleTurnoId,String Empresa,String Sucursal,String Sector,String Turno,String Contenedor,String Usuario,String Origen,String Depositario,String CodigoOperacion,String Moneda)
                 {
                     this.TransaccionId = TransaccionId;
                     this.FechaTransaccion = FechaTransaccion;
                     this.CodigoSobre = CodigoSobre;
+                    this.Cantidad = Cantidad;
+                    this.TipoValor = TipoValor;
+                    this.SectorId = SectorId;
+                    this.SucursalId = SucursalId;
+                    this.EmpresaId = EmpresaId;
                     this.UsuarioId = UsuarioId;
                     this.ContenedorId = ContenedorId;
-                    this.Cantidad = Cantidad;
-                    this.Depositario = Depositario;
-                    this.TipoValor = TipoValor;
-                    this.TurnoId = TurnoId;
-                    this.SectorId = SectorId;
+                    this.OrigenId = OrigenId;
                     this.DepositarioId = DepositarioId;
+                    this.EsquemaDetalleTurnoId = EsquemaDetalleTurnoId;
+                    this.Empresa = Empresa;
+                    this.Sucursal = Sucursal;
+                    this.Sector = Sector;
+                    this.Turno = Turno;
+                    this.Contenedor = Contenedor;
+                    this.Usuario = Usuario;
+                    this.Origen = Origen;
+                    this.Depositario = Depositario;
+                    this.CodigoOperacion = CodigoOperacion;
+                    this.Moneda = Moneda;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -446,22 +643,46 @@ using System.Text;
              public DateTime FechaTransaccion { get; set; }
              [DataItemAttributeFieldName("CodigoSobre","CodigoSobre")]
              public String CodigoSobre { get; set; }
+             [DataItemAttributeFieldName("Cantidad","Cantidad")]
+             public Int64 Cantidad { get; set; }
+             [DataItemAttributeFieldName("TipoValor","TipoValor")]
+             public String TipoValor { get; set; }
+             [DataItemAttributeFieldName("SectorId","SectorId")]
+             public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             public Int64 EmpresaId { get; set; }
              [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
              public Int64 UsuarioId { get; set; }
              [DataItemAttributeFieldName("ContenedorId","ContenedorId")]
              public Int64 ContenedorId { get; set; }
-             [DataItemAttributeFieldName("Cantidad","Cantidad")]
-             public Int64 Cantidad { get; set; }
-             [DataItemAttributeFieldName("Depositario","Depositario")]
-             public String Depositario { get; set; }
-             [DataItemAttributeFieldName("TipoValor","TipoValor")]
-             public String TipoValor { get; set; }
-             [DataItemAttributeFieldName("TurnoId","TurnoId")]
-             public Int64 TurnoId { get; set; }
-             [DataItemAttributeFieldName("SectorId","SectorId")]
-             public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("OrigenId","OrigenId")]
+             public Int64 OrigenId { get; set; }
              [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
              public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("EsquemaDetalleTurnoId","EsquemaDetalleTurnoId")]
+             public Int64 EsquemaDetalleTurnoId { get; set; }
+             [DataItemAttributeFieldName("Empresa","Empresa")]
+             public String Empresa { get; set; }
+             [DataItemAttributeFieldName("Sucursal","Sucursal")]
+             public String Sucursal { get; set; }
+             [DataItemAttributeFieldName("Sector","Sector")]
+             public String Sector { get; set; }
+             [DataItemAttributeFieldName("Turno","Turno")]
+             public String Turno { get; set; }
+             [DataItemAttributeFieldName("Contenedor","Contenedor")]
+             public String Contenedor { get; set; }
+             [DataItemAttributeFieldName("Usuario","Usuario")]
+             public String Usuario { get; set; }
+             [DataItemAttributeFieldName("Origen","Origen")]
+             public String Origen { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
+             [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
+             public String CodigoOperacion { get; set; }
+             [DataItemAttributeFieldName("Moneda","Moneda")]
+             public String Moneda { get; set; }
 				
 			} //Class DetalleTransaccionesSobre 
 			
@@ -501,6 +722,7 @@ using System.Text;
 					public const string DepositarioId = "DepositarioId";
 					public const string OrigenId = "OrigenId";
 					public const string Origen = "Origen";
+					public const string CodigoOperacion = "CodigoOperacion";
 				}
 				public enum FieldEnum : int
                 {
@@ -527,7 +749,8 @@ using System.Text;
 					UsuarioId,
 					DepositarioId,
 					OrigenId,
-					Origen
+					Origen,
+					CodigoOperacion
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -538,7 +761,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId,Int64 OrigenId,String Origen)
+                public  Transacciones(Int64 TransaccionId,Int64 TransaccionTipoId,String TransaccionTipo,String Usuario,DateTime FechaTransaccion,DateTime FechaRetiroBolsa,String Moneda,Double TotalValidado,Double TotalAValidar,String Empresa,String Sucursal,String Sector,String Turno,String Depositario,String Contenedor,Int64 ContenedorId,Int64 EsquemaDetalleTurnoId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,Int64 DepositarioId,Int64 OrigenId,String Origen,String CodigoOperacion)
                 {
                     this.TransaccionId = TransaccionId;
                     this.TransaccionTipoId = TransaccionTipoId;
@@ -564,6 +787,7 @@ using System.Text;
                     this.DepositarioId = DepositarioId;
                     this.OrigenId = OrigenId;
                     this.Origen = Origen;
+                    this.CodigoOperacion = CodigoOperacion;
                 }
              [DataItemAttributeFieldName("TransaccionId","TransaccionId")]
              public Int64 TransaccionId { get; set; }
@@ -613,8 +837,146 @@ using System.Text;
              public Int64 OrigenId { get; set; }
              [DataItemAttributeFieldName("Origen","Origen")]
              public String Origen { get; set; }
+             [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
+             public String CodigoOperacion { get; set; }
 				
 			} //Class Transacciones 
+			
+} //namespace Permaquim.Depositario.Entities.Views.Reporte
+//////////////////////////////////////////////////////////////////////////////////
+		namespace Permaquim.Depositario.Entities.Views.Reporte {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
+			[DataItemAttributeObjectName("Turnos","Turnos")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
+			public class Turnos : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string TurnoId = "TurnoId";
+					public const string DepositarioId = "DepositarioId";
+					public const string SectorId = "SectorId";
+					public const string SucursalId = "SucursalId";
+					public const string EmpresaId = "EmpresaId";
+					public const string EsquemaDetalleTurnoId = "EsquemaDetalleTurnoId";
+					public const string FechaApertura = "FechaApertura";
+					public const string FechaCierre = "FechaCierre";
+					public const string Fecha = "Fecha";
+					public const string Secuencia = "Secuencia";
+					public const string Turno = "Turno";
+					public const string CierreDiario = "CierreDiario";
+					public const string Empresa = "Empresa";
+					public const string Sucursal = "Sucursal";
+					public const string Sector = "Sector";
+					public const string Depositario = "Depositario";
+					public const string CantidadTransacciones = "CantidadTransacciones";
+					public const string TotalValidado = "TotalValidado";
+					public const string TotalAValidar = "TotalAValidar";
+					public const string Moneda = "Moneda";
+					public const string CodigoTurno = "CodigoTurno";
+				}
+				public enum FieldEnum : int
+                {
+					TurnoId,
+					DepositarioId,
+					SectorId,
+					SucursalId,
+					EmpresaId,
+					EsquemaDetalleTurnoId,
+					FechaApertura,
+					FechaCierre,
+					Fecha,
+					Secuencia,
+					Turno,
+					CierreDiario,
+					Empresa,
+					Sucursal,
+					Sector,
+					Depositario,
+					CantidadTransacciones,
+					TotalValidado,
+					TotalAValidar,
+					Moneda,
+					CodigoTurno
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public Turnos()
+                {
+                }
+	               /// <summary>
+                /// Constructor with Parameters 
+	               /// <summary>
+                public  Turnos(Int64 TurnoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 EsquemaDetalleTurnoId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,String Turno,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoTurno)
+                {
+                    this.TurnoId = TurnoId;
+                    this.DepositarioId = DepositarioId;
+                    this.SectorId = SectorId;
+                    this.SucursalId = SucursalId;
+                    this.EmpresaId = EmpresaId;
+                    this.EsquemaDetalleTurnoId = EsquemaDetalleTurnoId;
+                    this.FechaApertura = FechaApertura;
+                    this.FechaCierre = FechaCierre;
+                    this.Fecha = Fecha;
+                    this.Secuencia = Secuencia;
+                    this.Turno = Turno;
+                    this.CierreDiario = CierreDiario;
+                    this.Empresa = Empresa;
+                    this.Sucursal = Sucursal;
+                    this.Sector = Sector;
+                    this.Depositario = Depositario;
+                    this.CantidadTransacciones = CantidadTransacciones;
+                    this.TotalValidado = TotalValidado;
+                    this.TotalAValidar = TotalAValidar;
+                    this.Moneda = Moneda;
+                    this.CodigoTurno = CodigoTurno;
+                }
+             [DataItemAttributeFieldName("TurnoId","TurnoId")]
+             public Int64 TurnoId { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("SectorId","SectorId")]
+             public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             public Int64 EmpresaId { get; set; }
+             [DataItemAttributeFieldName("EsquemaDetalleTurnoId","EsquemaDetalleTurnoId")]
+             public Int64 EsquemaDetalleTurnoId { get; set; }
+             [DataItemAttributeFieldName("FechaApertura","FechaApertura")]
+             public DateTime FechaApertura { get; set; }
+             [DataItemAttributeFieldName("FechaCierre","FechaCierre")]
+             public DateTime FechaCierre { get; set; }
+             [DataItemAttributeFieldName("Fecha","Fecha")]
+             public DateTime Fecha { get; set; }
+             [DataItemAttributeFieldName("Secuencia","Secuencia")]
+             public Int32 Secuencia { get; set; }
+             [DataItemAttributeFieldName("Turno","Turno")]
+             public String Turno { get; set; }
+             [DataItemAttributeFieldName("CierreDiario","CierreDiario")]
+             public String CierreDiario { get; set; }
+             [DataItemAttributeFieldName("Empresa","Empresa")]
+             public String Empresa { get; set; }
+             [DataItemAttributeFieldName("Sucursal","Sucursal")]
+             public String Sucursal { get; set; }
+             [DataItemAttributeFieldName("Sector","Sector")]
+             public String Sector { get; set; }
+             [DataItemAttributeFieldName("Depositario","Depositario")]
+             public String Depositario { get; set; }
+             [DataItemAttributeFieldName("CantidadTransacciones","CantidadTransacciones")]
+             public Int32 CantidadTransacciones { get; set; }
+             [DataItemAttributeFieldName("TotalValidado","TotalValidado")]
+             public Double TotalValidado { get; set; }
+             [DataItemAttributeFieldName("TotalAValidar","TotalAValidar")]
+             public Double TotalAValidar { get; set; }
+             [DataItemAttributeFieldName("Moneda","Moneda")]
+             public String Moneda { get; set; }
+             [DataItemAttributeFieldName("CodigoTurno","CodigoTurno")]
+             public String CodigoTurno { get; set; }
+				
+			} //Class Turnos 
 			
 } //namespace Permaquim.Depositario.Entities.Views.Reporte
 //////////////////////////////////////////////////////////////////////////////////

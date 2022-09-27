@@ -5,253 +5,246 @@
 
 @if (dataFunciones != null)
 {
-    @if (SeguridadController.VerificarPermisoFuncion("DispositivoDepositarioMoneda", dataFunciones, "PuedeVisualizar"))
+    @if (DepositarioMoneda_entities == null)
     {
-        @if (DepositarioMoneda_entities == null)
+        <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+    }
+    else
+    {
+        switch (crudMode)
         {
-            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
-        }
-        else
-        {
-            switch (crudMode)
-            {
-                case CrudMode.Add:
-                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
-                        <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
-                        </ChildContent>
-                    </RadzenBadge>
-                    break;
-                case CrudMode.Delete:
-                    <RadzenBadge BadgeStyle="BadgeStyle.Warning">
-                        <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
-                        </ChildContent>
-                    </RadzenBadge>
-                    break;
-                case CrudMode.Edit:
-                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
-                        <ChildContent>
-                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
-                        </ChildContent>
-                    </RadzenBadge>
-                    break;
-                case CrudMode.List:
-                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
-                        <ChildContent>
-                            <div>
-                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
-                            </div>
-                        </ChildContent>
-                    </RadzenBadge>
-                    break;
-            }
-            <hr>
-            if (crudMode == CrudMode.List)
-            {
-                <RadzenDataGrid AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@DepositarioMoneda_entities" TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
-                    <EmptyTemplate>
-                        <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
-                    </EmptyTemplate>
-                    <Columns>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
-                            <HeaderTemplate>
-                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("DispositivoDepositarioMoneda",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
-                                </RadzenButton>
-                            </HeaderTemplate>
-                            <Template Context="element">
-                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("DispositivoDepositarioMoneda",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
-                                </RadzenButton>
-                                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("DispositivoDepositarioMoneda",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
-                                </RadzenButton>
-                            </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn Visible="false" TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Property="DepositarioId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_DepositarioId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                            <Template>
-                                @if (Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == @context.DepositarioId) != null)
-                                {
-                                    <RadzenLabel Text="@Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @context.DepositarioId).Nombre" Component="DepositarioId" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                                else
-                                {
-                                    <RadzenLabel Text="No data available" Component="DepositarioId" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                            </Template>
-                            <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                                <RadzenDropDown @bind-Value=@selectedFilter_DepositarioId Data="@Depositario_DepositarioId_filter" Change="OnSelectedFilter_DepositarioId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
-                            </FilterTemplate>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Property="MonedaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_MonedaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                            <Template>
-                                @if (Moneda_MonedaId_entities.FirstOrDefault(c => c.Id == @context.MonedaId) != null)
-                                {
-                                    <RadzenLabel Text="@Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @context.MonedaId).Nombre" Component="MonedaId" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                                else
-                                {
-                                    <RadzenLabel Text="No data available" Component="MonedaId" style="width: 100%">
-                                    </RadzenLabel>
-                                }
-                            </Template>
-                            <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                                <RadzenDropDown @bind-Value=@selectedFilter_MonedaId Data="@Moneda_MonedaId_filter" Change="OnSelectedFilter_MonedaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
-                            </FilterTemplate>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="IndiceEnContadora" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
-                            <Template Context="data">
-                                <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
-                                </RadzenCheckBox>
-                            </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                            <Template>
-                                @{
-                                    var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
-                                    if (usuario != null)
-                                    {
-                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
-                                        </RadzenLabel>
-                                    }
-                                    else
-                                    {
-                                        <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
-                                        </RadzenLabel>
-                                    }
-                                }
-                            </Template>
-                            <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                                <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
-                            </FilterTemplate>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                            <Template>
-                                @{
-                                    var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion);
-                                    if (usuario != null)
-                                    {
-                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
-                                        </RadzenLabel>
-                                    }
-                                    else
-                                    {
-                                        <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
-                                        </RadzenLabel>
-                                    }
-                                }
-                            </Template>
-                            <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                                <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
-                            </FilterTemplate>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
-                        </RadzenDataGridColumn>
-                    </Columns>
-                </RadzenDataGrid>
-                <hr>
-            }
-
-            if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
-            {
-                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Data="@DepositarioMoneda_entity" @bind-Value="DepositarioMoneda_entity" Submit="Save" Visible="@(DepositarioMoneda_entity != null)">
+            case CrudMode.Add:
+                <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
                     <ChildContent>
-                        @if (crudMode != CrudMode.Add)
-                        {
-                            <div style="margin-bottom: 1rem" class="row">
-                                <div class="col-md-3">
-                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
+                        <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
+                    </ChildContent>
+                </RadzenBadge>
+                break;
+            case CrudMode.Delete:
+                <RadzenBadge BadgeStyle="BadgeStyle.Warning">
+                    <ChildContent>
+                        <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
+                    </ChildContent>
+                </RadzenBadge>
+                break;
+            case CrudMode.Edit:
+                <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                    <ChildContent>
+                        <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
+                    </ChildContent>
+                </RadzenBadge>
+                break;
+            case CrudMode.List:
+                <RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+                    <ChildContent>
+                        <div>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Dispositivo.DepositarioMoneda",dataLenguaje)</h4>
+                        </div>
+                    </ChildContent>
+                </RadzenBadge>
+                break;
+        }
+        <hr>
+        if (crudMode == CrudMode.List)
+        {
+            <RadzenDataGrid RowRender="@DepositarioMonedaRowRender" AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@DepositarioMoneda_entities" TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
+                <EmptyTemplate>
+                    <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                </EmptyTemplate>
+                <Columns>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
+                        <HeaderTemplate>
+                            <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("DispositivoDepositarioMoneda",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
+                            </RadzenButton>
+                        </HeaderTemplate>
+                        <Template Context="element">
+                            <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("DispositivoDepositarioMoneda",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                            </RadzenButton>
+                            <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("DispositivoDepositarioMoneda",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                            </RadzenButton>
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
+                    <RadzenDataGridColumn Visible="false" TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Property="DepositarioId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_DepositarioId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <Template>
+                            @if (Depositario_DepositarioId_entities.FirstOrDefault(c => c.Id == @context.DepositarioId) != null)
+                            {
+                                <RadzenLabel Text="@Depositario_DepositarioId_entities.FirstOrDefault( c => c.Id == @context.DepositarioId).Nombre" Component="DepositarioId" style="width: 100%">
+                                </RadzenLabel>
+                            }
+                            else
+                            {
+                                <RadzenLabel Text="No data available" Component="DepositarioId" style="width: 100%">
+                                </RadzenLabel>
+                            }
+                        </Template>
+                        <FilterTemplate>
+                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <RadzenDropDown @bind-Value=@selectedFilter_DepositarioId Data="@Depositario_DepositarioId_filter" Change="OnSelectedFilter_DepositarioId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                        </FilterTemplate>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Property="MonedaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_MonedaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <Template>
+                            @if (Moneda_MonedaId_entities.FirstOrDefault(c => c.Id == @context.MonedaId) != null)
+                            {
+                                <RadzenLabel Text="@Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @context.MonedaId).Nombre" Component="MonedaId" style="width: 100%">
+                                </RadzenLabel>
+                            }
+                            else
+                            {
+                                <RadzenLabel Text="No data available" Component="MonedaId" style="width: 100%">
+                                </RadzenLabel>
+                            }
+                        </Template>
+                        <FilterTemplate>
+                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <RadzenDropDown @bind-Value=@selectedFilter_MonedaId Data="@Moneda_MonedaId_filter" Change="OnSelectedFilter_MonedaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                        </FilterTemplate>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="IndiceEnContadora" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <Template Context="data">
+                            <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
+                            </RadzenCheckBox>
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <Template>
+                            @{
+                                var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
+                                if (usuario != null)
+                                {
+                                    <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
                                     </RadzenLabel>
-                                </div>
-                                <div class="col-md-9">
-                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioMoneda_entity.Id)" Name="Id" Disabled="true">
-                                    </RadzenNumeric>
-                                </div>
-                            </div>
-                        }
+                                }
+                                else
+                                {
+                                    <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                            }
+                        </Template>
+                        <FilterTemplate>
+                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
+                        </FilterTemplate>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="FechaCreacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                        <Template>
+                            @{
+                                var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioModificacion);
+                                if (usuario != null)
+                                {
+                                    <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                                else
+                                {
+                                    <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                            }
+                        </Template>
+                        <FilterTemplate>
+                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
+                        </FilterTemplate>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Property="FechaModificacion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="false">
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+            <hr>
+        }
+
+        if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+        {
+            <RadzenTemplateForm TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Data="@DepositarioMoneda_entity" @bind-Value="DepositarioMoneda_entity" Submit="Save" Visible="@(DepositarioMoneda_entity != null)">
+                <ChildContent>
+                    @if (crudMode != CrudMode.Add)
+                    {
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Component="DepositarioId" style="width: 100%">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
-                                <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@DepositarioId"
-                                Data=@Depositario_DepositarioId_entities TextProperty="Nombre" ValueProperty="Id"
-                                Disabled="true" />
+                            <div class="col-md-auto">
+                                <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(DepositarioMoneda_entity.Id)" Name="Id" Disabled="true">
+                                </RadzenNumeric>
                             </div>
                         </div>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Component="MonedaId" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col-md-9">
-                                @if ((@Moneda_MonedaId_entities.Count > 0 && @Moneda_MonedaId_entities.FirstOrDefault(c => c.Id == @DepositarioMoneda_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
-                                {
-                                    var dataSet = crudMode == CrudMode.Add ? Moneda_MonedaId_entities.Where(x => x.Habilitado == true) : Moneda_MonedaId_entities.Where(x => x.Habilitado == true || x.Id == DepositarioMoneda_entity.MonedaId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                    }
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIOID",dataLenguaje) Component="DepositarioId" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-4">
+                            <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@DepositarioId"
+                                Data=@Depositario_DepositarioId_entities TextProperty="Nombre" ValueProperty="Id"
+                                Disabled="true" />
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("MONEDAID",dataLenguaje) Component="MonedaId" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-4">
+                            @if ((@Moneda_MonedaId_entities.Count > 0 && @Moneda_MonedaId_entities.FirstOrDefault(c => c.Id == @DepositarioMoneda_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
+                            {
+                                var dataSet = crudMode == CrudMode.Add ? Moneda_MonedaId_entities.Where(x => x.Habilitado == true) : Moneda_MonedaId_entities.Where(x => x.Habilitado == true || x.Id == DepositarioMoneda_entity.MonedaId);
+                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioMoneda_entity.MonedaId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMoneda_MonedaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
-                                }
-                                else
-                                {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                            }
+                            else
+                            {
+                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Moneda_MonedaId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectMoneda_MonedaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
-                                }
-                            </div>
+                            }
                         </div>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Component="IndiceEnContadora" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col-md-9">
-                                <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioMoneda_entity.IndiceEnContadora)" Name="IndiceEnContadora" Disabled="@(crudMode==CrudMode.Delete)">
-                                </RadzenNumeric>
-                            </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("INDICEENCONTADORA",dataLenguaje) Component="IndiceEnContadora" style="width: 100%">
+                            </RadzenLabel>
                         </div>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
-                            </div>
-                            <div class="col-md-9">
-                                <RadzenCheckBox @bind-Value=@DepositarioMoneda_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @DepositarioMoneda_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
-                            </div>
+                        <div class="col-md-auto">
+                            <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioMoneda_entity.IndiceEnContadora)" Name="IndiceEnContadora" Disabled="@(crudMode==CrudMode.Delete)">
+                            </RadzenNumeric>
                         </div>
-                        <div class="row">
-                            <div class="col offset-sm-3">
-                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
-                                </RadzenButton>
-                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
-                                </RadzenButton>
-                            </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                         </div>
-                    </ChildContent>
-                </RadzenTemplateForm>
-                <hr>
-            }
-
-            <RadzenNotification />
+                        <div class="col-md-9">
+                            <RadzenCheckBox @bind-Value=@DepositarioMoneda_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @DepositarioMoneda_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-sm-3">
+                            <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                            </RadzenButton>
+                            <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
+                            </RadzenButton>
+                        </div>
+                    </div>
+                </ChildContent>
+            </RadzenTemplateForm>
+            <hr>
         }
-    }
-    else
-    {
-        <p>No tiene permisos para visualizar los registros.</p>
+
+        <RadzenNotification />
     }
 }
 else
@@ -662,6 +655,18 @@ else
     void HabilitadoChange(bool? value, Depositary.Entities.Tables.Dispositivo.DepositarioMoneda item)
     {
         DepositarioMoneda_entity = item;
+    }
+
+    /// <summary>
+    /// DepositarioMonedaRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void DepositarioMonedaRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Dispositivo.DepositarioMoneda> args)
+    {
+        if (!args.Data.Habilitado)
+            args.Attributes.Add("class", "row-highlight-disabled");
+        else
+            args.Attributes.Add("class", "rz-datatable-even");
     }
     #endregion
 

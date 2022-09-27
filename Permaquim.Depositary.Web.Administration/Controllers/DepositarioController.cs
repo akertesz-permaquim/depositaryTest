@@ -38,6 +38,7 @@
                 depositarioMonitor.Sector = sector.Nombre;
                 depositarioMonitor.Sucursal = sucursal.Nombre;
                 depositarioMonitor.Empresa = sucursal.EmpresaId.Nombre;
+                depositarioMonitor.EmpresaId = sucursal._EmpresaId;
                 depositarioMonitor.NumeroSerie = depositario.NumeroSerie;
                 depositarioMonitor.CodigoExterno = depositario.CodigoExterno;
                 depositarioMonitor.Modelo = depositario.ModeloId.Nombre;
@@ -293,7 +294,7 @@
                 var turno = depositario.ListOf_Turno_DepositarioId.FirstOrDefault(x => x.FechaCierre == null && x.Habilitado == true);
                 if (turno != null)
                 {
-                    resultado.Turno = turno.TurnoDepositarioId.Nombre;
+                    resultado.Turno = turno.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre;
                     resultado.FechaAperturaTurno = turno.FechaApertura;
                 }
 
@@ -590,6 +591,141 @@
             }
 
             return resultado;
+        }
+
+        #endregion
+
+        #region Validaciones
+
+        public static string ObtenerValidacionesDepositarioABM(Int64 pDepositarioId, List<Entities.TextoLenguaje> pDataTextos)
+        {
+            //Por defecto pasa todas las validaciones
+            string resultado = "";
+
+            Depositary.Business.Relations.Dispositivo.Depositario depositario = new();
+            depositario.Where.Add(Business.Relations.Dispositivo.Depositario.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, pDepositarioId);
+            depositario.Items();
+
+            if (depositario.Result.Count > 0)
+            {
+                //En principio tenemos 3 validaciones para verificar, se iran agregando mas conforme se pida
+                if (ObtenerMonedasDepositario(depositario.Result.FirstOrDefault().SectorId._SucursalId).Count == 0)
+                {
+                    resultado += MultilenguajeController.ObtenerTextoPorClave("MONEDAS_SIN_ASOCIAR_EN_SUCURSAL", pDataTextos);
+                    resultado += "\n";
+                }
+
+                var contadoraDepositario = ObtenerContadoraDepositario(pDepositarioId);
+
+                if (contadoraDepositario != null)
+                {
+                    if (contadoraDepositario.PollTime <= 0)
+                    {
+                        resultado += MultilenguajeController.ObtenerTextoPorClave("TIEMPO_DE_ENCUESTA_NO_PUEDE_SER_CERO", pDataTextos);
+                        resultado += "; ";
+                    }
+
+                    if (contadoraDepositario.Sleeptime <= 0)
+                    {
+                        resultado += MultilenguajeController.ObtenerTextoPorClave("TIEMPO_DE_ESPERA_NO_PUEDE_SER_CERO", pDataTextos);
+                        resultado += "; ";
+                    }
+                }
+                else
+                {
+                    resultado += MultilenguajeController.ObtenerTextoPorClave("FALTA_ASOCIAR_CONTADORA", pDataTextos);
+                    resultado += "; ";
+                }
+
+                var placaDepositario = ObtenerPlacaDepositario(pDepositarioId);
+
+                if (placaDepositario == null)
+                {
+                    resultado += MultilenguajeController.ObtenerTextoPorClave("FALTA_ASOCIAR_PLACA", pDataTextos);
+                    resultado += "; ";
+                }
+
+            }
+
+            return resultado;
+        }
+
+        public static Depositary.Entities.Tables.Dispositivo.DepositarioContadora? ObtenerContadoraDepositario(Int64 pDepositarioId)
+        {
+            Depositary.Entities.Tables.Dispositivo.DepositarioContadora? resultado = null;
+
+            Depositary.Business.Tables.Dispositivo.DepositarioContadora entity = new();
+            entity.Where.Add(Depositary.Business.Tables.Dispositivo.DepositarioContadora.ColumnEnum.DepositarioId,
+                Depositary.sqlEnum.OperandEnum.Equal, pDepositarioId);
+            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND,
+                Depositary.Business.Tables.Dispositivo.DepositarioContadora.ColumnEnum.Habilitado,
+              Depositary.sqlEnum.OperandEnum.Equal, true);
+
+            entity.Items();
+
+            if (entity.Result.Count > 0)
+            {
+                resultado = entity.Result.FirstOrDefault();
+            }
+
+            return resultado;
+        }
+
+        public static Depositary.Entities.Tables.Dispositivo.DepositarioPlaca? ObtenerPlacaDepositario(Int64 pDepositarioId)
+        {
+            Depositary.Entities.Tables.Dispositivo.DepositarioPlaca? resultado = null;
+
+            Depositary.Business.Tables.Dispositivo.DepositarioPlaca entity = new();
+            entity.Where.Add(Depositary.Business.Tables.Dispositivo.DepositarioPlaca.ColumnEnum.DepositarioId,
+                Depositary.sqlEnum.OperandEnum.Equal, pDepositarioId);
+            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND,
+                Depositary.Business.Tables.Dispositivo.DepositarioPlaca.ColumnEnum.Habilitado,
+              Depositary.sqlEnum.OperandEnum.Equal, true);
+
+            entity.Items();
+
+            if (entity.Result.Count > 0)
+            {
+                resultado = entity.Result.FirstOrDefault();
+            }
+
+            return resultado;
+        }
+
+        public static List<Depositary.Entities.Relations.Valor.Moneda> ObtenerMonedasDepositario(Int64 pSucursalId)
+        {
+
+            List<Depositary.Entities.Relations.Valor.Moneda> returnValue = new();
+
+            Depositary.Business.Relations.Directorio.RelacionMonedaSucursal monedasucursal = new();
+            monedasucursal.Where.Add(Depositary.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId,
+                Depositary.sqlEnum.OperandEnum.Equal, pSucursalId);
+            monedasucursal.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND,
+                Depositary.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.Habilitado,
+                Depositary.sqlEnum.OperandEnum.Equal, true);
+
+            monedasucursal.Items();
+
+            var monedas = monedasucursal.Result.DistinctBy(x => x.MonedaId.Id).Select(x => x.MonedaId.Id).ToList();
+
+            Depositary.Business.Relations.Valor.Moneda currencies = new();
+
+            // si no existen monedas habilitadas para la sucursal, se retorna vacío.
+            if (monedas.Count > 0)
+            {
+                currencies.Where.Add(Business.Relations.Valor.Moneda.ColumnEnum.Habilitado,
+                    Depositary.sqlEnum.OperandEnum.Equal, true);
+                currencies.Where.Add(sqlEnum.ConjunctionEnum.AND,
+                    Depositary.Business.Relations.Valor.Moneda.ColumnEnum.Id,
+                    Depositary.sqlEnum.OperandEnum.NotEqual, 0);
+                currencies.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND,
+                Depositary.Business.Relations.Valor.Moneda.ColumnEnum.Id,
+                Depositary.sqlEnum.OperandEnum.In, monedas);
+                returnValue = currencies.Items();
+            }
+
+            return returnValue;
+
         }
 
         #endregion

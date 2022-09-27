@@ -31,13 +31,11 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
 
         public static string GetConfiguration(string configurationEntry)
         {
-
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == null ? String.Empty :
                  Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") + ".";
             var builder = new ConfigurationBuilder()
-                            .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                             .AddJsonFile("appsettings." + env + "json", optional: false, reloadOnChange: true);
-
 
             IConfigurationRoot configuration = builder.Build();
 

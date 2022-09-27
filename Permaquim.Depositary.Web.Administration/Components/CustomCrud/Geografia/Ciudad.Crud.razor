@@ -48,9 +48,21 @@
                     break;
             }
             <hr>
+
+            if (PathPaginaAnterior != "")
+            {
+                <RadzenBreadCrumb>
+                    <RadzenBreadCrumbItem Path="GeografiaPaisCustomCrud" Text="Pais" />
+                    <RadzenBreadCrumbItem Path="@PathPaginaAnterior" Text="Provincia" />
+                    <RadzenBreadCrumbItem Text="Ciudad" />
+                </RadzenBreadCrumb>
+
+                <hr>
+            }
+
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid AllowColumnPicking="true" CellRender="@CiudadCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@CiudadRowRender" AllowColumnPicking="true" CellRender="@CiudadCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@Ciudad_entities" TItem="Depositary.Entities.Tables.Geografia.Ciudad" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -89,17 +101,24 @@
                             </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="Nombre" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="Descripcion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="CodigoExterno" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="CodigoExterno" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
@@ -163,7 +182,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Ciudad_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -204,7 +223,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PROVINCIAID",dataLenguaje) Component="ProvinciaId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@ParametroProvinciaId"
                                 Data=@Provincia_ProvinciaId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
@@ -265,6 +284,8 @@ else
 
     private Int64 ParametroProvinciaId;
 
+    private string PathPaginaAnterior { get; set; }
+
     /// <summary>
     /// Crud Mode Enum
     /// </summary>
@@ -286,6 +307,9 @@ else
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
 
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Habilitado_filter;
 
     /// <summary>
     /// Variables to store permissions
@@ -329,6 +353,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         ParametroProvinciaId = Int64.Parse(ProvinciaId);
+        ReconstruirPathPaginasAnteriores();
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
         await Task.Run(LoadMainEntityData);
@@ -338,6 +363,23 @@ else
             NavManager.NavigateTo("login", true);
     }
     #region Loading entities data
+
+    #region Navigation
+
+    private void ReconstruirPathPaginasAnteriores()
+    {
+        Depositary.Business.Tables.Geografia.Provincia provincia = new();
+        provincia.Where.Add(Business.Tables.Geografia.Provincia.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, ParametroProvinciaId);
+        provincia.Items();
+
+        if (provincia.Result.Count > 0)
+        {
+            PathPaginaAnterior = "GeografiaProvinciaCustomCrud/" + provincia.Result.FirstOrDefault().PaisId;
+        }
+    }
+
+    #endregion
+
     /// <summary>
     /// Loads main entity data
     /// </summary>
@@ -645,6 +687,18 @@ else
     void HabilitadoChange(bool? value, Depositary.Entities.Tables.Geografia.Ciudad item)
     {
         Ciudad_entity = item;
+    }
+
+    /// <summary>
+    /// CiudadRowRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void CiudadRowRender(RowRenderEventArgs<Depositary.Entities.Tables.Geografia.Ciudad> args)
+    {
+        if (!args.Data.Habilitado)
+            args.Attributes.Add("class", "row-highlight-disabled");
+        else
+            args.Attributes.Add("class", "rz-datatable-even");
     }
     #endregion
 

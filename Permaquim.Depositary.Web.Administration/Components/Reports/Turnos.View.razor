@@ -1,0 +1,639 @@
+@page "/ReporteTurnosView"
+@using Permaquim.Depositary.Web.Administration.Controllers;
+
+@inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+
+<RadzenBadge BadgeStyle="BadgeStyle.Secondary">
+    <ChildContent>
+        <div>
+            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_TURNOS",dataLenguaje)</h4>
+        </div>
+    </ChildContent>
+</RadzenBadge>
+
+<hr>
+
+@if (estaCargandoParametrosReporte)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
+        <HeaderTemplate>
+            <h4 class="m-0 d-flex align-items-center">
+                <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
+            </h4>
+        </HeaderTemplate>
+        <ChildContent>
+            <RadzenTemplateForm TItem="parametros" Data="@parametrosTurnosView" @bind-Value="parametrosTurnosView" Submit="LoadMainEntityData">
+                <ChildContent>
+                    <table class="table table-borderless w-auto">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHADESDE",dataLenguaje)" Component="fechaDesdeDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaDesde) Max="@(parametrosTurnosView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaHasta.HasValue) Value=@(parametrosTurnosView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_MENOR_FECHAHASTA",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAHASTA",dataLenguaje)" Component="fechaHastaDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaHasta) Min="@(parametrosTurnosView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaDesde.HasValue) Value=@(parametrosTurnosView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_MAYOR_FECHADESDE",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURADESDE",dataLenguaje)" Component="fechaAperturaDesdeDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaDesde) Max="@(parametrosTurnosView.fechaAperturaHasta)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaHasta.HasValue) Value=@(parametrosTurnosView.fechaAperturaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaAperturaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURADESDE_MENOR_FECHAAPERTURAHASTA",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAAPERTURAHASTA",dataLenguaje)" Component="fechaAperturaHastaDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaHasta) Min="@(parametrosTurnosView.fechaAperturaDesde)" Name="fechaAperturaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaDesde.HasValue) Value=@(parametrosTurnosView.fechaAperturaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaAperturaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURAHASTA_MAYOR_FECHAAPERTURADESDE",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREDESDE",dataLenguaje)" Component="fechaCierreDesdeDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreDesde) Max="@(parametrosTurnosView.fechaCierreHasta)" Name="fechaCierreDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreHasta.HasValue) Value=@(parametrosTurnosView.fechaCierreHasta) Operator="CompareOperator.LessThanEqual" Component="fechaCierreDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREDESDE_MENOR_FECHACIERREHASTA",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHACIERREHASTA",dataLenguaje)" Component="fechaCierreHastaDatePicker" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreHasta) Min="@(parametrosTurnosView.fechaCierreDesde)" Name="fechaCierreHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreDesde.HasValue) Value=@(parametrosTurnosView.fechaCierreDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaCierreHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREHASTA_MAYOR_FECHACIERREDESDE",dataLenguaje)" Style="position: inherit" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_EMPRESAS",dataLenguaje)" Component="dropDownEmpresas" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownEmpresas" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.empresaSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_EMPRESA",dataLenguaje)" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
+                                                    Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SUCURSALES",dataLenguaje)" Component="dropDownSucursales" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownSucursales" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.sucursalSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SUCURSAL",dataLenguaje)" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
+                                                    Change=@(args => OnChangeSucursal(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SECTORES",dataLenguaje)" Component="dropDownSectores" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownSectores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.sectorSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SECTOR",dataLenguaje)" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
+                                                    Change=@(args => OnChangeSector(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_DEPOSITARIOS",dataLenguaje)" Component="dropDownDepositarios" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
+                                                    Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_TURNOS",dataLenguaje)" Component="dropDownTurnos" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownTurnos" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosTurnosView.turnosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_TURNOS",dataLenguaje)" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
+                                                    Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_CODIGOTURNO",dataLenguaje)" Component="txtcodigoTurno" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenTextBox @bind-Value=@(parametrosTurnosView.codigoTurno) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_CODIGOTURNO",dataLenguaje)" Name="txtcodigoTurno"></RadzenTextBox>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-bottom: 1rem" class="row justify-content-center">
+                        <div class="col col-md-auto">
+                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
+                            </RadzenButton>
+                        </div>
+                        <div class="col col-md-auto">
+                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
+                            </RadzenButton>
+                        </div>
+                    </div>
+                </ChildContent>
+            </RadzenTemplateForm>
+        </ChildContent>
+    </RadzenPanel>
+}
+
+<div>
+    @if (dataTurnosView != null)
+    {
+        <RadzenButton Text="Export XLS" Icon="grid_on" Click="@(args => Export("excel"))" Class="mb-4 mr-2" />
+        <RadzenButton Text="Export CSV" Icon="wrap_text" Click="@(args => Export("csv"))" Class="mb-4" />
+        <RadzenDataGrid @ref="gridTurnosView" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    Data="@dataTurnosView" TItem="ResultReporte" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+            <EmptyTemplate>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+            </EmptyTemplate>
+            <Columns>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TurnoId" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNOID",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Fecha" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CodigoTurno" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOTURNO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaApertura" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Secuencia" Title="@MultilenguajeController.ObtenerTextoPorClave("SECUENCIA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Turno" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaCierre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHACIERRE",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CierreDiario" Title="@MultilenguajeController.ObtenerTextoPorClave("CIERREDIARIO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Depositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadTransacciones" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADTRANSACCIONES",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalValidado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalAValidar" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Total" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTAL",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    }
+</div>
+<hr>
+
+<RadzenNotification />
+
+@code {
+    public class parametros
+    {
+        public DateTime? fechaDesde { get; set; }
+        public DateTime? fechaHasta { get; set; }
+        public DateTime? fechaAperturaDesde { get; set; }
+        public DateTime? fechaAperturaHasta { get; set; }
+        public DateTime? fechaCierreDesde { get; set; }
+        public DateTime? fechaCierreHasta { get; set; }
+        public Int64? empresaSeleccionada { get; set; }
+        public Int64? sucursalSeleccionada { get; set; }
+        public Int64? sectorSeleccionado { get; set; }
+        public Int64? depositarioSeleccionado { get; set; }
+        public IEnumerable<Int64> turnosSeleccionados = new Int64[] { };
+        public string codigoTurno { get; set; }
+    }
+
+    //Clase creada para sortear algunas cuestiones de la vista que traemos de SQL
+    public class ResultReporte
+    {
+        public Int64 TurnoId { get; set; }
+        public DateTime Fecha { get; set; }
+        public DateTime? FechaApertura { get; set; }
+        public DateTime? FechaCierre { get; set; }
+        public string Moneda { get; set; }
+        public double TotalValidado { get; set; }
+        public double TotalAValidar { get; set; }
+        public double Total
+        {
+            get
+            {
+                return TotalValidado + TotalAValidar;
+            }
+        }
+        public int CantidadTransacciones { get; set; }
+        public string CierreDiario { get; set; }
+        public string Turno { get; set; }
+        public string Sector { get; set; }
+        public string Empresa { get; set; }
+        public string Sucursal { get; set; }
+        public string Depositario { get; set; }
+        public string CodigoTurno { get; set; }
+    }
+
+    RadzenDataGrid<ResultReporte> gridTurnosView;
+
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private List<ResultReporte> dataTurnosView;
+
+    /// <summary>
+    /// Variables to store multilanguaje
+    /// </summary>
+    private List<Entities.TextoLenguaje> dataLenguaje;
+
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+    private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+
+    //Datasource para dropdown
+    private List<DirectorioEntities.Empresa> empresasUsuario = new();
+    private List<DirectorioEntities.Sucursal> sucursalesUsuario = new();
+    private List<DirectorioEntities.Sector> sectoresUsuario = new();
+    private List<DispositivoEntities.Depositario> depositariosUsuario = new();
+
+    private List<DirectorioEntities.Empresa> dataEmpresasCombo = new();
+    private List<DirectorioEntities.Sucursal> dataSucursalesCombo = new();
+    private List<DirectorioEntities.Sector> dataSectoresCombo = new();
+    private List<DispositivoEntities.Depositario> dataDepositariosCombo = new();
+
+    private List<TurnoEntities.TurnoComboReporte> dataTurnos = new();
+
+    private bool estaCargandoGrillaReporte = false;
+    private bool estaCargandoParametrosReporte = true;
+
+    private parametros parametrosTurnosView = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
+            NavManager.NavigateTo("login", true);
+        dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
+        await Task.Run(CargarCombosBusqueda);
+        parametrosTurnosView.fechaDesde = DateTime.Today;
+        parametrosTurnosView.fechaHasta = DateTime.Today;
+        estaCargandoParametrosReporte = false;
+    }
+
+    #region Form events
+    void OnChangeEmpresa(object value)
+    {
+        if (value != null)
+        {
+            dataSucursalesCombo = sucursalesUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
+        }
+        else
+        {
+            dataSucursalesCombo = new();
+            parametrosTurnosView.sucursalSeleccionada = null;
+
+            dataSectoresCombo = new();
+            parametrosTurnosView.sectorSeleccionado = null;
+
+            dataDepositariosCombo = depositariosUsuario;
+            parametrosTurnosView.depositarioSeleccionado = null;
+        }
+    }
+
+    void OnChangeSucursal(object value)
+    {
+        if (value != null)
+        {
+            dataSectoresCombo = sectoresUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+        }
+        else
+        {
+            dataSectoresCombo = new();
+            parametrosTurnosView.sectorSeleccionado = null;
+
+            if (parametrosTurnosView.empresaSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == parametrosTurnosView.empresaSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
+
+            parametrosTurnosView.depositarioSeleccionado = null;
+        }
+
+    }
+
+    void OnChangeSector(object value)
+    {
+        if (value != null)
+        {
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SectorId == (Int64)value).ToList();
+        }
+        else
+        {
+            if (parametrosTurnosView.sucursalSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == parametrosTurnosView.sucursalSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
+        }
+
+    }
+
+    void resetParametros()
+    {
+        parametrosTurnosView = new();
+        dataSectoresCombo = new();
+        dataSucursalesCombo = new();
+        dataDepositariosCombo = depositariosUsuario;
+    }
+
+    #endregion
+
+    #region Visualizacion
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void CargarCombosBusqueda()
+    {
+        empresasUsuario = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
+        dataEmpresasCombo = empresasUsuario; //El unico combo estatico es el de mayor jerarquia
+        sucursalesUsuario = ReportController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id, true);
+        sectoresUsuario = ReportController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
+        depositariosUsuario = ReportController.ObtenerListadoDepositariosPorPerfil(dataUsuario.Id);
+        dataDepositariosCombo = depositariosUsuario; //En principio vemos todos los depositarios accesibles por perfil.
+        dataTurnos = ReportController.ObtenerTurnos();
+    }
+    #endregion
+
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        estaCargandoGrillaReporte = true;
+        dataTurnosView = new();
+        Depositary.Business.Views.Reporte.Turnos entity = new();
+        List<Depositary.Entities.Views.Reporte.Turnos> turnos = new();
+
+        //Si no tiene empresas ni sucursales ni sectores visibles por perfil entonces le traigo siempre datasource vacio.
+        if (empresasUsuario.Count == 0 && sucursalesUsuario.Count == 0 && sectoresUsuario.Count == 0)
+        {
+            dataTurnosView = new();
+        }
+        else
+        {
+            //Construimos el where general segun las empresas/sucursales/sectores/depositarios que puede ver el usuario
+            entity.Where.OpenParentheses();
+            entity.Where.OpenParentheses();
+
+            for (int i = 0; i < sectoresUsuario.Count; i++)
+            {
+                if (i > 0)
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
+                entity.Where.OpenParentheses();
+                entity.Where.Add(Business.Views.Reporte.Turnos.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
+                var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
+                if (sucursal != null)
+                {
+                    entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Turnos.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
+                    var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
+                    if (empresa != null)
+                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Turnos.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                }
+                entity.Where.CloseParentheses();
+            }
+
+            entity.Where.CloseParentheses();
+
+            //Construimos el where segun los parametros de los controles
+            if (parametrosTurnosView.empresaSeleccionada.HasValue || parametrosTurnosView.sucursalSeleccionada.HasValue || parametrosTurnosView.sectorSeleccionado.HasValue || parametrosTurnosView.depositarioSeleccionado.HasValue)
+            {
+                entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                entity.Where.OpenParentheses();
+
+                int cantidadFiltrosCustom = 0;
+
+                if (parametrosTurnosView.empresaSeleccionada.HasValue)
+                {
+                    entity.Where.Add(Depositary.Business.Views.Reporte.Turnos.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, parametrosTurnosView.empresaSeleccionada.Value);
+                    cantidadFiltrosCustom++;
+                }
+
+                if (parametrosTurnosView.sucursalSeleccionada.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosTurnosView.sucursalSeleccionada.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.Turnos.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosTurnosView.sucursalSeleccionada.Value);
+                }
+
+                if (parametrosTurnosView.sectorSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosTurnosView.sectorSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.Turnos.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosTurnosView.sectorSeleccionado.Value);
+                }
+
+                if (parametrosTurnosView.depositarioSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosTurnosView.depositarioSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.Turnos.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosTurnosView.depositarioSeleccionado.Value);
+                }
+
+                entity.Where.CloseParentheses();
+            }
+
+            entity.Where.CloseParentheses();
+
+            if (parametrosTurnosView.fechaDesde.HasValue)
+            {
+                parametrosTurnosView.fechaDesde = new DateTime(parametrosTurnosView.fechaDesde.Value.Year, parametrosTurnosView.fechaDesde.Value.Month, parametrosTurnosView.fechaDesde.Value.Day, 0, 0, 0);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosTurnosView.fechaDesde.Value);
+            }
+
+            if (parametrosTurnosView.fechaHasta.HasValue)
+            {
+                parametrosTurnosView.fechaHasta = new DateTime(parametrosTurnosView.fechaHasta.Value.Year, parametrosTurnosView.fechaHasta.Value.Month, parametrosTurnosView.fechaHasta.Value.Day, 23, 59, 59);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosTurnosView.fechaHasta.Value);
+            }
+
+            if (parametrosTurnosView.fechaAperturaDesde.HasValue)
+            {
+                parametrosTurnosView.fechaAperturaDesde = new DateTime(parametrosTurnosView.fechaAperturaDesde.Value.Year, parametrosTurnosView.fechaAperturaDesde.Value.Month, parametrosTurnosView.fechaAperturaDesde.Value.Day, 0, 0, 0);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosTurnosView.fechaAperturaDesde.Value);
+            }
+
+            if (parametrosTurnosView.fechaAperturaHasta.HasValue)
+            {
+                parametrosTurnosView.fechaAperturaHasta = new DateTime(parametrosTurnosView.fechaAperturaHasta.Value.Year, parametrosTurnosView.fechaAperturaHasta.Value.Month, parametrosTurnosView.fechaAperturaHasta.Value.Day, 23, 59, 59);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosTurnosView.fechaAperturaHasta.Value);
+            }
+
+            if (parametrosTurnosView.fechaCierreDesde.HasValue)
+            {
+                parametrosTurnosView.fechaCierreDesde = new DateTime(parametrosTurnosView.fechaCierreDesde.Value.Year, parametrosTurnosView.fechaCierreDesde.Value.Month, parametrosTurnosView.fechaCierreDesde.Value.Day, 0, 0, 0);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosTurnosView.fechaCierreDesde.Value);
+            }
+
+            if (parametrosTurnosView.fechaCierreHasta.HasValue)
+            {
+                parametrosTurnosView.fechaCierreHasta = new DateTime(parametrosTurnosView.fechaCierreHasta.Value.Year, parametrosTurnosView.fechaCierreHasta.Value.Month, parametrosTurnosView.fechaCierreHasta.Value.Day, 23, 59, 59);
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosTurnosView.fechaCierreHasta.Value);
+            }
+
+            if (parametrosTurnosView.turnosSeleccionados == null)
+                parametrosTurnosView.turnosSeleccionados = new Int64[] { };
+            else
+            {
+                if (parametrosTurnosView.turnosSeleccionados.Count() > 0)
+                {
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                    entity.Where.OpenParentheses();
+
+                    int turnosFiltrados = 0;
+
+                    foreach (var turno in parametrosTurnosView.turnosSeleccionados)
+                    {
+                        if (turnosFiltrados > 0)
+                            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+                        else
+                            entity.Where.Add(Depositary.Business.Views.Reporte.Turnos.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+
+                        turnosFiltrados++;
+                    }
+
+                    entity.Where.CloseParentheses();
+                }
+            }
+
+            if (parametrosTurnosView.codigoTurno != string.Empty && parametrosTurnosView.codigoTurno != null)
+                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Turnos.ColumnEnum.CodigoTurno, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosTurnosView.codigoTurno + "%");
+
+
+            turnos = entity.Items();
+
+            if (turnos.Count > 0)
+            {
+                foreach (var turno in turnos)
+                {
+                    ResultReporte resultReporte = new();
+                    resultReporte.CierreDiario = turno.CierreDiario;
+                    resultReporte.Depositario = turno.Depositario;
+                    resultReporte.Empresa = turno.Empresa;
+                    resultReporte.Sucursal = turno.Sucursal;
+                    resultReporte.Sector = turno.Sector;
+                    resultReporte.Fecha = turno.Fecha;
+                    resultReporte.FechaApertura = turno.FechaApertura.Year == 1 ? null : turno.FechaApertura;
+                    resultReporte.FechaCierre = turno.FechaCierre.Year == 1 ? null : turno.FechaCierre;
+                    resultReporte.Moneda = turno.Moneda;
+                    resultReporte.TotalAValidar = turno.TotalAValidar;
+                    resultReporte.CantidadTransacciones = turno.CantidadTransacciones;
+                    resultReporte.TotalValidado = turno.TotalValidado;
+                    resultReporte.Turno = turno.Turno;
+                    resultReporte.TurnoId = turno.TurnoId;
+                    resultReporte.CodigoTurno = turno.CodigoTurno;
+
+                    dataTurnosView.Add(resultReporte);
+                }
+            }
+        }
+    }
+    #endregion
+
+    #region Export
+
+    public void Export(string type)
+    {
+        //service.Export("OrderDetails", type, new Query()
+        //    {
+        //        OrderBy = grid.Query.OrderBy,
+        //        Filter = grid.Query.Filter,
+        //        Select = string.Join(",", gridTurnosView.ColumnsCollection.Where(c => c.GetVisible()).Select(c => c.Property))
+        //    });
+    }
+
+    #endregion
+}

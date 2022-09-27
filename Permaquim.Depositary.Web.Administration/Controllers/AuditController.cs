@@ -1,29 +1,34 @@
-﻿using Permaquim.Depositary.Web.Administration.Entities;
-using Permaquim.Depositary.Web.Administration.Managers;
-using System.Diagnostics;
-using static Permaquim.Depositary.Web.Administration.Entities.AuditEntities;
+﻿using System.Diagnostics;
 
-namespace Permaquim.Depositary.UI.Desktop.Controllers
+namespace Permaquim.Depositary.Web.Administration.Controllers
 {
     internal static class AuditController
     {
-        public static void Log(LogTypeEnum logType, string description, string detail)
+        public enum LogTypeEnum
+        {
+            None,
+            Exception,
+            Information,
+            Navigation
+        }
+
+        public static void Log(LogTypeEnum logType, string description, string detail, Int64 userId)
         {
             try
             {
                 StackTrace stackTrace = new StackTrace(); //Para obtener el nombre del metodo que lo llamo
 
-                Permaquim.Depositary.Business.Tables.Auditoria.Log entities = new();
-                Permaquim.Depositary.Entities.Tables.Auditoria.Log entity = new()
+                Depositary.Business.Tables.Auditoria.Log entities = new();
+                Depositary.Entities.Tables.Auditoria.Log entity = new()
                 {
-                    AplicacionId = AuditEntities.APPLICATION_ID,
+                    AplicacionId = (Int64)SeguridadEntities.Aplicacion.AdministradorWeb,
                     Fecha = DateTime.Now,
                     Metodo = stackTrace.GetFrame(1).GetMethod().Name,
                     Modulo = stackTrace.GetFrame(1).GetMethod().Module.Name,
                     TipoId = (long)logType,
                     Descripcion = description,
                     Detalle = detail,
-                    UsuarioId = -1
+                    UsuarioId = userId,
 
                 };
 
@@ -37,8 +42,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static void Log(Exception exception)
         {
-            Log(LogTypeEnum.Exception, exception.Message, exception.StackTrace);
+            Log(LogTypeEnum.Exception, exception.Message, exception.StackTrace, 2);
         }
-
     }
 }

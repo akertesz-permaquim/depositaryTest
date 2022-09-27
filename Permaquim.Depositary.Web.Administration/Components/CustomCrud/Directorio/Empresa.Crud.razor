@@ -3,6 +3,7 @@
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
+@layout MainLayout
 
 @if (dataFunciones != null)
 {
@@ -48,9 +49,16 @@
                     break;
             }
             <hr>
+
+            <RadzenBreadCrumb>
+                <RadzenBreadCrumbItem Path="DirectorioGrupoCustomCrud" Text="Grupo" />
+                <RadzenBreadCrumbItem Text="Empresa" />
+            </RadzenBreadCrumb>
+
+            <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid AllowColumnPicking="true" CellRender="@EmpresaCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirEmpresa" RowRender="@empresaRowRender" RowCollapse="@colapsarEmpresa" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnPicking="true" CellRender="@EmpresaCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirEmpresa" RowRender="@empresaRowRender" RowCollapse="@colapsarEmpresa" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@Empresa_entities" TItem="Depositary.Entities.Tables.Directorio.Empresa" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -89,15 +97,15 @@
                             </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Id" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" />
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Nombre" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Nombre" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Descripcion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Descripcion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="CodigoExterno" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="CodigoExterno" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Direccion" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("DIRECCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Direccion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("DIRECCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="CodigoPostalId" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOPOSTALID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="CodigoPostalId" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOPOSTALID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Title=@MultilenguajeController.ObtenerTextoPorClave("ESTILOESQUEMAID",dataLenguaje) Property="EstiloEsquemaId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_EstiloEsquemaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
@@ -135,17 +143,31 @@
                                 <RadzenDropDown @bind-Value=@selectedFilter_LenguajeId Data="@Lenguaje_LenguajeId_filter" Change="OnSelectedFilter_LenguajeId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Habilitado" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="Habilitado" Filterable="true" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="EsDefault" Filterable="false" Title=@MultilenguajeController.ObtenerTextoPorClave("ESDEFAULT",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Property="EsDefault" Filterable="true" FilterValue="@EsDefault_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("ESDEFAULT",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.EsDefault Disabled="true">
                                 </RadzenCheckBox>
                             </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Directorio.Empresa" Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Width="100px" Visible="false" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                             <Template>
@@ -195,7 +217,27 @@
                         </RadzenDataGridColumn>
                     </Columns>
                     <Template Context="empresa">
-                        <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Aplicacion.ConfiguracionEmpresa_Crud EmpresaId="@(empresa.Id)" EsDefault="@(empresa.EsDefault)"></Permaquim.Depositary.Web.Administration.Components.CustomCrud.Aplicacion.ConfiguracionEmpresa_Crud>
+                        @{
+                            var permisoAplicacionConfiguracionEmpresa = SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionEmpresa", dataFunciones, "PuedeVisualizar");
+                            var permisoBancaCuenta = SeguridadController.VerificarPermisoFuncion("BancaCuenta", dataFunciones, "PuedeVisualizar");
+                            if (!permisoAplicacionConfiguracionEmpresa && !permisoBancaCuenta)
+                            {
+                                <p>No posee permisos para visualizar esta información</p>
+                            }
+                            else
+                            {
+                                <RadzenTabs>
+                                    <Tabs>
+                                        <RadzenTabsItem Visible="@permisoAplicacionConfiguracionEmpresa" Text="Configuraciones">
+                                            <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Aplicacion.ConfiguracionEmpresa_Crud EmpresaId="@(empresa.Id)" EsDefault="@(empresa.EsDefault)"></Permaquim.Depositary.Web.Administration.Components.CustomCrud.Aplicacion.ConfiguracionEmpresa_Crud>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Visible="@permisoBancaCuenta" Text="Cuentas">
+                                            <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.Cuenta_Crud EmpresaId="@(empresa.Id)"></Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.Cuenta_Crud>
+                                        </RadzenTabsItem>
+                                    </Tabs>
+                                </RadzenTabs>
+                            }
+                        }
                     </Template>
                 </RadzenDataGrid>
                 <hr>
@@ -212,7 +254,7 @@
                                     <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
                                     </RadzenLabel>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-auto">
                                     <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Empresa_entity.Id)" Name="Id" Disabled="true">
                                     </RadzenNumeric>
                                 </div>
@@ -253,7 +295,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("GRUPOID",dataLenguaje) Component="GrupoId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100" Value="@ParametroGrupoId"
                                 Data=@Grupo_GrupoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Disabled="true" />
@@ -294,7 +336,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGOPOSTALID",dataLenguaje) Component="CodigoPostalId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-auto">
                                 <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Empresa_entity.CodigoPostalId)" Name="CodigoPostalId" Disabled="@(crudMode==CrudMode.Delete)">
                                 </RadzenNumeric>
                             </div>
@@ -304,7 +346,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ESTILOESQUEMAID",dataLenguaje) Component="EstiloEsquemaId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 @if ((@Esquema_EstiloEsquemaId_entities.Count > 0 && @Esquema_EstiloEsquemaId_entities.FirstOrDefault(c => c.Id == @Empresa_entity.EstiloEsquemaId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Esquema_EstiloEsquemaId_entities.Where(x => x.Habilitado == true) : Esquema_EstiloEsquemaId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.EstiloEsquemaId);
@@ -328,12 +370,12 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LENGUAJEID",dataLenguaje) Component="LenguajeId" style="width: 100%">
                                 </RadzenLabel>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 @if ((@Lenguaje_LenguajeId_entities.Count > 0 && @Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @Empresa_entity.LenguajeId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true) : Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.LenguajeId);
                                     <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                        TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.LenguajeId)"
+                                TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.LenguajeId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
@@ -404,6 +446,15 @@ else
         Edit,
         Delete
     }
+
+    /// <summary>
+    /// Variables to handle column filter for field Banco.Habilitado
+    private bool? Habilitado_filter;
+    
+    /// <summary>
+    /// Variables to handle column filter for field Banco.EsDefault
+    private bool? EsDefault_filter;
+
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
@@ -791,7 +842,7 @@ else
 
     private void ObtenerSucursales(Depositary.Entities.Tables.Directorio.Empresa item)
     {
-        NavManager.NavigateTo("DirectorioSucursalCustomCrud/" + item.Id, true);
+        NavManager.NavigateTo("DirectorioSucursalCustomCrud/" + item.Id , true);
     }
 
     void EmpresaCellRender(DataGridCellRenderEventArgs<Depositary.Entities.Tables.Directorio.Empresa> args)

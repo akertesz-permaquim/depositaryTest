@@ -38,13 +38,14 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.MainPanel.Controls.Clear();
 
-            if (SecurityController.IsFunctionenabled(FunctionEnum.TurnChange))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.CambioDeTurno))
                 LoadTurnButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.DailyClosing))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.CierreDiario))
                 LoadDailyClosingButton();
-            if (SecurityController.IsFunctionenabled(FunctionEnum.Support))
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.Soporte))
                 LoadSupportButton();
-            LoadResetButton();
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.Reset))
+                LoadResetButton();
 
             LoadBackButton();
         }
@@ -106,7 +107,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void TurnButton_Click(object sender, EventArgs e)
         {
-            if (DatabaseController.AvailableTurnsCount > 0)
+            if (DatabaseController.GetAvailableTurns() > 0 || DatabaseController.GetPreviousDaysTurns() > 0 )
             {
                 FormsController.OpenChildForm(this, new TurnChangeForm(),
                   (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
@@ -131,7 +132,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
-            if (DatabaseController.AvailableTurnsCount == 0)
+            if (DatabaseController.GetAvailableTurns() == 0)
             {
                 FormsController.OpenChildForm(this, new DailyClosingForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);

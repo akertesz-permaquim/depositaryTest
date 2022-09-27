@@ -9,10 +9,28 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class FormsController
     {
+        private const string FORM = "System.Windows.Forms.Form";
         private static List<Form> _formList = new();
         public static MainForm MainFormInstance { get; set; }
 
-        private static Form _activeForm = null;
+        public static Form ActiveForm { get; set; }
+
+        /// <summary>
+        /// Hides 'instance', shows 'childForm' and appends breadCrumbText
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="childForm"></param>
+        /// <param name="device"></param>
+        public static void OpenChildForm(Form instance, Form childForm,
+        Permaquim.Depositary.UI.Desktop.Components.CounterDevice device,string breadCrumbText)
+        {
+            HideInstance(instance);
+            OpenChildForm(childForm, device);
+            MainFormInstance.BreadCrumbText =
+                 MultilanguangeController.GetText(childForm.Name) + breadCrumbText;
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+        }
+
 
         /// <summary>
         /// Hides 'instance' and shows 'childForm'
@@ -29,6 +47,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                  MultilanguangeController.GetText(childForm.Name);
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
+        /// <summary>
+        /// Loads child form
+        /// </summary>
+        /// <param name="childForm"></param>
+        /// <param name="device"></param>
         public static void OpenChildForm(Form childForm,
         Permaquim.Depositary.UI.Desktop.Components.CounterDevice device)
         {
@@ -58,9 +81,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 MainFormInstance.BreadCrumbText =
                     MultilanguangeController.GetText(childForm.Name);
             }
-            childForm.Show();
-
-            
 
             childForm.Location = new Point()
             {
@@ -68,7 +88,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Y = MainFormInstance.MainPanel.Height / 2 - childForm.Height / 2
             };
 
+            childForm.Show();
+            ActiveForm = childForm;
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+        }
+
+        public static void AppendtoBreadcrumbText(string textToAppend)
+        {
+            MainFormInstance.BreadCrumbText += textToAppend;
         }
         public static int ActiveFormscount
         {
@@ -85,7 +112,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             foreach (var item in _formList)
             {
-                if (item.GetType().BaseType.FullName.Equals("System.Windows.Forms.Form"))
+                if (item.GetType().BaseType.FullName.Equals(FORM))
                 {
                     item.Close();
                 }
@@ -96,6 +123,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             MultilanguangeController.ResetLanguage();
 
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
+
+            MainFormInstance.LoadPresentation();
 
 
         }

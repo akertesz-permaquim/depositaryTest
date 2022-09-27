@@ -25,17 +25,19 @@
                 {
                     MonitorEntities.TransaccionValidadaMonitor transaccionValidadaMonitor = new();
                     var usuarioTransaccion = transaccion.UsuarioId;
-                    var usuarioCuenta = transaccion.UsuarioCuentaId;
-                    var cuentaTransaccion = usuarioCuenta.CuentaId;
-                    var detallesUsuarioCuenta = usuarioCuenta.UsuarioId;
+                    var cuenta = transaccion.CuentaId;
+                    if (cuenta != null)
+                    {
+                        transaccionValidadaMonitor.Banco = cuenta.Nombre;
+                        transaccionValidadaMonitor.Cuenta = cuenta.Nombre;
+                    }
                     transaccionValidadaMonitor.TransaccionId = transaccion.Id;
+                    transaccionValidadaMonitor.CodigoOperacion = transaccion.CodigoOperacion;
                     transaccionValidadaMonitor.TipoTransaccion = transaccion.TipoId.Nombre;
-                    transaccionValidadaMonitor.Banco = cuentaTransaccion.BancoId.Nombre;
-                    transaccionValidadaMonitor.Cuenta = cuentaTransaccion.Nombre;
+                    transaccionValidadaMonitor.OrigenValor = transaccion.OrigenValorId.Nombre;
                     transaccionValidadaMonitor.DepositarioId = transaccion._DepositarioId;
                     transaccionValidadaMonitor.FechaTransaccion = transaccion.Fecha;
                     transaccionValidadaMonitor.TotalValidado = moneda.Codigo + " " + transaccion.TotalValidado.ToString();
-                    transaccionValidadaMonitor.UsuarioCuenta = detallesUsuarioCuenta.Nombre + " " + detallesUsuarioCuenta.Apellido;
                     transaccionValidadaMonitor.UsuarioTransaccion = usuarioTransaccion.Nombre + " " + usuarioTransaccion.Apellido;
                     transaccionValidadaMonitor.Moneda = moneda.Nombre;
                     resultado.Add(transaccionValidadaMonitor);
@@ -101,12 +103,12 @@
             }
             if (monedasId != null)
             {
-                if(monedasId.Count>0)
+                if (monedasId.Count > 0)
                     oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId, Depositary.sqlEnum.OperandEnum.In, monedasId);
             }
             if (tiposTransaccion != null)
             {
-                if(tiposTransaccion.Count>0)
+                if (tiposTransaccion.Count > 0)
                     oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, Depositary.sqlEnum.OperandEnum.In, tiposTransaccion);
             }
             if (pFechaDesde != null)
@@ -175,23 +177,25 @@
                 if (transaccionSobre != null)
                 {
                     var moneda = transaccion.MonedaId;
-                    var usuarioCuenta = transaccion.UsuarioCuentaId;
-                    var cuenta = usuarioCuenta.CuentaId;
-                    var banco = cuenta.BancoId;
-                    var usuarioCuentaUsuario = usuarioCuenta.UsuarioId;
-                    var usuarioTransaccion = transaccion.UsuarioId;
+                    var cuenta = transaccion.CuentaId;
                     MonitorEntities.TransaccionAValidarMonitor transaccionAValidarMonitor = new();
-                    transaccionAValidarMonitor.Banco = banco.Nombre;
+                    if (cuenta != null)
+                    {
+                        var banco = cuenta.BancoId;
+                        transaccionAValidarMonitor.Banco = banco.Nombre;
+                        transaccionAValidarMonitor.Cuenta = cuenta.Nombre;
+                    }
+                    var usuarioTransaccion = transaccion.UsuarioId;
                     transaccionAValidarMonitor.TipoTransaccion = transaccion.TipoId.Nombre;
                     transaccionAValidarMonitor.CodigoSobre = transaccionSobre.CodigoSobre;
-                    transaccionAValidarMonitor.Cuenta = cuenta.Nombre;
                     transaccionAValidarMonitor.DepositarioId = transaccion._DepositarioId;
                     transaccionAValidarMonitor.FechaTransaccion = transaccion.Fecha;
+                    transaccionAValidarMonitor.OrigenValor = transaccion.OrigenValorId.Nombre;
                     transaccionAValidarMonitor.FechaTransaccionSobre = transaccionSobre.Fecha;
                     transaccionAValidarMonitor.TotalAValidar = moneda.Codigo + " " + transaccion.TotalAValidar.ToString();
-                    transaccionAValidarMonitor.UsuarioCuenta = usuarioCuentaUsuario.Nombre + " " + usuarioCuentaUsuario.Apellido;
                     transaccionAValidarMonitor.UsuarioTransaccion = usuarioTransaccion.Nombre + " " + usuarioTransaccion.Apellido;
                     transaccionAValidarMonitor.TransaccionId = transaccion.Id;
+                    transaccionAValidarMonitor.CodigoOperacion = transaccion.CodigoOperacion;
                     transaccionAValidarMonitor.TransaccionSobreId = transaccionSobre.Id;
                     transaccionAValidarMonitor.Moneda = moneda.Nombre;
                     resultado.Add(transaccionAValidarMonitor);
@@ -415,6 +419,7 @@
                     {
                         MonitorEntities.TotalGeneral totalGeneral = new();
 
+                        totalGeneral.CodigoMoneda = moneda.Codigo;
                         totalGeneral.TotalAValidar = transaccion.TotalAValidar;
                         totalGeneral.TotalValidado = transaccion.TotalValidado;
                         totalGeneral.Moneda = moneda.Nombre;

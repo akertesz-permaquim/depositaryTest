@@ -20,9 +20,10 @@
   <DbDriver>SQL</DbDriver>
   <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews />
-  <SelectedStoredProcedures />
-  <UnselectedStoredProcedures>
+  <SelectedStoredProcedures>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
+  </SelectedStoredProcedures>
+  <UnselectedStoredProcedures>
     <string>dbo.fn_diagramobjects</string>
     <string>dbo.sp_alterdiagram</string>
     <string>dbo.sp_creatediagram</string>
@@ -31,6 +32,7 @@
     <string>dbo.sp_helpdiagrams</string>
     <string>dbo.sp_renamediagram</string>
     <string>dbo.sp_upgraddiagrams</string>
+    <string>dbo.splitCapital</string>
     <string>Desarrollo.ActualizarLenguajeItem</string>
     <string>Desarrollo.GenerarTablaModelo</string>
     <string>Desarrollo.GenerarTablaTipoModelo</string>

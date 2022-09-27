@@ -1,3 +1,4 @@
+using BlazorDownloadFile;
 using Blazored.SessionStorage;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddLocalization();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 builder.Services.AddServerSideBlazor().AddHubOptions(options => { options.MaximumReceiveMessageSize = 10 * 1024 * 1024; });
+builder.Services.AddBlazorDownloadFile();
 
 var supportedCultures = new[]
 {
