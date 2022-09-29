@@ -2192,11 +2192,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                     {
                         Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Impresion.TipoTicket", item.TipoId);
                         Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.DepositarioModeloId);
+                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
 
-                        if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue)
+                        if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue && empresaIdOrigen.HasValue)
                         {
                             item.TipoId = tipoIdOrigen.Value;
                             item.DepositarioModeloId = depositarioModeloIdOrigen.Value;
+                            item.EmpresaId = empresaIdOrigen.Value;
 
                             Int64 origenId = item.Id;
 
