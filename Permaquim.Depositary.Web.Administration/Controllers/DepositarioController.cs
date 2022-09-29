@@ -48,7 +48,7 @@
                 depositarioMonitor.FechaCreacion = depositario.FechaCreacion;
                 depositarioMonitor.FechaModificacion = depositario.FechaModificacion;
                 depositarioMonitor.SemaforoAnomalia = "Rojo";
-                depositarioMonitor.SemaforoOnline = "Verde";
+                depositarioMonitor.SemaforoOnline = VerificarDepositarioEnLinea(depositario.Id,sucursal._EmpresaId);
                 Int64? bolsaColocada = OperacionController.ObtenerBolsaColocada(depositario.Id);
                 if (bolsaColocada.HasValue)
                     depositarioMonitor.PorcentajeOcupacionbolsa = OperacionController.ObtenerPorcentajeOcupacionBolsa(bolsaColocada.Value);
@@ -436,6 +436,36 @@
             }
             else
                 resultado = "Falta configuración";
+
+            return resultado;
+        }
+
+        public static string VerificarDepositarioEnLinea(Int64 DepositarioId, Int64 EmpresaId)
+        {
+            string resultado = "Rojo";
+
+            //En esta variable guardo el tiempo en segundos de intervalo para determinar si esta offline
+            int tiempoDepositarioEnLineaSegundos = 0;
+
+            string configuracionValor = AplicacionController.ObtenerConfiguracionEmpresa("TIEMPO_DEPOSITARIO_EN_LINEA_SEGUNDOS", EmpresaId);
+
+            if (configuracionValor != "")
+            {
+                if (int.TryParse(configuracionValor, out tiempoDepositarioEnLineaSegundos))
+                {
+
+                    Depositary.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacion = new();
+                    oSincronizacion.Where.Add(Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    oSincronizacion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechainicio, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Now.AddSeconds(-tiempoDepositarioEnLineaSegundos));
+
+                    oSincronizacion.Items();
+
+                    if (oSincronizacion.Result.Count > 0)
+                    {
+                        resultado = "Verde";
+                    }
+                }
+            }
 
             return resultado;
         }

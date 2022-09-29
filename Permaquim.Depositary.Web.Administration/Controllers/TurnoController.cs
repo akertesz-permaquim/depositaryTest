@@ -144,7 +144,8 @@
                                 try
                                 {
                                     DateTime fechaTurno = new(auxFecha.Year, auxFecha.Month, auxFecha.Day, 0, 0, 0);
-                                    oAgendaTurno.Add(pAgendaTurnoABM.NombreAgenda, esquemaDetalle.Id, fechaTurno, sector.SectorId, esquemaDetalle.Secuencia, pAgendaTurnoABM.UsuarioId, DateTime.Now, null, null, true);
+                                    string nombreAgenda = pAgendaTurnoABM.NombreAgenda + " - " + fechaTurno.Date.ToString("dd/MM/yyyy") + " - " + esquemaDetalle.Nombre;
+                                    oAgendaTurno.Add(nombreAgenda, esquemaDetalle.Id, fechaTurno, sector.SectorId, esquemaDetalle.Secuencia, pAgendaTurnoABM.UsuarioId, DateTime.Now, null, null, true);
                                 }
                                 catch (Exception ex)
                                 {

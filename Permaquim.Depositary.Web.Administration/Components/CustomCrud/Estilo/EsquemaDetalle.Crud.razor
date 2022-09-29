@@ -8,7 +8,9 @@
 
 @if (estaCargando)
 {
-    <div class="spinner"></div>
+    <div style="height:80px;">
+        <div class="spinnerCentradoLateralRelativo"></div>
+    </div>
 }
 @if (dataFunciones != null)
 {
@@ -50,7 +52,7 @@
         <hr>
         if (crudMode == CrudMode.List)
         {
-            <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@EsquemaDetalleRowRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" CellRender="@esquemaDetalleCellRender" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            <RadzenDataGrid @bind-Settings="@GridSettings" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" RowRender="@EsquemaDetalleRowRender" PageSizeOptions="@(new int[]{10,20,50,100})" AllowColumnPicking="true" AllowFiltering="true" AllowColumnResize="true" CellRender="@esquemaDetalleCellRender" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@EsquemaDetalle_entities" TItem="Depositary.Entities.Tables.Estilo.EsquemaDetalle" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                 <EmptyTemplate>
                     <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -97,7 +99,7 @@
                             }
                         </Template>
                         <FilterTemplate>
-                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                             <RadzenDropDown @bind-Value=@selectedFilter_AplicacionId Data="@Aplicacion_AplicacionId_filter" Change="OnSelectedFilter_AplicacionId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                         </FilterTemplate>
                     </RadzenDataGridColumn>
@@ -115,7 +117,7 @@
                             }
                         </Template>
                         <FilterTemplate>
-                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                             <RadzenDropDown @bind-Value=@selectedFilter_TipoEsquemaDetalleId Data="@TipoEsquemaDetalle_TipoEsquemaDetalleId_filter" Change="OnSelectedFilter_TipoEsquemaDetalleId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                         </FilterTemplate>
                     </RadzenDataGridColumn>
@@ -152,7 +154,7 @@
                             </RadzenCheckBox>
                         </Template>
                         <FilterTemplate>
-                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                             <div>
                                 @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
                                 <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
@@ -178,7 +180,7 @@
                             }
                         </Template>
                         <FilterTemplate>
-                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                             <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                         </FilterTemplate>
                     </RadzenDataGridColumn>
@@ -203,7 +205,7 @@
                             }
                         </Template>
                         <FilterTemplate>
-                            <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                            <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                             <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                         </FilterTemplate>
                     </RadzenDataGridColumn>
@@ -218,6 +220,10 @@
         {
             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Estilo.EsquemaDetalle" Data="@EsquemaDetalle_entity" @bind-Value="EsquemaDetalle_entity" Submit="Save" Visible="@(EsquemaDetalle_entity != null)">
                 <ChildContent>
+                    @if (estaProcesando)
+                    {
+                        <div class="spinnerCentrado"></div>
+                    }
                     @if (crudMode != CrudMode.Add)
                     {
                         <div style="margin-bottom: 1rem" class="row">
@@ -254,13 +260,13 @@
                                 <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(EsquemaDetalle_entity.AplicacionId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
-                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault)" />
+                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
                             }
                             else
                             {
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@Aplicacion_entities TextProperty="Nombre" ValueProperty="Id"
-                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault)" />
+                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
                             }
                         </div>
                     </div>
@@ -277,14 +283,14 @@
                                 AllowClear="false" TValue="Int64" Class="w-100" @bind-Value="@(EsquemaDetalle_entity.TipoEsquemaDetalleId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoEsquemaDetalleValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault)" />
+                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
                             }
                             else
                             {
                                 <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
                                 Data=@TipoEsquemaDetalle_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoEsquemaDetalleValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault)" />
+                                Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
                             }
                         </div>
                     </div>
@@ -294,7 +300,7 @@
                             </RadzenLabel>
                         </div>
                         <div class="col-md-9">
-                            <RadzenTextBox style="display: block" @bind-Value="@(EsquemaDetalle_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete || !EsDefault)">
+                            <RadzenTextBox style="display: block" @bind-Value="@(EsquemaDetalle_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)">
                             </RadzenTextBox>
                             @if (@crudMode != CrudMode.Delete)
                             {
@@ -309,7 +315,7 @@
                             </RadzenLabel>
                         </div>
                         <div class="col-md-9">
-                            <RadzenTextBox style="display: block" @bind-Value="@(EsquemaDetalle_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
+                            <RadzenTextBox style="display: block" @bind-Value="@(EsquemaDetalle_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                             </RadzenTextBox>
                             @if (@crudMode != CrudMode.Delete)
                             {
@@ -326,19 +332,19 @@
                             @switch (EsquemaDetalle_entity.TipoEsquemaDetalleId)
                             {
                                 case 1: //1=Color
-                                    <RadzenColorPicker @bind-Value="@EsquemaDetalle_entity.Valor" Name="Valor" ShowButton="true" Disabled="@(crudMode==CrudMode.Delete)"></RadzenColorPicker>
+                                    <RadzenColorPicker @bind-Value="@EsquemaDetalle_entity.Valor" Name="Valor" ShowButton="true" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)"></RadzenColorPicker>
                                     break;
                                 case 2: //2=Fuente
                                     <RadzenDropDown AllowClear="false" TValue="string" Name="Valor" @bind-Value="@(EsquemaDetalle_entity.Valor)"
                                 Data=@dataFonts TextProperty="Name" ValueProperty="Name" Style="width:50%"
                                 Change=@(args => SelectFontValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
+                                Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                     break;
                                 case 3: //3=Imagen
-                                    <RadzenFileInput @bind-Value="@EsquemaDetalle_entity.Valor" Error="@ErrorFileInput" Style="width:50%" Name="Valor" TValue="string" Disabled="@(crudMode==CrudMode.Delete)" />
+                                    <RadzenFileInput @bind-Value="@EsquemaDetalle_entity.Valor" Error="@ErrorFileInput" Style="width:50%" Name="Valor" TValue="string" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                     break;
                                 default:
-                                    <RadzenTextBox style="display: block; width:50%" @bind-Value="@(EsquemaDetalle_entity.Descripcion)" Name="Valor" Disabled="@(crudMode==CrudMode.Delete)">
+                                    <RadzenTextBox style="display: block; width:50%" @bind-Value="@(EsquemaDetalle_entity.Descripcion)" Name="Valor" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                     </RadzenTextBox>
                                     break;
                             }
@@ -359,7 +365,7 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje) Component="Imagen" Style="margin-left: 0px; vertical-align: middle;" />
                         </div>
                         <div class="col-md-auto">
-                            <RadzenFileInput @bind-Value="@EsquemaDetalle_entity.Imagen" Error="@ErrorFileInput_Imagen" Disabled="@(!EsDefault)" TValue="string" Class="w-100" />
+                            <RadzenFileInput @bind-Value="@EsquemaDetalle_entity.Imagen" Error="@ErrorFileInput_Imagen" Disabled="@(!EsDefault || estaProcesando)" TValue="string" Class="w-100" />
                         </div>
                     </div>
                     <div style="margin-bottom: 1rem" class="row">
@@ -367,14 +373,14 @@
                             <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                         </div>
                         <div class="col-md-9">
-                            <RadzenCheckBox @bind-Value=@EsquemaDetalle_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @EsquemaDetalle_entity)) Disabled="@(crudMode == CrudMode.Delete || !EsDefault)" />
+                            <RadzenCheckBox @bind-Value=@EsquemaDetalle_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @EsquemaDetalle_entity)) Disabled="@(crudMode == CrudMode.Delete || !EsDefault || estaProcesando)" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col offset-sm-3">
-                            <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                            <RadzenButton Disabled="@estaProcesando" ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
                             </RadzenButton>
-                            <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
+                            <RadzenButton Disabled="@estaProcesando" ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                             </RadzenButton>
                         </div>
                     </div>
@@ -403,6 +409,12 @@
         Edit,
         Delete
     }
+
+    /// <summary>
+    /// Variable to save grid state
+    /// </summary>
+    private DataGridSettings GridSettings;
+
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
@@ -410,6 +422,8 @@
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> EsquemaDetalle_entities = null;
 
     private bool estaCargando = true;
+
+    private bool estaProcesando = false;
 
     /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
@@ -419,6 +433,8 @@
     /// Variables to multilanguaje
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
+
+    private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
 
     /// <summary>
     /// Variables to store permissions
@@ -489,16 +505,22 @@
 
     protected override async Task OnInitializedAsync()
     {
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
+            NavManager.NavigateTo("login", true);
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
+        await sessionStorage.RemoveItemAsync("DataFunciones");
+        await sessionStorage.RemoveItemAsync("RolId");
+        usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+        dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
+        await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
+        await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
         await Task.Run(LoadFonts);
         estaCargando = false;
         StateHasChanged();
-        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
-        if (dataUsuario == null)
-            NavManager.NavigateTo("login", true);
+
     }
     #region Loading entities data
     /// <summary>
@@ -506,6 +528,7 @@
     /// </summary>
     private void LoadMainEntityData()
     {
+        estaProcesando = false;
         Depositary.Business.Tables.Estilo.EsquemaDetalle entity = new Depositary.Business.Tables.Estilo.EsquemaDetalle();
         entity.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, EsquemaId);
         EsquemaDetalle_entities = entity.Items();
@@ -624,7 +647,7 @@
     /// </summary>
     private async Task Save()
     {
-        estaCargando = true;
+        estaProcesando = true;
         StateHasChanged();
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
@@ -761,6 +784,7 @@
                 {
                     if (EsDefault)
                     {
+                        EsquemaDetalle_entity.Habilitado = false;
                         crud.Update(EsquemaDetalle_entity);
 
                         //Obtenemos los ID de todos los detalles de esquemas existentes (salvo este)
@@ -814,9 +838,10 @@
                 Duration = 4000
             });
 
-        await Task.Run(LoadMainEntityData);
-        estaCargando = false;
+        estaProcesando = false;
         StateHasChanged();
+
+        await Task.Run(LoadMainEntityData);
     }
 
     #region Grid events

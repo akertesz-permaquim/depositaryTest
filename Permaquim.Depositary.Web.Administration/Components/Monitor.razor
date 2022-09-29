@@ -10,295 +10,401 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
-@if (dataLenguaje != null)
+@if (dataFunciones != null)
 {
-    <RadzenContent Container="main">
-        <ChildContent>
-            <h1>Monitor</h1>
-            <hr>
-            @MultilenguajeController.ObtenerTextoPorClave("AGRUPAR_DEPOSITARIOS",dataLenguaje)
-            <RadzenCheckBox TValue="bool"
+    @if (SeguridadController.VerificarPermisoFuncion("BancaBanco", dataFunciones, "PuedeVisualizar"))
+    {
+        @if (dataLenguaje != null)
+        {
+            <RadzenContent Container="main">
+                <ChildContent>
+                    <h1>Monitor</h1>
+                    <hr>
+                    @MultilenguajeController.ObtenerTextoPorClave("AGRUPAR_DEPOSITARIOS",dataLenguaje)
+                    <RadzenCheckBox TValue="bool"
                         Name="ChkAgruparDepositarios"
                         Change="@changeChkAgruparDepositarios">
-            </RadzenCheckBox>
-            <br />
-            <br />
-            @if (estaCargandoMonitor)
-            {
-                <div class="spinner"></div>
-            }
-            else
-            {
-                <RadzenDataGrid TItem="MonitorEntities.DepositarioMonitor"
+                    </RadzenCheckBox>
+                    <br />
+                    <br />
+                    @if (estaCargandoMonitor)
+                    {
+                        <div class="spinner"></div>
+                    }
+                    else
+                    {
+                        <RadzenDataGrid Responsive="true" GroupPanelText="@MultilenguajeController.ObtenerTextoPorClave("INDICADOR_AGRUPACION",dataLenguaje)" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.DepositarioMonitor"
                         @ref="@gridDepositarios"
+                        Render="@DepositarioRender"
+                        Data="@dataDepositarios"
+                        @bind-Settings="@GridSettings"
                         IsLoading="@estaCargandoGridDepositarios"
                         AllowFiltering="true"
                         AllowPaging="true"
-                        ExpandMode="DataGridExpandMode.Multiple"
-                        Data="@dataDepositarios"
+                        ExpandMode="DataGridExpandMode.Single"
                         RowExpand="@expandirDepositario"
                         RowCollapse="@colapsarDepositario"
                         RowRender="@depositarioRowRender"
                         PageSizeOptions="@(new int[]{10,20,50,100})"
                         AllowColumnPicking="false"
                         AllowGrouping="true">
-                    <Columns>
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="DepositarioId" Title="ID" Width="2%" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Property="Empresa">
-                            <Template>
-                                @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
-                                {
-                                    <div class="textoResaltadoRow">
-                                        @context.Empresa
-                                    </div>
-                                }
-                                else
-                                    @context.Empresa
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                </Template>
-                            </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Property="Sucursal">
-                                <Template>
-                                    @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
-                                {
-                                    <div class="textoResaltadoRow">
-                                        @context.Sucursal
-                                    </div>
-                                }
-                                else
-                                    @context.Sucursal
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                </Template>
-                            </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector">
-                                <Template>
-                                    @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
-                                {
-                                    <div class="textoResaltadoRow">
-                                        @context.Sector
-                                    </div>
-                                }
-                                else
-                                    @context.Sector
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                </Template>
-                            </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="Nombre" Title="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje)" />
-                            <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="Modelo" Width="9%" Title="@MultilenguajeController.ObtenerTextoPorClave("MODELO",dataLenguaje)" />
-                            <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="ValorTotalEnBolsa" FormatString="{0:C2}" Width="12%" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("VALORTOTALENBOLSA",dataLenguaje)" />
-                            <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="SemaforoOnline" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROONLINE",dataLenguaje)" Width="9%" TextAlign="TextAlign.Center">
-                                <Template Context="depositario">
-                                    @switch (depositario.SemaforoOnline)
-                                {
-                                    case "Verde":
-                                        <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                    case "Amarillo":
-                                        <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                    case "Rojo":
-                                        <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                }
-                            </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="SemaforoOcupacionBolsa" Width="10%" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROOCUPACIONBOLSA",dataLenguaje)" TextAlign="TextAlign.Center">
-                            <Template Context="depositario">
-                                @switch (depositario.SemaforoOcupacionBolsa)
-                                {
-                                    case "Verde":
-                                        <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                    case "Amarillo":
-                                        <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                    case "Rojo":
-                                        <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                }
-                            </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="SemaforoAnomalia" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROANOMALIA",dataLenguaje)" Width="9%" TextAlign="TextAlign.Center">
-                            <Template Context="depositario">
-                                @switch (depositario.SemaforoAnomalia)
-                                {
-                                    case "Verde":
-                                        <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                    case "Amarillo":
-                                        <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                    case "Rojo":
-                                        <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
-                                        break;
-                                }
-                            </Template>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="Descripcion" Title="@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje)" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="NumeroSerie" Title="@MultilenguajeController.ObtenerTextoPorClave("NUMEROSERIE",dataLenguaje)" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="CodigoExterno" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje)" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="UsuarioCreacion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje)" Width="10%" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="FechaCreacion" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje)" Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="UsuarioModificacion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje)" Width="10%" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="FechaModificacion" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje)" Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                        <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="Habilitado" Title="@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)" />
-                    </Columns>
-                    <Template Context="depositario">
-                        <div style="background-color:silver">
-                            <RadzenCard Style="background-color:azure; margin-bottom:1%; padding-bottom: 0.5%">
-                                <ChildContent>
-                                    @{
-                                        var auxInformacionDepositario = dataInformacionDepositario.Where(x => x.DepositarioId == depositario.DepositarioId).FirstOrDefault();
-                                        @if (auxInformacionDepositario != null)
+                            <Columns>
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="DepositarioId" Title="ID" Width="2%" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Property="Empresa">
+                                    <Template>
+                                        @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
                                         {
-                                            <div class="container-fluid flex">
-                                                <div class="row" style="margin-left: -5%;">
-                                                    <div class="col-md-2" style="align-self: center;text-align: center;">
-                                                        <RadzenImage Path="@auxInformacionDepositario.ImagenModelo" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
-                                                        <br />
-                                                        <b>@MultilenguajeController.ObtenerTextoPorClave("NUMEROSERIE",dataLenguaje):</b> @auxInformacionDepositario.NumeroSerie
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div style="padding-left: 5%; padding-top: 1%; text-align:center">
-                                                                    <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROVALIDADO",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalValidado
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div style="padding-left: 5%; padding-top: 1%; text-align:center">
-                                                                    <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROAVALIDAR",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalAValidar
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div style="padding-left: 5%; padding-top: 1%; text-align:center">
-                                                                    <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROTOTAL",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.Total
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4" style="padding-left: 5%; padding-top: 3%; font-size: medium; text-align:center;">
-                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("IDENTIFICADOR",dataLenguaje):</b> @auxInformacionDepositario.IdentificadorBolsa
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div style="padding-top: 5%; text-align:center"><b>@MultilenguajeController.ObtenerTextoPorClave("OCUPACIONBOLSA",dataLenguaje)</b></div>
-                                                                @if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 70 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 90)
-                                                                {
-                                                                    <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                                }
-                                                                else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 90 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 100)
-                                                                {
-                                                                    <PermaquimProgressBar BarColor="red" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                                }
-                                                                else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 100)
-                                                                {
-                                                                    <PermaquimProgressBar BarColor="darkred" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                                }
-                                                                else
-                                                                {
-                                                                    <PermaquimProgressBar BarColor="green" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
-                                                                }
-                                                            </div>
-                                                            <div class="col-md-4" style="padding-top: 5%; padding-top: 3%; font-size: medium; text-align:center;">
-                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("CANTIDADBILLETESBOLSA",dataLenguaje):</b>
-                                                                @auxInformacionDepositario.CantidadBilletesEnBolsa / @auxInformacionDepositario.CapacidadBilletesBolsa
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4" style="padding-top: 3%; font-size: medium; text-align:center;">
-                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("TURNOACTIVO",dataLenguaje):</b>
-                                                                @auxInformacionDepositario.Turno
-                                                            </div>
-                                                            <div class="col-md-4" style="padding-top: 3%; font-size: medium; text-align:center;">
-                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURATURNOACTIVO",dataLenguaje):</b>
-                                                                @auxInformacionDepositario.FechaAperturaTurno
-                                                            </div>
-                                                            <div class="col-md-4" style="padding-left: 5%; padding-top: 3%; font-size: medium; text-align:center;">
-                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMASINCRONIZACION",dataLenguaje):</b> @(@auxInformacionDepositario.FechaUltimaSincronizacion.HasValue ? @auxInformacionDepositario.FechaUltimaSincronizacion.Value : "-")
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @if (auxInformacionDepositario.DepositoEnOtraMoneda)
-                                                {
-                                                    <div class="mensajeTransaccionOtrasMonedas">
-                                                        *<b>@MultilenguajeController.ObtenerTextoPorClave("EXISTENCIADEPOSITOSOTRAMONEDA",dataLenguaje)</b>
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div style="margin-top:2%;" />
-                                                }
+                                            <div class="textoResaltadoRow">
+                                                @context.Empresa
                                             </div>
                                         }
-                                    }
-                                </ChildContent>
-                            </RadzenCard>
-                        </div>
-                        <RadzenTabs Change="@(args => changeTabMonitorDepositario(args,depositario))">
-                            <Tabs>
-                                <RadzenTabsItem Icon="local_atm" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_DEPOSITOS",dataLenguaje)">
-                                    <RadzenDataGrid TItem="MonitorEntities.TransaccionValidadaMonitor"
+                                        else
+                                            @context.Empresa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </Template>
+                                    </RadzenDataGridColumn>
+                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Property="Sucursal">
+                                        <Template>
+                                            @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
+                                        {
+                                            <div class="textoResaltadoRow">
+                                                @context.Sucursal
+                                            </div>
+                                        }
+                                        else
+                                            @context.Sucursal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </Template>
+                                    </RadzenDataGridColumn>
+                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector">
+                                        <Template>
+                                            @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
+                                        {
+                                            <div class="textoResaltadoRow">
+                                                @context.Sector
+                                            </div>
+                                        }
+                                        else
+                                            @context.Sector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </Template>
+                                    </RadzenDataGridColumn>
+                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="Nombre" Title="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje)" />
+                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="Modelo" Width="9%" Title="@MultilenguajeController.ObtenerTextoPorClave("MODELO",dataLenguaje)" />
+                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="ValorTotalEnBolsa" FormatString="{0:C2}" Width="12%" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("VALORTOTALENBOLSA",dataLenguaje)" />
+                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="SemaforoOnline" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROONLINE",dataLenguaje)" Width="9%" TextAlign="TextAlign.Center">
+                                        <Template Context="depositario">
+                                            @switch (depositario.SemaforoOnline)
+                                        {
+                                            case "Verde":
+                                                <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                            case "Amarillo":
+                                                <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                            case "Rojo":
+                                                <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                        }
+                                    </Template>
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="SemaforoOcupacionBolsa" Width="10%" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROOCUPACIONBOLSA",dataLenguaje)" TextAlign="TextAlign.Center">
+                                    <Template Context="depositario">
+                                        @switch (depositario.SemaforoOcupacionBolsa)
+                                        {
+                                            case "Verde":
+                                                <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                            case "Amarillo":
+                                                <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                            case "Rojo":
+                                                <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                        }
+                                    </Template>
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="SemaforoAnomalia" Title="@MultilenguajeController.ObtenerTextoPorClave("SEMAFOROANOMALIA",dataLenguaje)" Width="9%" TextAlign="TextAlign.Center">
+                                    <Template Context="depositario">
+                                        @switch (depositario.SemaforoAnomalia)
+                                        {
+                                            case "Verde":
+                                                <RadzenImage Path="images/led_green.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                            case "Amarillo":
+                                                <RadzenImage Path="images/led_yellow.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                            case "Rojo":
+                                                <RadzenImage Path="images/led_red.png" style="width: 30px; height: 30px; border-radius: 8px;" />
+                                                break;
+                                        }
+                                    </Template>
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="Descripcion" Title="@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje)" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="NumeroSerie" Title="@MultilenguajeController.ObtenerTextoPorClave("NUMEROSERIE",dataLenguaje)" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="CodigoExterno" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje)" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="UsuarioCreacion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje)" Width="10%" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="FechaCreacion" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje)" Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="UsuarioModificacion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje)" Width="10%" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="FechaModificacion" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje)" Width="10%" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Visible="false" Property="Habilitado" Title="@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)" />
+                            </Columns>
+                            <Template Context="depositario">
+                                <div style="background-color:silver">
+                                    <RadzenCard Style="background-color:azure; margin-bottom:1%; padding-bottom: 0.5%">
+                                        <ChildContent>
+                                            @{
+                                                var auxInformacionDepositario = dataInformacionDepositario.Where(x => x.DepositarioId == depositario.DepositarioId).FirstOrDefault();
+                                                @if (auxInformacionDepositario != null)
+                                                {
+                                                    <div class="container-fluid flex">
+                                                        <div>
+                                                            <div class="row" style="margin-left: -5%;">
+                                                                <div class="col-md-2" style="align-self: center;text-align: center;">
+                                                                    <RadzenImage Path="@auxInformacionDepositario.ImagenModelo" style="width: 100px; height: 100px; border-radius: 8px; text-align:center;" />
+                                                                    <br />
+                                                                    <b>@MultilenguajeController.ObtenerTextoPorClave("NUMEROSERIE",dataLenguaje):</b> @auxInformacionDepositario.NumeroSerie
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <div style="padding-left: 5%; padding-top: 1%; text-align:center">
+                                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROVALIDADO",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalValidado
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div style="padding-left: 5%; padding-top: 1%; text-align:center">
+                                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROAVALIDAR",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.TotalAValidar
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div style="padding-left: 5%; padding-top: 1%; text-align:center">
+                                                                                <b>@MultilenguajeController.ObtenerTextoPorClave("DINEROTOTAL",dataLenguaje):</b> @auxInformacionDepositario.CodigoMoneda @auxInformacionDepositario.Total
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4" style="padding-left: 5%; padding-top: 3%; font-size: medium; text-align:center;">
+                                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("IDENTIFICADOR",dataLenguaje):</b> @auxInformacionDepositario.IdentificadorBolsa
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div style="padding-top: 5%; text-align:center"><b>@MultilenguajeController.ObtenerTextoPorClave("OCUPACIONBOLSA",dataLenguaje)</b></div>
+                                                                            @if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 70 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 90)
+                                                                            {
+                                                                                <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                            }
+                                                                            else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 90 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 100)
+                                                                            {
+                                                                                <PermaquimProgressBar BarColor="red" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                            }
+                                                                            else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 100)
+                                                                            {
+                                                                                <PermaquimProgressBar BarColor="darkred" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <PermaquimProgressBar BarColor="green" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                            }
+                                                                        </div>
+                                                                        <div class="col-md-4" style="padding-top: 5%; padding-top: 3%; font-size: medium; text-align:center;">
+                                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("CANTIDADBILLETESBOLSA",dataLenguaje):</b>
+                                                                            @auxInformacionDepositario.CantidadBilletesEnBolsa / @auxInformacionDepositario.CapacidadBilletesBolsa
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4" style="padding-top: 3%; font-size: medium; text-align:center;">
+                                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("TURNOACTIVO",dataLenguaje):</b>
+                                                                            @auxInformacionDepositario.Turno
+                                                                        </div>
+                                                                        <div class="col-md-4" style="padding-top: 3%; font-size: medium; text-align:center;">
+                                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURATURNOACTIVO",dataLenguaje):</b>
+                                                                            @auxInformacionDepositario.FechaAperturaTurno
+                                                                        </div>
+                                                                        <div class="col-md-4" style="padding-left: 5%; padding-top: 3%; font-size: medium; text-align:center;">
+                                                                            <b>@MultilenguajeController.ObtenerTextoPorClave("FECHAULTIMASINCRONIZACION",dataLenguaje):</b> @(@auxInformacionDepositario.FechaUltimaSincronizacion.HasValue ? @auxInformacionDepositario.FechaUltimaSincronizacion.Value : "-")
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @if (auxInformacionDepositario.DepositoEnOtraMoneda)
+                                                            {
+                                                                <div class="text-end mensajeTransaccionOtrasMonedas">
+                                                                    *<b>@MultilenguajeController.ObtenerTextoPorClave("EXISTENCIADEPOSITOSOTRAMONEDA",dataLenguaje)</b>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </ChildContent>
+                                    </RadzenCard>
+                                </div>
+                                <RadzenTabs Change="@(args => changeTabMonitorDepositario(args,depositario))">
+                                    <Tabs>
+                                        <RadzenTabsItem Icon="local_atm" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_DEPOSITOS",dataLenguaje)">
+                                            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.TransaccionValidadaMonitor"
                                             @ref="@gridTransacciones"
                                             AllowFiltering="true"
                                             AllowPaging="true"
@@ -309,50 +415,50 @@
                                             RowExpand="@expandirTransaccion"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataTransaccionesDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible="false" Property="TransaccionId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONID",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible="true" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="FechaTransaccion" Sortable="true" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="UsuarioTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible=@mostrarDatosOrigenValor Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Property="OrigenValor" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible=@mostrarDatosCuentaBancaria Title="@MultilenguajeController.ObtenerTextoPorClave("CUENTA",dataLenguaje)" Property="Cuenta" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible=@mostrarDatosCuentaBancaria Property="Banco" Width="10%" Title="@MultilenguajeController.ObtenerTextoPorClave("BANCO",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="TotalValidado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTAL",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
-                                        </Columns>
-                                        <Template Context="transaccion">
-                                            <RadzenDataGrid TItem="MonitorEntities.DetalleTransaccionValidadaMonitor"
+                                                <Columns>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible="false" Property="TransaccionId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONID",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible="true" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="FechaTransaccion" Sortable="true" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="UsuarioTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible=@mostrarDatosOrigenValor Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Property="OrigenValor" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible=@mostrarDatosCuentaBancaria Title="@MultilenguajeController.ObtenerTextoPorClave("CUENTA",dataLenguaje)" Property="Cuenta" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Visible=@mostrarDatosCuentaBancaria Property="Banco" Width="10%" Title="@MultilenguajeController.ObtenerTextoPorClave("BANCO",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionValidadaMonitor" Property="TotalValidado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTAL",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
+                                                </Columns>
+                                                <Template Context="transaccion">
+                                                    <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.DetalleTransaccionValidadaMonitor"
                                                     @ref="@gridTransaccionDetalles"
                                                     IsLoading="@estaCargandoGridTransaccionDetalles"
                                                     AllowFiltering="true"
                                                     AllowPaging="true"
                                                     PageSizeOptions="@(new int[]{10,20,50,100})"
                                                     Data="@dataTransaccionDetalles.Where(x => x.TransaccionId==transaccion.TransaccionId)">
-                                                <Columns>
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Visible="false" Property="TransaccionDetalleId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONDETALLEID",dataLenguaje)" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="FechaTransaccionDetalle" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="ImagenDenominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)">
-                                                        <Template Context="transaccionDetalle">
-                                                            <div style="text-align:center">
-                                                                <RadzenImage Path="@transaccionDetalle.ImagenDenominacion" Style="width: 80px;" />
-                                                            </div>
-                                                        </Template>
-                                                    </RadzenDataGridColumn>
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="Denominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("DENOMINACION",dataLenguaje)" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="CantidadUnidades" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDAD",dataLenguaje)" TextAlign="TextAlign.Right">
-                                                        <FooterTemplate>
-                                                            Total cantidad: <b>@dataTransaccionDetalles.Where(x => x.TransaccionId==transaccion.TransaccionId).Sum(o => o.CantidadUnidades)</b>
-                                                        </FooterTemplate>
-                                                    </RadzenDataGridColumn>
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="TotalValidadoFormateado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTAL",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
-                                                </Columns>
+                                                        <Columns>
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Visible="false" Property="TransaccionDetalleId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONDETALLEID",dataLenguaje)" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="FechaTransaccionDetalle" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="ImagenDenominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)">
+                                                                <Template Context="transaccionDetalle">
+                                                                    <div style="text-align:center">
+                                                                        <RadzenImage Path="@transaccionDetalle.ImagenDenominacion" Style="width: 80px;" />
+                                                                    </div>
+                                                                </Template>
+                                                            </RadzenDataGridColumn>
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="Denominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("DENOMINACION",dataLenguaje)" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="CantidadUnidades" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDAD",dataLenguaje)" TextAlign="TextAlign.Right">
+                                                                <FooterTemplate>
+                                                                    Total cantidad: <b>@dataTransaccionDetalles.Where(x => x.TransaccionId==transaccion.TransaccionId).Sum(o => o.CantidadUnidades)</b>
+                                                                </FooterTemplate>
+                                                            </RadzenDataGridColumn>
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionValidadaMonitor" Property="TotalValidadoFormateado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTAL",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
+                                                        </Columns>
+                                                    </RadzenDataGrid>
+                                                </Template>
                                             </RadzenDataGrid>
-                                        </Template>
-                                    </RadzenDataGrid>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Icon="forward_to_inbox" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_DEPOSITOSSOBRE",dataLenguaje)">
-                                    <RadzenDataGrid TItem="MonitorEntities.TransaccionAValidarMonitor"
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Icon="forward_to_inbox" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_DEPOSITOSSOBRE",dataLenguaje)">
+                                            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.TransaccionAValidarMonitor"
                                             @ref="@gridTransaccionesSobres"
                                             AllowFiltering="true"
                                             AllowPaging="true"
@@ -361,125 +467,137 @@
                                             RowExpand="@expandirTransaccionSobre"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataTransaccionesSobreDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible="false" Property="TransaccionSobreId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONSOBREID",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="FechaTransaccionSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOSOBRE",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="UsuarioTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIO",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarDatosOrigenValor Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Property="OrigenValor" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarDatosCuentaBancaria Property="Cuenta" Title="@MultilenguajeController.ObtenerTextoPorClave("CUENTA",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarDatosCuentaBancaria Property="Banco" Width="10%" Title="@MultilenguajeController.ObtenerTextoPorClave("BANCO",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TotalAValidar" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
-                                        </Columns>
-                                        <Template Context="transaccionSobre">
-                                            <RadzenDataGrid TItem="MonitorEntities.DetalleTransaccionAValidarMonitor"
+                                                <Columns>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible="false" Property="TransaccionSobreId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONSOBREID",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="FechaTransaccionSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOSOBRE",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="UsuarioTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIO",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarDatosOrigenValor Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Property="OrigenValor" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarDatosCuentaBancaria Property="Cuenta" Title="@MultilenguajeController.ObtenerTextoPorClave("CUENTA",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarDatosCuentaBancaria Property="Banco" Width="10%" Title="@MultilenguajeController.ObtenerTextoPorClave("BANCO",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TotalAValidar" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
+                                                </Columns>
+                                                <Template Context="transaccionSobre">
+                                                    <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.DetalleTransaccionAValidarMonitor"
                                                     @ref="@gridTransaccionSobreDetalles"
                                                     AllowFiltering="true"
                                                     AllowPaging="true"
                                                     IsLoading="@estaCargandoGridTransaccionSobreDetalles"
                                                     Data="@dataTransaccionSobreDetalles.Where(x => x.TransaccionSobreId == transaccionSobre.TransaccionSobreId)">
-                                                <Columns>
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Visible="false" Property="TransaccionSobreDetalleId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONSOBREDETALLEID",dataLenguaje)" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="FechaTransaccionSobreDetalle" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Visible="false" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="TipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOVALOR",dataLenguaje)" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="CantidadDeclarada" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADDECLARADA",dataLenguaje)" TextAlign="TextAlign.Right" />
-                                                    <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="ValorDeclaradoFormateado" Title="@MultilenguajeController.ObtenerTextoPorClave("VALORDECLARADO",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
-                                                </Columns>
+                                                        <Columns>
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Visible="false" Property="TransaccionSobreDetalleId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONSOBREDETALLEID",dataLenguaje)" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="FechaTransaccionSobreDetalle" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Visible="false" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="TipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOVALOR",dataLenguaje)" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="CantidadDeclarada" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADDECLARADA",dataLenguaje)" TextAlign="TextAlign.Right" />
+                                                            <RadzenDataGridColumn TItem="MonitorEntities.DetalleTransaccionAValidarMonitor" Property="ValorDeclaradoFormateado" Title="@MultilenguajeController.ObtenerTextoPorClave("VALORDECLARADO",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right" />
+                                                        </Columns>
+                                                    </RadzenDataGrid>
+                                                </Template>
                                             </RadzenDataGrid>
-                                        </Template>
-                                    </RadzenDataGrid>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Icon="archive" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_EXISTENCIAS",dataLenguaje)">
-                                    <RadzenDataGrid TItem="MonitorEntities.ExistenciaValidada"
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Icon="archive" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_EXISTENCIAS",dataLenguaje)">
+                                            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.ExistenciaValidada"
                                             @ref="@gridExistencias"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridExistencias"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataExistenciasDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="ImagenDenominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)" TextAlign="TextAlign.Center">
-                                                <Template Context="dataExistencia">
-                                                    <RadzenImage Path="@dataExistencia.ImagenDenominacion" style="width: 100px; border-radius: 8px;">
-                                                    </RadzenImage>
-                                                </Template>
-                                            </RadzenDataGridColumn>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="Denominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("DENOMINACION",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="CantidadValidada" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADVALIDADA",dataLenguaje)">
-                                                <FooterTemplate>
-                                                    Total existencias: <b>@dataExistenciasDepositario.Where(x => x.DepositarioId==depositario.DepositarioId).Sum(o => o.CantidadValidada)</b>
-                                                </FooterTemplate>
-                                            </RadzenDataGridColumn>
-                                        </Columns>
-                                    </RadzenDataGrid>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Icon="mark_as_unread" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_EXISTENCIASAVALIDAR",dataLenguaje)">
-                                    <RadzenDataGrid TItem="MonitorEntities.ExistenciaAValidar"
+                                                <Columns>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="ImagenDenominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)" TextAlign="TextAlign.Center">
+                                                        <Template Context="dataExistencia">
+                                                            <RadzenImage Path="@dataExistencia.ImagenDenominacion" style="width: 100px; border-radius: 8px;">
+                                                            </RadzenImage>
+                                                        </Template>
+                                                    </RadzenDataGridColumn>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="Denominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("DENOMINACION",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="CantidadValidada" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADVALIDADA",dataLenguaje)">
+                                                        <FooterTemplate>
+                                                            Total existencias: <b>@dataExistenciasDepositario.Where(x => x.DepositarioId==depositario.DepositarioId).Sum(o => o.CantidadValidada)</b>
+                                                        </FooterTemplate>
+                                                    </RadzenDataGridColumn>
+                                                </Columns>
+                                            </RadzenDataGrid>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Icon="mark_as_unread" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_EXISTENCIASAVALIDAR",dataLenguaje)">
+                                            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.ExistenciaAValidar"
                                             @ref="@gridExistenciasAValidar"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridExistenciasAValidar"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataExistenciasAValidarDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaAValidar" Property="ImagenTipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)" TextAlign="TextAlign.Center">
-                                                <Template Context="dataExistenciaAValidar">
-                                                    <RadzenImage Path="@dataExistenciaAValidar.ImagenTipoValor" style="width: 100px; border-radius: 8px;">
-                                                    </RadzenImage>
-                                                </Template>
-                                            </RadzenDataGridColumn>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaAValidar" Property="TipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOVALOR",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaAValidar" Property="Cantidad" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDAD",dataLenguaje)" />
-                                        </Columns>
-                                    </RadzenDataGrid>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Icon="calculate" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_TOTALGENERAL",dataLenguaje)">
-                                    <RadzenDataGrid TItem="MonitorEntities.TotalGeneral"
+                                                <Columns>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaAValidar" Property="ImagenTipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)" TextAlign="TextAlign.Center">
+                                                        <Template Context="dataExistenciaAValidar">
+                                                            <RadzenImage Path="@dataExistenciaAValidar.ImagenTipoValor" style="width: 100px; border-radius: 8px;">
+                                                            </RadzenImage>
+                                                        </Template>
+                                                    </RadzenDataGridColumn>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaAValidar" Property="TipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOVALOR",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaAValidar" Property="Cantidad" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDAD",dataLenguaje)" />
+                                                </Columns>
+                                            </RadzenDataGrid>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Icon="calculate" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_TOTALGENERAL",dataLenguaje)">
+                                            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.TotalGeneral"
                                             @ref="@gridTotalesGenerales"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridTotalesGenerales"
                                             Data="@dataTotalesGeneralesDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalValidadoFormateado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalAValidarFormateado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALGENERAL",dataLenguaje)" />
-                                        </Columns>
-                                    </RadzenDataGrid>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Icon="settings_input_component" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_ANOMALIAS",dataLenguaje)">
-                                    <RadzenDataGrid TItem="MonitorEntities.Evento"
+                                                <Columns>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalValidadoFormateado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="TotalAValidarFormateado" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.TotalGeneral" Property="Total" FormatString="{0:C2}" TextAlign="TextAlign.Right" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALGENERAL",dataLenguaje)" />
+                                                </Columns>
+                                            </RadzenDataGrid>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Icon="settings_input_component" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_ANOMALIAS",dataLenguaje)">
+                                            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.Evento"
                                             @ref="@gridEventos"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridEventos"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
                                             Data="@dataEventosDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
-                                        <Columns>
-                                            <RadzenDataGridColumn TItem="MonitorEntities.Evento" Visible="false" Property="EventoID" Title="@MultilenguajeController.ObtenerTextoPorClave("EVENTOID",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="FechaEvento" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="TipoEvento" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONID",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="Mensaje" Title="@MultilenguajeController.ObtenerTextoPorClave("MENSAJE",dataLenguaje)" />
-                                            <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="Valor" Title="@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje)" />
-                                        </Columns>
-                                    </RadzenDataGrid>
-                                </RadzenTabsItem>
-                            </Tabs>
-                        </RadzenTabs>
-                    </Template>
-                </RadzenDataGrid>
-            }
-        </ChildContent>
-    </RadzenContent>
+                                                <Columns>
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.Evento" Visible="false" Property="EventoID" Title="@MultilenguajeController.ObtenerTextoPorClave("EVENTOID",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="FechaEvento" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="TipoEvento" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONID",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="Mensaje" Title="@MultilenguajeController.ObtenerTextoPorClave("MENSAJE",dataLenguaje)" />
+                                                    <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="Valor" Title="@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje)" />
+                                                </Columns>
+                                            </RadzenDataGrid>
+                                        </RadzenTabsItem>
+                                    </Tabs>
+                                </RadzenTabs>
+                            </Template>
+                        </RadzenDataGrid>
+                    }
+                </ChildContent>
+            </RadzenContent>
+        }
+    }
+    else
+    {
+        <p>No tiene permisos para visualizar esta información.</p>
+    }
+}
+else
+{
+    <div class="spinner"></div>
 }
 
 @code {
+    private DataGridSettings GridSettings;
+
     //Datasets
     private List<MonitorEntities.DepositarioMonitor> dataDepositarios = new();
     private List<MonitorEntities.TransaccionValidadaMonitor> dataTransaccionesDepositario = new();
@@ -517,6 +635,7 @@
     private bool estaCargandoMonitor = false;
     private bool mostrarDatosCuentaBancaria = false;
     private bool mostrarDatosOrigenValor = false;
+    private bool ejecucionRecarga = false;
 
     //Variables auxiliares
     private Timer timerRecargaInformacion = new Timer();
@@ -525,18 +644,8 @@
     string colorRow;
     string colorMensajesResaltados;
 
-    protected override void OnInitialized()
-    {
-        estaCargandoMonitor = true;
-        base.OnInitialized();
-        var timer = new System.Threading.Timer((_) =>
-       {
-           InvokeAsync(async () =>
-           {
-                StateHasChanged();
-           });
-       }, null, 0, 1000);
-    }
+    private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
+    private List<SeguridadEntities.FuncionRol> dataFunciones;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -544,24 +653,27 @@
         {
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
             dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+            if (dataUsuario == null)
+                NavManager.NavigateTo("login", true);
+            usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+            dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
             dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
             colorRow = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorRowExpandida", true);
             colorMensajesResaltados = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorMensajeResaltadoMonitor", true);
-            if (dataUsuario == null)
-                NavManager.NavigateTo("login", true);
             estaCargandoGridDepositarios = true;
             StateHasChanged();
             await Task.Run(obtenerDepositarios);
             estaCargandoMonitor = false;
             StateHasChanged();
+            //SetTimer();
         }
+
     }
 
     private void SetTimer()
     {
-        // Create a timer with a two second interval.
-        timerRecargaInformacion = new System.Timers.Timer(10000);
-        // Hook up the Elapsed event for the timer.
+        //Creamos un timer con el tiempo parametrizado.
+        timerRecargaInformacion = new System.Timers.Timer(30000);
         timerRecargaInformacion.Elapsed += new ElapsedEventHandler(recargarInformacionDepositario);
         timerRecargaInformacion.AutoReset = true;
         timerRecargaInformacion.Enabled = true;
@@ -570,13 +682,21 @@
 
     private async void recargarInformacionDepositario(Object source, ElapsedEventArgs e)
     {
-        estaCargandoGridDepositarios = true;
+        timerRecargaInformacion.Enabled = false;
+        //estaCargandoGridDepositarios = true;
         await Task.Run(obtenerDepositarios);
+
+        await this.InvokeAsync(() => this.StateHasChanged());
+
+        timerRecargaInformacion.Enabled = true;
+
+        ejecucionRecarga = true;
 
     }
 
     private void obtenerDepositarios()
     {
+        timerRecargaInformacion.Enabled = false;
         dataDepositarios = DepositarioController.ObtenerDepositarios(dataUsuario.Id);
         estaCargandoGridDepositarios = false;
     }
@@ -608,7 +728,25 @@
 
     protected async Task colapsarDepositario(MonitorEntities.DepositarioMonitor args)
     {
-        rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
+        if (!ejecucionRecarga)
+            rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
+    }
+
+    void DepositarioRender(DataGridRenderEventArgs<MonitorEntities.DepositarioMonitor> args)
+    {
+        if(args.FirstRender) 
+        {
+            //if(rowsDepositariosExpandidas.Count>0)
+            //{
+                args.Grid.ExpandRow(dataDepositarios.FirstOrDefault());
+
+                //args.Grid.Reload();
+
+                StateHasChanged();
+
+            //    ejecucionRecarga = false;
+            //}
+        }
     }
 
     void depositarioRowRender(RowRenderEventArgs<MonitorEntities.DepositarioMonitor> args)
@@ -779,7 +917,6 @@
     }
 
     .mensajeTransaccionOtrasMonedas {
-        float: right;
         margin-top: 1%;
         margin-right: -3%;
         color: @colorMensajesResaltados;

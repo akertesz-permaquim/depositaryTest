@@ -11,7 +11,7 @@
     {
         @if (Empresa_entities == null)
         {
-            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+            <div class="spinner" />
         }
         else
         {
@@ -58,7 +58,7 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnPicking="true" CellRender="@EmpresaCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirEmpresa" RowRender="@empresaRowRender" RowCollapse="@colapsarEmpresa" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid @bind-Settings="@GridSettings" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnPicking="true" CellRender="@EmpresaCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirEmpresa" RowRender="@empresaRowRender" RowCollapse="@colapsarEmpresa" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@Empresa_entities" TItem="Depositary.Entities.Tables.Directorio.Empresa" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
                         <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -92,7 +92,7 @@
                                 }
                             </Template>
                             <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                                 <RadzenDropDown @bind-Value=@selectedFilter_GrupoId Data="@Grupo_GrupoId_filter" Change="OnSelectedFilter_GrupoId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
@@ -121,7 +121,7 @@
                                 }
                             </Template>
                             <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                                 <RadzenDropDown @bind-Value=@selectedFilter_EstiloEsquemaId Data="@Esquema_EstiloEsquemaId_filter" Change="OnSelectedFilter_EstiloEsquemaId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
@@ -139,7 +139,7 @@
                                 }
                             </Template>
                             <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                                 <RadzenDropDown @bind-Value=@selectedFilter_LenguajeId Data="@Lenguaje_LenguajeId_filter" Change="OnSelectedFilter_LenguajeId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
@@ -149,7 +149,7 @@
                                 </RadzenCheckBox>
                             </Template>
                             <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                                 <div>
                                     @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
                                     <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
@@ -162,7 +162,7 @@
                                 </RadzenCheckBox>
                             </Template>
                             <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                                 <div>
                                     @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
                                     <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
@@ -186,7 +186,7 @@
                                 }
                             </Template>
                             <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
@@ -209,7 +209,7 @@
                                 }
                             </Template>
                             <FilterTemplate>
-                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div style="margin-top: 1rem;font-weight: 600">@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)</div>
                                 <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
                             </FilterTemplate>
                         </RadzenDataGridColumn>
@@ -220,7 +220,8 @@
                         @{
                             var permisoAplicacionConfiguracionEmpresa = SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracionEmpresa", dataFunciones, "PuedeVisualizar");
                             var permisoBancaCuenta = SeguridadController.VerificarPermisoFuncion("BancaCuenta", dataFunciones, "PuedeVisualizar");
-                            if (!permisoAplicacionConfiguracionEmpresa && !permisoBancaCuenta)
+                            var permisoImpresionTicket = SeguridadController.VerificarPermisoFuncion("ImpresionTicket", dataFunciones, "PuedeVisualizar");
+                            if (!permisoAplicacionConfiguracionEmpresa && !permisoBancaCuenta && !permisoImpresionTicket)
                             {
                                 <p>No posee permisos para visualizar esta información</p>
                             }
@@ -233,6 +234,9 @@
                                         </RadzenTabsItem>
                                         <RadzenTabsItem Visible="@permisoBancaCuenta" Text="Cuentas">
                                             <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.Cuenta_Crud EmpresaId="@(empresa.Id)"></Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.Cuenta_Crud>
+                                        </RadzenTabsItem>
+                                        <RadzenTabsItem Visible="@permisoImpresionTicket" Text="Tickets">
+                                            <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Impresion.Ticket_Crud EmpresaId="@(empresa.Id)"></Permaquim.Depositary.Web.Administration.Components.CustomCrud.Impresion.Ticket_Crud>
                                         </RadzenTabsItem>
                                     </Tabs>
                                 </RadzenTabs>
@@ -247,6 +251,10 @@
             {
                 <RadzenTemplateForm TItem="Depositary.Entities.Tables.Directorio.Empresa" Data="@Empresa_entity" @bind-Value="Empresa_entity" Submit="Save" Visible="@(Empresa_entity != null)">
                     <ChildContent>
+                        @if (estaProcesando)
+                        {
+                            <div class="spinnerCentrado"></div>
+                        }
                         @if (crudMode != CrudMode.Add)
                         {
                             <div style="margin-bottom: 1rem" class="row">
@@ -266,7 +274,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
@@ -281,7 +289,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
@@ -307,7 +315,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.CodigoExterno)" Name="CodigoExterno" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.CodigoExterno)" Name="CodigoExterno" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
@@ -322,7 +330,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.Direccion)" Name="Direccion" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Empresa_entity.Direccion)" Name="Direccion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
@@ -337,7 +345,7 @@
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-auto">
-                                <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Empresa_entity.CodigoPostalId)" Name="CodigoPostalId" Disabled="@(crudMode==CrudMode.Delete)">
+                                <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Empresa_entity.CodigoPostalId)" Name="CodigoPostalId" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                 </RadzenNumeric>
                             </div>
                         </div>
@@ -354,14 +362,14 @@
                                 TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.EstiloEsquemaId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEsquema_EstiloEsquemaIdValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
+                                Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                                 else
                                 {
                                     <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Esquema_EstiloEsquemaId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEsquema_EstiloEsquemaIdValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
+                                Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                             </div>
                         </div>
@@ -378,14 +386,14 @@
                                 TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.LenguajeId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
+                                Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                                 else
                                 {
                                     <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Lenguaje_LenguajeId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
-                                Disabled="@(crudMode==CrudMode.Delete)" />
+                                Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                             </div>
                         </div>
@@ -394,7 +402,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
                             </div>
                             <div class="col-md-9">
-                                <RadzenCheckBox @bind-Value=@Empresa_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Empresa_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                                <RadzenCheckBox @bind-Value=@Empresa_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Empresa_entity)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando)" />
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
@@ -402,14 +410,14 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ESDEFAULT",dataLenguaje) Component="EsDefault" Style="margin-left: 0px; vertical-align: middle;" />
                             </div>
                             <div class="col-md-9">
-                                <RadzenCheckBox @bind-Value=@Empresa_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Change=@(args => EsDefaultChange(args, @Empresa_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                                <RadzenCheckBox @bind-Value=@Empresa_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Change=@(args => EsDefaultChange(args, @Empresa_entity)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando)" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col offset-sm-3">
-                                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                                <RadzenButton Disabled="@estaProcesando" ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
                                 </RadzenButton>
-                                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
+                                <RadzenButton Disabled="@estaProcesando" ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                                 </RadzenButton>
                             </div>
                         </div>
@@ -428,7 +436,7 @@
 }
 else
 {
-    <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+    <div class="spinner" />
 }
 
 @code {
@@ -448,9 +456,16 @@ else
     }
 
     /// <summary>
+    /// Variable to save grid state
+    /// </summary>
+    private DataGridSettings GridSettings;
+
+    private bool estaProcesando = false;
+
+    /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? Habilitado_filter;
-    
+
     /// <summary>
     /// Variables to handle column filter for field Banco.EsDefault
     private bool? EsDefault_filter;
@@ -465,6 +480,8 @@ else
     /// Variables to store multilanguaje
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
+
+    private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
 
     private List<Depositary.Entities.Tables.Directorio.Empresa> rowsEmpresasExpandidas = new();
 
@@ -528,14 +545,20 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        ParametroGrupoId = Int64.Parse(GrupoId);
-        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
-        await Task.Run(LoadMainEntityData);
-        await Task.Run(LoadTypesData);
+
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
+        ParametroGrupoId = Int64.Parse(GrupoId);
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        await sessionStorage.RemoveItemAsync("DataFunciones");
+        await sessionStorage.RemoveItemAsync("RolId");
+        usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+        dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
+        await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
+        await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
     }
     #region Loading entities data
     /// <summary>
@@ -543,6 +566,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        estaProcesando = false;
         Depositary.Business.Tables.Directorio.Empresa entity = new();
         entity.Where.Add(Business.Tables.Directorio.Empresa.ColumnEnum.GrupoId, sqlEnum.OperandEnum.Equal, ParametroGrupoId);
         Empresa_entities = entity.Items();
@@ -658,6 +682,8 @@ else
     /// </summary>
     private async Task Save()
     {
+        estaProcesando = true;
+        StateHasChanged();
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -798,6 +824,9 @@ else
                 Duration = 4000
             });
 
+        estaProcesando = false;
+        StateHasChanged();
+
         await Task.Run(LoadMainEntityData);
     }
     /// <summary>
@@ -842,7 +871,7 @@ else
 
     private void ObtenerSucursales(Depositary.Entities.Tables.Directorio.Empresa item)
     {
-        NavManager.NavigateTo("DirectorioSucursalCustomCrud/" + item.Id , true);
+        NavManager.NavigateTo("DirectorioSucursalCustomCrud/" + item.Id, true);
     }
 
     void EmpresaCellRender(DataGridCellRenderEventArgs<Depositary.Entities.Tables.Directorio.Empresa> args)

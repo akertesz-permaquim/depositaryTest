@@ -30,13 +30,13 @@
                     <RadzenProfileMenu Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@Profilemenu0Click">
                         <ChildContent>
                             <div style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfilDesplegable", false)>
-                            <RadzenProfileMenuItem Text="Perfil" Path="perfil" Value="Perfil" Icon="person">
-                            </RadzenProfileMenuItem>
-                            <RadzenProfileMenuItem Text="Cambiar password" Path="cambioPassword" Value="ActualizarPassword" Icon="password">
-                            </RadzenProfileMenuItem>
-                            <RadzenProfileMenuItem Text="Logout" Path="logout" Value="Logout" Icon="power_settings_new">
-                            </RadzenProfileMenuItem>
-                                </div>
+                                <RadzenProfileMenuItem Text="Perfil" Path="perfil" Value="Perfil" Icon="person">
+                                </RadzenProfileMenuItem>
+                                <RadzenProfileMenuItem Text="Cambiar password" Path="cambioPassword" Value="ActualizarPassword" Icon="password">
+                                </RadzenProfileMenuItem>
+                                <RadzenProfileMenuItem Text="Logout" Path="logout" Value="Logout" Icon="power_settings_new">
+                                </RadzenProfileMenuItem>
+                            </div>
                         </ChildContent>
                         <Template>
                             <RadzenLabel Text="@dataUsuario.Nombre">

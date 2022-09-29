@@ -10,7 +10,7 @@
 {
  @if (TipoConfiguracionDepositario_entities == null)
  {
-     <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+     <div class="spinner" />
  }
  else
  {
@@ -50,7 +50,8 @@
      <hr>
      if (crudMode == CrudMode.List)
      {
-         <RadzenDataGrid FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" RowRender=@TipoConfiguracionDepositarioRowRender AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         <RadzenDataGrid @bind-Settings="@GridSettings" FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" RowRender=@TipoConfiguracionDepositarioRowRender AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         FilterText=@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO", dataLenguaje) IsEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO", dataLenguaje) IsNotNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO", dataLenguaje) IsNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO", dataLenguaje) LessThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A", dataLenguaje) LessThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL", dataLenguaje) NotEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE", dataLenguaje) IsNotEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO", dataLenguaje) OrOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR", dataLenguaje) GreaterThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A", dataLenguaje) GreaterThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL", dataLenguaje) AndOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND", dataLenguaje) AllColumnsText=@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS", dataLenguaje) ContainsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE", dataLenguaje) DoesNotContainText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE", dataLenguaje) ClearFilterText=@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO", dataLenguaje) ApplyFilterText=@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO", dataLenguaje) EqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO", dataLenguaje) EndsWithText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON", dataLenguaje) PageSizeText=@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA", dataLenguaje) StartsWithText=@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON", dataLenguaje) ColumnsShowingText=@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES", dataLenguaje)
          Data="@TipoConfiguracionDepositario_entities" TItem="Depositary.Entities.Tables.Dispositivo.TipoConfiguracionDepositario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -143,6 +144,10 @@
      {
              <RadzenTemplateForm TItem="Depositary.Entities.Tables.Dispositivo.TipoConfiguracionDepositario" Data="@TipoConfiguracionDepositario_entity"  @bind-Value="TipoConfiguracionDepositario_entity" Submit ="Save" Visible ="@(TipoConfiguracionDepositario_entity != null)">
              <ChildContent>
+             @if (estaProcesando)
+             {
+                 <div class="spinnerCentrado"></div>
+             }
                 @if(crudMode != CrudMode.Add)
                 {
                  <div style="margin-bottom: 1rem" class="row">
@@ -162,7 +167,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoConfiguracionDepositario_entity.Clave)" Name="Clave" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoConfiguracionDepositario_entity.Clave)" Name="Clave" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                          </RadzenTextBox>
                      </div>
                  </div>
@@ -172,7 +177,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoConfiguracionDepositario_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoConfiguracionDepositario_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
                          {
@@ -187,7 +192,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoConfiguracionDepositario_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoConfiguracionDepositario_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
                          {
@@ -206,9 +211,9 @@
                  </div>
              <div class="row">
                  <div class="col offset-sm-3">
-                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle ="ButtonStyle.Primary">
+                 <RadzenButton Disabled="@estaProcesando" ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle ="ButtonStyle.Primary">
                  </RadzenButton>
-                 <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
+                 <RadzenButton Disabled="@estaProcesando" ButtonStyle ="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                  </RadzenButton>
                   </div>
              </div>
@@ -227,7 +232,7 @@ else
 }
 else
 {
-     <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+     <div class="spinner" />
 }
  
 @code {
@@ -242,6 +247,11 @@ else
         Delete
     }
     /// <summary>
+    /// Variable to save grid state
+    /// </summary>
+    private DataGridSettings GridSettings;
+ 
+    /// <summary>
     /// Variables to handle main entity
     /// </summary>
     private Depositary.Entities.Tables.Dispositivo.TipoConfiguracionDepositario TipoConfiguracionDepositario_entity = new();
@@ -252,6 +262,9 @@ else
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
  
+    private bool estaProcesando = false ;
+ 
+    private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
  
     /// <summary>
     /// Variables to store permissions
@@ -290,13 +303,18 @@ else
  
     protected override async Task OnInitializedAsync()
     {
-        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
-        await Task.Run(LoadMainEntityData);
-        await Task.Run(LoadTypesData);
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
              NavManager.NavigateTo("login", true);
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        await sessionStorage.RemoveItemAsync("DataFunciones");
+        await sessionStorage.RemoveItemAsync("RolId");
+        usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+        dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
+        await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
+        await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
     }
     #region Loading entities data
     /// <summary>
@@ -304,6 +322,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        estaProcesando = false;
         Depositary.Business.Tables.Dispositivo.TipoConfiguracionDepositario entity = new();
         TipoConfiguracionDepositario_entities = entity.Items();
     }
@@ -364,6 +383,8 @@ else
     /// </summary>
     private async Task Save()
     {
+        estaProcesando = true;
+        StateHasChanged();
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -465,6 +486,8 @@ else
             Detail = actionInformation, 
             Duration = 4000 });
        
+       estaProcesando = false;
+       StateHasChanged();
             await Task.Run(LoadMainEntityData);
     }
     /// <summary>

@@ -70,7 +70,6 @@
     <string>Dispositivo.TipoPlaca</string>
     <string>Estilo.TipoEsquemaDetalle</string>
     <string>Geografia.Zona</string>
-    <string>Impresion.Ticket</string>
     <string>Impresion.TipoTicket</string>
     <string>Operacion.TipoContenedor</string>
     <string>Operacion.TipoEvento</string>
