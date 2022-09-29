@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
@@ -119,7 +120,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
             _formList.Clear();
             MainFormInstance.BreadCrumbText =
-                 MultilanguangeController.GetText(MainFormInstance.Name);
+                 MultilanguangeController.GetText(MainFormInstance.Name) + 
+                 " - Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             MultilanguangeController.ResetLanguage();
 
             MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);

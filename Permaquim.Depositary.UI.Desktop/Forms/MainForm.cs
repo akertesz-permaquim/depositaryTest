@@ -8,6 +8,7 @@ using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 using Permaquim.Depositary.UI.Desktop.Forms;
 using System.Windows.Forms;
 using Permaquim.Depositary.UI.Desktop.Entities;
+using System.Reflection;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
@@ -530,8 +531,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void LoadLanguageItems()
         {
-            BreadCrumbText = MultilanguangeController.GetText(this.Name);
-            SetInformationMessage(InformationTypeEnum.None, MultilanguangeController.GetText(MultiLanguageEnum.TOQUE_PANTALLA_PARA_INICIAR));
+            BreadCrumbText = MultilanguangeController.GetText(this.Name) +
+                " - Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            SetInformationMessage(InformationTypeEnum.None, 
+                MultilanguangeController.GetText(MultiLanguageEnum.TOQUE_PANTALLA_PARA_INICIAR));
         }
 
         private void LoadStyles()
@@ -554,6 +557,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         public void LoadPresentation()
         {
             MainPictureBox.Image = StyleController.GetImageResourceFromfile(PRESENTACION);
+           
         }
         private void LoadLogo()
         {
@@ -704,19 +708,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
 
             }
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //var _bagContentItems = DatabaseController.GetBillBagContentItems();
-            //_bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
-            //ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-            //                           DatabaseController.CurrentContainer, _bagContentItems);
-
-            ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                                   DatabaseController.CurrentContainer,
-                                   DatabaseController.GetBillBagContentItems(), 0); 
 
         }
     }

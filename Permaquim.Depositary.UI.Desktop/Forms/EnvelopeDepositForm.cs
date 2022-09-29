@@ -727,16 +727,24 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (e.ColumnIndex == 2)
             {
-                activatedCell = ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex];
-                _selectedEditElement = SelectedEditElementEnum.Cell;
-                DenominationsGridView.BeginEdit(false);
-
-                CustomNumericInputboxKeyboard numericInputForm = new CustomNumericInputboxKeyboard();
-                numericInputForm.NumericInputBoxPlaceholder =
-                    ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                if (numericInputForm.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value = numericInputForm.ReturnValue;
+                    activatedCell = ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    _selectedEditElement = SelectedEditElementEnum.Cell;
+                    DenominationsGridView.BeginEdit(false);
+
+                    CustomNumericInputboxKeyboard numericInputForm = new CustomNumericInputboxKeyboard();
+                    numericInputForm.NumericInputBoxPlaceholder =
+                        ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                    if (numericInputForm.ShowDialog() == DialogResult.OK)
+                    {
+                        ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value = numericInputForm.ReturnValue;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    AuditController.Log(ex);
                 }
             }
         }
