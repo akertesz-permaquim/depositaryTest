@@ -128,31 +128,31 @@ namespace Permaquim.Depositary.UI.Desktop
                 case (int)OperationTypeEnum.BillDeposit:
                     if (DatabaseController.GetPreviousDaysTurns() >= 0)
                     {
-                        if (DatabaseController.GetAvailableTurns() > 0)
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                        MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
+                    }
+
+                    if (DatabaseController.GetAvailableTurns() > 0)
+                    {
+                        if (DatabaseController.GetCurrencies().Count == 1)
                         {
-                            if (DatabaseController.GetCurrencies().Count == 1)
-                            {
-                                DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                                FormsController.OpenChildForm(this, new BillDepositForm(),
-                                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                            }
-                            else
-                            {
-                                FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                            }
+                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                            FormsController.OpenChildForm(this, new BillDepositForm(),
+                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                         else
                         {
-                            FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                                MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         }
                     }
                     else
                     {
                         FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                            MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
+                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
                     }
+                    
+  
                     break;
                 case (int)OperationTypeEnum.EnvelopeDeposit:
                     if (DatabaseController.GetPreviousDaysTurns() >= 0)
@@ -160,7 +160,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         if (DatabaseController.GetAvailableTurns() > 0)
                         {
 
-                            if (DatabaseController.GetCurrencies().Count == 1)
+                            if (DatabaseController.GetCurrencyValueRelations().Count == 1)
                             {
                                 DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
                                 FormsController.OpenChildForm(this, new EnvelopeDepositForm(),

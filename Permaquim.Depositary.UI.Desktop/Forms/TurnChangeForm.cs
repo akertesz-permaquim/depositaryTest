@@ -44,7 +44,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 DatabaseController.LogOff(true);
                 FormsController.LogOff();
             }
-            SetinformationMessage();
+            //SetinformationMessage();
         }
         private void TurnChangeForm_Load(object sender, EventArgs e)
         {
@@ -128,6 +128,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (this.Visible)
             {
                 LoadOperationsHeader();
+                SetinformationMessage();
             }
             else
             {

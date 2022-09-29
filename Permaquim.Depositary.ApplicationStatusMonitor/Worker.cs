@@ -62,7 +62,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                 {
                                     if (item.ProcessId != 0)
                                     {
-                                        
+
                                         var process = Process.GetProcessById(item.ProcessId);
                                         if (process.HasExited) isUp = false;
                                     }
@@ -71,16 +71,33 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                         isUp = false;
                                     }
                                 }
-                                catch(ArgumentException argex)
+                                catch (ArgumentException argex)
                                 {
                                     isUp = false;
                                 }
-                                
+
                                 if (!isUp)
                                 {
-                                    Thread.Sleep(_configuration.GetSection("TaskDelay").Get<int>());
+                                    //Thread.Sleep(_configuration.GetSection("TaskDelay").Get<int>());
                                     if (item.ProcessId == 0) Log("Starting process " + item.ProcessName + "...");
-                                    item.ProcessId = Process.Start(item.Target).Id;
+                                    //item.ProcessId = Process.Start(item.Target).Id;
+
+                                    System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                                    System.Security.SecureString ssPwd = new System.Security.SecureString();
+                                    proc.StartInfo.UseShellExecute = true;
+                                    proc.StartInfo.FileName = item.Target;
+                                    proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(item.Target);
+                                    proc.StartInfo.UserName = "SB1015-I5";
+                                    string password = "admin";
+                                    for (int x = 0; x < password.Length; x++)
+                                    {
+                                        ssPwd.AppendChar(password[x]);
+                                    }
+                                    password = "";
+                                    proc.StartInfo.Password = ssPwd;
+                                    proc.Start();
+                                    item.ProcessId = proc.Id;
+
                                 }
                                 break;
 
