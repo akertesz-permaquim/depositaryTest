@@ -15,8 +15,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private const string TODOS = "Todos";
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
-        private bool _alreadyPrinted;
-
         private long _operationId;
         private long _operationTypeId;
 
@@ -29,23 +27,12 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadFilterControls();
             InitializeOperationsHeaderGridView();
 
-            FromDateTimePicker.Value = DateTime.Now.Date;
-            ToDateTimePicker.Value = DateTime.Now.Date;
-            FromDateTimePicker.Format = DateTimePickerFormat.Custom;
-            FromDateTimePicker.CustomFormat = "dd/MM/yyyy";
-
-            ToDateTimePicker.Format = DateTimePickerFormat.Custom;
-            ToDateTimePicker.CustomFormat = "dd/MM/yyyy";
-
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
-
-            OperationsHeaderGridView.DataSource = null;
-            OperationsDetailGridView.DataSource = null;
 
             LoadOperationsHeader();
         }
@@ -58,6 +45,23 @@ namespace Permaquim.Depositary.UI.Desktop
                 return CP;
             }
         }
+
+        private void ResetReport()
+        {
+            FromDateTimePicker.Value = DateTime.Now.Date;
+            ToDateTimePicker.Value = DateTime.Now.Date;
+            FromDateTimePicker.Format = DateTimePickerFormat.Custom;
+            FromDateTimePicker.CustomFormat = "dd/MM/yyyy";
+
+            ToDateTimePicker.Format = DateTimePickerFormat.Custom;
+            ToDateTimePicker.CustomFormat = "dd/MM/yyyy";
+
+            UserComboBox.SelectedIndex = 0;
+            TurnComboBox.SelectedIndex = 0;
+
+            LoadOperationsHeader();
+        }
+
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -125,6 +129,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
+            ResetReport();
             FormsController.OpenChildForm(this, new ReportsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
@@ -455,6 +460,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             OperationsHeaderGridView.DataSource = null;
             OperationsDetailGridView.DataSource = null;
+
             InitializeOperationsHeaderGridView();
 
             DateTime FechaHasta = ToDateTimePicker.Value;
@@ -644,19 +650,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PrintBillDepositTicket()
         {
-
             if (ParameterController.PrintsBillDeposit)
             {
                 var _header = DatabaseController.GetTransactionHeader(_operationId);
                 var _details = DatabaseController.GetTransactionDetails(_operationId);
-                if (!_alreadyPrinted)
+                for (int i = 1; i <= ParameterController.PrintBillDepositQuantity; i++)
                 {
-                    for (int i = 1; i < ParameterController.PrintBillDepositQuantity; i++)
-                    {
-                        ReportController.PrintReport(ReportTypeEnum.BillDeposit,
-                            _header, _details, i);
-                        _alreadyPrinted = true;
-                    }
+                    ReportController.PrintReport(ReportTypeEnum.BillDeposit,
+                        _header, _details, i);
                 }
             }
         }
@@ -667,13 +668,10 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 var _header = DatabaseController.GetTransactionHeader(_operationId);
                 var _details = DatabaseController.GetTransactionDetails(_operationId);
-                if (!_alreadyPrinted)
+
+                for (int i = 1; i <= ParameterController.PrintBillDepositQuantity; i++)
                 {
-                    for (int i = 1; i < ParameterController.PrintBillDepositQuantity; i++)
-                    {
-                        ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport, _header, _details, i);
-                        _alreadyPrinted = true;
-                    }
+                    ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport, _header, _details, i);
                 }
             }
         }

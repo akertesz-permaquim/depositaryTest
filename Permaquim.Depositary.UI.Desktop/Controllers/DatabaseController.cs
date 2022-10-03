@@ -639,9 +639,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         }
                     }
 
-                    transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
-                    Depositario.sqlEnum.OperandEnum.In, arrayTurns);
+                    if (arrayTurns.Count == 0)
+                        arrayTurns.Add(-1);
+
+                        transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                        Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
+                        Depositario.sqlEnum.OperandEnum.In, arrayTurns);
 
                 }
             }
@@ -1843,13 +1846,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             Depositario.Business.Views.Reporte.Contenedores entities = new();
             entities.Where.Add(Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, FechaAperturaDesde);
-            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositario.sqlEnum.OperandEnum.LessThanOrEqual, FechaAperturaHasta);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositario.sqlEnum.OperandEnum.LessThanOrEqual, FechaAperturaHasta);
             if (FechaCierreDesde.HasValue)
-                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, FechaCierreDesde.Value);
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, FechaCierreDesde.Value);
             if (FechaCierreHasta.HasValue)
-                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositario.sqlEnum.OperandEnum.LessThanOrEqual, FechaCierreHasta.Value);
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositario.sqlEnum.OperandEnum.LessThanOrEqual, FechaCierreHasta.Value);
             if (Identificador != "")
-                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositario.sqlEnum.OperandEnum.Like, Identificador);
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositario.sqlEnum.OperandEnum.Like, "%"+Identificador+"%");
 
             return entities.Items();
         }
