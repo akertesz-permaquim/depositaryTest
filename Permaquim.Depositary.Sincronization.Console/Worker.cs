@@ -53,52 +53,55 @@ namespace Permaquim.Depositary.Sincronization.Console
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-
             _logger.Log(LogLevel.Information, "Starting sincronization...");
 
             while (!stoppingToken.IsCancellationRequested)
             {
-
-                if (DatabaseController.CurrentDepositary == null)
+                try
                 {
-                    await InitializationController.InitializeDepositary();
-                }
-                else
-                {
-                    foreach (var item in _workerTasks)
+                    if (DatabaseController.CurrentDepositary == null)
                     {
-                        _baseUrl = AppConfiguration.WebApiUrl;
-
-                        _logger.Log(LogLevel.Information, "Api endpoint is " + _baseUrl + item.Endpoint);
-
-                        switch (item.WorkerTaskType)
+                        await InitializationController.InitializeDepositary();
+                    }
+                    else
+                    {
+                        foreach (var item in _workerTasks)
                         {
-                            case WorkerTask.WorkerTaskTypeEnum.None:
-                                break;
-                            case WorkerTask.WorkerTaskTypeEnum.GetToken:
-                                await GetToken(item);
-                                break;
-                            case WorkerTask.WorkerTaskTypeEnum.Receive:
-                                await ReceiveData(item);
-                                break;
-                            case WorkerTask.WorkerTaskTypeEnum.Send:
-                                await SendData(item);
-                                break;
-                            case WorkerTask.WorkerTaskTypeEnum.SendAndReceive:
-                                await SendAndReceiveData(item);
-                                break;
-                            default:
-                                break;
+                            _baseUrl = AppConfiguration.WebApiUrl;
+
+                            _logger.Log(LogLevel.Information, "Api endpoint is " + _baseUrl + item.Endpoint);
+
+                            switch (item.WorkerTaskType)
+                            {
+                                case WorkerTask.WorkerTaskTypeEnum.None:
+                                    break;
+                                case WorkerTask.WorkerTaskTypeEnum.GetToken:
+                                    await GetToken(item);
+                                    break;
+                                case WorkerTask.WorkerTaskTypeEnum.Receive:
+                                    await ReceiveData(item);
+                                    break;
+                                case WorkerTask.WorkerTaskTypeEnum.Send:
+                                    await SendData(item);
+                                    break;
+                                case WorkerTask.WorkerTaskTypeEnum.SendAndReceive:
+                                    await SendAndReceiveData(item);
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            model = null;
+
+                            await Task.Delay(100, stoppingToken);
+
                         }
-
-                        model = null;
-
-                        await Task.Delay(100, stoppingToken);
-
                     }
                 }
-
-                //await Task.Delay(Convert.ToInt32(_delaytime), stoppingToken);
+                catch (Exception ex)
+                {
+                    AuditController.LogToFile(ex);
+                }
 
                 _hostApplicationLifetime.StopApplication();
 
@@ -307,7 +310,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         }
         private void Log(Exception ex)
         {
-            string logDirectory = System.IO.Directory.GetCurrentDirectory() + @"\Logs\";
+            string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
 
@@ -320,7 +323,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         }
         private void Log(string message)
         {
-            string logDirectory = System.IO.Directory.GetCurrentDirectory() + @"\Logs\";
+            string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
 

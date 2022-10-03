@@ -15,6 +15,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Crud\Directorio\**" />
+    <Content Remove="Components\Crud\Directorio\**" />
+    <EmbeddedResource Remove="Components\Crud\Directorio\**" />
+    <None Remove="Components\Crud\Directorio\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Components\UserRolViewer.razor" />
   </ItemGroup>
 
@@ -23,7 +30,8 @@
     <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Radzen.Blazor" Version="3.19.10" />
+    <PackageReference Include="Radzen.Blazor" Version="4.1.4" />
+    <PackageReference Include="Radzen.Blazor.GridExportOptions" Version="3.3.0.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
@@ -32,54 +40,24 @@
   <ItemGroup>
     <Folder Include="Dal\" />
     <Folder Include="Resources\" />
+    <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Components\Crud\Banca\TipoCuenta.Crud.razor" />
-    <None Include="Components\Crud\Directorio\Empresa.Crud.razor" />
-    <None Include="Components\Crud\Directorio\Grupo.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\IdentificadorUsuario.Crud.razor" />
-    <None Include="Components\Crud\Directorio\Sector.Crud.razor" />
-    <None Include="Components\Crud\Directorio\TipoIdentificador.Crud.razor" />
-    <None Include="Components\Crud\Dispositivo\ComandoContadora.Crud.razor" />
-    <None Include="Components\Crud\Dispositivo\ComandoPlaca.Crud.razor" />
     <None Include="Components\CustomCrud\Dispositivo\ConfiguracionDepositario.Crud.razor" />
     <None Include="Components\CustomCrud\Dispositivo\Depositario.Crud.razor" />
     <None Include="Components\CustomCrud\Dispositivo\DepositarioContadora.Crud.razor" />
-    <None Include="Components\Crud\Dispositivo\DepositarioEstado.Crud.razor" />
     <None Include="Components\CustomCrud\Dispositivo\DepositarioPlaca.Crud.razor" />
     <None Include="Components\CustomCrud\Dispositivo\Marca.Crud.razor" />
     <None Include="Components\CustomCrud\Dispositivo\Modelo.Crud.razor" />
-    <None Include="Components\Crud\Dispositivo\TipoConfiguracionDepositario.Crud.razor" />
-    <None Include="Components\Crud\Dispositivo\TipoContadora.Crud.razor" />
-    <None Include="Components\Crud\Dispositivo\TipoPlaca.Crud.razor" />
-    <None Include="Components\Crud\Estilo\TipoEsquemaDetalle.Crud.razor" />
-    <None Include="Components\Crud\Geografia\Ciudad.Crud.razor" />
-    <None Include="Components\Crud\Geografia\CodigoPostal.Crud.razor" />
-    <None Include="Components\Crud\Geografia\Pais.Crud.razor" />
-    <None Include="Components\Crud\Geografia\Provincia.Crud.razor" />
-    <None Include="Components\Crud\Geografia\Zona.Crud.razor" />
-    <None Include="Components\Crud\Operacion\Contenedor.Crud.razor" />
-    <None Include="Components\Crud\Operacion\TipoContenedor.Crud.razor" />
-    <None Include="Components\Crud\Operacion\TipoEvento.Crud.razor" />
-    <None Include="Components\Crud\Operacion\TipoTransaccion.Crud.razor" />
-    <None Include="Components\Crud\Operacion\Turno.Crud.razor" />
-    <None Include="Components\Crud\Operacion\TurnoUsuario.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\Aplicacion.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\AplicacionParametro.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\AplicacionParametroValor.Crud.razor" />
-    <None Include="Components\Crud\Seguridad\Funcion.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\Rol.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\RolFuncion.Crud.razor" />
-    <None Include="Components\Crud\Seguridad\TipoAplicacion.Crud.razor" />
-    <None Include="Components\Crud\Seguridad\TipoFuncion.Crud.razor" />
-    <None Include="Components\Crud\Seguridad\TipoMenu.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\UsuarioRol.Crud.razor" />
     <None Include="Components\CustomCrud\Seguridad\UsuarioSector.Crud.razor" />
-    <None Include="Components\Crud\Sincronizacion\Configuracion.Crud.razor" />
-    <None Include="Components\Crud\Sincronizacion\Entidad.Crud.razor" />
-    <None Include="Components\Crud\Valor\RelacionMonedaTipoValor.Crud.razor" />
-    <None Include="Components\Crud\Valor\Tipo.Crud.razor" />
     <None Include="Components\CustomCrud\Directorio\RelacionMonedaSucursal.Crud.razor" />
     <None Include="Components\CustomCrud\Directorio\Sucursal.Crud.razor" />
     <None Include="Components\CustomCrud\Estilo\EsquemaDetalle.Crud.razor" />
@@ -91,8 +69,6 @@
     <None Include="Components\CustomCrud\Valor\Moneda.Crud.razor" />
     <None Include="Components\CustomCrud\Visualizacion\Perfil.Crud.razor" />
     <None Include="Components\CustomCrud\Visualizacion\PerfilItem.Crud.razor" />
-    <None Include="Components\Reports\DetalleTransacciones.View.razor" />
-    <None Include="Components\Reports\DetalleTransaccionesSobre.View.razor" />
     <None Include="Components\Reports\Transacciones.View.razor" />
   </ItemGroup>
 

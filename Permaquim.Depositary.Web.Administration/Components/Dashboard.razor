@@ -10,223 +10,238 @@
 @using Radzen.Blazor
 @using System.Timers;
 
-<RadzenContent Container="main">
-    <ChildContent>
-        <RadzenIcon Icon="assessment">
-        </RadzenIcon>
-        <div class="row">
-            <div class="col-8 align-items-left d-flex">
-                <RadzenHeading Size="H1" style="display: inline-block; vertical-align:middle" Text="Dashboard depositario">
-                </RadzenHeading>
-            </div>
-            <div class="col-4 align-items-right d-flex" style="margin-top:0.5%">
-                @if (dataEmpresasAccesibles != null)
-                {
-                    if (dataEmpresasAccesibles.Count > 0)
-                    {
-                        <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" SelectAllText="Todos"
+
+@if (dataFunciones != null)
+{
+    @if (SeguridadController.VerificarPermisoFuncion("BancaBanco", dataFunciones, "PuedeVisualizar"))
+    {
+        <RadzenContent Container="main">
+            <ChildContent>
+                <RadzenIcon Icon="assessment">
+                </RadzenIcon>
+                <div class="row">
+                    <div class="col-8 align-items-left d-flex">
+                        <RadzenHeading Size="H1" style="display: inline-block; vertical-align:middle" Text="Dashboard depositario">
+                        </RadzenHeading>
+                    </div>
+                    <div class="col-4 align-items-right d-flex" style="margin-top:0.5%">
+                        @if (dataEmpresasAccesibles != null)
+                        {
+                            if (dataEmpresasAccesibles.Count > 0)
+                            {
+                                <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" SelectAllText="Todos"
                                 @bind-Value=@empresasSeleccionadas Multiple="true" Placeholder="Seleccione empresas" Data=@dataEmpresasAccesibles TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
                                 Change=@(args => OnChangeEmpresa(args)) Disabled=@estaCargando Class="w-100" />
-                    }
+                            }
+                        }
+                    </div>
+                </div>
+                @if (estaCargando)
+                {
+                    <div class="spinner"></div>
                 }
-            </div>
-        </div>
-        @if (estaCargando)
-        {
-            <div class="spinner"></div>
-        }
-        else
-        {
-            <div class="row">
-                <div class="col-md-12 col-xl-3 col-lg-6">
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-12 col-xl-3 col-lg-6">
 
-                    <RadzenCard style="margin-bottom: 16px">
-                        <ChildContent>
-                            <div class="row">
-                                <div class="col-4 align-items-center d-flex">
-                                    <RadzenIcon Icon="attach_money" style="background-color: #68d5c8; font-size: 48px; height: 64px; width: 64px">
-                                    </RadzenIcon>
-                                </div>
-                                <div class="col-sm-8">
-                                    <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Transacciones">
-                                    </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="DEL DIA">
-                                    </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadTransaccionesAlDia">
-                                    </RadzenHeading>
-                                </div>
-                            </div>
-                        </ChildContent>
-                    </RadzenCard>
-                </div>
-                <div class="col-md-12 col-xl-3 col-lg-6">
-                    <RadzenCard style="margin-bottom: 16px">
-                        <ChildContent>
-                            <div class="row">
-                                <div class="col-4 align-items-center d-flex">
-                                    <RadzenIcon Icon="no_backpack" style="background-color: #f9777f; font-size: 48px; height: 64px; width: 64px">
-                                    </RadzenIcon>
-                                </div>
-                                <div class="col-sm-8">
-                                    <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
-                                        x|
-                                    </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="CON BOLSA CASI LLENA">
-                                    </RadzenHeading>
-                                    @{
-                                        int parseVar;
-                                        if (!int.TryParse(cantidadDepositariosBolsaCasiLlena, out parseVar))
-                                        {
-                                            <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
+                            <RadzenCard style="margin-bottom: 16px">
+                                <ChildContent>
+                                    <div class="row">
+                                        <div class="col-4 align-items-center d-flex">
+                                            <RadzenIcon Icon="attach_money" style="background-color: #68d5c8; font-size: 48px; height: 64px; width: 64px">
+                                            </RadzenIcon>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Transacciones">
                                             </RadzenHeading>
-                                        }
-                                        else
-                                        {
-                                            <RadzenHeading Size="H4" style="color: #f9777f; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="DEL DIA">
                                             </RadzenHeading>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        </ChildContent>
-                    </RadzenCard>
-                </div>
-                <div class="col-md-12 col-xl-3 col-lg-6">
-                    <RadzenCard style="margin-bottom: 16px">
-                        <ChildContent>
-                            <div class="row">
-                                <div class="col-4 align-items-center d-flex">
-                                    <RadzenIcon Icon="computer" style="background-color: #3dd311; font-size: 48px; height: 64px; width: 64px">
-                                    </RadzenIcon>
-                                </div>
-                                <div class="col-sm-8">
-                                    <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
-                                    </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="EN LINEA / FUERA DE LINEA">
-                                    </RadzenHeading>
-                                    @{
-                                        int parseVar;
-                                        @if (!int.TryParse(cantidadDepositariosEnLinea, out parseVar) || !int.TryParse(cantidadDepositariosFueraLinea, out parseVar))
-                                        {
-                                            if (!int.TryParse(cantidadDepositariosEnLinea, out parseVar))
-                                            {
-                                                <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
-                                                </RadzenHeading>
-                                            }
-                                            else
-                                            {
-                                                <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
-                                                </RadzenHeading>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <div class="row">
-                                                <div class="col-4 align-items-center d-flex" style="margin-left:10%">
-                                                    <RadzenHeading Size="H4" style="color: #3dd311; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                            <RadzenHeading Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadTransaccionesAlDia">
+                                            </RadzenHeading>
+                                        </div>
+                                    </div>
+                                </ChildContent>
+                            </RadzenCard>
+                        </div>
+                        <div class="col-md-12 col-xl-3 col-lg-6">
+                            <RadzenCard style="margin-bottom: 16px">
+                                <ChildContent>
+                                    <div class="row">
+                                        <div class="col-4 align-items-center d-flex">
+                                            <RadzenIcon Icon="no_backpack" style="background-color: #f9777f; font-size: 48px; height: 64px; width: 64px">
+                                            </RadzenIcon>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
+                                                x|
+                                            </RadzenHeading>
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="CON BOLSA CASI LLENA">
+                                            </RadzenHeading>
+                                            @{
+                                                int parseVar;
+                                                if (!int.TryParse(cantidadDepositariosBolsaCasiLlena, out parseVar))
+                                                {
+                                                    <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
                                                     </RadzenHeading>
-                                                </div>
-                                                <div class="col-4 align-items-center d-flex" style="margin-left:10%">
-                                                    <RadzenHeading Size="H4" style="color:red ; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraLinea">
+                                                }
+                                                else
+                                                {
+                                                    <RadzenHeading Size="H4" style="color: #f9777f; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
                                                     </RadzenHeading>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        </ChildContent>
-                    </RadzenCard>
-                </div>
-                <div class="col-md-12 col-xl-3 col-lg-6">
-                    <RadzenCard style="margin-bottom: 16px">
-                        <ChildContent>
-                            <div class="row">
-                                <div class="col-4 align-items-center d-flex">
-                                    <RadzenIcon Icon="home_repair_service" style="background-color: darkred; font-size: 48px; height: 64px; width: 64px">
-                                    </RadzenIcon>
-                                </div>
-                                <div class="col-sm-8">
-                                    <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
-                                    </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="FUERA DE SERVICIO">
-                                    </RadzenHeading>
-                                    <RadzenHeading Size="H4" style="color: darkred; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraServicio">
-                                    </RadzenHeading>
-                                </div>
-                            </div>
-                        </ChildContent>
-                    </RadzenCard>
-                </div>
-            </div>
-            <RadzenHeading Size="H2" Text="Carga de trabajo segun equipo">
-            </RadzenHeading>
-            <div class="row">
-                <div class="col-md-12 col-lg-6 col-xl-6">
-                    <RadzenCard>
-                        <ChildContent>
-                            <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Depositarios con mayor carga de transacciones">
-                            </RadzenHeading>
-                            @if (dataCargaDepositarios != null)
-                            {
-                                if (dataCargaDepositarios.Count > 0)
-                                {
-                                    <RadzenChart ColorScheme="ColorScheme.Pastel">
-                                        <RadzenValueAxis Min="0" />
-                                        @foreach (var item in dataCargaDepositarios)
-                                        {
-                                            var nombreColumna = item.FirstOrDefault().NombreDepositarioConCantidad;
-                                            <RadzenColumnSeries Data="@item" CategoryProperty="NombreDepositario" Title="@nombreColumna" LineType="LineType.Dashed" ValueProperty="CantidadTransacciones">
-                                                <TooltipTemplate>
-                                                    <div style="text-align:center">
-                                                        <b>
-                                                            @context.NombreDepositario
-                                                            <br>
-                                                            Cantidad transacciones: @context.CantidadTransacciones
-                                                        </b>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </ChildContent>
+                            </RadzenCard>
+                        </div>
+                        <div class="col-md-12 col-xl-3 col-lg-6">
+                            <RadzenCard style="margin-bottom: 16px">
+                                <ChildContent>
+                                    <div class="row">
+                                        <div class="col-4 align-items-center d-flex">
+                                            <RadzenIcon Icon="computer" style="background-color: #3dd311; font-size: 48px; height: 64px; width: 64px">
+                                            </RadzenIcon>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
+                                            </RadzenHeading>
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="EN LINEA / FUERA DE LINEA">
+                                            </RadzenHeading>
+                                            @{
+                                                int parseVar;
+                                                @if (!int.TryParse(cantidadDepositariosEnLinea, out parseVar) || !int.TryParse(cantidadDepositariosFueraLinea, out parseVar))
+                                                {
+                                                    if (!int.TryParse(cantidadDepositariosEnLinea, out parseVar))
+                                                    {
+                                                        <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                                        </RadzenHeading>
+                                                    }
+                                                    else
+                                                    {
+                                                        <RadzenHeading Size="H4" style="color: red; font-size: 14px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosBolsaCasiLlena">
+                                                        </RadzenHeading>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-4 align-items-center d-flex" style="margin-left:10%">
+                                                            <RadzenHeading Size="H4" style="color: #3dd311; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosEnLinea">
+                                                            </RadzenHeading>
+                                                        </div>
+                                                        <div class="col-4 align-items-center d-flex" style="margin-left:10%">
+                                                            <RadzenHeading Size="H4" style="color:red ; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraLinea">
+                                                            </RadzenHeading>
+                                                        </div>
                                                     </div>
-                                                </TooltipTemplate>
-                                            </RadzenColumnSeries>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </ChildContent>
+                            </RadzenCard>
+                        </div>
+                        <div class="col-md-12 col-xl-3 col-lg-6">
+                            <RadzenCard style="margin-bottom: 16px">
+                                <ChildContent>
+                                    <div class="row">
+                                        <div class="col-4 align-items-center d-flex">
+                                            <RadzenIcon Icon="home_repair_service" style="background-color: darkred; font-size: 48px; height: 64px; width: 64px">
+                                            </RadzenIcon>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
+                                            </RadzenHeading>
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="FUERA DE SERVICIO">
+                                            </RadzenHeading>
+                                            <RadzenHeading Size="H4" style="color: darkred; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraServicio">
+                                            </RadzenHeading>
+                                        </div>
+                                    </div>
+                                </ChildContent>
+                            </RadzenCard>
+                        </div>
+                    </div>
+                    <RadzenHeading Size="H2" Text="Carga de trabajo segun equipo">
+                    </RadzenHeading>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6 col-xl-6">
+                            <RadzenCard>
+                                <ChildContent>
+                                    <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Depositarios con mayor carga de transacciones">
+                                    </RadzenHeading>
+                                    @if (dataCargaDepositarios != null)
+                                    {
+                                        if (dataCargaDepositarios.Count > 0)
+                                        {
+                                            <RadzenChart ColorScheme="ColorScheme.Pastel">
+                                                <RadzenValueAxis Min="0" />
+                                                @foreach (var item in dataCargaDepositarios)
+                                                {
+                                                    var nombreColumna = item.FirstOrDefault().NombreDepositarioConCantidad;
+                                                    <RadzenColumnSeries Data="@item" CategoryProperty="NombreDepositario" Title="@nombreColumna" LineType="LineType.Dashed" ValueProperty="CantidadTransacciones">
+                                                        <TooltipTemplate>
+                                                            <div style="text-align:center">
+                                                                <b>
+                                                                    @context.NombreDepositario
+                                                                    <br>
+                                                                    Cantidad transacciones: @context.CantidadTransacciones
+                                                                </b>
+                                                            </div>
+                                                        </TooltipTemplate>
+                                                    </RadzenColumnSeries>
+                                                }
+                                                <RadzenColumnOptions Margin="1" Radius="5" />
+                                                <RadzenCategoryAxis Visible="false" Padding="40" />
+                                            </RadzenChart>
                                         }
-                                        <RadzenColumnOptions Margin="1" Radius="5" />
-                                        <RadzenCategoryAxis Visible="false" Padding="40" />
-                                    </RadzenChart>
-                                }
-                            }
-                        </ChildContent>
-                    </RadzenCard>
-                </div>
-                <div class="col-md-12 col-lg-6 col-xl-6">
-                    <RadzenCard>
-                        <ChildContent>
-                            <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Cantidad de transacciones por tipo">
-                            </RadzenHeading>
-                            @if (dataCantidadTipoTransacciones != null)
-                            {
-                                if (dataCantidadTipoTransacciones.Count > 0)
-                                {
-                                    <RadzenChart ColorScheme="ColorScheme.Pastel">
-                                        <RadzenPieSeries Data="@dataCantidadTipoTransacciones" Title="Cantidad" CategoryProperty="NombreTipoTransaccionConPorcentaje" ValueProperty="CantidadTipoTransaccion">
-                                            <TooltipTemplate>
-                                                <div style="text-align:center">
-                                                    <b>
-                                                        @context.NombreTipoTransaccion
-                                                        <br>
-                                                        Cantidad transacciones: @context.CantidadTipoTransaccion
-                                                    </b>
-                                                </div>
-                                            </TooltipTemplate>
-                                        </RadzenPieSeries>
-                                    </RadzenChart>
-                                }
-                            }
-                        </ChildContent>
-                    </RadzenCard>
-                </div>
-            </div>
-        }
-    </ChildContent>
-</RadzenContent>
+                                    }
+                                </ChildContent>
+                            </RadzenCard>
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-xl-6">
+                            <RadzenCard>
+                                <ChildContent>
+                                    <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Cantidad de transacciones por tipo">
+                                    </RadzenHeading>
+                                    @if (dataCantidadTipoTransacciones != null)
+                                    {
+                                        if (dataCantidadTipoTransacciones.Count > 0)
+                                        {
+                                            <RadzenChart ColorScheme="ColorScheme.Pastel">
+                                                <RadzenPieSeries Data="@dataCantidadTipoTransacciones" Title="Cantidad" CategoryProperty="NombreTipoTransaccionConPorcentaje" ValueProperty="CantidadTipoTransaccion">
+                                                    <TooltipTemplate>
+                                                        <div style="text-align:center">
+                                                            <b>
+                                                                @context.NombreTipoTransaccion
+                                                                <br>
+                                                                Cantidad transacciones: @context.CantidadTipoTransaccion
+                                                            </b>
+                                                        </div>
+                                                    </TooltipTemplate>
+                                                </RadzenPieSeries>
+                                            </RadzenChart>
+                                        }
+                                    }
+                                </ChildContent>
+                            </RadzenCard>
+                        </div>
+                    </div>
+                }
+            </ChildContent>
+        </RadzenContent>
+    }
+    else
+    {
+        <p>No tiene permisos para visualizar esta información.</p>
+    }
+}
+else
+{
+    <div class="spinner"></div>
+}
 
 @code {
     private bool estaCargando { get; set; }
@@ -242,6 +257,9 @@
     private List<DirectorioEntities.Empresa> dataEmpresasAccesibles { get; set; }
     private IEnumerable<Int64> empresasSeleccionadas = new Int64[] { };
     private int tiempoRecargaSegundos { get; set; } = 10;
+    private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
+
+    private List<SeguridadEntities.FuncionRol> dataFunciones;
     //Variables auxiliares
     private Timer timerRecargaInformacion = new Timer();
 
@@ -259,6 +277,10 @@
             dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
             if (dataUsuario == null)
                 NavManager.NavigateTo("login", true);
+
+            usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+            dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
+
 
             //En funcion del usuario que consulta obtenemos el perfil de visualizacion y luego las empresas a las que puede acceder
             await Task.Run(ObtenerListadoEmpresasPorPerfil);

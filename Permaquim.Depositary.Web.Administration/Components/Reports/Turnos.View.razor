@@ -1,5 +1,6 @@
 @page "/ReporteTurnosView"
 @using Permaquim.Depositary.Web.Administration.Controllers;
+@using Radzen.Blazor.GridExportOptions;
 
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
@@ -42,7 +43,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaDesde) Max="@(parametrosTurnosView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaDesde) Max="@(parametrosTurnosView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
                                         <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaHasta.HasValue) Value=@(parametrosTurnosView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_MENOR_FECHAHASTA",dataLenguaje)" Style="position: inherit" />
                                     </div>
@@ -55,7 +56,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaHasta) Min="@(parametrosTurnosView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaHasta) Min="@(parametrosTurnosView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
                                         <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaDesde.HasValue) Value=@(parametrosTurnosView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_MAYOR_FECHADESDE",dataLenguaje)" Style="position: inherit" />
                                     </div>
@@ -70,7 +71,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaDesde) Max="@(parametrosTurnosView.fechaAperturaHasta)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaDesde) Max="@(parametrosTurnosView.fechaAperturaHasta)" Name="fechaAperturaDesdeDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaHasta.HasValue) Value=@(parametrosTurnosView.fechaAperturaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaAperturaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURADESDE_MENOR_FECHAAPERTURAHASTA",dataLenguaje)" Style="position: inherit" />
                                     </div>
                                 </td>
@@ -82,7 +83,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaHasta) Min="@(parametrosTurnosView.fechaAperturaDesde)" Name="fechaAperturaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaAperturaHasta) Min="@(parametrosTurnosView.fechaAperturaDesde)" Name="fechaAperturaHastaDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaAperturaDesde.HasValue) Value=@(parametrosTurnosView.fechaAperturaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaAperturaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAAPERTURAHASTA_MAYOR_FECHAAPERTURADESDE",dataLenguaje)" Style="position: inherit" />
                                     </div>
                                 </td>
@@ -96,7 +97,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreDesde) Max="@(parametrosTurnosView.fechaCierreHasta)" Name="fechaCierreDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreDesde) Max="@(parametrosTurnosView.fechaCierreHasta)" Name="fechaCierreDesdeDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreHasta.HasValue) Value=@(parametrosTurnosView.fechaCierreHasta) Operator="CompareOperator.LessThanEqual" Component="fechaCierreDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREDESDE_MENOR_FECHACIERREHASTA",dataLenguaje)" Style="position: inherit" />
                                     </div>
                                 </td>
@@ -108,7 +109,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreHasta) Min="@(parametrosTurnosView.fechaCierreDesde)" Name="fechaCierreHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTurnosView.fechaCierreHasta) Min="@(parametrosTurnosView.fechaCierreDesde)" Name="fechaCierreHastaDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenCompareValidator Visible=@(parametrosTurnosView.fechaCierreDesde.HasValue) Value=@(parametrosTurnosView.fechaCierreDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaCierreHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHACIERREHASTA_MAYOR_FECHACIERREDESDE",dataLenguaje)" Style="position: inherit" />
                                     </div>
                                 </td>
@@ -214,47 +215,54 @@ else
 <div>
     @if (dataTurnosView != null)
     {
-        <RadzenButton Text="Export XLS" Icon="grid_on" Click="@(args => Export("excel"))" Class="mb-4 mr-2" />
-        <RadzenButton Text="Export CSV" Icon="wrap_text" Click="@(args => Export("csv"))" Class="mb-4" />
-        <RadzenDataGrid @ref="gridTurnosView" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                    Data="@dataTurnosView" TItem="ResultReporte" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+        <br />
+        <br />
+        if (gridTurnosView != null)
+        {
+            if (dataTurnosView.Count > 0)
+            {
+                <RadzenGridExportOptions ReportName="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE_ARCHIVO_REPORTE_TURNOS",dataLenguaje)" GridId="gridTurnosView" Grid="@gridTurnosView" TItem="ResultReporte" ExcelButtonCssStyle="background-color:green" NotExportableClass="exclude-from-radzen-export" ExcelTitle="@MultilenguajeController.ObtenerTextoPorClave("BOTON_EXPORTAR_EXCEL",dataLenguaje)" DateTimeFormat="dd/MM/yyyy" CsvExport="false"></RadzenGridExportOptions>
+            }
+        }
+        <RadzenDataGrid @ref="@gridTurnosView" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" AllowColumnResize="true" AllowSorting="true" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    id="gridTurnosView" Data="@dataTurnosView" Render="@ReportRender" TItem="ResultReporte" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
             <EmptyTemplate>
                 <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
             </EmptyTemplate>
             <Columns>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="TurnoId" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNOID",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TurnoId" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNOID",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Fecha" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Fecha" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="CodigoTurno" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOTURNO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CodigoTurno" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOTURNO",dataLenguaje)" Frozen="false" Sortable="true" Width="8%">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaApertura" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaApertura" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHAAPERTURA",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Secuencia" Title="@MultilenguajeController.ObtenerTextoPorClave("SECUENCIA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Secuencia" Title="@MultilenguajeController.ObtenerTextoPorClave("SECUENCIA",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Turno" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Turno" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNO",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaCierre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHACIERRE",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="FechaCierre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHACIERRE",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="CierreDiario" Title="@MultilenguajeController.ObtenerTextoPorClave("CIERREDIARIO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CierreDiario" Title="@MultilenguajeController.ObtenerTextoPorClave("CIERREDIARIO",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Depositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Depositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadTransacciones" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADTRANSACCIONES",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CantidadTransacciones" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDADTRANSACCIONES",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalValidado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalValidado" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALVALIDADO",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalAValidar" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="TotalAValidar" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Total" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTAL",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Total" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTAL",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>
@@ -621,19 +629,25 @@ else
             }
         }
     }
-    #endregion
 
-    #region Export
-
-    public void Export(string type)
+        /// <summary>
+    /// FuncionRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void ReportRender(DataGridRenderEventArgs<ResultReporte> args)
     {
-        //service.Export("OrderDetails", type, new Query()
-        //    {
-        //        OrderBy = grid.Query.OrderBy,
-        //        Filter = grid.Query.Filter,
-        //        Select = string.Join(",", gridTurnosView.ColumnsCollection.Where(c => c.GetVisible()).Select(c => c.Property))
-        //    });
+        if (args.FirstRender)
+        {
+            if (dataTurnosView != null)
+            {
+                if (dataTurnosView.Count > 0)
+                {
+                    StateHasChanged();
+                }
+            }
+        }
     }
-
     #endregion
+
+
 }

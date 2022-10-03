@@ -10,7 +10,7 @@
 {
  @if (TipoPlaca_entities == null)
  {
-     <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+     <div class="spinner" />
  }
  else
  {
@@ -50,7 +50,8 @@
      <hr>
      if (crudMode == CrudMode.List)
      {
-         <RadzenDataGrid FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" RowRender=@TipoPlacaRowRender AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         <RadzenDataGrid @bind-Settings="@GridSettings" FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" RowRender=@TipoPlacaRowRender AllowColumnPicking ="true" PageSizeOptions="@(new int[]{10,20,50,100})" AllowFiltering ="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+         FilterText=@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO", dataLenguaje) IsEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO", dataLenguaje) IsNotNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO", dataLenguaje) IsNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO", dataLenguaje) LessThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A", dataLenguaje) LessThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL", dataLenguaje) NotEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE", dataLenguaje) IsNotEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO", dataLenguaje) OrOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR", dataLenguaje) GreaterThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A", dataLenguaje) GreaterThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL", dataLenguaje) AndOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND", dataLenguaje) AllColumnsText=@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS", dataLenguaje) ContainsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE", dataLenguaje) DoesNotContainText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE", dataLenguaje) ClearFilterText=@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO", dataLenguaje) ApplyFilterText=@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO", dataLenguaje) EqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO", dataLenguaje) EndsWithText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON", dataLenguaje) PageSizeText=@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA", dataLenguaje) StartsWithText=@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON", dataLenguaje) ColumnsShowingText=@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES", dataLenguaje)
          Data="@TipoPlaca_entities" TItem="Depositary.Entities.Tables.Dispositivo.TipoPlaca" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
          <EmptyTemplate>
              <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
@@ -266,6 +267,10 @@
      {
              <RadzenTemplateForm TItem="Depositary.Entities.Tables.Dispositivo.TipoPlaca" Data="@TipoPlaca_entity"  @bind-Value="TipoPlaca_entity" Submit ="Save" Visible ="@(TipoPlaca_entity != null)">
              <ChildContent>
+             @if (estaProcesando)
+             {
+                 <div class="spinnerCentrado"></div>
+             }
                 @if(crudMode != CrudMode.Add)
                 {
                  <div style="margin-bottom: 1rem" class="row">
@@ -291,14 +296,14 @@
                          <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(TipoPlaca_entity.ModeloId)"
                                      Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectModelo_ModeloIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                                     Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                      }
                      else
                      {
                          <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
                                      Data=@Modelo_ModeloId_entities TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectModelo_ModeloIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete)" />
+                                     Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                     }
                 </div>
               </div>
@@ -308,7 +313,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
                          {
@@ -323,7 +328,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
                          {
@@ -338,7 +343,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.PortName)" Name="PortName" Disabled="@(crudMode==CrudMode.Delete)">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(TipoPlaca_entity.PortName)" Name="PortName" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                          </RadzenTextBox>
                          @if(@crudMode!=CrudMode.Delete)
                          {
@@ -353,7 +358,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Parity)" Name="Parity" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -363,7 +368,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.DataBits)" Name="DataBits" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -373,7 +378,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.ReadBufferSize)" Name="ReadBufferSize" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -383,7 +388,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.StopBits)" Name="StopBits" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -393,7 +398,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.ReadTimeout)" Name="ReadTimeout" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -403,7 +408,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Handshake)" Name="Handshake" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -413,7 +418,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -439,7 +444,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorA)" Name="BitSensorA" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorA)" Name="BitSensorA" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -457,7 +462,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorB)" Name="BitSensorB" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorB)" Name="BitSensorB" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -475,7 +480,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorC)" Name="BitSensorC" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorC)" Name="BitSensorC" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -493,7 +498,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorD)" Name="BitSensorD" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorD)" Name="BitSensorD" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -511,7 +516,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorL)" Name="BitSensorL" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="short" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.BitSensorL)" Name="BitSensorL" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -521,7 +526,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.PollTime)" Name="PollTime" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.PollTime)" Name="PollTime" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -531,7 +536,7 @@
                          </RadzenLabel>
                      </div>
                      <div class="col-md-auto">
-                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Sleeptime)" Name="Sleeptime" Disabled="@(crudMode==CrudMode.Delete)" >
+                         <RadzenNumeric  TValue="int" style="display: block; width: 100%" @bind-Value="@(TipoPlaca_entity.Sleeptime)" Name="Sleeptime" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" >
                      </RadzenNumeric>
                      </div>
                  </div>
@@ -545,9 +550,9 @@
                  </div>
              <div class="row">
                  <div class="col offset-sm-3">
-                 <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle ="ButtonStyle.Primary">
+                 <RadzenButton Disabled="@estaProcesando" ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle ="ButtonStyle.Primary">
                  </RadzenButton>
-                 <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
+                 <RadzenButton Disabled="@estaProcesando" ButtonStyle ="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
                  </RadzenButton>
                   </div>
              </div>
@@ -566,7 +571,7 @@ else
 }
 else
 {
-     <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+     <div class="spinner" />
 }
  
 @code {
@@ -581,6 +586,11 @@ else
         Delete
     }
     /// <summary>
+    /// Variable to save grid state
+    /// </summary>
+    private DataGridSettings GridSettings;
+ 
+    /// <summary>
     /// Variables to handle main entity
     /// </summary>
     private Depositary.Entities.Tables.Dispositivo.TipoPlaca TipoPlaca_entity = new();
@@ -591,6 +601,9 @@ else
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
  
+    private bool estaProcesando = false ;
+ 
+    private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
  
     /// <summary>
     /// Variables to store permissions
@@ -661,13 +674,18 @@ else
  
     protected override async Task OnInitializedAsync()
     {
-        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-        dataFunciones = await sessionStorage.GetItemAsync<List<SeguridadEntities.FuncionRol>>("DataFunciones");
-        await Task.Run(LoadMainEntityData);
-        await Task.Run(LoadTypesData);
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
              NavManager.NavigateTo("login", true);
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        await sessionStorage.RemoveItemAsync("DataFunciones");
+        await sessionStorage.RemoveItemAsync("RolId");
+        usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
+        dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
+        await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
+        await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
+        await Task.Run(LoadMainEntityData);
+        await Task.Run(LoadTypesData);
     }
     #region Loading entities data
     /// <summary>
@@ -675,6 +693,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        estaProcesando = false;
         Depositary.Business.Tables.Dispositivo.TipoPlaca entity = new();
         TipoPlaca_entities = entity.Items();
     }
@@ -744,6 +763,8 @@ else
     /// </summary>
     private async Task Save()
     {
+        estaProcesando = true;
+        StateHasChanged();
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -845,6 +866,8 @@ else
             Detail = actionInformation, 
             Duration = 4000 });
        
+       estaProcesando = false;
+       StateHasChanged();
             await Task.Run(LoadMainEntityData);
     }
     /// <summary>

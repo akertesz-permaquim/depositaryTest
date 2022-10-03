@@ -9,27 +9,28 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private const string JTI = "jti";
         private const string PASSWORDKEY = "AppSettings:PasswordKey";
 
-        public static Int64? _depositaryId { get; private set; }
+        //public static Int64? _depositaryId { get; private set; } TODO: Averiguar si se puede usar variable de sesion
 
         public static Int64 GetDepositaryId(HttpContext context, IConfiguration configuration)
         {
-            if (_depositaryId == null)
+            Int64? depositaryId = null;
+            //if (_depositaryId == null)
+            //{
+            DepositaryWebApi.Business.Tables.Dispositivo.Depositario oDepositario = new();
+            oDepositario.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
+            oDepositario.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
+                DepositaryWebApi.sqlEnum.OperandEnum.Equal, GetDepositaryCode(context, configuration));
+
+            oDepositario.Items();
+
+            if (oDepositario.Result.Count != 0)
             {
-                // Verifica que eista un turno disponible para el depositario / sector
-                DepositaryWebApi.Business.Tables.Dispositivo.Depositario oDepositario = new();
-                oDepositario.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
-                oDepositario.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
-                    DepositaryWebApi.sqlEnum.OperandEnum.Equal, GetDepositaryCode(context, configuration));
-
-                oDepositario.Items();
-
-                if (oDepositario.Result.Count != 0)
-                {
-                    _depositaryId = oDepositario.Result.FirstOrDefault().Id;
-                }
-
+                depositaryId = oDepositario.Result.FirstOrDefault().Id;
             }
-            return _depositaryId.Value;
+
+            return depositaryId.Value;
+            //}
+            //return _depositaryId.Value;
 
         }
         public static string GetDepositaryCode(HttpContext context, IConfiguration configuration)

@@ -1,5 +1,6 @@
 @page "/ReporteDetalleTransaccionesSobreView"
 @using Permaquim.Depositary.Web.Administration.Controllers;
+@using Radzen.Blazor.GridExportOptions;
 
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
@@ -42,7 +43,7 @@
                                     </td>
                                     <td colspan="2">
                                         <div>
-                                            <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesSobreView.fechaDesde) Max="@(parametrosDetalleTransaccionesSobreView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                            <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesSobreView.fechaDesde) Max="@(parametrosDetalleTransaccionesSobreView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                             <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
                                             <RadzenCompareValidator Visible=@(parametrosDetalleTransaccionesSobreView.fechaHasta.HasValue) Value=@(parametrosDetalleTransaccionesSobreView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_MENOR_FECHAHASTA",dataLenguaje)" Style="position: inherit" />
                                         </div>
@@ -55,7 +56,7 @@
                                     </td>
                                     <td colspan="2">
                                         <div>
-                                            <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesSobreView.fechaHasta) Min="@(parametrosDetalleTransaccionesSobreView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="d" Class="w-100" />
+                                            <RadzenDatePicker @bind-Value=@(parametrosDetalleTransaccionesSobreView.fechaHasta) Min="@(parametrosDetalleTransaccionesSobreView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                             <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
                                             <RadzenCompareValidator Visible=@(parametrosDetalleTransaccionesSobreView.fechaDesde.HasValue) Value=@(parametrosDetalleTransaccionesSobreView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_MAYOR_FECHADESDE",dataLenguaje)" Style="position: inherit" />
                                         </div>
@@ -203,45 +204,54 @@
 
 @if (DetalleTransaccionesSobre_entities != null)
 {
-    <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+    <br />
+    <br />
+    if (gridDetalleTransaccionesSobreView != null)
+    {
+        if (DetalleTransaccionesSobre_entities.Count > 0)
+        {
+            <RadzenGridExportOptions ReportName="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE_ARCHIVO_REPORTE_DETALLETRANSACCIONESSOBRE",dataLenguaje)" GridId="gridDetalleTransaccionesSobreView" Grid="@gridDetalleTransaccionesSobreView" TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" ExcelButtonCssStyle="background-color:green" NotExportableClass="exclude-from-radzen-export" ExcelTitle="@MultilenguajeController.ObtenerTextoPorClave("BOTON_EXPORTAR_EXCEL",dataLenguaje)" DateTimeFormat="dd/MM/yyyy" CsvExport="false"></RadzenGridExportOptions>
+        }
+    }
+    <RadzenDataGrid @ref="@gridDetalleTransaccionesSobreView" Render="@ReportRender" id="gridDetalleTransaccionesSobreView" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" AllowColumnResize="true" AllowSorting="true" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@DetalleTransaccionesSobre_entities" TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
         <EmptyTemplate>
             <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
         </EmptyTemplate>
         <Columns>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="TransaccionId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONID",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="TransaccionId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONID",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="FechaTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHATRANSACCION",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="FechaTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHATRANSACCION",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="8%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="8%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="8%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="8%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Depositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Depositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="8%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Usuario" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIO",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Usuario" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIO",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="8%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Turno" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNO",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="8%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Turno" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNO",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="8%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Contenedor" Title="@MultilenguajeController.ObtenerTextoPorClave("CONTENEDOR",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="10%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Contenedor" Title="@MultilenguajeController.ObtenerTextoPorClave("CONTENEDOR",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="10%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Origen" Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Filterable="true" Width="10%">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Origen" Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Visible="@(!TransaccionId.HasValue)" Frozen="false" Sortable="true" Width="10%">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="CodigoSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOSOBRE",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="CodigoSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOSOBRE",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="UsuarioId" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="UsuarioId" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIOID",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="ContenedorId" Title="@MultilenguajeController.ObtenerTextoPorClave("CONTENEDORID",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="ContenedorId" Title="@MultilenguajeController.ObtenerTextoPorClave("CONTENEDORID",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="TipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOVALOR",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="TipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOVALOR",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Cantidad" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDAD",dataLenguaje)" Frozen="false" Sortable="true" Filterable="true" Width="60px">
+            <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre" Property="Cantidad" Title="@MultilenguajeController.ObtenerTextoPorClave("CANTIDAD",dataLenguaje)" Frozen="false" Sortable="true" Width="60px">
             </RadzenDataGridColumn>
         </Columns>
     </RadzenDataGrid>
@@ -252,6 +262,8 @@
 <RadzenNotification />
 
 @code {
+    RadzenDataGrid<Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre> gridDetalleTransaccionesSobreView;
+
     [Parameter]
     public Int64? TransaccionId { get; set; }
 
@@ -628,6 +640,24 @@
             }
         }
 
+    }
+
+    /// <summary>
+    /// FuncionRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void ReportRender(DataGridRenderEventArgs<Depositary.Entities.Views.Reporte.DetalleTransaccionesSobre> args)
+    {
+        if (args.FirstRender)
+        {
+            if (DetalleTransaccionesSobre_entities != null)
+            {
+                if (DetalleTransaccionesSobre_entities.Count > 0)
+                {
+                    StateHasChanged();
+                }
+            }
+        }
     }
     #endregion
 }

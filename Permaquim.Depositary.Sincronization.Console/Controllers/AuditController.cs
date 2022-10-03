@@ -30,7 +30,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
                     TipoId = (long)logType,
                     Descripcion = description,
                     Detalle = detail,
-                    UsuarioId = -1 
+                    UsuarioId = -1
 
                 };
 
@@ -45,6 +45,33 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
         public static void Log(Exception exception)
         {
             Log(LogTypeEnum.Exception, exception.Message, exception.StackTrace);
+        }
+
+        public static void LogToFile(Exception ex)
+        {
+            string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
+            if (!System.IO.Directory.Exists(logDirectory))
+                System.IO.Directory.CreateDirectory(logDirectory);
+
+            string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".Exception.log";
+
+            System.IO.StreamWriter file = new(filename, true);
+            file.WriteLine("Message : " + ex.Message + Environment.NewLine
+                + "StackTrace :" + ex.StackTrace); ;
+            file.Close();
+        }
+
+        public static void LogToFile(string coco)
+        {
+            string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
+            if (!System.IO.Directory.Exists(logDirectory))
+                System.IO.Directory.CreateDirectory(logDirectory);
+
+            string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".Exception.log";
+
+            System.IO.StreamWriter file = new(filename, true);
+            file.WriteLine("Message : " + coco);
+            file.Close();
         }
 
     }

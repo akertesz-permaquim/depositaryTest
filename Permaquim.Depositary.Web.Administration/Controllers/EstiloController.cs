@@ -74,5 +74,21 @@
             }
             return resultado;
         }
+
+        public static int ObtenerPaginadoDefault(Int64 pEmpresaId)
+        {
+            int paginado = 10; //Por defecto el paginado es de 10 registros
+
+            int paginadoConversion=0;
+
+            string paginadoSinConvertir = "";
+
+            paginadoSinConvertir = AplicacionController.ObtenerConfiguracionEmpresa("PAGINADO_DEFAULT", pEmpresaId);
+
+            if (int.TryParse(paginadoSinConvertir, out paginadoConversion))
+                paginado = paginadoConversion;
+
+            return paginado;
+        }
     }
 }
