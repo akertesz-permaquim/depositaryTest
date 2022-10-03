@@ -9,7 +9,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class TurnsHistoryForm : Form
     {
-        private const string NICKNAME = "NickName";
+        private const string NOMBREAPELLIDO = "NombreApellido";
         private const string NOMBRE = "Nombre";
         private const string ID = "Id";
         private const string TODOS = "Todos";
@@ -121,13 +121,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
             {
-                NickName = TODOS,
+                NombreApellido = TODOS,
                 Id = -1
             });
 
             UserComboBox.DataSource = userList;
 
-            UserComboBox.DisplayMember = NICKNAME;
+            UserComboBox.DisplayMember = NOMBREAPELLIDO;
             UserComboBox.ValueMember = ID;
 
             var turnList = DatabaseController.GetTurnList();
@@ -140,7 +140,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in turnList)
             {
                 turnItemList.Add(new TurnItemElement()
-                { Value = item.Id, Text = item.Nombre + " " + item.EsquemaDetalleTurnoId.Nombre });
+                { Value = item.TurnoEsquemaDetalleId, Text = item.Nombre });
             }
 
             TurnComboBox.DisplayMember = TEXT;

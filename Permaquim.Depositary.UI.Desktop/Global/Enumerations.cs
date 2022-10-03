@@ -284,7 +284,12 @@
             ERROR_DATO,
             ERROR_PUERTO,
             TOQUE_PANTALLA_PARA_INICIAR,
-            TICKET_NO_CONFIGURADO
+            TICKET_NO_CONFIGURADO,
+            FECHA_APERTURA_DESDE,
+            FECHA_APERTURA_HASTA,
+            FECHA_CIERRE_DESDE,
+            FECHA_CIERRE_HASTA,
+            IDENTIFICADOR
         }
 
         public enum FunctionEnum

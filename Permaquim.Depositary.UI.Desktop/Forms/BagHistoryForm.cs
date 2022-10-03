@@ -18,7 +18,16 @@ namespace Permaquim.Depositary.UI.Desktop
             InitializeComponent();
             CenterPanel();
             LoadStyles();
+            LoadMultilanguageItems();
             LoadBackButton();
+
+            FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
+            ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
+            FromFechaCierreDateTimePicker.Checked = false;
+            FromFechaCierreDateTimePicker.CustomFormat = " ";
+            ToFechaCierreDateTimePicker.Checked = false;
+            ToFechaCierreDateTimePicker.CustomFormat = " ";
+
             TimeOutController.Reset();
 
         }
@@ -59,11 +68,21 @@ namespace Permaquim.Depositary.UI.Desktop
 
             StyleController.SetControlStyle(MainGridView);
         }
+
+        private void LoadMultilanguageItems()
+        {
+            FromFechaAperturaDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_APERTURA_DESDE);
+            ToFechaAperturaDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_APERTURA_HASTA);
+            FromFechaCierreDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE_DESDE);
+            ToFechaCierreDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE_HASTA);
+            IdentificadorLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.IDENTIFICADOR);
+            ExecuteBagHistorySearch.Text = MultilanguangeController.GetText(MultiLanguageEnum.EJECUTAR);
+        }
         #region BackButton
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width -3);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width - 3);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -199,6 +218,49 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BagHistoryForm_MouseClick(object sender, MouseEventArgs e)
         {
             TimeOutController.Reset();
+        }
+
+        private void MainGridView_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void FromFechaCierreDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            FromFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
+        }
+
+        private void ToFechaCierreDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void ToFechaCierreDateTimePicker_EnabledChanged(object sender, EventArgs e)
+        {
+            if(!ToFechaCierreDateTimePicker.Checked)
+            {
+                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
+                ToFechaCierreDateTimePicker.CustomFormat = " ";
+            }
+            else
+            {
+                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
+                ToFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
+            }
+        }
+
+        private void FromFechaCierreDateTimePicker_EnabledChanged(object sender, EventArgs e)
+        {
+            if (!FromFechaCierreDateTimePicker.Checked)
+            {
+                FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
+                FromFechaCierreDateTimePicker.CustomFormat = " ";
+            }
+            else
+            {
+                FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
+                FromFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
+
+            }
         }
     }
 }

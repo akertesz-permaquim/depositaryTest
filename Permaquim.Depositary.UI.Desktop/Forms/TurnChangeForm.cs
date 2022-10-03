@@ -148,7 +148,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (DatabaseController.GetAvailableTurns() == 1)
                 message = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_ULTIMO_TURNO);
 
-            FormsController.SetInformationMessage(InformationTypeEnum.Information, message);
+            FormsController.SetInformationMessage(InformationTypeEnum.Error, message);
         }
 
         #region Datagrid        

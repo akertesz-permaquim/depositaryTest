@@ -12,5 +12,6 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         public string TipoValor { get; set; }
         public long CantidadDeclarada { get; set; }
         public DateTime Fecha { get; set; }
+        public string Moneda { get; set; }
     }
 }

@@ -46,7 +46,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             OpenChildForm(childForm, device);
             MainFormInstance.BreadCrumbText =
                  MultilanguangeController.GetText(childForm.Name);
-            MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+            //MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         /// <summary>
         /// Loads child form
@@ -89,9 +89,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Y = MainFormInstance.MainPanel.Height / 2 - childForm.Height / 2
             };
 
+            //MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
             childForm.Show();
             ActiveForm = childForm;
-            MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 
         public static void AppendtoBreadcrumbText(string textToAppend)

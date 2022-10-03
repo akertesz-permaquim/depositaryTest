@@ -8,7 +8,7 @@ namespace Permaquim.Depositary.UI.Desktop
 {
     public partial class OperationsHistoryForm : Form
     {
-        private const string NICKNAME = "NickName";
+        private const string NOMBREAPELLIDO = "NombreApellido";
         private const string TEXT = "Text";
         private const string VALUE = "Value";
         private const string ID = "Id";
@@ -86,7 +86,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-   
+
             ExecuteButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
@@ -114,7 +114,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new ReportsForm(),
+            FormsController.OpenChildForm(this, new ReportsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
@@ -124,13 +124,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
             {
-                NickName = TODOS,
+                NombreApellido = TODOS,
                 Id = -1
             });
 
             UserComboBox.DataSource = userList;
 
-            UserComboBox.DisplayMember = NICKNAME;
+            UserComboBox.DisplayMember = NOMBREAPELLIDO;
             UserComboBox.ValueMember = ID;
 
             var turnList = DatabaseController.GetTurnList();
@@ -142,8 +142,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
             foreach (var item in turnList)
             {
-                turnItemList.Add(new TurnItemElement() 
-                { Value = item.Id, Text = item.Nombre + " " + item.EsquemaDetalleTurnoId.Nombre});
+                turnItemList.Add(new TurnItemElement()
+                { Value = item.TurnoEsquemaDetalleId, Text = item.Nombre });
             }
 
             TurnComboBox.DisplayMember = TEXT;
@@ -263,13 +263,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-
             OperationsHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "UsuarioCuenta",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
                 Name = "UsuarioCuenta",
-                Visible = true,
+                Visible = ParameterController.UsesBankAccount,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
@@ -324,6 +323,16 @@ namespace Permaquim.Depositary.UI.Desktop
                     Visible = false,
                     Width = 100,
                     CellTemplate = new DataGridViewTextBoxCell()
+                });
+
+                OperationsDetailGridView.Columns.Add(new()
+                {
+                    DataPropertyName = "Moneda",
+                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
+                    Name = "Moneda",
+                    Visible = true,
+                    Width = 100,
+                    CellTemplate = new DataGridViewTextBoxCell()
 
                 });
 
@@ -349,8 +358,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 });
             }
-            if(operationType == OperationTypeEnum.EnvelopeDeposit)
+            if (operationType == OperationTypeEnum.EnvelopeDeposit)
             {
+                OperationsDetailGridView.Columns.Add(new()
+                {
+                    DataPropertyName = "Moneda",
+                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
+                    Name = "Moneda",
+                    Visible = true,
+                    Width = 100,
+                    CellTemplate = new DataGridViewTextBoxCell()
+
+                });
+
                 OperationsDetailGridView.Columns.Add(new()
                 {
                     DataPropertyName = "Sobre",
@@ -415,9 +435,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
             foreach (var item in operations)
             {
+                var esquemaDetalleTurno = item.TurnoId.TurnoDepositarioId.EsquemaDetalleTurnoId;
                 _transactionHeaderItems.Add(new TransactionHeaderItem()
                 {
-                    Cierrediario = item.CierreDiarioId.Nombre,
+                    Cierrediario = item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString("dd/MM/yyyy") : "",
                     Contenedor = item.ContenedorId.Nombre +
                         (item.ContenedorId.Identificador.Length == 0 ? "" : " (" + item.ContenedorId.Identificador + " )"),
                     Fecha = item.Fecha,
@@ -428,7 +449,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TipoId = item.TipoId.Id,
                     TotalAValidar = item.TotalAValidar,
                     TotalValidado = item.TotalValidado,
-                    Turno = item.TurnoId.ToString(),
+                    Turno = esquemaDetalleTurno.EsquemaTurnoId.Nombre + " - " + esquemaDetalleTurno.Nombre,
                     Usuario = item.UsuarioId.NombreApellido,
                     UsuarioCuenta = item.CuentaId == null ? null : item.CuentaId.Numero
                 }); ;
@@ -456,7 +477,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     _operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["Id"].Value;
                     _operationTypeId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["TipoId"].Value;
-
+                    var moneda = OperationsHeaderGridView.Rows[e.RowIndex].Cells["Moneda"].Value.ToString();
                     InitializeOperationsDetailGridView((OperationTypeEnum)_operationTypeId);
 
                     if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.BillDeposit)
@@ -472,6 +493,7 @@ namespace Permaquim.Depositary.UI.Desktop
                                 CantidadUnidades = item.CantidadUnidades,
                                 Denominacion = item.DenominacionId.Nombre,
                                 Fecha = item.Fecha,
+                                Moneda = moneda == null ? "" : moneda,
                                 Id = item.Id
                             });
                         }
@@ -493,6 +515,7 @@ namespace Permaquim.Depositary.UI.Desktop
                                 CantidadDeclarada = item.CantidadDeclarada,
                                 Sobre = item.SobreId.CodigoSobre,
                                 Fecha = item.Fecha,
+                                Moneda = moneda == null ? "" : moneda,
                                 TipoValor = item.RelacionMonedaTipoValorId.TipoValorId.Nombre
 
                             });
@@ -511,7 +534,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<TransactionEnvelopDetailItem> _transactionEnvelopeDetailItems = new();
 
 
- 
+
         private void OperationsHeaderGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             System.Diagnostics.Debug.Print("");
@@ -549,6 +572,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ExecuteButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             LoadOperationsHeader();
         }
 
@@ -601,6 +625,48 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                 }
             }
+        }
+
+        private void ToDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            FromDateTimePicker.MaxDate = ToDateTimePicker.Value;
+            TimeOutController.Reset();
+        }
+
+        private void FromDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            ToDateTimePicker.MinDate = FromDateTimePicker.Value;
+            TimeOutController.Reset();
+        }
+
+        private void FilterPanel_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void OperationsHistoryForm_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void TurnComboBox_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void UserComboBox_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void FromDateTimePicker_MouseDown(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void ToDateTimePicker_MouseDown(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

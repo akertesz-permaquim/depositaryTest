@@ -601,7 +601,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             else
             {
 
-                if (VerifySchedule())
+                //if (VerifySchedule())
                     if (_device.CounterConnected && _device.IoBoardConnected)
                     {
                         if (ParameterController.ValidatesBagInplace)
@@ -633,14 +633,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                                              MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO),
                                              MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO));
                     }
-                else
-                {
-                    SetInformationMessage(InformationTypeEnum.Error,
-                    MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
-                    AuditController.Log(LogTypeEnum.Exception,
-                        MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO),
-                        MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
-                }
+                //else
+                //{
+                //    SetInformationMessage(InformationTypeEnum.Error,
+                //    MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                //    AuditController.Log(LogTypeEnum.Exception,
+                //        MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO),
+                //        MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                //}
             }
         }
 
