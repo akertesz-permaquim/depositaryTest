@@ -621,7 +621,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     (_currentCountingQuantity + _operationStatus.CurrentTransactionQuantity).ToString();
                 DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Amount"].Value =
                     DatabaseController.CurrentCurrency.Simbolo + " " +
-                        (_currentCountingAmount + _operationStatus.CurrentTransactionAmount).ToString();
+                        // (_currentCountingAmount + _operationStatus.CurrentTransactionAmount).ToString();
+                        _currentCountingAmount.ToString();
             }
         }
 

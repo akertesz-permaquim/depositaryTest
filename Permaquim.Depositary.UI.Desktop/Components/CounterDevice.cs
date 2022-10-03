@@ -50,9 +50,6 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public event EventHandler<ECErrorArgs> ECError;
         public int SleepTimeout { get; set; }
 
-        // Port Names
-        public List<string> PortNames { get; private set; } = new List<string>();
-
         #endregion
 
         #region Device Events
@@ -121,6 +118,12 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         const byte SP = 0x20;  // SPACE
         #endregion
 
+        public List<string> Ports 
+        {
+            get {
+                return SerialPort.GetPortNames().ToList<string>();
+            }
+        }
         #region Constructors
         /// <summary>
         /// Constructor
@@ -128,14 +131,12 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         /// <param name="device"></param>
         public CounterDevice(DEXDevice device)
         {
-
-            PortNames = GetPortNames();
-
+            
             _device = device;
             Log("FUNCTION: Counter Device initializing in COM Port: " + device.CounterComPort.PortName + ".");
             try
             {
-                if (PortNames.Exists(e => e.EndsWith(device.CounterComPort.PortName)))
+                if (Ports.Exists(e => e.EndsWith(device.CounterComPort.PortName)))
                 {
                     _counterPort = new SerialPort
                     {
@@ -163,7 +164,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     };
                 }
 
-                if (PortNames.Exists(e => e.EndsWith(device.IOboardComPort.PortName)))
+                if (Ports.Exists(e => e.EndsWith(device.IOboardComPort.PortName)))
                 {
 
                     _ioboardPort = new SerialPort
@@ -199,13 +200,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             {
                 throw ex;
             }
+
+            var portNames = SerialPort.GetPortNames();
         }
 
         public CounterDevice()
         {
         }
-
-        public int MyProperty { get; set; }
 
         #endregion
 
@@ -1496,47 +1497,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
 
         #region com ports
-        public static List<string> GetPortNames()
-        {
-            RegistryKey baseKey = null;
-            RegistryKey serialKey = null;
-
-            List<string> portNames = null;
-
-            RegistryPermission registryPermission = new RegistryPermission(RegistryPermissionAccess.Read,
-                                    @"HKEY_LOCAL_MACHINE\HARDWARE\DEVICEMAP\SERIALCOMM");
-            registryPermission.Assert();
-
-            try
-            {
-                baseKey = Registry.LocalMachine;
-                serialKey = baseKey.OpenSubKey(@"HARDWARE\DEVICEMAP\SERIALCOMM", false);
-
-                if (serialKey != null)
-                {
-                    portNames = new List<string>();
-
-                    for (int i = 0; i < serialKey.GetValueNames().Length; i++)
-                        portNames.Add((string)serialKey.GetValue(serialKey.GetValueNames()[i]));
-                }
-            }
-            finally
-            {
-                if (baseKey != null)
-                    baseKey.Close();
-
-                if (serialKey != null)
-                    serialKey.Close();
-
-                RegistryPermission.RevertAssert();
-            }
-
-            // If serialKey didn't exist for some reason
-            if (portNames == null)
-                portNames = new List<string>();
-
-            return portNames;
-        }
+ 
         #endregion
 
         #region Public Properties
@@ -1546,10 +1507,11 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         {
             get
             {
-                if (_counterPort != null)
-                    return _counterPort.IsOpen;
-                else
+                if (_counterPort == null)
                     return false;
+                else
+                    return Ports.Exists(e => e.EndsWith(_counterPort.PortName));
+                
             }
 
         }
@@ -1558,12 +1520,12 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         {
             get
             {
-                if (_ioboardPort != null)
-                    return _ioboardPort.IsOpen;
-                else
+                if (_ioboardPort == null)
                     return false;
-            }
+                else
+                    return Ports.Exists(e => e.EndsWith(_ioboardPort.PortName));
 
+            }
         }
         public void IoBoardReconnect()
         {

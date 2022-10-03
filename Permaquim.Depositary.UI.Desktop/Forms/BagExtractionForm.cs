@@ -123,27 +123,31 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             if (_bagExtractionProcess == BagExtractionProcessEnum.BagExtracted)
-                Debug.Print("");
+                TimeOutController.Reset();
 
             if ((_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.CLOSED
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_0)
                 && _bagExtractionProcess == BagExtractionProcessEnum.ProcessFinished)
             {
                 _pollingTimer.Enabled = false;
+                _bagExtractionProcess = BagExtractionProcessEnum.None;
+                PrintTicket();
                 FormsController.OpenChildForm(this,new OperationForm(), _device);
             }
-            
-
+ 
             if (_device.IoBoardStatusProperty.LockState == IoBoardStatus.LOCK_STATE.UNLOCKED)
                 _bagExtractionProcess = BagExtractionProcessEnum.GateUnlocked;
 
             // si se detecta la apertura de la puerta, y el contenedor se encuentra colocado,
             // se asume que se inicia el proceso.
             if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN
-                && _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE 
-                && ( _bagExtractionProcess == BagExtractionProcessEnum.None
+                && _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
+                && (_bagExtractionProcess == BagExtractionProcessEnum.None
                 || _bagExtractionProcess == BagExtractionProcessEnum.GateWaitingToRelease))
-                    _bagExtractionProcess = BagExtractionProcessEnum.GateReleased;
+            {
+                _bagExtractionProcess = BagExtractionProcessEnum.GateReleased;
+                TimeOutController.Reset();
+            }
 
             // Este dato lo informa cuando está esperando para abrir la puerta
             if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_0 
@@ -166,17 +170,21 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
             {
                 _bagExtractionProcess = BagExtractionProcessEnum.BagExtracted;
-                // Debido a que los sensores pueden disparar la extracción más de una vez durante el proceso,
-                // Se marca con este flag el 
-                if (!_bagAlreadyInserted)
-                {
-                    DatabaseController.CreateContainer();
+                    // Debido a que los sensores pueden disparar la extracción más de una vez durante el proceso,
+                    // Se marca con este flag el 
+                    if (!_bagAlreadyInserted)
+                    {
+                        TimeOutController.Reset();
+                        DatabaseController.CreateContainer();
                         _bagAlreadyInserted = true;
-                }
+                    }
             }
 
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_PUTTING_START)
+            {
                 _bagExtractionProcess = BagExtractionProcessEnum.BagPuttingStart;
+                TimeOutController.Reset();
+            }
 
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_PUTTING_1
                 || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_PUTTING_2
@@ -185,7 +193,10 @@ namespace Permaquim.Depositary.UI.Desktop
                 || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_PUTTING_5
                 || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_PUTTING_6
                 )
+            {
                 _bagExtractionProcess = BagExtractionProcessEnum.BagPuttingStart;
+                TimeOutController.Reset();
+            }
 
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE 
                 && (_bagExtractionProcess == BagExtractionProcessEnum.BagExtracted 
@@ -193,13 +204,17 @@ namespace Permaquim.Depositary.UI.Desktop
                 || _bagExtractionProcess == BagExtractionProcessEnum.BagPuttingStart)
             {
                 _bagExtractionProcess = BagExtractionProcessEnum.IdentifierPending;
+                TimeOutController.Reset();
             }
             // El sensor de la puerta está bloqueado durante la extracción y reinserción del 
             // contenedor, por lo cual ha que evaluar además el sensor respectivo
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_TAKING_START
                 || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_TAKING_STEP1
                 || _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_TAKING_STEP2)
+            {
                 _bagExtractionProcess = BagExtractionProcessEnum.BagExtracting;
+                TimeOutController.Reset();
+            }
 
 
             // Es un  estado intermedio ? problemas con los sensores?
@@ -394,6 +409,7 @@ namespace Permaquim.Depositary.UI.Desktop
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
             if (!this.Visible)
                 _bagAlreadyInserted = false;
+            
         }
 
         private void BagExtractionForm_MouseClick(object sender, MouseEventArgs e)

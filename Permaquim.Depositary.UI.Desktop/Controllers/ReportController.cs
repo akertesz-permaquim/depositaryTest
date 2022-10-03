@@ -664,7 +664,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             yOffset += _interlineSpace;
 
-
             e.Graphics.DrawString(
             MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR) + ": " +
             ((Permaquim.Depositario.Entities.Relations.Operacion.Contenedor)_header).Nombre
@@ -672,7 +671,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
            Brushes.Black,
            _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
-
 
             e.Graphics.DrawString(
             MultilanguangeController.GetText(MultiLanguageEnum.FECHA) + ": " +
