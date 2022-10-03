@@ -714,7 +714,23 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             long defaultCurrencyId = DatabaseController.DefaultCurrency().Id;
 
-            foreach (var currentContainerTransactionItem in currentContainerTransactions)
+            List<Entities.BillContentResumeItem>? consolidatedContainerTransactions = new();
+
+            foreach(var item in currentContainerTransactions)
+            {
+                var existentItem = consolidatedContainerTransactions.FirstOrDefault(x => x.DenominacionId == item.DenominacionId);
+
+                if(existentItem!=null)
+                {
+                    existentItem.Cantidad += item.Cantidad;
+                }
+                else
+                {
+                    consolidatedContainerTransactions.Add(item);
+                }
+            }
+
+            foreach (var currentContainerTransactionItem in consolidatedContainerTransactions)
             {
 
                 if (currentContainerTransactionItem.Cantidad > 0)

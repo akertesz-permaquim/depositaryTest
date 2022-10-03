@@ -21,15 +21,23 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadMultilanguageItems();
             LoadBackButton();
 
+            ResetReport();
+
+            TimeOutController.Reset();
+
+        }
+
+        private void ResetReport()
+        {
             FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
             ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
             FromFechaCierreDateTimePicker.Checked = false;
             FromFechaCierreDateTimePicker.CustomFormat = " ";
             ToFechaCierreDateTimePicker.Checked = false;
             ToFechaCierreDateTimePicker.CustomFormat = " ";
+            IdentificadorTextbox.Text = "";
 
-            TimeOutController.Reset();
-
+            LoadBagHistoryItems();
         }
 
         private void PollingTimer_Tick(object? sender, EventArgs e)
@@ -90,6 +98,8 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
+            ResetReport();
+            TimeOutController.Reset();
             FormsController.OpenChildForm(this, new ReportsForm(), _device);
         }
         #endregion
@@ -194,19 +204,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
             DateTime FechaAperturaDesde = FromFechaAperturaDateTimePicker.Value;
             DateTime FechaAperturaHasta = ToFechaAperturaDateTimePicker.Value;
-            DateTime? FechaCierreDesde = FromFechaCierreDateTimePicker.Checked ? FromFechaCierreDateTimePicker.Value : null;
-            DateTime? FechaCierreHasta = ToFechaCierreDateTimePicker.Checked ? ToFechaCierreDateTimePicker.Value : null;
+            DateTime? FechaCierreDesde = FromFechaCierreDateTimePicker.Checked ?
+                                        new DateTime(FromFechaCierreDateTimePicker.Value.Year, FromFechaCierreDateTimePicker.Value.Month, FromFechaCierreDateTimePicker.Value.Day, 0, 0, 0) : null;
+            DateTime? FechaCierreHasta = ToFechaCierreDateTimePicker.Checked ?
+                                        new DateTime(ToFechaCierreDateTimePicker.Value.Year, ToFechaCierreDateTimePicker.Value.Month, ToFechaCierreDateTimePicker.Value.Day, 23, 59, 59) : null;
 
             FechaAperturaHasta = FechaAperturaHasta.AddHours(23);
             FechaAperturaHasta = FechaAperturaHasta.AddMinutes(59);
             FechaAperturaHasta = FechaAperturaHasta.AddSeconds(59);
-
-            if (FechaCierreHasta.HasValue)
-            {
-                FechaCierreHasta = FechaCierreHasta.Value.AddHours(23);
-                FechaCierreHasta = FechaCierreHasta.Value.AddMinutes(59);
-                FechaCierreHasta = FechaCierreHasta.Value.AddSeconds(59);
-            }
 
             _bagHistoryItems = DatabaseController.GetBaghistoryItems(FechaAperturaDesde,
                                                                     FechaAperturaHasta,
@@ -258,7 +263,13 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
                 FromFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
-                ToFechaCierreDateTimePicker.MinDate = FromFechaCierreDateTimePicker.Value;
+                if (ToFechaCierreDateTimePicker.Checked)
+                    ToFechaCierreDateTimePicker.MinDate = FromFechaCierreDateTimePicker.Value;
+                else
+                {
+                    ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
+                    ToFechaCierreDateTimePicker.CustomFormat = " ";
+                }
             }
         }
 
@@ -274,7 +285,11 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
                 ToFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
-                FromFechaCierreDateTimePicker.MaxDate = ToFechaCierreDateTimePicker.Value;
+                if(FromFechaCierreDateTimePicker.Checked)
+                {
+                    FromFechaCierreDateTimePicker.MaxDate = ToFechaCierreDateTimePicker.Value;
+                }
+
             }
         }
 
