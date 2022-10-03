@@ -37,14 +37,14 @@ namespace Permaquim.Depositary.UI.Desktop
             ToDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToDateTimePicker.CustomFormat = "dd/MM/yyyy";
 
-            FromDateTimePicker.Value = DateTime.Now.AddDays(-30);
-
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
+
+            LoadOperationsHeader();
         }
         protected override CreateParams CreateParams
         {
