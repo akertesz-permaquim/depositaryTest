@@ -10,9 +10,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
     public static class TimeOutController
     {
         private const string TIMEOUT_GENERAL = "TIMEOUT_GENERAL";
-        private static DateTime referenceTime;
-
-
         private static Stopwatch _sw;
         private static bool _isTimeOut = false;
         private static long _timeOut { get; set; } = 0;

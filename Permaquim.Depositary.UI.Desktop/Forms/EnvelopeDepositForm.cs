@@ -44,6 +44,9 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
+        CustomNumericInputboxKeyboard _numericInputForm = null;
+        InputBoxForm _inputForm = null;
+
         //////////////////////////////////////////////////////////////////////
         DataGridViewCell activatedCell;
         private void CellClicked(object sender, DataGridViewCellEventArgs e)
@@ -164,11 +167,22 @@ namespace Permaquim.Depositary.UI.Desktop
                 CurrencyLabel.Enabled = true;
                 RemainingTimeLabel.Enabled = true;
                 SubtotalLabel.Enabled = true;
-
-
             }
             else
+            {
+                if (_numericInputForm != null)
+                {
+                    _numericInputForm.Close();
+                    _numericInputForm = null;
+                }
+                if (_inputForm != null)
+                {
+                    _inputForm.Close();
+                    _inputForm = null;
+                }
+
                 InitializeLocals();
+            }
 
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
 
@@ -399,7 +413,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void VerifyEscrowEmpty()
         {
 
-            // Si el esrcrow está abierto, y el sensor detecta presencia, se asume que es un sobre y se 
+            // Si el escrow está abierto, y el sensor detecta presencia, se asume que es un sobre y se 
             // completa el depósito
             if (
                 _operationStatus.GeneralStatus == StatusInformation.State.PQWaitingTocloseEscrow
@@ -410,8 +424,23 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.CloseEscrow();
                 PrintTicket(TicketTypeEnum.Second);
                 _device.PreviousState = StatusInformation.State.PQClosingEscrow;
+
                 ButtonsPanel.Visible = false;
             }
+
+
+            // Si el escrow está cerrado y no tiene contenido, se debe volver a abrid
+            if (
+                _operationStatus.GeneralStatus == StatusInformation.State.PQClosingEscrow
+                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
+                && _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
+            {
+                _operationStatus.DepositConfirmed = false;
+                _device.OpenEscrow();
+                _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                ButtonsPanel.Visible = true;
+            }
+
         }
         /// <summary>
         /// Habilita la visualización de los botones de acuerdo a los estados del hardware
@@ -523,13 +552,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
 
             Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
-            sesiones.Items(null,DatabaseController.CurrentDepositary.Id,
+            sesiones.Items(null, DatabaseController.CurrentDepositary.Id,
                 DatabaseController.CurrentUser.Id, null, null, null);
 
 
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
-    
-            Permaquim.Depositario.Entities.Tables.Operacion.Transaccion transaction = new()
+
+            try
+            {
+                transactions.BeginTransaction();
+
+                Permaquim.Depositario.Entities.Tables.Operacion.Transaccion transaction = new()
                 {
                     CierreDiarioId = DatabaseController.CurrentDailyClosing.Id,
                     ContenedorId = DatabaseController.CurrentContainer.Id,
@@ -545,46 +578,55 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalValidado = 0,
                     TurnoId = DatabaseController.CurrentTurn.Id,
                     CuentaId = DatabaseController.CurrentUserBankAccount == null ? null :
-                        DatabaseController.CurrentUserBankAccount.CuentaId.Id,
+                            DatabaseController.CurrentUserBankAccount.CuentaId.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id,
                     CodigoOperacion =
-                        DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
+                            DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
                     OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? 0 :
-                    DatabaseController.CurrentDepositOrigin.Id
-            };
+                        DatabaseController.CurrentDepositOrigin.Id
+                };
                 transactions.Add(transaction);
                 _operationStatus.CurrentTransactionId = transaction.Id;
 
-            Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobre transactionEnvelopes = new();
-            Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobre transactionEnvelope = new()
-            {
-                CodigoSobre = EnvelopeTextBox.Texts.Trim(),
-                TransaccionId = _operationStatus.CurrentTransactionId,
-                Fecha = DateTime.Now
-            };
-            transactionEnvelopes.Add(transactionEnvelope);
-
-            Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transactionenvelopeDetails = new();
-            foreach (var item in _envelopeDepositItems)
-            {
-                if (item.Id > -1  && item.Quantity > 0)
+                Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobre transactionEnvelopes = new(transactions);
+                Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobre transactionEnvelope = new()
                 {
-                    Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle transactionEnvelopeDetail = new()
+                    CodigoSobre = EnvelopeTextBox.Texts.Trim(),
+                    TransaccionId = _operationStatus.CurrentTransactionId,
+                    Fecha = DateTime.Now
+                };
+                transactionEnvelopes.Add(transactionEnvelope);
+
+                Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transactionenvelopeDetails = new(transactions);
+                foreach (var item in _envelopeDepositItems)
+                {
+                    if (item.Id > -1 && item.Quantity > 0)
                     {
-                        CantidadDeclarada = item.Quantity,
-                        RelacionMonedaTipoValorId = item.Id,
-                        ValorDeclarado = item.Amount,
-                        Fecha = DateTime.Now,
-                        SobreId = transactionEnvelope.Id
-                     };
+                        Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle transactionEnvelopeDetail = new()
+                        {
+                            CantidadDeclarada = item.Quantity,
+                            RelacionMonedaTipoValorId = item.Id,
+                            ValorDeclarado = item.Amount,
+                            Fecha = DateTime.Now,
+                            SobreId = transactionEnvelope.Id
+                        };
 
-                    transaction.TotalAValidar += item.Amount;
-                    transactionenvelopeDetails.Add(transactionEnvelopeDetail);
+                        transaction.TotalAValidar += item.Amount;
+                        transactionenvelopeDetails.Add(transactionEnvelopeDetail);
+                    }
                 }
-            }
-            transactions.Update(transaction);
+                transactions.Update(transaction);
 
-            PrintTicket(TicketTypeEnum.First);
+                transactions.EndTransaction(true);
+
+                PrintTicket(TicketTypeEnum.First);
+
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                transactions.EndTransaction(false);
+            }
 
         }
         
@@ -733,13 +775,13 @@ namespace Permaquim.Depositary.UI.Desktop
                     _selectedEditElement = SelectedEditElementEnum.Cell;
                     DenominationsGridView.BeginEdit(false);
 
-                    CustomNumericInputboxKeyboard numericInputForm = new CustomNumericInputboxKeyboard();
-                    numericInputForm.NumericInputBoxPlaceholder =
+                    _numericInputForm = new CustomNumericInputboxKeyboard();
+                    _numericInputForm.NumericInputBoxPlaceholder =
                         ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
-                    if (numericInputForm.ShowDialog() == DialogResult.OK)
+                    if (_numericInputForm.ShowDialog(this) == DialogResult.OK)
                     {
-                        ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value = numericInputForm.ReturnValue;
+                        ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _numericInputForm.ReturnValue;
                     }
                 }
                 catch (Exception ex)
@@ -802,17 +844,17 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
             _selectedEditElement = SelectedEditElementEnum.EnvelopeCode;
-            InputBoxForm inputForm = new InputBoxForm();
+            _inputForm = new InputBoxForm();
 
             if (EnvelopeTextBox.Texts.Equals(EnvelopeTextBox.PlaceholderText))
-                inputForm.InputTexboxPlaceholder = EnvelopeTextBox.PlaceholderText;
+                _inputForm.InputTexboxPlaceholder = EnvelopeTextBox.PlaceholderText;
             else
-                inputForm.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.ENVELOPE_TEXTBOX_PLACEHOLDER);
+                _inputForm.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.ENVELOPE_TEXTBOX_PLACEHOLDER);
 
-            inputForm.ReturnTextValue = EnvelopeTextBox.Texts;
-            if (inputForm.ShowDialog() == DialogResult.OK)
+            _inputForm.ReturnTextValue = EnvelopeTextBox.Texts;
+            if (_inputForm.ShowDialog(this) == DialogResult.OK)
             {
-                EnvelopeTextBox.Texts = inputForm.ReturnTextValue
+                EnvelopeTextBox.Texts = _inputForm.ReturnTextValue
                     .Replace("{ENTER}","");
             }
         }

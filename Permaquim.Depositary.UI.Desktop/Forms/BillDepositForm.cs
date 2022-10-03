@@ -227,6 +227,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     ConfirmDeposit();
                     _operationStatus.DepositConfirmed = true;
                     SaveTransaction();
+                    PrintTicket();
                     DatabaseController.LogOff(true);
                     FormsController.LogOff();
                 }
@@ -640,7 +641,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CancelDepositButton_Click(object sender, EventArgs e)
         {
             ButtonsPanel.Visible = false;
-            TimeOutController.Stop();
+            TimeOutController.Reset();
             CancelDeposit();
             AuditController.Log(LogTypeEnum.Information, 
                 DEPOSITO_BILLETE_CANCELADO, 
@@ -788,7 +789,11 @@ namespace Permaquim.Depositary.UI.Desktop
             _operationStatus.CurrentTransactionAmount += _currentCountingAmount;
 
             Depositario.Business.Tables.Operacion.Transaccion transactions = new();
-            Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = new();
+
+            try
+            {
+
+            transactions.BeginTransaction();
 
             if (_operationStatus.CurrentTransactionId == 0)
             {
@@ -831,6 +836,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
 
+            Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = new(transactions);
+
             foreach (var item in _detectedDenominations)
             {
                 if (item.CantidadDetectada > 0)
@@ -848,6 +855,16 @@ namespace Permaquim.Depositary.UI.Desktop
                     );
                 }
             }
+
+            transactions.EndTransaction(true);
+
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                transactions.EndTransaction(false);
+            }
+
         }
         private void PrintTicket()
         {
