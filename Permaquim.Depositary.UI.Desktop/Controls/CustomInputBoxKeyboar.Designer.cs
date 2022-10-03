@@ -517,6 +517,7 @@
             this.InputTexbox.SelectionStart = 0;
             this.InputTexbox.Size = new System.Drawing.Size(822, 45);
             this.InputTexbox.TabIndex = 150;
+            this.InputTexbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.InputTexbox.Texts = "";
             this.InputTexbox.UnderlinedStyle = false;
             // 
@@ -535,7 +536,7 @@
             this.Button_Space.Name = "Button_Space";
             this.Button_Space.Size = new System.Drawing.Size(581, 55);
             this.Button_Space.TabIndex = 149;
-            this.Button_Space.Tag = "{SPACE}";
+            this.Button_Space.Tag = " ";
             this.Button_Space.Text = " Espacio";
             this.Button_Space.TextColor = System.Drawing.Color.White;
             this.Button_Space.UseVisualStyleBackColor = false;

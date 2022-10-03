@@ -592,6 +592,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
+                FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
                 LoadOperationsHeader();
             }
             else
@@ -647,7 +648,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 var _details = DatabaseController.GetTransactionDetails(_operationId);
                 if (!_alreadyPrinted)
                 {
-                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                    for (int i = 1; i < ParameterController.PrintBillDepositQuantity; i++)
                     {
                         ReportController.PrintReport(ReportTypeEnum.BillDeposit,
                             _header, _details, i);
@@ -665,7 +666,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 var _details = DatabaseController.GetTransactionDetails(_operationId);
                 if (!_alreadyPrinted)
                 {
-                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                    for (int i = 1; i < ParameterController.PrintBillDepositQuantity; i++)
                     {
                         ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport, _header, _details, i);
                         _alreadyPrinted = true;
