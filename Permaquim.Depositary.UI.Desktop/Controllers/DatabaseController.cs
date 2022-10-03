@@ -1835,10 +1835,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             sesion.Add(CurrentDepositary.Id, DatabaseController.CurrentUser.Id, DateTime.Now, null, null);
         }
 
-        public static List<Depositario.Entities.Views.Reporte.Contenedores> GetBaghistoryItems()
+        public static List<Depositario.Entities.Views.Reporte.Contenedores> GetBaghistoryItems(DateTime FechaAperturaDesde,
+                                                                                               DateTime FechaAperturaHasta,
+                                                                                               DateTime? FechaCierreDesde,
+                                                                                               DateTime? FechaCierreHasta,
+                                                                                               string Identificador)
         {
             Depositario.Business.Views.Reporte.Contenedores entities = new();
-
+            entities.Where.Add(Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, FechaAperturaDesde);
+            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositario.sqlEnum.OperandEnum.LessThanOrEqual, FechaAperturaHasta);
+            if (FechaCierreDesde.HasValue)
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, FechaCierreDesde.Value);
+            if (FechaCierreHasta.HasValue)
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositario.sqlEnum.OperandEnum.LessThanOrEqual, FechaCierreHasta.Value);
+            if (Identificador != "")
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositario.sqlEnum.OperandEnum.Like, Identificador);
 
             return entities.Items();
         }

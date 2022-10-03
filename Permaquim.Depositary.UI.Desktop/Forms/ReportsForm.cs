@@ -100,6 +100,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void DailyClosingHistoryButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             FormsController.OpenChildForm(this, new DailyClosingHistoryForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
@@ -116,6 +117,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void TurnsHistoryButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             FormsController.OpenChildForm(this, new TurnsHistoryForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
@@ -134,6 +136,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void OperationsButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             FormsController.OpenChildForm(this, new OperationsHistoryForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
@@ -149,6 +152,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BagContentButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             FormsController.OpenChildForm(this, new BagContentForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
@@ -164,6 +168,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BagHistoryButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             FormsController.OpenChildForm(this, new BagHistoryForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
@@ -186,9 +191,20 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             FormsController.OpenChildForm(this, new OperationForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
         #endregion
+
+        private void ReportsForm_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void MainPanel_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
     }
 }
