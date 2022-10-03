@@ -834,7 +834,12 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                 }
 
+<<<<<<< HEAD
                 Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = new(transactions);
+=======
+                Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = 
+                    new Depositario.Business.Tables.Operacion.TransaccionDetalle (transactions);
+>>>>>>> 815256b0924000b2d6a56ee2cd697b3fde8b789b
 
                 foreach (var item in _detectedDenominations)
                 {

@@ -124,10 +124,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                  " - Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             MultilanguangeController.ResetLanguage();
 
-            MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
 
             MainFormInstance.LoadPresentation();
 
+            MainFormInstance.SetInformationMessage(InformationTypeEnum.None,string.Empty);
 
         }
 

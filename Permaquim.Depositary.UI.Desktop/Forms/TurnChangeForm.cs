@@ -41,10 +41,11 @@ namespace Permaquim.Depositary.UI.Desktop
             if (TimeOutController.IsTimeOut())
             {
                 _pollingTimer.Enabled = false;
+                FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
                 DatabaseController.LogOff(true);
                 FormsController.LogOff();
             }
-            //SetinformationMessage();
+            
         }
         private void TurnChangeForm_Load(object sender, EventArgs e)
         {
@@ -110,7 +111,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildCancelButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width / 2 - 5,55);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION), MainPanel.Width / 2 - 5,55);
 
             this.MainPanel.Controls.Add(backButton);
 
@@ -148,7 +149,8 @@ namespace Permaquim.Depositary.UI.Desktop
             if (DatabaseController.GetAvailableTurns() == 1)
                 message = MultilanguangeController.GetText(MultiLanguageEnum.CONFIRMA_CIERRE_ULTIMO_TURNO);
 
-            FormsController.SetInformationMessage(InformationTypeEnum.Error, message);
+            if(message.Length>0)
+                FormsController.SetInformationMessage(InformationTypeEnum.Error, message);
         }
 
         #region Datagrid        

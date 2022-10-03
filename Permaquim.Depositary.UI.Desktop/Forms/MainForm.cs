@@ -420,7 +420,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 RemainingTimeLabel.Visible = remainingTime > 0;
 
-                RemainingTimeLabel.Text = _remainingTimeText +
+                RemainingTimeLabel.Text = " " + _remainingTimeText +
                     remainingTime.ToString();
                 if (remainingTime > _greenStatusIndicator)
                     RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoInformacion);
