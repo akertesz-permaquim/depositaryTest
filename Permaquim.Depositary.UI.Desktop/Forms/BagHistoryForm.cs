@@ -191,7 +191,28 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Data    
         private void LoadBagHistoryItems()
         {
-            _bagHistoryItems = DatabaseController.GetBaghistoryItems();
+
+            DateTime FechaAperturaDesde = FromFechaAperturaDateTimePicker.Value;
+            DateTime FechaAperturaHasta = ToFechaAperturaDateTimePicker.Value;
+            DateTime? FechaCierreDesde = FromFechaCierreDateTimePicker.Checked ? FromFechaCierreDateTimePicker.Value : null;
+            DateTime? FechaCierreHasta = ToFechaCierreDateTimePicker.Checked ? ToFechaCierreDateTimePicker.Value : null;
+
+            FechaAperturaHasta = FechaAperturaHasta.AddHours(23);
+            FechaAperturaHasta = FechaAperturaHasta.AddMinutes(59);
+            FechaAperturaHasta = FechaAperturaHasta.AddSeconds(59);
+
+            if (FechaCierreHasta.HasValue)
+            {
+                FechaCierreHasta = FechaCierreHasta.Value.AddHours(23);
+                FechaCierreHasta = FechaCierreHasta.Value.AddMinutes(59);
+                FechaCierreHasta = FechaCierreHasta.Value.AddSeconds(59);
+            }
+
+            _bagHistoryItems = DatabaseController.GetBaghistoryItems(FechaAperturaDesde,
+                                                                    FechaAperturaHasta,
+                                                                    FechaCierreDesde,
+                                                                    FechaCierreHasta,
+                                                                    IdentificadorTextbox.Text);
             MainGridView.DataSource = _bagHistoryItems;
             StyleController.SetControlHeight(MainGridView);
         }
@@ -227,29 +248,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void FromFechaCierreDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            FromFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
-        }
-
-        private void ToFechaCierreDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void ToFechaCierreDateTimePicker_EnabledChanged(object sender, EventArgs e)
-        {
-            if(!ToFechaCierreDateTimePicker.Checked)
-            {
-                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
-                ToFechaCierreDateTimePicker.CustomFormat = " ";
-            }
-            else
-            {
-                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
-                ToFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
-            }
-        }
-
-        private void FromFechaCierreDateTimePicker_EnabledChanged(object sender, EventArgs e)
-        {
+            TimeOutController.Reset();
             if (!FromFechaCierreDateTimePicker.Checked)
             {
                 FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
@@ -259,8 +258,47 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
                 FromFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
-
+                ToFechaCierreDateTimePicker.MinDate = FromFechaCierreDateTimePicker.Value;
             }
+        }
+
+        private void ToFechaCierreDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+            if (!ToFechaCierreDateTimePicker.Checked)
+            {
+                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
+                ToFechaCierreDateTimePicker.CustomFormat = " ";
+            }
+            else
+            {
+                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
+                ToFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
+                FromFechaCierreDateTimePicker.MaxDate = ToFechaCierreDateTimePicker.Value;
+            }
+        }
+
+        private void ExecuteBagHistorySearch_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+            LoadBagHistoryItems();
+        }
+
+        private void FromFechaAperturaDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            ToFechaAperturaDateTimePicker.MinDate = FromFechaAperturaDateTimePicker.Value;
+            TimeOutController.Reset();
+        }
+
+        private void ToFechaAperturaDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            FromFechaAperturaDateTimePicker.MaxDate = ToFechaAperturaDateTimePicker.Value;
+            TimeOutController.Reset();
+        }
+
+        private void IdentificadorTextbox_TextChanged(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

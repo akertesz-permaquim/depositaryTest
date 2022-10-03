@@ -10,6 +10,8 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
     {
         public long Id { get; set; }
         public string Denominacion { get; set; }
+        public decimal Unidades { get; set; }
+        public Int64 DenominacionId { get; set; }
         public long CantidadUnidades { get; set; }
         public string Moneda { get; set; }
         public DateTime Fecha { get; set; }

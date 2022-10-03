@@ -29,6 +29,14 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadFilterControls();
             InitializeOperationsHeaderGridView();
 
+            FromDateTimePicker.Value = DateTime.Now.Date;
+            ToDateTimePicker.Value = DateTime.Now.Date;
+            FromDateTimePicker.Format = DateTimePickerFormat.Custom;
+            FromDateTimePicker.CustomFormat = "dd/MM/yyyy";
+
+            ToDateTimePicker.Format = DateTimePickerFormat.Custom;
+            ToDateTimePicker.CustomFormat = "dd/MM/yyyy";
+
             FromDateTimePicker.Value = DateTime.Now.AddDays(-30);
 
             TimeOutController.Reset();
@@ -357,6 +365,28 @@ namespace Permaquim.Depositary.UI.Desktop
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
+
+                OperationsDetailGridView.Columns.Add(new()
+                {
+                    DataPropertyName = "Unidades",
+                    HeaderText = "",
+                    Name = "Unidades",
+                    Visible = false,
+                    Width = 100,
+                    CellTemplate = new DataGridViewTextBoxCell()
+
+                });
+
+                OperationsDetailGridView.Columns.Add(new()
+                {
+                    DataPropertyName = "DenominacionId",
+                    HeaderText = "",
+                    Name = "DenominacionId",
+                    Visible = false,
+                    Width = 100,
+                    CellTemplate = new DataGridViewTextBoxCell()
+
+                });
             }
             if (operationType == OperationTypeEnum.EnvelopeDeposit)
             {
@@ -424,9 +454,15 @@ namespace Permaquim.Depositary.UI.Desktop
             OperationsDetailGridView.DataSource = null;
             InitializeOperationsHeaderGridView();
 
+            DateTime FechaHasta = ToDateTimePicker.Value;
+
+            FechaHasta = FechaHasta.AddHours(23);
+            FechaHasta = FechaHasta.AddMinutes(59);
+            FechaHasta = FechaHasta.AddSeconds(59);
+
             var operations = DatabaseController.GetOperationsHeaders(
                 FromDateTimePicker.Value,
-                ToDateTimePicker.Value,
+                FechaHasta,
                 (long)UserComboBox.SelectedValue,
                 (long)TurnComboBox.SelectedValue
                 );
@@ -488,18 +524,29 @@ namespace Permaquim.Depositary.UI.Desktop
 
                         foreach (var item in operationDetails)
                         {
-                            _transactionDetailItems.Add(new TransactionDetailItem()
+                            var operationDetail = _transactionDetailItems.FirstOrDefault(x => x.DenominacionId == item._DenominacionId);
+
+                            //Si ya existia en la lista un elemento con esa denominacion lo actualizo
+                            if (operationDetail != null)
                             {
-                                CantidadUnidades = item.CantidadUnidades,
-                                Denominacion = item.DenominacionId.Nombre,
-                                Fecha = item.Fecha,
-                                Moneda = moneda == null ? "" : moneda,
-                                Id = item.Id
-                            });
+                                operationDetail.CantidadUnidades += item.CantidadUnidades;
+                            }
+                            else
+                            {
+                                _transactionDetailItems.Add(new TransactionDetailItem()
+                                {
+                                    CantidadUnidades = item.CantidadUnidades,
+                                    Unidades = item.DenominacionId.Unidades,
+                                    DenominacionId = item._DenominacionId,
+                                    Denominacion = item.DenominacionId.Nombre,
+                                    Fecha = item.Fecha,
+                                    Moneda = moneda == null ? "" : moneda,
+                                    Id = item.Id
+                                });
+                            }
                         }
 
-                        OperationsDetailGridView.DataSource = _transactionDetailItems;
-
+                        OperationsDetailGridView.DataSource = _transactionDetailItems.OrderBy(x => x.Unidades).ToList();
 
                     }
                     if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.EnvelopeDeposit)
@@ -578,11 +625,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             DetailPanel.Visible = false;
         }
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.BillDeposit)
                 PrintBillDepositTicket();
             if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.EnvelopeDeposit)
@@ -610,8 +659,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void PrintEnvelopeTicket()
         {
-
-
             if (ParameterController.PrintsEnvelopeDeposit)
             {
                 var _header = DatabaseController.GetTransactionHeader(_operationId);
@@ -665,6 +712,21 @@ namespace Permaquim.Depositary.UI.Desktop
         }
 
         private void ToDateTimePicker_MouseDown(object sender, MouseEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void DetailPanel_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void OperationsDetailGridView_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void DetailLabel_Click(object sender, EventArgs e)
         {
             TimeOutController.Reset();
         }
