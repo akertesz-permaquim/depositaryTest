@@ -44,6 +44,9 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
 
+            OperationsHeaderGridView.DataSource = null;
+            OperationsDetailGridView.DataSource = null;
+
             LoadOperationsHeader();
         }
         protected override CreateParams CreateParams
