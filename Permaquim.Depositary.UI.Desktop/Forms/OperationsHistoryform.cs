@@ -654,10 +654,35 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 var _header = DatabaseController.GetTransactionHeader(_operationId);
                 var _details = DatabaseController.GetTransactionDetails(_operationId);
+
+                //Consolidamos el detalle 
+                List<Entities.BillDepositDetail> _consolidatedDetailsList = new List<Entities.BillDepositDetail>();
+                foreach (var detailReportItem in _details)
+                {
+                    var detailExists = _consolidatedDetailsList.FirstOrDefault(x => x.DenominacionId == detailReportItem._DenominacionId);
+
+                    if (detailExists != null)
+                    {
+                        detailExists.CantidadUnidades += detailReportItem.CantidadUnidades;
+                    }
+                    else
+                    {
+                        Entities.BillDepositDetail billDepositDetail = new();
+
+                        billDepositDetail.CantidadUnidades = detailReportItem.CantidadUnidades;
+                        billDepositDetail.Unidades = detailReportItem.DenominacionId.Unidades;
+                        billDepositDetail.DenominacionId = detailReportItem._DenominacionId;
+                        billDepositDetail.DenominacionNombre = detailReportItem.DenominacionId.Nombre;
+                        billDepositDetail.MonedaCodigo = detailReportItem.DenominacionId.MonedaId.Codigo;
+
+                        _consolidatedDetailsList.Add(billDepositDetail);
+                    }
+                }
+
                 for (int i = 1; i <= ParameterController.PrintBillDepositQuantity; i++)
                 {
                     ReportController.PrintReport(ReportTypeEnum.BillDeposit,
-                        _header, _details, i);
+                        _header, _consolidatedDetailsList, i);
                 }
             }
         }

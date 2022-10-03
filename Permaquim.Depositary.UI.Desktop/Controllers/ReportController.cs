@@ -229,28 +229,52 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             // Detalles
+            //for (int i = 0; i < _details.Count; i++)
+            //{
+            //    var textLen = MaxCharacterLenght - (_details[i].DenominacionId.MonedaId.Codigo.Length +
+            //        _details[i].DenominacionId.Nombre.Length +
+            //        _details[i].CantidadUnidades.ToString().Length +
+            //        (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString().Length );
+
+            //    e.Graphics.DrawString(
+            //    String.Format("{0,1}\t{1,10}\t{2,10}\t{3,10}",
+            //        _details[i].DenominacionId.MonedaId.Codigo, 
+            //        _details[i].DenominacionId.Nombre, 
+            //        _details[i].CantidadUnidades.ToString(),
+            //           (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString("C2"))
+            //            ,_font,
+            //        Brushes.Black,
+            //        _detailStart_X, yOffset, new StringFormat());
+
+            //    amount += _details[i].CantidadUnidades * _details[i].DenominacionId.Unidades;
+            //    itemsQuantity += _details[i].CantidadUnidades;
+
+            //    yOffset += _interlineSpace;
+            //}
+
             for (int i = 0; i < _details.Count; i++)
             {
-                var textLen = MaxCharacterLenght - (_details[i].DenominacionId.MonedaId.Codigo.Length +
-                    _details[i].DenominacionId.Nombre.Length +
+                var textLen = MaxCharacterLenght - (_details[i].MonedaCodigo.Length +
+                    _details[i].DenominacionNombre.Length +
                     _details[i].CantidadUnidades.ToString().Length +
-                    (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString().Length );
+                    (_details[i].CantidadUnidades * _details[i].Unidades).ToString().Length);
 
                 e.Graphics.DrawString(
                 String.Format("{0,1}\t{1,10}\t{2,10}\t{3,10}",
-                    _details[i].DenominacionId.MonedaId.Codigo, 
-                    _details[i].DenominacionId.Nombre, 
+                    _details[i].MonedaCodigo,
+                    _details[i].DenominacionNombre,
                     _details[i].CantidadUnidades.ToString(),
-                       (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString("C2"))
-                        ,_font,
+                       (_details[i].CantidadUnidades * _details[i].Unidades).ToString("C2"))
+                        , _font,
                     Brushes.Black,
                     _detailStart_X, yOffset, new StringFormat());
 
-                amount += _details[i].CantidadUnidades * _details[i].DenominacionId.Unidades;
+                amount += _details[i].CantidadUnidades * _details[i].Unidades;
                 itemsQuantity += _details[i].CantidadUnidades;
 
                 yOffset += _interlineSpace;
             }
+
             yOffset += _interlineSpace;
 
             // Separador
