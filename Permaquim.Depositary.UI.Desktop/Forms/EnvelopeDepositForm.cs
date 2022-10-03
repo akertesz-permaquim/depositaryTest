@@ -243,39 +243,44 @@ namespace Permaquim.Depositary.UI.Desktop
             if (TimeOutController.IsTimeOut())
             {
                 _pollingTimer.Enabled = false;
+                FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
+
                 DatabaseController.LogOff(true);
                 FormsController.LogOff();
             }
-            EvaluateTimeout();
-
-            // Asigna a la máquina el valor del estado de la contadora en este ciclo
-            if (_device != null &&_device.CounterConnected)
-            {
-                _operationStatus.GeneralStatus = _device.CurrentStatus;
-
-                if (_device != null && _device.CounterConnected)
-                {
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode
-                        && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.Waiting)
-                    {
-                        _device.ManualDepositMode();
-                    }
-                    else
-                    {
-                        // Muestra el estado del hardware
-                        ShowHardwareMonitorData();
-                        // Procesa los estados 
-                        ProcessDeviceStatus();
-                    }
-                }
-            }
             else
             {
-                VerifyButtonsVisibility();
-            }
+                EvaluateTimeout();
 
- 
-            SetTotals();
+                // Asigna a la máquina el valor del estado de la contadora en este ciclo
+                if (_device != null && _device.CounterConnected)
+                {
+                    _operationStatus.GeneralStatus = _device.CurrentStatus;
+
+                    if (_device != null && _device.CounterConnected)
+                    {
+                        if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode
+                            && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.Waiting)
+                        {
+                            _device.ManualDepositMode();
+                        }
+                        else
+                        {
+                            // Muestra el estado del hardware
+                            ShowHardwareMonitorData();
+                            // Procesa los estados 
+                            ProcessDeviceStatus();
+                        }
+                    }
+                }
+                else
+                {
+                    VerifyButtonsVisibility();
+                }
+
+
+                SetTotals();
+            }
         }
         private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {

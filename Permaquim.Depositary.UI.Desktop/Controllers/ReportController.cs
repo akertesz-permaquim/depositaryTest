@@ -170,7 +170,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             e.Graphics.DrawString(
              MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": " + 
        
-             ((Depositario.Entities.Relations.Operacion.Transaccion)_header).CodigoOperacion.ToString()
+             ((Depositario.Entities.Relations.Operacion.Transaccion)_header).CodigoOperacion.ToString() + "-" +
+             ((Depositario.Entities.Relations.Operacion.Transaccion)_header).Id.ToString()
               , _font,  Brushes.Black,
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
@@ -484,7 +485,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             // Transacción
             e.Graphics.DrawString(
-             MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": " + _header.CodigoOperacion.ToString()
+             MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": " + _header.CodigoOperacion.ToString() + "-" +
+             ((Depositario.Entities.Relations.Operacion.Transaccion)_header).Id.ToString()
               , _font,
             Brushes.Black,
             _headerTextStart_X, yOffset, new StringFormat());

@@ -793,70 +793,71 @@ namespace Permaquim.Depositary.UI.Desktop
             try
             {
 
-            transactions.BeginTransaction();
+                transactions.BeginTransaction();
 
-            if (_operationStatus.CurrentTransactionId == 0)
-            {
-                Transaccion transaction = new()
+                if (_operationStatus.CurrentTransactionId == 0)
                 {
-                    CierreDiarioId = DatabaseController.CurrentDailyClosing.Id,
-                    ContenedorId = DatabaseController.CurrentContainer.Id,
-                    DepositarioId = DatabaseController.CurrentDepositary.Id,
-                    Fecha = DateTime.Now,
-                    Finalizada = true,
-                    MonedaId = DatabaseController.CurrentCurrency.Id,
-                    SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
-                    SesionId = DatabaseController.CurrentSession.Id,
-                    SucursalId = DatabaseController.CurrentDepositary.SectorId.SucursalId.Id,
-                    TipoId = (long)OperationTypeEnum.BillDeposit,// Depósito de Billete
-                    TotalAValidar = 0,
-                    TotalValidado = _operationStatus.CurrentTransactionAmount,
-                    TurnoId = DatabaseController.CurrentTurn.Id,
-                    CuentaId = DatabaseController.CurrentUserBankAccount == null ?  null:
-                        DatabaseController.CurrentUserBankAccount.CuentaId.Id,
-                    UsuarioId = DatabaseController.CurrentUser.Id,
-                    CodigoOperacion =
-                        DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
-                    OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? 0 : 
-                    DatabaseController.CurrentDepositOrigin.Id
-                };
-                _headerTransaction.Add(transactions.Add(transaction));
-                _operationStatus.CurrentTransactionId = transaction.Id;
-                
-            }
-            else
-            {
-                transactions.Items(_operationStatus.CurrentTransactionId);
-                if (transactions.Result.Count > 0)
-                {
-                    var previousTransaction = transactions.Result.FirstOrDefault();
-                    previousTransaction.TotalValidado = _operationStatus.CurrentTransactionAmount;
-
-                    transactions.Update(previousTransaction);
-                }
-            }
-
-            Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = new(transactions);
-
-            foreach (var item in _detectedDenominations)
-            {
-                if (item.CantidadDetectada > 0)
-                {
-                    Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle transactionDetail = new()
+                    Transaccion transaction = new()
                     {
-                        CantidadUnidades = item.CantidadDetectada,
-                        DenominacionId = item.Id,
+                        CierreDiarioId = DatabaseController.CurrentDailyClosing.Id,
+                        ContenedorId = DatabaseController.CurrentContainer.Id,
+                        DepositarioId = DatabaseController.CurrentDepositary.Id,
                         Fecha = DateTime.Now,
-                        TransaccionId = _operationStatus.CurrentTransactionId
-
+                        Finalizada = true,
+                        MonedaId = DatabaseController.CurrentCurrency.Id,
+                        SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
+                        SesionId = DatabaseController.CurrentSession.Id,
+                        SucursalId = DatabaseController.CurrentDepositary.SectorId.SucursalId.Id,
+                        TipoId = (long)OperationTypeEnum.BillDeposit,// Depósito de Billete
+                        TotalAValidar = 0,
+                        TotalValidado = _operationStatus.CurrentTransactionAmount,
+                        TurnoId = DatabaseController.CurrentTurn.Id,
+                        CuentaId = DatabaseController.CurrentUserBankAccount == null ? null :
+                            DatabaseController.CurrentUserBankAccount.CuentaId.Id,
+                        UsuarioId = DatabaseController.CurrentUser.Id,
+                        CodigoOperacion =
+                            DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
+                        OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? 0 :
+                        DatabaseController.CurrentDepositOrigin.Id
                     };
-                    _detailTransactions.Add(
-                    transactionDetails.Add(transactionDetail)
-                    );
-                }
-            }
+                    _headerTransaction.Add(transactions.Add(transaction));
+                    _operationStatus.CurrentTransactionId = transaction.Id;
 
-            transactions.EndTransaction(true);
+                }
+                else
+                {
+                    transactions.Items(_operationStatus.CurrentTransactionId);
+                    if (transactions.Result.Count > 0)
+                    {
+                        var previousTransaction = transactions.Result.FirstOrDefault();
+                        previousTransaction.TotalValidado = _operationStatus.CurrentTransactionAmount;
+
+                        transactions.Update(previousTransaction);
+                    }
+                }
+
+                Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = 
+                    new Depositario.Business.Tables.Operacion.TransaccionDetalle (transactions);
+
+                foreach (var item in _detectedDenominations)
+                {
+                    if (item.CantidadDetectada > 0)
+                    {
+                        Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle transactionDetail = new()
+                        {
+                            CantidadUnidades = item.CantidadDetectada,
+                            DenominacionId = item.Id,
+                            Fecha = DateTime.Now,
+                            TransaccionId = _operationStatus.CurrentTransactionId
+
+                        };
+                        _detailTransactions.Add(
+                        transactionDetails.Add(transactionDetail)
+                        );
+                    }
+                }
+
+                transactions.EndTransaction(true);
 
             }
             catch (Exception ex)
