@@ -33,10 +33,10 @@
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.MainGridView = new System.Windows.Forms.DataGridView();
             this.FilterPanel = new System.Windows.Forms.Panel();
-            this.FromFechaCierreDateTimeLabel = new System.Windows.Forms.Label();
-            this.FromFechaCierreDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ToFechaCierreDateTimeLabel = new System.Windows.Forms.Label();
             this.ToFechaCierreDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.FromFechaCierreDateTimeLabel = new System.Windows.Forms.Label();
+            this.FromFechaCierreDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ExecuteBagHistorySearch = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.IdentificadorTextbox = new System.Windows.Forms.TextBox();
             this.IdentificadorLabel = new System.Windows.Forms.Label();
@@ -98,6 +98,7 @@
             this.MainGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MainGridView.Size = new System.Drawing.Size(924, 368);
             this.MainGridView.TabIndex = 192;
+            this.MainGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MainGridView_CellClick);
             this.MainGridView.Click += new System.EventHandler(this.MainGridView_Click);
             // 
             // FilterPanel
@@ -120,27 +121,6 @@
             this.FilterPanel.Size = new System.Drawing.Size(950, 88);
             this.FilterPanel.TabIndex = 193;
             // 
-            // FromFechaCierreDateTimeLabel
-            // 
-            this.FromFechaCierreDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.FromFechaCierreDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FromFechaCierreDateTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.FromFechaCierreDateTimeLabel.Location = new System.Drawing.Point(364, 12);
-            this.FromFechaCierreDateTimeLabel.Name = "FromFechaCierreDateTimeLabel";
-            this.FromFechaCierreDateTimeLabel.Size = new System.Drawing.Size(170, 27);
-            this.FromFechaCierreDateTimeLabel.TabIndex = 208;
-            this.FromFechaCierreDateTimeLabel.Text = "*";
-            // 
-            // FromFechaCierreDateTimePicker
-            // 
-            this.FromFechaCierreDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FromFechaCierreDateTimePicker.Location = new System.Drawing.Point(364, 44);
-            this.FromFechaCierreDateTimePicker.Name = "FromFechaCierreDateTimePicker";
-            this.FromFechaCierreDateTimePicker.ShowCheckBox = true;
-            this.FromFechaCierreDateTimePicker.Size = new System.Drawing.Size(170, 23);
-            this.FromFechaCierreDateTimePicker.TabIndex = 207;
-            this.FromFechaCierreDateTimePicker.ValueChanged += new System.EventHandler(this.FromFechaCierreDateTimePicker_ValueChanged);
-            // 
             // ToFechaCierreDateTimeLabel
             // 
             this.ToFechaCierreDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
@@ -161,6 +141,27 @@
             this.ToFechaCierreDateTimePicker.Size = new System.Drawing.Size(170, 23);
             this.ToFechaCierreDateTimePicker.TabIndex = 209;
             this.ToFechaCierreDateTimePicker.ValueChanged += new System.EventHandler(this.ToFechaCierreDateTimePicker_ValueChanged);
+            // 
+            // FromFechaCierreDateTimeLabel
+            // 
+            this.FromFechaCierreDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.FromFechaCierreDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FromFechaCierreDateTimeLabel.ForeColor = System.Drawing.Color.White;
+            this.FromFechaCierreDateTimeLabel.Location = new System.Drawing.Point(364, 12);
+            this.FromFechaCierreDateTimeLabel.Name = "FromFechaCierreDateTimeLabel";
+            this.FromFechaCierreDateTimeLabel.Size = new System.Drawing.Size(170, 27);
+            this.FromFechaCierreDateTimeLabel.TabIndex = 208;
+            this.FromFechaCierreDateTimeLabel.Text = "*";
+            // 
+            // FromFechaCierreDateTimePicker
+            // 
+            this.FromFechaCierreDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FromFechaCierreDateTimePicker.Location = new System.Drawing.Point(364, 44);
+            this.FromFechaCierreDateTimePicker.Name = "FromFechaCierreDateTimePicker";
+            this.FromFechaCierreDateTimePicker.ShowCheckBox = true;
+            this.FromFechaCierreDateTimePicker.Size = new System.Drawing.Size(170, 23);
+            this.FromFechaCierreDateTimePicker.TabIndex = 207;
+            this.FromFechaCierreDateTimePicker.ValueChanged += new System.EventHandler(this.FromFechaCierreDateTimePicker_ValueChanged);
             // 
             // ExecuteBagHistorySearch
             // 

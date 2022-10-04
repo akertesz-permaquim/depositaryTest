@@ -2087,5 +2087,20 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return resultado;
         }
 
+
+        public static void CreateEvent(EventTypeEnum eventTypeEnum, string nombre,string Descripcion, bool esBloquente)
+        {
+            Permaquim.Depositario.Business.Tables.Operacion.Evento evento = new();
+            evento.Add(new Depositario.Entities.Tables.Operacion.TipoEvento()
+            {
+                Descripcion = Descripcion,
+                EsBloqueante = esBloquente,
+                FechaCreacion = DateTime.Now,
+                Habilitado = true,
+                Nombre = nombre,
+                UsuarioCreacion = CurrentUser.Id
+
+            });
+        }
     }
 }

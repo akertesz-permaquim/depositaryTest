@@ -425,9 +425,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
+            TimeOutController.Reset();
             DetailPanel.Visible = false;
         }
 
+        private void DetailGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void DetailLabel_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
     }
 }
 

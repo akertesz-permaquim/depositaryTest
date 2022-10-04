@@ -321,5 +321,15 @@
             Information,
             Navigation
         }
+
+        public enum EventTypeEnum
+        {
+            Ninguno,
+            Apertura_de_Puerta,
+            Cambio_de_Contenedor,
+            Alarma_de_Contenedor_Mal_Ubicado,
+            Alarma_De_Exclusa,
+            Estado_Fuera_De_Servicio
+        }
     }
 }

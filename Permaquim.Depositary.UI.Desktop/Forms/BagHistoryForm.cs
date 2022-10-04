@@ -24,6 +24,11 @@ namespace Permaquim.Depositary.UI.Desktop
             ResetReport();
 
             TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval()
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
 
         }
 
@@ -312,6 +317,11 @@ namespace Permaquim.Depositary.UI.Desktop
         }
 
         private void IdentificadorTextbox_TextChanged(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void MainGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
         }

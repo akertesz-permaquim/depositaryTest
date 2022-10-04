@@ -289,8 +289,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     (DatabaseController.CurrentOperation == null ||
                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
                 {
-                    AuditController.Log(LogTypeEnum.Exception, MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA),
-                    MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
+                    string message = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA);
+                    AuditController.Log(LogTypeEnum.Exception, message, message);
+
+                    DatabaseController.CreateEvent(EventTypeEnum.Apertura_de_Puerta, message, message, true);
+
 
                     if (ParameterController.PrintsBagExtraction)
                     {
