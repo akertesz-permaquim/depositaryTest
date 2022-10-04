@@ -90,22 +90,28 @@ namespace Permaquim.Depositary.UI.Desktop
                     {
                         if (DatabaseController.UserAllowedInSector())
                         {
-                            if (currentUser.DebeCambiarPassword || DatabaseController.UserExpirationDateReached())
+
+                            if (currentUser.DebeCambiarPassword)
                             {
                                 MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.DEBECAMBIARPASSWORD));
+                                return;
                             }
-                            else
+
+                            if (DatabaseController.UserExpirationDateReached())
                             {
-                                MultilanguangeController.ResetLanguage();
+                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_USUARIO_EXPIRADA));
+                                return;
+                            }
 
-                                DatabaseController.GetTurnSchedule();
+                            MultilanguangeController.ResetLanguage();
 
-                                if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
-                                {
-                                    MainKeyboard.ClearCredentials();
-                                    FormsController.OpenChildForm(this, new OperationForm(),
-                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                                }
+                            DatabaseController.GetTurnSchedule();
+
+                            if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
+                            {
+                                MainKeyboard.ClearCredentials();
+                                FormsController.OpenChildForm(this, new OperationForm(),
+                                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                             }
                         }
                         else

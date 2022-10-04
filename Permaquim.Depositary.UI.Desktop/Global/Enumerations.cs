@@ -212,6 +212,7 @@
             TIEMPO_DE_ENCUESTA_NO_PUEDE_SER_CERO,
             TIEMPO_DE_ESPERA_NO_PUEDE_SER_CERO,
             DEBECAMBIARPASSWORD,
+            CUENTA_USUARIO_EXPIRADA,
             SOBRE,
             SOBRES,
             RETIRAR_SOBRE,
