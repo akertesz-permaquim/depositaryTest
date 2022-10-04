@@ -179,6 +179,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        public static int BagMaxPercentage
+        {
+            get
+            {
+                return Convert.ToInt16(DatabaseController.GetEnterpriseParameterValue("PORCENTAJE_CONTENEDOR_ROJO"));
+
+            }
+
+        }
+
         public static bool ValidatesBagInplace
         {
             get
@@ -187,7 +197,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
-        
+        public static bool ForcedValueExtractionNeedsAuthorization
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("EXTRACCION_BOLSA_REQUIERE_AUTORIZACION"));
+            }
+
+        }
 
     }
 }

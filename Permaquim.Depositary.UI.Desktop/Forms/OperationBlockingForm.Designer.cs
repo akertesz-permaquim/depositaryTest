@@ -65,6 +65,7 @@
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "OperationBlockingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OperationBlockingForm";
             this.Load += new System.EventHandler(this.OperationBlockingForm_Load);
             this.ResumeLayout(false);

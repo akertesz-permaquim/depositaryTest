@@ -115,7 +115,10 @@
             None = 0,
             NoTurn,
             NoBag,
-            PortError
+            PortError,
+            CounterCommunicationError,
+            IoBoardCommunicationError,
+            BagMaxVolumeReached
         }
         public enum DepositaryConfigurationEnum
         {
@@ -284,6 +287,8 @@
             ERROR_FALTA_DATO,
             ERROR_DATO,
             ERROR_PUERTO,
+            ERROR_COMUNICACION_CONTADORA,
+            ERROR_COMUNICACION_PLACA,
             TOQUE_PANTALLA_PARA_INICIAR,
             TICKET_NO_CONFIGURADO,
             FECHA_APERTURA_DESDE,

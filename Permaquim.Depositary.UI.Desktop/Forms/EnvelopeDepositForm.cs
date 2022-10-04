@@ -435,16 +435,16 @@ namespace Permaquim.Depositary.UI.Desktop
 
 
             // Si el escrow está cerrado y no tiene contenido, se debe volver a abrid
-            if (
-                _operationStatus.GeneralStatus == StatusInformation.State.PQClosingEscrow
-                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
-                && _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
-            {
-                _operationStatus.DepositConfirmed = false;
-                _device.OpenEscrow();
-                _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
-                ButtonsPanel.Visible = true;
-            }
+            //if (
+            //    _operationStatus.GeneralStatus == StatusInformation.State.PQClosingEscrow
+            //    && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
+            //    && _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
+            //{
+            //    _operationStatus.DepositConfirmed = false;
+            //    _device.OpenEscrow();
+            //    _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+            //    ButtonsPanel.Visible = true;
+            //}
 
         }
         /// <summary>

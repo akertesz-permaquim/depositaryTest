@@ -325,7 +325,6 @@ namespace Permaquim.Depositary.UI.Desktop
                     DetailPanel.Anchor = AnchorStyles.None;
 
                     DetailPanel.Visible = true;
-
                 }
             }
         }
