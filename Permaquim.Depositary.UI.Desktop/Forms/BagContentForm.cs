@@ -317,13 +317,16 @@ namespace Permaquim.Depositary.UI.Desktop
                 var currencyId = BillDepositGridView.Rows[e.RowIndex].Cells[1].Value;
                 DetailGridView.DataSource = DatabaseController.GetBillBagContentItems((long)currencyId);
 
+                if (DatabaseController.GetBillBagContentItems((long)currencyId).Count > 0)
+                {
+                    DetailPanel.Location = new Point(
+                        this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
+                        this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
+                    DetailPanel.Anchor = AnchorStyles.None;
 
-                DetailPanel.Location = new Point(
-                    this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
-                    this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
-                DetailPanel.Anchor = AnchorStyles.None;
+                    DetailPanel.Visible = true;
 
-                DetailPanel.Visible = true;
+                }
             }
         }
 
