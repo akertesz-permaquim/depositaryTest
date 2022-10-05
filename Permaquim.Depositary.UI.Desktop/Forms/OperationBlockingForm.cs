@@ -104,7 +104,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void InformationLabel_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, InformationLabel.DisplayRectangle, InformationLabel.ForeColor, ButtonBorderStyle.Solid);
+            //ControlPaint.DrawBorder(e.Graphics, InformationLabel.DisplayRectangle, InformationLabel.ForeColor, ButtonBorderStyle.Solid);
         }
     }
 }

@@ -124,7 +124,7 @@
             // ToFechaCierreDateTimeLabel
             // 
             this.ToFechaCierreDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.ToFechaCierreDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ToFechaCierreDateTimeLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ToFechaCierreDateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.ToFechaCierreDateTimeLabel.Location = new System.Drawing.Point(540, 12);
             this.ToFechaCierreDateTimeLabel.Name = "ToFechaCierreDateTimeLabel";
@@ -145,7 +145,7 @@
             // FromFechaCierreDateTimeLabel
             // 
             this.FromFechaCierreDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.FromFechaCierreDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FromFechaCierreDateTimeLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FromFechaCierreDateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.FromFechaCierreDateTimeLabel.Location = new System.Drawing.Point(364, 12);
             this.FromFechaCierreDateTimeLabel.Name = "FromFechaCierreDateTimeLabel";
@@ -195,7 +195,7 @@
             // IdentificadorLabel
             // 
             this.IdentificadorLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.IdentificadorLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.IdentificadorLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.IdentificadorLabel.ForeColor = System.Drawing.Color.White;
             this.IdentificadorLabel.Location = new System.Drawing.Point(716, 12);
             this.IdentificadorLabel.Name = "IdentificadorLabel";
@@ -206,7 +206,7 @@
             // FromFechaAperturaDateTimeLabel
             // 
             this.FromFechaAperturaDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.FromFechaAperturaDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FromFechaAperturaDateTimeLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FromFechaAperturaDateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.FromFechaAperturaDateTimeLabel.Location = new System.Drawing.Point(12, 12);
             this.FromFechaAperturaDateTimeLabel.Name = "FromFechaAperturaDateTimeLabel";
@@ -217,7 +217,7 @@
             // ToFechaAperturaDateTimeLabel
             // 
             this.ToFechaAperturaDateTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.ToFechaAperturaDateTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ToFechaAperturaDateTimeLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ToFechaAperturaDateTimeLabel.ForeColor = System.Drawing.Color.White;
             this.ToFechaAperturaDateTimeLabel.Location = new System.Drawing.Point(188, 12);
             this.ToFechaAperturaDateTimeLabel.Name = "ToFechaAperturaDateTimeLabel";

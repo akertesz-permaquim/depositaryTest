@@ -127,7 +127,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.BillDeposit:
 
-                    if (!_device.CounterConnected)
+                    if (_device != null && !_device.CounterConnected)
                     {
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
                         operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
@@ -181,12 +181,13 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
 
                     break;
+
                 case (int)OperationTypeEnum.EnvelopeDeposit:
 
-                    if (!_device.CounterConnected)
+                    if (_device != null && !_device.CounterConnected)
                     {
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
-                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.IoBoardCommunicationError;
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
                         operationBlockingForm.ShowDialog();
                         return;
                     }
@@ -240,10 +241,12 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
 
                     break;
+
                 case (int)OperationTypeEnum.ValueExtraction:
                     FormsController.OpenChildForm(this, new BagExtractionForm(),
                         (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                     break;
+
                 default:
                     break;
             }

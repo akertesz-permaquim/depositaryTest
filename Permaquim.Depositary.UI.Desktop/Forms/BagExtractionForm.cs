@@ -424,7 +424,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 var _bagContentItems = DatabaseController.GetBillBagContentItems();
                 _bagContentItems.AddRange( DatabaseController.GetEnvelopeBagContentItems());
 
-
                 if (!_alreadyPrinted)
                 {
                     for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)

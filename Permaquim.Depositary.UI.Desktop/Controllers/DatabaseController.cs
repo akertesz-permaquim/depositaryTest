@@ -1692,6 +1692,65 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
         }
 
+        public static bool IsFuntionEnabled(long functionId,long userId)
+        {
+            bool returnValue = false;
+
+            try
+            {
+                if (CurrentUser == null)
+                {
+                    returnValue = false;
+                }
+                else
+                {
+                    // Obtiene los roles de la aplicación
+                    Permaquim.Depositario.Business.Tables.Seguridad.Rol rolEntities = new();
+                    rolEntities.Where.Add(Depositario.Business.Tables.Seguridad.Rol.ColumnEnum.AplicacionId,
+                         Depositario.sqlEnum.OperandEnum.Equal, Global.Constants.APPLICATION_ID);
+
+                    rolEntities.Items();
+
+                    List<long> roles = rolEntities.Result.DistinctBy(x => x.Id).Select(x => x.Id).ToList();
+
+
+                    Permaquim.Depositario.Business.Tables.Seguridad.UsuarioRol usuarioRolEntities = new();
+                    usuarioRolEntities.Where.Add(Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.UsuarioId,
+                         Depositario.sqlEnum.OperandEnum.Equal, userId);
+                    usuarioRolEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                        Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.RolId,
+                         Depositario.sqlEnum.OperandEnum.In, roles);
+
+                    usuarioRolEntities.Items();
+
+                    if (usuarioRolEntities.Result.Count > 0)
+                    {
+
+                        Permaquim.Depositario.Business.Tables.Seguridad.RolFuncion rolFuncionEntities = new();
+                        rolFuncionEntities.Where.Add(Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.FuncionId,
+                            Depositario.sqlEnum.OperandEnum.Equal, functionId);
+                        rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                            Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.RolId,
+                            Depositario.sqlEnum.OperandEnum.Equal, usuarioRolEntities.Result.FirstOrDefault().RolId);
+                        rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                             Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.Habilitado,
+                             Depositario.sqlEnum.OperandEnum.Equal, true);
+
+
+                        rolFuncionEntities.Items();
+                        if (rolFuncionEntities.Result.Count > 0)
+                            returnValue = rolFuncionEntities.Result.FirstOrDefault().PuedeVisualizar;
+                    }
+                }
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                return returnValue;
+            }
+        }
+
         public static bool IsFuntionEnabled(string functionName)
         {
             bool returnValue = false;

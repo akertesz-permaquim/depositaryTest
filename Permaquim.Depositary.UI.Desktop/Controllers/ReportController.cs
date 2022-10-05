@@ -22,14 +22,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
 
+        private static string _fechaHora;
+
         public static void PrintReport(ReportTypeEnum reportType,
             dynamic header,dynamic details,int copyIndex)
         {
             if (copyIndex == 0)
-                _copyInstance = "********ORIGINAL*******";
+                _copyInstance = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESION_ORIGINAL);
             else
-                _copyInstance = "********COPIA*********";
-
+                _copyInstance = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESION_COPIA);
 
             if (header == null || details == null)
             {
@@ -37,6 +38,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     MultilanguangeController.GetText(MultiLanguageEnum.ERROR_DATO));
                 return;
             }
+
+            _fechaHora =  MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA);
 
             _header = header;
             _details = details;
@@ -212,7 +215,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             e.Graphics.DrawString(
                 //"DENOMINACION CANTIDAD TOTAL"
-                String.Format("{0,1}\t{1,5}\t{2,5}",
+                String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_TRES_COLUMNAS),
                 MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION) + "     ",
                 MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD) + "     ",
                 MultilanguangeController.GetText(MultiLanguageEnum.TOTAL))
@@ -238,7 +241,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString().Length );
 
                 e.Graphics.DrawString(
-                String.Format("{0,1}\t{1,10}\t{2,10}\t{3,10}",
+                String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_CUATRO_COLUMNAS),
                     _details[i].DenominacionId.MonedaId.Codigo, 
                     _details[i].DenominacionId.Nombre, 
                     _details[i].CantidadUnidades.ToString(),
@@ -282,7 +285,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             //Pie
-            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie, 
+            e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + "\t" + _ticket.TextoPie, 
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 
@@ -432,7 +435,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             //Pie
-            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
+            e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 
@@ -582,7 +585,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             //Pie
-            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
+            e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 
@@ -631,18 +634,25 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             // Referencia
             e.Graphics.DrawString(
              MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + ": " +
-             DatabaseController.CurrentTurn.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre
-              , _font,
-            Brushes.Black,
+             DatabaseController.CurrentTurn.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre, _font,Brushes.Black,
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
+
             if (DatabaseController.CurrentUser != null)
             {
                 // Usuario
                 e.Graphics.DrawString(
                  MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " + DatabaseController.CurrentUser.NombreApellido
-                  , _font,
-                Brushes.Black,
+                  , _font, Brushes.Black,
+                _headerTextStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+            }
+            else
+            {
+                // Usuario no registrado
+                e.Graphics.DrawString(
+                 MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " +
+                 MultilanguangeController.GetText(MultiLanguageEnum.SIN_USUARIO) , _font, Brushes.Black,
                 _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
             }
@@ -703,14 +713,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             e.Graphics.DrawString(
            //"DENOMINACION CANTIDAD TOTAL"
-           String.Format("{0,1}\t{1,5}\t{2,5}",
+           String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_TRES_COLUMNAS) ,
            MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION) + "     ",
            MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD) + "     ",
            MultilanguangeController.GetText(MultiLanguageEnum.TOTAL))
-           , _font,
-      Brushes.Black,
-      _detailStart_X, yOffset, new StringFormat());
-
+           , _font, Brushes.Black, _detailStart_X, yOffset, new StringFormat());
 
             long defaultCurrencyId = DatabaseController.DefaultCurrency().Id;
 
@@ -744,7 +751,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                                                       //    (_details[i].CantidadUnidades * _details[i].DenominacionId.Unidades).ToString().Length);
 
                     e.Graphics.DrawString(
-                    String.Format("{0,1}\t{1,10}\t{2,10}",
+                        String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_TRES_COLUMNAS),
                         currentContainerTransactionItem.Moneda + ": " + currentContainerTransactionItem.Denominacion,
                         currentContainerTransactionItem.Cantidad,
                            (currentContainerTransactionItem.Cantidad * currentContainerTransactionItem.UnidadesDenominacion).ToString("C2"))
@@ -790,7 +797,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             //Pie
-            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
+            e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 
@@ -811,7 +818,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             int yOffset;
             const int MaxCharacterLenght = 33;
 
-            var currentDailyClosingOperations = _details; //DatabaseController.GetDailyClosingItems();
+            var currentDailyClosingOperations = _details;
 
             // dibuja el gráfico
             e.Graphics.DrawImage(_image, _rectangle);
@@ -885,7 +892,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             e.Graphics.DrawString(
            //"DENOMINACION CANTIDAD TOTAL"
-           String.Format("{0,1}\t{1,5}\t{2,5}",
+           String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_TRES_COLUMNAS),
            MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION) + "     ",
            MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD) + "     ",
            MultilanguangeController.GetText(MultiLanguageEnum.TOTAL))
@@ -908,7 +915,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                                                          currentDailyClosingItem.UnidadesDenominacion).ToString().Length;
 
                     e.Graphics.DrawString(
-                    String.Format("{0,1}\t{1,10}\t{2,10}",
+                    String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_TRES_COLUMNAS),
                         currentDailyClosingItem.Moneda + ": " + currentDailyClosingItem.Denominacion,
                         currentDailyClosingItem.Cantidad,
                            (currentDailyClosingItem.Cantidad * currentDailyClosingItem.UnidadesDenominacion).ToString("C2"))
@@ -948,7 +955,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             //Pie
-            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
+            e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 
@@ -1059,7 +1066,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             e.Graphics.DrawString(
            //"DENOMINACION CANTIDAD TOTAL"
-           String.Format("{0,1}\t{1,5}\t{2,5}",
+           String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_TRES_COLUMNAS),
            MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION) + "     ",
            MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD) + "     ",
            MultilanguangeController.GetText(MultiLanguageEnum.TOTAL))
@@ -1082,7 +1089,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                                                          currentTurnItem.UnidadesDenominacion).ToString().Length;
 
                     e.Graphics.DrawString(
-                    String.Format("{0,1}\t{1,10}\t{2,10}",
+                    String.Format(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_TRES_COLUMNAS),
                         currentTurnItem.Moneda + ": " + currentTurnItem.Denominacion,
                         currentTurnItem.Cantidad,
                            (currentTurnItem.Cantidad * currentTurnItem.UnidadesDenominacion).ToString("C2"))
@@ -1122,7 +1129,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             yOffset += _interlineSpace;
 
             //Pie
-            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "\t" + _ticket.TextoPie,
+            e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + "\t" + _ticket.TextoPie,
                 _font, Brushes.Black,
             _detailStart_X, yOffset, new StringFormat());
 

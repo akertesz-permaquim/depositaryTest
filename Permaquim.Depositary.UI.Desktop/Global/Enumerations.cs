@@ -118,7 +118,8 @@
             PortError,
             CounterCommunicationError,
             IoBoardCommunicationError,
-            BagMaxVolumeReached
+            BagMaxVolumeReached,
+            DoorWasOpened
         }
         public enum DepositaryConfigurationEnum
         {
@@ -151,6 +152,7 @@
         public enum MultiLanguageEnum
         {
             TITULO_LOGIN,
+            INGRESE_CRDENCIALES_AUTORIZACION,
             PLACEHOLDER_TEXTO_USUARIO,
             PLACEHOLDER_TEXTO_PASSWORD,
             FALTA_USUARIO_PASSWORD,
@@ -195,6 +197,7 @@
             USUARIOCUENTA,
             ORIGEN_VALOR,
             USUARIO,
+            SIN_USUARIO,
             TURNO,
             TOTAL,
             TOTAL_VALIDADO,
@@ -216,6 +219,7 @@
             TIEMPO_DE_ESPERA_NO_PUEDE_SER_CERO,
             DEBECAMBIARPASSWORD,
             CUENTA_USUARIO_EXPIRADA,
+            NO_POSEE_PERMISOS,
             SOBRE,
             SOBRES,
             RETIRAR_SOBRE,
@@ -295,7 +299,12 @@
             FECHA_APERTURA_HASTA,
             FECHA_CIERRE_DESDE,
             FECHA_CIERRE_HASTA,
-            IDENTIFICADOR
+            IDENTIFICADOR,
+            IMPRESION_ORIGINAL,
+            IMPRESION_COPIA,
+            FORMATO_FECHA_HORA_COMPLETA,
+            FORMATO_TRES_COLUMNAS,
+            FORMATO_CUATRO_COLUMNAS
         }
 
         public enum FunctionEnum

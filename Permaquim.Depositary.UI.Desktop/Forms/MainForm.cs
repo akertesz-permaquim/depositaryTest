@@ -81,7 +81,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 if (DatabaseController.CurrentDepositary == null)
                 {
                     InformationLabel.BackColor = Color.Red;
-                    InformationLabel.Text = "DEPOSITARIO NO INICIALIZADO";
+                    InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
                     return;
                 }
 
@@ -304,18 +304,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                         DatabaseController.CreateEvent(EventTypeEnum.Apertura_de_Puerta, message, message);
 
-
-                        if (ParameterController.PrintsBagExtraction)
-                        {
-                            for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
-                            {
-                                var _bagContentItems = DatabaseController.GetBillBagContentItems();
-                                _bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
-                                ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                                DatabaseController.CurrentContainer, _bagContentItems, 0);
-                            }
-                        }
-
                         _blockingDialog = new SystemBlockingDialog()
                         {
                             Tag = this.Tag,
@@ -335,19 +323,26 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void VerifyBagExtracted()
         {
-            if (_device.IoBoardConnected)
+            if (DatabaseController.CurrentOperation == null ||
+                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction)
             {
-                if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
+                if (_device.IoBoardConnected)
                 {
-                    if (!_bagRemoved)
-                        // Se asume retiro de bolsa
-                        DatabaseController.CreateContainer();
-                    PrintBagTicket();
-                    _bagRemoved = true;
-                }
-                if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)
-                {
-                    _bagRemoved = false;
+                    if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
+                    {
+                        if (!_bagRemoved)
+                        {
+                            // Se asume retiro de bolsa
+                            DatabaseController.CreateContainer();
+
+                            PrintBagTicket();
+                            _bagRemoved = true;
+                        }
+                    }
+                    if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)
+                    {
+                        _bagRemoved = false;
+                    }
                 }
             }
         }
