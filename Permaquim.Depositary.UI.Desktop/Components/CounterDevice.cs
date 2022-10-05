@@ -17,6 +17,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private SerialPort _counterPort;
         private SerialPort _ioboardPort;
 
+        private long _counterLastBytesRead = 0;
+        private long _ioBoardLastBytesRead = 0;
 
         private static string _readbuffer = string.Empty;
 
@@ -403,7 +405,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
                 if (_buffer.Count > 100)
                     DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
-
+                _counterLastBytesRead = _buffer.Count;
 
                 _buffer.Clear();
 
@@ -424,6 +426,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
             else
             {
+                _counterLastBytesRead = 0;
+
                 Log("COMMAND NOT SENT: Sense. Port is closed.");
                 return StateResultProperty;
             }
@@ -891,6 +895,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             while (true)
             {
                 var bytes = _ioboardPort.BytesToRead;
+                
+
                 if (bytes > 0)
                 {
                     byte[] buffer = new byte[bytes];
@@ -902,6 +908,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     break;
                 }
             }
+            
+            _ioBoardLastBytesRead = _buffer.Count;
 
             if (IOboardDeviceDataReceived != null)
             {
@@ -1083,6 +1091,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     result.ParseStatus(ReadIoBoardResponse());
 
                     _ioBoardStatus = result;
+                }
+                else
+                {
+                    _ioBoardLastBytesRead = 0;
                 }
                 return result;
             }
@@ -1510,8 +1522,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (_counterPort == null)
                     return false;
                 else
-                    return Ports.Exists(e => e.EndsWith(_counterPort.PortName));
-                
+                    //return Ports.Exists(e => e.EndsWith(_counterPort.PortName));
+                    return _counterLastBytesRead > 0;
             }
 
         }
@@ -1523,8 +1535,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (_ioboardPort == null)
                     return false;
                 else
-                    return Ports.Exists(e => e.EndsWith(_ioboardPort.PortName));
-
+                    //return Ports.Exists(e => e.EndsWith(_ioboardPort.PortName));
+                    return _ioBoardLastBytesRead > 0;
             }
         }
         public void IoBoardReconnect()

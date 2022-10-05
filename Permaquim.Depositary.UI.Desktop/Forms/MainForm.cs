@@ -414,7 +414,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             else
             {
                 CounterPictureBox.Image = _redLedImage;
-                //_device.CounterBoardReconnect();
+                _device.CounterBoardReconnect();
             }
 
             _ioBoardStatus = _device.Status();
@@ -427,7 +427,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             else
             {
                 IoBoardPictureBox.Image = _redLedImage;
-                //_device.IoBoardReconnect();
+                _device.IoBoardReconnect();
             }
         }
 
