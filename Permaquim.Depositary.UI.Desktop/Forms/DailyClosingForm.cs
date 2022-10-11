@@ -15,7 +15,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<DailyClosingItem> _dailyClosingItems = new();
         private Depositario.Entities.Tables.Operacion.CierreDiario _currentDailyclosing = new();
 
-        private bool _alreadyPrinted;
         public DailyClosingForm()
         {
             InitializeComponent();
@@ -211,7 +210,6 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             // inicializar las variables locales
             DenominationsGridView.DataSource = null;
-            _alreadyPrinted = false;
         }
 
         private void DenominationsGridView_SelectionChanged(object sender, EventArgs e)
@@ -228,13 +226,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (ParameterController.PrintsDailyClosing)
             {
-                if (!_alreadyPrinted)
+                for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                 {
-                    for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
-                    {
-                        ReportController.PrintReport(ReportTypeEnum.DailyClosing,null,null, i);
-                        _alreadyPrinted = true;
-                    }
+                    ReportController.PrintReport(ReportTypeEnum.DailyClosing, 
+                        DatabaseController.CurrentDailyClosing, 
+                        DatabaseController.GetDailyClosingDetail(DatabaseController.CurrentDailyClosing.Id), i);
+
                 }
             }
         }

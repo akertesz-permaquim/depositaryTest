@@ -1,6 +1,7 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Builders;
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
@@ -367,6 +368,40 @@ namespace Permaquim.Depositary.UI.Desktop
         private void InitializeLocals()
         {
             _transactions = new();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //var _bagContentItems = DatabaseController.GetBillBagContentItems();
+            //_bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
+
+            //for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
+            //{
+            //    ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+            //        DatabaseController.CurrentContainer, _bagContentItems, i);
+            //}
+
+
+            //if (ParameterController.PrintsTurnChange)
+            //{
+            //    for (int i = 0; i < ParameterController.PrintTurnChangeQuantity; i++)
+            //    {
+            //        ReportController.PrintReport(ReportTypeEnum.TurnChange, DatabaseController.CurrentTurn, DatabaseController.GetCurrentTurnTransactions(), i);
+            //    }
+            //}
+
+            if (ParameterController.PrintsDailyClosing)
+            {
+                for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
+                {
+                    ReportController.PrintReport(ReportTypeEnum.DailyClosing,
+                        DatabaseController.CurrentDailyClosing,
+                        DatabaseController.GetDailyClosingItems(), i);
+
+                }
+            }
+
+
         }
     }
 }

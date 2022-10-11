@@ -1978,6 +1978,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     transactionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                         Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.MonedaId,
                         Depositario.sqlEnum.OperandEnum.Equal, currencyItem.Id);
+                    transactionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                        Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.TipoId,
+                        Depositario.sqlEnum.OperandEnum.NotEqual, Global.Enumerations.OperationTypeEnum.ValueExtraction);
+
                     transactionEntities.OrderBy.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.TipoId);
 
                     foreach (var transaccionItem in transactionEntities.Items())
