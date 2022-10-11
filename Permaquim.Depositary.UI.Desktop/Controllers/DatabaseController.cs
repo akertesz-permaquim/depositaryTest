@@ -476,7 +476,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Fecha = DateTime.Now,
                 Finalizada = true,
                 MonedaId = DefaultCurrency().Id,
-                OrigenValorId = 0, // NO ESPECIFICADO
+                OrigenValorId = null, // NO ESPECIFICADO
                 SectorId = CurrentDepositary.SectorId.Id,
                 SesionId = CurrentSession.Id,
                 SucursalId = CurrentDepositary.SectorId.SucursalId.Id,
@@ -484,7 +484,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 TotalAValidar = 0,
                 TotalValidado = 0,
                 TurnoId = CurrentTurn.Id,
-                UsuarioId = CurrentUser.Id
+                UsuarioId = CurrentUser == null ? 0 : CurrentUser.Id
 
             });
 
@@ -2192,6 +2192,29 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             });
 
+        }
+
+        public static Depositario.Entities.Tables.Impresion.Ticket GetTicket(ReportTypeEnum reportType)
+        {
+
+            Depositario.Entities.Tables.Impresion.Ticket resultValue = null;
+
+            Depositario.Business.Tables.Impresion.Ticket ticket = new();
+            ticket.Where.Add(Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.TipoId,
+                Depositario.sqlEnum.OperandEnum.Equal, (int)reportType);
+            ticket.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.DepositarioModeloId,
+                Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary.ModeloId.Id);
+            ticket.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Impresion.Ticket.ColumnEnum.EmpresaId,
+            Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.Id);
+
+            ticket.Items();
+            if (ticket.Result.Count > 0)
+            {
+                resultValue = ticket.Result.FirstOrDefault();
+            }
+            return resultValue;
         }
     }
 }
