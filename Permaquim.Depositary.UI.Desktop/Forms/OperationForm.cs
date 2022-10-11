@@ -127,13 +127,23 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.BillDeposit:
 
-                    //if (DatabaseController.GetPreviousDaysTurns() >= 0)
-                    //{
-                    //    FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                    //    MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
-                    //}
+                    if (_device != null && !_device.CounterConnected)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
+                        operationBlockingForm.ShowDialog();
+                        return;
+                    }
 
-                    if (DatabaseController.CurrentTurn != null)
+                    if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.BagMaxVolumeReached;
+                        operationBlockingForm.ShowDialog();
+                        return;
+                    }
+
+            if (DatabaseController.CurrentTurn != null)
                     {
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
@@ -171,20 +181,27 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
 
                     break;
+
                 case (int)OperationTypeEnum.EnvelopeDeposit:
-                    //if (DatabaseController.GetPreviousDaysTurns() >= 0)
-                    //{
+
+                    if (_device != null && !_device.CounterConnected)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
+                        operationBlockingForm.ShowDialog();
+                        return;
+                    }
+
+                    if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.BagMaxVolumeReached;
+                        operationBlockingForm.ShowDialog();
+                        return;
+                    }
 
                     if (DatabaseController.CurrentTurn != null)
                     {
-                        //if (DatabaseController.GetCurrencyValueRelations().Count == 1)
-                        //{
-                        //    DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                        //    FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
-                        //    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                        //}
-                        //else
-                        //{
                         FormsController.OpenChildForm(this, new CurrencySelectorForm(),
                         (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                         //}
@@ -223,17 +240,13 @@ namespace Permaquim.Depositary.UI.Desktop
                         }
                     }
 
-                    //}
-                    //else
-                    //{
-                    //    FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                    //        MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
-                    //}
                     break;
+
                 case (int)OperationTypeEnum.ValueExtraction:
                     FormsController.OpenChildForm(this, new BagExtractionForm(),
                         (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                     break;
+
                 default:
                     break;
             }

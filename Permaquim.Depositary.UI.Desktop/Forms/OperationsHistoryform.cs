@@ -508,7 +508,11 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
+<<<<<<< HEAD
             OperationsDetailGridView.DataSource = null;
+=======
+
+>>>>>>> 64b31373d3485f7fc51f9af5b4d94b10363b129b
             if (e.RowIndex > -1)
             {
                 DetailPanel.Location = new Point(
@@ -518,6 +522,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 DetailPanel.Visible = true;
 
+<<<<<<< HEAD
+=======
+                OperationsDetailGridView.DataSource = null;
+
+>>>>>>> 64b31373d3485f7fc51f9af5b4d94b10363b129b
                 if (OperationsHeaderGridView.Rows[e.RowIndex].Cells["Id"] != null)
                 {
                     _operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["Id"].Value;

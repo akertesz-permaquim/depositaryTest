@@ -36,10 +36,10 @@
             // 
             this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InformationLabel.BackColor = System.Drawing.Color.Red;
             this.InformationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.Red;
+            this.InformationLabel.ForeColor = System.Drawing.Color.White;
             this.InformationLabel.Location = new System.Drawing.Point(32, 93);
             this.InformationLabel.Name = "InformationLabel";
             this.InformationLabel.Size = new System.Drawing.Size(888, 91);
@@ -65,6 +65,7 @@
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "OperationBlockingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OperationBlockingForm";
             this.Load += new System.EventHandler(this.OperationBlockingForm_Load);
             this.ResumeLayout(false);

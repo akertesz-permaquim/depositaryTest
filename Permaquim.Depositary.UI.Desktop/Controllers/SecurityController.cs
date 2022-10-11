@@ -21,6 +21,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             return IsFunctionEnabled(functionId);
         }
-
+        public static bool IsFunctionEnabled(FunctionEnum function,long userId )
+        {
+            return DatabaseController.IsFuntionEnabled((long)function,userId);
+        }
     }
 }

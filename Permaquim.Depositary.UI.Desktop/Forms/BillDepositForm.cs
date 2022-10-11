@@ -815,8 +815,8 @@ namespace Permaquim.Depositary.UI.Desktop
                         UsuarioId = DatabaseController.CurrentUser.Id,
                         CodigoOperacion =
                             DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
-                        OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? 0 :
-                        DatabaseController.CurrentDepositOrigin.Id
+                        OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? null :
+                            DatabaseController.CurrentDepositOrigin.Id
                     };
                     _headerTransaction.Add(transactions.Add(transaction));
                     _operationStatus.CurrentTransactionId = transaction.Id;

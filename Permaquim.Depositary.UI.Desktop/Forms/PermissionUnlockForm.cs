@@ -1,23 +1,23 @@
-using Permaquim.Depositary.UI.Desktop.Controllers;
+﻿using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Controls;
 using Permaquim.Depositary.UI.Desktop.Global;
 using System.Configuration;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
-namespace Permaquim.Depositary.UI.Desktop
+namespace Permaquim.Depositary.UI.Desktop.Forms
 {
-    public partial class KeyboardInputForm : System.Windows.Forms.Form
+    public partial class PermissionUnlockForm : Form
     {
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         private const string ENTER = "{ENTER}";
-        public KeyboardInputForm()
+        public PermissionUnlockForm()
         {
             this.SuspendLayout();
             InitializeComponent();
             MainKeyboard.Visible = false;
             LoadStyles();
             Loadlogo();
-           
+
             TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TITULO_LOGIN);
             MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_USUARIO);
             MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_PASSWORD);
@@ -65,16 +65,16 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CenterPanel()
         {
 
-            MainPanel.Location = new Point()
+            MainKeyboard.Location = new Point()
             {
-                X = this.Width / 2 - MainPanel.Width / 2,
-                Y = this.Height / 2 - MainPanel.Height / 2
+                X = this.Width / 2 - MainKeyboard.Width / 2,
+                Y = this.Height / 2 - MainKeyboard.Height / 2
             };
         }
         private void MainKeyboard_KeyboardEvent(object sender, KeyboardEventArgs args)
         {
             TimeOutController.Reset();
-            
+
             if (args.KeyPressed.Equals(ENTER))
             {
                 if (args.UserText.Trim().Equals(string.Empty) ||
@@ -105,13 +105,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
                             MultilanguangeController.ResetLanguage();
 
-                            DatabaseController.GetTurnSchedule();
+                            if (SecurityController.IsFunctionEnabled(FunctionEnum.ExtraccionDeValores, currentUser.Id))
+                                this.DialogResult = DialogResult.OK;
+                            else
+                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.NO_POSEE_PERMISOS));
 
                             if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
                             {
                                 MainKeyboard.ClearCredentials();
-                                FormsController.OpenChildForm(this, new OperationForm(),
-                                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
                             }
                         }
                         else

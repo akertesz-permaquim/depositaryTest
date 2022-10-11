@@ -47,15 +47,39 @@ namespace Permaquim.Depositary.UI.Desktop
                 case OperationblockingReasonEnum.None:
                     break;
                 case OperationblockingReasonEnum.NoTurn:
+
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 case OperationblockingReasonEnum.NoBag:
+
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 case OperationblockingReasonEnum.PortError:
+
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
+                case OperationblockingReasonEnum.CounterCommunicationError:
+
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
+                case OperationblockingReasonEnum.IoBoardCommunicationError:
+
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_PLACA);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
+                case OperationblockingReasonEnum.BagMaxVolumeReached:
+
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LIMITE_BOLSA_ALCANZADO);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 default:
@@ -80,7 +104,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void InformationLabel_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, InformationLabel.DisplayRectangle, InformationLabel.ForeColor, ButtonBorderStyle.Solid);
+            //ControlPaint.DrawBorder(e.Graphics, InformationLabel.DisplayRectangle, InformationLabel.ForeColor, ButtonBorderStyle.Solid);
         }
     }
 }

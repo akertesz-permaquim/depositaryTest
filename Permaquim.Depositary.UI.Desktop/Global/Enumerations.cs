@@ -115,7 +115,11 @@
             None = 0,
             NoTurn,
             NoBag,
-            PortError
+            PortError,
+            CounterCommunicationError,
+            IoBoardCommunicationError,
+            BagMaxVolumeReached,
+            DoorWasOpened
         }
         public enum DepositaryConfigurationEnum
         {
@@ -148,6 +152,7 @@
         public enum MultiLanguageEnum
         {
             TITULO_LOGIN,
+            INGRESE_CRDENCIALES_AUTORIZACION,
             PLACEHOLDER_TEXTO_USUARIO,
             PLACEHOLDER_TEXTO_PASSWORD,
             FALTA_USUARIO_PASSWORD,
@@ -192,6 +197,7 @@
             USUARIOCUENTA,
             ORIGEN_VALOR,
             USUARIO,
+            SIN_USUARIO,
             TURNO,
             TOTAL,
             TOTAL_VALIDADO,
@@ -212,6 +218,8 @@
             TIEMPO_DE_ENCUESTA_NO_PUEDE_SER_CERO,
             TIEMPO_DE_ESPERA_NO_PUEDE_SER_CERO,
             DEBECAMBIARPASSWORD,
+            CUENTA_USUARIO_EXPIRADA,
+            NO_POSEE_PERMISOS,
             SOBRE,
             SOBRES,
             RETIRAR_SOBRE,
@@ -283,13 +291,21 @@
             ERROR_FALTA_DATO,
             ERROR_DATO,
             ERROR_PUERTO,
+            ERROR_COMUNICACION_CONTADORA,
+            ERROR_COMUNICACION_PLACA,
             TOQUE_PANTALLA_PARA_INICIAR,
             TICKET_NO_CONFIGURADO,
             FECHA_APERTURA_DESDE,
             FECHA_APERTURA_HASTA,
             FECHA_CIERRE_DESDE,
             FECHA_CIERRE_HASTA,
-            IDENTIFICADOR
+            IDENTIFICADOR,
+            IMPRESION_ORIGINAL,
+            IMPRESION_COPIA,
+            FORMATO_FECHA,
+            FORMATO_FECHA_HORA_COMPLETA,
+            FORMATO_TRES_COLUMNAS,
+            FORMATO_CUATRO_COLUMNAS
         }
 
         public enum FunctionEnum
@@ -319,6 +335,16 @@
             Exception,
             Information,
             Navigation
+        }
+
+        public enum EventTypeEnum
+        {
+            Ninguno,
+            Apertura_de_Puerta,
+            Cambio_de_Contenedor,
+            Alarma_de_Contenedor_Mal_Ubicado,
+            Alarma_De_Exclusa,
+            Estado_Fuera_De_Servicio
         }
     }
 }

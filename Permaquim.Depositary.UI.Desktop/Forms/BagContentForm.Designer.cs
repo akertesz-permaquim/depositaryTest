@@ -214,6 +214,7 @@
             this.DetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DetailGridView.Size = new System.Drawing.Size(544, 267);
             this.DetailGridView.TabIndex = 187;
+            this.DetailGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailGridView_CellClick);
             // 
             // AcceptButton
             // 
@@ -246,6 +247,7 @@
             this.DetailLabel.Size = new System.Drawing.Size(544, 27);
             this.DetailLabel.TabIndex = 189;
             this.DetailLabel.Text = "*";
+            this.DetailLabel.Click += new System.EventHandler(this.DetailLabel_Click);
             // 
             // DetailPanel
             // 

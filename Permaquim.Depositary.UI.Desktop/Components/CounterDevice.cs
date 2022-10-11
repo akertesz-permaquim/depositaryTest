@@ -16,7 +16,14 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         //Serial port instance
         private SerialPort _counterPort;
         private SerialPort _ioboardPort;
-
+        /// <summary>
+        /// Holds the last quantity of bytes received from counter
+        /// </summary>
+        private long _counterLastBytesRead = 0;
+        /// <summary>
+        /// Holds the last quantity of bytes received from IO Board
+        /// </summary>
+        private long _ioBoardLastBytesRead = 0;
 
         private static string _readbuffer = string.Empty;
 
@@ -403,7 +410,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
                 if (_buffer.Count > 100)
                     DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
-
+                _counterLastBytesRead = _buffer.Count;
 
                 _buffer.Clear();
 
@@ -424,6 +431,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
             else
             {
+                _counterLastBytesRead = 0;
+
                 Log("COMMAND NOT SENT: Sense. Port is closed.");
                 return StateResultProperty;
             }
@@ -887,10 +896,12 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         private string ReadIoBoardResponse()
         {
             List<byte> _buffer = new();
-            Thread.Sleep(100);
+            Thread.Sleep(SleepTimeout);
             while (true)
             {
                 var bytes = _ioboardPort.BytesToRead;
+                
+
                 if (bytes > 0)
                 {
                     byte[] buffer = new byte[bytes];
@@ -902,6 +913,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     break;
                 }
             }
+            
+            _ioBoardLastBytesRead = _buffer.Count;
 
             if (IOboardDeviceDataReceived != null)
             {
@@ -1055,7 +1068,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 this._ioboardPort.Write(_device.Status);
                 Thread.Sleep(millisecondsTimeout);
                 string Lectura = this._ioboardPort.ReadExisting();
-                Thread.Sleep(500);
+                Thread.Sleep(SleepTimeout);
                 string[] strArray = Lectura.Split(new char[2] { '\r', '\n' },
                     StringSplitOptions.RemoveEmptyEntries);
 
@@ -1084,6 +1097,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                     _ioBoardStatus = result;
                 }
+                else
+                {
+                    _ioBoardLastBytesRead = 0;
+                }
                 return result;
             }
             catch (Exception ex)
@@ -1108,14 +1125,14 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     StringSplitOptions.RemoveEmptyEntries);
                 List<string[]> strArrayList = this.TranslateStatus(strArray[0]);
                 this.TranslateStatus(strArray[1]);
-                Thread.Sleep(500);
+                Thread.Sleep(SleepTimeout);
                 if (((IEnumerable<string>)strArrayList.Find((Predicate<string[]>)(s => ((IEnumerable<string>)s).Contains<string>("BAG")))).Last<string>().ToString() == "00")
                 {
                     this.DiscardBuffer(_ioboardPort);
                     this._ioboardPort.Write(_device.Empty);
                     Thread.Sleep(millisecondsTimeout);
                 }
-                Thread.Sleep(500);
+                Thread.Sleep(SleepTimeout);
                 this.DiscardBuffer(_ioboardPort);
                 this._ioboardPort.Write(_device.Approve);
                 Thread.Sleep(millisecondsTimeout);
@@ -1510,8 +1527,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (_counterPort == null)
                     return false;
                 else
-                    return Ports.Exists(e => e.EndsWith(_counterPort.PortName));
-                
+                    //return Ports.Exists(e => e.EndsWith(_counterPort.PortName));
+                    return _counterLastBytesRead > 0;
             }
 
         }
@@ -1523,8 +1540,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (_ioboardPort == null)
                     return false;
                 else
-                    return Ports.Exists(e => e.EndsWith(_ioboardPort.PortName));
-
+                    //return Ports.Exists(e => e.EndsWith(_ioboardPort.PortName));
+                    return _ioBoardLastBytesRead > 0;
             }
         }
         public void IoBoardReconnect()

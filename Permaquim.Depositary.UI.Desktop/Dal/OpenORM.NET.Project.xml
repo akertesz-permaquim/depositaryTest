@@ -314,6 +314,7 @@
     <string>Geografia.Pais</string>
     <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
+    <string>Impresion.PlantillaTicket</string>
     <string>Impresion.Ticket</string>
     <string>Impresion.TipoTicket</string>
     <string>Operacion.CierreDiario</string>
