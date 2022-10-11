@@ -48,8 +48,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private int _yellowStatusIndicator;
         private int _redStatusIndicator;
 
-        private bool _alreadyPrinted = false;
-
         List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
         List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> _detailTransactions = new();
 
@@ -60,12 +58,12 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             Loadparameters();
             TimeOutController.Reset();
- 
+
 
         }
         private void BillDepositForm_Load(object sender, EventArgs e)
         {
-             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
+            _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
 
             _detectedDenominations = new();
 
@@ -130,13 +128,11 @@ namespace Permaquim.Depositary.UI.Desktop
             _depositItems = new();
             _currentCountingAmount = 0;
             _currentCountingQuantity = 0;
-            _alreadyPrinted = false;
-            _alreadyPrinted = false;
-            FormsController.SetInformationMessage(InformationTypeEnum.None,string.Empty);
+            FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
-         private void CenterPanel()
+        private void CenterPanel()
         {
-             MainPanel.Location = new Point()
+            MainPanel.Location = new Point()
             {
                 X = this.Width / 2 - MainPanel.Width / 2,
                 Y = this.Height / 2 - MainPanel.Height / 2
@@ -166,7 +162,7 @@ namespace Permaquim.Depositary.UI.Desktop
             };
 
             CurrencyLabel.Left = DenominationsGridView.Left;
-            
+
         }
         private void LoadLanguageItems()
         {
@@ -185,7 +181,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-            
+
             CurrencyLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
             CurrencyLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
@@ -221,7 +217,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TimeOutController.Reset();
                     return;
                 }
-                if (_device.StateResultProperty != null &&_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                if (_device.StateResultProperty != null && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     || _currentCountingAmount > 0)
                 {
                     ConfirmDeposit();
@@ -263,7 +259,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
             SetSubTotalsValues();
-         }
+        }
         private void EvaluateTimeout()
         {
 
@@ -277,7 +273,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoError);
         }
 
-        public bool EsMultiplo(int numero,int multiplo)
+        public bool EsMultiplo(int numero, int multiplo)
         {
             if (numero % multiplo == 0)
             {
@@ -340,7 +336,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 ConfirmAndContinueDepositButton.Visible =
                         _device.StateResultProperty.DeviceStateInformation.StackerFull
-                        && _device.StateResultProperty.StatusInformation.OperatingState 
+                        && _device.StateResultProperty.StatusInformation.OperatingState
                         != StatusInformation.State.PQStoring
                         && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
                         ;
@@ -351,7 +347,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     && _device.StateResultProperty.DoorStateInformation.Escrow == false
                 && _device.StateResultProperty.StatusInformation.OperatingState
                 == StatusInformation.State.BeingReset;
- 
+
 
 
                 ButtonsPanel.Visible = true;
@@ -397,7 +393,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
                 {
-                    FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
                         MultilanguangeController.GetText(MultiLanguageEnum.RETIRAR_BILLETES_RECHAZADOS));
                 }
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
@@ -425,21 +421,21 @@ namespace Permaquim.Depositary.UI.Desktop
                     && _operationStatus.CurrentTransactionQuantity == 0
                     && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQWaitingToRemoveBankNotes)
                 {
-                    FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
                         MultilanguangeController.GetText(MultiLanguageEnum.CANCELAR_DEPOSITO));
 
                 }
 
                 if (_device.StateResultProperty.DeviceStateInformation.StackerFull)
                 {
-                    _countingCycle+=1;
+                    _countingCycle += 1;
                     FormsController.SetInformationMessage(InformationTypeEnum.Error,
                     MultilanguangeController.GetText(MultiLanguageEnum.ESCROW_LLENO));
                 }
 
                 if (_device.StateResultProperty.EndInformation.StoreEnd)
                 {
-                    FormsController.SetInformationMessage(InformationTypeEnum.Information, 
+                    FormsController.SetInformationMessage(InformationTypeEnum.Information,
                         MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
                 }
             }
@@ -447,7 +443,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN)
                 {
-                    FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
                         MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
                 }
             }
@@ -600,7 +596,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _currentCountingAmount = 0;
             }
-            
+
             SetTotals();
 
             CancelDepositButton.Visible = true;
@@ -630,10 +626,10 @@ namespace Permaquim.Depositary.UI.Desktop
         private void SetcolumnsAlignment()
         {
 
-                DenominationsGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                DenominationsGridView.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-                DenominationsGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                DenominationsGridView.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             SetTotals();
         }
@@ -643,8 +639,8 @@ namespace Permaquim.Depositary.UI.Desktop
             ButtonsPanel.Visible = false;
             TimeOutController.Reset();
             CancelDeposit();
-            AuditController.Log(LogTypeEnum.Information, 
-                DEPOSITO_BILLETE_CANCELADO, 
+            AuditController.Log(LogTypeEnum.Information,
+                DEPOSITO_BILLETE_CANCELADO,
                 DEPOSITO_BILLETE_CANCELADO);
             ButtonsPanel.Visible = true;
         }
@@ -683,11 +679,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BackButton_Click(object sender, EventArgs e)
         {
             TimeOutController.Reset();
-            if (_device != null){
+            if (_device != null)
+            {
                 if (_device.CounterConnected)
                     _device.RemoteCancel();
             }
-            FormsController.OpenChildForm(this,new OperationForm(), _device);
+            FormsController.OpenChildForm(this, new OperationForm(), _device);
 
         }
         /// <summary>
@@ -702,18 +699,18 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = false;
             SaveTransaction();
             EnableDisableControls(false);
-             _device.RemoteCancel();
+            _device.RemoteCancel();
             _operationStatus.DepositEnded = false;
             CleanDetectedBills();
 
             PrintTicket();
             _device.Close();
-            FormsController.OpenChildForm(this,new OperationForm(), _device);
+            FormsController.OpenChildForm(this, new OperationForm(), _device);
         }
 
         private void SaveAndContinueDeposit()
         {
-            _device.PreviousState = StatusInformation.State.PQStoring; 
+            _device.PreviousState = StatusInformation.State.PQStoring;
             ButtonsPanel.Visible = false;
             TimeOutController.Reset();
             _device.StoringStart();
@@ -762,17 +759,18 @@ namespace Permaquim.Depositary.UI.Desktop
                 _depositItems.Add(new DepositItem()
                 {
                     Amount = "0",
-                    Denomination =item.MonedaId.Codigo + " " +  item.Nombre,
+                    Denomination = item.MonedaId.Codigo + " " + item.Nombre,
                     Quantity = 0,
                     Image = System.Drawing.Image.FromStream(new MemoryStream(bytes))
                 });
 
             }
-            _depositItems.Add(new() { 
+            _depositItems.Add(new()
+            {
                 Denomination = "Total",
                 Amount = "0",
-                Image= StyleController.GetCellStyleBitmap(),
-                Quantity=0
+                Image = StyleController.GetCellStyleBitmap(),
+                Quantity = 0
             });
             DenominationsGridView.DataSource = _depositItems;
             EnableDisableLabelsAndGrid(true);
@@ -836,8 +834,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                 }
 
-                Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = 
-                    new Depositario.Business.Tables.Operacion.TransaccionDetalle (transactions);
+                Depositario.Business.Tables.Operacion.TransaccionDetalle transactionDetails = new(transactions);
 
                 foreach (var item in _detectedDenominations)
                 {
@@ -869,18 +866,39 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PrintTicket()
         {
-            
+
             if (ParameterController.PrintsBillDeposit)
             {
                 var _header = DatabaseController.GetTransactionHeader(_operationStatus.CurrentTransactionId);
                 var _details = DatabaseController.GetTransactionDetails(_operationStatus.CurrentTransactionId);
-                if (!_alreadyPrinted)
+
+                //Consolidamos el detalle 
+                List<Entities.BillDepositDetail> _consolidatedDetailsList = new List<Entities.BillDepositDetail>();
+                foreach (var detailReportItem in _details)
                 {
-                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                    var detailExists = _consolidatedDetailsList.FirstOrDefault(x => x.DenominacionId == detailReportItem._DenominacionId);
+
+                    if (detailExists != null)
                     {
-                        ReportController.PrintReport(ReportTypeEnum.BillDeposit, _header,_details,i);
-                        _alreadyPrinted = true;
+                        detailExists.CantidadUnidades += detailReportItem.CantidadUnidades;
                     }
+                    else
+                    {
+                        Entities.BillDepositDetail billDepositDetail = new();
+
+                        billDepositDetail.CantidadUnidades = detailReportItem.CantidadUnidades;
+                        billDepositDetail.Unidades = detailReportItem.DenominacionId.Unidades;
+                        billDepositDetail.DenominacionId = detailReportItem._DenominacionId;
+                        billDepositDetail.DenominacionNombre = detailReportItem.DenominacionId.Nombre;
+                        billDepositDetail.MonedaCodigo = detailReportItem.DenominacionId.MonedaId.Codigo;
+
+                        _consolidatedDetailsList.Add(billDepositDetail);
+                    }
+                }
+
+                for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                {
+                    ReportController.PrintReport(ReportTypeEnum.BillDeposit, _header, _consolidatedDetailsList, i);
                 }
             }
         }
@@ -892,14 +910,14 @@ namespace Permaquim.Depositary.UI.Desktop
             MonitorGroupBox.Visible = EventCheckbox.Checked;
         }
 
-         private void ConfirmAndContinueDepositButton_Click(object sender, EventArgs e)
+        private void ConfirmAndContinueDepositButton_Click(object sender, EventArgs e)
         {
             SaveAndContinueDeposit();
         }
 
         private void RemainingTimeLabel_Click(object sender, EventArgs e)
         {
-             TimeOutController.Reset();
+            TimeOutController.Reset();
         }
 
         private void MonitorGroupcheckbox_CheckStateChanged(object sender, EventArgs e)
@@ -909,7 +927,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DenominationsGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < DenominationsGridView.Rows.Count-1 && e.ColumnIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < DenominationsGridView.Rows.Count - 1 && e.ColumnIndex >= 0)
             {
 
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.Border);

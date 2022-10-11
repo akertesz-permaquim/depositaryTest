@@ -4038,6 +4038,8 @@ using System.Text;
                          }
                 }
                  /// <summary>
+<<<<<<< HEAD
+=======
                  ///  Represents the child collection of PlantillaTicket that have this DepositarioModeloId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -4050,6 +4052,7 @@ using System.Text;
                          }
                 }
                  /// <summary>
+>>>>>>> 64b31373d3485f7fc51f9af5b4d94b10363b129b
                  ///  Represents the child collection of Ticket that have this DepositarioModeloId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
