@@ -508,16 +508,16 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
-            DetailPanel.Location = new Point(
-               this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
-               this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
-            DetailPanel.Anchor = AnchorStyles.None;
-
-            DetailPanel.Visible = true;
-
             OperationsDetailGridView.DataSource = null;
             if (e.RowIndex > -1)
             {
+                DetailPanel.Location = new Point(
+                this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
+                this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
+                DetailPanel.Anchor = AnchorStyles.None;
+
+                DetailPanel.Visible = true;
+
                 if (OperationsHeaderGridView.Rows[e.RowIndex].Cells["Id"] != null)
                 {
                     _operationId = (long)OperationsHeaderGridView.Rows[e.RowIndex].Cells["Id"].Value;

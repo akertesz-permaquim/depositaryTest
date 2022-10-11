@@ -404,6 +404,11 @@
       <Name>Radzen Blazor Generation folder</Name>
       <Value />
     </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>BaseClasses Extensions Builder</Template>
+      <Name>BaseClasses Extensions Generation folder</Name>
+      <Value />
+    </TemplateConfigurationEntry>
   </TemplateConfigurationEntries>
   <UsesEncription>true</UsesEncription>
 </GenerationProject>

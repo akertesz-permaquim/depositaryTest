@@ -1639,18 +1639,6 @@ using System.Text;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
-                 ///  Represents the child collection of Ticket that have this EmpresaId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_EmpresaId
-                {
-                     get {
-                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
-                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.EmpresaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of ConfiguracionEmpresa that have this EmpresaId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -1683,6 +1671,18 @@ using System.Text;
                      get {
                              Permaquim.Depositario.Business.Relations.Directorio.Sucursal entities = new Permaquim.Depositario.Business.Relations.Directorio.Sucursal();
                              entities.Where.Add(Permaquim.Depositario.Business.Relations.Directorio.Sucursal.ColumnEnum.EmpresaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Ticket that have this EmpresaId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_EmpresaId
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.EmpresaId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -4002,18 +4002,6 @@ using System.Text;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
-                 ///  Represents the child collection of Ticket that have this DepositarioModeloId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_DepositarioModeloId
-                {
-                     get {
-                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
-                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Depositario that have this ModeloId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -4046,6 +4034,18 @@ using System.Text;
                      get {
                              Permaquim.Depositario.Business.Relations.Dispositivo.TipoPlaca entities = new Permaquim.Depositario.Business.Relations.Dispositivo.TipoPlaca();
                              entities.Where.Add(Permaquim.Depositario.Business.Relations.Dispositivo.TipoPlaca.ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Ticket that have this DepositarioModeloId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_DepositarioModeloId
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10219,30 +10219,6 @@ using System.Text;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
-                 ///  Represents the child collection of Ticket that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_UsuarioCreacion
-                {
-                     get {
-                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
-                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of Ticket that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_UsuarioModificacion
-                {
-                     get {
-                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
-                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Configuracion that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11115,6 +11091,30 @@ using System.Text;
                      get {
                              Permaquim.Depositario.Business.Relations.Geografia.Zona entities = new Permaquim.Depositario.Business.Relations.Geografia.Zona();
                              entities.Where.Add(Permaquim.Depositario.Business.Relations.Geografia.Zona.ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Ticket that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_UsuarioCreacion
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Ticket that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<Permaquim.Depositario.Entities.Relations.Impresion.Ticket> ListOf_Ticket_UsuarioModificacion
+                {
+                     get {
+                             Permaquim.Depositario.Business.Relations.Impresion.Ticket entities = new Permaquim.Depositario.Business.Relations.Impresion.Ticket();
+                             entities.Where.Add(Permaquim.Depositario.Business.Relations.Impresion.Ticket.ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }

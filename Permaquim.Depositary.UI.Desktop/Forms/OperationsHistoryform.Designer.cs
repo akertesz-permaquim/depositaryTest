@@ -371,6 +371,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "OperationsHistoryForm";
             this.Text = "OperationsHistoryform";
+            this.VisibleChanged += new System.EventHandler(this.OperationsHistoryform_VisibleChanged);
             this.Click += new System.EventHandler(this.OperationsHistoryForm_Click);
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).EndInit();
             this.FilterPanel.ResumeLayout(false);
