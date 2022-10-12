@@ -133,18 +133,47 @@ namespace Permaquim.Depositary.UI.Desktop
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
                         operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
                         operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
+                            (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
                         return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
                     {
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
-                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.BagMaxVolumeReached;
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.ContainerMaxVolumeReached;
                         operationBlockingForm.ShowDialog();
                         return;
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.ContainerMaxVolumeReached),
+                       (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
-            if (DatabaseController.CurrentTurn != null)
+                    if (DatabaseController.CurrentContainer.FechaCierre != null)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CurrentContainerIsClosed;
+                        operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.CurrentContainerIsClosed),
+                     (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                        return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
+                    }
+
+                    if (DatabaseController.CurrentTurn != null)
                     {
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
@@ -190,15 +219,44 @@ namespace Permaquim.Depositary.UI.Desktop
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
                         operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
                         operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
+                            (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
                         return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
                     {
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
-                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.BagMaxVolumeReached;
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.ContainerMaxVolumeReached;
                         operationBlockingForm.ShowDialog();
                         return;
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.ContainerMaxVolumeReached),
+                       (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                    }
+                    else
+                    {
+                       DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                       (int)EventTypeEnum.Ninguno, string.Empty);
+                    }
+
+                    if (DatabaseController.CurrentContainer.FechaCierre != null)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CurrentContainerIsClosed;
+                        operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.CurrentContainerIsClosed),
+                     (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                        return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
                     if (DatabaseController.CurrentTurn != null)
@@ -368,40 +426,6 @@ namespace Permaquim.Depositary.UI.Desktop
         private void InitializeLocals()
         {
             _transactions = new();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //var _bagContentItems = DatabaseController.GetBillBagContentItems();
-            //_bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
-
-            //for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
-            //{
-            //    ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-            //        DatabaseController.CurrentContainer, _bagContentItems, i);
-            //}
-
-
-            //if (ParameterController.PrintsTurnChange)
-            //{
-            //    for (int i = 0; i < ParameterController.PrintTurnChangeQuantity; i++)
-            //    {
-            //        ReportController.PrintReport(ReportTypeEnum.TurnChange, DatabaseController.CurrentTurn, DatabaseController.GetCurrentTurnTransactions(), i);
-            //    }
-            //}
-
-            if (ParameterController.PrintsDailyClosing)
-            {
-                for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
-                {
-                    ReportController.PrintReport(ReportTypeEnum.DailyClosing,
-                        DatabaseController.CurrentDailyClosing,
-                        DatabaseController.GetDailyClosingItems(), i);
-
-                }
-            }
-
-
         }
     }
 }

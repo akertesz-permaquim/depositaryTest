@@ -862,15 +862,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             // Referencia
             e.Graphics.DrawString(
-            StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-            StringHelper.FormatString(DatabaseController.CurrentTurn.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
+            StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CIERREDIARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+            StringHelper.FormatString(DatabaseController.LastDailyClosing.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
             , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
             // Usuario
             e.Graphics.DrawString(
             StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-            StringHelper.FormatString(_header.UsuarioId.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
+            StringHelper.FormatString(DatabaseController.LastDailyClosing.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
             , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
@@ -1012,7 +1012,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             // Referencia
             e.Graphics.DrawString(
             StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-            StringHelper.FormatString(DatabaseController.CurrentTurn.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre, 20, StringHelper.AlignEnum.AlignLeft) 
+            StringHelper.FormatString(DatabaseController.LastTurn.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre, 20, StringHelper.AlignEnum.AlignLeft) 
             ,_font,Brushes.Black,_headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;
 
@@ -1068,7 +1068,20 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             yOffset += _interlineSpace;
 
-            e.Graphics.DrawString(
+            // Separador
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _boldFont,
+                        Brushes.Black,
+                        _detailStart_X, yOffset, new StringFormat());
+
+            yOffset += _interlineSpace;
+            // Billetes
+            e.Graphics.DrawString(MultilanguangeController.GetText(MultiLanguageEnum.BILLETE) + ": ", _boldFont,
+                        Brushes.Black,
+                        _detailStart_X, yOffset, new StringFormat());
+
+            yOffset += _interlineSpace;
+
+                e.Graphics.DrawString(
                  //"DENOMINACION CANTIDAD TOTAL"
                  StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION).Substring(0, 5), 5, StringHelper.AlignEnum.AlignLeft) +
                  StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD).Substring(0, 4), 10, StringHelper.AlignEnum.AlignRight) +
@@ -1131,8 +1144,47 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             yOffset += _interlineSpace;
 
-            // Instancia (ORIGINAL / COPIA)
-            e.Graphics.DrawString(_copyInstance, _boldFont,
+            // sobres
+            e.Graphics.DrawString(MultilanguangeController.GetText(MultiLanguageEnum.SOBRE) + ": ", _boldFont,
+                        Brushes.Black,
+                        _detailStart_X, yOffset, new StringFormat());
+
+            yOffset += _interlineSpace;
+
+            // Separador
+            e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _boldFont,
+                        Brushes.Black,
+                        _detailStart_X, yOffset, new StringFormat());
+
+                e.Graphics.DrawString(
+                 //"DENOMINACION CANTIDAD TOTAL"
+                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION), 13, StringHelper.AlignEnum.AlignLeft) +
+                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD), 20, StringHelper.AlignEnum.AlignRight) 
+
+                 , _font, Brushes.Black, _detailStart_X, yOffset, new StringFormat());
+
+                yOffset += _interlineSpace;
+
+                // Separador
+                e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _boldFont,
+                            Brushes.Black,
+                            _detailStart_X, yOffset, new StringFormat());
+
+                //foreach (var item in _details)
+                //{
+                //    StringHelper.FormatString(_details, 5, StringHelper.AlignEnum.AlignLeft) +
+                //    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD).Substring(0, 4), 10, StringHelper.AlignEnum.AlignRight) +
+                //}
+
+
+                // Separador
+                e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _boldFont,
+                            Brushes.Black,
+                            _detailStart_X, yOffset, new StringFormat());
+
+
+                // Instancia (ORIGINAL / COPIA)
+                e.Graphics.DrawString(_copyInstance, _boldFont,
             Brushes.Black,
             _headerTextStart_X, yOffset, new StringFormat());
             yOffset += _interlineSpace;

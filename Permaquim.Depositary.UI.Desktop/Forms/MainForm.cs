@@ -289,61 +289,80 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void VerifyOpenDoor()
         {
-            if (_device.IoBoardConnected)
+
+            try
             {
-                if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN)
 
+                if (_device.IoBoardConnected)
                 {
+                    if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN)
 
-                    if (_blockingDialog == null &&
-                        (DatabaseController.CurrentOperation == null ||
-                        DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
                     {
-                        string message = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA);
-                        AuditController.Log(LogTypeEnum.Exception, message, message);
 
-                        DatabaseController.CreateEvent(EventTypeEnum.Apertura_de_Puerta, message, message);
-
-                        _blockingDialog = new SystemBlockingDialog()
+                        if (_blockingDialog == null &&
+                            (DatabaseController.CurrentOperation == null ||
+                            DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction))
                         {
-                            Tag = this.Tag,
-                            MessageText = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA)
-                        };
-                        _blockingDialog.LoadStyles();
-                        _blockingDialog.ShowDialog();
-                        _blockingDialog = null;
+                            string message = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA);
+                            AuditController.Log(LogTypeEnum.Exception, message, message);
+
+                            DatabaseController.CreateEvent(EventTypeEnum.Apertura_de_Puerta, message, message);
+
+                            _blockingDialog = new SystemBlockingDialog()
+                            {
+                                Tag = this.Tag,
+                                MessageText = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA)
+                            };
+                            _blockingDialog.LoadStyles();
+                            _blockingDialog.ShowDialog();
+                            _blockingDialog = null;
+                        }
+                    }
+                    else
+                    {
+                        VerifyConnections();
                     }
                 }
-                else
-                {
-                    VerifyConnections();
-                }
             }
-
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+            }
         }
         private void VerifyBagExtracted()
         {
-            if (DatabaseController.CurrentOperation == null ||
-                     DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction)
-            {
-                if (_device.IoBoardConnected)
-                {
-                    if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
-                    {
-                        if (!_bagRemoved)
-                        {
-                            // Se asume retiro de bolsa
-                            DatabaseController.CreateContainer();
 
-                            PrintBagTicket();
-                            _bagRemoved = true;
+            try
+            {
+
+                if (DatabaseController.CurrentOperation == null ||
+                         DatabaseController.CurrentOperation.Id != (long)OperationTypeEnum.ValueExtraction)
+                {
+                    if (_device.IoBoardConnected)
+                    {
+                        if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
+                        {
+                            if (!_bagRemoved)
+                            {
+                                // Se asume retiro de bolsa
+                                DatabaseController.CreateContainer();
+
+                                PrintBagTicket();
+                                _bagRemoved = true;
+                            }
+                        }
+                        if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)
+                        {
+                            _bagRemoved = false;
                         }
                     }
-                    if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE)
-                    {
-                        _bagRemoved = false;
-                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
             }
         }
 
@@ -398,33 +417,41 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void VerifyConnections()
         {
-
-            // consulta el estado de la contadora si está conectada
-            _counterStatesResult = _device.Sense();
-
-            if (_device.CounterConnected)
+            try
             {
-                CounterPictureBox.Image = _greenLedImage;
-            }
-            else
-            {
-                CounterPictureBox.Image = _redLedImage;
-                _device.CounterBoardReconnect();
-            }
 
-            _ioBoardStatus = _device.Status();
+                // consulta el estado de la contadora si está conectada
+                _counterStatesResult = _device.Sense();
 
-            // consulta el estado de la ioboard  si está conectada
-            if (_device.IoBoardConnected)
-            {
-                IoBoardPictureBox.Image = _greenLedImage;
+                if (_device.CounterConnected)
+                {
+                    CounterPictureBox.Image = _greenLedImage;
+                }
+                else
+                {
+                    CounterPictureBox.Image = _redLedImage;
+                    _device.CounterBoardReconnect();
+                }
+
+                _ioBoardStatus = _device.Status();
+
+                // consulta el estado de la ioboard  si está conectada
+                if (_device.IoBoardConnected)
+                {
+                    IoBoardPictureBox.Image = _greenLedImage;
+                }
+                else
+                {
+                    IoBoardPictureBox.Image = _redLedImage;
+                    _device.IoBoardReconnect();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                IoBoardPictureBox.Image = _redLedImage;
-                _device.IoBoardReconnect();
+                AuditController.Log(ex);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
             }
-        }
+}
 
         private void VerifyTimeout()
         {

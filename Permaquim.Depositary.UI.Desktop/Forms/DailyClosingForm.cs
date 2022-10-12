@@ -229,8 +229,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                 {
                     ReportController.PrintReport(ReportTypeEnum.DailyClosing, 
-                        DatabaseController.CurrentDailyClosing, 
-                        DatabaseController.GetDailyClosingDetail(DatabaseController.CurrentDailyClosing.Id), i);
+                        DatabaseController.LastDailyClosing, 
+                        DatabaseController.GetDailyClosingDetail(DatabaseController.LastDailyClosing.Id), i);
 
                 }
             }

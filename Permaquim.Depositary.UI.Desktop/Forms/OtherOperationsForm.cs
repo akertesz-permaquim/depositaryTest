@@ -132,6 +132,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
+            
+            if(DatabaseController.CurrentDailyClosing == null)
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                                  MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_ABIERTOS));
+            }
+            
+            
             if (DatabaseController.GetAvailableTurns() == 0)
             {
                 FormsController.OpenChildForm(this, new DailyClosingForm(),

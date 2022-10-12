@@ -118,8 +118,9 @@
             PortError,
             CounterCommunicationError,
             IoBoardCommunicationError,
-            BagMaxVolumeReached,
-            DoorWasOpened
+            ContainerMaxVolumeReached,
+            DoorWasOpened,
+            CurrentContainerIsClosed
         }
         public enum DepositaryConfigurationEnum
         {
@@ -163,7 +164,8 @@
             EXISTEN_TURNOS_PREVIOS_A_LA_FECHA,
             SIN_BOLSA,
             SIN_BOLSA_ACTIVA,
-            LIMITE_BOLSA_ALCANZADO,
+            LIMITE_CONTENEDOR_ALCANZADO,
+            CONTENEDOR_CERRADO,
             VOLVER,
             PUERTA_ABIERTA,
             ERROR_OPERACION_PREVIA,
@@ -341,10 +343,19 @@
         {
             Ninguno,
             Apertura_de_Puerta,
+            Contenedor_Lleno,
             Cambio_de_Contenedor,
             Alarma_de_Contenedor_Mal_Ubicado,
             Alarma_De_Exclusa,
-            Estado_Fuera_De_Servicio
+            Estado_Fuera_De_Servicio,
+            Error_De_Comunicacion
         }
+
+        public enum ContainerChangeEventEnum
+        {
+            WhenDoorIsOpened,
+            WhenBagIsExtracted
+        }
+
     }
 }
