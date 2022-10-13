@@ -508,8 +508,8 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 for (int i = 0; i < ParameterController.PrintTurnChangeQuantity; i++)
                 {
-                    ReportController.PrintReport(ReportTypeEnum.TurnChange, 
-                        DatabaseController.LastTurn, DatabaseController.GetLastTurnTransactions(), i);
+                    ReportController.PrintReport(ReportTypeEnum.TurnChange,
+                         DatabaseController.GetLastTurnEnvelopeBagContentItems(), DatabaseController.GetLastTurnTransactions(), i);
                 }
             }
         }

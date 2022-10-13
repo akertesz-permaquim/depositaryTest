@@ -427,5 +427,6 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _transactions = new();
         }
+
     }
 }
