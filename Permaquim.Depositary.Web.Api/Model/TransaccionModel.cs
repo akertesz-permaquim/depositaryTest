@@ -4,6 +4,7 @@
     {
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public string CodigoExternoDepositario { get; set; }
+        public List<NuevoEvento> Eventos { get; set; }
         public List<NuevaSesion> Sesiones { get; set; }
         public List<NuevoCiereDiario> CierresDiarios { get; set; }
         public List<NuevoTurno> Turnos { get; set; }
@@ -45,6 +46,10 @@
     public class NuevaTransaccionSobreDetalle : DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobreDetalle
     {
         public Int64? OrigenTransaccionSobreDetalle_Id { get; set; }
+    }
+    public class NuevoEvento : DepositaryWebApi.Entities.Tables.Operacion.Evento
+    {
+        public Int64? OrigenEvento_Id { get; set; }
     }
 
     public class EventoModel
