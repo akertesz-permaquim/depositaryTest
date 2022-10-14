@@ -78,6 +78,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Aplicacion.Configuracion>().ToList<Entities.Relations.Aplicacion.Configuracion>();
                 return _entities;
             }
@@ -405,6 +406,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Relations.Aplicacion.ConfiguracionEmpresa>();
                 return _entities;
             }
@@ -728,6 +730,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionTipoDato>().ToList<Entities.Relations.Aplicacion.ConfiguracionTipoDato>();
                 return _entities;
             }
@@ -1025,6 +1028,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionValidacionDato>().ToList<Entities.Relations.Aplicacion.ConfiguracionValidacionDato>();
                 return _entities;
             }
@@ -1350,6 +1354,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Auditoria.Log>().ToList<Entities.Relations.Auditoria.Log>();
                 return _entities;
             }
@@ -1658,6 +1663,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Auditoria.TipoLog>().ToList<Entities.Relations.Auditoria.TipoLog>();
                 return _entities;
             }
@@ -1955,6 +1961,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Banca.Banco>().ToList<Entities.Relations.Banca.Banco>();
                 return _entities;
             }
@@ -2290,6 +2297,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Banca.Cuenta>().ToList<Entities.Relations.Banca.Cuenta>();
                 return _entities;
             }
@@ -2675,6 +2683,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Banca.TipoCuenta>().ToList<Entities.Relations.Banca.TipoCuenta>();
                 return _entities;
             }
@@ -2983,6 +2992,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Banca.UsuarioCuenta>().ToList<Entities.Relations.Banca.UsuarioCuenta>();
                 return _entities;
             }
@@ -3278,6 +3288,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Biometria.HuellaDactilar>().ToList<Entities.Relations.Biometria.HuellaDactilar>();
                 return _entities;
             }
@@ -3600,6 +3611,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Directorio.Empresa>().ToList<Entities.Relations.Directorio.Empresa>();
                 return _entities;
             }
@@ -4000,6 +4012,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Directorio.Grupo>().ToList<Entities.Relations.Directorio.Grupo>();
                 return _entities;
             }
@@ -4310,6 +4323,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Directorio.RelacionMonedaSucursal>().ToList<Entities.Relations.Directorio.RelacionMonedaSucursal>();
                 return _entities;
             }
@@ -4620,6 +4634,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Directorio.Sector>().ToList<Entities.Relations.Directorio.Sector>();
                 return _entities;
             }
@@ -4938,6 +4953,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Directorio.Sucursal>().ToList<Entities.Relations.Directorio.Sucursal>();
                 return _entities;
             }
@@ -5314,6 +5330,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.ComandoContadora>().ToList<Entities.Relations.Dispositivo.ComandoContadora>();
                 return _entities;
             }
@@ -5675,6 +5692,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.ComandoPlaca>().ToList<Entities.Relations.Dispositivo.ComandoPlaca>();
                 return _entities;
             }
@@ -6030,6 +6048,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.ConfiguracionDepositario>().ToList<Entities.Relations.Dispositivo.ConfiguracionDepositario>();
                 return _entities;
             }
@@ -6346,6 +6365,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.Depositario>().ToList<Entities.Relations.Dispositivo.Depositario>();
                 return _entities;
             }
@@ -6723,6 +6743,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioContadora>().ToList<Entities.Relations.Dispositivo.DepositarioContadora>();
                 return _entities;
             }
@@ -7212,6 +7233,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioEstado>().ToList<Entities.Relations.Dispositivo.DepositarioEstado>();
                 return _entities;
             }
@@ -7627,6 +7649,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioMoneda>().ToList<Entities.Relations.Dispositivo.DepositarioMoneda>();
                 return _entities;
             }
@@ -7977,6 +8000,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioPlaca>().ToList<Entities.Relations.Dispositivo.DepositarioPlaca>();
                 return _entities;
             }
@@ -8585,6 +8609,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.Marca>().ToList<Entities.Relations.Dispositivo.Marca>();
                 return _entities;
             }
@@ -8884,6 +8909,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.Modelo>().ToList<Entities.Relations.Dispositivo.Modelo>();
                 return _entities;
             }
@@ -9222,6 +9248,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.PlantillaMoneda>().ToList<Entities.Relations.Dispositivo.PlantillaMoneda>();
                 return _entities;
             }
@@ -9521,6 +9548,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.PlantillaMonedaDetalle>().ToList<Entities.Relations.Dispositivo.PlantillaMonedaDetalle>();
                 return _entities;
             }
@@ -9861,6 +9889,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.TipoConfiguracionDepositario>().ToList<Entities.Relations.Dispositivo.TipoConfiguracionDepositario>();
                 return _entities;
             }
@@ -10193,6 +10222,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.TipoContadora>().ToList<Entities.Relations.Dispositivo.TipoContadora>();
                 return _entities;
             }
@@ -10710,6 +10740,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Dispositivo.TipoPlaca>().ToList<Entities.Relations.Dispositivo.TipoPlaca>();
                 return _entities;
             }
@@ -11335,6 +11366,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Estilo.Esquema>().ToList<Entities.Relations.Estilo.Esquema>();
                 return _entities;
             }
@@ -11653,6 +11685,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Estilo.EsquemaDetalle>().ToList<Entities.Relations.Estilo.EsquemaDetalle>();
                 return _entities;
             }
@@ -12021,6 +12054,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Estilo.TipoEsquemaDetalle>().ToList<Entities.Relations.Estilo.TipoEsquemaDetalle>();
                 return _entities;
             }
@@ -12318,6 +12352,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Geografia.Ciudad>().ToList<Entities.Relations.Geografia.Ciudad>();
                 return _entities;
             }
@@ -12645,6 +12680,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Geografia.CodigoPostal>().ToList<Entities.Relations.Geografia.CodigoPostal>();
                 return _entities;
             }
@@ -12972,6 +13008,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Geografia.Pais>().ToList<Entities.Relations.Geografia.Pais>();
                 return _entities;
             }
@@ -13299,6 +13336,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Geografia.Provincia>().ToList<Entities.Relations.Geografia.Provincia>();
                 return _entities;
             }
@@ -13624,6 +13662,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Geografia.Zona>().ToList<Entities.Relations.Geografia.Zona>();
                 return _entities;
             }
@@ -13864,6 +13903,538 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
+		public class PlantillaTicket : RelationsDataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					TipoId,
+					DepositarioModeloId,
+					Nombre,
+					Descripcion,
+					Impresora,
+					TextoCabecera,
+					NombreFuenteCabecera,
+					TamanioFuenteCabecera,
+					UbicacionTextoCabecera,
+					TextoPie,
+					NombreFuentePie,
+					TamanioFuentePie,
+					UbicacionTextoPie,
+					Imagen,
+					UbicacionImagen,
+					UbicacionTextoDetalle,
+					AnchoDetalle,
+					TamanioEntreLineas,
+					AnchoReporte,
+					FactorAltoReporte,
+					LineasAlFinal
+				}
+			   protected List<Entities.Relations.Impresion.PlantillaTicket> _cacheItemList = new List<Entities.Relations.Impresion.PlantillaTicket>();
+			   protected List<Entities.Relations.Impresion.PlantillaTicket> _entities = null;
+            public new CustomWhereParameter Where { get; set; }
+            public new CustomOrderByParameter OrderByParameter { get; set; }
+            public new CustomGroupByParameter GroupByParameter { get; set; }
+            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public PlantillaTicket() : base()
+            {
+                base._dataItem = new Entities.Relations.Impresion.PlantillaTicket();
+                Where = new CustomWhereParameter();
+                OrderByParameter = new CustomOrderByParameter();
+                GroupByParameter = new CustomGroupByParameter();
+            }
+            public class CustomAggregateParameter : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Relations.Impresion.PlantillaTicket item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// PlantillaTicket Add Method
+         /// </summary>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
+         /// <param name='Impresora'></param>
+         /// <param name='TextoCabecera'></param>
+         /// <param name='NombreFuenteCabecera'></param>
+         /// <param name='TamanioFuenteCabecera'></param>
+         /// <param name='UbicacionTextoCabecera'></param>
+         /// <param name='TextoPie'></param>
+         /// <param name='NombreFuentePie'></param>
+         /// <param name='TamanioFuentePie'></param>
+         /// <param name='UbicacionTextoPie'></param>
+         /// <param name='Imagen'></param>
+         /// <param name='UbicacionImagen'></param>
+         /// <param name='UbicacionTextoDetalle'></param>
+         /// <param name='AnchoDetalle'></param>
+         /// <param name='TamanioEntreLineas'></param>
+         /// <param name='AnchoReporte'></param>
+         /// <param name='FactorAltoReporte'></param>
+         /// <param name='LineasAlFinal'></param>
+         /// <returns>Entities.Relations.Impresion.PlantillaTicket</returns>
+			public Entities.Relations.Impresion.PlantillaTicket Add(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal) 
+			{
+			  return (Entities.Relations.Impresion.PlantillaTicket)base.Add(new Entities.Relations.Impresion.PlantillaTicket(TipoId,DepositarioModeloId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,AnchoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,LineasAlFinal));
+			}
+            public new List<Entities.Relations.Impresion.PlantillaTicket> Items()
+            {
+                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
+                dh.WhereParameter = this.Where.whereParameter;
+                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
+                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
+                _entities = dh.Items().Cast<Entities.Relations.Impresion.PlantillaTicket>().ToList<Entities.Relations.Impresion.PlantillaTicket>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Relations.Impresion.PlantillaTicket items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Impresion.PlantillaTicket> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets items with all fields
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
+            /// <param name="TextoCabecera"></param>
+            /// <param name="NombreFuenteCabecera"></param>
+            /// <param name="TamanioFuenteCabecera"></param>
+            /// <param name="UbicacionTextoCabecera"></param>
+            /// <param name="TextoPie"></param>
+            /// <param name="NombreFuentePie"></param>
+            /// <param name="TamanioFuentePie"></param>
+            /// <param name="UbicacionTextoPie"></param>
+            /// <param name="Imagen"></param>
+            /// <param name="UbicacionImagen"></param>
+            /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
+            /// <param name="TamanioEntreLineas"></param>
+            /// <param name="AnchoReporte"></param>
+            /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Impresion.PlantillaTicket> Items(Int64? Id,Int64? TipoId,Int64? DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? AnchoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,Int32? LineasAlFinal)
+            {
+                this.Where.whereParameter.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (TipoId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                   
+                }
+                if (DepositarioModeloId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Descripcion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Impresora != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
+                    }
+                   
+                }
+                if (TextoCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoCabecera);
+                    }
+                   
+                }
+                if (NombreFuenteCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.NombreFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.NombreFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
+                    }
+                   
+                }
+                if (TamanioFuenteCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
+                    }
+                   
+                }
+                if (UbicacionTextoCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
+                    }
+                   
+                }
+                if (TextoPie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoPie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoPie);
+                    }
+                   
+                }
+                if (NombreFuentePie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.NombreFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuentePie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.NombreFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuentePie);
+                    }
+                   
+                }
+                if (TamanioFuentePie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuentePie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuentePie);
+                    }
+                   
+                }
+                if (UbicacionTextoPie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
+                    }
+                   
+                }
+                if (Imagen != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Imagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Imagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                   
+                }
+                if (UbicacionImagen != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionImagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionImagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionImagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionImagen);
+                    }
+                   
+                }
+                if (UbicacionTextoDetalle != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
+                    }
+                   
+                }
+                if (AnchoDetalle != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                   
+                }
+                if (TamanioEntreLineas != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioEntreLineas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioEntreLineas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
+                    }
+                   
+                }
+                if (AnchoReporte != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoReporte);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoReporte);
+                    }
+                   
+                }
+                if (FactorAltoReporte != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
+                    }
+                   
+                }
+                if (LineasAlFinal != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            public List<Entities.Relations.Impresion.PlantillaTicket> Result 
+            {
+                get { return _entities; }
+            }
+            public Entities.Relations.Impresion.PlantillaTicket Add(Entities.Relations.Impresion.PlantillaTicket item)
+            {
+                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
+                return (Entities.Relations.Impresion.PlantillaTicket)base.Add((IDataItem)item);
+            }
+            public Int64 Update(Entities.Relations.Impresion.PlantillaTicket item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            public Int64 Delete(Entities.Relations.Impresion.PlantillaTicket item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Relations.Impresion.PlantillaTicket with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
+            /// <param name="TextoCabecera"></param>
+            /// <param name="NombreFuenteCabecera"></param>
+            /// <param name="TamanioFuenteCabecera"></param>
+            /// <param name="UbicacionTextoCabecera"></param>
+            /// <param name="TextoPie"></param>
+            /// <param name="NombreFuentePie"></param>
+            /// <param name="TamanioFuentePie"></param>
+            /// <param name="UbicacionTextoPie"></param>
+            /// <param name="Imagen"></param>
+            /// <param name="UbicacionImagen"></param>
+            /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
+            /// <param name="TamanioEntreLineas"></param>
+            /// <param name="AnchoReporte"></param>
+            /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 Id,Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal)
+            {
+                 Entities.Tables.Impresion.PlantillaTicket item = new Entities.Tables.Impresion.PlantillaTicket();
+                 item.Id = Id;
+                 item.TipoId = TipoId;
+                 item.DepositarioModeloId = DepositarioModeloId;
+                 item.Nombre = Nombre;
+                 item.Descripcion = Descripcion;
+                 item.Impresora = Impresora;
+                 item.TextoCabecera = TextoCabecera;
+                 item.NombreFuenteCabecera = NombreFuenteCabecera;
+                 item.TamanioFuenteCabecera = TamanioFuenteCabecera;
+                 item.UbicacionTextoCabecera = UbicacionTextoCabecera;
+                 item.TextoPie = TextoPie;
+                 item.NombreFuentePie = NombreFuentePie;
+                 item.TamanioFuentePie = TamanioFuentePie;
+                 item.UbicacionTextoPie = UbicacionTextoPie;
+                 item.Imagen = Imagen;
+                 item.UbicacionImagen = UbicacionImagen;
+                 item.UbicacionTextoDetalle = UbicacionTextoDetalle;
+                 item.AnchoDetalle = AnchoDetalle;
+                 item.TamanioEntreLineas = TamanioEntreLineas;
+                 item.AnchoReporte = AnchoReporte;
+                 item.FactorAltoReporte = FactorAltoReporte;
+                 item.LineasAlFinal = LineasAlFinal;
+
+                return base.Update((IDataItem)item);
+            }
+            public class CustomWhereParameter : WhereParameter {
+                 internal WhereParameter whereParameter = new WhereParameter();
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Clear()
+                 {
+                     this.whereParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.whereParameter.Count;
+                     }
+                 }
+            }
+            public class CustomOrderByParameter : OrderByParameter {
+                 internal OrderByParameter orderByParameter = new OrderByParameter();
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class CustomGroupByParameter : GroupByParameter {
+                 internal GroupByParameter groupByParameter = new GroupByParameter();
+                 public void Add(ColumnEnum column)
+                 {
+                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class PlantillaTicket
+	} //namespace Permaquim.Depositario.Business.Relations.Impresion
+	namespace Permaquim.Depositario.Business.Relations.Impresion {
+	    /// <summary>
+	    /// 
+	    /// </summary>
 		public class Ticket : RelationsDataHandler
 		{
 				public enum ColumnEnum : int
@@ -13972,6 +14543,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Impresion.Ticket>().ToList<Entities.Relations.Impresion.Ticket>();
                 return _entities;
             }
@@ -14567,6 +15139,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Impresion.TipoTicket>().ToList<Entities.Relations.Impresion.TipoTicket>();
                 return _entities;
             }
@@ -14879,6 +15452,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.CierreDiario>().ToList<Entities.Relations.Operacion.CierreDiario>();
                 return _entities;
             }
@@ -15210,6 +15784,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.Contenedor>().ToList<Entities.Relations.Operacion.Contenedor>();
                 return _entities;
             }
@@ -15561,6 +16136,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.Evento>().ToList<Entities.Relations.Operacion.Evento>();
                 return _entities;
             }
@@ -15835,6 +16411,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.Sesion>().ToList<Entities.Relations.Operacion.Sesion>();
                 return _entities;
             }
@@ -16100,6 +16677,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.TipoContenedor>().ToList<Entities.Relations.Operacion.TipoContenedor>();
                 return _entities;
             }
@@ -16410,6 +16988,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.TipoEvento>().ToList<Entities.Relations.Operacion.TipoEvento>();
                 return _entities;
             }
@@ -16720,6 +17299,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.TipoTransaccion>().ToList<Entities.Relations.Operacion.TipoTransaccion>();
                 return _entities;
             }
@@ -17050,6 +17630,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.Transaccion>().ToList<Entities.Relations.Operacion.Transaccion>();
                 return _entities;
             }
@@ -17502,6 +18083,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.TransaccionDetalle>().ToList<Entities.Relations.Operacion.TransaccionDetalle>();
                 return _entities;
             }
@@ -17742,6 +18324,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.TransaccionSobre>().ToList<Entities.Relations.Operacion.TransaccionSobre>();
                 return _entities;
             }
@@ -17971,6 +18554,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.TransaccionSobreDetalle>().ToList<Entities.Relations.Operacion.TransaccionSobreDetalle>();
                 return _entities;
             }
@@ -18250,6 +18834,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.Turno>().ToList<Entities.Relations.Operacion.Turno>();
                 return _entities;
             }
@@ -18663,6 +19248,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Operacion.TurnoUsuario>().ToList<Entities.Relations.Operacion.TurnoUsuario>();
                 return _entities;
             }
@@ -18960,6 +19546,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Regionalizacion.Lenguaje>().ToList<Entities.Relations.Regionalizacion.Lenguaje>();
                 return _entities;
             }
@@ -19287,6 +19874,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Regionalizacion.LenguajeItem>().ToList<Entities.Relations.Regionalizacion.LenguajeItem>();
                 return _entities;
             }
@@ -19612,6 +20200,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.Aplicacion>().ToList<Entities.Relations.Seguridad.Aplicacion>();
                 return _entities;
             }
@@ -19920,6 +20509,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.AplicacionParametro>().ToList<Entities.Relations.Seguridad.AplicacionParametro>();
                 return _entities;
             }
@@ -20215,6 +20805,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.AplicacionParametroValor>().ToList<Entities.Relations.Seguridad.AplicacionParametroValor>();
                 return _entities;
             }
@@ -20529,6 +21120,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.Funcion>().ToList<Entities.Relations.Seguridad.Funcion>();
                 return _entities;
             }
@@ -20869,6 +21461,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.IdentificadorUsuario>().ToList<Entities.Relations.Seguridad.IdentificadorUsuario>();
                 return _entities;
             }
@@ -21185,6 +21778,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.Menu>().ToList<Entities.Relations.Seguridad.Menu>();
                 return _entities;
             }
@@ -21542,6 +22136,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.Rol>().ToList<Entities.Relations.Seguridad.Rol>();
                 return _entities;
             }
@@ -21875,6 +22470,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.RolFuncion>().ToList<Entities.Relations.Seguridad.RolFuncion>();
                 return _entities;
             }
@@ -22243,6 +22839,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoAplicacion>().ToList<Entities.Relations.Seguridad.TipoAplicacion>();
                 return _entities;
             }
@@ -22536,6 +23133,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoFuncion>().ToList<Entities.Relations.Seguridad.TipoFuncion>();
                 return _entities;
             }
@@ -22831,6 +23429,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoIdentificador>().ToList<Entities.Relations.Seguridad.TipoIdentificador>();
                 return _entities;
             }
@@ -23139,6 +23738,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoMenu>().ToList<Entities.Relations.Seguridad.TipoMenu>();
                 return _entities;
             }
@@ -23466,6 +24066,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.Usuario>().ToList<Entities.Relations.Seguridad.Usuario>();
                 return _entities;
             }
@@ -24014,6 +24615,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.UsuarioRol>().ToList<Entities.Relations.Seguridad.UsuarioRol>();
                 return _entities;
             }
@@ -24307,6 +24909,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Seguridad.UsuarioSector>().ToList<Entities.Relations.Seguridad.UsuarioSector>();
                 return _entities;
             }
@@ -24600,6 +25203,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.Configuracion>().ToList<Entities.Relations.Sincronizacion.Configuracion>();
                 return _entities;
             }
@@ -24891,6 +25495,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.Entidad>().ToList<Entities.Relations.Sincronizacion.Entidad>();
                 return _entities;
             }
@@ -25165,6 +25770,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.EntidadCabecera>().ToList<Entities.Relations.Sincronizacion.EntidadCabecera>();
                 return _entities;
             }
@@ -25422,6 +26028,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.EntidadDetalle>().ToList<Entities.Relations.Sincronizacion.EntidadDetalle>();
                 return _entities;
             }
@@ -25676,6 +26283,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Turno.AgendaTurno>().ToList<Entities.Relations.Turno.AgendaTurno>();
                 return _entities;
             }
@@ -26016,6 +26624,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Turno.EsquemaDetalleTurno>().ToList<Entities.Relations.Turno.EsquemaDetalleTurno>();
                 return _entities;
             }
@@ -26322,6 +26931,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Turno.EsquemaTurno>().ToList<Entities.Relations.Turno.EsquemaTurno>();
                 return _entities;
             }
@@ -26610,6 +27220,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Valor.Denominacion>().ToList<Entities.Relations.Valor.Denominacion>();
                 return _entities;
             }
@@ -26982,6 +27593,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Valor.Moneda>().ToList<Entities.Relations.Valor.Moneda>();
                 return _entities;
             }
@@ -27307,6 +27919,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Valor.OrigenValor>().ToList<Entities.Relations.Valor.OrigenValor>();
                 return _entities;
             }
@@ -27615,6 +28228,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Valor.RelacionMonedaTipoValor>().ToList<Entities.Relations.Valor.RelacionMonedaTipoValor>();
                 return _entities;
             }
@@ -27910,6 +28524,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Valor.Tipo>().ToList<Entities.Relations.Valor.Tipo>();
                 return _entities;
             }
@@ -28220,6 +28835,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Visualizacion.Perfil>().ToList<Entities.Relations.Visualizacion.Perfil>();
                 return _entities;
             }
@@ -28528,6 +29144,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Visualizacion.PerfilItem>().ToList<Entities.Relations.Visualizacion.PerfilItem>();
                 return _entities;
             }
@@ -28823,6 +29440,7 @@ using System.Text;
                 dh.WhereParameter = this.Where.whereParameter;
                 dh.OrderByParameter = this.OrderByParameter.orderByParameter;
                 dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Relations.Visualizacion.PerfilTipo>().ToList<Entities.Relations.Visualizacion.PerfilTipo>();
                 return _entities;
             }

@@ -231,6 +231,12 @@ namespace Permaquim.Depositary.Sincronization.Console
                     Int64? mapSucursalId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Directorio.Sucursal", transactionRow.SucursalId);
                     Int64? mapMonedaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Valor.Moneda", transactionRow.MonedaId);
                     Int64? mapUsuarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", transactionRow.UsuarioId);
+                    
+                    Int64? mapOrigenValorId = null;
+                    if (transactionRow.OrigenValorId.HasValue)
+                    {
+                        mapOrigenValorId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Valor.OrigenValor", transactionRow.OrigenValorId.Value);
+                    }
 
                     Int64? mapCuentaId = null;
                     if (transactionRow.CuentaId.HasValue)
@@ -245,6 +251,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                         transactionRow.SucursalId = mapSucursalId.Value;
                         transactionRow.MonedaId = mapMonedaId.Value;
                         transactionRow.UsuarioId = mapUsuarioId.Value;
+                        transactionRow.OrigenValorId = mapOrigenValorId;
                         transactionRow.CodigoOperacion = transactionRow.CodigoOperacion + "-" + transactionRow.Id.ToString();
                     }
                 }
@@ -315,6 +322,35 @@ namespace Permaquim.Depositary.Sincronization.Console
             }
 
             return envelopeTransactionDetail.Result;
+        }
+
+        public List<Depositario.Entities.Tables.Operacion.Evento> GetEvents()
+        {
+            var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Evento);
+            Depositario.Business.Tables.Operacion.Evento events = new();
+
+            events.Where.Add(Depositario.Business.Tables.Operacion.Evento.ColumnEnum.Fecha,
+            Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+
+            events.Items();
+
+            //Map master id's
+            if (events.Result.Count > 0)
+            {
+                foreach (var eventRow in events.Result)
+                {
+                    Int64? mapTipoId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Operacion.TipoEvento", eventRow.TipoId);
+                    Int64? mapDepositarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Dispositivo.Depositario", eventRow.DepositarioId);
+
+                    if (mapTipoId.HasValue && mapDepositarioId.HasValue)
+                    {
+                        eventRow.TipoId = mapTipoId.Value;
+                        eventRow.DepositarioId = mapDepositarioId.Value;
+                    }
+                }
+            }
+
+            return events.Result;
         }
 
         public void SaveEntitySincronizationDate(EntitiesEnum entity, DateTime startDate, DateTime endDate)
