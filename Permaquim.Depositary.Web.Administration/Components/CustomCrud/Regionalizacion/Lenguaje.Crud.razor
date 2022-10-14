@@ -363,6 +363,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "GeografiaPaisCustomCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Regionalizacion.Lenguaje entity = new();
         Lenguaje_entities = entity.Items();
@@ -395,6 +396,7 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "GeografiaPaisCustomCrud", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -420,6 +422,8 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "GeografiaPaisCustomCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -487,7 +491,7 @@ else
                     case CrudMode.Add:
                         try
                         {
-                            crud.Add(Lenguaje_entity);
+                            crud.Add(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                             //Si se agrego un esquema no default y ademas existia un esquema default entonces le cargamos los items del esquema default
                             if (!Lenguaje_entity.EsDefault && lenguajeDefault != null)
@@ -515,6 +519,7 @@ else
                         }
                         catch (Exception ex)
                         {
+                            AuditController.Log(ex, dataUsuario.Id);
                             summary = "Error al procesar.";
                             actionInformation = ex.Message;
                             severityType = NotificationSeverity.Error;
@@ -523,13 +528,14 @@ else
                     case CrudMode.Edit:
                         try
                         {
-                            crud.Update(Lenguaje_entity);
+                            crud.Update(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             summary = "El registro se ha ";
                             actionInformation = "modificado.";
                             severityType = NotificationSeverity.Success;
                         }
                         catch (Exception ex)
                         {
+                            AuditController.Log(ex, dataUsuario.Id);
                             summary = "Error al procesar.";
                             actionInformation = ex.Message;
                             severityType = NotificationSeverity.Error;
@@ -543,7 +549,7 @@ else
             try
             {
                 Lenguaje_entity.Habilitado = false;
-                crud.Update(Lenguaje_entity);
+                crud.Update(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                 summary = "El registro se ha ";
                 actionInformation = "eliminado.";
                 severityType = NotificationSeverity.Success;
@@ -624,7 +630,7 @@ else
 
                 try
                 {
-                    oLenguajeItemNuevo.Add(eLenguajeItemNuevo);
+                    oLenguajeItemNuevo.Add(eLenguajeItemNuevo, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                 }
                 catch (Exception ex)
                 {

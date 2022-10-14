@@ -1,7 +1,6 @@
 ﻿@page "/perfil"
 @layout MainLayout
 
-@using Permaquim.Depositary.UI.Desktop.Controllers
 @using Permaquim.Depositary.Web.Administration.Controllers
 
 @inject NotificationService NotificationService
@@ -201,6 +200,9 @@
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "perfil", "", dataUsuario.Id);
+
         await Task.Run(LoadMainEntityData);
         estaCargando = false;
         StateHasChanged();
@@ -249,7 +251,7 @@
             {
                 await sessionStorage.RemoveItemAsync("DataLenguaje");
                 dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
-                AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,"User "+dataUsuario.NickName+" saved.", "");
+                //AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,"User "+dataUsuario.NickName+" saved.", "");
                 await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
                 dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
             }
@@ -259,7 +261,7 @@
             summary = "Error al procesar.";
             actionInformation = ex.Message;
             severityType = NotificationSeverity.Error;
-            AuditController.Log(Entities.AuditEntities.LogTypeEnum.Exception,"Error saving changes on user "+dataUsuario.NickName+".", "");
+            //AuditController.Log(Entities.AuditEntities.LogTypeEnum.Exception,"Error saving changes on user "+dataUsuario.NickName+".", "");
             estaCargando = false;
             StateHasChanged();
         }

@@ -6,7 +6,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Configuracion : DataHandler
+		public partial class Configuracion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -81,6 +81,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Aplicacion.Configuracion>().ToList<Entities.Tables.Aplicacion.Configuracion>();
                 return _entities;
             }
@@ -388,7 +389,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class ConfiguracionEmpresa : DataHandler
+		public partial class ConfiguracionEmpresa : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -463,6 +464,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Tables.Aplicacion.ConfiguracionEmpresa>();
                 return _entities;
             }
@@ -770,7 +772,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class ConfiguracionTipoDato : DataHandler
+		public partial class ConfiguracionTipoDato : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -841,6 +843,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionTipoDato>().ToList<Entities.Tables.Aplicacion.ConfiguracionTipoDato>();
                 return _entities;
             }
@@ -1120,7 +1123,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class ConfiguracionValidacionDato : DataHandler
+		public partial class ConfiguracionValidacionDato : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -1195,6 +1198,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionValidacionDato>().ToList<Entities.Tables.Aplicacion.ConfiguracionValidacionDato>();
                 return _entities;
             }
@@ -1502,7 +1506,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Log : DataHandler
+		public partial class Log : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -1575,6 +1579,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Auditoria.Log>().ToList<Entities.Tables.Auditoria.Log>();
                 return _entities;
             }
@@ -1868,7 +1873,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoLog : DataHandler
+		public partial class TipoLog : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -1939,6 +1944,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Auditoria.TipoLog>().ToList<Entities.Tables.Auditoria.TipoLog>();
                 return _entities;
             }
@@ -2218,7 +2224,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Banco : DataHandler
+		public partial class Banco : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -2293,6 +2299,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Banca.Banco>().ToList<Entities.Tables.Banca.Banco>();
                 return _entities;
             }
@@ -2600,7 +2607,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Cuenta : DataHandler
+		public partial class Cuenta : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -2683,6 +2690,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Banca.Cuenta>().ToList<Entities.Tables.Banca.Cuenta>();
                 return _entities;
             }
@@ -3046,7 +3054,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoCuenta : DataHandler
+		public partial class TipoCuenta : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -3119,6 +3127,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Banca.TipoCuenta>().ToList<Entities.Tables.Banca.TipoCuenta>();
                 return _entities;
             }
@@ -3412,7 +3421,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class UsuarioCuenta : DataHandler
+		public partial class UsuarioCuenta : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -3483,6 +3492,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Banca.UsuarioCuenta>().ToList<Entities.Tables.Banca.UsuarioCuenta>();
                 return _entities;
             }
@@ -3762,7 +3772,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class HuellaDactilar : DataHandler
+		public partial class HuellaDactilar : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -3835,6 +3845,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Biometria.HuellaDactilar>().ToList<Entities.Tables.Biometria.HuellaDactilar>();
                 return _entities;
             }
@@ -4128,7 +4139,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Empresa : DataHandler
+		public partial class Empresa : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -4213,6 +4224,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Directorio.Empresa>().ToList<Entities.Tables.Directorio.Empresa>();
                 return _entities;
             }
@@ -4590,7 +4602,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Grupo : DataHandler
+		public partial class Grupo : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -4663,6 +4675,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Directorio.Grupo>().ToList<Entities.Tables.Directorio.Grupo>();
                 return _entities;
             }
@@ -4956,7 +4969,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class RelacionMonedaSucursal : DataHandler
+		public partial class RelacionMonedaSucursal : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -5029,6 +5042,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Directorio.RelacionMonedaSucursal>().ToList<Entities.Tables.Directorio.RelacionMonedaSucursal>();
                 return _entities;
             }
@@ -5322,7 +5336,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Sector : DataHandler
+		public partial class Sector : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -5395,6 +5409,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Directorio.Sector>().ToList<Entities.Tables.Directorio.Sector>();
                 return _entities;
             }
@@ -5688,7 +5703,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Sucursal : DataHandler
+		public partial class Sucursal : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -5769,6 +5784,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Directorio.Sucursal>().ToList<Entities.Tables.Directorio.Sucursal>();
                 return _entities;
             }
@@ -6118,7 +6134,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class ComandoContadora : DataHandler
+		public partial class ComandoContadora : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -6197,6 +6213,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.ComandoContadora>().ToList<Entities.Tables.Dispositivo.ComandoContadora>();
                 return _entities;
             }
@@ -6532,7 +6549,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class ComandoPlaca : DataHandler
+		public partial class ComandoPlaca : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -6611,6 +6628,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.ComandoPlaca>().ToList<Entities.Tables.Dispositivo.ComandoPlaca>();
                 return _entities;
             }
@@ -6946,7 +6964,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class ConfiguracionDepositario : DataHandler
+		public partial class ConfiguracionDepositario : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -7019,6 +7037,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.ConfiguracionDepositario>().ToList<Entities.Tables.Dispositivo.ConfiguracionDepositario>();
                 return _entities;
             }
@@ -7312,7 +7331,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Depositario : DataHandler
+		public partial class Depositario : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -7391,6 +7410,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.Depositario>().ToList<Entities.Tables.Dispositivo.Depositario>();
                 return _entities;
             }
@@ -7726,7 +7746,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class DepositarioContadora : DataHandler
+		public partial class DepositarioContadora : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -7821,6 +7841,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioContadora>().ToList<Entities.Tables.Dispositivo.DepositarioContadora>();
                 return _entities;
             }
@@ -8268,7 +8289,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class DepositarioEstado : DataHandler
+		public partial class DepositarioEstado : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -8355,6 +8376,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioEstado>().ToList<Entities.Tables.Dispositivo.DepositarioEstado>();
                 return _entities;
             }
@@ -8746,7 +8768,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class DepositarioMoneda : DataHandler
+		public partial class DepositarioMoneda : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -8819,6 +8841,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioMoneda>().ToList<Entities.Tables.Dispositivo.DepositarioMoneda>();
                 return _entities;
             }
@@ -9112,7 +9135,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class DepositarioPlaca : DataHandler
+		public partial class DepositarioPlaca : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -9225,6 +9248,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioPlaca>().ToList<Entities.Tables.Dispositivo.DepositarioPlaca>();
                 return _entities;
             }
@@ -9798,7 +9822,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Marca : DataHandler
+		public partial class Marca : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -9869,6 +9893,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.Marca>().ToList<Entities.Tables.Dispositivo.Marca>();
                 return _entities;
             }
@@ -10148,7 +10173,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Modelo : DataHandler
+		public partial class Modelo : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -10225,6 +10250,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.Modelo>().ToList<Entities.Tables.Dispositivo.Modelo>();
                 return _entities;
             }
@@ -10546,7 +10572,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class PlantillaMoneda : DataHandler
+		public partial class PlantillaMoneda : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -10617,6 +10643,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.PlantillaMoneda>().ToList<Entities.Tables.Dispositivo.PlantillaMoneda>();
                 return _entities;
             }
@@ -10896,7 +10923,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class PlantillaMonedaDetalle : DataHandler
+		public partial class PlantillaMonedaDetalle : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -10973,6 +11000,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>().ToList<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>();
                 return _entities;
             }
@@ -11294,7 +11322,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoConfiguracionDepositario : DataHandler
+		public partial class TipoConfiguracionDepositario : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -11367,6 +11395,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.TipoConfiguracionDepositario>().ToList<Entities.Tables.Dispositivo.TipoConfiguracionDepositario>();
                 return _entities;
             }
@@ -11660,7 +11689,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoContadora : DataHandler
+		public partial class TipoContadora : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -11755,6 +11784,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.TipoContadora>().ToList<Entities.Tables.Dispositivo.TipoContadora>();
                 return _entities;
             }
@@ -12202,7 +12232,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoPlaca : DataHandler
+		public partial class TipoPlaca : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -12317,6 +12347,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Dispositivo.TipoPlaca>().ToList<Entities.Tables.Dispositivo.TipoPlaca>();
                 return _entities;
             }
@@ -12904,7 +12935,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Esquema : DataHandler
+		public partial class Esquema : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -12977,6 +13008,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Estilo.Esquema>().ToList<Entities.Tables.Estilo.Esquema>();
                 return _entities;
             }
@@ -13270,7 +13302,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class EsquemaDetalle : DataHandler
+		public partial class EsquemaDetalle : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -13351,6 +13383,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Estilo.EsquemaDetalle>().ToList<Entities.Tables.Estilo.EsquemaDetalle>();
                 return _entities;
             }
@@ -13700,7 +13733,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoEsquemaDetalle : DataHandler
+		public partial class TipoEsquemaDetalle : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -13771,6 +13804,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Estilo.TipoEsquemaDetalle>().ToList<Entities.Tables.Estilo.TipoEsquemaDetalle>();
                 return _entities;
             }
@@ -14050,7 +14084,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Ciudad : DataHandler
+		public partial class Ciudad : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -14125,6 +14159,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Geografia.Ciudad>().ToList<Entities.Tables.Geografia.Ciudad>();
                 return _entities;
             }
@@ -14432,7 +14467,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class CodigoPostal : DataHandler
+		public partial class CodigoPostal : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -14507,6 +14542,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Geografia.CodigoPostal>().ToList<Entities.Tables.Geografia.CodigoPostal>();
                 return _entities;
             }
@@ -14814,7 +14850,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Pais : DataHandler
+		public partial class Pais : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -14889,6 +14925,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Geografia.Pais>().ToList<Entities.Tables.Geografia.Pais>();
                 return _entities;
             }
@@ -15196,7 +15233,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Provincia : DataHandler
+		public partial class Provincia : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -15271,6 +15308,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Geografia.Provincia>().ToList<Entities.Tables.Geografia.Provincia>();
                 return _entities;
             }
@@ -15578,7 +15616,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Zona : DataHandler
+		public partial class Zona : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -15651,6 +15689,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Geografia.Zona>().ToList<Entities.Tables.Geografia.Zona>();
                 return _entities;
             }
@@ -15944,7 +15983,582 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Ticket : DataHandler
+		public partial class PlantillaTicket : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					TipoId,
+					DepositarioModeloId,
+					Nombre,
+					Descripcion,
+					Impresora,
+					TextoCabecera,
+					NombreFuenteCabecera,
+					TamanioFuenteCabecera,
+					UbicacionTextoCabecera,
+					TextoPie,
+					NombreFuentePie,
+					TamanioFuentePie,
+					UbicacionTextoPie,
+					Imagen,
+					UbicacionImagen,
+					UbicacionTextoDetalle,
+					AnchoDetalle,
+					TamanioEntreLineas,
+					AnchoReporte,
+					FactorAltoReporte,
+					LineasAlFinal
+				}
+         protected List<Entities.Tables.Impresion.PlantillaTicket> _entities = new List<Entities.Tables.Impresion.PlantillaTicket>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public PlantillaTicket() : base()
+            {
+                base._dataItem = new Entities.Tables.Impresion.PlantillaTicket();
+            }
+            public PlantillaTicket(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Impresion.PlantillaTicket();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Impresion.PlantillaTicket item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// PlantillaTicket Add Method
+         /// </summary>
+         /// <param name='TipoId'></param>
+         /// <param name='DepositarioModeloId'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
+         /// <param name='Impresora'></param>
+         /// <param name='TextoCabecera'></param>
+         /// <param name='NombreFuenteCabecera'></param>
+         /// <param name='TamanioFuenteCabecera'></param>
+         /// <param name='UbicacionTextoCabecera'></param>
+         /// <param name='TextoPie'></param>
+         /// <param name='NombreFuentePie'></param>
+         /// <param name='TamanioFuentePie'></param>
+         /// <param name='UbicacionTextoPie'></param>
+         /// <param name='Imagen'></param>
+         /// <param name='UbicacionImagen'></param>
+         /// <param name='UbicacionTextoDetalle'></param>
+         /// <param name='AnchoDetalle'></param>
+         /// <param name='TamanioEntreLineas'></param>
+         /// <param name='AnchoReporte'></param>
+         /// <param name='FactorAltoReporte'></param>
+         /// <param name='LineasAlFinal'></param>
+         /// <returns>Entities.Tables.Impresion.PlantillaTicket</returns>
+			public Entities.Tables.Impresion.PlantillaTicket Add(Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal) 
+			{
+			  return (Entities.Tables.Impresion.PlantillaTicket)base.Add(new Entities.Tables.Impresion.PlantillaTicket(TipoId,DepositarioModeloId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,AnchoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,LineasAlFinal));
+			}
+            public new List<Entities.Tables.Impresion.PlantillaTicket> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
+                _entities = dh.Items().Cast<Entities.Tables.Impresion.PlantillaTicket>().ToList<Entities.Tables.Impresion.PlantillaTicket>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Impresion.PlantillaTicket items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Impresion.PlantillaTicket> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Impresion.PlantillaTicket items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
+            /// <param name="TextoCabecera"></param>
+            /// <param name="NombreFuenteCabecera"></param>
+            /// <param name="TamanioFuenteCabecera"></param>
+            /// <param name="UbicacionTextoCabecera"></param>
+            /// <param name="TextoPie"></param>
+            /// <param name="NombreFuentePie"></param>
+            /// <param name="TamanioFuentePie"></param>
+            /// <param name="UbicacionTextoPie"></param>
+            /// <param name="Imagen"></param>
+            /// <param name="UbicacionImagen"></param>
+            /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
+            /// <param name="TamanioEntreLineas"></param>
+            /// <param name="AnchoReporte"></param>
+            /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Impresion.PlantillaTicket> Items(Int64? Id,Int64? TipoId,Int64? DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? AnchoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,Int32? LineasAlFinal)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (TipoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoId, sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                   
+                }
+                if (DepositarioModeloId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioModeloId, sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Descripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Descripcion, sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Impresora != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Impresora, sqlEnum.OperandEnum.Equal, Impresora);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
+                    }
+                   
+                }
+                if (TextoCabecera != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TextoCabecera, sqlEnum.OperandEnum.Equal, TextoCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoCabecera);
+                    }
+                   
+                }
+                if (NombreFuenteCabecera != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.NombreFuenteCabecera, sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.NombreFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
+                    }
+                   
+                }
+                if (TamanioFuenteCabecera != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioFuenteCabecera, sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TamanioFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
+                    }
+                   
+                }
+                if (UbicacionTextoCabecera != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoCabecera, sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UbicacionTextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
+                    }
+                   
+                }
+                if (TextoPie != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TextoPie, sqlEnum.OperandEnum.Equal, TextoPie);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoPie);
+                    }
+                   
+                }
+                if (NombreFuentePie != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.NombreFuentePie, sqlEnum.OperandEnum.Equal, NombreFuentePie);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.NombreFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuentePie);
+                    }
+                   
+                }
+                if (TamanioFuentePie != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioFuentePie, sqlEnum.OperandEnum.Equal, TamanioFuentePie);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TamanioFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuentePie);
+                    }
+                   
+                }
+                if (UbicacionTextoPie != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoPie, sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UbicacionTextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
+                    }
+                   
+                }
+                if (Imagen != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Imagen, sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Imagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                   
+                }
+                if (UbicacionImagen != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionImagen, sqlEnum.OperandEnum.Equal, UbicacionImagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UbicacionImagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionImagen);
+                    }
+                   
+                }
+                if (UbicacionTextoDetalle != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoDetalle, sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UbicacionTextoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
+                    }
+                   
+                }
+                if (AnchoDetalle != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoDetalle, sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                   
+                }
+                if (TamanioEntreLineas != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioEntreLineas, sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TamanioEntreLineas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
+                    }
+                   
+                }
+                if (AnchoReporte != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoReporte, sqlEnum.OperandEnum.Equal, AnchoReporte);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.AnchoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoReporte);
+                    }
+                   
+                }
+                if (FactorAltoReporte != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FactorAltoReporte, sqlEnum.OperandEnum.Equal, FactorAltoReporte);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
+                    }
+                   
+                }
+                if (LineasAlFinal != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.LineasAlFinal, sqlEnum.OperandEnum.Equal, LineasAlFinal);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Impresion.PlantillaTicket
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Impresion.PlantillaTicket Add(Entities.Tables.Impresion.PlantillaTicket item)
+            {
+                return (Entities.Tables.Impresion.PlantillaTicket)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Impresion.PlantillaTicket
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Impresion.PlantillaTicket AddOrUpdate(Entities.Tables.Impresion.PlantillaTicket item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Impresion.PlantillaTicket)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Impresion.PlantillaTicket
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Impresion.PlantillaTicket item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Impresion.PlantillaTicket with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
+            /// <param name="TextoCabecera"></param>
+            /// <param name="NombreFuenteCabecera"></param>
+            /// <param name="TamanioFuenteCabecera"></param>
+            /// <param name="UbicacionTextoCabecera"></param>
+            /// <param name="TextoPie"></param>
+            /// <param name="NombreFuentePie"></param>
+            /// <param name="TamanioFuentePie"></param>
+            /// <param name="UbicacionTextoPie"></param>
+            /// <param name="Imagen"></param>
+            /// <param name="UbicacionImagen"></param>
+            /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
+            /// <param name="TamanioEntreLineas"></param>
+            /// <param name="AnchoReporte"></param>
+            /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositariomodeloid,String nombre,String descripcion,String impresora,String textocabecera,String nombrefuentecabecera,Int32 tamaniofuentecabecera,Int32 ubicaciontextocabecera,String textopie,String nombrefuentepie,Int32 tamaniofuentepie,String ubicaciontextopie,String imagen,String ubicacionimagen,Int32 ubicaciontextodetalle,Int32 anchodetalle,Int32 tamanioentrelineas,Int32 anchoreporte,Int32 factoraltoreporte,Int32 lineasalfinal)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Impresion.PlantillaTicket {Id = id,TipoId = tipoid,DepositarioModeloId = depositariomodeloid,Nombre = nombre,Descripcion = descripcion,Impresora = impresora,TextoCabecera = textocabecera,NombreFuenteCabecera = nombrefuentecabecera,TamanioFuenteCabecera = tamaniofuentecabecera,UbicacionTextoCabecera = ubicaciontextocabecera,TextoPie = textopie,NombreFuentePie = nombrefuentepie,TamanioFuentePie = tamaniofuentepie,UbicacionTextoPie = ubicaciontextopie,Imagen = imagen,UbicacionImagen = ubicacionimagen,UbicacionTextoDetalle = ubicaciontextodetalle,AnchoDetalle = anchodetalle,TamanioEntreLineas = tamanioentrelineas,AnchoReporte = anchoreporte,FactorAltoReporte = factoraltoreporte,LineasAlFinal = lineasalfinal});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Impresion.PlantillaTicket
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Impresion.PlantillaTicket item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Impresion.PlantillaTicket with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Impresion.PlantillaTicket {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Impresion.PlantillaTicket> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class PlantillaTicket
+	} //namespace Permaquim.Depositario.Business.Tables.Impresion
+	namespace Permaquim.Depositario.Business.Tables.Impresion {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public partial class Ticket : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -16055,6 +16669,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Impresion.Ticket>().ToList<Entities.Tables.Impresion.Ticket>();
                 return _entities;
             }
@@ -16614,7 +17229,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoTicket : DataHandler
+		public partial class TipoTicket : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -16687,6 +17302,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Impresion.TipoTicket>().ToList<Entities.Tables.Impresion.TipoTicket>();
                 return _entities;
             }
@@ -16980,7 +17596,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class CierreDiario : DataHandler
+		public partial class CierreDiario : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -17055,6 +17671,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.CierreDiario>().ToList<Entities.Tables.Operacion.CierreDiario>();
                 return _entities;
             }
@@ -17362,7 +17979,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Contenedor : DataHandler
+		public partial class Contenedor : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -17441,6 +18058,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.Contenedor>().ToList<Entities.Tables.Operacion.Contenedor>();
                 return _entities;
             }
@@ -17776,7 +18394,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Evento : DataHandler
+		public partial class Evento : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -17845,6 +18463,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.Evento>().ToList<Entities.Tables.Operacion.Evento>();
                 return _entities;
             }
@@ -18110,7 +18729,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Sesion : DataHandler
+		public partial class Sesion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -18177,6 +18796,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.Sesion>().ToList<Entities.Tables.Operacion.Sesion>();
                 return _entities;
             }
@@ -18428,7 +19048,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoContenedor : DataHandler
+		public partial class TipoContenedor : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -18501,6 +19121,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.TipoContenedor>().ToList<Entities.Tables.Operacion.TipoContenedor>();
                 return _entities;
             }
@@ -18794,7 +19415,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoEvento : DataHandler
+		public partial class TipoEvento : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -18867,6 +19488,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.TipoEvento>().ToList<Entities.Tables.Operacion.TipoEvento>();
                 return _entities;
             }
@@ -19160,7 +19782,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoTransaccion : DataHandler
+		public partial class TipoTransaccion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -19233,6 +19855,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.TipoTransaccion>().ToList<Entities.Tables.Operacion.TipoTransaccion>();
                 return _entities;
             }
@@ -19526,7 +20149,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Transaccion : DataHandler
+		public partial class Transaccion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -19609,7 +20232,7 @@ using System.Text;
          /// <param name='OrigenValorId'></param>
          /// <param name='CodigoOperacion'></param>
          /// <returns>Entities.Tables.Operacion.Transaccion</returns>
-			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64 OrigenValorId,String CodigoOperacion) 
+			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion) 
 			{
 			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,CuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico,OrigenValorId,CodigoOperacion));
 			}
@@ -19619,6 +20242,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.Transaccion>().ToList<Entities.Tables.Operacion.Transaccion>();
                 return _entities;
             }
@@ -19953,7 +20577,7 @@ using System.Text;
             /// <param name="OrigenValorId"></param>
             /// <param name="CodigoOperacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? cuentaid,Int64 contenedorid,Int64 sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64 origenvalorid,String codigooperacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? cuentaid,Int64 contenedorid,Int64? sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64? origenvalorid,String codigooperacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,CuentaId = cuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico,OrigenValorId = origenvalorid,CodigoOperacion = codigooperacion});
             }
@@ -20052,7 +20676,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TransaccionDetalle : DataHandler
+		public partial class TransaccionDetalle : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -20117,6 +20741,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.TransaccionDetalle>().ToList<Entities.Tables.Operacion.TransaccionDetalle>();
                 return _entities;
             }
@@ -20354,7 +20979,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TransaccionSobre : DataHandler
+		public partial class TransaccionSobre : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -20417,6 +21042,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.TransaccionSobre>().ToList<Entities.Tables.Operacion.TransaccionSobre>();
                 return _entities;
             }
@@ -20640,7 +21266,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TransaccionSobreDetalle : DataHandler
+		public partial class TransaccionSobreDetalle : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -20707,6 +21333,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.TransaccionSobreDetalle>().ToList<Entities.Tables.Operacion.TransaccionSobreDetalle>();
                 return _entities;
             }
@@ -20958,7 +21585,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Turno : DataHandler
+		public partial class Turno : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -21045,6 +21672,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.Turno>().ToList<Entities.Tables.Operacion.Turno>();
                 return _entities;
             }
@@ -21436,7 +22064,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TurnoUsuario : DataHandler
+		public partial class TurnoUsuario : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -21507,6 +22135,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Operacion.TurnoUsuario>().ToList<Entities.Tables.Operacion.TurnoUsuario>();
                 return _entities;
             }
@@ -21786,7 +22415,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Lenguaje : DataHandler
+		public partial class Lenguaje : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -21861,6 +22490,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Regionalizacion.Lenguaje>().ToList<Entities.Tables.Regionalizacion.Lenguaje>();
                 return _entities;
             }
@@ -22168,7 +22798,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class LenguajeItem : DataHandler
+		public partial class LenguajeItem : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -22243,6 +22873,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Regionalizacion.LenguajeItem>().ToList<Entities.Tables.Regionalizacion.LenguajeItem>();
                 return _entities;
             }
@@ -22550,7 +23181,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Aplicacion : DataHandler
+		public partial class Aplicacion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -22623,6 +23254,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.Aplicacion>().ToList<Entities.Tables.Seguridad.Aplicacion>();
                 return _entities;
             }
@@ -22916,7 +23548,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class AplicacionParametro : DataHandler
+		public partial class AplicacionParametro : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -22987,6 +23619,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.AplicacionParametro>().ToList<Entities.Tables.Seguridad.AplicacionParametro>();
                 return _entities;
             }
@@ -23266,7 +23899,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class AplicacionParametroValor : DataHandler
+		public partial class AplicacionParametroValor : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -23339,6 +23972,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.AplicacionParametroValor>().ToList<Entities.Tables.Seguridad.AplicacionParametroValor>();
                 return _entities;
             }
@@ -23632,7 +24266,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Funcion : DataHandler
+		public partial class Funcion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -23709,6 +24343,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.Funcion>().ToList<Entities.Tables.Seguridad.Funcion>();
                 return _entities;
             }
@@ -24030,7 +24665,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class IdentificadorUsuario : DataHandler
+		public partial class IdentificadorUsuario : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -24103,6 +24738,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.IdentificadorUsuario>().ToList<Entities.Tables.Seguridad.IdentificadorUsuario>();
                 return _entities;
             }
@@ -24396,7 +25032,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Menu : DataHandler
+		public partial class Menu : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -24475,6 +25111,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.Menu>().ToList<Entities.Tables.Seguridad.Menu>();
                 return _entities;
             }
@@ -24810,7 +25447,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Rol : DataHandler
+		public partial class Rol : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -24885,6 +25522,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.Rol>().ToList<Entities.Tables.Seguridad.Rol>();
                 return _entities;
             }
@@ -25192,7 +25830,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class RolFuncion : DataHandler
+		public partial class RolFuncion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -25273,6 +25911,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.RolFuncion>().ToList<Entities.Tables.Seguridad.RolFuncion>();
                 return _entities;
             }
@@ -25622,7 +26261,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoAplicacion : DataHandler
+		public partial class TipoAplicacion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -25693,6 +26332,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoAplicacion>().ToList<Entities.Tables.Seguridad.TipoAplicacion>();
                 return _entities;
             }
@@ -25972,7 +26612,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoFuncion : DataHandler
+		public partial class TipoFuncion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -26043,6 +26683,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoFuncion>().ToList<Entities.Tables.Seguridad.TipoFuncion>();
                 return _entities;
             }
@@ -26322,7 +26963,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoIdentificador : DataHandler
+		public partial class TipoIdentificador : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -26395,6 +27036,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoIdentificador>().ToList<Entities.Tables.Seguridad.TipoIdentificador>();
                 return _entities;
             }
@@ -26688,7 +27330,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class TipoMenu : DataHandler
+		public partial class TipoMenu : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -26759,6 +27401,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoMenu>().ToList<Entities.Tables.Seguridad.TipoMenu>();
                 return _entities;
             }
@@ -27038,7 +27681,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Usuario : DataHandler
+		public partial class Usuario : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -27143,6 +27786,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.Usuario>().ToList<Entities.Tables.Seguridad.Usuario>();
                 return _entities;
             }
@@ -27660,7 +28304,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class UsuarioRol : DataHandler
+		public partial class UsuarioRol : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -27731,6 +28375,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.UsuarioRol>().ToList<Entities.Tables.Seguridad.UsuarioRol>();
                 return _entities;
             }
@@ -28010,7 +28655,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class UsuarioSector : DataHandler
+		public partial class UsuarioSector : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -28081,6 +28726,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Seguridad.UsuarioSector>().ToList<Entities.Tables.Seguridad.UsuarioSector>();
                 return _entities;
             }
@@ -28360,7 +29006,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Configuracion : DataHandler
+		public partial class Configuracion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -28431,6 +29077,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.Configuracion>().ToList<Entities.Tables.Sincronizacion.Configuracion>();
                 return _entities;
             }
@@ -28710,7 +29357,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Entidad : DataHandler
+		public partial class Entidad : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -28779,6 +29426,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.Entidad>().ToList<Entities.Tables.Sincronizacion.Entidad>();
                 return _entities;
             }
@@ -29044,7 +29692,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class EntidadCabecera : DataHandler
+		public partial class EntidadCabecera : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -29111,6 +29759,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.EntidadCabecera>().ToList<Entities.Tables.Sincronizacion.EntidadCabecera>();
                 return _entities;
             }
@@ -29362,7 +30011,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class EntidadDetalle : DataHandler
+		public partial class EntidadDetalle : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -29427,6 +30076,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.EntidadDetalle>().ToList<Entities.Tables.Sincronizacion.EntidadDetalle>();
                 return _entities;
             }
@@ -29664,7 +30314,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class AgendaTurno : DataHandler
+		public partial class AgendaTurno : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -29741,6 +30391,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Turno.AgendaTurno>().ToList<Entities.Tables.Turno.AgendaTurno>();
                 return _entities;
             }
@@ -30062,7 +30713,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class EsquemaDetalleTurno : DataHandler
+		public partial class EsquemaDetalleTurno : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -30135,6 +30786,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Turno.EsquemaDetalleTurno>().ToList<Entities.Tables.Turno.EsquemaDetalleTurno>();
                 return _entities;
             }
@@ -30428,7 +31080,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class EsquemaTurno : DataHandler
+		public partial class EsquemaTurno : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -30497,6 +31149,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Turno.EsquemaTurno>().ToList<Entities.Tables.Turno.EsquemaTurno>();
                 return _entities;
             }
@@ -30762,7 +31415,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Denominacion : DataHandler
+		public partial class Denominacion : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -30843,6 +31496,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Valor.Denominacion>().ToList<Entities.Tables.Valor.Denominacion>();
                 return _entities;
             }
@@ -31192,7 +31846,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Moneda : DataHandler
+		public partial class Moneda : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -31267,6 +31921,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Valor.Moneda>().ToList<Entities.Tables.Valor.Moneda>();
                 return _entities;
             }
@@ -31574,7 +32229,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class OrigenValor : DataHandler
+		public partial class OrigenValor : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -31647,6 +32302,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Valor.OrigenValor>().ToList<Entities.Tables.Valor.OrigenValor>();
                 return _entities;
             }
@@ -31940,7 +32596,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class RelacionMonedaTipoValor : DataHandler
+		public partial class RelacionMonedaTipoValor : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -32011,6 +32667,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Valor.RelacionMonedaTipoValor>().ToList<Entities.Tables.Valor.RelacionMonedaTipoValor>();
                 return _entities;
             }
@@ -32290,7 +32947,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Tipo : DataHandler
+		public partial class Tipo : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -32363,6 +33020,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Valor.Tipo>().ToList<Entities.Tables.Valor.Tipo>();
                 return _entities;
             }
@@ -32656,7 +33314,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class Perfil : DataHandler
+		public partial class Perfil : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -32729,6 +33387,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Visualizacion.Perfil>().ToList<Entities.Tables.Visualizacion.Perfil>();
                 return _entities;
             }
@@ -33022,7 +33681,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class PerfilItem : DataHandler
+		public partial class PerfilItem : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -33093,6 +33752,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Visualizacion.PerfilItem>().ToList<Entities.Tables.Visualizacion.PerfilItem>();
                 return _entities;
             }
@@ -33372,7 +34032,7 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
-		public class PerfilTipo : DataHandler
+		public partial class PerfilTipo : DataHandler
 		{
 				public enum ColumnEnum : int
                 {
@@ -33445,6 +34105,7 @@ using System.Text;
                 dh.WhereParameter = this.Where;
                 dh.OrderByParameter = this.OrderBy;
                 dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
                 _entities = dh.Items().Cast<Entities.Tables.Visualizacion.PerfilTipo>().ToList<Entities.Tables.Visualizacion.PerfilTipo>();
                 return _entities;
             }

@@ -358,6 +358,9 @@ else
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "ReporteTurnosView", "", dataUsuario.Id);
+
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         await Task.Run(CargarCombosBusqueda);
         parametrosTurnosView.fechaDesde = DateTime.Today;
@@ -630,7 +633,7 @@ else
         }
     }
 
-        /// <summary>
+    /// <summary>
     /// FuncionRender event
     /// </summary>
     /// <param name="args"></param>

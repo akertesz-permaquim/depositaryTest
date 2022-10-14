@@ -485,7 +485,7 @@ public class DataHandlerBase: IDataHandler
         }
         finally
         {
-            if(_connection.State != ConnectionState.Closed)
+            if(_connection.State != ConnectionState.Closed && transaction == null)
                  _connection.Close();
         }
     }

@@ -319,6 +319,7 @@
     <string>Geografia.Pais</string>
     <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
+    <string>Impresion.PlantillaTicket</string>
     <string>Impresion.Ticket</string>
     <string>Impresion.TipoTicket</string>
     <string>Operacion.CierreDiario</string>
@@ -371,6 +372,7 @@
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
     <string>353e226c-6bf1-4079-a822-ba12163b71c9</string>
+    <string>c6885894-f5e6-505c-bc2d-480cd6d456a1</string>
   </SelectedTemplates>
   <Location>\</Location>
   <DatasourceServer />
@@ -408,6 +410,11 @@
     <TemplateConfigurationEntry>
       <Template>RadzenBlazor View ReportBuilder</Template>
       <Name>Radzen Blazor Generation folder</Name>
+      <Value />
+    </TemplateConfigurationEntry>
+    <TemplateConfigurationEntry>
+      <Template>BaseClasses Extensions Builder</Template>
+      <Name>BaseClasses Extensions Generation folder</Name>
       <Value />
     </TemplateConfigurationEntry>
   </TemplateConfigurationEntries>

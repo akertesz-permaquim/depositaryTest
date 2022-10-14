@@ -21,13 +21,13 @@
         <ChildContent>
             <div class="row justify-content-start align-items-center">
                 <div class="col-6 d-flex align-items-center">
-                    <RadzenSidebarToggle Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ButtonSideBarAdministradorWebDepositario", false) Click="@SidebarToggle0Click">
+                    <RadzenSidebarToggle class="textoMainLayout" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ButtonSideBarAdministradorWebDepositario", false) Click="@SidebarToggle0Click">
                     </RadzenSidebarToggle>
-                    <RadzenLabel Text="Administrador Depositario">
+                    <RadzenLabel class="textoMainLayout" Text="Administrador Depositario">
                     </RadzenLabel>
                 </div>
                 <div class="col-6 text-right">
-                    <RadzenProfileMenu Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@Profilemenu0Click">
+                    <RadzenProfileMenu class="textoMainLayout" Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@Profilemenu0Click">
                         <ChildContent>
                             <div style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfilDesplegable", false)>
                                 <RadzenProfileMenuItem Text="Perfil" Path="perfil" Value="Perfil" Icon="person">
@@ -39,9 +39,9 @@
                             </div>
                         </ChildContent>
                         <Template>
-                            <RadzenLabel Text="@dataUsuario.Nombre">
+                            <RadzenLabel class="textoMainLayout" Text="@dataUsuario.Nombre">
                             </RadzenLabel>
-                            <RadzenLabel Text="@dataUsuario.Apellido">
+                            <RadzenLabel class="textoMainLayout" Text="@dataUsuario.Apellido">
                             </RadzenLabel>
                             <RadzenImage Path="@dataUsuario.Avatar" style="border-radius: 16px; height: 32px; width: 32px">
                             </RadzenImage>
@@ -111,7 +111,7 @@
     </RadzenSidebar>
     <RadzenFooter Style="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"FooterAdministradorWebDepositario",false)">
         <ChildContent>
-            <RadzenLabel Text="Permaquim S.A., Copyright Ⓒ 2022">
+            <RadzenLabel class="textoMainLayout" Text="Permaquim S.A., Copyright Ⓒ 2022">
             </RadzenLabel>
         </ChildContent>
     </RadzenFooter>
@@ -126,6 +126,15 @@
     private List<SeguridadEntities.Menu> dataMenues = new();
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
     private string colorHeader;
+    private string colorFondoMenuActivo;
+    private string colorBordeMenuActivo;
+    private string colorPrincipalMenu;
+    private string colorLetrasMenu;
+    private string colorTextoMainLayout;
+    private string colorFondoMenuesPrimeraLinea;
+    private string colorFondoMenuesSegundaLinea;
+    private string colorFondoMenuesTerceraLinea;
+
 
     protected async System.Threading.Tasks.Task SidebarToggle0Click(dynamic args)
     {
@@ -156,6 +165,14 @@
                 dataMenues = await sessionStorage.GetItemAsync<List<SeguridadEntities.Menu>>("DataMenues");
                 dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
                 colorHeader = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "HeaderAdministradorWebDepositario", true);
+                colorFondoMenuActivo = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuActivo", true);
+                colorBordeMenuActivo = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorBordeMenuActivo", true);
+                colorPrincipalMenu = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorPrincipalMenu", true);
+                colorLetrasMenu = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorLetrasMenu", true);
+                colorTextoMainLayout = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorTextoMainLayout", true);
+                colorFondoMenuesPrimeraLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesPrimeraLinea", true);
+                colorFondoMenuesSegundaLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesSegundaLinea", true);
+                colorFondoMenuesTerceraLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesTerceraLinea", true);
                 StateHasChanged();
             }
         }
@@ -168,8 +185,61 @@
         z-index: 3;
     }
 
+    .textoMainLayout {
+        color: @colorTextoMainLayout;
+    }
+
     .rz-panel-menu {
         height: 100%;
+    }
+
+    .rz-panel-menu {
+        background-color: @colorPrincipalMenu;
+        color: @colorLetrasMenu;
+    }
+
+        .rz-panel-menu .rz-navigation-item-wrapper {
+            background-color: @colorFondoMenuesPrimeraLinea;
+        }
+
+        .rz-panel-menu .rz-navigation-menu .rz-navigation-item-wrapper {
+            background-color: @colorFondoMenuesSegundaLinea;
+        }
+
+        .rz-panel-menu .rz-navigation-menu .rz-navigation-menu .rz-navigation-item-wrapper {
+            background-color: @colorFondoMenuesTerceraLinea;
+        }
+
+        .rz-panel-menu .rz-navigation-item-wrapper-active:before {
+            background-color: @colorBordeMenuActivo;
+        }
+
+        .rz-panel-menu .rz-navigation-item-active, .rz-panel-menu .rz-navigation-item-wrapper-active {
+            background-color: @colorFondoMenuActivo;
+        }
+
+        .rz-panel-menu .rz-navigation-menu .rz-navigation-menu .rz-navigation-item-active, .rz-panel-menu .rz-navigation-menu .rz-navigation-menu .rz-navigation-item-wrapper-active {
+            background-color: @colorFondoMenuActivo;
+        }
+
+        .rz-panel-menu .rz-navigation-menu .rz-navigation-item-active, .rz-panel-menu .rz-navigation-menu .rz-navigation-item-wrapper-active {
+            background-color: @colorFondoMenuActivo;
+        }
+
+    .ul.rz-profile-menu .rz-navigation-menu .rz-navigation-item-wrapper:hover .rz-navigation-item-text {
+        color: @colorTextoMainLayout;
+    }
+
+    ul.rz-profile-menu .rz-navigation-menu .rz-navigation-item-link, ul.rz-profile-menu .rz-navigation-menu .rz-navigation-item-text {
+        color: @colorTextoMainLayout;
+    }
+
+    .rzi .rz-navigation-item-icon-children {
+        color: @colorTextoMainLayout;
+    }
+
+    ul.rz-profile-menu .rz-navigation-item-icon-children {
+        color: @colorTextoMainLayout;
     }
 
 </style>

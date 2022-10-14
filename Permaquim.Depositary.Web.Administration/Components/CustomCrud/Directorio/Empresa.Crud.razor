@@ -566,6 +566,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "DirectorioEmpresaCustomCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Directorio.Empresa entity = new();
         entity.Where.Add(Business.Tables.Directorio.Empresa.ColumnEnum.GrupoId, sqlEnum.OperandEnum.Equal, ParametroGrupoId);
@@ -636,6 +637,7 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "DirectorioEmpresaCustomCrud", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -676,6 +678,9 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "DirectorioEmpresaCustomCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
+
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -744,7 +749,7 @@ else
                     case CrudMode.Add:
                         try
                         {
-                            crud.Add(Empresa_entity);
+                            crud.Add(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                             //Si se agrego una empresa no default y ademas existia una empresa default entonces le cargamos las configuraciones de la empresa default
                             if (!Empresa_entity.EsDefault && empresaDefault != null)
@@ -771,6 +776,7 @@ else
                         }
                         catch (Exception ex)
                         {
+                            AuditController.Log(ex, dataUsuario.Id);
                             summary = "Error al procesar.";
                             actionInformation = ex.Message;
                             severityType = NotificationSeverity.Error;
@@ -779,13 +785,14 @@ else
                     case CrudMode.Edit:
                         try
                         {
-                            crud.Update(Empresa_entity);
+                            crud.Update(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             summary = "El registro se ha ";
                             actionInformation = "modificado.";
                             severityType = NotificationSeverity.Success;
                         }
                         catch (Exception ex)
                         {
+                            AuditController.Log(ex, dataUsuario.Id);
                             summary = "Error al procesar.";
                             actionInformation = ex.Message;
                             severityType = NotificationSeverity.Error;
@@ -806,6 +813,7 @@ else
             }
             catch (Exception ex)
             {
+                AuditController.Log(ex, dataUsuario.Id);
                 summary = "Error al procesar.";
                 actionInformation = ex.Message;
                 severityType = NotificationSeverity.Error;
@@ -896,7 +904,7 @@ else
     {
         if (rowsEmpresasExpandidas.Where(x => x.Id == args.Data.Id).ToList().Count > 0)
         {
-            args.Attributes.Add("class", "row-highlight");
+            args.Attributes.Add("style", $"background-color: orange;");
         }
         else
         {

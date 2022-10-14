@@ -24,6 +24,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private const string ENTIDAD_TURNO = "Operacion.Turno";
         private const string ENTIDAD_SESION = "Operacion.Sesion";
         private const string ENTIDAD_CONTENEDOR = "Operacion.Contenedor";
+        private const string ENTIDAD_EVENTO = "Operacion.Evento";
+
 
         public enum OperationTypeEnum
         {
@@ -43,14 +45,42 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             long depositarioId = SynchronizationController.ObtenerIdDepositario(model.CodigoExternoDepositario);
 
-            DepositaryWebApi.Business.Tables.Operacion.Contenedor contenedorController = new();
 
             try
             {
+                if (model.Eventos.Count > 0)
+                {
+                    DepositaryWebApi.Business.Tables.Operacion.Evento eventoController = new();
+
+                    //Iniciamos un registro de sincronizacion de la entidad
+                    Int64? SincronizacionEventoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_EVENTO);
+
+                    foreach (var eventoItem in model.Eventos)
+                    {
+                        eventoItem.OrigenEvento_Id = eventoItem.Id;
+                        Int64? idEventoExistente = SynchronizationController.obtenerIdDestinoDetalleSincronizacion(ENTIDAD_EVENTO, depositarioId, eventoItem.OrigenEvento_Id.Value);
+                        if (idEventoExistente.HasValue)
+                        {
+                            eventoItem.Id = idEventoExistente.Value;
+                            eventoController.Update(eventoItem);
+                        }
+                        else
+                            eventoController.Add(eventoItem);
+
+                        SynchronizationController.guardarDetalleSincronizacion(SincronizacionEventoId.Value, eventoItem.OrigenEvento_Id.Value, eventoItem.Id);
+                    }
+
+                    //Cerramos el registro de sincronizacion de la entidad
+                    if (SincronizacionEventoId.HasValue)
+                        SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionEventoId.Value);
+                }
+
                 if (model.Contenedores.Count > 0)
                 {
                     //Iniciamos un registro de sincronizacion de la entidad
                     Int64? SincronizacionContenedorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONTENEDOR);
+
+                    DepositaryWebApi.Business.Tables.Operacion.Contenedor contenedorController = new();
 
                     foreach (var contenedorItem in model.Contenedores)
                     {
@@ -196,16 +226,19 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                         Int64? idTransaccionExistente = SynchronizationController.obtenerIdDestinoDetalleSincronizacion(ENTIDAD_TRANSACCION, depositarioId, transaccionItem.OrigenTransaccion_Id.Value);
                         if (!idTransaccionExistente.HasValue)
                         {
-                            if (model.Sesiones.Count > 0)
+                            if (transaccionItem.SesionId.HasValue)
                             {
-                                var SesionAsociada = model.Sesiones.Where(x => x.OrigenSesion_Id == transaccionItem.SesionId).FirstOrDefault();
-                                if (SesionAsociada != null)
-                                    transaccionItem.SesionId = SesionAsociada.Id;
+                                if (model.Sesiones.Count > 0)
+                                {
+                                    var SesionAsociada = model.Sesiones.Where(x => x.OrigenSesion_Id == transaccionItem.SesionId).FirstOrDefault();
+                                    if (SesionAsociada != null)
+                                        transaccionItem.SesionId = SesionAsociada.Id;
+                                    else
+                                        transaccionItem.SesionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion(ENTIDAD_SESION, depositarioId, transaccionItem.SesionId.Value).Value;
+                                }
                                 else
-                                    transaccionItem.SesionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion(ENTIDAD_SESION, depositarioId, transaccionItem.SesionId).Value;
+                                    transaccionItem.SesionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion(ENTIDAD_SESION, depositarioId, transaccionItem.SesionId.Value).Value;
                             }
-                            else
-                                transaccionItem.SesionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion(ENTIDAD_SESION, depositarioId, transaccionItem.SesionId).Value;
 
                             if (transaccionItem.CierreDiarioId.HasValue)
                             {

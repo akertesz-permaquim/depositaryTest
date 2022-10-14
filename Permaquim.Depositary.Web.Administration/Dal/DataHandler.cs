@@ -89,6 +89,9 @@ public class DataHandler : DataHandlerBase
     {
         throw new NotImplementedException();
     }
+
+    public int TopQuantity { get; set; }
+
     /// <summary>
     /// Returns a List<IDataItem> for a SQL query.
     /// </summary>
@@ -100,10 +103,12 @@ public class DataHandler : DataHandlerBase
             //Clears previous result
             _itemList.Clear();
             _commandText = Constants.SQL_SELECT ;
+            if (TopQuantity > 0)
+                 _commandText += Constants.SQL_TOP + TopQuantity.ToString() +" ";
             _commandText += GetFieldList(true, true);
             _commandText += Constants.SQL_FROM ;
             _commandText += GetFullDataEntityName();
-            _commandText += " WITH (NOLOCK) ";
+            _commandText += Constants.SQL_WITH_NOLOCK;
             _commandText += WhereParameter.ToString();
             _commandText += GroupByParameter.ToString();
             BuildParameterValuesList(WhereParameter);

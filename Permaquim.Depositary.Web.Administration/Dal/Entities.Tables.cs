@@ -3642,6 +3642,149 @@ using System.Text;
 		namespace Permaquim.Depositary.Entities.Tables.Impresion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Impresion")]  // Database Schema Name
+			[DataItemAttributeObjectName("PlantillaTicket","PlantillaTicket")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class PlantillaTicket : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string TipoId = "TipoId";
+					public const string DepositarioModeloId = "DepositarioModeloId";
+					public const string Nombre = "Nombre";
+					public const string Descripcion = "Descripcion";
+					public const string Impresora = "Impresora";
+					public const string TextoCabecera = "TextoCabecera";
+					public const string NombreFuenteCabecera = "NombreFuenteCabecera";
+					public const string TamanioFuenteCabecera = "TamanioFuenteCabecera";
+					public const string UbicacionTextoCabecera = "UbicacionTextoCabecera";
+					public const string TextoPie = "TextoPie";
+					public const string NombreFuentePie = "NombreFuentePie";
+					public const string TamanioFuentePie = "TamanioFuentePie";
+					public const string UbicacionTextoPie = "UbicacionTextoPie";
+					public const string Imagen = "Imagen";
+					public const string UbicacionImagen = "UbicacionImagen";
+					public const string UbicacionTextoDetalle = "UbicacionTextoDetalle";
+					public const string AnchoDetalle = "AnchoDetalle";
+					public const string TamanioEntreLineas = "TamanioEntreLineas";
+					public const string AnchoReporte = "AnchoReporte";
+					public const string FactorAltoReporte = "FactorAltoReporte";
+					public const string LineasAlFinal = "LineasAlFinal";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					TipoId,
+					DepositarioModeloId,
+					Nombre,
+					Descripcion,
+					Impresora,
+					TextoCabecera,
+					NombreFuenteCabecera,
+					TamanioFuenteCabecera,
+					UbicacionTextoCabecera,
+					TextoPie,
+					NombreFuentePie,
+					TamanioFuentePie,
+					UbicacionTextoPie,
+					Imagen,
+					UbicacionImagen,
+					UbicacionTextoDetalle,
+					AnchoDetalle,
+					TamanioEntreLineas,
+					AnchoReporte,
+					FactorAltoReporte,
+					LineasAlFinal
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public PlantillaTicket()
+                {
+                }
+                public  PlantillaTicket(Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal)
+                {
+                    this.Id = Id;
+                    this.TipoId = TipoId;
+                    this.DepositarioModeloId = DepositarioModeloId;
+                    this.Nombre = Nombre;
+                    this.Descripcion = Descripcion;
+                    this.Impresora = Impresora;
+                    this.TextoCabecera = TextoCabecera;
+                    this.NombreFuenteCabecera = NombreFuenteCabecera;
+                    this.TamanioFuenteCabecera = TamanioFuenteCabecera;
+                    this.UbicacionTextoCabecera = UbicacionTextoCabecera;
+                    this.TextoPie = TextoPie;
+                    this.NombreFuentePie = NombreFuentePie;
+                    this.TamanioFuentePie = TamanioFuentePie;
+                    this.UbicacionTextoPie = UbicacionTextoPie;
+                    this.Imagen = Imagen;
+                    this.UbicacionImagen = UbicacionImagen;
+                    this.UbicacionTextoDetalle = UbicacionTextoDetalle;
+                    this.AnchoDetalle = AnchoDetalle;
+                    this.TamanioEntreLineas = TamanioEntreLineas;
+                    this.AnchoReporte = AnchoReporte;
+                    this.FactorAltoReporte = FactorAltoReporte;
+                    this.LineasAlFinal = LineasAlFinal;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("TipoId","TipoId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("TipoTicket")]// Object name in Database
+             public Int64 TipoId { get; set; }
+             [DataItemAttributeFieldName("DepositarioModeloId","DepositarioModeloId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Modelo")]// Object name in Database
+             public Int64 DepositarioModeloId { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("Descripcion","Descripcion")]
+             public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Impresora","Impresora")]
+             public String Impresora { get; set; }
+             [DataItemAttributeFieldName("TextoCabecera","TextoCabecera")]
+             public String TextoCabecera { get; set; }
+             [DataItemAttributeFieldName("NombreFuenteCabecera","NombreFuenteCabecera")]
+             public String NombreFuenteCabecera { get; set; }
+             [DataItemAttributeFieldName("TamanioFuenteCabecera","TamanioFuenteCabecera")]
+             public Int32 TamanioFuenteCabecera { get; set; }
+             [DataItemAttributeFieldName("UbicacionTextoCabecera","UbicacionTextoCabecera")]
+             public Int32 UbicacionTextoCabecera { get; set; }
+             [DataItemAttributeFieldName("TextoPie","TextoPie")]
+             public String TextoPie { get; set; }
+             [DataItemAttributeFieldName("NombreFuentePie","NombreFuentePie")]
+             public String NombreFuentePie { get; set; }
+             [DataItemAttributeFieldName("TamanioFuentePie","TamanioFuentePie")]
+             public Int32 TamanioFuentePie { get; set; }
+             [DataItemAttributeFieldName("UbicacionTextoPie","UbicacionTextoPie")]
+             public String UbicacionTextoPie { get; set; }
+             [DataItemAttributeFieldName("Imagen","Imagen")]
+             public String Imagen { get; set; }
+             [DataItemAttributeFieldName("UbicacionImagen","UbicacionImagen")]
+             public String UbicacionImagen { get; set; }
+             [DataItemAttributeFieldName("UbicacionTextoDetalle","UbicacionTextoDetalle")]
+             public Int32 UbicacionTextoDetalle { get; set; }
+             [DataItemAttributeFieldName("AnchoDetalle","AnchoDetalle")]
+             public Int32 AnchoDetalle { get; set; }
+             [DataItemAttributeFieldName("TamanioEntreLineas","TamanioEntreLineas")]
+             public Int32 TamanioEntreLineas { get; set; }
+             [DataItemAttributeFieldName("AnchoReporte","AnchoReporte")]
+             public Int32 AnchoReporte { get; set; }
+             [DataItemAttributeFieldName("FactorAltoReporte","FactorAltoReporte")]
+             public Int32 FactorAltoReporte { get; set; }
+             [DataItemAttributeFieldName("LineasAlFinal","LineasAlFinal")]
+             public Int32 LineasAlFinal { get; set; }
+				
+			} //Class PlantillaTicket 
+} //namespace Permaquim.Depositary.Entities.Tables.Impresion
+		namespace Permaquim.Depositary.Entities.Tables.Impresion {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Impresion")]  // Database Schema Name
 			[DataItemAttributeObjectName("Ticket","Ticket")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
 			public class Ticket : IDataItem
@@ -3669,8 +3812,8 @@ using System.Text;
 					public const string UbicacionTextoDetalle = "UbicacionTextoDetalle";
 					public const string AnchoDetalle = "AnchoDetalle";
 					public const string TamanioEntreLineas = "TamanioEntreLineas";
-					public const string FactorAltoReporte = "FactorAltoReporte";
 					public const string AnchoReporte = "AnchoReporte";
+					public const string FactorAltoReporte = "FactorAltoReporte";
 					public const string LineasAlFinal = "LineasAlFinal";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
@@ -3700,8 +3843,8 @@ using System.Text;
 					UbicacionTextoDetalle,
 					AnchoDetalle,
 					TamanioEntreLineas,
-					FactorAltoReporte,
 					AnchoReporte,
+					FactorAltoReporte,
 					LineasAlFinal,
 					Habilitado,
 					UsuarioCreacion,
@@ -3715,7 +3858,7 @@ using System.Text;
                 public Ticket()
                 {
                 }
-                public  Ticket(Int64 TipoId,Int64 DepositarioModeloId,Int64 EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 FactorAltoReporte,Int32 AnchoReporte,Int32 LineasAlFinal,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Ticket(Int64 TipoId,Int64 DepositarioModeloId,Int64 EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -3737,8 +3880,8 @@ using System.Text;
                     this.UbicacionTextoDetalle = UbicacionTextoDetalle;
                     this.AnchoDetalle = AnchoDetalle;
                     this.TamanioEntreLineas = TamanioEntreLineas;
-                    this.FactorAltoReporte = FactorAltoReporte;
                     this.AnchoReporte = AnchoReporte;
+                    this.FactorAltoReporte = FactorAltoReporte;
                     this.LineasAlFinal = LineasAlFinal;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
@@ -3795,10 +3938,10 @@ using System.Text;
              public Int32 AnchoDetalle { get; set; }
              [DataItemAttributeFieldName("TamanioEntreLineas","TamanioEntreLineas")]
              public Int32 TamanioEntreLineas { get; set; }
-             [DataItemAttributeFieldName("FactorAltoReporte","FactorAltoReporte")]
-             public Int32 FactorAltoReporte { get; set; }
              [DataItemAttributeFieldName("AnchoReporte","AnchoReporte")]
              public Int32 AnchoReporte { get; set; }
+             [DataItemAttributeFieldName("FactorAltoReporte","FactorAltoReporte")]
+             public Int32 FactorAltoReporte { get; set; }
              [DataItemAttributeFieldName("LineasAlFinal","LineasAlFinal")]
              public Int32 LineasAlFinal { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
@@ -4499,7 +4642,7 @@ using System.Text;
                 public Transaccion()
                 {
                 }
-                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64 SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64 OrigenValorId,String CodigoOperacion)
+                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -4560,7 +4703,7 @@ using System.Text;
              [DataItemAttributeFieldName("SesionId","SesionId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Sesion")]// Object name in Database
-             public Int64 SesionId { get; set; }
+             public Int64? SesionId { get; set; }
              [DataItemAttributeFieldName("TurnoId","TurnoId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Turno")]// Object name in Database
@@ -4582,7 +4725,7 @@ using System.Text;
              [DataItemAttributeFieldName("OrigenValorId","OrigenValorId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("OrigenValor")]// Object name in Database
-             public Int64 OrigenValorId { get; set; }
+             public Int64? OrigenValorId { get; set; }
              [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
              public String CodigoOperacion { get; set; }
 				

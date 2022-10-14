@@ -317,7 +317,7 @@ else
     /// Variables to handle main entity
     /// </summary>
     private UsuarioCuenta UsuarioCuenta_entity = new();
-    private List<UsuarioCuenta> UsuarioCuenta_entities = new();
+    private List<UsuarioCuenta> UsuarioCuenta_entities = null;
 
     private bool estaProcesando = false;
 
@@ -404,10 +404,13 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaUsuarioCuenta", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Relations.Banca.UsuarioCuenta entity = new();
         entity.Where.Add(Depositary.Business.Relations.Banca.UsuarioCuenta.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
         entity.Items();
+
+        List<UsuarioCuenta> usuarioCuentas = new();
 
         if (entity.Result.Count > 0)
         {
@@ -424,9 +427,11 @@ else
                 usuarioCuenta.UsuarioId = entitie._UsuarioId;
                 usuarioCuenta.UsuarioModificacion = entitie._UsuarioModificacion;
 
-                UsuarioCuenta_entities.Add(usuarioCuenta);
+                usuarioCuentas.Add(usuarioCuenta);
             }
         }
+
+        UsuarioCuenta_entities = usuarioCuentas;
     }
     /// <summary>
     /// Loads Type Tables data
@@ -484,6 +489,7 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaUsuarioCuenta", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -519,6 +525,8 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaUsuarioCuenta", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -588,13 +596,14 @@ else
             case CrudMode.Add:
                 try
                 {
-                    crud.Add(usuarioCuenta_entitie);
+                    crud.Add(usuarioCuenta_entitie, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "agregado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -603,13 +612,14 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(usuarioCuenta_entitie);
+                    crud.Update(usuarioCuenta_entitie, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "modificado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -619,13 +629,14 @@ else
                 try
                 {
                     usuarioCuenta_entitie.Habilitado = false;
-                    crud.Update(usuarioCuenta_entitie);
+                    crud.Update(usuarioCuenta_entitie, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;

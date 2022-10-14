@@ -528,6 +528,7 @@
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "EstiloEsquemaDetalle", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Estilo.EsquemaDetalle entity = new Depositary.Business.Tables.Estilo.EsquemaDetalle();
         entity.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, EsquemaId);
@@ -610,6 +611,7 @@
         TipoEsquemaDetalle_entity = new();
         Aplicacion_entity = new();
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "EstiloEsquemaDetalle", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -640,6 +642,8 @@
             crudMode = CrudMode.Edit;
             nombreAnteriorEstiloDetalle = EsquemaDetalle_entity.Nombre;
         }
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "EstiloEsquemaDetalle", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
 
     }
     /// <summary>
@@ -698,12 +702,11 @@
             case CrudMode.Add:
                 if (EsDefault)
                 {
-                    //TODO: Revisar transaccion en este caso
-                    //crud.BeginTransaction();
+                    crud.BeginTransaction();
                     try
                     {
 
-                        crud.Add(EsquemaDetalle_entity);
+                        crud.Add(EsquemaDetalle_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todos los esquemas existentes (salvo este) e insertamos el registro en ellos
                         var esquemasRestantes = ObtenerEsquemasRestantes();
@@ -714,18 +717,19 @@
                             {
                                 Depositary.Business.Tables.Estilo.EsquemaDetalle oEsquemaDetalle = new();
                                 EsquemaDetalle_entity.EsquemaId = esquema.Id;
-                                oEsquemaDetalle.Add(EsquemaDetalle_entity);
+                                oEsquemaDetalle.Add(EsquemaDetalle_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
-                        //crud.EndTransaction(true);
+                        crud.EndTransaction(true);
                         summary = "El registro se ha ";
                         actionInformation = "agregado a este esquema y a los restantes.";
                         severityType = NotificationSeverity.Success;
                     }
                     catch (Exception ex)
                     {
-                        //crud.EndTransaction(false);
+                        crud.EndTransaction(false);
+                        AuditController.Log(ex, dataUsuario.Id);
                         summary = "Error al procesar.";
                         actionInformation = ex.Message;
                         severityType = NotificationSeverity.Error;
@@ -738,7 +742,7 @@
                     //Si se modifica la plantilla default se arrastra el cambio (salvo el valor y la descripcion) al resto de los esquemas
                     if (EsDefault)
                     {
-                        crud.Update(EsquemaDetalle_entity);
+                        crud.Update(EsquemaDetalle_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todos los detalles de esquemas existentes (salvo este)
                         var esquemasDetallesRestantes = ObtenerDetallesEsquemas(nombreAnteriorEstiloDetalle, EsquemaDetalle_entity.Id);
@@ -756,7 +760,7 @@
                                 esquemaDetalle.FechaModificacion = DateTime.Now;
                                 esquemaDetalle.UsuarioModificacion = dataUsuario.Id;
                                 esquemaDetalle.Habilitado = EsquemaDetalle_entity.Habilitado;
-                                oEsquemaDetalle.Update(esquemaDetalle);
+                                oEsquemaDetalle.Update(esquemaDetalle, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
@@ -766,7 +770,7 @@
                     }
                     else
                     {
-                        crud.Update(EsquemaDetalle_entity);
+                        crud.Update(EsquemaDetalle_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         summary = "El registro se ha ";
                         actionInformation = "modificado.";
                         severityType = NotificationSeverity.Success;
@@ -774,6 +778,7 @@
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -785,7 +790,7 @@
                     if (EsDefault)
                     {
                         EsquemaDetalle_entity.Habilitado = false;
-                        crud.Update(EsquemaDetalle_entity);
+                        crud.Update(EsquemaDetalle_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todos los detalles de esquemas existentes (salvo este)
                         var esquemasDetallesRestantes = ObtenerDetallesEsquemas(EsquemaDetalle_entity.Nombre, EsquemaDetalle_entity.Id);
@@ -797,7 +802,7 @@
                                 Depositary.Business.Tables.Estilo.EsquemaDetalle oEsquemaDetalle = new();
 
                                 esquemaDetalle.Habilitado = false;
-                                oEsquemaDetalle.Update(esquemaDetalle);
+                                oEsquemaDetalle.Update(esquemaDetalle, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
@@ -808,7 +813,7 @@
                     else
                     {
                         EsquemaDetalle_entity.Habilitado = false;
-                        crud.Update(EsquemaDetalle_entity);
+                        crud.Update(EsquemaDetalle_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         summary = "El registro se ha ";
                         actionInformation = "eliminado.";
                         severityType = NotificationSeverity.Success;
@@ -816,6 +821,7 @@
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;

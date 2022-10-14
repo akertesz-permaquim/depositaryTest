@@ -483,6 +483,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "AplicacionConfiguracionEmpresaCustomCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa entity = new();
         entity.Where.Add(Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, EmpresaId);
@@ -551,6 +552,7 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "AplicacionConfiguracionEmpresaCustomCrud", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -589,6 +591,8 @@ else
             crudMode = CrudMode.Edit;
             claveAnteriorConfiguracionEmpresa = ConfiguracionEmpresa_entity.Clave;
         }
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "AplicacionConfiguracionEmpresaCustomCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
 
         var validacionConfiguracion = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(x => x.Id == ConfiguracionEmpresa_entity.ValidacionDatoId);
 
@@ -670,11 +674,10 @@ else
             case CrudMode.Add:
                 if (EsDefault)
                 {
-                    //TODO: Revisar transaccion en este caso
-                    //crud.BeginTransaction();
+                    crud.BeginTransaction();
                     try
                     {
-                        crud.Add(ConfiguracionEmpresa_entity);
+                        crud.Add(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
 
                         //Obtenemos los ID de todas las empresas existentes (salvo este) e insertamos el registro de configuracion en ellas
@@ -686,17 +689,19 @@ else
                             {
                                 Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
                                 ConfiguracionEmpresa_entity.EmpresaId = empresa.Id;
-                                oConfiguracionEmpresa.Add(ConfiguracionEmpresa_entity);
+                                oConfiguracionEmpresa.Add(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
-                        //crud.EndTransaction(true);
+                        crud.EndTransaction(true);
                         summary = "El registro se ha ";
                         actionInformation = "agregado.";
                         severityType = NotificationSeverity.Success;
                     }
                     catch (Exception ex)
                     {
+                        crud.EndTransaction(false);
+                        AuditController.Log(ex, dataUsuario.Id);
                         summary = "Error al procesar.";
                         actionInformation = ex.Message;
                         severityType = NotificationSeverity.Error;
@@ -709,7 +714,7 @@ else
                     //Si se modifica la configuracion de la empresa default se arrastra el cambio (salvo el valor y la empresa) al resto de las configuraciones de empresa.
                     if (EsDefault)
                     {
-                        crud.Update(ConfiguracionEmpresa_entity);
+                        crud.Update(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todas  las empresas existentes (salvo esta)
                         var empresasConfiguracionRestantes = ObtenerRegistrosDeConfiguracionPorClaveRestantes(claveAnteriorConfiguracionEmpresa);
@@ -724,7 +729,7 @@ else
                                 registroConfiguracionEmpresa.FechaModificacion = DateTime.Now;
                                 registroConfiguracionEmpresa.UsuarioModificacion = dataUsuario.Id;
                                 registroConfiguracionEmpresa.Habilitado = ConfiguracionEmpresa_entity.Habilitado;
-                                oConfiguracionEmpresa.Update(registroConfiguracionEmpresa);
+                                oConfiguracionEmpresa.Update(registroConfiguracionEmpresa, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
@@ -734,7 +739,7 @@ else
                     }
                     else
                     {
-                        crud.Update(ConfiguracionEmpresa_entity);
+                        crud.Update(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         summary = "El registro se ha ";
                         actionInformation = "modificado.";
                         severityType = NotificationSeverity.Success;
@@ -742,6 +747,7 @@ else
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -753,7 +759,7 @@ else
                     if (EsDefault)
                     {
                         ConfiguracionEmpresa_entity.Habilitado = false;
-                        crud.Update(ConfiguracionEmpresa_entity);
+                        crud.Update(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todas  las empresas existentes (salvo esta)
                         var empresasConfiguracionRestantes = ObtenerRegistrosDeConfiguracionPorClaveRestantes(ConfiguracionEmpresa_entity.Clave);
@@ -765,7 +771,7 @@ else
                                 Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
 
                                 registroConfiguracionEmpresa.Habilitado = false;
-                                oConfiguracionEmpresa.Update(registroConfiguracionEmpresa);
+                                oConfiguracionEmpresa.Update(registroConfiguracionEmpresa, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
@@ -776,7 +782,7 @@ else
                     else
                     {
                         ConfiguracionEmpresa_entity.Habilitado = false;
-                        crud.Update(ConfiguracionEmpresa_entity);
+                        crud.Update(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         summary = "El registro se ha ";
                         actionInformation = "eliminado.";
                         severityType = NotificationSeverity.Success;
@@ -784,6 +790,7 @@ else
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;

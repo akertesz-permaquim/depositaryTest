@@ -24,7 +24,7 @@
                     esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, empresa.Result.FirstOrDefault().EstiloEsquemaId.Id);
 
                 esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-
+                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
                 esquemaDetalle.Items();
             }
             else
@@ -39,6 +39,7 @@
 
                 esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, estiloEsquemaId);
                 esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
 
                 resultado = esquemaDetalle.Items();
             }

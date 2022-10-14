@@ -1,7 +1,6 @@
 ﻿@page "/login"
 @layout LoginLayout
 
-@using Permaquim.Depositary.UI.Desktop.Controllers
 @using Radzen
 @using Radzen.Blazor
 @using Microsoft.AspNetCore.Identity;
@@ -78,7 +77,7 @@
             //Si no encontro usuario cargamos los textos default.
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(-1);
             NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), Duration = 3000 });
-            AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje));
+            AuditController.Log(AuditController.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje));
         }
         else
         {
@@ -88,14 +87,15 @@
             if (dataUsuario.Bloqueado)
             {
                 NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_BLOCKED_USER", dataLenguaje), Duration = 3000 });
-                AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje));
-
+                AuditController.Log(AuditController.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), dataUsuario.Id);
             }
             else
             {
                 if (dataUsuario.Password != Cryptography.Hash(loginForm.Password))
+                {
                     NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), Duration = 3000 });
-                    AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje));
+                    AuditController.Log(AuditController.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), dataUsuario.Id);
+                }
 
                 else
                 {
@@ -110,8 +110,7 @@
                         if (usuarioRol == null)
                         {
                             NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_NOROLES", dataLenguaje), Duration = 3000 });
-                            AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_NOROLES", dataLenguaje));
-
+                            AuditController.Log(AuditController.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_NOROLES", dataLenguaje), dataUsuario.Id);
                         }
                         else
                         {
@@ -130,6 +129,8 @@
 
                             estaCargando = false;
                             StateHasChanged();
+
+                            AuditController.Log(AuditController.LogTypeEnum.Navigation, "Login" , "Logueado con exito" , dataUsuario.Id);
 
                             NavManager.NavigateTo("Dashboard", true);
                         }

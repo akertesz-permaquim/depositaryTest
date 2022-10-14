@@ -310,6 +310,9 @@ else
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
             NavManager.NavigateTo("login", true);
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "ReporteCierresDiariosView", "", dataUsuario.Id);
+
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         await Task.Run(CargarCombosBusqueda);
         parametrosCierresDiariosView.fechaDesde = DateTime.Today;

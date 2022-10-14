@@ -80,7 +80,7 @@
                             registroConfiguracion.FechaModificacion = null;
                             registroConfiguracion.UsuarioModificacion = null;
                             registroConfiguracion.FechaCreacion = DateTime.Now;
-                            oConfiguracionEmpresa.Add(registroConfiguracion);
+                            oConfiguracionEmpresa.Add(registroConfiguracion, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         }
                     }
 

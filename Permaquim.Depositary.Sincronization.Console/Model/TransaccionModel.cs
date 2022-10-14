@@ -18,6 +18,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> TransaccionesDetalles { get; set; } = new();
         public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> TransaccionesSobres { get; set; } = new();
         public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionesSobresDetalles { get; set; } = new();
+        public List<Depositario.Entities.Tables.Operacion.Evento> Eventos { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
 
         public void Process(DateTime dateTime)
@@ -32,10 +33,12 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             CodigoExternoDepositario = ConfigurationController.GetCurrentDepositaryCode();
 
+            Eventos = DatabaseController.GetEvents();
+
             Sesiones = DatabaseController.GetSessions();
 
             CierresDiarios = DatabaseController.GetDailyclosingItems();
- 
+
             Turnos = DatabaseController.GetTurns();
 
             Contenedores = DatabaseController.GetContainers();
@@ -47,11 +50,14 @@ namespace Permaquim.Depositary.Sincronization.Console
             TransaccionesSobres = DatabaseController.GetEnvelopeTransaction();
 
             TransaccionesSobresDetalles = DatabaseController.GetEnvelopeTransactionDetails();
+
         }
         public void Persist()
         {
             DateTime endSincronizationDate = DateTime.Now;
 
+            DatabaseController.SaveEntitySincronizationDate(
+                Enumerations.EntitiesEnum.Operacion_Evento, _startDateTime, endSincronizationDate);
             DatabaseController.SaveEntitySincronizationDate(
                 Enumerations.EntitiesEnum.Operacion_Sesion, _startDateTime, endSincronizationDate);
             DatabaseController.SaveEntitySincronizationDate(
@@ -68,9 +74,6 @@ namespace Permaquim.Depositary.Sincronization.Console
                 Enumerations.EntitiesEnum.Operacion_TransaccionSobre, _startDateTime, endSincronizationDate);
             DatabaseController.SaveEntitySincronizationDate(
                 Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle, _startDateTime, endSincronizationDate);
-
         }
-
-   
     }
 }

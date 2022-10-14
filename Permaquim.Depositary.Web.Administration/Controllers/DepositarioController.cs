@@ -47,7 +47,7 @@
                 depositarioMonitor.UsuarioModificacion = depositario.UsuarioModificacion.ToString(); //revisar: falta la fk
                 depositarioMonitor.FechaCreacion = depositario.FechaCreacion;
                 depositarioMonitor.FechaModificacion = depositario.FechaModificacion;
-                depositarioMonitor.SemaforoAnomalia = "Rojo";
+                depositarioMonitor.SemaforoAnomalia = VerificarDepositarioBloqueado(depositario.Id);
                 depositarioMonitor.SemaforoOnline = VerificarDepositarioEnLinea(depositario.Id,sucursal._EmpresaId);
                 Int64? bolsaColocada = OperacionController.ObtenerBolsaColocada(depositario.Id);
                 if (bolsaColocada.HasValue)
@@ -86,7 +86,7 @@
                 }
                 else
                 {
-                    depositarioMonitor.ValorTotalEnBolsa = "0";
+                    depositarioMonitor.ValorTotalEnBolsa = ObtenerMonedaPrincipalDepositario(depositario.Id).Codigo + " 0";
                 }
 
                 resultado.Add(depositarioMonitor);
@@ -263,13 +263,8 @@
                 resultado.DepositarioId = depositario.Id;
                 resultado.ImagenModelo = depositario.ModeloId.Imagen;
                 resultado.NumeroSerie = depositario.NumeroSerie;
-                var sincronizacionesDepositario = depositario.ListOf_EntidadCabecera_DepositarioId;
-                if (sincronizacionesDepositario != null)
-                {
-                    var ultimaSincronizacion = depositario.ListOf_EntidadCabecera_DepositarioId.OrderByDescending(x => x.Fechafin).FirstOrDefault();
-                    if (ultimaSincronizacion != null)
-                        resultado.FechaUltimaSincronizacion = ultimaSincronizacion.Fechainicio;
-                }
+
+                resultado.FechaUltimaSincronizacion = ObtenerFechaUltimaSincronizacion(depositario.Id);
 
                 Int64? bolsaColocada = OperacionController.ObtenerBolsaColocada(depositario.Id);
 
@@ -415,16 +410,26 @@
                         {
                             foreach (var depositario in depositarios)
                             {
-                                Depositary.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacion = new();
-                                oSincronizacion.Where.Add(Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, depositario);
-                                oSincronizacion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechainicio, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Now.AddSeconds(-tiempoDepositarioEnLineaSegundos));
+                                DateTime? fechaUltimaSincronizacion = ObtenerFechaUltimaSincronizacion(depositario);
 
-                                oSincronizacion.Items();
-
-                                if (oSincronizacion.Result.Count > 0)
+                                if(fechaUltimaSincronizacion.HasValue)
                                 {
-                                    depositariosEnLinea++;
+                                    if((DateTime.Now - fechaUltimaSincronizacion.Value).Seconds <= tiempoDepositarioEnLineaSegundos)
+                                    {
+                                        depositariosEnLinea++;
+                                    }
                                 }
+
+                                //Depositary.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacion = new();
+                                //oSincronizacion.Where.Add(Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, depositario);
+                                //oSincronizacion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechainicio, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Now.AddSeconds(-tiempoDepositarioEnLineaSegundos));
+
+                                //oSincronizacion.Items();
+
+                                //if (oSincronizacion.Result.Count > 0)
+                                //{
+                                //    depositariosEnLinea++;
+                                //}
                             }
                         }
                     }
@@ -454,15 +459,14 @@
                 if (int.TryParse(configuracionValor, out tiempoDepositarioEnLineaSegundos))
                 {
 
-                    Depositary.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacion = new();
-                    oSincronizacion.Where.Add(Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
-                    oSincronizacion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechainicio, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Now.AddSeconds(-tiempoDepositarioEnLineaSegundos));
+                    DateTime? fechaUltimaSincronizacion = ObtenerFechaUltimaSincronizacion(DepositarioId);
 
-                    oSincronizacion.Items();
-
-                    if (oSincronizacion.Result.Count > 0)
+                    if (fechaUltimaSincronizacion.HasValue)
                     {
-                        resultado = "Verde";
+                        if ((DateTime.Now - fechaUltimaSincronizacion.Value).Seconds <= tiempoDepositarioEnLineaSegundos)
+                        {
+                            resultado = "Verde";
+                        }
                     }
                 }
             }
@@ -470,6 +474,26 @@
             return resultado;
         }
 
+        public static string VerificarDepositarioBloqueado(Int64 DepositarioId)
+        {
+            string resultado = "Verde";
+
+            Depositary.Business.Relations.Operacion.Evento oEvento = new();
+            oEvento.Where.Add(Business.Relations.Operacion.Evento.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
+            oEvento.OrderByParameter.Add(Business.Relations.Operacion.Evento.ColumnEnum.Fecha, sqlEnum.DirEnum.DESC);
+            oEvento.TopQuantity = 1;
+            oEvento.Items();
+
+            if(oEvento.Result.Count>0)
+            {
+                var ultimoEvento = oEvento.Result.FirstOrDefault();
+
+                if (ultimoEvento.TipoId.EsBloqueante)
+                    resultado = "Rojo";
+            }
+
+            return resultado;
+        }
         public static string ObtenerCantidadDepositariosFueraLinea(List<Int64> pEmpresasSeleccionadas, Int64 pEmpresaId)
         {
             string resultado = "ERROR";
@@ -756,6 +780,25 @@
 
             return returnValue;
 
+        }
+
+        public static DateTime? ObtenerFechaUltimaSincronizacion(Int64 DepositarioId)
+        {
+            DateTime? returnValue = null;
+
+            Depositary.Business.Tables.Sincronizacion.EntidadCabecera entidadCabecera = new();
+            entidadCabecera.Where.Add(Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
+            entidadCabecera.OrderBy.Add(Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechainicio, sqlEnum.DirEnum.DESC);
+            entidadCabecera.TopQuantity = 1;
+
+            entidadCabecera.Items();
+
+            if(entidadCabecera.Result.Count>0)
+            {
+                returnValue = entidadCabecera.Result.FirstOrDefault().Fechainicio;
+            }
+
+            return returnValue;
         }
 
         #endregion

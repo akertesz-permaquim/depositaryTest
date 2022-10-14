@@ -369,6 +369,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "RegionalizacionLenguajeItem", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Regionalizacion.LenguajeItem entity = new Depositary.Business.Tables.Regionalizacion.LenguajeItem();
         entity.Where.Add(Depositary.Business.Tables.Regionalizacion.LenguajeItem.ColumnEnum.LenguajeId, Depositary.sqlEnum.OperandEnum.Equal, LenguajeId);
@@ -430,6 +431,7 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "RegionalizacionLenguajeItem", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -463,6 +465,8 @@ else
             crudMode = CrudMode.Edit;
             claveAnteriorLenguajeItem = LenguajeItem_entity.Clave;
         }
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "RegionalizacionLenguajeItem", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -521,12 +525,11 @@ else
             case CrudMode.Add:
                 if (EsDefault)
                 {
-                    //TODO: Revisar transaccion en este caso
-                    //crud.BeginTransaction();
+                    crud.BeginTransaction();
                     try
                     {
 
-                        crud.Add(LenguajeItem_entity);
+                        crud.Add(LenguajeItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todos los lenguajes existentes (salvo este) e insertamos el registro en ellos
                         var lenguajesRestantes = ObtenerLenguajesRestantes();
@@ -537,18 +540,19 @@ else
                             {
                                 Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new();
                                 LenguajeItem_entity.LenguajeId = lenguaje.Id;
-                                oLenguajeItem.Add(LenguajeItem_entity);
+                                oLenguajeItem.Add(LenguajeItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
-                        //crud.EndTransaction(true);
+                        crud.EndTransaction(true);
                         summary = "El registro se ha ";
                         actionInformation = "agregado a este lenguaje y a los restantes.";
                         severityType = NotificationSeverity.Success;
                     }
                     catch (Exception ex)
                     {
-                        //crud.EndTransaction(false);
+                        crud.EndTransaction(false);
+                        AuditController.Log(ex, dataUsuario.Id);
                         summary = "Error al procesar.";
                         actionInformation = ex.Message;
                         severityType = NotificationSeverity.Error;
@@ -561,7 +565,7 @@ else
                     //Si se modifica el lenguaje default se arrastra el cambio (salvo el texto) al resto de los lenguajes
                     if (EsDefault)
                     {
-                        crud.Update(LenguajeItem_entity);
+                        crud.Update(LenguajeItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todos los items de lenguajes existentes (salvo este)
                         var itemsLenguajesRestantes = ObtenerItemsLenguajes(claveAnteriorLenguajeItem, LenguajeItem_entity.Id);
@@ -576,7 +580,7 @@ else
                                 lenguajeItem.FechaModificacion = DateTime.Now;
                                 lenguajeItem.UsuarioModificacion = dataUsuario.Id;
                                 lenguajeItem.Habilitado = LenguajeItem_entity.Habilitado;
-                                oLenguajeItem.Update(lenguajeItem);
+                                oLenguajeItem.Update(lenguajeItem, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
@@ -586,7 +590,7 @@ else
                     }
                     else
                     {
-                        crud.Update(LenguajeItem_entity);
+                        crud.Update(LenguajeItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         summary = "El registro se ha ";
                         actionInformation = "modificado.";
                         severityType = NotificationSeverity.Success;
@@ -594,6 +598,7 @@ else
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -605,7 +610,7 @@ else
                     if (EsDefault)
                     {
                         LenguajeItem_entity.Habilitado = false;
-                        crud.Update(LenguajeItem_entity);
+                        crud.Update(LenguajeItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                         //Obtenemos los ID de todos los detalles de esquemas existentes (salvo este)
                         var itemsLenguajesRestantes = ObtenerItemsLenguajes(LenguajeItem_entity.Clave, LenguajeItem_entity.Id);
@@ -617,7 +622,7 @@ else
                                 Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new();
 
                                 lenguajeItem.Habilitado = false;
-                                oLenguajeItem.Update(lenguajeItem);
+                                oLenguajeItem.Update(lenguajeItem, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
                         }
 
@@ -628,7 +633,7 @@ else
                     else
                     {
                         LenguajeItem_entity.Habilitado = false;
-                        crud.Update(LenguajeItem_entity);
+                        crud.Update(LenguajeItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         summary = "El registro se ha ";
                         actionInformation = "eliminado.";
                         severityType = NotificationSeverity.Success;
@@ -636,6 +641,7 @@ else
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;

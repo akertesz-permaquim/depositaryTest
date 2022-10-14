@@ -461,7 +461,7 @@ else
             case CrudMode.Add:
                 try
                 {
-                    crud.Add(PerfilItem_entity);
+                    crud.Add(PerfilItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "agregado.";
                     severityType = NotificationSeverity.Success;
@@ -476,7 +476,7 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(PerfilItem_entity);
+                    crud.Update(PerfilItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "modificado.";
                     severityType = NotificationSeverity.Success;
@@ -492,7 +492,7 @@ else
                 try
                 {
                     PerfilItem_entity.Habilitado = false;
-                    crud.Update(PerfilItem_entity);
+                    crud.Update(PerfilItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;

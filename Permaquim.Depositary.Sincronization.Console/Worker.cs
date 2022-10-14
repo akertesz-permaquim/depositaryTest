@@ -136,7 +136,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 }
                 catch (Exception ex)
                 {
-                    Log(ex);
+                    AuditController.LogToFile(ex);
                 }
                 finally
                 {
@@ -166,7 +166,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                     _logger.Log(LogLevel.Information, "Sending content: " + jsonToSend);
 
                     if (item.Log)
-                        Log(jsonToSend);
+                        AuditController.LogToFile(jsonToSend);
 
                     _httpClient.DefaultRequestHeaders.Accept.Clear();
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
@@ -205,7 +205,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             catch (Exception ex)
             {
 
-                Log(ex);
+                AuditController.LogToFile(ex);
             }
             finally
             {
@@ -257,7 +257,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 catch (Exception ex)
                 {
 
-                    Log(ex);
+                    AuditController.LogToFile(ex);
                 }
                 finally
                 {
@@ -297,7 +297,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 }
                 catch (Exception ex)
                 {
-                    Log(ex);
+                    AuditController.LogToFile(ex);
                 }
             }
         }
@@ -308,33 +308,6 @@ namespace Permaquim.Depositary.Sincronization.Console
             _logger.LogInformation("The service has been stopped...");
             return base.StopAsync(cancellationToken);
         }
-        private void Log(Exception ex)
-        {
-            string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
-            if (!System.IO.Directory.Exists(logDirectory))
-                System.IO.Directory.CreateDirectory(logDirectory);
 
-            string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".Exception.log";
-
-            System.IO.StreamWriter file = new(filename, true);
-            file.WriteLine("Message : " + ex.Message + Environment.NewLine
-                + "StackTrace :" + ex.StackTrace); ;
-            file.Close();
-        }
-        private void Log(string message)
-        {
-            string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
-            if (!System.IO.Directory.Exists(logDirectory))
-                System.IO.Directory.CreateDirectory(logDirectory);
-
-            string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".log";
-
-            System.IO.StreamWriter file = new(filename, true);
-            file.WriteLine(message);
-            file.Close();
-
-            file.Flush();
-            file = null;
-        }
     }
 }

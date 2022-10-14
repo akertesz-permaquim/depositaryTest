@@ -53,26 +53,32 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
 
-            string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".Exception.log";
+            string filename = logDirectory + DateTime.Now.ToString("dd.MM.yyyy") + ".log";
 
             System.IO.StreamWriter file = new(filename, true);
+
+            file.WriteLine("Exception at " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ms.f") + ":");
             file.WriteLine("Message : " + ex.Message + Environment.NewLine
                 + "StackTrace :" + ex.StackTrace); ;
+            file.WriteLine("");
             file.Close();
         }
-
-        public static void LogToFile(string coco)
+        public static void LogToFile(string message)
         {
             string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
 
-            string filename = logDirectory + DateTime.Now.ToString("yyyy.MM.dd.hh.mm.ss") + ".Exception.log";
+            string filename = logDirectory + DateTime.Now.ToString("dd.MM.yyyy") + ".log";
 
             System.IO.StreamWriter file = new(filename, true);
-            file.WriteLine("Message : " + coco);
+            file.WriteLine("Message at " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ms.f") + ":");
+            file.WriteLine(message);
+            file.WriteLine("");
             file.Close();
-        }
 
+            file.Flush();
+            file = null;
+        }
     }
 }
