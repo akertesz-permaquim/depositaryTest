@@ -240,8 +240,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                       DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
-                       (int)EventTypeEnum.Ninguno, string.Empty);
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
                     if (DatabaseController.CurrentContainer.FechaCierre != null)
@@ -415,18 +415,14 @@ namespace Permaquim.Depositary.UI.Desktop
                     if (DatabaseController.CurrentTurn.Fecha < DateTime.Now.Date)
                     {
                         FormsController.SetInformationMessage(InformationTypeEnum.Error,
-    MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
+                        MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
                     }
                 }
-
             }
-
-            //FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {
             _transactions = new();
         }
-
     }
 }

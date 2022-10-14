@@ -25,7 +25,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private const string DEPOSITO_SOBRE_CANCELADO = "Deposito de sobre Cancelado";
 
-        private bool _alreadyPrinted = false;
         List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
         List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> _detailTransactions = new();
 
@@ -193,7 +192,6 @@ namespace Permaquim.Depositary.UI.Desktop
             _totalQuantity = 0;
             _totalAmount = 0;
             _operationStatus = new();
-            _alreadyPrinted = false;
         
         }
         public void LoadDenominations()
@@ -427,7 +425,6 @@ namespace Permaquim.Depositary.UI.Desktop
              {
                 _operationStatus.DepositConfirmed = true;
                 _device.CloseEscrow();
-                PrintTicket(TicketTypeEnum.Second);
                 _device.PreviousState = StatusInformation.State.PQClosingEscrow;
 
                 ButtonsPanel.Visible = false;
@@ -893,12 +890,10 @@ namespace Permaquim.Depositary.UI.Desktop
                             case TicketTypeEnum.First:
                                 ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositFirstReport,
                                 _header,_details, i);
-                                _alreadyPrinted = true;
                                 break;
                             case TicketTypeEnum.Second:
                                 ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport,
                                 _header, _details, i);
-                                _alreadyPrinted = true;
                                 break;
                             default:
                                 break;

@@ -65,7 +65,7 @@
             this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
-            this.DenominationsGridView.Location = new System.Drawing.Point(52, 8);
+            this.DenominationsGridView.Location = new System.Drawing.Point(8, 8);
             this.DenominationsGridView.Name = "DenominationsGridView";
             this.DenominationsGridView.RowHeadersVisible = false;
             this.DenominationsGridView.RowTemplate.DividerHeight = 1;
@@ -73,7 +73,7 @@
             this.DenominationsGridView.RowTemplate.ReadOnly = true;
             this.DenominationsGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DenominationsGridView.Size = new System.Drawing.Size(697, 400);
+            this.DenominationsGridView.Size = new System.Drawing.Size(816, 400);
             this.DenominationsGridView.TabIndex = 185;
             this.DenominationsGridView.SelectionChanged += new System.EventHandler(this.DenominationsGridView_SelectionChanged);
             // 
@@ -81,7 +81,7 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(176, 440);
+            this.MainPanel.Location = new System.Drawing.Point(192, 440);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(448, 80);
             this.MainPanel.TabIndex = 188;
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(832, 600);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.DenominationsGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

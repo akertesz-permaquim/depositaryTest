@@ -141,7 +141,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
                 Name = "Moneda",
                 Visible = true,
-                Width = 260,
+                Width = 240,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -153,7 +153,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADOPERACIONES),
                 Name = "CantidadOperaciones",
                 Visible = true,
-                Width = 100,
+                Width = 120,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -164,7 +164,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
                 Name = "TotalValidado",
                 Visible = true,
-                Width = 100,
+                Width = 180,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -175,7 +175,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
                 Name = "TotalAValidar",
                 Visible = true,
-                Width = 100,
+                Width = 180,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -188,9 +188,18 @@ namespace Permaquim.Depositary.UI.Desktop
                 Width = 100,
                 CellTemplate = new DataGridViewTextBoxCell()
 
-            }); 
-
+            });
+            SetcolumnsAlignment();
         }
+        private void SetcolumnsAlignment()
+        {
+            DenominationsGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DenominationsGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DenominationsGridView.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
         #endregion
 
         private void DailyClosingForm_VisibleChanged(object sender, EventArgs e)
@@ -229,8 +238,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                 {
                     ReportController.PrintReport(ReportTypeEnum.DailyClosing, 
-                        DatabaseController.LastDailyClosing, 
-                        DatabaseController.GetDailyClosingDetail(DatabaseController.LastDailyClosing.Id), i);
+                        DatabaseController.GetLastDailyClosingEnvelopeBagContentItems(), 
+                        DatabaseController.GetLastDailyClosingTransactions(), i);
 
                 }
             }

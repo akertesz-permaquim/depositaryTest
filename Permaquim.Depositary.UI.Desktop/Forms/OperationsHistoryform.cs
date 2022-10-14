@@ -587,9 +587,9 @@ namespace Permaquim.Depositary.UI.Desktop
         }
 
 
-        private List<TransactionHeaderItem> _transactionHeaderItems = new();
-        private List<TransactionDetailItem> _transactionDetailItems = new();
-        private List<TransactionEnvelopDetailItem> _transactionEnvelopeDetailItems = new();
+        private System.ComponentModel.BindingList<TransactionHeaderItem> _transactionHeaderItems = new();
+        private System.ComponentModel.BindingList<TransactionDetailItem> _transactionDetailItems = new();
+        private System.ComponentModel.BindingList<TransactionEnvelopDetailItem> _transactionEnvelopeDetailItems = new();
 
 
 

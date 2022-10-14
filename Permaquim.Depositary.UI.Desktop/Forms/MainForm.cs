@@ -82,21 +82,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 {
                     InformationLabel.BackColor = Color.Red;
                     InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
-                    return;
+                    MessageBox.Show(DEPOSITARIO_NO_INICIALIZADO, DEPOSITARIO_NO_INICIALIZADO, MessageBoxButtons.OK);
+                    Application.Exit();
                 }
-
-                _pollingTimer = new System.Windows.Forms.Timer()
+                else
                 {
-                    Interval = DeviceController.GetPollingInterval(),
-                    Enabled = false
-                };
-                _pollingTimer.Tick += PollingTimer_Tick;
+                    _pollingTimer = new System.Windows.Forms.Timer()
+                    {
+                        Interval = DeviceController.GetPollingInterval(),
+                        Enabled = false
+                    };
+                    _pollingTimer.Tick += PollingTimer_Tick;
 
-                LoadLogo();
+                    LoadLogo();
 
-                _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+                    _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
-                this.DoubleBuffered = true;
+                    this.DoubleBuffered = true;
+                }
 
             }
             catch (System.Data.SqlClient.SqlException ex)
@@ -750,17 +753,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void PrintBagTicket()
         {
-
             if (ParameterController.PrintsBagExtraction)
             {
-                var _bagContentItems = DatabaseController.GetBillBagContentItems();
-                _bagContentItems.AddRange(DatabaseController.GetEnvelopeBagContentItems());
                 for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                 {
                     ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                        DatabaseController.CurrentContainer, _bagContentItems, i);
+                        DatabaseController.GetEnvelopeBagContentItems(),
+                        DatabaseController.GetBillBagContentItems(), i);
                 }
-
             }
         }
     }

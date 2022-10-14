@@ -107,10 +107,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             get
             {
                 Depositario.Business.Relations.Operacion.CierreDiario entity = new();
-                entity.Where.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Id,
-                    Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, 0);
-                entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                    Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Fecha,
+
+                entity.Where.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Fecha,
                     Depositario.sqlEnum.OperandEnum.IsNotNull, 0);
                 entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                     Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.DepositarioId,
@@ -1114,6 +1112,62 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         }
 
+        public static List<BillContentResumeItem> GetLastDailyClosingTransactions()
+        {
+            List<BillContentResumeItem> returnValue = new();
+
+
+            // Monedas
+            var currencies = GetCurrencies();
+
+            foreach (var currencyItem in currencies)
+            {
+                foreach (var currencyDenominationItem in GetCurrencyDenominations(currencyItem.Id))
+                {
+
+                    BillContentResumeItem newBagBillContentResumeItem = new()
+                    {
+                        MonedaId = currencyItem.Id,
+                        Moneda = currencyItem.Codigo,
+                        DenominacionId = currencyDenominationItem.Id,
+                        Denominacion = currencyDenominationItem.Nombre,
+                        UnidadesDenominacion = currencyDenominationItem.Unidades
+                    };
+                    returnValue.Add(newBagBillContentResumeItem);
+                }
+
+            }
+
+            // Transacciones
+            Permaquim.Depositario.Business.Relations.Operacion.Transaccion transactions = new();
+            transactions.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.CierreDiarioId,
+                Depositario.sqlEnum.OperandEnum.Equal, LastDailyClosing.Id);
+            transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
+                Depositario.sqlEnum.OperandEnum.Equal, true);
+            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+
+            transactions.Items();
+
+            var txs = transactions.Result.DistinctBy(x => x.Id).Select(x => x.Id).ToList();
+
+            Permaquim.Depositario.Business.Relations.Operacion.TransaccionDetalle transactionDetails = new();
+            transactionDetails.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
+                Depositario.sqlEnum.OperandEnum.In, txs);
+            transactionDetails.Items();
+
+            foreach (var transactionDetailItem in transactionDetails.Result)
+            {
+
+                returnValue.Find(x => x.DenominacionId == transactionDetailItem.DenominacionId.Id).Cantidad += transactionDetailItem.CantidadUnidades;
+
+            }
+
+
+            return returnValue;
+
+        }
+
         public static List<BillContentResumeItem>  GetLastClosingDayTransactions()
         {
             List<BillContentResumeItem> returnValue = new();
@@ -1645,10 +1699,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 foreach (var currentDailyclosing in entities.Items())
                 {
-
                     currentDailyclosing.Fecha = DateTime.Now;
                     currentDailyclosing.UsuarioModificacion = CurrentUser.Id;
                     currentDailyclosing.FechaModificacion = DateTime.Now;
+
                     entities.Update(currentDailyclosing);
 
                     newClosing = entities.Add(new Permaquim.Depositario.Entities.Tables.Operacion.CierreDiario()
@@ -2253,7 +2307,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                     Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactionEntities = new();
                     transactionEntities.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.ContenedorId,
-                        Depositario.sqlEnum.OperandEnum.Equal, CurrentContainer.Id);
+                        Depositario.sqlEnum.OperandEnum.Equal, LastContainer.Id);
                     transactionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                         Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.MonedaId,
                         Depositario.sqlEnum.OperandEnum.Equal, currencyItem.Id);
@@ -2294,7 +2348,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactionEntities = new();
             transactionEntities.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.ContenedorId,
-                Depositario.sqlEnum.OperandEnum.Equal, CurrentContainer.Id);
+                Depositario.sqlEnum.OperandEnum.Equal, LastContainer.Id);
 
             transactionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.TipoId,
@@ -2308,6 +2362,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     Depositario.Business.Relations.Operacion.TransaccionSobre.ColumnEnum.TransaccionId,
                     Depositario.sqlEnum.OperandEnum.Equal, transactionItem.Id);
 
+
                 foreach (var transactionEnvelopeDetailItem in transactionEnvelopeEntities.Items())
                 {
 
@@ -2315,20 +2370,23 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     {
                         BagContentItem newBagContentItem = new();
 
-                        newBagContentItem.Moneda =
-                            transactionEnvelopeDetailItem.CodigoSobre.Length == 0 ? "S/C" : transactionEnvelopeDetailItem.CodigoSobre;
                         newBagContentItem.Moneda = transactionEnvelopeDetailItem.TransaccionId.MonedaId.Nombre;
 
-                       newBagContentItem.Cantidad = item.CantidadDeclarada;
+                        newBagContentItem.Cantidad = item.CantidadDeclarada;
                         newBagContentItem.Denominacion = item.RelacionMonedaTipoValorId.TipoValorId.Nombre;
 
-                        returnValue.Add(newBagContentItem);
+                        var ret = returnValue.Find(x => x.Moneda.Equals(newBagContentItem.Moneda) 
+                        && x.Denominacion.Equals(newBagContentItem.Denominacion));
+                        if (ret == null)
+                            returnValue.Add(newBagContentItem);
+                        else
+                            ret.Cantidad += item.CantidadDeclarada;
+
                     }
                 }
 
-
             }
-
+            
             return returnValue;
         }
 
@@ -2338,11 +2396,7 @@ public static List<BagContentItem> GetLastTurnEnvelopeBagContentItems()
             List<BagContentItem> returnValue = new List<BagContentItem>();
 
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactionEntities = new();
-            transactionEntities.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.ContenedorId,
-                Depositario.sqlEnum.OperandEnum.Equal, CurrentContainer.Id);
-
-            transactionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.TipoId,
+            transactionEntities.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.TipoId,
                 Depositario.sqlEnum.OperandEnum.Equal, OperationTypeEnum.EnvelopeDeposit);
             transactionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.TurnoId,
@@ -2371,7 +2425,62 @@ public static List<BagContentItem> GetLastTurnEnvelopeBagContentItems()
                         newBagContentItem.Cantidad = item.CantidadDeclarada;
                         newBagContentItem.Denominacion = item.RelacionMonedaTipoValorId.TipoValorId.Nombre;
 
-                        returnValue.Add(newBagContentItem);
+                        var ret = returnValue.Find(x => x.Moneda.Equals(newBagContentItem.Moneda)
+                           && x.Denominacion.Equals(newBagContentItem.Denominacion));
+                        if (ret == null)
+                            returnValue.Add(newBagContentItem);
+                        else
+                            ret.Cantidad += item.CantidadDeclarada;
+                    }
+                }
+
+
+            }
+
+            return returnValue;
+        }
+
+
+        public static List<BagContentItem> GetLastDailyClosingEnvelopeBagContentItems()
+        {
+            List<BagContentItem> returnValue = new List<BagContentItem>();
+
+            Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactionEntities = new();
+            transactionEntities.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.TipoId,
+                Depositario.sqlEnum.OperandEnum.Equal, OperationTypeEnum.EnvelopeDeposit);
+            transactionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+               Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.CierreDiarioId,
+               Depositario.sqlEnum.OperandEnum.Equal, LastDailyClosing.Id);
+
+
+            foreach (var transactionItem in transactionEntities.Items())
+            {
+
+                Permaquim.Depositario.Business.Relations.Operacion.TransaccionSobre transactionEnvelopeEntities = new();
+                transactionEnvelopeEntities.Where.Add(
+                    Depositario.Business.Relations.Operacion.TransaccionSobre.ColumnEnum.TransaccionId,
+                    Depositario.sqlEnum.OperandEnum.Equal, transactionItem.Id);
+
+                foreach (var transactionEnvelopeDetailItem in transactionEnvelopeEntities.Items())
+                {
+
+                    foreach (var item in transactionEnvelopeDetailItem.ListOf_TransaccionSobreDetalle_SobreId)
+                    {
+                        BagContentItem newBagContentItem = new();
+
+                        newBagContentItem.Moneda =
+                            transactionEnvelopeDetailItem.CodigoSobre.Length == 0 ? "S/C" : transactionEnvelopeDetailItem.CodigoSobre;
+                        newBagContentItem.Moneda = transactionEnvelopeDetailItem.TransaccionId.MonedaId.Nombre;
+
+                        newBagContentItem.Cantidad = item.CantidadDeclarada;
+                        newBagContentItem.Denominacion = item.RelacionMonedaTipoValorId.TipoValorId.Nombre;
+
+                        var ret = returnValue.Find(x => x.Moneda.Equals(newBagContentItem.Moneda)
+                           && x.Denominacion.Equals(newBagContentItem.Denominacion));
+                        if (ret == null)
+                            returnValue.Add(newBagContentItem);
+                        else
+                            ret.Cantidad += item.CantidadDeclarada;
                     }
                 }
 
