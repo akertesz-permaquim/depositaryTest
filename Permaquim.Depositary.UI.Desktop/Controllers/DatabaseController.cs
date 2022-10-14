@@ -1702,6 +1702,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     currentDailyclosing.Fecha = DateTime.Now;
                     currentDailyclosing.UsuarioModificacion = CurrentUser.Id;
                     currentDailyclosing.FechaModificacion = DateTime.Now;
+                    currentDailyclosing.CodigoCierre = 
+                        currentDailyclosing.CodigoCierre + "-" + currentDailyclosing.Id.ToString();
 
                     entities.Update(currentDailyclosing);
 
