@@ -79,6 +79,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                     oUsuario.FechaExpiracion = ObtenerFechaExpiracion(oUsuario.EmpresaId);
                 oUsuario.Password = Cryptography.Hash(pNewPassword);
                 oUsuario.DebeCambiarPassword = false;
+                oUsuario.FechaModificacion = DateTime.Now;
                 try
                 {
                     oTable.Update(oUsuario);

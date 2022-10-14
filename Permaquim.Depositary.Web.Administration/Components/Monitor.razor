@@ -33,11 +33,10 @@
                     }
                     else
                     {
-                        <RadzenDataGrid Responsive="true" GroupPanelText="@MultilenguajeController.ObtenerTextoPorClave("INDICADOR_AGRUPACION",dataLenguaje)" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.DepositarioMonitor"
+                        <RadzenDataGrid FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" GroupPanelText="@MultilenguajeController.ObtenerTextoPorClave("INDICADOR_AGRUPACION",dataLenguaje)" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.DepositarioMonitor"
                         @ref="@gridDepositarios"
-                        Render="@DepositarioRender"
                         Data="@dataDepositarios"
-                        @bind-Settings="@GridSettings"
+                        @bind-Settings="@gridDepositariosSettings"
                         IsLoading="@estaCargandoGridDepositarios"
                         AllowFiltering="true"
                         AllowPaging="true"
@@ -60,6 +59,30 @@
                                         }
                                         else
                                             @context.Empresa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -182,6 +205,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                         </Template>
                                     </RadzenDataGridColumn>
                                     <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector">
@@ -194,6 +241,30 @@
                                         }
                                         else
                                             @context.Sector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -401,11 +472,12 @@
                                         </ChildContent>
                                     </RadzenCard>
                                 </div>
-                                <RadzenTabs Change="@(args => changeTabMonitorDepositario(args,depositario))">
+                                <RadzenTabs @ref="@tabsMonitor" @bind-SelectedIndex="@selectedTab" Change="@(args => changeTabMonitorDepositario(args,depositario))">
                                     <Tabs>
                                         <RadzenTabsItem Icon="local_atm" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_DEPOSITOS",dataLenguaje)">
                                             <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.TransaccionValidadaMonitor"
                                             @ref="@gridTransacciones"
+                                            @bind-Settings="@gridTransaccionesSettings"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             AllowSorting="true"
@@ -430,6 +502,7 @@
                                                 <Template Context="transaccion">
                                                     <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.DetalleTransaccionValidadaMonitor"
                                                     @ref="@gridTransaccionDetalles"
+                                                    @bind-Settings="@gridTransaccionDetallesSettings"
                                                     IsLoading="@estaCargandoGridTransaccionDetalles"
                                                     AllowFiltering="true"
                                                     AllowPaging="true"
@@ -460,6 +533,7 @@
                                         <RadzenTabsItem Icon="forward_to_inbox" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_DEPOSITOSSOBRE",dataLenguaje)">
                                             <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.TransaccionAValidarMonitor"
                                             @ref="@gridTransaccionesSobres"
+                                            @bind-Settings="@gridTransaccionesSobresSettings"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             ExpandMode="DataGridExpandMode.Multiple"
@@ -483,6 +557,7 @@
                                                 <Template Context="transaccionSobre">
                                                     <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.DetalleTransaccionAValidarMonitor"
                                                     @ref="@gridTransaccionSobreDetalles"
+                                                    @bind-Settings="@gridTransaccionSobreDetallesSettings"
                                                     AllowFiltering="true"
                                                     AllowPaging="true"
                                                     IsLoading="@estaCargandoGridTransaccionSobreDetalles"
@@ -502,6 +577,7 @@
                                         <RadzenTabsItem Icon="archive" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_EXISTENCIAS",dataLenguaje)">
                                             <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.ExistenciaValidada"
                                             @ref="@gridExistencias"
+                                            @bind-Settings="@gridExistenciasSettings"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridExistencias"
@@ -527,6 +603,7 @@
                                         <RadzenTabsItem Icon="mark_as_unread" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_EXISTENCIASAVALIDAR",dataLenguaje)">
                                             <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.ExistenciaAValidar"
                                             @ref="@gridExistenciasAValidar"
+                                            @bind-Settings="@gridExistenciasAValidarSettings"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridExistenciasAValidar"
@@ -547,6 +624,7 @@
                                         <RadzenTabsItem Icon="calculate" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_TOTALGENERAL",dataLenguaje)">
                                             <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.TotalGeneral"
                                             @ref="@gridTotalesGenerales"
+                                            @bind-Settings="@gridTotalesSettings"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridTotalesGenerales"
@@ -562,6 +640,7 @@
                                         <RadzenTabsItem Icon="settings_input_component" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_ANOMALIAS",dataLenguaje)">
                                             <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.Evento"
                                             @ref="@gridEventos"
+                                            @bind-Settings="@gridEventosSettings"
                                             AllowFiltering="true"
                                             AllowPaging="true"
                                             IsLoading="@estaCargandoGridEventos"
@@ -596,7 +675,15 @@ else
 }
 
 @code {
-    private DataGridSettings GridSettings;
+    private DataGridSettings gridDepositariosSettings;
+    private DataGridSettings gridTransaccionesSettings;
+    private DataGridSettings gridTransaccionDetallesSettings;
+    private DataGridSettings gridTransaccionesSobresSettings;
+    private DataGridSettings gridTransaccionSobreDetallesSettings;
+    private DataGridSettings gridExistenciasSettings;
+    private DataGridSettings gridExistenciasAValidarSettings;
+    private DataGridSettings gridTotalesSettings;
+    private DataGridSettings gridEventosSettings;
 
     //Datasets
     private List<MonitorEntities.DepositarioMonitor> dataDepositarios = new();
@@ -623,6 +710,7 @@ else
     private RadzenDataGrid<MonitorEntities.ExistenciaAValidar> gridExistenciasAValidar = new();
     private RadzenDataGrid<MonitorEntities.TotalGeneral> gridTotalesGenerales = new();
     private RadzenCard cardInformacionDepositario = new RadzenCard();
+    private RadzenTabs tabsMonitor = new();
     private bool estaCargandoGridExistencias = false;
     private bool estaCargandoGridDepositarios = false;
     private bool estaCargandoGridTransacciones = false;
@@ -636,6 +724,8 @@ else
     private bool mostrarDatosCuentaBancaria = false;
     private bool mostrarDatosOrigenValor = false;
     private bool ejecucionRecarga = false;
+    private int tiempoRecargaSegundos { get; set; }
+    private int selectedTab { get; set; } = 0;
 
     //Variables auxiliares
     private Timer timerRecargaInformacion = new Timer();
@@ -655,6 +745,9 @@ else
             dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
             if (dataUsuario == null)
                 NavManager.NavigateTo("login", true);
+
+            AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "Monitor", "" , dataUsuario.Id);
+
             usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
             dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
             dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
@@ -665,15 +758,48 @@ else
             await Task.Run(obtenerDepositarios);
             estaCargandoMonitor = false;
             StateHasChanged();
-            //SetTimer();
+            obtenerParametrosConfiguracion();
+            SetTimer();
+        }
+        else
+        {
+            //Si se esta recargando la grilla entonces expandimos los rows que estaban expandidos
+            if (ejecucionRecarga && !estaCargandoGridDepositarios)
+            {
+                if (rowsDepositariosExpandidas.Count > 0)
+                {
+                    gridDepositarios.ExpandRow(dataDepositarios.Where(x => x.DepositarioId == rowsDepositariosExpandidas[0].DepositarioId).FirstOrDefault());
+                    obtenerInformacionDepositario(rowsDepositariosExpandidas[0].DepositarioId);
+                }
+                ejecucionRecarga = false;
+                timerRecargaInformacion.Enabled = true;
+            }
         }
 
+    }
+
+    private void obtenerParametrosConfiguracion()
+    {
+        int tiempoRecarga;
+        string tiempoRecargaString = "";
+        //Obtenemos el tiempo de recarga en segundos de la configuracion
+        tiempoRecargaString = AplicacionController.ObtenerConfiguracionEmpresa("TIEMPO_RECARGA_MONITOR_SEGUNDOS", dataUsuario.EmpresaId);
+        if (int.TryParse(tiempoRecargaString, out tiempoRecarga))
+        {
+            //Si el tiempo parametrizado es mayor al tiempo default definido por codigo entonces pisamos el valor.
+            if (tiempoRecarga > tiempoRecargaSegundos)
+                tiempoRecargaSegundos = tiempoRecarga;
+        }
+        else
+        {
+            tiempoRecargaSegundos = 60;
+        }
     }
 
     private void SetTimer()
     {
         //Creamos un timer con el tiempo parametrizado.
-        timerRecargaInformacion = new System.Timers.Timer(30000);
+        timerRecargaInformacion = new System.Timers.Timer(tiempoRecargaSegundos * 1000);
         timerRecargaInformacion.Elapsed += new ElapsedEventHandler(recargarInformacionDepositario);
         timerRecargaInformacion.AutoReset = true;
         timerRecargaInformacion.Enabled = true;
@@ -682,16 +808,15 @@ else
 
     private async void recargarInformacionDepositario(Object source, ElapsedEventArgs e)
     {
-        timerRecargaInformacion.Enabled = false;
-        //estaCargandoGridDepositarios = true;
-        await Task.Run(obtenerDepositarios);
+        if (!estaCargandoGridDepositarios)
+        {
+            timerRecargaInformacion.Enabled = false;
+            await Task.Run(obtenerDepositarios);
 
-        await this.InvokeAsync(() => this.StateHasChanged());
+            await this.InvokeAsync(() => this.StateHasChanged());
 
-        timerRecargaInformacion.Enabled = true;
-
-        ejecucionRecarga = true;
-
+            ejecucionRecarga = true;
+        }
     }
 
     private void obtenerDepositarios()
@@ -721,32 +846,38 @@ else
             bool.TryParse(valorConfiguracionOrigenValor, out mostrarDatosOrigenValor);
         }
 
-        rowsDepositariosExpandidas.Add(args);
-        await Task.Run(() => obtenerInformacionDepositario(args.DepositarioId));
-        await Task.Run(() => obtenerTransaccionesPorDepositario(args.DepositarioId));
+        //Si se abre por primera vez ese row se agrega a la lista y se abre el primer tab.
+        if (!rowsDepositariosExpandidas.Exists(x => x.DepositarioId == args.DepositarioId))
+        {
+            rowsDepositariosExpandidas.Add(args);
+            reiniciarEstadoDepositarioExpandido();
+            await Task.Run(() => obtenerInformacionDepositario(args.DepositarioId));
+        }
+        estaCargandoGridDepositarios = false;
+        await Task.Run(() => cargarInformacionTab(args.DepositarioId));
+
+        //await Task.Run(() => obtenerTransaccionesPorDepositario(args.DepositarioId));
     }
 
     protected async Task colapsarDepositario(MonitorEntities.DepositarioMonitor args)
     {
         if (!ejecucionRecarga)
+        {
             rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
+        }
     }
 
-    void DepositarioRender(DataGridRenderEventArgs<MonitorEntities.DepositarioMonitor> args)
+    void reiniciarEstadoDepositarioExpandido()
     {
-        if(args.FirstRender) 
-        {
-            //if(rowsDepositariosExpandidas.Count>0)
-            //{
-                args.Grid.ExpandRow(dataDepositarios.FirstOrDefault());
-
-                //args.Grid.Reload();
-
-                StateHasChanged();
-
-            //    ejecucionRecarga = false;
-            //}
-        }
+        gridEventosSettings = new();
+        gridExistenciasAValidarSettings = new();
+        gridExistenciasSettings = new();
+        gridTotalesSettings = new();
+        gridTransaccionDetallesSettings = new();
+        gridTransaccionesSettings = new();
+        gridTransaccionesSobresSettings = new();
+        gridTransaccionSobreDetallesSettings = new();
+        selectedTab = 0;
     }
 
     void depositarioRowRender(RowRenderEventArgs<MonitorEntities.DepositarioMonitor> args)
@@ -761,7 +892,7 @@ else
         }
     }
 
-    private void obtenerInformacionDepositario(Int64 pDepositarioId)
+    private async void obtenerInformacionDepositario(Int64 pDepositarioId)
     {
         dataInformacionDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
         dataInformacionDepositario.Add(DepositarioController.ObtenerInformacionDepositario(pDepositarioId));
@@ -771,7 +902,6 @@ else
     {
         dataTransaccionesDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
         dataTransaccionesDepositario.AddRange(OperacionController.ObtenerTransaccionesValidadasMonitor(pDepositarioId));
-        estaCargandoGridDepositarios = false;
         estaCargandoGridTransacciones = false;
     }
 
@@ -812,33 +942,40 @@ else
 
     private async Task changeTabMonitorDepositario(int index, MonitorEntities.DepositarioMonitor depositario)
     {
-        switch (index)
+        cargarInformacionTab(depositario.DepositarioId, index);
+    }
+
+    private async Task cargarInformacionTab(Int64 DepositarioId, int? indice = null)
+    {
+        switch (indice.HasValue ? indice.Value : selectedTab)
         {
             case 0:
                 estaCargandoGridTransacciones = true;
-                await Task.Run(() => obtenerTransaccionesPorDepositario(depositario.DepositarioId));
+                await Task.Run(() => obtenerTransaccionesPorDepositario(DepositarioId));
                 break;
             case 1:
                 estaCargandoGridTransaccionesSobres = true;
-                await Task.Run(() => obtenerTransaccionesSobrePorDepositario(depositario.DepositarioId));
+                await Task.Run(() => obtenerTransaccionesSobrePorDepositario(DepositarioId));
                 break;
             case 2:
                 estaCargandoGridExistencias = true;
-                await Task.Run(() => obtenerExistenciasPorDepositario(depositario.DepositarioId));
+                await Task.Run(() => obtenerExistenciasPorDepositario(DepositarioId));
                 break;
             case 3:
                 estaCargandoGridExistenciasAValidar = true;
-                await Task.Run(() => obtenerExistenciasAValidarPorDepositario(depositario.DepositarioId));
+                await Task.Run(() => obtenerExistenciasAValidarPorDepositario(DepositarioId));
                 break;
             case 4:
                 estaCargandoGridTotalesGenerales = true;
-                await Task.Run(() => obtenerTotalesGeneralesPorDepositario(depositario.DepositarioId));
+                await Task.Run(() => obtenerTotalesGeneralesPorDepositario(DepositarioId));
                 break;
             case 5:
                 estaCargandoGridEventos = true;
-                await Task.Run(() => obtenerEventosPorDepositario(depositario.DepositarioId));
+                await Task.Run(() => obtenerEventosPorDepositario(DepositarioId));
                 break;
         }
+
+        await this.InvokeAsync(() => this.StateHasChanged());
     }
 
     protected async Task changeChkAgruparDepositarios(bool value)

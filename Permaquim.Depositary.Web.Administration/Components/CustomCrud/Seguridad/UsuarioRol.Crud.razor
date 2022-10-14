@@ -398,6 +398,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+                AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "SeguridadUsuarioRol", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Seguridad.UsuarioRol entity = new();
         entity.Where.Add(Depositary.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, Depositary.sqlEnum.OperandEnum.Equal, UsuarioId);
@@ -446,6 +447,7 @@ else
         Usuario_UsuarioModificacion_entity = new();
         dataSet_Rol = Rol_RolId_entities.Where(x => x.AplicacionId == AplicacionId).ToList();
         crudMode = CrudMode.Add;
+                AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "SeguridadUsuarioRol", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -490,6 +492,8 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "SeguridadUsuarioRol", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -546,13 +550,14 @@ else
             case CrudMode.Add:
                 try
                 {
-                    crud.Add(UsuarioRol_entity);
+                    crud.Add(UsuarioRol_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "agregado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -561,13 +566,14 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(UsuarioRol_entity);
+                    crud.Update(UsuarioRol_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "modificado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -577,13 +583,14 @@ else
                 try
                 {
                     UsuarioRol_entity.Habilitado = false;
-                    crud.Update(UsuarioRol_entity);
+                    crud.Update(UsuarioRol_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;

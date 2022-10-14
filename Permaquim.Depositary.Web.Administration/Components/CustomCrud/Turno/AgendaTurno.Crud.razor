@@ -566,6 +566,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "TurnoAgendaTurnoCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Turno.AgendaTurno entity = new();
         AgendaTurno_entities = entity.Items();
@@ -613,6 +614,7 @@ else
         agendaTurnoABM = new();
         await Task.Run(ObtenerDataArbolAgenda);
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "TurnoAgendaTurnoCrud", crudMode.ToString(), dataUsuario.Id);
         StateHasChanged();
     }
 
@@ -655,6 +657,8 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "TurnoAgendaTurnoCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -756,6 +760,7 @@ else
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -786,10 +791,10 @@ else
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
-                    
                 }
                 break;
             case CrudMode.Delete:
@@ -805,6 +810,7 @@ else
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;

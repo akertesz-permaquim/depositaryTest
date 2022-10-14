@@ -12,7 +12,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             Navigation
         }
 
-        public static void Log(LogTypeEnum logType, string description, string detail, Int64 userId)
+        public static void Log(LogTypeEnum logType, string description, string detail, Int64 userId = 0)
         {
             try
             {
@@ -40,9 +40,9 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             }
         }
 
-        public static void Log(Exception exception)
+        public static void Log(Exception exception, Int64 userId = 0)
         {
-            Log(LogTypeEnum.Exception, exception.Message, exception.StackTrace, 2);
+            Log(LogTypeEnum.Exception, exception.Message, exception.StackTrace, userId);
         }
     }
 }

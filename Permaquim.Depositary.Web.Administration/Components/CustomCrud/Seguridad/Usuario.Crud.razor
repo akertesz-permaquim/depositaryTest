@@ -681,6 +681,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+                AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "SeguridadUsuarioCustomCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Seguridad.Usuario entity = new();
         Usuario_entities = entity.Items();
@@ -729,7 +730,7 @@ else
         Usuario_entity.FechaIngreso = DateTime.Now;
 
         crudMode = CrudMode.Add;
-
+                AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "SeguridadUsuarioCustomCrud", crudMode.ToString(), dataUsuario.Id);
     }
 
     /// <summary>
@@ -759,6 +760,8 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "SeguridadUsuarioCustomCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -839,13 +842,14 @@ else
                     Usuario_entity.FechaExpiracion = SeguridadController.ObtenerFechaExpiracion(Usuario_entity.EmpresaId);
                     string password = Usuario_entity.Nombre.Substring(0, 1) + Usuario_entity.Apellido.Substring(0, 1) + Usuario_entity.Documento;
                     Usuario_entity.Password = Cryptography.Hash(password);
-                    crud.Add(Usuario_entity);
+                    crud.Add(Usuario_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "agregado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -889,13 +893,14 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(Usuario_entity);
+                    crud.Update(Usuario_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "modificado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -905,13 +910,14 @@ else
                 try
                 {
                     Usuario_entity.Habilitado = false;
-                    crud.Update(Usuario_entity);
+                    crud.Update(Usuario_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;

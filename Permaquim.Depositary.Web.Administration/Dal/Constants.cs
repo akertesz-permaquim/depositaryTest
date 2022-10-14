@@ -36,6 +36,7 @@ public class Constants {
          internal const string SQL_SELECT = " SELECT ";
          internal const string SQL_UPDATE = " UPDATE ";
          internal const string SQL_DELETE = " DELETE ";
+         internal const string SQL_TOP = " TOP ";
          internal const string SQL_FROM = " FROM ";
          internal const string SQL_WHERE = " WHERE ";
          internal const string SQL_SET = " SET ";
@@ -45,6 +46,7 @@ public class Constants {
          internal const string SQL_AND = " AND ";
          internal const string SQL_OPENPARENTHESES = " ( ";
          internal const string SQL_CLOSEPARENTHESES = " ) ";
+         internal const string SQL_WITH_NOLOCK = " WITH (NOLOCK) ";
     #endregion
     #region Error Constants
          internal const string ERROR_CONSTRUCTOR = "DataHandler (constructor) : Transaction assignment Error.";

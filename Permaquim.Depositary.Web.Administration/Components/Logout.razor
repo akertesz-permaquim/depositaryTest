@@ -1,17 +1,27 @@
 ﻿@page "/logout"
-@using Permaquim.Depositary.UI.Desktop.Controllers
+
+@using Permaquim.Depositary.Web.Administration.Controllers
 
 @inject NavigationManager NavManager
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Login> L
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 @code {
+
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+            AuditController.Log(AuditController.LogTypeEnum.Navigation, "Logout", "", dataUsuario.Id);
+
             await sessionStorage.ClearAsync();
-            AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,  "User logout msg","");
+            //AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,  "User logout msg","");
             NavManager.NavigateTo("login", true);
         }
     }

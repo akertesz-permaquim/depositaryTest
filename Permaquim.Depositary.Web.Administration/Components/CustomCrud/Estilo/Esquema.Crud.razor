@@ -343,6 +343,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "EstiloEsquemaCustomCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Estilo.Esquema entity = new();
         Esquema_entities = entity.Items();
@@ -411,7 +412,7 @@ else
 
                 try
                 {
-                    oEsquemaDetalleNuevo.Add(eEsquemaDetalleNuevo);
+                    oEsquemaDetalleNuevo.Add(eEsquemaDetalleNuevo, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                 }
                 catch (Exception ex)
                 {
@@ -435,6 +436,7 @@ else
         Esquema_entity = new();
         //Relations entities initialization
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "EstiloEsquemaCustomCrud", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -447,6 +449,8 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "EstiloEsquemaCustomCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -514,7 +518,7 @@ else
                     case CrudMode.Add:
                         try
                         {
-                            crud.Add(Esquema_entity);
+                            crud.Add(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                             //Si se agrego un esquema no default y ademas existia un esquema default entonces le cargamos los items del esquema default
                             if (!Esquema_entity.EsDefault && esquemaDefault != null)
@@ -542,6 +546,7 @@ else
                         }
                         catch (Exception ex)
                         {
+                            AuditController.Log(ex, dataUsuario.Id);
                             summary = "Error al procesar.";
                             actionInformation = ex.Message;
                             severityType = NotificationSeverity.Error;
@@ -550,13 +555,14 @@ else
                     case CrudMode.Edit:
                         try
                         {
-                            crud.Update(Esquema_entity);
+                            crud.Update(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             summary = "El registro se ha ";
                             actionInformation = "modificado.";
                             severityType = NotificationSeverity.Success;
                         }
                         catch (Exception ex)
                         {
+                            AuditController.Log(ex, dataUsuario.Id);
                             summary = "Error al procesar.";
                             actionInformation = ex.Message;
                             severityType = NotificationSeverity.Error;
@@ -570,13 +576,14 @@ else
             try
             {
                 Esquema_entity.Habilitado = false;
-                crud.Update(Esquema_entity);
+                crud.Update(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                 summary = "El registro se ha ";
                 actionInformation = "eliminado.";
                 severityType = NotificationSeverity.Success;
             }
             catch (Exception ex)
             {
+                AuditController.Log(ex, dataUsuario.Id);
                 summary = "Error al procesar.";
                 actionInformation = ex.Message;
                 severityType = NotificationSeverity.Error;

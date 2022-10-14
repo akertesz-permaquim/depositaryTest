@@ -661,6 +661,7 @@ else
     /// </summary>
     private void LoadMainEntityData()
     {
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "ImpresionTicketCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Impresion.Ticket entity = new();
         entity.Where.Add(Business.Tables.Impresion.Ticket.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, EmpresaId);
@@ -709,6 +710,7 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         crudMode = CrudMode.Add;
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "ImpresionTicketCrud", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -749,6 +751,8 @@ else
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
+
+        AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "ImpresionTicketCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -805,13 +809,14 @@ else
             case CrudMode.Add:
                 try
                 {
-                    crud.Add(Ticket_entity);
+                    crud.Add(Ticket_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "agregado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -820,13 +825,14 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(Ticket_entity);
+                    crud.Update(Ticket_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "modificado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -836,13 +842,14 @@ else
                 try
                 {
                     Ticket_entity.Habilitado = false;
-                    crud.Update(Ticket_entity);
+                    crud.Update(Ticket_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                     summary = "El registro se ha ";
                     actionInformation = "eliminado.";
                     severityType = NotificationSeverity.Success;
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
@@ -895,6 +902,47 @@ else
         }
         return retValue;
     }
+
+    #region Custom
+
+    private void CargarDatosPlantillaTicket()
+    {
+        Depositary.Business.Tables.Impresion.PlantillaTicket plantillaTicket = new();
+        plantillaTicket.Where.Add(Business.Tables.Impresion.PlantillaTicket.ColumnEnum.TipoId, sqlEnum.OperandEnum.Equal, Ticket_entity.TipoId);
+        plantillaTicket.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Tables.Impresion.PlantillaTicket.ColumnEnum.DepositarioModeloId, sqlEnum.OperandEnum.Equal, Ticket_entity.DepositarioModeloId);
+
+        plantillaTicket.Items();
+
+        if (plantillaTicket.Result.Count > 0)
+        {
+            var dataPlantillaTicket = plantillaTicket.Result.FirstOrDefault();
+
+            Ticket_entity.Nombre = dataPlantillaTicket.Nombre;
+            Ticket_entity.Descripcion = dataPlantillaTicket.Descripcion;
+            Ticket_entity.Impresora = dataPlantillaTicket.Impresora;
+            Ticket_entity.TextoCabecera = dataPlantillaTicket.TextoCabecera;
+            Ticket_entity.NombreFuenteCabecera = dataPlantillaTicket.NombreFuenteCabecera;
+            Ticket_entity.TamanioFuenteCabecera = dataPlantillaTicket.TamanioFuenteCabecera;
+            Ticket_entity.UbicacionTextoCabecera = dataPlantillaTicket.UbicacionTextoCabecera;
+            Ticket_entity.TextoPie = dataPlantillaTicket.TextoPie;
+            Ticket_entity.NombreFuentePie = dataPlantillaTicket.NombreFuentePie;
+            Ticket_entity.TamanioFuentePie = dataPlantillaTicket.TamanioFuentePie;
+            Ticket_entity.UbicacionTextoPie = dataPlantillaTicket.UbicacionTextoPie;
+            Ticket_entity.Imagen = dataPlantillaTicket.Imagen;
+            Ticket_entity.UbicacionImagen = dataPlantillaTicket.UbicacionImagen;
+            Ticket_entity.UbicacionTextoDetalle = dataPlantillaTicket.UbicacionTextoDetalle;
+            Ticket_entity.AnchoDetalle = dataPlantillaTicket.AnchoDetalle;
+            Ticket_entity.TamanioEntreLineas = dataPlantillaTicket.TamanioEntreLineas;
+            Ticket_entity.AnchoReporte = dataPlantillaTicket.AnchoReporte;
+            Ticket_entity.FactorAltoReporte = dataPlantillaTicket.FactorAltoReporte;
+            Ticket_entity.LineasAlFinal = dataPlantillaTicket.LineasAlFinal;
+
+        }
+
+    }
+
+    #endregion
+
     #region Notifications
     private void ShowNotification(NotificationMessage message)
     {
@@ -910,6 +958,11 @@ else
     /// <param name="item"></param>
     private void SelectTipoTicket_TipoIdValueChanged(object item)
     {
+        //Traemos los datos de tipo de ticket de la tabla plantilla si es que ya eligio un modelo de depositario
+        if (Ticket_entity.DepositarioModeloId != 0)
+        {
+            CargarDatosPlantillaTicket();
+        }
     }
 
     /// <summary>
@@ -930,6 +983,11 @@ else
     /// <param name="item"></param>
     private void SelectModelo_DepositarioModeloIdValueChanged(object item)
     {
+        //Traemos los datos de modelo de depositario de ticket de la tabla plantilla si es que ya eligio un tipo de ticket
+        if (Ticket_entity.TipoId != 0)
+        {
+            CargarDatosPlantillaTicket();
+        }
     }
 
     /// <summary>
