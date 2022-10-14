@@ -76,9 +76,16 @@ namespace Permaquim.Depositary.UI.Desktop
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
-                case OperationblockingReasonEnum.BagMaxVolumeReached:
+                case OperationblockingReasonEnum.ContainerMaxVolumeReached:
 
-                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LIMITE_BOLSA_ALCANZADO);
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LIMITE_CONTENEDOR_ALCANZADO);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
+
+                case OperationblockingReasonEnum.CurrentContainerIsClosed:
+
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR_CERRADO);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;

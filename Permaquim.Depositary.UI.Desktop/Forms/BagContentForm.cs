@@ -134,7 +134,6 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
                 case OperationTypeEnum.EnvelopeDeposit:
                     referenceDataGridview = EnvelopeDepositGridView;
-                    //_bagContentItems = DatabaseController.GetEnvelopeBagContentItems();
                     _bagContentItems = DatabaseController.GetCurrentContainerResume(OperationTypeEnum.EnvelopeDeposit);
                     EnvelopeDepositGridView.DataSource = _bagContentItems;
                     break;
@@ -144,30 +143,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
             }
 
-            //_bagContentItems.Add(new BagContentItem()
-            //{
-            //    Moneda = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
-            //    Cantidad = _bagContentItems.Sum(x => x.Cantidad)
-            //});
-
-            //referenceDataGridview.DataSource = _bagContentResumeItems; //_bagContentItems;
-
-            //if (referenceDataGridview.Rows.Count > 0)
-            //{
-            //    referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.BackColor =
-            //        StyleController.GetColor(Enumerations.ColorNameEnum.PieGrilla);
-            //    referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.ForeColor =
-            //        StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            //    referenceDataGridview.Rows[referenceDataGridview.Rows.Count - 1].DefaultCellStyle.Font = new Font("Verdana", 16);
-            //}
-
-            //for (int i = 0; i < referenceDataGridview.Columns.Count; i++)
-            //{
-            //    referenceDataGridview.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            //    referenceDataGridview.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            //}
-
             referenceDataGridview.ClearSelection();
+
         }
         #endregion
 

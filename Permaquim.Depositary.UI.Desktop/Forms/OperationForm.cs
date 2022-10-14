@@ -1,6 +1,7 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Builders;
 using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
@@ -132,18 +133,47 @@ namespace Permaquim.Depositary.UI.Desktop
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
                         operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
                         operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
+                            (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
                         return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
                     {
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
-                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.BagMaxVolumeReached;
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.ContainerMaxVolumeReached;
                         operationBlockingForm.ShowDialog();
                         return;
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.ContainerMaxVolumeReached),
+                       (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
-            if (DatabaseController.CurrentTurn != null)
+                    if (DatabaseController.CurrentContainer.FechaCierre != null)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CurrentContainerIsClosed;
+                        operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.CurrentContainerIsClosed),
+                     (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                        return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
+                    }
+
+                    if (DatabaseController.CurrentTurn != null)
                     {
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
@@ -189,15 +219,44 @@ namespace Permaquim.Depositary.UI.Desktop
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
                         operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
                         operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
+                            (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
                         return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
                     {
                         OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
-                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.BagMaxVolumeReached;
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.ContainerMaxVolumeReached;
                         operationBlockingForm.ShowDialog();
                         return;
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.ContainerMaxVolumeReached),
+                       (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
+                    }
+
+                    if (DatabaseController.CurrentContainer.FechaCierre != null)
+                    {
+                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CurrentContainerIsClosed;
+                        operationBlockingForm.ShowDialog();
+                        DatabaseController.SetBlockingEvent(Enum.GetName(OperationblockingReasonEnum.CurrentContainerIsClosed),
+                     (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                        return;
+                    }
+                    else
+                    {
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
+                        (int)EventTypeEnum.Ninguno, string.Empty);
                     }
 
                     if (DatabaseController.CurrentTurn != null)
@@ -356,13 +415,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     if (DatabaseController.CurrentTurn.Fecha < DateTime.Now.Date)
                     {
                         FormsController.SetInformationMessage(InformationTypeEnum.Error,
-    MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
+                        MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_PREVIOS_A_LA_FECHA));
                     }
                 }
-
             }
-
-            //FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         private void InitializeLocals()
         {

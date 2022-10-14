@@ -13,10 +13,7 @@ namespace Permaquim.Depositary.UI.Desktop
     {
         public CounterDevice _device { get; set; }
 
-        private bool _bagAlreadyExtracted = false;
-
         private bool _bagAlreadyInserted = false;
-        private bool _alreadyPrinted = false;
 
         private enum BagSensorBehaviourEnum
         {
@@ -405,7 +402,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BagExtractionForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
-            _bagAlreadyExtracted = false;
+
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
             if (!this.Visible)
                 _bagAlreadyInserted = false;
@@ -421,19 +418,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (ParameterController.PrintsBagExtraction)
             {
-                var _bagContentItems = DatabaseController.GetBillBagContentItems();
-                _bagContentItems.AddRange( DatabaseController.GetEnvelopeBagContentItems());
-
-                if (!_alreadyPrinted)
+                for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                 {
-                    for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
-                    {
-                        ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                            DatabaseController.CurrentContainer, _bagContentItems,i);
-                        _alreadyPrinted = true;
-                    }
+                    ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+                        DatabaseController.GetEnvelopeBagContentItems(), 
+                        DatabaseController.GetBillBagContentItems(), i);
                 }
             }
-        }
+        }        
     }
 }

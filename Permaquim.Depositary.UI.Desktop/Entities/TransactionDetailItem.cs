@@ -15,5 +15,9 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         public long CantidadUnidades { get; set; }
         public string Moneda { get; set; }
         public DateTime Fecha { get; set; }
+
+        public decimal Total { get {
+                return Unidades * CantidadUnidades;
+            } }
     }
 }
