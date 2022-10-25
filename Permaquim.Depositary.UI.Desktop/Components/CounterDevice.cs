@@ -2,6 +2,7 @@
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.CustomExceptions;
 using System.Collections;
+using System.Configuration;
 using System.IO.Ports;
 using System.Security.Permissions;
 using System.Text;
@@ -960,6 +961,44 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 Log(ex);
             }
         }
+
+
+        public StatesResult SwitchToCurrency(int currencyNumber)
+        {
+            if (_counterPort.IsOpen)
+            {
+                Log("COMMAND: StoringStart");
+                DiscardBuffer(_counterPort);
+
+
+
+                byte[] currencyRequest = new byte[8] { (byte)2, (byte)48, (byte)48, (byte)50, (byte)57, (byte)49, (byte)3, (byte)0 };
+
+                int baseValue = 48;
+                // Pesos: 39 U$S: 58 Euro : 59
+
+
+                currencyRequest[5] = BitConverter.GetBytes(baseValue + currencyNumber)[0];
+
+                byte[] bcc = GetBCC(currencyRequest);
+
+                _counterPort.BaseStream.Write(bcc, 0, bcc.Length);
+
+                List<byte> _buffer = ReadCounterSimpleResponse();
+
+                _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
+
+                _buffer.Clear();
+
+                return _stateResultProperty;
+            }
+            else
+            {
+                Log("COMMAND NOT SENT: StoringStart. Port is closed.");
+                return StateResultProperty;
+            }
+        }
+
         /// <summary>
         /// Calculate Block Check Character
         /// </summary>
@@ -1238,12 +1277,15 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             string filename = logDirectory + _device.DeviceName + "."
                 + DateTime.Now.ToString("yyyy.MM.dd") + ".log";
 
-           /*System.IO.StreamWriter file = new(filename, true);
-            file.WriteLine(DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss"));
-            file.WriteLine(message);
-            file.WriteLine("------------------------------------------------------------------------");
-            file.Close();
-           */
+            if (ParameterController.DeviceLogEnabled)
+            {
+                System.IO.StreamWriter file = new(filename, true);
+                file.WriteLine(DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss"));
+                file.WriteLine(message);
+                file.WriteLine("------------------------------------------------------------------------");
+                file.Close();
+
+            }
         }
 
         #endregion
@@ -1285,113 +1327,115 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
 
                 if (_counterPort.IsOpen)
-                {
-                    BitArray StatusInformationBitArray = new BitArray(new byte[] { numArray[4] });
-                    //new(int[] { numArray[4] });
-
-
-                    string StateInput =
-                        (StatusInformationBitArray[0] ? 1 : 0).ToString() +
-                        (StatusInformationBitArray[1] ? 1 : 0).ToString() +
-                        (StatusInformationBitArray[2] ? 1 : 0).ToString() +
-                        (StatusInformationBitArray[3] ? 1 : 0).ToString() +
-                        (StatusInformationBitArray[4] ? 1 : 0).ToString() +
-                        (StatusInformationBitArray[5] ? 1 : 0).ToString();
-
-                    statesResult.StatusInformation.OperatingState = (StatusInformation.State)BinaryToDecimal(StateInput);
-
-                    BitArray EndInformationBitArray = new(new byte[1] { numArray[5] });
-                    statesResult.EndInformation.CollectEnd = EndInformationBitArray[5];
-                    statesResult.EndInformation.StoreEnd = EndInformationBitArray[4];
-                    statesResult.EndInformation.RestorationEnd = EndInformationBitArray[3];
-                    statesResult.EndInformation.BatchEnd = EndInformationBitArray[2];
-                    statesResult.EndInformation.AbnormalEnd = EndInformationBitArray[1];
-                    statesResult.EndInformation.CountEnd = EndInformationBitArray[0];
-
-                    BitArray DeviceStateInformationBitArray = new(new byte[1] { numArray[6] });
-                    statesResult.DeviceStateInformation.RejectFull = DeviceStateInformationBitArray[5];
-                    statesResult.DeviceStateInformation.StackerFull = DeviceStateInformationBitArray[4];
-                    statesResult.DeviceStateInformation.DischargingFailure = DeviceStateInformationBitArray[3];
-                    statesResult.DeviceStateInformation.RejectedBillPresent = DeviceStateInformationBitArray[2];
-                    statesResult.DeviceStateInformation.EscrowBillPresent = DeviceStateInformationBitArray[1];
-                    statesResult.DeviceStateInformation.HopperBillPresent = DeviceStateInformationBitArray[0];
-
-                    BitArray ErrorStateInformationBitArray = new(new byte[1] { numArray[7] });
-
-                    statesResult.ErrorStateInformation.AbnormalStorage = ErrorStateInformationBitArray[3];
-                    statesResult.ErrorStateInformation.AbnormalDevice = ErrorStateInformationBitArray[2];
-                    statesResult.ErrorStateInformation.CountingError = ErrorStateInformationBitArray[1];
-                    statesResult.ErrorStateInformation.Jamming = ErrorStateInformationBitArray[0];
-
-                    BitArray ModeStateInformationBitArray = new(new byte[1] { numArray[8] });
-                    string ModeInput = (ModeStateInformationBitArray[5] ? 1 : 0).ToString() + (object)(ModeStateInformationBitArray[4] ? 1 : 0) + (object)(ModeStateInformationBitArray[3] ? 1 : 0) + (object)(ModeStateInformationBitArray[2] ? 1 : 0) + (object)(ModeStateInformationBitArray[1] ? 1 : 0) + (object)(ModeStateInformationBitArray[0] ? 1 : 0);
-                    statesResult.ModeStateInformation.ModeState = (ModeStateInformation.Mode)BinaryToDecimal(ModeInput);
-
-                    BitArray DoorStateInformationBitArray = new(new byte[1] { numArray[9] });
-                    statesResult.DoorStateInformation.Escrow = DoorStateInformationBitArray[5];
-                    statesResult.DoorStateInformation.CassetteFull = DoorStateInformationBitArray[2];
-
-                    BitArray CountryCodeBitArray = new(new byte[1] { numArray[10] });
-                    string CurrencyInput = (CountryCodeBitArray[0] ? 1 : 0).ToString() + (object)(CountryCodeBitArray[1] ? 1 : 0) + (object)(CountryCodeBitArray[2] ? 1 : 0);
-                    statesResult.CountryCode.CurrencyStateInformation = (CountryCode.Currency)BinaryToDecimal(CurrencyInput);
-
-                    if (statesResult.ErrorStateInformation.AbnormalDevice)
+                {   // Por alguna razón, la respuesta tiene ocasionalmente 1 solo byte.
+                    if (numArray.Length > 1)  
                     {
-                        if (DeviceErrorReceived != null)
+
+                        BitArray StatusInformationBitArray = new BitArray(new byte[] { numArray[4] });
+
+                        string StateInput =
+                            (StatusInformationBitArray[0] ? 1 : 0).ToString() +
+                            (StatusInformationBitArray[1] ? 1 : 0).ToString() +
+                            (StatusInformationBitArray[2] ? 1 : 0).ToString() +
+                            (StatusInformationBitArray[3] ? 1 : 0).ToString() +
+                            (StatusInformationBitArray[4] ? 1 : 0).ToString() +
+                            (StatusInformationBitArray[5] ? 1 : 0).ToString();
+
+                        statesResult.StatusInformation.OperatingState = (StatusInformation.State)BinaryToDecimal(StateInput);
+
+                        BitArray EndInformationBitArray = new(new byte[1] { numArray[5] });
+                        statesResult.EndInformation.CollectEnd = EndInformationBitArray[5];
+                        statesResult.EndInformation.StoreEnd = EndInformationBitArray[4];
+                        statesResult.EndInformation.RestorationEnd = EndInformationBitArray[3];
+                        statesResult.EndInformation.BatchEnd = EndInformationBitArray[2];
+                        statesResult.EndInformation.AbnormalEnd = EndInformationBitArray[1];
+                        statesResult.EndInformation.CountEnd = EndInformationBitArray[0];
+
+                        BitArray DeviceStateInformationBitArray = new(new byte[1] { numArray[6] });
+                        statesResult.DeviceStateInformation.RejectFull = DeviceStateInformationBitArray[5];
+                        statesResult.DeviceStateInformation.StackerFull = DeviceStateInformationBitArray[4];
+                        statesResult.DeviceStateInformation.DischargingFailure = DeviceStateInformationBitArray[3];
+                        statesResult.DeviceStateInformation.RejectedBillPresent = DeviceStateInformationBitArray[2];
+                        statesResult.DeviceStateInformation.EscrowBillPresent = DeviceStateInformationBitArray[1];
+                        statesResult.DeviceStateInformation.HopperBillPresent = DeviceStateInformationBitArray[0];
+
+                        BitArray ErrorStateInformationBitArray = new(new byte[1] { numArray[7] });
+
+                        statesResult.ErrorStateInformation.AbnormalStorage = ErrorStateInformationBitArray[3];
+                        statesResult.ErrorStateInformation.AbnormalDevice = ErrorStateInformationBitArray[2];
+                        statesResult.ErrorStateInformation.CountingError = ErrorStateInformationBitArray[1];
+                        statesResult.ErrorStateInformation.Jamming = ErrorStateInformationBitArray[0];
+
+                        BitArray ModeStateInformationBitArray = new(new byte[1] { numArray[8] });
+                        string ModeInput = (ModeStateInformationBitArray[5] ? 1 : 0).ToString() + (object)(ModeStateInformationBitArray[4] ? 1 : 0) + (object)(ModeStateInformationBitArray[3] ? 1 : 0) + (object)(ModeStateInformationBitArray[2] ? 1 : 0) + (object)(ModeStateInformationBitArray[1] ? 1 : 0) + (object)(ModeStateInformationBitArray[0] ? 1 : 0);
+                        statesResult.ModeStateInformation.ModeState = (ModeStateInformation.Mode)BinaryToDecimal(ModeInput);
+
+                        BitArray DoorStateInformationBitArray = new(new byte[1] { numArray[9] });
+                        statesResult.DoorStateInformation.Escrow = DoorStateInformationBitArray[5];
+                        statesResult.DoorStateInformation.CassetteFull = DoorStateInformationBitArray[2];
+
+                        BitArray CountryCodeBitArray = new(new byte[1] { numArray[10] });
+                        string CurrencyInput = (CountryCodeBitArray[0] ? 1 : 0).ToString() + (object)(CountryCodeBitArray[1] ? 1 : 0) + (object)(CountryCodeBitArray[2] ? 1 : 0);
+                        statesResult.CountryCode.CurrencyStateInformation = (CountryCode.Currency)BinaryToDecimal(CurrencyInput);
+
+                        if (statesResult.ErrorStateInformation.AbnormalDevice)
                         {
-
-                            DeviceErrorEventArgs args = new()
+                            if (DeviceErrorReceived != null)
                             {
-                                ErrorCode = "FF02",
-                                ErrorDescription = "AbnormalDevice"
-                            };
 
-                            DeviceErrorReceived(this, args);
+                                DeviceErrorEventArgs args = new()
+                                {
+                                    ErrorCode = "FF02",
+                                    ErrorDescription = "AbnormalDevice"
+                                };
+
+                                DeviceErrorReceived(this, args);
+                            }
+
+                        }
+
+                        if (statesResult.ErrorStateInformation.Jamming)
+                        {
+                            if (DeviceErrorReceived != null)
+                            {
+
+                                DeviceErrorEventArgs args = new()
+                                {
+                                    ErrorCode = "Jamming",
+                                    ErrorDescription = "Jamming"
+                                };
+                                DeviceErrorReceived(this, args);
+                            }
+                        }
+
+                        if (statesResult.ErrorStateInformation.AbnormalStorage)
+                        {
+                            if (DeviceErrorReceived != null)
+                            {
+
+                                DeviceErrorEventArgs args = new()
+                                {
+                                    ErrorCode = "AbnormalStorage",
+                                    ErrorDescription = "AbnormalStorage"
+                                };
+                                DeviceErrorReceived(this, args);
+                            }
+                        }
+                        if (statesResult.ErrorStateInformation.CountingError)
+                        {
+                            if (DeviceErrorReceived != null)
+                            {
+
+                                DeviceErrorEventArgs args = new()
+                                {
+                                    ErrorCode = "CountingError",
+                                    ErrorDescription = "CountingError"
+                                };
+                                DeviceErrorReceived(this, args);
+                            }
                         }
 
                     }
-
-                    if (statesResult.ErrorStateInformation.Jamming)
-                    {
-                        if (DeviceErrorReceived != null)
-                        {
-
-                            DeviceErrorEventArgs args = new()
-                            {
-                                ErrorCode = "Jamming",
-                                ErrorDescription = "Jamming"
-                            };
-                            DeviceErrorReceived(this, args);
-                        }
-                    }
-
-                    if (statesResult.ErrorStateInformation.AbnormalStorage)
-                    {
-                        if (DeviceErrorReceived != null)
-                        {
-
-                            DeviceErrorEventArgs args = new()
-                            {
-                                ErrorCode = "AbnormalStorage",
-                                ErrorDescription = "AbnormalStorage"
-                            };
-                            DeviceErrorReceived(this, args);
-                        }
-                    }
-                    if (statesResult.ErrorStateInformation.CountingError)
-                    {
-                        if (DeviceErrorReceived != null)
-                        {
-
-                            DeviceErrorEventArgs args = new()
-                            {
-                                ErrorCode = "CountingError",
-                                ErrorDescription = "CountingError"
-                            };
-                            DeviceErrorReceived(this, args);
-                        }
-                    }
-
                 }
                 return statesResult;
             }

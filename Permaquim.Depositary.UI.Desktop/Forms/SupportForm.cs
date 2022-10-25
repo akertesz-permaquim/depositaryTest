@@ -94,7 +94,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     _device.Close();
                     break;
                 case "UnLock":
-                    //_device.UnLock();
+                    _device.Unlock();
                     break;
                 case "Status":
                     _device.Status();
@@ -103,7 +103,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     //_device.Empty();
                     break;
                 case "Approve":
-                    //_device.Approve();
+                    _device.ApproveBag();
                     break;
                 default:
                     break;
@@ -191,17 +191,27 @@ namespace Permaquim.Depositary.UI.Desktop
                 case "DenominationDataRequest":
                     _device.DenominationDataRequest();
                     break;
-                case "SwitchtoARS":
-                    _device.SwitchCurrency(30 + 18 + 1); // CAMBIAR
+                case "SwitchToFirstCurrency":
+                    _device.SwitchToCurrency(1);
                     break;
-                case "SwitchtoUS":
-                    _device.SwitchCurrency(30 + 18 + 2);
+                case "SwitchToSecondCurrency":
+                    _device.SwitchToCurrency(2);
                     break;
-                case "SwitchToEUR":
-                    _device.SwitchCurrency(30 + 18 + 3);
+                case "SwitchToThirdCurrency":
+                    _device.SwitchToCurrency(3);
                     break;
-                case "SwitchToCL":
-                    _device.SwitchCurrency(30 + 18 + 4);
+                case "SwitchToFourthCurrency":
+                    _device.SwitchToCurrency(4);
+                    break;
+                case "SwitchToFifthCurrency":
+                    _device.SwitchToCurrency(5);
+                    break;
+                case "SwitchToSixthCurrency":
+                    _device.SwitchToCurrency(6);
+                    break;
+                case "SwitchToSeventhCurrency":
+                    _device.SwitchToCurrency(7);
+                    break;
                     break;
                 default:
                     break;

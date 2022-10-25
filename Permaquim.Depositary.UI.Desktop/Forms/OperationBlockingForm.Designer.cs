@@ -42,7 +42,7 @@
             this.InformationLabel.ForeColor = System.Drawing.Color.White;
             this.InformationLabel.Location = new System.Drawing.Point(32, 93);
             this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(888, 91);
+            this.InformationLabel.Size = new System.Drawing.Size(896, 91);
             this.InformationLabel.TabIndex = 150;
             this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.InformationLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.InformationLabel_Paint);
@@ -51,9 +51,9 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(332, 246);
+            this.MainPanel.Location = new System.Drawing.Point(248, 352);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 200);
+            this.MainPanel.Size = new System.Drawing.Size(496, 94);
             this.MainPanel.TabIndex = 149;
             // 
             // OperationBlockingForm

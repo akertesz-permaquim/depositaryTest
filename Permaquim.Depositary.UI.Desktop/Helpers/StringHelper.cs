@@ -21,6 +21,8 @@ namespace Permaquim.Depositary.UI.Desktop.Helpers
         {
             StringBuilder returnValue = new();
 
+            text = text.Length > textLenght ? text.Substring(0, textLenght) : text ;
+
             switch (align)
             {
                 case AlignEnum.AlignLeft:
@@ -33,7 +35,7 @@ namespace Permaquim.Depositary.UI.Desktop.Helpers
 
                     int startText = textLenght / 2 - text.Length / 2;
 
-                    returnValue.Append(SPACE, startText - 1);
+                    returnValue.Append(SPACE, startText == 0 ? 0 : startText - 1);
                     returnValue.Append(text);
                     returnValue.Append(SPACE, textLenght - returnValue.Length);
 

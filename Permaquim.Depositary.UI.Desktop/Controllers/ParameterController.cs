@@ -82,6 +82,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+
         public static bool PrintsDailyClosing
         {
             get
@@ -202,6 +203,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             get
             {
                 return Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("EXTRACCION_BOLSA_REQUIERE_AUTORIZACION"));
+            }
+
+        }
+        public static bool DeviceLogEnabled
+        {
+            get
+            {
+                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOG_DISPOSITIVO_HABILITADO"));
             }
 
         }

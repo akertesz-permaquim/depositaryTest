@@ -797,7 +797,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     Transaccion transaction = new()
                     {
-                        CierreDiarioId = DatabaseController.CurrentDailyClosing.Id,
+                        CierreDiarioId = DatabaseController.CurrentDailyClosing != null ? DatabaseController.CurrentDailyClosing.Id : null,
                         ContenedorId = DatabaseController.CurrentContainer.Id,
                         DepositarioId = DatabaseController.CurrentDepositary.Id,
                         Fecha = DateTime.Now,

@@ -483,7 +483,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 var esquemaDetalleTurno = item.TurnoId.TurnoDepositarioId.EsquemaDetalleTurnoId;
                 _transactionHeaderItems.Add(new TransactionHeaderItem()
                 {
-                    Cierrediario = item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString("dd/MM/yyyy") : "",
+                    Cierrediario =  item.CierreDiarioId != null?  
+                        item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString("dd/MM/yyyy") : "" : String.Empty,
                     Contenedor = item.ContenedorId.Nombre +
                         (item.ContenedorId.Identificador.Length == 0 ? "" : " (" + item.ContenedorId.Identificador + " )"),
                     Fecha = item.Fecha,

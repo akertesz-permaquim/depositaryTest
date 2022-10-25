@@ -19,6 +19,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             InitializeComponent();
             LoadBackButton();
+            LoadOkButton();
             TimeOutController.Reset();
         }
         protected override CreateParams CreateParams
@@ -47,43 +48,48 @@ namespace Permaquim.Depositary.UI.Desktop
                 case OperationblockingReasonEnum.None:
                     break;
                 case OperationblockingReasonEnum.NoTurn:
-
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
-                case OperationblockingReasonEnum.NoBag:
 
+                case OperationblockingReasonEnum.NoBag:
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
-                case OperationblockingReasonEnum.PortError:
 
+                case OperationblockingReasonEnum.PortError:
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
-                case OperationblockingReasonEnum.CounterCommunicationError:
 
+                case OperationblockingReasonEnum.CounterCommunicationError:
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
-                case OperationblockingReasonEnum.IoBoardCommunicationError:
 
+                case OperationblockingReasonEnum.IoBoardCommunicationError:
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_PLACA);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
-                case OperationblockingReasonEnum.ContainerMaxVolumeReached:
 
+                case OperationblockingReasonEnum.ContainerMaxVolumeReached:
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.LIMITE_CONTENEDOR_ALCANZADO);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
 
                 case OperationblockingReasonEnum.CurrentContainerIsClosed:
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR_CERRADO);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+                    break;
+
+                case OperationblockingReasonEnum.DepositaryDisabled:
 
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR_CERRADO);
                     InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
@@ -97,7 +103,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width / 2 -5 );
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
@@ -105,6 +111,24 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            FormsController.HideInstance(this);
+        }
+        #endregion
+
+        #region OK button
+        private void LoadOkButton()
+        {
+            CustomButton backButton = ControlBuilder.BuildStandardButton(
+                "OkButton", MultilanguangeController.GetText(
+                    MultiLanguageEnum.ELIMINAR_ERRORES), MainPanel.Width / 2 - 5);
+
+            this.MainPanel.Controls.Add(backButton);
+            backButton.Click += new System.EventHandler(OkButton_Click);
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            DeviceController.ResetIssues();
             FormsController.HideInstance(this);
         }
         #endregion

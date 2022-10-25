@@ -139,8 +139,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
-                        (int)EventTypeEnum.Ninguno, string.Empty);
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                        (int)EventTypeEnum.Normal, string.Empty);
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
@@ -154,8 +154,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
-                        (int)EventTypeEnum.Ninguno, string.Empty);
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                        (int)EventTypeEnum.Normal, string.Empty);
                     }
 
                     if (DatabaseController.CurrentContainer.FechaCierre != null)
@@ -169,8 +169,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
-                        (int)EventTypeEnum.Ninguno, string.Empty);
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                        (int)EventTypeEnum.Normal, string.Empty);
                     }
 
                     if (DatabaseController.CurrentTurn != null)
@@ -225,8 +225,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
-                        (int)EventTypeEnum.Ninguno, string.Empty);
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                        (int)EventTypeEnum.Normal, string.Empty);
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
@@ -240,8 +240,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
-                        (int)EventTypeEnum.Ninguno, string.Empty);
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                        (int)EventTypeEnum.Normal, string.Empty);
                     }
 
                     if (DatabaseController.CurrentContainer.FechaCierre != null)
@@ -255,8 +255,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Ninguno),
-                        (int)EventTypeEnum.Ninguno, string.Empty);
+                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                        (int)EventTypeEnum.Normal, string.Empty);
                     }
 
                     if (DatabaseController.CurrentTurn != null)

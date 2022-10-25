@@ -56,7 +56,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             }
 
         }
-        private void LoadStyles()
+        public void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
             MainKeyboard.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);

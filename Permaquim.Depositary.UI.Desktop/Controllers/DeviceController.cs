@@ -11,6 +11,37 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
     internal static class DeviceController
     {
+        public static bool ComunicationIssue { get; set; }
+        public static bool BagIssue { get; set; }
+        public static bool CounterIssue { get; set; }
+        public static bool IoBoardIssue { get; set; }
+
+        public static bool PrinterIssue { get; set; }
+        public static bool BagRemovedForcefully { get; set; }
+
+        public static bool HasAnyIssue
+        {
+            get { return 
+                    ComunicationIssue == true 
+                    || BagIssue == true 
+                    || CounterIssue == true 
+                    || IoBoardIssue == true; }
+  
+        }
+        public static void ResetIssues()
+        {
+            ComunicationIssue = false;
+            BagIssue = false;
+            CounterIssue = false;
+            IoBoardIssue = false;
+            PrinterIssue = false;
+
+            DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                     (int)EventTypeEnum.Normal, string.Empty);
+
+        }
+
+
         public static int GetPollingInterval()
         {
             return DatabaseController.CurrentDepositaryCounter.PollTime;
@@ -19,7 +50,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             return DatabaseController.CurrentDepositaryIoboard.Sleeptime;
         }
-
 
         public static DEXDevice InitializeDevice()
         {
@@ -118,7 +148,5 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             return device;
         }
-
-
-}
+    }
 }

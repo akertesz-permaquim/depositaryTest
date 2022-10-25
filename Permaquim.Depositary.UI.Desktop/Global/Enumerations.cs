@@ -120,7 +120,10 @@
             IoBoardCommunicationError,
             ContainerMaxVolumeReached,
             DoorWasOpened,
-            CurrentContainerIsClosed
+            CurrentContainerIsClosed,
+            DepositaryDisabled,
+            ContainerError,
+            PrinterError
         }
         public enum DepositaryConfigurationEnum
         {
@@ -249,11 +252,13 @@
             CONTANDO,
             CONTINUAR_INGRESANDO_BILLETES,
             ACEPTAR_O_CANCELAR_DEPOSITO,
+            ELIMINAR_ERRORES,
             CANTIDADUNIDADES,
             TRANSACCIONES_TURNO,
             CONFIRMA_CIERRE_TURNO,
             CONFIRMA_CIERRE_ULTIMO_TURNO,
             CONFIRMA_CIERRE_DIARIO,
+            CIERRE_DIARIO_REALIZADO,
             CIERRE_DIARIO,
             CANTIDADDECLARADA,
             CAMBIO_TURNO,
@@ -341,14 +346,14 @@
 
         public enum EventTypeEnum
         {
-            Ninguno,
-            Apertura_de_Puerta,
-            Contenedor_Lleno,
+            Normal,
             Cambio_de_Contenedor,
             Alarma_de_Contenedor_Mal_Ubicado,
             Alarma_De_Exclusa,
             Estado_Fuera_De_Servicio,
-            Error_De_Comunicacion
+            Error_De_Comunicacion,
+            Apertura_de_Puerta,
+            Cambio_de_Contenedor_Sin_usuario
         }
 
         public enum ContainerChangeEventEnum

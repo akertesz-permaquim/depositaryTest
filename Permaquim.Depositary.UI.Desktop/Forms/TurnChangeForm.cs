@@ -165,7 +165,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _transactionHeaderItems.Add(new TransactionHeaderItem()
                 {
-                    Cierrediario = item.CierreDiarioId.Nombre,
+                    Cierrediario = null,
                     Contenedor = item.ContenedorId.Identificador,
                     Fecha = item.Fecha,
                     Finalizada = item.Finalizada,

@@ -132,23 +132,24 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
-            
-            if(DatabaseController.CurrentDailyClosing == null)
+
+            if (DatabaseController.CurrentDailyClosing == null)
             {
-                FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                                  MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_ABIERTOS));
-            }
-            
-            
-            if (DatabaseController.GetAvailableTurns() == 0)
-            {
-                FormsController.OpenChildForm(this, new DailyClosingForm(),
-              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                if (DatabaseController.GetAvailableTurns() == 0)
+                {
+                    FormsController.OpenChildForm(this, new DailyClosingForm(),
+                  (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                }
+                else
+                {
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                        MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_ABIERTOS));
+                }
             }
             else
             {
                 FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                    MultilanguangeController.GetText(MultiLanguageEnum.EXISTEN_TURNOS_ABIERTOS));
+                    MultilanguangeController.GetText(MultiLanguageEnum.CIERRE_DIARIO_REALIZADO));
             }
         }
         #endregion

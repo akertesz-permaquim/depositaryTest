@@ -154,7 +154,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void EnvelopeDepositForm_VisibleChanged(object sender, EventArgs e)
         {
-            MonitorGroupcheckbox.Visible = true;// SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+            MonitorGroupcheckbox.Visible = false;// SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
 
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
@@ -566,7 +566,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 Permaquim.Depositario.Entities.Tables.Operacion.Transaccion transaction = new()
                 {
-                    CierreDiarioId = DatabaseController.CurrentDailyClosing.Id,
+                    CierreDiarioId = null,
                     ContenedorId = DatabaseController.CurrentContainer.Id,
                     DepositarioId = DatabaseController.CurrentDepositary.Id,
                     MonedaId = DatabaseController.CurrentCurrency.Id,
@@ -580,12 +580,12 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalValidado = 0,
                     TurnoId = DatabaseController.CurrentTurn.Id,
                     CuentaId = DatabaseController.CurrentUserBankAccount == null ? null :
-                            DatabaseController.CurrentUserBankAccount.CuentaId.Id,
+                                DatabaseController.CurrentUserBankAccount.CuentaId.Id,
                     UsuarioId = DatabaseController.CurrentUser.Id,
                     CodigoOperacion =
-                            DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
+                                DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
                     OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? null :
-                        DatabaseController.CurrentDepositOrigin.Id
+                                DatabaseController.CurrentDepositOrigin.Id
                 };
                 transactions.Add(transaction);
                 _operationStatus.CurrentTransactionId = transaction.Id;
@@ -686,11 +686,14 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
-                SaveTransaction();
+                if (!DeviceController.HasAnyIssue)
+                {
+                    SaveTransaction();
 
-                TimeOutController.Reset();
-                _device.OpenEscrow();
-                _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                    TimeOutController.Reset();
+                    _device.OpenEscrow();
+                    _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                }
             }
 
         }
@@ -817,7 +820,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void MonitorGroupcheckbox_CheckStateChanged(object sender, EventArgs e)
         {
-            MonitorGroupBox.Visible = MonitorGroupcheckbox.Checked;
+            //MonitorGroupBox.Visible = MonitorGroupcheckbox.Checked;
         }
 
         private void EnvelopeDepositForm_MouseClick(object sender, MouseEventArgs e)

@@ -38,7 +38,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 ConfigurationController.GetConfiguration("CodigoDepositario"), 
                 ConfigurationController.GetConfiguration("PasswordKey"));
         }
-
+  
         private static string GetConfiguration(string configurationEntry)
         {
 
