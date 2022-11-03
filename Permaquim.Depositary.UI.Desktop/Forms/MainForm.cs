@@ -30,6 +30,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private int closingcombination = 0;
+        private Color _defaultColor = Color.SteelBlue;
 
         StatesResult _counterStatesResult;
         IoBoardStatus _ioBoardStatus;
@@ -81,21 +82,21 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 FormsController.MainFormInstance = this;
 
-                // StartPosition was set to FormStartPosition.Manual in the properties window.
                 Rectangle screen = Screen.PrimaryScreen.WorkingArea;
                 this.Location = new Point(0, 0);
                 this.Size = new Size(screen.Width, screen.Height);
 
                 if (DatabaseController.CurrentDepositary == null)
                 {
+                    LoadDefaultStyles();
                     InformationLabel.BackColor = Color.Red;
                     InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
-                    MessageBox.Show(DEPOSITARIO_NO_INICIALIZADO, DEPOSITARIO_NO_INICIALIZADO, MessageBoxButtons.OK);
                     Application.Exit();
                     return;
                 }
                 else
                 {
+
                     _pollingTimer = new System.Windows.Forms.Timer()
                     {
                         Interval = DeviceController.GetPollingInterval(),
@@ -108,6 +109,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
                     this.DoubleBuffered = true;
+
                 }
 
             }
@@ -145,11 +147,26 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             if (DatabaseController.CurrentDepositary != null)
             {
-                InitializeDevices();
-                LoadLedImages();
-                VerifyUserData();
-                LoadParameters();
-                LoadLanguageItems();
+                if (CheckLicensefile())
+                {
+                    if (CheckLicense())
+                    {
+                        InitializeDevices();
+                        LoadLedImages();
+                        VerifyUserData();
+                        LoadParameters();
+                        LoadLanguageItems();
+                    }
+                    else
+                    {
+                        LoadStyles();
+                    }
+                }else
+                {
+                    string message = MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA);
+                    MessageBox.Show(message, message, MessageBoxButtons.OK);
+                    Clipboard.SetText(LicenseController.GetHardwareId());
+                }
             }
             else
             {
@@ -171,6 +188,47 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 _errorForm.Tag = _device;
                 _errorForm.ShowDialog();
                 _errorForm = null;
+            }
+        }
+
+        /// <summary>
+        /// Chequeo de licencia
+        /// </summary>
+        private bool CheckLicensefile()
+        {
+            return true;
+            return File.Exists((Directory.GetCurrentDirectory() + @"\APP0STOL.License"));
+        }
+
+            /// <summary>
+            /// Chequeo de licencia
+            /// </summary>
+            private bool CheckLicense()
+        {
+            return true; // TODO: ELIMINAR EN PRODUCCIÓN
+
+            if (LicenseController.IsValidLicenseAvailable())
+            {
+                double remainingDays = LicenseController.GetLicenseRemainingDays();
+                if (remainingDays <= 7) {
+                    SetInformationMessage(InformationTypeEnum.Error, 
+                        MultilanguangeController.GetText(MultiLanguageEnum.DIAS_RESTANTES_LICENCIA) 
+                        + " " + ((int)remainingDays).ToString());
+                }
+                if (!LicenseController.CheckLicenseAttributes())
+                {
+                    SetInformationMessage(InformationTypeEnum.Error,
+                 MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
+                    return false;
+                }
+
+                return true;
+            }
+            else
+            {
+                SetInformationMessage(InformationTypeEnum.Error, 
+                    MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
+                return false;
             }
         }
         private void LoadParameters()
@@ -682,6 +740,19 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             LoadPresentation();
         }
+        private void LoadDefaultStyles()
+        {
+            HeadPanel.BackColor = _defaultColor;
+             MainPanel.BackColor = _defaultColor;
+            BottomPanel.BackColor = _defaultColor;
+            MainPictureBox.BackColor = _defaultColor;
+            UserLabel.ForeColor = _defaultColor;
+            EnterpriseLabel.ForeColor = _defaultColor;
+            TurnAndDateTimeLabel.ForeColor = _defaultColor; 
+            BreadcrumbLabel.BackColor = _defaultColor;
+            BreadcrumbLabel.ForeColor = Color.White;
+            InformationLabel.ForeColor = Color.White; 
+        }
 
         public void LoadPresentation()
         {
@@ -824,8 +895,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 Application.Exit();
                 AuditController.Log(LogTypeEnum.Information,
-            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO),
-            MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+            MultilanguangeController.GetText(MultiLanguageEnum.APLICACION_CERRADA_MANUALMENTE),
+            MultilanguangeController.GetText(MultiLanguageEnum.APLICACION_CERRADA_MANUALMENTE));
 
             }
         }

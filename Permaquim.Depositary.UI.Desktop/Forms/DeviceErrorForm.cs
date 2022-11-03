@@ -17,6 +17,8 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 {
     public partial class DeviceErrorForm : Form
     {
+        private const string D50 = "D50";
+        private const string D70 = "D70";
         CounterDevice _device = null;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public DeviceErrorForm()
@@ -120,17 +122,19 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
         private void UnJamButton_Click(object sender, EventArgs e)
         {
-            
-            _device.UnJam();
-            
-            _device.Sleep();
-
-            if (_device.StateResultProperty.DoorStateInformation.Escrow == true)
+            switch ((DatabaseController.CurrentDepositary.
+                ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
             {
-                _device.CloseEscrow();
-                _device.Sleep();
-                _device.RemoteCancel();
+                case D50:
+                    _device.UnJamD50();
+                    break;
+                case D70:
+                    _device.UnJamD70();
+                    break;
+                default:
+                    break;
             }
+            
 
             FormsController.LogOff();
             _pollingTimer.Enabled = true;

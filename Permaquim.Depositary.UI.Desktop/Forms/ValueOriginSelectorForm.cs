@@ -92,7 +92,42 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             DatabaseController.CurrentDepositOrigin = (Permaquim.Depositario.Entities.Relations.Valor.OrigenValor)((CustomButton)sender).Tag;
 
-            ValidateDepositOrigin();
+            if (ParameterController.UsesBankAccount == true)
+            {
+
+                var _userBankAccounts = DatabaseController.GetUserBankAccounts();
+
+                if (_userBankAccounts.Count != 0)
+                {
+                    if (_userBankAccounts.Count == 1)
+                    {
+                        DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
+                        string userBankAccountText = " - " +
+                              MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
+                          ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero;
+                        if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
+                            FormsController.OpenChildForm(this, new BillDepositForm(),
+                            (CounterDevice)this.Tag, userBankAccountText);
+                        if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                            (CounterDevice)this.Tag, userBankAccountText);
+                    }
+                    else
+                    {
+                        FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                    }
+                }
+                else
+                {
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                         MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_BANCARIA_OBLIGATORIA));
+                }
+            }
+            else
+            {
+                ValidateDepositOrigin();
+            }
 
         }
 

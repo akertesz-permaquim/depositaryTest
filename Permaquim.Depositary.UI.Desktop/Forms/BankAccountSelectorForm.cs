@@ -99,7 +99,7 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             billDepositFormBreadcrumbText += " " +
             MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
-              ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero;
+              ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Nombre;
 
             if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
             {

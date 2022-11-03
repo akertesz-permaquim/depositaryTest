@@ -192,7 +192,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     _device.DenominationDataRequest();
                     break;
                 case "UnJam":
-                    _device.UnJam();
+                    _device.UnJamD50();
                     break;
                 case "SwitchToFirstCurrency":
                     _device.SwitchToCurrency(1);

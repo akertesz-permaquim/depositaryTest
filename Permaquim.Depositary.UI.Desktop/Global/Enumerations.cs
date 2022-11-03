@@ -163,6 +163,7 @@
             USUARIO_NO_REGISTRADO,
             USUARIO_NO_HABILITADO_EN_SECTOR,
             SIN_TURNO,
+            APLICACION_CERRADA_MANUALMENTE,
             EXISTEN_TURNOS_ABIERTOS,
             EXISTEN_TURNOS_PREVIOS_A_LA_FECHA,
             SIN_BOLSA,
@@ -317,7 +318,9 @@
             FORMATO_CUATRO_COLUMNAS,
             IMPRESORA_PUERTA_ABIERTA,
             IMPRESORA_SIN_ALIMENTACION,
-            IMPRESORA_ATASCADA
+            IMPRESORA_ATASCADA,
+            LICENCIA_NO_VALIDA,
+            DIAS_RESTANTES_LICENCIA
         }
 
         public enum FunctionEnum

@@ -261,9 +261,18 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     if (DatabaseController.CurrentTurn != null)
                     {
-                        FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
-                        //}
+
+                        if (DatabaseController.GetCurrencies().Count == 1)
+                        {
+                            DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
+                        else
+                        {
+                            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                        }
                     }
                     else
                     {

@@ -93,6 +93,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Eziriz.Reactor.Licensing" Version="6.9.0" />
     <PackageReference Include="Eziriz.Reactor.TrimHelper" Version="6.9.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />

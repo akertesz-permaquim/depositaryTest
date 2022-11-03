@@ -158,7 +158,6 @@
             this.TurnAndDateTimeLabel.Name = "TurnAndDateTimeLabel";
             this.TurnAndDateTimeLabel.Size = new System.Drawing.Size(216, 32);
             this.TurnAndDateTimeLabel.TabIndex = 104;
-            this.TurnAndDateTimeLabel.Text = "------";
             this.TurnAndDateTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.TurnAndDateTimeLabel.Click += new System.EventHandler(this.TurnAndDateTimeLabel_Click);
             // 
@@ -173,7 +172,6 @@
             this.DepositaryLabel.Name = "DepositaryLabel";
             this.DepositaryLabel.Size = new System.Drawing.Size(264, 32);
             this.DepositaryLabel.TabIndex = 103;
-            this.DepositaryLabel.Text = "------";
             this.DepositaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SucursalInfoLabel
@@ -185,7 +183,6 @@
             this.SucursalInfoLabel.Name = "SucursalInfoLabel";
             this.SucursalInfoLabel.Size = new System.Drawing.Size(240, 32);
             this.SucursalInfoLabel.TabIndex = 102;
-            this.SucursalInfoLabel.Text = "------";
             this.SucursalInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // IoBoardPictureBox
