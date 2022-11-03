@@ -191,6 +191,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 case "DenominationDataRequest":
                     _device.DenominationDataRequest();
                     break;
+                case "UnJam":
+                    _device.UnJam();
+                    break;
                 case "SwitchToFirstCurrency":
                     _device.SwitchToCurrency(1);
                     break;
@@ -211,7 +214,6 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
                 case "SwitchToSeventhCurrency":
                     _device.SwitchToCurrency(7);
-                    break;
                     break;
                 default:
                     break;

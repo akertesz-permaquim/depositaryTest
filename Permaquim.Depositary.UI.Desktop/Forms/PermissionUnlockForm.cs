@@ -18,7 +18,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             LoadStyles();
             Loadlogo();
 
-            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TITULO_LOGIN);
+            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.INGRESE_CRDENCIALES_AUTORIZACION);
             MainKeyboard.UserTextboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_USUARIO);
             MainKeyboard.PasswordTextBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_PASSWORD);
 
@@ -91,22 +91,12 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                         if (DatabaseController.UserAllowedInSector())
                         {
 
-                            if (currentUser.DebeCambiarPassword)
+                            if (SecurityController.IsFunctionEnabled(104))
                             {
-                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.DEBECAMBIARPASSWORD));
-                                return;
-                            }
-
-                            if (DatabaseController.UserExpirationDateReached())
-                            {
-                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_USUARIO_EXPIRADA));
-                                return;
-                            }
-
-                            MultilanguangeController.ResetLanguage();
-
-                            if (SecurityController.IsFunctionEnabled(FunctionEnum.ExtraccionDeValores, currentUser.Id))
                                 this.DialogResult = DialogResult.OK;
+                                DeviceController.BagRemovedForcefully = false;
+                                return;
+                            }
                             else
                                 MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.NO_POSEE_PERMISOS));
 

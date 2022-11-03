@@ -48,14 +48,14 @@
             // 
             // TitleLabel
             // 
-            this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.TitleLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.TitleLabel.Location = new System.Drawing.Point(304, 6);
+            this.TitleLabel.Location = new System.Drawing.Point(152, 6);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(259, 37);
+            this.TitleLabel.Size = new System.Drawing.Size(544, 37);
             this.TitleLabel.TabIndex = 4;
             this.TitleLabel.Text = "Ingreso de Usuario";
+            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainKeyboard
             // 

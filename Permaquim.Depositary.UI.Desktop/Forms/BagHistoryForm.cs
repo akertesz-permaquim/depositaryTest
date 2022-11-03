@@ -224,7 +224,7 @@ namespace Permaquim.Depositary.UI.Desktop
                                                                     FechaCierreHasta,
                                                                     IdentificadorTextbox.Text);
             MainGridView.DataSource = _bagHistoryItems;
-            StyleController.SetControlHeight(MainGridView);
+
         }
         #endregion
         private void InitializeLocals()

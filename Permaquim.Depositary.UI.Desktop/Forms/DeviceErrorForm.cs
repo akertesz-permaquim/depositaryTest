@@ -120,10 +120,19 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
         private void UnJamButton_Click(object sender, EventArgs e)
         {
-            if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+            
+            _device.UnJam();
+            
+            _device.Sleep();
+
+            if (_device.StateResultProperty.DoorStateInformation.Escrow == true)
             {
-                _device.OpenEscrow();
+                _device.CloseEscrow();
+                _device.Sleep();
+                _device.RemoteCancel();
             }
+
+            FormsController.LogOff();
             _pollingTimer.Enabled = true;
         }
         #endregion

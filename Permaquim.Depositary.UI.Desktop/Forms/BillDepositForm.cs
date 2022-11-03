@@ -95,9 +95,9 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _pollingTimer.Enabled = this.Visible;
 
-            MonitorGroupcheckbox.Visible = false;// SecurityController.IsFunctionenabled(FunctionEnum.ViewEvents);
+            MonitorGroupcheckbox.Visible = false;// ConfigurationController.IsDevelopment();
 
-            if (this.Visible)
+                if (this.Visible)
             {
                 LoadCurrentContainer();
                 LoadLanguageItems();
@@ -536,6 +536,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CountEndCheckBox.Checked = _device.StateResultProperty.EndInformation.CountEnd;
             StoreEndCheckBox.Checked = _device.StateResultProperty.EndInformation.StoreEnd;
             CollectEndCheckBox.Checked = _device.StateResultProperty.EndInformation.CollectEnd;
+            checkBoxEscrow.Checked = _device.StateResultProperty.DoorStateInformation.Escrow;
 
         }
         /// <summary>
@@ -695,9 +696,9 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private void ExitBillDepositForm()
         {
-            // Ya que se debe salir del form, se 
             _pollingTimer.Enabled = false;
             SaveTransaction();
+            UpdateTransaction();
             EnableDisableControls(false);
             _device.RemoteCancel();
             _operationStatus.DepositEnded = false;
@@ -801,7 +802,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         ContenedorId = DatabaseController.CurrentContainer.Id,
                         DepositarioId = DatabaseController.CurrentDepositary.Id,
                         Fecha = DateTime.Now,
-                        Finalizada = true,
+                        Finalizada = false,
                         MonedaId = DatabaseController.CurrentCurrency.Id,
                         SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
                         SesionId = DatabaseController.CurrentSession.Id,
@@ -864,6 +865,19 @@ namespace Permaquim.Depositary.UI.Desktop
             }
 
         }
+
+        private void UpdateTransaction()
+        {
+            Depositario.Business.Tables.Operacion.Transaccion transactions = new();
+            transactions.Items(_operationStatus.CurrentTransactionId);
+            if (transactions.Result.Count > 0)
+            {
+                var currentTransaction = transactions.Result.FirstOrDefault();
+                currentTransaction.Finalizada = true;
+                transactions.Update(currentTransaction);
+
+            }
+        }
         private void PrintTicket()
         {
 
@@ -896,10 +910,19 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                 }
 
-                for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+
+
+                Thread thread = new Thread(() =>
                 {
-                    ReportController.PrintReport(ReportTypeEnum.BillDeposit, _header, _consolidatedDetailsList, i);
-                }
+                    for (int i = 0; i < ParameterController.PrintBillDepositQuantity; i++)
+                    {
+                        ReportController.PrintReport(ReportTypeEnum.BillDeposit, _header, _consolidatedDetailsList, i);
+                    }
+
+                });
+                thread.Start();
+
+
             }
         }
         #endregion

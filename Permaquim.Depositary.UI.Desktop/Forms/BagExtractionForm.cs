@@ -402,12 +402,11 @@ namespace Permaquim.Depositary.UI.Desktop
         private void BagExtractionForm_VisibleChanged(object sender, EventArgs e)
         {
             _pollingTimer.Enabled = this.Visible;
-
+            _containerTextBox.Texts = String.Empty;
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
             if (!this.Visible)
                 _bagAlreadyInserted = false;
-            
-        }
+         }
 
         private void BagExtractionForm_MouseClick(object sender, MouseEventArgs e)
         {
@@ -421,8 +420,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                 {
                     ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                        DatabaseController.GetEnvelopeBagContentItems(), 
-                        DatabaseController.GetBillBagContentItems(), i);
+                        DatabaseController.GetEnvelopeLastContainerContentItems(), 
+                        DatabaseController.GetBillLastContainerContentItems(), i);
                 }
             }
         }        

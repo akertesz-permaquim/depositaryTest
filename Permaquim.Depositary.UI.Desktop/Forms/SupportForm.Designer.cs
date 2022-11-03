@@ -257,10 +257,14 @@
             "StoringErrorRecoveryMode",
             "CollectMode",
             "Reset",
-            "SwitchtoARS",
-            "SwitchtoUS",
-            "SwitchToEUR",
-            "SwitchToCL"});
+            "UnJam",
+            "SwitchToFirstCurrency",
+            "SwitchToSecondCurrency",
+            "SwitchTothirdCurrency",
+            "SwitchToFourthCurrency",
+            "SwitchToFifthCurrency",
+            "SwitchToSixthCurrency",
+            "SwitchToSeventhCurrency"});
             this.CounterCommandComboBox.Location = new System.Drawing.Point(8, 24);
             this.CounterCommandComboBox.Name = "CounterCommandComboBox";
             this.CounterCommandComboBox.Size = new System.Drawing.Size(232, 31);

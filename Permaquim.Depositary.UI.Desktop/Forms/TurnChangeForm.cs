@@ -176,7 +176,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalAValidar = item.TotalAValidar,
                     TotalValidado = item.TotalValidado,
                     Turno = item.TurnoId.ToString(),
-                    Usuario = item.UsuarioId.ToString(),
+                    Usuario = item.UsuarioId.NombreApellido.ToString(),
                     UsuarioCuenta = item.CuentaId == null ? null :item.CuentaId.Numero
                 });
             }

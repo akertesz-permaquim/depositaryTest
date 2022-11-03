@@ -18,7 +18,8 @@ namespace Permaquim.Depositary.UI.Desktop
         public OperationBlockingForm()
         {
             InitializeComponent();
-            LoadBackButton();
+            CenterPanel();
+            //LoadBackButton();
             LoadOkButton();
             TimeOutController.Reset();
         }
@@ -36,7 +37,16 @@ namespace Permaquim.Depositary.UI.Desktop
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
 
         }
+        private void CenterPanel()
+        {
 
+            MainPanel.Location = new Point()
+            {
+                X = this.Width / 2 - MainPanel.Width / 2,
+                Y = MainPanel.Location.Y
+            };
+
+        }
         private void OperationBlockingForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
@@ -46,6 +56,9 @@ namespace Permaquim.Depositary.UI.Desktop
             switch (OperationBlockingReason)
             {
                 case OperationblockingReasonEnum.None:
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_GENERICO);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 case OperationblockingReasonEnum.NoTurn:
                     InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
@@ -96,6 +109,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
                     break;
                 default:
+                    InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_GENERICO);
+                    InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+                    InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+
                     break;
             }
         }
@@ -103,7 +120,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
             CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width / 2 -5 );
+                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width -5 );
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(BackButton_Click);
@@ -120,7 +137,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             CustomButton backButton = ControlBuilder.BuildStandardButton(
                 "OkButton", MultilanguangeController.GetText(
-                    MultiLanguageEnum.ELIMINAR_ERRORES), MainPanel.Width / 2 - 5);
+                    MultiLanguageEnum.ELIMINAR_ERRORES), MainPanel.Width - 5);
 
             this.MainPanel.Controls.Add(backButton);
             backButton.Click += new System.EventHandler(OkButton_Click);

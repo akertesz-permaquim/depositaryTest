@@ -169,6 +169,7 @@
             SIN_BOLSA_ACTIVA,
             LIMITE_CONTENEDOR_ALCANZADO,
             CONTENEDOR_CERRADO,
+            ERROR_GENERICO,
             VOLVER,
             PUERTA_ABIERTA,
             ERROR_OPERACION_PREVIA,
@@ -200,6 +201,7 @@
             IMAGEN,
             CANTIDAD,
             USUARIOCUENTA,
+            CUENTA_BANCARIA,
             ORIGEN_VALOR,
             USUARIO,
             SIN_USUARIO,
@@ -312,7 +314,10 @@
             FORMATO_FECHA,
             FORMATO_FECHA_HORA_COMPLETA,
             FORMATO_TRES_COLUMNAS,
-            FORMATO_CUATRO_COLUMNAS
+            FORMATO_CUATRO_COLUMNAS,
+            IMPRESORA_PUERTA_ABIERTA,
+            IMPRESORA_SIN_ALIMENTACION,
+            IMPRESORA_ATASCADA
         }
 
         public enum FunctionEnum

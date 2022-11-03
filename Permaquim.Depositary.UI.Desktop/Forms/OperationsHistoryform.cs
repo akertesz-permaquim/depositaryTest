@@ -326,7 +326,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void InitializeOperationsDetailGridView(OperationTypeEnum operationType)
         {
-            OperationsHeaderGridView.AutoGenerateColumns = false;
+            OperationsDetailGridView.AutoGenerateColumns = false;
             OperationsDetailGridView.Columns.Clear();
 
             if (operationType == OperationTypeEnum.BillDeposit)
@@ -682,11 +682,18 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                 }
 
-                for (int i = 1; i <= ParameterController.PrintBillDepositQuantity; i++)
+
+
+                Thread thread = new Thread(() =>
                 {
-                    ReportController.PrintReport(ReportTypeEnum.BillDeposit,
-                        _header, _consolidatedDetailsList, i);
-                }
+
+                    for (int i = 1; i <= ParameterController.PrintBillDepositQuantity; i++)
+                    {
+                        ReportController.PrintReport(ReportTypeEnum.BillDeposit,
+                            _header, _consolidatedDetailsList, i);
+                    }
+                });
+                thread.Start();
             }
         }
 

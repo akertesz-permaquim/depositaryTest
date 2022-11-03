@@ -63,6 +63,7 @@
             this.DeviceModeLabel = new System.Windows.Forms.Label();
             this.GeneralStatusLabel = new System.Windows.Forms.Label();
             this.MonitorGroupcheckbox = new System.Windows.Forms.CheckBox();
+            this.checkBoxEscrow = new System.Windows.Forms.CheckBox();
             this.MainPanel.SuspendLayout();
             this.ButtonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
@@ -323,6 +324,7 @@
             // 
             this.MonitorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MonitorGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.MonitorGroupBox.Controls.Add(this.checkBoxEscrow);
             this.MonitorGroupBox.Controls.Add(this.CollectEndCheckBox);
             this.MonitorGroupBox.Controls.Add(this.StoreEndCheckBox);
             this.MonitorGroupBox.Controls.Add(this.CountEndCheckBox);
@@ -342,7 +344,7 @@
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonitorGroupBox.Location = new System.Drawing.Point(744, 120);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
-            this.MonitorGroupBox.Size = new System.Drawing.Size(152, 448);
+            this.MonitorGroupBox.Size = new System.Drawing.Size(152, 504);
             this.MonitorGroupBox.TabIndex = 140;
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
@@ -569,6 +571,19 @@
             this.MonitorGroupcheckbox.Visible = false;
             this.MonitorGroupcheckbox.CheckStateChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
             // 
+            // checkBoxEscrow
+            // 
+            this.checkBoxEscrow.AutoSize = true;
+            this.checkBoxEscrow.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxEscrow.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxEscrow.ForeColor = System.Drawing.Color.SteelBlue;
+            this.checkBoxEscrow.Location = new System.Drawing.Point(8, 432);
+            this.checkBoxEscrow.Name = "checkBoxEscrow";
+            this.checkBoxEscrow.Size = new System.Drawing.Size(66, 17);
+            this.checkBoxEscrow.TabIndex = 41;
+            this.checkBoxEscrow.Text = "Escrow";
+            this.checkBoxEscrow.UseVisualStyleBackColor = false;
+            // 
             // BillDepositForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -634,5 +649,6 @@
         private CheckBox CountEndCheckBox;
         private CheckBox StoreEndCheckBox;
         private CheckBox CollectEndCheckBox;
+        private CheckBox checkBoxEscrow;
     }
 }

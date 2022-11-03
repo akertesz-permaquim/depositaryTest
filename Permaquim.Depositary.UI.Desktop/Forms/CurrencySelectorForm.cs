@@ -139,9 +139,9 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else // No opera con depósito, valida las cuentas bancarias
             {
-                if (ParameterController.UsesValueOrigin == true)
+                if (ParameterController.UsesBankAccount == true)
                 {
-                    ValidateDepositOrigin();
+                    ValidateUserBankAccount();
                 }
                 else
                 {
@@ -160,9 +160,9 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else // No opera con depósito, valida las cuentas bancarias
             {
-                if (ParameterController.UsesValueOrigin == true)
+                if (ParameterController.UsesBankAccount == true)
                 {
-                    ValidateDepositOrigin();
+                    ValidateUserBankAccount();
                 }
                 else
                 {

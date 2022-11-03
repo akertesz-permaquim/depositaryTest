@@ -31,6 +31,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         // Device instance
         private DEXDevice _device = null;
 
+        private bool _deviceLogEnabled = ParameterController.DeviceLogEnabled;
+
         public StatusInformation.State PreviousState { get; set; }
         public StatusInformation.State CurrentStatus
         {
@@ -124,11 +126,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         const byte CAN = 0x18; // CANCEL
         const byte EOM = 0x19; // END OF MEDIUM
         const byte SP = 0x20;  // SPACE
+        private const int MINIMUM_DATA_SIZE = 22;
         #endregion
 
-        public List<string> Ports 
+        public List<string> Ports
         {
-            get {
+            get
+            {
                 return SerialPort.GetPortNames().ToList<string>();
             }
         }
@@ -139,7 +143,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         /// <param name="device"></param>
         public CounterDevice(DEXDevice device)
         {
-            
+
             _device = device;
             Log("FUNCTION: Counter Device initializing in COM Port: " + device.CounterComPort.PortName + ".");
             try
@@ -468,8 +472,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         }
         public StatesResult StoringStart()
         {
-            if ( _counterPort!= null &&_counterPort.IsOpen)
-            { 
+            if (_counterPort != null && _counterPort.IsOpen)
+            {
                 Log("COMMAND: StoringStart");
                 DiscardBuffer(_counterPort);
                 byte[] bcc = GetBCC(_device.StoringStart);
@@ -493,13 +497,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         public StatesResult SwitchCurrency(long counterIndex)
         {
-            if (_counterPort !=null && _counterPort.IsOpen)
+            if (_counterPort != null && _counterPort.IsOpen)
             {
                 Log("COMMAND: StoringStart");
                 DiscardBuffer(_counterPort);
                 byte[] currencyRequest = _device.SwitchCurrency;
-                  
-                currencyRequest[5] = BitConverter.GetBytes(counterIndex)[0]; 
+
+                currencyRequest[5] = BitConverter.GetBytes(counterIndex)[0];
 
                 byte[] bcc = GetBCC(currencyRequest);
 
@@ -639,7 +643,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 List<byte> _buffer = ReadCounterResponse();
 
                 if (_buffer.Count > 100)
-                   this.DenominationResultProperty.DenominationArray  = ParseDenomination(_buffer.ToArray<byte>());
+                    this.DenominationResultProperty.DenominationArray = ParseDenomination(_buffer.ToArray<byte>());
 
                 _buffer.Clear();
 
@@ -678,7 +682,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         }
         public StatesResult RemoteCancel()
         {
-            if (_counterPort != null &&_counterPort.IsOpen )
+            if (_counterPort != null && _counterPort.IsOpen)
             {
                 Log("COMMAND: RemoteCancel");
                 DiscardBuffer(_counterPort);
@@ -901,7 +905,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             while (true)
             {
                 var bytes = _ioboardPort.BytesToRead;
-                
+
 
                 if (bytes > 0)
                 {
@@ -914,7 +918,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     break;
                 }
             }
-            
+
             _ioBoardLastBytesRead = _buffer.Count;
 
             if (IOboardDeviceDataReceived != null)
@@ -934,6 +938,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             return data;
         }
 
+        public void Sleep()
+        {
+            Thread.Sleep(SleepTimeout);
+        }
 
         #endregion
 
@@ -975,7 +983,6 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 byte[] currencyRequest = new byte[8] { (byte)2, (byte)48, (byte)48, (byte)50, (byte)57, (byte)49, (byte)3, (byte)0 };
 
                 int baseValue = 48;
-                // Pesos: 39 U$S: 58 Euro : 59
 
 
                 currencyRequest[5] = BitConverter.GetBytes(baseValue + currencyNumber)[0];
@@ -1277,7 +1284,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             string filename = logDirectory + _device.DeviceName + "."
                 + DateTime.Now.ToString("yyyy.MM.dd") + ".log";
 
-            if (ParameterController.DeviceLogEnabled)
+            if (_deviceLogEnabled)
             {
                 System.IO.StreamWriter file = new(filename, true);
                 file.WriteLine(DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss"));
@@ -1328,7 +1335,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                 if (_counterPort.IsOpen)
                 {   // Por alguna razón, la respuesta tiene ocasionalmente 1 solo byte.
-                    if (numArray.Length > 1)  
+                    if (numArray.Length >= MINIMUM_DATA_SIZE)
                     {
 
                         BitArray StatusInformationBitArray = new BitArray(new byte[] { numArray[4] });
@@ -1558,7 +1565,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
 
         #region com ports
- 
+
         #endregion
 
         #region Public Properties
@@ -1588,6 +1595,9 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                     return _ioBoardLastBytesRead > 0;
             }
         }
+
+        #endregion
+        #region Issues
         public void IoBoardReconnect()
         {
             try
@@ -1613,6 +1623,88 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
             }
         }
+        public void UnJam()
+        {
+
+            while (Sense().StatusInformation.OperatingState != StatusInformation.State.Waiting)
+            {
+
+
+                switch (StateResultProperty.ModeStateInformation.ModeState)
+                {
+                    case ModeStateInformation.Mode.NormalErrorRecoveryMode:
+                    case ModeStateInformation.Mode.StoringErrorRecoveryMode:
+                        switch (StateResultProperty.StatusInformation.OperatingState)
+                        {
+
+                            case StatusInformation.State.EscrowOpenRequest:
+                            case StatusInformation.State.StoringError:
+                                OpenEscrow();
+                                break;
+                            case StatusInformation.State.EscrowOpen:
+                                break;
+                            case StatusInformation.State.BeingRecoverFromStoringError:
+                                DeviceReset();
+                                break;
+                            case StatusInformation.State.BeingReset:
+                                DeviceReset();
+                                RemoteCancel();
+                                StoringStart();
+                                break;
+                            case StatusInformation.State.EscrowCloseRequest:
+                            case StatusInformation.State.PQWaitingTocloseEscrow:
+                                CloseEscrow();
+                                break;
+                            case StatusInformation.State.EscrowClose:
+                                break;
+                            case StatusInformation.State.StoringStartRequest:
+                                StoringStart();
+                                break;
+                            case StatusInformation.State.BeingStore:
+                                break;
+                            case StatusInformation.State.Waiting:
+                                RemoteCancel();
+                                break;
+                            case StatusInformation.State.PQStoring:
+                                break;
+
+                            default:
+                                DeviceReset();
+                                break;
+                        }
+                        break;
+                    case ModeStateInformation.Mode.Neutral_SettingMode:
+                        switch (StateResultProperty.StatusInformation.OperatingState)
+                        {
+                            case StatusInformation.State.StoringError:
+                                StoringErrorRecoveryMode();
+
+                                break;
+                            case StatusInformation.State.Waiting:
+                                CloseEscrow();
+                                Thread.Sleep(SleepTimeout);
+                                RemoteCancel();
+                                return;
+                        }
+
+                        break;
+                    case ModeStateInformation.Mode.InitialMode:
+                    case ModeStateInformation.Mode.DepositMode:
+                    case ModeStateInformation.Mode.ManualMode:
+                    default:
+                        switch (StateResultProperty.StatusInformation.OperatingState)
+                        {
+                            case StatusInformation.State.StoringStartRequest:
+                                OpenEscrow();
+                                break;
+                        }
+                        RemoteCancel();
+                        break;
+                }
+                Thread.Sleep(SleepTimeout);
+            }
+        }
+
         #endregion
     }
     #region Event classes

@@ -292,9 +292,9 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 DetailLabel.Text = BillDepositGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
                 var currencyId = BillDepositGridView.Rows[e.RowIndex].Cells[1].Value;
-                DetailGridView.DataSource = DatabaseController.GetBillBagContentItems((long)currencyId);
+                DetailGridView.DataSource = DatabaseController.GetBillCurrentContainerContentItems((long)currencyId);
 
-                if (DatabaseController.GetBillBagContentItems((long)currencyId).Count > 0)
+                if (DatabaseController.GetBillCurrentContainerContentItems((long)currencyId).Count > 0)
                 {
                     DetailPanel.Location = new Point(
                         this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
@@ -393,7 +393,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 DetailLabel.Text = BillDepositGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
                 var currencyId = BillDepositGridView.Rows[e.RowIndex].Cells[1].Value;
-                DetailGridView.DataSource = DatabaseController.GetEnvelopeBagContentItems();
+                DetailGridView.DataSource = DatabaseController.GetEnvelopeCurrentContainerContentItems();
                 DetailPanel.Location = new Point(
        this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
        this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);

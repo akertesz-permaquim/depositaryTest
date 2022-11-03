@@ -431,17 +431,19 @@ namespace Permaquim.Depositary.UI.Desktop
             }
 
 
-            // Si el escrow está cerrado y no tiene contenido, se debe volver a abrid
-            //if (
-            //    _operationStatus.GeneralStatus == StatusInformation.State.PQClosingEscrow
-            //    && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false
-            //    && _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
-            //{
-            //    _operationStatus.DepositConfirmed = false;
-            //    _device.OpenEscrow();
-            //    _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
-            //    ButtonsPanel.Visible = true;
-            //}
+            // Si el escrow está cerrado y no tiene contenido, se debe volver a abrir
+            if (
+                _operationStatus.GeneralStatus == StatusInformation.State.PQClosingEscrow
+                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == true
+                )
+            {
+                _operationStatus.DepositConfirmed = false;
+                _device.OpenEscrow();
+                _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                ButtonsPanel.Visible = true;
+            }
+            _pollingTimer.Enabled = true;
+
 
         }
         /// <summary>
@@ -467,10 +469,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 BackButton.Visible = !ButtonsPanel.Visible;
             }
-            else
-            {
-                EnableDisableControls(false);
-            }
+            //else
+            //{
+            //    EnableDisableControls(false);
+            //}
 
         }
         private void ShowInformation()

@@ -35,9 +35,9 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(250, 35);
+            this.MainPanel.Location = new System.Drawing.Point(250, 12);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 531);
+            this.MainPanel.Size = new System.Drawing.Size(300, 572);
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Click += new System.EventHandler(this.MainPanel_Click);
             // 
@@ -45,6 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

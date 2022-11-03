@@ -36,10 +36,9 @@
             // 
             this.InformationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.InformationLabel.BackColor = System.Drawing.Color.Red;
-            this.InformationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.InformationLabel.ForeColor = System.Drawing.Color.White;
+            this.InformationLabel.ForeColor = System.Drawing.Color.Transparent;
             this.InformationLabel.Location = new System.Drawing.Point(32, 93);
             this.InformationLabel.Name = "InformationLabel";
             this.InformationLabel.Size = new System.Drawing.Size(896, 91);
@@ -51,9 +50,9 @@
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(248, 352);
+            this.MainPanel.Location = new System.Drawing.Point(320, 352);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(496, 94);
+            this.MainPanel.Size = new System.Drawing.Size(304, 94);
             this.MainPanel.TabIndex = 149;
             // 
             // OperationBlockingForm

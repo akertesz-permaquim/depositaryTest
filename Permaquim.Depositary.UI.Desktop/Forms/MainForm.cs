@@ -21,6 +21,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private const string GREENLED = "GREENLED";
         private const string REDLED = "REDLED";
         private const string PRESENTACION = "Presentacion.gif";
+
+        private const string ERROR_COMUNICACION_CONTADORA = "Error de comunicación de la contadora";
+        private const string ERROR_COMUNICACION_PLACA = "Error de comunicación de la placa";
+        private const string ERROR_CONTENEDOR = "Error de contenedor";
+        private const string ERROR_IMPRESORA = "Error de impresora";
+
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private int closingcombination = 0;
@@ -157,7 +163,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             
             AuditController.Log(LogTypeEnum.Exception, args.ErrorCode, args.ErrorDescription);
 
-            DeviceController.CounterIssue = true;
+            //DeviceController.CounterIssue = true;
 
             if (_errorForm == null)
             {
@@ -283,14 +289,27 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 OperationblockingReasonEnum operationblockingReason = OperationblockingReasonEnum.None;
 
                 if (DeviceController.CounterIssue)
+                {
                     operationblockingReason = OperationblockingReasonEnum.CounterCommunicationError;
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, ERROR_COMUNICACION_CONTADORA, String.Empty);
+                }
                 if (DeviceController.IoBoardIssue)
+                {
                     operationblockingReason = OperationblockingReasonEnum.IoBoardCommunicationError;
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio,ERROR_COMUNICACION_PLACA, String.Empty);
+                }
                 if (DeviceController.BagIssue)
+                {
                     operationblockingReason = OperationblockingReasonEnum.ContainerError;
-                if (DeviceController.PrinterIssue)
-                    operationblockingReason = OperationblockingReasonEnum.PrinterError;
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, ERROR_CONTENEDOR, String.Empty);
+                }
 
+                if (DeviceController.PrinterIssue)
+                {
+                    operationblockingReason = OperationblockingReasonEnum.PrinterError;
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, ERROR_IMPRESORA, String.Empty);
+
+                }
                 if (_operationBlockingForm == null)
                 {
                     _operationBlockingForm = new OperationBlockingForm()
@@ -308,13 +327,13 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void VerifyForcedValueExtraction()
         {
-            if(DeviceController.BagRemovedForcefully)
+            if(DeviceController.BagRemovedForcefully )
             {
                 
-                AuditController.Log(LogTypeEnum.Exception, RETIRO_DE_VALORES_SIN_USUARIO, RETIRO_DE_VALORES_SIN_USUARIO);
 
                 if (_permissionUnlockForm == null)
                 {
+                    AuditController.Log(LogTypeEnum.Exception, RETIRO_DE_VALORES_SIN_USUARIO, RETIRO_DE_VALORES_SIN_USUARIO);
                     _permissionUnlockForm = new PermissionUnlockForm()
                     {
                         Tag = this.Tag
@@ -486,20 +505,19 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             try
             {
-
                 // consulta el estado de la contadora si está conectada
                 _counterStatesResult = _device.Sense();
 
                 if (_device.CounterConnected)
                 {
                     CounterPictureBox.Image = _greenLedImage;
-                    DeviceController.ComunicationIssue = false;
+                    DeviceController.CounterIssue = false;
                 }
                 else
                 {
                     CounterPictureBox.Image = _redLedImage;
                     _device.CounterBoardReconnect();
-                    DeviceController.ComunicationIssue = true;
+                    DeviceController.CounterIssue = true;
                 }
 
                 _ioBoardStatus = _device.Status();
@@ -508,21 +526,22 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 if (_device.IoBoardConnected)
                 {
                     IoBoardPictureBox.Image = _greenLedImage;
-                    DeviceController.ComunicationIssue = false;
+                    //DeviceController.IoBoardIssue = false;
                 }
                 else
                 {
                     IoBoardPictureBox.Image = _redLedImage;
                     _device.IoBoardReconnect();
-                    DeviceController.ComunicationIssue = true;
+                    DeviceController.IoBoardIssue = true;
                 }
+
             }
             catch (Exception ex)
             {
                 AuditController.Log(ex);
                 SetInformationMessage(InformationTypeEnum.Error, ex.Message);
             }
-}
+        }
 
         private void VerifyTimeout()
         {
@@ -817,8 +836,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                 {
                     ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                        DatabaseController.GetEnvelopeBagContentItems(),
-                        DatabaseController.GetBillBagContentItems(), i);
+                        DatabaseController.GetEnvelopeLastContainerContentItems(),
+                        DatabaseController.GetBillLastContainerContentItems(), i);
                 }
             }
         }
