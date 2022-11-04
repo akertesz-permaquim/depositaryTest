@@ -58,6 +58,8 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                     _errorInformation += "CountingError;";
                 if (_device.StateResultProperty.ErrorStateInformation.Jamming)
                     _errorInformation += "Jamming;";
+                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    _errorInformation += "EscrowBillPresent;";
 
                 InformationLabel.Text = _errorInformation;
 

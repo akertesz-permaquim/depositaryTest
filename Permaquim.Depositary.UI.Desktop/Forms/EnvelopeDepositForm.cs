@@ -23,6 +23,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private int _yellowStatusIndicator;
         private int _redStatusIndicator;
 
+        private bool _requiresEnvelopeIdentifier = ParameterController.RequiresEnvelopeIdentifier;
         private const string DEPOSITO_SOBRE_CANCELADO = "Deposito de sobre Cancelado";
 
         List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
@@ -420,9 +421,10 @@ namespace Permaquim.Depositary.UI.Desktop
             // completa el depósito
             if (
                 _operationStatus.GeneralStatus == StatusInformation.State.PQWaitingTocloseEscrow
-                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == true
-                && _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
+                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == true )
+                //&& _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
              {
+                TimeOutController.Reset();
                 _operationStatus.DepositConfirmed = true;
                 _device.CloseEscrow();
                 _device.PreviousState = StatusInformation.State.PQClosingEscrow;
@@ -432,18 +434,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
 
             // Si el escrow está cerrado y no tiene contenido, se debe volver a abrir
-            if (
-                _operationStatus.GeneralStatus == StatusInformation.State.PQClosingEscrow
-                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == true
-                )
-            {
-                _operationStatus.DepositConfirmed = false;
-                _device.OpenEscrow();
-                _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
-                ButtonsPanel.Visible = true;
-            }
+            //if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == false)
+            //{
+            //    _operationStatus.DepositConfirmed = false;
+            //    _device.OpenEscrow();
+            //    _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+            //    ButtonsPanel.Visible = true;
+            //}
             _pollingTimer.Enabled = true;
-
 
         }
         /// <summary>
@@ -462,18 +460,14 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 CancelDepositButton.Visible = true;
 
-                EnvelopeTextBox.Visible = ParameterController.RequiresEnvelopeIdentifier
+                EnvelopeTextBox.Visible = _requiresEnvelopeIdentifier
                     && ConfirmAndExitDepositButton.Visible;
 
                 ButtonsPanel.Visible = _totalQuantity > 0;
 
                 BackButton.Visible = !ButtonsPanel.Visible;
             }
-            //else
-            //{
-            //    EnableDisableControls(false);
-            //}
-
+ 
         }
         private void ShowInformation()
         {
@@ -523,7 +517,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 _device.StoringStart();
                 _device.PreviousState = StatusInformation.State.PQStoring;
-                ExitEnvelopeDepositForm();
+                if(_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    ExitEnvelopeDepositForm();
 
             }
         }
@@ -534,7 +529,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             PrintTicket(TicketTypeEnum.Second);
 
-            //SaveTransaction();
+            SaveTransaction();
             _device.RemoteCancel();
 
             _operationStatus.DepositEnded = true;
@@ -690,11 +685,9 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 if (!DeviceController.HasAnyIssue)
                 {
-                    SaveTransaction();
-
-                    TimeOutController.Reset();
-                    _device.OpenEscrow();
-                    _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                         TimeOutController.Reset();
+                        _device.OpenEscrow();
+                        _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
                 }
             }
 
