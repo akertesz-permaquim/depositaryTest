@@ -117,6 +117,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
             MainGridView.Columns.Add(new()
             {
+                DataPropertyName = "ContenedorId",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
+                Name = "Id",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            MainGridView.Columns.Add(new()
+            {
                 DataPropertyName = "Identificador",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CODIGO),
                 Name = "Identificador",
@@ -207,8 +218,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBagHistoryItems()
         {
 
-            DateTime FechaAperturaDesde = FromFechaAperturaDateTimePicker.Value;
-            DateTime FechaAperturaHasta = ToFechaAperturaDateTimePicker.Value;
+            DateTime FechaAperturaDesde = FromFechaAperturaDateTimePicker.Value.Date;
+            DateTime FechaAperturaHasta = ToFechaAperturaDateTimePicker.Value.Date;
             DateTime? FechaCierreDesde = FromFechaCierreDateTimePicker.Checked ?
                                         new DateTime(FromFechaCierreDateTimePicker.Value.Year, FromFechaCierreDateTimePicker.Value.Month, FromFechaCierreDateTimePicker.Value.Day, 0, 0, 0) : null;
             DateTime? FechaCierreHasta = ToFechaCierreDateTimePicker.Checked ?

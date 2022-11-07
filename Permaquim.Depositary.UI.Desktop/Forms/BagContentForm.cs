@@ -392,8 +392,8 @@ namespace Permaquim.Depositary.UI.Desktop
             if (e.RowIndex > -1)
             {
                 DetailLabel.Text = BillDepositGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
-                var currencyId = BillDepositGridView.Rows[e.RowIndex].Cells[1].Value;
-                DetailGridView.DataSource = DatabaseController.GetEnvelopeCurrentContainerContentItems();
+                Int64 currencyId = (Int64)BillDepositGridView.Rows[e.RowIndex].Cells[1].Value;
+                DetailGridView.DataSource = DatabaseController.GetEnvelopeCurrentContainerContentItems(currencyId);
                 DetailPanel.Location = new Point(
        this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
        this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);

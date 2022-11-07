@@ -219,6 +219,7 @@
             // 
             // ToDateTimePicker
             // 
+            this.ToDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.ToDateTimePicker.Location = new System.Drawing.Point(224, 45);
             this.ToDateTimePicker.Name = "ToDateTimePicker";
             this.ToDateTimePicker.Size = new System.Drawing.Size(200, 23);
@@ -226,6 +227,7 @@
             // 
             // FromDateTimePicker
             // 
+            this.FromDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.FromDateTimePicker.Location = new System.Drawing.Point(16, 45);
             this.FromDateTimePicker.Name = "FromDateTimePicker";
             this.FromDateTimePicker.Size = new System.Drawing.Size(200, 23);

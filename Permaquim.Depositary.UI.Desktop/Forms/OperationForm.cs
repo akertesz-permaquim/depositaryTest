@@ -178,8 +178,24 @@ namespace Permaquim.Depositary.UI.Desktop
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
                             DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                            FormsController.OpenChildForm(this, new BillDepositForm(),
-                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+
+                            // Si la empresa opera con orígen de depósito
+                            if (ParameterController.UsesValueOrigin == true)
+                            {
+                                ValidateDepositOrigin();
+                            }
+                            else // No opera con depósito, valida las cuentas bancarias
+                            {
+                                if (ParameterController.UsesBankAccount == true)
+                                {
+                                    ValidateUserBankAccount();
+                                }
+                                else
+                                {
+                                    FormsController.OpenChildForm(this, new BillDepositForm(),
+                                    (CounterDevice)this.Tag);
+                                }
+                            }
                         }
                         else
                         {
@@ -194,8 +210,24 @@ namespace Permaquim.Depositary.UI.Desktop
                             if (DatabaseController.GetCurrencies().Count == 1)
                             {
                                 DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                                FormsController.OpenChildForm(this, new BillDepositForm(),
-                                            (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+
+                                // Si la empresa opera con orígen de depósito
+                                if (ParameterController.UsesValueOrigin == true)
+                                {
+                                    ValidateDepositOrigin();
+                                }
+                                else // No opera con depósito, valida las cuentas bancarias
+                                {
+                                    if (ParameterController.UsesBankAccount == true)
+                                    {
+                                        ValidateUserBankAccount();
+                                    }
+                                    else
+                                    {
+                                        FormsController.OpenChildForm(this, new BillDepositForm(),
+                                        (CounterDevice)this.Tag);
+                                    }
+                                }
                             }
                             else
                             {
@@ -265,8 +297,24 @@ namespace Permaquim.Depositary.UI.Desktop
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
                             DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
-                                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+
+                            // Si la empresa opera con orígen de depósito
+                            if (ParameterController.UsesValueOrigin == true)
+                            {
+                                ValidateDepositOrigin();
+                            }
+                            else // No opera con depósito, valida las cuentas bancarias
+                            {
+                                if (ParameterController.UsesBankAccount == true)
+                                {
+                                    ValidateUserBankAccount();
+                                }
+                                else
+                                {
+                                    FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                                                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                                }
+                            }
                         }
                         else
                         {
@@ -327,6 +375,84 @@ namespace Permaquim.Depositary.UI.Desktop
             this.MainPanel.Controls.Add(_backButton);
             _backButton.Click += new System.EventHandler(BackButton_Click);
         }
+
+        #region aux
+
+        private void ValidateDepositOrigin()
+        {
+            // Obtiene los distintos orígenes
+            var _depositOrigins = DatabaseController.GetDepositOrigins();
+            // Si tiene, debe evaluar si existe solo uno y seleccionarlo
+            if (_depositOrigins.Count != 0)
+            {
+                if (_depositOrigins.Count == 1)
+                {
+                    DatabaseController.CurrentDepositOrigin = _depositOrigins.FirstOrDefault();
+                    string userBankAccountText = " - " +
+                          MultilanguangeController.GetText(MultiLanguageEnum.ORIGEN_VALOR) +
+                      ":" + DatabaseController.CurrentDepositOrigin.Nombre;
+                    if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
+                        FormsController.OpenChildForm(this, new BillDepositForm(),
+                        (CounterDevice)this.Tag, userBankAccountText);
+                    if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+                        FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                        (CounterDevice)this.Tag, userBankAccountText);
+                }
+                else
+                {
+                    FormsController.OpenChildForm(this, new ValueOriginSelectorForm(),
+                    (CounterDevice)this.Tag);
+                }
+            }
+            else // Si no tiene orígenes configurados, debe salir por error
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                     MultilanguangeController.GetText(MultiLanguageEnum.ORIGEN_VALOR_OBLIGATORIO));
+            }
+        }
+
+        private void ValidateUserBankAccount()
+        {
+            if (ParameterController.UsesBankAccount == true)
+            {
+
+                var _userBankAccounts = DatabaseController.GetUserBankAccounts();
+
+                if (_userBankAccounts.Count != 0)
+                {
+                    if (_userBankAccounts.Count == 1)
+                    {
+                        DatabaseController.CurrentUserBankAccount = _userBankAccounts.FirstOrDefault();
+                        string userBankAccountText = " - " +
+                              MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
+                          ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero;
+                        if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit)
+                            FormsController.OpenChildForm(this, new BillDepositForm(),
+                            (CounterDevice)this.Tag, userBankAccountText);
+                        if (DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit)
+                            FormsController.OpenChildForm(this, new EnvelopeDepositForm(),
+                            (CounterDevice)this.Tag, userBankAccountText);
+                    }
+                    else
+                    {
+                        FormsController.OpenChildForm(this, new BankAccountSelectorForm(),
+                        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                    }
+                }
+                else
+                {
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                         MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_BANCARIA_OBLIGATORIA));
+                }
+            }
+            else
+            {
+                FormsController.OpenChildForm(this, new BillDepositForm(),
+                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
+        }
+
+        #endregion
 
         #region Reports
 

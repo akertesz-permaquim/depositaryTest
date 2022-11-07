@@ -25,6 +25,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         static dynamic _details;
         private static string _copyInstance = string.Empty;
 
+        /// <summary>
+        /// Representa el turno que esta en impresion en el reporte de turnos
+        /// </summary>
+        public static Depositario.Entities.Relations.Operacion.Turno TurnToPrint;
+
+        public static Depositario.Entities.Relations.Operacion.CierreDiario DailyClosingToPrint;
+
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
 
         private static string _fechaHora;
@@ -1009,14 +1016,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Referencia
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CIERREDIARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.CurrentDailyClosing.CodigoCierre, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(DailyClosingToPrint.CodigoCierre, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
                 // Usuario
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.CurrentDailyClosing.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(DailyClosingToPrint.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
@@ -1264,15 +1271,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Referencia
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastTurn.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(ReportController.TurnToPrint.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
                 // Transacción
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastTurn.CodigoTurno + "-" +
-                DatabaseController.LastTurn.Id.ToString()
+                StringHelper.FormatString(ReportController.TurnToPrint.CodigoTurno + "-" +
+                ReportController.TurnToPrint.Id.ToString()
                 , 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
@@ -1280,29 +1287,29 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Usuario
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastTurn.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(ReportController.TurnToPrint.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
                 // Sucursal
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastTurn.DepositarioId.SectorId.SucursalId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(ReportController.TurnToPrint.DepositarioId.SectorId.SucursalId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
                  , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
                 // Terminal
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastTurn.DepositarioId.CodigoExterno, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(ReportController.TurnToPrint.DepositarioId.CodigoExterno, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
 
 
                 // Fecha Cierre
-                var fechaApertura = DatabaseController.LastTurn.
-                        FechaApertura == null ? "" : ((DateTime)DatabaseController.LastTurn.
+                var fechaApertura = ReportController.TurnToPrint.
+                        FechaApertura == null ? "" : ((DateTime)ReportController.TurnToPrint.
                         FechaApertura).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA));
 
                 e.Graphics.DrawString(
@@ -1313,8 +1320,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 yOffset += _interlineSpace;
 
                 // Fecha turno
-                var fechaTurno = DatabaseController.LastTurn.
-                        Fecha == null ? "" : ((DateTime)DatabaseController.LastTurn.
+                var fechaTurno = ReportController.TurnToPrint.
+                        Fecha == null ? "" : ((DateTime)ReportController.TurnToPrint.
                         Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA));
 
                 e.Graphics.DrawString(

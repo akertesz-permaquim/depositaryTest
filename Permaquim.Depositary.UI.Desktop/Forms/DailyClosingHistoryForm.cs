@@ -16,10 +16,10 @@ namespace Permaquim.Depositary.UI.Desktop
         private const string VALUE = "Value";
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
-        private bool _alreadyPrinted;
+        private long _dailyClosingId;
 
-        private long _operationId;
-        private long _operationTypeId;
+        private List<DailyClosingHeader> _dailyClosingHeaders = new();
+
 
         public DailyClosingHistoryForm()
         {
@@ -30,7 +30,7 @@ namespace Permaquim.Depositary.UI.Desktop
             LoadFilterControls();
             InitializeDailyClosingHeaderGridView();
 
-            FromDateTimePicker.Value = DateTime.Now.AddDays(-30);
+            FromDateTimePicker.Value = DateTime.Today.Date;
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -39,6 +39,7 @@ namespace Permaquim.Depositary.UI.Desktop
             };
             _pollingTimer.Tick += PollingTimer_Tick;
         }
+
         protected override CreateParams CreateParams
         {
             get
@@ -48,6 +49,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 return CP;
             }
         }
+
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
             if (TimeOutController.IsTimeOut())
@@ -57,6 +59,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 FormsController.LogOff();
             }
         }
+
         private void CenterPanel()
         {
 
@@ -81,7 +84,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
-   
+
             ExecuteButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
@@ -105,12 +108,28 @@ namespace Permaquim.Depositary.UI.Desktop
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
             AcceptButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
             PrintButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.IMPRIMIR);
-
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new ReportsForm(),
+            ResetReport();
+            FormsController.OpenChildForm(this, new ReportsForm(),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+        }
+
+        private void ResetReport()
+        {
+            FromDateTimePicker.Value = DateTime.Now.Date;
+            ToDateTimePicker.Value = DateTime.Now.Date;
+            FromDateTimePicker.Format = DateTimePickerFormat.Custom;
+            FromDateTimePicker.CustomFormat = "dd/MM/yyyy";
+
+            ToDateTimePicker.Format = DateTimePickerFormat.Custom;
+            ToDateTimePicker.CustomFormat = "dd/MM/yyyy";
+
+            UserComboBox.SelectedIndex = 0;
+            TurnComboBox.SelectedIndex = 0;
+
+            LoadDailyClosingHeader();
         }
 
         public void LoadFilterControls()
@@ -131,7 +150,6 @@ namespace Permaquim.Depositary.UI.Desktop
             var turnList = DatabaseController.GetTurnList();
 
             List<TurnItemElement> turnItemList = new();
-
 
             turnItemList.Add(new TurnItemElement() { Value = -1, Text = "Todos" });
 
@@ -169,6 +187,51 @@ namespace Permaquim.Depositary.UI.Desktop
 
             DailyClosingHeaderGridView.Columns.Add(new()
             {
+                DataPropertyName = "Fecha",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
+                Name = "Fecha",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DailyClosingHeaderGridView.Columns.Add(new()
+            {
+                DataPropertyName = "CodigoCierre",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CIERREDIARIO),
+                Name = "CodigoCierre",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+
+            DailyClosingHeaderGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Usuario",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO),
+                Name = "Usuario",
+                Visible = true,
+                Width = 200,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            //DailyClosingHeaderGridView.Columns.Add(new()
+            //{
+            //    DataPropertyName = "Moneda",
+            //    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
+            //    Name = "Moneda",
+            //    Visible = true,
+            //    Width = 150,
+            //    CellTemplate = new DataGridViewTextBoxCell()
+
+            //});
+
+            DailyClosingHeaderGridView.Columns.Add(new()
+            {
                 DataPropertyName = "TotalValidado",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
                 Name = "TotalValidado",
@@ -189,42 +252,25 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
+        }
 
-            DailyClosingHeaderGridView.Columns.Add(new()
+        private void InitializeDailyClosingDetailGridView(OperationTypeEnum operationType)
+        {
+            DailyClosingHeaderGridView.AutoGenerateColumns = false;
+            DailyClosingDetailGridView.Columns.Clear();
+
+            DailyClosingDetailGridView.Columns.Add(new()
             {
-                DataPropertyName = "Fecha",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
-                Name = "Fecha",
-                Visible = true,
-                Width = 150,
+                DataPropertyName = "Id",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
+                Name = "Id",
+                Visible = false,
+                Width = 100,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
 
-
-            DailyClosingHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "Usuario",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO),
-                Name = "Usuario",
-                Visible = true,
-                Width = 200,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-            DailyClosingHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "Contenedor",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR),
-                Name = "Contenedor",
-                Visible = true,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-            DailyClosingHeaderGridView.Columns.Add(new()
+            DailyClosingDetailGridView.Columns.Add(new()
             {
                 DataPropertyName = "Tipo",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPO),
@@ -235,7 +281,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            DailyClosingHeaderGridView.Columns.Add(new()
+            DailyClosingDetailGridView.Columns.Add(new()
             {
                 DataPropertyName = "Moneda",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
@@ -246,138 +292,28 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            DailyClosingHeaderGridView.Columns.Add(new()
+            DailyClosingDetailGridView.Columns.Add(new()
             {
-                DataPropertyName = "TipoId",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPOID),
-                Name = "TipoId",
-                Visible = false,
-                Width = 1,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-
-            DailyClosingHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "UsuarioCuenta",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
-                Name = "UsuarioCuenta",
-                Visible = true,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-            DailyClosingHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "Turno",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TURNO),
-                Name = "Turno",
-                Visible = true,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-            DailyClosingHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "CierreDiario",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CIERREDIARIO),
-                Name = "CierreDiario",
-                Visible = true,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-            DailyClosingHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "Finalizada",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FINALIZADA),
-                Name = "Finalizada",
+                DataPropertyName = "TotalValidado",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
+                Name = "TotalValidado",
                 Visible = true,
                 Width = 100,
-                CellTemplate = new DataGridViewCheckBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell()
 
             });
-        }
 
-        private void InitializeDailyClosingDetailGridView(OperationTypeEnum operationType)
-        {
-            DailyClosingHeaderGridView.AutoGenerateColumns = false;
-            DailyClosingDetailGridView.Columns.Clear();
-
-            if (operationType == OperationTypeEnum.BillDeposit)
+            DailyClosingDetailGridView.Columns.Add(new()
             {
-                DailyClosingDetailGridView.Columns.Add(new()
-                {
-                    DataPropertyName = ID,
-                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
-                    Name = ID,
-                    Visible = false,
-                    Width = 100,
-                    CellTemplate = new DataGridViewTextBoxCell()
+                DataPropertyName = "TotalAValidar",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
+                Name = "TotalAValidar",
+                Visible = true,
+                Width = 100,
+                CellTemplate = new DataGridViewTextBoxCell()
 
-                });
+            });
 
-                DailyClosingDetailGridView.Columns.Add(new()
-                {
-                    DataPropertyName = "Denominacion",
-                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION),
-                    Name = "Denominacion",
-                    Visible = true,
-                    Width = 100,
-                    CellTemplate = new DataGridViewTextBoxCell()
-
-                });
-
-                DailyClosingDetailGridView.Columns.Add(new()
-                {
-                    DataPropertyName = "CantidadUnidades",
-                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
-                    Name = "CantidadUnidades",
-                    Visible = true,
-                    Width = 100,
-                    CellTemplate = new DataGridViewTextBoxCell()
-
-                });
-            }
-            if(operationType == OperationTypeEnum.EnvelopeDeposit)
-            {
-                DailyClosingDetailGridView.Columns.Add(new()
-                {
-                    DataPropertyName = "Sobre",
-                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.SOBRE),
-                    Name = "Sobre",
-                    Visible = true,
-                    Width = 100,
-                    CellTemplate = new DataGridViewTextBoxCell()
-
-                });
-
-                DailyClosingDetailGridView.Columns.Add(new()
-                {
-                    DataPropertyName = "TipoValor",
-                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPOVALOR),
-                    Name = "TipoValor",
-                    Visible = true,
-                    Width = 100,
-                    CellTemplate = new DataGridViewTextBoxCell()
-
-                });
-
-                DailyClosingDetailGridView.Columns.Add(new()
-                {
-                    DataPropertyName = "CantidadDeclarada",
-                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADDECLARADA),
-                    Name = "CantidadDeclarada",
-                    Visible = true,
-                    Width = 100,
-                    CellTemplate = new DataGridViewTextBoxCell()
-
-                });
-            }
 
             DailyClosingDetailGridView.Columns.Add(new()
             {
@@ -389,6 +325,84 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
+
+
+            DailyClosingDetailGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Usuario",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO),
+                Name = "Usuario",
+                Visible = true,
+                Width = 200,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DailyClosingDetailGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Contenedor",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR),
+                Name = "Contenedor",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DailyClosingDetailGridView.Columns.Add(new()
+            {
+                DataPropertyName = "TipoId",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPOID),
+                Name = "TipoId",
+                Visible = false,
+                Width = 1,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DailyClosingDetailGridView.Columns.Add(new()
+            {
+                DataPropertyName = "UsuarioCuenta",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
+                Name = "UsuarioCuenta",
+                Visible = ParameterController.UsesBankAccount,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DailyClosingDetailGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Turno",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TURNO),
+                Name = "Turno",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DailyClosingDetailGridView.Columns.Add(new()
+            {
+                DataPropertyName = "CierreDiario",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CIERREDIARIO),
+                Name = "CierreDiario",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            DailyClosingDetailGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Finalizada",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FINALIZADA),
+                Name = "Finalizada",
+                Visible = true,
+                Width = 100,
+                CellTemplate = new DataGridViewCheckBoxCell()
+
+            });
         }
 
         private void LoadDailyClosingHeader()
@@ -396,33 +410,42 @@ namespace Permaquim.Depositary.UI.Desktop
 
             DailyClosingHeaderGridView.DataSource = null;
             DailyClosingDetailGridView.DataSource = null;
+
             InitializeDailyClosingHeaderGridView();
+
+            DateTime FechaHasta = ToDateTimePicker.Value.Date;
+
+            FechaHasta = FechaHasta.AddHours(23);
+            FechaHasta = FechaHasta.AddMinutes(59);
+            FechaHasta = FechaHasta.AddSeconds(59);
 
             var DailyClosing = DatabaseController.GetDailyClosingHeaders(
                 FromDateTimePicker.Value,
-                ToDateTimePicker.Value,
+                FechaHasta,
                 (long)UserComboBox.SelectedValue
                 );
 
-            _dailyclosingItems.Clear();
+            _dailyClosingHeaders.Clear();
+
+            Int64 DefaultCurrency = DatabaseController.DefaultCurrency().Id;
 
             foreach (var item in DailyClosing)
             {
-                _dailyclosingItems.Add(new DailyClosingItem()
+                _dailyClosingHeaders.Add(new DailyClosingHeader()
                 {
-                    CantidadOperaciones = (long)DatabaseController.GetDailyClosingDetail(item.Id).Count,
-                    Total = (double)DatabaseController.GetDailyClosingDetail(item.Id).Sum(x => x.CantidadUnidades * x.DenominacionId.Unidades),
-                    Moneda = DatabaseController.GetDailyClosingDetail(item.Id).FirstOrDefault().DenominacionId.MonedaId.Nombre,
-                    TotalAValidar = DatabaseController.GetDailyClosingDetail(item.Id).FirstOrDefault().TransaccionId.TotalAValidar,
-                    TotalValidado = DatabaseController.GetDailyClosingDetail(item.Id).FirstOrDefault().TransaccionId.TotalValidado
-
-                }); 
+                    Id = item.Id,
+                    CodigoCierre = item.CodigoCierre + "-" + item.Id,
+                    Fecha = item.Fecha,
+                    Usuario = item.UsuarioCreacion.NombreApellido,
+                    TotalValidado = item.ListOf_Transaccion_CierreDiarioId.Where(x => x._MonedaId == DefaultCurrency).Sum(x => x.TotalValidado),
+                    TotalAValidar = item.ListOf_Transaccion_CierreDiarioId.Where(x => x._MonedaId == DefaultCurrency).Sum(x => x.TotalAValidar)
+                });
             }
 
-            DailyClosingHeaderGridView.DataSource = _dailyclosingItems;
-
+            DailyClosingHeaderGridView.DataSource = _dailyClosingHeaders;
 
         }
+
         private void DailyClosingHeaderGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
@@ -431,27 +454,52 @@ namespace Permaquim.Depositary.UI.Desktop
             this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
             DetailPanel.Anchor = AnchorStyles.None;
 
-
             DetailPanel.Visible = true;
 
-            DailyClosingDetailGridView.DataSource  = null;
+            DailyClosingDetailGridView.DataSource = null;
+
             if (e.RowIndex > -1)
             {
+                //InitializeDailyClosingDetailGridView();
 
-                _operationId = (long)DailyClosingHeaderGridView.Rows[e.RowIndex].Cells[ID].Value;
-                _operationTypeId = (long)DailyClosingHeaderGridView.Rows[e.RowIndex].Cells["TipoId"].Value;
+                _dailyClosingId = (long)DailyClosingHeaderGridView.Rows[e.RowIndex].Cells["Id"].Value;
 
-                InitializeDailyClosingDetailGridView((OperationTypeEnum)_operationTypeId);
+                var dailyClosingDetails = DatabaseController.GetDailyClosingDetails(_dailyClosingId);
 
-       
-    
-             }
+                List<TransactionHeaderItem> operationDailyClosingDetails = new();
+
+                foreach (var item in dailyClosingDetails)
+                {
+                    var esquemaDetalleTurno = item.TurnoId.TurnoDepositarioId.EsquemaDetalleTurnoId;
+                    operationDailyClosingDetails.Add(new TransactionHeaderItem()
+                    {
+                        Cierrediario = item.CierreDiarioId != null ?
+                            item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString("dd/MM/yyyy") : "" : String.Empty,
+                        Contenedor = item.ContenedorId.Nombre +
+                            (item.ContenedorId.Identificador.Length == 0 ? "" : " (" + item.ContenedorId.Identificador + " )"),
+                        Fecha = item.Fecha,
+                        Finalizada = item.Finalizada,
+                        Id = item.Id,
+                        Moneda = item.MonedaId.Nombre,
+                        Tipo = item.TipoId.Nombre,
+                        TipoId = item.TipoId.Id,
+                        TotalAValidar = item.TotalAValidar,
+                        TotalValidado = item.TotalValidado,
+                        Turno = esquemaDetalleTurno.EsquemaTurnoId.Nombre + " - " + esquemaDetalleTurno.Nombre,
+                        Usuario = item.UsuarioId.NombreApellido,
+                        UsuarioCuenta = item.CuentaId == null ? null : item.CuentaId.Numero
+                    }); ;
+                }
+
+                DailyClosingDetailGridView.DataSource = operationDailyClosingDetails;
+
+            }
         }
 
 
         private List<DailyClosingItem> _dailyclosingItems = new();
 
- 
+
         private void DailyClosingHeaderGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             System.Diagnostics.Debug.Print("");
@@ -506,19 +554,19 @@ namespace Permaquim.Depositary.UI.Desktop
         private void PrintTicket()
         {
 
-            if (ParameterController.PrintsDailyClosing)
+            Depositario.Business.Relations.Operacion.CierreDiario cierreDiario = new();
+            cierreDiario.Where.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Id, Depositario.sqlEnum.OperandEnum.Equal, _dailyClosingId);
+            cierreDiario.Items();
+
+            if (cierreDiario.Result.Count > 0)
             {
-                if (!_alreadyPrinted)
-                {
-                    for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
-                    {
-                        ReportController.PrintReport(ReportTypeEnum.DailyClosing,
-                            _dailyclosingItems,null, i);
-                        _alreadyPrinted = true;
-                    }
-                }
+                ReportController.DailyClosingToPrint = cierreDiario.Result.FirstOrDefault();
+
+                ReportController.PrintReport(ReportTypeEnum.DailyClosing,
+                DatabaseController.GetDailyClosingEnvelopeBagContentItems(_dailyClosingId),
+                DatabaseController.GetDailyClosingTransactions(_dailyClosingId), 1);
             }
         }
 
-      }
+    }
 }

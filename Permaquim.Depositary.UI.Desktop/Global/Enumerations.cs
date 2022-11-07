@@ -320,7 +320,9 @@
             IMPRESORA_SIN_ALIMENTACION,
             IMPRESORA_ATASCADA,
             LICENCIA_NO_VALIDA,
-            DIAS_RESTANTES_LICENCIA
+            DIAS_RESTANTES_LICENCIA,
+            CANTIDADTRANSACCIONES,
+            SECUENCIA
         }
 
         public enum FunctionEnum
