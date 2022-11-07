@@ -31,7 +31,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         #region PostEndpoints
 
-        [HttpGet]
+        [HttpPost]
         [Route("ObtenerOperacion")]
         [Authorize]
         public async Task<IActionResult> ObtenerOperacion()
