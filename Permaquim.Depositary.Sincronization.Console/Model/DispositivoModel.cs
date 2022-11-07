@@ -106,22 +106,38 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoConfiguracionDepositario", item.Id);
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
 
-                            //Guardo el id que venia del server.
-                            Int64 origenId = item.Id;
-
-                            //Si se sincronizo antes entonces hago un update con el id propio.
-                            if (idDestino.HasValue)
+                            if (usuarioCreacionIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
                             {
-                                item.Id = idDestino.Value;
-                                tipoConfiguracionDepositario.Update(item);
-                            }
-                            else
-                            {
-                                tipoConfiguracionDepositario.Add(item);
-                            }
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                //Guardo el id que venia del server.
+                                Int64 origenId = item.Id;
+
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                item.ValidacionDatoId = validacionDatoIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
+
+                                //Si se sincronizo antes entonces hago un update con el id propio.
+                                if (idDestino.HasValue)
+                                {
+                                    item.Id = idDestino.Value;
+                                    tipoConfiguracionDepositario.Update(item);
+                                }
+                                else
+                                {
+                                    tipoConfiguracionDepositario.Add(item);
+                                }
+
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                            }
                         }
                         SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                     }
@@ -141,22 +157,34 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Marca", item.Id);
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
-                            //Guardo el id que venia del server.
-                            Int64 origenId = item.Id;
-
-                            //Si se sincronizo antes entonces hago un update con el id propio.
-                            if (idDestino.HasValue)
+                            if (usuarioCreacionIdOrigen.HasValue)
                             {
-                                item.Id = idDestino.Value;
-                                marca.Update(item);
-                            }
-                            else
-                            {
-                                marca.Add(item);
-                            }
+                                //Guardo el id que venia del server.
+                                Int64 origenId = item.Id;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
+
+                                //Si se sincronizo antes entonces hago un update con el id propio.
+                                if (idDestino.HasValue)
+                                {
+                                    item.Id = idDestino.Value;
+                                    marca.Update(item);
+                                }
+                                else
+                                {
+                                    marca.Add(item);
+                                }
+
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                            }
                         }
                         SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                     }
@@ -176,22 +204,34 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.PlantillaMoneda", item.Id);
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
-                            //Guardo el id que venia del server.
-                            Int64 origenId = item.Id;
-
-                            //Si se sincronizo antes entonces hago un update con el id propio.
-                            if (idDestino.HasValue)
+                            if (usuarioCreacionIdOrigen.HasValue)
                             {
-                                item.Id = idDestino.Value;
-                                plantillaMoneda.Update(item);
-                            }
-                            else
-                            {
-                                plantillaMoneda.Add(item);
-                            }
+                                //Guardo el id que venia del server.
+                                Int64 origenId = item.Id;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
+
+                                //Si se sincronizo antes entonces hago un update con el id propio.
+                                if (idDestino.HasValue)
+                                {
+                                    item.Id = idDestino.Value;
+                                    plantillaMoneda.Update(item);
+                                }
+                                else
+                                {
+                                    plantillaMoneda.Add(item);
+                                }
+
+                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                            }
                         }
                         SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                     }
@@ -211,12 +251,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.PlantillaMonedaDetalle", item.Id);
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
                             Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
 
                             Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
 
-                            if(plantillaMonedaIdOrigen.HasValue && monedaIdOrigen.HasValue)
+                            if (plantillaMonedaIdOrigen.HasValue && monedaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -224,6 +265,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
                                 item.MonedaId = monedaIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -257,12 +305,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.Id);
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
                             Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
 
                             Int64? marcaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Marca", item.MarcaId);
 
-                            if (plantillaMonedaIdOrigen.HasValue && marcaIdOrigen.HasValue)
+                            if (plantillaMonedaIdOrigen.HasValue && marcaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -270,6 +319,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
                                 item.MarcaId = marcaIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -303,16 +359,24 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoContadora", item.Id);
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
                             Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.ModeloId);
 
-                            if (modeloIdOrigen.HasValue)
+                            if (modeloIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
                                 item.ModeloId = modeloIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -346,16 +410,24 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoPlaca", item.Id);
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
                             Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.ModeloId);
 
-                            if (modeloIdOrigen.HasValue)
+                            if (modeloIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
                                 item.ModeloId = modeloIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -389,11 +461,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Sector", item.SectorId);
                             Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.ModeloId);
 
-                            if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue)
+                            if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -401,6 +473,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.ModeloId = modeloIdOrigen.Value;
                                 item.SectorId = sectorIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -434,11 +513,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.DepositarioContadora", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
                             Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoContadora", item.TipoContadoraId);
 
-                            if (depositarioIdOrigen.HasValue && tipoContadoraIdOrigen.HasValue)
+                            if (depositarioIdOrigen.HasValue && tipoContadoraIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -446,6 +525,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.DepositarioId = depositarioIdOrigen.Value;
                                 item.TipoContadoraId = tipoContadoraIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -479,16 +565,23 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.DepositarioEstado", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
 
-                            if (depositarioIdOrigen.HasValue)
+                            if (depositarioIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
                                 item.DepositarioId = depositarioIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -522,11 +615,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.DepositarioMoneda", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
                             Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
 
-                            if (depositarioIdOrigen.HasValue && monedaIdOrigen.HasValue)
+                            if (depositarioIdOrigen.HasValue && monedaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -534,6 +627,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.DepositarioId = depositarioIdOrigen.Value;
                                 item.MonedaId = monedaIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -569,11 +669,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.DepositarioPlaca", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
                             Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoPlaca", item.TipoPlacaId);
 
-                            if (depositarioIdOrigen.HasValue && tipoPlacaIdOrigen.HasValue)
+                            if (depositarioIdOrigen.HasValue && tipoPlacaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -581,6 +681,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.DepositarioId = depositarioIdOrigen.Value;
                                 item.TipoPlacaId = tipoPlacaIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -616,16 +723,23 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.ComandoContadora", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoContadora", item.TipoContadoraId);
 
-                            if (tipoContadoraIdOrigen.HasValue)
+                            if (tipoContadoraIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
                                 item.TipoContadoraId = tipoContadoraIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -661,16 +775,23 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.ComandoPlaca", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoPlaca", item.TipoPlacaId);
 
-                            if (tipoPlacaIdOrigen.HasValue)
+                            if (tipoPlacaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
                                 item.TipoPlacaId = tipoPlacaIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)
@@ -706,11 +827,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.ConfiguracionDepositario", item.Id);
-
+                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Depositario", item.DepositarioId);
                             Int64? tipoConfiguracionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.TipoConfiguracionDepositario", item.TipoId);
 
-                            if (depositarioIdOrigen.HasValue && tipoConfiguracionIdOrigen.HasValue)
+                            if (depositarioIdOrigen.HasValue && tipoConfiguracionIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
                                 Int64 origenId = item.Id;
@@ -718,6 +839,13 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 //Reemplazo los id de FK por id propio.
                                 item.TipoId = tipoConfiguracionIdOrigen.Value;
                                 item.DepositarioId = depositarioIdOrigen.Value;
+                                item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
+
+                                if (item.UsuarioModificacion.HasValue)
+                                {
+                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
+                                }
 
                                 //Si se sincronizo antes entonces hago un update con el id propio.
                                 if (idDestino.HasValue)

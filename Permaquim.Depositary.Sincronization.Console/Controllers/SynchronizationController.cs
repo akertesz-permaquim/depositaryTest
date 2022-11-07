@@ -130,6 +130,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
                 oSincronizacionEntidadCabecera.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, Depositario.sqlEnum.OperandEnum.Equal, oSincronizacionEntidad.Result.FirstOrDefault().Id);
                 oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, Depositario.sqlEnum.OperandEnum.IsNotNull, null);
                 oSincronizacionEntidadCabecera.OrderBy.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id, Depositario.sqlEnum.DirEnum.DESC);
+                oSincronizacionEntidadCabecera.TopQuantity = 1;
                 oSincronizacionEntidadCabecera.Items();
 
                 if (oSincronizacionEntidadCabecera.Result.Count > 0)

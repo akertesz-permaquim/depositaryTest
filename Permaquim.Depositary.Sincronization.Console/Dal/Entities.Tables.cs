@@ -909,6 +909,249 @@ using System.Text;
 				
 			} //Class HuellaDactilar 
 } //namespace Permaquim.Depositario.Entities.Tables.Biometria
+		namespace Permaquim.Depositario.Entities.Tables.Customizador {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Customizador")]  // Database Schema Name
+			[DataItemAttributeObjectName("Entidad","Entidad")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class Entidad : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string Tipo = "Tipo";
+					public const string Nombre = "Nombre";
+					public const string Esquema = "Esquema";
+					public const string HabilitarAgrupamiento = "HabilitarAgrupamiento";
+					public const string HabilitarMovilidad = "HabilitarMovilidad";
+					public const string HabilitarFiltrado = "HabilitarFiltrado";
+					public const string HabilitarColumnasOpcionales = "HabilitarColumnasOpcionales";
+					public const string HabilitarOrdenamiento = "HabilitarOrdenamiento";
+					public const string HabilitarRedimensionamiento = "HabilitarRedimensionamiento";
+					public const string HabilitarPaginado = "HabilitarPaginado";
+					public const string HabilitarAuditoria = "HabilitarAuditoria";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					Tipo,
+					Nombre,
+					Esquema,
+					HabilitarAgrupamiento,
+					HabilitarMovilidad,
+					HabilitarFiltrado,
+					HabilitarColumnasOpcionales,
+					HabilitarOrdenamiento,
+					HabilitarRedimensionamiento,
+					HabilitarPaginado,
+					HabilitarAuditoria,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public Entidad()
+                {
+                }
+                public  Entidad(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.Tipo = Tipo;
+                    this.Nombre = Nombre;
+                    this.Esquema = Esquema;
+                    this.HabilitarAgrupamiento = HabilitarAgrupamiento;
+                    this.HabilitarMovilidad = HabilitarMovilidad;
+                    this.HabilitarFiltrado = HabilitarFiltrado;
+                    this.HabilitarColumnasOpcionales = HabilitarColumnasOpcionales;
+                    this.HabilitarOrdenamiento = HabilitarOrdenamiento;
+                    this.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
+                    this.HabilitarPaginado = HabilitarPaginado;
+                    this.HabilitarAuditoria = HabilitarAuditoria;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("Tipo","Tipo")]
+             public String Tipo { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("Esquema","Esquema")]
+             public String Esquema { get; set; }
+             [DataItemAttributeFieldName("HabilitarAgrupamiento","HabilitarAgrupamiento")]
+             public Boolean HabilitarAgrupamiento { get; set; }
+             [DataItemAttributeFieldName("HabilitarMovilidad","HabilitarMovilidad")]
+             public Boolean HabilitarMovilidad { get; set; }
+             [DataItemAttributeFieldName("HabilitarFiltrado","HabilitarFiltrado")]
+             public Boolean HabilitarFiltrado { get; set; }
+             [DataItemAttributeFieldName("HabilitarColumnasOpcionales","HabilitarColumnasOpcionales")]
+             public Boolean HabilitarColumnasOpcionales { get; set; }
+             [DataItemAttributeFieldName("HabilitarOrdenamiento","HabilitarOrdenamiento")]
+             public Boolean HabilitarOrdenamiento { get; set; }
+             [DataItemAttributeFieldName("HabilitarRedimensionamiento","HabilitarRedimensionamiento")]
+             public Boolean HabilitarRedimensionamiento { get; set; }
+             [DataItemAttributeFieldName("HabilitarPaginado","HabilitarPaginado")]
+             public Boolean HabilitarPaginado { get; set; }
+             [DataItemAttributeFieldName("HabilitarAuditoria","HabilitarAuditoria")]
+             public Boolean HabilitarAuditoria { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64? UsuarioModificacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+				
+			} //Class Entidad 
+} //namespace Permaquim.Depositario.Entities.Tables.Customizador
+		namespace Permaquim.Depositario.Entities.Tables.Customizador {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Customizador")]  // Database Schema Name
+			[DataItemAttributeObjectName("EntidadAtributo","EntidadAtributo")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class EntidadAtributo : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string EntidadId = "EntidadId";
+					public const string Nombre = "Nombre";
+					public const string VisibleEnGrilla = "VisibleEnGrilla";
+					public const string VisibleEnSelectorColumnas = "VisibleEnSelectorColumnas";
+					public const string Redimensionable = "Redimensionable";
+					public const string Agrupable = "Agrupable";
+					public const string Movible = "Movible";
+					public const string Ordenable = "Ordenable";
+					public const string Filtrable = "Filtrable";
+					public const string PosicionEnGrilla = "PosicionEnGrilla";
+					public const string AnchoMinimoEnGrilla = "AnchoMinimoEnGrilla";
+					public const string AnchoEnGrilla = "AnchoEnGrilla";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					EntidadId,
+					Nombre,
+					VisibleEnGrilla,
+					VisibleEnSelectorColumnas,
+					Redimensionable,
+					Agrupable,
+					Movible,
+					Ordenable,
+					Filtrable,
+					PosicionEnGrilla,
+					AnchoMinimoEnGrilla,
+					AnchoEnGrilla,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public EntidadAtributo()
+                {
+                }
+                public  EntidadAtributo(Int64 EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32? PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.EntidadId = EntidadId;
+                    this.Nombre = Nombre;
+                    this.VisibleEnGrilla = VisibleEnGrilla;
+                    this.VisibleEnSelectorColumnas = VisibleEnSelectorColumnas;
+                    this.Redimensionable = Redimensionable;
+                    this.Agrupable = Agrupable;
+                    this.Movible = Movible;
+                    this.Ordenable = Ordenable;
+                    this.Filtrable = Filtrable;
+                    this.PosicionEnGrilla = PosicionEnGrilla;
+                    this.AnchoMinimoEnGrilla = AnchoMinimoEnGrilla;
+                    this.AnchoEnGrilla = AnchoEnGrilla;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("EntidadId","EntidadId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Entidad")]// Object name in Database
+             public Int64 EntidadId { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("VisibleEnGrilla","VisibleEnGrilla")]
+             public Boolean VisibleEnGrilla { get; set; }
+             [DataItemAttributeFieldName("VisibleEnSelectorColumnas","VisibleEnSelectorColumnas")]
+             public Boolean VisibleEnSelectorColumnas { get; set; }
+             [DataItemAttributeFieldName("Redimensionable","Redimensionable")]
+             public Boolean Redimensionable { get; set; }
+             [DataItemAttributeFieldName("Agrupable","Agrupable")]
+             public Boolean Agrupable { get; set; }
+             [DataItemAttributeFieldName("Movible","Movible")]
+             public Boolean Movible { get; set; }
+             [DataItemAttributeFieldName("Ordenable","Ordenable")]
+             public Boolean Ordenable { get; set; }
+             [DataItemAttributeFieldName("Filtrable","Filtrable")]
+             public Boolean Filtrable { get; set; }
+             [DataItemAttributeFieldName("PosicionEnGrilla","PosicionEnGrilla")]
+             public Int32? PosicionEnGrilla { get; set; }
+             [DataItemAttributeFieldName("AnchoMinimoEnGrilla","AnchoMinimoEnGrilla")]
+             public Int32 AnchoMinimoEnGrilla { get; set; }
+             [DataItemAttributeFieldName("AnchoEnGrilla","AnchoEnGrilla")]
+             public Int32 AnchoEnGrilla { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64? UsuarioModificacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+				
+			} //Class EntidadAtributo 
+} //namespace Permaquim.Depositario.Entities.Tables.Customizador
 		namespace Permaquim.Depositario.Entities.Tables.Directorio {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Directorio")]  // Database Schema Name
@@ -2584,6 +2827,8 @@ using System.Text;
 					public const string Clave = "Clave";
 					public const string Nombre = "Nombre";
 					public const string Descripcion = "Descripcion";
+					public const string ValidacionDatoId = "ValidacionDatoId";
+					public const string Valor = "Valor";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -2596,6 +2841,8 @@ using System.Text;
 					Clave,
 					Nombre,
 					Descripcion,
+					ValidacionDatoId,
+					Valor,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -2608,12 +2855,14 @@ using System.Text;
                 public TipoConfiguracionDepositario()
                 {
                 }
-                public  TipoConfiguracionDepositario(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  TipoConfiguracionDepositario(String Clave,String Nombre,String Descripcion,Int64 ValidacionDatoId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Clave = Clave;
                     this.Nombre = Nombre;
                     this.Descripcion = Descripcion;
+                    this.ValidacionDatoId = ValidacionDatoId;
+                    this.Valor = Valor;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -2631,6 +2880,12 @@ using System.Text;
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("Descripcion","Descripcion")]
              public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("ValidacionDatoId","ValidacionDatoId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("ConfiguracionValidacionDato")]// Object name in Database
+             public Int64 ValidacionDatoId { get; set; }
+             [DataItemAttributeFieldName("Valor","Valor")]
+             public String Valor { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -5919,7 +6174,7 @@ using System.Text;
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
-             public Int16 Id { get; set; }
+             public Int64 Id { get; set; }
              [DataItemAttributeFieldName("FuncionId","FuncionId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Funcion")]// Object name in Database
@@ -6689,14 +6944,10 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }

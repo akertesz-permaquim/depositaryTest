@@ -3525,6 +3525,917 @@ using System.Text;
             }
         } // class HuellaDactilar
 	} //namespace Permaquim.Depositario.Business.Relations.Biometria
+	namespace Permaquim.Depositario.Business.Relations.Customizador {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class Entidad : RelationsDataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Tipo,
+					Nombre,
+					Esquema,
+					HabilitarAgrupamiento,
+					HabilitarMovilidad,
+					HabilitarFiltrado,
+					HabilitarColumnasOpcionales,
+					HabilitarOrdenamiento,
+					HabilitarRedimensionamiento,
+					HabilitarPaginado,
+					HabilitarAuditoria,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+			   protected List<Entities.Relations.Customizador.Entidad> _cacheItemList = new List<Entities.Relations.Customizador.Entidad>();
+			   protected List<Entities.Relations.Customizador.Entidad> _entities = null;
+            public new CustomWhereParameter Where { get; set; }
+            public new CustomOrderByParameter OrderByParameter { get; set; }
+            public new CustomGroupByParameter GroupByParameter { get; set; }
+            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public Entidad() : base()
+            {
+                base._dataItem = new Entities.Relations.Customizador.Entidad();
+                Where = new CustomWhereParameter();
+                OrderByParameter = new CustomOrderByParameter();
+                GroupByParameter = new CustomGroupByParameter();
+            }
+            public class CustomAggregateParameter : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Relations.Customizador.Entidad item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// Entidad Add Method
+         /// </summary>
+         /// <param name='Tipo'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Esquema'></param>
+         /// <param name='HabilitarAgrupamiento'></param>
+         /// <param name='HabilitarMovilidad'></param>
+         /// <param name='HabilitarFiltrado'></param>
+         /// <param name='HabilitarColumnasOpcionales'></param>
+         /// <param name='HabilitarOrdenamiento'></param>
+         /// <param name='HabilitarRedimensionamiento'></param>
+         /// <param name='HabilitarPaginado'></param>
+         /// <param name='HabilitarAuditoria'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Relations.Customizador.Entidad</returns>
+			public Entities.Relations.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			{
+			  return (Entities.Relations.Customizador.Entidad)base.Add(new Entities.Relations.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Relations.Customizador.Entidad> Items()
+            {
+                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
+                dh.WhereParameter = this.Where.whereParameter;
+                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
+                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
+                _entities = dh.Items().Cast<Entities.Relations.Customizador.Entidad>().ToList<Entities.Relations.Customizador.Entidad>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Relations.Customizador.Entidad items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.Entidad> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets items with all fields
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Tipo"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Esquema"></param>
+            /// <param name="HabilitarAgrupamiento"></param>
+            /// <param name="HabilitarMovilidad"></param>
+            /// <param name="HabilitarFiltrado"></param>
+            /// <param name="HabilitarColumnasOpcionales"></param>
+            /// <param name="HabilitarOrdenamiento"></param>
+            /// <param name="HabilitarRedimensionamiento"></param>
+            /// <param name="HabilitarPaginado"></param>
+            /// <param name="HabilitarAuditoria"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.whereParameter.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Tipo != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Tipo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Tipo);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Tipo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Tipo);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Esquema != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Esquema, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Esquema);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Esquema, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Esquema);
+                    }
+                   
+                }
+                if (HabilitarAgrupamiento != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarAgrupamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAgrupamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
+                    }
+                   
+                }
+                if (HabilitarMovilidad != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarMovilidad, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarMovilidad, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
+                    }
+                   
+                }
+                if (HabilitarFiltrado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarFiltrado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarFiltrado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
+                    }
+                   
+                }
+                if (HabilitarColumnasOpcionales != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarColumnasOpcionales, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarColumnasOpcionales, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
+                    }
+                   
+                }
+                if (HabilitarOrdenamiento != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarOrdenamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarOrdenamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
+                    }
+                   
+                }
+                if (HabilitarRedimensionamiento != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarRedimensionamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarRedimensionamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
+                    }
+                   
+                }
+                if (HabilitarPaginado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarPaginado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarPaginado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
+                    }
+                   
+                }
+                if (HabilitarAuditoria != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarAuditoria, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAuditoria, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            public List<Entities.Relations.Customizador.Entidad> Result 
+            {
+                get { return _entities; }
+            }
+            public Entities.Relations.Customizador.Entidad Add(Entities.Relations.Customizador.Entidad item)
+            {
+                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
+                return (Entities.Relations.Customizador.Entidad)base.Add((IDataItem)item);
+            }
+            public Int64 Update(Entities.Relations.Customizador.Entidad item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            public Int64 Delete(Entities.Relations.Customizador.Entidad item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Relations.Customizador.Entidad with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Tipo"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Esquema"></param>
+            /// <param name="HabilitarAgrupamiento"></param>
+            /// <param name="HabilitarMovilidad"></param>
+            /// <param name="HabilitarFiltrado"></param>
+            /// <param name="HabilitarColumnasOpcionales"></param>
+            /// <param name="HabilitarOrdenamiento"></param>
+            /// <param name="HabilitarRedimensionamiento"></param>
+            /// <param name="HabilitarPaginado"></param>
+            /// <param name="HabilitarAuditoria"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 Id,String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            {
+                 Entities.Tables.Customizador.Entidad item = new Entities.Tables.Customizador.Entidad();
+                 item.Id = Id;
+                 item.Tipo = Tipo;
+                 item.Nombre = Nombre;
+                 item.Esquema = Esquema;
+                 item.HabilitarAgrupamiento = HabilitarAgrupamiento;
+                 item.HabilitarMovilidad = HabilitarMovilidad;
+                 item.HabilitarFiltrado = HabilitarFiltrado;
+                 item.HabilitarColumnasOpcionales = HabilitarColumnasOpcionales;
+                 item.HabilitarOrdenamiento = HabilitarOrdenamiento;
+                 item.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
+                 item.HabilitarPaginado = HabilitarPaginado;
+                 item.HabilitarAuditoria = HabilitarAuditoria;
+                 item.Habilitado = Habilitado;
+                 item.UsuarioCreacion = UsuarioCreacion;
+                 item.FechaCreacion = FechaCreacion;
+                 item.UsuarioModificacion = UsuarioModificacion;
+                 item.FechaModificacion = FechaModificacion;
+
+                return base.Update((IDataItem)item);
+            }
+            public class CustomWhereParameter : WhereParameter {
+                 internal WhereParameter whereParameter = new WhereParameter();
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Clear()
+                 {
+                     this.whereParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.whereParameter.Count;
+                     }
+                 }
+            }
+            public class CustomOrderByParameter : OrderByParameter {
+                 internal OrderByParameter orderByParameter = new OrderByParameter();
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class CustomGroupByParameter : GroupByParameter {
+                 internal GroupByParameter groupByParameter = new GroupByParameter();
+                 public void Add(ColumnEnum column)
+                 {
+                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class Entidad
+	} //namespace Permaquim.Depositario.Business.Relations.Customizador
+	namespace Permaquim.Depositario.Business.Relations.Customizador {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class EntidadAtributo : RelationsDataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					EntidadId,
+					Nombre,
+					VisibleEnGrilla,
+					VisibleEnSelectorColumnas,
+					Redimensionable,
+					Agrupable,
+					Movible,
+					Ordenable,
+					Filtrable,
+					PosicionEnGrilla,
+					AnchoMinimoEnGrilla,
+					AnchoEnGrilla,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+			   protected List<Entities.Relations.Customizador.EntidadAtributo> _cacheItemList = new List<Entities.Relations.Customizador.EntidadAtributo>();
+			   protected List<Entities.Relations.Customizador.EntidadAtributo> _entities = null;
+            public new CustomWhereParameter Where { get; set; }
+            public new CustomOrderByParameter OrderByParameter { get; set; }
+            public new CustomGroupByParameter GroupByParameter { get; set; }
+            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public EntidadAtributo() : base()
+            {
+                base._dataItem = new Entities.Relations.Customizador.EntidadAtributo();
+                Where = new CustomWhereParameter();
+                OrderByParameter = new CustomOrderByParameter();
+                GroupByParameter = new CustomGroupByParameter();
+            }
+            public class CustomAggregateParameter : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Relations.Customizador.EntidadAtributo item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// EntidadAtributo Add Method
+         /// </summary>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='VisibleEnGrilla'></param>
+         /// <param name='VisibleEnSelectorColumnas'></param>
+         /// <param name='Redimensionable'></param>
+         /// <param name='Agrupable'></param>
+         /// <param name='Movible'></param>
+         /// <param name='Ordenable'></param>
+         /// <param name='Filtrable'></param>
+         /// <param name='PosicionEnGrilla'></param>
+         /// <param name='AnchoMinimoEnGrilla'></param>
+         /// <param name='AnchoEnGrilla'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Relations.Customizador.EntidadAtributo</returns>
+			public Entities.Relations.Customizador.EntidadAtributo Add(Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			{
+			  return (Entities.Relations.Customizador.EntidadAtributo)base.Add(new Entities.Relations.Customizador.EntidadAtributo(EntidadId,Nombre,VisibleEnGrilla,VisibleEnSelectorColumnas,Redimensionable,Agrupable,Movible,Ordenable,Filtrable,PosicionEnGrilla,AnchoMinimoEnGrilla,AnchoEnGrilla,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Relations.Customizador.EntidadAtributo> Items()
+            {
+                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
+                dh.WhereParameter = this.Where.whereParameter;
+                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
+                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
+                dh.TopQuantity = this.TopQuantity;
+                _entities = dh.Items().Cast<Entities.Relations.Customizador.EntidadAtributo>().ToList<Entities.Relations.Customizador.EntidadAtributo>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Relations.Customizador.EntidadAtributo items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets items with all fields
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EntidadId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="VisibleEnGrilla"></param>
+            /// <param name="VisibleEnSelectorColumnas"></param>
+            /// <param name="Redimensionable"></param>
+            /// <param name="Agrupable"></param>
+            /// <param name="Movible"></param>
+            /// <param name="Ordenable"></param>
+            /// <param name="Filtrable"></param>
+            /// <param name="PosicionEnGrilla"></param>
+            /// <param name="AnchoMinimoEnGrilla"></param>
+            /// <param name="AnchoEnGrilla"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64? Id,Int64? EntidadId,String Nombre,Boolean? VisibleEnGrilla,Boolean? VisibleEnSelectorColumnas,Boolean? Redimensionable,Boolean? Agrupable,Boolean? Movible,Boolean? Ordenable,Boolean? Filtrable,Int32? PosicionEnGrilla,Int32? AnchoMinimoEnGrilla,Int32? AnchoEnGrilla,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.whereParameter.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (EntidadId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EntidadId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EntidadId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.EntidadId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EntidadId);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (VisibleEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.VisibleEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
+                    }
+                   
+                }
+                if (VisibleEnSelectorColumnas != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.VisibleEnSelectorColumnas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnSelectorColumnas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
+                    }
+                   
+                }
+                if (Redimensionable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Redimensionable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Redimensionable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Redimensionable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Redimensionable);
+                    }
+                   
+                }
+                if (Agrupable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Agrupable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Agrupable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Agrupable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Agrupable);
+                    }
+                   
+                }
+                if (Movible != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Movible, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Movible);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Movible, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Movible);
+                    }
+                   
+                }
+                if (Ordenable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Ordenable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Ordenable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Ordenable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Ordenable);
+                    }
+                   
+                }
+                if (Filtrable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Filtrable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Filtrable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Filtrable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Filtrable);
+                    }
+                   
+                }
+                if (PosicionEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PosicionEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PosicionEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
+                    }
+                   
+                }
+                if (AnchoMinimoEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoMinimoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoMinimoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
+                    }
+                   
+                }
+                if (AnchoEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            public List<Entities.Relations.Customizador.EntidadAtributo> Result 
+            {
+                get { return _entities; }
+            }
+            public Entities.Relations.Customizador.EntidadAtributo Add(Entities.Relations.Customizador.EntidadAtributo item)
+            {
+                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
+                return (Entities.Relations.Customizador.EntidadAtributo)base.Add((IDataItem)item);
+            }
+            public Int64 Update(Entities.Relations.Customizador.EntidadAtributo item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            public Int64 Delete(Entities.Relations.Customizador.EntidadAtributo item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Relations.Customizador.EntidadAtributo with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EntidadId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="VisibleEnGrilla"></param>
+            /// <param name="VisibleEnSelectorColumnas"></param>
+            /// <param name="Redimensionable"></param>
+            /// <param name="Agrupable"></param>
+            /// <param name="Movible"></param>
+            /// <param name="Ordenable"></param>
+            /// <param name="Filtrable"></param>
+            /// <param name="PosicionEnGrilla"></param>
+            /// <param name="AnchoMinimoEnGrilla"></param>
+            /// <param name="AnchoEnGrilla"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 Id,Int64 EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            {
+                 Entities.Tables.Customizador.EntidadAtributo item = new Entities.Tables.Customizador.EntidadAtributo();
+                 item.Id = Id;
+                 item.EntidadId = EntidadId;
+                 item.Nombre = Nombre;
+                 item.VisibleEnGrilla = VisibleEnGrilla;
+                 item.VisibleEnSelectorColumnas = VisibleEnSelectorColumnas;
+                 item.Redimensionable = Redimensionable;
+                 item.Agrupable = Agrupable;
+                 item.Movible = Movible;
+                 item.Ordenable = Ordenable;
+                 item.Filtrable = Filtrable;
+                 item.PosicionEnGrilla = PosicionEnGrilla;
+                 item.AnchoMinimoEnGrilla = AnchoMinimoEnGrilla;
+                 item.AnchoEnGrilla = AnchoEnGrilla;
+                 item.Habilitado = Habilitado;
+                 item.UsuarioCreacion = UsuarioCreacion;
+                 item.FechaCreacion = FechaCreacion;
+                 item.UsuarioModificacion = UsuarioModificacion;
+                 item.FechaModificacion = FechaModificacion;
+
+                return base.Update((IDataItem)item);
+            }
+            public class CustomWhereParameter : WhereParameter {
+                 internal WhereParameter whereParameter = new WhereParameter();
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Clear()
+                 {
+                     this.whereParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.whereParameter.Count;
+                     }
+                 }
+            }
+            public class CustomOrderByParameter : OrderByParameter {
+                 internal OrderByParameter orderByParameter = new OrderByParameter();
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class CustomGroupByParameter : GroupByParameter {
+                 internal GroupByParameter groupByParameter = new GroupByParameter();
+                 public void Add(ColumnEnum column)
+                 {
+                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class EntidadAtributo
+	} //namespace Permaquim.Depositario.Business.Relations.Customizador
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
 	    /// <summary>
 	    /// 
@@ -9827,6 +10738,8 @@ using System.Text;
 					Clave,
 					Nombre,
 					Descripcion,
+					ValidacionDatoId,
+					Valor,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -9873,15 +10786,17 @@ using System.Text;
          /// <param name='Clave'></param>
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId'></param>
+         /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.TipoConfiguracionDepositario</returns>
-			public Entities.Relations.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId,String Valor,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Dispositivo.TipoConfiguracionDepositario)base.Add(new Entities.Relations.Dispositivo.TipoConfiguracionDepositario(Clave,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Dispositivo.TipoConfiguracionDepositario)base.Add(new Entities.Relations.Dispositivo.TipoConfiguracionDepositario(Clave,Nombre,Descripcion,ValidacionDatoId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Dispositivo.TipoConfiguracionDepositario> Items()
             {
@@ -9918,13 +10833,15 @@ using System.Text;
             /// <param name="Clave"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="ValidacionDatoId"></param>
+            /// <param name="Valor"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Dispositivo.TipoConfiguracionDepositario> Items(Int64? Id,String Clave,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Dispositivo.TipoConfiguracionDepositario> Items(Int64? Id,String Clave,String Nombre,String Descripcion,Int64? ValidacionDatoId,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -9972,6 +10889,30 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (ValidacionDatoId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValidacionDatoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ValidacionDatoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValidacionDatoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ValidacionDatoId);
+                    }
+                   
+                }
+                if (Valor != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Valor, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Valor);
                     }
                    
                 }
@@ -10060,19 +11001,23 @@ using System.Text;
             /// <param name="Clave"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="ValidacionDatoId"></param>
+            /// <param name="Valor"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Clave,String Nombre,String Descripcion,Int64 ValidacionDatoId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Dispositivo.TipoConfiguracionDepositario item = new Entities.Tables.Dispositivo.TipoConfiguracionDepositario();
                  item.Id = Id;
                  item.Clave = Clave;
                  item.Nombre = Nombre;
                  item.Descripcion = Descripcion;
+                 item.ValidacionDatoId = ValidacionDatoId;
+                 item.Valor = Valor;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -22479,7 +23424,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.RolFuncion> Items(Int16 Id)
+            public List<Entities.Relations.Seguridad.RolFuncion> Items(Int64 Id)
             {
                 this.Where.Clear();
                     if (this.Where.whereParameter.Count == 0)
@@ -22509,7 +23454,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.RolFuncion> Items(Int16? Id,Int64? FuncionId,Int64? RolId,String Descripcion,Boolean? PuedeAgregar,Boolean? PuedeModificar,Boolean? PuedeEliminar,Boolean? PuedeVisualizar,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Seguridad.RolFuncion> Items(Int64? Id,Int64? FuncionId,Int64? RolId,String Descripcion,Boolean? PuedeAgregar,Boolean? PuedeModificar,Boolean? PuedeEliminar,Boolean? PuedeVisualizar,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -22703,7 +23648,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int16 Id,Int64 FuncionId,Int64 RolId,String Descripcion,Boolean PuedeAgregar,Boolean PuedeModificar,Boolean PuedeEliminar,Boolean PuedeVisualizar,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 FuncionId,Int64 RolId,String Descripcion,Boolean PuedeAgregar,Boolean PuedeModificar,Boolean PuedeEliminar,Boolean PuedeVisualizar,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Seguridad.RolFuncion item = new Entities.Tables.Seguridad.RolFuncion();
                  item.Id = Id;
@@ -25479,13 +26424,13 @@ using System.Text;
          /// Entidad Add Method
          /// </summary>
          /// <param name='Nombre'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Sincronizacion.Entidad</returns>
-			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Sincronizacion.Entidad)base.Add(new Entities.Relations.Sincronizacion.Entidad(Nombre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -25754,13 +26699,13 @@ using System.Text;
          /// <summary>
          /// EntidadCabecera Add Method
          /// </summary>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Sincronizacion.Entidad EntidadId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
          /// <param name='Valor'></param>
          /// <param name='Fechainicio'></param>
          /// <param name='Fechafin'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadCabecera</returns>
-			public Entities.Relations.Sincronizacion.EntidadCabecera Add(Permaquim.Depositario.Entities.Relations.Sincronizacion.Entidad EntidadId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,DateTime Fechainicio,DateTime Fechafin) 
+			public Entities.Relations.Sincronizacion.EntidadCabecera Add(Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,DateTime Fechainicio,DateTime Fechafin) 
 			{
 			  return (Entities.Relations.Sincronizacion.EntidadCabecera)base.Add(new Entities.Relations.Sincronizacion.EntidadCabecera(EntidadId,DepositarioId,Valor,Fechainicio,Fechafin));
 			}

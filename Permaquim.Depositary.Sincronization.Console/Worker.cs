@@ -41,7 +41,7 @@ namespace Permaquim.Depositary.Sincronization.Console
             try
             {
                 _workerTasks = AppConfiguration.GetWorkerTasks();
-
+                //_httpClient.Timeout = TimeSpan.FromMinutes(2);
             }
             catch (Exception ex)
             {
@@ -96,11 +96,15 @@ namespace Permaquim.Depositary.Sincronization.Console
                             await Task.Delay(100, stoppingToken);
 
                         }
+                        _hostApplicationLifetime.StopApplication();
+                        return;
+
                     }
                 }
                 catch (Exception ex)
                 {
-                    AuditController.LogToFile(ex);
+                    if (!stoppingToken.IsCancellationRequested)
+                        AuditController.LogToFile(ex);
                 }
 
                 _hostApplicationLifetime.StopApplication();
@@ -204,7 +208,6 @@ namespace Permaquim.Depositary.Sincronization.Console
             }
             catch (Exception ex)
             {
-
                 AuditController.LogToFile(ex);
             }
             finally
@@ -256,7 +259,6 @@ namespace Permaquim.Depositary.Sincronization.Console
                 }
                 catch (Exception ex)
                 {
-
                     AuditController.LogToFile(ex);
                 }
                 finally

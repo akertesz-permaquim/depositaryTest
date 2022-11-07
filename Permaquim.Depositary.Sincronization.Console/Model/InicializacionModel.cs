@@ -1557,10 +1557,16 @@ namespace Permaquim.Depositary.Sincronization.Console
                     foreach (var item in DispositivoTipoConfiguracionDepositario)
                     {
                         Int64 origenId = item.Id;
+                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
 
-                        var newEntitieDispositivoTipoConfiguracionDepositario = entitiesDispositivoTipoConfiguracionDepositario.Add(item);
+                        if (validacionDatoIdOrigen.HasValue)
+                        {
+                            item.ValidacionDatoId = validacionDatoIdOrigen.Value;
 
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoConfiguracionDepositario.Id);
+                            var newEntitieDispositivoTipoConfiguracionDepositario = entitiesDispositivoTipoConfiguracionDepositario.Add(item);
+
+                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoConfiguracionDepositario.Id);
+                        }
 
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);

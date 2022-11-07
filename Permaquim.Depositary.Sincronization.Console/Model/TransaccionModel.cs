@@ -29,7 +29,6 @@ namespace Permaquim.Depositary.Sincronization.Console
         void IModel.Process()
         {
             _startDateTime = DateTime.Now;
-            DateTime lastSincronizationDate;
 
             CodigoExternoDepositario = ConfigurationController.GetCurrentDepositaryCode();
 
