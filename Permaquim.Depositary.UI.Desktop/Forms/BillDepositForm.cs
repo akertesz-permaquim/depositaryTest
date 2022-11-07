@@ -662,6 +662,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ButtonsPanel.Visible = false;
             _operationStatus.DepositConfirmed = true;
             ConfirmDeposit();
+            
         }
 
         private void ConfirmDeposit()

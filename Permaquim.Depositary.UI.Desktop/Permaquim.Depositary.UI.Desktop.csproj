@@ -89,6 +89,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="bin\Debug\net6.0-windows\App0stol.license" />
     <None Include="bin\Debug\net6.0-windows\Devices\DE50.json" />
   </ItemGroup>
 

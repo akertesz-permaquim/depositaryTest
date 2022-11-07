@@ -6,9 +6,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
     internal static class LicenseController
     {
         private const string PRODUCTNAME = "PRODUCTNAME";
+        private const string HWID = "HWID";
         private const string TYPE = "TYPE";
         private const string BASIC = "BASIC";
         private const string FULL = "FULL";
+        private const string APP0STOL = "APP0STOL";
         #region License
 
         // Check if a valid license file is available
@@ -25,25 +27,43 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static bool CheckLicenseAttributes()
         {
-            if (!ReadAdditonalLicenseInformation(PRODUCTNAME).Equals(GetHardwareID()))
-            {
-                return false;
-            }
-            if (!ReadAdditonalLicenseInformation(TYPE).Equals(BASIC)
-                ||
-                !ReadAdditonalLicenseInformation(TYPE).Equals(FULL)
 
-                )
+            if (!ReadAdditonalLicenseInformation(HWID).Equals(GetHardwareId()))
             {
                 return false;
             }
+            if (!ReadAdditonalLicenseInformation(PRODUCTNAME).Equals(APP0STOL))
+            {
+                return false;
+            }
+            switch (ReadAdditonalLicenseInformation(TYPE))
+            {
+                case BASIC:
+                case FULL:
+                    return true;
+                    break;
+
+                default:
+                    return false;
+                    break;
+            }
+
             return true;
         }
         private static string ReadAdditonalLicenseInformation(string key)
         {
-            string returnValue = string.Empty;
+            string result = String.Empty;
 
-            return returnValue;
+            for (int i = 0; i < License.Status.KeyValueList.Count; i++)
+            {
+                if (License.Status.KeyValueList.GetKey(i).ToString().Equals(key))
+                {
+                    result = License.Status.KeyValueList.GetByIndex(i).ToString();
+                    break;
+                }
+            }
+
+            return result;
         }
 
         // Read additonal license information from a license license

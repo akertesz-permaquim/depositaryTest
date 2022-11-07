@@ -19,6 +19,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
     {
         private const string D50 = "D50";
         private const string D70 = "D70";
+        string _errorInformation = String.Empty;
         CounterDevice _device = null;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public DeviceErrorForm()
@@ -36,6 +37,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             };
             _pollingTimer.Tick += PollingTimer_Tick;
             _pollingTimer.Enabled = false;
+            InformationLabel.Text = String.Empty;
         }
 
         private void DeviceErrorForm_Load(object sender, EventArgs e)
@@ -47,6 +49,20 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
             if (_device.StateResultProperty != null)
             {
+                
+                if (_device.StateResultProperty.ErrorStateInformation.AbnormalDevice)
+                    _errorInformation += "AbnormalDevice;";
+                if (_device.StateResultProperty.ErrorStateInformation.AbnormalStorage)
+                    _errorInformation += "AbnormalStorage;";
+                if (_device.StateResultProperty.ErrorStateInformation.CountingError)
+                    _errorInformation += "CountingError;";
+                if (_device.StateResultProperty.ErrorStateInformation.Jamming)
+                    _errorInformation += "Jamming;";
+                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    _errorInformation += "EscrowBillPresent;";
+
+                InformationLabel.Text = _errorInformation;
+
                 if (!_device.StateResultProperty.ErrorStateInformation.AbnormalDevice
                     && !_device.StateResultProperty.ErrorStateInformation.AbnormalStorage
                     && !_device.StateResultProperty.ErrorStateInformation.CountingError
@@ -75,7 +91,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                     }
 
                     _pollingTimer.Enabled = false;
-                    this.DialogResult=DialogResult.OK;
+                    this.DialogResult = DialogResult.OK;
 
                 }
             }

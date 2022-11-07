@@ -26,7 +26,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private const string ERROR_COMUNICACION_PLACA = "Error de comunicación de la placa";
         private const string ERROR_CONTENEDOR = "Error de contenedor";
         private const string ERROR_IMPRESORA = "Error de impresora";
-
+        private const int WEEK_DAYS = 7;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private int closingcombination = 0;
@@ -45,6 +45,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private int _redStatusIndicator;
         private string _remainingTimeText;
 
+        private bool _isLicensed = false;
 
         private bool _bagRemoved = false;
 
@@ -147,22 +148,23 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             if (DatabaseController.CurrentDepositary != null)
             {
+                LoadStyles();
+
                 if (CheckLicensefile())
                 {
                     if (CheckLicense())
                     {
+                        _isLicensed = true;
                         InitializeDevices();
                         LoadLedImages();
                         VerifyUserData();
                         LoadParameters();
                         LoadLanguageItems();
                     }
-                    else
-                    {
-                        LoadStyles();
-                    }
+                        
                 }else
                 {
+                    _isLicensed = false;
                     string message = MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA);
                     MessageBox.Show(message, message, MessageBoxButtons.OK);
                     Clipboard.SetText(LicenseController.GetHardwareId());
@@ -170,6 +172,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             else
             {
+                LoadDefaultStyles();
                 InformationLabel.BackColor = Color.Red;
                 InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
             }
@@ -196,39 +199,47 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         /// </summary>
         private bool CheckLicensefile()
         {
-            return true;
-            return File.Exists((Directory.GetCurrentDirectory() + @"\APP0STOL.License"));
+            if (ConfigurationController.IsDevelopment())
+                return true;
+            else
+                return File.Exists((Directory.GetCurrentDirectory() + @"\APP0STOL.License"));
         }
 
-            /// <summary>
-            /// Chequeo de licencia
-            /// </summary>
-            private bool CheckLicense()
+        /// <summary>
+        /// Chequeo de licencia
+        /// </summary>
+        private bool CheckLicense()
         {
-            return true; // TODO: ELIMINAR EN PRODUCCIÓN
-
-            if (LicenseController.IsValidLicenseAvailable())
-            {
-                double remainingDays = LicenseController.GetLicenseRemainingDays();
-                if (remainingDays <= 7) {
-                    SetInformationMessage(InformationTypeEnum.Error, 
-                        MultilanguangeController.GetText(MultiLanguageEnum.DIAS_RESTANTES_LICENCIA) 
-                        + " " + ((int)remainingDays).ToString());
-                }
-                if (!LicenseController.CheckLicenseAttributes())
-                {
-                    SetInformationMessage(InformationTypeEnum.Error,
-                 MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
-                    return false;
-                }
-
+            if (ConfigurationController.IsDevelopment())
                 return true;
-            }
             else
             {
-                SetInformationMessage(InformationTypeEnum.Error, 
-                    MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
-                return false;
+                if (LicenseController.IsValidLicenseAvailable())
+                {
+                    double remainingDays = LicenseController.GetLicenseRemainingDays();
+                    if (remainingDays <= WEEK_DAYS)
+                    {
+                        SetInformationMessage(InformationTypeEnum.Error,
+                            MultilanguangeController.GetText(MultiLanguageEnum.DIAS_RESTANTES_LICENCIA)
+                            + " " + ((int)remainingDays).ToString());
+                    }
+                    if (!LicenseController.CheckLicenseAttributes())
+                    {
+                        SetInformationMessage(InformationTypeEnum.Error,
+                     MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
+                        Clipboard.SetText(LicenseController.GetHardwareId());
+                        return false;
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    SetInformationMessage(InformationTypeEnum.Error,
+                        MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
+                    Clipboard.SetText(LicenseController.GetHardwareId());
+                    return false;
+                }
             }
         }
         private void LoadParameters()
@@ -795,42 +806,41 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void MainPictureBox_Click(object sender, EventArgs e)
         {
-
-            if (ConfigurationController.IsDevelopment())
-                Login();
-            else
+            if (_isLicensed)
             {
-
-                //if (VerifySchedule())
-                if (_device.CounterConnected && _device.IoBoardConnected)
+                if (ConfigurationController.IsDevelopment())
+                    Login();
+                else
                 {
-                    if (ParameterController.ValidatesBagInplace)
+                    if (_device.CounterConnected && _device.IoBoardConnected)
                     {
-                        if (VerifyBagInplace())
+                        if (ParameterController.ValidatesBagInplace)
                         {
-                            Login();
+                            if (VerifyBagInplace())
+                            {
+                                Login();
+                            }
+                            else
+                            {
+                                string message = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
+                                SetInformationMessage(InformationTypeEnum.Error, message);
+                                AuditController.Log(LogTypeEnum.Exception, message, message);
+                                DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
+                                DeviceController.BagIssue = true;
+                            }
                         }
                         else
                         {
-                            string message = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
-                            SetInformationMessage(InformationTypeEnum.Error, message);
-                            AuditController.Log(LogTypeEnum.Exception, message, message);
-                            DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
-                            DeviceController.BagIssue = true;
-
+                            Login();
                         }
                     }
                     else
                     {
-                        Login();
+                        string message = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO);
+                        SetInformationMessage(InformationTypeEnum.Error, message);
+                        AuditController.Log(LogTypeEnum.Exception, message, message);
+                        DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
                     }
-                }
-                else
-                {
-                    string message = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO);
-                    SetInformationMessage(InformationTypeEnum.Error, message);
-                    AuditController.Log(LogTypeEnum.Exception, message, message);
-                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
                 }
             }
         }

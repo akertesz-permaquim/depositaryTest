@@ -1906,6 +1906,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 newClosing = closingEntities.Add(new Permaquim.Depositario.Entities.Tables.Operacion.CierreDiario()
                 {
+                    Fecha = DateTime.Now,
                     FechaCreacion = DateTime.Now,
                     FechaModificacion = null,
                     Nombre = CIERRE_DIARIO,
