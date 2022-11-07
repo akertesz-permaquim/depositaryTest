@@ -115,11 +115,11 @@ a, .btn-link {
 }
 
 .row-highlight {
-    background-color: silver;
+    background-color: silver !important;
 }
 
 .row-highlight-disabled {
-    background-color: burlywood;
+    background-color: burlywood !important;
 }
 
 .rz-expanded-row-template {

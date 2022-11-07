@@ -96,7 +96,6 @@
                     NotificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Error, Summary = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), Detail = MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), Duration = 3000 });
                     AuditController.Log(AuditController.LogTypeEnum.Information,  MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("LOGIN_ERROR_INCORRECT_USERORPASSWORD", dataLenguaje), dataUsuario.Id);
                 }
-
                 else
                 {
                     if (dataUsuario.DebeCambiarPassword || dataUsuario.FechaExpiracion <= DateTime.Now)

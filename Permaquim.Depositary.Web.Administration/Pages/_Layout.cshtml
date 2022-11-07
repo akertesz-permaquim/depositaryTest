@@ -21,6 +21,22 @@
     <script src="~/_content/radzen.blazor.gridexportoptions/xlsx.full.min.js"></script>
     <script src="~/_content/radzen.blazor.gridexportoptions/luxon.min.js"></script>
 
+    <script>
+        // Wait until a reload button appears
+        new MutationObserver((mutations, observer) => {
+            if (document.querySelector(&#039;#components-reconnect-modal h5 a&#039;)) {
+                // Now every 10 seconds, see if the server appears to be back, and if so, reload
+                async function attemptReload() {
+                    await fetch(&#039;&#039;); // Check the server really is back
+                    location.reload();
+                }
+                observer.disconnect();
+                attemptReload();
+                setInterval(attemptReload, 2000);
+            }
+        }).observe(document.body, { childList: true, subtree: true });
+    </script>
+
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>

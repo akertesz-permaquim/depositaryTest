@@ -53,44 +53,49 @@
         public static bool GenerarRegistrosConfiguracionEmpresa(Int64 pEmpresaId)
         {
             bool resultado = false;
-            try
+
+            //Obtenemos la empresa default
+            Depositary.Business.Tables.Directorio.Empresa oEmpresa = new();
+
+            oEmpresa.Where.Add(Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
+            oEmpresa.Where.Add(sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+
+            oEmpresa.Items();
+
+            if (oEmpresa.Result.Count > 0)
             {
-                //Obtenemos la empresa default
-                Depositary.Business.Tables.Directorio.Empresa oEmpresa = new();
+                Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
+                oConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, oEmpresa.Result.FirstOrDefault().Id);
 
-                oEmpresa.Where.Add(Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
-                oEmpresa.Where.Add(sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                oConfiguracionEmpresa.Items();
 
-                oEmpresa.Items();
-
-                if (oEmpresa.Result.Count > 0)
+                if (oConfiguracionEmpresa.Result.Count > 0)
                 {
-
-                    Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
-                    oConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, oEmpresa.Result.FirstOrDefault().Id);
-
-                    oConfiguracionEmpresa.Items();
-
-                    if (oConfiguracionEmpresa.Result.Count > 0)
+                    oConfiguracionEmpresa.BeginTransaction();
+                    foreach (var registroConfiguracion in oConfiguracionEmpresa.Result)
                     {
-                        foreach (var registroConfiguracion in oConfiguracionEmpresa.Result)
+                        registroConfiguracion.EmpresaId = pEmpresaId;
+                        registroConfiguracion.FechaModificacion = null;
+                        registroConfiguracion.UsuarioModificacion = null;
+                        registroConfiguracion.FechaCreacion = DateTime.Now;
+
+                        try
                         {
-                            oConfiguracionEmpresa = new();
-                            registroConfiguracion.EmpresaId = pEmpresaId;
-                            registroConfiguracion.FechaModificacion = null;
-                            registroConfiguracion.UsuarioModificacion = null;
-                            registroConfiguracion.FechaCreacion = DateTime.Now;
                             oConfiguracionEmpresa.Add(registroConfiguracion, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                         }
+                        catch (Exception ex)
+                        {
+                            AuditController.Log(ex);
+                            oConfiguracionEmpresa.EndTransaction(false);
+                            return false;
+                        }
                     }
+                    oConfiguracionEmpresa.EndTransaction(true);
 
                 }
-                resultado = true;
+
             }
-            catch (Exception ex)
-            {
-                resultado = false;
-            }
+            resultado = true;
 
             return resultado;
         }

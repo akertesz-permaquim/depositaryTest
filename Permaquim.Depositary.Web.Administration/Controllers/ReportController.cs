@@ -3,6 +3,8 @@
     public class ReportController
     {
 
+        private static List<Depositary.Entities.Relations.Directorio.Sucursal> sucursales = new();
+
         #region Entidades Directorio
         public static List<DirectorioEntities.Empresa> ObtenerListadoEmpresasPorPerfil(Int64 pUsuarioId, bool filtroAscendente = false)
         {
@@ -65,7 +67,10 @@
                                 }
                                 if (listadoEmpresasId.Count > 0)
                                 {
-                                    oEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                                    if(oEmpresa.Where.Count>0)
+                                        oEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                                    else
+                                        oEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
                                     oEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, listadoEmpresasId);
                                     oEmpresa.Items();
 
@@ -170,7 +175,7 @@
         {
             List<DirectorioEntities.Sucursal> resultado = new();
 
-            List<Depositary.Entities.Relations.Directorio.Sucursal> sucursales = new();
+            
 
             var perfilVisualizacion = VisualizacionController.ObtenerPerfilVisualizacionPorUsuario(pUsuarioId);
 

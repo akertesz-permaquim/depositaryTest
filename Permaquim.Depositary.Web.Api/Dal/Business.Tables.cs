@@ -4135,6 +4135,1012 @@ using System.Text;
             }
         } // class HuellaDactilar
 	} //namespace DepositaryWebApi.Business.Tables.Biometria
+	namespace DepositaryWebApi.Business.Tables.Customizador {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public partial class Entidad : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Tipo,
+					Nombre,
+					Esquema,
+					HabilitarAgrupamiento,
+					HabilitarMovilidad,
+					HabilitarFiltrado,
+					HabilitarColumnasOpcionales,
+					HabilitarOrdenamiento,
+					HabilitarRedimensionamiento,
+					HabilitarPaginado,
+					HabilitarAuditoria,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Customizador.Entidad> _entities = new List<Entities.Tables.Customizador.Entidad>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public Entidad() : base()
+            {
+                base._dataItem = new Entities.Tables.Customizador.Entidad();
+            }
+            public Entidad(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Customizador.Entidad();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Customizador.Entidad item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// Entidad Add Method
+         /// </summary>
+         /// <param name='Tipo'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Esquema'></param>
+         /// <param name='HabilitarAgrupamiento'></param>
+         /// <param name='HabilitarMovilidad'></param>
+         /// <param name='HabilitarFiltrado'></param>
+         /// <param name='HabilitarColumnasOpcionales'></param>
+         /// <param name='HabilitarOrdenamiento'></param>
+         /// <param name='HabilitarRedimensionamiento'></param>
+         /// <param name='HabilitarPaginado'></param>
+         /// <param name='HabilitarAuditoria'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Customizador.Entidad</returns>
+			public Entities.Tables.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Customizador.Entidad)base.Add(new Entities.Tables.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Customizador.Entidad> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
+                _entities = dh.Items().Cast<Entities.Tables.Customizador.Entidad>().ToList<Entities.Tables.Customizador.Entidad>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Customizador.Entidad items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Customizador.Entidad> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Customizador.Entidad items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Tipo"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Esquema"></param>
+            /// <param name="HabilitarAgrupamiento"></param>
+            /// <param name="HabilitarMovilidad"></param>
+            /// <param name="HabilitarFiltrado"></param>
+            /// <param name="HabilitarColumnasOpcionales"></param>
+            /// <param name="HabilitarOrdenamiento"></param>
+            /// <param name="HabilitarRedimensionamiento"></param>
+            /// <param name="HabilitarPaginado"></param>
+            /// <param name="HabilitarAuditoria"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Tipo != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Tipo, sqlEnum.OperandEnum.Equal, Tipo);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Tipo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Tipo);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Esquema != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Esquema, sqlEnum.OperandEnum.Equal, Esquema);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Esquema, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Esquema);
+                    }
+                   
+                }
+                if (HabilitarAgrupamiento != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarAgrupamiento, sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarAgrupamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
+                    }
+                   
+                }
+                if (HabilitarMovilidad != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarMovilidad, sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarMovilidad, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
+                    }
+                   
+                }
+                if (HabilitarFiltrado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarFiltrado, sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarFiltrado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
+                    }
+                   
+                }
+                if (HabilitarColumnasOpcionales != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarColumnasOpcionales, sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarColumnasOpcionales, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
+                    }
+                   
+                }
+                if (HabilitarOrdenamiento != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarOrdenamiento, sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarOrdenamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
+                    }
+                   
+                }
+                if (HabilitarRedimensionamiento != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarRedimensionamiento, sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarRedimensionamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
+                    }
+                   
+                }
+                if (HabilitarPaginado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarPaginado, sqlEnum.OperandEnum.Equal, HabilitarPaginado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarPaginado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
+                    }
+                   
+                }
+                if (HabilitarAuditoria != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarAuditoria, sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.HabilitarAuditoria, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Customizador.Entidad
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Customizador.Entidad Add(Entities.Tables.Customizador.Entidad item)
+            {
+                return (Entities.Tables.Customizador.Entidad)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Customizador.Entidad
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Customizador.Entidad AddOrUpdate(Entities.Tables.Customizador.Entidad item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Customizador.Entidad)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Customizador.Entidad
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Customizador.Entidad item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Customizador.Entidad with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Tipo"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Esquema"></param>
+            /// <param name="HabilitarAgrupamiento"></param>
+            /// <param name="HabilitarMovilidad"></param>
+            /// <param name="HabilitarFiltrado"></param>
+            /// <param name="HabilitarColumnasOpcionales"></param>
+            /// <param name="HabilitarOrdenamiento"></param>
+            /// <param name="HabilitarRedimensionamiento"></param>
+            /// <param name="HabilitarPaginado"></param>
+            /// <param name="HabilitarAuditoria"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,String tipo,String nombre,String esquema,Boolean habilitaragrupamiento,Boolean habilitarmovilidad,Boolean habilitarfiltrado,Boolean habilitarcolumnasopcionales,Boolean habilitarordenamiento,Boolean habilitarredimensionamiento,Boolean habilitarpaginado,Boolean habilitarauditoria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Customizador.Entidad {Id = id,Tipo = tipo,Nombre = nombre,Esquema = esquema,HabilitarAgrupamiento = habilitaragrupamiento,HabilitarMovilidad = habilitarmovilidad,HabilitarFiltrado = habilitarfiltrado,HabilitarColumnasOpcionales = habilitarcolumnasopcionales,HabilitarOrdenamiento = habilitarordenamiento,HabilitarRedimensionamiento = habilitarredimensionamiento,HabilitarPaginado = habilitarpaginado,HabilitarAuditoria = habilitarauditoria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Customizador.Entidad
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Customizador.Entidad item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Customizador.Entidad with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Customizador.Entidad {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Customizador.Entidad> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class Entidad
+	} //namespace DepositaryWebApi.Business.Tables.Customizador
+	namespace DepositaryWebApi.Business.Tables.Customizador {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public partial class EntidadAtributo : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					EntidadId,
+					Nombre,
+					VisibleEnGrilla,
+					VisibleEnSelectorColumnas,
+					Redimensionable,
+					Agrupable,
+					Movible,
+					Ordenable,
+					Filtrable,
+					PosicionEnGrilla,
+					AnchoMinimoEnGrilla,
+					AnchoEnGrilla,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+         protected List<Entities.Tables.Customizador.EntidadAtributo> _entities = new List<Entities.Tables.Customizador.EntidadAtributo>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public EntidadAtributo() : base()
+            {
+                base._dataItem = new Entities.Tables.Customizador.EntidadAtributo();
+            }
+            public EntidadAtributo(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Customizador.EntidadAtributo();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Customizador.EntidadAtributo item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// EntidadAtributo Add Method
+         /// </summary>
+         /// <param name='EntidadId'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='VisibleEnGrilla'></param>
+         /// <param name='VisibleEnSelectorColumnas'></param>
+         /// <param name='Redimensionable'></param>
+         /// <param name='Agrupable'></param>
+         /// <param name='Movible'></param>
+         /// <param name='Ordenable'></param>
+         /// <param name='Filtrable'></param>
+         /// <param name='PosicionEnGrilla'></param>
+         /// <param name='AnchoMinimoEnGrilla'></param>
+         /// <param name='AnchoEnGrilla'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Tables.Customizador.EntidadAtributo</returns>
+			public Entities.Tables.Customizador.EntidadAtributo Add(Int64 EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32? PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			{
+			  return (Entities.Tables.Customizador.EntidadAtributo)base.Add(new Entities.Tables.Customizador.EntidadAtributo(EntidadId,Nombre,VisibleEnGrilla,VisibleEnSelectorColumnas,Redimensionable,Agrupable,Movible,Ordenable,Filtrable,PosicionEnGrilla,AnchoMinimoEnGrilla,AnchoEnGrilla,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Tables.Customizador.EntidadAtributo> Items()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                dh.TopQuantity = this.TopQuantity;
+                _entities = dh.Items().Cast<Entities.Tables.Customizador.EntidadAtributo>().ToList<Entities.Tables.Customizador.EntidadAtributo>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Customizador.EntidadAtributo items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Customizador.EntidadAtributo> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Customizador.EntidadAtributo items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EntidadId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="VisibleEnGrilla"></param>
+            /// <param name="VisibleEnSelectorColumnas"></param>
+            /// <param name="Redimensionable"></param>
+            /// <param name="Agrupable"></param>
+            /// <param name="Movible"></param>
+            /// <param name="Ordenable"></param>
+            /// <param name="Filtrable"></param>
+            /// <param name="PosicionEnGrilla"></param>
+            /// <param name="AnchoMinimoEnGrilla"></param>
+            /// <param name="AnchoEnGrilla"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Customizador.EntidadAtributo> Items(Int64? Id,Int64? EntidadId,String Nombre,Boolean? VisibleEnGrilla,Boolean? VisibleEnSelectorColumnas,Boolean? Redimensionable,Boolean? Agrupable,Boolean? Movible,Boolean? Ordenable,Boolean? Filtrable,Int32? PosicionEnGrilla,Int32? AnchoMinimoEnGrilla,Int32? AnchoEnGrilla,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (EntidadId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EntidadId, sqlEnum.OperandEnum.Equal, EntidadId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, EntidadId);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (VisibleEnGrilla != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.VisibleEnGrilla, sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.VisibleEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
+                    }
+                   
+                }
+                if (VisibleEnSelectorColumnas != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.VisibleEnSelectorColumnas, sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.VisibleEnSelectorColumnas, DepositaryWebApi.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
+                    }
+                   
+                }
+                if (Redimensionable != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Redimensionable, sqlEnum.OperandEnum.Equal, Redimensionable);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Redimensionable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Redimensionable);
+                    }
+                   
+                }
+                if (Agrupable != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Agrupable, sqlEnum.OperandEnum.Equal, Agrupable);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Agrupable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Agrupable);
+                    }
+                   
+                }
+                if (Movible != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Movible, sqlEnum.OperandEnum.Equal, Movible);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Movible, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Movible);
+                    }
+                   
+                }
+                if (Ordenable != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Ordenable, sqlEnum.OperandEnum.Equal, Ordenable);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Ordenable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Ordenable);
+                    }
+                   
+                }
+                if (Filtrable != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Filtrable, sqlEnum.OperandEnum.Equal, Filtrable);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Filtrable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Filtrable);
+                    }
+                   
+                }
+                if (PosicionEnGrilla != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PosicionEnGrilla, sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.PosicionEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
+                    }
+                   
+                }
+                if (AnchoMinimoEnGrilla != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoMinimoEnGrilla, sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.AnchoMinimoEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
+                    }
+                   
+                }
+                if (AnchoEnGrilla != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoEnGrilla, sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.AnchoEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Customizador.EntidadAtributo
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Customizador.EntidadAtributo Add(Entities.Tables.Customizador.EntidadAtributo item)
+            {
+                return (Entities.Tables.Customizador.EntidadAtributo)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Customizador.EntidadAtributo
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Customizador.EntidadAtributo AddOrUpdate(Entities.Tables.Customizador.EntidadAtributo item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Customizador.EntidadAtributo)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Customizador.EntidadAtributo
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Customizador.EntidadAtributo item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Customizador.EntidadAtributo with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EntidadId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="VisibleEnGrilla"></param>
+            /// <param name="VisibleEnSelectorColumnas"></param>
+            /// <param name="Redimensionable"></param>
+            /// <param name="Agrupable"></param>
+            /// <param name="Movible"></param>
+            /// <param name="Ordenable"></param>
+            /// <param name="Filtrable"></param>
+            /// <param name="PosicionEnGrilla"></param>
+            /// <param name="AnchoMinimoEnGrilla"></param>
+            /// <param name="AnchoEnGrilla"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64 entidadid,String nombre,Boolean visibleengrilla,Boolean visibleenselectorcolumnas,Boolean redimensionable,Boolean agrupable,Boolean movible,Boolean ordenable,Boolean filtrable,Int32? posicionengrilla,Int32 anchominimoengrilla,Int32 anchoengrilla,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Customizador.EntidadAtributo {Id = id,EntidadId = entidadid,Nombre = nombre,VisibleEnGrilla = visibleengrilla,VisibleEnSelectorColumnas = visibleenselectorcolumnas,Redimensionable = redimensionable,Agrupable = agrupable,Movible = movible,Ordenable = ordenable,Filtrable = filtrable,PosicionEnGrilla = posicionengrilla,AnchoMinimoEnGrilla = anchominimoengrilla,AnchoEnGrilla = anchoengrilla,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Customizador.EntidadAtributo
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Customizador.EntidadAtributo item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Customizador.EntidadAtributo with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                DataHandler dh =  new DataHandler(this._dataItem);
+                dh.WhereParameter = this.Where;
+                dh.OrderByParameter = this.OrderBy;
+                dh.GroupByParameter = this.GroupBy;
+                return dh.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Customizador.EntidadAtributo {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Customizador.EntidadAtributo> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(DepositaryWebApi.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class EntidadAtributo
+	} //namespace DepositaryWebApi.Business.Tables.Customizador
 	namespace DepositaryWebApi.Business.Tables.Directorio {
 	    /// <summary>
 	    /// 
@@ -11330,6 +12336,8 @@ using System.Text;
 					Clave,
 					Nombre,
 					Descripcion,
+					ValidacionDatoId,
+					Valor,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -11379,15 +12387,17 @@ using System.Text;
          /// <param name='Clave'></param>
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
+         /// <param name='ValidacionDatoId'></param>
+         /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.TipoConfiguracionDepositario</returns>
-			public Entities.Tables.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Int64 ValidacionDatoId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Dispositivo.TipoConfiguracionDepositario)base.Add(new Entities.Tables.Dispositivo.TipoConfiguracionDepositario(Clave,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Dispositivo.TipoConfiguracionDepositario)base.Add(new Entities.Tables.Dispositivo.TipoConfiguracionDepositario(Clave,Nombre,Descripcion,ValidacionDatoId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Dispositivo.TipoConfiguracionDepositario> Items()
             {
@@ -11424,13 +12434,15 @@ using System.Text;
             /// <param name="Clave"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="ValidacionDatoId"></param>
+            /// <param name="Valor"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Dispositivo.TipoConfiguracionDepositario> Items(Int64? Id,String Clave,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Dispositivo.TipoConfiguracionDepositario> Items(Int64? Id,String Clave,String Nombre,String Descripcion,Int64? ValidacionDatoId,String Valor,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -11478,6 +12490,30 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (ValidacionDatoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValidacionDatoId, sqlEnum.OperandEnum.Equal, ValidacionDatoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.ValidacionDatoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValidacionDatoId);
+                    }
+                   
+                }
+                if (Valor != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Valor, sqlEnum.OperandEnum.Equal, Valor);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Valor, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor);
                     }
                    
                 }
@@ -11584,15 +12620,17 @@ using System.Text;
             /// <param name="Clave"></param>
             /// <param name="Nombre"></param>
             /// <param name="Descripcion"></param>
+            /// <param name="ValidacionDatoId"></param>
+            /// <param name="Valor"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String clave,String nombre,String descripcion,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String clave,String nombre,String descripcion,Int64 validaciondatoid,String valor,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Dispositivo.TipoConfiguracionDepositario {Id = id,Clave = clave,Nombre = nombre,Descripcion = descripcion,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Dispositivo.TipoConfiguracionDepositario {Id = id,Clave = clave,Nombre = nombre,Descripcion = descripcion,ValidacionDatoId = validaciondatoid,Valor = valor,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Dispositivo.TipoConfiguracionDepositario
@@ -25920,7 +26958,7 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Seguridad.RolFuncion> Items(Int16 Id)
+            public List<Entities.Tables.Seguridad.RolFuncion> Items(Int64 Id)
             {
                 this.Where.Clear();
                     if (this.Where.Count == 0)
@@ -25950,7 +26988,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Seguridad.RolFuncion> Items(Int16? Id,Int64? FuncionId,Int64? RolId,String Descripcion,Boolean? PuedeAgregar,Boolean? PuedeModificar,Boolean? PuedeEliminar,Boolean? PuedeVisualizar,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Seguridad.RolFuncion> Items(Int64? Id,Int64? FuncionId,Int64? RolId,String Descripcion,Boolean? PuedeAgregar,Boolean? PuedeModificar,Boolean? PuedeEliminar,Boolean? PuedeVisualizar,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -26162,7 +27200,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int16 id,Int64 funcionid,Int64 rolid,String descripcion,Boolean puedeagregar,Boolean puedemodificar,Boolean puedeeliminar,Boolean puedevisualizar,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 funcionid,Int64 rolid,String descripcion,Boolean puedeagregar,Boolean puedemodificar,Boolean puedeeliminar,Boolean puedevisualizar,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
                 return base.Update((IDataItem) new Entities.Tables.Seguridad.RolFuncion {Id = id,FuncionId = funcionid,RolId = rolid,Descripcion = descripcion,PuedeAgregar = puedeagregar,PuedeModificar = puedemodificar,PuedeEliminar = puedeeliminar,PuedeVisualizar = puedevisualizar,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
@@ -26191,7 +27229,7 @@ using System.Text;
             /// Deletes by Pks
             /// </summary>
             /// <returns></returns>
-            public Int64 Delete(Int16 id)
+            public Int64 Delete(Int64 id)
             {
                 return base.DeleteItem((IDataItem) new Entities.Tables.Seguridad.RolFuncion {Id = id});
             }

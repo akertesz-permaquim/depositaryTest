@@ -34,7 +34,7 @@
                     transaccionValidadaMonitor.TransaccionId = transaccion.Id;
                     transaccionValidadaMonitor.CodigoOperacion = transaccion.CodigoOperacion;
                     transaccionValidadaMonitor.TipoTransaccion = transaccion.TipoId.Nombre;
-                    transaccionValidadaMonitor.OrigenValor = transaccion.OrigenValorId.Nombre;
+                    transaccionValidadaMonitor.OrigenValor = transaccion._OrigenValorId > 0 ? transaccion.OrigenValorId.Nombre : "";
                     transaccionValidadaMonitor.DepositarioId = transaccion._DepositarioId;
                     transaccionValidadaMonitor.FechaTransaccion = transaccion.Fecha;
                     transaccionValidadaMonitor.TotalValidado = moneda.Codigo + " " + transaccion.TotalValidado.ToString();
@@ -136,22 +136,12 @@
             oContenedor.Where.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.IsNull, 0);
             oContenedor.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositario);
             oContenedor.OrderByParameter.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaApertura, Depositary.sqlEnum.DirEnum.DESC);
+            oContenedor.TopQuantity = 1;
             oContenedor.Items();
 
             if (oContenedor.Result.Count > 0)
             {
                 bolsaColocada = oContenedor.Result.FirstOrDefault().Id;
-                //foreach (var contenedor in oContenedor.Result)
-                //{
-                //    var bolsaTransaccion = contenedor.ListOf_Transaccion_ContenedorId.FirstOrDefault(x => x._DepositarioId == pDepositario);
-
-                //    if (bolsaTransaccion != null)
-                //    {
-                //        bolsaColocada = bolsaTransaccion._ContenedorId;
-                //        return bolsaColocada;
-                //    }
-
-                //}
             }
 
             return bolsaColocada;
@@ -190,7 +180,7 @@
                     transaccionAValidarMonitor.CodigoSobre = transaccionSobre.CodigoSobre;
                     transaccionAValidarMonitor.DepositarioId = transaccion._DepositarioId;
                     transaccionAValidarMonitor.FechaTransaccion = transaccion.Fecha;
-                    transaccionAValidarMonitor.OrigenValor = transaccion.OrigenValorId.Nombre;
+                    transaccionAValidarMonitor.OrigenValor = transaccion._OrigenValorId > 0 ? transaccion.OrigenValorId.Nombre : "";
                     transaccionAValidarMonitor.FechaTransaccionSobre = transaccionSobre.Fecha;
                     transaccionAValidarMonitor.TotalAValidar = moneda.Codigo + " " + transaccion.TotalAValidar.ToString();
                     transaccionAValidarMonitor.UsuarioTransaccion = usuarioTransaccion.Nombre + " " + usuarioTransaccion.Apellido;
@@ -238,7 +228,7 @@
 
         #region Existencias
 
-        public static float ObtenerPorcentajeOcupacionBolsa(Int64 pContenedorId)
+        public static float ObtenerPorcentajeOcupacionBolsa(Int64 pContenedorId, Int64 DepositarioId)
         {
             float resultado = 0;
             Int64 cantidadMaxima = 0;
@@ -253,6 +243,7 @@
                 cantidadMaxima = contenedor.Result.FirstOrDefault().TipoId.Capacidad;
                 Depositary.Business.Relations.Operacion.Transaccion transacciones = new();
                 transacciones.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, Depositary.sqlEnum.OperandEnum.Equal, pContenedorId);
+                transacciones.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
                 transacciones.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, Depositary.sqlEnum.OperandEnum.Equal, TransaccionEntities.TipoTransaccion.DepositoBillete);
                 transacciones.Items();
 
@@ -338,10 +329,10 @@
                     foreach (var detalleTransaccionSobre in detallesTransaccionSobre)
                     {
                         var relacionMonedaTipoValor = detalleTransaccionSobre.RelacionMonedaTipoValorId;
-                        var tipoValorAValidar = resultado.FirstOrDefault(x => x.TipoValorId == relacionMonedaTipoValor._TipoValorId);
-                        if (tipoValorAValidar != null)
+                        var existenciaPrevia = resultado.FirstOrDefault(x => x.TipoValorId == relacionMonedaTipoValor._TipoValorId && x.MonedaId == relacionMonedaTipoValor._MonedaId);
+                        if (existenciaPrevia != null)
                         {
-                            tipoValorAValidar.Cantidad += detalleTransaccionSobre.CantidadDeclarada;
+                            existenciaPrevia.Cantidad += detalleTransaccionSobre.CantidadDeclarada;
                         }
                         else
                         {
@@ -349,6 +340,7 @@
                             var tipoValor = relacionMonedaTipoValor.TipoValorId;
                             nuevoTipoValorAValidar.Cantidad = detalleTransaccionSobre.CantidadDeclarada;
                             nuevoTipoValorAValidar.Moneda = relacionMonedaTipoValor.MonedaId.Nombre;
+                            nuevoTipoValorAValidar.MonedaId = relacionMonedaTipoValor._MonedaId;
                             nuevoTipoValorAValidar.TipoValorId = tipoValor.Id;
                             nuevoTipoValorAValidar.TipoValor = tipoValor.Nombre;
                             nuevoTipoValorAValidar.DepositarioId = pDepositarioID;

@@ -1,0 +1,38 @@
+﻿@page "/RequerimientoLicencia"
+
+@using Radzen.Blazor
+@using Permaquim.Depositary.Web.Administration.Controllers;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+<span style="text-align:center">
+    <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_MENU_REQUIERE_LICENCIA",dataLenguaje)</h2>
+</span>
+<br>
+<br>
+<div style="text-align:center">
+    <RadzenImage Path="images/CandadoLicencia.png">
+
+    </RadzenImage>
+</div>
+<br>
+<br>
+<div style="text-align:center">
+    <RadzenButton Text="Cargar licencia"></RadzenButton>
+</div>
+
+@code {
+    private List<Entities.TextoLenguaje> dataLenguaje;
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
+        {
+            NavManager.NavigateTo("login", true);
+        }
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+    }
+
+}

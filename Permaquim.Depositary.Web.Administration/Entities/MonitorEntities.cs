@@ -134,6 +134,7 @@
     {
         public Int64 DepositarioId { get; set; }
         public string Moneda { get; set; }
+        public Int64 MonedaId { get; set; }
         public Int64 TipoValorId { get; set; }
         public string TipoValor { get; set; }
         public string ImagenTipoValor { get; set; }

@@ -21,13 +21,13 @@
         <ChildContent>
             <div class="row justify-content-start align-items-center">
                 <div class="col-6 d-flex align-items-center">
-                    <RadzenSidebarToggle class="textoMainLayout" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ButtonSideBarAdministradorWebDepositario", false) Click="@SidebarToggle0Click">
+                    <RadzenSidebarToggle class="textoMainLayout" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ButtonSideBarAdministradorWebDepositario", false) Click="@SidebarToggleClick">
                     </RadzenSidebarToggle>
-                    <RadzenLabel class="textoMainLayout" Text="Administrador Depositario">
+                    <RadzenLabel class="textoMainLayout" Text="@MultilenguajeController.ObtenerTextoPorClave("TEXTO_HEADER_MAIN_LAYOUT",dataLenguaje)">
                     </RadzenLabel>
                 </div>
                 <div class="col-6 text-right">
-                    <RadzenProfileMenu class="textoMainLayout" Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@Profilemenu0Click">
+                    <RadzenProfileMenu class="textoMainLayout" Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@ProfileMenuClick">
                         <ChildContent>
                             <div style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfilDesplegable", false)>
                                 <RadzenProfileMenuItem Text="Perfil" Path="perfil" Value="Perfil" Icon="person">
@@ -67,10 +67,29 @@
                         //Menues principales
                         foreach (var menu in dataMenues.Where(x => x.DependeDe == null).OrderBy(x => x.MenuDescripcion))
                         {
+                            if (!isLicensed)
+                            {
+                                if (listaMenuesLicenciaPremium.Exists(x => x == menu.MenuNombre))
+                                    esMenuLicenciado = true;
+                                else
+                                    esMenuLicenciado = false;
+                            }
+                            else
+                                esMenuLicenciado = false;
+
+                            if (esMenuLicenciado)
+                            {
+                                iconoMenu = "lock";
+                            }
+                            else
+                            {
+                                iconoMenu = menu.Imagen;
+                            }
+
                             switch (menu.TipoMenuId)
                             {
                                 case (Int64)SeguridadEntities.TipoMenu.Carpeta:
-                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)">
+                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@iconoMenu">
                                         <ChildContent>
                                             @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId).OrderBy(x => x.MenuDescripcion))
                                             {
@@ -81,14 +100,22 @@
                                                             @foreach (var subMenuDependiente in dataMenues.Where(x => x.DependeDe == menuDependiente.MenuId).OrderBy(x => x.MenuDescripcion))
                                                             {
                                                                 <RadzenPanelMenuItem Text="@(subMenuDependiente.MenuDescripcion)" Icon="@(subMenuDependiente.Imagen)" Path="@(subMenuDependiente.Referencia)" class="sub-menu2">
-
                                                                 </RadzenPanelMenuItem>
                                                             }
                                                         </RadzenPanelMenuItem>
                                                         break;
                                                     case (Int64)SeguridadEntities.TipoMenu.Pagina:
-                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" Path="@(menuDependiente.Referencia)" class="sub-menu">
 
+                                                        if (esMenuLicenciado)
+                                                        {
+                                                            iconoMenu = "lock";
+                                                        }
+                                                        else
+                                                        {
+                                                            iconoMenu = menuDependiente.Imagen;
+                                                        }
+
+                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@iconoMenu" Path="@(menuDependiente.Referencia)" class="sub-menu">
                                                         </RadzenPanelMenuItem>
                                                         break;
                                                 }
@@ -97,12 +124,11 @@
                                     </RadzenPanelMenuItem>
                                     break;
                                 case (Int64)SeguridadEntities.TipoMenu.Pagina:
-                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@(menu.Imagen)" Path="@(menu.Referencia)">
+                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@iconoMenu" Path="@(menu.Referencia)">
 
                                     </RadzenPanelMenuItem>
                                     break;
                             }
-
                         }
                     }
                 </ChildContent>
@@ -111,7 +137,7 @@
     </RadzenSidebar>
     <RadzenFooter Style="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"FooterAdministradorWebDepositario",false)">
         <ChildContent>
-            <RadzenLabel class="textoMainLayout" Text="Permaquim S.A., Copyright Ⓒ 2022">
+            <RadzenLabel class="textoMainLayout" Text="@MultilenguajeController.ObtenerTextoPorClave("TEXTO_FOOTER_MAIN_LAYOUT",dataLenguaje)">
             </RadzenLabel>
         </ChildContent>
     </RadzenFooter>
@@ -124,7 +150,9 @@
     protected RadzenSidebar sidebar0;
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>();
     private List<SeguridadEntities.Menu> dataMenues = new();
+    private List<Entities.TextoLenguaje> dataLenguaje;
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+    private string claseMenu = "";
     private string colorHeader;
     private string colorFondoMenuActivo;
     private string colorBordeMenuActivo;
@@ -134,16 +162,19 @@
     private string colorFondoMenuesPrimeraLinea;
     private string colorFondoMenuesSegundaLinea;
     private string colorFondoMenuesTerceraLinea;
+    private string iconoMenu = "";
+    private bool isLicensed = true;
+    private bool esMenuLicenciado;
+    private List<string> listaMenuesLicenciaPremium = new();
 
-
-    protected async System.Threading.Tasks.Task SidebarToggle0Click(dynamic args)
+    protected async System.Threading.Tasks.Task SidebarToggleClick(dynamic args)
     {
         await InvokeAsync(() => { sidebar0.Toggle(); });
 
         await InvokeAsync(() => { body0.Toggle(); });
     }
 
-    protected async System.Threading.Tasks.Task Profilemenu0Click(dynamic args)
+    protected async System.Threading.Tasks.Task ProfileMenuClick(dynamic args)
     {
         //if (args.Value == "Logout")
         //{
@@ -151,11 +182,19 @@
         //}
     }
 
+    protected override void OnInitialized()
+    {
+        listaMenuesLicenciaPremium.Add("Dashboard");
+        listaMenuesLicenciaPremium.Add("Monitor");
+        listaMenuesLicenciaPremium.Add("Reportes");
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+            dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
             if (dataUsuario == null)
             {
                 NavManager.NavigateTo("login", true);

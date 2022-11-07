@@ -12,7 +12,7 @@
 
 @if (dataFunciones != null)
 {
-    @if (SeguridadController.VerificarPermisoFuncion("BancaBanco", dataFunciones, "PuedeVisualizar"))
+    @if (SeguridadController.VerificarPermisoFuncion("Dashboard", dataFunciones, "PuedeVisualizar"))
     {
         <RadzenContent Container="main">
             <ChildContent>
@@ -286,7 +286,7 @@ else
             //En funcion del usuario que consulta obtenemos el perfil de visualizacion y luego las empresas a las que puede acceder
             await Task.Run(ObtenerListadoEmpresasPorPerfil);
             await Task.Run(obtenerParametrosConfiguracion);
-            SetTimer();
+            //SetTimer();
             obtenerInformacion();
             StateHasChanged();
         }
@@ -345,7 +345,6 @@ else
 
     private void ObtenerListadoEmpresasPorPerfil()
     {
-
         dataEmpresasAccesibles = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
         //Dejo todas las empresas marcadas
         if (dataEmpresasAccesibles.Count > 0)
