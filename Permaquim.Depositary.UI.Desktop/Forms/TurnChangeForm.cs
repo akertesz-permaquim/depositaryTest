@@ -100,6 +100,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void TurnchangeButton_Click(object sender, EventArgs e)
         {
+            this.MainPanel.Enabled = false;
             _turnChange = DatabaseController.CloseCurrentTurn();
             PrintTicket();
             FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
@@ -129,6 +130,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 LoadOperationsHeader();
                 SetinformationMessage();
+                this.MainPanel.Enabled = true;
             }
             else
             {

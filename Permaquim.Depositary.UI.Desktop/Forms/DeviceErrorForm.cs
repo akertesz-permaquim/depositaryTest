@@ -138,6 +138,9 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
         private void UnJamButton_Click(object sender, EventArgs e)
         {
+
+            TimeOutController.Reset();
+
             switch ((DatabaseController.CurrentDepositary.
                 ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
             {

@@ -13,6 +13,12 @@ namespace Permaquim.Depositary.UI.Desktop
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private List<Depositario.Entities.Views.Reporte.Contenedores> _bagHistoryItems = new();
+
+        private long _currentContainerId;
+
+        private List<BagBillContentResume> _bagContentItems = new();
+        private List<BagBillContentResume> _bagContentResumeItems = new();
+
         public BagHistoryForm()
         {
             InitializeComponent();
@@ -214,6 +220,95 @@ namespace Permaquim.Depositary.UI.Desktop
         }
 
         #endregion
+
+        #region Datagrid Detalle
+        private void InitializeGridView(OperationTypeEnum operationType)
+        {
+
+            DataGridView referenceDataGridview = null;
+
+
+            switch (operationType)
+            {
+                case OperationTypeEnum.None:
+                    break;
+                case OperationTypeEnum.BillDeposit:
+                    referenceDataGridview = BillDepositGridView;
+                    break;
+                case OperationTypeEnum.CoinDeposit:
+                    break;
+                case OperationTypeEnum.EnvelopeDeposit:
+                    referenceDataGridview = EnvelopeDepositGridView;
+                    break;
+                case OperationTypeEnum.ValueExtraction:
+                    break;
+                default:
+                    break;
+            }
+
+
+
+            referenceDataGridview.AutoGenerateColumns = false;
+
+            referenceDataGridview.Columns.Clear();
+
+            referenceDataGridview.Columns.Add(new()
+            {
+                Visible = false,
+                Width = 1,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            referenceDataGridview.Columns.Add(new()
+            {
+                DataPropertyName = "MonedaId",
+                Name = "MonedaId",
+                Visible = false,
+                Width = 50,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            referenceDataGridview.Columns.Add(new()
+            {
+                DataPropertyName = "Moneda",
+                HeaderText = (operationType == OperationTypeEnum.BillDeposit
+                        ? MultilanguangeController.GetText(MultiLanguageEnum.MONEDA)
+                        : MultilanguangeController.GetText(MultiLanguageEnum.SOBRE)),
+                Name = "Moneda",
+                Visible = true,
+                Width = 350,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+
+            });
+
+            referenceDataGridview.Columns.Add(new()
+            {
+                DataPropertyName = "FormattedTotal",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
+                Name = "Total",
+                Visible = true,
+                Width = 350,
+                CellTemplate = new DataGridViewTextBoxCell()
+            });
+
+        }
+        private void SetcolumnsAlignment(DataGridView grid)
+        {
+            for (int i = 1; i < grid.Columns.Count; i++)
+            {
+                grid.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                grid.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+
+
+        }
+
+
+        #endregion
+
         #region Data    
         private void LoadBagHistoryItems()
         {
@@ -255,6 +350,7 @@ namespace Permaquim.Depositary.UI.Desktop
             else
                 InitializeLocals();
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+
         }
         #endregion
         private void BagHistoryForm_MouseClick(object sender, MouseEventArgs e)
@@ -332,9 +428,87 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
         }
 
+        private void InitializeContainerHistoryDetaillGridView()
+        {
+
+        }
+
         private void MainGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             TimeOutController.Reset();
+
+            DetailPanel.Location = new Point(
+              this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
+              this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
+            DetailPanel.Anchor = AnchorStyles.None;
+
+            DetailPanel.Visible = true;
+
+            InitializeGridView(OperationTypeEnum.BillDeposit);
+            InitializeGridView(OperationTypeEnum.EnvelopeDeposit);
+
+            LoadBagContentItems(OperationTypeEnum.BillDeposit);
+            LoadBagContentItems(OperationTypeEnum.EnvelopeDeposit);
+
+            SetcolumnsAlignment(BillDepositGridView);
+            SetcolumnsAlignment(EnvelopeDepositGridView);
+
+
+            if (e.RowIndex > -1)
+            {
+                InitializeContainerHistoryDetaillGridView();
+
+                _currentContainerId = (long)MainGridView.Rows[e.RowIndex].Cells["Id"].Value;
+
+
+            }
+
+
+        }
+
+        private void LoadBagContentItems(OperationTypeEnum operationType)
+        {
+            DataGridView referenceDataGridview = null;
+
+            switch (operationType)
+            {
+                case OperationTypeEnum.None:
+                    break;
+                case OperationTypeEnum.BillDeposit:
+                    referenceDataGridview = BillDepositGridView;
+                    _bagContentResumeItems = DatabaseController.GetContainerResume(_currentContainerId,OperationTypeEnum.BillDeposit);
+                    BillDepositGridView.DataSource = _bagContentResumeItems;
+                    break;
+                case OperationTypeEnum.CoinDeposit:
+                    break;
+                case OperationTypeEnum.EnvelopeDeposit:
+                    referenceDataGridview = EnvelopeDepositGridView;
+                    _bagContentItems = DatabaseController.GetContainerResume(_currentContainerId,OperationTypeEnum.EnvelopeDeposit);
+                    EnvelopeDepositGridView.DataSource = _bagContentItems;
+                    break;
+                case OperationTypeEnum.ValueExtraction:
+                    break;
+                default:
+                    break;
+            }
+
+            referenceDataGridview.ClearSelection();
+
+        }
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+
+
+            ReportController.ContainerToPrint = DatabaseController.GetContainer(_currentContainerId);
+            ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+            DatabaseController.GetEnvelopeContainerContentItems(_currentContainerId),
+            DatabaseController.GetBillContainerContentItems(_currentContainerId),1);
+        }
+
+        private void AcceptButton_Click(object sender, EventArgs e)
+        {
+            DetailPanel.Visible = false;
         }
     }
 }

@@ -322,7 +322,9 @@
             LICENCIA_NO_VALIDA,
             DIAS_RESTANTES_LICENCIA,
             CANTIDADTRANSACCIONES,
-            SECUENCIA
+            SECUENCIA,
+            ERROR_CONTENEDOR,
+            ERROR_IMPRESORA
         }
 
         public enum FunctionEnum

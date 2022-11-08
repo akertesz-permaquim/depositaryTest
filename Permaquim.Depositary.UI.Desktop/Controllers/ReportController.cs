@@ -30,6 +30,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         /// </summary>
         public static Depositario.Entities.Relations.Operacion.Turno TurnToPrint;
 
+        /// <summary>
+        /// Representa el contenedor que esta en impresion en el reporte de turnos
+        /// </summary>
+        public static Depositario.Entities.Relations.Operacion.Contenedor ContainerToPrint;
+
         public static Depositario.Entities.Relations.Operacion.CierreDiario DailyClosingToPrint;
 
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
@@ -739,7 +744,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     // Usuario
                     e.Graphics.DrawString(
                     StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(DatabaseController.LastContainer.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(ContainerToPrint.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                     yOffset += _interlineSpace;
                 }
@@ -756,14 +761,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Sucursal
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastContainer.DepositarioId.SectorId.SucursalId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(ContainerToPrint.DepositarioId.SectorId.SucursalId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
                  , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
                 // Terminal
                 e.Graphics.DrawString(
                                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastContainer.DepositarioId.CodigoExterno, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(ContainerToPrint.DepositarioId.CodigoExterno, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
@@ -771,13 +776,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Contenedor
                 e.Graphics.DrawString(
                                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(DatabaseController.LastContainer.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(ContainerToPrint.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
 
                 string fechaaperura = 
-                    DatabaseController.LastContainer.FechaApertura.ToString("dd/MM/yyyy HH:mm");
+                    ContainerToPrint.FechaApertura.ToString("dd/MM/yyyy HH:mm");
 
                 // Fecha Apertura
                 e.Graphics.DrawString(
@@ -788,8 +793,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 yOffset += _interlineSpace;
 
                 // Fecha Cierre
-                var fechaCierre = DatabaseController.LastContainer.FechaCierre == null ? "" :
-                    ((DateTime)DatabaseController.LastContainer.FechaCierre).ToString("dd/MM/yyyy HH:mm");
+                var fechaCierre = ContainerToPrint.FechaCierre == null ? "" :
+                    ((DateTime)ContainerToPrint.FechaCierre).ToString("dd/MM/yyyy HH:mm");
 
                 e.Graphics.DrawString(
                     StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +

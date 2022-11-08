@@ -419,6 +419,8 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                 {
+
+                    ReportController.ContainerToPrint = DatabaseController.LastContainer;
                     ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
                         DatabaseController.GetEnvelopeLastContainerContentItems(), 
                         DatabaseController.GetBillLastContainerContentItems(), i);

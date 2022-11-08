@@ -33,7 +33,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
-
+            ResetReport();
             LoadOperationsHeader();
         }
         protected override CreateParams CreateParams
@@ -48,8 +48,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ResetReport()
         {
-            FromDateTimePicker.Value = DateTime.Now.Date;
             ToDateTimePicker.Value = DateTime.Now.Date;
+            FromDateTimePicker.Value = DateTime.Now.Date;
             FromDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromDateTimePicker.CustomFormat = "dd/MM/yyyy";
 
@@ -58,8 +58,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             UserComboBox.SelectedIndex = 0;
             TurnComboBox.SelectedIndex = 0;
-
-            LoadOperationsHeader();
         }
 
         private void PollingTimer_Tick(object? sender, EventArgs e)

@@ -116,6 +116,7 @@ namespace Permaquim.Depositary.UI.Desktop
             else
             {
                 InitializeLocals();
+                _device.RemoteCancel();
             }
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }

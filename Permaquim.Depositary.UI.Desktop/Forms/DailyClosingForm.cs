@@ -90,6 +90,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void DailyClosingButton_Click(object sender, EventArgs e)
         {
+            this.MainPanel.Enabled = false;
             _currentDailyclosing = DatabaseController.ClosePendingDays();
             PrintTicket();
             FormsController.OpenChildForm(this, new OtherOperationsForm(), _device);
@@ -209,6 +210,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 InitializeDenominationsGridViewDetailGridView();
                 LoadDailyClosingItems();
+                this.MainPanel.Enabled = true;
             }
             else
                 InitializeLocals();

@@ -517,8 +517,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 _device.StoringStart();
                 _device.PreviousState = StatusInformation.State.PQStoring;
-                if(_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
-                    ExitEnvelopeDepositForm();
+                 ExitEnvelopeDepositForm();
 
             }
         }
@@ -526,10 +525,10 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             EnableDisableControls(false);
+            
 
             PrintTicket(TicketTypeEnum.Second);
 
-            SaveTransaction();
             _device.RemoteCancel();
 
             _operationStatus.DepositEnded = true;
@@ -538,7 +537,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Graba el depósito en base de datos
         /// </summary>
-        private void SaveTransaction()
+        private long SaveTransaction()
         {
 
             DenominationsGridView.Enabled = false;
@@ -620,11 +619,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 PrintTicket(TicketTypeEnum.First);
 
+                return transaction.Id;
+
             }
             catch (Exception ex)
             {
                 AuditController.Log(ex);
                 transactions.EndTransaction(false);
+                return -1;
             }
 
         }
@@ -687,7 +689,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                          TimeOutController.Reset();
                         _device.OpenEscrow();
-                        _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                    _operationStatus.CurrentTransactionId = SaveTransaction();
+                    _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
                 }
             }
 

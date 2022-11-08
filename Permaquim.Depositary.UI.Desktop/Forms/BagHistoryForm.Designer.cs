@@ -30,6 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.MainGridView = new System.Windows.Forms.DataGridView();
             this.FilterPanel = new System.Windows.Forms.Panel();
@@ -45,8 +49,22 @@
             this.ToFechaAperturaDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FromFechaAperturaDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ExecuteButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.DetailPanel = new System.Windows.Forms.Panel();
+            this.BagContentTabControl = new System.Windows.Forms.TabControl();
+            this.Billetes = new System.Windows.Forms.TabPage();
+            this.BillDepositGridView = new System.Windows.Forms.DataGridView();
+            this.EnvelopeDepositTabPage = new System.Windows.Forms.TabPage();
+            this.EnvelopeDepositGridView = new System.Windows.Forms.DataGridView();
+            this.PrintButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.MainGridView)).BeginInit();
             this.FilterPanel.SuspendLayout();
+            this.DetailPanel.SuspendLayout();
+            this.BagContentTabControl.SuspendLayout();
+            this.Billetes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BillDepositGridView)).BeginInit();
+            this.EnvelopeDepositTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EnvelopeDepositGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // MainPanel
@@ -175,7 +193,7 @@
             this.ExecuteBagHistorySearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExecuteBagHistorySearch.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ExecuteBagHistorySearch.ForeColor = System.Drawing.Color.White;
-            this.ExecuteBagHistorySearch.Location = new System.Drawing.Point(810, 12);
+            this.ExecuteBagHistorySearch.Location = new System.Drawing.Point(600, 12);
             this.ExecuteBagHistorySearch.Name = "ExecuteBagHistorySearch";
             this.ExecuteBagHistorySearch.Size = new System.Drawing.Size(128, 64);
             this.ExecuteBagHistorySearch.TabIndex = 213;
@@ -255,7 +273,7 @@
             this.ExecuteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExecuteButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ExecuteButton.ForeColor = System.Drawing.Color.White;
-            this.ExecuteButton.Location = new System.Drawing.Point(1558, 8);
+            this.ExecuteButton.Location = new System.Drawing.Point(1348, 8);
             this.ExecuteButton.Name = "ExecuteButton";
             this.ExecuteButton.Size = new System.Drawing.Size(128, 64);
             this.ExecuteButton.TabIndex = 197;
@@ -263,23 +281,200 @@
             this.ExecuteButton.TextColor = System.Drawing.Color.White;
             this.ExecuteButton.UseVisualStyleBackColor = false;
             // 
+            // DetailPanel
+            // 
+            this.DetailPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DetailPanel.Controls.Add(this.BagContentTabControl);
+            this.DetailPanel.Controls.Add(this.PrintButton);
+            this.DetailPanel.Controls.Add(this.AcceptButton);
+            this.DetailPanel.Location = new System.Drawing.Point(56, 0);
+            this.DetailPanel.Name = "DetailPanel";
+            this.DetailPanel.Size = new System.Drawing.Size(808, 552);
+            this.DetailPanel.TabIndex = 194;
+            this.DetailPanel.Visible = false;
+            // 
+            // BagContentTabControl
+            // 
+            this.BagContentTabControl.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BagContentTabControl.Controls.Add(this.Billetes);
+            this.BagContentTabControl.Controls.Add(this.EnvelopeDepositTabPage);
+            this.BagContentTabControl.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BagContentTabControl.Location = new System.Drawing.Point(15, 20);
+            this.BagContentTabControl.Name = "BagContentTabControl";
+            this.BagContentTabControl.SelectedIndex = 0;
+            this.BagContentTabControl.Size = new System.Drawing.Size(776, 384);
+            this.BagContentTabControl.TabIndex = 190;
+            // 
+            // Billetes
+            // 
+            this.Billetes.BackColor = System.Drawing.Color.Transparent;
+            this.Billetes.Controls.Add(this.BillDepositGridView);
+            this.Billetes.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Billetes.Location = new System.Drawing.Point(4, 39);
+            this.Billetes.Name = "Billetes";
+            this.Billetes.Padding = new System.Windows.Forms.Padding(3);
+            this.Billetes.Size = new System.Drawing.Size(768, 341);
+            this.Billetes.TabIndex = 0;
+            this.Billetes.Text = "Billetes";
+            // 
+            // BillDepositGridView
+            // 
+            this.BillDepositGridView.AllowUserToAddRows = false;
+            this.BillDepositGridView.AllowUserToDeleteRows = false;
+            this.BillDepositGridView.AllowUserToResizeColumns = false;
+            this.BillDepositGridView.AllowUserToResizeRows = false;
+            this.BillDepositGridView.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BillDepositGridView.BackgroundColor = System.Drawing.Color.White;
+            this.BillDepositGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BillDepositGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.BillDepositGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BillDepositGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.BillDepositGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.BillDepositGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            this.BillDepositGridView.EnableHeadersVisualStyles = false;
+            this.BillDepositGridView.GridColor = System.Drawing.Color.White;
+            this.BillDepositGridView.Location = new System.Drawing.Point(8, 5);
+            this.BillDepositGridView.Name = "BillDepositGridView";
+            this.BillDepositGridView.RowHeadersVisible = false;
+            this.BillDepositGridView.RowTemplate.DividerHeight = 1;
+            this.BillDepositGridView.RowTemplate.Height = 50;
+            this.BillDepositGridView.RowTemplate.ReadOnly = true;
+            this.BillDepositGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.BillDepositGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.BillDepositGridView.Size = new System.Drawing.Size(752, 328);
+            this.BillDepositGridView.TabIndex = 186;
+            // 
+            // EnvelopeDepositTabPage
+            // 
+            this.EnvelopeDepositTabPage.Controls.Add(this.EnvelopeDepositGridView);
+            this.EnvelopeDepositTabPage.Location = new System.Drawing.Point(4, 39);
+            this.EnvelopeDepositTabPage.Name = "EnvelopeDepositTabPage";
+            this.EnvelopeDepositTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.EnvelopeDepositTabPage.Size = new System.Drawing.Size(768, 341);
+            this.EnvelopeDepositTabPage.TabIndex = 1;
+            this.EnvelopeDepositTabPage.Text = "Sobres";
+            // 
+            // EnvelopeDepositGridView
+            // 
+            this.EnvelopeDepositGridView.AllowUserToAddRows = false;
+            this.EnvelopeDepositGridView.AllowUserToDeleteRows = false;
+            this.EnvelopeDepositGridView.AllowUserToResizeColumns = false;
+            this.EnvelopeDepositGridView.AllowUserToResizeRows = false;
+            this.EnvelopeDepositGridView.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.EnvelopeDepositGridView.BackgroundColor = System.Drawing.Color.White;
+            this.EnvelopeDepositGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.EnvelopeDepositGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.EnvelopeDepositGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.EnvelopeDepositGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.EnvelopeDepositGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.EnvelopeDepositGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            this.EnvelopeDepositGridView.EnableHeadersVisualStyles = false;
+            this.EnvelopeDepositGridView.GridColor = System.Drawing.Color.White;
+            this.EnvelopeDepositGridView.Location = new System.Drawing.Point(8, 6);
+            this.EnvelopeDepositGridView.Name = "EnvelopeDepositGridView";
+            this.EnvelopeDepositGridView.RowHeadersVisible = false;
+            this.EnvelopeDepositGridView.RowTemplate.DividerHeight = 1;
+            this.EnvelopeDepositGridView.RowTemplate.Height = 50;
+            this.EnvelopeDepositGridView.RowTemplate.ReadOnly = true;
+            this.EnvelopeDepositGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.EnvelopeDepositGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.EnvelopeDepositGridView.Size = new System.Drawing.Size(752, 326);
+            this.EnvelopeDepositGridView.TabIndex = 187;
+            // 
+            // PrintButton
+            // 
+            this.PrintButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.PrintButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.PrintButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.PrintButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.PrintButton.BorderRadius = 5;
+            this.PrintButton.BorderSize = 0;
+            this.PrintButton.FlatAppearance.BorderSize = 0;
+            this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PrintButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PrintButton.ForeColor = System.Drawing.Color.White;
+            this.PrintButton.Location = new System.Drawing.Point(520, 452);
+            this.PrintButton.Name = "PrintButton";
+            this.PrintButton.Size = new System.Drawing.Size(160, 55);
+            this.PrintButton.TabIndex = 185;
+            this.PrintButton.Text = "Imprimir";
+            this.PrintButton.TextColor = System.Drawing.Color.White;
+            this.PrintButton.UseVisualStyleBackColor = false;
+            this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
+            // 
+            // AcceptButton
+            // 
+            this.AcceptButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AcceptButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.AcceptButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.AcceptButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.AcceptButton.BorderRadius = 5;
+            this.AcceptButton.BorderSize = 0;
+            this.AcceptButton.FlatAppearance.BorderSize = 0;
+            this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AcceptButton.ForeColor = System.Drawing.Color.White;
+            this.AcceptButton.Location = new System.Drawing.Point(280, 452);
+            this.AcceptButton.Name = "AcceptButton";
+            this.AcceptButton.Size = new System.Drawing.Size(160, 55);
+            this.AcceptButton.TabIndex = 184;
+            this.AcceptButton.Text = "Salir";
+            this.AcceptButton.TextColor = System.Drawing.Color.White;
+            this.AcceptButton.UseVisualStyleBackColor = false;
+            this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
+            // 
             // BagHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 600);
+            this.Controls.Add(this.DetailPanel);
             this.Controls.Add(this.FilterPanel);
             this.Controls.Add(this.MainGridView);
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BagHistoryForm";
-            this.Text = "BagHisoryForm";
+            this.Text = "BagHistoryForm";
             this.Load += new System.EventHandler(this.BagHistoryForm_Load);
             this.VisibleChanged += new System.EventHandler(this.BagHistoryForm_VisibleChanged);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BagHistoryForm_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.MainGridView)).EndInit();
             this.FilterPanel.ResumeLayout(false);
             this.FilterPanel.PerformLayout();
+            this.DetailPanel.ResumeLayout(false);
+            this.BagContentTabControl.ResumeLayout(false);
+            this.Billetes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BillDepositGridView)).EndInit();
+            this.EnvelopeDepositTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.EnvelopeDepositGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -301,5 +496,13 @@
         private DateTimePicker FromFechaAperturaDateTimePicker;
         private TextBox IdentificadorTextbox;
         private CustomButton ExecuteBagHistorySearch;
+        private Panel DetailPanel;
+        private CustomButton PrintButton;
+        private CustomButton AcceptButton;
+        private TabControl BagContentTabControl;
+        private TabPage Billetes;
+        private DataGridView BillDepositGridView;
+        private TabPage EnvelopeDepositTabPage;
+        private DataGridView EnvelopeDepositGridView;
     }
 }

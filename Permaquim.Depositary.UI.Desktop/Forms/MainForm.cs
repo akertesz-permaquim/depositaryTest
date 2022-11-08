@@ -22,10 +22,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private const string REDLED = "REDLED";
         private const string PRESENTACION = "Presentacion.gif";
 
-        private const string ERROR_COMUNICACION_CONTADORA = "Error de comunicación de la contadora";
-        private const string ERROR_COMUNICACION_PLACA = "Error de comunicación de la placa";
-        private const string ERROR_CONTENEDOR = "Error de contenedor";
-        private const string ERROR_IMPRESORA = "Error de impresora";
         private const int WEEK_DAYS = 7;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
@@ -165,9 +161,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 }else
                 {
                     _isLicensed = false;
-                    string message = MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA);
-                    MessageBox.Show(message, message, MessageBoxButtons.OK);
+                    SetInformationMessage(InformationTypeEnum.Error,
+                    MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
                     Clipboard.SetText(LicenseController.GetHardwareId());
+  
                 }
             }
             else
@@ -210,6 +207,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         /// </summary>
         private bool CheckLicense()
         {
+
+           //MessageBox.Show( LicenseController.ReadAdditonalLicenseInformation());
+
             if (ConfigurationController.IsDevelopment())
                 return true;
             else
@@ -355,41 +355,39 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         {
             if (DeviceController.HasAnyIssue)
             {
+                string message = string.Empty;
+
+
                 OperationblockingReasonEnum operationblockingReason = OperationblockingReasonEnum.None;
 
                 if (DeviceController.CounterIssue)
                 {
+                    message = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA);
                     operationblockingReason = OperationblockingReasonEnum.CounterCommunicationError;
-                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, ERROR_COMUNICACION_CONTADORA, String.Empty);
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, String.Empty);
                 }
                 if (DeviceController.IoBoardIssue)
                 {
+                    message = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA);
                     operationblockingReason = OperationblockingReasonEnum.IoBoardCommunicationError;
-                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio,ERROR_COMUNICACION_PLACA, String.Empty);
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, String.Empty);
                 }
                 if (DeviceController.BagIssue)
                 {
+                    message = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_CONTENEDOR);
                     operationblockingReason = OperationblockingReasonEnum.ContainerError;
-                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, ERROR_CONTENEDOR, String.Empty);
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, String.Empty);
                 }
 
                 if (DeviceController.PrinterIssue)
                 {
+                    message = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_CONTENEDOR);
                     operationblockingReason = OperationblockingReasonEnum.PrinterError;
-                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, ERROR_IMPRESORA, String.Empty);
+                    DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, String.Empty);
 
                 }
-                if (_operationBlockingForm == null)
-                {
-                    _operationBlockingForm = new OperationBlockingForm()
-                    {
-                         OperationBlockingReason = operationblockingReason,
-                         Tag = this.Tag
-                    };
-                    _operationBlockingForm.LoadStyles();
-                    _operationBlockingForm.ShowDialog();
-                    _operationBlockingForm = null;
-                }
+
+                SetInformationMessage(InformationTypeEnum.Error, message);
 
             }
         }
@@ -916,6 +914,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 for (int i = 0; i < ParameterController.PrintBagExtractionQuantity; i++)
                 {
+                    ReportController.ContainerToPrint = DatabaseController.LastContainer;
                     ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
                         DatabaseController.GetEnvelopeLastContainerContentItems(),
                         DatabaseController.GetBillLastContainerContentItems(), i);

@@ -63,10 +63,20 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
                 {
+                    _device.Sleep();
+
                     _device.RemoteCancel();
+
                     FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
 
                 }
+                // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
+                if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode
+                    || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.InitialMode)
+                {
+                    _device.RemoteCancel();
+                }
+
             }
 
 
