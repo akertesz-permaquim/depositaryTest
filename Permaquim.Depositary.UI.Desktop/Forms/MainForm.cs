@@ -1,21 +1,18 @@
-﻿using Newtonsoft.Json;
-using Permaquim.Depositary.UI.Desktop.Components;
+﻿using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.CustomExceptions;
+using Permaquim.Depositary.UI.Desktop.Forms;
 using Permaquim.Depositary.UI.Desktop.Global;
 using Permaquim.Depositary.UI.Desktop.Helpers;
-using Permaquim.Depositary.UI.Desktop.CustomExceptions;
-using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
-using Permaquim.Depositary.UI.Desktop.Forms;
-using System.Windows.Forms;
-using Permaquim.Depositary.UI.Desktop.Entities;
 using System.Reflection;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
         private const string DEPOSITARIO_NO_INICIALIZADO = "Depositario no inicializado.";
-        private const string RETIRO_DE_VALORES_SIN_USUARIO = "Retiro de valres sin usuario.";
+        private const string RETIRO_DE_VALORES_SIN_USUARIO = "Retiro de valores sin usuario.";
         private const string ERROR = "Error";
 
         private const string GREENLED = "GREENLED";
@@ -593,7 +590,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 if (_device.IoBoardConnected)
                 {
                     IoBoardPictureBox.Image = _greenLedImage;
-                    //DeviceController.IoBoardIssue = false;
+                    DeviceController.IoBoardIssue = false;
                 }
                 else
                 {
@@ -688,7 +685,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 string turnDate = string.Empty;
                 if (DatabaseController.CurrentTurn.Fecha != null)
-                    turnDate = " - " + ((DateTime)DatabaseController.CurrentTurn.Fecha).ToString("dd/MM/yyyy");
+                    turnDate = " - " + ((DateTime)DatabaseController.CurrentTurn.Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA));
                 TurnAndDateTimeLabel.Text += DatabaseController.CurrentTurn.TurnoDepositarioId.
                 EsquemaDetalleTurnoId.Nombre + turnDate;
             }

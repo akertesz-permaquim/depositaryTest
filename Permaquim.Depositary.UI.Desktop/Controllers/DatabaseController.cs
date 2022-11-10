@@ -1341,9 +1341,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             {
 
                 returnValue.Find(x => x.DenominacionId == transactionDetailItem.DenominacionId.Id).Cantidad += transactionDetailItem.CantidadUnidades;
+                returnValue.Find(x => x.DenominacionId == transactionDetailItem.DenominacionId.Id).Total =
+                    returnValue.Find(x => x.DenominacionId == transactionDetailItem.DenominacionId.Id).Cantidad *
+                    returnValue.Find(x => x.DenominacionId == transactionDetailItem.DenominacionId.Id).UnidadesDenominacion;
 
             }
-
+            returnValue = returnValue.Where(x=>x.Total > 0).ToList();
 
             return returnValue;
 
@@ -1458,7 +1461,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         transactionDetailItem.CantidadUnidades * transactionDetailItem.DenominacionId.Unidades;
                         element.FormattedTotal = transactionDetailItem.TransaccionId.MonedaId.Simbolo +
                                 " " + element.Total;
-
+                        element.CantidadBilletes += transactionDetailItem.CantidadUnidades;
                     }
                 }
                 if (depositType == OperationTypeEnum.EnvelopeDeposit)
@@ -2505,11 +2508,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
             return resultado;
         }
-        public static List<Depositario.Entities.Views.Reporte.Contenedores> GetBaghistoryItems(DateTime FechaAperturaDesde,
+        public static List<Depositario.Entities.Views.Reporte.Contenedores> GetBagHistoryItems(DateTime FechaAperturaDesde,
                                                                                                DateTime FechaAperturaHasta,
                                                                                                DateTime? FechaCierreDesde,
                                                                                                DateTime? FechaCierreHasta,
-                                                                                               string Identificador)
+                                                                                               string Identificador,
+                                                                                               bool incluirBolsaActual = true)
         {
             Depositario.Business.Views.Reporte.Contenedores entities = new();
             entities.Where.Add(Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, FechaAperturaDesde);
@@ -2521,6 +2525,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             if (Identificador != "")
                 entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositario.sqlEnum.OperandEnum.Like, "%" + Identificador + "%");
 
+            if(!incluirBolsaActual)
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Views.Reporte.Contenedores.ColumnEnum.ContenedorId, Depositario.sqlEnum.OperandEnum.NotEqual, 
+                    CurrentContainer.Id);
             return entities.Items();
         }
         public static List<DailyClosingItem> GetDailyClosingItems()

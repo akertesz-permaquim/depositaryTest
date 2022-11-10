@@ -240,6 +240,7 @@
             HISTORICO_OPERACIONES,
             FINALIZADA,
             FECHA,
+            FECHA_TURNO,
             FECHA_APERTURA,
             FECHA_CIERRE,
             FECHA_DESDE,

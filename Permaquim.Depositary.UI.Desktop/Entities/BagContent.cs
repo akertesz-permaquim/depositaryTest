@@ -37,6 +37,8 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
 
         public string FormattedTotal { get; set; }
 
+        public long CantidadBilletes { get; set; }
+
     }
 
     internal class BagEnvelope

@@ -146,5 +146,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             grid.Height = grid.RowTemplate.Height * grid.Rows.Count +
             grid.ColumnHeadersHeight;
         }
+
+        public static DataGridViewCellStyle GetDateColumnStyle()
+        {
+            DataGridViewCellStyle dateColumnStyle = new()
+            {
+                Format = System.Convert.ToChar(34) + MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA) + System.Convert.ToChar(34)
+            };
+            return dateColumnStyle;
+
+        }
     }
 }

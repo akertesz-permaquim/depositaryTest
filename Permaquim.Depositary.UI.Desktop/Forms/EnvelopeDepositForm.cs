@@ -242,6 +242,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (TimeOutController.IsTimeOut())
             {
                 _pollingTimer.Enabled = false;
+                Canceloperation();
                 FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
 
                 DatabaseController.LogOff(true);
@@ -828,6 +829,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void CancelDepositButton_Click(object sender, EventArgs e)
         {
+            Canceloperation();
+
+        }
+
+        private void Canceloperation()
+        {
             TimeOutController.Reset();
 
             _operationStatus.DepositConfirmed = false;
@@ -840,7 +847,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.RemoteCancel();
 
             FormsController.OpenChildForm(this, new OperationForm(), _device);
-
         }
 
         private void EnvelopeTextBox_Click(object sender, EventArgs e)

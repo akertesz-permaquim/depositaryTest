@@ -19,8 +19,16 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
     {
         private const string D50 = "D50";
         private const string D70 = "D70";
+        private const string ABNORMALDEVICE = "AbnormalDevice; ";
+        private const string ABNORMALSTORAGE = "AbnormalStorage; ";
+        private const string COUNTINGERROR = "CountingError; ";
+        private const string JAMMING = "Jamming; ";
+        private const string ESCROWBILLPRESENT = "EscrowBillPresent; ";
+
         string _errorInformation = String.Empty;
-        CounterDevice _device = null;
+        CustomButton _resetButton = null;
+
+        private CounterDevice _device = null;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         public DeviceErrorForm()
         {
@@ -28,7 +36,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             CenterPanel();
 
             LoadStyles();
-            LoadUnJamButton();
+            LoadResetButton();
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -36,7 +44,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                 Interval = DeviceController.GetPollingInterval()
             };
             _pollingTimer.Tick += PollingTimer_Tick;
-            _pollingTimer.Enabled = false;
+            _pollingTimer.Enabled = true;
             InformationLabel.Text = String.Empty;
         }
 
@@ -44,58 +52,41 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
         }
-        private void PollingTimer_Tick(object? sender, EventArgs e)
-        {
 
+          private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            VerifyStatus();
+        }
+
+        private void VerifyStatus()
+        {
             if (_device.StateResultProperty != null)
             {
-                
+
+                _errorInformation = String.Empty;
+
                 if (_device.StateResultProperty.ErrorStateInformation.AbnormalDevice)
-                    _errorInformation += "AbnormalDevice;";
+                    _errorInformation += ABNORMALDEVICE;
                 if (_device.StateResultProperty.ErrorStateInformation.AbnormalStorage)
-                    _errorInformation += "AbnormalStorage;";
+                    _errorInformation += ABNORMALSTORAGE;
                 if (_device.StateResultProperty.ErrorStateInformation.CountingError)
-                    _errorInformation += "CountingError;";
+                    _errorInformation += COUNTINGERROR;
                 if (_device.StateResultProperty.ErrorStateInformation.Jamming)
-                    _errorInformation += "Jamming;";
+                    _errorInformation += JAMMING;
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
-                    _errorInformation += "EscrowBillPresent;";
+                    _errorInformation += ESCROWBILLPRESENT;
 
                 InformationLabel.Text = _errorInformation;
 
-                if (!_device.StateResultProperty.ErrorStateInformation.AbnormalDevice
-                    && !_device.StateResultProperty.ErrorStateInformation.AbnormalStorage
-                    && !_device.StateResultProperty.ErrorStateInformation.CountingError
-                    && !_device.StateResultProperty.ErrorStateInformation.Jamming
-                    )
+                if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                    && _device.StateResultProperty.DoorStateInformation.Escrow)
                 {
-                    _pollingTimer.Enabled = false;
-
-                    this.DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                        && _device.StateResultProperty.DoorStateInformation.Escrow)
-                    {
-                        _device.CloseEscrow();
-                        Thread.Sleep(500);
-                    }
-
-                    if (!_device.StateResultProperty.DoorStateInformation.Escrow)
-                    {
-                        _device.NormalErrorRecoveryMode();
-                        Thread.Sleep(500);
-                        _device.DeviceReset();
-                        Thread.Sleep(500);
-                    }
-
-                    _pollingTimer.Enabled = false;
-                    this.DialogResult = DialogResult.OK;
-
+                    _device.CloseEscrow();
+                    _device.Sleep();
                 }
             }
         }
+
         private void CenterPanel()
         {
 
@@ -124,40 +115,44 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         public void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
+            InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Breadcrumb);
 
         }
         #region Back button
-        private void LoadUnJamButton()
+        private void LoadResetButton()
         {
-            CustomButton unJamButton = ControlBuilder.BuildStandardButton(
-                "UnJamButton", MultilanguangeController.GetText(MultiLanguageEnum.RESET), MainPanel.Width);
+             _resetButton = ControlBuilder.BuildStandardButton(
+                "ResetButton", MultilanguangeController.GetText(MultiLanguageEnum.RESET), MainPanel.Width);
 
-            this.MainPanel.Controls.Add(unJamButton);
-            unJamButton.Click += new System.EventHandler(UnJamButton_Click);
+            this.MainPanel.Controls.Add(_resetButton);
+            _resetButton.Click += new System.EventHandler(ResetButton_Click);
         }
 
-        private void UnJamButton_Click(object sender, EventArgs e)
+        private void ResetButton_Click(object sender, EventArgs e)
         {
-
             TimeOutController.Reset();
+            _resetButton.Enabled = false;
+            if (ParameterController.UsesShutter)
+                _device.Open();
 
-            switch ((DatabaseController.CurrentDepositary.
-                ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
-            {
-                case D50:
-                    _device.UnJamD50();
-                    break;
-                case D70:
-                    _device.UnJamD70();
-                    break;
-                default:
-                    break;
-            }
-            
+            if (_device.StateResultProperty.ErrorStateInformation.AbnormalDevice)
+                _device.ResetFF0x();
+            if (_device.StateResultProperty.ErrorStateInformation.AbnormalStorage)
+                _device.ResetFF0x();
+            if (_device.StateResultProperty.ErrorStateInformation.CountingError)
+                return;
+            if (_device.StateResultProperty.ErrorStateInformation.Jamming)
+                _device.UnJam();
+            this.DialogResult = DialogResult.OK;
 
-            FormsController.LogOff();
-            _pollingTimer.Enabled = true;
-        }
+         }
         #endregion
+
+        private void DeviceErrorForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _resetButton.Enabled = this.Visible;
+            _pollingTimer.Enabled = this.Visible;
+        }
     }
 }

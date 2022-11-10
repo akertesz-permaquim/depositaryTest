@@ -252,7 +252,7 @@
             this.DetailPanel.Controls.Add(this.OperationsDetailGridView);
             this.DetailPanel.Location = new System.Drawing.Point(16, 128);
             this.DetailPanel.Name = "DetailPanel";
-            this.DetailPanel.Size = new System.Drawing.Size(648, 392);
+            this.DetailPanel.Size = new System.Drawing.Size(752, 392);
             this.DetailPanel.TabIndex = 184;
             this.DetailPanel.Visible = false;
             this.DetailPanel.Click += new System.EventHandler(this.DetailPanel_Click);
@@ -265,7 +265,7 @@
             this.DetailLabel.ForeColor = System.Drawing.Color.White;
             this.DetailLabel.Location = new System.Drawing.Point(8, 0);
             this.DetailLabel.Name = "DetailLabel";
-            this.DetailLabel.Size = new System.Drawing.Size(632, 27);
+            this.DetailLabel.Size = new System.Drawing.Size(736, 27);
             this.DetailLabel.TabIndex = 190;
             this.DetailLabel.Click += new System.EventHandler(this.DetailLabel_Click);
             // 
@@ -281,7 +281,7 @@
             this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.PrintButton.ForeColor = System.Drawing.Color.White;
-            this.PrintButton.Location = new System.Drawing.Point(368, 328);
+            this.PrintButton.Location = new System.Drawing.Point(420, 328);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(160, 55);
             this.PrintButton.TabIndex = 185;
@@ -302,7 +302,7 @@
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AcceptButton.ForeColor = System.Drawing.Color.White;
-            this.AcceptButton.Location = new System.Drawing.Point(128, 328);
+            this.AcceptButton.Location = new System.Drawing.Point(180, 328);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(160, 55);
             this.AcceptButton.TabIndex = 184;
@@ -356,7 +356,7 @@
             this.OperationsDetailGridView.RowTemplate.Height = 30;
             this.OperationsDetailGridView.RowTemplate.ReadOnly = true;
             this.OperationsDetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OperationsDetailGridView.Size = new System.Drawing.Size(632, 292);
+            this.OperationsDetailGridView.Size = new System.Drawing.Size(736, 292);
             this.OperationsDetailGridView.TabIndex = 183;
             this.OperationsDetailGridView.Click += new System.EventHandler(this.OperationsDetailGridView_Click);
             // 

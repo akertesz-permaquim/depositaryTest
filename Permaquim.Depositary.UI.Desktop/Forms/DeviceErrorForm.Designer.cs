@@ -39,7 +39,7 @@
             // 
             this.MainPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MainPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("MainPictureBox.Image")));
-            this.MainPictureBox.Location = new System.Drawing.Point(360, 98);
+            this.MainPictureBox.Location = new System.Drawing.Point(360, 106);
             this.MainPictureBox.Name = "MainPictureBox";
             this.MainPictureBox.Size = new System.Drawing.Size(304, 248);
             this.MainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -50,20 +50,20 @@
             // 
             this.MainPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(363, 352);
+            this.MainPanel.Location = new System.Drawing.Point(363, 386);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(300, 155);
+            this.MainPanel.Size = new System.Drawing.Size(300, 131);
             this.MainPanel.TabIndex = 2;
             // 
             // InformationLabel
             // 
             this.InformationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InformationLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.InformationLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.InformationLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InformationLabel.ForeColor = System.Drawing.Color.Silver;
-            this.InformationLabel.Location = new System.Drawing.Point(0, 549);
+            this.InformationLabel.Location = new System.Drawing.Point(0, 0);
             this.InformationLabel.Name = "InformationLabel";
-            this.InformationLabel.Size = new System.Drawing.Size(1027, 42);
+            this.InformationLabel.Size = new System.Drawing.Size(1027, 56);
             this.InformationLabel.TabIndex = 114;
             this.InformationLabel.Text = "...";
             this.InformationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -72,7 +72,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1027, 591);
+            this.ClientSize = new System.Drawing.Size(1027, 611);
             this.Controls.Add(this.InformationLabel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainPictureBox);
@@ -82,6 +82,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DeviceErrorForm";
             this.Load += new System.EventHandler(this.DeviceErrorForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.DeviceErrorForm_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
             this.ResumeLayout(false);
 

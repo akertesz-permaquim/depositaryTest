@@ -1,6 +1,7 @@
 ﻿using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
+using System.ComponentModel;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -18,7 +19,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private long _dailyClosingId;
 
-        private List<DailyClosingHeader> _dailyClosingHeaders = new();
+        private BindingList<DailyClosingHeader> _dailyClosingHeaders = new();
 
 
         public DailyClosingHistoryForm()
@@ -121,10 +122,10 @@ namespace Permaquim.Depositary.UI.Desktop
             FromDateTimePicker.Value = DateTime.Now.Date;
             ToDateTimePicker.Value = DateTime.Now.Date;
             FromDateTimePicker.Format = DateTimePickerFormat.Custom;
-            FromDateTimePicker.CustomFormat = "dd/MM/yyyy";
+            FromDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 
             ToDateTimePicker.Format = DateTimePickerFormat.Custom;
-            ToDateTimePicker.CustomFormat = "dd/MM/yyyy";
+            ToDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 
             UserComboBox.SelectedIndex = 0;
             TurnComboBox.SelectedIndex = 0;
@@ -174,6 +175,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DailyClosingHeaderGridView.AutoGenerateColumns = false;
             DailyClosingHeaderGridView.Columns.Clear();
 
+
             DailyClosingHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = ID,
@@ -185,17 +187,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            DailyClosingHeaderGridView.Columns.Add(new()
+            var col = DailyClosingHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "Fecha",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
                 Name = "Fecha",
                 Visible = true,
                 Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DefaultCellStyle = StyleController.GetDateColumnStyle()
 
             });
 
+  
             DailyClosingHeaderGridView.Columns.Add(new()
             {
                 DataPropertyName = "CodigoCierre",
@@ -219,16 +223,16 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
-            //DailyClosingHeaderGridView.Columns.Add(new()
-            //{
-            //    DataPropertyName = "Moneda",
-            //    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
-            //    Name = "Moneda",
-            //    Visible = true,
-            //    Width = 150,
-            //    CellTemplate = new DataGridViewTextBoxCell()
+            DailyClosingHeaderGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Moneda",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
+                Name = "Moneda",
+                Visible = true,
+                Width = 200,
+                CellTemplate = new DataGridViewTextBoxCell()
 
-            //});
+            });
 
             DailyClosingHeaderGridView.Columns.Add(new()
             {
@@ -236,7 +240,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_VALIDADO),
                 Name = "TotalValidado",
                 Visible = true,
-                Width = 100,
+                Width = 200,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -247,7 +251,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_A_VALIDAR),
                 Name = "TotalAValidar",
                 Visible = true,
-                Width = 100,
+                Width = 200,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -322,7 +326,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 Name = "Fecha",
                 Visible = true,
                 Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DefaultCellStyle = StyleController.GetDateColumnStyle()
 
             });
 
@@ -427,7 +432,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             _dailyClosingHeaders.Clear();
 
-            Int64 DefaultCurrency = DatabaseController.DefaultCurrency().Id;
+            Permaquim.Depositario.Entities.Relations.Valor.Moneda DefaultCurrency = DatabaseController.DefaultCurrency();
 
             foreach (var item in DailyClosing)
             {
@@ -437,8 +442,9 @@ namespace Permaquim.Depositary.UI.Desktop
                     CodigoCierre = item.CodigoCierre + "-" + item.Id,
                     Fecha = item.Fecha,
                     Usuario = item.UsuarioCreacion.NombreApellido,
-                    TotalValidado = item.ListOf_Transaccion_CierreDiarioId.Where(x => x._MonedaId == DefaultCurrency).Sum(x => x.TotalValidado),
-                    TotalAValidar = item.ListOf_Transaccion_CierreDiarioId.Where(x => x._MonedaId == DefaultCurrency).Sum(x => x.TotalAValidar)
+                    TotalValidado = item.ListOf_Transaccion_CierreDiarioId.Where(x => x._MonedaId == DefaultCurrency.Id).Sum(x => x.TotalValidado),
+                    TotalAValidar = item.ListOf_Transaccion_CierreDiarioId.Where(x => x._MonedaId == DefaultCurrency.Id).Sum(x => x.TotalAValidar),
+                    Moneda = DefaultCurrency.Nombre
                 });
             }
 
@@ -474,7 +480,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     operationDailyClosingDetails.Add(new TransactionHeaderItem()
                     {
                         Cierrediario = item.CierreDiarioId != null ?
-                            item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString("dd/MM/yyyy") : "" : String.Empty,
+                            item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA)) : "" : String.Empty,
                         Contenedor = item.ContenedorId.Nombre +
                             (item.ContenedorId.Identificador.Length == 0 ? "" : " (" + item.ContenedorId.Identificador + " )"),
                         Fecha = item.Fecha,

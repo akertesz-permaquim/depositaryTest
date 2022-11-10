@@ -43,7 +43,7 @@
             this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.DetailLabel = new System.Windows.Forms.Label();
             this.DetailPanel = new System.Windows.Forms.Panel();
-            this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.BagContentTabControl.SuspendLayout();
             this.Billetes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BillDepositGridView)).BeginInit();
@@ -204,7 +204,7 @@
             this.DetailGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.DetailGridView.EnableHeadersVisualStyles = false;
             this.DetailGridView.GridColor = System.Drawing.Color.White;
-            this.DetailGridView.Location = new System.Drawing.Point(7, 40);
+            this.DetailGridView.Location = new System.Drawing.Point(8, 40);
             this.DetailGridView.Name = "DetailGridView";
             this.DetailGridView.RowHeadersVisible = false;
             this.DetailGridView.RowTemplate.DividerHeight = 1;
@@ -212,7 +212,7 @@
             this.DetailGridView.RowTemplate.ReadOnly = true;
             this.DetailGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DetailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DetailGridView.Size = new System.Drawing.Size(544, 267);
+            this.DetailGridView.Size = new System.Drawing.Size(631, 267);
             this.DetailGridView.TabIndex = 187;
             this.DetailGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailGridView_CellClick);
             // 
@@ -228,7 +228,7 @@
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AcceptButton.ForeColor = System.Drawing.Color.White;
-            this.AcceptButton.Location = new System.Drawing.Point(192, 312);
+            this.AcceptButton.Location = new System.Drawing.Point(236, 312);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(160, 55);
             this.AcceptButton.TabIndex = 188;
@@ -242,9 +242,9 @@
             this.DetailLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.DetailLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DetailLabel.ForeColor = System.Drawing.Color.White;
-            this.DetailLabel.Location = new System.Drawing.Point(8, 8);
+            this.DetailLabel.Location = new System.Drawing.Point(7, 8);
             this.DetailLabel.Name = "DetailLabel";
-            this.DetailLabel.Size = new System.Drawing.Size(544, 27);
+            this.DetailLabel.Size = new System.Drawing.Size(631, 27);
             this.DetailLabel.TabIndex = 189;
             this.DetailLabel.Text = "*";
             this.DetailLabel.Click += new System.EventHandler(this.DetailLabel_Click);
@@ -255,20 +255,32 @@
             this.DetailPanel.Controls.Add(this.AcceptButton);
             this.DetailPanel.Controls.Add(this.DetailLabel);
             this.DetailPanel.Controls.Add(this.DetailGridView);
-            this.DetailPanel.Location = new System.Drawing.Point(352, 40);
+            this.DetailPanel.Location = new System.Drawing.Point(264, 40);
             this.DetailPanel.Name = "DetailPanel";
-            this.DetailPanel.Size = new System.Drawing.Size(560, 376);
+            this.DetailPanel.Size = new System.Drawing.Size(648, 376);
             this.DetailPanel.TabIndex = 190;
             this.DetailPanel.Visible = false;
             // 
-            // MainPanel
+            // BackButton
             // 
-            this.MainPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(308, 447);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(320, 88);
-            this.MainPanel.TabIndex = 192;
+            this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BackButton.BorderRadius = 5;
+            this.BackButton.BorderSize = 0;
+            this.BackButton.FlatAppearance.BorderSize = 0;
+            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BackButton.ForeColor = System.Drawing.Color.White;
+            this.BackButton.Location = new System.Drawing.Point(353, 457);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(240, 55);
+            this.BackButton.TabIndex = 196;
+            this.BackButton.Text = "Salir";
+            this.BackButton.TextColor = System.Drawing.Color.White;
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // BagContentForm
             // 
@@ -277,7 +289,7 @@
             this.ClientSize = new System.Drawing.Size(950, 600);
             this.Controls.Add(this.DetailPanel);
             this.Controls.Add(this.BagContentTabControl);
-            this.Controls.Add(this.MainPanel);
+            this.Controls.Add(this.BackButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BagContentForm";
             this.Text = "BagContentForm";
@@ -310,6 +322,6 @@
         private CustomButton AcceptButton;
         private Label DetailLabel;
         private Panel DetailPanel;
-        private FlowLayoutPanel MainPanel;
+        private CustomButton BackButton;
     }
 }

@@ -69,7 +69,7 @@
             this.BackButton.ForeColor = System.Drawing.Color.White;
             this.BackButton.Location = new System.Drawing.Point(392, 592);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(160, 55);
+            this.BackButton.Size = new System.Drawing.Size(240, 55);
             this.BackButton.TabIndex = 179;
             this.BackButton.Text = "Salir";
             this.BackButton.TextColor = System.Drawing.Color.White;
@@ -181,6 +181,7 @@
             // 
             // ExecuteButton
             // 
+            this.ExecuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ExecuteButton.BackColor = System.Drawing.Color.SteelBlue;
             this.ExecuteButton.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.ExecuteButton.BorderColor = System.Drawing.Color.PaleVioletRed;

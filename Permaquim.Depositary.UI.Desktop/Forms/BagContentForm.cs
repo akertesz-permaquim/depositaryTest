@@ -26,7 +26,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 CenterPanel();
                 LoadStyles();
                 LoadMultilanguageItems();
-                LoadBackButton();
 
                 TimeOutController.Reset();
                 _pollingTimer = new System.Windows.Forms.Timer()
@@ -65,18 +64,18 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void CenterPanel()
         {
-
-            MainPanel.Location = new Point()
-            {
-                X = this.Width / 2 - MainPanel.Width / 2,
-                Y = MainPanel.Location.Y
-            };
-
  
             BagContentTabControl.Location = new Point()
             {
                 X = this.Width / 2 - BagContentTabControl.Width / 2,
                 Y = BagContentTabControl.Location.Y
+            };
+
+
+            BackButton.Location = new Point()
+            {
+                X = this.Width / 2 - BackButton.Width / 2,
+                Y = BackButton.Location.Y
             };
         }
         private void LoadStyles()
@@ -91,6 +90,7 @@ namespace Permaquim.Depositary.UI.Desktop
             BagContentTabControl.TabPages[ENVELOPES].ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
 
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
 
         }
 
@@ -100,17 +100,10 @@ namespace Permaquim.Depositary.UI.Desktop
             BagContentTabControl.TabPages[BILLS].Text = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES);
             BagContentTabControl.TabPages[ENVELOPES].Text = MultilanguangeController.GetText(MultiLanguageEnum.SOBRES);
             AcceptButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
+            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
         }
         #region BackButton
-        private void LoadBackButton()
-        {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width -3);
-
-            this.MainPanel.Controls.Add(backButton);
-
-            backButton.Click += new System.EventHandler(BackButton_Click);
-        }
+  
         private void BackButton_Click(object sender, EventArgs e)
         {
             FormsController.OpenChildForm(this, new ReportsForm(), _device);
@@ -211,13 +204,28 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
+            if(operationType == OperationTypeEnum.BillDeposit)
+            {
+                referenceDataGridview.Columns.Add(new()
+                {
+                    DataPropertyName = "CantidadBilletes",
+                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES),
+                    Name = "CantidadBilletes",
+                    Visible = true,
+                    Width = 100,
+                    CellTemplate = new DataGridViewTextBoxCell()
+
+                });
+            }
+
+
             referenceDataGridview.Columns.Add(new()
             {
                 DataPropertyName = "FormattedTotal",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
                 Name = "Total",
                    Visible = true,
-                Width = 350,
+                Width = 250,
                 CellTemplate = new DataGridViewTextBoxCell()
             });
 
@@ -330,7 +338,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDAD),
                     Name = "Cantidad",
                     Visible = true,
-                    Width = 150,
+                    Width = 180,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
@@ -342,7 +350,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     Name = "Total",
 
                     Visible = true,
-                    Width = 180,
+                    Width = 200,
                     CellTemplate = new DataGridViewTextBoxCell()
                 });
             }
@@ -352,9 +360,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     DataPropertyName = "Moneda",
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.SOBRE),
-                    Name = "Denominacion",
+                    Name = "Moneda",
                     Visible = true,
-                    Width = 150,
+                    Width = 240,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
@@ -363,9 +371,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     DataPropertyName = "Cantidad",
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADDECLARADA),
-                    Name = "Denominacion",
+                    Name = "Cantidad",
                     Visible = true,
-                    Width = 150,
+                    Width = 200,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
@@ -376,7 +384,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION),
                     Name = "Denominacion",
                     Visible = true,
-                    Width = 240,
+                    Width = 200,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });

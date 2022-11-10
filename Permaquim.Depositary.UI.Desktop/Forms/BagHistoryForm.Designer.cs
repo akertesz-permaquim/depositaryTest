@@ -34,7 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.MainGridView = new System.Windows.Forms.DataGridView();
             this.FilterPanel = new System.Windows.Forms.Panel();
             this.ToFechaCierreDateTimeLabel = new System.Windows.Forms.Label();
@@ -57,6 +56,7 @@
             this.EnvelopeDepositGridView = new System.Windows.Forms.DataGridView();
             this.PrintButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.MainGridView)).BeginInit();
             this.FilterPanel.SuspendLayout();
             this.DetailPanel.SuspendLayout();
@@ -66,15 +66,6 @@
             this.EnvelopeDepositTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EnvelopeDepositGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // MainPanel
-            // 
-            this.MainPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.MainPanel.BackColor = System.Drawing.Color.Transparent;
-            this.MainPanel.Location = new System.Drawing.Point(319, 500);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(320, 88);
-            this.MainPanel.TabIndex = 191;
             // 
             // MainGridView
             // 
@@ -114,7 +105,7 @@
             this.MainGridView.RowTemplate.ReadOnly = true;
             this.MainGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.MainGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.MainGridView.Size = new System.Drawing.Size(924, 368);
+            this.MainGridView.Size = new System.Drawing.Size(1022, 368);
             this.MainGridView.TabIndex = 192;
             this.MainGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MainGridView_CellClick);
             this.MainGridView.Click += new System.EventHandler(this.MainGridView_Click);
@@ -136,7 +127,7 @@
             this.FilterPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.FilterPanel.Location = new System.Drawing.Point(0, 0);
             this.FilterPanel.Name = "FilterPanel";
-            this.FilterPanel.Size = new System.Drawing.Size(950, 88);
+            this.FilterPanel.Size = new System.Drawing.Size(1048, 88);
             this.FilterPanel.TabIndex = 193;
             // 
             // ToFechaCierreDateTimeLabel
@@ -193,7 +184,7 @@
             this.ExecuteBagHistorySearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExecuteBagHistorySearch.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ExecuteBagHistorySearch.ForeColor = System.Drawing.Color.White;
-            this.ExecuteBagHistorySearch.Location = new System.Drawing.Point(600, 12);
+            this.ExecuteBagHistorySearch.Location = new System.Drawing.Point(888, 8);
             this.ExecuteBagHistorySearch.Name = "ExecuteBagHistorySearch";
             this.ExecuteBagHistorySearch.Size = new System.Drawing.Size(128, 64);
             this.ExecuteBagHistorySearch.TabIndex = 213;
@@ -273,7 +264,7 @@
             this.ExecuteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExecuteButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ExecuteButton.ForeColor = System.Drawing.Color.White;
-            this.ExecuteButton.Location = new System.Drawing.Point(1348, 8);
+            this.ExecuteButton.Location = new System.Drawing.Point(1446, 8);
             this.ExecuteButton.Name = "ExecuteButton";
             this.ExecuteButton.Size = new System.Drawing.Size(128, 64);
             this.ExecuteButton.TabIndex = 197;
@@ -289,7 +280,7 @@
             this.DetailPanel.Controls.Add(this.AcceptButton);
             this.DetailPanel.Location = new System.Drawing.Point(56, 0);
             this.DetailPanel.Name = "DetailPanel";
-            this.DetailPanel.Size = new System.Drawing.Size(808, 552);
+            this.DetailPanel.Size = new System.Drawing.Size(784, 488);
             this.DetailPanel.TabIndex = 194;
             this.DetailPanel.Visible = false;
             // 
@@ -299,11 +290,12 @@
             this.BagContentTabControl.Controls.Add(this.Billetes);
             this.BagContentTabControl.Controls.Add(this.EnvelopeDepositTabPage);
             this.BagContentTabControl.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BagContentTabControl.Location = new System.Drawing.Point(15, 20);
+            this.BagContentTabControl.Location = new System.Drawing.Point(3, 8);
             this.BagContentTabControl.Name = "BagContentTabControl";
             this.BagContentTabControl.SelectedIndex = 0;
             this.BagContentTabControl.Size = new System.Drawing.Size(776, 384);
             this.BagContentTabControl.TabIndex = 190;
+            this.BagContentTabControl.Click += new System.EventHandler(this.BagContentTabControl_Click);
             // 
             // Billetes
             // 
@@ -347,7 +339,7 @@
             this.BillDepositGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.BillDepositGridView.EnableHeadersVisualStyles = false;
             this.BillDepositGridView.GridColor = System.Drawing.Color.White;
-            this.BillDepositGridView.Location = new System.Drawing.Point(8, 5);
+            this.BillDepositGridView.Location = new System.Drawing.Point(8, 8);
             this.BillDepositGridView.Name = "BillDepositGridView";
             this.BillDepositGridView.RowHeadersVisible = false;
             this.BillDepositGridView.RowTemplate.DividerHeight = 1;
@@ -357,6 +349,7 @@
             this.BillDepositGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.BillDepositGridView.Size = new System.Drawing.Size(752, 328);
             this.BillDepositGridView.TabIndex = 186;
+            this.BillDepositGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BillDepositGridView_CellClick);
             // 
             // EnvelopeDepositTabPage
             // 
@@ -398,7 +391,7 @@
             this.EnvelopeDepositGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.EnvelopeDepositGridView.EnableHeadersVisualStyles = false;
             this.EnvelopeDepositGridView.GridColor = System.Drawing.Color.White;
-            this.EnvelopeDepositGridView.Location = new System.Drawing.Point(8, 6);
+            this.EnvelopeDepositGridView.Location = new System.Drawing.Point(8, 8);
             this.EnvelopeDepositGridView.Name = "EnvelopeDepositGridView";
             this.EnvelopeDepositGridView.RowHeadersVisible = false;
             this.EnvelopeDepositGridView.RowTemplate.DividerHeight = 1;
@@ -408,6 +401,7 @@
             this.EnvelopeDepositGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.EnvelopeDepositGridView.Size = new System.Drawing.Size(752, 326);
             this.EnvelopeDepositGridView.TabIndex = 187;
+            this.EnvelopeDepositGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EnvelopeDepositGridView_CellClick);
             // 
             // PrintButton
             // 
@@ -421,7 +415,7 @@
             this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.PrintButton.ForeColor = System.Drawing.Color.White;
-            this.PrintButton.Location = new System.Drawing.Point(520, 452);
+            this.PrintButton.Location = new System.Drawing.Point(424, 408);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(160, 55);
             this.PrintButton.TabIndex = 185;
@@ -442,7 +436,7 @@
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AcceptButton.ForeColor = System.Drawing.Color.White;
-            this.AcceptButton.Location = new System.Drawing.Point(280, 452);
+            this.AcceptButton.Location = new System.Drawing.Point(176, 408);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(160, 55);
             this.AcceptButton.TabIndex = 184;
@@ -451,15 +445,36 @@
             this.AcceptButton.UseVisualStyleBackColor = false;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
+            // BackButton
+            // 
+            this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
+            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BackButton.BorderRadius = 5;
+            this.BackButton.BorderSize = 0;
+            this.BackButton.FlatAppearance.BorderSize = 0;
+            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BackButton.ForeColor = System.Drawing.Color.White;
+            this.BackButton.Location = new System.Drawing.Point(377, 512);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(240, 55);
+            this.BackButton.TabIndex = 195;
+            this.BackButton.Text = "Salir";
+            this.BackButton.TextColor = System.Drawing.Color.White;
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
             // BagHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 600);
+            this.ClientSize = new System.Drawing.Size(1048, 600);
             this.Controls.Add(this.DetailPanel);
             this.Controls.Add(this.FilterPanel);
             this.Controls.Add(this.MainGridView);
-            this.Controls.Add(this.MainPanel);
+            this.Controls.Add(this.BackButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BagHistoryForm";
             this.Text = "BagHistoryForm";
@@ -504,5 +519,6 @@
         private DataGridView BillDepositGridView;
         private TabPage EnvelopeDepositTabPage;
         private DataGridView EnvelopeDepositGridView;
+        private CustomButton BackButton;
     }
 }

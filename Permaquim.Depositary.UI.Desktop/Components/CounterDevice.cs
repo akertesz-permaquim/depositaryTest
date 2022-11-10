@@ -1623,7 +1623,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
             }
         }
-        public void UnJamD50()
+        public void UnJam()
         {
 
             while (Sense().StatusInformation.OperatingState != StatusInformation.State.Waiting)
@@ -1703,25 +1703,19 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 }
                 Thread.Sleep(SleepTimeout);
             }
-        }
 
-        public void UnJamD70()
+            RemoteCancel();
+        
+        }
+        public void ResetFF0x()
         {
-            if (StateResultProperty.DeviceStateInformation.EscrowBillPresent
-         && StateResultProperty.DoorStateInformation.Escrow)
-            {
-                CloseEscrow();
-                Thread.Sleep(SleepTimeout);
-            }
-
-            if (!StateResultProperty.DoorStateInformation.Escrow)
-            {
-                NormalErrorRecoveryMode();
-                Thread.Sleep(SleepTimeout);
-                DeviceReset();
-                Thread.Sleep(SleepTimeout);
-            }
+            NormalErrorRecoveryMode();
+            Sleep();
+            DeviceReset();
+            Sleep();
+            RemoteCancel();
         }
+
 
         #endregion
     }

@@ -15,5 +15,7 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         public double TotalValidado { get; set; }
         public double TotalAValidar { get; set; }
 
+        public string Moneda { get; set; }
+
     }
 }

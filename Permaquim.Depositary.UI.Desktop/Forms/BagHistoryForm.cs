@@ -3,6 +3,7 @@ using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
+using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -25,7 +26,6 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             LoadStyles();
             LoadMultilanguageItems();
-            LoadBackButton();
 
             ResetReport();
 
@@ -40,13 +40,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ResetReport()
         {
-            FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
             ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
+            FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
             FromFechaCierreDateTimePicker.Checked = false;
-            FromFechaCierreDateTimePicker.CustomFormat = " ";
             ToFechaCierreDateTimePicker.Checked = false;
-            ToFechaCierreDateTimePicker.CustomFormat = " ";
             IdentificadorTextbox.Text = "";
+            FromFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
+            FromFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+
+            ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
+            ToFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+
 
             LoadBagHistoryItems();
         }
@@ -68,24 +72,33 @@ namespace Permaquim.Depositary.UI.Desktop
         private void CenterPanel()
         {
 
-            MainPanel.Location = new Point()
-            {
-                X = this.Width / 2 - MainPanel.Width / 2,
-                Y = MainPanel.Location.Y
-            };
-
             MainGridView.Location = new Point()
             {
                 X = this.Width / 2 - MainGridView.Width / 2,
                 Y = MainGridView.Location.Y
             };
 
+            BackButton.Location = new Point()
+            {
+                X = this.Width / 2 - BackButton.Width / 2,
+                Y = BackButton.Location.Y
+            };
+
         }
         private void LoadStyles()
         {
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+            AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            PrintButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
+            BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
+            ExecuteBagHistorySearch.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ExecuteBagHistorySearch.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ExecuteBagHistorySearch.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            ExecuteBagHistorySearch.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             StyleController.SetControlStyle(MainGridView);
+            StyleController.SetControlStyle(BillDepositGridView);
+            StyleController.SetControlStyle(EnvelopeDepositGridView);
         }
 
         private void LoadMultilanguageItems()
@@ -96,17 +109,11 @@ namespace Permaquim.Depositary.UI.Desktop
             ToFechaCierreDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE_HASTA);
             IdentificadorLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.IDENTIFICADOR);
             ExecuteBagHistorySearch.Text = MultilanguangeController.GetText(MultiLanguageEnum.EJECUTAR);
+            AcceptButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
+            PrintButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.IMPRIMIR);
+            BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
         }
         #region BackButton
-        private void LoadBackButton()
-        {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
-                "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width - 3);
-
-            this.MainPanel.Controls.Add(backButton);
-
-            backButton.Click += new System.EventHandler(BackButton_Click);
-        }
         private void BackButton_Click(object sender, EventArgs e)
         {
             ResetReport();
@@ -150,7 +157,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 Name = "FechaApertura",
                 Visible = true,
                 Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DefaultCellStyle = StyleController.GetDateColumnStyle()
 
             });
 
@@ -161,7 +169,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 Name = "FechaCierre",
                 Visible = true,
                 Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DefaultCellStyle = StyleController.GetDateColumnStyle()
 
             });
 
@@ -284,13 +293,28 @@ namespace Permaquim.Depositary.UI.Desktop
 
             });
 
+            if (operationType == OperationTypeEnum.BillDeposit)
+            {
+                referenceDataGridview.Columns.Add(new()
+                {
+                    DataPropertyName = "CantidadBilletes",
+                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.BILLETES),
+                    Name = "CantidadBilletes",
+                    Visible = true,
+                    Width = 100,
+                    CellTemplate = new DataGridViewTextBoxCell()
+
+                });
+            }
+
+
             referenceDataGridview.Columns.Add(new()
             {
                 DataPropertyName = "FormattedTotal",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL),
                 Name = "Total",
                 Visible = true,
-                Width = 350,
+                Width = 250,
                 CellTemplate = new DataGridViewTextBoxCell()
             });
 
@@ -324,11 +348,11 @@ namespace Permaquim.Depositary.UI.Desktop
             FechaAperturaHasta = FechaAperturaHasta.AddMinutes(59);
             FechaAperturaHasta = FechaAperturaHasta.AddSeconds(59);
 
-            _bagHistoryItems = DatabaseController.GetBaghistoryItems(FechaAperturaDesde,
+            _bagHistoryItems = DatabaseController.GetBagHistoryItems(FechaAperturaDesde,
                                                                     FechaAperturaHasta,
                                                                     FechaCierreDesde,
                                                                     FechaCierreHasta,
-                                                                    IdentificadorTextbox.Text);
+                                                                    IdentificadorTextbox.Text, false);
             MainGridView.DataSource = _bagHistoryItems;
 
         }
@@ -374,7 +398,7 @@ namespace Permaquim.Depositary.UI.Desktop
             else
             {
                 FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
-                FromFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
+                FromFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
                 if (ToFechaCierreDateTimePicker.Checked)
                     ToFechaCierreDateTimePicker.MinDate = FromFechaCierreDateTimePicker.Value;
                 else
@@ -396,7 +420,7 @@ namespace Permaquim.Depositary.UI.Desktop
             else
             {
                 ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
-                ToFechaCierreDateTimePicker.CustomFormat = "dd/MM/yyyy";
+                ToFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
                 if(FromFechaCierreDateTimePicker.Checked)
                 {
                     FromFechaCierreDateTimePicker.MaxDate = ToFechaCierreDateTimePicker.Value;
@@ -437,33 +461,28 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
-            DetailPanel.Location = new Point(
-              this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
-              this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
-            DetailPanel.Anchor = AnchorStyles.None;
-
-            DetailPanel.Visible = true;
-
-            InitializeGridView(OperationTypeEnum.BillDeposit);
-            InitializeGridView(OperationTypeEnum.EnvelopeDeposit);
-
-            LoadBagContentItems(OperationTypeEnum.BillDeposit);
-            LoadBagContentItems(OperationTypeEnum.EnvelopeDeposit);
-
-            SetcolumnsAlignment(BillDepositGridView);
-            SetcolumnsAlignment(EnvelopeDepositGridView);
-
-
             if (e.RowIndex > -1)
             {
+                DetailPanel.Location = new Point(
+                  this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
+                  this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
+                DetailPanel.Anchor = AnchorStyles.None;
+
+                DetailPanel.Visible = true;
+
+                InitializeGridView(OperationTypeEnum.BillDeposit);
+                InitializeGridView(OperationTypeEnum.EnvelopeDeposit);
+
+                SetcolumnsAlignment(BillDepositGridView);
+                SetcolumnsAlignment(EnvelopeDepositGridView);
+
                 InitializeContainerHistoryDetaillGridView();
 
                 _currentContainerId = (long)MainGridView.Rows[e.RowIndex].Cells["Id"].Value;
-
+                LoadBagContentItems(OperationTypeEnum.BillDeposit);
+                LoadBagContentItems(OperationTypeEnum.EnvelopeDeposit);
 
             }
-
-
         }
 
         private void LoadBagContentItems(OperationTypeEnum operationType)
@@ -509,6 +528,21 @@ namespace Permaquim.Depositary.UI.Desktop
         private void AcceptButton_Click(object sender, EventArgs e)
         {
             DetailPanel.Visible = false;
+        }
+
+        private void BillDepositGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void EnvelopeDepositGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void BagContentTabControl_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
         }
     }
 }

@@ -232,6 +232,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                     {
+                        _device.CloseEscrow();
                         DatabaseController.LogOff(true);
                         FormsController.LogOff();
                     }

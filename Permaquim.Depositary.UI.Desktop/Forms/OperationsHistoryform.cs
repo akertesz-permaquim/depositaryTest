@@ -51,10 +51,10 @@ namespace Permaquim.Depositary.UI.Desktop
             ToDateTimePicker.Value = DateTime.Now.Date;
             FromDateTimePicker.Value = DateTime.Now.Date;
             FromDateTimePicker.Format = DateTimePickerFormat.Custom;
-            FromDateTimePicker.CustomFormat = "dd/MM/yyyy";
+            FromDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 
             ToDateTimePicker.Format = DateTimePickerFormat.Custom;
-            ToDateTimePicker.CustomFormat = "dd/MM/yyyy";
+            ToDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 
             UserComboBox.SelectedIndex = 0;
             TurnComboBox.SelectedIndex = 0;
@@ -239,7 +239,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 Name = "Fecha",
                 Visible = true,
                 Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DefaultCellStyle = StyleController.GetDateColumnStyle()
 
             });
 
@@ -345,7 +346,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
                     Name = "Moneda",
                     Visible = true,
-                    Width = 100,
+                    Width = 200,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
@@ -367,7 +368,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADUNIDADES),
                     Name = "CantidadUnidades",
                     Visible = true,
-                    Width = 100,
+                    Width = 130,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
@@ -402,7 +403,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
                     Name = "Moneda",
                     Visible = true,
-                    Width = 100,
+                    Width = 200,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
@@ -435,7 +436,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CANTIDADDECLARADA),
                     Name = "CantidadDeclarada",
                     Visible = true,
-                    Width = 100,
+                    Width = 130,
                     CellTemplate = new DataGridViewTextBoxCell()
 
                 });
@@ -448,7 +449,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 Name = "Fecha",
                 Visible = true,
                 Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DefaultCellStyle = StyleController.GetDateColumnStyle()
 
             });
         }
@@ -482,7 +484,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _transactionHeaderItems.Add(new TransactionHeaderItem()
                 {
                     Cierrediario =  item.CierreDiarioId != null?  
-                        item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString("dd/MM/yyyy") : "" : String.Empty,
+                        item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA)) : "" : String.Empty,
                     Contenedor = item.ContenedorId.Nombre +
                         (item.ContenedorId.Identificador.Length == 0 ? "" : " (" + item.ContenedorId.Identificador + " )"),
                     Fecha = item.Fecha,
