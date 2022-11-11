@@ -570,7 +570,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     Fecha = DateTime.Now,
                     Finalizada = true,
                     SectorId = DatabaseController.CurrentDepositary.SectorId.Id,
-                    SesionId = sesiones.Result.FirstOrDefault().Id,
+                    SesionId = DatabaseController.CurrentSession.Id,
                     SucursalId = DatabaseController.CurrentDepositary.SectorId.SucursalId.Id,
                     TipoId = (long)OperationTypeEnum.EnvelopeDeposit,             // Depósito de Sobre
                     TotalAValidar = _totalQuantity,

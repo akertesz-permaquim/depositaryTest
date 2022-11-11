@@ -210,10 +210,19 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOG_DISPOSITIVO_HABILITADO"));
+                bool returnValue = false;
+                try
+                {
+
+                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOG_DISPOSITIVO_HABILITADO"));
+                }
+                catch (Exception)
+                {
+
+                    returnValue = false;
+                }
+                return returnValue;
             }
-
         }
-
     }
 }

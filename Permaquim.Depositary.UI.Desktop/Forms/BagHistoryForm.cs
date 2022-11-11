@@ -41,13 +41,23 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ResetReport()
         {
             ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
+            ToFechaCierreDateTimePicker.Value = DateTime.Now.Date;
+            ToFechaCierreDateTimePicker.Checked = false;
+
+            FromFechaCierreDateTimePicker.Value = DateTime.Now.Date;
             FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
             FromFechaCierreDateTimePicker.Checked = false;
-            ToFechaCierreDateTimePicker.Checked = false;
+
             IdentificadorTextbox.Text = "";
+
             FromFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+            ToFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
+            ToFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 
+
+            FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
+            FromFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
             ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 

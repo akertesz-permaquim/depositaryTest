@@ -660,6 +660,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
+                yOffset += _interlineSpace;
 
                 // Contenido del sobre
                 e.Graphics.DrawString(
@@ -1084,13 +1085,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 yOffset += _interlineSpace;
 
                 // Fecha operacion
-                var fechaOperacion = _header.
+                var fechaCierre = DailyClosingToPrint.
                         Fecha == null ? "" : ((DateTime)DailyClosingToPrint.
                         Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
 
                 e.Graphics.DrawString(
                     StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(fechaOperacion, 20, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(fechaCierre, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
@@ -1388,7 +1389,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 e.Graphics.DrawString(
                     StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(fechaApertura, 20, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(fechaCierre, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;

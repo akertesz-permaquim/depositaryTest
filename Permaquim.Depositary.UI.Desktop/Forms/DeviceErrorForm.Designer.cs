@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceErrorForm));
             this.MainPictureBox = new System.Windows.Forms.PictureBox();
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.InformationLabel = new System.Windows.Forms.Label();
@@ -38,7 +37,6 @@
             // MainPictureBox
             // 
             this.MainPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.MainPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("MainPictureBox.Image")));
             this.MainPictureBox.Location = new System.Drawing.Point(360, 106);
             this.MainPictureBox.Name = "MainPictureBox";
             this.MainPictureBox.Size = new System.Drawing.Size(304, 248);

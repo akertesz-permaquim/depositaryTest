@@ -205,6 +205,18 @@ namespace Permaquim.Depositary.UI.Desktop
 
             OperationsHeaderGridView.Columns.Add(new()
             {
+                DataPropertyName = "TipoId",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
+                Name = "TipoId",
+                Visible = false,
+                Width = 100,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+
+            OperationsHeaderGridView.Columns.Add(new()
+            {
                 DataPropertyName = "Tipo",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPO),
                 Name = "Tipo",

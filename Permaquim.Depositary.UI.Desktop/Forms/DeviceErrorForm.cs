@@ -47,7 +47,12 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             _pollingTimer.Enabled = true;
             InformationLabel.Text = String.Empty;
         }
+        private void LoadDeviceImage()
+        {
+            MainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            MainPictureBox.Image = StyleController.GetDeviceImage();
 
+        }
         private void DeviceErrorForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
@@ -117,6 +122,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.TextoError);
             InformationLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.Breadcrumb);
+            LoadDeviceImage();
 
         }
         #region Back button
@@ -136,14 +142,49 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             if (ParameterController.UsesShutter)
                 _device.Open();
 
-            if (_device.StateResultProperty.ErrorStateInformation.AbnormalDevice)
-                _device.ResetFF0x();
+            if (_device.StateResultProperty.ErrorStateInformation.AbnormalDevice)   // TODO: Unificar
+
+                switch ((DatabaseController.CurrentDepositary.
+                      ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
+                {
+                    case D50:
+                        _device.UnJam();
+                        break;
+                    case D70:
+                        _device.ResetFF0x();
+                        break;
+                    default:
+                        break;
+                }
+           
             if (_device.StateResultProperty.ErrorStateInformation.AbnormalStorage)
-                _device.ResetFF0x();
+                switch ((DatabaseController.CurrentDepositary.
+                         ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
+                {
+                    case D50:
+                        _device.UnJam();
+                        break;
+                    case D70:
+                        _device.ResetFF0x();
+                        break;
+                    default:
+                        break;
+                }
             if (_device.StateResultProperty.ErrorStateInformation.CountingError)
                 return;
             if (_device.StateResultProperty.ErrorStateInformation.Jamming)
-                _device.UnJam();
+                switch ((DatabaseController.CurrentDepositary.
+                         ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
+                {
+                    case D50:
+                        _device.UnJam();
+                        break;
+                    case D70:
+                        _device.ResetFF0x();
+                        break;
+                    default:
+                        break;
+                }
             this.DialogResult = DialogResult.OK;
 
          }

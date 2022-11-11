@@ -16,8 +16,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private const string RETIRO_DE_VALORES_SIN_USUARIO = "Retiro de valores sin usuario.";
         private const string ERROR = "Error";
 
-        private const string GREENLED = "GREENLED";
-        private const string REDLED = "REDLED";
+        private const string GREENLED_COUNTER = "GREENLED_COUNTER";
+        private const string REDLED_COUNTER = "REDLED_COUNTER";
+        private const string GREENLED_IOBOARD = "GREENLED_IOBOARD";
+        private const string REDLED_IOBOARD = "REDLED_IOBOARD";
+
         private const string PRESENTACION = "Presentacion.gif";
 
         private const int WEEK_DAYS = 7;
@@ -29,8 +32,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         StatesResult _counterStatesResult;
         IoBoardStatus _ioBoardStatus;
 
-        private Image _greenLedImage;
-        private Image _redLedImage;
+        private Image _greenLedImageCounter;
+        private Image _redLedImageCounter;
+        private Image _greenLedImageIoboard;
+        private Image _redLedImageIoboard;
 
         private Image _avatarImage;
 
@@ -154,6 +159,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                         VerifyUserData();
                         LoadParameters();
                         LoadLanguageItems();
+                        SetDepositaryInformation();
+                        SetTurnAndDateTimeLabel();
                     }
                         
                 }else
@@ -205,9 +212,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         /// </summary>
         private bool CheckLicense()
         {
-
-           //MessageBox.Show( LicenseController.ReadAdditonalLicenseInformation());
-
             if (ConfigurationController.IsDevelopment())
                 return true;
             else
@@ -248,8 +252,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         }
         private void LoadLedImages()
         {
-            _greenLedImage = StyleController.GetImageResource(GREENLED);
-            _redLedImage = StyleController.GetImageResource(REDLED);
+            _greenLedImageCounter = StyleController.GetImageResource(GREENLED_COUNTER);
+            _redLedImageCounter = StyleController.GetImageResource(REDLED_COUNTER);
+            _greenLedImageIoboard = StyleController.GetImageResource(GREENLED_IOBOARD);
+            _redLedImageIoboard = StyleController.GetImageResource(REDLED_IOBOARD);
         }
         private void InitializeDevices()
         {
@@ -328,6 +334,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
+            SetTurnAndDateTimeLabel();
+
             VerifyIssues();
 
             VerifyForcedValueExtraction();
@@ -586,12 +594,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 if (_device.CounterConnected)
                 {
-                    CounterPictureBox.Image = _greenLedImage;
+                    CounterPictureBox.Image = _greenLedImageCounter;
                     DeviceController.CounterIssue = false;
                 }
                 else
                 {
-                    CounterPictureBox.Image = _redLedImage;
+                    CounterPictureBox.Image = _redLedImageCounter;
                     _device.CounterBoardReconnect();
                     DeviceController.CounterIssue = true;
                 }
@@ -601,12 +609,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 // consulta el estado de la ioboard  si está conectada
                 if (_device.IoBoardConnected)
                 {
-                    IoBoardPictureBox.Image = _greenLedImage;
+                    IoBoardPictureBox.Image = _greenLedImageIoboard;
                     DeviceController.IoBoardIssue = false;
                 }
                 else
                 {
-                    IoBoardPictureBox.Image = _redLedImage;
+                    IoBoardPictureBox.Image = _redLedImageIoboard;
                     _device.IoBoardReconnect();
                     DeviceController.IoBoardIssue = true;
                 }
@@ -650,21 +658,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 if (DatabaseController.UserAllowedInSector())
                 {
                     UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": " +
-                DatabaseController.CurrentUser.Apellido + " " + DatabaseController.CurrentUser.Nombre;
+                        DatabaseController.CurrentUser.Apellido + " " + DatabaseController.CurrentUser.Nombre;
 
                     EnterpriseLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.EMPRESA) + ": " +
                     DatabaseController.CurrentUser.EmpresaId.Nombre;
-
-                    SucursalInfoLabel.Text =
-                        MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
-                        + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
-                        + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
-                        + DatabaseController.CurrentDepositary.SectorId.Nombre;
-
-                    DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
-                     + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
-                     + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
-                     + DatabaseController.CurrentDepositary.CodigoExterno;
 
                     SetTurnAndDateTimeLabel();
                 }
@@ -674,12 +671,24 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 UserLabel.Text = String.Empty;
                 EnterpriseLabel.Text = String.Empty;
-                SucursalInfoLabel.Text = String.Empty;
                 RemainingTimeLabel.Text = String.Empty;
-                DepositaryLabel.Text = String.Empty;
                 TurnAndDateTimeLabel.Text = String.Empty;
             }
 
+        }
+
+        private void SetDepositaryInformation()
+        {
+            SucursalInfoLabel.Text =
+                MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
+                + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
+                + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
+                + DatabaseController.CurrentDepositary.SectorId.Nombre;
+
+            DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
+             + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
+             + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
+             + DatabaseController.CurrentDepositary.CodigoExterno;
         }
 
         private void SetTurnAndDateTimeLabel()

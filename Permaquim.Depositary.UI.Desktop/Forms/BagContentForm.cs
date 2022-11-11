@@ -401,12 +401,15 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 DetailLabel.Text = BillDepositGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
                 Int64 currencyId = (Int64)BillDepositGridView.Rows[e.RowIndex].Cells[1].Value;
-                DetailGridView.DataSource = DatabaseController.GetEnvelopeCurrentContainerContentItems(currencyId);
+                var content = DatabaseController.GetEnvelopeCurrentContainerContentItems(currencyId);
+                if (content.Count > 0) {
+                    DetailGridView.DataSource = content;
                 DetailPanel.Location = new Point(
-       this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
-       this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
-                DetailPanel.Anchor = AnchorStyles.None;
-                DetailPanel.Visible = true;
+                   this.ClientSize.Width / 2 - DetailPanel.Size.Width / 2,
+                   this.ClientSize.Height / 2 - DetailPanel.Size.Height / 2);
+                    DetailPanel.Anchor = AnchorStyles.None;
+                    DetailPanel.Visible = true;
+                }
             }
         }
 

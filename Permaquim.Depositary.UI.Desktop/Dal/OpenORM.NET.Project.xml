@@ -32,6 +32,7 @@
   </SelectedViews>
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
+    <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
     <string>dbo.fn_diagramobjects</string>
     <string>dbo.sp_alterdiagram</string>
@@ -286,6 +287,8 @@
     <string>Banca.TipoCuenta</string>
     <string>Banca.UsuarioCuenta</string>
     <string>Biometria.HuellaDactilar</string>
+    <string>Customizador.Entidad</string>
+    <string>Customizador.EntidadAtributo</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.RelacionMonedaSucursal</string>

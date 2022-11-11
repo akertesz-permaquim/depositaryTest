@@ -2061,13 +2061,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static string GetApplicationParameterValue(string key)
         {
             string returnValue = string.Empty;
+            try
+            {
 
-            Permaquim.Depositario.Business.Tables.Aplicacion.Configuracion entities = new();
-            entities.Where.Add(Depositario.Business.Tables.Aplicacion.Configuracion.ColumnEnum.Clave,
-                Depositario.sqlEnum.OperandEnum.Equal, key);
-            entities.Items();
-            if (entities.Result.Count > 0)
-                return entities.Result.FirstOrDefault().Valor;
+                Permaquim.Depositario.Business.Tables.Aplicacion.Configuracion entities = new();
+                entities.Where.Add(Depositario.Business.Tables.Aplicacion.Configuracion.ColumnEnum.Clave,
+                    Depositario.sqlEnum.OperandEnum.Equal, key);
+                entities.Items();
+                if (entities.Result.Count > 0)
+                    return entities.Result.FirstOrDefault().Valor;
+            }
+            catch (Exception)
+            {
+
+                returnValue = String.Empty;
+            }
 
             return returnValue;
         }

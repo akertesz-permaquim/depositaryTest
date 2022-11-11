@@ -18,6 +18,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             return GetImageResource("Login");
         }
+
+        public static Image GetDeviceImage()
+        {
+            return ImageFromBase64Helper.
+                GetImageFromBase64String(DatabaseController.CurrentDepositary.ModeloId.Imagen);
+
+        }
+
         public static Image GetPresentation()
         {
             return GetImageResource("Presentacion");
