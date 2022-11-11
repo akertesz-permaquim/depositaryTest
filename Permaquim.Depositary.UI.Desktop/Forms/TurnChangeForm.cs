@@ -177,7 +177,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     TipoId = item.TipoId.Id,
                     TotalAValidar = item.TotalAValidar,
                     TotalValidado = item.TotalValidado,
-                    Turno = item.TurnoId.ToString(),
+                    Turno = item.TurnoId.TurnoDepositarioId.Nombre,
                     Usuario = item.UsuarioId.NombreApellido.ToString(),
                     UsuarioCuenta = item.CuentaId == null ? null :item.CuentaId.Numero
                 });
@@ -199,6 +199,29 @@ namespace Permaquim.Depositary.UI.Desktop
                 Name = "Id",
                 Visible = false,
                 Width = 100,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            OperationsHeaderGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Tipo",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPO),
+                Name = "Tipo",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+
+            OperationsHeaderGridView.Columns.Add(new()
+            {
+                DataPropertyName = "Moneda",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
+                Name = "Moneda",
+                Visible = true,
+                Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -232,7 +255,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 Name = "Fecha",
                 Visible = true,
                 Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                CellTemplate = new DataGridViewTextBoxCell(),
+                DefaultCellStyle = StyleController.GetDateColumnStyle()
 
             });
 
@@ -257,49 +281,19 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-
-            OperationsHeaderGridView.Columns.Add(new()
+            if (ParameterController.UsesBankAccount)
             {
-                DataPropertyName = "Tipo",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPO),
-                Name = "Tipo",
-                Visible = true,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                OperationsHeaderGridView.Columns.Add(new()
+                {
+                    DataPropertyName = "UsuarioCuenta",
+                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
+                    Name = "UsuarioCuenta",
+                    Visible = true,
+                    Width = 150,
+                    CellTemplate = new DataGridViewTextBoxCell()
 
-            });
-
-            OperationsHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "Moneda",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
-                Name = "Moneda",
-                Visible = true,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-
-            OperationsHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "TipoId",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TIPOID),
-                Name = "TipoId",
-                Visible = false,
-                Width = 1,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
-            OperationsHeaderGridView.Columns.Add(new()
-            {
-                DataPropertyName = "UsuarioCuenta",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
-                Name = "UsuarioCuenta",
-                Visible = true,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
-
-            });
+                });
+            }
 
             OperationsHeaderGridView.Columns.Add(new()
             {
@@ -307,7 +301,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.TURNO),
                 Name = "Turno",
                 Visible = true,
-                Width = 150,
+                Width = 350,
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
@@ -523,5 +517,24 @@ namespace Permaquim.Depositary.UI.Desktop
             DetailsPanel.Visible = false;
         }
 
+        private void TurnChangeForm_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void OperationsHeaderGridView_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void OperationsDetailGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TimeOutController.Reset();
+        }
+
+        private void DetailsPanel_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
     }
 }

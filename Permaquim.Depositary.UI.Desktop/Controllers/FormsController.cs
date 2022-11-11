@@ -46,7 +46,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             OpenChildForm(childForm, device);
             MainFormInstance.BreadCrumbText =
                  MultilanguangeController.GetText(childForm.Name);
-            //MainFormInstance.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
         /// <summary>
         /// Loads child form

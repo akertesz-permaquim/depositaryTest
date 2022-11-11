@@ -151,7 +151,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             DataGridViewCellStyle dateColumnStyle = new()
             {
-                Format = System.Convert.ToChar(34) + MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA) + System.Convert.ToChar(34)
+                Format = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA)
             };
             return dateColumnStyle;
 

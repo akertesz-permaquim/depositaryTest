@@ -441,8 +441,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 });
             }
-
-            OperationsDetailGridView.Columns.Add(new()
+            if (operationType == OperationTypeEnum.ValueExtraction)
+            {
+                OperationsDetailGridView.Columns.Add(new()
+                {
+                    DataPropertyName = "Id",
+                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ID),
+                    Name = "Id",
+                    Visible = false,
+                    Width = 100,
+                    CellTemplate = new DataGridViewTextBoxCell()
+                });
+            }
+                OperationsDetailGridView.Columns.Add(new()
             {
                 DataPropertyName = "Fecha",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.FECHA),
@@ -649,8 +660,21 @@ namespace Permaquim.Depositary.UI.Desktop
                 PrintBillDepositTicket();
             if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.EnvelopeDeposit)
                 PrintEnvelopeTicket();
+            if ((OperationTypeEnum)_operationTypeId == OperationTypeEnum.ValueExtraction)
+                PrintValueExtractionTicket();
         }
+        private void PrintValueExtractionTicket()
+        {
+            if (ParameterController.PrintsBagExtraction)
+            {
+                var _header = DatabaseController.GetTransactionHeader(_operationId);
 
+                ReportController.ContainerToPrint = DatabaseController.GetContainer(_header.ContenedorId.Id);
+                ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
+                DatabaseController.GetEnvelopeContainerContentItems(_header.ContenedorId.Id),
+                DatabaseController.GetBillContainerContentItems(_header.ContenedorId.Id), 1);
+            }
+        }
         private void PrintBillDepositTicket()
         {
             if (ParameterController.PrintsBillDeposit)

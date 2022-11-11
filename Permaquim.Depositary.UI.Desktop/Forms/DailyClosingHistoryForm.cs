@@ -364,17 +364,19 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewTextBoxCell()
 
             });
-
-            DailyClosingDetailGridView.Columns.Add(new()
+            if (ParameterController.UsesBankAccount)
             {
-                DataPropertyName = "UsuarioCuenta",
-                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
-                Name = "UsuarioCuenta",
-                Visible = ParameterController.UsesBankAccount,
-                Width = 150,
-                CellTemplate = new DataGridViewTextBoxCell()
+                DailyClosingDetailGridView.Columns.Add(new()
+                {
+                    DataPropertyName = "UsuarioCuenta",
+                    HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA),
+                    Name = "UsuarioCuenta",
+                    Visible = ParameterController.UsesBankAccount,
+                    Width = 150,
+                    CellTemplate = new DataGridViewTextBoxCell()
 
-            });
+                });
+            }
 
             DailyClosingDetailGridView.Columns.Add(new()
             {

@@ -224,6 +224,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     ConfirmDeposit();
                     _operationStatus.DepositConfirmed = true;
                     SaveTransaction();
+                    SetAutoDeposit();
                     PrintTicket();
                     DatabaseController.LogOff(true);
                     FormsController.LogOff();
@@ -650,6 +651,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void CancelDeposit()
         {
+            if(_operationStatus.CurrentTransactionId != 0)
+            {
+                PrintTicket();
+            }
+
+            ConfirmEndTransaction(true);
             _operationStatus.DepositConfirmed = false;
             _operationStatus.DepositCancelled = true;
             ConfirmAndExitDepositButton.Visible = false;
@@ -657,7 +664,25 @@ namespace Permaquim.Depositary.UI.Desktop
             _device.OpenEscrow();
             _device.PreviousState = StatusInformation.State.PQWaitingToRemoveBankNotes;
         }
+        /// <summary>
+        /// Setea como finalizada = false;
+        /// </summary>
+        private void ConfirmEndTransaction(bool finished)
+        {
+            Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
 
+            transactions.Items(_operationStatus.CurrentTransactionId);
+            if (transactions.Result.Count > 0)
+            {
+                var previousTransacion = transactions.Result.FirstOrDefault();
+
+                previousTransacion.Finalizada = finished;
+
+                transactions.Update(previousTransacion);
+
+            }
+
+        }
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
             TimeOutController.Reset();
@@ -701,7 +726,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _pollingTimer.Enabled = false;
             SaveTransaction();
-            UpdateTransaction();
+            ConfirmEndTransaction(true);
             EnableDisableControls(false);
             _device.RemoteCancel();
             _operationStatus.DepositEnded = false;
@@ -711,7 +736,21 @@ namespace Permaquim.Depositary.UI.Desktop
             _device.Close();
             FormsController.OpenChildForm(this, new OperationForm(), _device);
         }
+        private void SetAutoDeposit()
+        {
+            Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
 
+            transactions.Items(_operationStatus.CurrentTransactionId);
+            if (transactions.Result.Count > 0)
+            {
+                var previousTransacion = transactions.Result.FirstOrDefault();
+
+                previousTransacion.EsDepositoAutomatico = true;
+
+                transactions.Update(previousTransacion);
+
+            }
+        }
         private void SaveAndContinueDeposit()
         {
             _device.PreviousState = StatusInformation.State.PQStoring;
@@ -869,18 +908,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
         }
 
-        private void UpdateTransaction()
-        {
-            Depositario.Business.Tables.Operacion.Transaccion transactions = new();
-            transactions.Items(_operationStatus.CurrentTransactionId);
-            if (transactions.Result.Count > 0)
-            {
-                var currentTransaction = transactions.Result.FirstOrDefault();
-                currentTransaction.Finalizada = true;
-                transactions.Update(currentTransaction);
-
-            }
-        }
         private void PrintTicket()
         {
 

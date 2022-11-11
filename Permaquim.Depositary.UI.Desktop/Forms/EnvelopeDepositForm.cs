@@ -631,14 +631,14 @@ namespace Permaquim.Depositary.UI.Desktop
             }
 
         }
-        
+        /// <summary>
+        /// Setea como finalizada = false;
+        /// </summary>
         private void DeleteTransaction()
         {
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
 
-            transactions.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Id,
-                Depositario.sqlEnum.OperandEnum.Equal, _operationStatus.CurrentTransactionId);
-            transactions.Items();
+            transactions.Items(_operationStatus.CurrentTransactionId);
             if (transactions.Result.Count > 0)
             {
                 var previousTransacion = transactions.Result.FirstOrDefault();
@@ -649,10 +649,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
             }
 
-
-
         }
-        
+
+          
         private void EnableDisableControls(bool value)
         {
             DenominationsGridView.Visible = value;
@@ -797,7 +796,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DenominationsGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            System.Diagnostics.Debug.Print(e.ToString());
+            System.Diagnostics.Debug.Print(e.ToString()); // Evita error al momento de editar.
         }
         private void EvaluateTimeout()
         {
@@ -837,12 +836,15 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
+            DeleteTransaction();
+
             _operationStatus.DepositConfirmed = false;
             _device.CloseEscrow();
             AuditController.Log(LogTypeEnum.Information,
                 DEPOSITO_SOBRE_CANCELADO,
                 DEPOSITO_SOBRE_CANCELADO);
             ButtonsPanel.Visible = true;
+
             if (_device.CounterConnected)
                 _device.RemoteCancel();
 

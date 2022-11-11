@@ -58,7 +58,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     return;
                 }
 
-                _fechaHora = DateTime.Now.ToString(
+               _fechaHora = DateTime.Now.ToString(
                     MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
 
                 _header = header;
@@ -279,8 +279,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
 
                 e.Graphics.DrawString(
-                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(fechaOperacion, 17, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(fechaOperacion, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
@@ -476,11 +476,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Fecha operacion
                 var fechaOperacion = _header.
                         Fecha == null ? "" : ((DateTime)_header.
-                        Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
-
+                        Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA) );
+                
                 e.Graphics.DrawString(
-                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(fechaOperacion, 17, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(fechaOperacion, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
@@ -648,6 +648,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                     yOffset += _interlineSpace;
                 }
+
+                // Fecha operacion
+                var fechaOperacion = _header.
+                        Fecha == null ? "" : ((DateTime)_header.
+                        Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
+
+                e.Graphics.DrawString(
+                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(fechaOperacion, 20, StringHelper.AlignEnum.AlignLeft)
+                    , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
+
                 yOffset += _interlineSpace;
 
                 // Contenido del sobre
@@ -1072,7 +1083,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 yOffset += _interlineSpace;
 
+                // Fecha operacion
+                var fechaOperacion = _header.
+                        Fecha == null ? "" : ((DateTime)DailyClosingToPrint.
+                        Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
 
+                e.Graphics.DrawString(
+                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(fechaOperacion, 20, StringHelper.AlignEnum.AlignLeft)
+                    , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
+
+                yOffset += _interlineSpace;
 
                 // Separador
                 e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _boldFont,
@@ -1342,8 +1363,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA));
 
                 e.Graphics.DrawString(
-                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_TURNO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(fechaTurno, 17, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_TURNO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(fechaTurno, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
@@ -1351,28 +1372,26 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Fecha apertura
                 var fechaApertura = ReportController.TurnToPrint.
                         FechaApertura == null ? "" : ((DateTime)ReportController.TurnToPrint.
-                        FechaApertura).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
+                        FechaApertura).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA) );
 
                 e.Graphics.DrawString(
-                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_APERTURA) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(fechaApertura, 17, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_APERTURA) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(fechaApertura, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
-
 
                 // Fecha cierre
                 var fechaCierre = ReportController.TurnToPrint.
                         FechaCierre == null ? "" : ((DateTime)ReportController.TurnToPrint.
-                        FechaCierre).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
+                        FechaCierre).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA) );
 
                 e.Graphics.DrawString(
-                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(fechaApertura, 17, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(fechaApertura, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                 yOffset += _interlineSpace;
-
 
                 // Separador
                 e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _boldFont,

@@ -39,6 +39,10 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (!ConfigurationController.IsDevelopment())
             {
+                _device.Sleep();
+                _device.RemoteCancel();
+                _device.Sleep();
+
                 MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
                 == ModeStateInformation.Mode.Neutral_SettingMode;
             }
@@ -63,6 +67,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
                 {
+
                     _device.Sleep();
 
                     _device.RemoteCancel();
@@ -72,11 +77,12 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
                 if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode
+                    || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.ManualMode
                     || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.InitialMode)
                 {
                     _device.RemoteCancel();
                 }
-
+  
             }
 
 
@@ -547,6 +553,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 InitializeLocals();
             else
             {
+                if(DatabaseController.CurrentOperation != null)
+                    DatabaseController.CurrentOperation.Id = (long)OperationTypeEnum.None;
+
                 _transactions = DatabaseController.GetTransactionTypes();
                 LoadTransactionButtons();
                 LoadOtherOperationsButton();
