@@ -72,7 +72,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _currencies)
             {
 
-                CustomButton newButton = ControlBuilder.BuildStandardButton(
+                System.Windows.Forms.Button newButton = ControlBuilder.BuildStandardButton(
                     "CurrencyButton" + item.Id.ToString(), 
                     MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
@@ -90,7 +90,7 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             
             // Obtiene la moneda que seleccionó el usuario
-            DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((CustomButton)sender).Tag;
+            DatabaseController.CurrentCurrency = (Permaquim.Depositario.Entities.Relations.Valor.Moneda)((System.Windows.Forms.Button)sender).Tag;
 
             // Valida que la moneda seleccionada eista en la plantilla del modelo del depositario
             // para evitar inconsistencia
@@ -250,7 +250,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region BackButton
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);

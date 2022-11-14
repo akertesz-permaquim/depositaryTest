@@ -10,6 +10,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
     {
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         private const string ENTER = "{ENTER}";
+        private TextBox _activeTextbox;
         public PermissionUnlockForm()
         {
             this.SuspendLayout();
@@ -24,7 +25,6 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
             MainKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
-            MainKeyboard.KeyboardEvent += MainKeyboard_KeyboardEvent;
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -71,53 +71,6 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                 Y = this.Height / 2 - MainKeyboard.Height / 2
             };
         }
-        private void MainKeyboard_KeyboardEvent(object sender, KeyboardEventArgs args)
-        {
-            TimeOutController.Reset();
-
-            if (args.KeyPressed.Equals(ENTER))
-            {
-                if (args.UserText.Trim().Equals(string.Empty) ||
-                    args.PasswordText.Trim().Equals(string.Empty))
-                {
-                    MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.ERROR_FALTA_DATO));
-                }
-                else
-                {
-                    var currentUser = DatabaseController.Login(args.UserText.Trim(), args.PasswordText.Trim());
-
-                    if (currentUser.Id != 0)
-                    {
-                        if (DatabaseController.UserAllowedInSector())
-                        {
-
-                            if (SecurityController.IsFunctionEnabled(104))
-                            {
-                                this.DialogResult = DialogResult.OK;
-                                DeviceController.BagRemovedForcefully = false;
-                                return;
-                            }
-                            else
-                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.NO_POSEE_PERMISOS));
-
-                            if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
-                            {
-                                MainKeyboard.ClearCredentials();
-                            }
-                        }
-                        else
-                        {
-                            MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_HABILITADO_EN_SECTOR));
-                        }
-
-                    }
-                    else
-                    {
-                        MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_REGISTRADO));
-                    }
-                }
-            }
-        }
 
         private void Loadlogo()
         {
@@ -140,6 +93,30 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         {
             _pollingTimer.Enabled = this.Visible;
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+        }
+        private void KeysHandler(object sender, EventArgs e)
+        {
+            _activeTextbox.Focus();
+
+
+            if (((System.Windows.Forms.Button)sender).Tag.ToString().Equals("{BACKSPACE}"))
+            {
+                if (_activeTextbox.Text.Length > 0)
+                {
+                    _activeTextbox.Text = _activeTextbox.Text.Substring(0, _activeTextbox.Text.Length - 1);
+                    _activeTextbox.SelectionStart = _activeTextbox.Text.Length;
+                }
+            }
+            else
+            {
+
+                int pos = _activeTextbox.SelectionStart;
+                _activeTextbox.Text = _activeTextbox.Text.Insert(pos, ((System.Windows.Forms.Button)sender).Tag.ToString());
+                _activeTextbox.SelectionStart = pos + 1;
+
+                _activeTextbox.SelectionLength = 0;
+
+            }
         }
     }
 }

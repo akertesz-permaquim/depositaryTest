@@ -13,7 +13,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private List<Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion> _transactions = DatabaseController.GetTransactionTypes();
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
-        private CustomButton _backButton;
+        private System.Windows.Forms.Button _backButton;
 
         CounterDevice _device = null;
         public OperationForm()
@@ -122,7 +122,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (SecurityController.IsOperationEnabled(((long)item.FuncionId)))
                 {
-                    CustomButton newButton = ControlBuilder.BuildStandardButton(
+                    System.Windows.Forms.Button newButton = ControlBuilder.BuildStandardButton(
                         "TransactionButton" + item.Id.ToString(),
                         MultilanguangeController.GetText(item.Nombre), MainPanel.Width);
 
@@ -137,7 +137,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void TransactionButton_Click(object sender, EventArgs e)
         {
-            DatabaseController.CurrentOperation = (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((CustomButton)sender).Tag;
+            DatabaseController.CurrentOperation = (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((System.Windows.Forms.Button)sender).Tag;
 
             switch ((int)DatabaseController.CurrentOperation.Id)
             {
@@ -479,7 +479,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 || SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeBolsas)
                 )
             {
-                CustomButton reportsButton = ControlBuilder.BuildStandardButton(
+                System.Windows.Forms.Button reportsButton = ControlBuilder.BuildStandardButton(
                     "ReportsButton", MultilanguangeController.GetText(MultiLanguageEnum.REPORTES), MainPanel.Width);
 
                 this.MainPanel.Controls.Add(reportsButton);
@@ -503,7 +503,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 || SecurityController.IsFunctionEnabled(FunctionEnum.Soporte)
              )
             {
-                CustomButton otherOperationsButton = ControlBuilder.BuildAlternateButton(
+                System.Windows.Forms.Button otherOperationsButton = ControlBuilder.BuildAlternateButton(
                     "OtherOperationsButton",
                     MultilanguangeController.GetText(MultiLanguageEnum.OTRAS_OPERACIONES), MainPanel.Width);
 
@@ -577,6 +577,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void InitializeLocals()
         {
             _transactions = new();
+
         }
     }
 }

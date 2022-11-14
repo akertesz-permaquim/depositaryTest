@@ -65,7 +65,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _valueOrigins)
             {
 
-                CustomButton newButton = ControlBuilder.BuildStandardButton(
+                System.Windows.Forms.Button newButton = ControlBuilder.BuildStandardButton(
                 "ValueOriginButton" + item.Id.ToString(),
                 item.Nombre
                 , MainPanel.Width);
@@ -80,7 +80,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
 
@@ -90,7 +90,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ValueOriginButton_Click(object sender, EventArgs e)
         {
-            DatabaseController.CurrentDepositOrigin = (Permaquim.Depositario.Entities.Relations.Valor.OrigenValor)((CustomButton)sender).Tag;
+            DatabaseController.CurrentDepositOrigin = (Permaquim.Depositario.Entities.Relations.Valor.OrigenValor)((System.Windows.Forms.Button)sender).Tag;
 
             if (ParameterController.UsesBankAccount == true)
             {
@@ -133,8 +133,14 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                  (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            if (DatabaseController.GetCurrencies().Count > 1)
+                FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                      (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            else
+            {
+                FormsController.OpenChildForm(this, new OperationForm(),
+                               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
         }
 
         private void ValueOriginSelectorForm_VisibleChanged(object sender, EventArgs e)

@@ -396,11 +396,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 SetInformationMessage(InformationTypeEnum.Error, message);
 
             }
-            else
-            {
-                if (DatabaseController.CurrentOperation == null)
-                    SetInformationMessage(InformationTypeEnum.None, String.Empty);
-            }
+
         }
 
         private void VerifyForcedValueExtraction()
@@ -672,7 +668,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 UserLabel.Text = String.Empty;
                 EnterpriseLabel.Text = String.Empty;
                 RemainingTimeLabel.Text = String.Empty;
-                TurnAndDateTimeLabel.Text = String.Empty;
+                //TurnAndDateTimeLabel.Text = String.Empty;
             }
 
         }
@@ -738,8 +734,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
 
             else
-                FormsController.OpenChildForm(new KeyboardInputForm(),
-                    (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                //FormsController.OpenChildForm(new StandardLoginForm(),
+                //(Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            FormsController.OpenChildForm(new KeyboardInputForm(),
+                (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
 
         }
 

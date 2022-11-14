@@ -26,7 +26,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         private const string ESCROWBILLPRESENT = "EscrowBillPresent; ";
 
         string _errorInformation = String.Empty;
-        CustomButton _resetButton = null;
+        System.Windows.Forms.Button _resetButton = null;
 
         private CounterDevice _device = null;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();

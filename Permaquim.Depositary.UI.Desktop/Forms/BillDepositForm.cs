@@ -195,7 +195,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ConfirmAndExitDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmAndExitDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
-            ConfirmAndContinueDepositButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            ConfirmAndContinueDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmAndContinueDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             CancelDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
@@ -212,7 +212,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (TimeOutController.IsTimeOut())
             {
-
+                SetAutoDeposit();
                 if (_device.StateResultProperty.DeviceStateInformation.HopperBillPresent)
                 {
                     TimeOutController.Reset();

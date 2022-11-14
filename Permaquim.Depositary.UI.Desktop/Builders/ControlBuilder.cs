@@ -10,13 +10,12 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
 {
     internal static class ControlBuilder
     {
-        private static CustomButton BuildButton()
+        private static System.Windows.Forms.Button BuildButton()
         {
-            CustomButton newButton = new();
+            System.Windows.Forms.Button newButton = new();
 
 
-            newButton.BorderRadius = 5;
-            newButton.BorderSize = 0;
+
             newButton.FlatAppearance.BorderSize = 0;
             newButton.FlatStyle = FlatStyle.Flat;
             newButton.Font = new Font("Verdana", 14F, FontStyle.Bold, GraphicsUnit.Point);
@@ -25,64 +24,57 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
             return newButton;
         }
 
-        public static CustomButton BuildStandardButton(string name, string text, int width,int height = 77)
+        public static System.Windows.Forms.Button BuildStandardButton(string name, string text, int width,int height = 77)
         {
 
-            CustomButton newButton = BuildButton();
+            System.Windows.Forms.Button newButton = BuildButton();
 
             newButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
-            newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+
             newButton.Name = name;
             newButton.Text = text;
             newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             return newButton;
         }
-        public static CustomButton BuildExitButton(string name, string text, int width, int height = 77)
+        public static System.Windows.Forms.Button BuildExitButton(string name, string text, int width, int height = 77)
         {
-            CustomButton newButton = BuildButton();
+            System.Windows.Forms.Button newButton = BuildButton();
 
             newButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonEstandar);
-            newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonEstandar);
             newButton.Name = name;
             newButton.Text = text;
             newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             return newButton;
         }
-        public static CustomButton BuildCancelButton(string name, string text, int width, int height = 77)
+        public static System.Windows.Forms.Button BuildCancelButton(string name, string text, int width, int height = 77)
         {
-            CustomButton newButton = BuildButton();
+            System.Windows.Forms.Button newButton = BuildButton();
 
             newButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
-            newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
             newButton.Name = name;
             newButton.Text = text;
             newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             return newButton;
         }
-        public static CustomButton BuildAlternateButton(string name, string text, int width, int height = 77)
+        public static System.Windows.Forms.Button BuildAlternateButton(string name, string text, int width, int height = 77)
         {
-            CustomButton newButton = BuildButton();
+            System.Windows.Forms.Button newButton = BuildButton();
 
             newButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
-            newButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
             newButton.Name = name;
             newButton.Text = text;
             newButton.Size = new Size(width - 5, height);
             newButton.TabIndex = 0;
             newButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            newButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             return newButton;
         }

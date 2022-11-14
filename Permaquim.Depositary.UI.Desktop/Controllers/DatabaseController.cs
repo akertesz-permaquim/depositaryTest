@@ -869,7 +869,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         }
         public static List<Depositario.Entities.Relations.Operacion.Turno> GetTurnChangeHeaders(
-       DateTime dateFrom, DateTime dateTo, long userId)
+       DateTime dateFrom, DateTime dateTo, long userId, long turnId)
         {
             Permaquim.Depositario.Business.Relations.Operacion.Turno turn = new();
 
@@ -881,6 +881,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 turn.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                     Depositario.Business.Relations.Operacion.Turno.ColumnEnum.UsuarioCreacion,
                               Depositario.sqlEnum.OperandEnum.Equal, userId);
+            }
+            if (turnId > -1)
+            {
+                turn.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Relations.Operacion.Turno.ColumnEnum.TurnoDepositarioId,
+                              Depositario.sqlEnum.OperandEnum.Equal, turnId);
             }
 
 
@@ -1323,9 +1329,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Permaquim.Depositario.Business.Relations.Operacion.Transaccion transactions = new();
             transactions.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.CierreDiarioId,
                 Depositario.sqlEnum.OperandEnum.Equal, DailyClosingId);
-            //transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-            //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
-            //    Depositario.sqlEnum.OperandEnum.Equal, true);
             transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
@@ -3189,6 +3192,36 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             resultado = oDepositarioMoneda.Result;
 
             return resultado;
+        }
+        public static Depositario.Entities.Relations.Seguridad.Usuario GetUser(long id) {
+            Depositario.Business.Relations.Seguridad.Usuario entity = new();
+            return entity.Items(id).FirstOrDefault();
+        }
+        public static Depositario.Entities.Relations.Dispositivo.Depositario GetDepositary(long id)
+        {
+            Depositario.Business.Relations.Dispositivo.Depositario entity = new();
+            return entity.Items(id).FirstOrDefault();
+        }
+        public static Depositario.Entities.Relations.Operacion.Transaccion GetTransaction(long id)
+        {
+            Depositario.Business.Relations.Operacion.Transaccion entity = new();
+            return entity.Items(id).FirstOrDefault();
+        }
+
+        public static Depositario.Entities.Relations.Banca.Cuenta GetBankAccount(long id)
+        {
+            Depositario.Business.Relations.Banca.Cuenta entity = new();
+            return entity.Items(id).FirstOrDefault();
+        }
+        public static Depositario.Entities.Relations.Valor.OrigenValor GetValueOrigin(long id)
+        {
+            Depositario.Business.Relations.Valor.OrigenValor entity = new();
+            return entity.Items(id).FirstOrDefault();
+        }
+        public static Depositario.Entities.Relations.Valor.RelacionMonedaTipoValor GetCurrencyValueRelation(long id)
+        {
+            Depositario.Business.Relations.Valor.RelacionMonedaTipoValor entity = new();
+            return entity.Items(id).FirstOrDefault();
         }
     }
 }

@@ -34,6 +34,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
             FromDateTimePicker.Value = DateTime.Today.Date;
 
+            ResetReport();
+
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
             {
@@ -87,9 +89,7 @@ namespace Permaquim.Depositary.UI.Desktop
             this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
 
             ExecuteButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
-            ExecuteButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            ExecuteButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
@@ -195,7 +195,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Visible = true,
                 Width = 120,
                 CellTemplate = new DataGridViewTextBoxCell(),
-                DefaultCellStyle = StyleController.GetDateColumnStyle()
+                DefaultCellStyle = StyleController.GetShortDateColumnStyle()
 
             });
 
@@ -229,7 +229,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Visible = true,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell(),
-                DefaultCellStyle = StyleController.GetDateColumnStyle()
+                DefaultCellStyle = StyleController.GetFullDateColumnStyle()
 
             });
 
@@ -242,7 +242,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Visible = true,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell(),
-                DefaultCellStyle = StyleController.GetDateColumnStyle()
+                DefaultCellStyle = StyleController.GetFullDateColumnStyle()
 
             });
 
@@ -372,7 +372,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Visible = true,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell(),
-                DefaultCellStyle = StyleController.GetDateColumnStyle()
+                DefaultCellStyle = StyleController.GetFullDateColumnStyle()
 
             });
 
@@ -473,7 +473,8 @@ namespace Permaquim.Depositary.UI.Desktop
             var Turns = DatabaseController.GetTurnChangeHeaders(
                 FromDateTimePicker.Value,
                 FechaHasta,
-                (long)UserComboBox.SelectedValue
+                (long)UserComboBox.SelectedValue,
+                (long)TurnComboBox.SelectedValue
                 );
 
             _turnItems.Clear();

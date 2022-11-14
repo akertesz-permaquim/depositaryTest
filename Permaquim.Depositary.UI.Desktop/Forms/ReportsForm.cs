@@ -93,7 +93,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region DailyClosingHistory
         private void LoadDailyClosingHistoryButton()
         {
-            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button OperationsButton = ControlBuilder.BuildStandardButton(
                 "DailyClosingHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_CIERRE_DIARIO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
@@ -110,7 +110,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region TurnsHistory
         private void LoadTurnsHistoryButton()
         {
-            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button OperationsButton = ControlBuilder.BuildStandardButton(
                 "TurnsHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_TURNO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
@@ -128,7 +128,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadOperationsHistoryButton()
         {
-            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button OperationsButton = ControlBuilder.BuildStandardButton(
                 "OperationsButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_OPERACIONES), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
@@ -145,7 +145,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region BagContent
         private void LoadBagContentButton()
         {
-            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button OperationsButton = ControlBuilder.BuildStandardButton(
                 "BagContentButton", MultilanguangeController.GetText(MultiLanguageEnum.CONTENIDO_BOLSA), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
@@ -161,7 +161,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Baghistory
         private void LoadBagHistoryButton()
         {
-            CustomButton OperationsButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button OperationsButton = ControlBuilder.BuildStandardButton(
                 "BagHistoryButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_BOLSA), MainPanel.Width);
 
             this.MainPanel.Controls.Add(OperationsButton);
@@ -183,7 +183,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Back button
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);

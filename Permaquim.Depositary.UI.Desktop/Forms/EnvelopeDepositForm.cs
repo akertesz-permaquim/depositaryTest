@@ -2,6 +2,7 @@
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Forms;
 using Permaquim.Depositary.UI.Desktop.Global;
+using System.Transactions;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -16,6 +17,10 @@ namespace Permaquim.Depositary.UI.Desktop
         private SelectedEditElementEnum _selectedEditElement;
 
         private List<EnvelopeDepositItem> _envelopeDepositItems = new();
+
+        Permaquim.Depositario.Entities.Tables.Operacion.Transaccion _transaction = null;
+        Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobre _transactionEnvelope = null;
+        List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> _transactionenvelopeDetails = null;
 
         private long _totalQuantity = 0;
         private double _totalAmount = 0;
@@ -79,7 +84,7 @@ namespace Permaquim.Depositary.UI.Desktop
             MainPanel.Location = new Point()
             {
                 X = this.Width / 2 - MainPanel.Width / 2,
-                Y = (this.Height / 2 - MainPanel.Height / 2 ) + 50
+                Y = (this.Height / 2 - MainPanel.Height / 2) + 50
             };
 
             ButtonsPanel.Location = new Point()
@@ -106,7 +111,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             RemainingTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
             RemainingTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            
+
             EnvelopeTextBox.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal);
 
             StyleController.SetControlStyle(DenominationsGridView);
@@ -118,7 +123,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CancelDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
         }
         private void LoadLanguageItems()
-        { 
+        {
             ConfirmAndExitDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
             CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION);
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
@@ -131,7 +136,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         }
 
-            private void EnvelopeDepositForm_Load(object sender, EventArgs e)
+        private void EnvelopeDepositForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -193,7 +198,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _totalQuantity = 0;
             _totalAmount = 0;
             _operationStatus = new();
-        
+
         }
         public void LoadDenominations()
         {
@@ -242,7 +247,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (TimeOutController.IsTimeOut())
             {
                 _pollingTimer.Enabled = false;
-                Canceloperation();
+                _device.CloseEscrow();
                 FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
 
                 DatabaseController.LogOff(true);
@@ -394,12 +399,12 @@ namespace Permaquim.Depositary.UI.Desktop
                 case ModeStateInformation.Mode.DepositMode:
                     break;
                 case ModeStateInformation.Mode.ManualMode:
-                    if (_operationStatus.DepositConfirmed == true 
+                    if (_operationStatus.DepositConfirmed == true
                         && _device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.Waiting)
                     {
                         _device.RemoteCancel();
                         _pollingTimer.Enabled = false;
-                        FormsController.OpenChildForm(this,new OperationForm(), _device);
+                        FormsController.OpenChildForm(this, new OperationForm(), _device);
                     }
                     break;
                 case ModeStateInformation.Mode.NormalErrorRecoveryMode:
@@ -413,7 +418,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 default:
                     break;
             }
- 
+
         }
         private void VerifyEscrowEmpty()
         {
@@ -422,9 +427,9 @@ namespace Permaquim.Depositary.UI.Desktop
             // completa el depósito
             if (
                 _operationStatus.GeneralStatus == StatusInformation.State.PQWaitingTocloseEscrow
-                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == true )
-                //&& _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
-             {
+                && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == true)
+            //&& _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
+            {
                 TimeOutController.Reset();
                 _operationStatus.DepositConfirmed = true;
                 _device.CloseEscrow();
@@ -465,10 +470,11 @@ namespace Permaquim.Depositary.UI.Desktop
                     && ConfirmAndExitDepositButton.Visible;
 
                 ButtonsPanel.Visible = _totalQuantity > 0;
+                EnvelopeTextBox.Visible = _totalQuantity > 0;
 
                 BackButton.Visible = !ButtonsPanel.Visible;
             }
- 
+
         }
         private void ShowInformation()
         {
@@ -488,7 +494,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 MultilanguangeController.GetText(MultiLanguageEnum.RETIRAR_SOBRE));
             }
 
-            if(_operationStatus.DepositConfirmed)
+            if (_operationStatus.DepositConfirmed)
             {
                 FormsController.SetInformationMessage(InformationTypeEnum.Event,
                                 MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO));
@@ -518,7 +524,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 _device.StoringStart();
                 _device.PreviousState = StatusInformation.State.PQStoring;
-                 ExitEnvelopeDepositForm();
+                ExitEnvelopeDepositForm();
 
             }
         }
@@ -526,7 +532,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             EnableDisableControls(false);
-            
+
+            SaveTransaction();
 
             PrintTicket(TicketTypeEnum.Second);
 
@@ -536,9 +543,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
         }
         /// <summary>
-        /// Graba el depósito en base de datos
+        /// Crea el registro de depósito en memoria
         /// </summary>
-        private long SaveTransaction()
+        private long CreateTransaction()
         {
 
             DenominationsGridView.Enabled = false;
@@ -549,19 +556,10 @@ namespace Permaquim.Depositary.UI.Desktop
             FormsController.SetInformationMessage(InformationTypeEnum.Information,
             MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO));
 
-
-            Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
-            sesiones.Items(null, DatabaseController.CurrentDepositary.Id,
-                DatabaseController.CurrentUser.Id, null, null, null);
-
-
-            Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
-
             try
             {
-                transactions.BeginTransaction();
 
-                Permaquim.Depositario.Entities.Tables.Operacion.Transaccion transaction = new()
+                _transaction = new()
                 {
                     CierreDiarioId = null,
                     ContenedorId = DatabaseController.CurrentContainer.Id,
@@ -584,17 +582,82 @@ namespace Permaquim.Depositary.UI.Desktop
                     OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? null :
                                 DatabaseController.CurrentDepositOrigin.Id
                 };
-                transactions.Add(transaction);
-                _operationStatus.CurrentTransactionId = transaction.Id;
 
-                Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobre transactionEnvelopes = new(transactions);
-                Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobre transactionEnvelope = new()
+                _transactionEnvelope = new()
                 {
                     CodigoSobre = EnvelopeTextBox.Texts.Trim(),
                     TransaccionId = _operationStatus.CurrentTransactionId,
                     Fecha = DateTime.Now
                 };
+
+                _transactionenvelopeDetails = new();
+
+                foreach (var item in _envelopeDepositItems)
+                {
+                    if (item.Id > -1 && item.Quantity > 0)
+                    {
+
+                        _transactionenvelopeDetails.Add(new Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle()
+                        {
+                            CantidadDeclarada = item.Quantity,
+                            RelacionMonedaTipoValorId = item.Id,
+                            ValorDeclarado = item.Amount,
+                            Fecha = DateTime.Now,
+                            SobreId = 0
+                        });
+
+                    }
+                }
+
+
+                PrintTicket(TicketTypeEnum.First);
+
+                return _transaction.Id;
+
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                return -1;
+            }
+
+        }
+
+        private void SaveTransaction()
+        {
+            DenominationsGridView.Enabled = false;
+            CurrencyLabel.Enabled = false;
+            RemainingTimeLabel.Enabled = false;
+            SubtotalLabel.Enabled = false;
+
+            FormsController.SetInformationMessage(InformationTypeEnum.Information,
+            MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO));
+
+
+            Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
+            sesiones.Items(null, DatabaseController.CurrentDepositary.Id,
+                DatabaseController.CurrentUser.Id, null, null, null);
+
+
+            Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
+
+            try
+            {
+                transactions.BeginTransaction();
+                //Depósito
+               var currentTransaction =  transactions.Add(_transaction);
+                _operationStatus.CurrentTransactionId = currentTransaction.Id;
+                // Depósito sobre
+                Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobre transactionEnvelopes = new(transactions);
+                Permaquim.Depositario.Entities.Tables.Operacion.TransaccionSobre transactionEnvelope = new()
+                {
+                    CodigoSobre = EnvelopeTextBox.Texts.Trim(),
+                    TransaccionId = currentTransaction.Id,
+                    Fecha = DateTime.Now
+                };
                 transactionEnvelopes.Add(transactionEnvelope);
+
+                // Depósito sobre detalle
 
                 Permaquim.Depositario.Business.Tables.Operacion.TransaccionSobreDetalle transactionenvelopeDetails = new(transactions);
                 foreach (var item in _envelopeDepositItems)
@@ -610,44 +673,31 @@ namespace Permaquim.Depositary.UI.Desktop
                             SobreId = transactionEnvelope.Id
                         };
 
-                        transaction.TotalAValidar += item.Amount;
+                        currentTransaction.TotalAValidar += item.Amount;
                         transactionenvelopeDetails.Add(transactionEnvelopeDetail);
                     }
                 }
-                transactions.Update(transaction);
+                transactions.Update(currentTransaction);
 
                 transactions.EndTransaction(true);
 
                 PrintTicket(TicketTypeEnum.First);
 
-                return transaction.Id;
-
             }
             catch (Exception ex)
             {
                 AuditController.Log(ex);
-                transactions.EndTransaction(false);
-                return -1;
-            }
 
+            }
         }
-        /// <summary>
-        /// Setea como finalizada = false;
-        /// </summary>
-        private void DeleteTransaction()
+    /// <summary>
+    /// inicializa las estructuras de transacción de sobre
+    /// </summary>
+    private void DeleteTransaction()
         {
-            Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
-
-            transactions.Items(_operationStatus.CurrentTransactionId);
-            if (transactions.Result.Count > 0)
-            {
-                var previousTransacion = transactions.Result.FirstOrDefault();
-
-                previousTransacion.Finalizada = false;
-
-                transactions.Update(previousTransacion);
-
-            }
+            _transaction = null;
+            _transactionEnvelope = null;
+            _transactionenvelopeDetails = null;
 
         }
 
@@ -689,7 +739,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                          TimeOutController.Reset();
                         _device.OpenEscrow();
-                    _operationStatus.CurrentTransactionId = SaveTransaction();
+                    _operationStatus.CurrentTransactionId = CreateTransaction();
                     _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
                 }
             }
@@ -882,34 +932,26 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PrintTicket(TicketTypeEnum ticketType)
         {
-
-
             if (ParameterController.PrintsEnvelopeDeposit)
             {
-                var _header = DatabaseController.GetTransactionHeader(_operationStatus.CurrentTransactionId);
-                var _details = _header.ListOf_TransaccionSobre_TransaccionId;
-
-                //if (!_alreadyPrinted)
-                //{
-                    for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
+                for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
+                {
+                    switch (ticketType)
                     {
-
-                        switch (ticketType)
-                        {
-                            case TicketTypeEnum.First:
-                                ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositFirstReport,
-                                _header,_details, i);
-                                break;
-                            case TicketTypeEnum.Second:
-                                ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport,
+                        case TicketTypeEnum.First:
+                            ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositFirstReport,
+                            _transaction, _transactionenvelopeDetails, i,EnvelopeTextBox.Texts.Trim());
+                            break;
+                        case TicketTypeEnum.Second:
+                            var _header = DatabaseController.GetTransactionHeader(_transaction.Id);
+                            var _details = _header.ListOf_TransaccionSobre_TransaccionId; ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositSecondReport,
                                 _header, _details, i);
-                                break;
-                            default:
-                                break;
-                        }
-
+                            break;
+                        default:
+                            break;
                     }
-                //}
+
+                }
             }
         }
     }

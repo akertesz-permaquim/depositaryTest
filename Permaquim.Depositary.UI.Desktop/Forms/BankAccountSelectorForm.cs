@@ -65,7 +65,7 @@ namespace Permaquim.Depositary.UI.Desktop
             foreach (var item in _userBankAccounts)
             {
 
-                CustomButton newButton = ControlBuilder.BuildStandardButton(
+                System.Windows.Forms.Button newButton = ControlBuilder.BuildStandardButton(
                 "BankAccountButton" + item.Id.ToString(),
                 item.CuentaId.Nombre + " - " + item.CuentaId.Numero + " (" + item.CuentaId.BancoId.Nombre + ")"
                 , MainPanel.Width);
@@ -80,7 +80,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildStandardButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
 
@@ -90,7 +90,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BankAccountButton_Click(object sender, EventArgs e)
         {
-            DatabaseController.CurrentUserBankAccount = (Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta)((CustomButton)sender).Tag;
+            DatabaseController.CurrentUserBankAccount = (Permaquim.Depositario.Entities.Relations.Banca.UsuarioCuenta)((System.Windows.Forms.Button)sender).Tag;
             string billDepositFormBreadcrumbText = " - ";
             if (DatabaseController.CurrentDepositOrigin != null)
             {
@@ -116,8 +116,22 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this, new CurrencySelectorForm(),
-                  (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            if (DatabaseController.GetDepositOrigins().Count > 0)
+            {
+                FormsController.OpenChildForm(this, new ValueOriginSelectorForm(),
+                       (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+            }
+            else
+            {
+                if (DatabaseController.GetCurrencies().Count > 1)
+                    FormsController.OpenChildForm(this, new CurrencySelectorForm(),
+                          (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                else
+                {
+                    FormsController.OpenChildForm(this, new OperationForm(),
+                                   (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                }
+            }
         }
 
         private void BankAccountSelectorForm_VisibleChanged(object sender, EventArgs e)

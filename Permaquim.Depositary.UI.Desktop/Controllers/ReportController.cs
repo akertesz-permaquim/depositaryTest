@@ -41,8 +41,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         private static string _fechaHora;
 
+        private static string _code = String.Empty;
+
         public static void PrintReport(ReportTypeEnum reportType,
-            dynamic header, dynamic details, int copyIndex)
+            dynamic header, dynamic details, int copyIndex, string code = "")
         {
             try
             {
@@ -420,34 +422,36 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
-                // Transacción
-                e.Graphics.DrawString(
-                StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(((Depositario.Entities.Relations.Operacion.Transaccion)_header).DepositarioId.CodigoExterno + "-" +
-                ((Depositario.Entities.Relations.Operacion.Transaccion)_header).Fecha.ToString("yyMMdd") + "-" +
-                ((Depositario.Entities.Relations.Operacion.Transaccion)_header).Id.ToString()
-                , 20, StringHelper.AlignEnum.AlignLeft)
-                , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
-                yOffset += _interlineSpace;
+                //// Transacción
+                //e.Graphics.DrawString(
+                //StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
+                //StringHelper.FormatString(((Depositario.Entities.Relations.Operacion.Transaccion)_header).DepositarioId.CodigoExterno + "-" +
+                //((Depositario.Entities.Relations.Operacion.Transaccion)_header).Fecha.ToString("yyMMdd") + "-" +
+                //((Depositario.Entities.Relations.Operacion.Transaccion)_header).Id.ToString()
+                //, 20, StringHelper.AlignEnum.AlignLeft)
+                //, _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
+                //yOffset += _interlineSpace;
+
+                var currentDepositary = DatabaseController.GetDepositary(_header.DepositarioId);
 
                 // Usuario
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(_header.UsuarioId.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(DatabaseController.CurrentUser.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
                 // Sucursal
                 e.Graphics.DrawString(
                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(_header.DepositarioId.SectorId.SucursalId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(currentDepositary.SectorId.SucursalId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
                  , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
                 // Terminal
                 e.Graphics.DrawString(
                                 StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                StringHelper.FormatString(_header.DepositarioId.CodigoExterno, 20, StringHelper.AlignEnum.AlignLeft)
+                StringHelper.FormatString(currentDepositary.CodigoExterno, 20, StringHelper.AlignEnum.AlignLeft)
                 , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                   
                 yOffset += _interlineSpace;
@@ -455,9 +459,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Cuenta bancaria
                 if (ParameterController.UsesBankAccount && _header.CuentaId != null)
                 {
+                    var currentBankAccount = DatabaseController.GetBankAccount(_header.CuentaId);
+
                     e.Graphics.DrawString(
                                         StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_BANCARIA) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                        StringHelper.FormatString(_header.CuentaId.Numero, 20, StringHelper.AlignEnum.AlignLeft)
+                        StringHelper.FormatString(currentBankAccount.Numero, 20, StringHelper.AlignEnum.AlignLeft)
                         , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                     yOffset += _interlineSpace;
@@ -465,9 +471,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Origen del depósito
                 if (ParameterController.UsesValueOrigin && _header.OrigenValorId != null)
                 {
+                    var currentValueOrigin = DatabaseController.GetValueOrigin(_header.OrigenValorId);
                     e.Graphics.DrawString(
                                         StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.ORIGEN_VALOR) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +
-                        StringHelper.FormatString(_header.OrigenValorId.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
+                        StringHelper.FormatString(currentValueOrigin.Nombre, 20, StringHelper.AlignEnum.AlignLeft)
                         , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
 
                     yOffset += _interlineSpace;
@@ -489,12 +496,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Contenido del sobre
                 e.Graphics.DrawString(
                     MultilanguangeController.GetText(MultiLanguageEnum.CONTENIDO_DEL_SOBRE) + ": " +
-                    (((Permaquim.Depositario.Entities.Relations.Operacion.Transaccion)_header)
-                          .ListOf_TransaccionSobre_TransaccionId)[0].CodigoSobre
+                    _code
                     , _font,Brushes.Black,_detailStart_X, yOffset, new StringFormat());
 
 
-                // Separador
+                // Separador +
                 e.Graphics.DrawString(new String(LINE, MaxCharacterLenght), _boldFont,
                             Brushes.Black,
                             _detailStart_X, yOffset, new StringFormat());
@@ -502,13 +508,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 yOffset += _interlineSpace;
                 yOffset += _interlineSpace;
 
-                foreach (var item in (((Permaquim.Depositario.Entities.Relations.Operacion.Transaccion)_header)
-                    .ListOf_TransaccionSobre_TransaccionId)[0].ListOf_TransaccionSobreDetalle_SobreId)
-                {
+                foreach (var item in _details)
+                   {
+
+
                     e.Graphics.DrawString(
                         StringHelper.FormatString(
-                         item.RelacionMonedaTipoValorId.TipoValorId.Nombre + SPACE +
-                         item.RelacionMonedaTipoValorId.MonedaId.Codigo, 15, StringHelper.AlignEnum.AlignLeft) +
+                         DatabaseController.GetCurrencyValueRelation(item.RelacionMonedaTipoValorId).TipoValorId.Nombre + SPACE +
+                         DatabaseController.GetCurrencyValueRelation(item.RelacionMonedaTipoValorId).MonedaId.Codigo, 15, StringHelper.AlignEnum.AlignLeft) +
                          StringHelper.FormatString(
                          item.CantidadDeclarada.ToString(), 18, StringHelper.AlignEnum.AlignRight)
                          , _font, Brushes.Black, _detailStart_X, yOffset, new StringFormat());

@@ -66,7 +66,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     entities.Where.Add(Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId,
                     Depositario.sqlEnum.OperandEnum.Equal,
                     DatabaseController.CurrentDepositary.SectorId.SucursalId.EmpresaId.EstiloEsquemaId.Id);
-
+                    entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                        Depositario.Business.Relations.Estilo.EsquemaDetalle.ColumnEnum.Habilitado,
+                    Depositario.sqlEnum.OperandEnum.Equal, true);
+ 
                     _selectedSchemaDetail = entities.Items();
                 }
 
@@ -155,11 +158,20 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             grid.ColumnHeadersHeight;
         }
 
-        public static DataGridViewCellStyle GetDateColumnStyle()
+        public static DataGridViewCellStyle GetFullDateColumnStyle()
         {
             DataGridViewCellStyle dateColumnStyle = new()
             {
                 Format = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA)
+            };
+            return dateColumnStyle;
+
+        }
+        public static DataGridViewCellStyle GetShortDateColumnStyle()
+        {
+            DataGridViewCellStyle dateColumnStyle = new()
+            {
+                Format = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA)
             };
             return dateColumnStyle;
 

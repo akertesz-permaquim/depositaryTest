@@ -31,9 +31,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private Permaquim.Depositario.Entities.Tables.Operacion.Contenedor _newContainer;
 
-               CustomButton _gateButton = new CustomButton();
-        CustomButton _backButton = new CustomButton();
-        CustomButton _confirmButton = new CustomButton();
+               System.Windows.Forms.Button _gateButton = new System.Windows.Forms.Button();
+        System.Windows.Forms.Button _backButton = new System.Windows.Forms.Button();
+        System.Windows.Forms.Button _confirmButton = new System.Windows.Forms.Button();
         CustomTextBox _containerTextBox = new CustomTextBox();
 
         public BagExtractionForm()
@@ -396,7 +396,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void Keys(object sender, EventArgs e)
         {
             _containerTextBox.Focus();
-            SendKeys.Send(((CustomButton)sender).Tag.ToString());
+            SendKeys.Send(((System.Windows.Forms.Button)sender).Tag.ToString());
         }
 
         private void BagExtractionForm_VisibleChanged(object sender, EventArgs e)

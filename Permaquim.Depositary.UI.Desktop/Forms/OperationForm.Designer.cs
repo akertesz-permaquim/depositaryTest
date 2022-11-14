@@ -63,6 +63,5 @@
         #endregion
 
         private FlowLayoutPanel MainPanel;
-        private CustomButton customButton1;
     }
 }

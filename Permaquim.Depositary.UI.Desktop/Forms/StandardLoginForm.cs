@@ -1,39 +1,69 @@
-﻿using System;
+﻿using Permaquim.Depositary.UI.Desktop.Controllers;
+using Permaquim.Depositary.UI.Desktop.Controls;
+using Permaquim.Depositary.UI.Desktop.Global;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
-namespace Permaquim.Depositary.UI.Desktop.Controls
+namespace Permaquim.Depositary.UI.Desktop.Forms
 {
-    public partial class CustomKeyboard : UserControl
+    public partial class StandardLoginForm : Form
     {
         private Color _mainColor;
 
         private bool _shift = false;
-        public delegate void KeyboardDataReceived(object sender, KeyboardEventArgs args);
-
-        public event KeyboardDataReceived KeyboardEvent;
+        private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
+        private const string ENTER = "{ENTER}";
 
         private Color _buttonsBackgroundColor;
-        private CustomTextBox _activeTextbox ;
-        public CustomKeyboard()
+        private TextBox _activeTextbox;
+        public StandardLoginForm()
         {
-           this.SuspendLayout();
+            this.SuspendLayout();
             this.DoubleBuffered = true;
             InitializeComponent();
 
             this.ResumeLayout();
             _activeTextbox = UsernameTextBox;
             _activeTextbox.Focus();
-            if(this.ParentForm !=null)
+            if (this.ParentForm != null)
                 this.ParentForm.AcceptButton = this.Button_Enter;
+
+
+            this.SuspendLayout();
+            InitializeComponent();
+            LoadStyles();
+            Loadlogo();
+
+            TitleLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TITULO_LOGIN);
+            UsernameTextBox.PlaceholderText = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_USUARIO);
+            PasswordTexBox.PlaceholderText = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTO_PASSWORD);
+
+            SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
+
+
+            TimeOutController.Reset();
+            _pollingTimer = new System.Windows.Forms.Timer()
+            {
+                Interval = DeviceController.GetPollingInterval()
+            };
+            _pollingTimer.Tick += PollingTimer_Tick;
+
+            CenterPanel();
+        }
+        private void Loadlogo()
+        {
+            LoginPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            LoginPictureBox.Image = StyleController.GetLogin();
+
         }
         protected override CreateParams CreateParams
         {
@@ -44,29 +74,41 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                 return CP;
             }
         }
+        private void PollingTimer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeOutController.IsTimeOut())
+            {
+                _pollingTimer.Enabled = false;
+                DatabaseController.LogOff(true);
+                FormsController.LogOff();
+            }
+
+        }
+        private void LoadStyles()
+        {
+            this.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.FondoFormulario);
+ 
+        }
+        private void CenterPanel()
+        {
+
+            MainPanel.Location = new Point()
+            {
+                X = this.Width / 2 - MainPanel.Width / 2,
+                Y = this.Height / 2 - MainPanel.Height / 2
+            };
+        }
+
         public void ClearCredentials()
         {
-            UsernameTextBox.Texts = String.Empty;
-            PasswordTexbox.Texts = String.Empty;
+            UsernameTextBox.Text = String.Empty;
+            PasswordTexBox.Text = String.Empty;
         }
         public void SetLoginError(string message)
         {
             InformationLabel.Text = message;
             InformationLabel.ForeColor = Color.Red;
-            UsernameTextBox.BorderColor = Color.Red;
-            PasswordTexbox.BorderColor = Color.Red;
-        }
 
-        public string UserTextboxPlaceholder
-        {
-            get { return UsernameTextBox.PlaceholderText; }
-            set { UsernameTextBox.PlaceholderText = value; }
-        }
-
-        public string PasswordTextBoxPlaceholder
-        {
-            get { return PasswordTexbox.PlaceholderText; }
-            set { PasswordTexbox.PlaceholderText = value; }
         }
 
         public void SetButtonsColor(Color color)
@@ -74,115 +116,111 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             _mainColor = color;
             foreach (var item in this.Controls)
             {
-               if(item.GetType().Name.Equals("Button"))
+                if (item.GetType().Name.Equals("Button"))
                 {
                     ((System.Windows.Forms.Button)item).BackColor = _mainColor;
                 }
             }
 
             UsernameTextBox.ForeColor = _mainColor;
-            PasswordTexbox.ForeColor = _mainColor;
+            PasswordTexBox.ForeColor = _mainColor;
         }
 
         private void KeysHandler(object sender, EventArgs e)
         {
-            _activeTextbox.Focus();
+            Button button = (System.Windows.Forms.Button)sender;
 
-            if (((System.Windows.Forms.Button)sender).Tag.ToString().Equals("{ENTER}"))
+            if (button.Tag.ToString().Equals("{ENTER}"))
             {
-                //Raises event for counter
-                if (KeyboardEvent != null)
+                if (UsernameTextBox.Text.Trim().Equals(string.Empty) ||
+                     PasswordTexBox.Text.Trim().Equals(string.Empty))
                 {
-
-                    KeyboardEventArgs args = new()
-                    {
-                        KeyPressed = "{ENTER}",
-                        UserText = UsernameTextBox.Texts,
-                        PasswordText = PasswordTexbox.Texts
-                    };
-
-                    // Raise the event.
-                    KeyboardEvent(this, args);
+                    SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.ERROR_FALTA_DATO));
                 }
-                return;
-            }
-            if (((System.Windows.Forms.Button)sender).Tag.ToString().Equals("{BACKSPACE}"))
-            {
-                if (_activeTextbox.Texts.Length > 0)
+                else
                 {
-                    _activeTextbox.Texts = _activeTextbox.Texts.Substring(0, _activeTextbox.Texts.Length - 1);
-                    _activeTextbox.SelectionStart = _activeTextbox.Texts.Length;
+                    var currentUser = DatabaseController.Login(UsernameTextBox.Text.Trim(), PasswordTexBox.Text.Trim());
+
+                    if (currentUser.Id != 0)
+                    {
+                        if (DatabaseController.UserAllowedInSector())
+                        {
+
+                            if (currentUser.DebeCambiarPassword)
+                            {
+                                SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.DEBECAMBIARPASSWORD));
+                                return;
+                            }
+
+                            if (DatabaseController.UserExpirationDateReached())
+                            {
+                                SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_USUARIO_EXPIRADA));
+                                return;
+                            }
+
+                            MultilanguangeController.ResetLanguage();
+
+                            DatabaseController.GetTurnSchedule();
+
+                            //if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
+                            //{
+                            //    ClearCredentials();
+                            //    FormsController.OpenChildForm(this, new OperationForm(),
+                            //        (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                            //}
+                        }
+                        else
+                        {
+                            SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_HABILITADO_EN_SECTOR));
+                        }
+
+                    }
+                    else
+                    {
+                        SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_REGISTRADO));
+                    }
+                }
+            }
+            if (button.Tag.ToString().Equals("{BACKSPACE}"))
+            {
+                if (_activeTextbox.Text.Length > 0)
+                {
+                    _activeTextbox.Text = _activeTextbox.Text.Substring(0, _activeTextbox.Text.Length - 1);
+                    _activeTextbox.SelectionStart = _activeTextbox.Text.Length;
                 }
             }
             else
-            {
-                //SendKeys.SendWait(((Button)sender).Tag.ToString());
-
-                int pos = _activeTextbox.SelectionStart;
-                _activeTextbox.Texts = _activeTextbox.Texts.Insert(pos, ((System.Windows.Forms.Button)sender).Tag.ToString());
-                _activeTextbox.SelectionStart = pos +1;
-                //_activeTextbox.Texts += ((Button)sender).Tag.ToString();
-                //_activeTextbox.SelectionStart = _activeTextbox.Texts.Length;
+            {    int pos = _activeTextbox.SelectionStart;
+                _activeTextbox.Text = _activeTextbox.Text.Insert(pos, button.Tag.ToString());
+                _activeTextbox.SelectionStart = pos + 1;
                 _activeTextbox.SelectionLength = 0;
-
-                //Raises event for counter
-                if (KeyboardEvent != null)
-                {
-
-                    KeyboardEventArgs args = new()
-                    {
-                        KeyPressed = ((System.Windows.Forms.Button)sender).Tag.ToString(),
-                        UserText = UsernameTextBox.Texts,
-                        PasswordText = PasswordTexbox.Texts
-                    };
-
-                    // Raise the event.
-                    KeyboardEvent(this, args);
-                }
             }
         }
+
         private void Delete(object sender, EventArgs e)
         {
-            UsernameTextBox.Texts = String.Empty;
-            PasswordTexbox.Texts = String.Empty;
-            UsernameTextBox.BorderColor = _mainColor;
-            PasswordTexbox.BorderColor = _mainColor;
+            UsernameTextBox.Text = String.Empty;
+            PasswordTexBox.Text = String.Empty;
             InformationLabel.Text = String.Empty;
             InformationLabel.ForeColor = _mainColor;
         }
 
         private void PasswordTexbox_Enter(object sender, EventArgs e)
         {
-            _activeTextbox = (CustomTextBox)sender;
+            _activeTextbox = (TextBox)sender;
         }
 
         private void UsernameTextBox_Enter(object sender, EventArgs e)
         {
-            _activeTextbox = (CustomTextBox)sender;
+            _activeTextbox = (TextBox)sender;
         }
 
         private void PasswordTexbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                //Raises event for counter
-                if (KeyboardEvent != null)
-                {
+                Debug.Print("");
 
-                    KeyboardEventArgs args = new()
-                    {
-                        KeyPressed = "{ENTER}",
-                        UserText = UsernameTextBox.Texts,
-                        PasswordText = PasswordTexbox.Texts
-                    };
-
-                    // Raise the event.
-                    KeyboardEvent(this, args);
-                }
-            }
-            else
-            {
-                KeyboardEvent(this, new KeyboardEventArgs());
             }
         }
 
@@ -190,9 +228,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                PasswordTexbox.Focus();
+                PasswordTexBox.Focus();
             }
-            KeyboardEvent(this, new KeyboardEventArgs());
+
         }
 
         private void Button_Shift_Click(object sender, EventArgs e)
@@ -202,7 +240,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         }
         private void ShiftUnshift()
         {
-            foreach (var item in this.Controls)
+            foreach (var item in this.MainPanel.Controls)
             {
                 if (item.GetType() == typeof(System.Windows.Forms.Button))
                 {
@@ -261,16 +299,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                 }
             }
         }
-    }
-    public class KeyboardEventArgs : EventArgs
-    {
-        // The Key pressed
-        public string KeyPressed = string.Empty;
 
-        // The UserText
-        public string UserText = string.Empty;
 
-        // The PasswordText
-        public string PasswordText = string.Empty;
+
     }
-}
+  }
+

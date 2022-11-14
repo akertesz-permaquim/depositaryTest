@@ -119,7 +119,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Back button
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width -5 );
 
             this.MainPanel.Controls.Add(backButton);
@@ -135,7 +135,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region OK button
         private void LoadOkButton()
         {
-            CustomButton backButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildStandardButton(
                 "OkButton", MultilanguangeController.GetText(
                     MultiLanguageEnum.ELIMINAR_ERRORES), MainPanel.Width - 5);
 

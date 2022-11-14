@@ -33,21 +33,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.BackButton = new System.Windows.Forms.Button();
             this.TurnsHeaderGridView = new System.Windows.Forms.DataGridView();
             this.FilterPanel = new System.Windows.Forms.Panel();
             this.UserLabel = new System.Windows.Forms.Label();
             this.TurnLabel = new System.Windows.Forms.Label();
             this.ToDateTimeLabel = new System.Windows.Forms.Label();
             this.FromDateTimeLabel = new System.Windows.Forms.Label();
-            this.ExecuteButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.ExecuteButton = new System.Windows.Forms.Button();
             this.UserComboBox = new System.Windows.Forms.ComboBox();
             this.TurnComboBox = new System.Windows.Forms.ComboBox();
             this.ToDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FromDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.DetailPanel = new System.Windows.Forms.Panel();
-            this.PrintButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.PrintButton = new System.Windows.Forms.Button();
+            this.AcceptButton = new System.Windows.Forms.Button();
             this.TurnsDetailGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.TurnsHeaderGridView)).BeginInit();
             this.FilterPanel.SuspendLayout();
@@ -59,10 +59,6 @@
             // 
             this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BackButton.BorderRadius = 5;
-            this.BackButton.BorderSize = 0;
             this.BackButton.FlatAppearance.BorderSize = 0;
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -72,7 +68,6 @@
             this.BackButton.Size = new System.Drawing.Size(240, 55);
             this.BackButton.TabIndex = 179;
             this.BackButton.Text = "Salir";
-            this.BackButton.TextColor = System.Drawing.Color.White;
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
@@ -183,10 +178,6 @@
             // 
             this.ExecuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ExecuteButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.ExecuteButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.ExecuteButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.ExecuteButton.BorderRadius = 5;
-            this.ExecuteButton.BorderSize = 0;
             this.ExecuteButton.FlatAppearance.BorderSize = 0;
             this.ExecuteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExecuteButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -196,7 +187,6 @@
             this.ExecuteButton.Size = new System.Drawing.Size(128, 64);
             this.ExecuteButton.TabIndex = 197;
             this.ExecuteButton.Text = "***";
-            this.ExecuteButton.TextColor = System.Drawing.Color.White;
             this.ExecuteButton.UseVisualStyleBackColor = false;
             this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
             // 
@@ -253,10 +243,6 @@
             // 
             this.PrintButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PrintButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.PrintButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.PrintButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.PrintButton.BorderRadius = 5;
-            this.PrintButton.BorderSize = 0;
             this.PrintButton.FlatAppearance.BorderSize = 0;
             this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -266,7 +252,6 @@
             this.PrintButton.Size = new System.Drawing.Size(160, 55);
             this.PrintButton.TabIndex = 185;
             this.PrintButton.Text = "Imprimir";
-            this.PrintButton.TextColor = System.Drawing.Color.White;
             this.PrintButton.UseVisualStyleBackColor = false;
             this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
@@ -274,10 +259,6 @@
             // 
             this.AcceptButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AcceptButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.AcceptButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.AcceptButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.AcceptButton.BorderRadius = 5;
-            this.AcceptButton.BorderSize = 0;
             this.AcceptButton.FlatAppearance.BorderSize = 0;
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -287,7 +268,6 @@
             this.AcceptButton.Size = new System.Drawing.Size(160, 55);
             this.AcceptButton.TabIndex = 184;
             this.AcceptButton.Text = "Salir";
-            this.AcceptButton.TextColor = System.Drawing.Color.White;
             this.AcceptButton.UseVisualStyleBackColor = false;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
@@ -362,7 +342,7 @@
         }
 
         #endregion
-        private CustomButton BackButton;
+        private System.Windows.Forms.Button BackButton;
         private DataGridView TurnsHeaderGridView;
         private Panel FilterPanel;
         private Label UserLabel;
@@ -373,10 +353,10 @@
         private ComboBox TurnComboBox;
         private DateTimePicker ToDateTimePicker;
         private DateTimePicker FromDateTimePicker;
-        private CustomButton ExecuteButton;
+        private System.Windows.Forms.Button ExecuteButton;
         private Panel DetailPanel;
-        private CustomButton AcceptButton;
+        private System.Windows.Forms.Button AcceptButton;
         private DataGridView TurnsDetailGridView;
-        private CustomButton PrintButton;
+        private System.Windows.Forms.Button PrintButton;
     }
 }

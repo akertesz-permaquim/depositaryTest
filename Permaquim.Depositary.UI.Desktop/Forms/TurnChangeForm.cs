@@ -91,7 +91,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region TurnchangeButton
         private void LoadTurnChangeButton()
         {
-            CustomButton turnchangeButton = ControlBuilder.BuildExitButton(
+            System.Windows.Forms.Button turnchangeButton = ControlBuilder.BuildExitButton(
                 "TurnchangeButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width /2 -5,55);
 
             this.MainPanel.Controls.Add(turnchangeButton);
@@ -110,7 +110,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region BackButton
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildCancelButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildCancelButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION), MainPanel.Width / 2 - 5,55);
 
             this.MainPanel.Controls.Add(backButton);
@@ -268,7 +268,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Visible = true,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell(),
-                DefaultCellStyle = StyleController.GetDateColumnStyle()
+                DefaultCellStyle = StyleController.GetFullDateColumnStyle()
 
             });
 

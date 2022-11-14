@@ -40,10 +40,10 @@
             this.EnvelopeDepositTabPage = new System.Windows.Forms.TabPage();
             this.EnvelopeDepositGridView = new System.Windows.Forms.DataGridView();
             this.DetailGridView = new System.Windows.Forms.DataGridView();
-            this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.AcceptButton = new System.Windows.Forms.Button();
             this.DetailLabel = new System.Windows.Forms.Label();
             this.DetailPanel = new System.Windows.Forms.Panel();
-            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.BackButton = new System.Windows.Forms.Button();
             this.BagContentTabControl.SuspendLayout();
             this.Billetes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BillDepositGridView)).BeginInit();
@@ -220,10 +220,6 @@
             // 
             this.AcceptButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AcceptButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.AcceptButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.AcceptButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.AcceptButton.BorderRadius = 5;
-            this.AcceptButton.BorderSize = 0;
             this.AcceptButton.FlatAppearance.BorderSize = 0;
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -233,7 +229,6 @@
             this.AcceptButton.Size = new System.Drawing.Size(160, 55);
             this.AcceptButton.TabIndex = 188;
             this.AcceptButton.Text = "Salir";
-            this.AcceptButton.TextColor = System.Drawing.Color.White;
             this.AcceptButton.UseVisualStyleBackColor = false;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
@@ -265,10 +260,6 @@
             // 
             this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BackButton.BorderRadius = 5;
-            this.BackButton.BorderSize = 0;
             this.BackButton.FlatAppearance.BorderSize = 0;
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -278,7 +269,6 @@
             this.BackButton.Size = new System.Drawing.Size(240, 55);
             this.BackButton.TabIndex = 196;
             this.BackButton.Text = "Salir";
-            this.BackButton.TextColor = System.Drawing.Color.White;
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
@@ -319,9 +309,9 @@
         private TabPage EnvelopeDepositTabPage;
         private DataGridView EnvelopeDepositGridView;
         private DataGridView DetailGridView;
-        private CustomButton AcceptButton;
+        private System.Windows.Forms.Button AcceptButton;
         private Label DetailLabel;
         private Panel DetailPanel;
-        private CustomButton BackButton;
+        private System.Windows.Forms.Button BackButton;
     }
 }

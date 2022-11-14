@@ -40,27 +40,29 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ResetReport()
         {
-            ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
-            ToFechaCierreDateTimePicker.Value = DateTime.Now.Date;
-            ToFechaCierreDateTimePicker.Checked = false;
 
-            FromFechaCierreDateTimePicker.Value = DateTime.Now.Date;
-            FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
-            FromFechaCierreDateTimePicker.Checked = false;
 
             IdentificadorTextbox.Text = "";
 
+
+            FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
+            FromFechaCierreDateTimePicker.Checked = false;
             FromFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+
+            ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
             ToFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 
 
+            FromFechaCierreDateTimePicker.Value = DateTime.Now.Date;
             FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+            
             ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
-
+            ToFechaCierreDateTimePicker.Value = DateTime.Now.Date;
+            ToFechaCierreDateTimePicker.Checked = false;
 
             LoadBagHistoryItems();
         }
@@ -102,9 +104,7 @@ namespace Permaquim.Depositary.UI.Desktop
             PrintButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
             BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
             ExecuteBagHistorySearch.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
-            ExecuteBagHistorySearch.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteBagHistorySearch.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            ExecuteBagHistorySearch.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             StyleController.SetControlStyle(MainGridView);
             StyleController.SetControlStyle(BillDepositGridView);
@@ -168,7 +168,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Visible = true,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell(),
-                DefaultCellStyle = StyleController.GetDateColumnStyle()
+                DefaultCellStyle = StyleController.GetFullDateColumnStyle()
 
             });
 
@@ -180,7 +180,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 Visible = true,
                 Width = 150,
                 CellTemplate = new DataGridViewTextBoxCell(),
-                DefaultCellStyle = StyleController.GetDateColumnStyle()
+                DefaultCellStyle = StyleController.GetFullDateColumnStyle()
 
             });
 

@@ -81,7 +81,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region DailyClosingButton
         private void LoadDailyClosingButton()
         {
-            CustomButton backButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildStandardButton(
                 "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width / 2 - 5, 55);
 
             this.MainPanel.Controls.Add(backButton);
@@ -100,7 +100,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region BackButton
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildCancelButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildCancelButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION), MainPanel.Width / 2 - 5, 55);
 
             this.MainPanel.Controls.Add(backButton);

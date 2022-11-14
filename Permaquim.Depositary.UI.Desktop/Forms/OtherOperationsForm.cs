@@ -80,7 +80,7 @@ namespace Permaquim.Depositary.UI.Desktop
         #region Back button
         private void LoadBackButton()
         {
-            CustomButton backButton = ControlBuilder.BuildExitButton(
+            System.Windows.Forms.Button backButton = ControlBuilder.BuildExitButton(
                 "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(backButton);
@@ -98,7 +98,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadTurnButton()
         {
-            CustomButton TurnButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button TurnButton = ControlBuilder.BuildStandardButton(
                 "TurnButton", MultilanguangeController.GetText(MultiLanguageEnum.CAMBIO_TURNO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(TurnButton);
@@ -123,7 +123,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadDailyClosingButton()
         {
-            CustomButton AccountClosingButton = ControlBuilder.BuildStandardButton(
+            System.Windows.Forms.Button AccountClosingButton = ControlBuilder.BuildStandardButton(
                 "DailyClosingButton", MultilanguangeController.GetText(MultiLanguageEnum.CIERRE_DIARIO), MainPanel.Width);
 
             this.MainPanel.Controls.Add(AccountClosingButton);
@@ -158,7 +158,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadSupportButton()
         {
-            CustomButton supportButton = ControlBuilder.BuildAlternateButton(
+            System.Windows.Forms.Button supportButton = ControlBuilder.BuildAlternateButton(
                 "SupportButton", MultilanguangeController.GetText(MultiLanguageEnum.SOPORTE), MainPanel.Width);
 
             this.MainPanel.Controls.Add(supportButton);
@@ -178,7 +178,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadResetButton()
         {
-            CustomButton supportButton = ControlBuilder.BuildAlternateButton(
+            System.Windows.Forms.Button supportButton = ControlBuilder.BuildAlternateButton(
                 "ResetButton", MultilanguangeController.GetText(MultiLanguageEnum.RESET), MainPanel.Width);
 
             this.MainPanel.Controls.Add(supportButton);
