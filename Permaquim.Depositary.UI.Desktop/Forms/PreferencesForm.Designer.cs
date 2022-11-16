@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.MainPropertyGrid = new System.Windows.Forms.PropertyGrid();
-            this.ConfirmAndContinueDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
-            this.CancelDepositButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.ConfirmAndContinueDepositButton = new System.Windows.Forms.Button();
+            this.CancelDepositButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MainPropertyGrid
@@ -46,10 +46,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ConfirmAndContinueDepositButton.BackColor = System.Drawing.Color.SeaGreen;
-            this.ConfirmAndContinueDepositButton.BackgroundColor = System.Drawing.Color.SeaGreen;
-            this.ConfirmAndContinueDepositButton.BorderColor = System.Drawing.Color.MediumSeaGreen;
-            this.ConfirmAndContinueDepositButton.BorderRadius = 4;
-            this.ConfirmAndContinueDepositButton.BorderSize = 0;
             this.ConfirmAndContinueDepositButton.FlatAppearance.BorderSize = 0;
             this.ConfirmAndContinueDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndContinueDepositButton.Font = new System.Drawing.Font("Verdana", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -60,7 +56,6 @@
             this.ConfirmAndContinueDepositButton.TabIndex = 152;
             this.ConfirmAndContinueDepositButton.Tag = "";
             this.ConfirmAndContinueDepositButton.Text = ">";
-            this.ConfirmAndContinueDepositButton.TextColor = System.Drawing.Color.White;
             this.ConfirmAndContinueDepositButton.UseVisualStyleBackColor = false;
             this.ConfirmAndContinueDepositButton.Click += new System.EventHandler(this.ConfirmAndContinueDepositButton_Click);
             // 
@@ -69,10 +64,6 @@
             this.CancelDepositButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.CancelDepositButton.BackColor = System.Drawing.Color.Red;
-            this.CancelDepositButton.BackgroundColor = System.Drawing.Color.Red;
-            this.CancelDepositButton.BorderColor = System.Drawing.Color.DarkOrange;
-            this.CancelDepositButton.BorderRadius = 4;
-            this.CancelDepositButton.BorderSize = 0;
             this.CancelDepositButton.FlatAppearance.BorderSize = 0;
             this.CancelDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelDepositButton.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -83,7 +74,6 @@
             this.CancelDepositButton.TabIndex = 151;
             this.CancelDepositButton.Tag = "";
             this.CancelDepositButton.Text = "X";
-            this.CancelDepositButton.TextColor = System.Drawing.Color.White;
             this.CancelDepositButton.UseVisualStyleBackColor = false;
             this.CancelDepositButton.Click += new System.EventHandler(this.CancelDepositButton_Click);
             // 
@@ -107,7 +97,7 @@
 
         private Panel MainPanel;
         private PropertyGrid MainPropertyGrid;
-        private CustomButton ConfirmAndContinueDepositButton;
-        private CustomButton CancelDepositButton;
+        private System.Windows.Forms.Button ConfirmAndContinueDepositButton;
+        private System.Windows.Forms.Button CancelDepositButton;
     }
 }

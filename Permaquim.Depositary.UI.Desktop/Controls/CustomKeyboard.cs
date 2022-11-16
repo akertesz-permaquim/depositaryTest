@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -182,7 +183,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             }
             else
             {
-                KeyboardEvent(this, new KeyboardEventArgs());
+                if (KeyboardEvent != null)
+                {
+                    KeyboardEvent(this, new KeyboardEventArgs()
+                    {
+                        KeyPressed = e.KeyChar.ToString(),
+                        UserText = UsernameTextBox.Texts,
+                        PasswordText = PasswordTexbox.Texts
+                    });
+                }
             }
         }
 
@@ -192,7 +201,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             {
                 PasswordTexbox.Focus();
             }
-            KeyboardEvent(this, new KeyboardEventArgs());
+            if (KeyboardEvent != null)
+            {
+                KeyboardEvent(this, new KeyboardEventArgs()
+                {
+                    KeyPressed = e.KeyChar.ToString(),
+                    UserText = UsernameTextBox.Texts,
+                    PasswordText = PasswordTexbox.Texts
+                });
+            }
         }
 
         private void Button_Shift_Click(object sender, EventArgs e)

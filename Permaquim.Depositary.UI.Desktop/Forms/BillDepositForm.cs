@@ -6,6 +6,7 @@ using System.Text;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Buffers;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -95,7 +96,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _pollingTimer.Enabled = this.Visible;
 
-            MonitorGroupcheckbox.Visible = false;// ConfigurationController.IsDevelopment();
+            MonitorGroupcheckbox.Visible = false;
 
                 if (this.Visible)
             {
@@ -342,7 +343,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         && _device.StateResultProperty.StatusInformation.OperatingState
                         != StatusInformation.State.PQStoring
                         && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
-                        ;
+                        && _operationStatus.DepositCancelled == false;
 
                 CancelDepositButton.Visible =
                     (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
@@ -374,10 +375,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     && _operationStatus.CurrentTransactionQuantity == 0
-                    && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQWaitingTocloseEscrow)
+                    && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQWaitingTocloseEscrow
+                    && !_operationStatus.DepositEnded)
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
                         MultilanguangeController.GetText(MultiLanguageEnum.INGRESAR_BILLETES));
+                    return;
                 }
 
                 if (_device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQCounting)
@@ -385,6 +388,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     FormsController.SetInformationMessage(InformationTypeEnum.Event,
                         MultilanguangeController.GetText(MultiLanguageEnum.CONTANDO));
                     TimeOutController.Reset();
+                    return;
                 }
 
                 if (_device.StateResultProperty.StatusInformation.OperatingState == StatusInformation.State.PQStoring)
@@ -392,26 +396,31 @@ namespace Permaquim.Depositary.UI.Desktop
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
                     MultilanguangeController.GetText(MultiLanguageEnum.AGUARDE_DEPOSITO));
                     TimeOutController.Reset();
+                    return;
                 }
 
                 if (_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Error,
                         MultilanguangeController.GetText(MultiLanguageEnum.RETIRAR_BILLETES_RECHAZADOS));
+                    return;
                 }
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                      && _operationStatus.CurrentTransactionQuantity == 0
-                     && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent)
+                     && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
+                     && _device.StateResultProperty.StatusInformation.OperatingState != StatusInformation.State.PQCounting)
                 {
-                    if (ButtonsPanel.Visible)
+                    if (_device.StateResultProperty.DeviceStateInformation.StackerFull)
                     {
                         FormsController.SetInformationMessage(InformationTypeEnum.Information,
-                        MultilanguangeController.GetText(MultiLanguageEnum.ACEPTAR_O_CANCELAR_DEPOSITO));
+                        MultilanguangeController.GetText(MultiLanguageEnum.CONTINUAR_INGRESANDO_BILLETES));
+                        return;
                     }
                     else
                     {
                         FormsController.SetInformationMessage(InformationTypeEnum.Information,
-                            MultilanguangeController.GetText(MultiLanguageEnum.CONTINUAR_INGRESANDO_BILLETES));
+                            MultilanguangeController.GetText(MultiLanguageEnum.ACEPTAR_O_CANCELAR_DEPOSITO));
+                        return;
                     }
                 }
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
@@ -419,6 +428,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
                     MultilanguangeController.GetText(MultiLanguageEnum.ACEPTAR_O_CANCELAR_DEPOSITO));
+                    return;
                 }
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     && _operationStatus.CurrentTransactionQuantity == 0
@@ -426,6 +436,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Error,
                         MultilanguangeController.GetText(MultiLanguageEnum.CANCELAR_DEPOSITO));
+                    return;
 
                 }
 
@@ -434,12 +445,14 @@ namespace Permaquim.Depositary.UI.Desktop
                     _countingCycle += 1;
                     FormsController.SetInformationMessage(InformationTypeEnum.Error,
                     MultilanguangeController.GetText(MultiLanguageEnum.ESCROW_LLENO));
+                    return;
                 }
 
                 if (_device.StateResultProperty.EndInformation.StoreEnd)
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
                         MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
+                    return;
                 }
             }
             else
@@ -448,6 +461,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Error,
                         MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA));
+                    return;
                 }
             }
         }
@@ -731,7 +745,8 @@ namespace Permaquim.Depositary.UI.Desktop
             _device.RemoteCancel();
             _operationStatus.DepositEnded = false;
             CleanDetectedBills();
-
+            FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                 MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
             PrintTicket();
             _device.Close();
             FormsController.OpenChildForm(this, new OperationForm(), _device);
@@ -746,6 +761,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 var previousTransacion = transactions.Result.FirstOrDefault();
 
                 previousTransacion.EsDepositoAutomatico = true;
+                previousTransacion.Finalizada = true;
 
                 transactions.Update(previousTransacion);
 
@@ -756,6 +772,8 @@ namespace Permaquim.Depositary.UI.Desktop
             _device.PreviousState = StatusInformation.State.PQStoring;
             ButtonsPanel.Visible = false;
             TimeOutController.Reset();
+            if (ParameterController.UsesShutter)
+                _device.Open();
             _device.StoringStart();
             SaveTransaction();
             //ButtonsPanel.Visible = true;
@@ -840,7 +858,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     Transaccion transaction = new()
                     {
-                        CierreDiarioId = DatabaseController.CurrentDailyClosing != null ? DatabaseController.CurrentDailyClosing.Id : null,
+                        CierreDiarioId = null,
                         ContenedorId = DatabaseController.CurrentContainer.Id,
                         DepositarioId = DatabaseController.CurrentDepositary.Id,
                         Fecha = DateTime.Now,

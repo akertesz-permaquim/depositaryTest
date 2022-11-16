@@ -12,7 +12,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return true;// Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_SHUTTER"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("USA_SHUTTER"), out parseResult);
+                return parseResult;
             }
 
         }
@@ -194,7 +196,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("VALIDA_EXISTENCIA_BOLSA"));
+                return false; //Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("VALIDA_EXISTENCIA_BOLSA"));
             }
 
         }

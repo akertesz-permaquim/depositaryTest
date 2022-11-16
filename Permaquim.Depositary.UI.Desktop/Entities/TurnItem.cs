@@ -27,4 +27,10 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         public long Value { get; set; }
         public string Text { get; set; }
     }
+
+    internal class OperationTypeItemElement
+    {
+        public long Value { get; set; }
+        public string Text { get; set; }
+    }
 }

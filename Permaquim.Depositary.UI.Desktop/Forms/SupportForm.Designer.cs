@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.BackButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.BackButton = new System.Windows.Forms.Button();
             this.IoBoardStatusGroup = new System.Windows.Forms.GroupBox();
             this.ExecuteIoBoardComandButton = new System.Windows.Forms.Button();
             this.IoboardCommandComboBox = new System.Windows.Forms.ComboBox();
@@ -62,10 +62,6 @@
             // BackButton
             // 
             this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BackButton.BorderRadius = 5;
-            this.BackButton.BorderSize = 0;
             this.BackButton.FlatAppearance.BorderSize = 0;
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -75,7 +71,6 @@
             this.BackButton.Size = new System.Drawing.Size(208, 56);
             this.BackButton.TabIndex = 157;
             this.BackButton.Text = "Salir";
-            this.BackButton.TextColor = System.Drawing.Color.White;
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
@@ -300,9 +295,9 @@
         private ComboBox CounterCommandComboBox;
         private TextBox CounterResponseTextBox;
         private ComboBox CounterComboBox;
-        private CustomButton BackButton;
+        private System.Windows.Forms.Button BackButton;
         private GroupBox IoBoardStatusGroup;
-        private Button ExecuteIoBoardComandButton;
+        private System.Windows.Forms.Button ExecuteIoBoardComandButton;
         private ComboBox IoboardCommandComboBox;
         private PropertyGrid IoBoardStatusPropertyGrid;
         private CheckBox ModeCheckBox;

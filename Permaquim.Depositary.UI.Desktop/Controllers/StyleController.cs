@@ -9,7 +9,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         private static Permaquim.Depositario.Entities.Relations.Estilo.Esquema _selectedSchema = new();
         private static List<Permaquim.Depositario.Entities.Relations.Estilo.EsquemaDetalle> _selectedSchemaDetail = new();
-
+        public static void ResetSchema()
+        {
+            _selectedSchemaDetail.Clear();
+        }
         public static Image GetLogo()
         {
             return GetImageResource("Logo");

@@ -2137,39 +2137,29 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string DepositarioId = "DepositarioId";
-					public const string SectorId = "SectorId";
-					public const string SucursalId = "SucursalId";
 					public const string ContadoraA = "ContadoraA";
 					public const string ContadoraB = "ContadoraB";
 					public const string Placa = "Placa";
 					public const string Puerta = "Puerta";
 					public const string Contenedor = "Contenedor";
+					public const string Impresora = "Impresora";
 					public const string FueraDeServicio = "FueraDeServicio";
 					public const string Observaciones = "Observaciones";
-					public const string Habilitado = "Habilitado";
-					public const string UsuarioCreacion = "UsuarioCreacion";
-					public const string FechaCreacion = "FechaCreacion";
-					public const string UsuarioModificacion = "UsuarioModificacion";
-					public const string FechaModificacion = "FechaModificacion";
+					public const string Fecha = "Fecha";
 				}
 				public enum FieldEnum : int
                 {
 					Id,
 					DepositarioId,
-					SectorId,
-					SucursalId,
 					ContadoraA,
 					ContadoraB,
 					Placa,
 					Puerta,
 					Contenedor,
+					Impresora,
 					FueraDeServicio,
 					Observaciones,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
+					Fecha
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -2177,24 +2167,19 @@ using System.Text;
                 public DepositarioEstado()
                 {
                 }
-                public  DepositarioEstado(Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  DepositarioEstado(Int64 DepositarioId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,String Impresora,Boolean FueraDeServicio,String Observaciones,DateTime Fecha)
                 {
                     this.Id = Id;
                     this.DepositarioId = DepositarioId;
-                    this.SectorId = SectorId;
-                    this.SucursalId = SucursalId;
                     this.ContadoraA = ContadoraA;
                     this.ContadoraB = ContadoraB;
                     this.Placa = Placa;
                     this.Puerta = Puerta;
                     this.Contenedor = Contenedor;
+                    this.Impresora = Impresora;
                     this.FueraDeServicio = FueraDeServicio;
                     this.Observaciones = Observaciones;
-                    this.Habilitado = Habilitado;
-                    this.UsuarioCreacion = UsuarioCreacion;
-                    this.FechaCreacion = FechaCreacion;
-                    this.UsuarioModificacion = UsuarioModificacion;
-                    this.FechaModificacion = FechaModificacion;
+                    this.Fecha = Fecha;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -2204,10 +2189,6 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
              public Int64 DepositarioId { get; set; }
-             [DataItemAttributeFieldName("SectorId","SectorId")]
-             public Int64 SectorId { get; set; }
-             [DataItemAttributeFieldName("SucursalId","SucursalId")]
-             public Int64 SucursalId { get; set; }
              [DataItemAttributeFieldName("ContadoraA","ContadoraA")]
              public String ContadoraA { get; set; }
              [DataItemAttributeFieldName("ContadoraB","ContadoraB")]
@@ -2218,24 +2199,14 @@ using System.Text;
              public String Puerta { get; set; }
              [DataItemAttributeFieldName("Contenedor","Contenedor")]
              public String Contenedor { get; set; }
+             [DataItemAttributeFieldName("Impresora","Impresora")]
+             public String Impresora { get; set; }
              [DataItemAttributeFieldName("FueraDeServicio","FueraDeServicio")]
              public Boolean FueraDeServicio { get; set; }
              [DataItemAttributeFieldName("Observaciones","Observaciones")]
              public String Observaciones { get; set; }
-             [DataItemAttributeFieldName("Habilitado","Habilitado")]
-             public Boolean Habilitado { get; set; }
-             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public Int64 UsuarioCreacion { get; set; }
-             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
-             public DateTime FechaCreacion { get; set; }
-             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public Int64? UsuarioModificacion { get; set; }
-             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime? FechaModificacion { get; set; }
+             [DataItemAttributeFieldName("Fecha","Fecha")]
+             public DateTime Fecha { get; set; }
 				
 			} //Class DepositarioEstado 
 } //namespace Permaquim.Depositario.Entities.Tables.Dispositivo

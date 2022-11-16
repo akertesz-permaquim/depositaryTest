@@ -10,6 +10,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
     {
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
         private const string ENTER = "{ENTER}";
+        private const string RETIRO_DE_VALORES = "Retiro de Valores";
         private TextBox _activeTextbox;
         public PermissionUnlockForm()
         {
@@ -25,6 +26,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
             MainKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
+            MainKeyboard.KeyboardEvent += MainKeyboard_KeyboardEvent;
 
             TimeOutController.Reset();
             _pollingTimer = new System.Windows.Forms.Timer()
@@ -118,5 +120,69 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
 
             }
         }
+
+        private void MainKeyboard_KeyboardEvent(object sender, KeyboardEventArgs args)
+        {
+            TimeOutController.Reset();
+
+            if (args.KeyPressed.Equals(ENTER))
+            {
+                if (args.UserText.Trim().Equals(string.Empty) ||
+                    args.PasswordText.Trim().Equals(string.Empty))
+                {
+                    MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.ERROR_FALTA_DATO));
+                }
+                else
+                {
+                    var currentUser = DatabaseController.Login(args.UserText.Trim(), args.PasswordText.Trim());
+
+                    if (currentUser.Id != 0)
+                    {
+                        if (DatabaseController.UserAllowedInSector())
+                        {
+
+                            if (currentUser.DebeCambiarPassword)
+                            {
+                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.DEBECAMBIARPASSWORD));
+                                return;
+                            }
+
+                            if (DatabaseController.UserExpirationDateReached())
+                            {
+                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.CUENTA_USUARIO_EXPIRADA));
+                                return;
+                            }
+
+                            MultilanguangeController.ResetLanguage();
+
+                            var operations = DatabaseController.GetTransactionTypes();
+                            var operation = operations.Where(x => x.Nombre.Equals(RETIRO_DE_VALORES)).FirstOrDefault();
+
+                            if (SecurityController.IsOperationEnabled((long)operation.FuncionId))
+                            {
+                                this.DialogResult = DialogResult.OK;
+                            }
+                            else
+                                MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.NO_POSEE_PERMISOS));
+
+                            if (((Permaquim.Depositary.UI.Desktop.Controls.KeyboardEventArgs)args).KeyPressed.Equals(ENTER))
+                            {
+                                MainKeyboard.ClearCredentials();
+                            }
+                        }
+                        else
+                        {
+                            MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_HABILITADO_EN_SECTOR));
+                        }
+
+                    }
+                    else
+                    {
+                        MainKeyboard.SetLoginError(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO_NO_REGISTRADO));
+                    }
+                }
+            }
+        }
+
     }
 }

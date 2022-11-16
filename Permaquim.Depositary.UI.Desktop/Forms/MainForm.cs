@@ -334,26 +334,43 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
-            SetTurnAndDateTimeLabel();
+            try
+            {
+                if (_device == null)
+                {
+                    DeviceController.IsOutOfService = true;
+                    DeviceController.ContainerStatus = Global.Constants.COUNTER_DISCONNECTED;
+                    DeviceController.IoBoardStatus = Global.Constants.IOBOARD_DISCONNECTED;
 
-            VerifyIssues();
+                    InitializeDevices();
+                }
 
-            VerifyForcedValueExtraction();
+                SetTurnAndDateTimeLabel();
 
-            VerifyConnections();
+                VerifyIssues();
 
-            VerifyUserData();
+                VerifyForcedValueExtraction();
 
-            VerifyTimeout();
+                VerifyConnections();
 
-            VerifyAvatar();
+                VerifyUserData();
 
-            VerifyOpenDoor();
+                VerifyTimeout();
 
-            VerifyBagExtracted();
+                VerifyAvatar();
 
-            VerifyPreviousFailedoperation();
+                VerifyOpenDoor();
 
+                VerifyBagExtracted();
+
+                VerifyPreviousFailedoperation();
+
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+            }
 
         }
 
@@ -415,6 +432,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     _permissionUnlockForm.LoadStyles();
                     _permissionUnlockForm.ShowDialog();
                     _permissionUnlockForm = null;
+                    DeviceController.BagRemovedForcefully = false;
                 }
 
             }
@@ -465,6 +483,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                             string message = MultilanguangeController.GetText(MultiLanguageEnum.PUERTA_ABIERTA);
                             AuditController.Log(LogTypeEnum.Exception, message, message);
 
+                            DeviceController.GateStatus = Global.Constants.OPEN_GATE;
+
                             DatabaseController.CreateEvent(EventTypeEnum.Apertura_de_Puerta, message, message);
 
                             _blockingDialog = new SystemBlockingDialog()
@@ -475,10 +495,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                             _blockingDialog.LoadStyles();
                             _blockingDialog.ShowDialog();
                             _blockingDialog = null;
+                            DeviceController.GateStatus = Global.Constants.NORMAL;
                         }
                     }
                     else
                     {
+                        DeviceController.GateStatus = Global.Constants.NORMAL;
                         VerifyConnections();
                     }
                 }
@@ -528,8 +550,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private bool VerifyBagInplace()
         {
-            return _device.IoBoardStatusProperty.BagState ==
-                IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE;
+            return _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE;
         }
 
         private void VerifyPreviousFailedoperation()
@@ -592,12 +613,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 {
                     CounterPictureBox.Image = _greenLedImageCounter;
                     DeviceController.CounterIssue = false;
+                    DeviceController.CounterStatus = Global.Constants.NORMAL;
                 }
                 else
                 {
                     CounterPictureBox.Image = _redLedImageCounter;
                     _device.CounterBoardReconnect();
                     DeviceController.CounterIssue = true;
+                    DeviceController.CounterStatus = Global.Constants.COUNTER_DISCONNECTED;
                 }
 
                 _ioBoardStatus = _device.Status();
@@ -607,12 +630,14 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 {
                     IoBoardPictureBox.Image = _greenLedImageIoboard;
                     DeviceController.IoBoardIssue = false;
+                    DeviceController.IoBoardStatus = Global.Constants.NORMAL;
                 }
                 else
                 {
                     IoBoardPictureBox.Image = _redLedImageIoboard;
                     _device.IoBoardReconnect();
                     DeviceController.IoBoardIssue = true;
+                    DeviceController.IoBoardStatus = Global.Constants.IOBOARD_DISCONNECTED;
                 }
 
             }
@@ -826,34 +851,31 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     Login();
                 else
                 {
-                    if (_device.CounterConnected && _device.IoBoardConnected)
-                    {
-                        if (ParameterController.ValidatesBagInplace)
-                        {
-                            if (VerifyBagInplace())
-                            {
-                                Login();
-                            }
-                            else
-                            {
-                                string message = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
-                                SetInformationMessage(InformationTypeEnum.Error, message);
-                                AuditController.Log(LogTypeEnum.Exception, message, message);
-                                DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
-                                DeviceController.BagIssue = true;
-                            }
-                        }
-                        else
-                        {
-                            Login();
-                        }
-                    }
-                    else
+                    if (!_device.CounterConnected || !_device.IoBoardConnected)
                     {
                         string message = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_PUERTO);
                         SetInformationMessage(InformationTypeEnum.Error, message);
                         AuditController.Log(LogTypeEnum.Exception, message, message);
                         DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
+                    }
+                    if (ParameterController.ValidatesBagInplace)
+                    {
+                        if (VerifyBagInplace())
+                        {
+                            Login();
+                        }
+                        else
+                        {
+                            string message = MultilanguangeController.GetText(MultiLanguageEnum.SIN_BOLSA_ACTIVA);
+                            SetInformationMessage(InformationTypeEnum.Error, message);
+                            AuditController.Log(LogTypeEnum.Exception, message, message);
+                            DatabaseController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
+                            DeviceController.BagIssue = true;
+                        }
+                    }
+                    else
+                    {
+                        Login();
                     }
                 }
             }

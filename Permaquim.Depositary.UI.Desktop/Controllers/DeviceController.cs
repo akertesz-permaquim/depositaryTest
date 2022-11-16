@@ -11,6 +11,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
     internal static class DeviceController
     {
+
         public static bool ComunicationIssue { get; set; }
         public static bool BagIssue { get; set; }
         public static bool CounterIssue { get; set; }
@@ -19,14 +20,117 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static bool PrinterIssue { get; set; }
         public static bool BagRemovedForcefully { get; set; }
 
+        private static bool _isOutOfService { get; set; }
+
+        public static bool IsOutOfService
+        {
+            get
+            {
+                return _isOutOfService;
+            }
+            set
+            {
+                _isOutOfService = value;
+                DatabaseController.SetDepositaryStatus();
+            }
+        }
+        public static string _printerStatus = Global.Constants.NORMAL;
+
+        public static string PrinterStatus
+        {
+            get
+            {
+                return _printerStatus;
+            }
+            set
+            {
+                _printerStatus = value;
+                DatabaseController.SetDepositaryStatus();
+            }
+        }
+
+        private static string _counterStatus  = Global.Constants.NORMAL;
+        public static string CounterStatus
+        {
+            get
+            {
+                return _counterStatus;
+            }
+            set
+            {
+                _counterStatus = value;
+                DatabaseController.SetDepositaryStatus();
+            }
+        }
+
+
+        private static string _ioBoardStatus = Global.Constants.NORMAL;
+        public static string IoBoardStatus
+        {
+            get
+            {
+                return _ioBoardStatus;
+            }
+            set
+            {
+                _ioBoardStatus = value;
+                DatabaseController.SetDepositaryStatus();
+            }
+        }
+        private static string _gateStatus = Global.Constants.NORMAL;
+        public static string GateStatus
+        {
+            get
+            {
+                return _gateStatus;
+            }
+            set
+            {
+                _gateStatus = value;
+                DatabaseController.SetDepositaryStatus();
+            }
+        }
+
+        private static string _containerStatus = Global.Constants.NORMAL;
+        public static string ContainerStatus
+        {
+            get
+            {
+                return _containerStatus;
+            }
+            set
+            {
+                _containerStatus = value;
+                DatabaseController.SetDepositaryStatus();
+            }
+        }
+
+        private static string _observations = string.Empty;
+
+        public static string Observations
+        {
+            get
+            {
+                return _observations;
+            }
+            set
+            {
+                _observations = value;
+                DatabaseController.SetDepositaryStatus();
+            }
+        }
+
         public static bool HasAnyIssue
         {
-            get { return 
-                    ComunicationIssue == true 
-                    || BagIssue == true 
-                    || CounterIssue == true 
-                    || IoBoardIssue == true; }
-  
+            get
+            {
+                return
+                    ComunicationIssue == true
+                    || BagIssue == true
+                    || CounterIssue == true
+                    || IoBoardIssue == true;
+            }
+
         }
         public static void ResetIssues()
         {

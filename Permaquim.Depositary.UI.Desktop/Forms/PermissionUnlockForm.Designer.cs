@@ -71,6 +71,7 @@
             this.MainKeyboard.TabIndex = 6;
             this.MainKeyboard.UserTextboxPlaceholder = "Usuario";
             this.MainKeyboard.Visible = false;
+            this.MainKeyboard.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainKeyboard_MouseClick);
             // 
             // MainPanel
             // 

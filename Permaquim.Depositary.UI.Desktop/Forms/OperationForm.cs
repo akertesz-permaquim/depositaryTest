@@ -3,6 +3,7 @@ using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Entities;
 using Permaquim.Depositary.UI.Desktop.Global;
+using System.Windows.Forms;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop
@@ -37,54 +38,70 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PollingTimer_Tick(object? sender, EventArgs e)
         {
-            if (!ConfigurationController.IsDevelopment())
+            try
             {
-                _device.Sleep();
-                _device.RemoteCancel();
-                _device.Sleep();
 
-                MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
-                == ModeStateInformation.Mode.Neutral_SettingMode;
-            }
-            else
-            {
-                MainPanel.Enabled = true;
-
-            }
-            _backButton.Enabled = true;
-
-            if (TimeOutController.IsTimeOut())
-            {
-                _pollingTimer.Enabled = false;
-                DatabaseController.LogOff(true);
-                FormsController.LogOff();
-            }
-
-            if (!ConfigurationController.IsDevelopment())
-            {
-                if (_device.StateResultProperty.DoorStateInformation.Escrow)
-                    _device.CloseEscrow();
-
-                if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                if (!ConfigurationController.IsDevelopment() && _device != null)
                 {
-
-                    _device.Sleep();
-
-                    _device.RemoteCancel();
-
-                    FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
+                    if (_device != null)
+                    {
+                        _device.Sleep();
+                        _device.RemoteCancel();
+                        _device.Sleep();
+                        MainPanel.Enabled = true;
+                        MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
+                        == ModeStateInformation.Mode.Neutral_SettingMode;
+                    }
+                    else
+                    {
+                        MainPanel.Enabled = true;
+                    }
+                }
+                else
+                {
+                    MainPanel.Enabled = true;
 
                 }
-                // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode
-                    || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.ManualMode
-                    || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.InitialMode)
-                {
-                    _device.RemoteCancel();
-                }
-  
-            }
+                _backButton.Enabled = true;
 
+                if (TimeOutController.IsTimeOut())
+                {
+                    _pollingTimer.Enabled = false;
+                    DatabaseController.LogOff(true);
+                    FormsController.LogOff();
+                }
+
+                if (!ConfigurationController.IsDevelopment() && _device != null)
+                {
+                    if (_device.StateResultProperty.DoorStateInformation.Escrow)
+                        _device.CloseEscrow();
+
+                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                    {
+
+                        _device.Sleep();
+
+                        _device.RemoteCancel();
+
+                        FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
+
+                    }
+                    // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
+                    if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode
+                        || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.ManualMode
+                        || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.InitialMode)
+                    {
+                        _device.RemoteCancel();
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Error, ex.Message);
+                AuditController.Log(ex);
+            }
 
         }
         private void OperationForm_Load(object sender, EventArgs e)
@@ -146,17 +163,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     if (_device != null && !_device.CounterConnected)
                     {
-                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
-                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
-                        operationBlockingForm.ShowDialog();
+                       
                         DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
                             (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA));
                         return;
                     }
                     else
                     {
                         DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
                         (int)EventTypeEnum.Normal, string.Empty);
+
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
@@ -194,7 +211,8 @@ namespace Permaquim.Depositary.UI.Desktop
                         if (DatabaseController.GetCurrencies().Count == 1)
                         {
                             DatabaseController.CurrentCurrency = DatabaseController.GetCurrencies()[0];
-
+                            if(_device!=null)
+                                _device.SwitchCurrency(DatabaseController.GetCurrencySequence());
                             // Si la empresa opera con orígen de depósito
                             if (ParameterController.UsesValueOrigin == true)
                             {
@@ -264,17 +282,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     if (_device != null && !_device.CounterConnected)
                     {
-                        OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
-                        operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
-                        operationBlockingForm.ShowDialog();
+                        //OperationBlockingForm operationBlockingForm = new OperationBlockingForm();
+                        //operationBlockingForm.OperationBlockingReason = OperationblockingReasonEnum.CounterCommunicationError;
+                        //operationBlockingForm.ShowDialog();
                         DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
                             (int)EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA));
                         return;
                     }
                     else
                     {
                         DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
                         (int)EventTypeEnum.Normal, string.Empty);
+                 
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
@@ -375,8 +395,19 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
 
                 case (int)OperationTypeEnum.ValueExtraction:
-                    FormsController.OpenChildForm(this, new BagExtractionForm(),
+
+                    if (_device != null && _device.IoBoardConnected)
+                    {
+
+                        FormsController.OpenChildForm(this, new BagExtractionForm(),
                         (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+                    }
+                    else
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_PLACA));
+                        return;
+                    }
+
                     break;
 
                 default:

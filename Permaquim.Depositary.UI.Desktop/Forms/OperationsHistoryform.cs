@@ -119,6 +119,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ToDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_HASTA);
             TurnLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO);
             UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO);
+            TypeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIPO);
             ExecuteButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EJECUTAR);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
             AcceptButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
@@ -164,6 +165,21 @@ namespace Permaquim.Depositary.UI.Desktop
             TurnComboBox.ValueMember = VALUE;
             TurnComboBox.DataSource = turnItemList;
 
+            List<OperationTypeItemElement> typeItemList = new();
+
+            typeItemList.Add(new OperationTypeItemElement() { Value = -1, Text = "Todos" });
+
+            var typeList = DatabaseController.GetTransactionTypes();
+
+            foreach (var item in typeList)
+            {
+                typeItemList.Add(new OperationTypeItemElement()
+                { Value = item.Id, Text = item.Nombre });
+            }
+
+            TypeComboBox.DisplayMember = TEXT;
+            TypeComboBox.ValueMember = VALUE;
+            TypeComboBox.DataSource = typeItemList;
         }
 
         private void OperationHistoryForm_Load(object sender, EventArgs e)
@@ -484,7 +500,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 FromDateTimePicker.Value,
                 FechaHasta,
                 (long)UserComboBox.SelectedValue,
-                (long)TurnComboBox.SelectedValue
+                (long)TurnComboBox.SelectedValue,
+                (long)TypeComboBox.SelectedValue
                 );
 
             _transactionHeaderItems.Clear();

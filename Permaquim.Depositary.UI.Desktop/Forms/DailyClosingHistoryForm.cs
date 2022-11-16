@@ -563,7 +563,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             Depositario.Business.Relations.Operacion.CierreDiario cierreDiario = new();
-            cierreDiario.Where.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Id, Depositario.sqlEnum.OperandEnum.Equal, _dailyClosingId);
+            cierreDiario.Where.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Id, 
+                Depositario.sqlEnum.OperandEnum.Equal, _dailyClosingId);
             cierreDiario.Items();
 
             if (cierreDiario.Result.Count > 0)

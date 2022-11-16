@@ -33,22 +33,24 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.BackButton = new Button();
+            this.BackButton = new System.Windows.Forms.Button();
             this.OperationsHeaderGridView = new System.Windows.Forms.DataGridView();
             this.FilterPanel = new System.Windows.Forms.Panel();
+            this.TypeLabel = new System.Windows.Forms.Label();
+            this.TypeComboBox = new System.Windows.Forms.ComboBox();
             this.UserLabel = new System.Windows.Forms.Label();
             this.TurnLabel = new System.Windows.Forms.Label();
             this.ToDateTimeLabel = new System.Windows.Forms.Label();
             this.FromDateTimeLabel = new System.Windows.Forms.Label();
-            this.ExecuteButton = new Button();
+            this.ExecuteButton = new System.Windows.Forms.Button();
             this.UserComboBox = new System.Windows.Forms.ComboBox();
             this.TurnComboBox = new System.Windows.Forms.ComboBox();
             this.ToDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FromDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.DetailPanel = new System.Windows.Forms.Panel();
             this.DetailLabel = new System.Windows.Forms.Label();
-            this.PrintButton = new Button();
-            this.AcceptButton = new Button();
+            this.PrintButton = new System.Windows.Forms.Button();
+            this.AcceptButton = new System.Windows.Forms.Button();
             this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).BeginInit();
             this.FilterPanel.SuspendLayout();
@@ -60,10 +62,6 @@
             // 
             this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BackButton.BackColor = System.Drawing.Color.SteelBlue;
-            //this.BackButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            //this.BackButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            //this.BackButton.BorderRadius = 5;
-            //this.BackButton.BorderSize = 0;
             this.BackButton.FlatAppearance.BorderSize = 0;
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -73,7 +71,6 @@
             this.BackButton.Size = new System.Drawing.Size(240, 55);
             this.BackButton.TabIndex = 179;
             this.BackButton.Text = "Salir";
-            //this.BackButton.TextColor = System.Drawing.Color.White;
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
@@ -121,6 +118,8 @@
             // 
             // FilterPanel
             // 
+            this.FilterPanel.Controls.Add(this.TypeLabel);
+            this.FilterPanel.Controls.Add(this.TypeComboBox);
             this.FilterPanel.Controls.Add(this.UserLabel);
             this.FilterPanel.Controls.Add(this.TurnLabel);
             this.FilterPanel.Controls.Add(this.ToDateTimeLabel);
@@ -137,14 +136,35 @@
             this.FilterPanel.TabIndex = 183;
             this.FilterPanel.Click += new System.EventHandler(this.FilterPanel_Click);
             // 
+            // TypeLabel
+            // 
+            this.TypeLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.TypeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TypeLabel.ForeColor = System.Drawing.Color.White;
+            this.TypeLabel.Location = new System.Drawing.Point(624, 13);
+            this.TypeLabel.Name = "TypeLabel";
+            this.TypeLabel.Size = new System.Drawing.Size(136, 27);
+            this.TypeLabel.TabIndex = 203;
+            this.TypeLabel.Text = "*";
+            // 
+            // TypeComboBox
+            // 
+            this.TypeComboBox.BackColor = System.Drawing.Color.White;
+            this.TypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TypeComboBox.FormattingEnabled = true;
+            this.TypeComboBox.Location = new System.Drawing.Point(624, 45);
+            this.TypeComboBox.Name = "TypeComboBox";
+            this.TypeComboBox.Size = new System.Drawing.Size(135, 23);
+            this.TypeComboBox.TabIndex = 202;
+            // 
             // UserLabel
             // 
             this.UserLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.UserLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.UserLabel.ForeColor = System.Drawing.Color.White;
-            this.UserLabel.Location = new System.Drawing.Point(520, 13);
+            this.UserLabel.Location = new System.Drawing.Point(480, 13);
             this.UserLabel.Name = "UserLabel";
-            this.UserLabel.Size = new System.Drawing.Size(176, 27);
+            this.UserLabel.Size = new System.Drawing.Size(136, 27);
             this.UserLabel.TabIndex = 201;
             this.UserLabel.Text = "*";
             // 
@@ -155,7 +175,7 @@
             this.TurnLabel.ForeColor = System.Drawing.Color.White;
             this.TurnLabel.Location = new System.Drawing.Point(336, 13);
             this.TurnLabel.Name = "TurnLabel";
-            this.TurnLabel.Size = new System.Drawing.Size(176, 27);
+            this.TurnLabel.Size = new System.Drawing.Size(136, 27);
             this.TurnLabel.TabIndex = 200;
             this.TurnLabel.Text = "*";
             // 
@@ -185,10 +205,6 @@
             // 
             this.ExecuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ExecuteButton.BackColor = System.Drawing.Color.SteelBlue;
-            //this.ExecuteButton.BackColor = System.Drawing.Color.SteelBlue;
-            //this.ExecuteButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            //this.ExecuteButton.BorderRadius = 5;
-            //this.ExecuteButton.BorderSize = 0;
             this.ExecuteButton.FlatAppearance.BorderSize = 0;
             this.ExecuteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExecuteButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -198,27 +214,28 @@
             this.ExecuteButton.Size = new System.Drawing.Size(128, 64);
             this.ExecuteButton.TabIndex = 197;
             this.ExecuteButton.Text = "***";
-            //this.ExecuteButton.TextColor = System.Drawing.Color.White;
             this.ExecuteButton.UseVisualStyleBackColor = false;
             this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
             // 
             // UserComboBox
             // 
+            this.UserComboBox.BackColor = System.Drawing.Color.White;
             this.UserComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.UserComboBox.FormattingEnabled = true;
-            this.UserComboBox.Location = new System.Drawing.Point(520, 45);
+            this.UserComboBox.Location = new System.Drawing.Point(480, 45);
             this.UserComboBox.Name = "UserComboBox";
-            this.UserComboBox.Size = new System.Drawing.Size(175, 23);
+            this.UserComboBox.Size = new System.Drawing.Size(135, 23);
             this.UserComboBox.TabIndex = 196;
             this.UserComboBox.Click += new System.EventHandler(this.UserComboBox_Click);
             // 
             // TurnComboBox
             // 
+            this.TurnComboBox.BackColor = System.Drawing.Color.White;
             this.TurnComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TurnComboBox.FormattingEnabled = true;
             this.TurnComboBox.Location = new System.Drawing.Point(336, 45);
             this.TurnComboBox.Name = "TurnComboBox";
-            this.TurnComboBox.Size = new System.Drawing.Size(175, 23);
+            this.TurnComboBox.Size = new System.Drawing.Size(135, 23);
             this.TurnComboBox.TabIndex = 195;
             this.TurnComboBox.Click += new System.EventHandler(this.TurnComboBox_Click);
             // 
@@ -273,10 +290,6 @@
             // 
             this.PrintButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PrintButton.BackColor = System.Drawing.Color.SteelBlue;
-            //this.PrintButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            //this.PrintButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            //this.PrintButton.BorderRadius = 5;
-            //this.PrintButton.BorderSize = 0;
             this.PrintButton.FlatAppearance.BorderSize = 0;
             this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -286,7 +299,6 @@
             this.PrintButton.Size = new System.Drawing.Size(160, 55);
             this.PrintButton.TabIndex = 185;
             this.PrintButton.Text = "Imprimir";
-            //this.PrintButton.TextColor = System.Drawing.Color.White;
             this.PrintButton.UseVisualStyleBackColor = false;
             this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
@@ -294,10 +306,6 @@
             // 
             this.AcceptButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AcceptButton.BackColor = System.Drawing.Color.SteelBlue;
-            //this.AcceptButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            //this.AcceptButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            //this.AcceptButton.BorderRadius = 5;
-            //this.AcceptButton.BorderSize = 0;
             this.AcceptButton.FlatAppearance.BorderSize = 0;
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -307,7 +315,6 @@
             this.AcceptButton.Size = new System.Drawing.Size(160, 55);
             this.AcceptButton.TabIndex = 184;
             this.AcceptButton.Text = "Salir";
-            //this.AcceptButton.TextColor = System.Drawing.Color.White;
             this.AcceptButton.UseVisualStyleBackColor = false;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
@@ -401,5 +408,7 @@
         private Button PrintButton;
         private Label DetailLabel;
         private Label label1;
+        private Label TypeLabel;
+        private ComboBox TypeComboBox;
     }
 }

@@ -306,7 +306,7 @@
             this.MonitorGroupcheckbox.BackColor = System.Drawing.Color.Transparent;
             this.MonitorGroupcheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonitorGroupcheckbox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(816, 8);
+            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(760, 40);
             this.MonitorGroupcheckbox.Name = "MonitorGroupcheckbox";
             this.MonitorGroupcheckbox.Size = new System.Drawing.Size(71, 17);
             this.MonitorGroupcheckbox.TabIndex = 143;

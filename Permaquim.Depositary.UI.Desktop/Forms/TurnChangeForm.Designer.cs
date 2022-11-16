@@ -37,7 +37,7 @@
             this.TurnLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.OperationsDetailGridView = new System.Windows.Forms.DataGridView();
-            this.AcceptButton = new Permaquim.Depositary.UI.Desktop.CustomButton();
+            this.AcceptButton = new System.Windows.Forms.Button();
             this.DetailsPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsHeaderGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OperationsDetailGridView)).BeginInit();
@@ -161,10 +161,6 @@
             // 
             this.AcceptButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AcceptButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.AcceptButton.BackgroundColor = System.Drawing.Color.SteelBlue;
-            this.AcceptButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.AcceptButton.BorderRadius = 5;
-            this.AcceptButton.BorderSize = 0;
             this.AcceptButton.FlatAppearance.BorderSize = 0;
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AcceptButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -174,7 +170,6 @@
             this.AcceptButton.Size = new System.Drawing.Size(160, 55);
             this.AcceptButton.TabIndex = 191;
             this.AcceptButton.Text = "Salir";
-            this.AcceptButton.TextColor = System.Drawing.Color.White;
             this.AcceptButton.UseVisualStyleBackColor = false;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
@@ -217,7 +212,7 @@
         private Label TurnLabel;
         private FlowLayoutPanel MainPanel;
         private DataGridView OperationsDetailGridView;
-        private CustomButton AcceptButton;
+        private System.Windows.Forms.Button AcceptButton;
         private Panel DetailsPanel;
     }
 }

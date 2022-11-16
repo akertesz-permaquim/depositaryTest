@@ -64,13 +64,18 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             {
                 if (_printerStatus.ContainsKey("PrinterState") && _printerStatus.ContainsKey("PrinterStatus"))
                 {
-                    if (_printerStatus["PrinterState"].Equals("144") && _printerStatus["PrinterStatus"].Equals("2"))
-                        returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_PUERTA_ABIERTA);
+                    if (_printerStatus["PrinterState"].Equals("144") && _printerStatus["PrinterStatus"].Equals("2")) { 
+                        returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_PUERTA_ABIERTA);}
                     if (_printerStatus["PrinterState"].Equals("0") && _printerStatus["PrinterStatus"].Equals("2"))
                         returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_SIN_ALIMENTACION);
                     if (_printerStatus["PrinterState"].Equals("136") && _printerStatus["PrinterStatus"].Equals("2"))
                         returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_ATASCADA);
                 }
+                if (returnValue.Equals(string.Empty))
+                    DeviceController.PrinterStatus = Global.Constants.NORMAL;
+                else
+                    DeviceController.PrinterStatus = returnValue;
+
             }
             return returnValue;
         }
