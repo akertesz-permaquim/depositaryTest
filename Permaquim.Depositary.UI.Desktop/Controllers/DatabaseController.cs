@@ -2503,7 +2503,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _lastEventMessage = message;
         }
 
-        public static void SetDepositaryStatus()
+        public static void SetDepositaryStatus(bool initialize = false)
         {
             if (_depositaryStatusEntities == null)
                 _depositaryStatusEntities = new();
@@ -2523,8 +2523,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _depositaryStatus.Placa = DeviceController.IoBoardStatus;
             _depositaryStatus.Puerta = DeviceController.GateStatus;
 
-            _depositaryStatusEntities.AddOrUpdate(_depositaryStatus);
-
+            if(initialize)
+                _depositaryStatusEntities.AddOrUpdate(_depositaryStatus);
+            else
+                _depositaryStatusEntities.Update(_depositaryStatus);
         }
 
         public static void CreateSession()

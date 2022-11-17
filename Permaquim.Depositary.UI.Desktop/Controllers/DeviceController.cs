@@ -155,6 +155,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return DatabaseController.CurrentDepositaryIoboard.Sleeptime;
         }
 
+        public static int GetEnvelopeEvaluationTime()
+        {
+            int parseResult = 100;
+            int.TryParse(ConfigurationController.GetDepositaryConfigurationItem(DepositaryConfigurationEnum.ENVELOPE_EVALUATION_TIME), out parseResult);
+            return parseResult;
+        }
+
         public static DEXDevice InitializeDevice()
         {
             DEXDevice device = new();
