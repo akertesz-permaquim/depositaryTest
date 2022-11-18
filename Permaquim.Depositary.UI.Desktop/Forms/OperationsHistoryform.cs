@@ -512,7 +512,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _transactionHeaderItems.Add(new TransactionHeaderItem()
                 {
                     Cierrediario =  item.CierreDiarioId != null?  
-                        item.CierreDiarioId.Fecha.HasValue ? item.CierreDiarioId.Fecha.Value.ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA)) : "" : String.Empty,
+                        item.CierreDiarioId.CodigoCierre : String.Empty,
                     Contenedor = item.ContenedorId.Nombre +
                         (item.ContenedorId.Identificador.Length == 0 ? "" : " (" + item.ContenedorId.Identificador + " )"),
                     Fecha = item.Fecha,

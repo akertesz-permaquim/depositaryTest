@@ -128,6 +128,16 @@ using System.Drawing.Drawing2D;
         }
     }
 
+    public int MaxLength
+    {
+        get { return textBox1.MaxLength; }
+        set
+        {
+            textBox1.MaxLength = value;
+        }
+    }
+
+
     [Category("Permaquim")]
         public override Color BackColor
         {

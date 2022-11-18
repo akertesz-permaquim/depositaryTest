@@ -204,6 +204,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _totalAmount = 0;
             _operationStatus = new();
             _maintainButtonUnvisible = false;
+            ConfirmAndExitDepositButton.Enabled = true;
 
         }
         public void LoadDenominations()
@@ -736,8 +737,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
+            ConfirmAndExitDepositButton.Enabled = false;
             _maintainButtonUnvisible = true;
             TimeOutController.Reset();
+
 
             if (ParameterController.RequiresEnvelopeIdentifier && EnvelopeTextBox.Texts.Trim().Equals(String.Empty))
             {

@@ -345,6 +345,7 @@ namespace Permaquim.Depositary.UI.Desktop
            _containerTextBox =  ControlBuilder.BuildStandardTextBox("ContainerTextbox",
                 MultilanguangeController.GetText(MultiLanguageEnum.INGRESE_CODIGO_CONTENEDOR),MainPanel.Width);
             _containerTextBox.Visible = false;
+            _containerTextBox.MaxLength = 50;
 
             _containerTextBox.Click += _containerTextBox_Click;
 

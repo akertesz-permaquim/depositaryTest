@@ -24,7 +24,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             InitializeComponent();
             NumericInputBoxControl.NumericInputBoxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTBOX_NUMERICO);
 
-
+         
             NumericInputBoxControl.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
             NumericInputBoxControl.KeyboardEvent += NumericInputBoxControl_KeyboardEvent;
@@ -40,7 +40,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         }
         private void NumericInputBoxControl_MouseClick(object sender, MouseEventArgs e)
         {
-
+            TimeOutController.Reset();
         }
 
         public string NumericInputBoxPlaceholder

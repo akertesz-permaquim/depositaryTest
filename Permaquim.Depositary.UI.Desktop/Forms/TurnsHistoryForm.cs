@@ -248,6 +248,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
             TurnsHeaderGridView.Columns.Add(new()
             {
+                DataPropertyName = "Moneda",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.MONEDA),
+                Name = "Moneda",
+                Visible = true,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            TurnsHeaderGridView.Columns.Add(new()
+            {
                 DataPropertyName = "Usuario",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO),
                 Name = "Usuario",
@@ -479,7 +490,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             _turnItems.Clear();
 
-            Int64 DefaultCurrency = DatabaseController.DefaultCurrency().Id;
+            var DefaultCurrency = DatabaseController.DefaultCurrency();
 
             foreach (var item in Turns)
             {
@@ -492,12 +503,13 @@ namespace Permaquim.Depositary.UI.Desktop
                     FechaApertura = item.FechaApertura,
                     Usuario = item.UsuarioCreacion.NombreApellido,
                     Turno = esquemaDetalleTurno.EsquemaTurnoId.Nombre + " - " + esquemaDetalleTurno.Nombre,
-                    TotalAValidar = transacciones.Where(x => x._MonedaId == DefaultCurrency).Sum(x => x.TotalAValidar),
-                    TotalValidado = transacciones.Where(x => x._MonedaId == DefaultCurrency).Sum(x => x.TotalValidado),
+                    TotalAValidar = transacciones.Where(x => x._MonedaId == DefaultCurrency.Id).Sum(x => x.TotalAValidar),
+                    TotalValidado = transacciones.Where(x => x._MonedaId == DefaultCurrency.Id).Sum(x => x.TotalValidado),
                     CierreDiario = item.CierreDiarioId == null? string.Empty : item.CierreDiarioId.CodigoCierre + "-" + item._CierreDiarioId,
                     FechaCierre = item.FechaCierre,
                     CantidadTransacciones = transacciones.Count(),
                     Secuencia = item.Secuencia,
+                    Moneda = DefaultCurrency.Nombre
                 });
             }
 

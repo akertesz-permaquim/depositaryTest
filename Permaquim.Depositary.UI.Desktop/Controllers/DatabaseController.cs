@@ -786,7 +786,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             if (turnId > -1)
             {
                 Permaquim.Depositario.Business.Relations.Turno.AgendaTurno scheduleTurns = new();
-                scheduleTurns.Where.Add(Depositario.Business.Relations.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, Depositario.sqlEnum.OperandEnum.Equal, turnId);
+                scheduleTurns.Where.Add(Depositario.Business.Relations.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, 
+                    Depositario.sqlEnum.OperandEnum.Equal, turnId);
                 scheduleTurns.Items();
 
                 if (scheduleTurns.Result.Count > 0)
@@ -886,8 +887,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             Permaquim.Depositario.Business.Relations.Operacion.Turno turn = new();
 
-            turn.Where.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.FechaCierre,
-                Depositario.sqlEnum.OperandEnum.Between, dateFrom, dateTo);
+            turn.Where.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.Fecha,
+                Depositario.sqlEnum.OperandEnum.Between, dateFrom, dateTo.AddHours(23).AddMinutes(59));
 
             if (userId > -1)
             {

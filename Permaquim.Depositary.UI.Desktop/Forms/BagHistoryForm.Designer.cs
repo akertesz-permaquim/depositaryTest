@@ -268,11 +268,12 @@
             this.DetailPanel.Controls.Add(this.BagContentTabControl);
             this.DetailPanel.Controls.Add(this.PrintButton);
             this.DetailPanel.Controls.Add(this.AcceptButton);
-            this.DetailPanel.Location = new System.Drawing.Point(56, 0);
+            this.DetailPanel.Location = new System.Drawing.Point(56, 104);
             this.DetailPanel.Name = "DetailPanel";
             this.DetailPanel.Size = new System.Drawing.Size(784, 488);
             this.DetailPanel.TabIndex = 194;
             this.DetailPanel.Visible = false;
+            this.DetailPanel.Click += new System.EventHandler(this.DetailPanel_Click);
             // 
             // BagContentTabControl
             // 

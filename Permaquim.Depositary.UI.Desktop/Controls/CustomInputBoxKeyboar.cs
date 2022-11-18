@@ -28,15 +28,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             ConfirmButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
             ConfirmButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
-            ConfirmButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            ConfirmButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             CancelButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION);
             CancelButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
-            CancelButton.BackgroundColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
             CancelButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
-            CancelButton.TextColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
 
         }
