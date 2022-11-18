@@ -143,6 +143,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             }
             else
             {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+
                 KeyboardEvent(this, new NumericInputBoxKeyboardEventArgs());
             }
         }

@@ -524,6 +524,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     _device.PreviousState == StatusInformation.State.PQClosingEscrow
                     )
                 {
+                    CancelDepositButton.Visible = false;
                     if (ParameterController.UsesShutter)
                         _device.Open();
                     _device.StoringStart();
@@ -535,6 +536,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.PreviousState == StatusInformation.State.PQClosingEscrow
                 )
                 {
+                    CancelDepositButton.Visible = true;
                     TimeOutController.Reset();
                     _device.OpenEscrow();
                     _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
