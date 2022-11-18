@@ -429,21 +429,22 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void VerifyEscrowEmpty()
         {
+            TimeOutController.Reset();
 
             // Si el escrow está abierto, y el sensor detecta presencia, se asume que es un sobre y se 
             // completa el depósito
             if (
                 _operationStatus.GeneralStatus == StatusInformation.State.PQWaitingTocloseEscrow
                 && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent == true)
-            //&& _device.PreviousState == StatusInformation.State.PQWaitingEnvelope)
             {
-                TimeOutController.Reset();
+                ButtonsPanel.Visible = false;
+                CancelDepositButton.Visible = false;
+
                 _operationStatus.DepositConfirmed = true;
                 
                 _device.CloseEscrow();
                 _device.PreviousState = StatusInformation.State.PQClosingEscrow;
 
-                ButtonsPanel.Visible = false;
             }
 
         }
@@ -484,6 +485,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_device.StateResultProperty.DoorStateInformation.Escrow == true 
                 && _operationStatus.DepositConfirmed)
             {
+                ButtonsPanel.Visible = true;
                 CancelDepositButton.Visible = true;
             }
 
@@ -757,6 +759,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             ConfirmAndExitDepositButton.Enabled = false;
             ConfirmAndExitDepositButton.Visible = false;
+            EnvelopeTextBox.Visible = false;
+
             _maintainButtonUnvisible = true;
             TimeOutController.Reset();
 
@@ -978,7 +982,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     {
                         case TicketTypeEnum.First:
                             ReportController.PrintReport(ReportTypeEnum.EnvelopeDepositFirstReport,
-                            _transaction, _transactionenvelopeDetails, i, EnvelopeTextBox.Texts.Trim());
+                            _transaction, _transactionenvelopeDetails, i, _transactionEnvelope.CodigoSobre);
                             break;
                         case TicketTypeEnum.Second:
                             var _header = DatabaseController.GetTransactionHeader(_transaction.Id);
