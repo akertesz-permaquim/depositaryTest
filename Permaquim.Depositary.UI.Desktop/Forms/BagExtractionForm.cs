@@ -289,12 +289,14 @@ namespace Permaquim.Depositary.UI.Desktop
             if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Argentina)
             {
                 _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending
-                 && ParameterController.RequiresContainerIdentifier;
+                 && ParameterController.RequiresContainerIdentifier
+                 && _device.IoBoardStatusProperty.BagState ==IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE;
             }
             if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Chile)
             {
                 _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.BagExtracted
-                && ParameterController.RequiresContainerIdentifier;
+                && ParameterController.RequiresContainerIdentifier
+                && _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE;
             }
 
         }
@@ -370,8 +372,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
+            _confirmButton.Enabled = false;
             if (ParameterController.RequiresContainerIdentifier)
                 DatabaseController.UpdateContainerIdentifier(_containerTextBox.Texts.Trim());
+            _containerTextBox.Visible = false;
             _bagExtractionProcess = BagExtractionProcessEnum.ProcessFinished;
         }
         private void BagButton_Click(object sender, EventArgs e)
