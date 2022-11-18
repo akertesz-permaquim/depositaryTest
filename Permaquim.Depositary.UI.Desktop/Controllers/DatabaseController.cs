@@ -786,7 +786,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             if (turnId > -1)
             {
                 Permaquim.Depositario.Business.Relations.Turno.AgendaTurno scheduleTurns = new();
-                scheduleTurns.Where.Add(Depositario.Business.Relations.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, Depositario.sqlEnum.OperandEnum.Equal, turnId);
+                scheduleTurns.Where.Add(Depositario.Business.Relations.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, 
+                    Depositario.sqlEnum.OperandEnum.Equal, turnId);
                 scheduleTurns.Items();
 
                 List<Int64> arrayTurns = new();
@@ -888,8 +889,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             Permaquim.Depositario.Business.Relations.Operacion.Turno turn = new();
 
-            turn.Where.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.FechaCierre,
-                Depositario.sqlEnum.OperandEnum.Between, dateFrom, dateTo);
+            turn.Where.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.Fecha,
+                Depositario.sqlEnum.OperandEnum.Between, dateFrom, dateTo.AddHours(23).AddMinutes(59));
 
             if (userId > -1)
             {
@@ -2521,7 +2522,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _lastEventMessage = message;
         }
 
-        public static void SetDepositaryStatus()
+        public static void SetDepositaryStatus(bool initialize = false)
         {
             if (_depositaryStatusEntities == null)
                 _depositaryStatusEntities = new();
@@ -2541,8 +2542,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _depositaryStatus.Placa = DeviceController.IoBoardStatus;
             _depositaryStatus.Puerta = DeviceController.GateStatus;
 
-            _depositaryStatusEntities.AddOrUpdate(_depositaryStatus);
-
+            if(initialize)
+                _depositaryStatusEntities.AddOrUpdate(_depositaryStatus);
+            else
+                _depositaryStatusEntities.Update(_depositaryStatus);
         }
 
         public static void CreateSession()

@@ -554,5 +554,10 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
         }
+
+        private void DetailPanel_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+        }
     }
 }

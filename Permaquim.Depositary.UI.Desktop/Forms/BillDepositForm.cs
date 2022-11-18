@@ -776,7 +776,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.Open();
             _device.StoringStart();
             SaveTransaction();
-            //ButtonsPanel.Visible = true;
+
         }
 
         private void EnableDisableControls(bool value)

@@ -16,6 +16,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             InitializeComponent();
             NumericInputBoxTexbox.Focus();
+            NumericInputBoxTexbox.MaxLength = 50;
             NumericInputBoxTexbox.TextAlign = HorizontalAlignment.Right;
             if (this.ParentForm != null)
                 this.ParentForm.AcceptButton = this.ConfirmButton;
@@ -142,6 +143,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             }
             else
             {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+
                 KeyboardEvent(this, new NumericInputBoxKeyboardEventArgs());
             }
         }

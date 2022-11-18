@@ -249,6 +249,7 @@
             this.EnvelopeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.EnvelopeTextBox.Location = new System.Drawing.Point(8, 432);
             this.EnvelopeTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.EnvelopeTextBox.MaxLength = 100;
             this.EnvelopeTextBox.Multiline = false;
             this.EnvelopeTextBox.Name = "EnvelopeTextBox";
             this.EnvelopeTextBox.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);

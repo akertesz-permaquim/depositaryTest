@@ -96,6 +96,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 }
                 else
                 {
+                    DatabaseController.SetDepositaryStatus(true);
 
                     _pollingTimer = new System.Windows.Forms.Timer()
                     {
@@ -260,17 +261,18 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void InitializeDevices()
         {
 
-            DEXDevice device = DeviceController.InitializeDevice();
-
-            _deXDevice = device;
-
-            this.Text = MultilanguangeController.GetText(MultiLanguageEnum.DISPOSITIVO)
-                + ": " + DatabaseController.CurrentDepositary.ModeloId.Nombre;
-
-            LoadStyles();
-
             try
             {
+
+                DEXDevice device = DeviceController.InitializeDevice();
+
+                _deXDevice = device;
+
+                this.Text = MultilanguangeController.GetText(MultiLanguageEnum.DISPOSITIVO)
+                    + ": " + DatabaseController.CurrentDepositary.ModeloId.Nombre;
+
+                LoadStyles();
+
                 _device = new CounterDevice(device);
 
                 _device.DeviceErrorReceived += DeviceErrorEventReceived;
@@ -291,7 +293,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     // Ejecuto la primera consulta al dispositivo. 
                     // Puede que se encuentre en un estado intermedio en donde no se haya finalizado la 
                     // Operación anterior.
-                    
+
                     _counterStatesResult = _device.Sense();
 
                     if (_device.CounterConnected)

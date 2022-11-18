@@ -151,7 +151,8 @@
             TEMPLATEMONCOMPLETO,
             CNTCPDEPOSITO,
             POLLTIME,
-            SLEEPTIME
+            SLEEPTIME,
+            ENVELOPE_EVALUATION_TIME
         }
         public enum MultiLanguageEnum
         {
