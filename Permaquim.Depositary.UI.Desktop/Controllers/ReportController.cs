@@ -944,9 +944,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                             Brushes.Black, _detailStart_X, yOffset, new StringFormat());
 
                         yOffset += _interlineSpace;
-                        yOffset += _interlineSpace;
-                        yOffset += _interlineSpace;
-                        yOffset += _interlineSpace;
 
                     }
 
@@ -1030,7 +1027,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
 
                 yOffset += _interlineSpace;
-      
+                yOffset += _interlineSpace;
+                yOffset += _interlineSpace;
+                yOffset += _interlineSpace;
+
+
             }
             catch (Exception ex)
             {

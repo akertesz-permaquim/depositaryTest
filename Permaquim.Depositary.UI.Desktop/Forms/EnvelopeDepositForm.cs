@@ -463,20 +463,30 @@ namespace Permaquim.Depositary.UI.Desktop
                 CancelDepositButton.Visible = true;
 
                 ButtonsPanel.Visible = _totalQuantity > 0;
- 
+
                 BackButton.Visible = !ButtonsPanel.Visible;
 
                 EnvelopeTextBox.Visible = _requiresEnvelopeIdentifier
                     && ConfirmAndExitDepositButton.Visible && _totalQuantity > 0;
-               
+
 
             }
             else
             {
+
                 EnvelopeTextBox.Visible = false;
                 ConfirmAndExitDepositButton.Visible = false;
+                if (!_maintainButtonUnvisible)
+                    CancelDepositButton.Visible = true;
+            }
+
+            // en el D70, se cierra solo el escrow al no detectar sobre.
+            if (_device.StateResultProperty.DoorStateInformation.Escrow == true 
+                && _operationStatus.DepositConfirmed)
+            {
                 CancelDepositButton.Visible = true;
             }
+
 
         }
         private void ShowInformation()
@@ -522,8 +532,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     _operationStatus.DepositConfirmed &&
                     _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent &&
                     _device.PreviousState == StatusInformation.State.PQClosingEscrow
+                    && !_operationStatus.DepositEnded
                     )
                 {
+                    ButtonsPanel.Visible = false;
                     CancelDepositButton.Visible = false;
                     if (ParameterController.UsesShutter)
                         _device.Open();
@@ -536,10 +548,14 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.PreviousState == StatusInformation.State.PQClosingEscrow
                 )
                 {
-                    CancelDepositButton.Visible = true;
-                    TimeOutController.Reset();
-                    _device.OpenEscrow();
-                    _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                    if (!_operationStatus.DepositEnded)
+                    {
+                        ButtonsPanel.Visible = true;
+                        CancelDepositButton.Visible = true;
+                        TimeOutController.Reset();
+                        _device.OpenEscrow();
+                        _device.PreviousState = StatusInformation.State.PQWaitingEnvelope;
+                    }
                 }
 
             }
@@ -740,6 +756,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
             ConfirmAndExitDepositButton.Enabled = false;
+            ConfirmAndExitDepositButton.Visible = false;
             _maintainButtonUnvisible = true;
             TimeOutController.Reset();
 
@@ -806,7 +823,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (_selectedEditElement == SelectedEditElementEnum.EnvelopeCode)
             {
                 EnvelopeTextBox.Focus();
-                SendKeys.Send(((CustomButton)sender).Tag.ToString());
+                SendKeys.Send(((Button)sender).Tag.ToString());
             }
         }
         #endregion
@@ -845,6 +862,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     DenominationsGridView.BeginEdit(false);
 
                     _numericInputForm = new CustomNumericInputboxKeyboard();
+
                     _numericInputForm.NumericInputBoxPlaceholder =
                         ((DataGridView)sender).Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
@@ -905,7 +923,8 @@ namespace Permaquim.Depositary.UI.Desktop
             DeleteTransaction();
 
             _operationStatus.DepositConfirmed = false;
-            _device.CloseEscrow();
+            if(_device!= null)
+                _device.CloseEscrow();
             AuditController.Log(LogTypeEnum.Information,
                 DEPOSITO_SOBRE_CANCELADO,
                 DEPOSITO_SOBRE_CANCELADO);
@@ -922,7 +941,7 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
             _selectedEditElement = SelectedEditElementEnum.EnvelopeCode;
             _inputForm = new InputBoxForm();
-
+            
             if (EnvelopeTextBox.Texts.Equals(EnvelopeTextBox.PlaceholderText))
                 _inputForm.InputTexboxPlaceholder = EnvelopeTextBox.PlaceholderText;
             else
@@ -948,8 +967,10 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void PrintTicket(TicketTypeEnum ticketType)
         {
- 
-            if (ParameterController.PrintsEnvelopeDeposit)
+            if (ConfigurationController.IsDevelopment())
+                return;
+
+                if (ParameterController.PrintsEnvelopeDeposit)
             {
                 for (int i = 0; i < ParameterController.PrintEnvelopeDepositQuantity; i++)
                 {

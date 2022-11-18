@@ -56,18 +56,22 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             get { return InputTexbox.PlaceholderText; }
             set { InputTexbox.PlaceholderText = value; }
         }
+        public void SetMaxLenght(int number)
+        {
+            InputTexbox.MaxLength = number;
+        }
 
         public void SetButtonsColor(Color color)
         {
             _mainColor = color;
             foreach (var item in this.Controls)
             {
-                if (item.GetType().Name.Equals("CustomButton"))
+                if (item.GetType().Name.Equals("Button"))
                 {
-                    string buttonTag = ((CustomButton)item).Tag.ToString();
+                    string buttonTag = ((Button)item).Tag.ToString();
 
                     if (!(buttonTag.Equals("{ACCEPT}") || buttonTag.Equals("{CANCEL}")))
-                        ((CustomButton)item).BackColor = _mainColor;
+                        ((Button)item).BackColor = _mainColor;
                 }
             }
 
@@ -78,7 +82,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             _activeTextbox.Focus();
 
-            if (((CustomButton)sender).Tag.ToString().Equals("{ENTER}"))
+
+            if (_activeTextbox.Texts.Length >= _activeTextbox.MaxLength)
+                return;
+
+            if (((Button)sender).Tag.ToString().Equals("{ENTER}"))
             {
                 //Raises event for counter
                 if (KeyboardEvent != null)
@@ -95,7 +103,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                 }
                 return;
             }
-            if (((CustomButton)sender).Tag.ToString().Equals("{BACKSPACE}"))
+            if (((Button)sender).Tag.ToString().Equals("{BACKSPACE}"))
             {
                 if (InputTexbox.Texts.Length > 0)
                 {
@@ -105,8 +113,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             }
             else
             {
-                //SendKeys.SendWait(((CustomButton)sender).Tag.ToString());
-                _activeTextbox.Texts += ((CustomButton)sender).Tag.ToString();
+                //SendKeys.SendWait(((Button)sender).Tag.ToString());
+                _activeTextbox.Texts += ((Button)sender).Tag.ToString();
                 _activeTextbox.SelectionStart = _activeTextbox.Texts.Length;
                 _activeTextbox.SelectionLength = 0;
 
@@ -116,7 +124,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
 
                     InputboxKeyboardEventArgs args = new()
                     {
-                        KeyPressed = ((CustomButton)sender).Tag.ToString(),
+                        KeyPressed = ((Button)sender).Tag.ToString(),
                         InputTex = InputTexbox.Texts
                     };
 
@@ -177,15 +185,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             foreach (var item in this.Controls)
             {
-                if (item.GetType() == typeof(CustomButton))
+                if (item.GetType() == typeof(Button))
                 {
-                    if (!((CustomButton)item).Tag.ToString().StartsWith("{"))
+                    if (!((Button)item).Tag.ToString().StartsWith("{"))
                     {
 
                         if (_shift)
                         {
-                            ((CustomButton)item).Tag = ((CustomButton)item).Tag.ToString().ToUpper();
-                            ((CustomButton)item).Text = ((CustomButton)item).Text.ToString().ToUpper();
+                            ((Button)item).Tag = ((Button)item).Tag.ToString().ToUpper();
+                            ((Button)item).Text = ((Button)item).Text.ToString().ToUpper();
                             Button_0.Tag = "="; Button_0.Text = Button_0.Tag.ToString();
                             Button_1.Tag = "¬"; Button_1.Text = Button_1.Tag.ToString();
                             Button_2.Tag = System.Convert.ToChar(34); Button_2.Text = Button_2.Tag.ToString();
@@ -208,8 +216,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
                         }
                         else
                         {
-                            ((CustomButton)item).Tag = ((CustomButton)item).Tag.ToString().ToLower();
-                            ((CustomButton)item).Text = ((CustomButton)item).Text.ToString().ToLower();
+                            ((Button)item).Tag = ((Button)item).Tag.ToString().ToLower();
+                            ((Button)item).Text = ((Button)item).Text.ToString().ToLower();
                             Button_0.Tag = "0"; Button_0.Text = Button_0.Tag.ToString();
                             Button_1.Tag = "1"; Button_1.Text = Button_1.Tag.ToString();
                             Button_2.Tag = "2"; Button_2.Text = Button_2.Tag.ToString();

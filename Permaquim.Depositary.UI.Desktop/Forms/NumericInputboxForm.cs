@@ -28,6 +28,8 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             NumericInputBoxControl.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
 
             NumericInputBoxControl.KeyboardEvent += NumericInputBoxControl_KeyboardEvent;
+
+            NumericInputBoxControl.SetMaxLenght(18);
         }
         protected override CreateParams CreateParams
         {

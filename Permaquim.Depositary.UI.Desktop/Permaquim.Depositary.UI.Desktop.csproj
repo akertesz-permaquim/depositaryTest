@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Compile Remove="Controls\BillDepositDialog.Designer.cs" />
+    <Compile Remove="Controls\CustomButton.cs" />
     <Compile Remove="Forms\OriginSelectorForm.cs" />
     <Compile Remove="Forms\OriginSelectorForm.Designer.cs" />
     <Compile Remove="Model\User.cs" />

@@ -16,7 +16,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             InitializeComponent();
             NumericInputBoxTexbox.Focus();
-            NumericInputBoxTexbox.MaxLength = 50;
+            NumericInputBoxTexbox.MaxLength = 18;
             NumericInputBoxTexbox.TextAlign = HorizontalAlignment.Right;
             if (this.ParentForm != null)
                 this.ParentForm.AcceptButton = this.ConfirmButton;
@@ -34,6 +34,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
            
 
         }
+        public void SetMaxLenght(int number)
+        {
+            NumericInputBoxTexbox.MaxLength = number;
+        }
+
         public void ClearData()
         {
             NumericInputBoxTexbox.Texts = String.Empty;
@@ -61,12 +66,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             _mainColor = color;
             foreach (var item in this.Controls)
             {
-                if (item.GetType().Name.Equals("CustomButton"))
+                if (item.GetType().Name.Equals("Button"))
                 {
-                    string buttonTag = ((CustomButton)item).Tag.ToString();
+                    string buttonTag = ((Button)item).Tag.ToString();
 
                     if (!(buttonTag.Equals("{ACCEPT}") || buttonTag.Equals("{CANCEL}")))
-                        ((CustomButton)item).BackColor = _mainColor;
+                        ((Button)item).BackColor = _mainColor;
                 }
             }
             NumericInputBoxTexbox.ForeColor = _mainColor;
@@ -76,7 +81,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             NumericInputBoxTexbox.Focus();
 
-            if (((CustomButton)sender).Tag.ToString().Equals("{ENTER}"))
+            if (NumericInputBoxTexbox.Texts.Length >= NumericInputBoxTexbox.MaxLength)
+                return;
+
+            if (((Button)sender).Tag.ToString().Equals("{ENTER}"))
             {
                 //Raises event for counter
                 if (KeyboardEvent != null)
@@ -94,8 +102,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
             }
             else
             {
-                //SendKeys.SendWait(((CustomButton)sender).Tag.ToString());
-                NumericInputBoxTexbox.Texts += ((CustomButton)sender).Tag.ToString();
+                //SendKeys.SendWait(((Button)sender).Tag.ToString());
+                NumericInputBoxTexbox.Texts += ((Button)sender).Tag.ToString();
                 NumericInputBoxTexbox.SelectionStart = NumericInputBoxTexbox.Texts.Length;
                 NumericInputBoxTexbox.SelectionLength = 0;
 
@@ -105,7 +113,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
 
                     NumericInputBoxKeyboardEventArgs args = new()
                     {
-                        KeyPressed = ((CustomButton)sender).Tag.ToString(),
+                        KeyPressed = ((Button)sender).Tag.ToString(),
                         NumericInputboxText = NumericInputBoxTexbox.Texts
                     };
 
@@ -125,6 +133,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
  
         private void NumericInputBoxTexbox_KeyPress(object sender, KeyPressEventArgs e)
         {
+
             if (e.KeyChar == (char)Keys.Enter)
             {
                 //Raises event for counter

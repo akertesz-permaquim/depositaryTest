@@ -41,28 +41,28 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ResetReport()
         {
 
-
             IdentificadorTextbox.Text = "";
 
-
-            FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
-            FromFechaCierreDateTimePicker.Checked = false;
             FromFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+            FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
+            FromFechaCierreDateTimePicker.Checked = false;
 
-            ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
             ToFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+            ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
 
-
-            FromFechaCierreDateTimePicker.Value = DateTime.Now.Date;
             FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
+            FromFechaCierreDateTimePicker.Value = DateTime.Now.Date;
             
             ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
             ToFechaCierreDateTimePicker.Value = DateTime.Now.Date;
             ToFechaCierreDateTimePicker.Checked = false;
+
+
+
 
             LoadBagHistoryItems();
         }

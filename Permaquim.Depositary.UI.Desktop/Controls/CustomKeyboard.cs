@@ -89,6 +89,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controls
         {
             _activeTextbox.Focus();
 
+            if (_activeTextbox.Texts.Length >= _activeTextbox.MaxLength)
+                return;
+
             if (((System.Windows.Forms.Button)sender).Tag.ToString().Equals("{ENTER}"))
             {
                 //Raises event for counter

@@ -24,7 +24,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             InitializeComponent();
             CustomInputBoxKeyboard.InputTexboxPlaceholder = MultilanguangeController.GetText(MultiLanguageEnum.PLACEHOLDER_TEXTBOX_ALFANUMERICO);
             CustomInputBoxKeyboard.SetButtonsColor(StyleController.GetColor(Enumerations.ColorNameEnum.FuentePrincipal));
-
+            CustomInputBoxKeyboard.SetMaxLenght(50);
             CustomInputBoxKeyboard.KeyboardEvent += CustomInputBoxKeyboard_KeyboardEvent;
         }
         protected override CreateParams CreateParams
