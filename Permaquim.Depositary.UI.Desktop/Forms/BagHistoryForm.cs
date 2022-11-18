@@ -46,23 +46,20 @@ namespace Permaquim.Depositary.UI.Desktop
             FromFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
             FromFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
-            FromFechaCierreDateTimePicker.Checked = false;
 
             ToFechaAperturaDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToFechaAperturaDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
             ToFechaAperturaDateTimePicker.Value = DateTime.Now.Date;
 
+            FromFechaCierreDateTimePicker.Checked = false;
             FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
             FromFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
             FromFechaCierreDateTimePicker.Value = DateTime.Now.Date;
             
+            ToFechaCierreDateTimePicker.Checked = false;
             ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
             ToFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
             ToFechaCierreDateTimePicker.Value = DateTime.Now.Date;
-            ToFechaCierreDateTimePicker.Checked = false;
-
-
-
 
             LoadBagHistoryItems();
         }
@@ -407,7 +404,7 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
-                FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
+                FromFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
                 FromFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
                 if (ToFechaCierreDateTimePicker.Checked)
                     ToFechaCierreDateTimePicker.MinDate = FromFechaCierreDateTimePicker.Value;
@@ -429,7 +426,7 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
-                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Short;
+                ToFechaCierreDateTimePicker.Format = DateTimePickerFormat.Custom;
                 ToFechaCierreDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
                 if(FromFechaCierreDateTimePicker.Checked)
                 {

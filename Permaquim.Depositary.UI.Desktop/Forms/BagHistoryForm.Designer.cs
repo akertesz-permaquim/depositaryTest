@@ -143,7 +143,7 @@
             // 
             // ToFechaCierreDateTimePicker
             // 
-            this.ToFechaCierreDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.ToFechaCierreDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.ToFechaCierreDateTimePicker.Location = new System.Drawing.Point(540, 44);
             this.ToFechaCierreDateTimePicker.Name = "ToFechaCierreDateTimePicker";
             this.ToFechaCierreDateTimePicker.ShowCheckBox = true;
@@ -164,7 +164,7 @@
             // 
             // FromFechaCierreDateTimePicker
             // 
-            this.FromFechaCierreDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FromFechaCierreDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.FromFechaCierreDateTimePicker.Location = new System.Drawing.Point(364, 44);
             this.FromFechaCierreDateTimePicker.Name = "FromFechaCierreDateTimePicker";
             this.FromFechaCierreDateTimePicker.ShowCheckBox = true;
