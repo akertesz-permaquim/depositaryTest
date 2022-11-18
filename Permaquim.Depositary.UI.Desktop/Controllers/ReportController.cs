@@ -50,6 +50,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             try
             {
+                _code = code;
+
                 if (copyIndex == 0)
                     _copyInstance = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESION_ORIGINAL);
                 else
@@ -114,7 +116,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     _reportHeight += (int)_fontHeight + _ticket.TamanioEntreLineas; // alto del texto de cabecera
                     _reportHeight += (int)_fontHeight + _ticket.TamanioEntreLineas; // alto del texto ORIGINAL / COPIA
                     _reportHeight += (int)_fontHeight + _ticket.TamanioEntreLineas; // alto del separador
-                    _reportHeight += (_details.Count * 6) + (_ticket.TamanioEntreLineas * 6); // Alto del encabezado (usuario, codigo, etc.)
+                    _reportHeight += (_details.Count * 9) + (_ticket.TamanioEntreLineas * 6); // Alto del encabezado (usuario, codigo, etc.)
                     _reportHeight += (int)_fontHeight + _ticket.TamanioEntreLineas; // alto del separador
                     _reportHeight += (int)_fontHeight + _ticket.TamanioEntreLineas; // alto de titulos de columnas
                     _reportHeight += (int)_fontHeight; // alto del separador
@@ -790,7 +792,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     // Usuario
                     e.Graphics.DrawString(
                     StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(ContainerToPrint.UsuarioCreacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
+                    StringHelper.FormatString(ContainerToPrint.UsuarioModificacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
                     , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                     yOffset += _interlineSpace;
                 }
@@ -1027,11 +1029,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
 
                 yOffset += _interlineSpace;
-                yOffset += _interlineSpace;
-                yOffset += _interlineSpace;
-                yOffset += _interlineSpace;
-
-
+      
             }
             catch (Exception ex)
             {

@@ -91,7 +91,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
-
+            InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            InformationLabel.BackColor = Color.Transparent;
         }
 
 
@@ -101,6 +102,9 @@ namespace Permaquim.Depositary.UI.Desktop
             BagContentTabControl.TabPages[ENVELOPES].Text = MultilanguangeController.GetText(MultiLanguageEnum.SOBRES);
             AcceptButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
+            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR) + ": " + 
+                DatabaseController.CurrentContainer.Identificador;
+
         }
         #region BackButton
   

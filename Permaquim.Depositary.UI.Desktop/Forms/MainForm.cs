@@ -435,6 +435,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     _permissionUnlockForm.ShowDialog();
                     _permissionUnlockForm = null;
                     DeviceController.BagRemovedForcefully = false;
+                    Login();
+
                 }
 
             }
