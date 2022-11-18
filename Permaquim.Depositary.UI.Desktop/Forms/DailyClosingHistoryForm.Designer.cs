@@ -37,12 +37,10 @@
             this.DailyClosingHeaderGridView = new System.Windows.Forms.DataGridView();
             this.FilterPanel = new System.Windows.Forms.Panel();
             this.UserLabel = new System.Windows.Forms.Label();
-            this.TurnLabel = new System.Windows.Forms.Label();
             this.ToDateTimeLabel = new System.Windows.Forms.Label();
             this.FromDateTimeLabel = new System.Windows.Forms.Label();
             this.ExecuteButton = new System.Windows.Forms.Button();
             this.UserComboBox = new System.Windows.Forms.ComboBox();
-            this.TurnComboBox = new System.Windows.Forms.ComboBox();
             this.ToDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FromDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.DetailPanel = new System.Windows.Forms.Panel();
@@ -116,12 +114,10 @@
             // FilterPanel
             // 
             this.FilterPanel.Controls.Add(this.UserLabel);
-            this.FilterPanel.Controls.Add(this.TurnLabel);
             this.FilterPanel.Controls.Add(this.ToDateTimeLabel);
             this.FilterPanel.Controls.Add(this.FromDateTimeLabel);
             this.FilterPanel.Controls.Add(this.ExecuteButton);
             this.FilterPanel.Controls.Add(this.UserComboBox);
-            this.FilterPanel.Controls.Add(this.TurnComboBox);
             this.FilterPanel.Controls.Add(this.ToDateTimePicker);
             this.FilterPanel.Controls.Add(this.FromDateTimePicker);
             this.FilterPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -135,22 +131,11 @@
             this.UserLabel.BackColor = System.Drawing.Color.SteelBlue;
             this.UserLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.UserLabel.ForeColor = System.Drawing.Color.White;
-            this.UserLabel.Location = new System.Drawing.Point(616, 13);
+            this.UserLabel.Location = new System.Drawing.Point(430, 13);
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(176, 27);
             this.UserLabel.TabIndex = 201;
             this.UserLabel.Text = "*";
-            // 
-            // TurnLabel
-            // 
-            this.TurnLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.TurnLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TurnLabel.ForeColor = System.Drawing.Color.White;
-            this.TurnLabel.Location = new System.Drawing.Point(432, 13);
-            this.TurnLabel.Name = "TurnLabel";
-            this.TurnLabel.Size = new System.Drawing.Size(176, 27);
-            this.TurnLabel.TabIndex = 200;
-            this.TurnLabel.Text = "*";
             // 
             // ToDateTimeLabel
             // 
@@ -194,19 +179,10 @@
             // 
             this.UserComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.UserComboBox.FormattingEnabled = true;
-            this.UserComboBox.Location = new System.Drawing.Point(616, 45);
+            this.UserComboBox.Location = new System.Drawing.Point(430, 45);
             this.UserComboBox.Name = "UserComboBox";
             this.UserComboBox.Size = new System.Drawing.Size(175, 23);
             this.UserComboBox.TabIndex = 196;
-            // 
-            // TurnComboBox
-            // 
-            this.TurnComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.TurnComboBox.FormattingEnabled = true;
-            this.TurnComboBox.Location = new System.Drawing.Point(432, 45);
-            this.TurnComboBox.Name = "TurnComboBox";
-            this.TurnComboBox.Size = new System.Drawing.Size(175, 23);
-            this.TurnComboBox.TabIndex = 195;
             // 
             // ToDateTimePicker
             // 
@@ -342,11 +318,9 @@
         private DataGridView DailyClosingHeaderGridView;
         private Panel FilterPanel;
         private Label UserLabel;
-        private Label TurnLabel;
         private Label ToDateTimeLabel;
         private Label FromDateTimeLabel;
         private ComboBox UserComboBox;
-        private ComboBox TurnComboBox;
         private DateTimePicker ToDateTimePicker;
         private DateTimePicker FromDateTimePicker;
         private System.Windows.Forms.Button ExecuteButton;

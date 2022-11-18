@@ -103,7 +103,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             FromDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_DESDE);
             ToDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.FECHA_HASTA);
-            TurnLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO);
+            //TurnLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO);
             UserLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.USUARIO);
             ExecuteButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.EJECUTAR);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
@@ -128,7 +128,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ToDateTimePicker.CustomFormat = MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA);
 
             UserComboBox.SelectedIndex = 0;
-            TurnComboBox.SelectedIndex = 0;
+            //TurnComboBox.SelectedIndex = 0;
 
             LoadDailyClosingHeader();
         }
@@ -148,21 +148,21 @@ namespace Permaquim.Depositary.UI.Desktop
             UserComboBox.DisplayMember = NOMBREAPELLIDO;
             UserComboBox.ValueMember = ID;
 
-            var turnList = DatabaseController.GetTurnList();
+            //var turnList = DatabaseController.GetTurnList();
 
-            List<TurnItemElement> turnItemList = new();
+            //List<TurnItemElement> turnItemList = new();
 
-            turnItemList.Add(new TurnItemElement() { Value = -1, Text = "Todos" });
+            //turnItemList.Add(new TurnItemElement() { Value = -1, Text = "Todos" });
 
-            foreach (var item in turnList)
-            {
-                turnItemList.Add(new TurnItemElement()
-                { Value = item.TurnoEsquemaDetalleId, Text = item.Nombre });
-            }
+            //foreach (var item in turnList)
+            //{
+            //    turnItemList.Add(new TurnItemElement()
+            //    { Value = item.TurnoEsquemaDetalleId, Text = item.Nombre });
+            //}
 
-            TurnComboBox.DisplayMember = TEXT;
-            TurnComboBox.ValueMember = VALUE;
-            TurnComboBox.DataSource = turnItemList;
+            //TurnComboBox.DisplayMember = TEXT;
+            //TurnComboBox.ValueMember = VALUE;
+            //TurnComboBox.DataSource = turnItemList;
         }
 
         private void OperationHistoryForm_Load(object sender, EventArgs e)
