@@ -548,6 +548,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     _font, Brushes.Black,
                 _detailStart_X, yOffset, new StringFormat());
 
+                // Separador
+                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
+                            Brushes.Black,
+                            _detailStart_X, yOffset, new StringFormat());
+
                 for (int i = 0; i < _ticket.LineasAlFinal; i++)
                 {
                     e.Graphics.DrawString(new String(' ', _ticket.AnchoDetalle), _boldFont,
@@ -556,10 +561,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     yOffset += _interlineSpace;
                 }
                 yOffset += _interlineSpace;
-                // Separador
-                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
-                            Brushes.Black,
-                            _detailStart_X, yOffset, new StringFormat());
+
             }
             catch (Exception ex)
             {
@@ -754,7 +756,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             try
             {
 
-
                 // dibuja el gráfico
                 e.Graphics.DrawImage(_image, _rectangle);
                 yOffset = _rectangle.Height + _interlineSpace;
@@ -778,16 +779,24 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 yOffset += _interlineSpace;
 
+                //Obtenemos la transaccion con la que se hizo el retiro de bolsa.
+                var bagExtractionTransaction = ContainerToPrint.ListOf_Transaccion_ContenedorId.FirstOrDefault(x => x._TipoId == (Int64)OperationTypeEnum.ValueExtraction);
+                
+                string turnName;
+
+                if(bagExtractionTransaction != null)
+                    turnName = bagExtractionTransaction.TurnoId.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre;
+                else
+                    turnName = MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO).Substring(0, 18);
+
                 // Referencia
                 e.Graphics.DrawString(
                  StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                 StringHelper.FormatString(DatabaseController.CurrentTurn != null ?
-                 DatabaseController.CurrentTurn.TurnoDepositarioId.EsquemaDetalleTurnoId.Nombre : 
-                 MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO).Substring(0,18), 20, StringHelper.AlignEnum.AlignLeft)
+                 StringHelper.FormatString(turnName, 20, StringHelper.AlignEnum.AlignLeft)
                  , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
-                if (DatabaseController.CurrentUser != null)
+                if (DatabaseController.CurrentUser != null )
                 {
                     // Usuario
                     e.Graphics.DrawString(
