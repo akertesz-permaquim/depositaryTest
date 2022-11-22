@@ -429,7 +429,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void VerifyEscrowEmpty()
         {
-            TimeOutController.Reset();
+
 
             // Si el escrow está abierto, y el sensor detecta presencia, se asume que es un sobre y se 
             // completa el depósito
@@ -460,8 +460,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     //Solo se habilita el botón de volver si no hay dinero en el escrow
                     ConfirmAndExitDepositButton.Visible =
                         _totalQuantity > 0 && !_maintainButtonUnvisible;
-                }
                 CancelDepositButton.Visible = true;
+                }
 
                 ButtonsPanel.Visible = _totalQuantity > 0;
 
@@ -480,13 +480,14 @@ namespace Permaquim.Depositary.UI.Desktop
                 if (!_maintainButtonUnvisible)
                     CancelDepositButton.Visible = true;
             }
-
-            // en el D70, se cierra solo el escrow al no detectar sobre.
-            if (_device.StateResultProperty.DoorStateInformation.Escrow == true 
-                && _operationStatus.DepositConfirmed)
+            if (_device != null)
             {
-                ButtonsPanel.Visible = true;
-                CancelDepositButton.Visible = true;
+                // en el D70, se cierra solo el escrow al no detectar sobre.
+                if (_device.StateResultProperty.DoorStateInformation.Escrow == true
+                    && _operationStatus.DepositConfirmed)
+                {
+                    ButtonsPanel.Visible = true;
+                }
             }
 
 
