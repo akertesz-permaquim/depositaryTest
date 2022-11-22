@@ -796,24 +796,33 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                  , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
-                if (DatabaseController.CurrentUser != null )
-                {
-                    // Usuario
-                    e.Graphics.DrawString(
-                    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(ContainerToPrint.UsuarioModificacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
-                    , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
-                    yOffset += _interlineSpace;
-                }
-                else
-                {
-                    // Usuario no registrado
-                    e.Graphics.DrawString(
-                      StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
-                      StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.SIN_USUARIO), 20, StringHelper.AlignEnum.AlignLeft)
-                      , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
-                    yOffset += _interlineSpace;
-                }
+                string modifyUserName = ContainerToPrint.UsuarioModificacion == null ? MultilanguangeController.GetText(MultiLanguageEnum.SIN_USUARIO) : ContainerToPrint.UsuarioModificacion.NombreApellido;
+
+                // Usuario
+                e.Graphics.DrawString(
+                StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
+                StringHelper.FormatString(modifyUserName, 20, StringHelper.AlignEnum.AlignLeft)
+                , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
+                yOffset += _interlineSpace;
+
+                //if (DatabaseController.CurrentUser != null )
+                //{
+                //    // Usuario
+                //    e.Graphics.DrawString(
+                //    StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
+                //    StringHelper.FormatString(ContainerToPrint.UsuarioModificacion.NombreApellido, 20, StringHelper.AlignEnum.AlignLeft)
+                //    , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
+                //    yOffset += _interlineSpace;
+                //}
+                //else
+                //{
+                //    // Usuario no registrado
+                //    e.Graphics.DrawString(
+                //      StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.USUARIO) + ": ", 16, StringHelper.AlignEnum.AlignLeft) +
+                //      StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.SIN_USUARIO), 20, StringHelper.AlignEnum.AlignLeft)
+                //      , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
+                //    yOffset += _interlineSpace;
+                //}
 
                 // Sucursal
                 e.Graphics.DrawString(

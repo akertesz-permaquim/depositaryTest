@@ -277,7 +277,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         TipoId = 0, // Default de tipo
                         DepositarioId = CurrentDepositary.Id,
                         FechaCreacion = DateTime.Now,
-                        Nombre = "Contenedor *",
+                        Nombre = "Contenedor current",
                         UsuarioCreacion = CurrentUser == null ? 0 : CurrentUser.Id
 
                     }); ;
@@ -309,7 +309,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 Depositario.sqlEnum.OperandEnum.IsNotNull, 0);
                 entity.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Contenedor.ColumnEnum.Id,
                     Depositario.sqlEnum.DirEnum.DESC);
-                entity.TopQuantity = 0;
+                entity.TopQuantity = 1;
 
                 entity.Items();
 
@@ -327,7 +327,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         TipoId = 0, // Default de tipo
                         DepositarioId = CurrentDepositary.Id,
                         FechaCreacion = DateTime.Now,
-                        Nombre = "Contenedor *",
+                        Nombre = "Contenedor last",
                         UsuarioCreacion = CurrentUser == null ? 0 : CurrentUser.Id
 
                     }); ;
@@ -566,8 +566,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     var currentcontainer = entities.Items(CurrentContainer.Id).FirstOrDefault();
                     currentcontainer.FechaCierre = DateTime.Now;
                     currentcontainer.FechaModificacion = DateTime.Now;
-                    currentcontainer.UsuarioModificacion = CurrentUser.Id;
-
+                    currentcontainer.UsuarioModificacion = CurrentUser == null ? null : CurrentUser.Id;
 
                     // Primero actualiza la fecha de cierre de la bolsa actual
                     entities.Update(currentcontainer);
