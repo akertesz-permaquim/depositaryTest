@@ -566,7 +566,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     var currentcontainer = entities.Items(CurrentContainer.Id).FirstOrDefault();
                     currentcontainer.FechaCierre = DateTime.Now;
                     currentcontainer.FechaModificacion = DateTime.Now;
+<<<<<<< HEAD
                     currentcontainer.UsuarioModificacion = CurrentUser == null ? null : CurrentUser.Id;
+=======
+                    currentcontainer.UsuarioModificacion = CurrentUser == null ? 0 : CurrentUser.Id;
+
+>>>>>>> 66bf9fd930c3d4ffac7fc2a6c9a33ed68b4a19d0
 
                     // Primero actualiza la fecha de cierre de la bolsa actual
                     entities.Update(currentcontainer);
@@ -616,6 +621,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     DepositarioId = CurrentDepositary.Id
 
                 });
+
 
                 // Si el usuario es nulo, es que se trata de un retiro sin usuario logueado,
                 // por lo tanto graba el evento en la tabla correspondiente
