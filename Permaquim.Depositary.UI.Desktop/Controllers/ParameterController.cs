@@ -191,6 +191,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        public static int EventEvaluationSeconds
+        {
+            get
+            {
+                int parseResult = 10;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("EVALUACION_EVENTOS_SEGUNDOS"), out parseResult);
+                return parseResult;
+
+            }
+
+        }
 
         public static bool ValidatesBagInplace
         {

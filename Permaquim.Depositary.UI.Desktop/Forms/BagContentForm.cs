@@ -102,8 +102,11 @@ namespace Permaquim.Depositary.UI.Desktop
             BagContentTabControl.TabPages[ENVELOPES].Text = MultilanguangeController.GetText(MultiLanguageEnum.SOBRES);
             AcceptButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
-            InformationLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR) + ": " + 
-                DatabaseController.CurrentContainer.Identificador;
+            InformationLabel.Text = 
+                MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR) + ": " + 
+                (DatabaseController.CurrentContainer.Identificador.Trim().Equals(String.Empty) ?
+                DatabaseController.CurrentContainer.Nombre : 
+                DatabaseController.CurrentContainer.Identificador.Trim());
 
         }
         #region BackButton

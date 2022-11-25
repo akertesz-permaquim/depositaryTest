@@ -7,6 +7,7 @@ using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Buffers;
+using System.Diagnostics;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -173,7 +174,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ConfirmAndContinueDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CONTINUAR);
             CancelDepositButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.BOTON_CANCELAR_OPERACION);
             BackButton.Text = MultilanguangeController.GetText(MultiLanguageEnum.VOLVER);
-            RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+            GrandTotalLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
 
             DenominationsGridView.Columns["Image"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.IMAGEN);
             DenominationsGridView.Columns["Denomination"].HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.DENOMINACION);
@@ -190,8 +191,8 @@ namespace Permaquim.Depositary.UI.Desktop
             SubtotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
             SubtotalLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
-            RemainingTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
-            RemainingTimeLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+            GrandTotalLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.SegundaCabeceraGrilla);
+            GrandTotalLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
             ConfirmAndExitDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ConfirmAndExitDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
@@ -246,7 +247,6 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
-                EvaluateTimeout();
                 if (_device != null && _device.CounterConnected)
                 {
                     if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.Neutral_SettingMode)
@@ -263,18 +263,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
             SetSubTotalsValues();
-        }
-        private void EvaluateTimeout()
-        {
-
-            RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
-                TimeOutController.GetRemainingtime().ToString();
-            if (TimeOutController.GetRemainingtime() > _greenStatusIndicator)
-                RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoInformacion); ;
-            if (TimeOutController.GetRemainingtime() < _yellowStatusIndicator)
-                RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoAlerta); ;
-            if (TimeOutController.GetRemainingtime() < _redStatusIndicator)
-                RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoError);
         }
 
         public bool EsMultiplo(int numero, int multiplo)
@@ -625,6 +613,14 @@ namespace Permaquim.Depositary.UI.Desktop
             SubtotalLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.SUB_TOTAL) +
                 DatabaseController.CurrentCurrency.Simbolo + " "
                 + _operationStatus.CurrentTransactionAmount.ToString();
+            if (_operationStatus.CurrentTransactionId != 0)
+                Debug.Print("");
+            if (_operationStatus.CurrentTransactionAmount != _currentCountingAmount)
+            {
+                GrandTotalLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TOTAL_GENERAL) +
+                    DatabaseController.CurrentCurrency.Simbolo + " "
+                    + (_operationStatus.CurrentTransactionAmount + _currentCountingAmount).ToString();
+            }
 
         }
         private void SetSubTotalsValues()
@@ -636,7 +632,6 @@ namespace Permaquim.Depositary.UI.Desktop
                     (_currentCountingQuantity + _operationStatus.CurrentTransactionQuantity).ToString();
                 DenominationsGridView.Rows[DenominationsGridView.Rows.Count - 1].Cells["Amount"].Value =
                     DatabaseController.CurrentCurrency.Simbolo + " " +
-                        // (_currentCountingAmount + _operationStatus.CurrentTransactionAmount).ToString();
                         _currentCountingAmount.ToString();
             }
         }
@@ -786,7 +781,7 @@ namespace Permaquim.Depositary.UI.Desktop
             ConfirmAndExitDepositButton.Visible = value;
             CurrencyLabel.Visible = value;
             SubtotalLabel.Visible = value;
-            RemainingTimeLabel.Visible = value;
+            GrandTotalLabel.Visible = value;
 
         }
 
@@ -795,7 +790,7 @@ namespace Permaquim.Depositary.UI.Desktop
             DenominationsGridView.Visible = value;
             CurrencyLabel.Visible = value;
             SubtotalLabel.Visible = value;
-            RemainingTimeLabel.Visible = value;
+            GrandTotalLabel.Visible = value;
 
         }
         #region Database Access
@@ -846,6 +841,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             _operationStatus.CurrentTransactionAmount += _currentCountingAmount;
+            _currentCountingAmount = 0;
 
             Depositario.Business.Tables.Operacion.Transaccion transactions = new();
 
@@ -1056,6 +1052,8 @@ namespace Permaquim.Depositary.UI.Desktop
         public long CurrentTransactionId { get; set; }
 
         public Double CurrentTransactionAmount { get; set; }
+
+        public Double CurrentTransactionPartialAmount { get; set; }
 
         public int CurrentTransactionQuantity { get; set; }
 

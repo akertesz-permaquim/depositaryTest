@@ -141,7 +141,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             PrinterIssue = false;
 
             DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
-                     (int)EventTypeEnum.Normal, string.Empty);
+                     EventTypeEnum.Normal, string.Empty);
 
         }
 

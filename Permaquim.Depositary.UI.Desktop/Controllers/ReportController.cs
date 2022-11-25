@@ -39,6 +39,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         private static Depositario.Entities.Tables.Impresion.Ticket _ticket;
 
+        private static Depositario.Business.Tables.Operacion.Contenedor _container = new();
+
         private static string _fechaHora;
 
         private static string _code = String.Empty;
@@ -365,9 +367,17 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 yOffset += _interlineSpace;
 
+ 
+
                 //Pie
                 e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + " " + _ticket.TextoPie,
                     _font, Brushes.Black, _detailStart_X, yOffset, new StringFormat());
+
+                yOffset += _interlineSpace;
+
+                // Separador
+                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
+                    Brushes.Black, _detailStart_X, yOffset, new StringFormat());
 
                 for (int i = 0; i < _ticket.LineasAlFinal; i++)
                 {
@@ -377,9 +387,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
                 yOffset += _interlineSpace;
 
-                // Separador
-                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
-                    Brushes.Black, _detailStart_X, yOffset, new StringFormat());
             }
             catch (Exception ex)
             {
@@ -548,6 +555,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     _font, Brushes.Black,
                 _detailStart_X, yOffset, new StringFormat());
 
+                yOffset += _interlineSpace;
+
                 // Separador
                 e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
                             Brushes.Black,
@@ -711,18 +720,30 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 yOffset += _interlineSpace;
 
-                yOffset += _interlineSpace;
-
                 // Instancia (ORIGINAL / COPIA)
                 e.Graphics.DrawString(_copyInstance, _boldFont,
                 Brushes.Black,
                 _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
+
+
                 //Pie
                 e.Graphics.DrawString(DateTime.Now.ToString(_fechaHora) + SPACE + _ticket.TextoPie,
                     _font, Brushes.Black,
                 _detailStart_X, yOffset, new StringFormat());
+               
+                yOffset += _interlineSpace;
+
+
+
+                // Separador
+                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
+                            Brushes.Black,
+                            _detailStart_X, yOffset, new StringFormat());
+
+                yOffset += _interlineSpace;
+
 
                 for (int i = 0; i < _ticket.LineasAlFinal; i++)
                 {
@@ -732,11 +753,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     yOffset += _interlineSpace;
                 }
 
-                yOffset += _interlineSpace;
-                // Separador
-                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
-                            Brushes.Black,
-                            _detailStart_X, yOffset, new StringFormat());
+
             }
             catch (Exception ex)
             {
@@ -796,7 +813,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                  , _font, Brushes.Black, _headerTextStart_X, yOffset, new StringFormat());
                 yOffset += _interlineSpace;
 
-                string modifyUserName = ContainerToPrint.UsuarioModificacion == null ? MultilanguangeController.GetText(MultiLanguageEnum.SIN_USUARIO) : ContainerToPrint.UsuarioModificacion.NombreApellido;
+
+                _container.Where.Clear();
+                 var user = _container.Items(ContainerToPrint.Id).FirstOrDefault().UsuarioModificacion;
+                
+                string modifyUserName = user.HasValue ? ContainerToPrint.UsuarioModificacion.NombreApellido : MultilanguangeController.GetText(MultiLanguageEnum.SIN_USUARIO);
 
                 // Usuario
                 e.Graphics.DrawString(
@@ -1298,6 +1319,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     _font, Brushes.Black,
                 _detailStart_X, yOffset, new StringFormat());
 
+                yOffset += _interlineSpace;
+                // Separador
+                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
+                            Brushes.Black,
+                            _detailStart_X, yOffset, new StringFormat());
+
                 for (int i = 0; i < _ticket.LineasAlFinal; i++)
                 {
                     e.Graphics.DrawString(new String(' ', _ticket.AnchoDetalle), _boldFont,
@@ -1305,11 +1332,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         _detailStart_X, yOffset, new StringFormat());
                     yOffset += _interlineSpace;
                 }
-                yOffset += _interlineSpace;
-                // Separador
-                e.Graphics.DrawString(new String(STAR, MAXCHARACTERLENGHT), _boldFont,
-                            Brushes.Black,
-                            _detailStart_X, yOffset, new StringFormat());
+
             }
             catch (Exception ex)
             {

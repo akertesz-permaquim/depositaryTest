@@ -7245,6 +7245,7 @@ using System.Text;
 					NumeroSerie,
 					CodigoExterno,
 					ModeloId,
+					TipoContenedorId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -7294,15 +7295,16 @@ using System.Text;
          /// <param name='NumeroSerie'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId'></param>
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Depositario</returns>
-			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Dispositivo.Depositario)base.Add(new Entities.Relations.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Dispositivo.Depositario)base.Add(new Entities.Relations.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,TipoContenedorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Dispositivo.Depositario> Items()
             {
@@ -7342,13 +7344,14 @@ using System.Text;
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
             /// <param name="ModeloId"></param>
+            /// <param name="TipoContenedorId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? ModeloId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? ModeloId,Int64? TipoContenedorId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -7432,6 +7435,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ModeloId);
+                    }
+                   
+                }
+                if (TipoContenedorId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
                     }
                    
                 }
@@ -7523,13 +7538,14 @@ using System.Text;
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
             /// <param name="ModeloId"></param>
+            /// <param name="TipoContenedorId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Int64 TipoContenedorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Dispositivo.Depositario item = new Entities.Tables.Dispositivo.Depositario();
                  item.Id = Id;
@@ -7539,6 +7555,7 @@ using System.Text;
                  item.NumeroSerie = NumeroSerie;
                  item.CodigoExterno = CodigoExterno;
                  item.ModeloId = ModeloId;
+                 item.TipoContenedorId = TipoContenedorId;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;

@@ -1442,6 +1442,21 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                             }
                         }
 
+                        // dispara como evento de error el estado de CassetteFull
+                        if (statesResult.DoorStateInformation.CassetteFull)
+                        {
+                            if (DeviceErrorReceived != null)
+                            {
+
+                                DeviceErrorEventArgs args = new()
+                                {
+                                    ErrorCode = "CassetteFull",
+                                    ErrorDescription = "CassetteFull"
+                                };
+                                DeviceErrorReceived(this, args);
+                            }
+                        }
+
                     }
                 }
                 return statesResult;
@@ -1715,7 +1730,12 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             Sleep();
             RemoteCancel();
         }
-
+        public void ResetCassetteFull()
+        {
+            CollectMode();
+            Sleep();
+            RemoteCancel();
+        }
 
         #endregion
     }

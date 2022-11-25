@@ -18,13 +18,13 @@ namespace Permaquim.Depositary.UI.Desktop
         private long _operationId;
         private long _operationTypeId;
 
-        public OperationsHistoryForm()
+        public OperationsHistoryForm(bool singleUser = false)
         {
             InitializeComponent();
             CenterPanel();
             LoadStyles();
             LoadMultilanguageItems();
-            LoadFilterControls();
+            LoadFilterControls(singleUser);
             InitializeOperationsHeaderGridView();
 
             TimeOutController.Reset();
@@ -133,16 +133,23 @@ namespace Permaquim.Depositary.UI.Desktop
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
-        public void LoadFilterControls()
+        public void LoadFilterControls(bool singleUser)
         {
             var userList = DatabaseController.GetUserList();
 
-            userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
+            if (singleUser)
             {
-                NombreApellido = TODOS,
-                Id = -1
-            });
+                userList.Where(x => x.Id == DatabaseController.CurrentUser.Id);
+            }
 
+            if (!singleUser)
+            {
+                userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
+                {
+                    NombreApellido = TODOS,
+                    Id = -1
+                });
+            }
             UserComboBox.DataSource = userList;
 
             UserComboBox.DisplayMember = NOMBREAPELLIDO;

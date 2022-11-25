@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.ButtonsPanel = new System.Windows.Forms.Panel();
             this.ConfirmAndContinueDepositButton = new System.Windows.Forms.Button();
@@ -42,10 +42,11 @@
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventCheckbox = new System.Windows.Forms.CheckBox();
-            this.RemainingTimeLabel = new System.Windows.Forms.Label();
+            this.GrandTotalLabel = new System.Windows.Forms.Label();
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
+            this.checkBoxEscrow = new System.Windows.Forms.CheckBox();
             this.CollectEndCheckBox = new System.Windows.Forms.CheckBox();
             this.StoreEndCheckBox = new System.Windows.Forms.CheckBox();
             this.CountEndCheckBox = new System.Windows.Forms.CheckBox();
@@ -63,7 +64,6 @@
             this.DeviceModeLabel = new System.Windows.Forms.Label();
             this.GeneralStatusLabel = new System.Windows.Forms.Label();
             this.MonitorGroupcheckbox = new System.Windows.Forms.CheckBox();
-            this.checkBoxEscrow = new System.Windows.Forms.CheckBox();
             this.MainPanel.SuspendLayout();
             this.ButtonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
@@ -76,7 +76,7 @@
             this.MainPanel.Controls.Add(this.ButtonsPanel);
             this.MainPanel.Controls.Add(this.DenominationsGridView);
             this.MainPanel.Controls.Add(this.EventCheckbox);
-            this.MainPanel.Controls.Add(this.RemainingTimeLabel);
+            this.MainPanel.Controls.Add(this.GrandTotalLabel);
             this.MainPanel.Controls.Add(this.SubtotalLabel);
             this.MainPanel.Controls.Add(this.CurrencyLabel);
             this.MainPanel.Location = new System.Drawing.Point(1, 40);
@@ -181,28 +181,28 @@
             this.DenominationsGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DenominationsGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.DenominationsGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DenominationsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DenominationsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DenominationsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Image,
             this.Denomination,
             this.Quantity,
             this.Amount});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DenominationsGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.DenominationsGridView.Enabled = false;
             this.DenominationsGridView.EnableHeadersVisualStyles = false;
             this.DenominationsGridView.GridColor = System.Drawing.Color.White;
@@ -266,17 +266,17 @@
             this.EventCheckbox.UseVisualStyleBackColor = false;
             this.EventCheckbox.Click += new System.EventHandler(this.EventCheckbox_CheckedChanged);
             // 
-            // RemainingTimeLabel
+            // GrandTotalLabel
             // 
-            this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(451, 12);
-            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(250, 27);
-            this.RemainingTimeLabel.TabIndex = 141;
-            this.RemainingTimeLabel.Text = "*";
-            this.RemainingTimeLabel.Click += new System.EventHandler(this.RemainingTimeLabel_Click);
+            this.GrandTotalLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.GrandTotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.GrandTotalLabel.ForeColor = System.Drawing.Color.White;
+            this.GrandTotalLabel.Location = new System.Drawing.Point(451, 12);
+            this.GrandTotalLabel.Name = "GrandTotalLabel";
+            this.GrandTotalLabel.Size = new System.Drawing.Size(250, 27);
+            this.GrandTotalLabel.TabIndex = 141;
+            this.GrandTotalLabel.Text = "*";
+            this.GrandTotalLabel.Click += new System.EventHandler(this.RemainingTimeLabel_Click);
             // 
             // SubtotalLabel
             // 
@@ -329,6 +329,19 @@
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
             this.MonitorGroupBox.Visible = false;
+            // 
+            // checkBoxEscrow
+            // 
+            this.checkBoxEscrow.AutoSize = true;
+            this.checkBoxEscrow.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxEscrow.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxEscrow.ForeColor = System.Drawing.Color.SteelBlue;
+            this.checkBoxEscrow.Location = new System.Drawing.Point(8, 432);
+            this.checkBoxEscrow.Name = "checkBoxEscrow";
+            this.checkBoxEscrow.Size = new System.Drawing.Size(66, 17);
+            this.checkBoxEscrow.TabIndex = 41;
+            this.checkBoxEscrow.Text = "Escrow";
+            this.checkBoxEscrow.UseVisualStyleBackColor = false;
             // 
             // CollectEndCheckBox
             // 
@@ -551,19 +564,6 @@
             this.MonitorGroupcheckbox.Visible = false;
             this.MonitorGroupcheckbox.CheckStateChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
             // 
-            // checkBoxEscrow
-            // 
-            this.checkBoxEscrow.AutoSize = true;
-            this.checkBoxEscrow.BackColor = System.Drawing.Color.Transparent;
-            this.checkBoxEscrow.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxEscrow.ForeColor = System.Drawing.Color.SteelBlue;
-            this.checkBoxEscrow.Location = new System.Drawing.Point(8, 432);
-            this.checkBoxEscrow.Name = "checkBoxEscrow";
-            this.checkBoxEscrow.Size = new System.Drawing.Size(66, 17);
-            this.checkBoxEscrow.TabIndex = 41;
-            this.checkBoxEscrow.Text = "Escrow";
-            this.checkBoxEscrow.UseVisualStyleBackColor = false;
-            // 
             // BillDepositForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -599,7 +599,7 @@
         private Panel MainPanel;
         private DataGridView DenominationsGridView;
         private CheckBox EventCheckbox;
-        private Label RemainingTimeLabel;
+        private Label GrandTotalLabel;
         private Label SubtotalLabel;
         private Label CurrencyLabel;
         private GroupBox MonitorGroupBox;

@@ -77,13 +77,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoTransacciones))
                 LoadOperationsHistoryButton();
+
+            if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoTransaccionesUsuario))
+                LoadOperationsHistoryButton();
+
             if (SecurityController.IsFunctionEnabled(FunctionEnum.ContenidoDeBolsa))
                 LoadBagContentButton();
+
             if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeBolsas))
                 LoadBagHistoryButton();
 
             if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeTurnos))
                 LoadTurnsHistoryButton();
+
             if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeCierreDiario))
                 LoadDailyClosingHistoryButton();
 
@@ -139,6 +145,24 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
             FormsController.OpenChildForm(this, new OperationsHistoryForm(),
+              (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
+        }
+        #endregion
+        #region Operations single user
+
+        private void LoadOperationsSingleUserHistoryButton()
+        {
+            System.Windows.Forms.Button OperationsSingleUserButton = ControlBuilder.BuildStandardButton(
+                "OperationsSingleUserButton", MultilanguangeController.GetText(MultiLanguageEnum.HISTORICO_OPERACIONES), MainPanel.Width);
+
+            this.MainPanel.Controls.Add(OperationsSingleUserButton);
+            OperationsSingleUserButton.Click += new System.EventHandler(OperationsSingleUserButton_Click);
+        }
+
+        private void OperationsSingleUserButton_Click(object sender, EventArgs e)
+        {
+            TimeOutController.Reset();
+            FormsController.OpenChildForm(this, new OperationsHistoryForm(true),
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
         #endregion
