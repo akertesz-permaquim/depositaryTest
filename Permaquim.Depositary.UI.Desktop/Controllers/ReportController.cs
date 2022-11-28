@@ -1,4 +1,5 @@
-﻿using Permaquim.Depositary.UI.Desktop.Helpers;
+﻿using Permaquim.Depositary.UI.Desktop.Entities;
+using Permaquim.Depositary.UI.Desktop.Helpers;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Reflection.Metadata.Ecma335;
@@ -345,10 +346,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 // Total
 
-                var totalAmount = StringHelper.FormatString("Total " +
-                    ((Depositario.Entities.Relations.Operacion.Transaccion)_header).MonedaId.Codigo + ":"
-                    , 12, StringHelper.AlignEnum.AlignLeft) +
-                    StringHelper.FormatString(amount.ToString(), 21, StringHelper.AlignEnum.AlignRight);
+                var totalAmount = StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TOTAL) + ":"
+                    , 9, StringHelper.AlignEnum.AlignLeft) +
+                    StringHelper.FormatString(itemsQuantity.ToString(), 7, StringHelper.AlignEnum.AlignRight) +
+
+                    StringHelper.FormatString(((Depositario.Entities.Relations.Operacion.Transaccion)_header).MonedaId.Codigo + " "
+                        + amount.ToString(), 17, StringHelper.AlignEnum.AlignRight);
 
                 e.Graphics.DrawString(totalAmount, _boldFont,
                     Brushes.Black, _detailStart_X, yOffset, new StringFormat());
@@ -767,6 +770,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
 
             decimal amount = 0;
+            int itemsQuantity = 0;
             int yOffset;
             
 
@@ -916,6 +920,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                     foreach (var currency in currencies)
                     {
+                        itemsQuantity = 0;
                         yOffset += _interlineSpace;
 
                         if (!currentCurrency.Equals(currency))
@@ -956,7 +961,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                             {
                                 var partialAmount = item.Cantidad * Convert.ToInt64(item.Denominacion);
                                 amount += item.Cantidad * Convert.ToInt64(item.Denominacion);
-
+                                itemsQuantity += item.Cantidad;
                                 var data =
                                 StringHelper.FormatString(item.Moneda, 4, StringHelper.AlignEnum.AlignLeft) +
                                 StringHelper.FormatString(item.Denominacion, 5, StringHelper.AlignEnum.AlignRight) +
@@ -978,8 +983,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         yOffset += _interlineSpace;
 
                         // Total
-                        var totalAmount = StringHelper.FormatString("Total " + currency + ": " , 13, StringHelper.AlignEnum.AlignLeft) +
-                            StringHelper.FormatString(amount.ToString(), 20, StringHelper.AlignEnum.AlignRight);
+                        //var totalAmount = StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TOTAL) + currency + ": " , 13, StringHelper.AlignEnum.AlignLeft) +
+                        //    StringHelper.FormatString(amount.ToString(), 20, StringHelper.AlignEnum.AlignRight);
+
+                        var totalAmount = StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TOTAL) + ":"
+                        , 9, StringHelper.AlignEnum.AlignLeft) +
+                        StringHelper.FormatString(itemsQuantity.ToString(), 7, StringHelper.AlignEnum.AlignRight) +
+
+                        StringHelper.FormatString(currency + " "
+                            + amount.ToString(), 17, StringHelper.AlignEnum.AlignRight);
 
                         e.Graphics.DrawString(totalAmount, _boldFont,
                             Brushes.Black, _detailStart_X, yOffset, new StringFormat());
@@ -1084,6 +1096,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             {
 
                 decimal amount = 0;
+                int itemsQuantity = 0;
                 int yOffset;
                 
 
@@ -1171,6 +1184,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                     foreach (var currency in currencies)
                     {
+                        itemsQuantity = 0;
                         yOffset += _interlineSpace;
 
                         if (!currentCurrency.Equals(currency))
@@ -1206,6 +1220,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                             {
                                 var partialAmount = item.Cantidad * item.UnidadesDenominacion;
                                 amount += item.Cantidad * item.UnidadesDenominacion;
+                                itemsQuantity += item.Cantidad;
 
                                 var data =
                                 StringHelper.FormatString(item.Moneda, 4, StringHelper.AlignEnum.AlignLeft) +
@@ -1227,8 +1242,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         yOffset += _interlineSpace;
 
                         // Total
-                         var totalAmount = StringHelper.FormatString("Total " + currency + ": ", 13, StringHelper.AlignEnum.AlignLeft) +
-                            StringHelper.FormatString(amount.ToString(), 20, StringHelper.AlignEnum.AlignRight);
+                        //var totalAmount = StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TOTAL) + currency + ": ", 13, StringHelper.AlignEnum.AlignLeft) +
+                        //   StringHelper.FormatString(amount.ToString(), 20, StringHelper.AlignEnum.AlignRight);
+
+                        var totalAmount = StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TOTAL) + ":"
+                        , 9, StringHelper.AlignEnum.AlignLeft) +
+                        StringHelper.FormatString(itemsQuantity.ToString(), 7, StringHelper.AlignEnum.AlignRight) +
+
+                        StringHelper.FormatString(currency + " "
+                            + amount.ToString(), 17, StringHelper.AlignEnum.AlignRight);
 
                         e.Graphics.DrawString(totalAmount, _boldFont,
                             Brushes.Black, _detailStart_X, yOffset, new StringFormat());
@@ -1347,9 +1369,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             {
 
                 decimal amount = 0;
+                int itemsQuantity = 0;
                 int yOffset;
                 
-
 
                 // dibuja el gráfico
                 e.Graphics.DrawImage(_image, _rectangle);
@@ -1472,6 +1494,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                     foreach (var currency in currencies)
                     {
+                        itemsQuantity = 0;
                         yOffset += _interlineSpace;
 
                         if (!currentCurrency.Equals(currency))
@@ -1508,6 +1531,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                             {
                                 var partialAmount = item.Cantidad * item.UnidadesDenominacion;
                                 amount += item.Cantidad * item.UnidadesDenominacion;
+                                itemsQuantity += item.Cantidad;
 
                                 var data =
                                 StringHelper.FormatString(item.Moneda, 4, StringHelper.AlignEnum.AlignLeft) +
@@ -1529,8 +1553,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         yOffset += _interlineSpace;
 
                         // Total
-                        var totalAmount = StringHelper.FormatString("Total " + currency + ": ", 13, StringHelper.AlignEnum.AlignLeft) +
-                            StringHelper.FormatString(amount.ToString(), 20, StringHelper.AlignEnum.AlignRight);
+                        //var totalAmount = StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TOTAL) + currency + ": ", 13, StringHelper.AlignEnum.AlignLeft) +
+                        //    StringHelper.FormatString(amount.ToString(), 20, StringHelper.AlignEnum.AlignRight);
+
+                        var totalAmount = StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.TOTAL) + ":"
+                        , 9, StringHelper.AlignEnum.AlignLeft) +
+                        StringHelper.FormatString(itemsQuantity.ToString(), 7, StringHelper.AlignEnum.AlignRight) +
+
+                        StringHelper.FormatString(currency + " "
+                            + amount.ToString(), 17, StringHelper.AlignEnum.AlignRight);
 
                         e.Graphics.DrawString(totalAmount, _boldFont,
                             Brushes.Black, _detailStart_X, yOffset, new StringFormat());
