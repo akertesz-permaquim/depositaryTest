@@ -11,6 +11,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private const string COMANDO_SOPORTE = "Comando ejecutado por soporte";
         private const string COMANDO_EJECUTADO = "Se ejecutó el comando : ";
+        private const string INGRESO_SOPORTE = "Ingreso a pantalla de soporte";
 
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
@@ -279,7 +280,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void MainPanel_VisibleChanged(object sender, EventArgs e)
         {
-
+            if(this.Visible)
+                AuditController.Log(LogTypeEnum.Navigation, INGRESO_SOPORTE, INGRESO_SOPORTE);
         }
 
         private void SupportForm_VisibleChanged(object sender, EventArgs e)

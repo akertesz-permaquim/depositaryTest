@@ -103,6 +103,14 @@ namespace Permaquim.Depositary.UI.Desktop
             ExecuteBagHistorySearch.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             ExecuteBagHistorySearch.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
 
+
+            FromFechaAperturaDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            ToFechaAperturaDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            FromFechaCierreDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            ToFechaCierreDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            IdentificadorLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+
+
             StyleController.SetControlStyle(MainGridView);
             StyleController.SetControlStyle(BillDepositGridView);
             StyleController.SetControlStyle(EnvelopeDepositGridView);

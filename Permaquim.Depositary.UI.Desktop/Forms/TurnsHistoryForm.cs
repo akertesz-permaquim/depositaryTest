@@ -95,6 +95,13 @@ namespace Permaquim.Depositary.UI.Desktop
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             PrintButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
 
+
+            FromDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            ToDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            UserLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            TurnLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            UserLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+
             StyleController.SetControlStyle(TurnsHeaderGridView);
             StyleController.SetControlStyle(TurnsDetailGridView);
         }
@@ -135,7 +142,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         public void LoadFilterControls()
         {
-            var userList = DatabaseController.GetUserList();
+            var userList = DatabaseController.GetUserList(false);
 
             userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
             {

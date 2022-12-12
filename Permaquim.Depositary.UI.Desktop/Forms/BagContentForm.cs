@@ -93,6 +93,8 @@ namespace Permaquim.Depositary.UI.Desktop
             BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
             InformationLabel.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             InformationLabel.BackColor = Color.Transparent;
+            DetailLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+
         }
 
 

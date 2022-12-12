@@ -2440,7 +2440,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return entities.Result;
         }
 
-        public static List<Permaquim.Depositario.Entities.Tables.Seguridad.Usuario> GetUserList()
+        public static List<Permaquim.Depositario.Entities.Tables.Seguridad.Usuario> GetUserList(bool singleUser)
         {
             Permaquim.Depositario.Business.Tables.Seguridad.Usuario entities = new();
 
@@ -2449,6 +2449,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Tables.Seguridad.Usuario.ColumnEnum.EmpresaId,
                 Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.SucursalId.EmpresaId.Id);
+
+            if(singleUser)
+            {
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Tables.Seguridad.Usuario.ColumnEnum.Id,
+                    Depositario.sqlEnum.OperandEnum.Equal, CurrentUser.Id);
+            }
+
             entities.Items();
 
             return entities.Result;

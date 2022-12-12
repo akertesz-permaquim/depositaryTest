@@ -21,6 +21,7 @@ namespace Permaquim.Depositary.UI.Desktop
             Argentina,
             Chile
         }
+        private const string CAMBIO_CONTENEDOR = "Cambio de contenedor";
 
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
@@ -288,23 +289,20 @@ namespace Permaquim.Depositary.UI.Desktop
   
             _gateButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None;
             _backButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None;
-                //|| _bagExtractionProcess == BagExtractionProcessEnum.BagError
-                //|| _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_ERROR;
 
             if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Argentina)
             {
                 _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending
-                 && ParameterController.RequiresContainerIdentifier
                  && _device.IoBoardStatusProperty.BagState ==IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE 
                  && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished; 
             }
             if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Chile)
             {
                 _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending
-                && ParameterController.RequiresContainerIdentifier
                 && _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
                 && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished;
             }
+
 
         }
         private void LoadGateButton()
@@ -326,7 +324,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _confirmButton = ControlBuilder.BuildStandardButton(
             "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width,55);
 
-            _confirmButton.Visible = false;
+            _confirmButton.Visible = ParameterController.RequiresContainerIdentifier; 
 
             this.MainPanel.Controls.Add(_confirmButton);
 
@@ -426,6 +424,10 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 _bagAlreadyInserted = false;
                 _bagExtractionProcess = BagExtractionProcessEnum.None;
+            }
+            else
+            {
+                AuditController.Log(LogTypeEnum.Navigation, CAMBIO_CONTENEDOR, CAMBIO_CONTENEDOR);
             }
 
          }

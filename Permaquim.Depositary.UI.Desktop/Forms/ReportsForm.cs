@@ -79,7 +79,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadOperationsHistoryButton();
 
             if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoTransaccionesUsuario))
-                LoadOperationsHistoryButton();
+                LoadOperationsSingleUserHistoryButton();
 
             if (SecurityController.IsFunctionEnabled(FunctionEnum.ContenidoDeBolsa))
                 LoadBagContentButton();

@@ -81,7 +81,7 @@
             this.MainPanel.Controls.Add(this.CurrencyLabel);
             this.MainPanel.Location = new System.Drawing.Point(1, 40);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(704, 612);
+            this.MainPanel.Size = new System.Drawing.Size(708, 612);
             this.MainPanel.TabIndex = 0;
             // 
             // ButtonsPanel
@@ -214,7 +214,7 @@
             this.DenominationsGridView.RowTemplate.ReadOnly = true;
             this.DenominationsGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DenominationsGridView.Size = new System.Drawing.Size(696, 440);
+            this.DenominationsGridView.Size = new System.Drawing.Size(698, 440);
             this.DenominationsGridView.TabIndex = 145;
             this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             // 

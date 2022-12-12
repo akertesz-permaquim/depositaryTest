@@ -109,6 +109,14 @@ namespace Permaquim.Depositary.UI.Desktop
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             PrintButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
 
+
+            FromDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            ToDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            UserLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            TurnLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            UserLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            TypeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+
             StyleController.SetControlStyle(OperationsHeaderGridView);
             StyleController.SetControlStyle(OperationsDetailGridView);
         }
@@ -135,12 +143,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         public void LoadFilterControls(bool singleUser)
         {
-            var userList = DatabaseController.GetUserList();
-
-            if (singleUser)
-            {
-                userList.Where(x => x.Id == DatabaseController.CurrentUser.Id);
-            }
+            var userList = DatabaseController.GetUserList(false);
 
             if (!singleUser)
             {
@@ -150,7 +153,11 @@ namespace Permaquim.Depositary.UI.Desktop
                     Id = -1
                 });
             }
-            UserComboBox.DataSource = userList;
+
+            if (singleUser)
+                UserComboBox.DataSource = DatabaseController.GetUserList(true); 
+            else
+                UserComboBox.DataSource = userList;
 
             UserComboBox.DisplayMember = NOMBREAPELLIDO;
             UserComboBox.ValueMember = ID;

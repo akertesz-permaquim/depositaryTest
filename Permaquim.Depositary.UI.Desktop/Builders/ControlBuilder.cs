@@ -43,7 +43,7 @@ namespace Permaquim.Depositary.UI.Desktop.Builders
         {
             System.Windows.Forms.Button newButton = BuildButton();
 
-            newButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonEstandar);
+            newButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
             newButton.Name = name;
             newButton.Text = text;
             newButton.Size = new Size(width - 5, height);

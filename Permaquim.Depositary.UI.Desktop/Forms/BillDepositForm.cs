@@ -8,6 +8,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Buffers;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Permaquim.Depositary.UI.Desktop
 {
@@ -18,7 +19,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// Instancia del dispositivo
         /// </summary>
         public CounterDevice _device { get; set; }
-
+        private const string DEPOSITO_BILLETE = "Deposito de billete";
         private const string DEPOSITO_BILLETE_CANCELADO = "Deposito de billete Cancelado";
 
         /// <summary>
@@ -34,6 +35,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// Denominacines detectadas por la contadora
         /// </summary>
         private List<DenominationItem> _detectedDenominations = new();
+
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
         /// </summary>
@@ -99,8 +101,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
             MonitorGroupcheckbox.Visible = false;
 
-                if (this.Visible)
+            if (this.Visible)
             {
+      
+                AuditController.Log(LogTypeEnum.Navigation, DEPOSITO_BILLETE, DEPOSITO_BILLETE);
                 LoadCurrentContainer();
                 LoadLanguageItems();
                 EnableDisableControls(false);
@@ -549,63 +553,71 @@ namespace Permaquim.Depositary.UI.Desktop
         /// </summary>
         private void VerifyLoadDetectedBills()
         {
-            _currentCountingAmount = 0;
-            _currentCountingQuantity = 0;
 
-            if (_device.DenominationResultProperty.DenominationArray != null
-                && _device.DenominationResultProperty.DenominationArray.Length == 96)
+            if (!_operationStatus.DepositConfirmed)
             {
-                _detectedDenominations = new List<DenominationItem>();
-                foreach (var item in _denominaciones)
+                _currentCountingAmount = 0;
+                _currentCountingQuantity = 0;
+
+                if (_device.DenominationResultProperty.DenominationArray != null
+                    && _device.DenominationResultProperty.DenominationArray.Length == 96)
                 {
-                    var readQuantity = string.Join<char>("",
-                       (IEnumerable<char>)Encoding.ASCII.GetChars(new byte[3]
+                    _detectedDenominations = new List<DenominationItem>();
+                    foreach (var item in _denominaciones)
                     {
+                        var readQuantity = string.Join<char>("",
+                           (IEnumerable<char>)Encoding.ASCII.GetChars(new byte[3]
+                        {
                         _device.DenominationResultProperty.DenominationArray[item.Posicion],
                         _device.DenominationResultProperty.DenominationArray[item.Posicion + 1],
                         _device.DenominationResultProperty.DenominationArray[item.Posicion + 2]
-                    }));
-                    int value = 0;
-                    int.TryParse(readQuantity, out value);
+                        }));
+                        int value = 0;
+                        int.TryParse(readQuantity, out value);
 
-                    _detectedDenominations.Add(new DenominationItem()
-                    {
-                        Id = item.Id,
-                        Nombre = item.Nombre,
-                        Unidades = item.Unidades,
-                        CantidadDetectada = value,
-                        Indice = _detectedDenominations.Count
-                    });
-                }
-            }
-
-            if (_detectedDenominations.Count > 0 && DenominationsGridView.Rows.Count > 0)
-            {
-
-                // Actualiza las denominaciones con el valor detectado 
-                foreach (var denomination in _detectedDenominations)
-                {
-                    if (DenominationsGridView.Rows.Count > 0)
-                    {
-                        DenominationsGridView.Rows[(int)denomination.Indice]
-                            .Cells["Quantity"].Value = denomination.CantidadDetectada.ToString();
-                        DenominationsGridView.Rows[(int)denomination.Indice]
-                            .Cells["Amount"].Value = DatabaseController.CurrentCurrency.Simbolo + " " +
-                            (denomination.CantidadDetectada * Convert.ToInt32(denomination.Unidades)).ToString();
-
-                        _currentCountingAmount += Convert.ToInt32(denomination.Unidades) * denomination.CantidadDetectada;
-                        _currentCountingQuantity += denomination.CantidadDetectada;
+                        _detectedDenominations.Add(new DenominationItem()
+                        {
+                            Id = item.Id,
+                            Nombre = item.Nombre,
+                            Unidades = item.Unidades,
+                            CantidadDetectada = value,
+                            Indice = _detectedDenominations.Count
+                        });
                     }
                 }
-            }
-            else
-            {
-                _currentCountingAmount = 0;
-            }
 
-            SetTotals();
+                if (_detectedDenominations.Count > 0 && DenominationsGridView.Rows.Count > 0)
+                {
+                    string denominationsData = JsonConvert.SerializeObject(_detectedDenominations, Formatting.Indented);
 
-            CancelDepositButton.Visible = true;
+                    AuditController.Log(LogTypeEnum.Information, "Detección de billetes", denominationsData);
+
+                    // Actualiza las denominaciones con el valor detectado 
+                    foreach (var denomination in _detectedDenominations)
+                    {
+
+                        if (DenominationsGridView.Rows.Count > 0)
+                        {
+                            DenominationsGridView.Rows[(int)denomination.Indice]
+                                .Cells["Quantity"].Value = denomination.CantidadDetectada.ToString();
+                            DenominationsGridView.Rows[(int)denomination.Indice]
+                                .Cells["Amount"].Value = DatabaseController.CurrentCurrency.Simbolo + " " +
+                                (denomination.CantidadDetectada * Convert.ToInt32(denomination.Unidades)).ToString();
+
+                            _currentCountingAmount += Convert.ToInt32(denomination.Unidades) * denomination.CantidadDetectada;
+                            _currentCountingQuantity += denomination.CantidadDetectada;
+                        }
+                    }
+                }
+                else
+                {
+                    _currentCountingAmount = 0;
+                }
+
+                SetTotals();
+
+                CancelDepositButton.Visible = true;
+            }
         }
 
         private void SetTotals()
@@ -694,6 +706,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
+
             TimeOutController.Reset();
             ButtonsPanel.Visible = false;
             _operationStatus.DepositConfirmed = true;
@@ -808,9 +821,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
             foreach (var item in _denominaciones)
             {
-                byte[] bytes = Convert.FromBase64String(item.Imagen
+                byte[] bytes = null;
+                if (item.TipoValorId.Imagen.Length > 0)
+                {
+                    bytes = Convert.FromBase64String(item.Imagen
                     .Replace("data:image/jpeg;base64,", String.Empty)
                     .Replace("data:image/webp;base64,", String.Empty));
+                }
+                else
+                {
+                    ImageConverter converter = new ImageConverter();
+                    bytes = (byte[])converter.ConvertTo(StyleController.CreateWhiteBitmap(), typeof(byte[]));
+                }
+
 
                 _depositItems.Add(new DepositItem()
                 {
@@ -840,6 +863,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private void SaveTransaction()
         {
 
+
             _operationStatus.CurrentTransactionAmount += _currentCountingAmount;
             _currentCountingAmount = 0;
 
@@ -848,10 +872,15 @@ namespace Permaquim.Depositary.UI.Desktop
             try
             {
 
+                string denominationsData = JsonConvert.SerializeObject(_detectedDenominations, Formatting.Indented);
+
                 transactions.BeginTransaction();
 
                 if (_operationStatus.CurrentTransactionId == 0)
                 {
+
+                    AuditController.Log(LogTypeEnum.Information, "Inicio de depósito de billetes", denominationsData);
+
                     Transaccion transaction = new()
                     {
                         CierreDiarioId = null,
@@ -881,6 +910,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 else
                 {
+
+                    AuditController.Log(LogTypeEnum.Information, "Continuación de depósito de billetes", denominationsData);
+
                     transactions.Items(_operationStatus.CurrentTransactionId);
                     if (transactions.Result.Count > 0)
                     {

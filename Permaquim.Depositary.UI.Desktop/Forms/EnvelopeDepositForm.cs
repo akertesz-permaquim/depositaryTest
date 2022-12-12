@@ -34,6 +34,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private bool _requiresEnvelopeIdentifier = ParameterController.RequiresEnvelopeIdentifier;
         private const string DEPOSITO_SOBRE_CANCELADO = "Deposito de sobre Cancelado";
+        private const string DEPOSITO_SOBRE = "Deposito de sobre";
 
         List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
         List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> _detailTransactions = new();
@@ -125,6 +126,11 @@ namespace Permaquim.Depositary.UI.Desktop
             ConfirmAndExitDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
             CancelDepositButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonCancelar);
             CancelDepositButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+            BackButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonSalir);
+            BackButton.ForeColor = StyleController.GetColor(Enumerations.ColorNameEnum.FuenteContraste);
+
+
         }
         private void LoadLanguageItems()
         {
@@ -169,6 +175,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
+                AuditController.Log(LogTypeEnum.Navigation, DEPOSITO_SOBRE, DEPOSITO_SOBRE);
                 LoadDenominations();
                 LoadLanguageItems();
                 DenominationsGridView.Enabled = true;
@@ -214,11 +221,19 @@ namespace Permaquim.Depositary.UI.Desktop
 
             foreach (var item in DatabaseController.GetEnvelopeValues())
             {
-                byte[] bytes = Convert.FromBase64String(item.TipoValorId.Imagen
-               .Replace("data:image/png;base64,", String.Empty)
-               .Replace("data:image/jpeg;base64,", String.Empty)
-               .Replace("data:image/webp;base64,", String.Empty));
-
+                byte[] bytes = null;
+                if (item.TipoValorId.Imagen.Length > 0)
+                {
+                    bytes = Convert.FromBase64String(item.TipoValorId.Imagen
+                   .Replace("data:image/png;base64,", String.Empty)
+                   .Replace("data:image/jpeg;base64,", String.Empty)
+                   .Replace("data:image/webp;base64,", String.Empty));
+                }
+                else
+                {
+                    ImageConverter converter = new ImageConverter();
+                    bytes = (byte[])converter.ConvertTo(StyleController.CreateWhiteBitmap(), typeof(byte[]));
+                }
                 _envelopeDepositItems.Add(new EnvelopeDepositItem()
                 {
                     Image = System.Drawing.Image.FromStream(new MemoryStream(bytes)),
@@ -997,5 +1012,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
             }
         }
+
+
+ 
     }
 }

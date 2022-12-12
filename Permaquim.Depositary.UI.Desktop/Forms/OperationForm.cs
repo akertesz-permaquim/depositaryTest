@@ -177,19 +177,21 @@ namespace Permaquim.Depositary.UI.Desktop
                         (int)EventTypeEnum.Normal, string.Empty);
 
                     }
-
-                    if (_device.StateResultProperty.DoorStateInformation.CassetteFull)
+                    if (_device != null && !_device.CounterConnected)
                     {
+                        if (_device.StateResultProperty.DoorStateInformation.CassetteFull)
+                        {
 
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Cassette_Full),
-                            EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.CASSETTE_FULL));
-                        return;
-                    }
-                    else
-                    {
-                        DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
-                        (int)EventTypeEnum.Normal, string.Empty);
+                            DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Cassette_Full),
+                                EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
+                            FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.CASSETTE_FULL));
+                            return;
+                        }
+                        else
+                        {
+                            DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Normal),
+                            (int)EventTypeEnum.Normal, string.Empty);
+                        }
                     }
 
                     if (DatabaseController.GetBagPercentaje() >= ParameterController.BagMaxPercentage)
@@ -536,6 +538,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoTransacciones)
                 || SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeCierreDiario)
                 || SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoDeBolsas)
+                || SecurityController.IsFunctionEnabled(FunctionEnum.HistoricoTransaccionesUsuario)
                 )
             {
                 System.Windows.Forms.Button reportsButton = ControlBuilder.BuildStandardButton(
