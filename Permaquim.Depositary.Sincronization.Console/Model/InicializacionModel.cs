@@ -29,7 +29,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Dispositivo.ConfiguracionDepositario> DispositivoConfiguracionDepositario { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.Depositario> DispositivoDepositario { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.DepositarioContadora> DispositivoDepositarioContadora { get; set; } = new();
-        public List<Depositario.Entities.Tables.Dispositivo.DepositarioEstado> DispositivoDepositarioEstado { get; set; } = new();
+        //public List<Depositario.Entities.Tables.Dispositivo.DepositarioEstado> DispositivoDepositarioEstado { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.DepositarioMoneda> DispositivoDepositarioMoneda { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.DepositarioPlaca> DispositivoDepositarioPlaca { get; set; } = new();
         public List<Depositario.Entities.Tables.Dispositivo.Marca> DispositivoMarca { get; set; } = new();
@@ -689,8 +689,6 @@ namespace Permaquim.Depositary.Sincronization.Console
                 }
             }
 
-            Depositario.Business.Tables.Valor.OrigenValor entitiesOrigenValor = new();
-
             #endregion
 
             #region Estilo
@@ -929,6 +927,8 @@ namespace Permaquim.Depositary.Sincronization.Console
             #endregion
 
             #region Valor.OrigenValor
+
+            Depositario.Business.Tables.Valor.OrigenValor entitiesOrigenValor = new();
 
             if (OrigenValor.Count > 0)
             {
@@ -1235,10 +1235,10 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                 if (sincronizacionCabeceraId.HasValue)
                 {
-                    foreach (var item in SeguridadMenu)
+                    foreach (var item in SeguridadMenu.OrderBy(x => x.DependeDe))
                     {
                         Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoMenu", item.TipoId);
-                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Funcion", item.FuncionId);
+                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId);
 
                         if (tipoIdOrigen.HasValue && funcionIdOrigen.HasValue)
                         {
@@ -1248,7 +1248,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                             if (item.DependeDe.HasValue)
                             {
-                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.DependeDe.Value);
+                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Menu", item.DependeDe.Value);
                                 item.DependeDe = dependeDeOrigen;
                             }
 
@@ -1542,6 +1542,87 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             #endregion
 
+            #region Operacion
+
+            Depositario.Business.Tables.Operacion.TipoContenedor entitiesOperacionTipoContenedor = new();
+
+            if (OperacionTipoContenedor.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoContenedor");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in OperacionTipoContenedor)
+                    {
+                        Int64 origenId = item.Id;
+
+                        var newEntitieOperacionTipoContenedor = entitiesOperacionTipoContenedor.Add(item);
+
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoContenedor.Id);
+
+                    }
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
+            Depositario.Business.Tables.Operacion.TipoEvento entitiesOperacionTipoEvento = new();
+
+            if (OperacionTipoEvento.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoEvento");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in OperacionTipoEvento)
+                    {
+                        Int64 origenId = item.Id;
+
+                        var newEntitieOperacionTipoEvento = entitiesOperacionTipoEvento.Add(item);
+
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoEvento.Id);
+
+                    }
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
+            Depositario.Business.Tables.Operacion.TipoTransaccion entitiesOperacionTipoTransaccion = new();
+
+            if (OperacionTipoTransaccion.Count > 0)
+            {
+                Int64? sincronizacionCabeceraId = null;
+
+                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoTransaccion");
+
+                if (sincronizacionCabeceraId.HasValue)
+                {
+                    foreach (var item in OperacionTipoTransaccion)
+                    {
+                        if (item.FuncionId.HasValue)
+                        {
+                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId.Value);
+
+                            if (funcionIdOrigen.HasValue)
+                                item.FuncionId = funcionIdOrigen.Value;
+                        }
+
+                        Int64 origenId = item.Id;
+
+                        var newEntitieOperacionTipoTransaccion = entitiesOperacionTipoTransaccion.Add(item);
+
+                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoTransaccion.Id);
+
+                    }
+                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                }
+            }
+
+            #endregion
+
             #region Dispositivo
 
             Depositario.Business.Tables.Dispositivo.TipoConfiguracionDepositario entitiesDispositivoTipoConfiguracionDepositario = new();
@@ -1755,12 +1836,15 @@ namespace Permaquim.Depositary.Sincronization.Console
                     {
                         Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.ModeloId);
                         Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sector", item.SectorId);
+                        Int64? tipoContenedorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Operacion.TipoContenedor", item.TipoContenedorId);
 
-                        if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue)
+                        if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue && tipoContenedorIdOrigen.HasValue)
                         {
                             item.ModeloId = modeloIdOrigen.Value;
 
                             item.SectorId = sectorIdOrigen.Value;
+
+                            item.TipoContenedorId = tipoContenedorIdOrigen.Value;
 
                             Int64 origenId = item.Id;
 
@@ -1805,34 +1889,34 @@ namespace Permaquim.Depositary.Sincronization.Console
                 }
             }
 
-            Depositario.Business.Tables.Dispositivo.DepositarioEstado entitiesDispositivoDepositarioEstado = new();
+            //Depositario.Business.Tables.Dispositivo.DepositarioEstado entitiesDispositivoDepositarioEstado = new();
 
-            if (DispositivoDepositarioEstado.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
+            //if (DispositivoDepositarioEstado.Count > 0)
+            //{
+            //    Int64? sincronizacionCabeceraId = null;
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioEstado");
+            //    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioEstado");
 
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in DispositivoDepositarioEstado)
-                    {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
+            //    if (sincronizacionCabeceraId.HasValue)
+            //    {
+            //        foreach (var item in DispositivoDepositarioEstado)
+            //        {
+            //            Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
 
-                        if (depositarioIdOrigen.HasValue)
-                        {
-                            item.DepositarioId = depositarioIdOrigen.Value;
+            //            if (depositarioIdOrigen.HasValue)
+            //            {
+            //                item.DepositarioId = depositarioIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+            //                Int64 origenId = item.Id;
 
-                            var newEntitieDispositivoDepositarioEstado = entitiesDispositivoDepositarioEstado.Add(item);
+            //                var newEntitieDispositivoDepositarioEstado = entitiesDispositivoDepositarioEstado.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioEstado.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
+            //                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioEstado.Id);
+            //            }
+            //        }
+            //        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+            //    }
+            //}
 
             Depositario.Business.Tables.Dispositivo.DepositarioMoneda entitiesDispositivoDepositarioMoneda = new();
 
@@ -1983,87 +2067,6 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                             SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoConfiguracionDepositario.Id);
                         }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Operacion
-
-            Depositario.Business.Tables.Operacion.TipoContenedor entitiesOperacionTipoContenedor = new();
-
-            if (OperacionTipoContenedor.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoContenedor");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OperacionTipoContenedor)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieOperacionTipoContenedor = entitiesOperacionTipoContenedor.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoContenedor.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Operacion.TipoEvento entitiesOperacionTipoEvento = new();
-
-            if (OperacionTipoEvento.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoEvento");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OperacionTipoEvento)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieOperacionTipoEvento = entitiesOperacionTipoEvento.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoEvento.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Operacion.TipoTransaccion entitiesOperacionTipoTransaccion = new();
-
-            if (OperacionTipoTransaccion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoTransaccion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OperacionTipoTransaccion)
-                    {
-                        if (item.FuncionId.HasValue)
-                        {
-                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId.Value);
-
-                            if (funcionIdOrigen.HasValue)
-                                item.FuncionId = funcionIdOrigen.Value;
-                        }
-
-                        Int64 origenId = item.Id;
-
-                        var newEntitieOperacionTipoTransaccion = entitiesOperacionTipoTransaccion.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoTransaccion.Id);
-
                     }
                     SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }

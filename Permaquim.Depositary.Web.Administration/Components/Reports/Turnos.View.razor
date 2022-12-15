@@ -381,6 +381,17 @@ else
 
     private parametros parametrosTurnosView = new();
 
+    protected override void OnInitialized()
+    {
+        //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
+        if (!LicenseController.IsValidLicenseAvailable() || LicenseController.GetLicenseRemainingDays() <= 0 || LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        {
+            NavManager.NavigateTo("RequerimientoLicencia/ReporteTurnosView", true);
+        }
+
+        base.OnInitialized();
+    }
+
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");

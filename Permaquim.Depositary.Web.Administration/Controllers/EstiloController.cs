@@ -2,76 +2,84 @@
 {
     public class EstiloController
     {
+        private static Depositary.Entities.Tables.Estilo.EsquemaDetalle _eTablesEsquemaDetalle = new();
+
         public static List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> ObtenerEsquemaDetalles(Int64 pUsuarioId)
         {
             List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> resultado = new();
-            Depositary.Business.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
-
-            //Primero valoro que usuario se esta recibiendo como parametro, si es -1 traemos los estilos de la empresa default o la primera que se encuentre.
-            if (pUsuarioId == -1)
+            using (Depositary.Business.Tables.Estilo.EsquemaDetalle bTablesEsquemaDetalle = new())
             {
-                Depositary.Business.Relations.Directorio.Empresa empresa = new Depositary.Business.Relations.Directorio.Empresa();
-                empresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
-                empresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-
-
-                if (empresa.Items().Count == 0)
+                //Primero valoro que usuario se esta recibiendo como parametro, si es -1 traemos los estilos de la empresa default o la primera que se encuentre.
+                if (pUsuarioId == -1)
                 {
-                    empresa.Where.Clear();
-                    esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, empresa.Items().FirstOrDefault().EstiloEsquemaId.Id);
+                    using (Depositary.Business.Relations.Directorio.Empresa bRelationsEmpresa = new())
+                    {
+
+                        bRelationsEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
+                        bRelationsEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+
+
+                        if (bRelationsEmpresa.Items().Count == 0)
+                        {
+                            bRelationsEmpresa.Where.Clear();
+                            bTablesEsquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, bRelationsEmpresa.Items().FirstOrDefault().EstiloEsquemaId.Id);
+                        }
+                        else
+                            bTablesEsquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, bRelationsEmpresa.Result.FirstOrDefault().EstiloEsquemaId.Id);
+                    }
+
+                    bTablesEsquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                    bTablesEsquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
+                    bTablesEsquemaDetalle.Items();
                 }
                 else
-                    esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, empresa.Result.FirstOrDefault().EstiloEsquemaId.Id);
+                {
+                    using (Depositary.Business.Relations.Seguridad.Usuario bRelationsUsuario = new())
+                    {
 
-                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
-                esquemaDetalle.Items();
+                        bRelationsUsuario.Where.Add(Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                        bRelationsUsuario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, pUsuarioId);
+
+                        bRelationsUsuario.Items();
+
+                        var estiloEsquemaId = bRelationsUsuario.Result.FirstOrDefault().EmpresaId._EstiloEsquemaId;
+
+                        bTablesEsquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, estiloEsquemaId);
+                        bTablesEsquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                        bTablesEsquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
+                    }
+
+                    resultado = bTablesEsquemaDetalle.Items();
+                }
+                resultado = bTablesEsquemaDetalle.Result;
             }
-            else
-            {
-                Depositary.Business.Relations.Seguridad.Usuario usuario = new();
-                usuario.Where.Add(Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                usuario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.Usuario.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, pUsuarioId);
-
-                usuario.Items();
-
-                var estiloEsquemaId = usuario.Result.FirstOrDefault().EmpresaId._EstiloEsquemaId;
-
-                esquemaDetalle.Where.Add(Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.EsquemaId, Depositary.sqlEnum.OperandEnum.Equal, estiloEsquemaId);
-                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                esquemaDetalle.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Business.Tables.Estilo.EsquemaDetalle.ColumnEnum.AplicacionId, sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
-
-                resultado = esquemaDetalle.Items();
-            }
-            resultado = esquemaDetalle.Result;
             return resultado;
         }
 
         public static string ObtenerItemEstilo(List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalles, string pNombre, bool obtenerSoloValor = false)
         {
             string resultado = "";
-            Depositary.Entities.Tables.Estilo.EsquemaDetalle esquemaDetalle = new();
 
             if (dataEsquemaDetalles.Where(x => x.Nombre == pNombre).Count() > 0)
             {
-                esquemaDetalle = dataEsquemaDetalles.Where(x => x.Nombre == pNombre).FirstOrDefault();
+                _eTablesEsquemaDetalle = dataEsquemaDetalles.Where(x => x.Nombre == pNombre).FirstOrDefault();
                 if (!obtenerSoloValor)
                 {
-                    switch (esquemaDetalle.TipoEsquemaDetalleId)
+                    switch (_eTablesEsquemaDetalle.TipoEsquemaDetalleId)
                     {
                         case 1:
-                            resultado = "background-color:" + esquemaDetalle.Valor;
+                            resultado = "background-color:" + _eTablesEsquemaDetalle.Valor;
                             break;
                         case 2:
-                            resultado = "font-family:" + esquemaDetalle.Valor;
+                            resultado = "font-family:" + _eTablesEsquemaDetalle.Valor;
                             break;
                         case 3:
-                            resultado = esquemaDetalle.Valor;
+                            resultado = _eTablesEsquemaDetalle.Valor;
                             break;
                     }
                 }
                 else
-                    resultado = esquemaDetalle.Valor;
+                    resultado = _eTablesEsquemaDetalle.Valor;
             }
             return resultado;
         }
@@ -80,7 +88,7 @@
         {
             int paginado = 10; //Por defecto el paginado es de 10 registros
 
-            int paginadoConversion=0;
+            int paginadoConversion = 0;
 
             string paginadoSinConvertir = "";
 

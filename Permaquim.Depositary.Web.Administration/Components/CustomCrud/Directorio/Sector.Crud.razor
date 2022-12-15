@@ -203,7 +203,7 @@
                                 @if ((@Sucursal_SucursalId_entities.Count > 0 && @Sucursal_SucursalId_entities.FirstOrDefault(c => c.Id == @Sector_entity.SucursalId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Sucursal_SucursalId_entities.Where(x => x.Habilitado == true) : Sucursal_SucursalId_entities.Where(x => x.Habilitado == true || x.Id == Sector_entity.SucursalId);
-                                    <RadzenDropDown FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true"
+                                    <RadzenDropDown Name="SucursalId" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true"
                                 TValue="Int64" Class="w-100" @bind-Value="@(Sector_entity.SucursalId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectSucursal_SucursalIdValueChanged(args))
@@ -211,10 +211,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="SucursalId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Sucursal_SucursalId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectSucursal_SucursalIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Sucursal_SucursalId_entities.Count > 0 ? Sucursal_SucursalId_entities.Min(x => x.Id) : 1)" Component="SucursalId" Text="SucursalId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>

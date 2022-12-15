@@ -1,38 +1,118 @@
-﻿@page "/RequerimientoLicencia"
+﻿@page "/RequerimientoLicencia/{ReferenciaPagina}/"
 
 @using Radzen.Blazor
 @using Permaquim.Depositary.Web.Administration.Controllers;
+@using System.Management
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
-<span style="text-align:center">
-    <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_MENU_REQUIERE_LICENCIA",dataLenguaje)</h2>
-</span>
-<br>
-<br>
-<div style="text-align:center">
-    <RadzenImage Path="images/CandadoLicencia.png">
+<div style="text-align:center; vertical-align: middle">
+    @if (TieneLicencia)
+    {
+        <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_MENU_REQUIERE_LICENCIA_SUPERIOR",dataLenguaje)</h2>
+    }
+    else
+    {
+        <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_REQUIERE_LICENCIA",dataLenguaje)</h2>
+    }
+    <h2>Hardware-ID: @GetHardwareId()</h2>
+    <br>
+    <br>
+    <div style="text-align:center; vertical-align: middle">
+        <RadzenImage Path="images/CandadoLicencia.png">
 
-    </RadzenImage>
-</div>
-<br>
-<br>
-<div style="text-align:center">
-    <RadzenButton Text="Cargar licencia"></RadzenButton>
+        </RadzenImage>
+    </div>
+    <br>
+    <br>
+    <RadzenTemplateForm TItem="ArchivoLicencia" Data="@archivoLicencia" @bind-Value="archivoLicencia" Submit="CargarArchivo">
+        <ChildContent>
+            <div style="text-align:center">
+                <RadzenFileInput Accept=".license;" Name="Archivo" @bind-Value="archivoLicencia.ArchivoSeleccionado" TValue="string" ChooseText="Seleccionar archivo de licencia">
+                </RadzenFileInput>
+                <RadzenRequiredValidator Component="Archivo" Text="Archivo is required" Style="position : inherit ">
+                </RadzenRequiredValidator>
+            </div>
+            <br>
+            <RadzenButton ButtonType="ButtonType.Submit" Text="Enviar"></RadzenButton>
+        </ChildContent>
+    </RadzenTemplateForm>
+
 </div>
 
 @code {
+    public class ArchivoLicencia
+    {
+        public string ArchivoSeleccionado { get; set; }
+    }
+
+    private ArchivoLicencia archivoLicencia = new();
     private List<Entities.TextoLenguaje> dataLenguaje;
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
 
+    [Parameter]
+    public string ReferenciaPagina { get; set; }
+
+    [Parameter]
+    public bool TieneLicencia { get; set; } = true;
+
     protected override async Task OnInitializedAsync()
     {
-        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
-        if (dataUsuario == null)
+        if (ReferenciaPagina != "login")
         {
+            //Si no nos redirige el login es porque tenemos licencia.
+            dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+            if (dataUsuario == null)
+            {
+                NavManager.NavigateTo("login", true);
+            }
+            dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        }
+        else //Si nos redirige el login es porque no se tiene licencia.
+        {
+            //Si la pagina que llama al requerimiento de licencia es el login entonces ofrecemos el lenguaje default.
+            dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(-1);
+        }
+    }
+
+    void CargarArchivo()
+    {
+        try
+        {
+            File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "DepositaryWebAdministrator.license", Convert.FromBase64String(archivoLicencia.ArchivoSeleccionado.Replace("data:application/octet-stream;base64,", String.Empty)));
+            //Si carga todo ok volvemos al login.
             NavManager.NavigateTo("login", true);
         }
-        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        catch (Exception ex)
+        {
+            AuditController.Log(ex);
+        }
+    }
+
+    string GetHardwareId()
+    {
+        string processorId = string.Empty;
+
+        var processorManagementObjectSearcher = new ManagementObjectSearcher("Select ProcessorId From Win32_processor");
+        ManagementObjectCollection processorList = processorManagementObjectSearcher.Get();
+
+        foreach (ManagementObject item in processorList)
+        {
+            processorId += item["ProcessorId"].ToString();
+            break;
+        }
+
+        string motherBoardId = string.Empty;
+
+        var motherBoardObjectSearcher = new ManagementObjectSearcher("SELECT SerialNumber FROM Win32_BaseBoard");
+        ManagementObjectCollection motherBoardList = motherBoardObjectSearcher.Get();
+
+        foreach (ManagementObject item in motherBoardList)
+        {
+            motherBoardId += item["SerialNumber"].ToString();
+            break;
+        }
+        return processorId + "-" + motherBoardId;
     }
 
 }

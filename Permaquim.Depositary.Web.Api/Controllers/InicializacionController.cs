@@ -33,6 +33,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             InicializacionModel model = new();
             try
             {
+                Int64 depositarioId = Int64.Parse(JwtController.GetDepositaryCode(HttpContext));
+
+
                 model.AplicacionConfiguracionTipoDato = ObtenerAplicacionTipoDato();
                 model.AplicacionConfiguracionValidacionDato = ObtenerAplicacionValidacionDato();
                 model.AplicacionConfiguracion = ObtenerAplicacionConfiguracion();
@@ -52,14 +55,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 model.SeguridadTipoIdentificador = ObtenerSeguridadTipoIdentificador();
                 model.DispositivoComandoContadora = ObtenerDispositivoComandoContadora();
                 model.DispositivoComandoPlaca = ObtenerDispositivoComandoPlaca();
-                model.DispositivoConfiguracionDepositario = ObtenerDispositivoConfiguracionDepositario();
-                model.DispositivoDepositario = ObtenerDispositivoDepositario();
+                model.DispositivoConfiguracionDepositario = ObtenerDispositivoConfiguracionDepositario(depositarioId);
+                model.DispositivoDepositario = ObtenerDispositivoDepositario(depositarioId);
                 model.PlantillaMoneda = ObtenerDispositivoPlantillaMoneda();
                 model.PlantillaMonedaDetalle = ObtenerDispositivoPlantillaMonedaDetalle();
-                model.DispositivoDepositarioContadora = ObtenerDispositivoDepositarioContadora();
-                model.DispositivoDepositarioEstado = ObtenerDispositivoDepositarioEstado();
-                model.DispositivoDepositarioMoneda = ObtenerDispositivoDepositarioMoneda();
-                model.DispositivoDepositarioPlaca = ObtenerDispositivoDepositarioPlaca();
+                model.DispositivoDepositarioContadora = ObtenerDispositivoDepositarioContadora(depositarioId);
+                model.DispositivoDepositarioMoneda = ObtenerDispositivoDepositarioMoneda(depositarioId);
+                model.DispositivoDepositarioPlaca = ObtenerDispositivoDepositarioPlaca(depositarioId);
                 model.DispositivoMarca = ObtenerDispositivoMarca();
                 model.DispositivoModelo = ObtenerDispositivoModelo();
                 model.DispositivoTipoConfiguracionDepositario = ObtenerDispositivoTipoConfiguracionDepositario();
@@ -111,7 +113,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             catch (Exception ex)
             {
 
-                throw ex; 
+                throw ex;
             }
 
             return Ok(model);
@@ -233,39 +235,38 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> ObtenerDispositivoConfiguracionDepositario()
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> ObtenerDispositivoConfiguracionDepositario(Int64 DepositarioId)
         {
             DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario entities = new();
+            entities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DepositarioId);
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> ObtenerDispositivoDepositario()
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> ObtenerDispositivoDepositario(Int64 DepositarioId)
         {
             DepositaryWebApi.Business.Tables.Dispositivo.Depositario entities = new();
+            entities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DepositarioId);
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> ObtenerDispositivoDepositarioContadora()
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> ObtenerDispositivoDepositarioContadora(Int64 DepositarioId)
         {
             DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora entities = new();
+            entities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DepositarioId);
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> ObtenerDispositivoDepositarioEstado()
-        {
-            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado entities = new();
-            return entities.Items();
-        }
-
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> ObtenerDispositivoDepositarioMoneda()
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> ObtenerDispositivoDepositarioMoneda(Int64 DepositarioId)
         {
             DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda entities = new();
+            entities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DepositarioId);
             return entities.Items();
         }
 
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> ObtenerDispositivoDepositarioPlaca()
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> ObtenerDispositivoDepositarioPlaca(Int64 DepositarioId)
         {
             DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca entities = new();
+            entities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DepositarioId);
             return entities.Items();
         }
 
@@ -593,7 +594,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
             DepositaryWebApi.Business.Relations.Dispositivo.Depositario depositarios = new();
             depositarios.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
-                DepositaryWebApi.sqlEnum.OperandEnum.Equal, 
+                DepositaryWebApi.sqlEnum.OperandEnum.Equal,
                 Cryptography.Decrypt(model.CodigoExternoDepositario, _configuration["AppSettings:PasswordKey"]));
             depositarios.Items();
 

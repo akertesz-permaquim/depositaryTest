@@ -209,44 +209,45 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
             return resultado;
         }
 
+        private static Depositario.Business.Tables.Sincronizacion.Entidad SincronizacionEntidadController = new();
+        private static Depositario.Business.Tables.Sincronizacion.EntidadCabecera SincronizacionEntidadCabeceraController = new();
+        private static Depositario.Business.Tables.Sincronizacion.EntidadDetalle SincronizacionEntidadDetalleController = new();
+
         public static Int64? ObtenerIdOrigenDetalleSincronizacion(string pEntidadNombre, Int64 pIdDestino)
         {
-            Int64? resultado = null;
-
+            SincronizacionEntidadController.Where.Clear();
             //En funcion del nombre recibido buscamos la entidad y obtenemos el id con el que se guardo
-            Depositario.Business.Tables.Sincronizacion.Entidad oSincronizacionEntidad = new();
-            oSincronizacionEntidad.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, Depositario.sqlEnum.OperandEnum.Equal, pEntidadNombre);
+            //Depositario.Business.Tables.Sincronizacion.Entidad oSincronizacionEntidad = new();
+            SincronizacionEntidadController.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, Depositario.sqlEnum.OperandEnum.Equal, pEntidadNombre);
 
-            oSincronizacionEntidad.Items();
+            SincronizacionEntidadController.Items();
 
-            if (oSincronizacionEntidad.Result.Count > 0)
+            if (SincronizacionEntidadController.Result.Count > 0)
             {
-                Int64 pEntidadId = oSincronizacionEntidad.Result.FirstOrDefault().Id;
+                SincronizacionEntidadCabeceraController.Where.Clear();
+                SincronizacionEntidadCabeceraController.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, Depositario.sqlEnum.OperandEnum.Equal, SincronizacionEntidadController.Result.FirstOrDefault().Id);
+                SincronizacionEntidadCabeceraController.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.Equal, ConfigurationController.GetCurrentDepositaryId());
+                SincronizacionEntidadCabeceraController.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, Depositario.sqlEnum.OperandEnum.IsNotNull, null);
 
-                Depositario.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new();
-                oSincronizacionEntidadCabecera.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, Depositario.sqlEnum.OperandEnum.Equal, pEntidadId);
-                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, Depositario.sqlEnum.OperandEnum.Equal, ConfigurationController.GetCurrentDepositaryId());
-                oSincronizacionEntidadCabecera.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, Depositario.sqlEnum.OperandEnum.IsNotNull, null);
+                SincronizacionEntidadCabeceraController.Items();
 
-                oSincronizacionEntidadCabecera.Items();
-
-                if (oSincronizacionEntidadCabecera.Result.Count > 0)
+                if (SincronizacionEntidadCabeceraController.Result.Count > 0)
                 {
-                    foreach (var entidadCabecera in oSincronizacionEntidadCabecera.Result)
+                    foreach (var entidadCabecera in SincronizacionEntidadCabeceraController.Result)
                     {
-                        Depositario.Business.Tables.Sincronizacion.EntidadDetalle oSincronizacionEntidadDetalle = new();
-                        oSincronizacionEntidadDetalle.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.EntidadCabeceraId, Depositario.sqlEnum.OperandEnum.Equal, entidadCabecera.Id);
-                        oSincronizacionEntidadDetalle.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.DestinoId, Depositario.sqlEnum.OperandEnum.Equal, pIdDestino);
+                        SincronizacionEntidadDetalleController.Where.Clear();
+                        SincronizacionEntidadDetalleController.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.EntidadCabeceraId, Depositario.sqlEnum.OperandEnum.Equal, entidadCabecera.Id);
+                        SincronizacionEntidadDetalleController.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.DestinoId, Depositario.sqlEnum.OperandEnum.Equal, pIdDestino);
+                        SincronizacionEntidadDetalleController.TopQuantity = 1;
+                        SincronizacionEntidadDetalleController.Items();
 
-                        oSincronizacionEntidadDetalle.Items();
-
-                        if (oSincronizacionEntidadDetalle.Result.Count > 0)
-                            return oSincronizacionEntidadDetalle.Result.FirstOrDefault().OrigenId;
+                        if (SincronizacionEntidadDetalleController.Result.Count > 0)
+                            return SincronizacionEntidadDetalleController.Result.FirstOrDefault().OrigenId;
                     }
                 }
             }
 
-            return resultado;
+            return null;
         }
 
         public static Int64? ObtenerIdDestinoDetalleSincronizacionInicial(string pEntidadNombre, Int64 pIdOrigen)

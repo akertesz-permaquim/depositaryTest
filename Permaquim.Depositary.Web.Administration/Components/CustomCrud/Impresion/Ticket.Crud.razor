@@ -283,17 +283,22 @@
                                 @if ((@TipoTicket_TipoId_entities.Count > 0 && @TipoTicket_TipoId_entities.FirstOrDefault(c => c.Id == @Ticket_entity.TipoId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? TipoTicket_TipoId_entities.Where(x => x.Habilitado == true) : TipoTicket_TipoId_entities.Where(x => x.Habilitado == true || x.Id == Ticket_entity.TipoId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.TipoId)"
+                                    <RadzenDropDown Name="TipoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.TipoId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoTicket_TipoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="TipoId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@TipoTicket_TipoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoTicket_TipoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(TipoTicket_TipoId_entities.Count > 0 ? TipoTicket_TipoId_entities.Min(x => x.Id) : 1)" Component="TipoId" Text="TipoId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -306,17 +311,22 @@
                                 @if ((@Modelo_DepositarioModeloId_entities.Count > 0 && @Modelo_DepositarioModeloId_entities.FirstOrDefault(c => c.Id == @Ticket_entity.DepositarioModeloId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Modelo_DepositarioModeloId_entities.Where(x => x.Habilitado == true) : Modelo_DepositarioModeloId_entities.Where(x => x.Habilitado == true || x.Id == Ticket_entity.DepositarioModeloId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.DepositarioModeloId)"
+                                    <RadzenDropDown Name="DepositarioModeloId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Ticket_entity.DepositarioModeloId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectModelo_DepositarioModeloIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="DepositarioModeloId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Modelo_DepositarioModeloId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectModelo_DepositarioModeloIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Modelo_DepositarioModeloId_entities.Count > 0 ? Modelo_DepositarioModeloId_entities.Min(x => x.Id) : 1)" Component="DepositarioModeloId" Text="DepositarioModeloId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>

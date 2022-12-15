@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
@@ -21,6 +22,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
         public static async Task InitializeDepositary()
         {
             string webapiUrl = GetConfiguration("WebApiUrl");
+
             InicializacionModel model = new()
             {
                 CodigoExternoDepositario = GetConfiguration("CodigoDepositario")
@@ -49,7 +51,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
                     var jsonResult = await postResult.Content.ReadAsStringAsync();
                     if (postResult.StatusCode == System.Net.HttpStatusCode.InternalServerError)
                     {
-                         AuditController.Log(new Exception(postResult.ReasonPhrase));
+                        AuditController.Log(new Exception(postResult.ReasonPhrase));
                     }
 
                     _jwToken = JsonConvert.DeserializeObject<JwtTokenModel>(jsonResult);

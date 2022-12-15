@@ -40,14 +40,13 @@
                         FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                         IsLoading="@estaCargandoGridDepositarios"
                         ExpandMode="DataGridExpandMode.Single"
+                        EditMode="DataGridEditMode.Single"
                         RowExpand="@expandirDepositario"
                         RowCollapse="@colapsarDepositario"
-                        RowRender="@depositarioRowRender"
                         CellRender="@depositarioCellRender"
                         PageSizeOptions="@(new int[]{10,20,50,100})"
                         AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionGrillaDepositarios.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionGrillaDepositarios.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionGrillaDepositarios.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionGrillaDepositarios.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionGrillaDepositarios.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionGrillaDepositarios.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionGrillaDepositarios.AtributosTabla)
-                        GroupPanelText="@MultilenguajeController.ObtenerTextoPorClave("INDICADOR_AGRUPACION",dataLenguaje)" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)"
-                        LoadChildData="@depositarioLoadChildData">
+                        GroupPanelText="@MultilenguajeController.ObtenerTextoPorClave("INDICADOR_AGRUPACION",dataLenguaje)" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)">
                             <Columns>
                                 <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Property="DepositarioId" Title="ID"
                                       Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("DepositarioId",dataCustomizacionGrillaDepositarios.AtributosColumnas)>
@@ -63,6 +62,34 @@
                                         }
                                         else
                                             @context.Empresa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -133,6 +160,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                         </Template>
                                     </RadzenDataGridColumn>
                                     <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector"
@@ -146,6 +201,34 @@
                                         }
                                         else
                                             @context.Sector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -448,37 +531,37 @@
                                             Data="@dataTransaccionesSobreDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                                 <Columns>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TransaccionSobreId" Title="@MultilenguajeController.ObtenerTextoPorClave("TRANSACCIONSOBREID",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionSobreId",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoOperacion" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOOPERACION",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CodigoOperacion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="FechaTransaccionSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Fecha",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TipoTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("TIPOTRANSACCION",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TipoTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="CodigoSobre" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOSOBRE",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CodigoSobre",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="UsuarioTransaccion" Title="@MultilenguajeController.ObtenerTextoPorClave("USUARIO",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("UsuarioTransaccion",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarColumnaOrigenTransaccionAValidar Title="@MultilenguajeController.ObtenerTextoPorClave("ORIGEN",dataLenguaje)" Property="OrigenValor"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Origen",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarColumnaCuentaTransaccionAValidar Property="Cuenta" Title="@MultilenguajeController.ObtenerTextoPorClave("CUENTA",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Cuenta",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Visible=@mostrarColumnaBancoTransaccionAValidar Property="Banco" Title="@MultilenguajeController.ObtenerTextoPorClave("BANCO",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Banco",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="Moneda" Title="@MultilenguajeController.ObtenerTextoPorClave("MONEDA",dataLenguaje)"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Moneda",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.TransaccionAValidarMonitor" Property="TotalAValidar" Title="@MultilenguajeController.ObtenerTextoPorClave("TOTALAVALIDAR",dataLenguaje)" FormatString="{0:C2}" TextAlign="TextAlign.Right"
-                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TransaccionDetalleId",dataCustomizacionGrillaDetallesTransaccion.AtributosColumnas)>
+                                                          Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TotalAValidar",dataCustomizacionGrillaTransaccionesSobre.AtributosColumnas)>
                                                     </RadzenDataGridColumn>
                                                 </Columns>
                                                 <Template Context="transaccionSobre">
@@ -700,9 +783,8 @@ else
     private bool mostrarColumnaCuentaTransaccionAValidar = false;
     private bool mostrarColumnaOrigenTransaccionAValidar = false;
 
-
-
     private bool ejecucionRecarga = false;
+    private bool recargandoRowPadre = false;
     private int tiempoRecargaSegundos { get; set; }
     private int selectedTab { get; set; } = 0;
 
@@ -726,6 +808,17 @@ else
 
     private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
     private List<SeguridadEntities.FuncionRol> dataFunciones;
+
+    protected override void OnInitialized()
+    {
+        //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
+        if (!LicenseController.IsValidLicenseAvailable() || LicenseController.GetLicenseRemainingDays() <= 0 || LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        {
+            NavManager.NavigateTo("RequerimientoLicencia/Monitor", true);
+        }
+
+        base.OnInitialized();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -760,11 +853,12 @@ else
                 if (rowsDepositariosExpandidas.Count > 0)
                 {
                     gridDepositarios.ExpandRow(dataDepositarios.Where(x => x.DepositarioId == rowsDepositariosExpandidas[0].DepositarioId).FirstOrDefault());
-                    obtenerInformacionDepositario(rowsDepositariosExpandidas[0].DepositarioId);
+                    //obtenerInformacionDepositario(rowsDepositariosExpandidas[0].DepositarioId);
                 }
                 ejecucionRecarga = false;
                 timerRecargaInformacion.Enabled = true;
             }
+
         }
 
     }
@@ -812,27 +906,35 @@ else
 
     private async void recargarInformacionDepositario(Object source, ElapsedEventArgs e)
     {
-        if (!estaCargandoGridDepositarios)
+        if (NavManager.Uri.Replace(NavManager.BaseUri, "") == "Monitor")
+        {
+            if (!estaCargandoGridDepositarios)
+            {
+                timerRecargaInformacion.Enabled = false;
+                await Task.Run(() => obtenerDepositarios());
+
+                await this.InvokeAsync(() => this.StateHasChanged());
+
+                ejecucionRecarga = true;
+            }
+        }
+        else
         {
             timerRecargaInformacion.Enabled = false;
-            await Task.Run(() => obtenerDepositarios());
-
-            await this.InvokeAsync(() => this.StateHasChanged());
-
-            ejecucionRecarga = true;
         }
     }
 
     private void obtenerDepositarios(MonitorEntities.DepositarioMonitor? depositarioMonitor = null)
     {
-        timerRecargaInformacion.Enabled = false;
         if (depositarioMonitor != null)
         {
             dataDepositarios.RemoveAt(dataDepositarios.IndexOf(dataDepositarios.Where(x => x.DepositarioId == depositarioMonitor.DepositarioId).FirstOrDefault()));
             dataDepositarios.AddRange(DepositarioController.ObtenerDepositarios(dataUsuario.Id, depositarioMonitor.DepositarioId));
+            dataDepositarios = dataDepositarios.OrderBy(x => x.DepositarioId).ToList();
         }
         else
         {
+            timerRecargaInformacion.Enabled = false;
             dataDepositarios = DepositarioController.ObtenerDepositarios(dataUsuario.Id);
         }
         estaCargandoGridDepositarios = false;
@@ -840,11 +942,7 @@ else
 
     protected async Task expandirDepositario(MonitorEntities.DepositarioMonitor args)
     {
-        //if (rowsDepositariosExpandidas.Count == 0)
-        //{
-        //    obtenerDepositarios(args);
-        //    await gridDepositarios.Reload();
-        //}
+
         //rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
         estaCargandoGridDepositarios = true;
 
@@ -866,9 +964,9 @@ else
         }
         else
         {
-            mostrarColumnaBancoTransaccionAValidar =  false;
-            mostrarColumnaCuentaTransaccionAValidar =  false;
-            mostrarColumnaBancoTransaccionValidada =  false;
+            mostrarColumnaBancoTransaccionAValidar = false;
+            mostrarColumnaCuentaTransaccionAValidar = false;
+            mostrarColumnaBancoTransaccionValidada = false;
             mostrarColumnaCuentaTransaccionValidada = false;
         }
 
@@ -897,22 +995,34 @@ else
         {
             rowsDepositariosExpandidas.Add(args);
             reiniciarEstadoDepositarioExpandido();
-            await Task.Run(() => obtenerInformacionDepositario(args.DepositarioId));
+
+            //Si se expandio de forma manual el registro obtenemos la info de la cabecera actualizada
+            //Recargamos la grilla y luego expandimos de nuevo ese registro
+            //Esto es para no tener cabecera y detalle con info desincronizada.
+
+            //Si no se esta ejecutando por el timer entonces es a mano.
+            if (!ejecucionRecarga)
+            {
+                //Si no se actualizo el registro padre obtenemos la info y actualizamos la grilla
+                recargandoRowPadre = true;
+                await Task.Run(() => obtenerDepositarios(args));
+                await gridDepositarios.Reload();
+                await gridDepositarios.ExpandRow(dataDepositarios.Where(x => x.DepositarioId == args.DepositarioId).FirstOrDefault());
+                recargandoRowPadre = false;
+            }
+
         }
+        //await Task.Run(() => obtenerInformacionDepositario(args.DepositarioId));
+
         estaCargandoGridDepositarios = false;
         await Task.Run(() => cargarInformacionTab(args.DepositarioId));
 
         //await Task.Run(() => obtenerTransaccionesPorDepositario(args.DepositarioId));
     }
 
-    protected async Task depositarioLoadChildData(DataGridLoadChildDataEventArgs<MonitorEntities.DepositarioMonitor> args)
-    {
-
-    }
-
     protected async Task colapsarDepositario(MonitorEntities.DepositarioMonitor args)
     {
-        if (!ejecucionRecarga)
+        if (!ejecucionRecarga && !recargandoRowPadre)
         {
             rowsDepositariosExpandidas.RemoveAll(x => x.DepositarioId == args.DepositarioId);
         }
@@ -931,12 +1041,8 @@ else
         selectedTab = 0;
     }
 
-    void depositarioRowRender(RowRenderEventArgs<MonitorEntities.DepositarioMonitor> args)
-    {
-        string ads = "";
-    }
-
-    void depositarioCellRender(DataGridCellRenderEventArgs<MonitorEntities.DepositarioMonitor> args)
+    void depositarioCellRender(DataGridCellRenderEventArgs<MonitorEntities.DepositarioMonitor>
+    args)
     {
         if (rowsDepositariosExpandidas.Where(x => x.DepositarioId == args.Data.DepositarioId).ToList().Count > 0)
         {

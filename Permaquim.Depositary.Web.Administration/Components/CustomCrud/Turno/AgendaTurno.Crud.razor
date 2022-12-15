@@ -305,7 +305,7 @@
                                 @if ((@EsquemaDetalleTurno_EsquemaDetalleTurnoId_entities.Count > 0 && @EsquemaDetalleTurno_EsquemaDetalleTurnoId_entities.FirstOrDefault(c => c.Id == @AgendaTurno_entity.EsquemaDetalleTurnoId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? EsquemaDetalleTurno_EsquemaDetalleTurnoId_entities.Where(x => x.Habilitado == true) : EsquemaDetalleTurno_EsquemaDetalleTurnoId_entities.Where(x => x.Habilitado == true || x.Id == AgendaTurno_entity.EsquemaDetalleTurnoId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown Name="EsquemaDetalleTurnoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(AgendaTurno_entity.EsquemaDetalleTurnoId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEsquemaDetalleTurno_EsquemaDetalleTurnoIdValueChanged(args))
@@ -313,10 +313,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="EsquemaDetalleTurnoId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@EsquemaDetalleTurno_EsquemaDetalleTurnoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEsquemaDetalleTurno_EsquemaDetalleTurnoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(EsquemaDetalleTurno_EsquemaDetalleTurnoId_entities.Count > 0 ? EsquemaDetalleTurno_EsquemaDetalleTurnoId_entities.Min(x => x.Id) : 1)" Component="EsquemaDetalleTurnoId" Text="EsquemaDetalleTurnoId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -339,7 +344,7 @@
                                 @if ((@Sector_SectorId_entities.Count > 0 && @Sector_SectorId_entities.FirstOrDefault(c => c.Id == @AgendaTurno_entity.SectorId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Sector_SectorId_entities.Where(x => x.Habilitado == true) : Sector_SectorId_entities.Where(x => x.Habilitado == true || x.Id == AgendaTurno_entity.SectorId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown Name="SectorId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(AgendaTurno_entity.SectorId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectSector_SectorIdValueChanged(args))
@@ -347,10 +352,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="SectorId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Sector_SectorId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectSector_SectorIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Sector_SectorId_entities.Count > 0 ? Sector_SectorId_entities.Min(x => x.Id) : 1)" Component="SectorId" Text="SectorId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -490,7 +500,7 @@ else
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? Habilitado_filter;
 
-    private bool SoloDiasHabiles = true;
+    private bool SoloDiasHabiles = false;
 
     /// <summary>
     /// Variables to handle main entity
@@ -635,7 +645,7 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         agendaTurnoABM = new();
-        SoloDiasHabiles = true;
+        SoloDiasHabiles = false;
         await Task.Run(ObtenerDataArbolAgenda);
         crudMode = CrudMode.Add;
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)

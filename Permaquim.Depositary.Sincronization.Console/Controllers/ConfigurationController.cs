@@ -14,7 +14,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
                 ConfigurationController.GetConfiguration("PasswordKey"));
         }
 
-        public static Int64 GetCurrentDepositaryId()
+        public static long? GetCurrentDepositaryId()
         {
             if(!_depositaryId.HasValue)
             {

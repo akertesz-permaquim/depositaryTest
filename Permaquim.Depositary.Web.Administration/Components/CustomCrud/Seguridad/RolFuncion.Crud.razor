@@ -265,7 +265,7 @@
                                 @if ((@Funcion_FuncionId_entities.Count > 0 && @Funcion_FuncionId_entities.FirstOrDefault(c => c.Id == @RolFuncion_entity.FuncionId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Funcion_FuncionId_entities.Where(x => x.Habilitado == true) : Funcion_FuncionId_entities.Where(x => x.Habilitado == true || x.Id == RolFuncion_entity.FuncionId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown Name="FuncionId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RolFuncion_entity.FuncionId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectFuncion_FuncionIdValueChanged(args))
@@ -273,10 +273,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="FuncionId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Funcion_FuncionId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectFuncion_FuncionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Funcion_FuncionId_entities.Count > 0 ? Funcion_FuncionId_entities.Min(x => x.Id) : 1)" Component="FuncionId" Text="FuncionId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>

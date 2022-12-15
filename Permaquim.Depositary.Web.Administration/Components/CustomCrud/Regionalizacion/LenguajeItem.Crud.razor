@@ -548,9 +548,9 @@ else
 
                         if (lenguajesRestantes.Count > 0)
                         {
+                            Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new(crud);
                             foreach (var lenguaje in lenguajesRestantes)
                             {
-                                Depositary.Business.Tables.Regionalizacion.LenguajeItem oLenguajeItem = new();
                                 LenguajeItem_entity.LenguajeId = lenguaje.Id;
                                 oLenguajeItem.Add(LenguajeItem_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }

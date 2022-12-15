@@ -143,6 +143,10 @@
                             </RadzenCheckBox>
                         </Template>
                     </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioContadora" Property="PollTime" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("PollTime",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("PollTime",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("PollTime",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("PollTime",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("PollTime",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("PollTime",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("PollTime",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("PollTime",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("PollTime",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("PollTime",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("POLLTIME",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioContadora" Property="Sleeptime" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Sleeptime",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Sleeptime",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Sleeptime",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("SLEEPTIME",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                    </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Dispositivo.DepositarioContadora" Property="Habilitado" FilterValue="@Habilitado_filter" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Habilitado",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Habilitado",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Habilitado",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
                         <Template Context="data">
                             <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
@@ -236,8 +240,8 @@
                         <div class="col-md-4">
                             @if ((@TipoContadora_TipoContadoraId_entities.Count > 0 && @TipoContadora_TipoContadoraId_entities.FirstOrDefault(c => c.Id == @DepositarioContadora_entity.TipoContadoraId) != null) || crudMode != CrudMode.Delete)
                             {
-                                var dataSet = crudMode == CrudMode.Add ? TipoContadora_TipoContadoraId_entities.Where(x => x.Habilitado == true && x.ModeloId == ModeloId) : TipoContadora_TipoContadoraId_entities.Where(x => (x.Habilitado == true && x.ModeloId == ModeloId) || x.Id == DepositarioContadora_entity.TipoContadoraId);
-                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                var dataSet = crudMode == CrudMode.Add ? TipoContadora_TipoContadoraId_entities.Where(x => x.Habilitado == true) : TipoContadora_TipoContadoraId_entities.Where(x => (x.Habilitado == true) || x.Id == DepositarioContadora_entity.TipoContadoraId);
+                                <RadzenDropDown Name="TipoContadoraId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(DepositarioContadora_entity.TipoContadoraId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoContadora_TipoContadoraIdValueChanged(args))
@@ -245,10 +249,15 @@
                             }
                             else
                             {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                <RadzenDropDown Name="TipoContadoraId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@TipoContadora_TipoContadoraId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoContadora_TipoContadoraIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                            }
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenNumericRangeValidator Min="@(TipoContadora_TipoContadoraId_entities.Count > 0 ? TipoContadora_TipoContadoraId_entities.Min(x => x.Id) : 1)" Component="TipoContadoraId" Text="TipoContadoraId is required" Style="position: relative">
+                                </RadzenNumericRangeValidator>
                             }
                         </div>
                     </div>
@@ -360,6 +369,26 @@
                         </div>
                         <div class="col-md-auto">
                             <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.BaudRate)" Name="BaudRate" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("POLLTIME",dataLenguaje) Component="PollTime" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-auto">
+                            <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.PollTime)" Name="PollTime" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                            </RadzenNumeric>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("SLEEPTIME",dataLenguaje) Component="Sleeptime" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-auto">
+                            <RadzenNumeric TValue="int" style="display: block; width: 100%" @bind-Value="@(DepositarioContadora_entity.Sleeptime)" Name="Sleeptime" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                             </RadzenNumeric>
                         </div>
                     </div>
@@ -770,6 +799,44 @@ else
     /// <param name="item"></param>
     private void SelectTipoContadora_TipoContadoraIdValueChanged(object item)
     {
+        Int64 TipoContadoraId;
+        if (Int64.TryParse(item.ToString(), out TipoContadoraId))
+        {
+            Depositary.Business.Tables.Dispositivo.TipoContadora tipoContadora = new();
+            tipoContadora.Where.Add(Business.Tables.Dispositivo.TipoContadora.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, TipoContadoraId);
+            tipoContadora.Items();
+
+            if (tipoContadora.Result.Count > 0)
+            {
+                var configuracionContadora = tipoContadora.Result.FirstOrDefault();
+                DepositarioContadora_entity.BaudRate = configuracionContadora.BaudRate;
+                DepositarioContadora_entity.DataBits = configuracionContadora.DataBits;
+                DepositarioContadora_entity.Handshake = configuracionContadora.Handshake;
+                DepositarioContadora_entity.Parity = configuracionContadora.Parity;
+                DepositarioContadora_entity.PollTime = configuracionContadora.PollTime;
+                DepositarioContadora_entity.PortName = configuracionContadora.PortName;
+                DepositarioContadora_entity.ReadBufferSize = configuracionContadora.ReadBufferSize;
+                DepositarioContadora_entity.ReadTimeout = configuracionContadora.ReadTimeout;
+                DepositarioContadora_entity.RtsEnable = configuracionContadora.RtsEnable;
+                DepositarioContadora_entity.Sleeptime = configuracionContadora.Sleeptime;
+                DepositarioContadora_entity.StopBits = configuracionContadora.StopBits;
+            }
+            else
+            {
+                DepositarioContadora_entity.BaudRate = 0;
+                DepositarioContadora_entity.DataBits = 0;
+                DepositarioContadora_entity.Handshake = 0;
+                DepositarioContadora_entity.Parity = 0;
+                DepositarioContadora_entity.PollTime = 0;
+                DepositarioContadora_entity.PortName = "";
+                DepositarioContadora_entity.ReadBufferSize = 0;
+                DepositarioContadora_entity.ReadTimeout = 0;
+                DepositarioContadora_entity.RtsEnable = false;
+                DepositarioContadora_entity.Sleeptime = 0;
+                DepositarioContadora_entity.StopBits = 0;
+            }
+        }
+
     }
 
     /// <summary>

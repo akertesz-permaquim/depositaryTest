@@ -216,17 +216,22 @@
                      @if((@Empresa_EmpresaId_entities.Count > 0 && @Empresa_EmpresaId_entities.FirstOrDefault( c => c.Id == @OrigenValor_entity.EmpresaId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? Empresa_EmpresaId_entities.Where(x => x.Habilitado == true) : Empresa_EmpresaId_entities.Where(x => x.Habilitado == true || x.Id == OrigenValor_entity.EmpresaId);
-                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(OrigenValor_entity.EmpresaId)"
+                         <RadzenDropDown  Name="EmpresaId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(OrigenValor_entity.EmpresaId)"
                                      Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectEmpresa_EmpresaIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                      }
                      else
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                         <RadzenDropDown  Name="EmpresaId" AllowClear="true" TValue="Int64" Class="w-100" 
                                      Data=@Empresa_EmpresaId_entities TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectEmpresa_EmpresaIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                     }
+                    @if (@crudMode != CrudMode.Delete)
+                    {
+                        <RadzenNumericRangeValidator Min="@(Empresa_EmpresaId_entities.Count > 0 ? Empresa_EmpresaId_entities.Min(x => x.Id) : 1)" Component ="EmpresaId" Text="EmpresaId is required" Style="position: relative">
+                        </RadzenNumericRangeValidator>
                     }
                 </div>
               </div>

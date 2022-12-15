@@ -25,36 +25,7 @@
   </SelectedViews>
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
-    <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
-    <string>dbo.fn_diagramobjects</string>
-    <string>dbo.sp_alterdiagram</string>
-    <string>dbo.sp_creatediagram</string>
-    <string>dbo.sp_dropdiagram</string>
-    <string>dbo.sp_helpdiagramdefinition</string>
-    <string>dbo.sp_helpdiagrams</string>
-    <string>dbo.sp_renamediagram</string>
-    <string>dbo.sp_upgraddiagrams</string>
-    <string>dbo.splitCapital</string>
-    <string>Desarrollo.ActualizarLenguajeItem</string>
-    <string>Desarrollo.GenerarTablaModelo</string>
-    <string>Desarrollo.GenerarTablaTipoModelo</string>
-    <string>Dispositivo.ObtenerDepositarios</string>
-    <string>Dispositivo.ObtenerInformacionDepositario</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
-    <string>Operacion.ObtenerDetalleTransaccion</string>
-    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
-    <string>Operacion.ObtenerEventosPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasPorDepositario</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
-    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
-    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
-    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
-    <string>Regionalizacion.ObtenerTextosLenguaje</string>
-    <string>Seguridad.ObtenerRolesPorUsuario</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures />
   <SelectedTables>
@@ -64,7 +35,6 @@
     <string>Banca.TipoCuenta</string>
     <string>Dispositivo.ComandoContadora</string>
     <string>Dispositivo.ComandoPlaca</string>
-    <string>Dispositivo.DepositarioEstado</string>
     <string>Dispositivo.DepositarioMoneda</string>
     <string>Dispositivo.PlantillaMoneda</string>
     <string>Dispositivo.PlantillaMonedaDetalle</string>
@@ -76,7 +46,6 @@
     <string>Operacion.TipoContenedor</string>
     <string>Operacion.TipoEvento</string>
     <string>Operacion.TipoTransaccion</string>
-    <string>Seguridad.Funcion</string>
     <string>Seguridad.TipoAplicacion</string>
     <string>Seguridad.TipoFuncion</string>
     <string>Seguridad.TipoMenu</string>

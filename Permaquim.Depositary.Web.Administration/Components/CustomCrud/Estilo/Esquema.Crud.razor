@@ -4,6 +4,7 @@
 
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject DialogService DialogService
 @inject NavigationManager NavManager
 
 @if (dataFunciones != null)
@@ -218,6 +219,11 @@
                             </div>
                             <div class="col-md-9">
                                 <RadzenCheckBox @bind-Value=@Esquema_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Disabled="@(crudMode == CrudMode.Delete || estaProcesando)" />
+                                @if (@crudMode != CrudMode.Delete && defaultObligatorio)
+                                {
+                                    <RadzenRequiredValidator Component="EsDefaultCheckBox" Text="EsDefault is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
@@ -336,6 +342,8 @@ else
     private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
     private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
 
+    private bool defaultObligatorio = false;
+
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
@@ -349,6 +357,7 @@ else
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
     }
     #region Loading entities data
+
     /// <summary>
     /// Loads main entity data
     /// </summary>
@@ -361,6 +370,7 @@ else
         Depositary.Business.Tables.Estilo.Esquema entity = new();
         Esquema_entities = entity.Items();
     }
+
     /// <summary>
     /// Loads Type Tables data
     /// </summary>
@@ -385,7 +395,6 @@ else
 
         Depositary.Business.Tables.Estilo.Esquema oEsquema = new();
         oEsquema.Where.Add(Depositary.Business.Tables.Estilo.Esquema.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
-        oEsquema.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.Esquema.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
         if (crudMode == CrudMode.Edit)
             oEsquema.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Estilo.Esquema.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.NotEqual, Esquema_entity.Id);
 
@@ -445,6 +454,13 @@ else
     /// </summary>
     private void Add()
     {
+        if (Esquema_entities.Where(x => x.EsDefault == true).Count() == 0)
+        {
+            defaultObligatorio = true;
+        }
+        else
+            defaultObligatorio = false;
+
         //Main entity initialization
         Esquema_entity = new();
         //Relations entities initialization
@@ -458,6 +474,13 @@ else
     /// </summary>
     private void Edit(Depositary.Entities.Tables.Estilo.Esquema item, bool delete)
     {
+        if (Esquema_entities.Where(x => x.EsDefault == true).Count() == 0)
+        {
+            defaultObligatorio = true;
+        }
+        else
+            defaultObligatorio = false;
+
         Esquema_entity = item;
         if (delete)
             crudMode = CrudMode.Delete;
@@ -472,72 +495,83 @@ else
     /// </summary>
     private async Task Save()
     {
+        bool continuarOperacion = true;
         estaProcesando = true;
         StateHasChanged();
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        Depositary.Business.Tables.Estilo.Esquema crud = new();
-        foreach (var property in Esquema_entity.GetType().GetProperties())
-        {
-            switch (property.Name)
-            {
-                case "FechaModificacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Esquema_entity.FechaModificacion = null;
-                    }
-                    else
-                    {
-                        Esquema_entity.FechaModificacion = DateTime.Now;
-                    }
-                    break;
-                case "FechaCreacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Esquema_entity.FechaCreacion = DateTime.Now;
-                    }
-                    break;
-                case "UsuarioCreacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Esquema_entity.UsuarioCreacion = dataUsuario.Id;
-                    }
-                    break;
-                case "UsuarioModificacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Esquema_entity.UsuarioModificacion = null;
-                    }
-                    else
-                    {
-                        Esquema_entity.UsuarioModificacion = dataUsuario.Id;
-                    }
-                    break;
-            }
-        }
-        if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit)
-        {
+
+        //Verifico que no exista previamente un estilo default.
+        if (crudMode != CrudMode.Delete)
             esquemaDefault = ObtenerEsquemaDefault();
 
-            if (Esquema_entity.EsDefault && esquemaDefault != null)
+        //Si se esta editando o agregando un estilo nueva que sera default debemos verificar la existencia previa de uno.
+        if (Esquema_entity.EsDefault && (crudMode == CrudMode.Add || crudMode == CrudMode.Edit))
+        {
+            //Si existe un estilo default previamente, muestro un dialog de confirmación para avisar
+            //Que se le quitara la marca default a ese estilo para colocarsela al actual
+            if (esquemaDefault != null)
             {
-                summary = "Error al procesar.";
-                actionInformation = "No se puede guardar/editar este esquema como default debido a que ya existe uno.";
-                severityType = NotificationSeverity.Error;
+                continuarOperacion = (bool)(await DialogService.Confirm(MultilenguajeController.ObtenerTextoPorClave("ADVERTENCIA_REEMPLAZAR_ESTILO_DEFAULT", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("TITULO_DIALOG_ADVERTENCIA", dataLenguaje), new ConfirmOptions() { OkButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR", dataLenguaje), CancelButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR", dataLenguaje) }));
             }
-            else
+        }
+
+        if (continuarOperacion)
+        {
+            Depositary.Business.Tables.Estilo.Esquema crud = new();
+            foreach (var property in Esquema_entity.GetType().GetProperties())
             {
+                switch (property.Name)
+                {
+                    case "FechaModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Esquema_entity.FechaModificacion = null;
+                        }
+                        else
+                        {
+                            Esquema_entity.FechaModificacion = DateTime.Now;
+                        }
+                        break;
+                    case "FechaCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Esquema_entity.FechaCreacion = DateTime.Now;
+                        }
+                        break;
+                    case "UsuarioCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Esquema_entity.UsuarioCreacion = dataUsuario.Id;
+                        }
+                        break;
+                    case "UsuarioModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Esquema_entity.UsuarioModificacion = null;
+                        }
+                        else
+                        {
+                            Esquema_entity.UsuarioModificacion = dataUsuario.Id;
+                        }
+                        break;
+                }
+            }
+            if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit)
+            {
+
                 switch (crudMode)
                 {
                     case CrudMode.Add:
                         try
                         {
-                            crud.Add(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                             //Si se agrego un esquema no default y ademas existia un esquema default entonces le cargamos los items del esquema default
                             if (!Esquema_entity.EsDefault && esquemaDefault != null)
                             {
+                                crud.Add(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
                                 if (!InsertarDetallesEsquemaDefault())
                                 {
                                     summary = "Error al procesar.";
@@ -553,6 +587,37 @@ else
                             }
                             else
                             {
+                                //Si se agrego un estilo default y ya existia uno le quitamos la marca al anterior
+                                if (esquemaDefault != null && Esquema_entity.EsDefault)
+                                {
+                                    Depositary.Business.Tables.Estilo.Esquema controllerEsquemaDefault = new(crud);
+
+                                    try
+                                    {
+                                        crud.BeginTransaction();
+
+                                        esquemaDefault.EsDefault = false;
+                                        controllerEsquemaDefault.Update(esquemaDefault);
+
+                                        crud.Add(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                        crud.EndTransaction(true);
+
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        crud.EndTransaction(false);
+                                        AuditController.Log(exception, dataUsuario.Id);
+                                        summary = "Error al procesar.";
+                                        actionInformation = exception.Message;
+                                        severityType = NotificationSeverity.Error;
+                                    }
+                                }
+                                else
+                                {
+                                    crud.Add(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                }
                                 summary = "El registro se ha ";
                                 actionInformation = "agregado.";
                                 severityType = NotificationSeverity.Success;
@@ -570,7 +635,37 @@ else
                     case CrudMode.Edit:
                         try
                         {
-                            crud.Update(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                            //Si se agrego un estilo default y ya existia uno le quitamos la marca al anterior
+                            if (esquemaDefault != null && Esquema_entity.EsDefault)
+                            {
+                                Depositary.Business.Tables.Estilo.Esquema controllerEsquemaDefault = new(crud);
+
+                                try
+                                {
+                                    crud.BeginTransaction();
+
+                                    esquemaDefault.EsDefault = false;
+                                    controllerEsquemaDefault.Update(esquemaDefault);
+
+                                    crud.Update(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                    crud.EndTransaction(true);
+
+                                }
+                                catch (Exception exception)
+                                {
+                                    crud.EndTransaction(false);
+                                    AuditController.Log(exception, dataUsuario.Id);
+                                    summary = "Error al procesar.";
+                                    actionInformation = exception.Message;
+                                    severityType = NotificationSeverity.Error;
+                                }
+                            }
+                            else
+                            {
+                                crud.Update(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                            }
+
                             summary = "El registro se ha ";
                             actionInformation = "modificado.";
                             severityType = NotificationSeverity.Success;
@@ -585,41 +680,45 @@ else
                         break;
                 }
             }
+            else
+            {
+                try
+                {
+                    Esquema_entity.Habilitado = false;
+                    crud.Update(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                    summary = "El registro se ha ";
+                    actionInformation = "eliminado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    AuditController.Log(ex, dataUsuario.Id);
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+            }
+
+            // Sets Crud mode to List
+            crudMode = CrudMode.List;
+
+            ShowNotification(new NotificationMessage
+                {
+                    Severity = severityType,
+                    Summary = summary,
+                    Detail = actionInformation,
+                    Duration = 4000
+                });
+
+            estaProcesando = false;
+            StateHasChanged();
+
+            await Task.Run(LoadMainEntityData);
         }
         else
         {
-            try
-            {
-                Esquema_entity.Habilitado = false;
-                crud.Update(Esquema_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                summary = "El registro se ha ";
-                actionInformation = "eliminado.";
-                severityType = NotificationSeverity.Success;
-            }
-            catch (Exception ex)
-            {
-                AuditController.Log(ex, dataUsuario.Id);
-                summary = "Error al procesar.";
-                actionInformation = ex.Message;
-                severityType = NotificationSeverity.Error;
-            }
+            estaProcesando = false;
         }
-
-        // Sets Crud mode to List
-        crudMode = CrudMode.List;
-
-        ShowNotification(new NotificationMessage
-            {
-                Severity = severityType,
-                Summary = summary,
-                Detail = actionInformation,
-                Duration = 4000
-            });
-
-        estaProcesando = false;
-        StateHasChanged();
-
-        await Task.Run(LoadMainEntityData);
     }
 
     #region Grid events

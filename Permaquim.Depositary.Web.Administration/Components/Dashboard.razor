@@ -259,11 +259,18 @@ else
     private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
 
     private List<SeguridadEntities.FuncionRol> dataFunciones;
+
     //Variables auxiliares
     private Timer timerRecargaInformacion = new Timer();
 
     protected override void OnInitialized()
     {
+        //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
+        if (!LicenseController.IsValidLicenseAvailable() || LicenseController.GetLicenseRemainingDays() <= 0 || LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        {
+            NavManager.NavigateTo("RequerimientoLicencia/Dashboard", true);
+        }
+
         estaCargando = true;
         base.OnInitialized();
     }
@@ -282,11 +289,10 @@ else
             usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
             dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
 
-
             //En funcion del usuario que consulta obtenemos el perfil de visualizacion y luego las empresas a las que puede acceder
             await Task.Run(ObtenerListadoEmpresasPorPerfil);
             await Task.Run(obtenerParametrosConfiguracion);
-            //SetTimer();
+            SetTimer();
             obtenerInformacion();
             StateHasChanged();
         }
@@ -318,10 +324,17 @@ else
 
     private void recargarInformacion(Object source, ElapsedEventArgs e)
     {
-        //Se deshabilita el timer hasta que se complete la operacion.
-        timerRecargaInformacion.Enabled = false;
-        obtenerInformacion();
-        timerRecargaInformacion.Enabled = true;
+        if (NavManager.Uri.Replace(NavManager.BaseUri, "") == "Dashboard")
+        {
+            //Se deshabilita el timer hasta que se complete la operacion.
+            timerRecargaInformacion.Enabled = false;
+            obtenerInformacion();
+            timerRecargaInformacion.Enabled = true;
+        }
+        else
+        {
+            timerRecargaInformacion.Enabled = false;
+        }
     }
 
     private async void obtenerInformacion()
@@ -375,7 +388,6 @@ else
         cantidadDepositariosFueraServicio = "";
         dataCargaDepositarios = new();
         dataCantidadTipoTransacciones = new();
-
     }
 
     private void obtenerCantidadTransaccionesAlDia()

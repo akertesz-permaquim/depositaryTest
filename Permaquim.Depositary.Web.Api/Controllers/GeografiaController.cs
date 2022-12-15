@@ -82,6 +82,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             catch (Exception ex)
             {
+                AuditController.Log(ex);
                 return BadRequest(ex.Message);
             }
 
@@ -109,6 +110,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -144,6 +146,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
                 //Cerramos el registro de sincronizacion de la entidad.
@@ -176,6 +179,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -208,6 +212,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -241,6 +246,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 

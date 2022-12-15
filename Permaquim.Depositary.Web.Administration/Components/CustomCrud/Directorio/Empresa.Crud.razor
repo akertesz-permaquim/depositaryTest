@@ -3,6 +3,7 @@
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
+@inject DialogService DialogService
 @layout MainLayout
 
 @if (dataFunciones != null)
@@ -375,17 +376,22 @@
                                 @if ((@CodigoPostal_CodigoPostalId_entities.Count > 0 && @CodigoPostal_CodigoPostalId_entities.FirstOrDefault(c => c.Id == @Empresa_entity.CodigoPostalId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? CodigoPostal_CodigoPostalId_entities.Where(x => x.Habilitado == true) : CodigoPostal_CodigoPostalId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.CodigoPostalId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.CodigoPostalId)"
+                                    <RadzenDropDown AllowFiltering="true" Name="CodigoPostalId" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.CodigoPostalId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostal_CodigoPostalIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Name="CodigoPostalId"
                                 Data=@CodigoPostal_CodigoPostalId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostal_CodigoPostalIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(CodigoPostal_CodigoPostalId_entities.Count>0 ? CodigoPostal_CodigoPostalId_entities.Min(x => x.Id) : 1)" Component="CodigoPostalId" Text="CodigoPostalId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -398,7 +404,7 @@
                                 @if ((@Esquema_EstiloEsquemaId_entities.Count > 0 && @Esquema_EstiloEsquemaId_entities.FirstOrDefault(c => c.Id == @Empresa_entity.EstiloEsquemaId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Esquema_EstiloEsquemaId_entities.Where(x => x.Habilitado == true) : Esquema_EstiloEsquemaId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.EstiloEsquemaId);
-                                    <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown AllowClear="true" Name="EstiloEsquemaId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.EstiloEsquemaId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEsquema_EstiloEsquemaIdValueChanged(args))
@@ -406,10 +412,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Name="EstiloEsquemaId"
                                 Data=@Esquema_EstiloEsquemaId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEsquema_EstiloEsquemaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Esquema_EstiloEsquemaId_entities.Count>0 ? Esquema_EstiloEsquemaId_entities.Min(x => x.Id) : 1)" Component="EstiloEsquemaId" Text="EstiloEsquemaId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -422,7 +433,7 @@
                                 @if ((@Lenguaje_LenguajeId_entities.Count > 0 && @Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @Empresa_entity.LenguajeId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true) : Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.LenguajeId);
-                                    <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown AllowClear="true" Name="LenguajeId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.LenguajeId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
@@ -430,10 +441,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Name="LenguajeId"
                                 Data=@Lenguaje_LenguajeId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Lenguaje_LenguajeId_entities.Count>0 ? Lenguaje_LenguajeId_entities.Min(x => x.Id) : 1)" Component="LenguajeId" Text="LenguajeId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -451,6 +467,11 @@
                             </div>
                             <div class="col-md-9">
                                 <RadzenCheckBox @bind-Value=@Empresa_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Change=@(args => EsDefaultChange(args, @Empresa_entity)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando)" />
+                                @if (@crudMode != CrudMode.Delete && defaultObligatorio)
+                                {
+                                    <RadzenRequiredValidator Component="EsDefaultCheckBox" Text="EsDefault is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
                             </div>
                         </div>
                         <div class="row">
@@ -599,6 +620,7 @@ else
 
     private Depositary.Entities.Tables.Directorio.Empresa? empresaDefault = null;
 
+    private bool defaultObligatorio = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -674,7 +696,6 @@ else
 
         Depositary.Business.Tables.Directorio.Empresa oEmpresa = new();
         oEmpresa.Where.Add(Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.EsDefault, Depositary.sqlEnum.OperandEnum.Equal, true);
-        oEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
         if (crudMode == CrudMode.Edit)
             oEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.NotEqual, Empresa_entity.Id);
 
@@ -693,6 +714,14 @@ else
     /// </summary>
     private void Add()
     {
+
+        if (Empresa_entities.Where(x => x.EsDefault == true).Count() == 0)
+        {
+            defaultObligatorio = true;
+        }
+        else
+            defaultObligatorio = false;
+
         //Main entity initialization
         Empresa_entity = new();
         //Relations entities initialization
@@ -712,6 +741,13 @@ else
     /// </summary>
     private void Edit(Depositary.Entities.Tables.Directorio.Empresa item, bool delete)
     {
+        if (Empresa_entities.Where(x => x.EsDefault == true).Count() == 0)
+        {
+            defaultObligatorio = true;
+        }
+        else
+            defaultObligatorio = false;
+
         Empresa_entity = item;
         Grupo_GrupoId_entity = new()
             {
@@ -760,74 +796,83 @@ else
     /// </summary>
     private async Task Save()
     {
+        bool continuarOperacion = true;
         estaProcesando = true;
         StateHasChanged();
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        Depositary.Business.Tables.Directorio.Empresa crud = new();
-        Empresa_entity.GrupoId = ParametroGrupoId;
-        foreach (var property in Empresa_entity.GetType().GetProperties())
-        {
-            switch (property.Name)
-            {
-                case "FechaModificacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Empresa_entity.FechaModificacion = null;
-                    }
-                    else
-                    {
-                        Empresa_entity.FechaModificacion = DateTime.Now;
-                    }
-                    break;
-                case "FechaCreacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Empresa_entity.FechaCreacion = DateTime.Now;
-                    }
-                    break;
-                case "UsuarioCreacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Empresa_entity.UsuarioCreacion = dataUsuario.Id;
-                    }
-                    break;
-                case "UsuarioModificacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Empresa_entity.UsuarioModificacion = null;
-                    }
-                    else
-                    {
-                        Empresa_entity.UsuarioModificacion = dataUsuario.Id;
-                    }
-                    break;
-            }
-        }
-        if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit)
-        {
+
+        //Verifico que no exista previamente una empresa default para el grupo
+        if (crudMode != CrudMode.Delete)
             empresaDefault = ObtenerEmpresaDefault();
 
-            if (Empresa_entity.EsDefault && empresaDefault != null)
+        //Si se esta editando o agregando una empresa nueva que sera default debemos verificar la existencia previa de una dentro del grupo.
+        if (Empresa_entity.EsDefault && (crudMode == CrudMode.Add || crudMode == CrudMode.Edit))
+        {
+            //Si existe una empresa default previamente, muestro un dialog de confirmación para avisar
+            //Que se le quitara la marca default a esa empresa para colocarsela a la actual
+            if (empresaDefault != null)
             {
-                summary = "Error al procesar.";
-                actionInformation = "No se puede guardar/editar esta empresa como default debido a que ya existe una.";
-                severityType = NotificationSeverity.Error;
+                continuarOperacion = (bool)(await DialogService.Confirm(MultilenguajeController.ObtenerTextoPorClave("ADVERTENCIA_REEMPLAZAR_EMPRESA_DEFAULT", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("TITULO_DIALOG_ADVERTENCIA", dataLenguaje), new ConfirmOptions() { OkButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR", dataLenguaje), CancelButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR", dataLenguaje) }));
             }
-            else
+        }
+
+        if (continuarOperacion)
+        {
+            Depositary.Business.Tables.Directorio.Empresa crud = new();
+            Empresa_entity.GrupoId = ParametroGrupoId;
+            foreach (var property in Empresa_entity.GetType().GetProperties())
+            {
+                switch (property.Name)
+                {
+                    case "FechaModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Empresa_entity.FechaModificacion = null;
+                        }
+                        else
+                        {
+                            Empresa_entity.FechaModificacion = DateTime.Now;
+                        }
+                        break;
+                    case "FechaCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Empresa_entity.FechaCreacion = DateTime.Now;
+                        }
+                        break;
+                    case "UsuarioCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Empresa_entity.UsuarioCreacion = dataUsuario.Id;
+                        }
+                        break;
+                    case "UsuarioModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Empresa_entity.UsuarioModificacion = null;
+                        }
+                        else
+                        {
+                            Empresa_entity.UsuarioModificacion = dataUsuario.Id;
+                        }
+                        break;
+                }
+            }
+            if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit)
             {
                 switch (crudMode)
                 {
                     case CrudMode.Add:
                         try
                         {
-                            crud.Add(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
 
                             //Si se agrego una empresa no default y ademas existia una empresa default
                             //entonces le cargamos las configuraciones y los tickets de la empresa default.
                             if (!Empresa_entity.EsDefault && empresaDefault != null)
                             {
+                                crud.Add(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                                 string mensajeValidacion = "";
                                 if (!AplicacionController.GenerarRegistrosConfiguracionEmpresa(Empresa_entity.Id))
                                 {
@@ -850,6 +895,37 @@ else
                             }
                             else
                             {
+                                //Si se agrego una empresa default y ya existia una le quitamos la marca a la anterior
+                                if (empresaDefault != null && Empresa_entity.EsDefault)
+                                {
+                                    Depositary.Business.Tables.Directorio.Empresa controllerEmpresaDefault = new(crud);
+
+                                    try
+                                    {
+                                        crud.BeginTransaction();
+
+                                        empresaDefault.EsDefault = false;
+                                        controllerEmpresaDefault.Update(empresaDefault);
+
+                                        crud.Add(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                        crud.EndTransaction(true);
+
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        crud.EndTransaction(false);
+                                        AuditController.Log(exception, dataUsuario.Id);
+                                        summary = "Error al procesar.";
+                                        actionInformation = exception.Message;
+                                        severityType = NotificationSeverity.Error;
+                                    }
+                                }
+                                else
+                                {
+                                    crud.Add(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                                }
+
                                 summary = "El registro se ha ";
                                 actionInformation = "agregado.";
                                 severityType = NotificationSeverity.Success;
@@ -857,6 +933,7 @@ else
                         }
                         catch (Exception ex)
                         {
+
                             AuditController.Log(ex, dataUsuario.Id);
                             summary = "Error al procesar.";
                             actionInformation = ex.Message;
@@ -866,7 +943,34 @@ else
                     case CrudMode.Edit:
                         try
                         {
-                            crud.Update(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                            if (empresaDefault != null && Empresa_entity.EsDefault)
+                            {
+                                Depositary.Business.Tables.Directorio.Empresa controllerEmpresaDefault = new(crud);
+
+                                try
+                                {
+                                    crud.BeginTransaction();
+
+                                    empresaDefault.EsDefault = false;
+                                    controllerEmpresaDefault.Update(empresaDefault);
+
+                                    crud.Update(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                    crud.EndTransaction(true);
+
+                                }
+                                catch (Exception exception)
+                                {
+                                    crud.EndTransaction(false);
+                                    AuditController.Log(exception, dataUsuario.Id);
+                                    summary = "Error al procesar.";
+                                    actionInformation = exception.Message;
+                                    severityType = NotificationSeverity.Error;
+                                }
+                            }
+                            else
+                                crud.Update(Empresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
                             summary = "El registro se ha ";
                             actionInformation = "modificado.";
                             severityType = NotificationSeverity.Success;
@@ -881,42 +985,47 @@ else
                         break;
                 }
             }
+            else
+            {
+                try
+                {
+                    Empresa_entity.Habilitado = false;
+                    crud.Update(Empresa_entity);
+                    summary = "El registro se ha ";
+                    actionInformation = "eliminado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    AuditController.Log(ex, dataUsuario.Id);
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+            }
+
+            // Sets Crud mode to List
+            crudMode = CrudMode.List;
+            rowsEmpresasExpandidas.Clear();
+
+            ShowNotification(new NotificationMessage
+                {
+                    Severity = severityType,
+                    Summary = summary,
+                    Detail = actionInformation,
+                    Duration = 4000
+                });
+
+            estaProcesando = false;
+            StateHasChanged();
+
+            await Task.Run(LoadMainEntityData);
         }
         else
         {
-            try
-            {
-                Empresa_entity.Habilitado = false;
-                crud.Update(Empresa_entity);
-                summary = "El registro se ha ";
-                actionInformation = "eliminado.";
-                severityType = NotificationSeverity.Success;
-            }
-            catch (Exception ex)
-            {
-                AuditController.Log(ex, dataUsuario.Id);
-                summary = "Error al procesar.";
-                actionInformation = ex.Message;
-                severityType = NotificationSeverity.Error;
-            }
+            estaProcesando = false;
         }
 
-        // Sets Crud mode to List
-        crudMode = CrudMode.List;
-        rowsEmpresasExpandidas.Clear();
-
-        ShowNotification(new NotificationMessage
-            {
-                Severity = severityType,
-                Summary = summary,
-                Detail = actionInformation,
-                Duration = 4000
-            });
-
-        estaProcesando = false;
-        StateHasChanged();
-
-        await Task.Run(LoadMainEntityData);
     }
     /// <summary>
     /// Crud mode cancellation and default mode

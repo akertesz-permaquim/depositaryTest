@@ -347,6 +347,18 @@
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
 
+
+    protected override void OnInitialized()
+    {
+        //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
+        if (!LicenseController.IsValidLicenseAvailable() || LicenseController.GetLicenseRemainingDays() <= 0 || LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        {
+            NavManager.NavigateTo("RequerimientoLicencia/ReporteDetalleTransaccionesSobreView", true);
+        }
+
+        base.OnInitialized();
+    }
+
     protected override async Task OnInitializedAsync()
     {
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");

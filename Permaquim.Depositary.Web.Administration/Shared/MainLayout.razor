@@ -65,31 +65,30 @@
                     @if (dataMenues.Count > 0)
                     {
                         //Menues principales
-                        foreach (var menu in dataMenues.Where(x => x.DependeDe == null).OrderBy(x => x.MenuDescripcion))
+                        foreach (var menu in dataMenues.Where(x => x.DependeDe == null))
                         {
-                            if (!isLicensed)
+                            //Si no se tiene licencia full verificamos si se trata de un menu que requiere de la misma.
+                            if (tipoLicencia != "FULL")
                             {
-                                if (listaMenuesLicenciaPremium.Exists(x => x == menu.MenuNombre))
-                                    esMenuLicenciado = true;
+                                if (listaMenuesLicenciaFull.Exists(x => x == menu.Referencia))
+                                {
+                                    //Si requiere licencia full y no se la tiene lo marcamos como no accesible
+                                    menu.Accesible = false;
+                                }
                                 else
-                                    esMenuLicenciado = false;
-                            }
-                            else
-                                esMenuLicenciado = false;
-
-                            if (esMenuLicenciado)
-                            {
-                                iconoMenu = "lock";
+                                {
+                                    menu.Accesible = true;
+                                }
                             }
                             else
                             {
-                                iconoMenu = menu.Imagen;
+                                menu.Accesible = true;
                             }
 
                             switch (menu.TipoMenuId)
                             {
                                 case (Int64)SeguridadEntities.TipoMenu.Carpeta:
-                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@iconoMenu">
+                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon=@(menu.Accesible ? menu.Imagen : iconoMenuNoAccesible)>
                                         <ChildContent>
                                             @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId).OrderBy(x => x.MenuDescripcion))
                                             {
@@ -105,17 +104,7 @@
                                                         </RadzenPanelMenuItem>
                                                         break;
                                                     case (Int64)SeguridadEntities.TipoMenu.Pagina:
-
-                                                        if (esMenuLicenciado)
-                                                        {
-                                                            iconoMenu = "lock";
-                                                        }
-                                                        else
-                                                        {
-                                                            iconoMenu = menuDependiente.Imagen;
-                                                        }
-
-                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@iconoMenu" Path="@(menuDependiente.Referencia)" class="sub-menu">
+                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon=@(menu.Accesible ? menuDependiente.Imagen : iconoMenuNoAccesible) Path="@(menu.Accesible ? menuDependiente.Referencia : "RequerimientoLicencia/" + menuDependiente.Referencia)" class="sub-menu">
                                                         </RadzenPanelMenuItem>
                                                         break;
                                                 }
@@ -124,7 +113,7 @@
                                     </RadzenPanelMenuItem>
                                     break;
                                 case (Int64)SeguridadEntities.TipoMenu.Pagina:
-                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon="@iconoMenu" Path="@(menu.Referencia)">
+                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon=@(menu.Accesible ? menu.Imagen : iconoMenuNoAccesible) Path="@(menu.Accesible ? menu.Referencia : "RequerimientoLicencia/" + menu.Referencia)">
 
                                     </RadzenPanelMenuItem>
                                     break;
@@ -152,7 +141,6 @@
     private List<SeguridadEntities.Menu> dataMenues = new();
     private List<Entities.TextoLenguaje> dataLenguaje;
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
-    private string claseMenu = "";
     private string colorHeader;
     private string colorFondoMenuActivo;
     private string colorBordeMenuActivo;
@@ -162,10 +150,12 @@
     private string colorFondoMenuesPrimeraLinea;
     private string colorFondoMenuesSegundaLinea;
     private string colorFondoMenuesTerceraLinea;
-    private string iconoMenu = "";
-    private bool isLicensed = true;
-    private bool esMenuLicenciado;
-    private List<string> listaMenuesLicenciaPremium = new();
+    private string colorPrimarioSpinner;
+    private string colorSecundarioSpinner;
+    private string iconoMenuNoAccesible = "lock";
+    private bool tieneLicencia = false;
+    private string tipoLicencia = "";
+    private List<string> listaMenuesLicenciaFull = new();
 
     protected async System.Threading.Tasks.Task SidebarToggleClick(dynamic args)
     {
@@ -184,15 +174,27 @@
 
     protected override void OnInitialized()
     {
-        listaMenuesLicenciaPremium.Add("Dashboard");
-        listaMenuesLicenciaPremium.Add("Monitor");
-        listaMenuesLicenciaPremium.Add("Reportes");
+        listaMenuesLicenciaFull.Add("Dashboard");
+        listaMenuesLicenciaFull.Add("Monitor");
+        listaMenuesLicenciaFull.Add("Reportes");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            //Verificamos si se tiene licencia y si no esta vencida.
+            if (LicenseController.IsValidLicenseAvailable())
+                tieneLicencia = true;
+            else
+                tieneLicencia = false;
+
+            if (tieneLicencia)
+            {
+                //Verificamos el tipo de licencia
+                tipoLicencia = LicenseController.ReadAdditonalLicenseInformation("TYPE");
+            }
+
             dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
             if (dataUsuario == null)
@@ -212,13 +214,67 @@
                 colorFondoMenuesPrimeraLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesPrimeraLinea", true);
                 colorFondoMenuesSegundaLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesSegundaLinea", true);
                 colorFondoMenuesTerceraLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesTerceraLinea", true);
+                colorPrimarioSpinner = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorPrimarioSpinner", true);
+                colorSecundarioSpinner = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorSecundarioSpinner", true);
                 StateHasChanged();
             }
         }
     }
+
 }
 
 <style>
+    .spinner {
+        border: 16px solid @(colorSecundarioSpinner == "" ? "silver" : colorSecundarioSpinner);
+        border-top: 16px solid @(colorPrimarioSpinner == "" ? "blue" : colorPrimarioSpinner);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 700ms linear infinite;
+        top: 40%;
+        left: 55%;
+        position: absolute;
+        z-index: 3;
+    }
+
+    .spinnerCentrado {
+        border: 16px solid @(colorSecundarioSpinner == "" ? "silver" : colorSecundarioSpinner);
+        border-top: 16px solid @(colorPrimarioSpinner == "" ? "blue" : colorPrimarioSpinner);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 700ms linear infinite;
+        top: 45%;
+        left: 40%;
+        position: absolute;
+        z-index: 3;
+    }
+
+    .spinnerCentradoRelativo {
+        border: 16px solid @(colorSecundarioSpinner == "" ? "silver" : colorSecundarioSpinner);
+        border-top: 16px solid @(colorPrimarioSpinner == "" ? "blue" : colorPrimarioSpinner);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 700ms linear infinite;
+        top: 50%;
+        left: 50%;
+        position: relative;
+        z-index: 3;
+    }
+
+    .spinnerCentradoLateralRelativo {
+        border: 16px solid @(colorSecundarioSpinner == "" ? "silver" : colorSecundarioSpinner);
+        border-top: 16px solid @(colorPrimarioSpinner == "" ? "blue" : colorPrimarioSpinner);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 700ms linear infinite;
+        left: 50%;
+        position: relative;
+        z-index: 3;
+    }
+
     .mainHeader {
         background-color: @colorHeader;
         z-index: 3;

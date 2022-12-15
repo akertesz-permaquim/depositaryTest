@@ -33,15 +33,13 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             _hostApplicationLifetime = hostApplicationLifetime;
             _logger = logger;
-
-
         }
+
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
                 _workerTasks = AppConfiguration.GetWorkerTasks();
-                //_httpClient.Timeout = TimeSpan.FromMinutes(2);
             }
             catch (Exception ex)
             {
@@ -96,6 +94,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                             await Task.Delay(100, stoppingToken);
 
                         }
+
                         _hostApplicationLifetime.StopApplication();
                         return;
 
@@ -104,7 +103,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                 catch (Exception ex)
                 {
                     if (!stoppingToken.IsCancellationRequested)
-                        AuditController.LogToFile(ex);
+                    AuditController.LogToFile(ex);
                 }
 
                 _hostApplicationLifetime.StopApplication();
@@ -129,13 +128,14 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     var getResponse = await _httpClient.GetStringAsync(_baseUrl + item.Endpoint);
 
-
                     string getRresult = getResponse.ToString();
 
                     var ret = JsonConvert.DeserializeObject(getRresult, model.GetType());
 
-                    ((IModel)ret).Process();
+                    if (item.Log)
+                        AuditController.LogToFile(getRresult);
 
+                    ((IModel)ret).Process();
 
                 }
                 catch (Exception ex)
@@ -239,6 +239,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                     var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
 
                     string jsonToSend = JsonConvert.SerializeObject(model);
+
+                    if (item.Log)
+                        AuditController.LogToFile(jsonToSend);
 
                     _httpClient.DefaultRequestHeaders.Accept.Clear();
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));

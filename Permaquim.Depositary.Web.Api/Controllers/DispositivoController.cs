@@ -20,7 +20,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         private const string ENTIDAD_CONFIGURACIONDEPOSITARIO = "Dispositivo.ConfiguracionDepositario";
         private const string ENTIDAD_DEPOSITARIO = "Dispositivo.Depositario";
         private const string ENTIDAD_DEPOSITARIOCONTADORA = "Dispositivo.DepositarioContadora";
-        private const string ENTIDAD_DEPOSITARIOESTADO = "Dispositivo.DepositarioEstado";
+        //private const string ENTIDAD_DEPOSITARIOESTADO = "Dispositivo.DepositarioEstado";
         private const string ENTIDAD_DEPOSITARIOMONEDA = "Dispositivo.DepositarioMoneda";
         private const string ENTIDAD_DEPOSITARIOPLACA = "Dispositivo.DepositarioPlaca";
         private const string ENTIDAD_MARCA = "Dispositivo.Marca";
@@ -69,7 +69,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 if (SincroDispositivoDepositarioId.HasValue)
                 {
                     var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIO) ? data.SincroDates[ENTIDAD_DEPOSITARIO] : fechaSincronizacionDefault;
-                    data.Depositarios = ObtenerDepositariosBD(fechaDiferencial);
+                    data.Depositarios = ObtenerDepositariosBD(fechaDiferencial, depositarioId);
                     SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoDepositarioId.Value);
                 }
 
@@ -105,7 +105,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 if (SincroDispositivoPlacaDepositarioId.HasValue)
                 {
                     var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOPLACA) ? data.SincroDates[ENTIDAD_DEPOSITARIOPLACA] : fechaSincronizacionDefault;
-                    data.PlacasDepositarios = ObtenerPlacasBD(fechaDiferencial);
+                    data.PlacasDepositarios = ObtenerPlacasBD(fechaDiferencial, depositarioId);
                     SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoPlacaDepositarioId.Value);
                 }
 
@@ -114,7 +114,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 if (SincroDispositivoConfiguracionDepositarioId.HasValue)
                 {
                     var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CONFIGURACIONDEPOSITARIO) ? data.SincroDates[ENTIDAD_CONFIGURACIONDEPOSITARIO] : fechaSincronizacionDefault;
-                    data.ConfiguracionesDepositarios = ObtenerConfiguracionesBD(fechaDiferencial);
+                    data.ConfiguracionesDepositarios = ObtenerConfiguracionesBD(fechaDiferencial, depositarioId);
                     SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoConfiguracionDepositarioId.Value);
                 }
 
@@ -132,7 +132,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 if (SincroDispositivoContadoraDepositarioId.HasValue)
                 {
                     var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOCONTADORA) ? data.SincroDates[ENTIDAD_DEPOSITARIOCONTADORA] : fechaSincronizacionDefault;
-                    data.ContadorasDepositarios = ObtenerContadorasBD(fechaDiferencial);
+                    data.ContadorasDepositarios = ObtenerContadorasBD(fechaDiferencial, depositarioId);
                     SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoContadoraDepositarioId.Value);
                 }
 
@@ -150,22 +150,23 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 if (SincroDispositivoMonedaDepositarioId.HasValue)
                 {
                     var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOMONEDA) ? data.SincroDates[ENTIDAD_DEPOSITARIOMONEDA] : fechaSincronizacionDefault;
-                    data.MonedasDepositarios = ObtenerMonedasBD(fechaDiferencial);
+                    data.MonedasDepositarios = ObtenerMonedasBD(fechaDiferencial, depositarioId);
                     SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoMonedaDepositarioId.Value);
                 }
 
-                Int64? SincroDispositivoEstadoDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOESTADO);
+                //Int64? SincroDispositivoEstadoDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOESTADO);
 
-                if (SincroDispositivoEstadoDepositarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOESTADO) ? data.SincroDates[ENTIDAD_DEPOSITARIOESTADO] : fechaSincronizacionDefault;
-                    data.EstadosDepositarios = ObtenerEstadosBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoEstadoDepositarioId.Value);
-                }
+                //if (SincroDispositivoEstadoDepositarioId.HasValue)
+                //{
+                //    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOESTADO) ? data.SincroDates[ENTIDAD_DEPOSITARIOESTADO] : fechaSincronizacionDefault;
+                //    data.EstadosDepositarios = ObtenerEstadosBD(fechaDiferencial);
+                //    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoEstadoDepositarioId.Value);
+                //}
 
             }
             catch (Exception ex)
             {
+                AuditController.Log(ex);
                 return BadRequest(ex.Message);
             }
 
@@ -192,6 +193,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -225,6 +227,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -257,6 +260,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -289,6 +293,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -321,6 +326,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -353,6 +359,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -385,6 +392,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -416,6 +424,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -427,37 +436,37 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("ObtenerEstados")]
-        [Authorize]
-        public async Task<IActionResult> ObtenerEstados()
-        {
-            DispositivoDepositarioEstadoModel data = new();
+        //[HttpGet]
+        //[Route("ObtenerEstados")]
+        //[Authorize]
+        //public async Task<IActionResult> ObtenerEstados()
+        //{
+        //    DispositivoDepositarioEstadoModel data = new();
 
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
+        //    Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-            //Iniciamos un registro de sincronizacion de la entidad.
-            Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOESTADO);
+        //    //Iniciamos un registro de sincronizacion de la entidad.
+        //    Int64? SincronizacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOESTADO);
 
-            if (SincronizacionId.HasValue)
-            {
-                try
-                {
-                    data.EstadosDepositarios = ObtenerEstadosBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOESTADO));
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
+        //    if (SincronizacionId.HasValue)
+        //    {
+        //        try
+        //        {
+        //            data.EstadosDepositarios = ObtenerEstadosBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOESTADO));
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return BadRequest(ex.Message);
+        //        }
 
-                SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
-                return Ok(data);
-            }
-            else
-            {
-                return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
-            }
-        }
+        //        SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionId.Value);
+        //        return Ok(data);
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("Error al intentar generar registro de sincronizacion para el depositario");
+        //    }
+        //}
 
         [HttpGet]
         [Route("ObtenerPlacas")]
@@ -479,6 +488,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -511,6 +521,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -543,6 +554,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -575,6 +587,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -607,6 +620,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -639,6 +653,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -655,12 +670,16 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         #region Controllers
 
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> ObtenerDepositariosBD(DateTime fechaUltimaSincronizacion)
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> ObtenerDepositariosBD(DateTime fechaUltimaSincronizacion, Int64? depositarioId = null)
         {
             List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> result = new();
             DepositaryWebApi.Business.Tables.Dispositivo.Depositario oEntities = new();
+            oEntities.Where.OpenParentheses();
             oEntities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
             oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.CloseParentheses();
+            if (depositarioId.HasValue)
+                oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, depositarioId);
 
             try
             {
@@ -727,12 +746,16 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> ObtenerMonedasBD(DateTime fechaUltimaSincronizacion)
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> ObtenerMonedasBD(DateTime fechaUltimaSincronizacion, Int64? depositarioId = null)
         {
             List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> result = new();
             DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda oEntities = new();
+            oEntities.Where.OpenParentheses();
             oEntities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
             oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.CloseParentheses();
+            if (depositarioId.HasValue)
+                oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, depositarioId);
 
             try
             {
@@ -751,12 +774,16 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> ObtenerPlacasBD(DateTime fechaUltimaSincronizacion)
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> ObtenerPlacasBD(DateTime fechaUltimaSincronizacion, Int64? depositarioId = null)
         {
             List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> result = new();
             DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca oEntities = new();
+            oEntities.Where.OpenParentheses();
             oEntities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
             oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.CloseParentheses();
+            if (depositarioId.HasValue)
+                oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, depositarioId);
 
             try
             {
@@ -775,36 +802,39 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> ObtenerEstadosBD(DateTime fechaUltimaSincronizacion)
-        {
-            List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> result = new();
-            DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado oEntities = new();
-            oEntities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
-            oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+        //private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> ObtenerEstadosBD(DateTime fechaUltimaSincronizacion)
+        //{
+        //    List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> result = new();
+        //    DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado oEntities = new();
+        //    oEntities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado.ColumnEnum.Fecha, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
 
-            try
-            {
-                oEntities.Items();
-                if (oEntities.Result.Count > 0)
-                {
-                    foreach (var item in oEntities.Result)
-                    {
-                        result.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return result;
-        }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> ObtenerContadorasBD(DateTime fechaUltimaSincronizacion)
+        //    try
+        //    {
+        //        oEntities.Items();
+        //        if (oEntities.Result.Count > 0)
+        //        {
+        //            foreach (var item in oEntities.Result)
+        //            {
+        //                result.Add(item);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return result;
+        //}
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> ObtenerContadorasBD(DateTime fechaUltimaSincronizacion, Int64? depositarioId = null)
         {
             List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> result = new();
             DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora oEntities = new();
+            oEntities.Where.OpenParentheses();
             oEntities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
             oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.CloseParentheses();
+            if (depositarioId.HasValue)
+                oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, depositarioId);
 
             try
             {
@@ -823,12 +853,16 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             return result;
         }
-        private List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> ObtenerConfiguracionesBD(DateTime fechaUltimaSincronizacion)
+        private List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> ObtenerConfiguracionesBD(DateTime fechaUltimaSincronizacion, Int64? depositarioId = null)
         {
             List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> result = new();
             DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario oEntities = new();
+            oEntities.Where.OpenParentheses();
             oEntities.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
             oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.OR, DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaUltimaSincronizacion);
+            oEntities.Where.CloseParentheses();
+            if (depositarioId.HasValue)
+                oEntities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, depositarioId);
 
             try
             {

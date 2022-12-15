@@ -217,7 +217,7 @@
                             @if ((@Aplicacion_AplicacionId_entities.Count > 0 && @Rol_RolId_entities.FirstOrDefault(c => c.AplicacionId == AplicacionId) != null) || crudMode != CrudMode.Delete)
                             {
                                 var dataSet = crudMode == CrudMode.Add ? Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true) : Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true || x.Id == Rol_RolId_entities.Where(x => x.Id == UsuarioRol_entity.RolId).FirstOrDefault().AplicacionId);
-                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                <RadzenDropDown Name="AplicacionId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@AplicacionId"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
@@ -225,10 +225,15 @@
                             }
                             else
                             {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                <RadzenDropDown Name="AplicacionId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Aplicacion_AplicacionId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                            }
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenNumericRangeValidator Min="@(Aplicacion_AplicacionId_entities.Count > 0 ? Aplicacion_AplicacionId_entities.Min(x => x.Id) : 1)" Component="AplicacionId" Text="AplicacionId is required" Style="position: relative">
+                                </RadzenNumericRangeValidator>
                             }
                         </div>
                     </div>
@@ -240,7 +245,7 @@
                         <div class="col-md-4">
                             @if ((@Rol_RolId_entities.Count > 0 && @Rol_RolId_entities.FirstOrDefault(c => c.Id == @UsuarioRol_entity.RolId) != null) || crudMode != CrudMode.Delete)
                             {
-                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                <RadzenDropDown Name="RolId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioRol_entity.RolId)"
                                 Data=@dataSet_Rol TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectRol_RolIdValueChanged(args))
@@ -248,10 +253,15 @@
                             }
                             else
                             {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                <RadzenDropDown Name="RolId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Rol_RolId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectRol_RolIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                            }
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenNumericRangeValidator Min="@(Rol_RolId_entities.Count > 0 ? Rol_RolId_entities.Min(x => x.Id) : 1)" Component="RolId" Text="RolId is required" Style="position: relative">
+                                </RadzenNumericRangeValidator>
                             }
                         </div>
                     </div>

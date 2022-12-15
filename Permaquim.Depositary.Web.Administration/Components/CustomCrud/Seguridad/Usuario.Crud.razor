@@ -196,9 +196,11 @@
                                 </div>
                             </FilterTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="CantidadLogueosIncorrectos" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("CANTIDADLOGUEOSINCORRECTOS",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="CantidadLogueosIncorrectos" Title=@MultilenguajeController.ObtenerTextoPorClave("CANTIDADLOGUEOSINCORRECTOS",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center"
+                              Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CantidadLogueosIncorrectos",dataCustomizacionPagina.AtributosColumnas)>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Bloqueado" Filterable="true" FilterValue="@Bloqueado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center">
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Bloqueado" FilterValue="@Bloqueado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("BLOQUEADO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center"
+                              Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Bloqueado",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Bloqueado",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Bloqueado",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Bloqueado",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Bloqueado",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Bloqueado",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Bloqueado",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Bloqueado",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Bloqueado",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Bloqueado",dataCustomizacionPagina.AtributosColumnas)>
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Bloqueado Disabled="true">
                                 </RadzenCheckBox>
@@ -328,7 +330,7 @@
                                 @if ((@Empresa_EmpresaId_entities.Count > 0 && @Empresa_EmpresaId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.EmpresaId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Empresa_EmpresaId_entities.Where(x => x.Habilitado == true) : Empresa_EmpresaId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.EmpresaId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown Name="EmpresaId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.EmpresaId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEmpresa_EmpresaIdValueChanged(args))
@@ -336,10 +338,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="EmpresaId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Empresa_EmpresaId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectEmpresa_EmpresaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Empresa_EmpresaId_entities.Count > 0 ? Empresa_EmpresaId_entities.Min(x => x.Id) : 1)" Component="EmpresaId" Text="EmpresaId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -352,7 +359,7 @@
                                 @if ((@Lenguaje_LenguajeId_entities.Count > 0 && @Lenguaje_LenguajeId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.LenguajeId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true) : Lenguaje_LenguajeId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.LenguajeId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown Name="LenguajeId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.LenguajeId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
@@ -360,10 +367,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="LenguajeId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Lenguaje_LenguajeId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectLenguaje_LenguajeIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Lenguaje_LenguajeId_entities.Count > 0 ? Lenguaje_LenguajeId_entities.Min(x => x.Id) : 1)" Component="LenguajeId" Text="LenguajeId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -376,7 +388,7 @@
                                 @if ((@Perfil_PerfilId_entities.Count > 0 && @Perfil_PerfilId_entities.FirstOrDefault(c => c.Id == @Usuario_entity.PerfilId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Perfil_PerfilId_entities.Where(x => x.Habilitado == true) : Perfil_PerfilId_entities.Where(x => x.Habilitado == true || x.Id == Usuario_entity.PerfilId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown Name="PerfilId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Usuario_entity.PerfilId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPerfil_PerfilIdValueChanged(args))
@@ -384,10 +396,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="PerfilId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Perfil_PerfilId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPerfil_PerfilIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Perfil_PerfilId_entities.Count > 0 ? Perfil_PerfilId_entities.Min(x => x.Id) : 1)" Component="PerfilId" Text="PerfilId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Permaquim.Depositary.Sincronization.Console.Controllers
 {
@@ -49,6 +50,7 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
 
         public static void LogToFile(Exception ex)
         {
+
             string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
@@ -59,10 +61,12 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
 
             file.WriteLine("Exception at " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ms.f") + ":");
             file.WriteLine("Message : " + ex.Message + Environment.NewLine
-                + "StackTrace :" + ex.StackTrace); ;
+                + "StackTrace :" + ex.StackTrace);
             file.WriteLine("");
+            file.Flush();
             file.Close();
         }
+
         public static void LogToFile(string message)
         {
             string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
@@ -72,13 +76,14 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
             string filename = logDirectory + DateTime.Now.ToString("dd.MM.yyyy") + ".log";
 
             System.IO.StreamWriter file = new(filename, true);
+
             file.WriteLine("Message at " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss.ms.f") + ":");
             file.WriteLine(message);
             file.WriteLine("");
+            file.Flush();
             file.Close();
 
-            file.Flush();
-            file = null;
+            //file = null;
         }
     }
 }

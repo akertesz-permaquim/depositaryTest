@@ -2124,7 +2124,7 @@
 				Metodo = metodo,
 				Modulo = "",
 				TipoId = (long)logType,
-				UsuarioId = entity.UsuarioModificacion != null ? (long)entity.UsuarioModificacion : entity.UsuarioCreacion != null ? (long)entity.UsuarioCreacion : -1
+				UsuarioId = -1
 			});
 
 			return 0;

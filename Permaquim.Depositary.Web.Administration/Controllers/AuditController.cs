@@ -4,6 +4,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 {
     internal static class AuditController
     {
+        private static Depositary.Business.Tables.Auditoria.Log _bTablesLog = new();
         public enum LogTypeEnum
         {
             None,
@@ -18,7 +19,6 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             {
                 StackTrace stackTrace = new StackTrace(); //Para obtener el nombre del metodo que lo llamo
 
-                Depositary.Business.Tables.Auditoria.Log entities = new();
                 Depositary.Entities.Tables.Auditoria.Log entity = new()
                 {
                     AplicacionId = (Int64)SeguridadEntities.Aplicacion.AdministradorWeb,
@@ -32,7 +32,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
                 };
 
-                entities.Add(entity);
+                _bTablesLog.Add(entity);
             }
             catch
             {

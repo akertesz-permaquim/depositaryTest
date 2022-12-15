@@ -15,6 +15,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string AplicacionId = "AplicacionId";
 					public const string ValidacionDatoId = "ValidacionDatoId";
+					public const string Descripcion = "Descripcion";
 					public const string Clave = "Clave";
 					public const string Valor = "Valor";
 					public const string Habilitado = "Habilitado";
@@ -28,6 +29,7 @@ using System.Text;
 					Id,
 					AplicacionId,
 					ValidacionDatoId,
+					Descripcion,
 					Clave,
 					Valor,
 					Habilitado,
@@ -42,11 +44,12 @@ using System.Text;
                 public Configuracion()
                 {
                 }
-                public  Configuracion(Int64 AplicacionId,Int64 ValidacionDatoId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Configuracion(Int64 AplicacionId,Int64 ValidacionDatoId,String Descripcion,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.AplicacionId = AplicacionId;
                     this.ValidacionDatoId = ValidacionDatoId;
+                    this.Descripcion = Descripcion;
                     this.Clave = Clave;
                     this.Valor = Valor;
                     this.Habilitado = Habilitado;
@@ -67,6 +70,8 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("ConfiguracionValidacionDato")]// Object name in Database
              public Int64 ValidacionDatoId { get; set; }
+             [DataItemAttributeFieldName("Descripcion","Descripcion")]
+             public String Descripcion { get; set; }
              [DataItemAttributeFieldName("Clave","Clave")]
              public String Clave { get; set; }
              [DataItemAttributeFieldName("Valor","Valor")]
@@ -101,6 +106,7 @@ using System.Text;
 					public const string Id = "Id";
 					public const string EmpresaId = "EmpresaId";
 					public const string ValidacionDatoId = "ValidacionDatoId";
+					public const string Descripcion = "Descripcion";
 					public const string Clave = "Clave";
 					public const string Valor = "Valor";
 					public const string Habilitado = "Habilitado";
@@ -114,6 +120,7 @@ using System.Text;
 					Id,
 					EmpresaId,
 					ValidacionDatoId,
+					Descripcion,
 					Clave,
 					Valor,
 					Habilitado,
@@ -128,11 +135,12 @@ using System.Text;
                 public ConfiguracionEmpresa()
                 {
                 }
-                public  ConfiguracionEmpresa(Int64 EmpresaId,Int64 ValidacionDatoId,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  ConfiguracionEmpresa(Int64 EmpresaId,Int64 ValidacionDatoId,String Descripcion,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.EmpresaId = EmpresaId;
                     this.ValidacionDatoId = ValidacionDatoId;
+                    this.Descripcion = Descripcion;
                     this.Clave = Clave;
                     this.Valor = Valor;
                     this.Habilitado = Habilitado;
@@ -153,6 +161,8 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("ConfiguracionValidacionDato")]// Object name in Database
              public Int64 ValidacionDatoId { get; set; }
+             [DataItemAttributeFieldName("Descripcion","Descripcion")]
+             public String Descripcion { get; set; }
              [DataItemAttributeFieldName("Clave","Clave")]
              public String Clave { get; set; }
              [DataItemAttributeFieldName("Valor","Valor")]
@@ -1899,6 +1909,7 @@ using System.Text;
 					public const string NumeroSerie = "NumeroSerie";
 					public const string CodigoExterno = "CodigoExterno";
 					public const string ModeloId = "ModeloId";
+					public const string TipoContenedorId = "TipoContenedorId";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -1914,6 +1925,7 @@ using System.Text;
 					NumeroSerie,
 					CodigoExterno,
 					ModeloId,
+					TipoContenedorId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -1926,7 +1938,7 @@ using System.Text;
                 public Depositario()
                 {
                 }
-                public  Depositario(String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Depositario(String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Int64 TipoContenedorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -1935,6 +1947,7 @@ using System.Text;
                     this.NumeroSerie = NumeroSerie;
                     this.CodigoExterno = CodigoExterno;
                     this.ModeloId = ModeloId;
+                    this.TipoContenedorId = TipoContenedorId;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -1962,6 +1975,10 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Modelo")]// Object name in Database
              public Int64 ModeloId { get; set; }
+             [DataItemAttributeFieldName("TipoContenedorId","TipoContenedorId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("TipoContenedor")]// Object name in Database
+             public Int64 TipoContenedorId { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -2127,39 +2144,29 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string DepositarioId = "DepositarioId";
-					public const string SectorId = "SectorId";
-					public const string SucursalId = "SucursalId";
 					public const string ContadoraA = "ContadoraA";
 					public const string ContadoraB = "ContadoraB";
 					public const string Placa = "Placa";
 					public const string Puerta = "Puerta";
 					public const string Contenedor = "Contenedor";
+					public const string Impresora = "Impresora";
 					public const string FueraDeServicio = "FueraDeServicio";
 					public const string Observaciones = "Observaciones";
-					public const string Habilitado = "Habilitado";
-					public const string UsuarioCreacion = "UsuarioCreacion";
-					public const string FechaCreacion = "FechaCreacion";
-					public const string UsuarioModificacion = "UsuarioModificacion";
-					public const string FechaModificacion = "FechaModificacion";
+					public const string Fecha = "Fecha";
 				}
 				public enum FieldEnum : int
                 {
 					Id,
 					DepositarioId,
-					SectorId,
-					SucursalId,
 					ContadoraA,
 					ContadoraB,
 					Placa,
 					Puerta,
 					Contenedor,
+					Impresora,
 					FueraDeServicio,
 					Observaciones,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
+					Fecha
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -2167,24 +2174,19 @@ using System.Text;
                 public DepositarioEstado()
                 {
                 }
-                public  DepositarioEstado(Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,Boolean FueraDeServicio,String Observaciones,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  DepositarioEstado(Int64 DepositarioId,String ContadoraA,String ContadoraB,String Placa,String Puerta,String Contenedor,String Impresora,Boolean FueraDeServicio,String Observaciones,DateTime Fecha)
                 {
                     this.Id = Id;
                     this.DepositarioId = DepositarioId;
-                    this.SectorId = SectorId;
-                    this.SucursalId = SucursalId;
                     this.ContadoraA = ContadoraA;
                     this.ContadoraB = ContadoraB;
                     this.Placa = Placa;
                     this.Puerta = Puerta;
                     this.Contenedor = Contenedor;
+                    this.Impresora = Impresora;
                     this.FueraDeServicio = FueraDeServicio;
                     this.Observaciones = Observaciones;
-                    this.Habilitado = Habilitado;
-                    this.UsuarioCreacion = UsuarioCreacion;
-                    this.FechaCreacion = FechaCreacion;
-                    this.UsuarioModificacion = UsuarioModificacion;
-                    this.FechaModificacion = FechaModificacion;
+                    this.Fecha = Fecha;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -2194,10 +2196,6 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
              public Int64 DepositarioId { get; set; }
-             [DataItemAttributeFieldName("SectorId","SectorId")]
-             public Int64 SectorId { get; set; }
-             [DataItemAttributeFieldName("SucursalId","SucursalId")]
-             public Int64 SucursalId { get; set; }
              [DataItemAttributeFieldName("ContadoraA","ContadoraA")]
              public String ContadoraA { get; set; }
              [DataItemAttributeFieldName("ContadoraB","ContadoraB")]
@@ -2208,24 +2206,14 @@ using System.Text;
              public String Puerta { get; set; }
              [DataItemAttributeFieldName("Contenedor","Contenedor")]
              public String Contenedor { get; set; }
+             [DataItemAttributeFieldName("Impresora","Impresora")]
+             public String Impresora { get; set; }
              [DataItemAttributeFieldName("FueraDeServicio","FueraDeServicio")]
              public Boolean FueraDeServicio { get; set; }
              [DataItemAttributeFieldName("Observaciones","Observaciones")]
              public String Observaciones { get; set; }
-             [DataItemAttributeFieldName("Habilitado","Habilitado")]
-             public Boolean Habilitado { get; set; }
-             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public Int64 UsuarioCreacion { get; set; }
-             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
-             public DateTime FechaCreacion { get; set; }
-             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public Int64? UsuarioModificacion { get; set; }
-             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
-             public DateTime? FechaModificacion { get; set; }
+             [DataItemAttributeFieldName("Fecha","Fecha")]
+             public DateTime Fecha { get; set; }
 				
 			} //Class DepositarioEstado 
 } //namespace DepositaryWebApi.Entities.Tables.Dispositivo

@@ -75,6 +75,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             catch (Exception ex)
             {
+                AuditController.Log(ex);
                 return BadRequest(ex.Message);
             }
 
@@ -101,6 +102,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -133,6 +135,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -165,6 +168,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
@@ -197,6 +201,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
 
