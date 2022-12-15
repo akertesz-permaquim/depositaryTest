@@ -11,7 +11,7 @@ namespace Permaquim.Depositary.UI.Desktop
     {
         CounterDevice _device = null;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
-
+        private const string CAMBIO_DE_TURNO = "Cambio de turno";
         private Permaquim.Depositario.Entities.Tables.Operacion.Turno _turnChange = new();
 
         public TurnChangeForm()
@@ -79,6 +79,7 @@ namespace Permaquim.Depositary.UI.Desktop
             StyleController.SetControlStyle(OperationsHeaderGridView);
             StyleController.SetControlStyle(OperationsDetailGridView);
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
+            TurnLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
 
         }
         private void LoadMultiLanguageItems()
@@ -128,6 +129,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
+                AuditController.Log(LogTypeEnum.Navigation, CAMBIO_DE_TURNO, CAMBIO_DE_TURNO);
                 LoadOperationsHeader();
                 SetinformationMessage();
                 this.MainPanel.Enabled = true;

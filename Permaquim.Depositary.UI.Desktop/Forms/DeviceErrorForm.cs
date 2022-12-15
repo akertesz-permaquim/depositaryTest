@@ -24,6 +24,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         private const string COUNTINGERROR = "CountingError; ";
         private const string JAMMING = "Jamming; ";
         private const string ESCROWBILLPRESENT = "EscrowBillPresent; ";
+        private const string CASSETTE_FULL = "CassetteFull;";
 
         string _errorInformation = String.Empty;
         System.Windows.Forms.Button _resetButton = null;
@@ -80,6 +81,9 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                     _errorInformation += JAMMING;
                 if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                     _errorInformation += ESCROWBILLPRESENT;
+                if (_device.StateResultProperty.DoorStateInformation.CassetteFull)
+                    _errorInformation += CASSETTE_FULL;
+
 
                 InformationLabel.Text = _errorInformation;
 
@@ -156,7 +160,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                     default:
                         break;
                 }
-           
+
             if (_device.StateResultProperty.ErrorStateInformation.AbnormalStorage)
                 switch ((DatabaseController.CurrentDepositary.
                          ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
@@ -185,9 +189,15 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                     default:
                         break;
                 }
+
+            if (_device.StateResultProperty.DoorStateInformation.CassetteFull)
+            {
+                _device.ResetCassetteFull();
+            }
+
             this.DialogResult = DialogResult.OK;
 
-         }
+        }
         #endregion
 
         private void DeviceErrorForm_VisibleChanged(object sender, EventArgs e)

@@ -124,6 +124,23 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return bitmap;
         }
 
+        public static Bitmap CreateWhiteBitmap()
+        {
+            var bitmap = new Bitmap(640, 480);
+
+            var color = Color.White;
+
+            for (var x = 0; x < bitmap.Width; x++)
+            {
+                for (var y = 0; y < bitmap.Height; y++)
+                {
+                    bitmap.SetPixel(x, y, color);
+                }
+            }
+
+            return bitmap;
+        }
+
         public static void SetControlStyle(DataGridView grid)
         {
 
@@ -131,13 +148,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
             grid.ColumnHeadersDefaultCellStyle.BackColor =
                    StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor =
+                  StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
             grid.BackgroundColor =
                 StyleController.GetColor(Enumerations.ColorNameEnum.FondoGrilla);
             grid.DefaultCellStyle.BackColor =
                 StyleController.GetColor(Enumerations.ColorNameEnum.FondoFilasGrilla);
             grid.DefaultCellStyle.ForeColor =
                 StyleController.GetColor(Enumerations.ColorNameEnum.TextoFilasGrilla);
-            
+            grid.DefaultCellStyle.SelectionBackColor =
+                StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
 
         }
 

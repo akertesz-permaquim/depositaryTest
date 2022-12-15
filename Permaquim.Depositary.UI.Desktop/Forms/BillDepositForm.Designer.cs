@@ -42,10 +42,11 @@
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventCheckbox = new System.Windows.Forms.CheckBox();
-            this.RemainingTimeLabel = new System.Windows.Forms.Label();
+            this.GrandTotalLabel = new System.Windows.Forms.Label();
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
+            this.checkBoxEscrow = new System.Windows.Forms.CheckBox();
             this.CollectEndCheckBox = new System.Windows.Forms.CheckBox();
             this.StoreEndCheckBox = new System.Windows.Forms.CheckBox();
             this.CountEndCheckBox = new System.Windows.Forms.CheckBox();
@@ -63,7 +64,6 @@
             this.DeviceModeLabel = new System.Windows.Forms.Label();
             this.GeneralStatusLabel = new System.Windows.Forms.Label();
             this.MonitorGroupcheckbox = new System.Windows.Forms.CheckBox();
-            this.checkBoxEscrow = new System.Windows.Forms.CheckBox();
             this.MainPanel.SuspendLayout();
             this.ButtonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DenominationsGridView)).BeginInit();
@@ -76,12 +76,12 @@
             this.MainPanel.Controls.Add(this.ButtonsPanel);
             this.MainPanel.Controls.Add(this.DenominationsGridView);
             this.MainPanel.Controls.Add(this.EventCheckbox);
-            this.MainPanel.Controls.Add(this.RemainingTimeLabel);
+            this.MainPanel.Controls.Add(this.GrandTotalLabel);
             this.MainPanel.Controls.Add(this.SubtotalLabel);
             this.MainPanel.Controls.Add(this.CurrencyLabel);
             this.MainPanel.Location = new System.Drawing.Point(1, 40);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(704, 612);
+            this.MainPanel.Size = new System.Drawing.Size(708, 612);
             this.MainPanel.TabIndex = 0;
             // 
             // ButtonsPanel
@@ -214,7 +214,7 @@
             this.DenominationsGridView.RowTemplate.ReadOnly = true;
             this.DenominationsGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DenominationsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.DenominationsGridView.Size = new System.Drawing.Size(697, 440);
+            this.DenominationsGridView.Size = new System.Drawing.Size(698, 440);
             this.DenominationsGridView.TabIndex = 145;
             this.DenominationsGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DenominationsGridView_CellPainting);
             // 
@@ -266,22 +266,22 @@
             this.EventCheckbox.UseVisualStyleBackColor = false;
             this.EventCheckbox.Click += new System.EventHandler(this.EventCheckbox_CheckedChanged);
             // 
-            // RemainingTimeLabel
+            // GrandTotalLabel
             // 
-            this.RemainingTimeLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.RemainingTimeLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RemainingTimeLabel.ForeColor = System.Drawing.Color.White;
-            this.RemainingTimeLabel.Location = new System.Drawing.Point(451, 12);
-            this.RemainingTimeLabel.Name = "RemainingTimeLabel";
-            this.RemainingTimeLabel.Size = new System.Drawing.Size(250, 27);
-            this.RemainingTimeLabel.TabIndex = 141;
-            this.RemainingTimeLabel.Text = "*";
-            this.RemainingTimeLabel.Click += new System.EventHandler(this.RemainingTimeLabel_Click);
+            this.GrandTotalLabel.BackColor = System.Drawing.Color.SteelBlue;
+            this.GrandTotalLabel.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.GrandTotalLabel.ForeColor = System.Drawing.Color.White;
+            this.GrandTotalLabel.Location = new System.Drawing.Point(451, 12);
+            this.GrandTotalLabel.Name = "GrandTotalLabel";
+            this.GrandTotalLabel.Size = new System.Drawing.Size(250, 27);
+            this.GrandTotalLabel.TabIndex = 141;
+            this.GrandTotalLabel.Text = "*";
+            this.GrandTotalLabel.Click += new System.EventHandler(this.RemainingTimeLabel_Click);
             // 
             // SubtotalLabel
             // 
             this.SubtotalLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SubtotalLabel.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SubtotalLabel.ForeColor = System.Drawing.Color.White;
             this.SubtotalLabel.Location = new System.Drawing.Point(203, 12);
             this.SubtotalLabel.Name = "SubtotalLabel";
@@ -292,9 +292,9 @@
             // CurrencyLabel
             // 
             this.CurrencyLabel.BackColor = System.Drawing.Color.SteelBlue;
-            this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CurrencyLabel.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CurrencyLabel.ForeColor = System.Drawing.Color.White;
-            this.CurrencyLabel.Location = new System.Drawing.Point(1, 12);
+            this.CurrencyLabel.Location = new System.Drawing.Point(2, 12);
             this.CurrencyLabel.Name = "CurrencyLabel";
             this.CurrencyLabel.Size = new System.Drawing.Size(201, 27);
             this.CurrencyLabel.TabIndex = 139;
@@ -329,6 +329,19 @@
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
             this.MonitorGroupBox.Visible = false;
+            // 
+            // checkBoxEscrow
+            // 
+            this.checkBoxEscrow.AutoSize = true;
+            this.checkBoxEscrow.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxEscrow.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxEscrow.ForeColor = System.Drawing.Color.SteelBlue;
+            this.checkBoxEscrow.Location = new System.Drawing.Point(8, 432);
+            this.checkBoxEscrow.Name = "checkBoxEscrow";
+            this.checkBoxEscrow.Size = new System.Drawing.Size(66, 17);
+            this.checkBoxEscrow.TabIndex = 41;
+            this.checkBoxEscrow.Text = "Escrow";
+            this.checkBoxEscrow.UseVisualStyleBackColor = false;
             // 
             // CollectEndCheckBox
             // 
@@ -551,19 +564,6 @@
             this.MonitorGroupcheckbox.Visible = false;
             this.MonitorGroupcheckbox.CheckStateChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
             // 
-            // checkBoxEscrow
-            // 
-            this.checkBoxEscrow.AutoSize = true;
-            this.checkBoxEscrow.BackColor = System.Drawing.Color.Transparent;
-            this.checkBoxEscrow.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxEscrow.ForeColor = System.Drawing.Color.SteelBlue;
-            this.checkBoxEscrow.Location = new System.Drawing.Point(8, 432);
-            this.checkBoxEscrow.Name = "checkBoxEscrow";
-            this.checkBoxEscrow.Size = new System.Drawing.Size(66, 17);
-            this.checkBoxEscrow.TabIndex = 41;
-            this.checkBoxEscrow.Text = "Escrow";
-            this.checkBoxEscrow.UseVisualStyleBackColor = false;
-            // 
             // BillDepositForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -599,7 +599,7 @@
         private Panel MainPanel;
         private DataGridView DenominationsGridView;
         private CheckBox EventCheckbox;
-        private Label RemainingTimeLabel;
+        private Label GrandTotalLabel;
         private Label SubtotalLabel;
         private Label CurrencyLabel;
         private GroupBox MonitorGroupBox;

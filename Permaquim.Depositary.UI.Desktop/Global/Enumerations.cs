@@ -209,6 +209,7 @@
             SIN_USUARIO,
             TURNO,
             TOTAL,
+            TOTAL_GENERAL,
             TOTAL_VALIDADO,
             TOTAL_A_VALIDAR,
             TIPOVALOR,
@@ -267,6 +268,7 @@
             CIERRE_DIARIO,
             CANTIDADDECLARADA,
             CAMBIO_TURNO,
+            CASSETTE_FULL,
             REPORTES,
             CONTENIDO_BOLSA,
             HISTORICO_BOLSA,
@@ -346,7 +348,8 @@
             HistoricoDeBolsas,
             HistoricoDeTurnos ,
             HistoricoDeCierreDiario,
-            Reset
+            Reset,
+            HistoricoTransaccionesUsuario
 
         }
 
@@ -367,7 +370,8 @@
             Estado_Fuera_De_Servicio,
             Error_De_Comunicacion,
             Apertura_de_Puerta,
-            Cambio_de_Contenedor_Sin_usuario
+            Cambio_de_Contenedor_Sin_usuario,
+            Cassette_Full
         }
 
         public enum ContainerChangeEventEnum

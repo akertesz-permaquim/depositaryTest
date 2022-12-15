@@ -37,6 +37,7 @@
             this.GatelStatusLabel = new System.Windows.Forms.Label();
             this.InformationLabel = new System.Windows.Forms.Label();
             this.EventCheckbox = new System.Windows.Forms.CheckBox();
+            this.ProcessStatusLabel = new System.Windows.Forms.Label();
             this.MonitorGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             // 
             this.MonitorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MonitorGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.MonitorGroupBox.Controls.Add(this.ProcessStatusLabel);
             this.MonitorGroupBox.Controls.Add(this.LockStateLabel);
             this.MonitorGroupBox.Controls.Add(this.BagAproveStatelabel);
             this.MonitorGroupBox.Controls.Add(this.ShutterStatusLabel);
@@ -60,7 +62,7 @@
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonitorGroupBox.Location = new System.Drawing.Point(640, 184);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
-            this.MonitorGroupBox.Size = new System.Drawing.Size(232, 168);
+            this.MonitorGroupBox.Size = new System.Drawing.Size(232, 208);
             this.MonitorGroupBox.TabIndex = 100;
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
@@ -153,6 +155,18 @@
             this.EventCheckbox.UseVisualStyleBackColor = false;
             this.EventCheckbox.CheckedChanged += new System.EventHandler(this.EventCheckbox_CheckedChanged);
             // 
+            // ProcessStatusLabel
+            // 
+            this.ProcessStatusLabel.AutoSize = true;
+            this.ProcessStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ProcessStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ProcessStatusLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.ProcessStatusLabel.Location = new System.Drawing.Point(16, 176);
+            this.ProcessStatusLabel.Name = "ProcessStatusLabel";
+            this.ProcessStatusLabel.Size = new System.Drawing.Size(91, 13);
+            this.ProcessStatusLabel.TabIndex = 146;
+            this.ProcessStatusLabel.Text = "Process Status";
+            // 
             // BagExtractionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -185,5 +199,6 @@
         private Label LockStateLabel;
         private Label InformationLabel;
         private CheckBox EventCheckbox;
+        private Label ProcessStatusLabel;
     }
 }

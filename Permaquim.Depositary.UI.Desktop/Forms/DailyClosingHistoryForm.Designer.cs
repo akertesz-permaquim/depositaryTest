@@ -61,7 +61,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(392, 592);
+            this.BackButton.Location = new System.Drawing.Point(392, 560);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(240, 55);
             this.BackButton.TabIndex = 179;
@@ -205,7 +205,7 @@
             this.DetailPanel.Controls.Add(this.PrintButton);
             this.DetailPanel.Controls.Add(this.AcceptButton);
             this.DetailPanel.Controls.Add(this.DailyClosingDetailGridView);
-            this.DetailPanel.Location = new System.Drawing.Point(16, 240);
+            this.DetailPanel.Location = new System.Drawing.Point(16, 104);
             this.DetailPanel.Name = "DetailPanel";
             this.DetailPanel.Size = new System.Drawing.Size(920, 392);
             this.DetailPanel.TabIndex = 184;

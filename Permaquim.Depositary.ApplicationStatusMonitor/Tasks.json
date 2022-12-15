@@ -1,7 +1,7 @@
 [
   {
     "ExecutionOrder": 1,
-    "Target": "C:\\Test.exe",
+    "Target": "C:\\Windows\\notepad.exe",
     "WorkerTaskType": 2
   },
   {

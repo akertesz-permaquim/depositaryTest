@@ -8380,6 +8380,7 @@ using System.Text;
 					NumeroSerie,
 					CodigoExterno,
 					ModeloId,
+					TipoContenedorId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -8432,15 +8433,16 @@ using System.Text;
          /// <param name='NumeroSerie'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='ModeloId'></param>
+         /// <param name='TipoContenedorId'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Dispositivo.Depositario</returns>
-			public Entities.Tables.Dispositivo.Depositario Add(String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Dispositivo.Depositario Add(String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Int64 TipoContenedorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Dispositivo.Depositario)base.Add(new Entities.Tables.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Dispositivo.Depositario)base.Add(new Entities.Tables.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,TipoContenedorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Dispositivo.Depositario> Items()
             {
@@ -8480,13 +8482,14 @@ using System.Text;
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
             /// <param name="ModeloId"></param>
+            /// <param name="TipoContenedorId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? ModeloId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? ModeloId,Int64? TipoContenedorId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -8570,6 +8573,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ModeloId);
+                    }
+                   
+                }
+                if (TipoContenedorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoContenedorId, sqlEnum.OperandEnum.Equal, TipoContenedorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
                     }
                    
                 }
@@ -8679,15 +8694,16 @@ using System.Text;
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
             /// <param name="ModeloId"></param>
+            /// <param name="TipoContenedorId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 sectorid,String numeroserie,String codigoexterno,Int64 modeloid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,String descripcion,Int64 sectorid,String numeroserie,String codigoexterno,Int64 modeloid,Int64 tipocontenedorid,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Dispositivo.Depositario {Id = id,Nombre = nombre,Descripcion = descripcion,SectorId = sectorid,NumeroSerie = numeroserie,CodigoExterno = codigoexterno,ModeloId = modeloid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Dispositivo.Depositario {Id = id,Nombre = nombre,Descripcion = descripcion,SectorId = sectorid,NumeroSerie = numeroserie,CodigoExterno = codigoexterno,ModeloId = modeloid,TipoContenedorId = tipocontenedorid,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Dispositivo.Depositario

@@ -18,13 +18,13 @@ namespace Permaquim.Depositary.UI.Desktop
         private long _operationId;
         private long _operationTypeId;
 
-        public OperationsHistoryForm()
+        public OperationsHistoryForm(bool singleUser = false)
         {
             InitializeComponent();
             CenterPanel();
             LoadStyles();
             LoadMultilanguageItems();
-            LoadFilterControls();
+            LoadFilterControls(singleUser);
             InitializeOperationsHeaderGridView();
 
             TimeOutController.Reset();
@@ -109,6 +109,14 @@ namespace Permaquim.Depositary.UI.Desktop
             AcceptButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAceptar);
             PrintButton.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.BotonAlternativo);
 
+
+            FromDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            ToDateTimeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            UserLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            TurnLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            UserLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+            TypeLabel.BackColor = StyleController.GetColor(Enumerations.ColorNameEnum.CabeceraGrilla);
+
             StyleController.SetControlStyle(OperationsHeaderGridView);
             StyleController.SetControlStyle(OperationsDetailGridView);
         }
@@ -133,17 +141,23 @@ namespace Permaquim.Depositary.UI.Desktop
               (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag);
         }
 
-        public void LoadFilterControls()
+        public void LoadFilterControls(bool singleUser)
         {
-            var userList = DatabaseController.GetUserList();
+            var userList = DatabaseController.GetUserList(false);
 
-            userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
+            if (!singleUser)
             {
-                NombreApellido = TODOS,
-                Id = -1
-            });
+                userList.Insert(0, new Depositario.Entities.Tables.Seguridad.Usuario()
+                {
+                    NombreApellido = TODOS,
+                    Id = -1
+                });
+            }
 
-            UserComboBox.DataSource = userList;
+            if (singleUser)
+                UserComboBox.DataSource = DatabaseController.GetUserList(true); 
+            else
+                UserComboBox.DataSource = userList;
 
             UserComboBox.DisplayMember = NOMBREAPELLIDO;
             UserComboBox.ValueMember = ID;

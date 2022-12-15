@@ -11,7 +11,7 @@ namespace Permaquim.Depositary.UI.Desktop
     {
         public CounterDevice _device { get; set; }
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
-
+        private const string CIERRE_DIARIO = "Cierre diario";
         private List<DailyClosingItem> _dailyClosingItems = new();
         private Depositario.Entities.Tables.Operacion.CierreDiario _currentDailyclosing = new();
 
@@ -208,6 +208,7 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
+                AuditController.Log(LogTypeEnum.Navigation, CIERRE_DIARIO, CIERRE_DIARIO);
                 InitializeDenominationsGridViewDetailGridView();
                 LoadDailyClosingItems();
                 this.MainPanel.Enabled = true;

@@ -32,11 +32,16 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+
+          
             try
             {
                 _workerTasks = AppConfiguration.GetWorkerTasks(_configuration.GetSection("TaskJson").Get<string>());
                 while (!stoppingToken.IsCancellationRequested)
                 {
+
+                    NativeMethods.LaunchProcess(@"C:\Windows\notepad.exe");
+
                     foreach (var item in _workerTasks)
                     {
                         switch (item.WorkerTaskType)
@@ -78,25 +83,28 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
                                 if (!isUp)
                                 {
+
+                                    NativeMethods.LaunchProcess(@"C:\Windows\notepad.exe");
+
                                     //Thread.Sleep(_configuration.GetSection("TaskDelay").Get<int>());
                                     if (item.ProcessId == 0) Log("Starting process " + item.ProcessName + "...");
                                     //item.ProcessId = Process.Start(item.Target).Id;
 
-                                    System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                                    System.Security.SecureString ssPwd = new System.Security.SecureString();
-                                    proc.StartInfo.UseShellExecute = true;
-                                    proc.StartInfo.FileName = item.Target;
-                                    proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(item.Target);
-                                    proc.StartInfo.UserName = "SB1015-I5";
-                                    string password = "admin";
-                                    for (int x = 0; x < password.Length; x++)
-                                    {
-                                        ssPwd.AppendChar(password[x]);
-                                    }
-                                    password = "";
-                                    proc.StartInfo.Password = ssPwd;
-                                    proc.Start();
-                                    item.ProcessId = proc.Id;
+                                    //System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                                    //System.Security.SecureString ssPwd = new System.Security.SecureString();
+                                    //proc.StartInfo.UseShellExecute = true;
+                                    //proc.StartInfo.FileName = item.Target;
+                                    //proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(item.Target);
+                                    //proc.StartInfo.UserName = "SB1015-I5";
+                                    //string password = "admin";
+                                    //for (int x = 0; x < password.Length; x++)
+                                    //{
+                                    //    ssPwd.AppendChar(password[x]);
+                                    //}
+                                    //password = "";
+                                    //proc.StartInfo.Password = ssPwd;
+                                    //proc.Start();
+                                    //item.ProcessId = proc.Id;
 
                                 }
                                 break;
