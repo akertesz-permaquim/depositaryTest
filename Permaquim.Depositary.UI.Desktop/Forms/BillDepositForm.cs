@@ -224,8 +224,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     TimeOutController.Reset();
                     return;
                 }
+
+
                 if (_device.StateResultProperty != null && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                    || _currentCountingAmount > 0)
+                || _currentCountingAmount > 0)
                 {
                     ConfirmDeposit();
                     _operationStatus.DepositConfirmed = true;
@@ -237,6 +239,10 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
                 else
                 {
+                    if (_device.StateResultProperty != null && _operationStatus.CurrentTransactionId != 0)
+                    {
+                        PrintTicket();
+                    }
                     if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                     {
                         _device.CloseEscrow();

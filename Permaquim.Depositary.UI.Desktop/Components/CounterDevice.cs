@@ -70,9 +70,11 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public event DeviceDataReceivedEventHandler IOboardDeviceDataReceived;
 
         public delegate void DeviceErrorReceivedEventHandler(object sender, DeviceErrorEventArgs args);
-
+       
         public event DeviceErrorReceivedEventHandler DeviceErrorReceived;
 
+        public delegate void DevicendDepositEventHandler(object sender, DeviceEndDepositEventArgs args);
+        public event DevicendDepositEventHandler DevicEndDeposit;
         #endregion
 
         #region Constants
@@ -1358,6 +1360,25 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                         statesResult.EndInformation.AbnormalEnd = EndInformationBitArray[1];
                         statesResult.EndInformation.CountEnd = EndInformationBitArray[0];
 
+
+                        // Acá se dispara el evento de fin de depósito
+                        if (statesResult.EndInformation.StoreEnd)
+                        {
+                            if (DevicEndDeposit != null)
+                            {
+
+                                DeviceEndDepositEventArgs args = new()
+                                {
+                                     EndDetected = true,
+                                    EndDescription = "StoreEnd"
+                                };
+
+                                DevicEndDeposit(this, args);
+                            }
+
+                        }
+
+
                         BitArray DeviceStateInformationBitArray = new(new byte[1] { numArray[6] });
                         statesResult.DeviceStateInformation.RejectFull = DeviceStateInformationBitArray[5];
                         statesResult.DeviceStateInformation.StackerFull = DeviceStateInformationBitArray[4];
@@ -1748,6 +1769,13 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         // Received message
         public string Message = string.Empty;
+    }
+
+    public class DeviceEndDepositEventArgs : EventArgs
+    {
+        public bool EndDetected = false;
+        public string EndDescription = string.Empty;
+
     }
 
     public class DeviceErrorEventArgs : EventArgs

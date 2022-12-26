@@ -241,6 +241,7 @@
             INGRESAR_BILLETES,
             HISTORICO_OPERACIONES,
             FINALIZADA,
+            ES_DEPOSITO_AUTOMATICO,
             FECHA,
             FECHA_TURNO,
             FECHA_APERTURA,
