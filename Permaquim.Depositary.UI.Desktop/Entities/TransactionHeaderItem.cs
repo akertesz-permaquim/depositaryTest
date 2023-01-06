@@ -21,5 +21,6 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         public double TotalAValidar { get; set; }
         public DateTime Fecha { get; set; }
         public bool Finalizada { get; set; }
+        public bool EsDepositoAutomatico { get; set; }
     }
 }

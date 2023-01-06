@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.CustomExceptions;
+using System;
 using System.Collections;
 using System.Configuration;
 using System.IO.Ports;
@@ -75,6 +76,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         public delegate void DevicendDepositEventHandler(object sender, DeviceEndDepositEventArgs args);
         public event DevicendDepositEventHandler DevicEndDeposit;
+
+        public delegate void DeviceStateChangeEventHandler(object sender, DeviceStateChangeEventArgs args);
+        public event DeviceStateChangeEventHandler DeviceStateChange;
+
         #endregion
 
         #region Constants
@@ -416,7 +421,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (_buffer.Count > 20)
                     _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
                 if (_buffer.Count > 100)
-                    DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
+                    // DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
+                    this.DenominationResultProperty.DenominationArray = ParseDenomination(_buffer.ToArray<byte>());
                 _counterLastBytesRead = _buffer.Count;
 
                 _buffer.Clear();
@@ -1352,6 +1358,23 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                         statesResult.StatusInformation.OperatingState = (StatusInformation.State)BinaryToDecimal(StateInput);
 
+
+                        if (DeviceStateChange != null)
+                        {
+
+                            string stateName = Enum.GetName(typeof(StatusInformation.State), 
+                                statesResult.StatusInformation.OperatingState);
+
+                            DeviceStateChangeEventArgs args = new()
+                            {
+                                 StateName = stateName,
+                                StateDescription = stateName
+                            };
+
+                            DeviceStateChange(this, args);
+                        }
+
+
                         BitArray EndInformationBitArray = new(new byte[1] { numArray[5] });
                         statesResult.EndInformation.CollectEnd = EndInformationBitArray[5];
                         statesResult.EndInformation.StoreEnd = EndInformationBitArray[4];
@@ -1784,6 +1807,14 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public string ErrorDescription = string.Empty;
 
     }
+
+    public class DeviceStateChangeEventArgs : EventArgs
+    {
+        public string StateName = string.Empty;
+        public string StateDescription = string.Empty;
+
+    }
+
     public class ECErrorArgs : EventArgs
     {
         public int Errorcode { get; set; }

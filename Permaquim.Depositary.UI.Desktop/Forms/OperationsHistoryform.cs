@@ -551,7 +551,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalValidado = item.TotalValidado,
                     Turno = esquemaDetalleTurno.EsquemaTurnoId.Nombre + " - " + esquemaDetalleTurno.Nombre,
                     Usuario = item.UsuarioId.NombreApellido,
-                    UsuarioCuenta = item.CuentaId == null ? null : item.CuentaId.Numero
+                    UsuarioCuenta = item.CuentaId == null ? null : item.CuentaId.Numero,
+                    EsDepositoAutomatico= item.EsDepositoAutomatico,
                 }); ;
             }
 
