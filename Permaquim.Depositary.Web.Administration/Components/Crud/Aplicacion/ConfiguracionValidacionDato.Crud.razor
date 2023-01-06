@@ -188,17 +188,22 @@
                      @if((@ConfiguracionTipoDato_TipoDatoId_entities.Count > 0 && @ConfiguracionTipoDato_TipoDatoId_entities.FirstOrDefault( c => c.Id == @ConfiguracionValidacionDato_entity.TipoDatoId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? ConfiguracionTipoDato_TipoDatoId_entities.Where(x => x.Habilitado == true) : ConfiguracionTipoDato_TipoDatoId_entities.Where(x => x.Habilitado == true || x.Id == ConfiguracionValidacionDato_entity.TipoDatoId);
-                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ConfiguracionValidacionDato_entity.TipoDatoId)"
+                         <RadzenDropDown  Name="TipoDatoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ConfiguracionValidacionDato_entity.TipoDatoId)"
                                      Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectConfiguracionTipoDato_TipoDatoIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                      }
                      else
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                         <RadzenDropDown  Name="TipoDatoId" AllowClear="true" TValue="Int64" Class="w-100" 
                                      Data=@ConfiguracionTipoDato_TipoDatoId_entities TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectConfiguracionTipoDato_TipoDatoIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                     }
+                    @if (@crudMode != CrudMode.Delete)
+                    {
+                        <RadzenNumericRangeValidator Min="@(ConfiguracionTipoDato_TipoDatoId_entities.Count > 0 ? ConfiguracionTipoDato_TipoDatoId_entities.Min(x => x.Id) : 1)" Component ="TipoDatoId" Text="TipoDatoId is required" Style="position: relative">
+                        </RadzenNumericRangeValidator>
                     }
                 </div>
               </div>

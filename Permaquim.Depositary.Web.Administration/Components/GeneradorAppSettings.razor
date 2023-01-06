@@ -22,7 +22,7 @@
         }
         else
         {
-            <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle ="BadgeStyle.Secondary" >
+            <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
                 <ChildContent>
                     <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_GENERADOR_APP_SETTINGS",dataLenguaje)</h4>
                 </ChildContent>
@@ -46,6 +46,10 @@
                     <RadzenDataGridColumn TItem="DispositivoEntities.DepositarioABM" Property="Depositario.Nombre" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                     </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="DispositivoEntities.DepositarioABM" Property="Depositario.Descripcion" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="DispositivoEntities.DepositarioABM" Property="Empresa" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("EMPRESAID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="DispositivoEntities.DepositarioABM" Property="Sucursal" Filterable="true" Title=@MultilenguajeController.ObtenerTextoPorClave("SUCURSALID",dataLenguaje) Frozen="false" Width="50px" TextAlign="TextAlign.Center" Visible="true">
                     </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="DispositivoEntities.DepositarioABM" Title=@MultilenguajeController.ObtenerTextoPorClave("SECTORID",dataLenguaje) Property="Depositario.SectorId" Width="100px" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_SectorId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
                         <Template>
@@ -182,6 +186,9 @@ else
     public class ArchivoAppSettings
     {
         public ClaveAppSettings AppSettings { get; set; }
+        public string TaskJson { get; set; }
+        public int TaskDelay { get; set; }
+        public string LogFile { get; set; }
     }
 
     public class ClaveAppSettings
@@ -218,6 +225,7 @@ else
         public string NombreBaseDatos { get; set; }
         public string PasswordKey { get; set; }
         public string WebApiUrl { get; set; }
+        public string TaskJson { get; set; }
 
         public GeneracionAppSettings()
         {
@@ -227,6 +235,10 @@ else
     }
 
     GeneracionAppSettings generacionAppSettings = new();
+
+    private string TaskJson = "C:\\Permaquim\\App0stol\\ServiceTasks.json";
+    private string LogFile = "C:\\Permaquim\\App0stol\\Log.txt";
+    private int TaskDelay = 15000;
 
     List<TipoAutenticacionBaseDatos> tipoAutenticacionBaseDatos = new();
 
@@ -315,7 +327,9 @@ else
     /// </summary>
     private void ObtenerDepositarios()
     {
+        Depositary.Business.Relations.Directorio.Sector sector = new();
         Depositary.Business.Tables.Dispositivo.Depositario entity = new();
+
         entity.Items();
 
         if (entity.Result.Count > 0)
@@ -324,6 +338,17 @@ else
             foreach (var row in entity.Result)
             {
                 DispositivoEntities.DepositarioABM depositarioABM = new();
+                sector.Where.Clear();
+                sector.Where.Add(Business.Relations.Directorio.Sector.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, row.SectorId);
+                sector.Items();
+
+                if (sector.Result.Count > 0)
+                {
+                    var sucursalDepositario = sector.Result.FirstOrDefault().SucursalId;
+                    depositarioABM.Empresa = sucursalDepositario.EmpresaId.Nombre;
+                    depositarioABM.Sucursal = sucursalDepositario.Nombre;
+                }
+
                 depositarioABM.Depositario = row;
                 depositarioABM.MensajeValidacion = DepositarioController.ObtenerValidacionesDepositarioABM(row.Id, dataLenguaje);
                 Depositario_entities.Add(depositarioABM);
@@ -427,7 +452,7 @@ else
                                     TValue="int?" Class="w-100" Name="TipoAutenticacion" @bind-Value="@(generacionAppSettings.TipoAutenticacionBaseDatos)"
                                     Data=@tipoAutenticacionBaseDatos TextProperty="Nombre" ValueProperty="Id"
                                     Change=@(args => TipoAutenticacionBaseDatosChange(args)) />
-                        <RadzenRequiredValidator Component="TipoAutenticacion" Text="TipoAutenticacion is required" Style="position: absolute">
+                        <RadzenRequiredValidator Component="TipoAutenticacion" Text="TipoAutenticacion is required" Style="position: relative">
                         </RadzenRequiredValidator>
                     </div>
                 </div>
@@ -458,6 +483,42 @@ else
                             </div>
                         </div>
                 }
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3" style="font-weight:bold">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TASKJSON",dataLenguaje) Component="TaskJson" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-auto">
+                            <RadzenTextBox style="display: block" @bind-Value="@TaskJson" Name="TaskJson">
+                            </RadzenTextBox>
+                            <RadzenRequiredValidator Component="TaskJson" Text="TaskJson is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3" style="font-weight:bold">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LOGFILE",dataLenguaje) Component="LogFile" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-auto">
+                            <RadzenTextBox style="display: block" @bind-Value="@LogFile" Name="LogFile">
+                            </RadzenTextBox>
+                            <RadzenRequiredValidator Component="LogFile" Text="LogFile is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3" style="font-weight:bold">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TASKDELAY",dataLenguaje) Component="TaskDelay" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-auto">
+                            <RadzenNumeric style="display: block" @bind-Value="@TaskDelay" Name="TaskDelay">
+                            </RadzenNumeric>
+                            <RadzenRequiredValidator Component="TaskDelay" Text="TaskDelay is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
+                        </div>
+                    </div>
                     <div class="row justify-content-center">
                         <div class="col col-md-auto">
                             <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
@@ -510,6 +571,9 @@ else
 
         ArchivoAppSettings archivoAppSettings = new();
         archivoAppSettings.AppSettings = claveAppSettings;
+        archivoAppSettings.TaskDelay = TaskDelay;
+        archivoAppSettings.LogFile = LogFile;
+        archivoAppSettings.TaskJson = TaskJson;
 
         string jsonAppSettings = JsonConvert.SerializeObject(archivoAppSettings);
 

@@ -192,17 +192,22 @@
                      @if((@TipoPlaca_TipoPlacaId_entities.Count > 0 && @TipoPlaca_TipoPlacaId_entities.FirstOrDefault( c => c.Id == @ComandoPlaca_entity.TipoPlacaId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? TipoPlaca_TipoPlacaId_entities.Where(x => x.Habilitado == true) : TipoPlaca_TipoPlacaId_entities.Where(x => x.Habilitado == true || x.Id == ComandoPlaca_entity.TipoPlacaId);
-                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ComandoPlaca_entity.TipoPlacaId)"
+                         <RadzenDropDown  Name="TipoPlacaId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ComandoPlaca_entity.TipoPlacaId)"
                                      Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectTipoPlaca_TipoPlacaIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                      }
                      else
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                         <RadzenDropDown  Name="TipoPlacaId" AllowClear="true" TValue="Int64" Class="w-100" 
                                      Data=@TipoPlaca_TipoPlacaId_entities TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectTipoPlaca_TipoPlacaIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                     }
+                    @if (@crudMode != CrudMode.Delete)
+                    {
+                        <RadzenNumericRangeValidator Min="@(TipoPlaca_TipoPlacaId_entities.Count > 0 ? TipoPlaca_TipoPlacaId_entities.Min(x => x.Id) : 1)" Component ="TipoPlacaId" Text="TipoPlacaId is required" Style="position: relative">
+                        </RadzenNumericRangeValidator>
                     }
                 </div>
               </div>

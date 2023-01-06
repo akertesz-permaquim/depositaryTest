@@ -42,7 +42,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
     DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es-AR")

@@ -21,7 +21,6 @@
             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Logout", "", dataUsuario.Id);
 
             await sessionStorage.ClearAsync();
-            //AuditController.Log(Entities.AuditEntities.LogTypeEnum.Information,  "User logout msg","");
             NavManager.NavigateTo("login", true);
         }
     }

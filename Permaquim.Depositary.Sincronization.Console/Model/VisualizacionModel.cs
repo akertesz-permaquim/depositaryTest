@@ -31,6 +31,11 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             try
             {
+                Int64? idDestino;
+                Int64? usuarioCreacionIdOrigen;
+                Int64? usuarioModificacionIdOrigen;
+                Int64 origenId;
+
                 if (Tipos.Count > 0)
                 {
                     Depositario.Business.Tables.Visualizacion.PerfilTipo perfilTipo = new();
@@ -44,19 +49,19 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in Tipos)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.PerfilTipo", item.Id);
-                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.PerfilTipo", item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
                             if (usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
-                                Int64 origenId = item.Id;
+                                origenId = item.Id;
 
                                 item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -88,18 +93,19 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
+                        Int64? perfilTipoIdOrigen;
                         foreach (var item in Perfiles)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.Perfil", item.Id);
-                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.Perfil", item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
-                            Int64? perfilTipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.PerfilTipo", item.PerfilTipoId);
+                            perfilTipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.PerfilTipo", item.PerfilTipoId);
 
                             if (perfilTipoIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
-                                Int64 origenId = item.Id;
+                                origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
                                 item.PerfilTipoId = perfilTipoIdOrigen.Value;
@@ -107,7 +113,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -139,17 +145,18 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
+                        Int64? perfilIdOrigen;
                         foreach (var item in PerfilesItems)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.PerfilItem", item.Id);
-                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
-                            Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.Perfil", item.PerfilId);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.PerfilItem", item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Visualizacion.Perfil", item.PerfilId);
 
                             if (perfilIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
-                                Int64 origenId = item.Id;
+                                origenId = item.Id;
 
                                 //Reemplazo los id de FK por id propio.
                                 item.PerfilId = perfilIdOrigen.Value;
@@ -157,7 +164,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 

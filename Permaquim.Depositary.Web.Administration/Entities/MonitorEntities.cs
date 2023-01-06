@@ -45,7 +45,7 @@
         public int CantidadBilletesEnBolsa { get; set; }
         public int CapacidadBilletesBolsa { get; set; }
         public string Turno { get; set; }
-        public DateTime? FechaAperturaTurno { get; set; }
+        public string FechaAperturaTurno { get; set; }
         public bool DepositoEnOtraMoneda { get; set; }
     }
 

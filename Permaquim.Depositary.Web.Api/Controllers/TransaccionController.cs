@@ -45,36 +45,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             long depositarioId = SynchronizationController.ObtenerIdDepositario(model.CodigoExternoDepositario);
 
-
             try
             {
-                if (model.Eventos.Count > 0)
-                {
-                    DepositaryWebApi.Business.Tables.Operacion.Evento eventoController = new();
-
-                    //Iniciamos un registro de sincronizacion de la entidad
-                    Int64? SincronizacionEventoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_EVENTO);
-
-                    foreach (var eventoItem in model.Eventos)
-                    {
-                        eventoItem.OrigenEvento_Id = eventoItem.Id;
-                        Int64? idEventoExistente = SynchronizationController.obtenerIdDestinoDetalleSincronizacion(ENTIDAD_EVENTO, depositarioId, eventoItem.OrigenEvento_Id.Value);
-                        if (idEventoExistente.HasValue)
-                        {
-                            eventoItem.Id = idEventoExistente.Value;
-                            eventoController.Update(eventoItem);
-                        }
-                        else
-                            eventoController.Add(eventoItem);
-
-                        SynchronizationController.guardarDetalleSincronizacion(SincronizacionEventoId.Value, eventoItem.OrigenEvento_Id.Value, eventoItem.Id);
-                    }
-
-                    //Cerramos el registro de sincronizacion de la entidad
-                    if (SincronizacionEventoId.HasValue)
-                        SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionEventoId.Value);
-                }
-
                 if (model.Contenedores.Count > 0)
                 {
                     //Iniciamos un registro de sincronizacion de la entidad
@@ -385,48 +357,9 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
             catch (Exception ex)
             {
+                AuditController.Log(ex);
                 return BadRequest(ex.Message);
             }
-        }
-
-        [HttpPost]
-        [Route("SincronizarEventos")]
-        [Authorize]
-        public async Task<IActionResult> Eventos([FromBody] EventoModel model)
-        {
-            DepositaryWebApi.Business.Tables.Operacion.Evento eventoEntity = new();
-
-            long depositarioId = SynchronizationController.ObtenerIdDepositario(model.CodigoExternoDepositario);
-
-            //Iniciamos un registro de sincronizacion de la entidad
-            Int64? SincronizacionEntidadId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, "Operacion.Evento");
-
-            if (SincronizacionEntidadId.HasValue)
-            {
-                try
-                {
-
-                    foreach (var item in model.Evento)
-                    {
-                        item.DepositarioId = depositarioId;
-                        eventoEntity.Add(item);
-                    }
-
-                    //Cerramos el registro de sincronizacion de la entidad
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincronizacionEntidadId.Value);
-
-                    return Ok();
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-            else
-            {
-                return BadRequest("No se pudo encontrar la entidad a sincronizar en Sincronizacion.Entidad");
-            }
-
         }
 
         [HttpPost]
@@ -459,6 +392,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
             }
@@ -499,6 +433,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
             }
@@ -539,6 +474,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 }
                 catch (Exception ex)
                 {
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
             }
@@ -590,6 +526,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 catch (Exception ex)
                 {
                     turnoEntity.EndTransaction(false);
+                    AuditController.Log(ex);
                     return BadRequest(ex.Message);
                 }
             }

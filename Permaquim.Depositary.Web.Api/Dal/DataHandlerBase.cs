@@ -4,7 +4,7 @@ using System.Data;
 using System.Configuration;
 using System.Collections;
 using System.Reflection;
-public class DataHandlerBase: IDataHandler
+public class DataHandlerBase: IDataHandler, IDisposable
 {
     #region Local Variables
     protected string _commandText = null;
@@ -59,6 +59,7 @@ public class DataHandlerBase: IDataHandler
     /// and are loaded with Reflection
     /// </summary>
     protected List<DataFieldDefinition> _dataFieldDefinitions = new List<DataFieldDefinition>();
+    private bool disposedValue;
     /// <summary>
     /// No constructor
     /// </summary>
@@ -531,5 +532,35 @@ public class DataHandlerBase: IDataHandler
         }
         dr.Close();
         return entities;
+    }
+ 
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                // TODO: dispose managed state (managed objects)
+                _itemList = null;
+                _fieldList = null;
+                _dataItem = null;
+            }
+ 
+            // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+            // TODO: set large fields to null
+            _connection = null;
+            _command = null;
+            _transaction = null;
+            _datareader = null;
+ 
+            disposedValue = true;
+        }
+    }
+ 
+    void IDisposable.Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
     }
 }

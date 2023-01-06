@@ -26,7 +26,6 @@
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> DispositivoConfiguracionDepositario { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> DispositivoDepositario { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> DispositivoDepositarioContadora { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioEstado> DispositivoDepositarioEstado { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> DispositivoDepositarioMoneda { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> DispositivoDepositarioPlaca { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Marca> DispositivoMarca { get; set; } = new();

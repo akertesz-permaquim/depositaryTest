@@ -14,10 +14,15 @@
         public Depositary.Entities.Tables.Dispositivo.Depositario Depositario { get; set; }
         public string MensajeValidacion { get; set; }
 
+        public string Empresa { get; set; }
+        public string Sucursal { get; set; }
+
         public DepositarioABM()
         {
             Depositario = new();
             MensajeValidacion = "";
+            Sucursal = "";
+            Empresa = "";
         }
     }
 }

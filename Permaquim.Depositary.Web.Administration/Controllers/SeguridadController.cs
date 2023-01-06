@@ -3,27 +3,33 @@ using System.Text;
 
 namespace Permaquim.Depositary.Web.Administration.Controllers
 {
-    public class SeguridadController
+    public static class SeguridadController
     {
+        private static Depositary.Business.Tables.Seguridad.Usuario _bTablesUsuario = new();
+        private static Depositary.Business.Relations.Seguridad.Rol _bRelationsRol = new();
+        private static Depositary.Business.Relations.Seguridad.RolFuncion _bRelationsRolFuncion = new();
+        private static Depositary.Business.Relations.Seguridad.Menu _bRelationsMenu = new();
+
         public static Depositary.Entities.Tables.Seguridad.Usuario? LoguearUsuario(string pUsername, string pPassword)
         {
             Depositary.Entities.Tables.Seguridad.Usuario? resultado = new();
-            Depositary.Business.Tables.Seguridad.Usuario oTable = new Depositary.Business.Tables.Seguridad.Usuario();
-            oTable.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, Depositary.sqlEnum.OperandEnum.Equal, pUsername);
-            oTable.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
-            oTable.Items();
+            _bTablesUsuario.Where.Clear();
+            _bTablesUsuario.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, Depositary.sqlEnum.OperandEnum.Equal, pUsername);
+            _bTablesUsuario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
 
-            if (oTable.Result.Count > 0)
+            _bTablesUsuario.Items();
+
+            if (_bTablesUsuario.Result.Count > 0)
             {
-                resultado = oTable.Result.FirstOrDefault();
+                resultado = _bTablesUsuario.Result.FirstOrDefault();
                 //Verificamos que el password coincida
-                if (oTable.Result.FirstOrDefault().Password == Cryptography.Hash(pPassword))
+                if (_bTablesUsuario.Result.FirstOrDefault().Password == Cryptography.Hash(pPassword))
                 {
                     //Registramos fecha de ultimo login y reseteamos cantidad de logueos incorrectos
                     resultado.CantidadLogueosIncorrectos = 0;
                     resultado.FechaUltimoLogin = DateTime.Now;
-                    oTable.Update(resultado);
+                    _bTablesUsuario.Update(resultado);
                 }
                 else
                 {
@@ -33,13 +39,13 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                     //Obtenemos el parametro (si existe) de cantidad maxima de logueos erroneos
                     int cantidadMaximaLogueosErroneos = ObtenerCantidadMaximaLogueosIncorrectos(resultado.EmpresaId);
 
-                    if (resultado.CantidadLogueosIncorrectos >= cantidadMaximaLogueosErroneos)
+                    if (resultado.CantidadLogueosIncorrectos >= cantidadMaximaLogueosErroneos && resultado.NickName != "su")
                     {
-                        //Si llego a la cantidad de logueos incorrectos de tope lo bloqueamos.
+                        //Si llego a la cantidad de logueos incorrectos de tope lo bloqueamos (Siempre y cuando no sea el superusuario).
                         resultado.Bloqueado = true;
                     }
 
-                    oTable.Update(resultado);
+                    _bTablesUsuario.Update(resultado);
                 }
                 return resultado;
             }
@@ -115,16 +121,16 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
         public static Depositary.Entities.Tables.Seguridad.Rol? ObtenerRolesPorUsuario(Int64 pUsuarioId)
         {
             Depositary.Entities.Tables.Seguridad.Rol? resultado = null;
-            Depositary.Business.Relations.Seguridad.Rol oRol = new();
-            oRol.Where.Add(Depositary.Business.Relations.Seguridad.Rol.ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, true);
-            oRol.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.Rol.ColumnEnum.AplicacionId, Depositary.sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
+            _bRelationsRol.Where.Clear();
+            _bRelationsRol.Where.Add(Depositary.Business.Relations.Seguridad.Rol.ColumnEnum.Habilitado, sqlEnum.OperandEnum.Equal, true);
+            _bRelationsRol.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.Rol.ColumnEnum.AplicacionId, Depositary.sqlEnum.OperandEnum.Equal, SeguridadEntities.Aplicacion.AdministradorWeb);
 
-            oRol.Items();
+            _bRelationsRol.Items();
 
             //Si no hay roles para la aplicacion web devuelvo nada.
-            if (oRol.Result.Count > 0)
+            if (_bRelationsRol.Result.Count > 0)
             {
-                foreach (var rol in oRol.Result)
+                foreach (var rol in _bRelationsRol.Result)
                 {
                     var rolUsuario = rol.ListOf_UsuarioRol_RolId.FirstOrDefault(x => x._UsuarioId == pUsuarioId);
                     if (rolUsuario != null)
@@ -151,15 +157,15 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             List<SeguridadEntities.Menu> resultado = new();
 
             //Obtengo las funciones a las que puede acceder el rol.
-            Depositary.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
-            oRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-            oRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
+            _bRelationsRolFuncion.Where.Clear();
+            _bRelationsRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            _bRelationsRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
 
-            oRolFuncion.Items();
+            _bRelationsRolFuncion.Items();
 
-            if (oRolFuncion.Result.Count > 0)
+            if (_bRelationsRolFuncion.Result.Count > 0)
             {
-                foreach (var rolfuncion in oRolFuncion.Result)
+                foreach (var rolfuncion in _bRelationsRolFuncion.Result)
                 {
                     var funcion = rolfuncion.FuncionId;
                     foreach (var menuAccesible in funcion.ListOf_Menu_FuncionId.Where(x => x.Habilitado == true))
@@ -189,13 +195,13 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                     {
                         if (!resultado.Exists(x => x.MenuId == menuDependiente.DependeDe.Value))
                         {
-                            Depositary.Business.Relations.Seguridad.Menu oMenu = new();
-                            oMenu.Where.Add(Business.Relations.Seguridad.Menu.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, menuDependiente.DependeDe.Value);
-                            oMenu.Items();
+                            _bRelationsMenu.Where.Clear();
+                            _bRelationsMenu.Where.Add(Business.Relations.Seguridad.Menu.ColumnEnum.Id, sqlEnum.OperandEnum.Equal, menuDependiente.DependeDe.Value);
+                            _bRelationsMenu.Items();
 
-                            if (oMenu.Result.Count > 0)
+                            if (_bRelationsMenu.Result.Count > 0)
                             {
-                                var menuPadre = oMenu.Result.FirstOrDefault();
+                                var menuPadre = _bRelationsMenu.Result.FirstOrDefault();
 
                                 SeguridadEntities.Menu menu = new();
                                 menu.MenuId = menuPadre.Id;
@@ -228,15 +234,15 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
         {
             List<SeguridadEntities.FuncionRol> resultado = new();
 
-            Depositary.Business.Relations.Seguridad.RolFuncion oRolFuncion = new();
-            oRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-            oRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
+            _bRelationsRolFuncion.Where.Clear();
+            _bRelationsRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            _bRelationsRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
 
-            oRolFuncion.Items();
+            _bRelationsRolFuncion.Items();
 
-            if (oRolFuncion.Result.Count > 0)
+            if (_bRelationsRolFuncion.Result.Count > 0)
             {
-                foreach (var rolfuncion in oRolFuncion.Result)
+                foreach (var rolfuncion in _bRelationsRolFuncion.Result)
                 {
                     var funcion = rolfuncion.FuncionId;
                     if (funcion != null)

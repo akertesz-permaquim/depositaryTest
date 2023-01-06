@@ -6,28 +6,33 @@
         {
             CustomizadorEntities.CustomizacionPagina resultado = new();
 
-            Business.Tables.Customizador.Entidad entidad = new();
-            entidad.Where.Add(Business.Tables.Customizador.Entidad.ColumnEnum.Esquema, sqlEnum.OperandEnum.Equal, Esquema);
-            entidad.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Tables.Customizador.Entidad.ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Tabla);
-
-            entidad.Items();
-
-            if (entidad.Result.Count > 0)
+            using (Business.Tables.Customizador.Entidad bTablesEntidad = new())
             {
-                Depositary.Entities.Tables.Customizador.Entidad entidadEncontrada = entidad.Result.FirstOrDefault();
+                bTablesEntidad.Where.Add(Business.Tables.Customizador.Entidad.ColumnEnum.Esquema, sqlEnum.OperandEnum.Equal, Esquema);
+                bTablesEntidad.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Tables.Customizador.Entidad.ColumnEnum.Nombre, sqlEnum.OperandEnum.Equal, Tabla);
 
-                resultado.AtributosTabla = entidadEncontrada;
+                bTablesEntidad.Items();
 
-                Business.Tables.Customizador.EntidadAtributo entidadAtributo = new();
-                entidadAtributo.Where.Add(Business.Tables.Customizador.EntidadAtributo.ColumnEnum.EntidadId, sqlEnum.OperandEnum.Equal, entidadEncontrada.Id);
-
-                entidadAtributo.Items();
-
-                if (entidadAtributo.Result.Count > 0)
+                if (bTablesEntidad.Result.Count > 0)
                 {
-                    foreach (var atributo in entidadAtributo.Result)
+                    Depositary.Entities.Tables.Customizador.Entidad entidadEncontrada = bTablesEntidad.Result.FirstOrDefault();
+
+                    resultado.AtributosTabla = entidadEncontrada;
+
+                    using (Business.Tables.Customizador.EntidadAtributo bTablesEntidadAtributo = new())
                     {
-                        resultado.AtributosColumnas.Add(atributo);
+                        bTablesEntidadAtributo.Where.Add(Business.Tables.Customizador.EntidadAtributo.ColumnEnum.EntidadId, sqlEnum.OperandEnum.Equal, entidadEncontrada.Id);
+
+                        bTablesEntidadAtributo.Items();
+
+                        if (bTablesEntidadAtributo.Result.Count > 0)
+                        {
+                            foreach (var atributo in bTablesEntidadAtributo.Result)
+                            {
+                                resultado.AtributosColumnas.Add(atributo);
+                            }
+                        }
+
                     }
                 }
             }
@@ -60,7 +65,8 @@
 
         public static bool ObtenerPropiedadVisibilidadColumna(string Campo, List<Depositary.Entities.Tables.Customizador.EntidadAtributo> Atributos)
         {
-            bool resultado = false;
+            //Se indica en true si los atributos son 0 ya que no estaria cargada la tabla de customizador para la entidad y no se mostraria la grilla
+            bool resultado = Atributos.Count == 0 ? true : false;
 
             var propiedadesCampo = Atributos.FirstOrDefault(x => x.Nombre == Campo);
 

@@ -138,6 +138,9 @@
                                 }
                             </Template>
                         </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Descripcion" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center"
+                              Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Descripcion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Descripcion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Descripcion",dataCustomizacionPagina.AtributosColumnas)>
+                        </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Property="Habilitado" FilterValue="@Habilitado_filter" Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center"
                               Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Habilitado",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Habilitado",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Habilitado",dataCustomizacionPagina.AtributosColumnas)>
                             <Template Context="data">
@@ -237,17 +240,22 @@
                                 @if ((@Aplicacion_AplicacionId_entities.Count > 0 && @Aplicacion_AplicacionId_entities.FirstOrDefault(c => c.Id == @Configuracion_entity.AplicacionId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true) : Aplicacion_AplicacionId_entities.Where(x => x.Habilitado == true || x.Id == Configuracion_entity.AplicacionId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Configuracion_entity.AplicacionId)"
+                                    <RadzenDropDown Name="AplicacionId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Configuracion_entity.AplicacionId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="AplicacionId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Aplicacion_AplicacionId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectAplicacion_AplicacionIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Aplicacion_AplicacionId_entities.Count > 0 ? Aplicacion_AplicacionId_entities.Min(x => x.Id) : 1)" Component="AplicacionId" Text="AplicacionId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -260,17 +268,22 @@
                                 @if ((@ConfiguracionValidacionDato_ValidacionDatoId_entities.Count > 0 && @ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(c => c.Id == @Configuracion_entity.ValidacionDatoId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true) : ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true || x.Id == Configuracion_entity.ValidacionDatoId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Configuracion_entity.ValidacionDatoId)"
+                                    <RadzenDropDown Name="ValidacionDatoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Configuracion_entity.ValidacionDatoId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="ValidacionDatoId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@ConfiguracionValidacionDato_ValidacionDatoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(ConfiguracionValidacionDato_ValidacionDatoId_entities.Count > 0 ? ConfiguracionValidacionDato_ValidacionDatoId_entities.Min(x => x.Id) : 1)" Component="ValidacionDatoId" Text="ValidacionDatoId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
@@ -358,6 +371,21 @@
                                         </RadzenTextBox>
                                     }
                                     <RadzenRequiredValidator Component="Valor" Text="Valor is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Component="Descripcion" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Configuracion_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                                </RadzenTextBox>
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute">
                                     </RadzenRequiredValidator>
                                 }
                             </div>

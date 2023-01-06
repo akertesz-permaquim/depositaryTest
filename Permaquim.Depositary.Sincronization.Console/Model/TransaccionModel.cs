@@ -18,7 +18,6 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Operacion.TransaccionDetalle> TransaccionesDetalles { get; set; } = new();
         public List<Depositario.Entities.Tables.Operacion.TransaccionSobre> TransaccionesSobres { get; set; } = new();
         public List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> TransaccionesSobresDetalles { get; set; } = new();
-        public List<Depositario.Entities.Tables.Operacion.Evento> Eventos { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
 
         public void Process(DateTime dateTime)
@@ -32,8 +31,6 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             CodigoExternoDepositario = ConfigurationController.GetCurrentDepositaryCode();
 
-            Eventos = DatabaseController.GetEvents();
-
             Sesiones = DatabaseController.GetSessions();
 
             CierresDiarios = DatabaseController.GetDailyclosingItems();
@@ -44,35 +41,66 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             Transacciones = DatabaseController.GetTransactions();
 
-            TransaccionesDetalles = DatabaseController.GetTransactionDetails();
+            TransaccionesDetalles = DatabaseController.GetTransactionDetails(Transacciones);
 
-            TransaccionesSobres = DatabaseController.GetEnvelopeTransaction();
+            TransaccionesSobres = DatabaseController.GetEnvelopeTransaction(Transacciones);
 
-            TransaccionesSobresDetalles = DatabaseController.GetEnvelopeTransactionDetails();
+            TransaccionesSobresDetalles = DatabaseController.GetEnvelopeTransactionDetails(TransaccionesSobres);
 
         }
         public void Persist()
         {
             DateTime endSincronizationDate = DateTime.Now;
 
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Evento, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Sesion, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_CierreDiario, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Turno, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Contenedor, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_Transaccion, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_TransaccionDetalle, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_TransaccionSobre, _startDateTime, endSincronizationDate);
-            DatabaseController.SaveEntitySincronizationDate(
-                Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle, _startDateTime, endSincronizationDate);
+            //Si hay registros para sincronizar generamos registro de sincronizacion
+            if (Sesiones.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_Sesion, _startDateTime, endSincronizationDate);
+            }
+
+            if (CierresDiarios.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_CierreDiario, _startDateTime, endSincronizationDate);
+            }
+
+            if (Turnos.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_Turno, _startDateTime, endSincronizationDate);
+            }
+
+            if (Contenedores.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_Contenedor, _startDateTime, endSincronizationDate);
+            }
+
+            if (Transacciones.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_Transaccion, _startDateTime, endSincronizationDate);
+            }
+
+            if (TransaccionesDetalles.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_TransaccionDetalle, _startDateTime, endSincronizationDate);
+            }
+
+            if (TransaccionesSobres.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_TransaccionSobre, _startDateTime, endSincronizationDate);
+            }
+
+            if (TransaccionesSobresDetalles.Count > 0)
+            {
+                DatabaseController.SaveEntitySincronizationDate(
+                    Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle, _startDateTime, endSincronizationDate);
+
+            }
         }
     }
 }

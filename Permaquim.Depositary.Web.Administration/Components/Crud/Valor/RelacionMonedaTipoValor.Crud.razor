@@ -199,17 +199,22 @@
                      @if((@Moneda_MonedaId_entities.Count > 0 && @Moneda_MonedaId_entities.FirstOrDefault( c => c.Id == @RelacionMonedaTipoValor_entity.MonedaId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? Moneda_MonedaId_entities.Where(x => x.Habilitado == true) : Moneda_MonedaId_entities.Where(x => x.Habilitado == true || x.Id == RelacionMonedaTipoValor_entity.MonedaId);
-                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaTipoValor_entity.MonedaId)"
+                         <RadzenDropDown  Name="MonedaId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaTipoValor_entity.MonedaId)"
                                      Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectMoneda_MonedaIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                      }
                      else
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                         <RadzenDropDown  Name="MonedaId" AllowClear="true" TValue="Int64" Class="w-100" 
                                      Data=@Moneda_MonedaId_entities TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectMoneda_MonedaIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                     }
+                    @if (@crudMode != CrudMode.Delete)
+                    {
+                        <RadzenNumericRangeValidator Min="@(Moneda_MonedaId_entities.Count > 0 ? Moneda_MonedaId_entities.Min(x => x.Id) : 1)" Component ="MonedaId" Text="MonedaId is required" Style="position: relative">
+                        </RadzenNumericRangeValidator>
                     }
                 </div>
               </div>
@@ -222,17 +227,22 @@
                      @if((@Tipo_TipoValorId_entities.Count > 0 && @Tipo_TipoValorId_entities.FirstOrDefault( c => c.Id == @RelacionMonedaTipoValor_entity.TipoValorId) != null) || crudMode != CrudMode.Delete)
                      {
                          var dataSet = crudMode == CrudMode.Add ? Tipo_TipoValorId_entities.Where(x => x.Habilitado == true) : Tipo_TipoValorId_entities.Where(x => x.Habilitado == true || x.Id == RelacionMonedaTipoValor_entity.TipoValorId);
-                         <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaTipoValor_entity.TipoValorId)"
+                         <RadzenDropDown  Name="TipoValorId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(RelacionMonedaTipoValor_entity.TipoValorId)"
                                      Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectTipo_TipoValorIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                      }
                      else
                      {
-                         <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" 
+                         <RadzenDropDown  Name="TipoValorId" AllowClear="true" TValue="Int64" Class="w-100" 
                                      Data=@Tipo_TipoValorId_entities TextProperty = "Nombre" ValueProperty = "Id"
                                      Change=@(args => SelectTipo_TipoValorIdValueChanged(args))
                                      Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                     }
+                    @if (@crudMode != CrudMode.Delete)
+                    {
+                        <RadzenNumericRangeValidator Min="@(Tipo_TipoValorId_entities.Count > 0 ? Tipo_TipoValorId_entities.Min(x => x.Id) : 1)" Component ="TipoValorId" Text="TipoValorId is required" Style="position: relative">
+                        </RadzenNumericRangeValidator>
                     }
                 </div>
               </div>

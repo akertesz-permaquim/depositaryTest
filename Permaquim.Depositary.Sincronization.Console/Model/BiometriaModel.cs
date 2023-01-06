@@ -20,6 +20,11 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             try
             {
+                Int64? idDestino;
+                Int64? usuarioCreacionIdOrigen;
+                Int64? usuarioModificacionIdOrigen;
+                Int64 origenId;
+
                 if (HuellasDactilares.Count > 0)
                 {
                     Depositario.Business.Tables.Biometria.HuellaDactilar huellaDactilar = new();
@@ -33,19 +38,19 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in HuellasDactilares)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            Int64? idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Biometria.HuellaDactilar", item.Id);
-                            Int64? usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Biometria.HuellaDactilar", item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
 
                             if (usuarioCreacionIdOrigen.HasValue)
                             {
                                 //Guardo el id que venia del server.
-                                Int64 origenId = item.Id;
+                                origenId = item.Id;
 
                                 item.UsuarioCreacion = usuarioCreacionIdOrigen.Value;
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    Int64? usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 

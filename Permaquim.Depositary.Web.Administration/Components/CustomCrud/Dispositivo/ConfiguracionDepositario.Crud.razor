@@ -228,17 +228,22 @@
                             @if ((@TipoConfiguracionDepositario_TipoId_entities.Count > 0 && @TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault(c => c.Id == @ConfiguracionDepositario_entity.TipoId) != null) || crudMode != CrudMode.Delete)
                             {
                                 var dataSet = crudMode == CrudMode.Add ? TipoConfiguracionDepositario_TipoId_entities.Where(x => x.Habilitado == true) : TipoConfiguracionDepositario_TipoId_entities.Where(x => x.Habilitado == true || x.Id == ConfiguracionDepositario_entity.TipoId);
-                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ConfiguracionDepositario_entity.TipoId)"
+                                <RadzenDropDown Name="TipoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ConfiguracionDepositario_entity.TipoId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoConfiguracionDepositario_TipoIdValueChanged(args))
                                 Disabled="@(crudMode!=CrudMode.Add || estaProcesando)" />
                             }
                             else
                             {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                <RadzenDropDown Name="TipoId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@TipoConfiguracionDepositario_TipoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoConfiguracionDepositario_TipoIdValueChanged(args))
                                 Disabled="@(crudMode!=CrudMode.Add || estaProcesando)" />
+                            }
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenNumericRangeValidator Min="@(TipoConfiguracionDepositario_TipoId_entities.Count > 0 ? TipoConfiguracionDepositario_TipoId_entities.Min(x => x.Id) : 1)" Component="TipoId" Text="TipoId is required" Style="position: relative">
+                                </RadzenNumericRangeValidator>
                             }
                         </div>
                     </div>
@@ -303,7 +308,7 @@
                                                 int conversionInt;
                                                 if (int.TryParse(ConfiguracionDepositario_entity.Valor, out conversionInt))
                                                 {
-                                                    <RadzenNumeric style="display: block" TValue="int" @bind-Value="@valorInt" Disabled="@(crudMode == CrudMode.Delete || estaProcesando)">
+                                                    <RadzenNumeric style="display: block" TValue="int" @bind-Value="@valorInt" Change=@(args => ValorIntChange(args)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando)">
                                                     </RadzenNumeric>
                                                     <RadzenTextBox Visible="false" @bind-Value="@(ConfiguracionDepositario_entity.Valor)" Name="Valor">
                                                     </RadzenTextBox>
@@ -545,6 +550,10 @@ else
         crudMode = CrudMode.Add;
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "DispositivoConfiguracionDepositario", crudMode.ToString(), dataUsuario.Id);
+
+        SetearControlValor(ConfiguracionDepositario_entity.TipoId);
+
+        StateHasChanged();
     }
     /// <summary>
     /// <summary>
@@ -737,6 +746,36 @@ else
         crudMode = CrudMode.List;
         LoadMainEntityData();
     }
+
+    private void SetearControlValor(Int64 TipoConfiguracionDepositarioId)
+    {
+        var tipoConfiguracionDepositario = TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault(x => x.Id == TipoConfiguracionDepositarioId);
+        ConfiguracionDepositario_entity.Valor = "";
+
+        if (tipoConfiguracionDepositario != null)
+        {
+            var validacionDato = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(x => x.Id == tipoConfiguracionDepositario.ValidacionDatoId);
+
+            switch (validacionDato.TipoDatoId)
+            {
+                case (Int64)AplicacionEntities.TipoDato.Bool:
+                    ConfiguracionDepositario_entity.Valor = "false";
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.Int:
+                    ConfiguracionDepositario_entity.Valor = "0";
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.Decimal:
+                    ConfiguracionDepositario_entity.Valor = "0.00";
+                    break;
+                case (Int64)AplicacionEntities.TipoDato.DateTime:
+                    ConfiguracionDepositario_entity.Valor = DateTime.Now.Date.ToString();
+                    break;
+            }
+        }
+
+        StateHasChanged();
+    }
+
     /// <summary>
     /// Sets detail panel title - TODO: Implement Multilanguage
     /// </summary>
@@ -812,31 +851,7 @@ else
     /// <param name="item"></param>
     private void SelectTipoConfiguracionDepositario_TipoIdValueChanged(object item)
     {
-        var tipoConfiguracionDepositario = TipoConfiguracionDepositario_TipoId_entities.FirstOrDefault(x => x.Id == (Int64)item);
-        ConfiguracionDepositario_entity.Valor = "";
-
-        if (tipoConfiguracionDepositario != null)
-        {
-            var validacionDato = ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(x => x.Id == tipoConfiguracionDepositario.ValidacionDatoId);
-
-            switch (validacionDato.TipoDatoId)
-            {
-                case (Int64)AplicacionEntities.TipoDato.Bool:
-                    ConfiguracionDepositario_entity.Valor = "false";
-                    break;
-                case (Int64)AplicacionEntities.TipoDato.Int:
-                    ConfiguracionDepositario_entity.Valor = "0";
-                    break;
-                case (Int64)AplicacionEntities.TipoDato.Decimal:
-                    ConfiguracionDepositario_entity.Valor = "0.00";
-                    break;
-                case (Int64)AplicacionEntities.TipoDato.DateTime:
-                    ConfiguracionDepositario_entity.Valor = DateTime.Now.Date.ToString();
-                    break;
-            }
-        }
-
-        StateHasChanged();
+        SetearControlValor((Int64)item);
     }
 
     /// <summary>

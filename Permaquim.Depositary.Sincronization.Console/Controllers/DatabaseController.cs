@@ -34,9 +34,14 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
         }
         public static void EndinitialSincro()
         {
-            //Finalmente ejecutamos la SP que termina de modelar la base de datos
-            Depositario.Business.Procedures.dbo.FinalizarPrimeraSincronizacion oSP = new();
-            oSP.Items(ConfigurationController.GetCurrentDepositaryId());
+            long? depositaryId = ConfigurationController.GetCurrentDepositaryId();
+
+            if (depositaryId.HasValue)
+            {
+                //Finalmente ejecutamos la SP que termina de modelar la base de datos
+                Depositario.Business.Procedures.dbo.FinalizarPrimeraSincronizacion oSP = new();
+                oSP.Items(ConfigurationController.GetCurrentDepositaryId());
+            }
         }
     }
 }

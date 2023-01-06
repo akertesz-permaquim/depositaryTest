@@ -2,6 +2,7 @@
 @using Permaquim.Depositary.Web.Administration.Controllers
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject DialogService DialogService
 @inject NavigationManager NavManager
 
 @if (dataFunciones != null)
@@ -234,6 +235,11 @@
                             </div>
                             <div class="col-md-9">
                                 <RadzenCheckBox @bind-Value=@Lenguaje_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Change=@(args => EsDefaultChange(args, @Lenguaje_entity)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando)" />
+                                @if (@crudMode != CrudMode.Delete && defaultObligatorio)
+                                {
+                                    <RadzenRequiredValidator Component="EsDefaultCheckBox" Text="EsDefault is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
@@ -352,6 +358,8 @@ else
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
 
+    private bool defaultObligatorio = false;
+
     protected override async Task OnInitializedAsync()
     {
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
@@ -403,6 +411,13 @@ else
     /// </summary>
     private void Add()
     {
+        if (Lenguaje_entities.Where(x => x.EsDefault == true).Count() == 0)
+        {
+            defaultObligatorio = true;
+        }
+        else
+            defaultObligatorio = false;
+
         //Main entity initialization
         Lenguaje_entity = new();
         //Relations entities initialization
@@ -418,6 +433,13 @@ else
     /// </summary>
     private void Edit(Depositary.Entities.Tables.Regionalizacion.Lenguaje item, bool delete)
     {
+        if (Lenguaje_entities.Where(x => x.EsDefault == true).Count() == 0)
+        {
+            defaultObligatorio = true;
+        }
+        else
+            defaultObligatorio = false;
+
         Lenguaje_entity = item;
         Usuario_UsuarioCreacion_entity = new()
             {
@@ -445,72 +467,81 @@ else
     /// </summary>
     private async Task Save()
     {
+        bool continuarOperacion = true;
         estaProcesando = true;
         StateHasChanged();
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-        Depositary.Business.Tables.Regionalizacion.Lenguaje crud = new();
-        foreach (var property in Lenguaje_entity.GetType().GetProperties())
-        {
-            switch (property.Name)
-            {
-                case "FechaModificacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Lenguaje_entity.FechaModificacion = null;
-                    }
-                    else
-                    {
-                        Lenguaje_entity.FechaModificacion = DateTime.Now;
-                    }
-                    break;
-                case "FechaCreacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Lenguaje_entity.FechaCreacion = DateTime.Now;
-                    }
-                    break;
-                case "UsuarioCreacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Lenguaje_entity.UsuarioCreacion = dataUsuario.Id;
-                    }
-                    break;
-                case "UsuarioModificacion":
-                    if (crudMode == CrudMode.Add)
-                    {
-                        Lenguaje_entity.UsuarioModificacion = null;
-                    }
-                    else
-                    {
-                        Lenguaje_entity.UsuarioModificacion = dataUsuario.Id;
-                    }
-                    break;
-            }
-        }
-        if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit)
-        {
+
+        //Verifico que no exista previamente una moneda default para la sucursal.
+        if (crudMode != CrudMode.Delete)
             lenguajeDefault = ObtenerLenguajeDefault();
 
-            if (Lenguaje_entity.EsDefault && lenguajeDefault != null)
+        //Si se esta editando o agregando una moneda nueva que sera default debemos verificar la existencia previa de una.
+        if (Lenguaje_entity.EsDefault && (crudMode == CrudMode.Add || crudMode == CrudMode.Edit))
+        {
+            //Si existe una moneda default previamente, muestro un dialog de confirmación para avisar
+            //Que se le quitara la marca default a esa moneda para colocarsela a la actual
+            if (lenguajeDefault != null)
             {
-                summary = "Error al procesar.";
-                actionInformation = "No se puede guardar/editar este lenguaje como default debido a que ya existe uno.";
-                severityType = NotificationSeverity.Error;
+                continuarOperacion = (bool)(await DialogService.Confirm(MultilenguajeController.ObtenerTextoPorClave("ADVERTENCIA_REEMPLAZAR_LENGUAJE_DEFAULT", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("TITULO_DIALOG_ADVERTENCIA", dataLenguaje), new ConfirmOptions() { OkButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR", dataLenguaje), CancelButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR", dataLenguaje) }));
             }
-            else
+        }
+
+        if (continuarOperacion)
+        {
+            Depositary.Business.Tables.Regionalizacion.Lenguaje crud = new();
+            foreach (var property in Lenguaje_entity.GetType().GetProperties())
+            {
+                switch (property.Name)
+                {
+                    case "FechaModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Lenguaje_entity.FechaModificacion = null;
+                        }
+                        else
+                        {
+                            Lenguaje_entity.FechaModificacion = DateTime.Now;
+                        }
+                        break;
+                    case "FechaCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Lenguaje_entity.FechaCreacion = DateTime.Now;
+                        }
+                        break;
+                    case "UsuarioCreacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Lenguaje_entity.UsuarioCreacion = dataUsuario.Id;
+                        }
+                        break;
+                    case "UsuarioModificacion":
+                        if (crudMode == CrudMode.Add)
+                        {
+                            Lenguaje_entity.UsuarioModificacion = null;
+                        }
+                        else
+                        {
+                            Lenguaje_entity.UsuarioModificacion = dataUsuario.Id;
+                        }
+                        break;
+                }
+            }
+            if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit)
             {
                 switch (crudMode)
                 {
                     case CrudMode.Add:
                         try
                         {
-                            crud.Add(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-
-                            //Si se agrego un esquema no default y ademas existia un esquema default entonces le cargamos los items del esquema default
+                            //Si se agrego un lenguaje no default y ademas existia un lenguaje default entonces le cargamos los items del lenguaje default
                             if (!Lenguaje_entity.EsDefault && lenguajeDefault != null)
                             {
+                                crud.Add(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
                                 if (!InsertarItemsLenguajeDefault())
                                 {
                                     summary = "Error al procesar.";
@@ -526,6 +557,37 @@ else
                             }
                             else
                             {
+                                //Si se agrego un lenguaje default y ya existia uno le quitamos la marca al anterior
+                                if (lenguajeDefault != null && Lenguaje_entity.EsDefault)
+                                {
+                                    Depositary.Business.Tables.Regionalizacion.Lenguaje controllerLenguajeDefault = new(crud);
+
+                                    try
+                                    {
+                                        crud.BeginTransaction();
+
+                                        lenguajeDefault.EsDefault = false;
+                                        controllerLenguajeDefault.Update(lenguajeDefault);
+
+                                        crud.Add(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                        crud.EndTransaction(true);
+
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        crud.EndTransaction(false);
+                                        AuditController.Log(exception, dataUsuario.Id);
+                                        summary = "Error al procesar.";
+                                        actionInformation = exception.Message;
+                                        severityType = NotificationSeverity.Error;
+                                    }
+                                }
+                                else
+                                {
+                                    crud.Add(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                }
                                 summary = "El registro se ha ";
                                 actionInformation = "agregado.";
                                 severityType = NotificationSeverity.Success;
@@ -543,7 +605,35 @@ else
                     case CrudMode.Edit:
                         try
                         {
-                            crud.Update(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                            //Si se agrego un lenguaje default y ya existia uno le quitamos la marca al anterior
+                            if (lenguajeDefault != null && Lenguaje_entity.EsDefault)
+                            {
+                                Depositary.Business.Tables.Regionalizacion.Lenguaje controllerLenguajeDefault = new(crud);
+                                try
+                                {
+                                    crud.BeginTransaction();
+
+                                    lenguajeDefault.EsDefault = false;
+                                    controllerLenguajeDefault.Update(lenguajeDefault);
+
+                                    crud.Update(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+
+                                    crud.EndTransaction(true);
+
+                                }
+                                catch (Exception exception)
+                                {
+                                    crud.EndTransaction(false);
+                                    AuditController.Log(exception, dataUsuario.Id);
+                                    summary = "Error al procesar.";
+                                    actionInformation = exception.Message;
+                                    severityType = NotificationSeverity.Error;
+                                }
+                            }
+                            else
+                            {
+                                crud.Update(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                            }
                             summary = "El registro se ha ";
                             actionInformation = "modificado.";
                             severityType = NotificationSeverity.Success;
@@ -558,46 +648,51 @@ else
                         break;
                 }
             }
+            else
+            {
+                try
+                {
+                    Lenguaje_entity.Habilitado = false;
+                    crud.Update(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                    summary = "El registro se ha ";
+                    actionInformation = "eliminado.";
+                    severityType = NotificationSeverity.Success;
+                }
+                catch (Exception ex)
+                {
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
+                }
+            }
+
+            //Recargamos el set de datos del lenguaje en el session storage.
+            await sessionStorage.RemoveItemAsync("DataLenguaje");
+            dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
+            await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
+            dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+
+
+            // Sets Crud mode to List
+            crudMode = CrudMode.List;
+
+            ShowNotification(new NotificationMessage
+                {
+                    Severity = severityType,
+                    Summary = summary,
+                    Detail = actionInformation,
+                    Duration = 4000
+                });
+
+            estaProcesando = false;
+            StateHasChanged();
+
+            await Task.Run(LoadMainEntityData);
         }
         else
         {
-            try
-            {
-                Lenguaje_entity.Habilitado = false;
-                crud.Update(Lenguaje_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                summary = "El registro se ha ";
-                actionInformation = "eliminado.";
-                severityType = NotificationSeverity.Success;
-            }
-            catch (Exception ex)
-            {
-                summary = "Error al procesar.";
-                actionInformation = ex.Message;
-                severityType = NotificationSeverity.Error;
-            }
+            estaProcesando = false;
         }
-
-        //Recargamos el set de datos del lenguaje en el session storage.
-        await sessionStorage.RemoveItemAsync("DataLenguaje");
-        dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(dataUsuario.Id);
-        await sessionStorage.SetItemAsync("DataLenguaje", dataLenguaje);
-        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
-
-        // Sets Crud mode to List
-        crudMode = CrudMode.List;
-
-        ShowNotification(new NotificationMessage
-            {
-                Severity = severityType,
-                Summary = summary,
-                Detail = actionInformation,
-                Duration = 4000
-            });
-
-        estaProcesando = false;
-        StateHasChanged();
-
-        await Task.Run(LoadMainEntityData);
     }
 
     #region Validaciones

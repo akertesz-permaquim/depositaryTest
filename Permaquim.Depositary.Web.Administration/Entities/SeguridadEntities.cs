@@ -62,6 +62,7 @@
         public string MenuDescripcion { get; set; }
         public string Imagen { get; set; }
         public string Referencia { get; set; }
+        public bool Accesible { get; set; } = false;
     }
 
     public class FuncionMenu

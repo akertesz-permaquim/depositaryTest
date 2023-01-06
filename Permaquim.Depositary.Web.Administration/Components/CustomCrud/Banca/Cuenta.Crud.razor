@@ -58,13 +58,13 @@
                 <Columns>
                     <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Cuenta" TextAlign="TextAlign.Center" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TemplateABM",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TemplateABM",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TemplateABM",dataCustomizacionPagina.AtributosColumnas)>
                         <HeaderTemplate>
-                            <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("BancaCuenta",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
+                            <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Disabled=@(!usaCuentaBancaria) Visible=@SeguridadController.VerificarPermisoFuncion("BancaCuenta",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
                             </RadzenButton>
                         </HeaderTemplate>
                         <Template Context="element">
-                            <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("BancaCuenta",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                            <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Disabled=@(!usaCuentaBancaria) Visible=@SeguridadController.VerificarPermisoFuncion("BancaCuenta",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                             </RadzenButton>
-                            <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("BancaCuenta",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                            <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Disabled=@(!usaCuentaBancaria) Visible=@SeguridadController.VerificarPermisoFuncion("BancaCuenta",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                             </RadzenButton>
                         </Template>
                     </RadzenDataGridColumn>
@@ -237,17 +237,22 @@
                             @if ((@TipoCuenta_TipoId_entities.Count > 0 && @TipoCuenta_TipoId_entities.FirstOrDefault(c => c.Id == @Cuenta_entity.TipoId) != null) || crudMode != CrudMode.Delete)
                             {
                                 var dataSet = crudMode == CrudMode.Add ? TipoCuenta_TipoId_entities.Where(x => x.Habilitado == true) : TipoCuenta_TipoId_entities.Where(x => x.Habilitado == true || x.Id == Cuenta_entity.TipoId);
-                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Cuenta_entity.TipoId)"
+                                <RadzenDropDown Name="TipoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Cuenta_entity.TipoId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoCuenta_TipoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                             }
                             else
                             {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                <RadzenDropDown Name="TipoId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@TipoCuenta_TipoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectTipoCuenta_TipoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                            }
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenNumericRangeValidator Min="@(TipoCuenta_TipoId_entities.Count > 0 ? TipoCuenta_TipoId_entities.Min(x => x.Id) : 1)" Component="TipoId" Text="TipoId is required" Style="position: relative">
+                                </RadzenNumericRangeValidator>
                             }
                         </div>
                     </div>
@@ -321,17 +326,22 @@
                             @if ((@Banco_BancoId_entities.Count > 0 && @Banco_BancoId_entities.FirstOrDefault(c => c.Id == @Cuenta_entity.BancoId) != null) || crudMode != CrudMode.Delete)
                             {
                                 var dataSet = crudMode == CrudMode.Add ? Banco_BancoId_entities.Where(x => x.Habilitado == true) : Banco_BancoId_entities.Where(x => x.Habilitado == true || x.Id == Cuenta_entity.BancoId);
-                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Cuenta_entity.BancoId)"
+                                <RadzenDropDown Name="BancoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Cuenta_entity.BancoId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectBanco_BancoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                             }
                             else
                             {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                <RadzenDropDown Name="BancoId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Banco_BancoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectBanco_BancoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                            }
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenNumericRangeValidator Min="@(Banco_BancoId_entities.Count > 0 ? Banco_BancoId_entities.Min(x => x.Id) : 1)" Component="BancoId" Text="BancoId is required" Style="position: relative">
+                                </RadzenNumericRangeValidator>
                             }
                         </div>
                     </div>
@@ -475,6 +485,8 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
 
+    private bool usaCuentaBancaria = false;
+
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
@@ -492,6 +504,12 @@ else
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
         dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
+
+        if (!bool.TryParse(AplicacionController.ObtenerConfiguracionEmpresa("USA_CUENTA_BANCARIA", EmpresaId), out usaCuentaBancaria))
+        {
+            usaCuentaBancaria = false;
+        }
+
         await sessionStorage.SetItemAsync("RolId", usuarioRol.Id);
         await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
         await Task.Run(LoadMainEntityData);

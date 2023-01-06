@@ -137,6 +137,9 @@
                             }
                         </Template>
                     </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Descripcion" Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center"
+                              Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Descripcion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Descripcion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Descripcion",dataCustomizacionPagina.AtributosColumnas)>
+                    </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Aplicacion.ConfiguracionEmpresa" Property="Habilitado" FilterValue="@Habilitado_filter" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Habilitado",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Habilitado",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Habilitado",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
                         <Template Context="data">
                             <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
@@ -242,17 +245,22 @@
                             @if ((@ConfiguracionValidacionDato_ValidacionDatoId_entities.Count > 0 && @ConfiguracionValidacionDato_ValidacionDatoId_entities.FirstOrDefault(c => c.Id == @ConfiguracionEmpresa_entity.ValidacionDatoId) != null) || crudMode != CrudMode.Delete)
                             {
                                 var dataSet = crudMode == CrudMode.Add ? ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true) : ConfiguracionValidacionDato_ValidacionDatoId_entities.Where(x => x.Habilitado == true || x.Id == ConfiguracionEmpresa_entity.ValidacionDatoId);
-                                <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ConfiguracionEmpresa_entity.ValidacionDatoId)"
+                                <RadzenDropDown Name="ValidacionDatoId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(ConfiguracionEmpresa_entity.ValidacionDatoId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
                             }
                             else
                             {
-                                <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                <RadzenDropDown Name="ValidacionDatoId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@ConfiguracionValidacionDato_ValidacionDatoId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || !EsDefault || estaProcesando)" />
+                            }
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenNumericRangeValidator Min="@(ConfiguracionValidacionDato_ValidacionDatoId_entities.Count > 0 ? ConfiguracionValidacionDato_ValidacionDatoId_entities.Min(x => x.Id) : 1)" Component="ValidacionDatoId" Text="ValidacionDatoId is required" Style="position: relative">
+                                </RadzenNumericRangeValidator>
                             }
                         </div>
                     </div>
@@ -340,6 +348,21 @@
                                     </RadzenTextBox>
                                 }
                                 <RadzenRequiredValidator Component="Valor" Text="Valor is required" Style="position: absolute">
+                                </RadzenRequiredValidator>
+                            }
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Component="Descripcion" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <RadzenTextBox style="display: block" @bind-Value="@(ConfiguracionEmpresa_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                            </RadzenTextBox>
+                            @if (@crudMode != CrudMode.Delete)
+                            {
+                                <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute">
                                 </RadzenRequiredValidator>
                             }
                         </div>
@@ -470,6 +493,7 @@ else
     private CrudMode crudMode = CrudMode.List;
 
     string claveAnteriorConfiguracionEmpresa = "";
+    string descripcionAnteriorConfiguracionEmpresa = "";
 
     /// <summary>
     ///  Variable to store the user id
@@ -596,6 +620,7 @@ else
         {
             crudMode = CrudMode.Edit;
             claveAnteriorConfiguracionEmpresa = ConfiguracionEmpresa_entity.Clave;
+            descripcionAnteriorConfiguracionEmpresa = ConfiguracionEmpresa_entity.Descripcion;
         }
 
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
@@ -715,16 +740,16 @@ else
                 }
                 break;
             case CrudMode.Edit:
-
                 //Si se modifica la configuracion de la empresa default se arrastra el cambio (salvo el valor y la empresa) al resto de las configuraciones de empresa.
+
                 if (EsDefault)
                 {
                     try
                     {
                         crud.BeginTransaction();
 
-                        //Si se cambio la clave le pego a todas las empresas
-                        if (claveAnteriorConfiguracionEmpresa != ConfiguracionEmpresa_entity.Clave)
+                        //Si se cambio la clave o la descripcion le pego a todas las empresas
+                        if (claveAnteriorConfiguracionEmpresa != ConfiguracionEmpresa_entity.Clave || descripcionAnteriorConfiguracionEmpresa != ConfiguracionEmpresa_entity.Descripcion)
                         {
 
                             crud.Update(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
@@ -737,8 +762,8 @@ else
                                 Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new(crud);
                                 foreach (var registroConfiguracionEmpresa in empresasConfiguracionRestantes)
                                 {
-
                                     registroConfiguracionEmpresa.Clave = ConfiguracionEmpresa_entity.Clave;
+                                    registroConfiguracionEmpresa.Descripcion = ConfiguracionEmpresa_entity.Descripcion;
                                     registroConfiguracionEmpresa.FechaModificacion = DateTime.Now;
                                     registroConfiguracionEmpresa.UsuarioModificacion = dataUsuario.Id;
                                     registroConfiguracionEmpresa.Habilitado = ConfiguracionEmpresa_entity.Habilitado;
@@ -746,7 +771,6 @@ else
                                 }
                             }
 
-                            crud.EndTransaction(true);
                             actionInformation = "modificado en esta empresa y en las restantes.";
 
                         }
@@ -754,9 +778,9 @@ else
                         {
                             crud.Update(ConfiguracionEmpresa_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             actionInformation = "modificado.";
-
                         }
 
+                        crud.EndTransaction(true);
                         summary = "El registro se ha ";
                         severityType = NotificationSeverity.Success;
                     }

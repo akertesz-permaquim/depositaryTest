@@ -267,17 +267,22 @@
                                 @if ((@PlantillaMoneda_PlantillaMonedaId_entities.Count > 0 && @PlantillaMoneda_PlantillaMonedaId_entities.FirstOrDefault(c => c.Id == @Modelo_entity.PlantillaMonedaId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? PlantillaMoneda_PlantillaMonedaId_entities.Where(x => x.Habilitado == true) : PlantillaMoneda_PlantillaMonedaId_entities.Where(x => x.Habilitado == true || x.Id == Modelo_entity.PlantillaMonedaId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Modelo_entity.PlantillaMonedaId)"
+                                    <RadzenDropDown Name="PlantillaMonedaId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Modelo_entity.PlantillaMonedaId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPlantillaMoneda_PlantillaMonedaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="PlantillaMonedaId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@PlantillaMoneda_PlantillaMonedaId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPlantillaMoneda_PlantillaMonedaIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(PlantillaMoneda_PlantillaMonedaId_entities.Count > 0 ? PlantillaMoneda_PlantillaMonedaId_entities.Min(x => x.Id) : 1)" Component="PlantillaMonedaId" Text="PlantillaMonedaId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>

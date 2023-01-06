@@ -212,7 +212,7 @@
                                 @if ((@Pais_PaisId_entities.Count > 0 && @Pais_PaisId_entities.FirstOrDefault(c => c.Id == @Moneda_entity.PaisId) != null) || crudMode != CrudMode.Delete)
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? Pais_PaisId_entities.Where(x => x.Habilitado == true) : Pais_PaisId_entities.Where(x => x.Habilitado == true || x.Id == Moneda_entity.PaisId);
-                                    <RadzenDropDown AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                    <RadzenDropDown Name="PaisId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                 AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Moneda_entity.PaisId)"
                                 Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPais_PaisIdValueChanged(args))
@@ -220,10 +220,15 @@
                                 }
                                 else
                                 {
-                                    <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100"
+                                    <RadzenDropDown Name="PaisId" AllowClear="true" TValue="Int64" Class="w-100"
                                 Data=@Pais_PaisId_entities TextProperty="Nombre" ValueProperty="Id"
                                 Change=@(args => SelectPais_PaisIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Pais_PaisId_entities.Count > 0 ? Pais_PaisId_entities.Min(x => x.Id) : 1)" Component="PaisId" Text="PaisId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
                                 }
                             </div>
                         </div>
