@@ -100,6 +100,46 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             return resultado;
         }
 
+        public static string ReiniciarPasswordUsuario(string pUsername, List<Entities.TextoLenguaje> dataLenguaje)
+        {
+            string resultado = "";
+
+            Depositary.Business.Tables.Seguridad.Usuario oTable = new Depositary.Business.Tables.Seguridad.Usuario();
+            oTable.Where.Add(Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.NickName, Depositary.sqlEnum.OperandEnum.Equal, pUsername);
+            oTable.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Seguridad.Usuario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+
+            oTable.Items();
+
+            if (oTable.Result.Count > 0)
+            {
+                Depositary.Entities.Tables.Seguridad.Usuario oUsuario = new();
+                oUsuario = oTable.Result.FirstOrDefault();
+                //Actualizamos la fecha de expiracion si es que tenia una.
+                if (oUsuario.FechaExpiracion.HasValue)
+                    oUsuario.FechaExpiracion = ObtenerFechaExpiracion(oUsuario.EmpresaId);
+
+                //Reiniciamos la password con el patron de primera letra nombre + primera letra apellido + documento.
+                string password = oUsuario.Nombre.Substring(0, 1) + oUsuario.Apellido.Substring(0, 1) + oUsuario.Documento;
+                oUsuario.Password = Cryptography.Hash(password);
+                oUsuario.DebeCambiarPassword = false;
+                try
+                {
+                    oTable.Update(oUsuario);
+                }
+                catch (Exception ex)
+                {
+                    resultado = ex.Message;
+                }
+
+            }
+            else
+            {
+                resultado = MultilenguajeController.ObtenerTextoPorClave("ERROR_REINICIO_PASSWORD", dataLenguaje);
+            }
+
+            return resultado;
+        }
+
         public static DateTime ObtenerFechaExpiracion(Int64 pEmpresaId)
         {
             //Por defecto la fecha de expiracion es dentro de 30 dias si es que no se definio por parametro.

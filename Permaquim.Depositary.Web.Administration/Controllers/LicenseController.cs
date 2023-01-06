@@ -17,7 +17,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
         // Check if a valid license file is available
         public static bool IsValidLicenseAvailable()
         {
-            if (Convert.ToBoolean(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("Development")))
+            if (GeneralController.EsDesarrollo())
                 return true;
             else
                 return Status.Licensed;
@@ -25,7 +25,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
         public static double GetLicenseRemainingDays()
         {
-            if (Convert.ToBoolean(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("Development")))
+            if (GeneralController.EsDesarrollo())
                 return 1;
             else
                 return (License.Status.Expiration_Date.Date - DateTime.Now.Date).TotalDays;
@@ -62,7 +62,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
         {
             string result = String.Empty;
 
-            if (Convert.ToBoolean(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("Development")) && key == "TYPE")
+            if (GeneralController.EsDesarrollo())
             {
                 result = "FULL";
             }

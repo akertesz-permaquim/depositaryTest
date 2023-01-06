@@ -26924,12 +26924,12 @@ using System.Text;
          /// <summary>
          /// EntidadDetalle Add Method
          /// </summary>
-         /// <param name='EntidadCabeceraId'></param>
+         /// <param name='DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='OrigenId'></param>
          /// <param name='DestinoId'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadDetalle</returns>
-			public Entities.Relations.Sincronizacion.EntidadDetalle Add(Int64 EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
+			public Entities.Relations.Sincronizacion.EntidadDetalle Add(DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
 			{
 			  return (Entities.Relations.Sincronizacion.EntidadDetalle)base.Add(new Entities.Relations.Sincronizacion.EntidadDetalle(EntidadCabeceraId,FechaCreacion,OrigenId,DestinoId));
 			}
