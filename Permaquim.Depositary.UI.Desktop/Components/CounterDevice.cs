@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.CustomExceptions;
+using System;
 using System.Collections;
 using System.Configuration;
 using System.IO.Ports;
@@ -70,8 +71,14 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public event DeviceDataReceivedEventHandler IOboardDeviceDataReceived;
 
         public delegate void DeviceErrorReceivedEventHandler(object sender, DeviceErrorEventArgs args);
-
+       
         public event DeviceErrorReceivedEventHandler DeviceErrorReceived;
+
+        public delegate void DevicendDepositEventHandler(object sender, DeviceEndDepositEventArgs args);
+        public event DevicendDepositEventHandler DevicEndDeposit;
+
+        public delegate void DeviceStateChangeEventHandler(object sender, DeviceStateChangeEventArgs args);
+        public event DeviceStateChangeEventHandler DeviceStateChange;
 
         #endregion
 
@@ -414,7 +421,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 if (_buffer.Count > 20)
                     _stateResultProperty = SenseParse(_buffer.ToArray<byte>());
                 if (_buffer.Count > 100)
-                    DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
+                    // DenominationResultProperty = ParseDenominationResult(_buffer.ToArray<byte>());
+                    this.DenominationResultProperty.DenominationArray = ParseDenomination(_buffer.ToArray<byte>());
                 _counterLastBytesRead = _buffer.Count;
 
                 _buffer.Clear();
@@ -1350,6 +1358,23 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                         statesResult.StatusInformation.OperatingState = (StatusInformation.State)BinaryToDecimal(StateInput);
 
+
+                        if (DeviceStateChange != null)
+                        {
+
+                            string stateName = Enum.GetName(typeof(StatusInformation.State), 
+                                statesResult.StatusInformation.OperatingState);
+
+                            DeviceStateChangeEventArgs args = new()
+                            {
+                                 StateName = stateName,
+                                StateDescription = stateName
+                            };
+
+                            DeviceStateChange(this, args);
+                        }
+
+
                         BitArray EndInformationBitArray = new(new byte[1] { numArray[5] });
                         statesResult.EndInformation.CollectEnd = EndInformationBitArray[5];
                         statesResult.EndInformation.StoreEnd = EndInformationBitArray[4];
@@ -1357,6 +1382,25 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                         statesResult.EndInformation.BatchEnd = EndInformationBitArray[2];
                         statesResult.EndInformation.AbnormalEnd = EndInformationBitArray[1];
                         statesResult.EndInformation.CountEnd = EndInformationBitArray[0];
+
+
+                        // Acá se dispara el evento de fin de depósito
+                        if (statesResult.EndInformation.StoreEnd)
+                        {
+                            if (DevicEndDeposit != null)
+                            {
+
+                                DeviceEndDepositEventArgs args = new()
+                                {
+                                     EndDetected = true,
+                                    EndDescription = "StoreEnd"
+                                };
+
+                                DevicEndDeposit(this, args);
+                            }
+
+                        }
+
 
                         BitArray DeviceStateInformationBitArray = new(new byte[1] { numArray[6] });
                         statesResult.DeviceStateInformation.RejectFull = DeviceStateInformationBitArray[5];
@@ -1750,12 +1794,27 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public string Message = string.Empty;
     }
 
+    public class DeviceEndDepositEventArgs : EventArgs
+    {
+        public bool EndDetected = false;
+        public string EndDescription = string.Empty;
+
+    }
+
     public class DeviceErrorEventArgs : EventArgs
     {
         public string ErrorCode = string.Empty;
         public string ErrorDescription = string.Empty;
 
     }
+
+    public class DeviceStateChangeEventArgs : EventArgs
+    {
+        public string StateName = string.Empty;
+        public string StateDescription = string.Empty;
+
+    }
+
     public class ECErrorArgs : EventArgs
     {
         public int Errorcode { get; set; }

@@ -351,6 +351,18 @@ namespace Permaquim.Depositary.UI.Desktop
                 CellTemplate = new DataGridViewCheckBoxCell()
 
             });
+
+            OperationsHeaderGridView.Columns.Add(new()
+            {
+                DataPropertyName = "EsDepositoAutomatico",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ES_DEPOSITO_AUTOMATICO),
+                Name = "EsDepositoAutomatico",
+                Visible = true,
+                Width = 100,
+                CellTemplate = new DataGridViewCheckBoxCell()
+
+            });
+
         }
 
         private void InitializeOperationsDetailGridView(OperationTypeEnum operationType)
@@ -539,7 +551,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     TotalValidado = item.TotalValidado,
                     Turno = esquemaDetalleTurno.EsquemaTurnoId.Nombre + " - " + esquemaDetalleTurno.Nombre,
                     Usuario = item.UsuarioId.NombreApellido,
-                    UsuarioCuenta = item.CuentaId == null ? null : item.CuentaId.Numero
+                    UsuarioCuenta = item.CuentaId == null ? null : item.CuentaId.Numero,
+                    EsDepositoAutomatico= item.EsDepositoAutomatico,
                 }); ;
             }
 

@@ -46,6 +46,7 @@
             this.SubtotalLabel = new System.Windows.Forms.Label();
             this.CurrencyLabel = new System.Windows.Forms.Label();
             this.MonitorGroupBox = new System.Windows.Forms.GroupBox();
+            this.PreviousStatusLabel = new System.Windows.Forms.Label();
             this.checkBoxEscrow = new System.Windows.Forms.CheckBox();
             this.CollectEndCheckBox = new System.Windows.Forms.CheckBox();
             this.StoreEndCheckBox = new System.Windows.Forms.CheckBox();
@@ -105,7 +106,7 @@
             this.ConfirmAndContinueDepositButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmAndContinueDepositButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ConfirmAndContinueDepositButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmAndContinueDepositButton.Location = new System.Drawing.Point(237, 0);
+            this.ConfirmAndContinueDepositButton.Location = new System.Drawing.Point(234, 0);
             this.ConfirmAndContinueDepositButton.Name = "ConfirmAndContinueDepositButton";
             this.ConfirmAndContinueDepositButton.Size = new System.Drawing.Size(228, 55);
             this.ConfirmAndContinueDepositButton.TabIndex = 150;
@@ -304,6 +305,7 @@
             // 
             this.MonitorGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MonitorGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.MonitorGroupBox.Controls.Add(this.PreviousStatusLabel);
             this.MonitorGroupBox.Controls.Add(this.checkBoxEscrow);
             this.MonitorGroupBox.Controls.Add(this.CollectEndCheckBox);
             this.MonitorGroupBox.Controls.Add(this.StoreEndCheckBox);
@@ -322,13 +324,25 @@
             this.MonitorGroupBox.Controls.Add(this.DeviceModeLabel);
             this.MonitorGroupBox.Controls.Add(this.GeneralStatusLabel);
             this.MonitorGroupBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonitorGroupBox.Location = new System.Drawing.Point(744, 120);
+            this.MonitorGroupBox.Location = new System.Drawing.Point(744, 88);
             this.MonitorGroupBox.Name = "MonitorGroupBox";
-            this.MonitorGroupBox.Size = new System.Drawing.Size(152, 504);
+            this.MonitorGroupBox.Size = new System.Drawing.Size(152, 536);
             this.MonitorGroupBox.TabIndex = 140;
             this.MonitorGroupBox.TabStop = false;
             this.MonitorGroupBox.Text = "Monitor";
             this.MonitorGroupBox.Visible = false;
+            // 
+            // PreviousStatusLabel
+            // 
+            this.PreviousStatusLabel.AutoSize = true;
+            this.PreviousStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PreviousStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.PreviousStatusLabel.ForeColor = System.Drawing.Color.Firebrick;
+            this.PreviousStatusLabel.Location = new System.Drawing.Point(8, 35);
+            this.PreviousStatusLabel.Name = "PreviousStatusLabel";
+            this.PreviousStatusLabel.Size = new System.Drawing.Size(88, 13);
+            this.PreviousStatusLabel.TabIndex = 42;
+            this.PreviousStatusLabel.Text = "GeneralStatus";
             // 
             // checkBoxEscrow
             // 
@@ -336,7 +350,7 @@
             this.checkBoxEscrow.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxEscrow.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkBoxEscrow.ForeColor = System.Drawing.Color.SteelBlue;
-            this.checkBoxEscrow.Location = new System.Drawing.Point(8, 432);
+            this.checkBoxEscrow.Location = new System.Drawing.Point(8, 448);
             this.checkBoxEscrow.Name = "checkBoxEscrow";
             this.checkBoxEscrow.Size = new System.Drawing.Size(66, 17);
             this.checkBoxEscrow.TabIndex = 41;
@@ -349,7 +363,7 @@
             this.CollectEndCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.CollectEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CollectEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.CollectEndCheckBox.Location = new System.Drawing.Point(8, 406);
+            this.CollectEndCheckBox.Location = new System.Drawing.Point(8, 422);
             this.CollectEndCheckBox.Name = "CollectEndCheckBox";
             this.CollectEndCheckBox.Size = new System.Drawing.Size(86, 17);
             this.CollectEndCheckBox.TabIndex = 40;
@@ -362,7 +376,7 @@
             this.StoreEndCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.StoreEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.StoreEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.StoreEndCheckBox.Location = new System.Drawing.Point(8, 380);
+            this.StoreEndCheckBox.Location = new System.Drawing.Point(8, 396);
             this.StoreEndCheckBox.Name = "StoreEndCheckBox";
             this.StoreEndCheckBox.Size = new System.Drawing.Size(78, 17);
             this.StoreEndCheckBox.TabIndex = 39;
@@ -375,7 +389,7 @@
             this.CountEndCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.CountEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CountEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.CountEndCheckBox.Location = new System.Drawing.Point(8, 354);
+            this.CountEndCheckBox.Location = new System.Drawing.Point(8, 370);
             this.CountEndCheckBox.Name = "CountEndCheckBox";
             this.CountEndCheckBox.Size = new System.Drawing.Size(81, 17);
             this.CountEndCheckBox.TabIndex = 38;
@@ -388,7 +402,7 @@
             this.BatchEndCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.BatchEndCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BatchEndCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.BatchEndCheckBox.Location = new System.Drawing.Point(8, 328);
+            this.BatchEndCheckBox.Location = new System.Drawing.Point(8, 344);
             this.BatchEndCheckBox.Name = "BatchEndCheckBox";
             this.BatchEndCheckBox.Size = new System.Drawing.Size(79, 17);
             this.BatchEndCheckBox.TabIndex = 37;
@@ -401,7 +415,7 @@
             this.CurrencyStatusLabel.BackColor = System.Drawing.Color.Transparent;
             this.CurrencyStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CurrencyStatusLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.CurrencyStatusLabel.Location = new System.Drawing.Point(6, 64);
+            this.CurrencyStatusLabel.Location = new System.Drawing.Point(6, 80);
             this.CurrencyStatusLabel.Name = "CurrencyStatusLabel";
             this.CurrencyStatusLabel.Size = new System.Drawing.Size(96, 13);
             this.CurrencyStatusLabel.TabIndex = 36;
@@ -413,7 +427,7 @@
             this.JammingCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.JammingCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.JammingCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.JammingCheckBox.Location = new System.Drawing.Point(9, 280);
+            this.JammingCheckBox.Location = new System.Drawing.Point(9, 296);
             this.JammingCheckBox.Name = "JammingCheckBox";
             this.JammingCheckBox.Size = new System.Drawing.Size(77, 17);
             this.JammingCheckBox.TabIndex = 35;
@@ -426,7 +440,7 @@
             this.CountingErrorCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.CountingErrorCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CountingErrorCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.CountingErrorCheckBox.Location = new System.Drawing.Point(9, 256);
+            this.CountingErrorCheckBox.Location = new System.Drawing.Point(9, 272);
             this.CountingErrorCheckBox.Name = "CountingErrorCheckBox";
             this.CountingErrorCheckBox.Size = new System.Drawing.Size(110, 17);
             this.CountingErrorCheckBox.TabIndex = 34;
@@ -439,7 +453,7 @@
             this.DepositFinishedCheckbox.BackColor = System.Drawing.Color.Transparent;
             this.DepositFinishedCheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DepositFinishedCheckbox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.DepositFinishedCheckbox.Location = new System.Drawing.Point(9, 232);
+            this.DepositFinishedCheckbox.Location = new System.Drawing.Point(9, 248);
             this.DepositFinishedCheckbox.Name = "DepositFinishedCheckbox";
             this.DepositFinishedCheckbox.Size = new System.Drawing.Size(117, 17);
             this.DepositFinishedCheckbox.TabIndex = 33;
@@ -452,7 +466,7 @@
             this.HopperBillPresentCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.HopperBillPresentCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.HopperBillPresentCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.HopperBillPresentCheckBox.Location = new System.Drawing.Point(8, 207);
+            this.HopperBillPresentCheckBox.Location = new System.Drawing.Point(8, 223);
             this.HopperBillPresentCheckBox.Name = "HopperBillPresentCheckBox";
             this.HopperBillPresentCheckBox.Size = new System.Drawing.Size(135, 17);
             this.HopperBillPresentCheckBox.TabIndex = 32;
@@ -465,7 +479,7 @@
             this.EscrowBillPresentCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.EscrowBillPresentCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.EscrowBillPresentCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.EscrowBillPresentCheckBox.Location = new System.Drawing.Point(8, 183);
+            this.EscrowBillPresentCheckBox.Location = new System.Drawing.Point(8, 199);
             this.EscrowBillPresentCheckBox.Name = "EscrowBillPresentCheckBox";
             this.EscrowBillPresentCheckBox.Size = new System.Drawing.Size(134, 17);
             this.EscrowBillPresentCheckBox.TabIndex = 31;
@@ -478,7 +492,7 @@
             this.DischargingFailureCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.DischargingFailureCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DischargingFailureCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.DischargingFailureCheckBox.Location = new System.Drawing.Point(8, 159);
+            this.DischargingFailureCheckBox.Location = new System.Drawing.Point(8, 175);
             this.DischargingFailureCheckBox.Name = "DischargingFailureCheckBox";
             this.DischargingFailureCheckBox.Size = new System.Drawing.Size(134, 17);
             this.DischargingFailureCheckBox.TabIndex = 30;
@@ -491,7 +505,7 @@
             this.RejectedBillPresentCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.RejectedBillPresentCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RejectedBillPresentCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.RejectedBillPresentCheckBox.Location = new System.Drawing.Point(8, 135);
+            this.RejectedBillPresentCheckBox.Location = new System.Drawing.Point(8, 151);
             this.RejectedBillPresentCheckBox.Name = "RejectedBillPresentCheckBox";
             this.RejectedBillPresentCheckBox.Size = new System.Drawing.Size(144, 17);
             this.RejectedBillPresentCheckBox.TabIndex = 29;
@@ -504,7 +518,7 @@
             this.RejectFullCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.RejectFullCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RejectFullCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.RejectFullCheckBox.Location = new System.Drawing.Point(8, 111);
+            this.RejectFullCheckBox.Location = new System.Drawing.Point(8, 127);
             this.RejectFullCheckBox.Name = "RejectFullCheckBox";
             this.RejectFullCheckBox.Size = new System.Drawing.Size(85, 17);
             this.RejectFullCheckBox.TabIndex = 28;
@@ -517,7 +531,7 @@
             this.StackerFullCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.StackerFullCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.StackerFullCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.StackerFullCheckBox.Location = new System.Drawing.Point(8, 87);
+            this.StackerFullCheckBox.Location = new System.Drawing.Point(8, 103);
             this.StackerFullCheckBox.Name = "StackerFullCheckBox";
             this.StackerFullCheckBox.Size = new System.Drawing.Size(93, 17);
             this.StackerFullCheckBox.TabIndex = 27;
@@ -530,7 +544,7 @@
             this.DeviceModeLabel.BackColor = System.Drawing.Color.Transparent;
             this.DeviceModeLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DeviceModeLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.DeviceModeLabel.Location = new System.Drawing.Point(6, 40);
+            this.DeviceModeLabel.Location = new System.Drawing.Point(6, 56);
             this.DeviceModeLabel.Name = "DeviceModeLabel";
             this.DeviceModeLabel.Size = new System.Drawing.Size(76, 13);
             this.DeviceModeLabel.TabIndex = 26;
@@ -555,13 +569,12 @@
             this.MonitorGroupcheckbox.BackColor = System.Drawing.Color.Transparent;
             this.MonitorGroupcheckbox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonitorGroupcheckbox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(760, 80);
+            this.MonitorGroupcheckbox.Location = new System.Drawing.Point(752, 56);
             this.MonitorGroupcheckbox.Name = "MonitorGroupcheckbox";
             this.MonitorGroupcheckbox.Size = new System.Drawing.Size(71, 17);
             this.MonitorGroupcheckbox.TabIndex = 141;
             this.MonitorGroupcheckbox.Text = "Eventos";
             this.MonitorGroupcheckbox.UseVisualStyleBackColor = false;
-            this.MonitorGroupcheckbox.Visible = false;
             this.MonitorGroupcheckbox.CheckStateChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
             // 
             // BillDepositForm
@@ -630,5 +643,6 @@
         private CheckBox StoreEndCheckBox;
         private CheckBox CollectEndCheckBox;
         private CheckBox checkBoxEscrow;
+        private Label PreviousStatusLabel;
     }
 }

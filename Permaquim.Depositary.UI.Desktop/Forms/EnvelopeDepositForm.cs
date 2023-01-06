@@ -35,6 +35,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private bool _requiresEnvelopeIdentifier = ParameterController.RequiresEnvelopeIdentifier;
         private const string DEPOSITO_SOBRE_CANCELADO = "Deposito de sobre Cancelado";
         private const string DEPOSITO_SOBRE = "Deposito de sobre";
+        private const string WAITING = "WAITING";
+        private const string STORINGERROR = "STORINGERROR";
 
         List<Permaquim.Depositario.Entities.Tables.Operacion.Transaccion> _headerTransaction = new();
         List<Permaquim.Depositario.Entities.Tables.Operacion.TransaccionDetalle> _detailTransactions = new();
@@ -149,6 +151,9 @@ namespace Permaquim.Depositary.UI.Desktop
         private void EnvelopeDepositForm_Load(object sender, EventArgs e)
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
+
+            _device.DeviceStateChange += DeviceStateChange;
+
             _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = DeviceController.GetPollingInterval(),
@@ -166,6 +171,27 @@ namespace Permaquim.Depositary.UI.Desktop
                     MultilanguangeController.GetText(MultiLanguageEnum.USUARIOCUENTA) +
                     ":" + DatabaseController.CurrentUserBankAccount.CuentaId.Numero
                     );
+            }
+        }
+
+        private void DeviceStateChange(object sender, DeviceStateChangeEventArgs args)
+        {
+            if (args.StateName.ToUpper().Equals(STORINGERROR))
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Event,
+                    MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITO_FINALIZADO_CON_ERROR));
+                return;
+            }
+
+            if (args.StateName.ToUpper().Equals(WAITING))
+            {
+                if (_device.PreviousState == StatusInformation.State.PQStoring)
+                {
+                    _device.PreviousState = StatusInformation.State.Waiting;
+                    FormsController.SetInformationMessage(InformationTypeEnum.Event,
+                        MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
+                    ExitForm();
+                }
             }
         }
         private void EnvelopeDepositForm_VisibleChanged(object sender, EventArgs e)
@@ -268,6 +294,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             if (TimeOutController.IsTimeOut())
             {
+                _operationStatus.IsAutoDeposit = true;
+
                 _pollingTimer.Enabled = false;
                 _device.CloseEscrow();
                 FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
@@ -557,8 +585,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     CancelDepositButton.Visible = false;
                     if (ParameterController.UsesShutter)
                         _device.Open();
+
                     _device.StoringStart();
-                    ExitEnvelopeDepositForm();
+                    _device.PreviousState = StatusInformation.State.PQStoring;
+                    //ExitEnvelopeDepositForm();
                 }
                 if (
                 _operationStatus.DepositConfirmed &&
@@ -578,7 +608,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             }
         }
-        private void ExitEnvelopeDepositForm()
+        private void ExitForm()
         {
 
             EnableDisableControls(false);
