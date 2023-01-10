@@ -215,8 +215,31 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
 
         public static Int64? ObtenerIdOrigenDetalleSincronizacion(string pEntidadNombre, Int64 pIdDestino)
         {
+            //Int64? resultado = null;
+
+            ////En funcion del nombre recibido buscamos la entidad y obtenemos el id con el que se guardo
+            //Depositario.Business.Procedures.Sincronizacion.ObtenerIdOrigen obtenerIdOrigen = new();
+
+            //try
+            //{
+            //    obtenerIdOrigen.Items(pEntidadNombre, ConfigurationController.GetCurrentDepositaryId(), pIdDestino);
+
+            //    if (obtenerIdOrigen.Resultset.Count > 0)
+            //    {
+            //        return obtenerIdOrigen.Resultset.FirstOrDefault().OrigenId;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    AuditController.Log(ex);
+            //    throw (ex);
+            //}
+
+            //return resultado;
+
             SincronizacionEntidadController.Where.Clear();
             //En funcion del nombre recibido buscamos la entidad y obtenemos el id con el que se guardo
+
             //Depositario.Business.Tables.Sincronizacion.Entidad oSincronizacionEntidad = new();
             SincronizacionEntidadController.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, Depositario.sqlEnum.OperandEnum.Equal, pEntidadNombre);
 

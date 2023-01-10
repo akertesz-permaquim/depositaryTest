@@ -57,7 +57,6 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             return resultado;
         }
 
-
         public static bool ValidarCredencialesMail(string usuarioEmailEnvia, string passwordEmailEnvia, string smtpHost, int smtpPort, bool validarCertificacion)
         {
             bool resultado = false;
@@ -86,6 +85,18 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
             }
             return resultado;
 
+        }
+
+        public static bool EsDesarrollo()
+        {
+            try
+            {
+                return Convert.ToBoolean(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("Development"));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

@@ -54,6 +54,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                 Depositario.Business.Tables.Sincronizacion.EntidadCabecera headerEntities = new();
                 headerEntities.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId,
                     Depositario.sqlEnum.OperandEnum.Equal, entities.Result.FirstOrDefault().Id);
+
+                //Solo tiene que traer datos desde la ultima sincro que finalizo correctamente
+                headerEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin,
+                    Depositario.sqlEnum.OperandEnum.IsNotNull, true);
+
                 headerEntities.OrderBy.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id,
                     Depositario.sqlEnum.DirEnum.DESC);
                 headerEntities.Items();
@@ -214,7 +219,6 @@ namespace Permaquim.Depositary.Sincronization.Console
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Transaccion);
             Depositario.Business.Tables.Operacion.Transaccion transaction = new();
 
-
             transaction.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha,
             Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
 
@@ -326,7 +330,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             List<Depositario.Entities.Tables.Operacion.TransaccionSobreDetalle> result = new();
 
-            if(envelopeTransactions.Count>0)
+            if (envelopeTransactions.Count > 0)
             {
                 //var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_TransaccionSobreDetalle);
                 Depositario.Business.Tables.Operacion.TransaccionSobreDetalle envelopeTransactionDetail = new();
@@ -440,7 +444,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                     EntidadId = entities.Result.FirstOrDefault().Id,
                     Fechafin = endDate,
                     Fechainicio = startDate,
-                    Valor = String.Empty
+                    Valor = entities.Result.FirstOrDefault().Nombre
                 });
 
             }

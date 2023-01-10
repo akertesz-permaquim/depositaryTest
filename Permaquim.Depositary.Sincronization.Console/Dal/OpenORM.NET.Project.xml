@@ -22,6 +22,7 @@
   <SelectedViews />
   <SelectedStoredProcedures>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
+    <string>Sincronizacion.ObtenerIdOrigen</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
     <string>Customizador.ConstruirEntidadesyAtributos</string>
@@ -53,6 +54,7 @@
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
     <string>Regionalizacion.ObtenerTextosLenguaje</string>
     <string>Seguridad.ObtenerRolesPorUsuario</string>
+    <string>Sincronizacion.ObtenerIdDestino</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures>
     <MappedStoredProcedure>

@@ -28,6 +28,7 @@
     <string>Operacion.ObtenerTransaccionesPorDepositario</string>
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
     <string>Seguridad.ObtenerRolesPorUsuario</string>
+    <string>Sincronizacion.ObtenerIdDestino</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
     <string>Customizador.ConstruirEntidadesyAtributos</string>

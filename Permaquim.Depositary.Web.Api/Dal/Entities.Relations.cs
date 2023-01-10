@@ -13009,6 +13009,18 @@ using System.Text;
              public DateTime Fechainicio { get; set; }
              [DataItemAttributeFieldName("Fechafin","Fechafin")]
              public DateTime? Fechafin { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of EntidadDetalle that have this EntidadCabeceraId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadDetalle> ListOf_EntidadDetalle_EntidadCabeceraId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Sincronizacion.EntidadDetalle entities = new DepositaryWebApi.Business.Relations.Sincronizacion.EntidadDetalle();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Sincronizacion.EntidadDetalle.ColumnEnum.EntidadCabeceraId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
 				
 			} //Class EntidadCabecera 
 } //namespace DepositaryWebApi.Entities.Relations.Sincronizacion
@@ -13042,7 +13054,7 @@ using System.Text;
                 public EntidadDetalle()
                 {
                 }
-                public  EntidadDetalle(Int64 EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId)
+                public  EntidadDetalle(DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId)
                 {
                     this.Id = Id;
                     this.EntidadCabeceraId = EntidadCabeceraId;
@@ -13054,7 +13066,22 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
              public Int64 Id { get; set; }
              [DataItemAttributeFieldName("EntidadCabeceraId","EntidadCabeceraId")]
-             public Int64 EntidadCabeceraId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _EntidadCabeceraId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("EntidadCabecera")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId
+             {
+                 get {
+                     if (EntidadCabeceraId_ == null || EntidadCabeceraId_.Id != _EntidadCabeceraId)
+                         {
+                             EntidadCabeceraId = new DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera().Items(this._EntidadCabeceraId).FirstOrDefault();
+                         }
+                     return EntidadCabeceraId_;
+                     }
+                 set {EntidadCabeceraId_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId_ = null;
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("OrigenId","OrigenId")]
