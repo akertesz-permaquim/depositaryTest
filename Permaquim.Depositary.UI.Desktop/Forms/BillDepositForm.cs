@@ -86,7 +86,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (args.StateName.ToUpper().Equals(WAITING))
             {
-                if (_device.PreviousState == StatusInformation.State.PQStoring)
+                if (_device.PreviousState == StatusInformation.State.PQStoring 
+                    && _operationStatus.DepositEnded)
                 {
                     _device.PreviousState = StatusInformation.State.BeingSet;
                     FormsController.SetInformationMessage(InformationTypeEnum.Event, 
@@ -131,7 +132,6 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BillDepositForm_VisibleChanged(object sender, EventArgs e)
         {
-            _pollingTimer.Enabled = this.Visible;
 
             MonitorGroupcheckbox.Visible = ConfigurationController.IsDevelopment();
 
@@ -158,6 +158,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 InitializeLocals();
                 _device.RemoteCancel();
             }
+            _pollingTimer.Enabled = this.Visible;
+
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
         }
 
@@ -269,12 +271,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 {
                     _operationStatus.DepositConfirmed = true;
-                    ConfirmDeposit();
-                    //SaveTransaction(true,true);
-
-                    //PrintTicket();
-                    //DatabaseController.LogOff(true);
-                    //FormsController.LogOff();
+                    ConfirmAndExitDeposit();
                 }
                 else
                 {
@@ -366,20 +363,29 @@ namespace Permaquim.Depositary.UI.Desktop
                     && _operationStatus.DepositCancelled == false
                     && _operationStatus.DepositConfirmed == false;
 
-                ConfirmAndExitDepositButton.Visible =
-                    (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                    && _operationStatus.DepositConfirmed == false 
-                    && _operationStatus.DepositCancelled == false)
-                    && _device.StateResultProperty.DoorStateInformation.Escrow == false
-                    && (_device.StateResultProperty.StatusInformation.OperatingState
-                    == StatusInformation.State.BeingReset ||
-                    _device.StateResultProperty.StatusInformation.OperatingState
-                    == StatusInformation.State.BeingReset)
-                    && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
-                     && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
-                        ;
-
-                CancelDepositButton.Visible = (
+                if ((_device.StateResultProperty.DeviceStateInformation.StackerFull
+                    || _operationStatus.StackerFullCondition)
+                    && _device.StateResultProperty.DeviceStateInformation.HopperBillPresent)
+                {
+                    ConfirmAndExitDepositButton.Visible = false;
+                }
+                else
+                {
+                    ConfirmAndExitDepositButton.Visible =
+                    (
+                        (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                        && _operationStatus.DepositConfirmed == false
+                        && _operationStatus.DepositCancelled == false)
+                        && _device.StateResultProperty.DoorStateInformation.Escrow == false
+                        && (_device.StateResultProperty.StatusInformation.OperatingState
+                        == StatusInformation.State.BeingReset ||
+                        _device.StateResultProperty.StatusInformation.OperatingState
+                        == StatusInformation.State.BeingReset)
+                        && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                            && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
+                        );
+                }
+                CancelDepositButton.Visible =
                     (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     && _operationStatus.DepositConfirmed == false
                     && _operationStatus.DepositCancelled == false)
@@ -387,19 +393,26 @@ namespace Permaquim.Depositary.UI.Desktop
                     && (_device.StateResultProperty.StatusInformation.OperatingState
                     == StatusInformation.State.BeingReset ||
                     _device.StateResultProperty.StatusInformation.OperatingState
-                    == StatusInformation.State.BeingReset)
-                    ) || _operationStatus.StackerFullCondition
+                    == StatusInformation.State.BeingSet)
+                    // Se agrega la condición en el caso de depósito subsecuente
+                    || (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
+                    && _device.StateResultProperty.StatusInformation.OperatingState
+                    == StatusInformation.State.Waiting
+                    && _device.StateResultProperty.DeviceStateInformation.StackerFull
+
+                    )
+
                     ;
 
 
                 ConfirmAndContinueDepositButton.Visible =
                         _device.StateResultProperty.DeviceStateInformation.StackerFull
                         && _device.StateResultProperty.StatusInformation.OperatingState
-                        != StatusInformation.State.PQStoring
+                        == StatusInformation.State.BeingReset
                         && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
                         && _operationStatus.DepositCancelled == false
                         && _operationStatus.DepositConfirmed == false
-                        && CancelDepositButton.Visible && ConfirmAndExitDepositButton.Visible;
+                        ;
 
 
                 ButtonsPanel.Visible = true;
@@ -550,8 +563,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.PreviousState = _device.StateResultProperty.StatusInformation.OperatingState;
                 _device.RemoteCancel();
                 _device.CloseEscrow();
-
-                FormsController.OpenChildForm(this, new OperationForm(), _device);
+                 ExitForm();
+                
             }
         }
         /// <summary>
@@ -759,9 +772,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             // Si se cancela luego de haber depositado  billetes
             // se imprimer el ticket de lo depositado hasta este momento
-            if (_operationStatus.CurrentTransactionId != 0)
+            if (_operationStatus.CurrentTransactionAmount != 0)
             {
-                //PrintTicket();
                 ConfirmEndTransaction(true);
                 if(!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                     ExitForm();
@@ -798,7 +810,11 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
-
+            ConfirmAndExitDeposit();
+        }
+        private void ConfirmAndExitDeposit()
+        {
+            _device.RemoteCancel();
             _operationStatus.StackerFullCondition = false;
 
             _operationStatus.CurrentTransactionAmount += _operationStatus.CurrentTransactionPartialAmount;
@@ -847,32 +863,39 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ExitForm()
         {
             _pollingTimer.Enabled = false;
-                
-            if(!_operationStatus.StackerFullCondition)
-                SaveTransaction(true, _operationStatus.IsAutoDeposit);
             
-            EnableDisableControls(false);
-                _device.RemoteCancel();
-                _operationStatus.DepositEnded = false;
-                CleanDetectedBills();
-                FormsController.SetInformationMessage(InformationTypeEnum.Information,
-                     MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
-                PrintTicket();
 
+            if (!_operationStatus.StackerFullCondition && _operationStatus.CurrentTransactionAmount > 0)
+            {
+                SaveTransaction(true, _operationStatus.IsAutoDeposit);
+            }
+            if(_operationStatus.CurrentTransactionAmount > 0)
+            {
+                PrintTicket();
+            }
+
+
+            EnableDisableControls(false);
+            _device.RemoteCancel();
+            CleanDetectedBills();
+            FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                 MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
+            if (ParameterController.UsesShutter)
                 _device.Close();
 
-                _operationStatus.DepositCancelled= false;
+            _operationStatus.DepositCancelled = false;
 
-                if (_operationStatus.IsAutoDeposit)
-                {
-                    DatabaseController.LogOff(true);
-                    FormsController.LogOff();
-                }
-                else
-                {
-                    FormsController.OpenChildForm(this, new OperationForm(), _device);
-                }
-        
+            _operationStatus.DepositEnded = true;
+
+            if (_operationStatus.IsAutoDeposit)
+            {
+                DatabaseController.LogOff(true);
+                FormsController.LogOff();
+            }
+            else
+            {
+                FormsController.OpenChildForm(this, new OperationForm(), _device);
+            }
         }
         private void SaveAndContinueDeposit()
         {
@@ -1066,6 +1089,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (ConfigurationController.IsDevelopment())
             {
+                MessageBox.Show("Ticket: " + _operationStatus.CurrentTransactionAmount.ToString("C2"));
                 return;
             }
 

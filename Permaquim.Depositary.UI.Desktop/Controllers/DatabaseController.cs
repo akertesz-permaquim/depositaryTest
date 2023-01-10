@@ -470,7 +470,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             Permaquim.Depositario.Business.Relations.Dispositivo.DepositarioMoneda depositarioMoneda = new();
             depositarioMoneda.Where.Add(Depositario.Business.Relations.Dispositivo.DepositarioMoneda.ColumnEnum.DepositarioId,
-                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.SucursalId.Id);
+                Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.Id);
 
             if (onlyEnabledCurrencies)
             {

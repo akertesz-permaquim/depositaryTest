@@ -58,7 +58,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             try
             {
-                return Convert.ToBoolean(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").Equals("DEVELOPMENT"));
+                string? env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+                return env == null? false: Convert.ToBoolean(env.Equals("DEVELOPMENT"));
             }
             catch (Exception)
             {
