@@ -123,6 +123,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                  " - Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             MultilanguangeController.ResetLanguage();
 
+            TimeOutController.Stop();
 
             MainFormInstance.LoadPresentation();
 

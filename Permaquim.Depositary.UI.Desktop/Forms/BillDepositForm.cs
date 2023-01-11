@@ -792,7 +792,7 @@ namespace Permaquim.Depositary.UI.Desktop
         /// <summary>
         /// Setea como finalizada = false;
         /// </summary>
-        private void ConfirmEndTransaction(bool finished)
+        private void ConfirmEndTransaction(bool finished , bool isAutoDeposit = false)
         {
             Permaquim.Depositario.Business.Tables.Operacion.Transaccion transactions = new();
 
@@ -802,6 +802,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 var previousTransacion = transactions.Result.FirstOrDefault();
 
                 previousTransacion.Finalizada = finished;
+                previousTransacion.EsDepositoAutomatico = isAutoDeposit;
 
                 transactions.Update(previousTransacion);
 
@@ -810,6 +811,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
+            _operationStatus.IsAutoDeposit = false;
             ConfirmAndExitDeposit();
         }
         private void ConfirmAndExitDeposit()
@@ -819,7 +821,6 @@ namespace Permaquim.Depositary.UI.Desktop
 
             _operationStatus.CurrentTransactionAmount += _operationStatus.CurrentTransactionPartialAmount;
 
-            _operationStatus.IsAutoDeposit = false;
             TimeOutController.Reset();
             ButtonsPanel.Visible = false;
             _operationStatus.DepositConfirmed = true;
@@ -869,6 +870,10 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 SaveTransaction(true, _operationStatus.IsAutoDeposit);
             }
+
+            ConfirmEndTransaction(true, _operationStatus.IsAutoDeposit);
+           
+
             if(_operationStatus.CurrentTransactionAmount > 0)
             {
                 PrintTicket();

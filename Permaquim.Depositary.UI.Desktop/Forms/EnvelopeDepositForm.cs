@@ -936,12 +936,12 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             RemainingTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE) +
-                TimeOutController.GetRemainingtime().ToString();
-            if (TimeOutController.GetRemainingtime() > _greenStatusIndicator)
+                TimeOutController.GetRemainingTime().ToString();
+            if (TimeOutController.GetRemainingTime() > _greenStatusIndicator)
                 RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoInformacion);
-            if (TimeOutController.GetRemainingtime() < _yellowStatusIndicator)
+            if (TimeOutController.GetRemainingTime() < _yellowStatusIndicator)
                 RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoAlerta);
-            if (TimeOutController.GetRemainingtime() < _redStatusIndicator)
+            if (TimeOutController.GetRemainingTime() < _redStatusIndicator)
                 RemainingTimeLabel.ForeColor = StyleController.GetColor(ColorNameEnum.TextoError);
         }
 

@@ -13,14 +13,19 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         private static Stopwatch _sw;
         private static bool _isTimeOut = false;
         private static long _timeOut { get; set; } = 0;
+        private static bool _isActive= false;
 
+        public static bool IsActive()
+        {
+            return _isActive;
+        } 
 
         public static bool IsTimeOut()
         {
             return _isTimeOut;
         }
 
-        public static long GetRemainingtime()
+        public static long GetRemainingTime()
         {
             long returnValue = 0;
             if (_sw != null)
@@ -40,9 +45,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _sw.Start();
             _isTimeOut = false;
             _timeOut = Convert.ToInt64(DatabaseController.GetEnterpriseParameterValue(TIMEOUT_GENERAL));
+            _isActive = true;
         }
         public static void Stop()
         {
+            _isActive = false;
             _sw.Stop();
         }
     }
