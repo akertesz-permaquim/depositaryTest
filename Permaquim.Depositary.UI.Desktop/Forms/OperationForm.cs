@@ -16,6 +16,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private System.Windows.Forms.Button _backButton;
 
+        private bool _operationBlocked = false;
+
         CounterDevice _device = null;
         public OperationForm()
         {
@@ -49,8 +51,13 @@ namespace Permaquim.Depositary.UI.Desktop
                         _device.RemoteCancel();
                         _device.Sleep();
                         MainPanel.Enabled = true;
-                        MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
-                        == ModeStateInformation.Mode.Neutral_SettingMode;
+                        //MainPanel.Enabled = _device.StateResultProperty.ModeStateInformation.ModeState
+                        //== ModeStateInformation.Mode.Neutral_SettingMode;
+                        if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                        {
+                            _device.Sleep();
+                            _device.RemoteCancel();
+                        }
                     }
                     else
                     {
@@ -60,9 +67,21 @@ namespace Permaquim.Depositary.UI.Desktop
                 else
                 {
                     MainPanel.Enabled = true;
+                    if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    {
+                        this.MainPanel.Controls.Clear();
+                        LoadReportsButton();
+                        LoadOtherOperationsButton();
+                        LoadBackButton();
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                            MultilanguangeController.GetText(MultiLanguageEnum.ESCROW_NO_VACIO));
+                        return;
+                    }
 
                 }
                 _backButton.Enabled = true;
+
+
 
                 if (TimeOutController.IsTimeOut())
                 {
@@ -111,11 +130,7 @@ namespace Permaquim.Depositary.UI.Desktop
             CenterPanel();
             if (_device != null && _device.CounterConnected)
                 SetDeviceToNeutralMode();
-            LoadTransactionButtons();
-            LoadReportsButton();
-            LoadOtherOperationsButton();
-            LoadBackButton();
-
+  
         }
         private void LoadStyles()
         {
@@ -609,22 +624,40 @@ namespace Permaquim.Depositary.UI.Desktop
         private void OperationForm_VisibleChanged(object sender, EventArgs e)
         {
             MainPanel.Enabled = false;
-            _backButton.Enabled = true;
+     
             _pollingTimer.Enabled = this.Visible;
             if (!this.Visible)
+            {
                 InitializeLocals();
+                MainPanel.Controls.Clear();
+            }
             else
             {
-                if(DatabaseController.CurrentOperation != null)
+
+                if (DatabaseController.CurrentOperation != null)
                     DatabaseController.CurrentOperation.Id = (long)OperationTypeEnum.None;
 
                 _transactions = DatabaseController.GetTransactionTypes();
-                LoadTransactionButtons();
-                LoadOtherOperationsButton();
+                // En esta instancia, se verifica si existe contenido en el escrow,
+                // de existir, solo se habilita el boton de otras operaciones, para
+                // acceder al soporte técnico
+                if (_device.StateResultProperty != null & !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                {
+                    LoadTransactionButtons();
+                }
+
                 LoadReportsButton();
+                LoadOtherOperationsButton();
                 LoadBackButton();
                 if (!ConfigurationController.IsDevelopment())
                     _device.RemoteCancel();
+
+                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                {
+                    FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                     MultilanguangeController.GetText(MultiLanguageEnum.ESCROW_NO_VACIO));
+                    return;
+                }
 
                 if (DatabaseController.CurrentTurn != null)
                 {

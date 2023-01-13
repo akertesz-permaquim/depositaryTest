@@ -295,8 +295,10 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 if (_device != null && _device.CounterConnected)
                 {
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.Neutral_SettingMode)
+                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.DepositMode)
                     {
+                        _device.RemoteCancel();
+                        _device.Sleep();
                         _device.DepositMode();
                     }
                     else

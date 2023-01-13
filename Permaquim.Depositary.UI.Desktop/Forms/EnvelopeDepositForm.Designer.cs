@@ -314,6 +314,7 @@
             this.MonitorGroupcheckbox.Text = "Eventos";
             this.MonitorGroupcheckbox.UseVisualStyleBackColor = false;
             this.MonitorGroupcheckbox.Visible = false;
+            this.MonitorGroupcheckbox.CheckedChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
             this.MonitorGroupcheckbox.CheckStateChanged += new System.EventHandler(this.MonitorGroupcheckbox_CheckStateChanged);
             // 
             // MonitorGroupBox

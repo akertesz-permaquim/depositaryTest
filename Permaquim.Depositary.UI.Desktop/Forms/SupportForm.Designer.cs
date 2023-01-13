@@ -42,6 +42,7 @@
             this.ExecuteCounterComandButton = new System.Windows.Forms.Button();
             this.CounterStatusPropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.CounterCommandComboBox = new System.Windows.Forms.ComboBox();
+            this.EscrowButton = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.IoBoardStatusGroup.SuspendLayout();
             this.CounterStatudGroupBox.SuspendLayout();
@@ -147,6 +148,7 @@
             // 
             // CounterStatudGroupBox
             // 
+            this.CounterStatudGroupBox.Controls.Add(this.EscrowButton);
             this.CounterStatudGroupBox.Controls.Add(this.ModeCheckBox);
             this.CounterStatudGroupBox.Controls.Add(this.CounterComboBox);
             this.CounterStatudGroupBox.Controls.Add(this.CounterResponseTextBox);
@@ -165,7 +167,7 @@
             // ModeCheckBox
             // 
             this.ModeCheckBox.AutoSize = true;
-            this.ModeCheckBox.Location = new System.Drawing.Point(8, 80);
+            this.ModeCheckBox.Location = new System.Drawing.Point(160, 80);
             this.ModeCheckBox.Name = "ModeCheckBox";
             this.ModeCheckBox.Size = new System.Drawing.Size(75, 18);
             this.ModeCheckBox.TabIndex = 163;
@@ -265,6 +267,17 @@
             this.CounterCommandComboBox.Size = new System.Drawing.Size(232, 31);
             this.CounterCommandComboBox.TabIndex = 30;
             // 
+            // EscrowButton
+            // 
+            this.EscrowButton.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.EscrowButton.Location = new System.Drawing.Point(8, 64);
+            this.EscrowButton.Name = "EscrowButton";
+            this.EscrowButton.Size = new System.Drawing.Size(136, 34);
+            this.EscrowButton.TabIndex = 164;
+            this.EscrowButton.Text = "Escrow";
+            this.EscrowButton.UseVisualStyleBackColor = true;
+            this.EscrowButton.Click += new System.EventHandler(this.EscrowButton_Click);
+            // 
             // SupportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -302,5 +315,6 @@
         private PropertyGrid IoBoardStatusPropertyGrid;
         private CheckBox ModeCheckBox;
         private TextBox IoBoardResponseTextBox;
+        private Button EscrowButton;
     }
 }

@@ -142,7 +142,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         private void ResetButton_Click(object sender, EventArgs e)
         {
             TimeOutController.Reset();
-            _resetButton.Enabled = false;
+            _resetButton.Visible = false;
             if (ParameterController.UsesShutter)
                 _device.Open();
 
@@ -162,6 +162,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                 }
 
             if (_device.StateResultProperty.ErrorStateInformation.AbnormalStorage)
+            {
                 switch ((DatabaseController.CurrentDepositary.
                          ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
                 {
@@ -174,6 +175,15 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                     default:
                         break;
                 }
+
+                _device.Sense();
+                while (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                {
+                    _device.RemoteCancel();
+                    _device.Sleep();
+                    _device.Sense();
+                }
+            }
             if (_device.StateResultProperty.ErrorStateInformation.CountingError)
                 return;
             if (_device.StateResultProperty.ErrorStateInformation.Jamming)
@@ -194,6 +204,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             {
                 _device.ResetCassetteFull();
             }
+  
 
             this.DialogResult = DialogResult.OK;
 
@@ -204,6 +215,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
         {
             _resetButton.Enabled = this.Visible;
             _pollingTimer.Enabled = this.Visible;
+            _resetButton.Visible = this.Visible;
         }
     }
 }

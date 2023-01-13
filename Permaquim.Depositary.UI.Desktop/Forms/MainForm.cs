@@ -27,6 +27,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private const int WEEK_DAYS = 7;
         private const string VERSION = " - Version: ";
+        private const int CLOSING_COMBINATION = 3;
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private int closingcombination = 0;
@@ -995,8 +996,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void DateTimeLabel_Click(object sender, EventArgs e)
         {
-            if (closingcombination == 3)
+
+            // solo sale de la aplicación si el usuario está deslogueado
+            if (closingcombination == CLOSING_COMBINATION && DatabaseController.CurrentUser == null)
                 Application.Exit();
+
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -1043,13 +1047,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void TurnAndDateTimeLabel_Click(object sender, EventArgs e)
         {
-            if (closingcombination == 3)
+            if (closingcombination == CLOSING_COMBINATION && DatabaseController.CurrentUser == null)
             {
                 AuditController.Log(LogTypeEnum.Information,
                 MultilanguangeController.GetText(MultiLanguageEnum.APLICACION_CERRADA_MANUALMENTE),
                 MultilanguangeController.GetText(MultiLanguageEnum.APLICACION_CERRADA_MANUALMENTE));
                 Application.Exit();
-
             }
         }
         private void PrintBagTicket()

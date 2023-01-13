@@ -320,6 +320,14 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
         }
+
+        private void EscrowButton_Click(object sender, EventArgs e)
+        {
+            if (!_device.StateResultProperty.DoorStateInformation.Escrow)
+                _device.OpenEscrow();
+            else
+                _device.CloseEscrow();
+        }
     }
 }
 
