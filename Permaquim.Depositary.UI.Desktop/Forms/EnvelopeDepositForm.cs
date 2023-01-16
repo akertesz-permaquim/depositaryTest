@@ -152,8 +152,6 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
 
-            _device.DeviceStateChange += DeviceStateChange;
-
             _pollingTimer = new System.Windows.Forms.Timer()
             {
                 Interval = DeviceController.GetPollingInterval(),
@@ -186,9 +184,11 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (args.StateName.ToUpper().Equals(WAITING))
             {
-                if (_device.PreviousState == StatusInformation.State.PQStoring)
+                if (_device.PreviousState == StatusInformation.State.PQStoring
+                    || _device.PreviousState == StatusInformation.State.StoringError)
                 {
-                    _device.PreviousState = StatusInformation.State.Waiting;
+                    if(_device.PreviousState != StatusInformation.State.StoringError)
+                        _device.PreviousState = StatusInformation.State.Waiting;
                     FormsController.SetInformationMessage(InformationTypeEnum.Event,
                         MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
                     ExitForm();
@@ -202,11 +202,16 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode)
-                    {
-                        _device.ManualDepositMode();
+                _device.DeviceStateChange += DeviceStateChange;
 
-                    }
+                if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode)
+                {
+                    _device.ManualDepositMode();
+
+                }
+                if (_device.StateResultProperty.DoorStateInformation.Escrow)
+                    _device.CloseEscrow();
+
 
                     AuditController.Log(LogTypeEnum.Navigation, DEPOSITO_SOBRE, DEPOSITO_SOBRE);
                 LoadDenominations();
@@ -220,6 +225,8 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
+                _device.DeviceStateChange -= DeviceStateChange;
+
                 if (_numericInputForm != null)
                 {
                     _numericInputForm.Close();

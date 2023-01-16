@@ -61,6 +61,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         public event EventHandler<ECErrorArgs> ECError;
         public int SleepTimeout { get; set; }
 
+        private string _lastState = String.Empty;
+
         #endregion
 
         #region Device Events
@@ -1365,13 +1367,18 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                             string stateName = Enum.GetName(typeof(StatusInformation.State), 
                                 statesResult.StatusInformation.OperatingState);
 
-                            DeviceStateChangeEventArgs args = new()
-                            {
-                                 StateName = stateName,
-                                StateDescription = stateName
-                            };
 
-                            DeviceStateChange(this, args);
+                            if (!_lastState.Equals(stateName))
+                            {
+                                _lastState = stateName;
+                                DeviceStateChangeEventArgs args = new()
+                                {
+                                    StateName = stateName,
+                                    StateDescription = stateName
+                                };
+
+                                DeviceStateChange(this, args);
+                            }
                         }
 
 

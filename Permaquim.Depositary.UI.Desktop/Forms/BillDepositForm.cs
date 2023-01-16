@@ -87,7 +87,7 @@ namespace Permaquim.Depositary.UI.Desktop
             if (args.StateName.ToUpper().Equals(WAITING))
             {
                 if (_device.PreviousState == StatusInformation.State.PQStoring 
-                    && _operationStatus.DepositEnded)
+                    && _operationStatus.DepositConfirmed)
                 {
                     _device.PreviousState = StatusInformation.State.BeingSet;
                     FormsController.SetInformationMessage(InformationTypeEnum.Event, 
@@ -102,9 +102,7 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             _device = (Permaquim.Depositary.UI.Desktop.Components.CounterDevice)this.Tag;
 
-            _device.DeviceStateChange += DeviceStateChange;
-
-            _detectedDenominations = new();
+                        _detectedDenominations = new();
 
             _pollingTimer = new System.Windows.Forms.Timer()
             {
@@ -137,6 +135,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (this.Visible)
             {
+                _device.DeviceStateChange += DeviceStateChange;
 
                 AuditController.Log(LogTypeEnum.Navigation, DEPOSITO_BILLETE, DEPOSITO_BILLETE);
                 LoadCurrentContainer();
@@ -147,14 +146,18 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     if (_device.StateResultProperty != null)
                     {
+                        _device.PreviousState = StatusInformation.State.Waiting;
                         if (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                             ButtonsPanel.Visible = true;
+                        if (_device.StateResultProperty.DoorStateInformation.Escrow)
+                            _device.CloseEscrow();
                     }
                 }
                 _countingCycle = 1;
             }
             else
             {
+                _device.DeviceStateChange -= DeviceStateChange;
                 InitializeLocals();
                 _device.RemoteCancel();
             }
@@ -400,12 +403,12 @@ namespace Permaquim.Depositary.UI.Desktop
                     || (!_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     && _device.StateResultProperty.StatusInformation.OperatingState
                     == StatusInformation.State.Waiting
-                    && _device.StateResultProperty.DeviceStateInformation.StackerFull
-
-                    )
+                     //&& _device.StateResultProperty.DeviceStateInformation.StackerFull
+                     && _operationStatus.StackerFullCondition == true
+                    );
 
                     ;
-
+               
 
                 ConfirmAndContinueDepositButton.Visible =
                         _device.StateResultProperty.DeviceStateInformation.StackerFull

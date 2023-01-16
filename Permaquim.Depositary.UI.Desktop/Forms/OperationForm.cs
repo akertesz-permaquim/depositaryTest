@@ -641,6 +641,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 // En esta instancia, se verifica si existe contenido en el escrow,
                 // de existir, solo se habilita el boton de otras operaciones, para
                 // acceder al soporte técnico
+                _device.Sleep();
+                _device.Sense();
                 if (_device.StateResultProperty != null & !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                 {
                     LoadTransactionButtons();

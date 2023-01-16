@@ -3,6 +3,7 @@ using Permaquim.Depositary.UI.Desktop.Components;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using Permaquim.Depositary.UI.Desktop.Global;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -147,7 +148,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                 _device.Open();
 
             if (_device.StateResultProperty.ErrorStateInformation.AbnormalDevice)   // TODO: Unificar
-
+            {
                 switch ((DatabaseController.CurrentDepositary.
                       ListOf_DepositarioContadora_DepositarioId.FirstOrDefault().TipoContadoraId.Nombre))
                 {
@@ -160,6 +161,8 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                     default:
                         break;
                 }
+                this.DialogResult = DialogResult.OK;
+            }
 
             if (_device.StateResultProperty.ErrorStateInformation.AbnormalStorage)
             {
@@ -205,8 +208,12 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
                 _device.ResetCassetteFull();
             }
   
-
+            _device.DeviceReset();
+            _device.PreviousState = StatusInformation.State.PQStoring;
+         
             this.DialogResult = DialogResult.OK;
+
+
 
         }
         #endregion
