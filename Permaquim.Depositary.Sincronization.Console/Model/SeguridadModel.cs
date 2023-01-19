@@ -516,7 +516,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in Funciones)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.Id);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Funcion", item.Id);
                             usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
                             aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Aplicacion", item.AplicacionId);
                             tipoFuncionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.TipoFuncion", item.TipoId);
