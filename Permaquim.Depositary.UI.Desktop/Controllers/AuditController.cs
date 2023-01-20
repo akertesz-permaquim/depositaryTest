@@ -9,6 +9,28 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             try
             {
+
+                switch (logType)
+                {
+                    case LogTypeEnum.None:
+                        break;
+                    case LogTypeEnum.Exception:
+                        if (!ParameterController.LogsExceptions)
+                            return;
+                        break;
+                    case LogTypeEnum.Information:
+                        if (!ParameterController.LogsInformations)
+                            return;
+                        break;
+                    case LogTypeEnum.Navigation:
+                        if (!ParameterController.LogsNavigations)
+                            return;
+                        break;
+                    default:
+                        break;
+                }
+
+
                 StackTrace stackTrace = new StackTrace(); //Para obtener el nombre del metodo que lo llamo
 
                 Depositario.Business.Tables.Auditoria.Log entities = new();
