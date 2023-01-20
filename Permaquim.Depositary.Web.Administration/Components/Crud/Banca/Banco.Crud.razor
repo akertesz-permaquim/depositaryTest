@@ -3,284 +3,267 @@
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
- 
-@if(dataFunciones != null)
+
+@if (estaProcesando)
 {
-@if (SeguridadController.VerificarPermisoFuncion("BancaBanco",dataFunciones,"PuedeVisualizar"))
+    <div class="spinner"></div>
+}
+
+@if (dataFunciones != null)
 {
- @if (Banco_entities == null)
- {
-     <div class="spinner" />
- }
- else
- {
-     switch (crudMode)
-     {
-         case CrudMode.Add:
-             <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle ="BadgeStyle.Secondary" >
-                 <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Banca.Banco",dataLenguaje)</h4>
-                 </ChildContent>
-             </RadzenBadge>
-             break;
-         case CrudMode.Delete:
-             <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadgeBorrar", false)  BadgeStyle="BadgeStyle.Warning" >
-                 <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Banca.Banco",dataLenguaje)</h4>
-                 </ChildContent>
-             </RadzenBadge>
-             break;
-             case CrudMode.Edit:
-             <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false)  BadgeStyle="BadgeStyle.Secondary" >
-                 <ChildContent>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Banca.Banco",dataLenguaje)</h4>
-                 </ChildContent>
-             </RadzenBadge>
-             break;         
-             case CrudMode.List:
-             <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false)  BadgeStyle="BadgeStyle.Secondary" >
-                 <ChildContent>
-                     <div>
-                         <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Banca.Banco",dataLenguaje)</h4>
-                     </div>
-                 </ChildContent>
-             </RadzenBadge>
-             break;  
-     }
-     <hr>
-     if (crudMode == CrudMode.List)
-     {
-         <RadzenDataGrid @bind-Settings="@GridSettings" FilterCaseSensitivity= "FilterCaseSensitivity.CaseInsensitive" CellRender=@BancoCellRender PageSizeOptions="@(new int[]{10,20,50,100})" FilterMode="FilterMode.Advanced" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-          AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla) 
-         FilterText=@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO", dataLenguaje) GroupPanelText=@MultilenguajeController.ObtenerTextoPorClave("INDICADOR_AGRUPACION", dataLenguaje) IsEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO", dataLenguaje) IsNotNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO", dataLenguaje) IsNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO", dataLenguaje) LessThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A", dataLenguaje) LessThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL", dataLenguaje) NotEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE", dataLenguaje) IsNotEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO", dataLenguaje) OrOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR", dataLenguaje) GreaterThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A", dataLenguaje) GreaterThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL", dataLenguaje) AndOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND", dataLenguaje) AllColumnsText=@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS", dataLenguaje) ContainsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE", dataLenguaje) DoesNotContainText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE", dataLenguaje) ClearFilterText=@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO", dataLenguaje) ApplyFilterText=@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO", dataLenguaje) EqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO", dataLenguaje) EndsWithText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON", dataLenguaje) PageSizeText=@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA", dataLenguaje) StartsWithText=@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON", dataLenguaje) ColumnsShowingText=@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES", dataLenguaje)
-         Data="@Banco_entities" TItem="Depositary.Entities.Tables.Banca.Banco" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
-         <EmptyTemplate>
-             <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
-         </EmptyTemplate>        
-         <Columns>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" TextAlign="TextAlign.Center" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TemplateABM",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TemplateABM",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TemplateABM",dataCustomizacionPagina.AtributosColumnas)  >
-                 <HeaderTemplate>
-                     <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("BancaBanco",dataFunciones,"PuedeAgregar") Text =@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
-                     </RadzenButton>
-                     </HeaderTemplate>
-                     <Template Context="element">
-                     <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("BancaBanco",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
-                     </RadzenButton>
-                     <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("BancaBanco",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
-                     </RadzenButton>
-                 </Template>
-                 </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Id" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Id",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Id",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Id",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Id",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Id",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Id",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Id",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Id",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Id",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Id",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" />
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Nombre" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Nombre",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Nombre",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Nombre",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Nombre",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Nombre",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Nombre",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Nombre",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Nombre",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Nombre",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Nombre",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Descripcion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Descripcion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Descripcion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Descripcion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Codigo" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Codigo",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Codigo",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Codigo",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Codigo",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Codigo",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Codigo",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Codigo",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Codigo",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Codigo",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Codigo",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("PaisId",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("PaisId",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("PaisId",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("PaisId",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("PaisId",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("PaisId",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("PaisId",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("PaisId",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("PaisId",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("PaisId",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Property="PaisId" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_PaisId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                 <Template>
-                     @if(Pais_PaisId_entities.FirstOrDefault( c => c.Id == @context.PaisId) != null){
-                         <RadzenLabel Text="@Pais_PaisId_entities.FirstOrDefault( c => c.Id == @context.PaisId).Nombre" Component="PaisId" style="width: 100%">
-                             </RadzenLabel>
-                         }
-                         else
-                         {
-                         <RadzenLabel Text="No data available" Component="PaisId" style="width: 100%">
-                             </RadzenLabel>                        
-                         }
-                 </Template>
-                 <FilterTemplate>
-                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                     <RadzenDropDown @bind-Value=@selectedFilter_PaisId Data="@Pais_PaisId_filter" Change="OnSelectedFilter_PaisId_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true"/>
-                 </FilterTemplate>
-             </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Habilitado" FilterValue="@Habilitado_filter" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Habilitado",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Habilitado",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Habilitado",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
-             <Template Context="data">
-                 <RadzenCheckBox TValue ="bool" Value=@data.Habilitado Disabled="true">
-                 </RadzenCheckBox>
-             </Template>
-             <FilterTemplate>
-                 <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                 <div>
-                     @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
-                     <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true"/>
-                 </div>
-             </FilterTemplate>
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                 <Template>
-                     @{
-                         var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioCreacion);
-                         if(usuario != null)
-                         {
-                             <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
-                             </RadzenLabel>
-                         }
-                         else
-                         {
-                             <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
-                             </RadzenLabel>                        
-                         }
-                     }
-                 </Template>
-                 <FilterTemplate>
-                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                     <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
-                 </FilterTemplate>
-             </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="FechaCreacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("FechaCreacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
-     </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                 <Template>
-                     @{
-                         var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion);
-                         if(usuario != null)
-                         {
-                             <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
-                             </RadzenLabel>
-                         }
-                         else
-                         {
-                             <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
-                             </RadzenLabel>                        
-                         }
-                     }
-                 </Template>
-                 <FilterTemplate>
-                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                     <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
-                 </FilterTemplate>
-             </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="FechaModificacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("FechaModificacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
-     </RadzenDataGridColumn>
-         </Columns>
-         </RadzenDataGrid>
-     <hr>
-     }
- 
-     if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
-     {
-             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Banca.Banco" Data="@Banco_entity"  @bind-Value="Banco_entity" Submit ="Save" Visible ="@(Banco_entity != null)">
-             <ChildContent>
-             @if (estaProcesando)
-             {
-                 <div class="spinnerCentrado"></div>
-             }
-                @if(crudMode != CrudMode.Add)
-                {
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                     <div class="col-md-auto">
-                         <RadzenNumeric  TValue="long" style="display: block; width: 100%" @bind-Value="@(Banco_entity.Id)" Name="Id" Disabled="true" >
-                     </RadzenNumeric>
-                     </div>
-                 </div>
-                }
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Component="Nombre" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                     <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(Banco_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
-                         </RadzenTextBox>
-                     </div>
-                 </div>
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Component="Descripcion" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                     <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(Banco_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
-                         </RadzenTextBox>
-                         @if(@crudMode!=CrudMode.Delete)
-                         {
-                             <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute">
-                             </RadzenRequiredValidator>
-                         }
-                     </div>
-                 </div>
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Component="Codigo" style="width: 100%">
-                         </RadzenLabel>
-                     </div>
-                     <div class="col-md-auto">
-                         <RadzenTextBox  style="display: block" @bind-Value="@(Banco_entity.Codigo)" Name="Codigo" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
-                         </RadzenTextBox>
-                         @if(@crudMode!=CrudMode.Delete)
-                         {
-                             <RadzenRequiredValidator Component="Codigo" Text="Codigo is required" Style="position: absolute">
-                             </RadzenRequiredValidator>
-                         }
-                     </div>
-                 </div>
-             <div style="margin-bottom: 1rem" class="row">
-                 <div class="col-md-3">
-                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Component ="PaisId" style="width: 100%">
-                 </RadzenLabel>
-                 </div>
-                 <div class="col-md-4">
-                     @if((@Pais_PaisId_entities.Count > 0 && @Pais_PaisId_entities.FirstOrDefault( c => c.Id == @Banco_entity.PaisId) != null) || crudMode != CrudMode.Delete)
-                     {
-                         var dataSet = crudMode == CrudMode.Add ? Pais_PaisId_entities.Where(x => x.Habilitado == true) : Pais_PaisId_entities.Where(x => x.Habilitado == true || x.Id == Banco_entity.PaisId);
-                         <RadzenDropDown  Name="PaisId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Banco_entity.PaisId)"
-                                     Data=@dataSet TextProperty = "Nombre" ValueProperty = "Id"
-                                     Change=@(args => SelectPais_PaisIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
-                     }
-                     else
-                     {
-                         <RadzenDropDown  Name="PaisId" AllowClear="true" TValue="Int64" Class="w-100" 
-                                     Data=@Pais_PaisId_entities TextProperty = "Nombre" ValueProperty = "Id"
-                                     Change=@(args => SelectPais_PaisIdValueChanged(args))
-                                     Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
-                     }
-                    @if (@crudMode != CrudMode.Delete)
-                    {
-                        <RadzenNumericRangeValidator Min="@(Pais_PaisId_entities.Count > 0 ? Pais_PaisId_entities.Min(x => x.Id) : 1)" Component ="PaisId" Text="PaisId is required" Style="position: relative">
-                        </RadzenNumericRangeValidator>
-                    }
-                </div>
-              </div>
-                 <div style="margin-bottom: 1rem" class="row">
-                     <div class="col-md-3">
-                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
-                     </div>
-                     <div class="col-md-auto">
-                 <RadzenCheckBox @bind-Value=@Banco_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Banco_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
-                     </div>
-                 </div>
-             <div class="row">
-                 <div class="col offset-sm-3">
-                 <RadzenButton Disabled="@estaProcesando" ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle ="ButtonStyle.Primary">
-                 </RadzenButton>
-                 <RadzenButton Disabled="@estaProcesando" ButtonStyle ="ButtonStyle.Secondary" Icon = "save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
-                 </RadzenButton>
-                  </div>
-             </div>
-             </ChildContent>
-             </RadzenTemplateForm>
-     <hr>
-     }
- 
-     <RadzenNotification /> 
- }
+    @if (SeguridadController.VerificarPermisoFuncion("BancaBanco", dataFunciones, "PuedeVisualizar"))
+    {
+        @if (Banco_entities == null)
+        {
+            <div class="spinner" />
+        }
+        else
+        {
+            switch (crudMode)
+            {
+                case CrudMode.Add:
+                    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
+                        <ChildContent>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_A_NAME_Banca.Banco",dataLenguaje)</h4>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+                case CrudMode.Delete:
+                    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadgeBorrar", false) BadgeStyle="BadgeStyle.Warning">
+                        <ChildContent>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_D_NAME_Banca.Banco",dataLenguaje)</h4>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+                case CrudMode.Edit:
+                    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
+                        <ChildContent>
+                            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_M_NAME_Banca.Banco",dataLenguaje)</h4>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+                case CrudMode.List:
+                    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
+                        <ChildContent>
+                            <div>
+                                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("ABM_L_NAME_Banca.Banco",dataLenguaje)</h4>
+                            </div>
+                        </ChildContent>
+                    </RadzenBadge>
+                    break;
+            }
+            <hr>
+            if (crudMode == CrudMode.List)
+            {
+                <RadzenDataGrid @bind-Settings="@GridSettings" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" CellRender=@BancoCellRender PageSizeOptions="@(new int[]{10,20,50,100})" FilterMode="FilterMode.Advanced" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)
+                FilterText=@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO", dataLenguaje) GroupPanelText=@MultilenguajeController.ObtenerTextoPorClave("INDICADOR_AGRUPACION", dataLenguaje) IsEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO", dataLenguaje) IsNotNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO", dataLenguaje) IsNullText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO", dataLenguaje) LessThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A", dataLenguaje) LessThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL", dataLenguaje) NotEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE", dataLenguaje) IsNotEmptyText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO", dataLenguaje) OrOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR", dataLenguaje) GreaterThanText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A", dataLenguaje) GreaterThanOrEqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL", dataLenguaje) AndOperatorText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND", dataLenguaje) AllColumnsText=@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS", dataLenguaje) ContainsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE", dataLenguaje) DoesNotContainText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE", dataLenguaje) ClearFilterText=@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO", dataLenguaje) ApplyFilterText=@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO", dataLenguaje) EqualsText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO", dataLenguaje) EndsWithText=@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON", dataLenguaje) PageSizeText=@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA", dataLenguaje) StartsWithText=@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON", dataLenguaje) ColumnsShowingText=@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES", dataLenguaje)
+                Data="@Banco_entities" TItem="Depositary.Entities.Tables.Banca.Banco" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
+                    <EmptyTemplate>
+                        <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                    </EmptyTemplate>
+                    <Columns>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" TextAlign="TextAlign.Center" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TemplateABM",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TemplateABM",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TemplateABM",dataCustomizacionPagina.AtributosColumnas)>
+                            <HeaderTemplate>
+                                <RadzenButton Icon="add_circle_outline" ButtonStyle="ButtonStyle.Success" Visible=@SeguridadController.VerificarPermisoFuncion("BancaBanco",dataFunciones,"PuedeAgregar") Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_NUEVO",dataLenguaje) Click="Add">
+                                </RadzenButton>
+                            </HeaderTemplate>
+                            <Template Context="element">
+                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("BancaBanco",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
+                                </RadzenButton>
+                                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("BancaBanco",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                                </RadzenButton>
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Id" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Id",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Id",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Id",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Id",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Id",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Id",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Id",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Id",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Id",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Id",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Nombre" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Nombre",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Nombre",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Nombre",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Nombre",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Nombre",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Nombre",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Nombre",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Nombre",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Nombre",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Nombre",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Descripcion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Descripcion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Descripcion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Descripcion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Descripcion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Descripcion",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Codigo" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Codigo",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Codigo",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Codigo",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Codigo",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Codigo",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Codigo",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Codigo",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Codigo",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Codigo",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Codigo",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("PaisId",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("PaisId",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("PaisId",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("PaisId",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("PaisId",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("PaisId",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("PaisId",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("PaisId",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("PaisId",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("PaisId",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Property="PaisId" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_PaisId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                            <Template>
+                                @if (Pais_PaisId_entities.FirstOrDefault(c => c.Id == @context.PaisId) != null)
+                                {
+                                    <RadzenLabel Text="@Pais_PaisId_entities.FirstOrDefault( c => c.Id == @context.PaisId).Nombre" Component="PaisId" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                                else
+                                {
+                                    <RadzenLabel Text="No data available" Component="PaisId" style="width: 100%">
+                                    </RadzenLabel>
+                                }
+                            </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_PaisId Data="@Pais_PaisId_filter" Change="OnSelectedFilter_PaisId_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="Nombre" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="Habilitado" FilterValue="@Habilitado_filter" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Habilitado",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Habilitado",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Habilitado",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                            <Template Context="data">
+                                <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
+                                </RadzenCheckBox>
+                            </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <div>
+                                    @MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje)
+                                    <RadzenCheckBox Style="margin-bottom: 2%;" @bind-Value="Habilitado_filter" TriState="true" />
+                                </div>
+                            </FilterTemplate>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("UsuarioCreacion",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOCREACION",dataLenguaje) Property="UsuarioCreacion" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioCreacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
+                            <Template>
+                                @{
+                                    var usuario = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == @context.UsuarioCreacion);
+                                    if (usuario != null)
+                                    {
+                                        <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioCreacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                    else
+                                    {
+                                        <RadzenLabel Text="No data available" Component="UsuarioCreacion" style="width: 100%">
+                                        </RadzenLabel>
+                                    }
+                                }
+                            </Template>
+                            <FilterTemplate>
+                                <div style="margin-top: 1rem;font-weight: 600">Filter</div>
+                                <RadzenDropDown @bind-Value=@selectedFilter_UsuarioCreacion Data="@Usuario_UsuarioCreacion_filter" Change="OnSelectedFilter_UsuarioCreacion_Changed" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear="true" Multiple="true" />
+                            </FilterTemplate>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="FechaCreacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="UsuarioModificacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Banca.Banco" Property="FechaModificacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
+                    </Columns>
+                </RadzenDataGrid>
+                <hr>
+            }
+
+            if (crudMode == CrudMode.Add || crudMode == CrudMode.Edit || crudMode == CrudMode.Delete)
+            {
+                <RadzenTemplateForm TItem="Depositary.Entities.Tables.Banca.Banco" Data="@Banco_entity" @bind-Value="Banco_entity" Submit="Save" Visible="@(Banco_entity != null)">
+                    <ChildContent>
+                        @if (crudMode != CrudMode.Add)
+                        {
+                            <div style="margin-bottom: 1rem" class="row">
+                                <div class="col-md-3">
+                                    <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje) Component="Id" style="width: 100%">
+                                    </RadzenLabel>
+                                </div>
+                                <div class="col-md-auto">
+                                    <RadzenNumeric TValue="long" style="display: block; width: 100%" @bind-Value="@(Banco_entity.Id)" Name="Id" Disabled="true">
+                                    </RadzenNumeric>
+                                </div>
+                            </div>
+                        }
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("NOMBRE",dataLenguaje) Component="Nombre" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-auto">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Banco_entity.Nombre)" Name="Nombre" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                                </RadzenTextBox>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje) Component="Descripcion" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-auto">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Banco_entity.Descripcion)" Name="Descripcion" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                                </RadzenTextBox>
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenRequiredValidator Component="Descripcion" Text="Descripcion is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGO",dataLenguaje) Component="Codigo" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-auto">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Banco_entity.Codigo)" Name="Codigo" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                                </RadzenTextBox>
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenRequiredValidator Component="Codigo" Text="Codigo is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("PAISID",dataLenguaje) Component="PaisId" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-4">
+                                @if ((@Pais_PaisId_entities.Count > 0 && @Pais_PaisId_entities.FirstOrDefault(c => c.Id == @Banco_entity.PaisId) != null) || crudMode != CrudMode.Delete)
+                                {
+                                    var dataSet = crudMode == CrudMode.Add ? Pais_PaisId_entities.Where(x => x.Habilitado == true) : Pais_PaisId_entities.Where(x => x.Habilitado == true || x.Id == Banco_entity.PaisId);
+                                    <RadzenDropDown Name="PaisId" AllowFiltering="true" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Banco_entity.PaisId)"
+                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
+                                Change=@(args => SelectPais_PaisIdValueChanged(args))
+                                Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                else
+                                {
+                                    <RadzenDropDown Name="PaisId" AllowClear="true" TValue="Int64" Class="w-100"
+                                Data=@Pais_PaisId_entities TextProperty="Nombre" ValueProperty="Id"
+                                Change=@(args => SelectPais_PaisIdValueChanged(args))
+                                Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
+                                }
+                                @if (@crudMode != CrudMode.Delete)
+                                {
+                                    <RadzenNumericRangeValidator Min="@(Pais_PaisId_entities.Count > 0 ? Pais_PaisId_entities.Min(x => x.Id) : 1)" Component="PaisId" Text="PaisId is required" Style="position: relative">
+                                    </RadzenNumericRangeValidator>
+                                }
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Component="Habilitado" Style="margin-left: 0px; vertical-align: middle;" />
+                            </div>
+                            <div class="col-md-auto">
+                                <RadzenCheckBox @bind-Value=@Banco_entity.Habilitado Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Banco_entity)) Disabled="@(crudMode == CrudMode.Delete)" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col offset-sm-3">
+                                <RadzenButton Disabled="@estaProcesando" ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                                </RadzenButton>
+                                <RadzenButton Disabled="@estaProcesando" ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="Cancel">
+                                </RadzenButton>
+                            </div>
+                        </div>
+                    </ChildContent>
+                </RadzenTemplateForm>
+                <hr>
+            }
+
+            <RadzenNotification />
+        }
+    }
+    else
+    {
+        <p>No tiene permisos para visualizar los registros.</p>
+    }
 }
 else
 {
-     <p>No tiene permisos para visualizar los registros.</p>
+    <div class="spinner" />
 }
-}
-else
-{
-     <div class="spinner" />
-}
- 
+
 @code {
     /// <summary>
     /// Crud Mode Enum
@@ -296,34 +279,34 @@ else
     /// Variable to save grid state
     /// </summary>
     private DataGridSettings GridSettings;
- 
+
     /// <summary>
     /// Variables to handle main entity
     /// </summary>
     private Depositary.Entities.Tables.Banca.Banco Banco_entity = new();
     private List<Depositary.Entities.Tables.Banca.Banco> Banco_entities = null;
- 
+
     /// <summary>
     /// Variables to store multilanguaje
     /// </summary>
     private List<Entities.TextoLenguaje> dataLenguaje;
- 
+
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
- 
-    private bool estaProcesando = false ;
- 
+
+    private bool estaProcesando = false;
+
     private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
- 
+
     /// <summary>
     /// List which stores definitions to customize grid columns
     /// </summary>
     private CustomizadorEntities.CustomizacionPagina dataCustomizacionPagina = new();
- 
+
     /// <summary>
     /// Variables to store permissions
     /// </summary>
     private List<SeguridadEntities.FuncionRol> dataFunciones;
- 
+
     /// <summary>
     /// Variables to handle Relation between Banco.PaisId and Pais.Id
     /// </summary>
@@ -331,11 +314,11 @@ else
     private List<Depositary.Entities.Tables.Geografia.Pais>? Pais_PaisId_entities;
     private List<Depositary.Entities.Tables.Geografia.Pais> Pais_PaisId_filter;
     private IEnumerable<Int64> selectedFilter_PaisId;
- 
+
     /// <summary>
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? Habilitado_filter;
- 
+
     /// <summary>
     /// Variables to handle Relation between Banco.UsuarioCreacion and Usuario.Id
     /// </summary>
@@ -343,34 +326,26 @@ else
     private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioCreacion_entities;
     private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioCreacion_filter;
     private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
- 
-    /// <summary>
-    /// Variables to handle Relation between Banco.UsuarioModificacion and Usuario.Id
-    /// </summary>
-    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
-    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
-    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
-    private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
- 
+
     /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
- 
+
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
     private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
- 
+
     protected override async Task OnInitializedAsync()
     {
         dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
         if (dataUsuario == null)
-             NavManager.NavigateTo("login", true);
+            NavManager.NavigateTo("login", true);
         dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         await sessionStorage.RemoveItemAsync("DataFunciones");
         await sessionStorage.RemoveItemAsync("RolId");
-        dataCustomizacionPagina = CustomizadorController.ObtenerCustomizacionPagina("Banca","Banco");
+        dataCustomizacionPagina = CustomizadorController.ObtenerCustomizacionPagina("Banca", "Banco");
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         usuarioRol = SeguridadController.ObtenerRolesPorUsuario(dataUsuario.Id);
         dataFunciones = SeguridadController.ObtenerFuncionesPorRol(usuarioRol.Id);
@@ -386,7 +361,7 @@ else
     private void LoadMainEntityData()
     {
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
-             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaBancoCrud", crudMode.ToString(), dataUsuario.Id);
+            AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaBancoCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
         Depositary.Business.Tables.Banca.Banco entity = new();
         Banco_entities = entity.Items();
@@ -399,19 +374,15 @@ else
         Depositary.Business.Tables.Geografia.Pais Pais_PaisId_local = new();
         Pais_PaisId_entities = Pais_PaisId_local.Items();
         Pais_PaisId_filter = Pais_PaisId_entities.Where(x => Banco_entities.Select(x => x.PaisId).Distinct().Contains(x.Id)).ToList();
- 
+
         Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioCreacion_local = new();
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
         Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => Banco_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
- 
-        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
-        Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
-        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => Banco_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
- 
+
     }
- 
+
     #endregion
- 
+
     /// <summary>
     /// Initializations for adding a new entity
     /// </summary>
@@ -420,12 +391,11 @@ else
         //Main entity initialization
         Banco_entity = new();
         //Relations entities initialization
-        Pais_PaisId_entity = new(); 
-        Usuario_UsuarioCreacion_entity = new(); 
-        Usuario_UsuarioModificacion_entity = new(); 
+        Pais_PaisId_entity = new();
+        Usuario_UsuarioCreacion_entity = new();
         crudMode = CrudMode.Add;
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
-             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaBancoCrud", crudMode.ToString(), dataUsuario.Id);
+            AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaBancoCrud", crudMode.ToString(), dataUsuario.Id);
     }
     /// <summary>
     /// <summary>
@@ -433,29 +403,24 @@ else
     /// </summary>
     private void Edit(Depositary.Entities.Tables.Banca.Banco item, bool delete)
     {
-             Banco_entity = item;
-            Pais_PaisId_entity = new() { 
-            Id = Pais_PaisId_entities.FirstOrDefault(c => c.Id == Banco_entity.PaisId).Id, 
-            Nombre = Pais_PaisId_entities.FirstOrDefault(c => c.Id == Banco_entity.PaisId).Nombre
-            };
-            Usuario_UsuarioCreacion_entity = new() { 
-            Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Banco_entity.UsuarioCreacion).Id, 
-            Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Banco_entity.UsuarioCreacion).Nombre
-            };
-            if(Usuario_UsuarioModificacion_entities.Exists(c => c.Id == Banco_entity.UsuarioModificacion))
+        Banco_entity = item;
+        Pais_PaisId_entity = new()
             {
-                 Usuario_UsuarioModificacion_entity = new() { 
-                 Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Banco_entity.UsuarioModificacion).Id, 
-                 Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == Banco_entity.UsuarioModificacion).Nombre
-                 };
-            }
+                Id = Pais_PaisId_entities.FirstOrDefault(c => c.Id == Banco_entity.PaisId).Id,
+                Nombre = Pais_PaisId_entities.FirstOrDefault(c => c.Id == Banco_entity.PaisId).Nombre
+            };
+        Usuario_UsuarioCreacion_entity = new()
+            {
+                Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Banco_entity.UsuarioCreacion).Id,
+                Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == Banco_entity.UsuarioCreacion).Nombre
+            };
         if (delete)
             crudMode = CrudMode.Delete;
         else
             crudMode = CrudMode.Edit;
 
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
-             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaBancoCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
+            AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "BancaBancoCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
     }
     /// <summary>
     /// Operation depending on Crud mode
@@ -463,121 +428,126 @@ else
     private async Task Save()
     {
         estaProcesando = true;
-        StateHasChanged();
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
+    {
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
         Depositary.Business.Tables.Banca.Banco crud = new();
-        foreach(var property in Banco_entity.GetType().GetProperties())
+        foreach (var property in Banco_entity.GetType().GetProperties())
         {
-             switch(property.Name)
-             {
-                 case "FechaModificacion":
-                 if(crudMode == CrudMode.Add)
-                 {
-                     Banco_entity.FechaModificacion=null;
-                 }
-                 else
-                 {
-                     Banco_entity.FechaModificacion=DateTime.Now;
-                 }
-                 break;
-                 case "FechaCreacion":
-                 if(crudMode == CrudMode.Add)
-                 {
-                     Banco_entity.FechaCreacion=DateTime.Now;
-                 }
-                 break;
-                 case "UsuarioCreacion":
-                 if(crudMode == CrudMode.Add)
-                 {
-                     Banco_entity.UsuarioCreacion=dataUsuario.Id;
-                 }
-                 break;
-                 case "UsuarioModificacion":
-                 if(crudMode == CrudMode.Add)
-                 {
-                     Banco_entity.UsuarioModificacion=null;
-                 }
-                 else
-                 {
-                     Banco_entity.UsuarioModificacion=dataUsuario.Id;
-                 }
-                 break;
-             }
+            switch (property.Name)
+            {
+                case "FechaModificacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        Banco_entity.FechaModificacion = null;
+                    }
+                    else
+                    {
+                        Banco_entity.FechaModificacion = DateTime.Now;
+                    }
+                    break;
+                case "FechaCreacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        Banco_entity.FechaCreacion = DateTime.Now;
+                    }
+                    break;
+                case "UsuarioCreacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        Banco_entity.UsuarioCreacion = dataUsuario.Id;
+                    }
+                    break;
+                case "UsuarioModificacion":
+                    if (crudMode == CrudMode.Add)
+                    {
+                        Banco_entity.UsuarioModificacion = null;
+                    }
+                    else
+                    {
+                        Banco_entity.UsuarioModificacion = dataUsuario.Id;
+                    }
+                    break;
+            }
         }
         switch (crudMode)
         {
             case CrudMode.Add:
                 try
                 {
-                     crud.Add(Banco_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                     summary = "El registro se ha ";
-                     actionInformation = "agregado.";
-                     severityType = NotificationSeverity.Success;
+                    crud.Add(Banco_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                    summary = "El registro se ha ";
+                    actionInformation = "agregado.";
+                    severityType = NotificationSeverity.Success;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                     AuditController.Log(ex, dataUsuario.Id);
-                     summary = "Error al procesar.";
-                     actionInformation = ex.Message;
-                     severityType = NotificationSeverity.Error;
+                    AuditController.Log(ex, dataUsuario.Id);
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
                 }
-            break;
+                break;
             case CrudMode.Edit:
                 try
                 {
-                     crud.Update(Banco_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                     summary = "El registro se ha ";
-                     actionInformation = "modificado.";
-                     severityType = NotificationSeverity.Success;
+                    crud.Update(Banco_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                    summary = "El registro se ha ";
+                    actionInformation = "modificado.";
+                    severityType = NotificationSeverity.Success;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                     AuditController.Log(ex, dataUsuario.Id);
-                     summary = "Error al procesar.";
-                     actionInformation = ex.Message;
-                     severityType = NotificationSeverity.Error;
+                    AuditController.Log(ex, dataUsuario.Id);
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
                 }
-            break;
+                break;
             case CrudMode.Delete:
                 try
                 {
-                     Banco_entity.Habilitado=false;
-                     crud.Update(Banco_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                     summary = "El registro se ha ";
-                     actionInformation = "eliminado.";
-                     severityType = NotificationSeverity.Success;
+                    Banco_entity.Habilitado = false;
+                    crud.Update(Banco_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                    summary = "El registro se ha ";
+                    actionInformation = "eliminado.";
+                    severityType = NotificationSeverity.Success;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                     AuditController.Log(ex, dataUsuario.Id);
-                     summary = "Error al procesar.";
-                     actionInformation = ex.Message;
-                     severityType = NotificationSeverity.Error;
+                    AuditController.Log(ex, dataUsuario.Id);
+                    summary = "Error al procesar.";
+                    actionInformation = ex.Message;
+                    severityType = NotificationSeverity.Error;
                 }
                 break;
         }
- 
+
         // Sets Crud mode to List
         crudMode = CrudMode.List;
- 
-        ShowNotification(new NotificationMessage { 
-            Severity = severityType, 
-            Summary = summary, 
-            Detail = actionInformation, 
-            Duration = 4000 });
-       
-       estaProcesando = false;
-       StateHasChanged();
-            await Task.Run(LoadMainEntityData);
+
+        ShowNotification(new NotificationMessage
+            {
+                Severity = severityType,
+                Summary = summary,
+                Detail = actionInformation,
+                Duration = 4000
+            });
+
+        await Task.Run(LoadMainEntityData);
     }
     /// <summary>
     /// Crud mode cancellation and default mode
     /// </summary>
     private void Cancel()
     {
-        crudMode = CrudMode.List;  
+        crudMode = CrudMode.List;
         LoadMainEntityData();
     }
     /// <summary>
@@ -605,9 +575,9 @@ else
     private void ShowNotification(NotificationMessage message)
     {
         NotificationService.Notify(message);
- 
+
     }
- 
+
     #endregion
     #region Selection events
     /// <summary>
@@ -617,19 +587,19 @@ else
     private void SelectPais_PaisIdValueChanged(object item)
     {
     }
- 
+
     /// <summary>
     /// selectedFilter_PaisId value changed
     /// </summary>
     /// <param name="item"></param>
     private void OnSelectedFilter_PaisId_Changed(object value)
     {
-         if(selectedFilter_PaisId!=null && !selectedFilter_PaisId.Any())
-         {
-             selectedFilter_PaisId=null;
-         }
+        if (selectedFilter_PaisId != null && !selectedFilter_PaisId.Any())
+        {
+            selectedFilter_PaisId = null;
+        }
     }
- 
+
     /// <summary>
     /// Usuario_UsuarioCreacion value changed
     /// </summary>
@@ -637,46 +607,26 @@ else
     private void SelectUsuario_UsuarioCreacionValueChanged(object item)
     {
     }
- 
+
     /// <summary>
     /// selectedFilter_UsuarioCreacion value changed
     /// </summary>
     /// <param name="item"></param>
     private void OnSelectedFilter_UsuarioCreacion_Changed(object value)
     {
-         if(selectedFilter_UsuarioCreacion!=null && !selectedFilter_UsuarioCreacion.Any())
-         {
-             selectedFilter_UsuarioCreacion=null;
-         }
+        if (selectedFilter_UsuarioCreacion != null && !selectedFilter_UsuarioCreacion.Any())
+        {
+            selectedFilter_UsuarioCreacion = null;
+        }
     }
- 
-    /// <summary>
-    /// Usuario_UsuarioModificacion value changed
-    /// </summary>
-    /// <param name="item"></param>
-    private void SelectUsuario_UsuarioModificacionValueChanged(object item)
-    {
-    }
- 
-    /// <summary>
-    /// selectedFilter_UsuarioModificacion value changed
-    /// </summary>
-    /// <param name="item"></param>
-    private void OnSelectedFilter_UsuarioModificacion_Changed(object value)
-    {
-         if(selectedFilter_UsuarioModificacion!=null && !selectedFilter_UsuarioModificacion.Any())
-         {
-             selectedFilter_UsuarioModificacion=null;
-         }
-    }
- 
+
     /// <summary>
     /// Entity is binded, however it sets anyway.
     /// </summary>
     /// <returns></returns>
-    void HabilitadoChange(bool? value,Depositary.Entities.Tables.Banca.Banco item)
+    void HabilitadoChange(bool? value, Depositary.Entities.Tables.Banca.Banco item)
     {
-         Banco_entity = item;
+        Banco_entity = item;
     }
     /// <summary>
     /// BancoCellRender event
@@ -684,16 +634,16 @@ else
     /// <param name="args"></param>
     private void BancoCellRender(DataGridCellRenderEventArgs<Depositary.Entities.Tables.Banca.Banco> args)
     {
-         if(!args.Data.Habilitado)
-             args.Attributes.Add("class", "row-highlight-disabled");
-         else
-             args.Attributes.Add("class", "rz-datatable-even");
+        if (!args.Data.Habilitado)
+            args.Attributes.Add("class", "row-highlight-disabled");
+        else
+            args.Attributes.Add("class", "rz-datatable-even");
     }
- 
+
     #endregion
- 
+
     #region Export
- 
+
     #endregion
- 
+
 }

@@ -5,6 +5,11 @@
 @inject DialogService DialogService
 @inject NavigationManager NavManager
 
+@if (estaProcesando)
+{
+    <div class="spinner"></div>
+}
+
 @if (dataFunciones != null)
 {
     @if (SeguridadController.VerificarPermisoFuncion("RegionalizacionLenguaje", dataFunciones, "PuedeVisualizar"))
@@ -167,10 +172,6 @@
             {
                 <RadzenTemplateForm TItem="Depositary.Entities.Tables.Regionalizacion.Lenguaje" Data="@Lenguaje_entity" @bind-Value="Lenguaje_entity" Submit="Save" Visible="@(Lenguaje_entity != null)">
                     <ChildContent>
-                        @if (estaProcesando)
-                        {
-                            <div class="spinnerCentrado"></div>
-                        }
                         @if (crudMode != CrudMode.Add)
                         {
                             <div style="margin-bottom: 1rem" class="row">
@@ -467,9 +468,14 @@ else
     /// </summary>
     private async Task Save()
     {
-        bool continuarOperacion = true;
         estaProcesando = true;
-        StateHasChanged();
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
+    {
+        bool continuarOperacion = true;
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -684,15 +690,9 @@ else
                     Duration = 4000
                 });
 
-            estaProcesando = false;
-            StateHasChanged();
-
             await Task.Run(LoadMainEntityData);
         }
-        else
-        {
-            estaProcesando = false;
-        }
+
     }
 
     #region Validaciones

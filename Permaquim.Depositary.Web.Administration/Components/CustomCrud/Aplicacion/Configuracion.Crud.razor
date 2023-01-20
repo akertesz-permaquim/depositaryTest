@@ -4,6 +4,11 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
+@if (estaProcesando)
+{
+    <div class="spinner"></div>
+}
+
 @if (dataFunciones != null)
 {
     @if (SeguridadController.VerificarPermisoFuncion("AplicacionConfiguracion", dataFunciones, "PuedeVisualizar"))
@@ -214,10 +219,6 @@
             {
                 <RadzenTemplateForm TItem="Depositary.Entities.Tables.Aplicacion.Configuracion" Data="@Configuracion_entity" @bind-Value="Configuracion_entity" Submit="Save" Visible="@(Configuracion_entity != null)">
                     <ChildContent>
-                        @if (estaProcesando)
-                        {
-                            <div class="spinnerCentrado"></div>
-                        }
                         @if (crudMode != CrudMode.Add)
                         {
                             <div style="margin-bottom: 1rem" class="row">
@@ -280,7 +281,7 @@
                                 Change=@(args => SelectConfiguracionValidacionDato_ValidacionDatoIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
-                                                                @if (@crudMode != CrudMode.Delete)
+                                @if (@crudMode != CrudMode.Delete)
                                 {
                                     <RadzenNumericRangeValidator Min="@(ConfiguracionValidacionDato_ValidacionDatoId_entities.Count > 0 ? ConfiguracionValidacionDato_ValidacionDatoId_entities.Min(x => x.Id) : 1)" Component="ValidacionDatoId" Text="ValidacionDatoId is required" Style="position: relative">
                                     </RadzenNumericRangeValidator>
@@ -656,7 +657,12 @@ else
     private async Task Save()
     {
         estaProcesando = true;
-        StateHasChanged();
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
+    {
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -763,8 +769,6 @@ else
                 Duration = 4000
             });
 
-        estaProcesando = false;
-        StateHasChanged();
         await Task.Run(LoadMainEntityData);
     }
     /// <summary>

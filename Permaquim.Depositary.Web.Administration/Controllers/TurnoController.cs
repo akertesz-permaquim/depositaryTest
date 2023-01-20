@@ -110,7 +110,7 @@
             return false; //Si se llega hasta aca no existen turnos.
         }
 
-        public static string GuardarAgenda(TurnoEntities.AgendaTurnoABM pAgendaTurnoABM, bool SoloDiasHabiles)
+        public static async Task<string> GuardarAgenda(TurnoEntities.AgendaTurnoABM pAgendaTurnoABM, bool SoloDiasHabiles)
         {
             string resultado = "";
 
@@ -121,44 +121,50 @@
 
             if (oEsquemaDetalleTurno.Result.Count > 0)
             {
-                foreach (var esquemaDetalle in oEsquemaDetalleTurno.Result)
+                Depositary.Business.Tables.Turno.AgendaTurno oAgendaTurno = new();
+                try
                 {
-                    //Segundo tenemos que hacer un ingreso por cada sector seleccionado
-                    foreach (var sector in pAgendaTurnoABM.Sectores)
+                    oAgendaTurno.BeginTransaction();
+                    foreach (var esquemaDetalle in oEsquemaDetalleTurno.Result)
                     {
-                        DateTime auxFecha = pAgendaTurnoABM.FechaDesde;
-                        //Tercero tenemos que hacer un insert por cada dia del periodo fecha desde - fecha hasta
-                        for (int i = 0; auxFecha <= pAgendaTurnoABM.FechaHasta; auxFecha = auxFecha.AddDays(1))
+                        //Segundo tenemos que hacer un ingreso por cada sector seleccionado
+                        foreach (var sector in pAgendaTurnoABM.Sectores)
                         {
-                            //Si se indica solo dias habiles se insertan valores para lun-vier, caso contrario se insertan todos los dias.
-                            if (!SoloDiasHabiles || (SoloDiasHabiles && auxFecha.DayOfWeek != DayOfWeek.Saturday && auxFecha.DayOfWeek != DayOfWeek.Sunday))
+                            DateTime auxFecha = pAgendaTurnoABM.FechaDesde;
+                            //Tercero tenemos que hacer un insert por cada dia del periodo fecha desde - fecha hasta
+                            for (int i = 0; auxFecha <= pAgendaTurnoABM.FechaHasta; auxFecha = auxFecha.AddDays(1))
                             {
-                                Depositary.Business.Tables.Turno.AgendaTurno oAgendaTurno = new();
-                                oAgendaTurno.Where.Add(Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Id);
-                                oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                                oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.Equal, auxFecha);
-                                oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Secuencia, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Secuencia);
-                                oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, sector.SectorId);
-                                oAgendaTurno.Items();
-
-                                //Solo agrego la agenda si no existia previamente una para esa fecha, ese sector, ese detalle y esa secuencia.
-                                if (oAgendaTurno.Result.Count == 0)
+                                //Si se indica solo dias habiles se insertan valores para lun-vier, caso contrario se insertan todos los dias.
+                                if (!SoloDiasHabiles || (SoloDiasHabiles && auxFecha.DayOfWeek != DayOfWeek.Saturday && auxFecha.DayOfWeek != DayOfWeek.Sunday))
                                 {
-                                    try
+                                    oAgendaTurno.Where.Clear();
+                                    oAgendaTurno.Where.Add(Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Id);
+                                    oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                                    oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.Equal, auxFecha);
+                                    oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.Secuencia, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Secuencia);
+                                    oAgendaTurno.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, sector.SectorId);
+                                    oAgendaTurno.Items();
+
+                                    //Solo agrego la agenda si no existia previamente una para esa fecha, ese sector, ese detalle y esa secuencia.
+                                    if (oAgendaTurno.Result.Count == 0)
                                     {
+
                                         DateTime fechaTurno = new(auxFecha.Year, auxFecha.Month, auxFecha.Day, 0, 0, 0);
                                         string nombreAgenda = pAgendaTurnoABM.NombreAgenda + " - " + fechaTurno.Date.ToString("dd/MM/yyyy") + " - " + esquemaDetalle.Nombre;
                                         oAgendaTurno.Add(nombreAgenda, esquemaDetalle.Id, fechaTurno, sector.SectorId, esquemaDetalle.Secuencia, pAgendaTurnoABM.UsuarioId, DateTime.Now, null, null, true);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        AuditController.Log(ex, pAgendaTurnoABM.UsuarioId);
-                                        resultado = ex.Message;
                                     }
                                 }
                             }
                         }
                     }
+
+                    oAgendaTurno.EndTransaction(true);
+                }
+                catch (Exception ex)
+                {
+                    oAgendaTurno.EndTransaction(false);
+                    AuditController.Log(ex, pAgendaTurnoABM.UsuarioId);
+                    resultado = ex.Message;
                 }
             }
 

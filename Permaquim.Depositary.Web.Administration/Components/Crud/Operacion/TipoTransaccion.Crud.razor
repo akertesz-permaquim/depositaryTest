@@ -4,6 +4,11 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
  
+@if (estaProcesando)
+{
+     <div class="spinner"></div>
+}
+ 
 @if(dataFunciones != null)
 {
 @if (SeguridadController.VerificarPermisoFuncion("OperacionTipoTransaccion",dataFunciones,"PuedeVisualizar"))
@@ -113,27 +118,8 @@
              </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TipoTransaccion" Property="FechaCreacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("FechaCreacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("FechaCreacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("FECHACREACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
      </RadzenDataGridColumn>
-             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TipoTransaccion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Property="UsuarioModificacion" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_UsuarioModificacion" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And">
-                 <Template>
-                     @{
-                         var usuario = Usuario_UsuarioModificacion_entities.FirstOrDefault( c => c.Id == @context.UsuarioModificacion);
-                         if(usuario != null)
-                         {
-                             <RadzenLabel Text=@(usuario.NombreApellido) Component="UsuarioModificacion" style="width: 100%">
-                             </RadzenLabel>
-                         }
-                         else
-                         {
-                             <RadzenLabel Text="No data available" Component="UsuarioModificacion" style="width: 100%">
-                             </RadzenLabel>                        
-                         }
-                     }
-                 </Template>
-                 <FilterTemplate>
-                     <div style="margin-top: 1rem;font-weight: 600">Filter</div>
-                     <RadzenDropDown @bind-Value=@selectedFilter_UsuarioModificacion Data="@Usuario_UsuarioModificacion_filter" Change="OnSelectedFilter_UsuarioModificacion_Changed" AllowFiltering ="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Id" TextProperty="NombreApellido" AllowClear ="true" Multiple="true"/>
-                 </FilterTemplate>
-             </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TipoTransaccion" Property="UsuarioModificacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("UsuarioModificacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("USUARIOMODIFICACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
+     </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Operacion.TipoTransaccion" Property="FechaModificacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("FechaModificacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
      </RadzenDataGridColumn>
          </Columns>
@@ -145,10 +131,6 @@
      {
              <RadzenTemplateForm TItem="Depositary.Entities.Tables.Operacion.TipoTransaccion" Data="@TipoTransaccion_entity"  @bind-Value="TipoTransaccion_entity" Submit ="Save" Visible ="@(TipoTransaccion_entity != null)">
              <ChildContent>
-             @if (estaProcesando)
-             {
-                 <div class="spinnerCentrado"></div>
-             }
                 @if(crudMode != CrudMode.Add)
                 {
                  <div style="margin-bottom: 1rem" class="row">
@@ -292,14 +274,6 @@ else
     private IEnumerable<Int64> selectedFilter_UsuarioCreacion;
  
     /// <summary>
-    /// Variables to handle Relation between TipoTransaccion.UsuarioModificacion and Usuario.Id
-    /// </summary>
-    private Depositary.Entities.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_entity = new();
-    private List<Depositary.Entities.Tables.Seguridad.Usuario>? Usuario_UsuarioModificacion_entities;
-    private List<Depositary.Entities.Tables.Seguridad.Usuario> Usuario_UsuarioModificacion_filter;
-    private IEnumerable<Int64> selectedFilter_UsuarioModificacion;
- 
-    /// <summary>
     ///  Page crud mode {List,Add,Edit,Delete}
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
@@ -347,10 +321,6 @@ else
         Usuario_UsuarioCreacion_entities = Usuario_UsuarioCreacion_local.Items();
         Usuario_UsuarioCreacion_filter = Usuario_UsuarioCreacion_entities.Where(x => TipoTransaccion_entities.Select(x => x.UsuarioCreacion).Distinct().Contains(x.Id)).ToList();
  
-        Depositary.Business.Tables.Seguridad.Usuario Usuario_UsuarioModificacion_local = new();
-        Usuario_UsuarioModificacion_entities = Usuario_UsuarioModificacion_local.Items();
-        Usuario_UsuarioModificacion_filter = Usuario_UsuarioModificacion_entities.Where(x => TipoTransaccion_entities.Select(x => x.UsuarioModificacion).Distinct().Contains(x.Id)).ToList();
- 
     }
  
     #endregion
@@ -364,7 +334,6 @@ else
         TipoTransaccion_entity = new();
         //Relations entities initialization
         Usuario_UsuarioCreacion_entity = new(); 
-        Usuario_UsuarioModificacion_entity = new(); 
         crudMode = CrudMode.Add;
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
              AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "OperacionTipoTransaccionCrud", crudMode.ToString(), dataUsuario.Id);
@@ -380,13 +349,6 @@ else
             Id = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == TipoTransaccion_entity.UsuarioCreacion).Id, 
             Nombre = Usuario_UsuarioCreacion_entities.FirstOrDefault(c => c.Id == TipoTransaccion_entity.UsuarioCreacion).Nombre
             };
-            if(Usuario_UsuarioModificacion_entities.Exists(c => c.Id == TipoTransaccion_entity.UsuarioModificacion))
-            {
-                 Usuario_UsuarioModificacion_entity = new() { 
-                 Id = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == TipoTransaccion_entity.UsuarioModificacion).Id, 
-                 Nombre = Usuario_UsuarioModificacion_entities.FirstOrDefault(c => c.Id == TipoTransaccion_entity.UsuarioModificacion).Nombre
-                 };
-            }
         if (delete)
             crudMode = CrudMode.Delete;
         else
@@ -401,7 +363,12 @@ else
     private async Task Save()
     {
         estaProcesando = true;
-        StateHasChanged();
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
+    {
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -506,8 +473,6 @@ else
             Detail = actionInformation, 
             Duration = 4000 });
        
-       estaProcesando = false;
-       StateHasChanged();
             await Task.Run(LoadMainEntityData);
     }
     /// <summary>
@@ -565,26 +530,6 @@ else
          if(selectedFilter_UsuarioCreacion!=null && !selectedFilter_UsuarioCreacion.Any())
          {
              selectedFilter_UsuarioCreacion=null;
-         }
-    }
- 
-    /// <summary>
-    /// Usuario_UsuarioModificacion value changed
-    /// </summary>
-    /// <param name="item"></param>
-    private void SelectUsuario_UsuarioModificacionValueChanged(object item)
-    {
-    }
- 
-    /// <summary>
-    /// selectedFilter_UsuarioModificacion value changed
-    /// </summary>
-    /// <param name="item"></param>
-    private void OnSelectedFilter_UsuarioModificacion_Changed(object value)
-    {
-         if(selectedFilter_UsuarioModificacion!=null && !selectedFilter_UsuarioModificacion.Any())
-         {
-             selectedFilter_UsuarioModificacion=null;
          }
     }
  
