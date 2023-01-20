@@ -237,5 +237,68 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 return returnValue;
             }
         }
+        /// <summary>
+        ///  Exception,Information,Navigation
+        /// </summary>
+
+        public static bool LogsExceptions
+        {
+            get
+            {
+                bool returnValue = true;
+                try
+                {
+
+                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOGUEA_EXCEPCIONES"));
+                }
+                catch (Exception)
+                {
+
+                    returnValue = false;
+                }
+                return returnValue;
+            }
+        }
+        /// <summary>
+        ///  Exception,Information,Navigation
+        /// </summary>
+
+        public static bool LogsInformations
+        {
+            get
+            {
+                bool returnValue = true;
+                try
+                {
+
+                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOGUEA_INFORMACIONES"));
+                }
+                catch (Exception)
+                {
+
+                    returnValue = false;
+                }
+                return returnValue;
+            }
+        }
+        public static bool LogsNavigations
+        {
+            get
+            {
+                bool returnValue = true;
+                try
+                {
+
+                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOGUEA_NAVEGACIONES"));
+                }
+                catch (Exception)
+                {
+
+                    returnValue = false;
+                }
+                return returnValue;
+            }
+        }
+
     }
 }

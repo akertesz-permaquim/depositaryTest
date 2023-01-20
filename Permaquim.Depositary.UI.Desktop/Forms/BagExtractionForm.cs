@@ -21,7 +21,6 @@ namespace Permaquim.Depositary.UI.Desktop
             Argentina,
             Chile
         }
-        private const string CAMBIO_CONTENEDOR = "Cambio de contenedor";
 
         /// <summary>
         /// Timer para la consulta del estado del dispositivo
@@ -32,7 +31,7 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private Permaquim.Depositario.Entities.Tables.Operacion.Contenedor _newContainer;
 
-               System.Windows.Forms.Button _gateButton = new System.Windows.Forms.Button();
+        System.Windows.Forms.Button _gateButton = new System.Windows.Forms.Button();
         System.Windows.Forms.Button _backButton = new System.Windows.Forms.Button();
         System.Windows.Forms.Button _confirmButton = new System.Windows.Forms.Button();
         CustomTextBox _containerTextBox = new CustomTextBox();
@@ -108,17 +107,17 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ShowHardwareMonitorData()
         {
-            BagStatusLabel.Text = "BagStatus: " + Enum.GetName(typeof(IoBoardStatus.BAG_STATE), 
+            BagStatusLabel.Text = "BagStatus: " + Enum.GetName(typeof(IoBoardStatus.BAG_STATE),
                 _device.IoBoardStatusProperty.BagState);
-            ShutterStatusLabel.Text = "Shutter Status: " + Enum.GetName(typeof(IoBoardStatus.SHUTTER_STATE), 
+            ShutterStatusLabel.Text = "Shutter Status: " + Enum.GetName(typeof(IoBoardStatus.SHUTTER_STATE),
                 _device.IoBoardStatusProperty.ShutterState);
-            BagAproveStatelabel.Text = "Bag Aprove Status: " + Enum.GetName(typeof(IoBoardStatus.BAG_APROVE_STATE), 
+            BagAproveStatelabel.Text = "Bag Aprove Status: " + Enum.GetName(typeof(IoBoardStatus.BAG_APROVE_STATE),
                 _device.IoBoardStatusProperty.BagAproveState);
-            LockStateLabel.Text = "Lock Status: " + Enum.GetName(typeof(IoBoardStatus.LOCK_STATE), 
+            LockStateLabel.Text = "Lock Status: " + Enum.GetName(typeof(IoBoardStatus.LOCK_STATE),
                 _device.IoBoardStatusProperty.LockState);
-            GatelStatusLabel.Text = "Gate Status: " + Enum.GetName(typeof(IoBoardStatus.GATE_STATE), 
+            GatelStatusLabel.Text = "Gate Status: " + Enum.GetName(typeof(IoBoardStatus.GATE_STATE),
                 _device.IoBoardStatusProperty.GateState);
-            ProcessStatusLabel.Text = "Process Status: " + Enum.GetName(typeof(BagExtractionProcessEnum), 
+            ProcessStatusLabel.Text = "Process Status: " + Enum.GetName(typeof(BagExtractionProcessEnum),
                 _bagExtractionProcess);
         }
         private void ProcessDeviceStatus()
@@ -134,9 +133,9 @@ namespace Permaquim.Depositary.UI.Desktop
                 _pollingTimer.Enabled = false;
                 _bagExtractionProcess = BagExtractionProcessEnum.None;
                 PrintTicket();
-                FormsController.OpenChildForm(this,new OperationForm(), _device);
+                FormsController.OpenChildForm(this, new OperationForm(), _device);
             }
- 
+
             if (_device.IoBoardStatusProperty.LockState == IoBoardStatus.LOCK_STATE.UNLOCKED)
                 _bagExtractionProcess = BagExtractionProcessEnum.GateUnlocked;
 
@@ -147,15 +146,15 @@ namespace Permaquim.Depositary.UI.Desktop
                 && (_bagExtractionProcess == BagExtractionProcessEnum.None
                 || _bagExtractionProcess == BagExtractionProcessEnum.GateWaitingToRelease))
             {
-                if(_bagExtractionProcess > BagExtractionProcessEnum.GateReleased)
+                if (_bagExtractionProcess > BagExtractionProcessEnum.GateReleased)
                     _bagExtractionProcess = BagExtractionProcessEnum.GateReleased;       //  TODO: analizar por que se dispara dos veces
                 TimeOutController.Reset();
             }
 
             // Este dato lo informa cuando está esperando para abrir la puerta
-            if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_0 
-                && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished)
-                _bagExtractionProcess = BagExtractionProcessEnum.GateWaitingToRelease;
+            //if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_0
+            //    && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished)
+            //    _bagExtractionProcess = BagExtractionProcessEnum.GateWaitingToRelease;
 
             if (_device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_1
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_1
@@ -168,11 +167,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.STATE_10
                 || _device.IoBoardStatusProperty.GateState == IoBoardStatus.GATE_STATE.OPEN
                 )
-    
 
-            if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
-            {
-                _bagExtractionProcess = BagExtractionProcessEnum.BagExtracted;
+
+                if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_REMOVED)
+                {
+                    _bagExtractionProcess = BagExtractionProcessEnum.BagExtracted;
                     // Debido a que los sensores pueden disparar la extracción más de una vez durante el proceso,
                     // Se marca con este flag el 
                     if (!_bagAlreadyInserted)
@@ -181,7 +180,7 @@ namespace Permaquim.Depositary.UI.Desktop
                         DatabaseController.CreateContainer();
                         _bagAlreadyInserted = true;
                     }
-            }
+                }
 
             if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_PUTTING_START)
             {
@@ -201,8 +200,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 TimeOutController.Reset();
             }
 
-            if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE 
-                && (_bagExtractionProcess == BagExtractionProcessEnum.BagExtracted 
+            if (_device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
+                && (_bagExtractionProcess == BagExtractionProcessEnum.BagExtracted
                 || _bagExtractionProcess == BagExtractionProcessEnum.BagExtracting)
                 || _bagExtractionProcess == BagExtractionProcessEnum.BagPuttingStart)
             {
@@ -252,7 +251,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     break;
                 case BagExtractionProcessEnum.GateReleased:
                     FormsController.SetInformationMessage(InformationTypeEnum.Information,
-                    MultilanguangeController.GetText(MultiLanguageEnum.PUEDE_RETIRAR_BOLSA) 
+                    MultilanguangeController.GetText(MultiLanguageEnum.PUEDE_RETIRAR_BOLSA)
                     + " : " + DatabaseController.CurrentContainer.Nombre);
                     break;
                 case BagExtractionProcessEnum.BagExtracting:
@@ -282,27 +281,38 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void VerifyContainerCodeVisibility()
         {
-            _containerTextBox.Visible = _bagExtractionProcess >= BagExtractionProcessEnum.GateUnlocked;
+            if (ParameterController.RequiresContainerIdentifier)
+            {
+                _containerTextBox.Visible = _bagExtractionProcess >= BagExtractionProcessEnum.GateUnlocked
+
+&&
+                   _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
+                   && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished
+                   ;
+            }
         }
         private void VerifyButtonsVisibility()
         {
-  
+
             _gateButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None;
             _backButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.None;
+            //|| _bagExtractionProcess == BagExtractionProcessEnum.BagError
+            //|| _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_ERROR;
 
             if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Argentina)
             {
                 _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending
-                 && _device.IoBoardStatusProperty.BagState ==IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE 
-                 && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished; 
+                 //&& ParameterController.RequiresContainerIdentifier
+                 && _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
+                 && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished;
             }
             if (ParameterController.BagSensorBehaviour == (int)BagSensorBehaviourEnum.Chile)
             {
                 _confirmButton.Visible = _bagExtractionProcess == BagExtractionProcessEnum.IdentifierPending
+                //&& ParameterController.RequiresContainerIdentifier
                 && _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
                 && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished;
             }
-
 
         }
         private void LoadGateButton()
@@ -322,9 +332,9 @@ namespace Permaquim.Depositary.UI.Desktop
         {
 
             _confirmButton = ControlBuilder.BuildStandardButton(
-            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width,55);
+            "GateButton", MultilanguangeController.GetText(MultiLanguageEnum.BOTON_ACEPTAR_OPERACION), MainPanel.Width, 55);
 
-            _confirmButton.Visible = ParameterController.RequiresContainerIdentifier; 
+            _confirmButton.Visible = false;
 
             this.MainPanel.Controls.Add(_confirmButton);
 
@@ -335,8 +345,8 @@ namespace Permaquim.Depositary.UI.Desktop
         private void LoadBackButton()
         {
 
-             _backButton = ControlBuilder.BuildExitButton(
-            "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
+            _backButton = ControlBuilder.BuildExitButton(
+           "BackButton", MultilanguangeController.GetText(MultiLanguageEnum.VOLVER), MainPanel.Width);
 
             this.MainPanel.Controls.Add(_backButton);
 
@@ -349,8 +359,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void LoadContainerTextbox()
         {
-           _containerTextBox =  ControlBuilder.BuildStandardTextBox("ContainerTextbox",
-                MultilanguangeController.GetText(MultiLanguageEnum.INGRESE_CODIGO_CONTENEDOR),MainPanel.Width);
+            _containerTextBox = ControlBuilder.BuildStandardTextBox("ContainerTextbox",
+                 MultilanguangeController.GetText(MultiLanguageEnum.INGRESE_CODIGO_CONTENEDOR), MainPanel.Width);
             _containerTextBox.Visible = false;
             _containerTextBox.MaxLength = 50;
 
@@ -380,15 +390,24 @@ namespace Permaquim.Depositary.UI.Desktop
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             string containerText = _containerTextBox.Texts.Trim();
-            _confirmButton.Visible = false;
-            _containerTextBox.Visible = false;
-            FormsController.SetInformationMessage(InformationTypeEnum.Information,
-                  MultilanguangeController.GetText(MultiLanguageEnum.PROCESO_BOLSA_FINALIZADO));
+            if (ParameterController.RequiresContainerIdentifier && containerText.Trim().Equals(String.Empty))
+            {
+                FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                   MultilanguangeController.GetText(MultiLanguageEnum.INDICAR_CODIGO_BOLSA));
+            }
+            else
+            {
 
-            _bagExtractionProcess = BagExtractionProcessEnum.ProcessFinished;
-            if (ParameterController.RequiresContainerIdentifier)
-                DatabaseController.UpdateContainerIdentifier(containerText);
-            _containerTextBox.Visible = false;
+                _confirmButton.Visible = false;
+                _containerTextBox.Visible = false;
+                FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                      MultilanguangeController.GetText(MultiLanguageEnum.PROCESO_BOLSA_FINALIZADO));
+
+                _bagExtractionProcess = BagExtractionProcessEnum.ProcessFinished;
+                if (ParameterController.RequiresContainerIdentifier)
+                    DatabaseController.UpdateContainerIdentifier(containerText);
+                _containerTextBox.Visible = false;
+            }
         }
         private void BagButton_Click(object sender, EventArgs e)
         {
@@ -396,7 +415,7 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
-            FormsController.OpenChildForm(this,new OperationForm(), _device);
+            FormsController.OpenChildForm(this, new OperationForm(), _device);
         }
         private void LoadStyles()
         {
@@ -425,12 +444,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 _bagAlreadyInserted = false;
                 _bagExtractionProcess = BagExtractionProcessEnum.None;
             }
-            else
-            {
-                AuditController.Log(LogTypeEnum.Navigation, CAMBIO_CONTENEDOR, CAMBIO_CONTENEDOR);
-            }
 
-         }
+        }
 
         private void BagExtractionForm_MouseClick(object sender, MouseEventArgs e)
         {
@@ -446,10 +461,10 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     ReportController.ContainerToPrint = DatabaseController.LastContainer;
                     ReportController.PrintReport(ReportTypeEnum.ValueExtraction,
-                        DatabaseController.GetEnvelopeLastContainerContentItems(), 
+                        DatabaseController.GetEnvelopeLastContainerContentItems(),
                         DatabaseController.GetBillLastContainerContentItems(), i);
                 }
             }
-        }        
+        }
     }
 }
