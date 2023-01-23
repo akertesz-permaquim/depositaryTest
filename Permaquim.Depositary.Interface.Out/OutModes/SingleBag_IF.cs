@@ -4,16 +4,16 @@ using Permaquim.Depositary.Interface.Out.Controllers;
 using Permaquim.Depositary.UI.Desktop.Controllers;
 using System.Text;
 
-internal class InterfaceProcessing
+internal class SingleBag_IF : IOutputInterface
 {
     private const string CSV_HEADER = "Transaccion, DNI, Fecha / Hora, 1000, 500, 200, 100, 50, 20, 10, Moneda";
     private Dictionary<string, Dictionary<decimal, long>> denomsCache = new();
     private string OutputPath { get; set; }
-    public InterfaceProcessing(string path)
+    public SingleBag_IF(string path)
     {
         OutputPath = path;
     }
-    internal void Process()
+    public void Process()
     {
         List<DefaultNamespace.Entities.Relations.Operacion.Contenedor> containers = DatabaseController.GetContainers();
         int processedTrx = 0;
