@@ -148,7 +148,6 @@
                                     //Solo agrego la agenda si no existia previamente una para esa fecha, ese sector, ese detalle y esa secuencia.
                                     if (oAgendaTurno.Result.Count == 0)
                                     {
-
                                         DateTime fechaTurno = new(auxFecha.Year, auxFecha.Month, auxFecha.Day, 0, 0, 0);
                                         string nombreAgenda = pAgendaTurnoABM.NombreAgenda + " - " + fechaTurno.Date.ToString("dd/MM/yyyy") + " - " + esquemaDetalle.Nombre;
                                         oAgendaTurno.Add(nombreAgenda, esquemaDetalle.Id, fechaTurno, sector.SectorId, esquemaDetalle.Secuencia, pAgendaTurnoABM.UsuarioId, DateTime.Now, null, null, true);

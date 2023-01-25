@@ -386,19 +386,19 @@
                                                                             <div style="padding-top: 5%; text-align:center"><b>@MultilenguajeController.ObtenerTextoPorClave("OCUPACIONBOLSA",dataLenguaje)</b></div>
                                                                             @if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 70 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 90)
                                                                             {
-                                                                                <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                                <PermaquimProgressBar BarColor="yellow" Mode="ProgressBarMode.Determinate" Value="@((float)auxInformacionDepositario.PorcentajeOcupacionBolsa)" Max="100" />
                                                                             }
                                                                             else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 90 && auxInformacionDepositario.PorcentajeOcupacionBolsa < 100)
                                                                             {
-                                                                                <PermaquimProgressBar BarColor="red" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                                <PermaquimProgressBar BarColor="red" Mode="ProgressBarMode.Determinate" Value="@((float)auxInformacionDepositario.PorcentajeOcupacionBolsa)" Max="100" />
                                                                             }
                                                                             else if (auxInformacionDepositario.PorcentajeOcupacionBolsa >= 100)
                                                                             {
-                                                                                <PermaquimProgressBar BarColor="darkred" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                                <PermaquimProgressBar BarColor="darkred" Mode="ProgressBarMode.Determinate" Value="@((float)auxInformacionDepositario.PorcentajeOcupacionBolsa)" Max="100" />
                                                                             }
                                                                             else
                                                                             {
-                                                                                <PermaquimProgressBar BarColor="green" Mode="ProgressBarMode.Determinate" Value="@auxInformacionDepositario.PorcentajeOcupacionBolsa" Max="100" />
+                                                                                <PermaquimProgressBar BarColor="green" Mode="ProgressBarMode.Determinate" Value="@((float)auxInformacionDepositario.PorcentajeOcupacionBolsa)" Max="100" />
                                                                             }
                                                                         </div>
                                                                         <div class="col-md-4" style="padding-top: 5%; padding-top: 3%; font-size: medium; text-align:center;">

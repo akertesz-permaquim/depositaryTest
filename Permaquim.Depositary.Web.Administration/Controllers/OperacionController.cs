@@ -240,6 +240,7 @@
         public static float ObtenerPorcentajeOcupacionBolsa(Int64 pContenedorId, Int64 DepositarioId)
         {
             float resultado = 0;
+            double resultado = 0;
             Int64 cantidadMaxima = 0;
             Int64 cantidadUnidadesAcumuladas = 0;
 

@@ -30,7 +30,7 @@ else
         <ChildContent>
             <RadzenTemplateForm TItem="parametros" Data="@parametrosTransaccionesView" @bind-Value="parametrosTransaccionesView" Submit="LoadMainEntityData">
                 <ChildContent>
-                    <table class="table table-borderless w-auto">
+                    <table class="table table-borderless w-auto" style="vertical-align: middle">
                         <tbody>
                             <tr>
                                 <td>
@@ -47,7 +47,7 @@ else
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="font-weight:bold;align-self:center;">
+                                    <div style="font-weight:bold;align-self:center;text-align:right">
                                         <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_FECHAHASTA",dataLenguaje)" Component="fechaHastaDatePicker" style="width: 100%">
                                         </RadzenLabel>
                                     </div>
@@ -452,7 +452,6 @@ else
 
             parametrosTransaccionesView.depositarioSeleccionado = null;
         }
-
     }
 
     void OnChangeSector(object value)

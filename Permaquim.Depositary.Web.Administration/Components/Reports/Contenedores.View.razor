@@ -1,6 +1,6 @@
 @page "/ReporteContenedoresView"
 @using Permaquim.Depositary.Web.Administration.Controllers;
-@using Radzen.Blazor.GridExportOptions
+@using Radzen.Blazor.GridExportOptions;
 
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
@@ -31,7 +31,7 @@ else
         <ChildContent>
             <RadzenTemplateForm TItem="parametros" Data="@parametrosContenedoresView" @bind-Value="parametrosContenedoresView" Submit="LoadMainEntityData">
                 <ChildContent>
-                    <table class="table table-borderless w-auto">
+                    <table class="table table-borderless w-auto" style="vertical-align: middle">
                         <tbody>
                             <tr>
                                 <td>
