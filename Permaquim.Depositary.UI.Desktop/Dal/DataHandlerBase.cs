@@ -4,7 +4,7 @@ using System.Data;
 using System.Configuration;
 using System.Collections;
 using System.Reflection;
-public class DataHandlerBase: IDataHandler
+public class DataHandlerBase: IDataHandler, IDisposable
 {
     #region Local Variables
     protected string _commandText = null;
@@ -32,24 +32,24 @@ public class DataHandlerBase: IDataHandler
     /// <summary>
     /// Represents Where condition list
     /// </summary>
-    internal WhereParameterBase WhereParameter {get;set;}
+    protected WhereParameterBase WhereParameter {get;set;}
     /// <summary>
     /// Represents Order By parameters
     /// </summary>
-    internal OrderByParameterBase OrderByParameter  {get;set;}
+    protected OrderByParameterBase OrderByParameter  {get;set;}
     /// <summary>
     /// Represents Group By parameters
     /// </summary>
-    internal GroupByParameterBase GroupByParameter  {get;set;}
+    protected GroupByParameterBase GroupByParameter  {get;set;}
     /// <summary>
     /// Represents aggregate parameter
     /// </summary>
-    internal AggregateParameterBase AggregateParameter {get;set;}
+    protected AggregateParameterBase AggregateParameter {get;set;}
     /// <summary>
     /// Reflection cache data
     /// </summary>
 	#region Reflection data
-		private Type _dataItemType = null;
+		protected Type _dataItemType = null;
 		private PropertyInfo[] _properties = null;
 		private System.Attribute _objectSchemaTypeAttribute = null;
 		private System.Attribute _objectNameTypeAttribute = null;
@@ -59,6 +59,7 @@ public class DataHandlerBase: IDataHandler
     /// and are loaded with Reflection
     /// </summary>
     protected List<DataFieldDefinition> _dataFieldDefinitions = new List<DataFieldDefinition>();
+    private bool disposedValue;
     /// <summary>
     /// No constructor
     /// </summary>
@@ -117,7 +118,7 @@ public class DataHandlerBase: IDataHandler
     /// Gets IdataItem reflection information and set corresponding variables.
     /// </summary>
     /// <returns></returns>	
-   private void AnalizeIDataItem()
+   protected void AnalizeIDataItem()
     {
         if (_dataItemType == null)
         {
@@ -417,6 +418,11 @@ public class DataHandlerBase: IDataHandler
                  _connection.ConnectionString = Permaquim.Depositario.Crypto.Decrypt(ConfigurationHandler.ConnectionString ,ConfigurationHandler.PasswordKey);
                  _connection.Open();
               }
+            else
+            {
+                 if (_connection.State == ConnectionState.Closed)
+                 _connection.Open(); 
+            }
         }
     }
     protected IDbCommand GetCommand(string query, IDbConnection connection, IDbTransaction transaction, CommandType commandType = CommandType.Text)
@@ -531,5 +537,35 @@ public class DataHandlerBase: IDataHandler
         }
         dr.Close();
         return entities;
+    }
+ 
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                // TODO: dispose managed state (managed objects)
+                _itemList = null;
+                _fieldList = null;
+                _dataItem = null;
+            }
+ 
+            // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+            // TODO: set large fields to null
+            _connection = null;
+            _command = null;
+            _transaction = null;
+            _datareader = null;
+ 
+            disposedValue = true;
+        }
+    }
+ 
+    void IDisposable.Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
     }
 }

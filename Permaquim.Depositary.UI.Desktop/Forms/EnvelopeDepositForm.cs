@@ -174,6 +174,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void DeviceStateChange(object sender, DeviceStateChangeEventArgs args)
         {
+            if (args.StateName.Equals(Global.Constants.PQCOMMUNICATIONERROR))
+                AuditController.Log(LogTypeEnum.Navigation, args.StateName, args.StateName);
+
             if (args.StateName.ToUpper().Equals(STORINGERROR))
             {
                 FormsController.SetInformationMessage(InformationTypeEnum.Event,
@@ -1110,7 +1113,20 @@ namespace Permaquim.Depositary.UI.Desktop
             }
         }
 
-
- 
+        private void EnvelopeDepositForm_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.Enabled)
+            {
+                TimeOutController.Reset();
+            }
+            else
+            {
+                if (_totalQuantity > 0)
+                {
+                    SaveTransaction();
+                    PrintTicket(TicketTypeEnum.Second);
+                }
+            }
+        }
     }
 }

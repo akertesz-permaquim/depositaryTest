@@ -135,5 +135,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             MainFormInstance.SetInformationMessage(type, message);
         }
+        public static void EnableDisableForms(bool value)
+        {
+            foreach (var item in _formList)
+            {
+                if (item.GetType().BaseType.FullName.Equals(FORM))
+                {
+                    item.Enabled  = value;
+                }
+            }
+        }
     }
 }

@@ -45,7 +45,7 @@ public class ProcedureDataHandler : DataHandlerBase
         {
             if (_datareader != null)
                 _datareader.Close();
-            if (_connection.State == ConnectionState.Open)
+            if (_connection.State == ConnectionState.Open  && _transaction == null)
                 _connection.Close();
         }
     }

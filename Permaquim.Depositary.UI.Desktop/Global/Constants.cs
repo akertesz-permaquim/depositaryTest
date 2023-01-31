@@ -15,5 +15,6 @@ namespace Permaquim.Depositary.UI.Desktop.Global
         public const string IOBOARD_DISCONNECTED = "Placa desconectada";
         public const string CONTAINER_NOT_SET = "Bolsa no colocada";
         public const string NORMAL = "Normal";
+        public const string PQCOMMUNICATIONERROR = "PQCommunicationError";
     }
 }

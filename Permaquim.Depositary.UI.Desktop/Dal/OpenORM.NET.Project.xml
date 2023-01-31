@@ -62,6 +62,8 @@
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
     <string>Regionalizacion.ObtenerTextosLenguaje</string>
     <string>Seguridad.ObtenerRolesPorUsuario</string>
+    <string>Sincronizacion.ObtenerIdDestino</string>
+    <string>Sincronizacion.ObtenerIdOrigen</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures>
     <MappedStoredProcedure>

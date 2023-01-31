@@ -704,6 +704,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 if (_device.CounterConnected)
                 {
+                    FormsController.EnableDisableForms(true);
                     CounterPictureBox.Image = _greenLedImageCounter;
                     DeviceController.CounterIssue = false;
                     DeviceController.CounterStatus = Global.Constants.NORMAL;
@@ -711,15 +712,23 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 }
                 else
                 {
+                    if (DatabaseController.CurrentOperation != null && (
+                   (int)DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit ||
+                   (int)DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit))
+                    {
+                        FormsController.EnableDisableForms(false);
+                        DatabaseController.LogOff(true);
+                        FormsController.LogOff();
+                    }
                     CounterPictureBox.Image = _redLedImageCounter;
-                    _device.CounterBoardReconnect();
                     DeviceController.CounterIssue = true;
                     DeviceController.IsOutOfService = true;
                     DeviceController.CounterStatus = Global.Constants.COUNTER_DISCONNECTED;
+                    _device.CounterBoardReconnect();
                 }
 
                 _ioBoardStatus = _device.Status();
-
+ 
                 // consulta el estado de la ioboard  si está conectada
                 if (_device.IoBoardConnected)
                 {
@@ -731,10 +740,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 else
                 {
                     IoBoardPictureBox.Image = _redLedImageIoboard;
-                    _device.IoBoardReconnect();
                     DeviceController.IoBoardIssue = true;
                     DeviceController.IsOutOfService = true;
                     DeviceController.IoBoardStatus = Global.Constants.IOBOARD_DISCONNECTED;
+                    _device.IoBoardReconnect();
                 }
 
             }

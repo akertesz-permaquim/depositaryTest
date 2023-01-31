@@ -24,16 +24,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Aplicacion.Configuracion> _cacheItemList = new List<Entities.Relations.Aplicacion.Configuracion>();
 			   protected List<Entities.Relations.Aplicacion.Configuracion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Configuracion() : base()
             {
                 base._dataItem = new Entities.Relations.Aplicacion.Configuracion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -76,12 +77,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Aplicacion.Configuracion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Aplicacion.Configuracion>().ToList<Entities.Relations.Aplicacion.Configuracion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Aplicacion.Configuracion>().ToList<Entities.Relations.Aplicacion.Configuracion>();
                 return _entities;
             }
             /// <summary>
@@ -369,16 +370,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Aplicacion.ConfiguracionEmpresa> _cacheItemList = new List<Entities.Relations.Aplicacion.ConfiguracionEmpresa>();
 			   protected List<Entities.Relations.Aplicacion.ConfiguracionEmpresa> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public ConfiguracionEmpresa() : base()
             {
                 base._dataItem = new Entities.Relations.Aplicacion.ConfiguracionEmpresa();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -421,12 +423,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Aplicacion.ConfiguracionEmpresa> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Relations.Aplicacion.ConfiguracionEmpresa>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Relations.Aplicacion.ConfiguracionEmpresa>();
                 return _entities;
             }
             /// <summary>
@@ -711,16 +713,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Aplicacion.ConfiguracionTipoDato> _cacheItemList = new List<Entities.Relations.Aplicacion.ConfiguracionTipoDato>();
 			   protected List<Entities.Relations.Aplicacion.ConfiguracionTipoDato> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public ConfiguracionTipoDato() : base()
             {
                 base._dataItem = new Entities.Relations.Aplicacion.ConfiguracionTipoDato();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -760,12 +763,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Aplicacion.ConfiguracionTipoDato> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionTipoDato>().ToList<Entities.Relations.Aplicacion.ConfiguracionTipoDato>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionTipoDato>().ToList<Entities.Relations.Aplicacion.ConfiguracionTipoDato>();
                 return _entities;
             }
             /// <summary>
@@ -1007,16 +1010,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Aplicacion.ConfiguracionValidacionDato> _cacheItemList = new List<Entities.Relations.Aplicacion.ConfiguracionValidacionDato>();
 			   protected List<Entities.Relations.Aplicacion.ConfiguracionValidacionDato> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public ConfiguracionValidacionDato() : base()
             {
                 base._dataItem = new Entities.Relations.Aplicacion.ConfiguracionValidacionDato();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -1058,12 +1062,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Aplicacion.ConfiguracionValidacionDato> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionValidacionDato>().ToList<Entities.Relations.Aplicacion.ConfiguracionValidacionDato>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Aplicacion.ConfiguracionValidacionDato>().ToList<Entities.Relations.Aplicacion.ConfiguracionValidacionDato>();
                 return _entities;
             }
             /// <summary>
@@ -1334,16 +1338,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Auditoria.Log> _cacheItemList = new List<Entities.Relations.Auditoria.Log>();
 			   protected List<Entities.Relations.Auditoria.Log> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Log() : base()
             {
                 base._dataItem = new Entities.Relations.Auditoria.Log();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -1384,12 +1389,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Auditoria.Log> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Auditoria.Log>().ToList<Entities.Relations.Auditoria.Log>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Auditoria.Log>().ToList<Entities.Relations.Auditoria.Log>();
                 return _entities;
             }
             /// <summary>
@@ -1644,16 +1649,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Auditoria.TipoLog> _cacheItemList = new List<Entities.Relations.Auditoria.TipoLog>();
 			   protected List<Entities.Relations.Auditoria.TipoLog> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoLog() : base()
             {
                 base._dataItem = new Entities.Relations.Auditoria.TipoLog();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -1693,12 +1699,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Auditoria.TipoLog> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Auditoria.TipoLog>().ToList<Entities.Relations.Auditoria.TipoLog>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Auditoria.TipoLog>().ToList<Entities.Relations.Auditoria.TipoLog>();
                 return _entities;
             }
             /// <summary>
@@ -1940,16 +1946,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Banca.Banco> _cacheItemList = new List<Entities.Relations.Banca.Banco>();
 			   protected List<Entities.Relations.Banca.Banco> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Banco() : base()
             {
                 base._dataItem = new Entities.Relations.Banca.Banco();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -1991,12 +1998,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Banca.Banco> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Banca.Banco>().ToList<Entities.Relations.Banca.Banco>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Banca.Banco>().ToList<Entities.Relations.Banca.Banco>();
                 return _entities;
             }
             /// <summary>
@@ -2272,16 +2279,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Banca.Cuenta> _cacheItemList = new List<Entities.Relations.Banca.Cuenta>();
 			   protected List<Entities.Relations.Banca.Cuenta> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Cuenta() : base()
             {
                 base._dataItem = new Entities.Relations.Banca.Cuenta();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -2327,12 +2335,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Banca.Cuenta> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Banca.Cuenta>().ToList<Entities.Relations.Banca.Cuenta>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Banca.Cuenta>().ToList<Entities.Relations.Banca.Cuenta>();
                 return _entities;
             }
             /// <summary>
@@ -2663,16 +2671,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Banca.TipoCuenta> _cacheItemList = new List<Entities.Relations.Banca.TipoCuenta>();
 			   protected List<Entities.Relations.Banca.TipoCuenta> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoCuenta() : base()
             {
                 base._dataItem = new Entities.Relations.Banca.TipoCuenta();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -2713,12 +2722,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Banca.TipoCuenta> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Banca.TipoCuenta>().ToList<Entities.Relations.Banca.TipoCuenta>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Banca.TipoCuenta>().ToList<Entities.Relations.Banca.TipoCuenta>();
                 return _entities;
             }
             /// <summary>
@@ -2973,16 +2982,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Banca.UsuarioCuenta> _cacheItemList = new List<Entities.Relations.Banca.UsuarioCuenta>();
 			   protected List<Entities.Relations.Banca.UsuarioCuenta> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public UsuarioCuenta() : base()
             {
                 base._dataItem = new Entities.Relations.Banca.UsuarioCuenta();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -3022,12 +3032,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Banca.UsuarioCuenta> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Banca.UsuarioCuenta>().ToList<Entities.Relations.Banca.UsuarioCuenta>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Banca.UsuarioCuenta>().ToList<Entities.Relations.Banca.UsuarioCuenta>();
                 return _entities;
             }
             /// <summary>
@@ -3268,16 +3278,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Biometria.HuellaDactilar> _cacheItemList = new List<Entities.Relations.Biometria.HuellaDactilar>();
 			   protected List<Entities.Relations.Biometria.HuellaDactilar> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public HuellaDactilar() : base()
             {
                 base._dataItem = new Entities.Relations.Biometria.HuellaDactilar();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -3318,12 +3329,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Biometria.HuellaDactilar> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Biometria.HuellaDactilar>().ToList<Entities.Relations.Biometria.HuellaDactilar>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Biometria.HuellaDactilar>().ToList<Entities.Relations.Biometria.HuellaDactilar>();
                 return _entities;
             }
             /// <summary>
@@ -3587,16 +3598,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Customizador.Entidad> _cacheItemList = new List<Entities.Relations.Customizador.Entidad>();
 			   protected List<Entities.Relations.Customizador.Entidad> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Entidad() : base()
             {
                 base._dataItem = new Entities.Relations.Customizador.Entidad();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -3645,12 +3657,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Customizador.Entidad> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Customizador.Entidad>().ToList<Entities.Relations.Customizador.Entidad>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Customizador.Entidad>().ToList<Entities.Relations.Customizador.Entidad>();
                 return _entities;
             }
             /// <summary>
@@ -4035,16 +4047,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Customizador.EntidadAtributo> _cacheItemList = new List<Entities.Relations.Customizador.EntidadAtributo>();
 			   protected List<Entities.Relations.Customizador.EntidadAtributo> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public EntidadAtributo() : base()
             {
                 base._dataItem = new Entities.Relations.Customizador.EntidadAtributo();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -4094,12 +4107,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Customizador.EntidadAtributo> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Customizador.EntidadAtributo>().ToList<Entities.Relations.Customizador.EntidadAtributo>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Customizador.EntidadAtributo>().ToList<Entities.Relations.Customizador.EntidadAtributo>();
                 return _entities;
             }
             /// <summary>
@@ -4496,16 +4509,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Directorio.Empresa> _cacheItemList = new List<Entities.Relations.Directorio.Empresa>();
 			   protected List<Entities.Relations.Directorio.Empresa> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Empresa() : base()
             {
                 base._dataItem = new Entities.Relations.Directorio.Empresa();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -4552,12 +4566,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Directorio.Empresa> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Directorio.Empresa>().ToList<Entities.Relations.Directorio.Empresa>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Directorio.Empresa>().ToList<Entities.Relations.Directorio.Empresa>();
                 return _entities;
             }
             /// <summary>
@@ -4903,16 +4917,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Directorio.Grupo> _cacheItemList = new List<Entities.Relations.Directorio.Grupo>();
 			   protected List<Entities.Relations.Directorio.Grupo> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Grupo() : base()
             {
                 base._dataItem = new Entities.Relations.Directorio.Grupo();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -4953,12 +4968,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Directorio.Grupo> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Directorio.Grupo>().ToList<Entities.Relations.Directorio.Grupo>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Directorio.Grupo>().ToList<Entities.Relations.Directorio.Grupo>();
                 return _entities;
             }
             /// <summary>
@@ -5214,16 +5229,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Directorio.RelacionMonedaSucursal> _cacheItemList = new List<Entities.Relations.Directorio.RelacionMonedaSucursal>();
 			   protected List<Entities.Relations.Directorio.RelacionMonedaSucursal> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public RelacionMonedaSucursal() : base()
             {
                 base._dataItem = new Entities.Relations.Directorio.RelacionMonedaSucursal();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -5264,12 +5280,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Directorio.RelacionMonedaSucursal> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Directorio.RelacionMonedaSucursal>().ToList<Entities.Relations.Directorio.RelacionMonedaSucursal>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Directorio.RelacionMonedaSucursal>().ToList<Entities.Relations.Directorio.RelacionMonedaSucursal>();
                 return _entities;
             }
             /// <summary>
@@ -5525,16 +5541,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Directorio.Sector> _cacheItemList = new List<Entities.Relations.Directorio.Sector>();
 			   protected List<Entities.Relations.Directorio.Sector> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Sector() : base()
             {
                 base._dataItem = new Entities.Relations.Directorio.Sector();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -5575,12 +5592,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Directorio.Sector> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Directorio.Sector>().ToList<Entities.Relations.Directorio.Sector>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Directorio.Sector>().ToList<Entities.Relations.Directorio.Sector>();
                 return _entities;
             }
             /// <summary>
@@ -5840,16 +5857,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Directorio.Sucursal> _cacheItemList = new List<Entities.Relations.Directorio.Sucursal>();
 			   protected List<Entities.Relations.Directorio.Sucursal> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Sucursal() : base()
             {
                 base._dataItem = new Entities.Relations.Directorio.Sucursal();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -5894,12 +5912,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Directorio.Sucursal> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Directorio.Sucursal>().ToList<Entities.Relations.Directorio.Sucursal>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Directorio.Sucursal>().ToList<Entities.Relations.Directorio.Sucursal>();
                 return _entities;
             }
             /// <summary>
@@ -6218,16 +6236,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.ComandoContadora> _cacheItemList = new List<Entities.Relations.Dispositivo.ComandoContadora>();
 			   protected List<Entities.Relations.Dispositivo.ComandoContadora> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public ComandoContadora() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.ComandoContadora();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -6271,12 +6290,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.ComandoContadora> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.ComandoContadora>().ToList<Entities.Relations.Dispositivo.ComandoContadora>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.ComandoContadora>().ToList<Entities.Relations.Dispositivo.ComandoContadora>();
                 return _entities;
             }
             /// <summary>
@@ -6580,16 +6599,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.ComandoPlaca> _cacheItemList = new List<Entities.Relations.Dispositivo.ComandoPlaca>();
 			   protected List<Entities.Relations.Dispositivo.ComandoPlaca> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public ComandoPlaca() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.ComandoPlaca();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -6633,12 +6653,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.ComandoPlaca> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.ComandoPlaca>().ToList<Entities.Relations.Dispositivo.ComandoPlaca>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.ComandoPlaca>().ToList<Entities.Relations.Dispositivo.ComandoPlaca>();
                 return _entities;
             }
             /// <summary>
@@ -6939,16 +6959,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.ConfiguracionDepositario> _cacheItemList = new List<Entities.Relations.Dispositivo.ConfiguracionDepositario>();
 			   protected List<Entities.Relations.Dispositivo.ConfiguracionDepositario> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public ConfiguracionDepositario() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.ConfiguracionDepositario();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -6989,12 +7010,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.ConfiguracionDepositario> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.ConfiguracionDepositario>().ToList<Entities.Relations.Dispositivo.ConfiguracionDepositario>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.ConfiguracionDepositario>().ToList<Entities.Relations.Dispositivo.ConfiguracionDepositario>();
                 return _entities;
             }
             /// <summary>
@@ -7254,16 +7275,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.Depositario> _cacheItemList = new List<Entities.Relations.Dispositivo.Depositario>();
 			   protected List<Entities.Relations.Dispositivo.Depositario> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Depositario() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.Depositario();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -7308,12 +7330,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.Depositario> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.Depositario>().ToList<Entities.Relations.Dispositivo.Depositario>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.Depositario>().ToList<Entities.Relations.Dispositivo.Depositario>();
                 return _entities;
             }
             /// <summary>
@@ -7640,16 +7662,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.DepositarioContadora> _cacheItemList = new List<Entities.Relations.Dispositivo.DepositarioContadora>();
 			   protected List<Entities.Relations.Dispositivo.DepositarioContadora> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public DepositarioContadora() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.DepositarioContadora();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -7701,12 +7724,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.DepositarioContadora> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioContadora>().ToList<Entities.Relations.Dispositivo.DepositarioContadora>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.DepositarioContadora>().ToList<Entities.Relations.Dispositivo.DepositarioContadora>();
                 return _entities;
             }
             /// <summary>
@@ -8129,16 +8152,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.DepositarioEstado> _cacheItemList = new List<Entities.Relations.Dispositivo.DepositarioEstado>();
 			   protected List<Entities.Relations.Dispositivo.DepositarioEstado> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public DepositarioEstado() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.DepositarioEstado();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -8181,12 +8205,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.DepositarioEstado> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioEstado>().ToList<Entities.Relations.Dispositivo.DepositarioEstado>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.DepositarioEstado>().ToList<Entities.Relations.Dispositivo.DepositarioEstado>();
                 return _entities;
             }
             /// <summary>
@@ -8472,16 +8496,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.DepositarioMoneda> _cacheItemList = new List<Entities.Relations.Dispositivo.DepositarioMoneda>();
 			   protected List<Entities.Relations.Dispositivo.DepositarioMoneda> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public DepositarioMoneda() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.DepositarioMoneda();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -8522,12 +8547,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.DepositarioMoneda> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioMoneda>().ToList<Entities.Relations.Dispositivo.DepositarioMoneda>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.DepositarioMoneda>().ToList<Entities.Relations.Dispositivo.DepositarioMoneda>();
                 return _entities;
             }
             /// <summary>
@@ -8803,16 +8828,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.DepositarioPlaca> _cacheItemList = new List<Entities.Relations.Dispositivo.DepositarioPlaca>();
 			   protected List<Entities.Relations.Dispositivo.DepositarioPlaca> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public DepositarioPlaca() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.DepositarioPlaca();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -8873,12 +8899,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.DepositarioPlaca> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.DepositarioPlaca>().ToList<Entities.Relations.Dispositivo.DepositarioPlaca>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.DepositarioPlaca>().ToList<Entities.Relations.Dispositivo.DepositarioPlaca>();
                 return _entities;
             }
             /// <summary>
@@ -9433,16 +9459,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.Marca> _cacheItemList = new List<Entities.Relations.Dispositivo.Marca>();
 			   protected List<Entities.Relations.Dispositivo.Marca> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Marca() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.Marca();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -9482,12 +9509,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.Marca> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.Marca>().ToList<Entities.Relations.Dispositivo.Marca>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.Marca>().ToList<Entities.Relations.Dispositivo.Marca>();
                 return _entities;
             }
             /// <summary>
@@ -9730,16 +9757,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.Modelo> _cacheItemList = new List<Entities.Relations.Dispositivo.Modelo>();
 			   protected List<Entities.Relations.Dispositivo.Modelo> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Modelo() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.Modelo();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -9782,12 +9810,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.Modelo> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.Modelo>().ToList<Entities.Relations.Dispositivo.Modelo>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.Modelo>().ToList<Entities.Relations.Dispositivo.Modelo>();
                 return _entities;
             }
             /// <summary>
@@ -10072,16 +10100,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.PlantillaMoneda> _cacheItemList = new List<Entities.Relations.Dispositivo.PlantillaMoneda>();
 			   protected List<Entities.Relations.Dispositivo.PlantillaMoneda> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public PlantillaMoneda() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.PlantillaMoneda();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -10121,12 +10150,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.PlantillaMoneda> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.PlantillaMoneda>().ToList<Entities.Relations.Dispositivo.PlantillaMoneda>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.PlantillaMoneda>().ToList<Entities.Relations.Dispositivo.PlantillaMoneda>();
                 return _entities;
             }
             /// <summary>
@@ -10369,16 +10398,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.PlantillaMonedaDetalle> _cacheItemList = new List<Entities.Relations.Dispositivo.PlantillaMonedaDetalle>();
 			   protected List<Entities.Relations.Dispositivo.PlantillaMonedaDetalle> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public PlantillaMonedaDetalle() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.PlantillaMonedaDetalle();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -10421,12 +10451,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.PlantillaMonedaDetalle> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.PlantillaMonedaDetalle>().ToList<Entities.Relations.Dispositivo.PlantillaMonedaDetalle>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.PlantillaMonedaDetalle>().ToList<Entities.Relations.Dispositivo.PlantillaMonedaDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -10714,16 +10744,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.TipoConfiguracionDepositario> _cacheItemList = new List<Entities.Relations.Dispositivo.TipoConfiguracionDepositario>();
 			   protected List<Entities.Relations.Dispositivo.TipoConfiguracionDepositario> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoConfiguracionDepositario() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.TipoConfiguracionDepositario();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -10766,12 +10797,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.TipoConfiguracionDepositario> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.TipoConfiguracionDepositario>().ToList<Entities.Relations.Dispositivo.TipoConfiguracionDepositario>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.TipoConfiguracionDepositario>().ToList<Entities.Relations.Dispositivo.TipoConfiguracionDepositario>();
                 return _entities;
             }
             /// <summary>
@@ -11068,16 +11099,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.TipoContadora> _cacheItemList = new List<Entities.Relations.Dispositivo.TipoContadora>();
 			   protected List<Entities.Relations.Dispositivo.TipoContadora> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoContadora() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.TipoContadora();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -11129,12 +11161,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.TipoContadora> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.TipoContadora>().ToList<Entities.Relations.Dispositivo.TipoContadora>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.TipoContadora>().ToList<Entities.Relations.Dispositivo.TipoContadora>();
                 return _entities;
             }
             /// <summary>
@@ -11576,16 +11608,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Dispositivo.TipoPlaca> _cacheItemList = new List<Entities.Relations.Dispositivo.TipoPlaca>();
 			   protected List<Entities.Relations.Dispositivo.TipoPlaca> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoPlaca() : base()
             {
                 base._dataItem = new Entities.Relations.Dispositivo.TipoPlaca();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -11647,12 +11680,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Dispositivo.TipoPlaca> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Dispositivo.TipoPlaca>().ToList<Entities.Relations.Dispositivo.TipoPlaca>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Dispositivo.TipoPlaca>().ToList<Entities.Relations.Dispositivo.TipoPlaca>();
                 return _entities;
             }
             /// <summary>
@@ -12223,16 +12256,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Estilo.Esquema> _cacheItemList = new List<Entities.Relations.Estilo.Esquema>();
 			   protected List<Entities.Relations.Estilo.Esquema> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Esquema() : base()
             {
                 base._dataItem = new Entities.Relations.Estilo.Esquema();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -12273,12 +12307,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Estilo.Esquema> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Estilo.Esquema>().ToList<Entities.Relations.Estilo.Esquema>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Estilo.Esquema>().ToList<Entities.Relations.Estilo.Esquema>();
                 return _entities;
             }
             /// <summary>
@@ -12538,16 +12572,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Estilo.EsquemaDetalle> _cacheItemList = new List<Entities.Relations.Estilo.EsquemaDetalle>();
 			   protected List<Entities.Relations.Estilo.EsquemaDetalle> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public EsquemaDetalle() : base()
             {
                 base._dataItem = new Entities.Relations.Estilo.EsquemaDetalle();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -12592,12 +12627,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Estilo.EsquemaDetalle> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Estilo.EsquemaDetalle>().ToList<Entities.Relations.Estilo.EsquemaDetalle>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Estilo.EsquemaDetalle>().ToList<Entities.Relations.Estilo.EsquemaDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -12912,16 +12947,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Estilo.TipoEsquemaDetalle> _cacheItemList = new List<Entities.Relations.Estilo.TipoEsquemaDetalle>();
 			   protected List<Entities.Relations.Estilo.TipoEsquemaDetalle> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoEsquemaDetalle() : base()
             {
                 base._dataItem = new Entities.Relations.Estilo.TipoEsquemaDetalle();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -12961,12 +12997,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Estilo.TipoEsquemaDetalle> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Estilo.TipoEsquemaDetalle>().ToList<Entities.Relations.Estilo.TipoEsquemaDetalle>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Estilo.TipoEsquemaDetalle>().ToList<Entities.Relations.Estilo.TipoEsquemaDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -13208,16 +13244,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Geografia.Ciudad> _cacheItemList = new List<Entities.Relations.Geografia.Ciudad>();
 			   protected List<Entities.Relations.Geografia.Ciudad> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Ciudad() : base()
             {
                 base._dataItem = new Entities.Relations.Geografia.Ciudad();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -13259,12 +13296,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Geografia.Ciudad> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Geografia.Ciudad>().ToList<Entities.Relations.Geografia.Ciudad>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Geografia.Ciudad>().ToList<Entities.Relations.Geografia.Ciudad>();
                 return _entities;
             }
             /// <summary>
@@ -13536,16 +13573,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Geografia.CodigoPostal> _cacheItemList = new List<Entities.Relations.Geografia.CodigoPostal>();
 			   protected List<Entities.Relations.Geografia.CodigoPostal> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public CodigoPostal() : base()
             {
                 base._dataItem = new Entities.Relations.Geografia.CodigoPostal();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -13587,12 +13625,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Geografia.CodigoPostal> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Geografia.CodigoPostal>().ToList<Entities.Relations.Geografia.CodigoPostal>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Geografia.CodigoPostal>().ToList<Entities.Relations.Geografia.CodigoPostal>();
                 return _entities;
             }
             /// <summary>
@@ -13864,16 +13902,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Geografia.Pais> _cacheItemList = new List<Entities.Relations.Geografia.Pais>();
 			   protected List<Entities.Relations.Geografia.Pais> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Pais() : base()
             {
                 base._dataItem = new Entities.Relations.Geografia.Pais();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -13915,12 +13954,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Geografia.Pais> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Geografia.Pais>().ToList<Entities.Relations.Geografia.Pais>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Geografia.Pais>().ToList<Entities.Relations.Geografia.Pais>();
                 return _entities;
             }
             /// <summary>
@@ -14192,16 +14231,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Geografia.Provincia> _cacheItemList = new List<Entities.Relations.Geografia.Provincia>();
 			   protected List<Entities.Relations.Geografia.Provincia> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Provincia() : base()
             {
                 base._dataItem = new Entities.Relations.Geografia.Provincia();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -14243,12 +14283,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Geografia.Provincia> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Geografia.Provincia>().ToList<Entities.Relations.Geografia.Provincia>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Geografia.Provincia>().ToList<Entities.Relations.Geografia.Provincia>();
                 return _entities;
             }
             /// <summary>
@@ -14519,16 +14559,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Geografia.Zona> _cacheItemList = new List<Entities.Relations.Geografia.Zona>();
 			   protected List<Entities.Relations.Geografia.Zona> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Zona() : base()
             {
                 base._dataItem = new Entities.Relations.Geografia.Zona();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -14569,12 +14610,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Geografia.Zona> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Geografia.Zona>().ToList<Entities.Relations.Geografia.Zona>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Geografia.Zona>().ToList<Entities.Relations.Geografia.Zona>();
                 return _entities;
             }
             /// <summary>
@@ -14843,16 +14884,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Impresion.PlantillaTicket> _cacheItemList = new List<Entities.Relations.Impresion.PlantillaTicket>();
 			   protected List<Entities.Relations.Impresion.PlantillaTicket> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public PlantillaTicket() : base()
             {
                 base._dataItem = new Entities.Relations.Impresion.PlantillaTicket();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -14906,12 +14948,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Impresion.PlantillaTicket> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Impresion.PlantillaTicket>().ToList<Entities.Relations.Impresion.PlantillaTicket>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Impresion.PlantillaTicket>().ToList<Entities.Relations.Impresion.PlantillaTicket>();
                 return _entities;
             }
             /// <summary>
@@ -15381,16 +15423,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Impresion.Ticket> _cacheItemList = new List<Entities.Relations.Impresion.Ticket>();
 			   protected List<Entities.Relations.Impresion.Ticket> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Ticket() : base()
             {
                 base._dataItem = new Entities.Relations.Impresion.Ticket();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -15450,12 +15493,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Impresion.Ticket> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Impresion.Ticket>().ToList<Entities.Relations.Impresion.Ticket>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Impresion.Ticket>().ToList<Entities.Relations.Impresion.Ticket>();
                 return _entities;
             }
             /// <summary>
@@ -15996,16 +16039,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Impresion.TipoTicket> _cacheItemList = new List<Entities.Relations.Impresion.TipoTicket>();
 			   protected List<Entities.Relations.Impresion.TipoTicket> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoTicket() : base()
             {
                 base._dataItem = new Entities.Relations.Impresion.TipoTicket();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -16046,12 +16090,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Impresion.TipoTicket> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Impresion.TipoTicket>().ToList<Entities.Relations.Impresion.TipoTicket>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Impresion.TipoTicket>().ToList<Entities.Relations.Impresion.TipoTicket>();
                 return _entities;
             }
             /// <summary>
@@ -16308,16 +16352,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.CierreDiario> _cacheItemList = new List<Entities.Relations.Operacion.CierreDiario>();
 			   protected List<Entities.Relations.Operacion.CierreDiario> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public CierreDiario() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.CierreDiario();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -16359,12 +16404,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.CierreDiario> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.CierreDiario>().ToList<Entities.Relations.Operacion.CierreDiario>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.CierreDiario>().ToList<Entities.Relations.Operacion.CierreDiario>();
                 return _entities;
             }
             /// <summary>
@@ -16638,16 +16683,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.Contenedor> _cacheItemList = new List<Entities.Relations.Operacion.Contenedor>();
 			   protected List<Entities.Relations.Operacion.Contenedor> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Contenedor() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.Contenedor();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -16691,12 +16737,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.Contenedor> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.Contenedor>().ToList<Entities.Relations.Operacion.Contenedor>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.Contenedor>().ToList<Entities.Relations.Operacion.Contenedor>();
                 return _entities;
             }
             /// <summary>
@@ -16995,16 +17041,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.Evento> _cacheItemList = new List<Entities.Relations.Operacion.Evento>();
 			   protected List<Entities.Relations.Operacion.Evento> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Evento() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.Evento();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -17043,12 +17090,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.Evento> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.Evento>().ToList<Entities.Relations.Operacion.Evento>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.Evento>().ToList<Entities.Relations.Operacion.Evento>();
                 return _entities;
             }
             /// <summary>
@@ -17271,16 +17318,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.Sesion> _cacheItemList = new List<Entities.Relations.Operacion.Sesion>();
 			   protected List<Entities.Relations.Operacion.Sesion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Sesion() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.Sesion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -17318,12 +17366,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.Sesion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.Sesion>().ToList<Entities.Relations.Operacion.Sesion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.Sesion>().ToList<Entities.Relations.Operacion.Sesion>();
                 return _entities;
             }
             /// <summary>
@@ -17534,16 +17582,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.TipoContenedor> _cacheItemList = new List<Entities.Relations.Operacion.TipoContenedor>();
 			   protected List<Entities.Relations.Operacion.TipoContenedor> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoContenedor() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.TipoContenedor();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -17584,12 +17633,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.TipoContenedor> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.TipoContenedor>().ToList<Entities.Relations.Operacion.TipoContenedor>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.TipoContenedor>().ToList<Entities.Relations.Operacion.TipoContenedor>();
                 return _entities;
             }
             /// <summary>
@@ -17845,16 +17894,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.TipoEvento> _cacheItemList = new List<Entities.Relations.Operacion.TipoEvento>();
 			   protected List<Entities.Relations.Operacion.TipoEvento> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoEvento() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.TipoEvento();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -17895,12 +17945,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.TipoEvento> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.TipoEvento>().ToList<Entities.Relations.Operacion.TipoEvento>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.TipoEvento>().ToList<Entities.Relations.Operacion.TipoEvento>();
                 return _entities;
             }
             /// <summary>
@@ -18156,16 +18206,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.TipoTransaccion> _cacheItemList = new List<Entities.Relations.Operacion.TipoTransaccion>();
 			   protected List<Entities.Relations.Operacion.TipoTransaccion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoTransaccion() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.TipoTransaccion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -18206,12 +18257,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.TipoTransaccion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.TipoTransaccion>().ToList<Entities.Relations.Operacion.TipoTransaccion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.TipoTransaccion>().ToList<Entities.Relations.Operacion.TipoTransaccion>();
                 return _entities;
             }
             /// <summary>
@@ -18477,16 +18528,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.Transaccion> _cacheItemList = new List<Entities.Relations.Operacion.Transaccion>();
 			   protected List<Entities.Relations.Operacion.Transaccion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Transaccion() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.Transaccion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -18537,12 +18589,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.Transaccion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.Transaccion>().ToList<Entities.Relations.Operacion.Transaccion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.Transaccion>().ToList<Entities.Relations.Operacion.Transaccion>();
                 return _entities;
             }
             /// <summary>
@@ -18944,16 +18996,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.TransaccionDetalle> _cacheItemList = new List<Entities.Relations.Operacion.TransaccionDetalle>();
 			   protected List<Entities.Relations.Operacion.TransaccionDetalle> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TransaccionDetalle() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.TransaccionDetalle();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -18990,12 +19043,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.TransaccionDetalle> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.TransaccionDetalle>().ToList<Entities.Relations.Operacion.TransaccionDetalle>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.TransaccionDetalle>().ToList<Entities.Relations.Operacion.TransaccionDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -19186,16 +19239,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.TransaccionSobre> _cacheItemList = new List<Entities.Relations.Operacion.TransaccionSobre>();
 			   protected List<Entities.Relations.Operacion.TransaccionSobre> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TransaccionSobre() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.TransaccionSobre();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -19231,12 +19285,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.TransaccionSobre> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.TransaccionSobre>().ToList<Entities.Relations.Operacion.TransaccionSobre>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.TransaccionSobre>().ToList<Entities.Relations.Operacion.TransaccionSobre>();
                 return _entities;
             }
             /// <summary>
@@ -19414,16 +19468,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.TransaccionSobreDetalle> _cacheItemList = new List<Entities.Relations.Operacion.TransaccionSobreDetalle>();
 			   protected List<Entities.Relations.Operacion.TransaccionSobreDetalle> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TransaccionSobreDetalle() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.TransaccionSobreDetalle();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -19461,12 +19516,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.TransaccionSobreDetalle> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.TransaccionSobreDetalle>().ToList<Entities.Relations.Operacion.TransaccionSobreDetalle>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.TransaccionSobreDetalle>().ToList<Entities.Relations.Operacion.TransaccionSobreDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -19684,16 +19739,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.Turno> _cacheItemList = new List<Entities.Relations.Operacion.Turno>();
 			   protected List<Entities.Relations.Operacion.Turno> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Turno() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.Turno();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -19741,12 +19797,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.Turno> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.Turno>().ToList<Entities.Relations.Operacion.Turno>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.Turno>().ToList<Entities.Relations.Operacion.Turno>();
                 return _entities;
             }
             /// <summary>
@@ -20106,16 +20162,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Operacion.TurnoUsuario> _cacheItemList = new List<Entities.Relations.Operacion.TurnoUsuario>();
 			   protected List<Entities.Relations.Operacion.TurnoUsuario> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TurnoUsuario() : base()
             {
                 base._dataItem = new Entities.Relations.Operacion.TurnoUsuario();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -20155,12 +20212,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Operacion.TurnoUsuario> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Operacion.TurnoUsuario>().ToList<Entities.Relations.Operacion.TurnoUsuario>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Operacion.TurnoUsuario>().ToList<Entities.Relations.Operacion.TurnoUsuario>();
                 return _entities;
             }
             /// <summary>
@@ -20402,16 +20459,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Regionalizacion.Lenguaje> _cacheItemList = new List<Entities.Relations.Regionalizacion.Lenguaje>();
 			   protected List<Entities.Relations.Regionalizacion.Lenguaje> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Lenguaje() : base()
             {
                 base._dataItem = new Entities.Relations.Regionalizacion.Lenguaje();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -20453,12 +20511,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Regionalizacion.Lenguaje> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Regionalizacion.Lenguaje>().ToList<Entities.Relations.Regionalizacion.Lenguaje>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Regionalizacion.Lenguaje>().ToList<Entities.Relations.Regionalizacion.Lenguaje>();
                 return _entities;
             }
             /// <summary>
@@ -20730,16 +20788,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Regionalizacion.LenguajeItem> _cacheItemList = new List<Entities.Relations.Regionalizacion.LenguajeItem>();
 			   protected List<Entities.Relations.Regionalizacion.LenguajeItem> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public LenguajeItem() : base()
             {
                 base._dataItem = new Entities.Relations.Regionalizacion.LenguajeItem();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -20781,12 +20840,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Regionalizacion.LenguajeItem> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Regionalizacion.LenguajeItem>().ToList<Entities.Relations.Regionalizacion.LenguajeItem>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Regionalizacion.LenguajeItem>().ToList<Entities.Relations.Regionalizacion.LenguajeItem>();
                 return _entities;
             }
             /// <summary>
@@ -21057,16 +21116,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.Aplicacion> _cacheItemList = new List<Entities.Relations.Seguridad.Aplicacion>();
 			   protected List<Entities.Relations.Seguridad.Aplicacion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Aplicacion() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.Aplicacion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -21107,12 +21167,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.Aplicacion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.Aplicacion>().ToList<Entities.Relations.Seguridad.Aplicacion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.Aplicacion>().ToList<Entities.Relations.Seguridad.Aplicacion>();
                 return _entities;
             }
             /// <summary>
@@ -21367,16 +21427,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.AplicacionParametro> _cacheItemList = new List<Entities.Relations.Seguridad.AplicacionParametro>();
 			   protected List<Entities.Relations.Seguridad.AplicacionParametro> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public AplicacionParametro() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.AplicacionParametro();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -21416,12 +21477,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.AplicacionParametro> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.AplicacionParametro>().ToList<Entities.Relations.Seguridad.AplicacionParametro>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.AplicacionParametro>().ToList<Entities.Relations.Seguridad.AplicacionParametro>();
                 return _entities;
             }
             /// <summary>
@@ -21662,16 +21723,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.AplicacionParametroValor> _cacheItemList = new List<Entities.Relations.Seguridad.AplicacionParametroValor>();
 			   protected List<Entities.Relations.Seguridad.AplicacionParametroValor> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public AplicacionParametroValor() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.AplicacionParametroValor();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -21712,12 +21774,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.AplicacionParametroValor> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.AplicacionParametroValor>().ToList<Entities.Relations.Seguridad.AplicacionParametroValor>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.AplicacionParametroValor>().ToList<Entities.Relations.Seguridad.AplicacionParametroValor>();
                 return _entities;
             }
             /// <summary>
@@ -21975,16 +22037,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.Funcion> _cacheItemList = new List<Entities.Relations.Seguridad.Funcion>();
 			   protected List<Entities.Relations.Seguridad.Funcion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Funcion() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.Funcion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -22027,12 +22090,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.Funcion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.Funcion>().ToList<Entities.Relations.Seguridad.Funcion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.Funcion>().ToList<Entities.Relations.Seguridad.Funcion>();
                 return _entities;
             }
             /// <summary>
@@ -22318,16 +22381,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.IdentificadorUsuario> _cacheItemList = new List<Entities.Relations.Seguridad.IdentificadorUsuario>();
 			   protected List<Entities.Relations.Seguridad.IdentificadorUsuario> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public IdentificadorUsuario() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.IdentificadorUsuario();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -22368,12 +22432,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.IdentificadorUsuario> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.IdentificadorUsuario>().ToList<Entities.Relations.Seguridad.IdentificadorUsuario>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.IdentificadorUsuario>().ToList<Entities.Relations.Seguridad.IdentificadorUsuario>();
                 return _entities;
             }
             /// <summary>
@@ -22632,16 +22696,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.Menu> _cacheItemList = new List<Entities.Relations.Seguridad.Menu>();
 			   protected List<Entities.Relations.Seguridad.Menu> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Menu() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.Menu();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -22685,12 +22750,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.Menu> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.Menu>().ToList<Entities.Relations.Seguridad.Menu>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.Menu>().ToList<Entities.Relations.Seguridad.Menu>();
                 return _entities;
             }
             /// <summary>
@@ -22992,16 +23057,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.Rol> _cacheItemList = new List<Entities.Relations.Seguridad.Rol>();
 			   protected List<Entities.Relations.Seguridad.Rol> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Rol() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.Rol();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -23043,12 +23109,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.Rol> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.Rol>().ToList<Entities.Relations.Seguridad.Rol>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.Rol>().ToList<Entities.Relations.Seguridad.Rol>();
                 return _entities;
             }
             /// <summary>
@@ -23323,16 +23389,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.RolFuncion> _cacheItemList = new List<Entities.Relations.Seguridad.RolFuncion>();
 			   protected List<Entities.Relations.Seguridad.RolFuncion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public RolFuncion() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.RolFuncion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -23377,12 +23444,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.RolFuncion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.RolFuncion>().ToList<Entities.Relations.Seguridad.RolFuncion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.RolFuncion>().ToList<Entities.Relations.Seguridad.RolFuncion>();
                 return _entities;
             }
             /// <summary>
@@ -23697,16 +23764,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.TipoAplicacion> _cacheItemList = new List<Entities.Relations.Seguridad.TipoAplicacion>();
 			   protected List<Entities.Relations.Seguridad.TipoAplicacion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoAplicacion() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.TipoAplicacion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -23746,12 +23814,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.TipoAplicacion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoAplicacion>().ToList<Entities.Relations.Seguridad.TipoAplicacion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.TipoAplicacion>().ToList<Entities.Relations.Seguridad.TipoAplicacion>();
                 return _entities;
             }
             /// <summary>
@@ -23991,16 +24059,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.TipoFuncion> _cacheItemList = new List<Entities.Relations.Seguridad.TipoFuncion>();
 			   protected List<Entities.Relations.Seguridad.TipoFuncion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoFuncion() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.TipoFuncion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -24040,12 +24109,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.TipoFuncion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoFuncion>().ToList<Entities.Relations.Seguridad.TipoFuncion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.TipoFuncion>().ToList<Entities.Relations.Seguridad.TipoFuncion>();
                 return _entities;
             }
             /// <summary>
@@ -24286,16 +24355,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.TipoIdentificador> _cacheItemList = new List<Entities.Relations.Seguridad.TipoIdentificador>();
 			   protected List<Entities.Relations.Seguridad.TipoIdentificador> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoIdentificador() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.TipoIdentificador();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -24336,12 +24406,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.TipoIdentificador> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoIdentificador>().ToList<Entities.Relations.Seguridad.TipoIdentificador>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.TipoIdentificador>().ToList<Entities.Relations.Seguridad.TipoIdentificador>();
                 return _entities;
             }
             /// <summary>
@@ -24596,16 +24666,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.TipoMenu> _cacheItemList = new List<Entities.Relations.Seguridad.TipoMenu>();
 			   protected List<Entities.Relations.Seguridad.TipoMenu> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public TipoMenu() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.TipoMenu();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -24645,12 +24716,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.TipoMenu> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.TipoMenu>().ToList<Entities.Relations.Seguridad.TipoMenu>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.TipoMenu>().ToList<Entities.Relations.Seguridad.TipoMenu>();
                 return _entities;
             }
             /// <summary>
@@ -24907,16 +24978,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.Usuario> _cacheItemList = new List<Entities.Relations.Seguridad.Usuario>();
 			   protected List<Entities.Relations.Seguridad.Usuario> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Usuario() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.Usuario();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -24973,12 +25045,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.Usuario> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.Usuario>().ToList<Entities.Relations.Seguridad.Usuario>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.Usuario>().ToList<Entities.Relations.Seguridad.Usuario>();
                 return _entities;
             }
             /// <summary>
@@ -25473,16 +25545,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.UsuarioRol> _cacheItemList = new List<Entities.Relations.Seguridad.UsuarioRol>();
 			   protected List<Entities.Relations.Seguridad.UsuarioRol> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public UsuarioRol() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.UsuarioRol();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -25522,12 +25595,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.UsuarioRol> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.UsuarioRol>().ToList<Entities.Relations.Seguridad.UsuarioRol>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.UsuarioRol>().ToList<Entities.Relations.Seguridad.UsuarioRol>();
                 return _entities;
             }
             /// <summary>
@@ -25767,16 +25840,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Seguridad.UsuarioSector> _cacheItemList = new List<Entities.Relations.Seguridad.UsuarioSector>();
 			   protected List<Entities.Relations.Seguridad.UsuarioSector> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public UsuarioSector() : base()
             {
                 base._dataItem = new Entities.Relations.Seguridad.UsuarioSector();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -25816,12 +25890,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Seguridad.UsuarioSector> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Seguridad.UsuarioSector>().ToList<Entities.Relations.Seguridad.UsuarioSector>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Seguridad.UsuarioSector>().ToList<Entities.Relations.Seguridad.UsuarioSector>();
                 return _entities;
             }
             /// <summary>
@@ -26061,16 +26135,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Sincronizacion.Configuracion> _cacheItemList = new List<Entities.Relations.Sincronizacion.Configuracion>();
 			   protected List<Entities.Relations.Sincronizacion.Configuracion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Configuracion() : base()
             {
                 base._dataItem = new Entities.Relations.Sincronizacion.Configuracion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -26110,12 +26185,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Sincronizacion.Configuracion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.Configuracion>().ToList<Entities.Relations.Sincronizacion.Configuracion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Sincronizacion.Configuracion>().ToList<Entities.Relations.Sincronizacion.Configuracion>();
                 return _entities;
             }
             /// <summary>
@@ -26354,16 +26429,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Sincronizacion.Entidad> _cacheItemList = new List<Entities.Relations.Sincronizacion.Entidad>();
 			   protected List<Entities.Relations.Sincronizacion.Entidad> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Entidad() : base()
             {
                 base._dataItem = new Entities.Relations.Sincronizacion.Entidad();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -26402,12 +26478,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Sincronizacion.Entidad> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.Entidad>().ToList<Entities.Relations.Sincronizacion.Entidad>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Sincronizacion.Entidad>().ToList<Entities.Relations.Sincronizacion.Entidad>();
                 return _entities;
             }
             /// <summary>
@@ -26630,16 +26706,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Sincronizacion.EntidadCabecera> _cacheItemList = new List<Entities.Relations.Sincronizacion.EntidadCabecera>();
 			   protected List<Entities.Relations.Sincronizacion.EntidadCabecera> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public EntidadCabecera() : base()
             {
                 base._dataItem = new Entities.Relations.Sincronizacion.EntidadCabecera();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -26677,12 +26754,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Sincronizacion.EntidadCabecera> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.EntidadCabecera>().ToList<Entities.Relations.Sincronizacion.EntidadCabecera>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Sincronizacion.EntidadCabecera>().ToList<Entities.Relations.Sincronizacion.EntidadCabecera>();
                 return _entities;
             }
             /// <summary>
@@ -26889,16 +26966,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Sincronizacion.EntidadDetalle> _cacheItemList = new List<Entities.Relations.Sincronizacion.EntidadDetalle>();
 			   protected List<Entities.Relations.Sincronizacion.EntidadDetalle> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public EntidadDetalle() : base()
             {
                 base._dataItem = new Entities.Relations.Sincronizacion.EntidadDetalle();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -26924,23 +27002,23 @@ using System.Text;
          /// <summary>
          /// EntidadDetalle Add Method
          /// </summary>
-         /// <param name='EntidadCabeceraId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='OrigenId'></param>
          /// <param name='DestinoId'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadDetalle</returns>
-			public Entities.Relations.Sincronizacion.EntidadDetalle Add(Int64 EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
+			public Entities.Relations.Sincronizacion.EntidadDetalle Add(Permaquim.Depositario.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
 			{
 			  return (Entities.Relations.Sincronizacion.EntidadDetalle)base.Add(new Entities.Relations.Sincronizacion.EntidadDetalle(EntidadCabeceraId,FechaCreacion,OrigenId,DestinoId));
 			}
             public new List<Entities.Relations.Sincronizacion.EntidadDetalle> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Sincronizacion.EntidadDetalle>().ToList<Entities.Relations.Sincronizacion.EntidadDetalle>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Sincronizacion.EntidadDetalle>().ToList<Entities.Relations.Sincronizacion.EntidadDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -27138,16 +27216,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Turno.AgendaTurno> _cacheItemList = new List<Entities.Relations.Turno.AgendaTurno>();
 			   protected List<Entities.Relations.Turno.AgendaTurno> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public AgendaTurno() : base()
             {
                 base._dataItem = new Entities.Relations.Turno.AgendaTurno();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -27190,12 +27269,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Turno.AgendaTurno> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Turno.AgendaTurno>().ToList<Entities.Relations.Turno.AgendaTurno>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Turno.AgendaTurno>().ToList<Entities.Relations.Turno.AgendaTurno>();
                 return _entities;
             }
             /// <summary>
@@ -27481,16 +27560,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Turno.EsquemaDetalleTurno> _cacheItemList = new List<Entities.Relations.Turno.EsquemaDetalleTurno>();
 			   protected List<Entities.Relations.Turno.EsquemaDetalleTurno> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public EsquemaDetalleTurno() : base()
             {
                 base._dataItem = new Entities.Relations.Turno.EsquemaDetalleTurno();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -27531,12 +27611,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Turno.EsquemaDetalleTurno> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Turno.EsquemaDetalleTurno>().ToList<Entities.Relations.Turno.EsquemaDetalleTurno>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Turno.EsquemaDetalleTurno>().ToList<Entities.Relations.Turno.EsquemaDetalleTurno>();
                 return _entities;
             }
             /// <summary>
@@ -27790,16 +27870,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Turno.EsquemaTurno> _cacheItemList = new List<Entities.Relations.Turno.EsquemaTurno>();
 			   protected List<Entities.Relations.Turno.EsquemaTurno> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public EsquemaTurno() : base()
             {
                 base._dataItem = new Entities.Relations.Turno.EsquemaTurno();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -27838,12 +27919,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Turno.EsquemaTurno> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Turno.EsquemaTurno>().ToList<Entities.Relations.Turno.EsquemaTurno>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Turno.EsquemaTurno>().ToList<Entities.Relations.Turno.EsquemaTurno>();
                 return _entities;
             }
             /// <summary>
@@ -28073,16 +28154,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Valor.Denominacion> _cacheItemList = new List<Entities.Relations.Valor.Denominacion>();
 			   protected List<Entities.Relations.Valor.Denominacion> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Denominacion() : base()
             {
                 base._dataItem = new Entities.Relations.Valor.Denominacion();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -28127,12 +28209,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Valor.Denominacion> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Valor.Denominacion>().ToList<Entities.Relations.Valor.Denominacion>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Valor.Denominacion>().ToList<Entities.Relations.Valor.Denominacion>();
                 return _entities;
             }
             /// <summary>
@@ -28449,16 +28531,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Valor.Moneda> _cacheItemList = new List<Entities.Relations.Valor.Moneda>();
 			   protected List<Entities.Relations.Valor.Moneda> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Moneda() : base()
             {
                 base._dataItem = new Entities.Relations.Valor.Moneda();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -28500,12 +28583,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Valor.Moneda> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Valor.Moneda>().ToList<Entities.Relations.Valor.Moneda>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Valor.Moneda>().ToList<Entities.Relations.Valor.Moneda>();
                 return _entities;
             }
             /// <summary>
@@ -28776,16 +28859,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Valor.OrigenValor> _cacheItemList = new List<Entities.Relations.Valor.OrigenValor>();
 			   protected List<Entities.Relations.Valor.OrigenValor> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public OrigenValor() : base()
             {
                 base._dataItem = new Entities.Relations.Valor.OrigenValor();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -28826,12 +28910,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Valor.OrigenValor> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Valor.OrigenValor>().ToList<Entities.Relations.Valor.OrigenValor>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Valor.OrigenValor>().ToList<Entities.Relations.Valor.OrigenValor>();
                 return _entities;
             }
             /// <summary>
@@ -29086,16 +29170,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Valor.RelacionMonedaTipoValor> _cacheItemList = new List<Entities.Relations.Valor.RelacionMonedaTipoValor>();
 			   protected List<Entities.Relations.Valor.RelacionMonedaTipoValor> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public RelacionMonedaTipoValor() : base()
             {
                 base._dataItem = new Entities.Relations.Valor.RelacionMonedaTipoValor();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -29135,12 +29220,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Valor.RelacionMonedaTipoValor> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Valor.RelacionMonedaTipoValor>().ToList<Entities.Relations.Valor.RelacionMonedaTipoValor>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Valor.RelacionMonedaTipoValor>().ToList<Entities.Relations.Valor.RelacionMonedaTipoValor>();
                 return _entities;
             }
             /// <summary>
@@ -29381,16 +29466,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Valor.Tipo> _cacheItemList = new List<Entities.Relations.Valor.Tipo>();
 			   protected List<Entities.Relations.Valor.Tipo> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Tipo() : base()
             {
                 base._dataItem = new Entities.Relations.Valor.Tipo();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -29431,12 +29517,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Valor.Tipo> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Valor.Tipo>().ToList<Entities.Relations.Valor.Tipo>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Valor.Tipo>().ToList<Entities.Relations.Valor.Tipo>();
                 return _entities;
             }
             /// <summary>
@@ -29692,16 +29778,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Visualizacion.Perfil> _cacheItemList = new List<Entities.Relations.Visualizacion.Perfil>();
 			   protected List<Entities.Relations.Visualizacion.Perfil> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public Perfil() : base()
             {
                 base._dataItem = new Entities.Relations.Visualizacion.Perfil();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -29742,12 +29829,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Visualizacion.Perfil> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Visualizacion.Perfil>().ToList<Entities.Relations.Visualizacion.Perfil>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Visualizacion.Perfil>().ToList<Entities.Relations.Visualizacion.Perfil>();
                 return _entities;
             }
             /// <summary>
@@ -30002,16 +30089,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Visualizacion.PerfilItem> _cacheItemList = new List<Entities.Relations.Visualizacion.PerfilItem>();
 			   protected List<Entities.Relations.Visualizacion.PerfilItem> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public PerfilItem() : base()
             {
                 base._dataItem = new Entities.Relations.Visualizacion.PerfilItem();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -30051,12 +30139,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Visualizacion.PerfilItem> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Visualizacion.PerfilItem>().ToList<Entities.Relations.Visualizacion.PerfilItem>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Visualizacion.PerfilItem>().ToList<Entities.Relations.Visualizacion.PerfilItem>();
                 return _entities;
             }
             /// <summary>
@@ -30297,16 +30385,17 @@ using System.Text;
 				}
 			   protected List<Entities.Relations.Visualizacion.PerfilTipo> _cacheItemList = new List<Entities.Relations.Visualizacion.PerfilTipo>();
 			   protected List<Entities.Relations.Visualizacion.PerfilTipo> _entities = null;
-            public new CustomWhereParameter Where { get; set; }
-            public new CustomOrderByParameter OrderByParameter { get; set; }
-            public new CustomGroupByParameter GroupByParameter { get; set; }
-            public new CustomAggregateParameter AggregateParameter { get; set; }
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
             public PerfilTipo() : base()
             {
                 base._dataItem = new Entities.Relations.Visualizacion.PerfilTipo();
                 Where = new CustomWhereParameter();
-                OrderByParameter = new CustomOrderByParameter();
-                GroupByParameter = new CustomGroupByParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
             }
             public class CustomAggregateParameter : AggregateParameter
             {
@@ -30347,12 +30436,12 @@ using System.Text;
 			}
             public new List<Entities.Relations.Visualizacion.PerfilTipo> Items()
             {
-                RelationsDataHandler dh =  new RelationsDataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderByParameter.orderByParameter;
-                dh.GroupByParameter = this.GroupByParameter.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Relations.Visualizacion.PerfilTipo>().ToList<Entities.Relations.Visualizacion.PerfilTipo>();
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Visualizacion.PerfilTipo>().ToList<Entities.Relations.Visualizacion.PerfilTipo>();
                 return _entities;
             }
             /// <summary>

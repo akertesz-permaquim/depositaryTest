@@ -94,7 +94,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                     Depositario.Business.Relations.Operacion.Turno.ColumnEnum.FechaCierre,
                 Depositario.sqlEnum.OperandEnum.IsNotNull, 0);
-                entities.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.Id, Depositario.sqlEnum.DirEnum.DESC);
+                entities.OrderBy.Add(Depositario.Business.Relations.Operacion.Turno.ColumnEnum.Id, Depositario.sqlEnum.DirEnum.DESC);
 
                 entities.Items();
 
@@ -118,7 +118,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                     Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.DepositarioId,
                         Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.Id);
-                entity.OrderByParameter.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Id,
+                entity.OrderBy.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Id,
                     Depositario.sqlEnum.DirEnum.DESC);
                 entity.TopQuantity = 1;
 
@@ -305,7 +305,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 entity.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                     Depositario.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre,
                 Depositario.sqlEnum.OperandEnum.IsNotNull, 0);
-                entity.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Contenedor.ColumnEnum.Id,
+                entity.OrderBy.Add(Depositario.Business.Relations.Operacion.Contenedor.ColumnEnum.Id,
                     Depositario.sqlEnum.DirEnum.DESC);
                 entity.TopQuantity = 1;
 
@@ -687,11 +687,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
 
             Permaquim.Depositario.Business.Relations.Operacion.Transaccion transaction = new();
-            transaction.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
+            transaction.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
                 Depositario.sqlEnum.DirEnum.DESC);
             transaction.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha,
                 Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.UtcNow.Date);
-            transaction.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
+            transaction.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
             transaction.Items();
 
             return transaction.Result;
@@ -797,7 +797,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             }
 
-            transaction.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
+            transaction.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
 
             transaction.Items();
 
@@ -814,7 +814,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             transaction.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
                 Depositario.sqlEnum.OperandEnum.Equal, turnId);
 
-            transaction.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
+            transaction.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
 
             transaction.Items();
 
@@ -831,7 +831,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             transaction.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.CierreDiarioId,
                 Depositario.sqlEnum.OperandEnum.Equal, dailyClosingId);
 
-            transaction.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
+            transaction.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha);
 
             transaction.Items();
 
@@ -852,12 +852,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             if (transactionHeader.Result.Count > 0)
             {
                 Permaquim.Depositario.Business.Relations.Operacion.TransaccionDetalle transactionDetail = new();
-                transactionDetail.OrderByParameter.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Id,
+                transactionDetail.OrderBy.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Id,
                     Depositario.sqlEnum.DirEnum.DESC);
                 transactionDetail.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
                     Depositario.sqlEnum.OperandEnum.Equal, transactionHeader.Result.FirstOrDefault().Id);
 
-                transactionDetail.OrderByParameter.Add(
+                transactionDetail.OrderBy.Add(
                     Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.DenominacionId);
 
                 transactionDetail.Items();
@@ -929,7 +929,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
 
-            transaction.OrderByParameter.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Fecha);
+            transaction.OrderBy.Add(Depositario.Business.Relations.Operacion.CierreDiario.ColumnEnum.Fecha);
 
             transaction.Items();
 
@@ -1006,7 +1006,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
             //    Depositario.sqlEnum.OperandEnum.Equal, true);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1064,7 +1064,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
             //    Depositario.sqlEnum.OperandEnum.Equal, true);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1118,7 +1118,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Permaquim.Depositario.Business.Relations.Operacion.Transaccion transactions = new();
             transactions.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
                 Depositario.sqlEnum.OperandEnum.Equal, CurrentTurn.Id);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1173,7 +1173,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         //    transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
         //        Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
         //        Depositario.sqlEnum.OperandEnum.Equal, true);
-        //    transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+        //    transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
         //    transactions.Items();
 
@@ -1228,7 +1228,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
             //    Depositario.sqlEnum.OperandEnum.Equal, true);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1344,7 +1344,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Permaquim.Depositario.Business.Relations.Operacion.Transaccion transactions = new();
             transactions.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.CierreDiarioId,
                 Depositario.sqlEnum.OperandEnum.Equal, DailyClosingId);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1406,7 +1406,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
             //    Depositario.sqlEnum.OperandEnum.Equal, true);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1458,7 +1458,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
             //    Depositario.sqlEnum.OperandEnum.Equal, true);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1542,7 +1542,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //transactions.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
             //    Depositario.sqlEnum.OperandEnum.Equal, true);
-            transactions.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
+            transactions.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.MonedaId);
 
             transactions.Items();
 
@@ -1607,7 +1607,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //{
             transaccion.Where.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.TurnoId,
                 Depositario.sqlEnum.OperandEnum.Equal, CurrentTurn.Id);
-            transaccion.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
+            transaccion.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
                 Depositario.sqlEnum.DirEnum.DESC);
 
             returnValue = transaccion.Items();
@@ -1625,7 +1625,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             //transaccion.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
             //    Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Finalizada,
             //    Depositario.sqlEnum.OperandEnum.Equal, true);
-            transaccion.OrderByParameter.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
+            transaccion.OrderBy.Add(Depositario.Business.Relations.Operacion.Transaccion.ColumnEnum.Id,
                 Depositario.sqlEnum.DirEnum.DESC);
 
             returnValue = transaccion.Items();
@@ -1638,12 +1638,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
 
             Permaquim.Depositario.Business.Relations.Operacion.TransaccionDetalle transactionDetail = new();
-            transactionDetail.OrderByParameter.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Id,
+            transactionDetail.OrderBy.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Id,
                 Depositario.sqlEnum.DirEnum.DESC);
             transactionDetail.Where.Add(Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
                 Depositario.sqlEnum.OperandEnum.Equal, transactionId);
 
-            transactionDetail.OrderByParameter.Add(
+            transactionDetail.OrderBy.Add(
                 Depositario.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.DenominacionId);
 
             transactionDetail.Items();
@@ -1657,7 +1657,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Permaquim.Depositario.Business.Relations.Valor.Denominacion denominacion = new();
             denominacion.Where.Add(Permaquim.Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.MonedaId,
                 Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentCurrency.Id);
-            denominacion.OrderByParameter.Add(Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.Unidades);
+            denominacion.OrderBy.Add(Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.Unidades);
 
             return denominacion.Items();
         }
@@ -1667,7 +1667,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             Permaquim.Depositario.Business.Relations.Valor.Denominacion denominacion = new();
             denominacion.Where.Add(Permaquim.Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.MonedaId,
                 Permaquim.Depositario.sqlEnum.OperandEnum.Equal, currencyId);
-            denominacion.OrderByParameter.Add(Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.Unidades);
+            denominacion.OrderBy.Add(Depositario.Business.Relations.Valor.Denominacion.ColumnEnum.Unidades);
 
             return denominacion.Items();
         }
@@ -1684,7 +1684,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             if (transaccionsobre.Result.Count > 0)
             {
 
-                transaccionDetalle.OrderByParameter.Add(
+                transaccionDetalle.OrderBy.Add(
                     Depositario.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.Id,
                     Depositario.sqlEnum.DirEnum.DESC);
                 transaccionDetalle.Where.Add(Depositario.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.SobreId,

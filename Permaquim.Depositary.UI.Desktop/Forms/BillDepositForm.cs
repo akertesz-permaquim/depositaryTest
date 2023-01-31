@@ -23,6 +23,7 @@ namespace Permaquim.Depositary.UI.Desktop
         private const string STORINGERROR = "STORINGERROR";
         private const string CONTINUACION_DEPOSITO = "Continuación de depósito de billetes";
         private const string DETECCION_BILLETES = "Detección de billetes";
+        
 
         /// <summary>
         /// Máquina de estado
@@ -70,6 +71,9 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void DeviceStateChange(object sender, DeviceStateChangeEventArgs args)
         {
+            if (args.StateName.Equals( Global.Constants.PQCOMMUNICATIONERROR))
+                AuditController.Log(LogTypeEnum.Navigation, args.StateName, args.StateName);
+
             if (_operationStatus.StackerFullCondition)
             {
                 FormsController.SetInformationMessage(InformationTypeEnum.Information,
@@ -298,7 +302,8 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 if (_device != null && _device.CounterConnected)
                 {
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.DepositMode)
+                    if (_device.StateResultProperty.ModeStateInformation.ModeState 
+                        != ModeStateInformation.Mode.DepositMode)
                     {
                         _device.RemoteCancel();
                         _device.Sleep();
@@ -337,8 +342,10 @@ namespace Permaquim.Depositary.UI.Desktop
                 TimeOutController.Reset();
 
             VerifySaveToDatabase();
-
-            VerifyStartCounting();
+            if(!_operationStatus.DepositConfirmed)
+            {
+                VerifyStartCounting();
+            }
 
             VerifyEscrowEmpty();
 
@@ -390,6 +397,7 @@ namespace Permaquim.Depositary.UI.Desktop
                             && !_device.StateResultProperty.DeviceStateInformation.RejectedBillPresent
                         );
                 }
+
                 CancelDepositButton.Visible =
                     (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent
                     && _operationStatus.DepositConfirmed == false
@@ -406,9 +414,6 @@ namespace Permaquim.Depositary.UI.Desktop
                      //&& _device.StateResultProperty.DeviceStateInformation.StackerFull
                      && _operationStatus.StackerFullCondition == true
                     );
-
-                    ;
-               
 
                 ConfirmAndContinueDepositButton.Visible =
                         _device.StateResultProperty.DeviceStateInformation.StackerFull
@@ -816,8 +821,11 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void ConfirmAndExitDepositButton_Click(object sender, EventArgs e)
         {
-            _operationStatus.IsAutoDeposit = false;
-            ConfirmAndExitDeposit();
+            if (_device.CounterConnected)
+            {
+                _operationStatus.IsAutoDeposit = false;
+                ConfirmAndExitDeposit();
+            }
         }
         private void ConfirmAndExitDeposit()
         {
@@ -909,23 +917,26 @@ namespace Permaquim.Depositary.UI.Desktop
         }
         private void SaveAndContinueDeposit()
         {
-            _operationStatus.StackerFullCondition = true;
+            if (_device.CounterConnected)
+            {
+                _operationStatus.StackerFullCondition = true;
 
-            _operationStatus.CurrentTransactionAmount += _operationStatus.CurrentTransactionPartialAmount;
-            _operationStatus.CurrentTransactionQuantity = _operationStatus.CurrentTransactionPartialQuantity;
+                _operationStatus.CurrentTransactionAmount += _operationStatus.CurrentTransactionPartialAmount;
+                _operationStatus.CurrentTransactionQuantity = _operationStatus.CurrentTransactionPartialQuantity;
 
-            SaveTransaction(false, _operationStatus.IsAutoDeposit);
+                SaveTransaction(false, _operationStatus.IsAutoDeposit);
 
-            _device.PreviousState = StatusInformation.State.PQStoring;
-            ButtonsPanel.Visible = false;
-            _operationStatus.IsAutoDeposit = false;
-            _operationStatus.StackerFullCondition = true;
-            TimeOutController.Reset();
-            if (ParameterController.UsesShutter)
-                _device.Open();
-            _device.StoringStart();
-
+                _device.PreviousState = StatusInformation.State.PQStoring;
+                ButtonsPanel.Visible = false;
+                _operationStatus.IsAutoDeposit = false;
+                _operationStatus.StackerFullCondition = true;
+                TimeOutController.Reset();
+                if (ParameterController.UsesShutter)
+                    _device.Open();
+                _device.StoringStart();
+            }
         }
+       
 
         private void EnableDisableControls(bool value)
         {
@@ -1083,6 +1094,35 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                 }
 
+
+                Permaquim.Depositario.Business.Tables.Operacion.TransaccionDetalle _savedDetails = new(transactions);
+                _savedDetails.Where.Add(Depositario.Business.Tables.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId,
+                    Depositario.sqlEnum.OperandEnum.Equal, _operationStatus.CurrentTransactionId);
+                _savedDetails.Items();
+                decimal detailsQuantity = 0;
+                if (_savedDetails.Result.Count > 0)
+                {
+                    foreach (var item in _savedDetails.Result)
+                    {
+                        Permaquim.Depositario.Business.Tables.Valor.Denominacion _denimonations = new(transactions);
+                        var units = _denimonations.Items(item.DenominacionId).FirstOrDefault().Unidades;
+
+                        detailsQuantity += (units * item.CantidadUnidades);
+                    }
+                }
+
+                if (detailsQuantity != (decimal)_operationStatus.CurrentTransactionAmount)
+                {
+                    transactions.Items(_operationStatus.CurrentTransactionId);
+                    if (transactions.Result.Count > 0)
+                    {
+                        var previousTransaction = transactions.Result.FirstOrDefault();
+                        previousTransaction.TotalValidado = (double)detailsQuantity;
+
+                        transactions.Update(previousTransaction);
+                    }
+                }
+
                 transactions.EndTransaction(true);
 
             }
@@ -1191,6 +1231,20 @@ namespace Permaquim.Depositary.UI.Desktop
             TimeOutController.Reset();
         }
 
+        private void BillDepositForm_EnabledChanged(object sender, EventArgs e)
+        {
+            if(this.Enabled) {
+                TimeOutController.Reset();
+            }
+            else
+            {
+                if (_operationStatus.CurrentTransactionAmount > 0)
+                {
+                    ConfirmEndTransaction(true, false);
+                    PrintTicket();
+                }
+            }
+        }
     }
 
     public class Operationstatus

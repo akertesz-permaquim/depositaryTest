@@ -507,6 +507,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EnvelopeDepositForm";
             this.Load += new System.EventHandler(this.EnvelopeDepositForm_Load);
+            this.EnabledChanged += new System.EventHandler(this.EnvelopeDepositForm_EnabledChanged);
             this.VisibleChanged += new System.EventHandler(this.EnvelopeDepositForm_VisibleChanged);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EnvelopeDepositForm_MouseClick);
             this.MainPanel.ResumeLayout(false);

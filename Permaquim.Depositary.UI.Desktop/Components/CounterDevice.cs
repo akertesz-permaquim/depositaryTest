@@ -446,6 +446,27 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             }
             else
             {
+
+                if (DeviceStateChange != null)
+                {
+
+                    string stateName = "PQCommunicationError";
+
+                    if (_lastState == null)
+                        _lastState = String.Empty;
+
+                    if (_lastState != null && !_lastState.Equals(stateName))
+                    {
+                        _lastState = stateName;
+                        DeviceStateChangeEventArgs args = new()
+                        {
+                            StateName = stateName,
+                            StateDescription = stateName
+                        };
+
+                        DeviceStateChange(this, args);
+                    }
+                }
                 _counterLastBytesRead = 0;
 
                 Log("COMMAND NOT SENT: Sense. Port is closed.");
@@ -482,7 +503,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         }
         public StatesResult StoringStart()
         {
-            if (_counterPort != null && _counterPort.IsOpen)
+            if (CounterConnected)
             {
                 Log("COMMAND: StoringStart");
                 DiscardBuffer(_counterPort);
@@ -1367,8 +1388,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                             string stateName = Enum.GetName(typeof(StatusInformation.State), 
                                 statesResult.StatusInformation.OperatingState);
 
+                            if (_lastState == null)
+                                _lastState = String.Empty;
 
-                            if (!_lastState.Equals(stateName))
+                            if (_lastState!=null && !_lastState.Equals(stateName))
                             {
                                 _lastState = stateName;
                                 DeviceStateChangeEventArgs args = new()
@@ -1952,7 +1975,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             State49 = 49,
             PQWaitingEnvelope = 50,
             State51 = 51,
-            PQWaitingTocloseEscrow = 52
+            PQWaitingTocloseEscrow = 52,
+            PQCommunicationError = 53
 
         }
     }

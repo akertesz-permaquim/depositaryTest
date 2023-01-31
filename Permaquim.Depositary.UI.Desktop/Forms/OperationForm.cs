@@ -67,7 +67,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 else
                 {
                     MainPanel.Enabled = true;
-                    if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    if (_device != null && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent ||
+                        _device != null && !_device.CounterConnected)
                     {
                         this.MainPanel.Controls.Clear();
                         LoadReportsButton();
@@ -171,19 +172,21 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
 
-            DatabaseController.CurrentOperation = (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((System.Windows.Forms.Button)sender).Tag;
+            DatabaseController.CurrentOperation = 
+                (Permaquim.Depositario.Entities.Relations.Operacion.TipoTransaccion)((System.Windows.Forms.Button)sender).Tag;
 
             switch ((int)DatabaseController.CurrentOperation.Id)
             {
 
                 case (int)OperationTypeEnum.BillDeposit:
 
-                    if (_device != null && !_device.CounterConnected)
+                    if (_device == null || !_device.CounterConnected)
                     {
                        
                         DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
                             EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA));
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                            MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA));
                         return;
                     }
                     else
@@ -199,7 +202,8 @@ namespace Permaquim.Depositary.UI.Desktop
 
                             DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Cassette_Full),
                                 EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
-                            FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.CASSETTE_FULL));
+                            FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                                MultilanguangeController.GetText(MultiLanguageEnum.CASSETTE_FULL));
                             return;
                         }
                         else
@@ -313,11 +317,12 @@ namespace Permaquim.Depositary.UI.Desktop
 
                 case (int)OperationTypeEnum.EnvelopeDeposit:
 
-                    if (_device != null && !_device.CounterConnected)
+                    if (_device == null || !_device.CounterConnected)
                     {
                         DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Error_De_Comunicacion),
                             EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA));
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                            MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA));
                         return;
                     }
                     else
@@ -327,12 +332,13 @@ namespace Permaquim.Depositary.UI.Desktop
                  
                     }
 
-                    if (_device.StateResultProperty.DoorStateInformation.CassetteFull)
+                    if (_device !=null && _device.StateResultProperty.DoorStateInformation.CassetteFull)
                     {
 
                         DatabaseController.SetBlockingEvent(Enum.GetName(EventTypeEnum.Cassette_Full),
                             EventTypeEnum.Estado_Fuera_De_Servicio, string.Empty);
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.CASSETTE_FULL));
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                            MultilanguangeController.GetText(MultiLanguageEnum.CASSETTE_FULL));
                         return;
                     }
                     else
@@ -433,7 +439,8 @@ namespace Permaquim.Depositary.UI.Desktop
                         }
                         else
                         {
-                            FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
+                            FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                                MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO));
                         }
                     }
 
@@ -449,7 +456,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     }
                     else
                     {
-                        FormsController.SetInformationMessage(InformationTypeEnum.Error, MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_PLACA));
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error, 
+                            MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_PLACA));
                         return;
                     }
 
@@ -641,9 +649,16 @@ namespace Permaquim.Depositary.UI.Desktop
                 // En esta instancia, se verifica si existe contenido en el escrow,
                 // de existir, solo se habilita el boton de otras operaciones, para
                 // acceder al soporte técnico
-                _device.Sleep();
-                _device.Sense();
-                if (_device.StateResultProperty != null & !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                if (!ConfigurationController.IsDevelopment())
+                {
+                    _device.Sleep();
+                    _device.Sense();
+                    if (_device.StateResultProperty != null & !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    {
+                        LoadTransactionButtons();
+                    }
+                }
+                else
                 {
                     LoadTransactionButtons();
                 }
@@ -651,10 +666,11 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadReportsButton();
                 LoadOtherOperationsButton();
                 LoadBackButton();
-                if (!ConfigurationController.IsDevelopment())
+
+                if (!ConfigurationController.IsDevelopment()) 
                     _device.RemoteCancel();
 
-                if (_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                if (_device!= null && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Error,
                      MultilanguangeController.GetText(MultiLanguageEnum.ESCROW_NO_VACIO));

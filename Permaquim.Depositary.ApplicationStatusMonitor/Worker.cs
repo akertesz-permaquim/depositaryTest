@@ -37,6 +37,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             try
             {
                 _workerTasks = AppConfiguration.GetWorkerTasks(_configuration.GetSection("TaskJson").Get<string>());
+                
                 while (!stoppingToken.IsCancellationRequested)
                 {
 

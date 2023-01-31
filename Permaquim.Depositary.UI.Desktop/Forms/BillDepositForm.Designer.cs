@@ -592,6 +592,7 @@
             this.Name = "BillDepositForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.BillDepositForm_Load);
+            this.EnabledChanged += new System.EventHandler(this.BillDepositForm_EnabledChanged);
             this.VisibleChanged += new System.EventHandler(this.BillDepositForm_VisibleChanged);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BillDepositForm_MouseClick);
             this.MainPanel.ResumeLayout(false);
