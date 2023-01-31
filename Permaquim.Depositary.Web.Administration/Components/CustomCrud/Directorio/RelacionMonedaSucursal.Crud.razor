@@ -5,6 +5,11 @@
 @inject NavigationManager NavManager
 @inject DialogService DialogService
 
+@if (estaProcesando)
+{
+    <div class="spinnerCentrado"></div>
+}
+
 @if (dataFunciones != null)
 {
     @if (SeguridadController.VerificarPermisoFuncion("DirectorioRelacionMonedaSucursal", dataFunciones, "PuedeVisualizar"))
@@ -381,6 +386,8 @@ else
 
     private bool defaultObligatorio = false;
 
+    private bool estaProcesando = false;
+
     /// <summary>
     /// Variables to store permissions
     /// </summary>
@@ -523,6 +530,13 @@ else
     /// Operation depending on Crud mode
     /// </summary>
     private async Task Save()
+    {
+        estaProcesando = true;
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
     {
         bool continuarOperacion = true;
         string actionInformation = string.Empty;

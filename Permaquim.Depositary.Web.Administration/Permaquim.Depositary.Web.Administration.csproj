@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -16,9 +16,13 @@
 
   <ItemGroup>
     <Compile Remove="Components\Crud\Directorio\**" />
+    <Compile Remove="wwwroot\scripts\**" />
     <Content Remove="Components\Crud\Directorio\**" />
+    <Content Remove="wwwroot\scripts\**" />
     <EmbeddedResource Remove="Components\Crud\Directorio\**" />
+    <EmbeddedResource Remove="wwwroot\scripts\**" />
     <None Remove="Components\Crud\Directorio\**" />
+    <None Remove="wwwroot\scripts\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,19 +32,20 @@
   <ItemGroup>
     <PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
     <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
+    <PackageReference Include="Eziriz.Reactor.Licensing" Version="6.9.0" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Radzen.Blazor" Version="4.1.4" />
+    <PackageReference Include="Radzen.Blazor" Version="4.3.2" />
     <PackageReference Include="Radzen.Blazor.GridExportOptions" Version="3.3.0.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageReference Include="System.Management" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Dal\" />
     <Folder Include="Resources\" />
-    <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,10 +90,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Components\CustomCrud\Customizador\Entidad.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\CustomCrud\Customizador\EntidadAtributo.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

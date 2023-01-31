@@ -30,7 +30,7 @@
         public string NumeroSerie { get; set; }
         public string ImagenModelo { get; set; }
         public DateTime? FechaUltimaSincronizacion { get; set; }
-        public float PorcentajeOcupacionBolsa { get; set; }
+        public double PorcentajeOcupacionBolsa { get; set; }
         public string IdentificadorBolsa { get; set; }
         public Double TotalValidado { get; set; }
         public Double TotalAValidar { get; set; }

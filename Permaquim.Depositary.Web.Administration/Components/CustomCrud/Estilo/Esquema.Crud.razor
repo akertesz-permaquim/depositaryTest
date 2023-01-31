@@ -7,6 +7,11 @@
 @inject DialogService DialogService
 @inject NavigationManager NavManager
 
+@if (estaProcesando)
+{
+    <div class="spinner"></div>
+}
+
 @if (dataFunciones != null)
 {
     @if (SeguridadController.VerificarPermisoFuncion("EstiloEsquema", dataFunciones, "PuedeVisualizar"))
@@ -166,10 +171,6 @@
             {
                 <RadzenTemplateForm TItem="Depositary.Entities.Tables.Estilo.Esquema" Data="@Esquema_entity" @bind-Value="Esquema_entity" Submit="Save" Visible="@(Esquema_entity != null)">
                     <ChildContent>
-                        @if (estaProcesando)
-                        {
-                            <div class="spinnerCentrado"></div>
-                        }
                         @if (crudMode != CrudMode.Add)
                         {
                             <div style="margin-bottom: 1rem" class="row">
@@ -495,9 +496,14 @@ else
     /// </summary>
     private async Task Save()
     {
-        bool continuarOperacion = true;
         estaProcesando = true;
-        StateHasChanged();
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
+    {
+        bool continuarOperacion = true;
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -710,14 +716,7 @@ else
                     Duration = 4000
                 });
 
-            estaProcesando = false;
-            StateHasChanged();
-
             await Task.Run(LoadMainEntityData);
-        }
-        else
-        {
-            estaProcesando = false;
         }
     }
 

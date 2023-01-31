@@ -7,6 +7,11 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
+@if (estaProcesando)
+{
+    <div class="spinner"></div>
+}
+
 @if (dataFunciones != null)
 {
     @if (SeguridadController.VerificarPermisoFuncion("DirectorioSucursal", dataFunciones, "PuedeVisualizar"))
@@ -455,6 +460,8 @@ else
 
     string colorCeldaCampoDependiente = "";
 
+    private bool estaProcesando = false;
+
     /// <summary>
     /// Variables to handle Relation between Sucursal.ZonaId and Zona.Id
     /// </summary>
@@ -633,6 +640,13 @@ else
     /// Operation depending on Crud mode
     /// </summary>
     private async Task Save()
+    {
+        estaProcesando = true;
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
     {
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;

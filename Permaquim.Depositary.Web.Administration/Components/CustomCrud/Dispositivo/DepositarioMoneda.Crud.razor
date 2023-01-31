@@ -3,6 +3,11 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
+@if (estaProcesando)
+{
+    <div class="spinnerCentrado"></div>
+}
+
 @if (dataFunciones != null)
 {
     @if (DepositarioMoneda_entities == null)
@@ -180,10 +185,6 @@
         {
             <RadzenTemplateForm TItem="Depositary.Entities.Tables.Dispositivo.DepositarioMoneda" Data="@DepositarioMoneda_entity" @bind-Value="DepositarioMoneda_entity" Submit="Save" Visible="@(DepositarioMoneda_entity != null)">
                 <ChildContent>
-                    @if (estaProcesando)
-                    {
-                        <div class="spinnerCentrado"></div>
-                    }
                     @if (crudMode != CrudMode.Add)
                     {
                         <div style="margin-bottom: 1rem" class="row">
@@ -486,7 +487,12 @@ else
     private async Task Save()
     {
         estaProcesando = true;
-        StateHasChanged();
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
+    {
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -593,9 +599,6 @@ else
                 Detail = actionInformation,
                 Duration = 4000
             });
-
-        estaProcesando = false;
-        StateHasChanged();
 
         await Task.Run(LoadMainEntityData);
     }

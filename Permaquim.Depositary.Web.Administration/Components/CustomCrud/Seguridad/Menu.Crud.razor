@@ -4,6 +4,11 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
+@if (estaProcesando)
+{
+    <div class="spinner"></div>
+}
+
 @if (dataFunciones != null)
 {
     @if (SeguridadController.VerificarPermisoFuncion("SeguridadMenu", dataFunciones, "PuedeVisualizar"))
@@ -206,10 +211,6 @@
             {
                 <RadzenTemplateForm TItem="Depositary.Entities.Tables.Seguridad.Menu" Data="@Menu_entity" @bind-Value="Menu_entity" Submit="Save" Visible="@(Menu_entity != null)">
                     <ChildContent>
-                        @if (estaProcesando)
-                        {
-                            <div class="spinnerCentrado"></div>
-                        }
                         @if (crudMode != CrudMode.Add)
                         {
                             <div style="margin-bottom: 1rem" class="row">
@@ -592,7 +593,12 @@ else
     private async Task Save()
     {
         estaProcesando = true;
-        StateHasChanged();
+        await Task.Run(Procesar);
+        estaProcesando = false;
+    }
+
+    private async Task Procesar()
+    {
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
@@ -702,9 +708,6 @@ else
                 Detail = actionInformation,
                 Duration = 4000
             });
-
-        estaProcesando = false;
-        StateHasChanged();
 
         await Task.Run(LoadMainEntityData);
     }
