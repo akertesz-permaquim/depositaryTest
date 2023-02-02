@@ -272,10 +272,17 @@ namespace Permaquim.Depositary.UI.Desktop
                     MultilanguangeController.GetText(MultiLanguageEnum.PROCESO_BOLSA_FINALIZADO));
                     break;
                 case BagExtractionProcessEnum.IdentifierPending:
-                    FormsController.SetInformationMessage(InformationTypeEnum.Information,
-                   MultilanguangeController.GetText(MultiLanguageEnum.INDICAR_CODIGO_BOLSA));
+                    if (ParameterController.RequiresContainerIdentifier)
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.Information,
+                        MultilanguangeController.GetText(MultiLanguageEnum.INDICAR_CODIGO_BOLSA));
+                    }
+                    else
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
+                    }
                     break;
-                default:
+                default:    
                     break;
             }
         }
@@ -284,11 +291,8 @@ namespace Permaquim.Depositary.UI.Desktop
             if (ParameterController.RequiresContainerIdentifier)
             {
                 _containerTextBox.Visible = _bagExtractionProcess >= BagExtractionProcessEnum.GateUnlocked
-
-&&
-                   _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
-                   && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished
-                   ;
+                    && _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE
+                   && _bagExtractionProcess != BagExtractionProcessEnum.ProcessFinished;
             }
         }
         private void VerifyButtonsVisibility()

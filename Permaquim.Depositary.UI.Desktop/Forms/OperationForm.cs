@@ -649,7 +649,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 // En esta instancia, se verifica si existe contenido en el escrow,
                 // de existir, solo se habilita el boton de otras operaciones, para
                 // acceder al soporte técnico
-                if (!ConfigurationController.IsDevelopment())
+                if (!ConfigurationController.IsDevelopment() && _device != null)
                 {
                     _device.Sleep();
                     _device.Sense();
@@ -667,7 +667,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 LoadOtherOperationsButton();
                 LoadBackButton();
 
-                if (!ConfigurationController.IsDevelopment()) 
+                if (!ConfigurationController.IsDevelopment() && _device != null) 
                     _device.RemoteCancel();
 
                 if (_device!= null && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)

@@ -1152,7 +1152,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // Fecha operacion
                 var fechaCierre = DailyClosingToPrint.
                         Fecha == null ? "" : ((DateTime)DailyClosingToPrint.
-                        Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA_HORA_COMPLETA));
+                        Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA));
 
                 e.Graphics.DrawString(
                     StringHelper.FormatString(MultilanguangeController.GetText(MultiLanguageEnum.FECHA_CIERRE) + ": ", 15, StringHelper.AlignEnum.AlignLeft) +

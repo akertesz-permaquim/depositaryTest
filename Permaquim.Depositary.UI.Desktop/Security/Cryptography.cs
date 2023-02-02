@@ -5,6 +5,8 @@ namespace Permaquim.Depositary.UI.Desktop.Security
 {
     public static class Cryptography
     {
+
+        private static int _encoding = 28591;// iso-8859-1 Western European(ISO)
         /// <summary>
         /// Metodo de hasheo de una cadena de caracteres alfanumericos con MD5
         /// </summary>
@@ -66,8 +68,6 @@ namespace Permaquim.Depositary.UI.Desktop.Security
                 }
             }
         }
-
-
         public static string Decrypt(this string textToDecrypt, string key)
         {
             if (string.IsNullOrEmpty(key))
@@ -109,6 +109,24 @@ namespace Permaquim.Depositary.UI.Desktop.Security
                 }
             }
         }
-
+        /// <summary>
+        /// Encriptación básica
+        /// </summary>
+        /// <param name="textToEncrypt"></param>
+        /// <returns></returns>
+        public static string BasicEncript(string textToEncrypt)
+        {
+            byte[] bytes = Encoding.GetEncoding(_encoding).GetBytes(textToEncrypt);
+            return System.Convert.ToBase64String(bytes);
+        }
+        /// <summary>
+        /// Des encriptación básica
+        /// </summary>
+        /// <param name="textToDecrypt"></param>
+        /// <returns></returns>
+        public static string BasicDecript(string textToDecrypt)
+        {
+            return Encoding.GetEncoding(_encoding).GetString(Convert.FromBase64String(textToDecrypt));
+        }
     }
 }
