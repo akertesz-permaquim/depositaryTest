@@ -202,6 +202,23 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        /// <summary>
+        /// Cantidad de espera de ciclos en el caso de pérdida de conectividad
+        /// entre el soft y la contadora
+        /// </summary>
+        public static int CounterReconnectRetrials
+        {
+            get
+            {
+                int parseResult = 100;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("REINTENTOS_RECONEXION_CONTADORA"), out parseResult);
+                if (parseResult == 0)
+                    parseResult = 100;
+                return parseResult;
+
+            }
+
+        }
 
         public static bool ValidatesBagInplace
         {

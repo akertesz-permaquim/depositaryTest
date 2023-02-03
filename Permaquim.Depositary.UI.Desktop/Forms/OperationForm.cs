@@ -163,6 +163,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
                     newButton.Tag = item;
 
+                    switch (item.Id)
+                    {
+                        case (int)OperationTypeEnum.BillDeposit:
+                        case (int)OperationTypeEnum.EnvelopeDeposit:
+                            newButton.Enabled = _device != null && _device.CounterConnected;
+                            break;
+                        default:
+                            newButton.Enabled = true;
+                            break;
+                    }
+
                     this.MainPanel.Controls.Add(newButton);
                 }
             }

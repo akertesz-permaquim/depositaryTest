@@ -13,6 +13,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
+        private int _counterReconnectRetrials = 0;
+
         private const string DEPOSITARIO_NO_INICIALIZADO = "Depositario no inicializado.";
         private const string RETIRO_DE_VALORES_SIN_USUARIO = "Retiro de valores sin usuario.";
         private const string ERROR = "Error";
@@ -704,6 +706,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                 if (_device.CounterConnected)
                 {
+                    _counterReconnectRetrials = 0;
                     FormsController.EnableDisableForms(true);
                     CounterPictureBox.Image = _greenLedImageCounter;
                     DeviceController.CounterIssue = false;
@@ -712,13 +715,19 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 }
                 else
                 {
-                    if (DatabaseController.CurrentOperation != null && (
-                   (int)DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit ||
-                   (int)DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit))
+                    _counterReconnectRetrials += 1;
+
+                    if (_counterReconnectRetrials >= ParameterController.CounterReconnectRetrials)
                     {
-                        FormsController.EnableDisableForms(false);
-                        DatabaseController.LogOff(true);
-                        FormsController.LogOff();
+                        if (DatabaseController.CurrentOperation != null && (
+                       (int)DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.BillDeposit ||
+                       (int)DatabaseController.CurrentOperation.Id == (int)OperationTypeEnum.EnvelopeDeposit))
+                        {
+
+                            FormsController.EnableDisableForms(false);
+                            DatabaseController.LogOff(true);
+                            FormsController.LogOff();
+                        }
                     }
                     CounterPictureBox.Image = _redLedImageCounter;
                     DeviceController.CounterIssue = true;
