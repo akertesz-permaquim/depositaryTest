@@ -1051,7 +1051,12 @@ namespace Permaquim.Depositary.UI.Desktop
                         OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? null :
                             DatabaseController.CurrentDepositOrigin.Id,
                         Finalizada = finished,
-                        EsDepositoAutomatico = isAutoDeposit
+                        EsDepositoAutomatico = isAutoDeposit,
+                        UsuarioCreacion = DatabaseController.CurrentUser.Id,
+                        UsuarioModificacion = null,
+                        FechaCreacion = DateTime.Now,
+                        FechaModificacion = null
+
                     };
                     _headerTransaction.Add(transactions.Add(transaction));
                     _operationStatus.CurrentTransactionId = transaction.Id;
@@ -1069,6 +1074,8 @@ namespace Permaquim.Depositary.UI.Desktop
                         previousTransaction.TotalValidado = _operationStatus.CurrentTransactionAmount;
                         previousTransaction.Finalizada = finished;
                         previousTransaction.EsDepositoAutomatico = isAutoDeposit;
+                        previousTransaction.UsuarioModificacion = DatabaseController.CurrentUser.Id;
+                        previousTransaction.FechaModificacion = DateTime.Now;
 
                         transactions.Update(previousTransaction);
                     }

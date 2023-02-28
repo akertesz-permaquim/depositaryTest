@@ -87,6 +87,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     {
                         FormsController.SetInformationMessage(InformationTypeEnum.Error, ex.Message);
                         AuditController.Log(ex);
+                        return;
                     }
 
                         _image = ImageFromBase64Helper.GetImageFromBase64String(_ticket.Imagen);

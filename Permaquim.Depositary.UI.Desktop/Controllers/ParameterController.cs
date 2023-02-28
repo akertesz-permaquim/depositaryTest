@@ -75,6 +75,16 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
         }
+        public static bool TurnAutoClose
+        {
+            get
+            {
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("CIERRE_TURNO_AUTOMATICO"), out parseResult);
+                return parseResult;
+            }
+
+        }
 
         public static bool PrintsBillDeposit
         {

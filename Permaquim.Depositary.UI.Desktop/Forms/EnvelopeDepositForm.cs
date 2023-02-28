@@ -730,7 +730,10 @@ namespace Permaquim.Depositary.UI.Desktop
                     CodigoOperacion =
                                 DatabaseController.CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd"),
                     OrigenValorId = DatabaseController.CurrentDepositOrigin == null ? null :
-                                DatabaseController.CurrentDepositOrigin.Id
+                                DatabaseController.CurrentDepositOrigin.Id,
+                    UsuarioCreacion = DatabaseController.CurrentUser.Id,
+                    UsuarioModificacion = null,
+                    FechaModificacion = null
                 };
 
                 _transactionEnvelope = new()
@@ -795,6 +798,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 transactions.BeginTransaction();
                 //Depósito
+                _transaction.FechaCreacion = DateTime.Now;
                 var currentTransaction = transactions.Add(_transaction);
                 _operationStatus.CurrentTransactionId = currentTransaction.Id;
                 // Depósito sobre

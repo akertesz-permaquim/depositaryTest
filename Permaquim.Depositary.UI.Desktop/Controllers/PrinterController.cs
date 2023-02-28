@@ -1,10 +1,23 @@
-﻿using System.Management;
+﻿using System.Drawing.Printing;
+using System.Management;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class PrinterController
     {
+
+        private static string GetDefaultPrinterName()
+        {
+            PrinterSettings settings = new PrinterSettings();
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                settings.PrinterName = printer;
+                if (settings.IsDefaultPrinter)
+                    return settings.PrinterName;
+            }
+            return string.Empty;
+        }
         private static Dictionary<string, object> _printerStatus = new Dictionary<string, object>();    
         public static Dictionary<string, object> GetPrinterStatus(string printerName)
         {
@@ -57,27 +70,41 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             string returnValue = string.Empty;
 
-
-            GetPrinterStatus(printerName);
-
-            if (_printerStatus.Count > 0)
+            if (GetPrintersList().Count == 0)
             {
-                if (_printerStatus.ContainsKey("PrinterState") && _printerStatus.ContainsKey("PrinterStatus"))
-                {
-                    if (_printerStatus["PrinterState"].Equals("144") && _printerStatus["PrinterStatus"].Equals("2")) { 
-                        returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_PUERTA_ABIERTA);}
-                    if (_printerStatus["PrinterState"].Equals("0") && _printerStatus["PrinterStatus"].Equals("2"))
-                        returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_SIN_ALIMENTACION);
-                    if (_printerStatus["PrinterState"].Equals("136") && _printerStatus["PrinterStatus"].Equals("2"))
-                        returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_ATASCADA);
-                }
-                if (returnValue.Equals(string.Empty))
-                    DeviceController.PrinterStatus = Global.Constants.NORMAL;
-                else
-                    DeviceController.PrinterStatus = returnValue;
-
+                throw new Exception(MultilanguangeController.GetText(MultiLanguageEnum.SIN_IMPRESORAS_INSTALADAS));
             }
-            return returnValue;
+            else
+            {
+                if (GetDefaultPrinterName().Equals(String.Empty))
+                {
+                    throw new Exception(MultilanguangeController.GetText(MultiLanguageEnum.SIN_IMPRESORA_PREDETERMINADA));
+                }
+                else
+                {
+                    GetPrinterStatus(printerName);
+
+                    if (_printerStatus.Count > 0)
+                    {
+                        if (_printerStatus.ContainsKey("PrinterState") && _printerStatus.ContainsKey("PrinterStatus"))
+                        {
+                            if (_printerStatus["PrinterState"].Equals("144") && _printerStatus["PrinterStatus"].Equals("2"))
+                            {
+                                returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_PUERTA_ABIERTA);
+                            }
+                            if (_printerStatus["PrinterState"].Equals("0") && _printerStatus["PrinterStatus"].Equals("2"))
+                                returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_SIN_ALIMENTACION);
+                            if (_printerStatus["PrinterState"].Equals("136") && _printerStatus["PrinterStatus"].Equals("2"))
+                                returnValue = MultilanguangeController.GetText(MultiLanguageEnum.IMPRESORA_ATASCADA);
+                        }
+                        if (returnValue.Equals(string.Empty))
+                            DeviceController.PrinterStatus = Global.Constants.NORMAL;
+                        else
+                            DeviceController.PrinterStatus = returnValue;
+                    }
+                }
+                return returnValue;
+            }
         }
     }
 }

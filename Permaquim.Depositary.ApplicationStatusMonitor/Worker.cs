@@ -85,7 +85,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                 if (!isUp)
                                 {
 
-                                    NativeMethods.LaunchProcess(@"C:\Windows\notepad.exe");
+                                    NativeMethods.LaunchProcess(item.Target);
 
                                     //Thread.Sleep(_configuration.GetSection("TaskDelay").Get<int>());
                                     if (item.ProcessId == 0) Log("Starting process " + item.ProcessName + "...");

@@ -113,6 +113,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             IntPtr li_Token = default(IntPtr);
             IntPtr li_EnvBlock = default(IntPtr);
             Process[] lObj_Processes = Process.GetProcessesByName(gs_EXPLORER);
+            int dwProcessId = 0;
 
             // Get explorer.exe id
 
@@ -137,7 +138,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             li_EnvBlock = GetEnvironmentBlock(li_Token);
 
             // Launch the process using the environment block and primary token
-            LaunchProcessAsUser(Ps_CmdLine, li_Token, li_EnvBlock);
+            dwProcessId = LaunchProcessAsUser(Ps_CmdLine, li_Token, li_EnvBlock);
 
             // If no valid enviroment block found
             if (li_EnvBlock.Equals(IntPtr.Zero))
@@ -150,7 +151,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             // CreateEnvironmentBlock function.
             DestroyEnvironmentBlock(li_EnvBlock);
 
-            return (int)li_Token;
+            return dwProcessId;
         }
 
         private static IntPtr GetPrimaryToken(int Pi_ProcessId)
@@ -216,7 +217,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             return li_EnvBlock;
         }
 
-        private static void LaunchProcessAsUser(string Ps_CmdLine, IntPtr Pi_Token, IntPtr Pi_EnvBlock)
+        private static int LaunchProcessAsUser(string Ps_CmdLine, IntPtr Pi_Token, IntPtr Pi_EnvBlock)
         {
             bool lb_Result = false;
             PROCESS_INFORMATION lObj_ProcessInformation = default(PROCESS_INFORMATION);
@@ -241,6 +242,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             lObj_StartupInfo.dwFlags = Convert.ToUInt32(STARTF_USESHOWWINDOW | STARTF_FORCEONFEEDBACK);
             lObj_StartupInfo.wShowWindow = SW_SHOW;
 
+
             // Creates a new process and its primary thread. The new process runs in the 
             // security context of the user represented by the specified token.
             lb_Result = CreateProcessAsUser(Pi_Token, null, Ps_CmdLine, ref lObj_ProcessAttributes, ref lObj_ThreadAttributes, true, CREATE_UNICODE_ENVIRONMENT, Pi_EnvBlock, null, ref lObj_StartupInfo, ref lObj_ProcessInformation);
@@ -250,6 +252,10 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             {
                 // Throw exception
                 throw new Exception(string.Format("CreateProcessAsUser Error: {0}", Marshal.GetLastWin32Error()));
+            }
+            else
+            {
+                return (int)lObj_ProcessInformation.dwProcessId;
             }
   
         }

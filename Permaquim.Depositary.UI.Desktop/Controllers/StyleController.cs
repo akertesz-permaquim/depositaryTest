@@ -54,8 +54,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static Image GetImageResourceFromfile(string fileResourceName)
         {
-            if(File.Exists(Directory.GetCurrentDirectory() + "\\Resources\\Images\\" + fileResourceName)) 
-                return  Image.FromFile(Directory.GetCurrentDirectory() + "\\Resources\\Images\\" + fileResourceName);
+            if(File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\Images\\" + fileResourceName)) 
+                return  Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\Images\\" + fileResourceName);
             else
                 return null;
         }

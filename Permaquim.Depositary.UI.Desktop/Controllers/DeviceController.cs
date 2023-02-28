@@ -148,7 +148,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         public static int GetPollingInterval()
         {
-            return DatabaseController.CurrentDepositaryCounter.PollTime;
+            return DatabaseController.GetPollingInterval();
         }
         public static int GetSleepInterval()
         {

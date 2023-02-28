@@ -21126,7 +21126,11 @@ using System.Text;
 					Finalizada,
 					EsDepositoAutomatico,
 					OrigenValorId,
-					CodigoOperacion
+					CodigoOperacion,
+					FechaCreacion,
+					FechaModificacion,
+					UsuarioCreacion,
+					UsuarioModificacion
 				}
          protected List<Entities.Tables.Operacion.Transaccion> _entities = new List<Entities.Tables.Operacion.Transaccion>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -21186,10 +21190,14 @@ using System.Text;
          /// <param name='EsDepositoAutomatico'></param>
          /// <param name='OrigenValorId'></param>
          /// <param name='CodigoOperacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <returns>Entities.Tables.Operacion.Transaccion</returns>
-			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion) 
+			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion,DateTime FechaCreacion,DateTime? FechaModificacion,Int64 UsuarioCreacion,Int64? UsuarioModificacion) 
 			{
-			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,CuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico,OrigenValorId,CodigoOperacion));
+			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,CuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico,OrigenValorId,CodigoOperacion,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion));
 			}
             public new List<Entities.Tables.Operacion.Transaccion> Items()
             {
@@ -21241,8 +21249,12 @@ using System.Text;
             /// <param name="EsDepositoAutomatico"></param>
             /// <param name="OrigenValorId"></param>
             /// <param name="CodigoOperacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? CuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion)
+            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? CuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion,DateTime? FechaCreacion,DateTime? FechaModificacion,Int64? UsuarioCreacion,Int64? UsuarioModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -21473,6 +21485,54 @@ using System.Text;
                     }
                    
                 }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
                 return this.Items();
             }
             /// <summary>
@@ -21531,10 +21591,14 @@ using System.Text;
             /// <param name="EsDepositoAutomatico"></param>
             /// <param name="OrigenValorId"></param>
             /// <param name="CodigoOperacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? cuentaid,Int64 contenedorid,Int64? sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64? origenvalorid,String codigooperacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? cuentaid,Int64 contenedorid,Int64? sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64? origenvalorid,String codigooperacion,DateTime fechacreacion,DateTime? fechamodificacion,Int64 usuariocreacion,Int64? usuariomodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,CuentaId = cuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico,OrigenValorId = origenvalorid,CodigoOperacion = codigooperacion});
+                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,CuentaId = cuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico,OrigenValorId = origenvalorid,CodigoOperacion = codigooperacion,FechaCreacion = fechacreacion,FechaModificacion = fechamodificacion,UsuarioCreacion = usuariocreacion,UsuarioModificacion = usuariomodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Operacion.Transaccion
@@ -30288,6 +30352,324 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
+		public partial class Ejecucion : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					DepositarioId,
+					FechaInicio,
+					FechaFin,
+					Finalizada,
+					EsPrimeraSincronizacion
+				}
+         protected List<Entities.Tables.Sincronizacion.Ejecucion> _entities = new List<Entities.Tables.Sincronizacion.Ejecucion>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public Ejecucion() : base()
+            {
+                base._dataItem = new Entities.Tables.Sincronizacion.Ejecucion();
+            }
+            public Ejecucion(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Sincronizacion.Ejecucion();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Sincronizacion.Ejecucion item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// Ejecucion Add Method
+         /// </summary>
+         /// <param name='DepositarioId'></param>
+         /// <param name='FechaInicio'></param>
+         /// <param name='FechaFin'></param>
+         /// <param name='Finalizada'></param>
+         /// <param name='EsPrimeraSincronizacion'></param>
+         /// <returns>Entities.Tables.Sincronizacion.Ejecucion</returns>
+			public Entities.Tables.Sincronizacion.Ejecucion Add(Int64? DepositarioId,DateTime FechaInicio,DateTime? FechaFin,Boolean Finalizada,Boolean EsPrimeraSincronizacion) 
+			{
+			  return (Entities.Tables.Sincronizacion.Ejecucion)base.Add(new Entities.Tables.Sincronizacion.Ejecucion(DepositarioId,FechaInicio,FechaFin,Finalizada,EsPrimeraSincronizacion));
+			}
+            public new List<Entities.Tables.Sincronizacion.Ejecucion> Items()
+            {
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Sincronizacion.Ejecucion>().ToList<Entities.Tables.Sincronizacion.Ejecucion>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Sincronizacion.Ejecucion items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Sincronizacion.Ejecucion> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Sincronizacion.Ejecucion items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="DepositarioId"></param>
+            /// <param name="FechaInicio"></param>
+            /// <param name="FechaFin"></param>
+            /// <param name="Finalizada"></param>
+            /// <param name="EsPrimeraSincronizacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Sincronizacion.Ejecucion> Items(Int64? Id,Int64? DepositarioId,DateTime? FechaInicio,DateTime? FechaFin,Boolean? Finalizada,Boolean? EsPrimeraSincronizacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (DepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.DepositarioId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                   
+                }
+                if (FechaInicio != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaInicio, sqlEnum.OperandEnum.Equal, FechaInicio);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaInicio, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaInicio);
+                    }
+                   
+                }
+                if (FechaFin != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaFin, sqlEnum.OperandEnum.Equal, FechaFin);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaFin, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaFin);
+                    }
+                   
+                }
+                if (Finalizada != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Finalizada, sqlEnum.OperandEnum.Equal, Finalizada);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Finalizada, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Finalizada);
+                    }
+                   
+                }
+                if (EsPrimeraSincronizacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EsPrimeraSincronizacion, sqlEnum.OperandEnum.Equal, EsPrimeraSincronizacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EsPrimeraSincronizacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EsPrimeraSincronizacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Sincronizacion.Ejecucion Add(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                return (Entities.Tables.Sincronizacion.Ejecucion)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Sincronizacion.Ejecucion AddOrUpdate(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Sincronizacion.Ejecucion)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Sincronizacion.Ejecucion with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="DepositarioId"></param>
+            /// <param name="FechaInicio"></param>
+            /// <param name="FechaFin"></param>
+            /// <param name="Finalizada"></param>
+            /// <param name="EsPrimeraSincronizacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64? depositarioid,DateTime fechainicio,DateTime? fechafin,Boolean finalizada,Boolean esprimerasincronizacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.Ejecucion {Id = id,DepositarioId = depositarioid,FechaInicio = fechainicio,FechaFin = fechafin,Finalizada = finalizada,EsPrimeraSincronizacion = esprimerasincronizacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Sincronizacion.Ejecucion with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Sincronizacion.Ejecucion {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Sincronizacion.Ejecucion> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositario.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class Ejecucion
+	} //namespace Permaquim.Depositario.Business.Tables.Sincronizacion
+	namespace Permaquim.Depositario.Business.Tables.Sincronizacion {
+	    /// <summary>
+	    /// 
+	    /// </summary>
 		public partial class Entidad : DataHandler
 		{
 				public enum ColumnEnum : int
@@ -30628,10 +31010,10 @@ using System.Text;
                 {
 					Id,
 					EntidadId,
-					DepositarioId,
 					Valor,
 					Fechainicio,
-					Fechafin
+					Fechafin,
+					EjecucionId
 				}
          protected List<Entities.Tables.Sincronizacion.EntidadCabecera> _entities = new List<Entities.Tables.Sincronizacion.EntidadCabecera>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -30674,14 +31056,14 @@ using System.Text;
          /// EntidadCabecera Add Method
          /// </summary>
          /// <param name='EntidadId'></param>
-         /// <param name='DepositarioId'></param>
          /// <param name='Valor'></param>
          /// <param name='Fechainicio'></param>
          /// <param name='Fechafin'></param>
+         /// <param name='EjecucionId'></param>
          /// <returns>Entities.Tables.Sincronizacion.EntidadCabecera</returns>
-			public Entities.Tables.Sincronizacion.EntidadCabecera Add(Int64 EntidadId,Int64? DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin) 
+			public Entities.Tables.Sincronizacion.EntidadCabecera Add(Int64 EntidadId,String Valor,DateTime Fechainicio,DateTime? Fechafin,Int64 EjecucionId) 
 			{
-			  return (Entities.Tables.Sincronizacion.EntidadCabecera)base.Add(new Entities.Tables.Sincronizacion.EntidadCabecera(EntidadId,DepositarioId,Valor,Fechainicio,Fechafin));
+			  return (Entities.Tables.Sincronizacion.EntidadCabecera)base.Add(new Entities.Tables.Sincronizacion.EntidadCabecera(EntidadId,Valor,Fechainicio,Fechafin,EjecucionId));
 			}
             public new List<Entities.Tables.Sincronizacion.EntidadCabecera> Items()
             {
@@ -30716,12 +31098,12 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EntidadId"></param>
-            /// <param name="DepositarioId"></param>
             /// <param name="Valor"></param>
             /// <param name="Fechainicio"></param>
             /// <param name="Fechafin"></param>
+            /// <param name="EjecucionId"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Sincronizacion.EntidadCabecera> Items(Int64? Id,Int64? EntidadId,Int64? DepositarioId,String Valor,DateTime? Fechainicio,DateTime? Fechafin)
+            public List<Entities.Tables.Sincronizacion.EntidadCabecera> Items(Int64? Id,Int64? EntidadId,String Valor,DateTime? Fechainicio,DateTime? Fechafin,Int64? EjecucionId)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -30745,18 +31127,6 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EntidadId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EntidadId);
-                    }
-                   
-                }
-                if (DepositarioId != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.DepositarioId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioId);
                     }
                    
                 }
@@ -30793,6 +31163,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Fechafin, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Fechafin);
+                    }
+                   
+                }
+                if (EjecucionId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EjecucionId, sqlEnum.OperandEnum.Equal, EjecucionId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EjecucionId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EjecucionId);
                     }
                    
                 }
@@ -30837,14 +31219,14 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EntidadId"></param>
-            /// <param name="DepositarioId"></param>
             /// <param name="Valor"></param>
             /// <param name="Fechainicio"></param>
             /// <param name="Fechafin"></param>
+            /// <param name="EjecucionId"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 entidadid,Int64? depositarioid,String valor,DateTime fechainicio,DateTime? fechafin)
+            public Int64 Update(Int64 id,Int64 entidadid,String valor,DateTime fechainicio,DateTime? fechafin,Int64 ejecucionid)
             {
-                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.EntidadCabecera {Id = id,EntidadId = entidadid,DepositarioId = depositarioid,Valor = valor,Fechainicio = fechainicio,Fechafin = fechafin});
+                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.EntidadCabecera {Id = id,EntidadId = entidadid,Valor = valor,Fechainicio = fechainicio,Fechafin = fechafin,EjecucionId = ejecucionid});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Sincronizacion.EntidadCabecera

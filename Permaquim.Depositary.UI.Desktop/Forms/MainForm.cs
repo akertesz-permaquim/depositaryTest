@@ -53,6 +53,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private bool _isLicensed = false;
 
         private bool _bagRemoved = false;
+        private bool _turnAutoClose = ParameterController.TurnAutoClose;
 
         // Variables de información de errores 
         private string _counterCommunicationError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA);
@@ -73,6 +74,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         DeviceErrorForm _errorForm = null;
         OperationBlockingForm _operationBlockingForm = null;
 
+
+        /// <summary>
+        /// Variable para controlar el cambio de la fecha
+        /// </summary>
+        DateTime _today = DateTime.Today;
 
         public string BreadCrumbText
         {
@@ -100,7 +106,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 this.Location = new Point(0, 0);
                 this.Size = new Size(screen.Width, screen.Height);
 
-                if (DatabaseController.CurrentDepositary == null)
+                if (!DatabaseController.IsInitialized())
                 {
                     LoadDefaultStyles();
                     InformationLabel.BackColor = Color.Red;
@@ -248,7 +254,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             if (ConfigurationController.IsDevelopment())
                 return true;
             else
-                return File.Exists((Directory.GetCurrentDirectory() + @"\APP0STOL.License"));
+                return File.Exists((AppDomain.CurrentDomain.BaseDirectory + @"\APP0STOL.License"));
         }
 
         /// <summary>
@@ -832,6 +838,16 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void SetTurnAndDateTimeLabel()
         {
+            // Chequeo de cambio de fecha
+            if(DateTime.Today > _today)
+            {
+                if (_turnAutoClose)
+                {
+                    DatabaseController.CloseCurrentTurn();
+                }
+                _today = DateTime.Today;
+            }
+
             TurnAndDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : ";
 
             if (DatabaseController.CurrentTurn == null)

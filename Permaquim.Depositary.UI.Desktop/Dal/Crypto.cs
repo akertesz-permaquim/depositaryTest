@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Permaquim.Depositario
 {
-    internal static partial class Crypto
+    internal static class Crypto
     {
         public static string Encrypt(string textToEncrypt,string key)
         {

@@ -42,6 +42,24 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static Permaquim.Depositario.Entities.Relations.Operacion.Turno _currentTurn { get; private set; }
 
         public static Permaquim.Depositario.Entities.Relations.Operacion.Turno _lastTurn { get; private set; }
+
+        private static Int64? _timeoutGeneral;
+
+        /// <summary>
+        /// Representa el turno actual
+        /// </summary>
+        public static Int64 TimeoutGeneral 
+        {  get
+            { 
+                if(_timeoutGeneral == null)
+                {
+                    _timeoutGeneral = Convert.ToInt64(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_GENERAL"));
+                }
+                return (Int64)_timeoutGeneral;
+            }
+        }
+
+
         /// <summary>
         /// Representa el turno actual
         /// </summary>
@@ -174,6 +192,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 return _currentDepositary;
 
             }
+        }
+
+        public static Int32 GetPollingInterval()
+        {
+            int returnValue = 0;
+            Permaquim.Depositario.Business.Relations.Dispositivo.ConfiguracionDepositario entity = new();
+            entity.Where.Add(Depositario.Business.Relations.Dispositivo.ConfiguracionDepositario.ColumnEnum.TipoId,sqlEnum.OperandEnum.Equal,0);
+            returnValue = Convert.ToInt32( entity.Items().FirstOrDefault().Valor);
+            return returnValue;
         }
 
         public static Permaquim.Depositario.Entities.Relations.Dispositivo.DepositarioContadora CurrentDepositaryCounter
@@ -591,9 +618,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         TotalAValidar = 0,
                         TotalValidado = 0,
                         TurnoId = CurrentTurn != null ? CurrentTurn.Id : LastTurn.Id,
-                        UsuarioId = CurrentUser == null ? 0 : CurrentUser.Id
+                        UsuarioId = CurrentUser == null ? 0 : CurrentUser.Id,
+                        FechaCreacion = DateTime.Now,
+                        UsuarioCreacion = CurrentUser == null ? 0 : CurrentUser.Id,
 
-                    });
+                    }); ;
 
                 }
                 //Luego genera una nueva
@@ -2054,9 +2083,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 foreach (var item in transacciones.Items())
                 {
                     item.CierreDiarioId = newClosing.Id;
+                    item.FechaModificacion = DateTime.Now;
+                    item.UsuarioModificacion = CurrentUser.Id;
                     transacciones.Update(item);
                 }
-
 
                 closingEntities.EndTransaction(true);
             }
@@ -2637,9 +2667,21 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
 
             }
+            return returnValue;
+        }
+
+        public static bool IsInitialized()
+        {
+            var returnValue = false;
+
+            Permaquim.Depositario.Business.Tables.Sincronizacion.Ejecucion entity = new();
+            entity.Where.Add(Depositario.Business.Tables.Sincronizacion.Ejecucion.ColumnEnum.EsPrimeraSincronizacion, sqlEnum.OperandEnum.Equal, true);
+            entity.Where.Add(sqlEnum.ConjunctionEnum.AND,Depositario.Business.Tables.Sincronizacion.Ejecucion.ColumnEnum.Finalizada, sqlEnum.OperandEnum.Equal, true);
+            entity.Items();
+
+            returnValue = entity.Result.Count > 0;
 
             return returnValue;
-
         }
 
         public static List<BagContentItem> GetBillCurrentContainerContentItems(long monedaId = -1)

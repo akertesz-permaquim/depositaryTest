@@ -1308,7 +1308,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         }
         private void AppendToLogFile(string message)
         {
-            string logDirectory = System.IO.Directory.GetCurrentDirectory() + @"\Logs\";
+            string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
 

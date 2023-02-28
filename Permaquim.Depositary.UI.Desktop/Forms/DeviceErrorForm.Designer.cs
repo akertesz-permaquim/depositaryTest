@@ -74,7 +74,7 @@
             this.Controls.Add(this.InformationLabel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainPictureBox);
-            this.DoubleBuffered = true;
+            this.DoubleBuffered = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DeviceErrorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

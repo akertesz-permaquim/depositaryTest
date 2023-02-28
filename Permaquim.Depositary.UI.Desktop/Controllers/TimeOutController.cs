@@ -9,7 +9,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     public static class TimeOutController
     {
-        private const string TIMEOUT_GENERAL = "TIMEOUT_GENERAL";
+  
         private static Stopwatch _sw;
         private static bool _isTimeOut = false;
         private static long _timeOut { get; set; } = 0;
@@ -44,7 +44,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _sw = new Stopwatch();
             _sw.Start();
             _isTimeOut = false;
-            _timeOut = Convert.ToInt64(DatabaseController.GetEnterpriseParameterValue(TIMEOUT_GENERAL));
+            _timeOut = DatabaseController.TimeoutGeneral;
             _isActive = true;
         }
         public static void Stop()

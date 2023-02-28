@@ -333,7 +333,9 @@
             CANTIDADTRANSACCIONES,
             SECUENCIA,
             ERROR_CONTENEDOR,
-            ERROR_IMPRESORA
+            ERROR_IMPRESORA,
+            SIN_IMPRESORAS_INSTALADAS,
+            SIN_IMPRESORA_PREDETERMINADA
         }
 
         public enum FunctionEnum

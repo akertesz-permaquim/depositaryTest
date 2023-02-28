@@ -587,7 +587,7 @@
             this.Controls.Add(this.MonitorGroupcheckbox);
             this.Controls.Add(this.MonitorGroupBox);
             this.Controls.Add(this.MainPanel);
-            this.DoubleBuffered = true;
+            this.DoubleBuffered = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BillDepositForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
