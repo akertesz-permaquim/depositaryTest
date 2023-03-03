@@ -152,7 +152,6 @@ namespace Permaquim.Depositary.UI.Desktop
             this.MainPanel.Controls.Clear();
             foreach (var item in _transactions)
             {
-
                 if (SecurityController.IsOperationEnabled(((long)item.FuncionId)))
                 {
                     System.Windows.Forms.Button newButton = ControlBuilder.BuildStandardButton(

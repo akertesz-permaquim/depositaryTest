@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class ParameterController
@@ -16,64 +11,71 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 bool.TryParse(DatabaseController.GetEnterpriseParameterValue("USA_SHUTTER"), out parseResult);
                 return parseResult;
             }
-
         }
 
         public static bool UsesBankAccount
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_CUENTA_BANCARIA"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("USA_CUENTA_BANCARIA"), out parseResult);
+                return parseResult;
             }
-                
+               
         }
         public static bool UsesValueOrigin
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("USA_ORIGEN_VALOR"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("USA_ORIGEN_VALOR"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int RedStatusIndicator
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_ROJO"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_ROJO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int YellowStatusIndicator
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_AMARILLO"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_AMARILLO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int GreenStatusIndicator
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_VERDE"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_VERDE"), out parseResult);
+                return parseResult;
             }
-
         }
         public static bool RequiresContainerIdentifier
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("REQUIERE_IDENTIFICADOR_BOLSA"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("REQUIERE_IDENTIFICADOR_BOLSA"), out parseResult);
+                return parseResult;
             }
-
         }
         public static bool RequiresEnvelopeIdentifier
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("REQUIERE_IDENTIFICADOR_SOBRE"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("REQUIERE_IDENTIFICADOR_SOBRE"), out parseResult);
+                return parseResult;
             }
-
         }
         public static bool TurnAutoClose
         {
@@ -90,7 +92,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_BILLETE"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_BILLETE"), out parseResult);
+                return parseResult;
             }
 
         }
@@ -99,107 +103,119 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CIERRE_DIARIO"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CIERRE_DIARIO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static bool PrintsTurnChange
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CAMBIO_TURNO"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CAMBIO_TURNO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static bool PrintsBagExtraction
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CAMBIO_BOLSA"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_CAMBIO_BOLSA"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int PrintTurnChangeQuantity
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CAMBIO_TURNO"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CAMBIO_TURNO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int PrintBagExtractionQuantity
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CAMBIO_BOLSA"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CAMBIO_BOLSA"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int PrintDailyClosingQuantity
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CIERRE_DIARIO"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_CIERRE_DIARIO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int PrintBillDepositQuantity
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_DEPOSITO_BILLETE"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_DEPOSITO_BILLETE"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int PrintEnvelopeDepositQuantity
         {
             get
             {
-                return Convert.ToInt32(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_DEPOSITO_SOBRE"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_DEPOSITO_SOBRE"), out parseResult);
+                return parseResult;
             }
-
-        }
+         }
         public static bool PrintsEnvelopeDeposit
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_SOBRE"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_SOBRE"), out parseResult);
+                return parseResult;
             }
-
-        }
+         }
         public static bool PrintsCoinDeposit
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_MONEDA"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_MONEDA"), out parseResult);
+                return parseResult;
             }
-
         }
 
         public static decimal RedBagPercent
         {
             get
             {
-                return Convert.ToDecimal(DatabaseController.GetEnterpriseParameterValue("PORCENTAJE_CONTENEDOR_ROJO"));
+                decimal parseResult = 0;
+                decimal.TryParse(DatabaseController.GetEnterpriseParameterValue("PORCENTAJE_CONTENEDOR_ROJO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int BagSensorBehaviour
         {
             get
             {
-                return Convert.ToInt16(DatabaseController.GetEnterpriseParameterValue("COMPORTAMIENTO_SENSORES_CONTENEDOR"));
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("COMPORTAMIENTO_SENSORES_CONTENEDOR"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int BagMaxPercentage
         {
             get
             {
-                return Convert.ToInt16(DatabaseController.GetEnterpriseParameterValue("PORCENTAJE_CONTENEDOR_ROJO"));
-
+                int parseResult = 0;
+                int.TryParse(DatabaseController.GetEnterpriseParameterValue("PORCENTAJE_CONTENEDOR_ROJO"), out parseResult);
+                return parseResult;
             }
-
         }
         public static int EventEvaluationSeconds
         {
@@ -234,7 +250,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return false; //Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("VALIDA_EXISTENCIA_BOLSA"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetDepositaryParameterValue("VALIDA_EXISTENCIA_BOLSA"), out parseResult);
+                return parseResult;
             }
 
         }
@@ -242,7 +260,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                return Convert.ToBoolean(DatabaseController.GetDepositaryParameterValue("EXTRACCION_BOLSA_REQUIERE_AUTORIZACION"));
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetDepositaryParameterValue("EXTRACCION_BOLSA_REQUIERE_AUTORIZACION"), out parseResult);
+                return parseResult;
             }
 
         }
@@ -250,18 +270,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                bool returnValue = false;
-                try
-                {
-
-                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOG_DISPOSITIVO_HABILITADO"));
-                }
-                catch (Exception)
-                {
-
-                    returnValue = false;
-                }
-                return returnValue;
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("LOG_DISPOSITIVO_HABILITADO"), out parseResult);
+                return parseResult;
             }
         }
         /// <summary>
@@ -272,18 +283,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                bool returnValue = true;
-                try
-                {
-
-                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOGUEA_EXCEPCIONES"));
-                }
-                catch (Exception)
-                {
-
-                    returnValue = false;
-                }
-                return returnValue;
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("LOGUEA_EXCEPCIONES"), out parseResult);
+                return parseResult;
             }
         }
         /// <summary>
@@ -294,36 +296,18 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             get
             {
-                bool returnValue = true;
-                try
-                {
-
-                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOGUEA_INFORMACIONES"));
-                }
-                catch (Exception)
-                {
-
-                    returnValue = false;
-                }
-                return returnValue;
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("LOGUEA_INFORMACIONES"), out parseResult);
+                return parseResult;
             }
         }
         public static bool LogsNavigations
         {
             get
             {
-                bool returnValue = true;
-                try
-                {
-
-                    returnValue = Convert.ToBoolean(DatabaseController.GetApplicationParameterValue("LOGUEA_NAVEGACIONES"));
-                }
-                catch (Exception)
-                {
-
-                    returnValue = false;
-                }
-                return returnValue;
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("LOGUEA_NAVEGACIONES"), out parseResult);
+                return parseResult;
             }
         }
 

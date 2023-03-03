@@ -401,15 +401,14 @@ namespace Permaquim.Depositary.UI.Desktop
             }
             else
             {
-
                 _confirmButton.Visible = false;
                 _containerTextBox.Visible = false;
                 FormsController.SetInformationMessage(InformationTypeEnum.Information,
                       MultilanguangeController.GetText(MultiLanguageEnum.PROCESO_BOLSA_FINALIZADO));
 
                 _bagExtractionProcess = BagExtractionProcessEnum.ProcessFinished;
-                if (ParameterController.RequiresContainerIdentifier)
-                    DatabaseController.UpdateContainerIdentifier(containerText);
+                // Lo actualiza siempre
+                DatabaseController.UpdateContainerIdentifier(containerText, ParameterController.RequiresContainerIdentifier);
                 _containerTextBox.Visible = false;
             }
         }

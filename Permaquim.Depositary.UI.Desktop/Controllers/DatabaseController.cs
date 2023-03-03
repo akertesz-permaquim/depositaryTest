@@ -436,8 +436,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _currentOperation = null;
             _currentUserBankAccount = null;
             _currentOperation = null;
-
-            StyleController.ResetSchema();
+             StyleController.ResetSchema();
 
         }
 
@@ -681,7 +680,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return returnValue;
         }
 
-        public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor UpdateContainerIdentifier(string bagIdentifier)
+        public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor UpdateContainerIdentifier(string bagIdentifier, 
+            bool requiresIdentifier)
         {
             Permaquim.Depositario.Entities.Tables.Operacion.Contenedor returnValue = new();
 
@@ -697,14 +697,14 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     FechaCreacion = CurrentContainer.FechaCreacion,
                     FechaModificacion = DateTime.Now,
                     Habilitado = CurrentContainer.Habilitado,
-                    Identificador = bagIdentifier,
-                    Nombre = bagIdentifier,
+                    Identificador =  requiresIdentifier == true ? bagIdentifier : String.Empty,
+                    Nombre = CurrentDepositary.CodigoExterno.ToString() + "-" + CurrentContainer.Id.ToString(),
                     TipoId = CurrentContainer.TipoId.Id,
                     UsuarioCreacion = CurrentContainer.UsuarioCreacion.Id,
                     UsuarioModificacion = CurrentUser.Id,
                     DepositarioId = CurrentDepositary.Id,
 
-                });
+                }); ;
 
             }
             return returnValue;
@@ -2282,45 +2282,25 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
                 else
                 {
-                    // Obtiene los roles de la aplicación
-                    Permaquim.Depositario.Business.Tables.Seguridad.Rol rolEntities = new();
-                    rolEntities.Where.Add(Depositario.Business.Tables.Seguridad.Rol.ColumnEnum.AplicacionId,
-                         Depositario.sqlEnum.OperandEnum.Equal, Global.Constants.APPLICATION_ID);
-
-                    rolEntities.Items();
-
-                    List<long> roles = rolEntities.Result.DistinctBy(x => x.Id).Select(x => x.Id).ToList();
-
-
-                    Permaquim.Depositario.Business.Tables.Seguridad.UsuarioRol usuarioRolEntities = new();
-                    usuarioRolEntities.Where.Add(Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.UsuarioId,
-                         Depositario.sqlEnum.OperandEnum.Equal, CurrentUser.Id);
-                    usuarioRolEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                        Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.RolId,
-                         Depositario.sqlEnum.OperandEnum.In, roles);
-
-                    usuarioRolEntities.Items();
-
-                    if (usuarioRolEntities.Result.Count > 0)
+                    // Se consulta los roles que tiene el usuario
+                    foreach (var usuarioRol in CurrentUser.ListOf_UsuarioRol_UsuarioId)
                     {
-
-                        Permaquim.Depositario.Business.Tables.Seguridad.RolFuncion rolFuncionEntities = new();
-                        rolFuncionEntities.Where.Add(Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.FuncionId,
-                            Depositario.sqlEnum.OperandEnum.Equal, functionId);
-                        rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                            Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.RolId,
-                            Depositario.sqlEnum.OperandEnum.Equal, usuarioRolEntities.Result.FirstOrDefault().RolId);
-                        rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                             Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.Habilitado,
-                             Depositario.sqlEnum.OperandEnum.Equal, true);
-
-
-                        rolFuncionEntities.Items();
-                        if (rolFuncionEntities.Result.Count > 0)
-                            returnValue = rolFuncionEntities.Result.FirstOrDefault().PuedeVisualizar;
+                        // Se obtiene el rol de la aplicación Desktop
+                        if (usuarioRol.RolId.AplicacionId.Id == Global.Constants.APPLICATION_ID)
+                        {
+                            if (usuarioRol.Habilitado)
+                            {
+                                foreach (var relFuncion in usuarioRol.RolId.ListOf_RolFuncion_RolId)
+                                {
+                                    if (relFuncion.FuncionId.Habilitado && relFuncion.FuncionId.Id == functionId)
+                                        return true;
+                                }
+                            }
+                        }
                     }
                 }
-                return returnValue;
+
+                return false;
             }
             catch (Exception ex)
             {
@@ -2341,45 +2321,25 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
                 else
                 {
-                    // Obtiene los roles de la aplicación
-                    Permaquim.Depositario.Business.Tables.Seguridad.Rol rolEntities = new();
-                    rolEntities.Where.Add(Depositario.Business.Tables.Seguridad.Rol.ColumnEnum.AplicacionId,
-                         Depositario.sqlEnum.OperandEnum.Equal, Global.Constants.APPLICATION_ID);
-
-                    rolEntities.Items();
-
-                    List<long> roles = rolEntities.Result.DistinctBy(x => x.Id).Select(x => x.Id).ToList();
-
-
-                    Permaquim.Depositario.Business.Tables.Seguridad.UsuarioRol usuarioRolEntities = new();
-                    usuarioRolEntities.Where.Add(Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.UsuarioId,
-                         Depositario.sqlEnum.OperandEnum.Equal, userId);
-                    usuarioRolEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                        Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.RolId,
-                         Depositario.sqlEnum.OperandEnum.In, roles);
-
-                    usuarioRolEntities.Items();
-
-                    if (usuarioRolEntities.Result.Count > 0)
+                    // Se consulta los roles que tiene el usuario
+                    foreach (var usuarioRol in CurrentUser.ListOf_UsuarioRol_UsuarioId)
                     {
-
-                        Permaquim.Depositario.Business.Tables.Seguridad.RolFuncion rolFuncionEntities = new();
-                        rolFuncionEntities.Where.Add(Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.FuncionId,
-                            Depositario.sqlEnum.OperandEnum.Equal, functionId);
-                        rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                            Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.RolId,
-                            Depositario.sqlEnum.OperandEnum.Equal, usuarioRolEntities.Result.FirstOrDefault().RolId);
-                        rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                             Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.Habilitado,
-                             Depositario.sqlEnum.OperandEnum.Equal, true);
-
-
-                        rolFuncionEntities.Items();
-                        if (rolFuncionEntities.Result.Count > 0)
-                            returnValue = rolFuncionEntities.Result.FirstOrDefault().PuedeVisualizar;
+                        // Se obtiene el rol de la aplicación Desktop
+                        if (usuarioRol.RolId.AplicacionId.Id == Global.Constants.APPLICATION_ID)
+                        {
+                            if (usuarioRol.Habilitado)
+                            {
+                                foreach (var relFuncion in usuarioRol.RolId.ListOf_RolFuncion_RolId)
+                                {
+                                    if (relFuncion.FuncionId.Habilitado && relFuncion.FuncionId.Id == functionId)
+                                        return true;
+                                }
+                            }
+                        }
                     }
                 }
-                return returnValue;
+
+                return false;
             }
             catch (Exception ex)
             {
@@ -2400,57 +2360,25 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
                 else
                 {
-                    // Obtiene los roles de la aplicación
-                    Permaquim.Depositario.Business.Tables.Seguridad.Rol rolEntities = new();
-                    rolEntities.Where.Add(Depositario.Business.Tables.Seguridad.Rol.ColumnEnum.AplicacionId,
-                         Depositario.sqlEnum.OperandEnum.Equal, Global.Constants.APPLICATION_ID);
-
-                    rolEntities.Items();
-
-                    List<long> roles = rolEntities.Result.DistinctBy(x => x.Id).Select(x => x.Id).ToList();
-
-
-                    Permaquim.Depositario.Business.Tables.Seguridad.UsuarioRol usuarioRolEntities = new();
-                    usuarioRolEntities.Where.Add(Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.UsuarioId,
-                         Depositario.sqlEnum.OperandEnum.Equal, CurrentUser.Id);
-                    usuarioRolEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                        Depositario.Business.Tables.Seguridad.UsuarioRol.ColumnEnum.RolId,
-                         Depositario.sqlEnum.OperandEnum.In, roles);
-
-                    usuarioRolEntities.Items();
-
-                    if (usuarioRolEntities.Result.Count > 0)
+                    // Se consulta los roles que tiene el usuario
+                    foreach (var usuarioRol in CurrentUser.ListOf_UsuarioRol_UsuarioId)
                     {
-                        Permaquim.Depositario.Business.Tables.Seguridad.Funcion functionEntities = new();
-
-                        functionEntities.Where.Add(Depositario.Business.Tables.Seguridad.Funcion.ColumnEnum.AplicacionId,
-                            Depositario.sqlEnum.OperandEnum.Equal, Global.Constants.APPLICATION_ID);
-                        functionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                            Depositario.Business.Tables.Seguridad.Funcion.ColumnEnum.Nombre,
-                            Depositario.sqlEnum.OperandEnum.Equal, functionName);
-                        functionEntities.Items();
-
-                        if (functionEntities.Result.Count > 0)
+                        // Se obtiene el rol de la aplicación Desktop
+                        if (usuarioRol.RolId.AplicacionId.Id == Global.Constants.APPLICATION_ID )
                         {
-                            var function = functionEntities.Result.FirstOrDefault();
-                            Permaquim.Depositario.Business.Tables.Seguridad.RolFuncion rolFuncionEntities = new();
-                            rolFuncionEntities.Where.Add(Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.FuncionId,
-                                Depositario.sqlEnum.OperandEnum.Equal, function.Id);
-                            rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                                Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.RolId,
-                                Depositario.sqlEnum.OperandEnum.Equal, usuarioRolEntities.Result.FirstOrDefault().RolId);
-                            rolFuncionEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                                 Depositario.Business.Tables.Seguridad.RolFuncion.ColumnEnum.Habilitado,
-                                 Depositario.sqlEnum.OperandEnum.Equal, true);
-
-
-                            rolFuncionEntities.Items();
-                            if (rolFuncionEntities.Result.Count > 0)
-                                returnValue = rolFuncionEntities.Result.FirstOrDefault().PuedeVisualizar;
+                            if (usuarioRol.Habilitado)
+                            {
+                                foreach (var relFuncion in usuarioRol.RolId.ListOf_RolFuncion_RolId)
+                                {
+                                    if (relFuncion.FuncionId.Habilitado && relFuncion.FuncionId.Nombre.Equals(functionName))
+                                        return true;
+                                }
+                            }
                         }
                     }
                 }
-                return returnValue;
+   
+                return false;
             }
             catch (Exception ex)
             {
