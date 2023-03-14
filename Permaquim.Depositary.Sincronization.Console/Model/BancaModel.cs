@@ -10,28 +10,30 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Banca.Cuenta> Cuentas { get; set; } = new();
         public List<Depositario.Entities.Tables.Banca.UsuarioCuenta> UsuariosCuenta { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
+        public Int64? SynchronizationExecutionId = SynchronizationController.CurrentSynchronizationExecutionId;
+
         void IModel.Process()
         {
 
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroBanco = SynchronizationController.obtenerFechaUltimaSincronizacion("Banca.Banco");
+            DateTime fechaSincroBanco = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Banca_Banco);
 
-            SincroDates.Add("Banca.Banco", fechaSincroBanco);
-
-            //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroCuenta = SynchronizationController.obtenerFechaUltimaSincronizacion("Banca.Cuenta");
-
-            SincroDates.Add("Banca.Cuenta", fechaSincroCuenta);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Banca_Banco).Replace("_", "."), fechaSincroBanco);
 
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroTipoCuenta = SynchronizationController.obtenerFechaUltimaSincronizacion("Banca.TipoCuenta");
+            DateTime fechaSincroCuenta = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Banca_Cuenta);
 
-            SincroDates.Add("Banca.TipoCuenta", fechaSincroTipoCuenta);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Banca_Cuenta).Replace("_", "."), fechaSincroCuenta);
 
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroUsuarioCuenta = SynchronizationController.obtenerFechaUltimaSincronizacion("Banca.UsuarioCuenta");
+            DateTime fechaSincroTipoCuenta = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Banca_TipoCuenta);
 
-            SincroDates.Add("Banca.UsuarioCuenta", fechaSincroUsuarioCuenta);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Banca_TipoCuenta).Replace("_", "."), fechaSincroTipoCuenta);
+
+            //Obtenemos la fecha de ultima sincronizacion de la entidad
+            DateTime fechaSincroUsuarioCuenta = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Banca_UsuarioCuenta);
+
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Banca_UsuarioCuenta).Replace("_", "."), fechaSincroUsuarioCuenta);
 
         }
         public void Persist()
@@ -49,7 +51,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.TipoCuenta");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_TipoCuenta, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
@@ -57,9 +59,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in TiposCuenta)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.TipoCuenta", item.Id);
-                            monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Valor.Moneda", item.MonedaId);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Banca_TipoCuenta, item.Id);
+                            monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Valor_Moneda, item.MonedaId);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
 
                             if (monedaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
@@ -71,7 +73,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -86,10 +88,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     tipoCuenta.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
 
@@ -99,7 +101,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.Banco");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_Banco, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
@@ -107,9 +109,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in Bancos)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.Banco", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
-                            paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Geografia.Pais", item.PaisId);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Banca_Banco, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
+                            paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Geografia_Pais, item.PaisId);
 
                             if (paisIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
@@ -122,7 +124,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -137,10 +139,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     banco.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
 
@@ -150,7 +152,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.Cuenta");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_Cuenta, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
@@ -160,11 +162,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in Cuentas)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.Cuenta", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
-                            tipoCuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.TipoCuenta", item.TipoId);
-                            empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
-                            bancoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.Banco", item.BancoId);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Banca_Cuenta, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
+                            tipoCuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Banca_TipoCuenta, item.TipoId);
+                            empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
+                            bancoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Banca_Banco, item.BancoId);
 
 
                             if (bancoIdOrigen.HasValue && tipoCuentaIdOrigen.HasValue && empresaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
@@ -180,7 +182,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -195,10 +197,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     cuenta.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
 
@@ -208,7 +210,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Banca.UsuarioCuenta");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_UsuarioCuenta, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
@@ -217,10 +219,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in UsuariosCuenta)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.UsuarioCuenta", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
-                            usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioId);
-                            cuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Banca.Cuenta", item.CuentaId);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Banca_UsuarioCuenta, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
+                            usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioId);
+                            cuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Banca_Cuenta, item.CuentaId);
 
 
                             if (usuarioIdOrigen.HasValue && cuentaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
@@ -235,7 +237,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -250,10 +252,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     usuarioCuenta.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
             }

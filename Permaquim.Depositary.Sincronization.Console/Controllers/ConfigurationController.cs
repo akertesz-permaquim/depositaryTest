@@ -14,21 +14,6 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
                 ConfigurationController.GetConfiguration("PasswordKey"));
         }
 
-        public static long? GetCurrentDepositaryId()
-        {
-            if(!_depositaryId.HasValue)
-            {
-                Depositario.Business.Tables.Dispositivo.Depositario oDepositario = new();
-                oDepositario.Where.Add(Depositario.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno, Depositario.sqlEnum.OperandEnum.Equal, GetCurrentDepositaryCode());
-                oDepositario.Items();
-
-                if (oDepositario.Result.Count > 0)
-                    _depositaryId = oDepositario.Result[0].Id;
-            }
-
-            return _depositaryId.Value;
-        }
-
         public static string GetConfiguration(string configurationEntry)
         {
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == null ? String.Empty :

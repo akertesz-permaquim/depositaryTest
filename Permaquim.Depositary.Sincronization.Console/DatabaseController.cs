@@ -55,13 +55,16 @@ namespace Permaquim.Depositary.Sincronization.Console
                 headerEntities.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId,
                     Depositario.sqlEnum.OperandEnum.Equal, entities.Result.FirstOrDefault().Id);
 
-                //Solo tiene que traer datos desde la ultima sincro que finalizo correctamente
-                headerEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin,
+                //Solo tiene que traer datos desde la vez que esa entidad se sincronizo correctamente.
+                headerEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin,
                     Depositario.sqlEnum.OperandEnum.IsNotNull, true);
 
+                //Ordeno todo DESC para obtener la ultima sincronizacion correcta de la entidad.
                 headerEntities.OrderBy.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id,
                     Depositario.sqlEnum.DirEnum.DESC);
+
                 headerEntities.Items();
+
                 if (headerEntities.Result.Count > 0)
                 {
                     returnValue = headerEntities.Result.FirstOrDefault().Fechainicio;
@@ -219,8 +222,13 @@ namespace Permaquim.Depositary.Sincronization.Console
             var lastSincronizationDate = GetLastSincronizationDate(Enumerations.EntitiesEnum.Operacion_Transaccion);
             Depositario.Business.Tables.Operacion.Transaccion transaction = new();
 
-            transaction.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha,
-            Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+            transaction.Where.OpenParentheses();
+
+            transaction.Where.Add(Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.FechaCreacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+
+            transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.OR, Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.FechaModificacion, Depositario.sqlEnum.OperandEnum.GreaterThanOrEqual, lastSincronizationDate);
+
+            transaction.Where.CloseParentheses();
 
             transaction.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND, Depositario.Business.Tables.Operacion.Transaccion.ColumnEnum.Finalizada,
             Depositario.sqlEnum.OperandEnum.Equal, true);
@@ -238,6 +246,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                     Int64? mapSucursalId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Directorio.Sucursal", transactionRow.SucursalId);
                     Int64? mapMonedaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Valor.Moneda", transactionRow.MonedaId);
                     Int64? mapUsuarioId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", transactionRow.UsuarioId);
+                    Int64? mapUsuarioCreacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", transactionRow.UsuarioCreacion);
+                    Int64? mapUsuarioModificacionId = null;
+                    if (transactionRow.UsuarioModificacion.HasValue)
+                        mapUsuarioModificacionId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Seguridad.Usuario", transactionRow.UsuarioModificacion.Value);
 
                     Int64? mapOrigenValorId = null;
                     if (transactionRow.OrigenValorId.HasValue)
@@ -249,7 +261,7 @@ namespace Permaquim.Depositary.Sincronization.Console
                     if (transactionRow.CuentaId.HasValue)
                         mapCuentaId = SynchronizationController.ObtenerIdOrigenDetalleSincronizacion("Banca.Cuenta", transactionRow.CuentaId.Value);
 
-                    if (mapTipoId.HasValue && mapDepositarioId.HasValue && mapSectorId.HasValue && mapSucursalId.HasValue && mapMonedaId.HasValue && mapUsuarioId.HasValue)
+                    if (mapTipoId.HasValue && mapDepositarioId.HasValue && mapUsuarioCreacionId.HasValue && mapSectorId.HasValue && mapSucursalId.HasValue && mapMonedaId.HasValue && mapUsuarioId.HasValue)
                     {
                         transactionRow.TipoId = mapTipoId.Value;
                         transactionRow.DepositarioId = mapDepositarioId.Value;
@@ -260,6 +272,8 @@ namespace Permaquim.Depositary.Sincronization.Console
                         transactionRow.UsuarioId = mapUsuarioId.Value;
                         transactionRow.OrigenValorId = mapOrigenValorId;
                         transactionRow.CodigoOperacion = transactionRow.CodigoOperacion + "-" + transactionRow.Id.ToString();
+                        transactionRow.UsuarioCreacion = mapUsuarioCreacionId.Value;
+                        transactionRow.UsuarioModificacion = mapUsuarioModificacionId;
                     }
                 }
             }
@@ -424,30 +438,5 @@ namespace Permaquim.Depositary.Sincronization.Console
             return result;
         }
 
-        public void SaveEntitySincronizationDate(EntitiesEnum entity, DateTime startDate, DateTime endDate)
-        {
-            Depositario.Business.Tables.Sincronizacion.Entidad entities = new();
-            entities.Where.Add(Depositario.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre,
-                Depositario.sqlEnum.OperandEnum.Equal, Enum.GetName(entity).Replace("_", "."));
-            entities.Items();
-
-            var depositarioId = ConfigurationController.GetCurrentDepositaryId();
-
-            if (entities.Result.Count > 0)
-            {
-                Depositario.Business.Tables.Sincronizacion.EntidadCabecera headerEntities = new();
-                headerEntities.Where.Add(Depositario.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId,
-                    Depositario.sqlEnum.OperandEnum.Equal, entities.Result.FirstOrDefault().Id);
-                headerEntities.Add(new Depositario.Entities.Tables.Sincronizacion.EntidadCabecera()
-                {
-                    DepositarioId = depositarioId,
-                    EntidadId = entities.Result.FirstOrDefault().Id,
-                    Fechafin = endDate,
-                    Fechainicio = startDate,
-                    Valor = entities.Result.FirstOrDefault().Nombre
-                });
-
-            }
-        }
     }
 }

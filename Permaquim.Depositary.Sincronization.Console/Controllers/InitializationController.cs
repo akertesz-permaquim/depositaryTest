@@ -3,14 +3,13 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
+using static System.Net.WebRequestMethods;
 
 namespace Permaquim.Depositary.Sincronization.Console.Controllers
 {
     internal static class InitializationController
     {
         private const string MEDIATYPE_JSON = "application/json";
-        private const string WEBAPI_BASE_URL = "WEBAPI_BASE_URL";
-        private const string SINCRONIZATION_DELAY = "SINCRONIZATION_DELAY";
         private const string TOKEN_ENDPOINT = "inicializacion/ObtenerTokenInicializacion";
         private const string SINCRO_ENDPOINT = "inicializacion/obtenerdatosiniciales";
         private const string SECURITY_SCHEME = "Bearer";
@@ -34,8 +33,11 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
             {
                 await ReceiveData(webapiUrl);
             }
+            else
+            {
+                AuditController.LogToFile("Invalid token");
+            }
         }
-
 
         private static async Task GetinitializationToken(InicializacionModel inicializacionModel, string webapiUrl)
         {
@@ -65,7 +67,6 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
         }
         private static async Task ReceiveData(string baseUrl)
         {
-
             if (_jwToken != null)
             {
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
@@ -73,73 +74,49 @@ namespace Permaquim.Depositary.Sincronization.Console.Controllers
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
                 try
                 {
-                    var getResponse = await _httpClient.GetStringAsync(baseUrl + SINCRO_ENDPOINT);
-                    string getRresult = getResponse.ToString();
-                    InicializacionModel model = new();
-                    model = JsonConvert.DeserializeObject<InicializacionModel>(getRresult);
-                    //Persistimos los metodos en la base de datos.
-                    model.Persist();
+                    await SynchronizationController.InitializeFirstSynchronizationExecution(_jwToken);
 
-                    DatabaseController.EndinitialSincro();
+                    if (SynchronizationController.HasOpenedExecution())
+                    {
+                        if (SynchronizationController.InitializeFirstSynchronization())
+                        {
+                            //Hacemos la solicitud de datos al servidor.
+                            InicializacionModel model = new();
+
+                            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+
+                            var postResponse = _httpClient.PostAsync(baseUrl + SINCRO_ENDPOINT, content);
+                            var postResult = postResponse.Result;
+
+                            if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                            {
+                                var jsonResult = await postResult.Content.ReadAsStringAsync();
+
+                                model = JsonConvert.DeserializeObject<InicializacionModel>(jsonResult);
+
+                                //Persistimos los metodos en la base de datos.
+                                if (model.Persist())
+                                {
+                                    if (SynchronizationController.FinishInitialSynchronization())
+                                    {
+                                        await SynchronizationController.FinishFirstSynchronizationExecution(_jwToken);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    AuditController.Log(ex);
+                    AuditController.LogToFile(ex);
                 }
 
             }
-        }
-
-        private static Task SendData(string baseUrl)
-        {
-            var model = new InicializacionModel();
-            model.CodigoExternoDepositario = GetConfiguration("CodigoDepositario");
-
-            try
-            {
-                if (_jwToken != null)
-                {
-                    var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
-                    string jsonToSend = JsonConvert.SerializeObject(model);
-
-                    _httpClient.DefaultRequestHeaders.Accept.Clear();
-                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
-                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
-
-                    var postResponse = _httpClient.PostAsync(baseUrl + SINCRO_ENDPOINT, content);
-                    var postResult = postResponse.Result;
-
-                    if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        model.Persist();
-                    }
-                    else
-                    {
-                        if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                        {
-                            _jwToken = null;
-                        }
-                        else
-                        {
-                            throw new Exception(postResult.ToString());
-                        }
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-
-            return Task.CompletedTask;
         }
 
         private static string GetConfiguration(string configurationEntry)
         {
-
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == null ? String.Empty :
                  Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") + ".";
             var builder = new ConfigurationBuilder()
