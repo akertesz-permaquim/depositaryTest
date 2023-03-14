@@ -41,19 +41,18 @@
         {
             string resultado = "";
 
-            using (Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa bTablesConfiguracionEmpresa = new())
+            Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa bTablesConfiguracionEmpresa = new();
+
+            bTablesConfiguracionEmpresa.Where.Clear();
+            bTablesConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, pEmpresaId);
+            bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Equal, pClave);
+
+            bTablesConfiguracionEmpresa.Items();
+
+            if (bTablesConfiguracionEmpresa.Result.Count > 0)
             {
-                bTablesConfiguracionEmpresa.Where.Clear();
-                bTablesConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, pEmpresaId);
-                bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Equal, pClave);
-
-                bTablesConfiguracionEmpresa.Items();
-
-                if (bTablesConfiguracionEmpresa.Result.Count > 0)
-                {
-                    resultado = bTablesConfiguracionEmpresa.Result.FirstOrDefault().Valor;
-                }
+                resultado = bTablesConfiguracionEmpresa.Result.FirstOrDefault().Valor;
             }
 
             return resultado;
@@ -74,38 +73,39 @@
 
                 if (bTablesEmpresa.Result.Count > 0)
                 {
-                    using (Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new())
+                    Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa oConfiguracionEmpresa = new();
+
+                    oConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, bTablesEmpresa.Result.FirstOrDefault().Id);
+
+                    oConfiguracionEmpresa.Items();
+
+                    if (oConfiguracionEmpresa.Result.Count > 0)
                     {
-                        oConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, bTablesEmpresa.Result.FirstOrDefault().Id);
+                        Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa btConfiguracionEmpresa = new();
 
-                        oConfiguracionEmpresa.Items();
+                        btConfiguracionEmpresa.BeginTransaction();
 
-                        if (oConfiguracionEmpresa.Result.Count > 0)
+                        foreach (var registroConfiguracion in oConfiguracionEmpresa.Result)
                         {
-                            oConfiguracionEmpresa.BeginTransaction();
-                            foreach (var registroConfiguracion in oConfiguracionEmpresa.Result)
+                            registroConfiguracion.EmpresaId = pEmpresaId;
+                            registroConfiguracion.FechaModificacion = null;
+                            registroConfiguracion.UsuarioModificacion = null;
+                            registroConfiguracion.FechaCreacion = DateTime.Now;
+
+                            try
                             {
-                                registroConfiguracion.EmpresaId = pEmpresaId;
-                                registroConfiguracion.FechaModificacion = null;
-                                registroConfiguracion.UsuarioModificacion = null;
-                                registroConfiguracion.FechaCreacion = DateTime.Now;
-
-                                try
-                                {
-                                    oConfiguracionEmpresa.Add(registroConfiguracion, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                                }
-                                catch (Exception ex)
-                                {
-                                    AuditController.Log(ex);
-                                    oConfiguracionEmpresa.EndTransaction(false);
-                                    return false;
-                                }
+                                btConfiguracionEmpresa.Add(registroConfiguracion, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
-                            oConfiguracionEmpresa.EndTransaction(true);
-
+                            catch (Exception ex)
+                            {
+                                AuditController.Log(ex);
+                                btConfiguracionEmpresa.EndTransaction(false);
+                                return false;
+                            }
                         }
-                    }
+                        btConfiguracionEmpresa.EndTransaction(true);
 
+                    }
                 }
             }
             resultado = true;

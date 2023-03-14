@@ -10,6 +10,8 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
+@implements IDisposable
+
 @if (dataFunciones != null)
 {
     @if (SeguridadController.VerificarPermisoFuncion("Monitor", dataFunciones, "PuedeVisualizar"))
@@ -119,6 +121,13 @@
 
 
 
+
+
+
+
+
+
+
                                         </Template>
                                     </RadzenDataGridColumn>
                                     <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Property="Sucursal"
@@ -131,7 +140,14 @@
                                             </div>
                                         }
                                         else
+
                                             @context.Sucursal
+
+
+
+
+
+
 
 
 
@@ -201,6 +217,13 @@
                                         }
                                         else
                                             @context.Sector
+
+
+
+
+
+
+
 
 
 
@@ -812,7 +835,7 @@ else
     protected override void OnInitialized()
     {
         //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
-        if (!LicenseController.IsValidLicenseAvailable() || LicenseController.GetLicenseRemainingDays() <= 0 || LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        if (LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
         {
             NavManager.NavigateTo("RequerimientoLicencia/Monitor", true);
         }
@@ -1196,6 +1219,37 @@ else
         dataTransaccionSobreDetalles.AddRange(OperacionController.ObtenerDetalleTransaccionAValidarMonitor(pTransaccionSobreId));
         estaCargandoGridTransaccionSobreDetalles = false;
     }
+
+    void IDisposable.Dispose()
+    {
+        timerRecargaInformacion.Dispose();
+        dataFunciones.Clear();
+        rowsDepositariosExpandidas.Clear();
+        tabsMonitor.Dispose();
+        cardInformacionDepositario.Dispose();
+        gridTotalesGenerales.Dispose();
+        gridExistenciasAValidar.Dispose();
+        gridExistencias.Dispose();
+        gridEventos.Dispose();
+        gridTransaccionSobreDetalles.Dispose();
+        gridTransaccionesSobres.Dispose();
+        gridTransaccionDetalles.Dispose();
+        gridDepositarios.Dispose();
+        gridTransacciones.Dispose();
+        dataEsquemaDetalle.Clear();
+        dataLenguaje.Clear();
+        dataTotalesGeneralesDepositario.Clear();
+        dataInformacionDepositario.Clear();
+        dataExistenciasAValidarDepositario.Clear();
+        dataExistenciasDepositario.Clear();
+        dataEventosDepositario.Clear();
+        dataTransaccionSobreDetalles.Clear();
+        dataTransaccionesSobreDepositario.Clear();
+        dataTransaccionDetalles.Clear();
+        dataTransaccionesDepositario.Clear();
+        dataDepositarios.Clear();
+    }
+
     }
 
 <style>

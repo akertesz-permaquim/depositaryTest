@@ -545,6 +545,7 @@ else
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "AplicacionConfiguracionCustomCrud", crudMode.ToString(), dataUsuario.Id);
         estaProcesando = false;
+
         Depositary.Business.Tables.Aplicacion.Configuracion entity = new();
         Configuracion_entities = entity.Items();
     }

@@ -2,9 +2,11 @@
 {
     public static class TurnoController
     {
-        public static List<TurnoEntities.GrupoTurno> ObtenerArbolTurnos()
+        public static List<TurnoEntities.GrupoTurno> ObtenerArbolTurnos(bool OperaSinTurno)
         {
             List<TurnoEntities.GrupoTurno> resultado = new();
+
+            bool generacionSectores = false;
 
             //1°Obtenemos todas las empresas
             Depositary.Business.Relations.Directorio.Grupo oGrupo = new();
@@ -19,48 +21,70 @@
                     TurnoEntities.GrupoTurno grupoTurno = new();
                     grupoTurno.GrupoId = grupo.Id;
                     grupoTurno.GrupoNombre = grupo.Nombre;
+                    //Tomamos las empresas segun si se pide que operen con o sin turno.
                     var empresas = grupo.ListOf_Empresa_GrupoId;
                     if (empresas != null)
                     {
+                        //En funcion del parametro, me quedo con las que trabajan con o sin turno.
+
                         foreach (var empresa in empresas)
                         {
-                            //2° Obtenemos para cada grupo sus empresas
-                            TurnoEntities.EmpresaTurno empresaTurno = new();
-                            empresaTurno.EmpresaNombre = empresa.Nombre;
-                            empresaTurno.EmpresaId = empresa.Id;
-                            var sucursales = empresa.ListOf_Sucursal_EmpresaId;
-                            if (sucursales != null)
+                            var parametroOperarSinTurno = empresa.ListOf_ConfiguracionEmpresa_EmpresaId.FirstOrDefault(x => x.Clave == "OPERA_SIN_TURNO");
+
+                            if (parametroOperarSinTurno != null)
                             {
-                                foreach (var sucursal in sucursales)
+                                bool conversionParametro;
+                                if (bool.TryParse(parametroOperarSinTurno.Valor, out conversionParametro))
                                 {
-                                    //3° Obtenemos para cada empresa sus sucursales
-                                    TurnoEntities.SucursalTurno sucursalTurno = new();
-                                    sucursalTurno.SucursalNombre = sucursal.Nombre;
-                                    sucursalTurno.SucursalId = sucursal.Id;
-
-                                    var sectores = sucursal.ListOf_Sector_SucursalId;
-
-                                    if (sectores != null)
+                                    if (conversionParametro == OperaSinTurno)
                                     {
-                                        foreach (var sector in sectores)
+                                        //2° Obtenemos para cada grupo sus empresas
+                                        TurnoEntities.EmpresaTurno empresaTurno = new();
+                                        empresaTurno.EmpresaNombre = empresa.Nombre;
+                                        empresaTurno.EmpresaId = empresa.Id;
+                                        var sucursales = empresa.ListOf_Sucursal_EmpresaId;
+                                        if (sucursales != null)
                                         {
-                                            //4° Obtenemos para cada sucursal sus sectores
-                                            TurnoEntities.SectorTurno sectorTurno = new();
-                                            sectorTurno.SectorNombre = sector.Nombre;
-                                            sectorTurno.SectorId = sector.Id;
-                                            sucursalTurno.Sectores.Add(sectorTurno);
+                                            foreach (var sucursal in sucursales)
+                                            {
+                                                //3° Obtenemos para cada empresa sus sucursales
+                                                TurnoEntities.SucursalTurno sucursalTurno = new();
+                                                sucursalTurno.SucursalNombre = sucursal.Nombre;
+                                                sucursalTurno.SucursalId = sucursal.Id;
+
+                                                var sectores = sucursal.ListOf_Sector_SucursalId;
+
+                                                if (sectores != null)
+                                                {
+                                                    foreach (var sector in sectores)
+                                                    {
+                                                        //4° Obtenemos para cada sucursal sus sectores
+                                                        TurnoEntities.SectorTurno sectorTurno = new();
+                                                        sectorTurno.SectorNombre = sector.Nombre;
+                                                        sectorTurno.SectorId = sector.Id;
+                                                        sucursalTurno.Sectores.Add(sectorTurno);
+                                                        if (!generacionSectores)
+                                                            generacionSectores = true;
+                                                    }
+                                                }
+                                                empresaTurno.Sucursales.Add(sucursalTurno);
+                                            }
                                         }
+                                        grupoTurno.Empresas.Add(empresaTurno);
                                     }
-                                    empresaTurno.Sucursales.Add(sucursalTurno);
                                 }
                             }
-                            grupoTurno.Empresas.Add(empresaTurno);
-
                         }
                     }
                     resultado.Add(grupoTurno);
                 }
+
+
+                //Si no se agregaron sectores, limpiamos el dataset ya que se necesitan sectores para operar.
+                if (!generacionSectores)
+                    resultado.Clear();
             }
+
 
             return resultado;
         }
@@ -110,7 +134,7 @@
             return false; //Si se llega hasta aca no existen turnos.
         }
 
-        public static async Task<string> GuardarAgenda(TurnoEntities.AgendaTurnoABM pAgendaTurnoABM, bool SoloDiasHabiles)
+        public static async Task<string> GuardarAgenda(TurnoEntities.AgendaTurnoABM pAgendaTurnoABM, bool diasCorridos)
         {
             string resultado = "";
 
@@ -134,8 +158,8 @@
                             //Tercero tenemos que hacer un insert por cada dia del periodo fecha desde - fecha hasta
                             for (int i = 0; auxFecha <= pAgendaTurnoABM.FechaHasta; auxFecha = auxFecha.AddDays(1))
                             {
-                                //Si se indica solo dias habiles se insertan valores para lun-vier, caso contrario se insertan todos los dias.
-                                if (!SoloDiasHabiles || (SoloDiasHabiles && auxFecha.DayOfWeek != DayOfWeek.Saturday && auxFecha.DayOfWeek != DayOfWeek.Sunday))
+                                //Si se indica solo dias corridos se insertan valores para todos los dias, caso contrario se insertan solo lun-vier.
+                                if (diasCorridos == true || (diasCorridos == false && auxFecha.DayOfWeek != DayOfWeek.Saturday && auxFecha.DayOfWeek != DayOfWeek.Sunday))
                                 {
                                     oAgendaTurno.Where.Clear();
                                     oAgendaTurno.Where.Add(Depositary.Business.Tables.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, Depositary.sqlEnum.OperandEnum.Equal, esquemaDetalle.Id);

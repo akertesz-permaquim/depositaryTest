@@ -16,38 +16,37 @@
 
                 if (bTablesEmpresa.Result.Count > 0)
                 {
-                    using (Depositary.Business.Tables.Impresion.Ticket bTablesTicket = new())
+                    Depositary.Business.Tables.Impresion.Ticket oTicket = new();
+
+                    oTicket.Where.Add(Depositary.Business.Tables.Impresion.Ticket.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, bTablesEmpresa.Result.FirstOrDefault().Id);
+
+                    oTicket.Items();
+
+                    if (oTicket.Result.Count > 0)
                     {
+                        Depositary.Business.Tables.Impresion.Ticket btTicket = new();
 
-                        bTablesTicket.Where.Add(Depositary.Business.Tables.Impresion.Ticket.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, bTablesEmpresa.Result.FirstOrDefault().Id);
-
-                        bTablesTicket.Items();
-
-                        if (bTablesTicket.Result.Count > 0)
+                        btTicket.BeginTransaction();
+                        foreach (var registroTicket in oTicket.Result)
                         {
-                            bTablesTicket.BeginTransaction();
-                            foreach (var registroTicket in bTablesTicket.Result)
+                            registroTicket.EmpresaId = pEmpresaId;
+                            registroTicket.FechaModificacion = null;
+                            registroTicket.UsuarioModificacion = null;
+                            registroTicket.FechaCreacion = DateTime.Now;
+                            try
                             {
-                                registroTicket.EmpresaId = pEmpresaId;
-                                registroTicket.FechaModificacion = null;
-                                registroTicket.UsuarioModificacion = null;
-                                registroTicket.FechaCreacion = DateTime.Now;
-                                try
-                                {
-                                    bTablesTicket.Add(registroTicket, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                                }
-                                catch (Exception ex)
-                                {
-                                    AuditController.Log(ex);
-                                    bTablesTicket.EndTransaction(false);
-                                    return false;
-                                }
+                                btTicket.Add(registroTicket, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
                             }
-                            bTablesTicket.EndTransaction(true);
-
+                            catch (Exception ex)
+                            {
+                                AuditController.Log(ex);
+                                btTicket.EndTransaction(false);
+                                return false;
+                            }
                         }
-                    }
+                        btTicket.EndTransaction(true);
 
+                    }
                 }
 
             }

@@ -54,7 +54,7 @@
             using (Depositary.Business.Relations.Operacion.TransaccionDetalle transaccionDetalles = new())
             {
                 transaccionDetalles.Where.Add(Depositary.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.TransaccionId, Depositary.sqlEnum.OperandEnum.Equal, pTransaccionId);
-                transaccionDetalles.OrderByParameter.Add(Depositary.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
+                transaccionDetalles.OrderBy.Add(Depositary.Business.Relations.Operacion.TransaccionDetalle.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
                 transaccionDetalles.Items();
 
@@ -118,7 +118,7 @@
                 {
                     oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, pFechaDesde);
                 }
-                oTransaccion.OrderByParameter.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
+                oTransaccion.OrderBy.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
                 oTransaccion.Items();
 
@@ -140,7 +140,7 @@
             {
                 oContenedor.Where.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.IsNull, 0);
                 oContenedor.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositario);
-                oContenedor.OrderByParameter.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaApertura, Depositary.sqlEnum.DirEnum.DESC);
+                oContenedor.OrderBy.Add(Depositary.Business.Relations.Operacion.Contenedor.ColumnEnum.FechaApertura, Depositary.sqlEnum.DirEnum.DESC);
                 oContenedor.TopQuantity = 1;
                 oContenedor.Items();
 
@@ -210,7 +210,7 @@
             {
 
                 transaccionSobreDetalles.Where.Add(Depositary.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.SobreId, Depositary.sqlEnum.OperandEnum.Equal, pTransaccionSobreId);
-                transaccionSobreDetalles.OrderByParameter.Add(Depositary.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
+                transaccionSobreDetalles.OrderBy.Add(Depositary.Business.Relations.Operacion.TransaccionSobreDetalle.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
                 transaccionSobreDetalles.Items();
 
@@ -237,9 +237,8 @@
 
         #region Existencias
 
-        public static float ObtenerPorcentajeOcupacionBolsa(Int64 pContenedorId, Int64 DepositarioId)
+        public static double ObtenerPorcentajeOcupacionBolsa(Int64 pContenedorId, Int64 DepositarioId)
         {
-            float resultado = 0;
             double resultado = 0;
             Int64 cantidadMaxima = 0;
             Int64 cantidadUnidadesAcumuladas = 0;
@@ -256,7 +255,6 @@
 
                     using (Depositary.Business.Relations.Operacion.Transaccion transacciones = new())
                     {
-
                         transacciones.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.ContenedorId, Depositary.sqlEnum.OperandEnum.Equal, pContenedorId);
                         transacciones.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
                         transacciones.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.TipoId, Depositary.sqlEnum.OperandEnum.Equal, TransaccionEntities.TipoTransaccion.DepositoBillete);
@@ -271,10 +269,10 @@
                             }
                         }
                     }
-                    resultado = (float)cantidadUnidadesAcumuladas * 100 / cantidadMaxima;
+                    resultado = (double)cantidadUnidadesAcumuladas * 100 / cantidadMaxima;
                 }
             }
-            return resultado;
+            return Math.Round(resultado, 2);
         }
         public static List<MonitorEntities.ExistenciaValidada> ObtenerExistenciasValidadasPorDepositario(Int64 pDepositarioID)
         {
@@ -384,7 +382,7 @@
             using (Depositary.Business.Relations.Operacion.Evento oEvento = new())
             {
                 oEvento.Where.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositarioId);
-                oEvento.OrderByParameter.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
+                oEvento.OrderBy.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
 
                 oEvento.Items();
 
@@ -459,17 +457,15 @@
                 if (depositarios.Count > 0)
                 {
                     //Levanto transacciones con un IN y con la fecha de hoy.
-                    using (Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new())
-                    {
+                    Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new();
 
-                        oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
-                        oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
-                        oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
+                    oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
+                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
+                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
 
-                        oTransaccion.Items();
+                    oTransaccion.Items();
 
-                        resultado = oTransaccion.Result.Count.ToString();
-                    }
+                    resultado = oTransaccion.Result.Count.ToString();
                 }
             }
 
@@ -490,33 +486,31 @@
             {
                 if (depositarios.Count > 0)
                 {
-                    using (Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new())
+                    Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new();
+
+                    oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Today);
+                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
+
+                    oTransaccion.Items();
+
+                    if (oTransaccion.Result.Count > 0)
                     {
-
-                        oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, DateTime.Today);
-                        oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
-
-                        oTransaccion.Items();
-
-                        if (oTransaccion.Result.Count > 0)
+                        foreach (var transaccion in oTransaccion.Result)
                         {
-                            foreach (var transaccion in oTransaccion.Result)
+                            var existenciaTipoTransaccion = resultado.FirstOrDefault(x => x.TipoTransaccionId == transaccion._TipoId);
+                            if (existenciaTipoTransaccion != null)
                             {
-                                var existenciaTipoTransaccion = resultado.FirstOrDefault(x => x.TipoTransaccionId == transaccion._TipoId);
-                                if (existenciaTipoTransaccion != null)
-                                {
-                                    existenciaTipoTransaccion.CantidadTipoTransaccion++;
-                                }
-                                else
-                                {
-                                    Entities.TransaccionTipoCantidad transaccionTipoCantidad = new();
-                                    transaccionTipoCantidad.NombreTipoTransaccion = transaccion.TipoId.Nombre;
-                                    transaccionTipoCantidad.CantidadTipoTransaccion = 1;
-                                    transaccionTipoCantidad.TipoTransaccionId = transaccion._TipoId;
-                                    resultado.Add(transaccionTipoCantidad);
-                                }
-                                transaccionesTotales++;
+                                existenciaTipoTransaccion.CantidadTipoTransaccion++;
                             }
+                            else
+                            {
+                                Entities.TransaccionTipoCantidad transaccionTipoCantidad = new();
+                                transaccionTipoCantidad.NombreTipoTransaccion = transaccion.TipoId.Nombre;
+                                transaccionTipoCantidad.CantidadTipoTransaccion = 1;
+                                transaccionTipoCantidad.TipoTransaccionId = transaccion._TipoId;
+                                resultado.Add(transaccionTipoCantidad);
+                            }
+                            transaccionesTotales++;
                         }
                     }
                 }

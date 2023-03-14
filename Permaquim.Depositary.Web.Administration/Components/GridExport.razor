@@ -1,0 +1,162 @@
+﻿@using ClosedXML.Excel
+@using BlazorDownloadFile
+@using Controllers
+
+@inject IBlazorDownloadFileService BlazorDownloadFileService
+
+@typeparam T
+
+<RadzenButton Text="@TituloBoton" Style="background-color:green" Click="@(() => Task.Run(GenerateWorkBook))" />
+
+
+@code {
+
+    [Parameter]
+    public RadzenDataGrid<T> Grid { get; set; }
+
+    [Parameter]
+    public string NombreArchivo { get; set; }
+
+    [Parameter]
+    public string TituloBoton { get; set; }
+
+    public async void GenerateWorkBook()
+    {
+        try
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                IXLWorksheet worksheet =
+                workbook.Worksheets.Add("Grid");
+
+                int columnasMismoNombre = 0;
+
+                var columnasVisiblesGrilla = Grid.ColumnsCollection.Where(x => x.Visible == true).ToList();
+
+                var range = worksheet.Range(1, 1, Grid.Data.Count() + 1, columnasVisiblesGrilla.Count);
+
+                var table = range.CreateTable();
+
+                //Seteamos un theme para la tabla.
+                //table.Theme = XLTableTheme.TableStyleDark2;
+
+                //Configuramos las columnas
+                for (int i = 0; i < columnasVisiblesGrilla.Count; i++)
+                {
+                    //Seteamos el titulo usando la property para luego mapear los datos de las celdas.
+                    table.Column(i + 1).Value = columnasVisiblesGrilla[i].Property;
+
+                    //Seteamos el color a los header
+                    table.Column(i + 1).Cell(1).Style.Fill.BackgroundColor = XLColor.Gray;
+
+                    //En funcion del tipo de dato seteamos el formato
+                    if (columnasVisiblesGrilla[i].FilterPropertyType != null)
+                    {
+                        switch (columnasVisiblesGrilla[i].FilterPropertyType.FullName)
+                        {
+                            case "System.Double":
+                            case "System.Float":
+                            case "System.Decimal":
+                                table.Column(i + 1).CellsUsed().Style.NumberFormat.SetNumberFormatId(4);
+                                break;
+                            case "System.Int":
+                            case "System.Int16":
+                            case "System.Int32":
+                            case "System.Int64":
+                                table.Column(i + 1).CellsUsed().Style.NumberFormat.SetNumberFormatId(1);
+                                break;
+                        }
+                    }
+
+                }
+
+                int index = 1;
+
+                foreach (var item in Grid.Data)
+                {
+                    index++;
+
+                    //Recorro las celdas del primer row (los titulos) y asigno los valores mapeando con el datasource
+                    for (int j = 0; j < columnasVisiblesGrilla.Count; j++)
+                    {
+                        var valor = item.GetType().GetProperty(worksheet.Cell(1, j + 1).Value.ToString()).GetValue(item, null);
+                        if (valor != null)
+                        {
+                            var tipoDato = valor.GetType().ToString();
+
+                            switch (tipoDato)
+                            {
+                                case "System.Double":
+                                    table.Cell(index, j + 1).Value = Double.Parse(valor.ToString());
+                                    break;
+                                case "System.Float":
+                                    table.Cell(index, j + 1).Value = float.Parse(valor.ToString());
+                                    break;
+                                case "System.Decimal":
+                                    table.Cell(index, j + 1).Value = decimal.Parse(valor.ToString());
+                                    break;
+                                case "System.Int":
+                                case "System.Int16":
+                                case "System.Int32":
+                                case "System.Int64":
+                                    table.Cell(index, j + 1).Value = int.Parse(valor.ToString());
+                                    break;
+                                case "System.DateTime":
+                                    table.Cell(index, j + 1).Value = DateTime.Parse(valor.ToString());
+                                    break;
+                                default:
+                                    table.Cell(index, j + 1).Value = valor.ToString();
+                                    break;
+
+                            }
+                        }
+                        else
+                            table.Cell(index, j + 1).Value = "";
+
+                    }
+
+                }
+
+                //Seteamos las columnas con valores numericos para evitar errores de repeticion de titulo
+                for (int i = 0; i < columnasVisiblesGrilla.Count; i++)
+                {
+                    table.Cell(1, i + 1).Value = i.ToString();
+                }
+
+                //Pisamos los titulos de las columnas con titulo de cada campo en la grilla
+                for (int i = 0; i < columnasVisiblesGrilla.Count; i++)
+                {
+                    //Revisamos si ya existe una columna con ese titulo
+                    //si existe la renombramos con indicador de repeticiones entre parentesis
+                    columnasMismoNombre = table.Range(1, 1, 1, i + 1).CellsUsed().Count(x => x.Value.ToString() == columnasVisiblesGrilla[i].Title);
+
+                    if (columnasMismoNombre > 0)
+                        table.Cell(1, i + 1).Value = columnasVisiblesGrilla[i].Title + "(" + columnasMismoNombre.ToString() + ")";
+                    else
+                        table.Cell(1, i + 1).Value = columnasVisiblesGrilla[i].Title;
+                }
+
+                //Ajustamos el ancho de las columnas al contenido.
+                worksheet.Columns().AdjustToContents();
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                    var strDate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                    string filename = string.Format($"{NombreArchivo}_{strDate}.xlsx");
+
+                    await BlazorDownloadFileService.DownloadFile(filename, content, contentType);
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            AuditController.Log(ex);
+        }
+
+    }
+    }

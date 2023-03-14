@@ -607,7 +607,7 @@ else
                     {
                         Depositary.Entities.Tables.Directorio.RelacionMonedaSucursal nuevaRelacionMonedaSucursal;
 
-                        //Si se quiere inserta una moneda default y ya existia una moneda default le quito la marca y prosigo la operacion
+                        //Si se quiere insertar una moneda default y ya existia una moneda default le quito la marca y prosigo la operacion
                         if (monedaDefaultExistente != null && RelacionMonedaSucursal_entity.EsDefault)
                         {
                             Depositary.Business.Tables.Directorio.RelacionMonedaSucursal controllerMonedaDefault = new(crud);

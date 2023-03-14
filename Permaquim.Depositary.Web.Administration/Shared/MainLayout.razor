@@ -17,119 +17,132 @@
 
 @if (dataUsuario != null)
 {
-    <RadzenHeader class="mainHeader">
-        <ChildContent>
-            <div class="row justify-content-start align-items-center">
-                <div class="col-6 d-flex align-items-center">
-                    <RadzenSidebarToggle class="textoMainLayout" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ButtonSideBarAdministradorWebDepositario", false) Click="@SidebarToggleClick">
-                    </RadzenSidebarToggle>
-                    <RadzenLabel class="textoMainLayout" Text="@MultilenguajeController.ObtenerTextoPorClave("TEXTO_HEADER_MAIN_LAYOUT",dataLenguaje)">
-                    </RadzenLabel>
+    @if (licenciaValida && !licenciaExpirada)
+    {
+        <RadzenHeader class="mainHeader">
+            <ChildContent>
+                <div class="row justify-content-start align-items-center">
+                    <div class="col-6 d-flex align-items-center">
+                        <RadzenSidebarToggle class="textoMainLayout" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ButtonSideBarAdministradorWebDepositario", false) Click="@SidebarToggleClick">
+                        </RadzenSidebarToggle>
+                        <RadzenLabel class="textoMainLayout" Text="@MultilenguajeController.ObtenerTextoPorClave("TEXTO_HEADER_MAIN_LAYOUT",dataLenguaje)">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-6 text-right">
+                        <RadzenProfileMenu class="textoMainLayout" Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@ProfileMenuClick">
+                            <ChildContent>
+                                <div style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfilDesplegable", false)>
+                                    <RadzenProfileMenuItem Text="Perfil" Path="perfil" Value="Perfil" Icon="person">
+                                    </RadzenProfileMenuItem>
+                                    <RadzenProfileMenuItem Text="Cambiar password" Path="cambioPassword" Value="ActualizarPassword" Icon="password">
+                                    </RadzenProfileMenuItem>
+                                    <RadzenProfileMenuItem Text="Logout" Path="logout" Value="Logout" Icon="power_settings_new">
+                                    </RadzenProfileMenuItem>
+                                </div>
+                            </ChildContent>
+                            <Template>
+                                <RadzenLabel class="textoMainLayout" Text="@dataUsuario.Nombre">
+                                </RadzenLabel>
+                                <RadzenLabel class="textoMainLayout" Text="@dataUsuario.Apellido">
+                                </RadzenLabel>
+                                <RadzenImage Path="@dataUsuario.Avatar" style="border-radius: 16px; height: 32px; width: 32px">
+                                </RadzenImage>
+                            </Template>
+                        </RadzenProfileMenu>
+                    </div>
                 </div>
-                <div class="col-6 text-right">
-                    <RadzenProfileMenu class="textoMainLayout" Visible="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfil", false) Click="@ProfileMenuClick">
-                        <ChildContent>
-                            <div style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoHeaderMenuPerfilDesplegable", false)>
-                                <RadzenProfileMenuItem Text="Perfil" Path="perfil" Value="Perfil" Icon="person">
-                                </RadzenProfileMenuItem>
-                                <RadzenProfileMenuItem Text="Cambiar password" Path="cambioPassword" Value="ActualizarPassword" Icon="password">
-                                </RadzenProfileMenuItem>
-                                <RadzenProfileMenuItem Text="Logout" Path="logout" Value="Logout" Icon="power_settings_new">
-                                </RadzenProfileMenuItem>
-                            </div>
-                        </ChildContent>
-                        <Template>
-                            <RadzenLabel class="textoMainLayout" Text="@dataUsuario.Nombre">
-                            </RadzenLabel>
-                            <RadzenLabel class="textoMainLayout" Text="@dataUsuario.Apellido">
-                            </RadzenLabel>
-                            <RadzenImage Path="@dataUsuario.Avatar" style="border-radius: 16px; height: 32px; width: 32px">
-                            </RadzenImage>
-                        </Template>
-                    </RadzenProfileMenu>
-                </div>
-            </div>
-        </ChildContent>
-    </RadzenHeader>
-    <RadzenBody @ref="body0">
-        <ChildContent>
-            <RadzenContentContainer Name="main">
-                @Body
-            </RadzenContentContainer>
-        </ChildContent>
-    </RadzenBody>
-    <RadzenSidebar @ref="sidebar0">
-        <ChildContent>
-            <RadzenPanelMenu style="height: 100%">
-                <ChildContent>
-                    @if (dataMenues.Count > 0)
-                    {
-                        //Menues principales
-                        foreach (var menu in dataMenues.Where(x => x.DependeDe == null))
+            </ChildContent>
+        </RadzenHeader>
+        <RadzenBody @ref="body0">
+            <ChildContent>
+                <RadzenContentContainer Name="main">
+                    @Body
+                </RadzenContentContainer>
+            </ChildContent>
+        </RadzenBody>
+        <RadzenSidebar @ref="sidebar0">
+            <ChildContent>
+                <RadzenPanelMenu style="height: 100%">
+                    <ChildContent>
+                        @if (dataMenues.Count > 0)
                         {
-                            //Si no se tiene licencia full verificamos si se trata de un menu que requiere de la misma.
-                            if (tipoLicencia != "FULL")
+                            //Menues principales
+                            foreach (var menu in dataMenues.Where(x => x.DependeDe == null))
                             {
-                                if (listaMenuesLicenciaFull.Exists(x => x == menu.Referencia))
+                                //Si no se tiene licencia full verificamos si se trata de un menu que requiere de la misma.
+                                if (tipoLicencia != "FULL")
                                 {
-                                    //Si requiere licencia full y no se la tiene lo marcamos como no accesible
-                                    menu.Accesible = false;
+                                    if (listaMenuesLicenciaFull.Exists(x => x == menu.Referencia))
+                                    {
+                                        //Si requiere licencia full y no se la tiene lo marcamos como no accesible
+                                        menu.Accesible = false;
+                                    }
+                                    else
+                                    {
+                                        menu.Accesible = true;
+                                    }
                                 }
                                 else
                                 {
                                     menu.Accesible = true;
                                 }
-                            }
-                            else
-                            {
-                                menu.Accesible = true;
-                            }
 
-                            switch (menu.TipoMenuId)
-                            {
-                                case (Int64)SeguridadEntities.TipoMenu.Carpeta:
-                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon=@(menu.Accesible ? menu.Imagen : iconoMenuNoAccesible)>
-                                        <ChildContent>
-                                            @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId).OrderBy(x => x.MenuDescripcion))
-                                            {
-                                                switch (menuDependiente.TipoMenuId)
+                                switch (menu.TipoMenuId)
+                                {
+                                    case (Int64)SeguridadEntities.TipoMenu.Carpeta:
+                                        <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon=@(menu.Accesible ? menu.Imagen : iconoMenuNoAccesible)>
+                                            <ChildContent>
+                                                @foreach (var menuDependiente in dataMenues.Where(x => x.DependeDe == menu.MenuId).OrderBy(x => x.MenuDescripcion))
                                                 {
-                                                    case (Int64)SeguridadEntities.TipoMenu.Carpeta:
-                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" class="sub-menu">
-                                                            @foreach (var subMenuDependiente in dataMenues.Where(x => x.DependeDe == menuDependiente.MenuId).OrderBy(x => x.MenuDescripcion))
-                                                            {
-                                                                <RadzenPanelMenuItem Text="@(subMenuDependiente.MenuDescripcion)" Icon="@(subMenuDependiente.Imagen)" Path="@(subMenuDependiente.Referencia)" class="sub-menu2">
-                                                                </RadzenPanelMenuItem>
-                                                            }
-                                                        </RadzenPanelMenuItem>
-                                                        break;
-                                                    case (Int64)SeguridadEntities.TipoMenu.Pagina:
-                                                        <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon=@(menu.Accesible ? menuDependiente.Imagen : iconoMenuNoAccesible) Path="@(menu.Accesible ? menuDependiente.Referencia : "RequerimientoLicencia/" + menuDependiente.Referencia)" class="sub-menu">
-                                                        </RadzenPanelMenuItem>
-                                                        break;
+                                                    switch (menuDependiente.TipoMenuId)
+                                                    {
+                                                        case (Int64)SeguridadEntities.TipoMenu.Carpeta:
+                                                            <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon="@(menuDependiente.Imagen)" class="sub-menu">
+                                                                @foreach (var subMenuDependiente in dataMenues.Where(x => x.DependeDe == menuDependiente.MenuId).OrderBy(x => x.MenuDescripcion))
+                                                                {
+                                                                    <RadzenPanelMenuItem Text="@(subMenuDependiente.MenuDescripcion)" Icon="@(subMenuDependiente.Imagen)" Path="@(subMenuDependiente.Referencia)" class="sub-menu2">
+                                                                    </RadzenPanelMenuItem>
+                                                                }
+                                                            </RadzenPanelMenuItem>
+                                                            break;
+                                                        case (Int64)SeguridadEntities.TipoMenu.Pagina:
+                                                            <RadzenPanelMenuItem Text="@(menuDependiente.MenuDescripcion)" Icon=@(menu.Accesible ? menuDependiente.Imagen : iconoMenuNoAccesible) Path="@(menu.Accesible ? menuDependiente.Referencia : "RequerimientoLicencia/" + menuDependiente.Referencia)" class="sub-menu">
+                                                            </RadzenPanelMenuItem>
+                                                            break;
+                                                    }
                                                 }
-                                            }
-                                        </ChildContent>
-                                    </RadzenPanelMenuItem>
-                                    break;
-                                case (Int64)SeguridadEntities.TipoMenu.Pagina:
-                                    <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon=@(menu.Accesible ? menu.Imagen : iconoMenuNoAccesible) Path="@(menu.Accesible ? menu.Referencia : "RequerimientoLicencia/" + menu.Referencia)">
+                                            </ChildContent>
+                                        </RadzenPanelMenuItem>
+                                        break;
+                                    case (Int64)SeguridadEntities.TipoMenu.Pagina:
+                                        <RadzenPanelMenuItem Text="@(menu.MenuDescripcion)" Icon=@(menu.Accesible ? menu.Imagen : iconoMenuNoAccesible) Path="@(menu.Accesible ? menu.Referencia : "RequerimientoLicencia/" + menu.Referencia)">
 
-                                    </RadzenPanelMenuItem>
-                                    break;
+                                        </RadzenPanelMenuItem>
+                                        break;
+                                }
                             }
                         }
-                    }
-                </ChildContent>
-            </RadzenPanelMenu>
-        </ChildContent>
-    </RadzenSidebar>
-    <RadzenFooter Style="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"FooterAdministradorWebDepositario",false)">
-        <ChildContent>
-            <RadzenLabel class="textoMainLayout" Text="@MultilenguajeController.ObtenerTextoPorClave("TEXTO_FOOTER_MAIN_LAYOUT",dataLenguaje)">
-            </RadzenLabel>
-        </ChildContent>
-    </RadzenFooter>
+                    </ChildContent>
+                </RadzenPanelMenu>
+            </ChildContent>
+        </RadzenSidebar>
+        <RadzenFooter Style="@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle,"FooterAdministradorWebDepositario",false)">
+            <ChildContent>
+                <RadzenLabel class="textoMainLayout" Text="@MultilenguajeController.ObtenerTextoPorClave("TEXTO_FOOTER_MAIN_LAYOUT",dataLenguaje)">
+                </RadzenLabel>
+                @if (LicenseController.GetLicenseRemainingDays() < 100)
+                {
+                    <RadzenLabel class="textoAlertaLicenciaExpirando" Text="@(MultilenguajeController.ObtenerTextoPorClave("TEXTO_ALERTA_LICENCIA_POR_EXPIRAR",dataLenguaje) + " " + LicenseController.GetLicenseRemainingDays() + " " + MultilenguajeController.ObtenerTextoPorClave("TEXTO_CONVERSOR_DIAS_LICENCIA",dataLenguaje))">
+                    </RadzenLabel>
+                }
+            </ChildContent>
+        </RadzenFooter>
+    }
+    else
+    {
+        <Permaquim.Depositary.Web.Administration.Components.RequerimientoLicencia ReferenciaPagina="login" LicenciaValida="@licenciaValida" LicenciaExpirada="@licenciaExpirada"></Permaquim.Depositary.Web.Administration.Components.RequerimientoLicencia>
+    }
+
 
 }
 
@@ -147,13 +160,15 @@
     private string colorPrincipalMenu;
     private string colorLetrasMenu;
     private string colorTextoMainLayout;
+    private string colorAlertaLicenciaExpirando;
     private string colorFondoMenuesPrimeraLinea;
     private string colorFondoMenuesSegundaLinea;
     private string colorFondoMenuesTerceraLinea;
     private string colorPrimarioSpinner;
     private string colorSecundarioSpinner;
     private string iconoMenuNoAccesible = "lock";
-    private bool tieneLicencia = false;
+    private bool licenciaValida = false;
+    private bool licenciaExpirada = true;
     private string tipoLicencia = "";
     private List<string> listaMenuesLicenciaFull = new();
 
@@ -175,26 +190,23 @@
     protected override void OnInitialized()
     {
         listaMenuesLicenciaFull.Add("Dashboard");
-        listaMenuesLicenciaFull.Add("Monitor");
         listaMenuesLicenciaFull.Add("Reportes");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        //Verificamos si se tiene licencia y si no esta vencida.
+        licenciaValida = LicenseController.IsValidLicenseAvailable();
+        licenciaExpirada = LicenseController.IsExpiredLicense();
+
+        //Verificamos el tipo de licencia
+        if (licenciaValida && !licenciaExpirada)
+        {
+            tipoLicencia = LicenseController.ReadAdditonalLicenseInformation("TYPE");
+        }
+
         if (firstRender)
         {
-            //Verificamos si se tiene licencia y si no esta vencida.
-            if (LicenseController.IsValidLicenseAvailable())
-                tieneLicencia = true;
-            else
-                tieneLicencia = false;
-
-            if (tieneLicencia)
-            {
-                //Verificamos el tipo de licencia
-                tipoLicencia = LicenseController.ReadAdditonalLicenseInformation("TYPE");
-            }
-
             dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
             if (dataUsuario == null)
@@ -211,11 +223,13 @@
                 colorPrincipalMenu = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorPrincipalMenu", true);
                 colorLetrasMenu = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorLetrasMenu", true);
                 colorTextoMainLayout = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorTextoMainLayout", true);
+                colorAlertaLicenciaExpirando = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "colorAlertaLicenciaExpirando", true);
                 colorFondoMenuesPrimeraLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesPrimeraLinea", true);
                 colorFondoMenuesSegundaLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesSegundaLinea", true);
                 colorFondoMenuesTerceraLinea = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoMenuesTerceraLinea", true);
                 colorPrimarioSpinner = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorPrimarioSpinner", true);
                 colorSecundarioSpinner = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorSecundarioSpinner", true);
+
                 StateHasChanged();
             }
         }
@@ -282,6 +296,12 @@
 
     .textoMainLayout {
         color: @colorTextoMainLayout;
+    }
+
+    .textoAlertaLicenciaExpirando {
+        color: @colorAlertaLicenciaExpirando;
+        font-weight: bold;
+        float: right;
     }
 
     .rz-panel-menu {

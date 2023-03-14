@@ -130,7 +130,7 @@
                             <Template>
                                 @if (CodigoPostal_entities.FirstOrDefault(c => c.Id == @context.CodigoPostalId) != null)
                                 {
-                                    <RadzenLabel Text="@CodigoPostal_entities.FirstOrDefault( c => c.Id == @context.CodigoPostalId).Nombre" Component="CodigoPostalId" style="width: 100%">
+                                    <RadzenLabel Text="@CodigoPostal_entities.FirstOrDefault( c => c.Id == @context.CodigoPostalId).CodigoYDescripcion" Component="CodigoPostalId" style="width: 100%">
                                     </RadzenLabel>
                                 }
                                 else
@@ -329,14 +329,14 @@
                                     var dataSet = crudMode == CrudMode.Add ? CodigoPostal_entities.Where(x => x.Habilitado == true) : CodigoPostal_entities.Where(x => x.Habilitado == true || x.Id == Sucursal_entity.CodigoPostalId);
                                     <RadzenDropDown FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true"
                                 TValue="Int64" Class="w-100" @bind-Value="@(Sucursal_entity.CodigoPostalId)"
-                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
+                                Data=@dataSet TextProperty="CodigoYDescripcion" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostalValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
                                 else
                                 {
                                     <RadzenDropDown AllowClear="false" TValue="Int64" Class="w-100"
-                                Data=@CodigoPostal_entities TextProperty="Nombre" ValueProperty="Id"
+                                Data=@CodigoPostal_entities TextProperty="CodigoYDescripcion" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostalValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete)" />
                                 }
@@ -406,6 +406,21 @@ else
 }
 
 @code {
+    public class CodigoPostal
+    {
+        public Int64 Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public Int64 CiudadId { get; set; }
+        public string CodigoExterno { get; set; }
+        public bool Habilitado { get; set; }
+        public string CodigoYDescripcion { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        public Int64 UsuarioCreacion { get; set; }
+        public Int64? UsuarioModificacion { get; set; }
+    }
+
     [Parameter]
     public string EmpresaId { get; set; }
 
@@ -482,8 +497,8 @@ else
     /// Variables to handle Relation between Sucursal.CodigoPostalId and CodigoPostal.Id
     /// </summary>
     private Depositary.Entities.Tables.Geografia.CodigoPostal CodigoPostal_entity = new();
-    private List<Depositary.Entities.Tables.Geografia.CodigoPostal>? CodigoPostal_entities;
-    private List<Depositary.Entities.Tables.Geografia.CodigoPostal> CodigoPostal_CodigoPostalId_filter;
+    private List<CodigoPostal>? CodigoPostal_entities;
+    private List<CodigoPostal> CodigoPostal_CodigoPostalId_filter;
     private IEnumerable<Int64> selectedFilter_CodigoPostalId;
 
     /// <summary>
@@ -572,9 +587,32 @@ else
         Empresa_entities = Empresa_local.Items();
         Empresa_EmpresaId_filter = Empresa_entities.Where(x => Sucursal_entities.Select(x => x.EmpresaId).Distinct().Contains(x.Id)).ToList();
 
-        Depositary.Business.Tables.Geografia.CodigoPostal CodigoPostal_local = new();
-        CodigoPostal_entities = CodigoPostal_local.Items();
-        CodigoPostal_CodigoPostalId_filter = CodigoPostal_entities.Where(x => Sucursal_entities.Select(x => x.CodigoPostalId).Distinct().Contains(x.Id)).ToList();
+        Depositary.Business.Tables.Geografia.CodigoPostal CodigoPostal_CodigoPostalId_local = new();
+        CodigoPostal_CodigoPostalId_local.Items();
+
+        if (CodigoPostal_CodigoPostalId_local.Result.Count > 0)
+        {
+            CodigoPostal_entities = new();
+            foreach (var codigoPostalEntitie in CodigoPostal_CodigoPostalId_local.Result)
+            {
+                CodigoPostal codigoPostal = new();
+                codigoPostal.CiudadId = codigoPostalEntitie.CiudadId;
+                codigoPostal.CodigoExterno = codigoPostalEntitie.CodigoExterno;
+                codigoPostal.CodigoYDescripcion = codigoPostalEntitie.CodigoExterno + " - " + codigoPostalEntitie.Descripcion;
+                codigoPostal.Descripcion = codigoPostalEntitie.Descripcion;
+                codigoPostal.FechaCreacion = codigoPostalEntitie.FechaCreacion;
+                codigoPostal.FechaModificacion = codigoPostalEntitie.FechaModificacion;
+                codigoPostal.Habilitado = codigoPostalEntitie.Habilitado;
+                codigoPostal.Id = codigoPostalEntitie.Id;
+                codigoPostal.Nombre = codigoPostalEntitie.Nombre;
+                codigoPostal.UsuarioCreacion = codigoPostalEntitie.UsuarioCreacion;
+                codigoPostal.UsuarioModificacion = codigoPostalEntitie.UsuarioModificacion;
+
+                CodigoPostal_entities.Add(codigoPostal);
+            }
+        }
+
+        CodigoPostal_CodigoPostalId_filter = CodigoPostal_entities.Where(x => Empresa_entities.Select(x => x.CodigoPostalId).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Geografia.Zona Zona_ZonaId_local = new();
         Zona_ZonaId_entities = Zona_ZonaId_local.Items();

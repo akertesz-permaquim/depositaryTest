@@ -288,7 +288,7 @@
                                             <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud UsuarioId="@context.Id" EmpresaId="@context.EmpresaId">
                                             </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Seguridad.UsuarioSector_Crud>
                                         </RadzenTabsItem>
-                                        <RadzenTabsItem Visible="@permisoUsuarioCuenta" Text="Cuentas">
+                                        <RadzenTabsItem Visible="@permisoUsuarioCuenta" Text="Cuentas bancarias">
                                             <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud UsuarioId="@context.Id" EmpresaId="@context.EmpresaId">
                                             </Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.UsuarioCuenta_Crud>
                                         </RadzenTabsItem>
@@ -866,28 +866,6 @@ else
         switch (crudMode)
         {
             case CrudMode.Add:
-                //Obtengo todas las configuraciones de envio de mail y si falta alguna doy mensaje de error.
-                //string smtpHostEnvio = AplicacionController.ObtenerConfiguracionGeneral("SMTP_HOST_ENVIO_MAIL");
-                //if (smtpHostEnvio != "")
-                //{
-                //    string smtpPortEnvio = AplicacionController.ObtenerConfiguracionGeneral("SMTP_PORT_ENVIO_MAIL");
-                //    if (smtpPortEnvio != "")
-                //    {
-                //        //Obtengo las credenciales de configuracion para envio de mail, si no existen doy error
-                //        string usuarioEmailEnvio = AplicacionController.ObtenerConfiguracionGeneral("USUARIO_ENVIO_MAIL");
-                //        if (usuarioEmailEnvio != "")
-                //        {
-                //            string passwordEmailEnvio = AplicacionController.ObtenerConfiguracionGeneral("PASSWORD_ENVIO_MAIL");
-                //            if (passwordEmailEnvio != "")
-                //            {
-                //                List<string> emailsReceptores = new();
-                //                emailsReceptores.Add(Usuario_entity.Mail);
-                //                string resultadoEnvioMail = "";
-                //                //Comentado hasta configurar el envio.
-                //                //GeneralController.EnviarMail(smtpHostEnvio, smtpPortEnvio, usuarioEmailEnvio, passwordEmailEnvio, emailsReceptores, "Generacion de clave usuario", "Su clave es " + Usuario_entity.Documento);
-                //                //Enviar mail con password al nuevo usuario
-                //                if (resultadoEnvioMail == "")
-                //                {
                 try
                 {
                     Usuario_entity.FechaExpiracion = SeguridadController.ObtenerFechaExpiracion(Usuario_entity.EmpresaId);
@@ -905,41 +883,6 @@ else
                     actionInformation = ex.Message;
                     severityType = NotificationSeverity.Error;
                 }
-                //                }
-                //                else
-                //                {
-                //                    summary = "Error al procesar.";
-                //                    actionInformation = resultadoEnvioMail;
-                //                    severityType = NotificationSeverity.Error;
-                //                }
-                //            }
-                //            else
-                //            {
-                //                summary = "Error al procesar.";
-                //                actionInformation = "Falta indicar la clave de configuración PASSWORD_ENVIO_MAIL para enviar mail al usuario nuevo";
-                //                severityType = NotificationSeverity.Error;
-                //            }
-                //        }
-                //        else
-                //        {
-                //            summary = "Error al procesar.";
-                //            actionInformation = "Falta indicar la clave de configuración USUARIO_ENVIO_MAIL para enviar mail al usuario nuevo";
-                //            severityType = NotificationSeverity.Error;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        summary = "Error al procesar.";
-                //        actionInformation = "Falta indicar la clave de configuración SMTP_PORT_ENVIO_MAIL para enviar mail al usuario nuevo";
-                //        severityType = NotificationSeverity.Error;
-                //    }
-                //}
-                //else
-                //{
-                //    summary = "Error al procesar.";
-                //    actionInformation = "Falta indicar la clave de configuración SMTP_HOST_ENVIO_MAIL para enviar mail al usuario nuevo";
-                //    severityType = NotificationSeverity.Error;
-                //}
                 break;
             case CrudMode.Edit:
                 try

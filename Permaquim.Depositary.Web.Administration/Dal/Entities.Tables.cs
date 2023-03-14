@@ -4856,6 +4856,10 @@ using System.Text;
 					public const string EsDepositoAutomatico = "EsDepositoAutomatico";
 					public const string OrigenValorId = "OrigenValorId";
 					public const string CodigoOperacion = "CodigoOperacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string FechaModificacion = "FechaModificacion";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
 				}
 				public enum FieldEnum : int
                 {
@@ -4877,7 +4881,11 @@ using System.Text;
 					Finalizada,
 					EsDepositoAutomatico,
 					OrigenValorId,
-					CodigoOperacion
+					CodigoOperacion,
+					FechaCreacion,
+					FechaModificacion,
+					UsuarioCreacion,
+					UsuarioModificacion
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -4885,7 +4893,7 @@ using System.Text;
                 public Transaccion()
                 {
                 }
-                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion)
+                public  Transaccion(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion,DateTime FechaCreacion,DateTime? FechaModificacion,Int64 UsuarioCreacion,Int64? UsuarioModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -4906,6 +4914,10 @@ using System.Text;
                     this.EsDepositoAutomatico = EsDepositoAutomatico;
                     this.OrigenValorId = OrigenValorId;
                     this.CodigoOperacion = CodigoOperacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.FechaModificacion = FechaModificacion;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -4971,6 +4983,18 @@ using System.Text;
              public Int64? OrigenValorId { get; set; }
              [DataItemAttributeFieldName("CodigoOperacion","CodigoOperacion")]
              public String CodigoOperacion { get; set; }
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64 UsuarioCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public Int64? UsuarioModificacion { get; set; }
 				
 			} //Class Transaccion 
 } //namespace Permaquim.Depositary.Entities.Tables.Operacion
@@ -6883,6 +6907,66 @@ using System.Text;
 		namespace Permaquim.Depositary.Entities.Tables.Sincronizacion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Sincronizacion")]  // Database Schema Name
+			[DataItemAttributeObjectName("Ejecucion","Ejecucion")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class Ejecucion : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string DepositarioId = "DepositarioId";
+					public const string FechaInicio = "FechaInicio";
+					public const string FechaFin = "FechaFin";
+					public const string Finalizada = "Finalizada";
+					public const string EsPrimeraSincronizacion = "EsPrimeraSincronizacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					DepositarioId,
+					FechaInicio,
+					FechaFin,
+					Finalizada,
+					EsPrimeraSincronizacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public Ejecucion()
+                {
+                }
+                public  Ejecucion(Int64? DepositarioId,DateTime FechaInicio,DateTime? FechaFin,Boolean Finalizada,Boolean EsPrimeraSincronizacion)
+                {
+                    this.Id = Id;
+                    this.DepositarioId = DepositarioId;
+                    this.FechaInicio = FechaInicio;
+                    this.FechaFin = FechaFin;
+                    this.Finalizada = Finalizada;
+                    this.EsPrimeraSincronizacion = EsPrimeraSincronizacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Auto)] //Is Auto Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
+             public Int64? DepositarioId { get; set; }
+             [DataItemAttributeFieldName("FechaInicio","FechaInicio")]
+             public DateTime FechaInicio { get; set; }
+             [DataItemAttributeFieldName("FechaFin","FechaFin")]
+             public DateTime? FechaFin { get; set; }
+             [DataItemAttributeFieldName("Finalizada","Finalizada")]
+             public Boolean Finalizada { get; set; }
+             [DataItemAttributeFieldName("EsPrimeraSincronizacion","EsPrimeraSincronizacion")]
+             public Boolean EsPrimeraSincronizacion { get; set; }
+				
+			} //Class Ejecucion 
+} //namespace Permaquim.Depositary.Entities.Tables.Sincronizacion
+		namespace Permaquim.Depositary.Entities.Tables.Sincronizacion {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Sincronizacion")]  // Database Schema Name
 			[DataItemAttributeObjectName("Entidad","Entidad")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
 			public class Entidad : IDataItem
@@ -6956,19 +7040,19 @@ using System.Text;
 				{
 					public const string Id = "Id";
 					public const string EntidadId = "EntidadId";
-					public const string DepositarioId = "DepositarioId";
 					public const string Valor = "Valor";
 					public const string Fechainicio = "Fechainicio";
 					public const string Fechafin = "Fechafin";
+					public const string EjecucionId = "EjecucionId";
 				}
 				public enum FieldEnum : int
                 {
 					Id,
 					EntidadId,
-					DepositarioId,
 					Valor,
 					Fechainicio,
-					Fechafin
+					Fechafin,
+					EjecucionId
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -6976,14 +7060,14 @@ using System.Text;
                 public EntidadCabecera()
                 {
                 }
-                public  EntidadCabecera(Int64 EntidadId,Int64? DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin)
+                public  EntidadCabecera(Int64 EntidadId,String Valor,DateTime Fechainicio,DateTime? Fechafin,Int64 EjecucionId)
                 {
                     this.Id = Id;
                     this.EntidadId = EntidadId;
-                    this.DepositarioId = DepositarioId;
                     this.Valor = Valor;
                     this.Fechainicio = Fechainicio;
                     this.Fechafin = Fechafin;
+                    this.EjecucionId = EjecucionId;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -6993,16 +7077,16 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Entidad")]// Object name in Database
              public Int64 EntidadId { get; set; }
-             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Depositario")]// Object name in Database
-             public Int64? DepositarioId { get; set; }
              [DataItemAttributeFieldName("Valor","Valor")]
              public String Valor { get; set; }
              [DataItemAttributeFieldName("Fechainicio","Fechainicio")]
              public DateTime Fechainicio { get; set; }
              [DataItemAttributeFieldName("Fechafin","Fechafin")]
              public DateTime? Fechafin { get; set; }
+             [DataItemAttributeFieldName("EjecucionId","EjecucionId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Ejecucion")]// Object name in Database
+             public Int64 EjecucionId { get; set; }
 				
 			} //Class EntidadCabecera 
 } //namespace Permaquim.Depositary.Entities.Tables.Sincronizacion
@@ -7250,6 +7334,8 @@ using System.Text;
 					public const string FechaCreacion = "FechaCreacion";
 					public const string UsuarioModificacion = "UsuarioModificacion";
 					public const string FechaModificacion = "FechaModificacion";
+					public const string OperaSinTurno = "OperaSinTurno";
+					public const string OperaDiasCorridos = "OperaDiasCorridos";
 				}
 				public enum FieldEnum : int
                 {
@@ -7259,7 +7345,9 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					OperaSinTurno,
+					OperaDiasCorridos
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -7267,7 +7355,7 @@ using System.Text;
                 public EsquemaTurno()
                 {
                 }
-                public  EsquemaTurno(String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  EsquemaTurno(String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -7276,6 +7364,8 @@ using System.Text;
                     this.FechaCreacion = FechaCreacion;
                     this.UsuarioModificacion = UsuarioModificacion;
                     this.FechaModificacion = FechaModificacion;
+                    this.OperaSinTurno = OperaSinTurno;
+                    this.OperaDiasCorridos = OperaDiasCorridos;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -7298,6 +7388,10 @@ using System.Text;
              public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+             [DataItemAttributeFieldName("OperaSinTurno","OperaSinTurno")]
+             public Boolean OperaSinTurno { get; set; }
+             [DataItemAttributeFieldName("OperaDiasCorridos","OperaDiasCorridos")]
+             public Boolean OperaDiasCorridos { get; set; }
 				
 			} //Class EsquemaTurno 
 } //namespace Permaquim.Depositary.Entities.Tables.Turno

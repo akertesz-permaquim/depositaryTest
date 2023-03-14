@@ -18,14 +18,29 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=NB000101</ConnectionString>
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews>
     <string>Reporte.CierresDiarios</string>
     <string>Reporte.Turnos</string>
   </SelectedViews>
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
+    <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
+    <string>dbo.fn_diagramobjects</string>
+    <string>dbo.IniciarPrimeraSincronizacion</string>
+    <string>dbo.sp_alterdiagram</string>
+    <string>dbo.sp_creatediagram</string>
+    <string>dbo.sp_dropdiagram</string>
+    <string>dbo.sp_helpdiagramdefinition</string>
+    <string>dbo.sp_helpdiagrams</string>
+    <string>dbo.sp_renamediagram</string>
+    <string>dbo.sp_upgraddiagrams</string>
+    <string>dbo.splitCapital</string>
+    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
+    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
+    <string>Sincronizacion.ObtenerIdDestino</string>
+    <string>Sincronizacion.ObtenerIdOrigen</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures />
   <SelectedTables>
