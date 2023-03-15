@@ -2,6 +2,7 @@
 {
     public class TurnoModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Turno.EsquemaTurno> Esquemas { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Turno.EsquemaDetalleTurno> EsquemasDetalles { get; set; } = new();

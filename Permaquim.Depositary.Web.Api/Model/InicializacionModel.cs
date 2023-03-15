@@ -2,12 +2,12 @@
 {
     public class InicializacionModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public string CodigoExternoDepositario { get; set; }
-        public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionEmpresa> AplicacionConfiguracionEmpresa { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionTipoDato> AplicacionConfiguracionTipoDato { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> AplicacionConfiguracionValidacionDato { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> AplicacionConfiguracion { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Auditoria.Log> AuditoriaLog { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionEmpresa> AplicacionConfiguracionEmpresa { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Auditoria.TipoLog> AuditoriaTipoLog { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Banca.Banco> BancaBanco { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Banca.Cuenta> BancaCuenta { get; set; } = new();
@@ -17,15 +17,16 @@
         public List<DepositaryWebApi.Entities.Tables.Directorio.Empresa> DirectorioEmpresa { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Grupo> DirectorioGrupo { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Seguridad.IdentificadorUsuario> SeguridadIdentificadorUsuario { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> SeguridadTipoIdentificador { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.RelacionMonedaSucursal> DirectorioRelacionMonedaSucursal { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Sector> DirectorioSector { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Sucursal> DirectorioSucursal { get; set; } = new();
+        public List<DepositaryWebApi.Entities.Tables.Seguridad.TipoIdentificador> SeguridadTipoIdentificador { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoContadora> DispositivoComandoContadora { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ComandoPlaca> DispositivoComandoPlaca { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.ConfiguracionDepositario> DispositivoConfiguracionDepositario { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Depositario> DispositivoDepositario { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioContadora> DispositivoDepositarioContadora { get; set; } = new();
+        //public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositaryWebApiEstado> DispositivoDepositaryWebApiEstado { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioMoneda> DispositivoDepositarioMoneda { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.DepositarioPlaca> DispositivoDepositarioPlaca { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Dispositivo.Marca> DispositivoMarca { get; set; } = new();
@@ -41,19 +42,9 @@
         public List<DepositaryWebApi.Entities.Tables.Geografia.Pais> GeografiaPais { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Geografia.Provincia> GeografiaProvincia { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Geografia.Zona> GeografiaZona { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.CierreDiario> OperacionCierreDiario { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.Contenedor> OperacionContenedor { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.Evento> OperacionEvento { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.Sesion> OperacionSesion { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Operacion.TipoContenedor> OperacionTipoContenedor { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Operacion.TipoEvento> OperacionTipoEvento { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Operacion.TipoTransaccion> OperacionTipoTransaccion { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.Transaccion> OperacionTransaccion { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionDetalle> OperacionTransaccionDetalle { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobre> OperacionTransaccionSobre { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.TransaccionSobreDetalle> OperacionTransaccionSobreDetalle { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.Turno> OperacionTurno { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Operacion.TurnoUsuario> OperacionTurnoUsuario { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Regionalizacion.Lenguaje> RegionalizacionLenguaje { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Regionalizacion.LenguajeItem> RegionalizacionLenguajeItem { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Seguridad.Aplicacion> SeguridadAplicacion { get; set; } = new();
@@ -71,8 +62,6 @@
         public List<DepositaryWebApi.Entities.Tables.Seguridad.UsuarioSector> SeguridadUsuarioSector { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Sincronizacion.Configuracion> SincronizacionConfiguracion { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Sincronizacion.Entidad> SincronizacionEntidad { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera> SincronizacionEntidadCabecera { get; set; } = new();
-        public List<DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle> SincronizacionEntidadDetalle { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Turno.AgendaTurno> TurnoAgendaTurno { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Turno.EsquemaDetalleTurno> TurnoEsquemaDetalleTurno { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Turno.EsquemaTurno> TurnoEsquemaTurno { get; set; } = new();

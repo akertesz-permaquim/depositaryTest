@@ -2,6 +2,7 @@
 {
     public class ImpresionModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Impresion.TipoTicket> TiposTickets { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Impresion.Ticket> Tickets { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();

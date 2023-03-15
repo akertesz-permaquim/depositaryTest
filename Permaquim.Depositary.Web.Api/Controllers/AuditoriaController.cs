@@ -24,31 +24,57 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerAuditoria([FromBody] AuditoriaModel data)
         {
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroAuditoriaTipoLogId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOLOG);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroAuditoriaTipoLogId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOLOG) ? data.SincroDates[ENTIDAD_TIPOLOG] : fechaSincronizacionDefault;
-                    data.TiposLog = ObtenerTiposLogBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroAuditoriaTipoLogId.Value);
-                }
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
 
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+                        try
+                        {
+                            //Iniciamos un registro de sincronizacion de la entidad.
+                            Int64? SincroAuditoriaTipoLogId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOLOG);
+
+                            if (SincroAuditoriaTipoLogId.HasValue)
+                            {
+                                var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOLOG) ? data.SincroDates[ENTIDAD_TIPOLOG] : fechaSincronizacionDefault;
+                                data.TiposLog = ObtenerTiposLogBD(fechaDiferencial);
+                                SynchronizationController.finalizarCabeceraSincronizacion(SincroAuditoriaTipoLogId.Value);
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            AuditController.Log(ex);
+                            return BadRequest(ex.Message);
+                        }
+
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
+                }
+                else
+                {
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                }
             }
             catch (Exception ex)
             {
                 AuditController.Log(ex);
                 return BadRequest(ex.Message);
             }
-
-            return Ok(data);
         }
 
         [HttpGet]

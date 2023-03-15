@@ -25,33 +25,53 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerRegionalizacion([FromBody] RegionalizacionModel data)
         {
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroRegionalizacionLenguajeId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_LENGUAJE);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroRegionalizacionLenguajeId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_LENGUAJE) ? data.SincroDates[ENTIDAD_LENGUAJE] : fechaSincronizacionDefault;
-                    data.Lenguajes = ObtenerLenguajesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroRegionalizacionLenguajeId.Value);
+
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroRegionalizacionLenguajeId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_LENGUAJE);
+
+                        if (SincroRegionalizacionLenguajeId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_LENGUAJE) ? data.SincroDates[ENTIDAD_LENGUAJE] : fechaSincronizacionDefault;
+                            data.Lenguajes = ObtenerLenguajesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroRegionalizacionLenguajeId.Value);
+                        }
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroRegionalizacionLenguajeItemId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_LENGUAJEITEM);
+
+                        if (SincroRegionalizacionLenguajeItemId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_LENGUAJEITEM) ? data.SincroDates[ENTIDAD_LENGUAJEITEM] : fechaSincronizacionDefault;
+                            data.LenguajeItems = ObtenerLenguajesItemsBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroRegionalizacionLenguajeItemId.Value);
+                        }
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroRegionalizacionLenguajeItemId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_LENGUAJEITEM);
-
-                if (SincroRegionalizacionLenguajeItemId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_LENGUAJEITEM) ? data.SincroDates[ENTIDAD_LENGUAJEITEM] : fechaSincronizacionDefault;
-                    data.LenguajeItems = ObtenerLenguajesItemsBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroRegionalizacionLenguajeItemId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
-
             }
             catch (Exception ex)
             {
@@ -59,7 +79,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]

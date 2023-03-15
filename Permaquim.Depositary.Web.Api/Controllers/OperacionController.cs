@@ -34,39 +34,60 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("ObtenerOperacion")]
         [Authorize]
-        public async Task<IActionResult> ObtenerOperacion()
+        public async Task<IActionResult> ObtenerOperacion([FromBody] OperacionModel data)
         {
-            OperacionModel data = new();
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroOperacionTipoEventoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOEVENTO);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroOperacionTipoEventoId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    data.TiposEventos = ObtenerTiposEventosBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOEVENTO));
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroOperacionTipoEventoId.Value);
+
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroOperacionTipoEventoId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOEVENTO);
+
+                        if (SincroOperacionTipoEventoId.HasValue)
+                        {
+                            data.TiposEventos = ObtenerTiposEventosBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOEVENTO));
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroOperacionTipoEventoId.Value);
+                        }
+
+                        Int64? SincroOperacionTipoContenedorId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOCONTENEDOR);
+
+                        if (SincroOperacionTipoContenedorId.HasValue)
+                        {
+                            data.TiposContenedores = ObtenerTiposContenedoresBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOCONTENEDOR));
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroOperacionTipoContenedorId.Value);
+                        }
+
+                        Int64? SincroOperacionTipoTransaccionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOTRANSACCION);
+
+                        if (SincroOperacionTipoTransaccionId.HasValue)
+                        {
+                            data.TiposTransacciones = ObtenerTiposTransaccionesBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOTRANSACCION));
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroOperacionTipoTransaccionId.Value);
+                        }
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                Int64? SincroOperacionTipoContenedorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCONTENEDOR);
-
-                if (SincroOperacionTipoContenedorId.HasValue)
+                else
                 {
-                    data.TiposContenedores = ObtenerTiposContenedoresBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOCONTENEDOR));
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroOperacionTipoContenedorId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
-
-                Int64? SincroOperacionTipoTransaccionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOTRANSACCION);
-
-                if (SincroOperacionTipoTransaccionId.HasValue)
-                {
-                    data.TiposTransacciones = ObtenerTiposTransaccionesBD(SynchronizationController.obtenerFechaUltimaSincronizacion(depositarioId, ENTIDAD_TIPOTRANSACCION));
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroOperacionTipoTransaccionId.Value);
-                }
-
             }
             catch (Exception ex)
             {
@@ -74,7 +95,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]

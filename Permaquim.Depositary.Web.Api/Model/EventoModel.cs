@@ -2,10 +2,11 @@
 {
     public class EventoModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public string CodigoExternoDepositario { get; set; }
         public List<NuevoEvento> Eventos { get; set; }
-        public NuevoEstado Estado { get; set; }
+        public NuevoEstado? Estado { get; set; }
     }
 
     public class NuevoEvento : DepositaryWebApi.Entities.Tables.Operacion.Evento

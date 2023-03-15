@@ -2,6 +2,7 @@
 {
     public class GeografiaModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Geografia.Pais> Paises { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Geografia.Provincia> Provincias { get; set; } = new();

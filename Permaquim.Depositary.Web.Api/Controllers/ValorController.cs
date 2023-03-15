@@ -29,59 +29,80 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         public async Task<IActionResult> ObtenerValor([FromBody] ValorModel data)
         {
 
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroValorMonedaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_MONEDA);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroValorMonedaId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MONEDA) ? data.SincroDates[ENTIDAD_MONEDA] : fechaSincronizacionDefault;
-                    data.Monedas = ObtenerMonedasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroValorMonedaId.Value);
+
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroValorMonedaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_MONEDA);
+
+                        if (SincroValorMonedaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MONEDA) ? data.SincroDates[ENTIDAD_MONEDA] : fechaSincronizacionDefault;
+                            data.Monedas = ObtenerMonedasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroValorMonedaId.Value);
+                        }
+
+                        Int64? SincroValorDenominacionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_DENOMINACION);
+
+                        if (SincroValorDenominacionId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DENOMINACION) ? data.SincroDates[ENTIDAD_DENOMINACION] : fechaSincronizacionDefault;
+                            data.Denominaciones = ObtenerDenominacionesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroValorDenominacionId.Value);
+                        }
+
+                        Int64? SincroValorTipoId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPO);
+
+                        if (SincroValorTipoId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPO) ? data.SincroDates[ENTIDAD_TIPO] : fechaSincronizacionDefault;
+                            data.Tipos = ObtenerTiposBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroValorTipoId.Value);
+                        }
+
+                        Int64? SincroValorRelacionMonedaTipoValorId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_RELACIONMONEDATIPOVALOR);
+
+                        if (SincroValorRelacionMonedaTipoValorId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_RELACIONMONEDATIPOVALOR) ? data.SincroDates[ENTIDAD_RELACIONMONEDATIPOVALOR] : fechaSincronizacionDefault;
+                            data.RelacionesMonedasTiposValores = ObtenerRelacionesMonedasTiposValoresBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroValorRelacionMonedaTipoValorId.Value);
+                        }
+
+                        Int64? SincroValorOrigenValorId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_ORIGENVALOR);
+
+                        if (SincroValorOrigenValorId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ORIGENVALOR) ? data.SincroDates[ENTIDAD_ORIGENVALOR] : fechaSincronizacionDefault;
+                            data.OrigenesValores = ObtenerOrigenesValoresBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroValorOrigenValorId.Value);
+                        }
+
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                Int64? SincroValorDenominacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DENOMINACION);
-
-                if (SincroValorDenominacionId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DENOMINACION) ? data.SincroDates[ENTIDAD_DENOMINACION] : fechaSincronizacionDefault;
-                    data.Denominaciones = ObtenerDenominacionesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroValorDenominacionId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
-
-                Int64? SincroValorTipoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPO);
-
-                if (SincroValorTipoId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPO) ? data.SincroDates[ENTIDAD_TIPO] : fechaSincronizacionDefault;
-                    data.Tipos = ObtenerTiposBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroValorTipoId.Value);
-                }
-
-                Int64? SincroValorRelacionMonedaTipoValorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_RELACIONMONEDATIPOVALOR);
-
-                if (SincroValorRelacionMonedaTipoValorId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_RELACIONMONEDATIPOVALOR) ? data.SincroDates[ENTIDAD_RELACIONMONEDATIPOVALOR] : fechaSincronizacionDefault;
-                    data.RelacionesMonedasTiposValores = ObtenerRelacionesMonedasTiposValoresBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroValorRelacionMonedaTipoValorId.Value);
-                }
-
-                Int64? SincroValorOrigenValorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ORIGENVALOR);
-
-                if (SincroValorOrigenValorId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ORIGENVALOR) ? data.SincroDates[ENTIDAD_ORIGENVALOR] : fechaSincronizacionDefault;
-                    data.OrigenesValores = ObtenerOrigenesValoresBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroValorOrigenValorId.Value);
-                }
-
             }
             catch (Exception ex)
             {
@@ -89,7 +110,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]

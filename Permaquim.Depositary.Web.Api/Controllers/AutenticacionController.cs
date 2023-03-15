@@ -30,17 +30,17 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
-            DepositaryWebApi.Business.Relations.Dispositivo.Depositario entities = new();
-            entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
-                DepositaryWebApi.sqlEnum.OperandEnum.Equal, Cryptography.Decrypt(model.DepositaryCode,_configuration["AppSettings:PasswordKey"]));
-            entities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,
-                DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
-            entities.Items();
+            //DepositaryWebApi.Business.Relations.Dispositivo.Depositario entities = new();
+            //entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
+            //    DepositaryWebApi.sqlEnum.OperandEnum.Equal, Cryptography.Decrypt(model.DepositaryCode,_configuration["AppSettings:PasswordKey"]));
+            //entities.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,
+            //    DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
+            //entities.Items();
 
-            //Si se encuentra un usuario con ese password se devuelve el token, si no un BadRequest con mensaje de error.
-            if(entities.Result.Count>0)
-            {
-                var usuario = entities.Result.FirstOrDefault();
+            ////Si se encuentra un usuario con ese password se devuelve el token, si no un BadRequest con mensaje de error.
+            //if(entities.Result.Count>0)
+            //{
+            //    var usuario = entities.Result.FirstOrDefault();
 
                 var authClaims = new List<Claim>
                 {
@@ -61,11 +61,11 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });
-            }
-            else
-            {
-                return BadRequest("Código de depositario inválido.");
-            }
+            //}
+            //else
+            //{
+            //    return BadRequest("Código de depositario inválido.");
+            //}
         }
 
     }

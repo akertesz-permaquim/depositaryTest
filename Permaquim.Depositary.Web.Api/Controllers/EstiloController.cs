@@ -27,41 +27,61 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerEstilo([FromBody] EstiloModel data)
         {
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroEstiloEsquemaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ESQUEMA);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroEstiloEsquemaId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ESQUEMA) ? data.SincroDates[ENTIDAD_ESQUEMA] : fechaSincronizacionDefault;
-                    data.Esquema = ObtenerEsquemasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroEstiloEsquemaId.Value);
+
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroEstiloEsquemaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_ESQUEMA);
+
+                        if (SincroEstiloEsquemaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ESQUEMA) ? data.SincroDates[ENTIDAD_ESQUEMA] : fechaSincronizacionDefault;
+                            data.Esquema = ObtenerEsquemasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroEstiloEsquemaId.Value);
+                        }
+
+                        Int64? SincroEstiloEsquemaDetalleId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_ESQUEMADETALLE);
+
+                        if (SincroEstiloEsquemaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ESQUEMADETALLE) ? data.SincroDates[ENTIDAD_ESQUEMADETALLE] : fechaSincronizacionDefault;
+                            data.EsquemaDetalle = ObtenerEsquemasDetallesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroEstiloEsquemaId.Value);
+                        }
+
+                        Int64? SincroEstiloTipoEsquemaDetalleId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOESQUEMADETALLE);
+
+                        if (SincroEstiloTipoEsquemaDetalleId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOESQUEMADETALLE) ? data.SincroDates[ENTIDAD_TIPOESQUEMADETALLE] : fechaSincronizacionDefault;
+                            data.TipoEsquemaDetalle = ObtenerTiposEsquemasDetallesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroEstiloTipoEsquemaDetalleId.Value);
+                        }
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                Int64? SincroEstiloEsquemaDetalleId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ESQUEMADETALLE);
-
-                if (SincroEstiloEsquemaId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ESQUEMADETALLE) ? data.SincroDates[ENTIDAD_ESQUEMADETALLE] : fechaSincronizacionDefault;
-                    data.EsquemaDetalle = ObtenerEsquemasDetallesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroEstiloEsquemaId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
-
-                Int64? SincroEstiloTipoEsquemaDetalleId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOESQUEMADETALLE);
-
-                if (SincroEstiloTipoEsquemaDetalleId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOESQUEMADETALLE) ? data.SincroDates[ENTIDAD_TIPOESQUEMADETALLE] : fechaSincronizacionDefault;
-                    data.TipoEsquemaDetalle = ObtenerTiposEsquemasDetallesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroEstiloTipoEsquemaDetalleId.Value);
-                }
-
             }
             catch (Exception ex)
             {
@@ -69,7 +89,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
 
         }
 

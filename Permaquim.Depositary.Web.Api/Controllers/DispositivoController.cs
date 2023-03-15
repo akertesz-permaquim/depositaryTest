@@ -38,131 +38,141 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerDispositivo([FromBody] DispositivoModel data)
         {
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroDispositivoModeloId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_MODELO);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroDispositivoModeloId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MODELO) ? data.SincroDates[ENTIDAD_MODELO] : fechaSincronizacionDefault;
-                    data.Modelos = ObtenerModelosBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoModeloId.Value);
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroDispositivoModeloId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_MODELO);
+
+                        if (SincroDispositivoModeloId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MODELO) ? data.SincroDates[ENTIDAD_MODELO] : fechaSincronizacionDefault;
+                            data.Modelos = ObtenerModelosBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoModeloId.Value);
+                        }
+
+                        Int64? SincroDispositivoMarcaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_MARCA);
+
+                        if (SincroDispositivoMarcaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MARCA) ? data.SincroDates[ENTIDAD_MARCA] : fechaSincronizacionDefault;
+                            data.Marcas = ObtenerMarcasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoMarcaId.Value);
+                        }
+
+                        Int64? SincroDispositivoDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_DEPOSITARIO);
+
+                        if (SincroDispositivoDepositarioId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIO) ? data.SincroDates[ENTIDAD_DEPOSITARIO] : fechaSincronizacionDefault;
+                            data.Depositarios = ObtenerDepositariosBD(fechaDiferencial, depositarioId);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoDepositarioId.Value);
+                        }
+
+                        Int64? SincroDispositivoTipoPlacaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOPLACA);
+
+                        if (SincroDispositivoTipoPlacaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOPLACA) ? data.SincroDates[ENTIDAD_TIPOPLACA] : fechaSincronizacionDefault;
+                            data.TiposPlacas = ObtenerTiposPlacasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoTipoPlacaId.Value);
+                        }
+
+                        Int64? SincroDispositivoComandoPlacaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_COMANDOPLACA);
+
+                        if (SincroDispositivoComandoPlacaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_COMANDOPLACA) ? data.SincroDates[ENTIDAD_COMANDOPLACA] : fechaSincronizacionDefault;
+                            data.ComandosPlacas = ObtenerComandosPlacasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoComandoPlacaId.Value);
+                        }
+
+                        Int64? SincroDispositivoTipoConfiguracionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOCONFIGURACIONDEPOSITARIO);
+
+                        if (SincroDispositivoTipoConfiguracionId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOCONFIGURACIONDEPOSITARIO) ? data.SincroDates[ENTIDAD_TIPOCONFIGURACIONDEPOSITARIO] : fechaSincronizacionDefault;
+                            data.TiposConfiguraciones = ObtenerTiposConfiguracionesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoTipoConfiguracionId.Value);
+                        }
+
+                        Int64? SincroDispositivoPlacaDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_DEPOSITARIOPLACA);
+
+                        if (SincroDispositivoPlacaDepositarioId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOPLACA) ? data.SincroDates[ENTIDAD_DEPOSITARIOPLACA] : fechaSincronizacionDefault;
+                            data.PlacasDepositarios = ObtenerPlacasBD(fechaDiferencial, depositarioId);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoPlacaDepositarioId.Value);
+                        }
+
+                        Int64? SincroDispositivoConfiguracionDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_CONFIGURACIONDEPOSITARIO);
+
+                        if (SincroDispositivoConfiguracionDepositarioId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CONFIGURACIONDEPOSITARIO) ? data.SincroDates[ENTIDAD_CONFIGURACIONDEPOSITARIO] : fechaSincronizacionDefault;
+                            data.ConfiguracionesDepositarios = ObtenerConfiguracionesBD(fechaDiferencial, depositarioId);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoConfiguracionDepositarioId.Value);
+                        }
+
+                        Int64? SincroDispositivoTipoContadoraId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOCONTADORA);
+
+                        if (SincroDispositivoTipoContadoraId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOCONTADORA) ? data.SincroDates[ENTIDAD_TIPOCONTADORA] : fechaSincronizacionDefault;
+                            data.TiposContadoras = ObtenerTiposContadorasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoTipoContadoraId.Value);
+                        }
+
+                        Int64? SincroDispositivoContadoraDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_DEPOSITARIOCONTADORA);
+
+                        if (SincroDispositivoContadoraDepositarioId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOCONTADORA) ? data.SincroDates[ENTIDAD_DEPOSITARIOCONTADORA] : fechaSincronizacionDefault;
+                            data.ContadorasDepositarios = ObtenerContadorasBD(fechaDiferencial, depositarioId);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoContadoraDepositarioId.Value);
+                        }
+
+                        Int64? SincroDispositivoComandoContadoraId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_COMANDOCONTADORA);
+
+                        if (SincroDispositivoComandoContadoraId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_COMANDOCONTADORA) ? data.SincroDates[ENTIDAD_COMANDOCONTADORA] : fechaSincronizacionDefault;
+                            data.ComandosContadoras = ObtenerComandosContadorasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoComandoContadoraId.Value);
+                        }
+
+                        Int64? SincroDispositivoMonedaDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_DEPOSITARIOMONEDA);
+
+                        if (SincroDispositivoMonedaDepositarioId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOMONEDA) ? data.SincroDates[ENTIDAD_DEPOSITARIOMONEDA] : fechaSincronizacionDefault;
+                            data.MonedasDepositarios = ObtenerMonedasBD(fechaDiferencial, depositarioId);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoMonedaDepositarioId.Value);
+                        }
+
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                Int64? SincroDispositivoMarcaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_MARCA);
-
-                if (SincroDispositivoMarcaId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MARCA) ? data.SincroDates[ENTIDAD_MARCA] : fechaSincronizacionDefault;
-                    data.Marcas = ObtenerMarcasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoMarcaId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
-
-                Int64? SincroDispositivoDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIO);
-
-                if (SincroDispositivoDepositarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIO) ? data.SincroDates[ENTIDAD_DEPOSITARIO] : fechaSincronizacionDefault;
-                    data.Depositarios = ObtenerDepositariosBD(fechaDiferencial, depositarioId);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoDepositarioId.Value);
-                }
-
-                Int64? SincroDispositivoTipoPlacaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOPLACA);
-
-                if (SincroDispositivoTipoPlacaId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOPLACA) ? data.SincroDates[ENTIDAD_TIPOPLACA] : fechaSincronizacionDefault;
-                    data.TiposPlacas = ObtenerTiposPlacasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoTipoPlacaId.Value);
-                }
-
-                Int64? SincroDispositivoComandoPlacaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_COMANDOPLACA);
-
-                if (SincroDispositivoComandoPlacaId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_COMANDOPLACA) ? data.SincroDates[ENTIDAD_COMANDOPLACA] : fechaSincronizacionDefault;
-                    data.ComandosPlacas = ObtenerComandosPlacasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoComandoPlacaId.Value);
-                }
-
-                Int64? SincroDispositivoTipoConfiguracionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCONFIGURACIONDEPOSITARIO);
-
-                if (SincroDispositivoTipoConfiguracionId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOCONFIGURACIONDEPOSITARIO) ? data.SincroDates[ENTIDAD_TIPOCONFIGURACIONDEPOSITARIO] : fechaSincronizacionDefault;
-                    data.TiposConfiguraciones = ObtenerTiposConfiguracionesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoTipoConfiguracionId.Value);
-                }
-
-                Int64? SincroDispositivoPlacaDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOPLACA);
-
-                if (SincroDispositivoPlacaDepositarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOPLACA) ? data.SincroDates[ENTIDAD_DEPOSITARIOPLACA] : fechaSincronizacionDefault;
-                    data.PlacasDepositarios = ObtenerPlacasBD(fechaDiferencial, depositarioId);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoPlacaDepositarioId.Value);
-                }
-
-                Int64? SincroDispositivoConfiguracionDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CONFIGURACIONDEPOSITARIO);
-
-                if (SincroDispositivoConfiguracionDepositarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CONFIGURACIONDEPOSITARIO) ? data.SincroDates[ENTIDAD_CONFIGURACIONDEPOSITARIO] : fechaSincronizacionDefault;
-                    data.ConfiguracionesDepositarios = ObtenerConfiguracionesBD(fechaDiferencial, depositarioId);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoConfiguracionDepositarioId.Value);
-                }
-
-                Int64? SincroDispositivoTipoContadoraId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOCONTADORA);
-
-                if (SincroDispositivoTipoContadoraId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOCONTADORA) ? data.SincroDates[ENTIDAD_TIPOCONTADORA] : fechaSincronizacionDefault;
-                    data.TiposContadoras = ObtenerTiposContadorasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoTipoContadoraId.Value);
-                }
-
-                Int64? SincroDispositivoContadoraDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOCONTADORA);
-
-                if (SincroDispositivoContadoraDepositarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOCONTADORA) ? data.SincroDates[ENTIDAD_DEPOSITARIOCONTADORA] : fechaSincronizacionDefault;
-                    data.ContadorasDepositarios = ObtenerContadorasBD(fechaDiferencial, depositarioId);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoContadoraDepositarioId.Value);
-                }
-
-                Int64? SincroDispositivoComandoContadoraId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_COMANDOCONTADORA);
-
-                if (SincroDispositivoComandoContadoraId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_COMANDOCONTADORA) ? data.SincroDates[ENTIDAD_COMANDOCONTADORA] : fechaSincronizacionDefault;
-                    data.ComandosContadoras = ObtenerComandosContadorasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoComandoContadoraId.Value);
-                }
-
-                Int64? SincroDispositivoMonedaDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOMONEDA);
-
-                if (SincroDispositivoMonedaDepositarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOMONEDA) ? data.SincroDates[ENTIDAD_DEPOSITARIOMONEDA] : fechaSincronizacionDefault;
-                    data.MonedasDepositarios = ObtenerMonedasBD(fechaDiferencial, depositarioId);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoMonedaDepositarioId.Value);
-                }
-
-                //Int64? SincroDispositivoEstadoDepositarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_DEPOSITARIOESTADO);
-
-                //if (SincroDispositivoEstadoDepositarioId.HasValue)
-                //{
-                //    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_DEPOSITARIOESTADO) ? data.SincroDates[ENTIDAD_DEPOSITARIOESTADO] : fechaSincronizacionDefault;
-                //    data.EstadosDepositarios = ObtenerEstadosBD(fechaDiferencial);
-                //    SynchronizationController.finalizarCabeceraSincronizacion(SincroDispositivoEstadoDepositarioId.Value);
-                //}
-
             }
             catch (Exception ex)
             {
@@ -170,7 +180,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]
