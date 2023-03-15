@@ -74,12 +74,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         DeviceErrorForm _errorForm = null;
         OperationBlockingForm _operationBlockingForm = null;
 
-
-        /// <summary>
-        /// Variable para controlar el cambio de la fecha
-        /// </summary>
-        DateTime _today = DateTime.Today;
-
         public string BreadCrumbText
         {
             get { return BreadcrumbLabel.Text; }
@@ -825,29 +819,20 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void SetDepositaryInformation()
         {
             SucursalInfoLabel.Text =
-                MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
-                + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
-                + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
-                + DatabaseController.CurrentDepositary.SectorId.Nombre;
+              MultilanguangeController.GetText(MultiLanguageEnum.SUCURSAL) + ": "
+              + DatabaseController.CurrentDepositary.SectorId.SucursalId.Nombre + Environment.NewLine
+              + MultilanguangeController.GetText(MultiLanguageEnum.SECTOR) + ": "
+              + DatabaseController.CurrentDepositary.SectorId.Nombre;
 
             DepositaryLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.DEPOSITARIO) + ": "
-             + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
-             + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
-             + DatabaseController.CurrentDepositary.CodigoExterno;
+              + DatabaseController.CurrentDepositary.Nombre + Environment.NewLine
+              + MultilanguangeController.GetText(MultiLanguageEnum.CODIGO) + ": "
+              + DatabaseController.CurrentDepositary.CodigoExterno;
         }
 
         private void SetTurnAndDateTimeLabel()
         {
-            // Chequeo de cambio de fecha
-            if(DateTime.Today > _today)
-            {
-                if (_turnAutoClose)
-                {
-                    DatabaseController.CloseCurrentTurn();
-                }
-                _today = DateTime.Today;
-            }
-
+ 
             TurnAndDateTimeLabel.Text = MultilanguangeController.GetText(MultiLanguageEnum.TURNO) + " : ";
 
             if (DatabaseController.CurrentTurn == null)
@@ -857,6 +842,17 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             else
             {
+                // Chequeo de cambio de fecha
+                if (DateTime.Today > DatabaseController.CurrentTurn.Fecha)
+                {
+                    if (_turnAutoClose && DatabaseController.CurrentUser != null)
+                    {
+                        _pollingTimer.Enabled= false;
+                        DatabaseController.ClosePendingTurns();
+                        _pollingTimer.Enabled = true;
+                    }
+                }
+
                 string turnDate = string.Empty;
                 if (DatabaseController.CurrentTurn.Fecha != null)
                     turnDate = " - " + ((DateTime)DatabaseController.CurrentTurn.Fecha).ToString(MultilanguangeController.GetText(MultiLanguageEnum.FORMATO_FECHA));

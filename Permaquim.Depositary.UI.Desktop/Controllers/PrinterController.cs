@@ -7,7 +7,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
     internal static class PrinterController
     {
 
-        private static string GetDefaultPrinterName()
+        public static string GetDefaultPrinterName()
         {
             PrinterSettings settings = new PrinterSettings();
             foreach (string printer in PrinterSettings.InstalledPrinters)

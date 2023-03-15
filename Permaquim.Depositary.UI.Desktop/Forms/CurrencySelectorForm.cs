@@ -99,7 +99,7 @@ namespace Permaquim.Depositary.UI.Desktop
             {
                 // Luego valida que tenga denominaciones configuradas para dicha moneda
 
-                if (DatabaseController.CurrencyHasValueRelation)
+                if (DatabaseController.CurrencyHasDenominations)
                 {
 
                     if (_device != null)

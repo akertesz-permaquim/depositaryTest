@@ -30,7 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permaquim.Depositary.UI.Des
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permaquim.Depositary.Launcher", "Permaquim.Depositary.Launcher\Permaquim.Depositary.Launcher.csproj", "{4F5397CE-D288-4C46-981E-FA07E97C7800}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Permaquim.Depositary.Interface.Out", "Permaquim.Depositary.Interface.Out\Permaquim.Depositary.Interface.Out.csproj", "{B71BB9F1-42E7-4D1F-84BB-F8C77E91CBF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permaquim.Depositary.Interface.Out", "Permaquim.Depositary.Interface.Out\Permaquim.Depositary.Interface.Out.csproj", "{B71BB9F1-42E7-4D1F-84BB-F8C77E91CBF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Permaquim.Depositary.Installer", "Permaquim.Depositary.Installer\Permaquim.Depositary.Installer.csproj", "{1F46417A-607A-4EDE-902F-3DB79E8B2B63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,10 @@ Global
 		{B71BB9F1-42E7-4D1F-84BB-F8C77E91CBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B71BB9F1-42E7-4D1F-84BB-F8C77E91CBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B71BB9F1-42E7-4D1F-84BB-F8C77E91CBF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F46417A-607A-4EDE-902F-3DB79E8B2B63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F46417A-607A-4EDE-902F-3DB79E8B2B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F46417A-607A-4EDE-902F-3DB79E8B2B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F46417A-607A-4EDE-902F-3DB79E8B2B63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
