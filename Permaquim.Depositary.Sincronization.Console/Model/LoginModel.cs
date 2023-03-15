@@ -14,7 +14,6 @@ namespace Permaquim.Depositary.Sincronization.Console
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public LoginModel()
         {
-            DatabaseController DatabaseController = new();
             //this.UserName = DatabaseController.GetApplicationParameterValue(WEBAPI_USER);
             //this.Password = DatabaseController.GetApplicationParameterValue(WEBAPI_PASSWORD);
             this.DepositaryCode = ConfigurationController.GetConfiguration(CODIGODEPOSITARIO);
@@ -29,6 +28,7 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             throw new NotImplementedException();
         }
+
         public void Persist()
         {
             throw new NotImplementedException();

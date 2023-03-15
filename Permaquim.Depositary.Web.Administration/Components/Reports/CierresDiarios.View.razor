@@ -159,11 +159,11 @@ else
                     </table>
                     <div style="margin-bottom: 1rem" class="row justify-content-center">
                         <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
+                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
                             </RadzenButton>
                         </div>
                         <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
+                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
                             </RadzenButton>
                         </div>
                     </div>
@@ -182,7 +182,7 @@ else
         {
             if (dataCierresDiariosView.Count > 0)
             {
-                <RadzenGridExportOptions ReportName="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE_ARCHIVO_REPORTE_CIERRESDIARIOS",dataLenguaje)" GridId="gridCierresDiariosView" Grid="@gridCierresDiariosView" TItem="ResultReporte" ExcelButtonCssStyle="background-color:green" NotExportableClass="exclude-from-radzen-export" ExcelTitle="@MultilenguajeController.ObtenerTextoPorClave("BOTON_EXPORTAR_EXCEL",dataLenguaje)" DateTimeFormat="dd/MM/yyyy" CsvExport="false"></RadzenGridExportOptions>
+                <GridExport T="ResultReporte" Grid="@gridCierresDiariosView" TituloBoton="@MultilenguajeController.ObtenerTextoPorClave("BOTON_EXPORTAR_EXCEL",dataLenguaje)" NombreArchivo="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE_ARCHIVO_REPORTE_CIERRESDIARIOS",dataLenguaje)"></GridExport>
             }
         }
         <RadzenDataGrid @ref="@gridCierresDiariosView"
@@ -194,14 +194,14 @@ else
                 <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
             </EmptyTemplate>
             <Columns>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Fecha" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy HH:mm:ss}" Frozen="false"
+                <RadzenDataGridColumn TItem="ResultReporte" Property="CierreDiarioId" Title="@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CierreDiarioId",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ResultReporte" Property="Fecha" Title="@MultilenguajeController.ObtenerTextoPorClave("FECHA",dataLenguaje)" FormatString="{0:dd/MM/yyyy}" Frozen="false"
                                   Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Fecha",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Fecha",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Fecha",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Fecha",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Fecha",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Fecha",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Fecha",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Fecha",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Fecha",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Fecha",dataCustomizacionPagina.AtributosColumnas)>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="ResultReporte" Property="CodigoCierreDiario" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOCIERREDIARIO",dataLenguaje)" Frozen="false"
                                   Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CodigoCierreDiario",dataCustomizacionPagina.AtributosColumnas)>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="ResultReporte" Property="Turno" Title="@MultilenguajeController.ObtenerTextoPorClave("TURNO",dataLenguaje)" Frozen="false"
-                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Turno",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Turno",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Turno",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Turno",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Turno",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Turno",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Turno",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Turno",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Turno",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Turno",dataCustomizacionPagina.AtributosColumnas)>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Frozen="false"
                                   Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Empresa",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Empresa",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Empresa",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Empresa",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Empresa",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Empresa",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Empresa",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Empresa",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Empresa",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Empresa",dataCustomizacionPagina.AtributosColumnas)>
@@ -271,7 +271,6 @@ else
             }
         }
         public string Sector { get; set; }
-        public string Turno { get; set; }
         public string Empresa { get; set; }
         public string Sucursal { get; set; }
         public string Depositario { get; set; }
@@ -331,7 +330,7 @@ else
     protected override void OnInitialized()
     {
         //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
-        if (!LicenseController.IsValidLicenseAvailable() || LicenseController.GetLicenseRemainingDays() <= 0 || LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        if (LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
         {
             NavManager.NavigateTo("RequerimientoLicencia/ReporteCierresDiariosView", true);
         }
@@ -565,31 +564,31 @@ else
                 }
             }
 
-            if (parametrosCierresDiariosView.turnosSeleccionados == null)
-                parametrosCierresDiariosView.turnosSeleccionados = new Int64[] { };
-            else
-            {
-                if (parametrosCierresDiariosView.turnosSeleccionados.Count() > 0)
-                {
-                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+            //if (parametrosCierresDiariosView.turnosSeleccionados == null)
+            //    parametrosCierresDiariosView.turnosSeleccionados = new Int64[] { };
+            //else
+            //{
+            //    if (parametrosCierresDiariosView.turnosSeleccionados.Count() > 0)
+            //    {
+            //        entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
-                    entity.Where.OpenParentheses();
+            //        entity.Where.OpenParentheses();
 
-                    int turnosFiltrados = 0;
+            //        int turnosFiltrados = 0;
 
-                    foreach (var turno in parametrosCierresDiariosView.turnosSeleccionados)
-                    {
-                        if (turnosFiltrados > 0)
-                            entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.TurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
-                        else
-                            entity.Where.Add(Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.TurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+            //        foreach (var turno in parametrosCierresDiariosView.turnosSeleccionados)
+            //        {
+            //            if (turnosFiltrados > 0)
+            //                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.OR, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.TurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
+            //            else
+            //                entity.Where.Add(Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.TurnoId, Depositary.sqlEnum.OperandEnum.Equal, turno);
 
-                        turnosFiltrados++;
-                    }
+            //            turnosFiltrados++;
+            //        }
 
-                    entity.Where.CloseParentheses();
-                }
-            }
+            //        entity.Where.CloseParentheses();
+            //    }
+            //}
 
             if (parametrosCierresDiariosView.codigoCierreDiario != string.Empty && parametrosCierresDiariosView.codigoCierreDiario != null)
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.CodigoCierreDiario, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosCierresDiariosView.codigoCierreDiario + "%");
@@ -606,12 +605,12 @@ else
                     resultReporte.TotalAValidar = cierreDiario.TotalAValidar;
                     resultReporte.TotalValidado = cierreDiario.TotalValidado;
                     resultReporte.Usuario = cierreDiario.Usuario;
-                    resultReporte.Turno = cierreDiario.Turno;
                     resultReporte.Empresa = cierreDiario.Empresa;
                     resultReporte.Sucursal = cierreDiario.Sucursal;
                     resultReporte.Depositario = cierreDiario.Depositario;
                     resultReporte.CodigoCierreDiario = cierreDiario.CodigoCierreDiario;
                     resultReporte.Fecha = cierreDiario.Fecha;
+                    resultReporte.CierreDiarioId = cierreDiario.CierreDiarioId;
                     dataCierresDiariosView.Add(resultReporte);
                 }
             }

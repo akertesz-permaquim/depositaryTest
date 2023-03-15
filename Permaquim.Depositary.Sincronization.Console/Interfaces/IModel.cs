@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Permaquim.Depositary.Sincronization.Console.Interfaces
 {
-    internal interface IModel 
+    internal interface IModel
     {
         public void Process();
         public Dictionary<string, DateTime> SincroDates { get; set; }
+
         public void Persist();
-  
+
     }
 }

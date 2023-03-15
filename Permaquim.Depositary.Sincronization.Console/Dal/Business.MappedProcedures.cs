@@ -2,24 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-		namespace Permaquim.Depositario.Business.Procedures.Operacion {
+		namespace Permaquim.Depositario.Business.Procedures.dbo {
 	    /// <summary>
-	    /// ObtenerExistenciasPorDepositario
+	    /// FinalizarPrimeraSincronizacion
 	    /// </summary>
-		public class ObtenerExistenciasPorDepositario : MappedProcedureDataHandler
+		public class FinalizarPrimeraSincronizacion : MappedProcedureDataHandler
 		{
          private List<List<IDataItem>> _result = new List<List<IDataItem>>();
          private List<IDataItem> _dataItems = new List<IDataItem>();
          public MappedResult MappedResultSet = new MappedResult();
-            public ObtenerExistenciasPorDepositario() : base()
+            public FinalizarPrimeraSincronizacion() : base()
             {
-                 _dataItems.Add(new Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado());
+                 _dataItems.Add(new Entities.Procedures.dbo.FinalizarPrimeraSincronizacion.Result());
             }
-            public List<List<IDataItem>> Items(Int64? DepositarioId)
+            public List<List<IDataItem>> Items(Int64? @DepositarioId)
             {
-                MappedProcedureDataHandler dh = new MappedProcedureDataHandler((IDataItem)new Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario(), _dataItems);
+                MappedProcedureDataHandler dh = new MappedProcedureDataHandler((IDataItem)new Entities.Procedures.dbo.FinalizarPrimeraSincronizacion(), _dataItems);
                 _result = dh.Items(new List<ParameterItemValue> { new ParameterItemValue("DepositarioId", DepositarioId)});
-                 MappedResultSet.Resultado = _result[0].Cast<Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado>().ToList<Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado>();
+                 MappedResultSet.Result = _result[0].Cast<Entities.Procedures.dbo.FinalizarPrimeraSincronizacion.Result>().ToList<Entities.Procedures.dbo.FinalizarPrimeraSincronizacion.Result>();
                 return _result;
              }
              public List<List<IDataItem>> Resultset
@@ -28,28 +28,28 @@ using System.Text;
              }
              public class MappedResult
              {
-                 public List<Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado> Resultado= new List<Entities.Procedures.Operacion.ObtenerExistenciasPorDepositario.Resultado>();
+                 public List<Entities.Procedures.dbo.FinalizarPrimeraSincronizacion.Result> Result= new List<Entities.Procedures.dbo.FinalizarPrimeraSincronizacion.Result>();
              }
         }// class 
      }
-		namespace Permaquim.Depositario.Business.Procedures.Dispositivo {
+		namespace Permaquim.Depositario.Business.Procedures.dbo {
 	    /// <summary>
-	    /// ObtenerInformacionDepositario
+	    /// IniciarPrimeraSincronizacion
 	    /// </summary>
-		public class ObtenerInformacionDepositario : MappedProcedureDataHandler
+		public class IniciarPrimeraSincronizacion : MappedProcedureDataHandler
 		{
          private List<List<IDataItem>> _result = new List<List<IDataItem>>();
          private List<IDataItem> _dataItems = new List<IDataItem>();
          public MappedResult MappedResultSet = new MappedResult();
-            public ObtenerInformacionDepositario() : base()
+            public IniciarPrimeraSincronizacion() : base()
             {
-                 _dataItems.Add(new Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado());
+                 _dataItems.Add(new Entities.Procedures.dbo.IniciarPrimeraSincronizacion.Result());
             }
-            public List<List<IDataItem>> Items(Int64? DepositarioId)
+            public List<List<IDataItem>> Items()
             {
-                MappedProcedureDataHandler dh = new MappedProcedureDataHandler((IDataItem)new Entities.Procedures.Dispositivo.ObtenerInformacionDepositario(), _dataItems);
-                _result = dh.Items(new List<ParameterItemValue> { new ParameterItemValue("DepositarioId", DepositarioId)});
-                 MappedResultSet.Resultado = _result[0].Cast<Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado>().ToList<Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado>();
+                MappedProcedureDataHandler dh = new MappedProcedureDataHandler((IDataItem)new Entities.Procedures.dbo.IniciarPrimeraSincronizacion(), _dataItems);
+                _result = dh.Items(new List<ParameterItemValue> {});
+                 MappedResultSet.Result = _result[0].Cast<Entities.Procedures.dbo.IniciarPrimeraSincronizacion.Result>().ToList<Entities.Procedures.dbo.IniciarPrimeraSincronizacion.Result>();
                 return _result;
              }
              public List<List<IDataItem>> Resultset
@@ -58,97 +58,7 @@ using System.Text;
              }
              public class MappedResult
              {
-                 public List<Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado> Resultado= new List<Entities.Procedures.Dispositivo.ObtenerInformacionDepositario.Resultado>();
-             }
-        }// class 
-     }
-		namespace Permaquim.Depositario.Business.Procedures.Operacion {
-	    /// <summary>
-	    /// ObtenerExistenciasAValidarPorDepositario
-	    /// </summary>
-		public class ObtenerExistenciasAValidarPorDepositario : MappedProcedureDataHandler
-		{
-         private List<List<IDataItem>> _result = new List<List<IDataItem>>();
-         private List<IDataItem> _dataItems = new List<IDataItem>();
-         public MappedResult MappedResultSet = new MappedResult();
-            public ObtenerExistenciasAValidarPorDepositario() : base()
-            {
-                 _dataItems.Add(new Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado());
-            }
-            public List<List<IDataItem>> Items(Int64? DepositarioId)
-            {
-                MappedProcedureDataHandler dh = new MappedProcedureDataHandler((IDataItem)new Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario(), _dataItems);
-                _result = dh.Items(new List<ParameterItemValue> { new ParameterItemValue("DepositarioId", DepositarioId)});
-                 MappedResultSet.Resultado = _result[0].Cast<Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>().ToList<Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>();
-                return _result;
-             }
-             public List<List<IDataItem>> Resultset
-             {
-                 get { return _result; }
-             }
-             public class MappedResult
-             {
-                 public List<Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado> Resultado= new List<Entities.Procedures.Operacion.ObtenerExistenciasAValidarPorDepositario.Resultado>();
-             }
-        }// class 
-     }
-		namespace Permaquim.Depositario.Business.Procedures.Operacion {
-	    /// <summary>
-	    /// ObtenerTotalesGeneralesPorMonedaDepositario
-	    /// </summary>
-		public class ObtenerTotalesGeneralesPorMonedaDepositario : MappedProcedureDataHandler
-		{
-         private List<List<IDataItem>> _result = new List<List<IDataItem>>();
-         private List<IDataItem> _dataItems = new List<IDataItem>();
-         public MappedResult MappedResultSet = new MappedResult();
-            public ObtenerTotalesGeneralesPorMonedaDepositario() : base()
-            {
-                 _dataItems.Add(new Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado());
-            }
-            public List<List<IDataItem>> Items(Int64? DepositarioId)
-            {
-                MappedProcedureDataHandler dh = new MappedProcedureDataHandler((IDataItem)new Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario(), _dataItems);
-                _result = dh.Items(new List<ParameterItemValue> { new ParameterItemValue("DepositarioId", DepositarioId)});
-                 MappedResultSet.Resultado = _result[0].Cast<Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>().ToList<Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>();
-                return _result;
-             }
-             public List<List<IDataItem>> Resultset
-             {
-                 get { return _result; }
-             }
-             public class MappedResult
-             {
-                 public List<Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado> Resultado= new List<Entities.Procedures.Operacion.ObtenerTotalesGeneralesPorMonedaDepositario.Resultado>();
-             }
-        }// class 
-     }
-		namespace Permaquim.Depositario.Business.Procedures.Regionalizacion {
-	    /// <summary>
-	    /// ObtenerTextosLenguaje
-	    /// </summary>
-		public class ObtenerTextosLenguaje : MappedProcedureDataHandler
-		{
-         private List<List<IDataItem>> _result = new List<List<IDataItem>>();
-         private List<IDataItem> _dataItems = new List<IDataItem>();
-         public MappedResult MappedResultSet = new MappedResult();
-            public ObtenerTextosLenguaje() : base()
-            {
-                 _dataItems.Add(new Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado());
-            }
-            public List<List<IDataItem>> Items(Int64? UsuarioId)
-            {
-                MappedProcedureDataHandler dh = new MappedProcedureDataHandler((IDataItem)new Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje(), _dataItems);
-                _result = dh.Items(new List<ParameterItemValue> { new ParameterItemValue("UsuarioId", UsuarioId)});
-                 MappedResultSet.Resultado = _result[0].Cast<Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>().ToList<Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>();
-                return _result;
-             }
-             public List<List<IDataItem>> Resultset
-             {
-                 get { return _result; }
-             }
-             public class MappedResult
-             {
-                 public List<Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado> Resultado= new List<Entities.Procedures.Regionalizacion.ObtenerTextosLenguaje.Resultado>();
+                 public List<Entities.Procedures.dbo.IniciarPrimeraSincronizacion.Result> Result= new List<Entities.Procedures.dbo.IniciarPrimeraSincronizacion.Result>();
              }
         }// class 
      }

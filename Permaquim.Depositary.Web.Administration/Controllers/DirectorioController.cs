@@ -10,7 +10,7 @@
             {
                 bRelationsRelacionMonedaSucursal.Where.Add(Depositary.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
                 bRelationsRelacionMonedaSucursal.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, pSucursalId);
-                bRelationsRelacionMonedaSucursal.OrderByParameter.Add(Depositary.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.EsDefault, Depositary.sqlEnum.DirEnum.DESC);
+                bRelationsRelacionMonedaSucursal.OrderBy.Add(Depositary.Business.Relations.Directorio.RelacionMonedaSucursal.ColumnEnum.EsDefault, Depositary.sqlEnum.DirEnum.DESC);
 
                 bRelationsRelacionMonedaSucursal.Items();
 
@@ -56,7 +56,10 @@
                         eDepositarioMoneda.UsuarioCreacion = NuevaRelacionMonedaSucursal.UsuarioCreacion;
                         eDepositarioMoneda.IndiceEnContadora = 0; //TODO: Revisar este dato, parece que no se usa.
 
-                        oDepositarioMoneda.BeginTransaction();
+                        Depositary.Business.Tables.Dispositivo.DepositarioMoneda btDepositarioMoneda = new();
+
+                        btDepositarioMoneda.BeginTransaction();
+
                         foreach (var sector in bRelationsSector.Result)
                         {
                             //Obtenemos los depositarios asociados al sector
@@ -80,21 +83,21 @@
                                         {
                                             var editDepositarioMoneda = oDepositarioMoneda.Result.FirstOrDefault();
                                             editDepositarioMoneda.Habilitado = NuevaRelacionMonedaSucursal.Habilitado;
-                                            oDepositarioMoneda.Update(editDepositarioMoneda);
+                                            btDepositarioMoneda.Update(editDepositarioMoneda);
                                         }
                                         else
-                                            oDepositarioMoneda.Add(eDepositarioMoneda);
+                                            btDepositarioMoneda.Add(eDepositarioMoneda);
                                     }
                                     catch (Exception ex)
                                     {
                                         AuditController.Log(ex);
-                                        oDepositarioMoneda.EndTransaction(false);
+                                        btDepositarioMoneda.EndTransaction(false);
                                         return false;
                                     }
                                 }
                             }
                         }
-                        oDepositarioMoneda.EndTransaction(true);
+                        btDepositarioMoneda.EndTransaction(true);
                     }
                 }
             }

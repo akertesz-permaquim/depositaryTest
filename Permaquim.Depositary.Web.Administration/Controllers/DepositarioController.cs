@@ -315,7 +315,7 @@
                             if (bRelationsContenedor.Result.Count > 0)
                             {
                                 var bolsa = bRelationsContenedor.Result.FirstOrDefault();
-                                resultado.IdentificadorBolsa = bolsa.Identificador;
+                                resultado.IdentificadorBolsa = bolsa.Identificador == "" ? bolsa.Nombre : bolsa.Identificador;
                                 resultado.CapacidadBilletesBolsa = bolsa.TipoId.Capacidad;
                                 resultado.PorcentajeOcupacionBolsa = OperacionController.ObtenerPorcentajeOcupacionBolsa(bolsa.Id, pDepositarioId);
                                 resultado.CantidadBilletesEnBolsa = (int)Math.Round(resultado.PorcentajeOcupacionBolsa * resultado.CapacidadBilletesBolsa / 100, MidpointRounding.AwayFromZero);
@@ -509,19 +509,17 @@
         {
             bool resultado = false;
 
-            using (Depositary.Business.Tables.Dispositivo.DepositarioEstado bTablesDepositarioEstado = new())
+            Depositary.Business.Tables.Dispositivo.DepositarioEstado bTablesDepositarioEstado = new();
+            bTablesDepositarioEstado.Where.Add(Business.Tables.Dispositivo.DepositarioEstado.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
+            bTablesDepositarioEstado.TopQuantity = 1;
+            bTablesDepositarioEstado.Items();
+
+            if (bTablesDepositarioEstado.Result.Count > 0)
             {
-                bTablesDepositarioEstado.Where.Add(Business.Tables.Dispositivo.DepositarioEstado.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
-                bTablesDepositarioEstado.TopQuantity = 1;
-                bTablesDepositarioEstado.Items();
+                var estadoDepositario = bTablesDepositarioEstado.Result.FirstOrDefault();
 
-                if (bTablesDepositarioEstado.Result.Count > 0)
-                {
-                    var estadoDepositario = bTablesDepositarioEstado.Result.FirstOrDefault();
-
-                    if (estadoDepositario.FueraDeServicio)
-                        resultado = true ;
-                }
+                if (estadoDepositario.FueraDeServicio)
+                    resultado = true;
             }
 
             return resultado;
@@ -587,7 +585,7 @@
                 {
                     foreach (var depositario in depositarios)
                     {
-                        if(VerificarDepositarioBloqueado(depositario))
+                        if (VerificarDepositarioBloqueado(depositario))
                             depositariosFueraServicio++;
 
                         //using (Depositary.Business.Tables.Dispositivo.DepositarioEstado bTablesDepositarioEstado = new())
@@ -632,30 +630,28 @@
             {
                 if (depositarios.Count > 0)
                 {
-                    using (Depositary.Business.Tables.Dispositivo.Depositario _bTablesDepositario = new())
+                    Depositary.Business.Tables.Dispositivo.Depositario _bTablesDepositario = new();
+
+                    _bTablesDepositario.Where.Clear();
+                    _bTablesDepositario.Where.Add(Depositary.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                    _bTablesDepositario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Dispositivo.Depositario.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, depositarios);
+
+                    _bTablesDepositario.Items();
+
+                    if (_bTablesDepositario.Result.Count > 0)
                     {
-
-                        _bTablesDepositario.Where.Clear();
-                        _bTablesDepositario.Where.Add(Depositary.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                        _bTablesDepositario.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Dispositivo.Depositario.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, depositarios);
-
-                        _bTablesDepositario.Items();
-
-                        if (_bTablesDepositario.Result.Count > 0)
+                        foreach (var depositario in _bTablesDepositario.Result)
                         {
-                            foreach (var depositario in _bTablesDepositario.Result)
+                            var transacciones = OperacionController.ObtenerTransaccionesPorDepositario(depositario.Id, false, null, null, DateTime.Today);
+                            if (transacciones.Count > 0)
                             {
-                                var transacciones = OperacionController.ObtenerTransaccionesPorDepositario(depositario.Id, false, null, null, DateTime.Today);
-                                if (transacciones.Count > 0)
-                                {
-                                    List<Entities.DepositarioCarga> ListaDepositarioCarga = new();
-                                    Entities.DepositarioCarga depositarioCarga = new();
-                                    depositarioCarga.NombreDepositario = depositario.Nombre;
-                                    depositarioCarga.CantidadTransacciones = transacciones.Count;
-                                    depositarioCarga.DepositarioId = depositario.Id;
-                                    ListaDepositarioCarga.Add(depositarioCarga);
-                                    resultado.Add(ListaDepositarioCarga);
-                                }
+                                List<Entities.DepositarioCarga> ListaDepositarioCarga = new();
+                                Entities.DepositarioCarga depositarioCarga = new();
+                                depositarioCarga.NombreDepositario = depositario.Nombre;
+                                depositarioCarga.CantidadTransacciones = transacciones.Count;
+                                depositarioCarga.DepositarioId = depositario.Id;
+                                ListaDepositarioCarga.Add(depositarioCarga);
+                                resultado.Add(ListaDepositarioCarga);
                             }
                         }
                     }
@@ -671,32 +667,32 @@
         {
             List<Int64> resultado = new();
 
-            using (Depositary.Business.Relations.Directorio.Empresa bRelationsEmpresa = new())
+            Depositary.Business.Relations.Directorio.Empresa bRelationsEmpresa = new();
+            
+            bRelationsEmpresa.Where.Clear();
+            bRelationsEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+            if (pEmpresas.Count > 0)
+                bRelationsEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, pEmpresas);
+
+            bRelationsEmpresa.Items();
+
+            if (bRelationsEmpresa.Result.Count > 0)
             {
-                bRelationsEmpresa.Where.Clear();
-                bRelationsEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-                if (pEmpresas.Count > 0)
-                    bRelationsEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, pEmpresas);
-
-                bRelationsEmpresa.Items();
-
-                if (bRelationsEmpresa.Result.Count > 0)
+                foreach (var empresa in bRelationsEmpresa.Result)
                 {
-                    foreach (var empresa in bRelationsEmpresa.Result)
+                    foreach (var sucursal in empresa.ListOf_Sucursal_EmpresaId)
                     {
-                        foreach (var sucursal in empresa.ListOf_Sucursal_EmpresaId)
+                        foreach (var sector in sucursal.ListOf_Sector_SucursalId)
                         {
-                            foreach (var sector in sucursal.ListOf_Sector_SucursalId)
+                            foreach (var depositario in sector.ListOf_Depositario_SectorId.Where(x => x.Habilitado == true))
                             {
-                                foreach (var depositario in sector.ListOf_Depositario_SectorId.Where(x => x.Habilitado == true))
-                                {
-                                    resultado.Add(depositario.Id);
-                                }
+                                resultado.Add(depositario.Id);
                             }
                         }
                     }
                 }
             }
+
 
             return resultado;
         }
@@ -902,20 +898,18 @@
         {
             DateTime? returnValue = null;
 
-            using (Depositary.Business.Tables.Sincronizacion.EntidadCabecera bTablesEntidadCabecera = new())
+            Depositary.Business.Tables.Sincronizacion.Ejecucion bTEjecucion = new();
+
+            bTEjecucion.Where.Add(Business.Tables.Sincronizacion.Ejecucion.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
+            bTEjecucion.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Tables.Sincronizacion.Ejecucion.ColumnEnum.Finalizada, sqlEnum.OperandEnum.Equal, true);
+            bTEjecucion.OrderBy.Add(Business.Tables.Sincronizacion.Ejecucion.ColumnEnum.FechaInicio, sqlEnum.DirEnum.DESC);
+            bTEjecucion.TopQuantity = 1;
+
+            bTEjecucion.Items();
+
+            if (bTEjecucion.Result.Count > 0)
             {
-                bTablesEntidadCabecera.Where.Clear();
-                bTablesEntidadCabecera.Where.Add(Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
-                bTablesEntidadCabecera.OrderBy.Clear();
-                bTablesEntidadCabecera.OrderBy.Add(Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechainicio, sqlEnum.DirEnum.DESC);
-                bTablesEntidadCabecera.TopQuantity = 1;
-
-                bTablesEntidadCabecera.Items();
-
-                if (bTablesEntidadCabecera.Result.Count > 0)
-                {
-                    returnValue = bTablesEntidadCabecera.Result.FirstOrDefault().Fechainicio;
-                }
+                returnValue = bTEjecucion.Result.FirstOrDefault().FechaInicio;
             }
 
             return returnValue;

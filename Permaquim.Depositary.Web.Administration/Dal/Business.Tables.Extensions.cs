@@ -4616,7 +4616,7 @@
 				Metodo = metodo,
 				Modulo = "",
 				TipoId = (long)logType,
-				UsuarioId = -1
+				UsuarioId = entity.UsuarioModificacion != null ? (long)entity.UsuarioModificacion : entity.UsuarioCreacion != null ? (long)entity.UsuarioCreacion : -1
 			});
 
 			return 0;
@@ -6664,6 +6664,95 @@
 				Modulo = "",
 				TipoId = (long)logType,
 				UsuarioId = entity.UsuarioModificacion != null ? (long)entity.UsuarioModificacion : entity.UsuarioCreacion != null ? (long)entity.UsuarioCreacion : -1
+			});
+
+			return 0;
+        }
+    }
+}
+
+    #endregion
+
+    #region Ejecucion
+
+	namespace Permaquim.Depositary.Business.Tables.Sincronizacion
+{
+	/// <summary>
+	/// 
+	/// </summary>
+	public partial class Ejecucion
+	{
+		public enum LogTypeEnum {
+			Ninguno,
+			Alta,
+			Baja,
+			Modificacion
+		}
+
+		public Entities.Tables.Sincronizacion.Ejecucion Add(Entities.Tables.Sincronizacion.Ejecucion item,long aplicacionId)
+		{
+			var refItem =  (Entities.Tables.Sincronizacion.Ejecucion)base.Add((IDataItem)item);
+			LogEvent(aplicacionId, LogTypeEnum.Alta, refItem);
+			return refItem;
+		}
+		public Int64 Update(Entities.Tables.Sincronizacion.Ejecucion item, long aplicacionId)
+		{
+			var refItem = base.Update((IDataItem)item);
+			LogEvent(aplicacionId, LogTypeEnum.Modificacion, item);
+			return refItem;
+		}
+
+		public Int64 Delete(Int64 id, long aplicacionId)
+		{
+			Business.Tables.Sincronizacion.Ejecucion refentities = new();
+			refentities.Items(id);
+			var refentity = refentities.Result.FirstOrDefault();
+			LogEvent(aplicacionId, LogTypeEnum.Baja, refentity);
+			return  base.DeleteItem(refentity);
+
+		}
+
+		private int LogEvent(long applicacionId, LogTypeEnum logType, Permaquim.Depositary.Entities.Tables.Sincronizacion.Ejecucion entity)
+
+		{
+			string descripcion = string.Empty;
+			string metodo = string.Empty;
+			string identificador = string.Empty;
+			identificador = " Id: " + entity.Id.ToString();
+
+			switch (logType)
+			{
+				case LogTypeEnum.Ninguno:
+					descripcion = "No especificado";
+					metodo = Enum.GetName(LogTypeEnum.Ninguno);
+					break;
+				case LogTypeEnum.Alta:
+					descripcion = "Alta de entidad: Permaquim.Depositary.Business.Sincronizacion.Ejecucion" + identificador;
+					metodo = Enum.GetName(LogTypeEnum.Alta);
+					break;
+				case LogTypeEnum.Baja:
+					descripcion = "Baja de entidad: Permaquim.Depositary.Business.Sincronizacion.Ejecucion" + identificador;
+					metodo = Enum.GetName(LogTypeEnum.Baja);
+					break;
+				case LogTypeEnum.Modificacion:
+					descripcion = "Modificacion de entidad: Permaquim.Depositary.Business.Sincronizacion.Ejecucion" + identificador;
+					metodo = Enum.GetName(LogTypeEnum.Modificacion);
+					break;
+				default:
+					break;
+			}
+
+			Permaquim.Depositary.Business.Tables.Auditoria.Log logEntities = new();
+			logEntities.Add(new()
+			{
+				AplicacionId = applicacionId,
+				Descripcion = descripcion,
+				Detalle = descripcion,
+				Fecha = DateTime.Now,
+				Metodo = metodo,
+				Modulo = "",
+				TipoId = (long)logType,
+				UsuarioId = -1
 			});
 
 			return 0;

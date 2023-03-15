@@ -72,13 +72,13 @@ using System.Text;
 			}
             public new List<Entities.Views.Operacion.VistaTransaccion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Operacion.VistaTransaccion> _entities = new List<Entities.Views.Operacion.VistaTransaccion>();
-                _entities = dh.Items().Cast<Entities.Views.Operacion.VistaTransaccion>().ToList<Entities.Views.Operacion.VistaTransaccion>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Operacion.VistaTransaccion>().ToList<Entities.Views.Operacion.VistaTransaccion>();
                 return _entities;
             }
             /// <summary>
@@ -331,8 +331,6 @@ using System.Text;
 					Empresa,
 					Sucursal,
 					Sector,
-					TurnoId,
-					Turno,
 					Depositario,
 					CantidadTransacciones,
 					TotalValidado,
@@ -382,19 +380,19 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Reporte.CierresDiarios Add(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64 TurnoId,String Turno,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoCierreDiario) 
+			public Entities.Views.Reporte.CierresDiarios Add(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoCierreDiario) 
 			{
-			  return (Entities.Views.Reporte.CierresDiarios)base.Add(new Entities.Views.Reporte.CierresDiarios(CierreDiarioId,DepositarioId,SectorId,SucursalId,EmpresaId,UsuarioId,Usuario,Fecha,CierreDiario,Empresa,Sucursal,Sector,TurnoId,Turno,Depositario,CantidadTransacciones,TotalValidado,TotalAValidar,Moneda,CodigoCierreDiario));
+			  return (Entities.Views.Reporte.CierresDiarios)base.Add(new Entities.Views.Reporte.CierresDiarios(CierreDiarioId,DepositarioId,SectorId,SucursalId,EmpresaId,UsuarioId,Usuario,Fecha,CierreDiario,Empresa,Sucursal,Sector,Depositario,CantidadTransacciones,TotalValidado,TotalAValidar,Moneda,CodigoCierreDiario));
 			}
             public new List<Entities.Views.Reporte.CierresDiarios> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Reporte.CierresDiarios> _entities = new List<Entities.Views.Reporte.CierresDiarios>();
-                _entities = dh.Items().Cast<Entities.Views.Reporte.CierresDiarios>().ToList<Entities.Views.Reporte.CierresDiarios>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Reporte.CierresDiarios>().ToList<Entities.Views.Reporte.CierresDiarios>();
                 return _entities;
             }
             /// <summary>
@@ -412,8 +410,6 @@ using System.Text;
             /// <param name="Empresa"></param>
             /// <param name="Sucursal"></param>
             /// <param name="Sector"></param>
-            /// <param name="TurnoId"></param>
-            /// <param name="Turno"></param>
             /// <param name="Depositario"></param>
             /// <param name="CantidadTransacciones"></param>
             /// <param name="TotalValidado"></param>
@@ -421,7 +417,7 @@ using System.Text;
             /// <param name="Moneda"></param>
             /// <param name="CodigoCierreDiario"></param>
             /// <returns></returns>
-            public List<Entities.Views.Reporte.CierresDiarios> Items(Int64? CierreDiarioId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,String Usuario,DateTime? Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64? TurnoId,String Turno,String Depositario,Int32? CantidadTransacciones,Double? TotalValidado,Double? TotalAValidar,String Moneda,String CodigoCierreDiario)
+            public List<Entities.Views.Reporte.CierresDiarios> Items(Int64? CierreDiarioId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? EmpresaId,Int64? UsuarioId,String Usuario,DateTime? Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32? CantidadTransacciones,Double? TotalValidado,Double? TotalAValidar,String Moneda,String CodigoCierreDiario)
             {
                 this.Where.whereParameter.Clear();
                 if (CierreDiarioId != null)
@@ -565,30 +561,6 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Sector, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Sector);
-                    }
-                   
-                }
-                if (TurnoId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TurnoId);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TurnoId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, TurnoId);
-                    }
-                   
-                }
-                if (Turno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Turno, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Turno);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Turno, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Turno);
                     }
                    
                 }
@@ -791,13 +763,13 @@ using System.Text;
 			}
             public new List<Entities.Views.Reporte.Contenedores> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Reporte.Contenedores> _entities = new List<Entities.Views.Reporte.Contenedores>();
-                _entities = dh.Items().Cast<Entities.Views.Reporte.Contenedores>().ToList<Entities.Views.Reporte.Contenedores>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Reporte.Contenedores>().ToList<Entities.Views.Reporte.Contenedores>();
                 return _entities;
             }
             /// <summary>
@@ -1149,13 +1121,13 @@ using System.Text;
 			}
             public new List<Entities.Views.Reporte.DetalleTransacciones> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Reporte.DetalleTransacciones> _entities = new List<Entities.Views.Reporte.DetalleTransacciones>();
-                _entities = dh.Items().Cast<Entities.Views.Reporte.DetalleTransacciones>().ToList<Entities.Views.Reporte.DetalleTransacciones>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Reporte.DetalleTransacciones>().ToList<Entities.Views.Reporte.DetalleTransacciones>();
                 return _entities;
             }
             /// <summary>
@@ -1598,13 +1570,13 @@ using System.Text;
 			}
             public new List<Entities.Views.Reporte.DetalleTransaccionesSobre> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Reporte.DetalleTransaccionesSobre> _entities = new List<Entities.Views.Reporte.DetalleTransaccionesSobre>();
-                _entities = dh.Items().Cast<Entities.Views.Reporte.DetalleTransaccionesSobre>().ToList<Entities.Views.Reporte.DetalleTransaccionesSobre>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Reporte.DetalleTransaccionesSobre>().ToList<Entities.Views.Reporte.DetalleTransaccionesSobre>();
                 return _entities;
             }
             /// <summary>
@@ -2049,13 +2021,13 @@ using System.Text;
 			}
             public new List<Entities.Views.Reporte.Transacciones> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Reporte.Transacciones> _entities = new List<Entities.Views.Reporte.Transacciones>();
-                _entities = dh.Items().Cast<Entities.Views.Reporte.Transacciones>().ToList<Entities.Views.Reporte.Transacciones>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Reporte.Transacciones>().ToList<Entities.Views.Reporte.Transacciones>();
                 return _entities;
             }
             /// <summary>
@@ -2522,13 +2494,13 @@ using System.Text;
 			}
             public new List<Entities.Views.Reporte.Turnos> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Reporte.Turnos> _entities = new List<Entities.Views.Reporte.Turnos>();
-                _entities = dh.Items().Cast<Entities.Views.Reporte.Turnos>().ToList<Entities.Views.Reporte.Turnos>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Reporte.Turnos>().ToList<Entities.Views.Reporte.Turnos>();
                 return _entities;
             }
             /// <summary>
@@ -2926,13 +2898,13 @@ using System.Text;
 			}
             public new List<Entities.Views.Valor.VistaDenominacion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where.whereParameter;
-                dh.OrderByParameter = this.OrderBy.orderByParameter;
-                dh.GroupByParameter = this.GroupBy.groupByParameter;
-                dh.TopQuantity = this.TopQuantity;
+                this.WhereParameter = this.Where.whereParameter;
+                this.OrderByParameter = this.OrderBy.orderByParameter;
+                this.GroupByParameter = this.GroupBy.groupByParameter;
+                this.TopQuantity = this.TopQuantity;
                 List<Entities.Views.Valor.VistaDenominacion> _entities = new List<Entities.Views.Valor.VistaDenominacion>();
-                _entities = dh.Items().Cast<Entities.Views.Valor.VistaDenominacion>().ToList<Entities.Views.Valor.VistaDenominacion>();
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Views.Valor.VistaDenominacion>().ToList<Entities.Views.Valor.VistaDenominacion>();
                 return _entities;
             }
             /// <summary>

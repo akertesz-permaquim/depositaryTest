@@ -1,4 +1,5 @@
 ﻿using License;
+using Permaquim.Depositary.Web.Administration.Controllers;
 using System.Management;
 
 namespace Permaquim.Depositary.Web.Administration.Controllers
@@ -29,7 +30,14 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                 return 1;
             else
                 return (License.Status.Expiration_Date.Date - DateTime.Now.Date).TotalDays;
-            //return (License.Status.Expiration_Date.Date - DateTime.Now.Date).TotalDays;
+        }
+
+        public static bool IsExpiredLicense()
+        {
+            if (LicenseController.GetLicenseRemainingDays() >= 0)
+                return false;
+            else
+                return true;
         }
 
 

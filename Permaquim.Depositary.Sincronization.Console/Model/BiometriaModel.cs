@@ -7,13 +7,14 @@ namespace Permaquim.Depositary.Sincronization.Console
     {
         public List<Depositario.Entities.Tables.Biometria.HuellaDactilar> HuellasDactilares { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
+        public Int64? SynchronizationExecutionId = SynchronizationController.CurrentSynchronizationExecutionId;
 
         void IModel.Process()
         {
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroHuellaDactilar = SynchronizationController.obtenerFechaUltimaSincronizacion("Biometria.HuellaDactilar");
+            DateTime fechaSincroHuellaDactilar = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Biometria_HuellaDactilar);
 
-            SincroDates.Add("Biometria.HuellaDactilar", fechaSincroHuellaDactilar);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Biometria_HuellaDactilar).Replace("_", "."), fechaSincroHuellaDactilar);
         }
 
         public void Persist()
@@ -31,15 +32,15 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Biometria.HuellaDactilar");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Biometria_HuellaDactilar, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
                         foreach (var item in HuellasDactilares)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Biometria.HuellaDactilar", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Biometria_HuellaDactilar, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
 
                             if (usuarioCreacionIdOrigen.HasValue)
                             {
@@ -50,7 +51,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -65,11 +66,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     huellaDactilar.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
 
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
             }

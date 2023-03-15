@@ -1,5 +1,6 @@
 using BlazorDownloadFile;
 using Blazored.SessionStorage;
+using Microsoft.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 

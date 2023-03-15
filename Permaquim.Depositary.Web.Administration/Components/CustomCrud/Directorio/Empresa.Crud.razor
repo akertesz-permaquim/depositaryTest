@@ -123,7 +123,7 @@
                             <Template>
                                 @if (CodigoPostal_CodigoPostalId_entities.FirstOrDefault(c => c.Id == @context.CodigoPostalId) != null)
                                 {
-                                    <RadzenLabel Text="@CodigoPostal_CodigoPostalId_entities.FirstOrDefault( c => c.Id == @context.CodigoPostalId).Nombre" Component="CodigoPostalId" style="width: 100%">
+                                    <RadzenLabel Text="@CodigoPostal_CodigoPostalId_entities.FirstOrDefault( c => c.Id == @context.CodigoPostalId).CodigoYDescripcion" Component="CodigoPostalId" style="width: 100%">
                                     </RadzenLabel>
                                 }
                                 else
@@ -265,7 +265,7 @@
                                         <RadzenTabsItem Visible="@permisoAplicacionConfiguracionEmpresa" Text="Configuraciones">
                                             <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Aplicacion.ConfiguracionEmpresa_Crud EmpresaId="@(empresa.Id)" EsDefault="@(empresa.EsDefault)"></Permaquim.Depositary.Web.Administration.Components.CustomCrud.Aplicacion.ConfiguracionEmpresa_Crud>
                                         </RadzenTabsItem>
-                                        <RadzenTabsItem Visible="@permisoBancaCuenta" Text="Cuentas">
+                                        <RadzenTabsItem Visible="@permisoBancaCuenta" Text="Cuentas bancarias">
                                             <Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.Cuenta_Crud EmpresaId="@(empresa.Id)"></Permaquim.Depositary.Web.Administration.Components.CustomCrud.Banca.Cuenta_Crud>
                                         </RadzenTabsItem>
                                         <RadzenTabsItem Visible="@permisoImpresionTicket" Text="Tickets">
@@ -378,14 +378,14 @@
                                 {
                                     var dataSet = crudMode == CrudMode.Add ? CodigoPostal_CodigoPostalId_entities.Where(x => x.Habilitado == true) : CodigoPostal_CodigoPostalId_entities.Where(x => x.Habilitado == true || x.Id == Empresa_entity.CodigoPostalId);
                                     <RadzenDropDown AllowFiltering="true" Name="CodigoPostalId" FilterOperator="StringFilterOperator.Contains" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(Empresa_entity.CodigoPostalId)"
-                                Data=@dataSet TextProperty="Nombre" ValueProperty="Id"
+                                Data=@dataSet TextProperty="CodigoYDescripcion" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostal_CodigoPostalIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
                                 else
                                 {
                                     <RadzenDropDown AllowClear="true" TValue="Int64" Class="w-100" Name="CodigoPostalId"
-                                Data=@CodigoPostal_CodigoPostalId_entities TextProperty="Nombre" ValueProperty="Id"
+                                Data=@CodigoPostal_CodigoPostalId_entities TextProperty="CodigoYDescripcion" ValueProperty="Id"
                                 Change=@(args => SelectCodigoPostal_CodigoPostalIdValueChanged(args))
                                 Disabled="@(crudMode==CrudMode.Delete || estaProcesando)" />
                                 }
@@ -467,12 +467,7 @@
                                 <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("ESDEFAULT",dataLenguaje) Component="EsDefault" Style="margin-left: 0px; vertical-align: middle;" />
                             </div>
                             <div class="col-md-9">
-                                <RadzenCheckBox @bind-Value=@Empresa_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Change=@(args => EsDefaultChange(args, @Empresa_entity)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando)" />
-                                @if (@crudMode != CrudMode.Delete && defaultObligatorio)
-                                {
-                                    <RadzenRequiredValidator Component="EsDefaultCheckBox" Text="EsDefault is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>
-                                }
+                                <RadzenCheckBox @bind-Value=@Empresa_entity.EsDefault Name="EsDefaultCheckBox" TValue="bool" Change=@(args => EsDefaultChange(args, @Empresa_entity)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando || (crudMode == CrudMode.Add && empresaDefault != null))" />
                             </div>
                         </div>
                         <div class="row">
@@ -502,6 +497,21 @@ else
 }
 
 @code {
+    public class CodigoPostal
+    {
+        public Int64 Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public Int64 CiudadId { get; set; }
+        public string CodigoExterno { get; set; }
+        public bool Habilitado { get; set; }
+        public string CodigoYDescripcion { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        public Int64 UsuarioCreacion { get; set; }
+        public Int64? UsuarioModificacion { get; set; }
+    }
+
     [Parameter]
     public string GrupoId { get; set; }
 
@@ -581,8 +591,8 @@ else
     /// Variables to handle Relation between Empresa.CodigoPostalId and CodigoPostal.Id
     /// </summary>
     private Depositary.Entities.Tables.Geografia.CodigoPostal CodigoPostal_CodigoPostalId_entity = new();
-    private List<Depositary.Entities.Tables.Geografia.CodigoPostal>? CodigoPostal_CodigoPostalId_entities;
-    private List<Depositary.Entities.Tables.Geografia.CodigoPostal> CodigoPostal_CodigoPostalId_filter;
+    private List<CodigoPostal>? CodigoPostal_CodigoPostalId_entities;
+    private List<CodigoPostal> CodigoPostal_CodigoPostalId_filter;
     private IEnumerable<Int64> selectedFilter_CodigoPostalId;
 
     /// <summary>
@@ -621,8 +631,6 @@ else
 
     private Depositary.Entities.Tables.Directorio.Empresa? empresaDefault = null;
 
-    private bool defaultObligatorio = false;
-
     protected override async Task OnInitializedAsync()
     {
 
@@ -642,6 +650,7 @@ else
         await sessionStorage.SetItemAsync("DataFunciones", dataFunciones);
         await Task.Run(LoadMainEntityData);
         await Task.Run(LoadTypesData);
+
     }
     #region Loading entities data
     /// <summary>
@@ -666,7 +675,30 @@ else
         Grupo_GrupoId_filter = Grupo_GrupoId_entities.Where(x => Empresa_entities.Select(x => x.GrupoId).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Geografia.CodigoPostal CodigoPostal_CodigoPostalId_local = new();
-        CodigoPostal_CodigoPostalId_entities = CodigoPostal_CodigoPostalId_local.Items();
+        CodigoPostal_CodigoPostalId_local.Items();
+
+        if (CodigoPostal_CodigoPostalId_local.Result.Count > 0)
+        {
+            CodigoPostal_CodigoPostalId_entities = new();
+            foreach (var codigoPostalEntitie in CodigoPostal_CodigoPostalId_local.Result)
+            {
+                CodigoPostal codigoPostal = new();
+                codigoPostal.CiudadId = codigoPostalEntitie.CiudadId;
+                codigoPostal.CodigoExterno = codigoPostalEntitie.CodigoExterno;
+                codigoPostal.CodigoYDescripcion = codigoPostalEntitie.CodigoExterno + " - " + codigoPostalEntitie.Descripcion;
+                codigoPostal.Descripcion = codigoPostalEntitie.Descripcion;
+                codigoPostal.FechaCreacion = codigoPostalEntitie.FechaCreacion;
+                codigoPostal.FechaModificacion = codigoPostalEntitie.FechaModificacion;
+                codigoPostal.Habilitado = codigoPostalEntitie.Habilitado;
+                codigoPostal.Id = codigoPostalEntitie.Id;
+                codigoPostal.Nombre = codigoPostalEntitie.Nombre;
+                codigoPostal.UsuarioCreacion = codigoPostalEntitie.UsuarioCreacion;
+                codigoPostal.UsuarioModificacion = codigoPostalEntitie.UsuarioModificacion;
+
+                CodigoPostal_CodigoPostalId_entities.Add(codigoPostal);
+            }
+        }
+
         CodigoPostal_CodigoPostalId_filter = CodigoPostal_CodigoPostalId_entities.Where(x => Empresa_entities.Select(x => x.CodigoPostalId).Distinct().Contains(x.Id)).ToList();
 
         Depositary.Business.Tables.Estilo.Esquema Esquema_EstiloEsquemaId_local = new();
@@ -715,14 +747,6 @@ else
     /// </summary>
     private void Add()
     {
-
-        if (Empresa_entities.Where(x => x.EsDefault == true).Count() == 0)
-        {
-            defaultObligatorio = true;
-        }
-        else
-            defaultObligatorio = false;
-
         //Main entity initialization
         Empresa_entity = new();
         //Relations entities initialization
@@ -735,6 +759,9 @@ else
         crudMode = CrudMode.Add;
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "DirectorioEmpresaCustomCrud", crudMode.ToString(), dataUsuario.Id);
+
+        //Verifico la existencia previa de una empresa default para el grupo
+        empresaDefault = ObtenerEmpresaDefault();
     }
     /// <summary>
     /// <summary>
@@ -742,13 +769,6 @@ else
     /// </summary>
     private void Edit(Depositary.Entities.Tables.Directorio.Empresa item, bool delete)
     {
-        if (Empresa_entities.Where(x => x.EsDefault == true).Count() == 0)
-        {
-            defaultObligatorio = true;
-        }
-        else
-            defaultObligatorio = false;
-
         Empresa_entity = item;
         Grupo_GrupoId_entity = new()
             {
@@ -786,7 +806,12 @@ else
         if (delete)
             crudMode = CrudMode.Delete;
         else
+        {
             crudMode = CrudMode.Edit;
+
+            //Verifico la existencia previa de una empresa default para el grupo
+            empresaDefault = ObtenerEmpresaDefault();
+        }
 
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "DirectorioEmpresaCustomCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
@@ -808,10 +833,6 @@ else
         string actionInformation = string.Empty;
         NotificationSeverity severityType = NotificationSeverity.Error;
         string summary = string.Empty;
-
-        //Verifico que no exista previamente una empresa default para el grupo
-        if (crudMode != CrudMode.Delete)
-            empresaDefault = ObtenerEmpresaDefault();
 
         //Si se esta editando o agregando una empresa nueva que sera default debemos verificar la existencia previa de una dentro del grupo.
         if (Empresa_entity.EsDefault && (crudMode == CrudMode.Add || crudMode == CrudMode.Edit))

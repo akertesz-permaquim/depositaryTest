@@ -6,7 +6,9 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class InicializacionModel
     {
-        public string CodigoExternoDepositario { get; set; }
+        public Int64? SynchronizationExecutionId = SynchronizationController.CurrentSynchronizationExecutionId;
+        public string CodigoExternoDepositario { get; set; } = ConfigurationController.GetCurrentDepositaryCode();
+
         public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionTipoDato> AplicacionConfiguracionTipoDato { get; set; } = new();
         public List<Depositario.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> AplicacionConfiguracionValidacionDato { get; set; } = new();
         public List<Depositario.Entities.Tables.Aplicacion.Configuracion> AplicacionConfiguracion { get; set; } = new();
@@ -81,2146 +83,2279 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Impresion.TipoTicket> TipoTicket { get; set; } = new();
         public List<Depositario.Entities.Tables.Impresion.Ticket> Ticket { get; set; } = new();
 
-        public void Persist()
+        public bool Persist()
         {
-            #region Sincronizacion
+            bool resultado = false;
 
             Depositario.Business.Tables.Sincronizacion.Entidad entitiesSincronizacionEntidad = new();
 
-            if (SincronizacionEntidad.Count > 0)
+            entitiesSincronizacionEntidad.BeginTransaction();
+
+            Depositario.Business.Tables.Sincronizacion.Configuracion entitiesSincronizacionConfiguracion = new(entitiesSincronizacionEntidad);
+            try
             {
-                foreach (var item in SincronizacionEntidad)
+                #region Sincronizacion
+
+                if (SincronizacionEntidad.Count > 0)
                 {
-                    var newEntitieSincronizacionEntidad = entitiesSincronizacionEntidad.Add(item);
-                    var sincronizacionConfiguracionEntities = SincronizacionConfiguracion.Where(x => x.EntidadId == item.Id);
-                    if (sincronizacionConfiguracionEntities != null)
+                    foreach (var item in SincronizacionEntidad)
                     {
-                        Depositario.Business.Tables.Sincronizacion.Configuracion entitiesSincronizacionConfiguracion = new();
-
-                        Int64? sincronizacionCabeceraId = null;
-
-                        sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Sincronizacion.Configuracion");
-
-                        if (sincronizacionCabeceraId != null)
+                        var newEntitieSincronizacionEntidad = entitiesSincronizacionEntidad.Add(item);
+                        var sincronizacionConfiguracionEntities = SincronizacionConfiguracion.Where(x => x.EntidadId == item.Id);
+                        if (sincronizacionConfiguracionEntities != null)
                         {
-                            foreach (var subItem in sincronizacionConfiguracionEntities)
+                            Int64? sincronizacionCabeceraId = null;
+
+                            sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Sincronizacion_Configuracion, DateTime.Now);
+
+                            if (sincronizacionCabeceraId != null)
                             {
-                                subItem.EntidadId = newEntitieSincronizacionEntidad.Id;
+                                foreach (var subItem in sincronizacionConfiguracionEntities)
+                                {
+                                    subItem.EntidadId = newEntitieSincronizacionEntidad.Id;
 
-                                Int64 origenId = subItem.Id;
+                                    Int64 origenId = subItem.Id;
 
-                                var newEntitieSincronizacionConfiguracion = entitiesSincronizacionConfiguracion.Add(subItem);
+                                    subItem.UsuarioCreacion = 0;
+                                    subItem.UsuarioModificacion = subItem.UsuarioModificacion.HasValue ? 0 : null;
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSincronizacionConfiguracion.Id);
+                                    var newEntitieSincronizacionConfiguracion = entitiesSincronizacionConfiguracion.Add(subItem);
+
+                                    SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSincronizacionConfiguracion.Id);
+                                }
+
+                                SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                            }
+                        }
+                    }
+                }
+
+                #endregion
+
+                #region Geografia
+
+                Depositario.Business.Tables.Geografia.Pais entitiesGeografiaPais = new(entitiesSincronizacionEntidad);
+                if (GeografiaPais.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Geografia_Pais, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in GeografiaPais)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieGeografiaPais = entitiesGeografiaPais.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaPais.Id);
+                        }
+
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Geografia.Provincia entitiesGeografiaProvincia = new(entitiesSincronizacionEntidad);
+                if (GeografiaProvincia.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Geografia_Provincia, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in GeografiaProvincia)
+                        {
+                            Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_Pais, item.PaisId);
+
+                            if (paisIdOrigen.HasValue)
+                            {
+                                item.PaisId = paisIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieGeografiaProvincia = entitiesGeografiaProvincia.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaProvincia.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Geografia.Ciudad entitiesGeografiaCiudad = new(entitiesSincronizacionEntidad);
+                if (GeografiaCiudad.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Geografia_Ciudad, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in GeografiaCiudad)
+                        {
+                            Int64? provinciaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_Provincia, item.ProvinciaId);
+
+                            if (provinciaIdOrigen.HasValue)
+                            {
+                                item.ProvinciaId = provinciaIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieGeografiaCiudad = entitiesGeografiaCiudad.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaCiudad.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Geografia.CodigoPostal entitiesGeografiaCodigoPostal = new(entitiesSincronizacionEntidad);
+
+                if (GeografiaCodigoPostal.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Geografia_CodigoPostal, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in GeografiaCodigoPostal)
+                        {
+                            Int64? ciudadIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_Ciudad, item.CiudadId);
+
+                            if (ciudadIdOrigen.HasValue)
+                            {
+                                item.CiudadId = ciudadIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieGeografiaCodigoPostal = entitiesGeografiaCodigoPostal.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaCodigoPostal.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+
+                    }
+                }
+
+                Depositario.Business.Tables.Geografia.Zona entitiesGeografiaZona = new(entitiesSincronizacionEntidad);
+
+                if (GeografiaZona.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Geografia_Zona, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in GeografiaZona)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieGeografiaZona = entitiesGeografiaZona.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaZona.Id);
+                        }
+
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Auditoria
+
+                Depositario.Business.Tables.Auditoria.TipoLog entitiesAuditoriaTipoLog = new(entitiesSincronizacionEntidad);
+
+                if (AuditoriaTipoLog.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Auditoria_TipoLog, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+
+                        foreach (var item in AuditoriaTipoLog)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieAuditoriaTipoLog = entitiesAuditoriaTipoLog.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieAuditoriaTipoLog.Id);
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Regionalizacion
+
+                Depositario.Business.Tables.Regionalizacion.Lenguaje entitiesRegionalizacionLenguaje = new(entitiesSincronizacionEntidad);
+
+                if (RegionalizacionLenguaje.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in RegionalizacionLenguaje)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieAuditoriaRegionalizacionLenguaje = entitiesRegionalizacionLenguaje.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieAuditoriaRegionalizacionLenguaje.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Regionalizacion.LenguajeItem entitiesRegionalizacionLenguajeItem = new(entitiesSincronizacionEntidad);
+
+                if (RegionalizacionLenguajeItem.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Regionalizacion_LenguajeItem, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+
+                        foreach (var item in RegionalizacionLenguajeItem)
+                        {
+                            Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, item.LenguajeId);
+
+                            if (lenguajeIdOrigen.HasValue)
+                            {
+                                item.LenguajeId = lenguajeIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieRegionalizacionLenguajeItem = entitiesRegionalizacionLenguajeItem.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieRegionalizacionLenguajeItem.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Visualizacion
+
+                Depositario.Business.Tables.Visualizacion.PerfilTipo entitiesVisualizacionPerfilTipo = new(entitiesSincronizacionEntidad);
+
+                if (VisualizacionPerfilTipo.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Visualizacion_PerfilTipo, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+
+                        foreach (var item in VisualizacionPerfilTipo)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieVisualizacionPerfilTipo = entitiesVisualizacionPerfilTipo.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfilTipo.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Visualizacion.Perfil entitiesVisualizacionPerfil = new(entitiesSincronizacionEntidad);
+
+                if (VisualizacionPerfil.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Visualizacion_Perfil, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in VisualizacionPerfil)
+                        {
+                            Int64? perfilTipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Visualizacion_PerfilTipo, item.PerfilTipoId);
+
+                            if (perfilTipoIdOrigen.HasValue)
+                            {
+                                item.PerfilTipoId = perfilTipoIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieVisualizacionPerfil = entitiesVisualizacionPerfil.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfil.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Visualizacion.PerfilItem entitiesVisualizacionPerfilItem = new(entitiesSincronizacionEntidad);
+
+                if (VisualizacionPerfilItem.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Visualizacion_PerfilItem, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in VisualizacionPerfilItem)
+                        {
+                            Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Visualizacion_Perfil, item.PerfilId);
+
+                            if (perfilIdOrigen.HasValue)
+                            {
+                                item.PerfilId = perfilIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieVisualizacionPerfilItem = entitiesVisualizacionPerfilItem.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfilItem.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Biometria
+
+                Depositario.Business.Tables.Biometria.HuellaDactilar entitiesBiometriaHuellaDactilar = new(entitiesSincronizacionEntidad);
+
+                if (BiometriaHuellaDactilar.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Biometria_HuellaDactilar, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in BiometriaHuellaDactilar)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieBiometriaHuellaDactilar = entitiesBiometriaHuellaDactilar.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieBiometriaHuellaDactilar.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Seguridad.Aplicacion
+
+                Depositario.Business.Tables.Seguridad.TipoAplicacion entitiesSeguridadTipoAplicacion = new(entitiesSincronizacionEntidad);
+
+                if (SeguridadTipoAplicacion.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_TipoAplicacion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+
+                        foreach (var item in SeguridadTipoAplicacion)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieSeguridadTipoAplicacion = entitiesSeguridadTipoAplicacion.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoAplicacion.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Seguridad.Aplicacion entitiesSeguridadAplicacion = new(entitiesSincronizacionEntidad);
+
+                if (SeguridadAplicacion.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_Aplicacion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in SeguridadAplicacion)
+                        {
+                            Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_TipoAplicacion, item.TipoId);
+
+                            if (tipoIdOrigen.HasValue)
+                            {
+                                item.TipoId = tipoIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadAplicacion = entitiesSeguridadAplicacion.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacion.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Seguridad.AplicacionParametro entitiesSeguridadAplicacionParametro = new(entitiesSincronizacionEntidad);
+
+                if (SeguridadAplicacionParametro.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_AplicacionParametro, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in SeguridadAplicacionParametro)
+                        {
+                            Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Aplicacion, item.AplicacionId);
+
+                            if (aplicacionIdOrigen.HasValue)
+                            {
+                                item.AplicacionId = aplicacionIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadAplicacionParametro = entitiesSeguridadAplicacionParametro.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacionParametro.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Seguridad.AplicacionParametroValor entitiesSeguridadAplicacionParametroValor = new(entitiesSincronizacionEntidad);
+
+                if (SeguridadAplicacionParametroValor.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_AplicacionParametroValor, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in SeguridadAplicacionParametroValor)
+                        {
+                            Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Aplicacion, item.AplicacionId);
+                            Int64? aplicacionParametroIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_AplicacionParametro, item.ParametroId);
+
+                            if (aplicacionIdOrigen.HasValue && aplicacionParametroIdOrigen.HasValue)
+                            {
+                                item.AplicacionId = aplicacionIdOrigen.Value;
+
+                                item.ParametroId = aplicacionParametroIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadAplicacionParametroValor = entitiesSeguridadAplicacionParametroValor.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacionParametroValor.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Valor
+
+                Depositario.Business.Tables.Valor.Tipo entitiesValorTipo = new(entitiesSincronizacionEntidad);
+
+                if (ValorTipo.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Valor_Tipo, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in ValorTipo)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieValorTipo = entitiesValorTipo.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieValorTipo.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Valor.Moneda entitiesValorMoneda = new(entitiesSincronizacionEntidad);
+                if (ValorMoneda.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Valor_Moneda, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in ValorMoneda)
+                        {
+                            Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_Pais, item.PaisId);
+
+                            if (paisIdOrigen.HasValue)
+                            {
+                                item.PaisId = paisIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieValorMoneda = entitiesValorMoneda.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieValorMoneda.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Valor.Denominacion entitiesValorDenominacion = new(entitiesSincronizacionEntidad);
+
+                if (ValorDenominacion.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Valor_Denominacion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in ValorDenominacion)
+                        {
+                            Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Tipo, item.TipoValorId);
+                            Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Moneda, item.MonedaId);
+
+                            if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
+                            {
+                                item.MonedaId = monedaIdOrigen.Value;
+
+                                item.TipoValorId = tipoValorIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieValorDenominacion = entitiesValorDenominacion.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieValorDenominacion.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Valor.RelacionMonedaTipoValor entitiesValorRelacionMonedaTipoValor = new(entitiesSincronizacionEntidad);
+
+                if (ValorRelacionMonedaTipoValor.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Valor_RelacionMonedaTipoValor, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in ValorRelacionMonedaTipoValor)
+                        {
+                            Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Tipo, item.TipoValorId);
+                            Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Moneda, item.MonedaId);
+
+                            if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
+                            {
+                                item.MonedaId = monedaIdOrigen.Value;
+
+                                item.TipoValorId = tipoValorIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieValorRelacionMonedaTipoValor = entitiesValorRelacionMonedaTipoValor.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieValorRelacionMonedaTipoValor.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Estilo
+
+                Depositario.Business.Tables.Estilo.TipoEsquemaDetalle entitiesEstiloTipoEsquemaDetalle = new(entitiesSincronizacionEntidad);
+
+                if (EstiloTipoEsquemaDetalle.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Estilo_TipoEsquemaDetalle, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in EstiloTipoEsquemaDetalle)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieEstiloTipoEsquemaDetalle = entitiesEstiloTipoEsquemaDetalle.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloTipoEsquemaDetalle.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Estilo.Esquema entitiesEstiloEsquema = new(entitiesSincronizacionEntidad);
+
+                if (EstiloEsquema.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Estilo_Esquema, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in EstiloEsquema)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieEstiloEsquema = entitiesEstiloEsquema.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloEsquema.Id);
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Estilo.EsquemaDetalle entitiesEstiloEsquemaDetalle = new(entitiesSincronizacionEntidad);
+                if (EstiloEsquemaDetalle.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Estilo_EsquemaDetalle, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in EstiloEsquemaDetalle)
+                        {
+                            Int64? esquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Estilo_Esquema, item.EsquemaId);
+                            Int64? tipoEsquemaDetalleIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Estilo_TipoEsquemaDetalle, item.TipoEsquemaDetalleId);
+
+                            if (esquemaIdOrigen.HasValue && tipoEsquemaDetalleIdOrigen.HasValue)
+                            {
+                                item.EsquemaId = esquemaIdOrigen.Value;
+
+                                item.TipoEsquemaDetalleId = tipoEsquemaDetalleIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieEstiloEsquemaDetalle = entitiesEstiloEsquemaDetalle.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloEsquemaDetalle.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Directorio
+
+                Depositario.Business.Tables.Directorio.Grupo entitiesDirectorioGrupo = new(entitiesSincronizacionEntidad);
+
+                if (DirectorioGrupo.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Directorio_Grupo, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DirectorioGrupo)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieDirectorioGrupo = entitiesDirectorioGrupo.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioGrupo.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Directorio.Empresa entitiesDirectorioEmpresa = new(entitiesSincronizacionEntidad);
+
+                if (DirectorioEmpresa.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Directorio_Empresa, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DirectorioEmpresa)
+                        {
+                            Int64? grupoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Grupo, item.GrupoId);
+                            Int64? estiloEsquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Estilo_Esquema, item.EstiloEsquemaId);
+                            Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, item.LenguajeId);
+
+                            if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue)
+                            {
+                                item.GrupoId = grupoIdOrigen.Value;
+
+                                item.EstiloEsquemaId = estiloEsquemaIdOrigen.Value;
+
+                                item.LenguajeId = lenguajeIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDirectorioEmpresa = entitiesDirectorioEmpresa.Add(item);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioEmpresa.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Directorio.Sucursal entitiesDirectorioSucursal = new(entitiesSincronizacionEntidad);
+
+                if (DirectorioSucursal.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Directorio_Sucursal, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DirectorioSucursal)
+                        {
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
+                            Int64? codigoPostalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_CodigoPostal, item.CodigoPostalId);
+                            Int64? zonaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_Zona, item.ZonaId);
+
+                            if (empresaIdOrigen.HasValue && codigoPostalIdOrigen.HasValue && zonaIdOrigen.HasValue)
+                            {
+                                item.EmpresaId = empresaIdOrigen.Value;
+
+                                item.CodigoPostalId = codigoPostalIdOrigen.Value;
+
+                                item.ZonaId = zonaIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDirectorioSucursal = entitiesDirectorioSucursal.Add(item);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioSucursal.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Directorio.Sector entitiesDirectorioSector = new(entitiesSincronizacionEntidad);
+
+                if (DirectorioSector.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Directorio_Sector, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DirectorioSector)
+                        {
+                            Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Sucursal, item.SucursalId);
+
+                            if (sucursalIdOrigen.HasValue)
+                            {
+                                item.SucursalId = sucursalIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDirectorioSector = entitiesDirectorioSector.Add(item);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioSector.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Directorio.RelacionMonedaSucursal entitiesDirectorioRelacionMonedaSucursal = new(entitiesSincronizacionEntidad);
+
+                if (DirectorioRelacionMonedaSucursal.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Directorio_RelacionMonedaSucursal, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DirectorioRelacionMonedaSucursal)
+                        {
+                            Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Moneda, item.MonedaId);
+                            Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Sucursal, item.SucursalId);
+
+                            if (monedaIdOrigen.HasValue && sucursalIdOrigen.HasValue)
+                            {
+                                item.MonedaId = monedaIdOrigen.Value;
+
+                                item.SucursalId = sucursalIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDirectorioRelacionMonedaSucursal = entitiesDirectorioRelacionMonedaSucursal.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioRelacionMonedaSucursal.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Valor.OrigenValor
+
+                Depositario.Business.Tables.Valor.OrigenValor entitiesOrigenValor = new(entitiesSincronizacionEntidad);
+
+                if (OrigenValor.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Valor_OrigenValor, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in OrigenValor)
+                        {
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
+
+                            if (empresaIdOrigen.HasValue)
+                            {
+                                item.EmpresaId = empresaIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieValorOrigenValor = entitiesOrigenValor.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieValorOrigenValor.Id);
                             }
 
-                            SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
-            }
 
-            #endregion
+                #endregion
 
-            #region Geografia
+                #region Seguridad
 
-            Depositario.Business.Tables.Geografia.Pais entitiesGeografiaPais = new();
-            if (GeografiaPais.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
+                Depositario.Business.Tables.Seguridad.TipoFuncion entitiesSeguridadTipoFuncion = new(entitiesSincronizacionEntidad);
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Pais");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (SeguridadTipoFuncion.Count > 0)
                 {
-                    foreach (var item in GeografiaPais)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_TipoFuncion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieGeografiaPais = entitiesGeografiaPais.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaPais.Id);
-                    }
-
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Geografia.Provincia entitiesGeografiaProvincia = new();
-            if (GeografiaProvincia.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Provincia");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in GeografiaProvincia)
-                    {
-                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Pais", item.PaisId);
-
-                        if (paisIdOrigen.HasValue)
+                        foreach (var item in SeguridadTipoFuncion)
                         {
-                            item.PaisId = paisIdOrigen.Value;
-
                             Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieGeografiaProvincia = entitiesGeografiaProvincia.Add(item);
+                            var newEntitieSeguridadTipoFuncion = entitiesSeguridadTipoFuncion.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaProvincia.Id);
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoFuncion.Id);
+
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Geografia.Ciudad entitiesGeografiaCiudad = new();
-            if (GeografiaCiudad.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
+                Depositario.Business.Tables.Seguridad.TipoIdentificador entitiesSeguridadTipoIdentificador = new(entitiesSincronizacionEntidad);
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Ciudad");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (SeguridadTipoIdentificador.Count > 0)
                 {
-                    foreach (var item in GeografiaCiudad)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_TipoIdentificador, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? provinciaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Provincia", item.ProvinciaId);
-
-                        if (provinciaIdOrigen.HasValue)
+                        foreach (var item in SeguridadTipoIdentificador)
                         {
-                            item.ProvinciaId = provinciaIdOrigen.Value;
-
                             Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieGeografiaCiudad = entitiesGeografiaCiudad.Add(item);
+                            var newEntitieSeguridadTipoIdentificador = entitiesSeguridadTipoIdentificador.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaCiudad.Id);
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoIdentificador.Id);
+
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Geografia.CodigoPostal entitiesGeografiaCodigoPostal = new();
+                Depositario.Business.Tables.Seguridad.TipoMenu entitiesSeguridadTipoMenu = new(entitiesSincronizacionEntidad);
 
-            if (GeografiaCodigoPostal.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.CodigoPostal");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (SeguridadTipoMenu.Count > 0)
                 {
-                    foreach (var item in GeografiaCodigoPostal)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_TipoMenu, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? ciudadIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Ciudad", item.CiudadId);
-
-                        if (ciudadIdOrigen.HasValue)
+                        foreach (var item in SeguridadTipoMenu)
                         {
-                            item.CiudadId = ciudadIdOrigen.Value;
-
                             Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieGeografiaCodigoPostal = entitiesGeografiaCodigoPostal.Add(item);
+                            var newEntitieSeguridadTipoMenu = entitiesSeguridadTipoMenu.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaCodigoPostal.Id);
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoMenu.Id);
+
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-
                 }
-            }
 
-            Depositario.Business.Tables.Geografia.Zona entitiesGeografiaZona = new();
+                Depositario.Business.Tables.Seguridad.Usuario entitiesSeguridadUsuario = new(entitiesSincronizacionEntidad);
 
-            if (GeografiaZona.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Geografia.Zona");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (SeguridadUsuario.Count > 0)
                 {
-                    foreach (var item in GeografiaZona)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_Usuario, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieGeografiaZona = entitiesGeografiaZona.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieGeografiaZona.Id);
-                    }
-
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Auditoria
-
-            Depositario.Business.Tables.Auditoria.TipoLog entitiesAuditoriaTipoLog = new();
-
-            if (AuditoriaTipoLog.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Auditoria.TipoLog");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-
-                    foreach (var item in AuditoriaTipoLog)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieAuditoriaTipoLog = entitiesAuditoriaTipoLog.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAuditoriaTipoLog.Id);
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Regionalizacion
-
-            Depositario.Business.Tables.Regionalizacion.Lenguaje entitiesRegionalizacionLenguaje = new();
-
-            if (RegionalizacionLenguaje.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Regionalizacion.Lenguaje");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in RegionalizacionLenguaje)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieAuditoriaRegionalizacionLenguaje = entitiesRegionalizacionLenguaje.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAuditoriaRegionalizacionLenguaje.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Regionalizacion.LenguajeItem entitiesRegionalizacionLenguajeItem = new();
-
-            if (RegionalizacionLenguajeItem.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Regionalizacion.LenguajeItem");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-
-                    foreach (var item in RegionalizacionLenguajeItem)
-                    {
-                        Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Regionalizacion.Lenguaje", item.LenguajeId);
-
-                        if (lenguajeIdOrigen.HasValue)
+                        foreach (var item in SeguridadUsuario)
                         {
-                            item.LenguajeId = lenguajeIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieRegionalizacionLenguajeItem = entitiesRegionalizacionLenguajeItem.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieRegionalizacionLenguajeItem.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Visualizacion
-
-            Depositario.Business.Tables.Visualizacion.PerfilTipo entitiesVisualizacionPerfilTipo = new();
-
-            if (VisualizacionPerfilTipo.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Visualizacion.PerfilTipo");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-
-                    foreach (var item in VisualizacionPerfilTipo)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieVisualizacionPerfilTipo = entitiesVisualizacionPerfilTipo.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfilTipo.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Visualizacion.Perfil entitiesVisualizacionPerfil = new();
-
-            if (VisualizacionPerfil.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Visualizacion.Perfil");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in VisualizacionPerfil)
-                    {
-                        Int64? perfilTipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Visualizacion.PerfilTipo", item.PerfilTipoId);
-
-                        if (perfilTipoIdOrigen.HasValue)
-                        {
-                            item.PerfilTipoId = perfilTipoIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieVisualizacionPerfil = entitiesVisualizacionPerfil.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfil.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Visualizacion.PerfilItem entitiesVisualizacionPerfilItem = new();
-
-            if (VisualizacionPerfilItem.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Visualizacion.PerfilItem");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in VisualizacionPerfilItem)
-                    {
-                        Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Visualizacion.Perfil", item.PerfilId);
-
-                        if (perfilIdOrigen.HasValue)
-                        {
-                            item.PerfilId = perfilIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieVisualizacionPerfilItem = entitiesVisualizacionPerfilItem.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieVisualizacionPerfilItem.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Biometria
-
-            Depositario.Business.Tables.Biometria.HuellaDactilar entitiesBiometriaHuellaDactilar = new();
-
-            if (BiometriaHuellaDactilar.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Biometria.HuellaDactilar");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in BiometriaHuellaDactilar)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieBiometriaHuellaDactilar = entitiesBiometriaHuellaDactilar.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBiometriaHuellaDactilar.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Seguridad.Aplicacion
-
-            Depositario.Business.Tables.Seguridad.TipoAplicacion entitiesSeguridadTipoAplicacion = new();
-
-            if (SeguridadTipoAplicacion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoAplicacion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-
-                    foreach (var item in SeguridadTipoAplicacion)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieSeguridadTipoAplicacion = entitiesSeguridadTipoAplicacion.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoAplicacion.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.Aplicacion entitiesSeguridadAplicacion = new();
-
-            if (SeguridadAplicacion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Aplicacion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadAplicacion)
-                    {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoAplicacion", item.TipoId);
-
-                        if (tipoIdOrigen.HasValue)
-                        {
-                            item.TipoId = tipoIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadAplicacion = entitiesSeguridadAplicacion.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacion.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.AplicacionParametro entitiesSeguridadAplicacionParametro = new();
-
-            if (SeguridadAplicacionParametro.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.AplicacionParametro");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadAplicacionParametro)
-                    {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
-
-                        if (aplicacionIdOrigen.HasValue)
-                        {
-                            item.AplicacionId = aplicacionIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadAplicacionParametro = entitiesSeguridadAplicacionParametro.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacionParametro.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.AplicacionParametroValor entitiesSeguridadAplicacionParametroValor = new();
-
-            if (SeguridadAplicacionParametroValor.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.AplicacionParametroValor");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadAplicacionParametroValor)
-                    {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
-                        Int64? aplicacionParametroIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.AplicacionParametro", item.ParametroId);
-
-                        if (aplicacionIdOrigen.HasValue && aplicacionParametroIdOrigen.HasValue)
-                        {
-                            item.AplicacionId = aplicacionIdOrigen.Value;
-
-                            item.ParametroId = aplicacionParametroIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadAplicacionParametroValor = entitiesSeguridadAplicacionParametroValor.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadAplicacionParametroValor.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Valor
-
-            Depositario.Business.Tables.Valor.Tipo entitiesValorTipo = new();
-
-            if (ValorTipo.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.Tipo");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in ValorTipo)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieValorTipo = entitiesValorTipo.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorTipo.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Valor.Moneda entitiesValorMoneda = new();
-            if (ValorMoneda.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.Moneda");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in ValorMoneda)
-                    {
-                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Pais", item.PaisId);
-
-                        if (paisIdOrigen.HasValue)
-                        {
-                            item.PaisId = paisIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieValorMoneda = entitiesValorMoneda.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorMoneda.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Valor.Denominacion entitiesValorDenominacion = new();
-
-            if (ValorDenominacion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.Denominacion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in ValorDenominacion)
-                    {
-                        Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Tipo", item.TipoValorId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
-
-                        if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
-                        {
-                            item.MonedaId = monedaIdOrigen.Value;
-
-                            item.TipoValorId = tipoValorIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieValorDenominacion = entitiesValorDenominacion.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorDenominacion.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Valor.RelacionMonedaTipoValor entitiesValorRelacionMonedaTipoValor = new();
-
-            if (ValorRelacionMonedaTipoValor.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.RelacionMonedaTipoValor");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in ValorRelacionMonedaTipoValor)
-                    {
-                        Int64? tipoValorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Tipo", item.TipoValorId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
-
-                        if (monedaIdOrigen.HasValue && tipoValorIdOrigen.HasValue)
-                        {
-                            item.MonedaId = monedaIdOrigen.Value;
-
-                            item.TipoValorId = tipoValorIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieValorRelacionMonedaTipoValor = entitiesValorRelacionMonedaTipoValor.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorRelacionMonedaTipoValor.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Estilo
-
-            Depositario.Business.Tables.Estilo.TipoEsquemaDetalle entitiesEstiloTipoEsquemaDetalle = new();
-
-            if (EstiloTipoEsquemaDetalle.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Estilo.TipoEsquemaDetalle");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in EstiloTipoEsquemaDetalle)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieEstiloTipoEsquemaDetalle = entitiesEstiloTipoEsquemaDetalle.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloTipoEsquemaDetalle.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Estilo.Esquema entitiesEstiloEsquema = new();
-
-            if (EstiloEsquema.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Estilo.Esquema");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in EstiloEsquema)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieEstiloEsquema = entitiesEstiloEsquema.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloEsquema.Id);
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Estilo.EsquemaDetalle entitiesEstiloEsquemaDetalle = new();
-            if (EstiloEsquemaDetalle.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Estilo.EsquemaDetalle");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in EstiloEsquemaDetalle)
-                    {
-                        Int64? esquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Estilo.Esquema", item.EsquemaId);
-                        Int64? tipoEsquemaDetalleIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Estilo.TipoEsquemaDetalle", item.TipoEsquemaDetalleId);
-
-                        if (esquemaIdOrigen.HasValue && tipoEsquemaDetalleIdOrigen.HasValue)
-                        {
-                            item.EsquemaId = esquemaIdOrigen.Value;
-
-                            item.TipoEsquemaDetalleId = tipoEsquemaDetalleIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieEstiloEsquemaDetalle = entitiesEstiloEsquemaDetalle.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieEstiloEsquemaDetalle.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Directorio
-
-            Depositario.Business.Tables.Directorio.Grupo entitiesDirectorioGrupo = new();
-
-            if (DirectorioGrupo.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Grupo");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in DirectorioGrupo)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieDirectorioGrupo = entitiesDirectorioGrupo.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioGrupo.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Directorio.Empresa entitiesDirectorioEmpresa = new();
-
-            if (DirectorioEmpresa.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Empresa");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in DirectorioEmpresa)
-                    {
-                        Int64? grupoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Grupo", item.GrupoId);
-                        Int64? estiloEsquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Estilo.Esquema", item.EstiloEsquemaId);
-                        Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Regionalizacion.Lenguaje", item.LenguajeId);
-
-                        if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue)
-                        {
-                            item.GrupoId = grupoIdOrigen.Value;
-
-                            item.EstiloEsquemaId = estiloEsquemaIdOrigen.Value;
-
-                            item.LenguajeId = lenguajeIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieDirectorioEmpresa = entitiesDirectorioEmpresa.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioEmpresa.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Directorio.Sucursal entitiesDirectorioSucursal = new();
-
-            if (DirectorioSucursal.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Sucursal");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in DirectorioSucursal)
-                    {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
-                        Int64? codigoPostalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.CodigoPostal", item.CodigoPostalId);
-                        Int64? zonaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Zona", item.ZonaId);
-
-                        if (empresaIdOrigen.HasValue && codigoPostalIdOrigen.HasValue && zonaIdOrigen.HasValue)
-                        {
-                            item.EmpresaId = empresaIdOrigen.Value;
-
-                            item.CodigoPostalId = codigoPostalIdOrigen.Value;
-
-                            item.ZonaId = zonaIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieDirectorioSucursal = entitiesDirectorioSucursal.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioSucursal.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Directorio.Sector entitiesDirectorioSector = new();
-
-            if (DirectorioSector.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.Sector");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in DirectorioSector)
-                    {
-                        Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sucursal", item.SucursalId);
-
-                        if (sucursalIdOrigen.HasValue)
-                        {
-                            item.SucursalId = sucursalIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieDirectorioSector = entitiesDirectorioSector.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioSector.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Directorio.RelacionMonedaSucursal entitiesDirectorioRelacionMonedaSucursal = new();
-
-            if (DirectorioRelacionMonedaSucursal.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Directorio.RelacionMonedaSucursal");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in DirectorioRelacionMonedaSucursal)
-                    {
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
-                        Int64? sucursalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sucursal", item.SucursalId);
-
-                        if (monedaIdOrigen.HasValue && sucursalIdOrigen.HasValue)
-                        {
-                            item.MonedaId = monedaIdOrigen.Value;
-
-                            item.SucursalId = sucursalIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieDirectorioRelacionMonedaSucursal = entitiesDirectorioRelacionMonedaSucursal.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDirectorioRelacionMonedaSucursal.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Valor.OrigenValor
-
-            Depositario.Business.Tables.Valor.OrigenValor entitiesOrigenValor = new();
-
-            if (OrigenValor.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Valor.OrigenValor");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OrigenValor)
-                    {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
-
-                        if (empresaIdOrigen.HasValue)
-                        {
-                            item.EmpresaId = empresaIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieValorOrigenValor = entitiesOrigenValor.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieValorOrigenValor.Id);
-                        }
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Seguridad
-
-            Depositario.Business.Tables.Seguridad.TipoFuncion entitiesSeguridadTipoFuncion = new();
-
-            if (SeguridadTipoFuncion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoFuncion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadTipoFuncion)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieSeguridadTipoFuncion = entitiesSeguridadTipoFuncion.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoFuncion.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.TipoIdentificador entitiesSeguridadTipoIdentificador = new();
-
-            if (SeguridadTipoIdentificador.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoIdentificador");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadTipoIdentificador)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieSeguridadTipoIdentificador = entitiesSeguridadTipoIdentificador.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoIdentificador.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.TipoMenu entitiesSeguridadTipoMenu = new();
-
-            if (SeguridadTipoMenu.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.TipoMenu");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadTipoMenu)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieSeguridadTipoMenu = entitiesSeguridadTipoMenu.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadTipoMenu.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.Usuario entitiesSeguridadUsuario = new();
-
-            if (SeguridadUsuario.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Usuario");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadUsuario)
-                    {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
-                        Int64? lenguajelIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Regionalizacion.Lenguaje", item.LenguajeId);
-                        Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Visualizacion.Perfil", item.PerfilId);
-
-                        if (empresaIdOrigen.HasValue && lenguajelIdOrigen.HasValue && perfilIdOrigen.HasValue)
-                        {
-                            item.EmpresaId = empresaIdOrigen.Value;
-
-                            item.LenguajeId = lenguajelIdOrigen.Value;
-
-                            item.PerfilId = perfilIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadUsuario = entitiesSeguridadUsuario.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuario.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.Funcion entitiesSeguridadFuncion = new();
-
-            if (SeguridadFuncion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Funcion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadFuncion)
-                    {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
-                        Int64? tipoFuncionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoFuncion", item.TipoId);
-
-                        if (aplicacionIdOrigen.HasValue && tipoFuncionIdOrigen.HasValue)
-                        {
-                            item.AplicacionId = aplicacionIdOrigen.Value;
-
-                            item.TipoId = tipoFuncionIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadFuncion = entitiesSeguridadFuncion.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadFuncion.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.IdentificadorUsuario entitiesSeguridadIdentificadorUsuario = new();
-
-            if (SeguridadIdentificadorUsuario.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.IdentificadorUsuario");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadIdentificadorUsuario)
-                    {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
-                        Int64? tipoIdentificadorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoIdentificador", item.TipoId);
-
-                        if (usuarioIdOrigen.HasValue && tipoIdentificadorIdOrigen.HasValue)
-                        {
-                            item.UsuarioId = usuarioIdOrigen.Value;
-
-                            item.TipoId = tipoIdentificadorIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadIdentificadorUsuario = entitiesSeguridadIdentificadorUsuario.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadIdentificadorUsuario.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.Rol entitiesSeguridadRol = new();
-            if (SeguridadRol.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Rol");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadRol.OrderBy(x => x.DependeDe))
-                    {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
-
-                        if (aplicacionIdOrigen.HasValue)
-                        {
-                            if (item.DependeDe.HasValue)
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
+                            Int64? lenguajelIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, item.LenguajeId);
+                            Int64? perfilIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Visualizacion_Perfil, item.PerfilId);
+
+                            if (empresaIdOrigen.HasValue && lenguajelIdOrigen.HasValue && perfilIdOrigen.HasValue)
                             {
-                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.DependeDe.Value);
-                                item.DependeDe = dependeDeOrigen;
+                                item.EmpresaId = empresaIdOrigen.Value;
+
+                                item.LenguajeId = lenguajelIdOrigen.Value;
+
+                                item.PerfilId = perfilIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadUsuario = entitiesSeguridadUsuario.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuario.Id);
                             }
-
-                            item.AplicacionId = aplicacionIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadRol = entitiesSeguridadRol.Add(item);
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRol.Id);
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Seguridad.UsuarioRol entitiesSeguridadUsuarioRol = new();
+                Depositario.Business.Tables.Seguridad.Funcion entitiesSeguridadFuncion = new(entitiesSincronizacionEntidad);
 
-            if (SeguridadUsuarioRol.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.UsuarioRol");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (SeguridadFuncion.Count > 0)
                 {
-                    foreach (var item in SeguridadUsuarioRol)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_Funcion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
-                        Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.RolId);
-
-                        if (usuarioIdOrigen.HasValue && rolIdOrigen.HasValue)
+                        foreach (var item in SeguridadFuncion)
                         {
-                            item.UsuarioId = usuarioIdOrigen.Value;
+                            Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Aplicacion, item.AplicacionId);
+                            Int64? tipoFuncionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_TipoFuncion, item.TipoId);
 
-                            item.RolId = rolIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadUsuarioRol = entitiesSeguridadUsuarioRol.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuarioRol.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.UsuarioSector entitiesSeguridadUsuarioSector = new();
-            if (SeguridadUsuarioSector.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.UsuarioSector");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadUsuarioSector)
-                    {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
-                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sector", item.SectorId);
-
-                        if (usuarioIdOrigen.HasValue && usuarioIdOrigen.HasValue)
-                        {
-                            item.SectorId = sectorIdOrigen.Value;
-
-                            item.UsuarioId = usuarioIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadUsuarioSector = entitiesSeguridadUsuarioSector.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuarioSector.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Seguridad.Menu entitiesSeguridadMenu = new();
-            if (SeguridadMenu.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.Menu");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in SeguridadMenu.OrderBy(x => x.DependeDe))
-                    {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.TipoMenu", item.TipoId);
-                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId);
-
-                        if (tipoIdOrigen.HasValue && funcionIdOrigen.HasValue)
-                        {
-                            item.TipoId = tipoIdOrigen.Value;
-
-                            item.FuncionId = funcionIdOrigen.Value;
-
-                            if (item.DependeDe.HasValue)
+                            if (aplicacionIdOrigen.HasValue && tipoFuncionIdOrigen.HasValue)
                             {
-                                Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Menu", item.DependeDe.Value);
-                                item.DependeDe = dependeDeOrigen;
+                                item.AplicacionId = aplicacionIdOrigen.Value;
+
+                                item.TipoId = tipoFuncionIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadFuncion = entitiesSeguridadFuncion.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadFuncion.Id);
                             }
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieSeguridadMenu = entitiesSeguridadMenu.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadMenu.Id);
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Seguridad.RolFuncion entitiesSeguridadRolFuncion = new();
+                Depositario.Business.Tables.Seguridad.IdentificadorUsuario entitiesSeguridadIdentificadorUsuario = new(entitiesSincronizacionEntidad);
 
-            if (SeguridadRolFuncion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Seguridad.RolFuncion");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (SeguridadIdentificadorUsuario.Count > 0)
                 {
-                    foreach (var item in SeguridadRolFuncion)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_IdentificadorUsuario, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId);
-                        Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Rol", item.RolId);
-
-                        if (funcionIdOrigen.HasValue && rolIdOrigen.HasValue)
+                        foreach (var item in SeguridadIdentificadorUsuario)
                         {
-                            item.FuncionId = funcionIdOrigen.Value;
+                            Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioId);
+                            Int64? tipoIdentificadorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_TipoIdentificador, item.TipoId);
 
-                            item.RolId = rolIdOrigen.Value;
+                            if (usuarioIdOrigen.HasValue && tipoIdentificadorIdOrigen.HasValue)
+                            {
+                                item.UsuarioId = usuarioIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                item.TipoId = tipoIdentificadorIdOrigen.Value;
 
-                            var newEntitieSeguridadRolFuncion = entitiesSeguridadRolFuncion.Add(item);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRolFuncion.Id);
+                                var newEntitieSeguridadIdentificadorUsuario = entitiesSeguridadIdentificadorUsuario.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadIdentificadorUsuario.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            #endregion
-
-            #region Banca
-
-            Depositario.Business.Tables.Banca.Banco entitiesBancaBanco = new();
-
-            if (BancaBanco.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.Banco");
-
-                if (sincronizacionCabeceraId.HasValue)
+                Depositario.Business.Tables.Seguridad.Rol entitiesSeguridadRol = new(entitiesSincronizacionEntidad);
+                if (SeguridadRol.Count > 0)
                 {
-                    foreach (var item in BancaBanco)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_Rol, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Geografia.Pais", item.PaisId);
-
-                        if (paisIdOrigen.HasValue)
+                        foreach (var item in SeguridadRol.OrderBy(x => x.DependeDe))
                         {
-                            item.PaisId = paisIdOrigen.Value;
+                            Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Aplicacion, item.AplicacionId);
 
-                            Int64 origenId = item.Id;
+                            if (aplicacionIdOrigen.HasValue)
+                            {
+                                if (item.DependeDe.HasValue)
+                                {
+                                    Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Rol, item.DependeDe.Value);
+                                    item.DependeDe = dependeDeOrigen;
+                                }
 
-                            var newEntitieBancaBanco = entitiesBancaBanco.Add(item);
+                                item.AplicacionId = aplicacionIdOrigen.Value;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaBanco.Id);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadRol = entitiesSeguridadRol.Add(item);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRol.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Banca.TipoCuenta entitiesBancaTipoCuenta = new();
+                Depositario.Business.Tables.Seguridad.UsuarioRol entitiesSeguridadUsuarioRol = new(entitiesSincronizacionEntidad);
 
-            if (BancaTipoCuenta.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.TipoCuenta");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (SeguridadUsuarioRol.Count > 0)
                 {
-                    foreach (var item in BancaTipoCuenta)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_UsuarioRol, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
-
-                        if (monedaIdOrigen.HasValue)
+                        foreach (var item in SeguridadUsuarioRol)
                         {
-                            Int64 origenId = item.Id;
+                            Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioId);
+                            Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Rol, item.RolId);
 
-                            item.MonedaId = monedaIdOrigen.Value;
+                            if (usuarioIdOrigen.HasValue && rolIdOrigen.HasValue)
+                            {
+                                item.UsuarioId = usuarioIdOrigen.Value;
 
-                            var newEntitieBancaTipoCuenta = entitiesBancaTipoCuenta.Add(item);
+                                item.RolId = rolIdOrigen.Value;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaTipoCuenta.Id);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadUsuarioRol = entitiesSeguridadUsuarioRol.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuarioRol.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Banca.Cuenta entitiesBancaCuenta = new();
-            if (BancaCuenta.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.Cuenta");
-
-                if (sincronizacionCabeceraId.HasValue)
+                Depositario.Business.Tables.Seguridad.UsuarioSector entitiesSeguridadUsuarioSector = new(entitiesSincronizacionEntidad);
+                if (SeguridadUsuarioSector.Count > 0)
                 {
-                    foreach (var item in BancaCuenta)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_UsuarioSector, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Banca.TipoCuenta", item.TipoId);
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
-                        Int64? bancoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Banca.Banco", item.BancoId);
-
-                        if (tipoIdOrigen.HasValue && empresaIdOrigen.HasValue && bancoIdOrigen.HasValue)
+                        foreach (var item in SeguridadUsuarioSector)
                         {
-                            item.TipoId = tipoIdOrigen.Value;
+                            Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioId);
+                            Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Sector, item.SectorId);
 
-                            item.EmpresaId = empresaIdOrigen.Value;
+                            if (usuarioIdOrigen.HasValue && usuarioIdOrigen.HasValue)
+                            {
+                                item.SectorId = sectorIdOrigen.Value;
 
-                            item.BancoId = bancoIdOrigen.Value;
+                                item.UsuarioId = usuarioIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieBancaCuenta = entitiesBancaCuenta.Add(item);
+                                var newEntitieSeguridadUsuarioSector = entitiesSeguridadUsuarioSector.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaCuenta.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadUsuarioSector.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Banca.UsuarioCuenta entitiesBancaUsuarioCuenta = new();
-            if (BancaUsuarioCuenta.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Banca.UsuarioCuenta");
-
-                if (sincronizacionCabeceraId.HasValue)
+                Depositario.Business.Tables.Seguridad.Menu entitiesSeguridadMenu = new(entitiesSincronizacionEntidad);
+                if (SeguridadMenu.Count > 0)
                 {
-                    foreach (var item in BancaUsuarioCuenta)
-                    {
-                        Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Usuario", item.UsuarioId);
-                        Int64? cuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Banca.Cuenta", item.CuentaId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (usuarioIdOrigen.HasValue && cuentaIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_Menu, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in SeguridadMenu.OrderBy(x => x.DependeDe))
                         {
-                            item.UsuarioId = usuarioIdOrigen.Value;
+                            Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_TipoMenu, item.TipoId);
+                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Funcion, item.FuncionId);
 
-                            item.CuentaId = cuentaIdOrigen.Value;
+                            if (tipoIdOrigen.HasValue && funcionIdOrigen.HasValue)
+                            {
+                                item.TipoId = tipoIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
-
-                            var newEntitieBancaUsuarioCuenta = entitiesBancaUsuarioCuenta.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieBancaUsuarioCuenta.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Aplicacion
-
-            Depositario.Business.Tables.Aplicacion.ConfiguracionTipoDato entitiesAplicacionConfiguracionTipoDato = new();
-
-            if (AplicacionConfiguracionTipoDato.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.ConfiguracionTipoDato");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in AplicacionConfiguracionTipoDato)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieAplicacionConfiguracionTipoDato = entitiesAplicacionConfiguracionTipoDato.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracionTipoDato.Id);
-                    }
-
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Aplicacion.ConfiguracionValidacionDato entitiesAplicacionConfiguracionValidacionDato = new();
-
-            if (AplicacionConfiguracionValidacionDato.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in AplicacionConfiguracionValidacionDato)
-                    {
-                        Int64? tipoDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionTipoDato", item.TipoDatoId);
-
-                        if (tipoDatoIdOrigen.HasValue)
-                        {
-                            item.TipoDatoId = tipoDatoIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieAplicacionConfiguracionValidacionDato = entitiesAplicacionConfiguracionValidacionDato.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracionValidacionDato.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Aplicacion.Configuracion entitiesAplicacionConfiguracion = new();
-
-            if (AplicacionConfiguracion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.Configuracion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in AplicacionConfiguracion)
-                    {
-                        Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Aplicacion", item.AplicacionId);
-                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
-
-                        if (aplicacionIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
-                        {
-                            item.AplicacionId = aplicacionIdOrigen.Value;
-                            item.ValidacionDatoId = validacionDatoIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieAplicacionConfiguracion = entitiesAplicacionConfiguracion.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracion.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entitiesConfiguracionEmpresa = new();
-
-            if (AplicacionConfiguracionEmpresa.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Aplicacion.ConfiguracionEmpresa");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in AplicacionConfiguracionEmpresa)
-                    {
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
-                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
-
-                        if (empresaIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
-                        {
-                            item.EmpresaId = empresaIdOrigen.Value;
-                            item.ValidacionDatoId = validacionDatoIdOrigen.Value;
-
-                            Int64 origenId = item.Id;
-
-                            var newEntitieConfiguracionEmpresa = entitiesConfiguracionEmpresa.Add(item);
-
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieConfiguracionEmpresa.Id);
-                        }
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            #endregion
-
-            #region Operacion
-
-            Depositario.Business.Tables.Operacion.TipoContenedor entitiesOperacionTipoContenedor = new();
-
-            if (OperacionTipoContenedor.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoContenedor");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OperacionTipoContenedor)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieOperacionTipoContenedor = entitiesOperacionTipoContenedor.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoContenedor.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Operacion.TipoEvento entitiesOperacionTipoEvento = new();
-
-            if (OperacionTipoEvento.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoEvento");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OperacionTipoEvento)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieOperacionTipoEvento = entitiesOperacionTipoEvento.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoEvento.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Operacion.TipoTransaccion entitiesOperacionTipoTransaccion = new();
-
-            if (OperacionTipoTransaccion.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Operacion.TipoTransaccion");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in OperacionTipoTransaccion)
-                    {
-                        if (item.FuncionId.HasValue)
-                        {
-                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Seguridad.Funcion", item.FuncionId.Value);
-
-                            if (funcionIdOrigen.HasValue)
                                 item.FuncionId = funcionIdOrigen.Value;
+
+                                if (item.DependeDe.HasValue)
+                                {
+                                    Int64? dependeDeOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Menu, item.DependeDe.Value);
+                                    item.DependeDe = dependeDeOrigen;
+                                }
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadMenu = entitiesSeguridadMenu.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadMenu.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Seguridad.RolFuncion entitiesSeguridadRolFuncion = new(entitiesSincronizacionEntidad);
+
+                if (SeguridadRolFuncion.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Seguridad_RolFuncion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in SeguridadRolFuncion)
+                        {
+                            Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Funcion, item.FuncionId);
+                            Int64? rolIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Rol, item.RolId);
+
+                            if (funcionIdOrigen.HasValue && rolIdOrigen.HasValue)
+                            {
+                                item.FuncionId = funcionIdOrigen.Value;
+
+                                item.RolId = rolIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieSeguridadRolFuncion = entitiesSeguridadRolFuncion.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieSeguridadRolFuncion.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Banca
+
+                Depositario.Business.Tables.Banca.Banco entitiesBancaBanco = new(entitiesSincronizacionEntidad);
+
+                if (BancaBanco.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_Banco, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in BancaBanco)
+                        {
+                            Int64? paisIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_Pais, item.PaisId);
+
+                            if (paisIdOrigen.HasValue)
+                            {
+                                item.PaisId = paisIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieBancaBanco = entitiesBancaBanco.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieBancaBanco.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Banca.TipoCuenta entitiesBancaTipoCuenta = new(entitiesSincronizacionEntidad);
+
+                if (BancaTipoCuenta.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_TipoCuenta, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in BancaTipoCuenta)
+                        {
+                            Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Moneda, item.MonedaId);
+
+                            if (monedaIdOrigen.HasValue)
+                            {
+                                Int64 origenId = item.Id;
+
+                                item.MonedaId = monedaIdOrigen.Value;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieBancaTipoCuenta = entitiesBancaTipoCuenta.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieBancaTipoCuenta.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Banca.Cuenta entitiesBancaCuenta = new(entitiesSincronizacionEntidad);
+                if (BancaCuenta.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_Cuenta, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in BancaCuenta)
+                        {
+                            Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Banca_TipoCuenta, item.TipoId);
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
+                            Int64? bancoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Banca_Banco, item.BancoId);
+
+                            if (tipoIdOrigen.HasValue && empresaIdOrigen.HasValue && bancoIdOrigen.HasValue)
+                            {
+                                item.TipoId = tipoIdOrigen.Value;
+
+                                item.EmpresaId = empresaIdOrigen.Value;
+
+                                item.BancoId = bancoIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieBancaCuenta = entitiesBancaCuenta.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieBancaCuenta.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Banca.UsuarioCuenta entitiesBancaUsuarioCuenta = new(entitiesSincronizacionEntidad);
+                if (BancaUsuarioCuenta.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Banca_UsuarioCuenta, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in BancaUsuarioCuenta)
+                        {
+                            Int64? usuarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioId);
+                            Int64? cuentaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Banca_Cuenta, item.CuentaId);
+
+                            if (usuarioIdOrigen.HasValue && cuentaIdOrigen.HasValue)
+                            {
+                                item.UsuarioId = usuarioIdOrigen.Value;
+
+                                item.CuentaId = cuentaIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieBancaUsuarioCuenta = entitiesBancaUsuarioCuenta.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieBancaUsuarioCuenta.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Aplicacion
+
+                Depositario.Business.Tables.Aplicacion.ConfiguracionTipoDato entitiesAplicacionConfiguracionTipoDato = new(entitiesSincronizacionEntidad);
+
+                if (AplicacionConfiguracionTipoDato.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Aplicacion_ConfiguracionTipoDato, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in AplicacionConfiguracionTipoDato)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieAplicacionConfiguracionTipoDato = entitiesAplicacionConfiguracionTipoDato.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracionTipoDato.Id);
                         }
 
-                        Int64 origenId = item.Id;
-
-                        var newEntitieOperacionTipoTransaccion = entitiesOperacionTipoTransaccion.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoTransaccion.Id);
-
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            #endregion
+                Depositario.Business.Tables.Aplicacion.ConfiguracionValidacionDato entitiesAplicacionConfiguracionValidacionDato = new(entitiesSincronizacionEntidad);
 
-            #region Dispositivo
-
-            Depositario.Business.Tables.Dispositivo.TipoConfiguracionDepositario entitiesDispositivoTipoConfiguracionDepositario = new();
-
-            if (DispositivoTipoConfiguracionDepositario.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.TipoConfiguracionDepositario");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (AplicacionConfiguracionValidacionDato.Count > 0)
                 {
-                    foreach (var item in DispositivoTipoConfiguracionDepositario)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Aplicacion_ConfiguracionValidacionDato, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64 origenId = item.Id;
-                        Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Aplicacion.ConfiguracionValidacionDato", item.ValidacionDatoId);
-
-                        if (validacionDatoIdOrigen.HasValue)
+                        foreach (var item in AplicacionConfiguracionValidacionDato)
                         {
-                            item.ValidacionDatoId = validacionDatoIdOrigen.Value;
+                            Int64? tipoDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Aplicacion_ConfiguracionTipoDato, item.TipoDatoId);
 
-                            var newEntitieDispositivoTipoConfiguracionDepositario = entitiesDispositivoTipoConfiguracionDepositario.Add(item);
+                            if (tipoDatoIdOrigen.HasValue)
+                            {
+                                item.TipoDatoId = tipoDatoIdOrigen.Value;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoConfiguracionDepositario.Id);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieAplicacionConfiguracionValidacionDato = entitiesAplicacionConfiguracionValidacionDato.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracionValidacionDato.Id);
+                            }
                         }
-
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.Marca entitiesDispositivoMarca = new();
+                Depositario.Business.Tables.Aplicacion.Configuracion entitiesAplicacionConfiguracion = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoMarca.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.Marca");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (AplicacionConfiguracion.Count > 0)
                 {
-                    foreach (var item in DispositivoMarca)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Aplicacion_Configuracion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieDispositivoMarca = entitiesDispositivoMarca.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoMarca.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Dispositivo.PlantillaMoneda entitiesPlantillaMoneda = new();
-
-            if (DispositivoMarca.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.PlantillaMoneda");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in PlantillaMoneda)
-                    {
-                        Int64 origenId = item.Id;
-
-                        var newEntitiePlantillaMoneda = entitiesPlantillaMoneda.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitiePlantillaMoneda.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle entitiesPlantillaMonedaDetalle = new();
-
-            if (PlantillaMonedaDetalle.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.PlantillaMonedaDetalle");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in PlantillaMonedaDetalle)
-                    {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
-
-                        if (plantillaMonedaIdOrigen.HasValue && monedaIdOrigen.HasValue)
+                        foreach (var item in AplicacionConfiguracion)
                         {
-                            item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
+                            Int64? aplicacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Aplicacion, item.AplicacionId);
+                            Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Aplicacion_ConfiguracionValidacionDato, item.ValidacionDatoId);
 
-                            item.MonedaId = monedaIdOrigen.Value;
+                            if (aplicacionIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
+                            {
+                                item.AplicacionId = aplicacionIdOrigen.Value;
+                                item.ValidacionDatoId = validacionDatoIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieAplicacionConfiguracion = entitiesAplicacionConfiguracion.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieAplicacionConfiguracion.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entitiesConfiguracionEmpresa = new(entitiesSincronizacionEntidad);
+
+                if (AplicacionConfiguracionEmpresa.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Aplicacion_ConfiguracionEmpresa, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in AplicacionConfiguracionEmpresa)
+                        {
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
+                            Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Aplicacion_ConfiguracionValidacionDato, item.ValidacionDatoId);
+
+                            if (empresaIdOrigen.HasValue && validacionDatoIdOrigen.HasValue)
+                            {
+                                item.EmpresaId = empresaIdOrigen.Value;
+                                item.ValidacionDatoId = validacionDatoIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieConfiguracionEmpresa = entitiesConfiguracionEmpresa.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieConfiguracionEmpresa.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Operacion
+
+                Depositario.Business.Tables.Operacion.TipoContenedor entitiesOperacionTipoContenedor = new(entitiesSincronizacionEntidad);
+
+                if (OperacionTipoContenedor.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Operacion_TipoContenedor, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in OperacionTipoContenedor)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieOperacionTipoContenedor = entitiesOperacionTipoContenedor.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoContenedor.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Operacion.TipoEvento entitiesOperacionTipoEvento = new(entitiesSincronizacionEntidad);
+
+                if (OperacionTipoEvento.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Operacion_TipoEvento, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in OperacionTipoEvento)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieOperacionTipoEvento = entitiesOperacionTipoEvento.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoEvento.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Operacion.TipoTransaccion entitiesOperacionTipoTransaccion = new(entitiesSincronizacionEntidad);
+
+                if (OperacionTipoTransaccion.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Operacion_TipoTransaccion, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in OperacionTipoTransaccion)
+                        {
+                            if (item.FuncionId.HasValue)
+                            {
+                                Int64? funcionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Seguridad_Funcion, item.FuncionId.Value);
+
+                                if (funcionIdOrigen.HasValue)
+                                    item.FuncionId = funcionIdOrigen.Value;
+                            }
 
                             Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitiePlantillaMonedaDetalle = entitiesPlantillaMonedaDetalle.Add(item);
+                            var newEntitieOperacionTipoTransaccion = entitiesOperacionTipoTransaccion.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitiePlantillaMonedaDetalle.Id);
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieOperacionTipoTransaccion.Id);
+
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.Modelo entitiesDispositivoModelo = new();
+                #endregion
 
-            if (DispositivoModelo.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
+                #region Dispositivo
 
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.Modelo");
+                Depositario.Business.Tables.Dispositivo.TipoConfiguracionDepositario entitiesDispositivoTipoConfiguracionDepositario = new(entitiesSincronizacionEntidad);
 
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoTipoConfiguracionDepositario.Count > 0)
                 {
-                    foreach (var item in DispositivoModelo)
-                    {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.PlantillaMoneda", item.PlantillaMonedaId);
-                        Int64? marcaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Marca", item.MarcaId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (plantillaMonedaIdOrigen.HasValue && marcaIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_TipoConfiguracionDepositario, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoTipoConfiguracionDepositario)
                         {
-                            item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
-
-                            item.MarcaId = marcaIdOrigen.Value;
-
                             Int64 origenId = item.Id;
+                            Int64? validacionDatoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Aplicacion_ConfiguracionValidacionDato, item.ValidacionDatoId);
 
-                            var newEntitieDispositivoModelo = entitiesDispositivoModelo.Add(item);
+                            if (validacionDatoIdOrigen.HasValue)
+                            {
+                                item.ValidacionDatoId = validacionDatoIdOrigen.Value;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoModelo.Id);
+                                var newEntitieDispositivoTipoConfiguracionDepositario = entitiesDispositivoTipoConfiguracionDepositario.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoConfiguracionDepositario.Id);
+                            }
+
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.TipoContadora entitiesDispositivoTipoContadora = new();
+                Depositario.Business.Tables.Dispositivo.Marca entitiesDispositivoMarca = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoTipoContadora.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.TipoContadora");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoMarca.Count > 0)
                 {
-                    foreach (var item in DispositivoTipoContadora)
-                    {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.ModeloId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (plantillaMonedaIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_Marca, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoMarca)
                         {
-                            item.ModeloId = plantillaMonedaIdOrigen.Value;
-
                             Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieDispositivoTipoContadora = entitiesDispositivoTipoContadora.Add(item);
+                            var newEntitieDispositivoMarca = entitiesDispositivoMarca.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoContadora.Id);
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoMarca.Id);
+
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.TipoPlaca entitiesDispositivoTipoPlaca = new();
+                Depositario.Business.Tables.Dispositivo.PlantillaMoneda entitiesPlantillaMoneda = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoTipoPlaca.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.TipoPlaca");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoMarca.Count > 0)
                 {
-                    foreach (var item in DispositivoTipoPlaca)
-                    {
-                        Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.ModeloId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (plantillaMonedaIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_PlantillaMoneda, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in PlantillaMoneda)
                         {
-                            item.ModeloId = plantillaMonedaIdOrigen.Value;
-
                             Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieDispositivoTipoPlaca = entitiesDispositivoTipoPlaca.Add(item);
+                            var newEntitiePlantillaMoneda = entitiesPlantillaMoneda.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoPlaca.Id);
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitiePlantillaMoneda.Id);
+
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.Depositario entitiesDispositivoDepositario = new();
+                Depositario.Business.Tables.Dispositivo.PlantillaMonedaDetalle entitiesPlantillaMonedaDetalle = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoDepositario.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.Depositario");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (PlantillaMonedaDetalle.Count > 0)
                 {
-                    foreach (var item in DispositivoDepositario)
-                    {
-                        Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.ModeloId);
-                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sector", item.SectorId);
-                        Int64? tipoContenedorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Operacion.TipoContenedor", item.TipoContenedorId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue && tipoContenedorIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_PlantillaMonedaDetalle, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in PlantillaMonedaDetalle)
                         {
-                            item.ModeloId = modeloIdOrigen.Value;
+                            Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_PlantillaMoneda, item.PlantillaMonedaId);
+                            Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Moneda, item.MonedaId);
 
-                            item.SectorId = sectorIdOrigen.Value;
+                            if (plantillaMonedaIdOrigen.HasValue && monedaIdOrigen.HasValue)
+                            {
+                                item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
 
-                            item.TipoContenedorId = tipoContenedorIdOrigen.Value;
+                                item.MonedaId = monedaIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieDispositivoDepositario = entitiesDispositivoDepositario.Add(item);
+                                var newEntitiePlantillaMonedaDetalle = entitiesPlantillaMonedaDetalle.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositario.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitiePlantillaMonedaDetalle.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.DepositarioContadora entitiesDispositivoDepositarioContadora = new();
+                Depositario.Business.Tables.Dispositivo.Modelo entitiesDispositivoModelo = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoDepositarioContadora.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioContadora");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoModelo.Count > 0)
                 {
-                    foreach (var item in DispositivoDepositarioContadora)
-                    {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoContadora", item.TipoContadoraId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (depositarioIdOrigen.HasValue && tipoContadoraIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_Modelo, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoModelo)
                         {
-                            item.DepositarioId = depositarioIdOrigen.Value;
+                            Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_PlantillaMoneda, item.PlantillaMonedaId);
+                            Int64? marcaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Marca, item.MarcaId);
 
-                            item.TipoContadoraId = tipoContadoraIdOrigen.Value;
+                            if (plantillaMonedaIdOrigen.HasValue && marcaIdOrigen.HasValue)
+                            {
+                                item.PlantillaMonedaId = plantillaMonedaIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                item.MarcaId = marcaIdOrigen.Value;
 
-                            var newEntitieDispositivoDepositarioContadora = entitiesDispositivoDepositarioContadora.Add(item);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioContadora.Id);
+                                var newEntitieDispositivoModelo = entitiesDispositivoModelo.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoModelo.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            //Depositario.Business.Tables.Dispositivo.DepositarioEstado entitiesDispositivoDepositarioEstado = new();
+                Depositario.Business.Tables.Dispositivo.TipoContadora entitiesDispositivoTipoContadora = new(entitiesSincronizacionEntidad);
 
-            //if (DispositivoDepositarioEstado.Count > 0)
-            //{
-            //    Int64? sincronizacionCabeceraId = null;
-
-            //    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioEstado");
-
-            //    if (sincronizacionCabeceraId.HasValue)
-            //    {
-            //        foreach (var item in DispositivoDepositarioEstado)
-            //        {
-            //            Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
-
-            //            if (depositarioIdOrigen.HasValue)
-            //            {
-            //                item.DepositarioId = depositarioIdOrigen.Value;
-
-            //                Int64 origenId = item.Id;
-
-            //                var newEntitieDispositivoDepositarioEstado = entitiesDispositivoDepositarioEstado.Add(item);
-
-            //                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioEstado.Id);
-            //            }
-            //        }
-            //        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-            //    }
-            //}
-
-            Depositario.Business.Tables.Dispositivo.DepositarioMoneda entitiesDispositivoDepositarioMoneda = new();
-
-            if (DispositivoDepositarioMoneda.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioMoneda");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoTipoContadora.Count > 0)
                 {
-                    foreach (var item in DispositivoDepositarioMoneda)
-                    {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Valor.Moneda", item.MonedaId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (depositarioIdOrigen.HasValue && monedaIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_TipoContadora, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoTipoContadora)
                         {
-                            item.DepositarioId = depositarioIdOrigen.Value;
+                            Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Modelo, item.ModeloId);
 
-                            item.MonedaId = monedaIdOrigen.Value;
+                            if (plantillaMonedaIdOrigen.HasValue)
+                            {
+                                item.ModeloId = plantillaMonedaIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieDispositivoDepositarioMoneda = entitiesDispositivoDepositarioMoneda.Add(item);
+                                var newEntitieDispositivoTipoContadora = entitiesDispositivoTipoContadora.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioMoneda.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoContadora.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.DepositarioPlaca entitiesDispositivoDepositarioPlaca = new();
+                Depositario.Business.Tables.Dispositivo.TipoPlaca entitiesDispositivoTipoPlaca = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoDepositarioPlaca.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.DepositarioPlaca");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoTipoPlaca.Count > 0)
                 {
-                    foreach (var item in DispositivoDepositarioPlaca)
-                    {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoPlaca", item.TipoPlacaId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (depositarioIdOrigen.HasValue && tipoPlacaIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_TipoPlaca, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoTipoPlaca)
                         {
-                            item.DepositarioId = depositarioIdOrigen.Value;
+                            Int64? plantillaMonedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Modelo, item.ModeloId);
 
-                            item.TipoPlacaId = tipoPlacaIdOrigen.Value;
+                            if (plantillaMonedaIdOrigen.HasValue)
+                            {
+                                item.ModeloId = plantillaMonedaIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieDispositivoDepositarioPlaca = entitiesDispositivoDepositarioPlaca.Add(item);
+                                var newEntitieDispositivoTipoPlaca = entitiesDispositivoTipoPlaca.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioPlaca.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoTipoPlaca.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.ComandoContadora entitiesDispositivoComandoContadora = new();
+                Depositario.Business.Tables.Dispositivo.Depositario entitiesDispositivoDepositario = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoComandoContadora.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.ComandoContadora");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoDepositario.Count > 0)
                 {
-                    foreach (var item in DispositivoComandoContadora)
-                    {
-                        Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoContadora", item.TipoContadoraId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (tipoContadoraIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_Depositario, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoDepositario)
                         {
-                            item.TipoContadoraId = tipoContadoraIdOrigen.Value;
+                            Int64? modeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Modelo, item.ModeloId);
+                            Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Sector, item.SectorId);
+                            Int64? tipoContenedorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Operacion_TipoContenedor, item.TipoContenedorId);
 
-                            Int64 origenId = item.Id;
+                            if (modeloIdOrigen.HasValue && sectorIdOrigen.HasValue && tipoContenedorIdOrigen.HasValue)
+                            {
+                                item.ModeloId = modeloIdOrigen.Value;
 
-                            var newEntitieDispositivoComandoContadora = entitiesDispositivoComandoContadora.Add(item);
+                                item.SectorId = sectorIdOrigen.Value;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoComandoContadora.Id);
+                                item.TipoContenedorId = tipoContenedorIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDispositivoDepositario = entitiesDispositivoDepositario.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositario.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.ComandoPlaca entitiesDispositivoComandoPlaca = new();
+                Depositario.Business.Tables.Dispositivo.DepositarioContadora entitiesDispositivoDepositarioContadora = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoComandoPlaca.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.ComandoPlaca");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoDepositarioContadora.Count > 0)
                 {
-                    foreach (var item in DispositivoComandoPlaca)
-                    {
-                        Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoPlaca", item.TipoPlacaId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (tipoPlacaIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_DepositarioContadora, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoDepositarioContadora)
                         {
-                            item.TipoPlacaId = tipoPlacaIdOrigen.Value;
+                            Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Depositario, item.DepositarioId);
+                            Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_TipoContadora, item.TipoContadoraId);
 
-                            Int64 origenId = item.Id;
+                            if (depositarioIdOrigen.HasValue && tipoContadoraIdOrigen.HasValue)
+                            {
+                                item.DepositarioId = depositarioIdOrigen.Value;
 
-                            var newEntitieDispositivoComandoPlaca = entitiesDispositivoComandoPlaca.Add(item);
+                                item.TipoContadoraId = tipoContadoraIdOrigen.Value;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoComandoPlaca.Id);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDispositivoDepositarioContadora = entitiesDispositivoDepositarioContadora.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioContadora.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario entitiesDispositivoConfiguracionDepositario = new();
+                Depositario.Business.Tables.Dispositivo.DepositarioMoneda entitiesDispositivoDepositarioMoneda = new(entitiesSincronizacionEntidad);
 
-            if (DispositivoConfiguracionDepositario.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Dispositivo.ConfiguracionDepositario");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoDepositarioMoneda.Count > 0)
                 {
-                    foreach (var item in DispositivoConfiguracionDepositario)
-                    {
-                        Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Depositario", item.DepositarioId);
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.TipoConfiguracionDepositario", item.TipoId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (depositarioIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_DepositarioMoneda, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoDepositarioMoneda)
                         {
-                            item.DepositarioId = depositarioIdOrigen.Value;
+                            Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Depositario, item.DepositarioId);
+                            Int64? monedaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Valor_Moneda, item.MonedaId);
 
-                            item.TipoId = tipoIdOrigen.Value;
+                            if (depositarioIdOrigen.HasValue && monedaIdOrigen.HasValue)
+                            {
+                                item.DepositarioId = depositarioIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                item.MonedaId = monedaIdOrigen.Value;
 
-                            var newEntitieDispositivoConfiguracionDepositario = entitiesDispositivoConfiguracionDepositario.Add(item);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoConfiguracionDepositario.Id);
+                                var newEntitieDispositivoDepositarioMoneda = entitiesDispositivoDepositarioMoneda.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioMoneda.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            #endregion
+                Depositario.Business.Tables.Dispositivo.DepositarioPlaca entitiesDispositivoDepositarioPlaca = new(entitiesSincronizacionEntidad);
 
-            #region Turno
-
-            Depositario.Business.Tables.Turno.EsquemaTurno entitiesTurnoEsquemaTurno = new();
-
-            if (TurnoEsquemaTurno.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Turno.EsquemaTurno");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoDepositarioPlaca.Count > 0)
                 {
-                    foreach (var item in TurnoEsquemaTurno)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_DepositarioPlaca, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieTurnoEsquemaTurno = entitiesTurnoEsquemaTurno.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoEsquemaTurno.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Turno.EsquemaDetalleTurno entitiesTurnoEsquemaDetalleTurno = new();
-
-            if (TurnoEsquemaDetalleTurno.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Turno.EsquemaDetalleTurno");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in TurnoEsquemaDetalleTurno)
-                    {
-                        Int64? esquemaTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Turno.EsquemaTurno", item.EsquemaTurnoId);
-
-                        if (esquemaTurnoIdOrigen.HasValue)
+                        foreach (var item in DispositivoDepositarioPlaca)
                         {
-                            item.EsquemaTurnoId = esquemaTurnoIdOrigen.Value;
+                            Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Depositario, item.DepositarioId);
+                            Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_TipoPlaca, item.TipoPlacaId);
 
-                            Int64 origenId = item.Id;
+                            if (depositarioIdOrigen.HasValue && tipoPlacaIdOrigen.HasValue)
+                            {
+                                item.DepositarioId = depositarioIdOrigen.Value;
 
-                            var newEntitieTurnoEsquemaDetalleTurno = entitiesTurnoEsquemaDetalleTurno.Add(item);
+                                item.TipoPlacaId = tipoPlacaIdOrigen.Value;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoEsquemaDetalleTurno.Id);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDispositivoDepositarioPlaca = entitiesDispositivoDepositarioPlaca.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoDepositarioPlaca.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            Depositario.Business.Tables.Turno.AgendaTurno entitiesTurnoAgendaTurno = new();
+                Depositario.Business.Tables.Dispositivo.ComandoContadora entitiesDispositivoComandoContadora = new(entitiesSincronizacionEntidad);
 
-            if (TurnoAgendaTurno.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Turno.AgendaTurno");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoComandoContadora.Count > 0)
                 {
-                    foreach (var item in TurnoAgendaTurno)
-                    {
-                        Int64? esquemaDetalleTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Turno.EsquemaDetalleTurno", item.EsquemaDetalleTurnoId);
-                        Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Sector", item.SectorId);
+                    Int64? sincronizacionCabeceraId = null;
 
-                        if (esquemaDetalleTurnoIdOrigen.HasValue && sectorIdOrigen.HasValue)
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_ComandoContadora, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoComandoContadora)
                         {
-                            item.EsquemaDetalleTurnoId = esquemaDetalleTurnoIdOrigen.Value;
+                            Int64? tipoContadoraIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_TipoContadora, item.TipoContadoraId);
 
-                            item.SectorId = sectorIdOrigen.Value;
+                            if (tipoContadoraIdOrigen.HasValue)
+                            {
+                                item.TipoContadoraId = tipoContadoraIdOrigen.Value;
 
-                            Int64 origenId = item.Id;
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            var newEntitieTurnoAgendaTurno = entitiesTurnoAgendaTurno.Add(item);
+                                var newEntitieDispositivoComandoContadora = entitiesDispositivoComandoContadora.Add(item);
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoAgendaTurno.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoComandoContadora.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
-            }
 
-            #endregion
+                Depositario.Business.Tables.Dispositivo.ComandoPlaca entitiesDispositivoComandoPlaca = new(entitiesSincronizacionEntidad);
 
-            #region Impresion
-
-            Depositario.Business.Tables.Impresion.TipoTicket entitiesImpresionTipoTicket = new();
-
-            if (TipoTicket.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Impresion.TipoTicket");
-
-                if (sincronizacionCabeceraId.HasValue)
+                if (DispositivoComandoPlaca.Count > 0)
                 {
-                    foreach (var item in TipoTicket)
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_ComandoPlaca, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64 origenId = item.Id;
-
-                        var newEntitieImpresionTipoTicket = entitiesImpresionTipoTicket.Add(item);
-
-                        SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieImpresionTipoTicket.Id);
-
-                    }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
-                }
-            }
-
-            Depositario.Business.Tables.Impresion.Ticket entitiesImpresionTicket = new();
-
-            if (Ticket.Count > 0)
-            {
-                Int64? sincronizacionCabeceraId = null;
-
-                sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacionInicial("Impresion.Ticket");
-
-                if (sincronizacionCabeceraId.HasValue)
-                {
-                    foreach (var item in Ticket)
-                    {
-                        Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Impresion.TipoTicket", item.TipoId);
-                        Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Dispositivo.Modelo", item.DepositarioModeloId);
-                        Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial("Directorio.Empresa", item.EmpresaId);
-
-                        if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue && empresaIdOrigen.HasValue)
+                        foreach (var item in DispositivoComandoPlaca)
                         {
-                            item.TipoId = tipoIdOrigen.Value;
-                            item.DepositarioModeloId = depositarioModeloIdOrigen.Value;
-                            item.EmpresaId = empresaIdOrigen.Value;
+                            Int64? tipoPlacaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_TipoPlaca, item.TipoPlacaId);
 
-                            Int64 origenId = item.Id;
+                            if (tipoPlacaIdOrigen.HasValue)
+                            {
+                                item.TipoPlacaId = tipoPlacaIdOrigen.Value;
 
-                            var newEntitieImpresionTicket = entitiesImpresionTicket.Add(item);
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
 
-                            SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, newEntitieImpresionTicket.Id);
+                                var newEntitieDispositivoComandoPlaca = entitiesDispositivoComandoPlaca.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoComandoPlaca.Id);
+                            }
                         }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
-                    SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
                 }
+
+                Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario entitiesDispositivoConfiguracionDepositario = new(entitiesSincronizacionEntidad);
+
+                if (DispositivoConfiguracionDepositario.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Dispositivo_ConfiguracionDepositario, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in DispositivoConfiguracionDepositario)
+                        {
+                            Int64? depositarioIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Depositario, item.DepositarioId);
+                            Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_TipoConfiguracionDepositario, item.TipoId);
+
+                            if (depositarioIdOrigen.HasValue)
+                            {
+                                item.DepositarioId = depositarioIdOrigen.Value;
+
+                                item.TipoId = tipoIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieDispositivoConfiguracionDepositario = entitiesDispositivoConfiguracionDepositario.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieDispositivoConfiguracionDepositario.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Turno
+
+                Depositario.Business.Tables.Turno.EsquemaTurno entitiesTurnoEsquemaTurno = new(entitiesSincronizacionEntidad);
+
+                if (TurnoEsquemaTurno.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Turno_EsquemaTurno, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TurnoEsquemaTurno)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieTurnoEsquemaTurno = entitiesTurnoEsquemaTurno.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoEsquemaTurno.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Turno.EsquemaDetalleTurno entitiesTurnoEsquemaDetalleTurno = new(entitiesSincronizacionEntidad);
+
+                if (TurnoEsquemaDetalleTurno.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Turno_EsquemaDetalleTurno, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TurnoEsquemaDetalleTurno)
+                        {
+                            Int64? esquemaTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Turno_EsquemaTurno, item.EsquemaTurnoId);
+
+                            if (esquemaTurnoIdOrigen.HasValue)
+                            {
+                                item.EsquemaTurnoId = esquemaTurnoIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieTurnoEsquemaDetalleTurno = entitiesTurnoEsquemaDetalleTurno.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoEsquemaDetalleTurno.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Turno.AgendaTurno entitiesTurnoAgendaTurno = new(entitiesSincronizacionEntidad);
+
+                if (TurnoAgendaTurno.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Turno_AgendaTurno, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TurnoAgendaTurno)
+                        {
+                            Int64? esquemaDetalleTurnoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Turno_EsquemaDetalleTurno, item.EsquemaDetalleTurnoId);
+                            Int64? sectorIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Sector, item.SectorId);
+
+                            if (esquemaDetalleTurnoIdOrigen.HasValue && sectorIdOrigen.HasValue)
+                            {
+                                item.EsquemaDetalleTurnoId = esquemaDetalleTurnoIdOrigen.Value;
+
+                                item.SectorId = sectorIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieTurnoAgendaTurno = entitiesTurnoAgendaTurno.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieTurnoAgendaTurno.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                #region Impresion
+
+                Depositario.Business.Tables.Impresion.TipoTicket entitiesImpresionTipoTicket = new(entitiesSincronizacionEntidad);
+
+                if (TipoTicket.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Impresion_TipoTicket, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in TipoTicket)
+                        {
+                            Int64 origenId = item.Id;
+                            item.UsuarioCreacion = 0;
+                            item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                            var newEntitieImpresionTipoTicket = entitiesImpresionTipoTicket.Add(item);
+
+                            SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieImpresionTipoTicket.Id);
+
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                Depositario.Business.Tables.Impresion.Ticket entitiesImpresionTicket = new(entitiesSincronizacionEntidad);
+
+                if (Ticket.Count > 0)
+                {
+                    Int64? sincronizacionCabeceraId = null;
+
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Impresion_Ticket, DateTime.Now);
+
+                    if (sincronizacionCabeceraId.HasValue)
+                    {
+                        foreach (var item in Ticket)
+                        {
+                            Int64? tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Impresion_TipoTicket, item.TipoId);
+                            Int64? depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Dispositivo_Modelo, item.DepositarioModeloId);
+                            Int64? empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
+
+                            if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue && empresaIdOrigen.HasValue)
+                            {
+                                item.TipoId = tipoIdOrigen.Value;
+                                item.DepositarioModeloId = depositarioModeloIdOrigen.Value;
+                                item.EmpresaId = empresaIdOrigen.Value;
+
+                                Int64 origenId = item.Id;
+                                item.UsuarioCreacion = 0;
+                                item.UsuarioModificacion = item.UsuarioModificacion.HasValue ? 0 : null;
+
+                                var newEntitieImpresionTicket = entitiesImpresionTicket.Add(item);
+
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, newEntitieImpresionTicket.Id);
+                            }
+                        }
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
+                    }
+                }
+
+                #endregion
+
+                entitiesSincronizacionEntidad.EndTransaction(true);
+
+                resultado = true;
+            }
+            catch (Exception ex)
+            {
+                //Se loguea en archivo porque se sobreentiende que la tabla de log no esta lista.
+                AuditController.LogToFile(ex);
+                entitiesSincronizacionEntidad.EndTransaction(false);
             }
 
-            #endregion
+            return resultado;
+
         }
 
     }

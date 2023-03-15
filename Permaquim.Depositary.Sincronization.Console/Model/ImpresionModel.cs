@@ -8,18 +8,19 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Impresion.TipoTicket> TiposTickets { get; set; } = new();
         public List<Depositario.Entities.Tables.Impresion.Ticket> Tickets { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
+        public Int64? SynchronizationExecutionId = SynchronizationController.CurrentSynchronizationExecutionId;
 
         void IModel.Process()
         {
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroTipoTicket = SynchronizationController.obtenerFechaUltimaSincronizacion("Impresion.TipoTicket");
+            DateTime fechaSincroTipoTicket = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Impresion_TipoTicket);
 
-            SincroDates.Add("Impresion.TipoTicket", fechaSincroTipoTicket);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Impresion_TipoTicket).Replace("_", "."), fechaSincroTipoTicket);
 
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroTicket = SynchronizationController.obtenerFechaUltimaSincronizacion("Impresion.Ticket");
+            DateTime fechaSincroTicket = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Impresion_Ticket);
 
-            SincroDates.Add("Impresion.Ticket", fechaSincroTicket);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Impresion_Ticket).Replace("_", "."), fechaSincroTicket);
         }
         public void Persist()
         {
@@ -37,15 +38,15 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.TipoTicket");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Impresion_TipoTicket, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
                         foreach (var item in TiposTickets)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Impresion_TipoTicket, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
 
                             if (usuarioCreacionIdOrigen.HasValue)
                             {
@@ -56,7 +57,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -71,10 +72,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     tipoTicket.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
 
@@ -84,7 +85,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Impresion.Ticket");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Impresion_Ticket, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
@@ -94,11 +95,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in Tickets)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.Ticket", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
-                            tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Impresion.TipoTicket", item.TipoId);
-                            depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Dispositivo.Modelo", item.DepositarioModeloId);
-                            empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Directorio.Empresa", item.EmpresaId);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Impresion_Ticket, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
+                            tipoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Impresion_TipoTicket, item.TipoId);
+                            depositarioModeloIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Dispositivo_Modelo, item.DepositarioModeloId);
+                            empresaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Directorio_Empresa, item.EmpresaId);
 
                             if (tipoIdOrigen.HasValue && depositarioModeloIdOrigen.HasValue && empresaIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
@@ -113,7 +114,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -128,10 +129,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     ticket.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
 

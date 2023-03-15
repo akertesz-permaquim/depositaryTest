@@ -4,7 +4,9 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
-@using Permaquim.Depositary.Web.Administration.Controllers;
+@implements IDisposable
+
+@using Permaquim.Depositary.Web.Administration.Controllers
 @using Radzen
 @using Radzen.Blazor
 @using System.Timers;
@@ -266,7 +268,7 @@ else
     protected override void OnInitialized()
     {
         //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
-        if (!LicenseController.IsValidLicenseAvailable() || LicenseController.GetLicenseRemainingDays() <= 0 || LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        if (LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
         {
             NavManager.NavigateTo("RequerimientoLicencia/Dashboard", true);
         }
@@ -324,17 +326,10 @@ else
 
     private void recargarInformacion(Object source, ElapsedEventArgs e)
     {
-        if (NavManager.Uri.Replace(NavManager.BaseUri, "") == "Dashboard")
-        {
-            //Se deshabilita el timer hasta que se complete la operacion.
-            timerRecargaInformacion.Enabled = false;
-            obtenerInformacion();
-            timerRecargaInformacion.Enabled = true;
-        }
-        else
-        {
-            timerRecargaInformacion.Enabled = false;
-        }
+        //Se deshabilita el timer hasta que se complete la operacion.
+        timerRecargaInformacion.Enabled = false;
+        obtenerInformacion();
+        timerRecargaInformacion.Enabled = true;
     }
 
     private async void obtenerInformacion()
@@ -343,13 +338,13 @@ else
         {
             if (empresasSeleccionadas.Count() > 0)
             {
-                await Task.Run(obtenerCantidadTransaccionesAlDia);
-                await Task.Run(obtenerCantidadDepositariosBolsaCasiLlena);
-                await Task.Run(obtenerCantidadDepositariosEnLinea);
-                await Task.Run(obtenerCantidadDepositariosFueraLinea);
-                await Task.Run(obtenerCantidadDepositariosFueraServicio);
-                await Task.Run(obtenerDepositariosConMayorCarga);
-                await Task.Run(obtenerCantidadTransaccionesPorTipo);
+                await Task.Run(obtenerCantidadTransaccionesAlDia); //10mb
+                await Task.Run(obtenerCantidadDepositariosBolsaCasiLlena); //10mb
+                await Task.Run(obtenerCantidadDepositariosEnLinea); //5mb
+                await Task.Run(obtenerCantidadDepositariosFueraLinea); //5mb
+                await Task.Run(obtenerCantidadDepositariosFueraServicio); //2mb
+                await Task.Run(obtenerDepositariosConMayorCarga); //2mb
+                await Task.Run(obtenerCantidadTransaccionesPorTipo); //2mb
             }
         }
         estaCargando = false;
@@ -424,4 +419,16 @@ else
     {
         dataCantidadTipoTransacciones = OperacionController.ObtenerCantidadTipoTransacciones(empresasSeleccionadas.ToList());
     }
+
+    void IDisposable.Dispose()
+    {
+        timerRecargaInformacion.Dispose();
+        dataCargaDepositarios.Clear();
+        dataCantidadTipoTransacciones.Clear();
+        dataEmpresasAccesibles.Clear();
+        empresasSeleccionadas = null;
+        dataFunciones.Clear();
+    }
+
+
 }

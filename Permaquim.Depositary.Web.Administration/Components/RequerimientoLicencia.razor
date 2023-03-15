@@ -7,9 +7,16 @@
 @inject NavigationManager NavManager
 
 <div style="text-align:center; vertical-align: middle">
-    @if (TieneLicencia)
+    @if (LicenciaValida)
     {
-        <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_MENU_REQUIERE_LICENCIA_SUPERIOR",dataLenguaje)</h2>
+        if (LicenciaExpirada)
+        {
+            <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_LICENCIA_EXPIRADA",dataLenguaje)</h2>
+        }
+        else
+        {
+            <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_MENU_REQUIERE_LICENCIA_SUPERIOR",dataLenguaje)</h2>
+        }
     }
     else
     {
@@ -41,6 +48,7 @@
 </div>
 
 @code {
+    //Si se llama a este componente es porque hay algun conflicto con la licencia, el componente determina que mensaje se muestra.
     public class ArchivoLicencia
     {
         public string ArchivoSeleccionado { get; set; }
@@ -54,13 +62,16 @@
     public string ReferenciaPagina { get; set; }
 
     [Parameter]
-    public bool TieneLicencia { get; set; } = true;
+    public bool LicenciaValida { get; set; } = false;
+
+    [Parameter]
+    public bool LicenciaExpirada { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
     {
+        //En funcion de la pagina que llama al componente levanto los datos de una forma u otra.
         if (ReferenciaPagina != "login")
         {
-            //Si no nos redirige el login es porque tenemos licencia.
             dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
             if (dataUsuario == null)
             {
@@ -68,7 +79,7 @@
             }
             dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
         }
-        else //Si nos redirige el login es porque no se tiene licencia.
+        else
         {
             //Si la pagina que llama al requerimiento de licencia es el login entonces ofrecemos el lenguaje default.
             dataLenguaje = MultilenguajeController.ObtenerTextosLenguaje(-1);

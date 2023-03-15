@@ -9,18 +9,20 @@ namespace Permaquim.Depositary.Sincronization.Console
         public List<Depositario.Entities.Tables.Regionalizacion.Lenguaje> Lenguajes { get; set; } = new();
         public List<Depositario.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItems { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
+        public Int64? SynchronizationExecutionId = SynchronizationController.CurrentSynchronizationExecutionId;
+
 
         void IModel.Process()
         {
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroLenguaje = SynchronizationController.obtenerFechaUltimaSincronizacion("Regionalizacion.Lenguaje");
+            DateTime fechaSincroLenguaje = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje);
 
-            SincroDates.Add("Regionalizacion.Lenguaje", fechaSincroLenguaje);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje).Replace("_", "."), fechaSincroLenguaje);
 
             //Obtenemos la fecha de ultima sincronizacion de la entidad
-            DateTime fechaSincroLenguajeItem = SynchronizationController.obtenerFechaUltimaSincronizacion("Regionalizacion.LenguajeItem");
+            DateTime fechaSincroLenguajeItem = SynchronizationController.GetLastSincronizationDate(Enumerations.EntitiesEnum.Regionalizacion_LenguajeItem);
 
-            SincroDates.Add("Regionalizacion.LenguajeItem", fechaSincroLenguajeItem);
+            SincroDates.Add(Enum.GetName(Enumerations.EntitiesEnum.Regionalizacion_LenguajeItem).Replace("_", "."), fechaSincroLenguajeItem);
         }
         public void Persist()
         {
@@ -38,15 +40,15 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.Lenguaje");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
                         foreach (var item in Lenguajes)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
 
                             if (usuarioCreacionIdOrigen.HasValue)
                             {
@@ -57,7 +59,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -72,10 +74,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     lenguaje.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
 
@@ -86,7 +88,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     Int64? sincronizacionCabeceraId = null;
 
-                    sincronizacionCabeceraId = SynchronizationController.IniciarCabeceraSincronizacion("Regionalizacion.LenguajeItem");
+                    sincronizacionCabeceraId = SynchronizationController.InitializeEntitySynchronization(Enumerations.EntitiesEnum.Regionalizacion_LenguajeItem, DateTime.Now);
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
@@ -94,9 +96,9 @@ namespace Permaquim.Depositary.Sincronization.Console
                         foreach (var item in LenguajeItems)
                         {
                             //Verifico si este registro se sincronizo anteriormente
-                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.LenguajeItem", item.Id);
-                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioCreacion);
-                            lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Regionalizacion.Lenguaje", item.LenguajeId);
+                            idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Regionalizacion_LenguajeItem, item.Id);
+                            usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
+                            lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, item.LenguajeId);
 
                             if (lenguajeIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
@@ -109,7 +111,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                                 if (item.UsuarioModificacion.HasValue)
                                 {
-                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion("Seguridad.Usuario", item.UsuarioModificacion.Value);
+                                    usuarioModificacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioModificacion.Value);
                                     item.UsuarioModificacion = usuarioModificacionIdOrigen.Value;
                                 }
 
@@ -124,10 +126,10 @@ namespace Permaquim.Depositary.Sincronization.Console
                                     lenguajeItem.Add(item);
                                 }
 
-                                SynchronizationController.GuardarDetalleSincronizacion(sincronizacionCabeceraId.Value, origenId, item.Id);
+                                SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
                             }
                         }
-                        SynchronizationController.FinalizarCabeceraSincronizacion(sincronizacionCabeceraId.Value);
+                        SynchronizationController.FinishEntitySynchronization(sincronizacionCabeceraId.Value);
                     }
                 }
             }

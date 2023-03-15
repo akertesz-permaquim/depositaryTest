@@ -12,10 +12,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 {
     public class Worker : BackgroundService
     {
-        DatabaseController DatabaseController = new();
         private const string MEDIATYPE_JSON = "application/json";
-        private const string WEBAPI_BASE_URL = "WEBAPI_BASE_URL";
-        private const string SINCRONIZATION_DELAY = "SINCRONIZATION_DELAY";
         private const string SECURITY_SCHEME = "Bearer";
         private const string WEBAPIURL = "WebApiUrl";
         private readonly ILogger<Worker> _logger;
@@ -57,57 +54,67 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 try
                 {
-                    if (DatabaseController.CurrentDepositary == null)
+                    //Verificamos si se hizo una primera sincronizacion de forma correcta.
+                    if (!SynchronizationController.IsInitialized())
                     {
+                        _logger.Log(LogLevel.Information, "Initializing database...");
+
                         await InitializationController.InitializeDepositary();
                     }
                     else
                     {
-                        foreach (var item in _workerTasks)
+                        if (_workerTasks.Count > 0)
                         {
-                            _baseUrl = AppConfiguration.WebApiUrl;
-
-                            _logger.Log(LogLevel.Information, "Api endpoint is " + _baseUrl + item.Endpoint);
-
-                            switch (item.WorkerTaskType)
+                            foreach (var item in _workerTasks)
                             {
-                                case WorkerTask.WorkerTaskTypeEnum.None:
-                                    break;
-                                case WorkerTask.WorkerTaskTypeEnum.GetToken:
-                                    await GetToken(item);
-                                    break;
-                                case WorkerTask.WorkerTaskTypeEnum.Receive:
-                                    await ReceiveData(item);
-                                    break;
-                                case WorkerTask.WorkerTaskTypeEnum.Send:
-                                    await SendData(item);
-                                    break;
-                                case WorkerTask.WorkerTaskTypeEnum.SendAndReceive:
-                                    await SendAndReceiveData(item);
-                                    break;
-                                default:
-                                    break;
+                                _baseUrl = AppConfiguration.WebApiUrl;
+
+                                _logger.Log(LogLevel.Information, "Api endpoint is " + _baseUrl + item.Endpoint);
+
+                                //Solo se ejecutan las tareas si tenemos un token y ademas se inicio un registro de sincro.
+                                switch (item.WorkerTaskType)
+                                {
+                                    case WorkerTask.WorkerTaskTypeEnum.None:
+                                        break;
+                                    case WorkerTask.WorkerTaskTypeEnum.GetToken:
+                                        await GetToken(item);
+                                        break;
+                                    case WorkerTask.WorkerTaskTypeEnum.HandleExecution:
+                                        await HandleExecution(item);
+                                        break;
+                                    case WorkerTask.WorkerTaskTypeEnum.Receive:
+                                        await ReceiveData(item);
+                                        break;
+                                    case WorkerTask.WorkerTaskTypeEnum.Send:
+                                        await SendData(item);
+                                        break;
+                                    case WorkerTask.WorkerTaskTypeEnum.SendAndReceive:
+                                        await SendAndReceiveData(item);
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                model = null;
+
+                                await Task.Delay(100, stoppingToken);
+
                             }
-
-                            model = null;
-
-                            await Task.Delay(100, stoppingToken);
-
                         }
 
-                        _hostApplicationLifetime.StopApplication();
-                        return;
+                        //_hostApplicationLifetime.StopApplication();
+                        //return;
 
                     }
                 }
                 catch (Exception ex)
                 {
                     if (!stoppingToken.IsCancellationRequested)
-                    AuditController.LogToFile(ex);
+                        AuditController.LogToFile(ex);
                 }
 
                 _hostApplicationLifetime.StopApplication();
-
+                return;
             }
         }
 
@@ -116,35 +123,45 @@ namespace Permaquim.Depositary.Sincronization.Console
 
             if (_jwToken != null)
             {
-                _logger.Log(LogLevel.Information, "Receiving data: " + item.Entity);
-
-                _httpClient.DefaultRequestHeaders.Accept.Clear();
-                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
-
-                try
+                if (SynchronizationController.HasOpenedExecution())
                 {
-                    var model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
+                    _logger.Log(LogLevel.Information, "Receiving data: " + item.Entity);
 
-                    var getResponse = await _httpClient.GetStringAsync(_baseUrl + item.Endpoint);
+                    _httpClient.DefaultRequestHeaders.Accept.Clear();
+                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
 
-                    string getRresult = getResponse.ToString();
+                    try
+                    {
+                        var model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
 
-                    var ret = JsonConvert.DeserializeObject(getRresult, model.GetType());
+                        var getResponse = await _httpClient.GetStringAsync(_baseUrl + item.Endpoint);
 
-                    if (item.Log)
-                        AuditController.LogToFile(getRresult);
+                        string getRresult = getResponse.ToString();
 
-                    ((IModel)ret).Process();
+                        var ret = JsonConvert.DeserializeObject(getRresult, model.GetType());
 
+                        if (item.Log)
+                            AuditController.LogToFile(getRresult);
+
+                        ((IModel)ret).Process();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        AuditController.LogToFile(ex);
+                    }
+                    finally
+                    {
+                        model = null;
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    AuditController.LogToFile(ex);
-                }
-                finally
-                {
-                    model = null;
+                    //Marcamos la sincro para saber que un step fallo
+                    SynchronizationController.currentExecution.Finalizada = false;
+
+                    _logger.Log(LogLevel.Information, "Synchronization execution not opened");
                 }
             }
             else
@@ -164,42 +181,51 @@ namespace Permaquim.Depositary.Sincronization.Console
             {
                 if (_jwToken != null)
                 {
-                    var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
-                    string jsonToSend = JsonConvert.SerializeObject(model);
-
-                    _logger.Log(LogLevel.Information, "Sending content: " + jsonToSend);
-
-                    if (item.Log)
-                        AuditController.LogToFile(jsonToSend);
-
-                    _httpClient.DefaultRequestHeaders.Accept.Clear();
-                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
-                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
-
-                    var postResponse = _httpClient.PostAsync(_baseUrl + item.Endpoint, content);
-                    var postResult = postResponse.Result;
-
-                    _logger.LogInformation(postResult.ToString() + " At endpoint: " + _httpClient.BaseAddress);
-
-
-                    if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                    if (SynchronizationController.HasOpenedExecution())
                     {
-                        model.Persist();
-                    }
+                        var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+                        string jsonToSend = JsonConvert.SerializeObject(model);
 
-                    else
-                    {
-                        if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                        _logger.Log(LogLevel.Information, "Sending content: " + jsonToSend);
+
+                        if (item.Log)
+                            AuditController.LogToFile(jsonToSend);
+
+                        _httpClient.DefaultRequestHeaders.Accept.Clear();
+                        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
+                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
+
+                        var postResponse = _httpClient.PostAsync(_baseUrl + item.Endpoint, content);
+                        var postResult = postResponse.Result;
+
+                        _logger.LogInformation(postResult.ToString() + " At endpoint: " + _httpClient.BaseAddress);
+
+
+                        if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            _logger.LogInformation("Unauthorized received. token was set to null.");
-                            _jwToken = null;
+                            model.Persist();
                         }
                         else
                         {
-                            throw new Exception(postResult.ToString());
+                            //Marcamos la sincro para saber que un step fallo
+                            SynchronizationController.currentExecution.Finalizada = false;
+                            AuditController.Log(AuditController.LogTypeEnum.Information, postResponse.Result.StatusCode.ToString(), postResult.ToString());
+
+                            if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                            {
+                                _logger.LogInformation("Unauthorized received. token was set to null.");
+                                _jwToken = null;
+                            }
+                            else
+                            {
+                                throw new Exception(postResult.ToString());
+                            }
                         }
                     }
-
+                    else
+                    {
+                        _logger.Log(LogLevel.Information, "Synchronization execution not opened");
+                    }
                 }
                 else
                 {
@@ -208,6 +234,9 @@ namespace Permaquim.Depositary.Sincronization.Console
             }
             catch (Exception ex)
             {
+                //Marcamos la sincro para saber que un step fallo
+                SynchronizationController.currentExecution.Finalizada = false;
+
                 AuditController.LogToFile(ex);
             }
             finally
@@ -220,62 +249,74 @@ namespace Permaquim.Depositary.Sincronization.Console
         {
             if (_jwToken != null)
             {
-                try
+                if (SynchronizationController.HasOpenedExecution())
                 {
-                    model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
-
-                    model.Process();
-
-                    _logger.Log(LogLevel.Information, "Sending and receiving data: " + item.Entity);
-
-                    if (model.SincroDates.Count > 0)
+                    try
                     {
-                        foreach (var date in model.SincroDates)
+                        model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
+
+                        model.Process();
+
+                        _logger.Log(LogLevel.Information, "Sending and receiving data: " + item.Entity);
+
+                        if (model.SincroDates.Count > 0)
                         {
-                            _logger.Log(LogLevel.Information, date.Key + " " + date.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                            foreach (var date in model.SincroDates)
+                            {
+                                _logger.Log(LogLevel.Information, date.Key + " " + date.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                            }
                         }
+
+                        var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+
+                        string jsonToSend = JsonConvert.SerializeObject(model);
+
+                        if (item.Log)
+                            AuditController.LogToFile(jsonToSend);
+
+                        _httpClient.DefaultRequestHeaders.Accept.Clear();
+                        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
+                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
+
+                        var postResponse = _httpClient.PostAsync(_baseUrl + item.Endpoint, content);
+                        var postResult = postResponse.Result;
+
+                        if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var jsonResult = await postResult.Content.ReadAsStringAsync();
+
+                            var ret = JsonConvert.DeserializeObject(jsonResult, model.GetType());
+
+                            ((IModel)ret).Persist();
+                        }
+                        else
+                        {
+                            //Marcamos la sincro para saber que un step fallo
+                            SynchronizationController.currentExecution.Finalizada = false;
+                            AuditController.Log(AuditController.LogTypeEnum.Information, postResponse.Result.StatusCode.ToString(), postResult.ToString());
+                        }
+
                     }
-
-                    var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
-
-                    string jsonToSend = JsonConvert.SerializeObject(model);
-
-                    if (item.Log)
-                        AuditController.LogToFile(jsonToSend);
-
-                    _httpClient.DefaultRequestHeaders.Accept.Clear();
-                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
-                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
-
-                    var postResponse = _httpClient.PostAsync(_baseUrl + item.Endpoint, content);
-                    var postResult = postResponse.Result;
-
-                    if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                    catch (Exception ex)
                     {
-                        var jsonResult = await postResult.Content.ReadAsStringAsync();
-
-                        var ret = JsonConvert.DeserializeObject(jsonResult, model.GetType());
-
-                        ((IModel)ret).Persist();
+                        //Marcamos la sincro para saber que un step fallo
+                        SynchronizationController.currentExecution.Finalizada = false;
+                        AuditController.LogToFile(ex);
                     }
-
+                    finally
+                    {
+                        model = null;
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    AuditController.LogToFile(ex);
+                    _logger.Log(LogLevel.Information, "Synchronization execution not opened");
                 }
-                finally
-                {
-                    model = null;
-                }
-
             }
             else
             {
                 _logger.Log(LogLevel.Information, "JwToken is null, POST was cancelled!");
             }
-
-
         }
 
         private async Task GetToken(WorkerTask item)
@@ -299,6 +340,55 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     _jwToken = JsonConvert.DeserializeObject<JwtTokenModel>(jsonResult);
 
+                }
+                catch (Exception ex)
+                {
+                    AuditController.LogToFile(ex);
+                }
+            }
+        }
+        private async Task HandleExecution(WorkerTask item)
+        {
+            if (_jwToken != null)
+            {
+                try
+                {
+                    model = (IModel)Activator.CreateInstance(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, item.Entity).Unwrap();
+
+                    model.Process();
+
+                    var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, MEDIATYPE_JSON);
+                    string jsonToSend = JsonConvert.SerializeObject(model);
+
+                    if (item.Log)
+                        AuditController.LogToFile(jsonToSend);
+
+                    _httpClient.DefaultRequestHeaders.Accept.Clear();
+                    _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MEDIATYPE_JSON));
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(SECURITY_SCHEME, _jwToken.Token);
+
+                    var postResponse = _httpClient.PostAsync(_baseUrl + item.Endpoint, content);
+                    var postResult = postResponse.Result;
+
+                    _logger.LogInformation(postResult.ToString() + " At endpoint: " + _httpClient.BaseAddress);
+
+                    if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        model.Persist();
+                    }
+                    else
+                    {
+                        SynchronizationController.executionController.EndTransaction(false);
+
+                        if (postResponse.Result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                        {
+                            _jwToken = null;
+                        }
+                        else
+                        {
+                            AuditController.LogToFile(postResult.ToString());
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {

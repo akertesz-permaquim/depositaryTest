@@ -9,7 +9,7 @@
 
 @try
 {
-    @if (tieneLicencia)
+    @if (licenciaValida && !licenciaExpirada)
     {
         <RadzenBody @ref="body0">
             <ChildContent>
@@ -34,7 +34,7 @@
     }
     else
     {
-        <Permaquim.Depositary.Web.Administration.Components.RequerimientoLicencia ReferenciaPagina="login" TieneLicencia="false"></Permaquim.Depositary.Web.Administration.Components.RequerimientoLicencia>
+        <Permaquim.Depositary.Web.Administration.Components.RequerimientoLicencia ReferenciaPagina="login" LicenciaValida="@licenciaValida" LicenciaExpirada="@licenciaExpirada"></Permaquim.Depositary.Web.Administration.Components.RequerimientoLicencia>
     }
 }
 catch (Exception ex)
@@ -46,7 +46,8 @@ catch (Exception ex)
 @code
 {
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
-    private bool tieneLicencia = false;
+    private bool licenciaValida = false;
+    private bool licenciaExpirada = true;
     private string colorPrimarioSpinner;
     private string colorSecundarioSpinner;
 
@@ -54,11 +55,9 @@ catch (Exception ex)
 
     protected override void OnInitialized()
     {
-        //Verificamos si se tiene licencia y el tipo de licencia que se tiene:
-        if (LicenseController.IsValidLicenseAvailable())
-            tieneLicencia = true;
-        else
-            tieneLicencia = false;
+        //Verificamos si se tiene licencia valida y si no expiro.
+        licenciaValida = LicenseController.IsValidLicenseAvailable();
+        licenciaExpirada = LicenseController.IsExpiredLicense();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

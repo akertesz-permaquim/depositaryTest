@@ -192,31 +192,23 @@
                 <RadzenTemplateForm TItem="TurnoEntities.AgendaTurnoABM" Data="@agendaTurnoABM" @bind-Value="@agendaTurnoABM" Submit="Save">
                     <ChildContent>
                         <div style="margin-bottom: 1rem" class="row align-items-center">
-
                             <div style="font-weight:bold;align-self:center;" class="col col-md-2">
-                                <RadzenLabel Text="Fecha desde:" Component="fechaDesdeDatePicker" style="width: 100%">
+                                <RadzenLabel Text="Esquema:" Component="esquemaDropDown" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col col-md-3">
-                                <RadzenDatePicker @bind-Value=@agendaTurnoABM.FechaDesde Max="@agendaTurnoABM.FechaHasta" Name="fechaDesdeDatePicker" Disabled="@estaProcesando" DateFormat="dd/MM/yyyy" Class="w-100" />
-                                <RadzenCompareValidator Value="@agendaTurnoABM.FechaHasta" Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="La fecha desde debe ser menor o igual a la fecha hasta" Style="position: inherit" />
+                                <RadzenDropDown AllowClear="false" Name="esquemaDropDown" ValueChanged="OnSelected_EsquemaTurno_Changed" TValue="Int64?" Disabled="@estaProcesando"
+                                Data=@dataEsquemaTurnos TextProperty="Nombre" ValueProperty="Id" />
+                                <br>
+                                <RadzenRequiredValidator Component="esquemaDropDown" Text="Esquema is required" Style="position: absolute; margin-top: -2%">
+                                </RadzenRequiredValidator>
                             </div>
                             <div style="font-weight:bold;align-self:center;" class="col col-md-auto">
-                                <RadzenLabel Text="Solo días habiles:" Component="checkBoxDiasHabiles" style="width: 100%">
+                                <RadzenLabel Text="Opera dias corridos:" Component="checkBoxDiasHabiles" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col col-md-auto">
-                                <RadzenCheckBox TriState="false" Disabled="@estaProcesando" @bind-Value=@SoloDiasHabiles Name="checkBoxDiasHabiles" />
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div style="font-weight:bold;align-self:center;" class="col col-md-2">
-                                <RadzenLabel Text="Fecha hasta:" Component="fechaHastaDatePicker" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col col-md-3">
-                                <RadzenDatePicker @bind-Value=@agendaTurnoABM.FechaHasta Min="@agendaTurnoABM.FechaDesde" Name="fechaHastaDatePicker" Disabled="@estaProcesando" DateFormat="dd/MM/yyyy" Class="w-100" />
-                                <RadzenCompareValidator Value="@agendaTurnoABM.FechaDesde" Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="La fecha hasta debe ser mayor o igual a la fecha desde" Style="position: inherit" />
+                                <RadzenCheckBox TriState="false" Disabled="true" @bind-Value=@ChkDiasCorridos Name="checkBoxDiasHabiles" />
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
@@ -233,15 +225,22 @@
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div style="font-weight:bold;align-self:center;" class="col col-md-2">
-                                <RadzenLabel Text="Esquema:" Component="esquemaDropDown" style="width: 100%">
+                                <RadzenLabel Text="Fecha desde:" Component="fechaDesdeDatePicker" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col col-md-3">
-                                <RadzenDropDown AllowClear="false" Name="esquemaDropDown" TValue="Int64?" Disabled="@estaProcesando" @bind-Value="@(agendaTurnoABM.EsquemaTurnoId)"
-                                Data=@dataEsquemaTurnos TextProperty="Nombre" ValueProperty="Id" />
-                                <br>
-                                <RadzenRequiredValidator Component="esquemaDropDown" Text="Esquema is required" Style="position: absolute; margin-top: -2%">
-                                </RadzenRequiredValidator>
+                                <RadzenDatePicker @bind-Value=@agendaTurnoABM.FechaDesde Max="@agendaTurnoABM.FechaHasta" Name="fechaDesdeDatePicker" Disabled="@estaProcesando" DateFormat="dd/MM/yyyy" Class="w-100" />
+                                <RadzenCompareValidator Value="@agendaTurnoABM.FechaHasta" Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="La fecha desde debe ser menor o igual a la fecha hasta" Style="position: inherit" />
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div style="font-weight:bold;align-self:center;" class="col col-md-2">
+                                <RadzenLabel Text="Fecha hasta:" Component="fechaHastaDatePicker" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col col-md-3">
+                                <RadzenDatePicker @bind-Value=@agendaTurnoABM.FechaHasta Min="@agendaTurnoABM.FechaDesde" Name="fechaHastaDatePicker" Disabled="@estaProcesando" DateFormat="dd/MM/yyyy" Class="w-100" />
+                                <RadzenCompareValidator Value="@agendaTurnoABM.FechaDesde" Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="La fecha hasta debe ser mayor o igual a la fecha desde" Style="position: inherit" />
                             </div>
                         </div>
                         <span style="font-weight:bold;align-self:center;">Seleccione las sucursales/sectores afectados:</span>
@@ -502,7 +501,7 @@ else
     /// Variables to handle column filter for field Banco.Habilitado
     private bool? Habilitado_filter;
 
-    private bool SoloDiasHabiles = false;
+    private bool ChkDiasCorridos = false;
 
     /// <summary>
     /// Variables to handle main entity
@@ -643,6 +642,7 @@ else
     private async void Add()
     {
         //Main entity initialization
+        dataArbolAgenda = new();
         AgendaTurno_entity = new();
         //Relations entities initialization
         EsquemaDetalleTurno_EsquemaDetalleTurnoId_entity = new();
@@ -650,18 +650,13 @@ else
         Usuario_UsuarioCreacion_entity = new();
         Usuario_UsuarioModificacion_entity = new();
         agendaTurnoABM = new();
-        SoloDiasHabiles = false;
-        await Task.Run(ObtenerDataArbolAgenda);
+        ChkDiasCorridos = false;
         crudMode = CrudMode.Add;
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "TurnoAgendaTurnoCrud", crudMode.ToString(), dataUsuario.Id);
         StateHasChanged();
     }
 
-    private void ObtenerDataArbolAgenda()
-    {
-        dataArbolAgenda = TurnoController.ObtenerArbolTurnos();
-    }
 
     /// <summary>
     /// <summary>
@@ -785,7 +780,7 @@ else
                         else
                         {
                             string resultado = "";
-                            resultado = Task.Run(() => TurnoController.GuardarAgenda(agendaTurnoABM, SoloDiasHabiles)).Result;
+                            resultado = Task.Run(() => TurnoController.GuardarAgenda(agendaTurnoABM, ChkDiasCorridos)).Result;
 
                             if (resultado == "")
                             {
@@ -825,7 +820,7 @@ else
 
                     bool existenciaTurnoPrevio = false;
 
-                    if(FechaAnterior != AgendaTurno_entity.Fecha || SectorAnterior != AgendaTurno_entity.SectorId)
+                    if (FechaAnterior != AgendaTurno_entity.Fecha || SectorAnterior != AgendaTurno_entity.SectorId)
                         existenciaTurnoPrevio = TurnoController.ValidarExistenciaTurnos(AgendaTurno_entity.SectorId, AgendaTurno_entity.Fecha);
 
                     if (!existenciaTurnoPrevio)
@@ -1093,6 +1088,22 @@ else
         {
             selectedFilter_UsuarioModificacion = null;
         }
+    }
+
+    /// <summary>
+    /// EsquemaTurno value changed
+    /// </summary>
+    /// <param name="item"></param>
+    private void OnSelected_EsquemaTurno_Changed(Int64? value)
+    {
+        //Quite el binding y lo hice con el evento, porque necesito saber cuando ocurre el cambio.
+        agendaTurnoABM.EsquemaTurnoId = value;
+
+        var esquemaTurnoSeleccionado = dataEsquemaTurnos.FirstOrDefault(x => x.Id == value.Value);
+        ChkDiasCorridos = !esquemaTurnoSeleccionado.OperaDiasCorridos;
+
+        //Recargamos el arbol trayendo empresas en funcion de si el esquema opera con o sin turno.
+        dataArbolAgenda = TurnoController.ObtenerArbolTurnos(esquemaTurnoSeleccionado.OperaSinTurno);
     }
 
     /// <summary>

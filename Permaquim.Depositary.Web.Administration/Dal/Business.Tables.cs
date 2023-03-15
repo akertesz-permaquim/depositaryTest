@@ -79,12 +79,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Aplicacion.Configuracion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Aplicacion.Configuracion>().ToList<Entities.Tables.Aplicacion.Configuracion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Aplicacion.Configuracion>().ToList<Entities.Tables.Aplicacion.Configuracion>();
                 return _entities;
             }
             /// <summary>
@@ -325,11 +325,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -478,12 +477,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Aplicacion.ConfiguracionEmpresa> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Tables.Aplicacion.ConfiguracionEmpresa>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionEmpresa>().ToList<Entities.Tables.Aplicacion.ConfiguracionEmpresa>();
                 return _entities;
             }
             /// <summary>
@@ -724,11 +723,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -871,12 +869,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Aplicacion.ConfiguracionTipoDato> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionTipoDato>().ToList<Entities.Tables.Aplicacion.ConfiguracionTipoDato>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionTipoDato>().ToList<Entities.Tables.Aplicacion.ConfiguracionTipoDato>();
                 return _entities;
             }
             /// <summary>
@@ -1075,11 +1073,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -1226,12 +1223,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Aplicacion.ConfiguracionValidacionDato> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionValidacionDato>().ToList<Entities.Tables.Aplicacion.ConfiguracionValidacionDato>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Aplicacion.ConfiguracionValidacionDato>().ToList<Entities.Tables.Aplicacion.ConfiguracionValidacionDato>();
                 return _entities;
             }
             /// <summary>
@@ -1458,11 +1455,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -1607,12 +1603,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Auditoria.Log> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Auditoria.Log>().ToList<Entities.Tables.Auditoria.Log>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Auditoria.Log>().ToList<Entities.Tables.Auditoria.Log>();
                 return _entities;
             }
             /// <summary>
@@ -1825,11 +1821,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -1972,12 +1967,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Auditoria.TipoLog> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Auditoria.TipoLog>().ToList<Entities.Tables.Auditoria.TipoLog>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Auditoria.TipoLog>().ToList<Entities.Tables.Auditoria.TipoLog>();
                 return _entities;
             }
             /// <summary>
@@ -2176,11 +2171,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -2327,12 +2321,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Banca.Banco> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Banca.Banco>().ToList<Entities.Tables.Banca.Banco>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Banca.Banco>().ToList<Entities.Tables.Banca.Banco>();
                 return _entities;
             }
             /// <summary>
@@ -2559,11 +2553,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -2718,12 +2711,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Banca.Cuenta> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Banca.Cuenta>().ToList<Entities.Tables.Banca.Cuenta>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Banca.Cuenta>().ToList<Entities.Tables.Banca.Cuenta>();
                 return _entities;
             }
             /// <summary>
@@ -3006,11 +2999,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -3155,12 +3147,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Banca.TipoCuenta> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Banca.TipoCuenta>().ToList<Entities.Tables.Banca.TipoCuenta>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Banca.TipoCuenta>().ToList<Entities.Tables.Banca.TipoCuenta>();
                 return _entities;
             }
             /// <summary>
@@ -3373,11 +3365,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -3520,12 +3511,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Banca.UsuarioCuenta> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Banca.UsuarioCuenta>().ToList<Entities.Tables.Banca.UsuarioCuenta>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Banca.UsuarioCuenta>().ToList<Entities.Tables.Banca.UsuarioCuenta>();
                 return _entities;
             }
             /// <summary>
@@ -3724,11 +3715,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -3873,12 +3863,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Biometria.HuellaDactilar> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Biometria.HuellaDactilar>().ToList<Entities.Tables.Biometria.HuellaDactilar>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Biometria.HuellaDactilar>().ToList<Entities.Tables.Biometria.HuellaDactilar>();
                 return _entities;
             }
             /// <summary>
@@ -4091,11 +4081,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -4256,12 +4245,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Customizador.Entidad> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Customizador.Entidad>().ToList<Entities.Tables.Customizador.Entidad>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Customizador.Entidad>().ToList<Entities.Tables.Customizador.Entidad>();
                 return _entities;
             }
             /// <summary>
@@ -4586,11 +4575,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -4753,12 +4741,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Customizador.EntidadAtributo> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Customizador.EntidadAtributo>().ToList<Entities.Tables.Customizador.EntidadAtributo>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Customizador.EntidadAtributo>().ToList<Entities.Tables.Customizador.EntidadAtributo>();
                 return _entities;
             }
             /// <summary>
@@ -5097,11 +5085,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -5258,12 +5245,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Directorio.Empresa> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Directorio.Empresa>().ToList<Entities.Tables.Directorio.Empresa>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Directorio.Empresa>().ToList<Entities.Tables.Directorio.Empresa>();
                 return _entities;
             }
             /// <summary>
@@ -5560,11 +5547,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -5709,12 +5695,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Directorio.Grupo> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Directorio.Grupo>().ToList<Entities.Tables.Directorio.Grupo>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Directorio.Grupo>().ToList<Entities.Tables.Directorio.Grupo>();
                 return _entities;
             }
             /// <summary>
@@ -5927,11 +5913,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -6076,12 +6061,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Directorio.RelacionMonedaSucursal> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Directorio.RelacionMonedaSucursal>().ToList<Entities.Tables.Directorio.RelacionMonedaSucursal>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Directorio.RelacionMonedaSucursal>().ToList<Entities.Tables.Directorio.RelacionMonedaSucursal>();
                 return _entities;
             }
             /// <summary>
@@ -6294,11 +6279,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -6443,12 +6427,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Directorio.Sector> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Directorio.Sector>().ToList<Entities.Tables.Directorio.Sector>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Directorio.Sector>().ToList<Entities.Tables.Directorio.Sector>();
                 return _entities;
             }
             /// <summary>
@@ -6661,11 +6645,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -6818,12 +6801,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Directorio.Sucursal> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Directorio.Sucursal>().ToList<Entities.Tables.Directorio.Sucursal>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Directorio.Sucursal>().ToList<Entities.Tables.Directorio.Sucursal>();
                 return _entities;
             }
             /// <summary>
@@ -7092,11 +7075,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -7247,12 +7229,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.ComandoContadora> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.ComandoContadora>().ToList<Entities.Tables.Dispositivo.ComandoContadora>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.ComandoContadora>().ToList<Entities.Tables.Dispositivo.ComandoContadora>();
                 return _entities;
             }
             /// <summary>
@@ -7507,11 +7489,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -7662,12 +7643,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.ComandoPlaca> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.ComandoPlaca>().ToList<Entities.Tables.Dispositivo.ComandoPlaca>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.ComandoPlaca>().ToList<Entities.Tables.Dispositivo.ComandoPlaca>();
                 return _entities;
             }
             /// <summary>
@@ -7922,11 +7903,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -8071,12 +8051,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.ConfiguracionDepositario> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.ConfiguracionDepositario>().ToList<Entities.Tables.Dispositivo.ConfiguracionDepositario>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.ConfiguracionDepositario>().ToList<Entities.Tables.Dispositivo.ConfiguracionDepositario>();
                 return _entities;
             }
             /// <summary>
@@ -8289,11 +8269,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -8446,12 +8425,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.Depositario> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.Depositario>().ToList<Entities.Tables.Dispositivo.Depositario>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.Depositario>().ToList<Entities.Tables.Dispositivo.Depositario>();
                 return _entities;
             }
             /// <summary>
@@ -8720,11 +8699,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -8891,12 +8869,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.DepositarioContadora> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioContadora>().ToList<Entities.Tables.Dispositivo.DepositarioContadora>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.DepositarioContadora>().ToList<Entities.Tables.Dispositivo.DepositarioContadora>();
                 return _entities;
             }
             /// <summary>
@@ -9263,11 +9241,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -9416,12 +9393,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.DepositarioEstado> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioEstado>().ToList<Entities.Tables.Dispositivo.DepositarioEstado>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.DepositarioEstado>().ToList<Entities.Tables.Dispositivo.DepositarioEstado>();
                 return _entities;
             }
             /// <summary>
@@ -9662,11 +9639,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -9811,12 +9787,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.DepositarioMoneda> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioMoneda>().ToList<Entities.Tables.Dispositivo.DepositarioMoneda>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.DepositarioMoneda>().ToList<Entities.Tables.Dispositivo.DepositarioMoneda>();
                 return _entities;
             }
             /// <summary>
@@ -10029,11 +10005,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -10218,12 +10193,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.DepositarioPlaca> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.DepositarioPlaca>().ToList<Entities.Tables.Dispositivo.DepositarioPlaca>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.DepositarioPlaca>().ToList<Entities.Tables.Dispositivo.DepositarioPlaca>();
                 return _entities;
             }
             /// <summary>
@@ -10716,11 +10691,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -10863,12 +10837,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.Marca> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.Marca>().ToList<Entities.Tables.Dispositivo.Marca>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.Marca>().ToList<Entities.Tables.Dispositivo.Marca>();
                 return _entities;
             }
             /// <summary>
@@ -11067,11 +11041,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -11220,12 +11193,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.Modelo> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.Modelo>().ToList<Entities.Tables.Dispositivo.Modelo>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.Modelo>().ToList<Entities.Tables.Dispositivo.Modelo>();
                 return _entities;
             }
             /// <summary>
@@ -11466,11 +11439,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -11613,12 +11585,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.PlantillaMoneda> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.PlantillaMoneda>().ToList<Entities.Tables.Dispositivo.PlantillaMoneda>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.PlantillaMoneda>().ToList<Entities.Tables.Dispositivo.PlantillaMoneda>();
                 return _entities;
             }
             /// <summary>
@@ -11817,11 +11789,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -11970,12 +11941,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.PlantillaMonedaDetalle> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>().ToList<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>().ToList<Entities.Tables.Dispositivo.PlantillaMonedaDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -12216,11 +12187,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -12369,12 +12339,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.TipoConfiguracionDepositario> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.TipoConfiguracionDepositario>().ToList<Entities.Tables.Dispositivo.TipoConfiguracionDepositario>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.TipoConfiguracionDepositario>().ToList<Entities.Tables.Dispositivo.TipoConfiguracionDepositario>();
                 return _entities;
             }
             /// <summary>
@@ -12615,11 +12585,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -12786,12 +12755,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.TipoContadora> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.TipoContadora>().ToList<Entities.Tables.Dispositivo.TipoContadora>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.TipoContadora>().ToList<Entities.Tables.Dispositivo.TipoContadora>();
                 return _entities;
             }
             /// <summary>
@@ -13158,11 +13127,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -13349,12 +13317,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Dispositivo.TipoPlaca> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Dispositivo.TipoPlaca>().ToList<Entities.Tables.Dispositivo.TipoPlaca>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Dispositivo.TipoPlaca>().ToList<Entities.Tables.Dispositivo.TipoPlaca>();
                 return _entities;
             }
             /// <summary>
@@ -13861,11 +13829,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -14010,12 +13977,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Estilo.Esquema> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Estilo.Esquema>().ToList<Entities.Tables.Estilo.Esquema>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Estilo.Esquema>().ToList<Entities.Tables.Estilo.Esquema>();
                 return _entities;
             }
             /// <summary>
@@ -14228,11 +14195,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -14385,12 +14351,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Estilo.EsquemaDetalle> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Estilo.EsquemaDetalle>().ToList<Entities.Tables.Estilo.EsquemaDetalle>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Estilo.EsquemaDetalle>().ToList<Entities.Tables.Estilo.EsquemaDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -14659,11 +14625,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -14806,12 +14771,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Estilo.TipoEsquemaDetalle> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Estilo.TipoEsquemaDetalle>().ToList<Entities.Tables.Estilo.TipoEsquemaDetalle>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Estilo.TipoEsquemaDetalle>().ToList<Entities.Tables.Estilo.TipoEsquemaDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -15010,11 +14975,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -15161,12 +15125,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Geografia.Ciudad> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Geografia.Ciudad>().ToList<Entities.Tables.Geografia.Ciudad>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Geografia.Ciudad>().ToList<Entities.Tables.Geografia.Ciudad>();
                 return _entities;
             }
             /// <summary>
@@ -15393,11 +15357,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -15544,12 +15507,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Geografia.CodigoPostal> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Geografia.CodigoPostal>().ToList<Entities.Tables.Geografia.CodigoPostal>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Geografia.CodigoPostal>().ToList<Entities.Tables.Geografia.CodigoPostal>();
                 return _entities;
             }
             /// <summary>
@@ -15776,11 +15739,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -15927,12 +15889,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Geografia.Pais> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Geografia.Pais>().ToList<Entities.Tables.Geografia.Pais>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Geografia.Pais>().ToList<Entities.Tables.Geografia.Pais>();
                 return _entities;
             }
             /// <summary>
@@ -16159,11 +16121,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -16310,12 +16271,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Geografia.Provincia> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Geografia.Provincia>().ToList<Entities.Tables.Geografia.Provincia>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Geografia.Provincia>().ToList<Entities.Tables.Geografia.Provincia>();
                 return _entities;
             }
             /// <summary>
@@ -16542,11 +16503,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -16691,12 +16651,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Geografia.Zona> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Geografia.Zona>().ToList<Entities.Tables.Geografia.Zona>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Geografia.Zona>().ToList<Entities.Tables.Geografia.Zona>();
                 return _entities;
             }
             /// <summary>
@@ -16909,11 +16869,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -17084,12 +17043,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Impresion.PlantillaTicket> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Impresion.PlantillaTicket>().ToList<Entities.Tables.Impresion.PlantillaTicket>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Impresion.PlantillaTicket>().ToList<Entities.Tables.Impresion.PlantillaTicket>();
                 return _entities;
             }
             /// <summary>
@@ -17484,11 +17443,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -17671,12 +17629,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Impresion.Ticket> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Impresion.Ticket>().ToList<Entities.Tables.Impresion.Ticket>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Impresion.Ticket>().ToList<Entities.Tables.Impresion.Ticket>();
                 return _entities;
             }
             /// <summary>
@@ -18155,11 +18113,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -18304,12 +18261,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Impresion.TipoTicket> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Impresion.TipoTicket>().ToList<Entities.Tables.Impresion.TipoTicket>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Impresion.TipoTicket>().ToList<Entities.Tables.Impresion.TipoTicket>();
                 return _entities;
             }
             /// <summary>
@@ -18522,11 +18479,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -18673,12 +18629,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.CierreDiario> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.CierreDiario>().ToList<Entities.Tables.Operacion.CierreDiario>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.CierreDiario>().ToList<Entities.Tables.Operacion.CierreDiario>();
                 return _entities;
             }
             /// <summary>
@@ -18905,11 +18861,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -19060,12 +19015,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.Contenedor> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.Contenedor>().ToList<Entities.Tables.Operacion.Contenedor>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.Contenedor>().ToList<Entities.Tables.Operacion.Contenedor>();
                 return _entities;
             }
             /// <summary>
@@ -19320,11 +19275,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -19465,12 +19419,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.Evento> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.Evento>().ToList<Entities.Tables.Operacion.Evento>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.Evento>().ToList<Entities.Tables.Operacion.Evento>();
                 return _entities;
             }
             /// <summary>
@@ -19655,11 +19609,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -19798,12 +19751,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.Sesion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.Sesion>().ToList<Entities.Tables.Operacion.Sesion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.Sesion>().ToList<Entities.Tables.Operacion.Sesion>();
                 return _entities;
             }
             /// <summary>
@@ -19974,11 +19927,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -20123,12 +20075,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.TipoContenedor> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.TipoContenedor>().ToList<Entities.Tables.Operacion.TipoContenedor>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.TipoContenedor>().ToList<Entities.Tables.Operacion.TipoContenedor>();
                 return _entities;
             }
             /// <summary>
@@ -20341,11 +20293,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -20490,12 +20441,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.TipoEvento> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.TipoEvento>().ToList<Entities.Tables.Operacion.TipoEvento>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.TipoEvento>().ToList<Entities.Tables.Operacion.TipoEvento>();
                 return _entities;
             }
             /// <summary>
@@ -20708,11 +20659,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -20857,12 +20807,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.TipoTransaccion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.TipoTransaccion>().ToList<Entities.Tables.Operacion.TipoTransaccion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.TipoTransaccion>().ToList<Entities.Tables.Operacion.TipoTransaccion>();
                 return _entities;
             }
             /// <summary>
@@ -21075,11 +21025,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -21177,7 +21126,11 @@ using System.Text;
 					Finalizada,
 					EsDepositoAutomatico,
 					OrigenValorId,
-					CodigoOperacion
+					CodigoOperacion,
+					FechaCreacion,
+					FechaModificacion,
+					UsuarioCreacion,
+					UsuarioModificacion
 				}
          protected List<Entities.Tables.Operacion.Transaccion> _entities = new List<Entities.Tables.Operacion.Transaccion>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -21237,19 +21190,23 @@ using System.Text;
          /// <param name='EsDepositoAutomatico'></param>
          /// <param name='OrigenValorId'></param>
          /// <param name='CodigoOperacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <param name='UsuarioCreacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <returns>Entities.Tables.Operacion.Transaccion</returns>
-			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion) 
+			public Entities.Tables.Operacion.Transaccion Add(Int64 TipoId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 MonedaId,Int64 UsuarioId,Int64? CuentaId,Int64 ContenedorId,Int64? SesionId,Int64 TurnoId,Int64? CierreDiarioId,Double TotalValidado,Double TotalAValidar,DateTime Fecha,Boolean Finalizada,Boolean EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion,DateTime FechaCreacion,DateTime? FechaModificacion,Int64 UsuarioCreacion,Int64? UsuarioModificacion) 
 			{
-			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,CuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico,OrigenValorId,CodigoOperacion));
+			  return (Entities.Tables.Operacion.Transaccion)base.Add(new Entities.Tables.Operacion.Transaccion(TipoId,DepositarioId,SectorId,SucursalId,MonedaId,UsuarioId,CuentaId,ContenedorId,SesionId,TurnoId,CierreDiarioId,TotalValidado,TotalAValidar,Fecha,Finalizada,EsDepositoAutomatico,OrigenValorId,CodigoOperacion,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion));
 			}
             public new List<Entities.Tables.Operacion.Transaccion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.Transaccion>().ToList<Entities.Tables.Operacion.Transaccion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.Transaccion>().ToList<Entities.Tables.Operacion.Transaccion>();
                 return _entities;
             }
             /// <summary>
@@ -21292,8 +21249,12 @@ using System.Text;
             /// <param name="EsDepositoAutomatico"></param>
             /// <param name="OrigenValorId"></param>
             /// <param name="CodigoOperacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? CuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion)
+            public List<Entities.Tables.Operacion.Transaccion> Items(Int64? Id,Int64? TipoId,Int64? DepositarioId,Int64? SectorId,Int64? SucursalId,Int64? MonedaId,Int64? UsuarioId,Int64? CuentaId,Int64? ContenedorId,Int64? SesionId,Int64? TurnoId,Int64? CierreDiarioId,Double? TotalValidado,Double? TotalAValidar,DateTime? Fecha,Boolean? Finalizada,Boolean? EsDepositoAutomatico,Int64? OrigenValorId,String CodigoOperacion,DateTime? FechaCreacion,DateTime? FechaModificacion,Int64? UsuarioCreacion,Int64? UsuarioModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -21524,6 +21485,54 @@ using System.Text;
                     }
                    
                 }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaCreacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaModificacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioCreacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.UsuarioModificacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
                 return this.Items();
             }
             /// <summary>
@@ -21582,10 +21591,14 @@ using System.Text;
             /// <param name="EsDepositoAutomatico"></param>
             /// <param name="OrigenValorId"></param>
             /// <param name="CodigoOperacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? cuentaid,Int64 contenedorid,Int64? sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64? origenvalorid,String codigooperacion)
+            public Int64 Update(Int64 id,Int64 tipoid,Int64 depositarioid,Int64 sectorid,Int64 sucursalid,Int64 monedaid,Int64 usuarioid,Int64? cuentaid,Int64 contenedorid,Int64? sesionid,Int64 turnoid,Int64? cierrediarioid,Double totalvalidado,Double totalavalidar,DateTime fecha,Boolean finalizada,Boolean esdepositoautomatico,Int64? origenvalorid,String codigooperacion,DateTime fechacreacion,DateTime? fechamodificacion,Int64 usuariocreacion,Int64? usuariomodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,CuentaId = cuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico,OrigenValorId = origenvalorid,CodigoOperacion = codigooperacion});
+                return base.Update((IDataItem) new Entities.Tables.Operacion.Transaccion {Id = id,TipoId = tipoid,DepositarioId = depositarioid,SectorId = sectorid,SucursalId = sucursalid,MonedaId = monedaid,UsuarioId = usuarioid,CuentaId = cuentaid,ContenedorId = contenedorid,SesionId = sesionid,TurnoId = turnoid,CierreDiarioId = cierrediarioid,TotalValidado = totalvalidado,TotalAValidar = totalavalidar,Fecha = fecha,Finalizada = finalizada,EsDepositoAutomatico = esdepositoautomatico,OrigenValorId = origenvalorid,CodigoOperacion = codigooperacion,FechaCreacion = fechacreacion,FechaModificacion = fechamodificacion,UsuarioCreacion = usuariocreacion,UsuarioModificacion = usuariomodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Operacion.Transaccion
@@ -21602,11 +21615,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -21743,12 +21755,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.TransaccionDetalle> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.TransaccionDetalle>().ToList<Entities.Tables.Operacion.TransaccionDetalle>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.TransaccionDetalle>().ToList<Entities.Tables.Operacion.TransaccionDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -21905,11 +21917,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -22044,12 +22055,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.TransaccionSobre> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.TransaccionSobre>().ToList<Entities.Tables.Operacion.TransaccionSobre>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.TransaccionSobre>().ToList<Entities.Tables.Operacion.TransaccionSobre>();
                 return _entities;
             }
             /// <summary>
@@ -22192,11 +22203,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -22335,12 +22345,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.TransaccionSobreDetalle> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.TransaccionSobreDetalle>().ToList<Entities.Tables.Operacion.TransaccionSobreDetalle>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.TransaccionSobreDetalle>().ToList<Entities.Tables.Operacion.TransaccionSobreDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -22511,11 +22521,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -22674,12 +22683,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.Turno> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.Turno>().ToList<Entities.Tables.Operacion.Turno>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.Turno>().ToList<Entities.Tables.Operacion.Turno>();
                 return _entities;
             }
             /// <summary>
@@ -22990,11 +22999,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -23137,12 +23145,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Operacion.TurnoUsuario> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Operacion.TurnoUsuario>().ToList<Entities.Tables.Operacion.TurnoUsuario>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Operacion.TurnoUsuario>().ToList<Entities.Tables.Operacion.TurnoUsuario>();
                 return _entities;
             }
             /// <summary>
@@ -23341,11 +23349,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -23492,12 +23499,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Regionalizacion.Lenguaje> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Regionalizacion.Lenguaje>().ToList<Entities.Tables.Regionalizacion.Lenguaje>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Regionalizacion.Lenguaje>().ToList<Entities.Tables.Regionalizacion.Lenguaje>();
                 return _entities;
             }
             /// <summary>
@@ -23724,11 +23731,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -23875,12 +23881,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Regionalizacion.LenguajeItem> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Regionalizacion.LenguajeItem>().ToList<Entities.Tables.Regionalizacion.LenguajeItem>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Regionalizacion.LenguajeItem>().ToList<Entities.Tables.Regionalizacion.LenguajeItem>();
                 return _entities;
             }
             /// <summary>
@@ -24107,11 +24113,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -24256,12 +24261,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.Aplicacion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.Aplicacion>().ToList<Entities.Tables.Seguridad.Aplicacion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.Aplicacion>().ToList<Entities.Tables.Seguridad.Aplicacion>();
                 return _entities;
             }
             /// <summary>
@@ -24474,11 +24479,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -24621,12 +24625,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.AplicacionParametro> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.AplicacionParametro>().ToList<Entities.Tables.Seguridad.AplicacionParametro>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.AplicacionParametro>().ToList<Entities.Tables.Seguridad.AplicacionParametro>();
                 return _entities;
             }
             /// <summary>
@@ -24825,11 +24829,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -24974,12 +24977,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.AplicacionParametroValor> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.AplicacionParametroValor>().ToList<Entities.Tables.Seguridad.AplicacionParametroValor>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.AplicacionParametroValor>().ToList<Entities.Tables.Seguridad.AplicacionParametroValor>();
                 return _entities;
             }
             /// <summary>
@@ -25192,11 +25195,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -25345,12 +25347,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.Funcion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.Funcion>().ToList<Entities.Tables.Seguridad.Funcion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.Funcion>().ToList<Entities.Tables.Seguridad.Funcion>();
                 return _entities;
             }
             /// <summary>
@@ -25591,11 +25593,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -25740,12 +25741,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.IdentificadorUsuario> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.IdentificadorUsuario>().ToList<Entities.Tables.Seguridad.IdentificadorUsuario>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.IdentificadorUsuario>().ToList<Entities.Tables.Seguridad.IdentificadorUsuario>();
                 return _entities;
             }
             /// <summary>
@@ -25958,11 +25959,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -26113,12 +26113,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.Menu> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.Menu>().ToList<Entities.Tables.Seguridad.Menu>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.Menu>().ToList<Entities.Tables.Seguridad.Menu>();
                 return _entities;
             }
             /// <summary>
@@ -26373,11 +26373,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -26524,12 +26523,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.Rol> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.Rol>().ToList<Entities.Tables.Seguridad.Rol>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.Rol>().ToList<Entities.Tables.Seguridad.Rol>();
                 return _entities;
             }
             /// <summary>
@@ -26756,11 +26755,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -26913,12 +26911,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.RolFuncion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.RolFuncion>().ToList<Entities.Tables.Seguridad.RolFuncion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.RolFuncion>().ToList<Entities.Tables.Seguridad.RolFuncion>();
                 return _entities;
             }
             /// <summary>
@@ -27187,11 +27185,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -27334,12 +27331,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.TipoAplicacion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoAplicacion>().ToList<Entities.Tables.Seguridad.TipoAplicacion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.TipoAplicacion>().ToList<Entities.Tables.Seguridad.TipoAplicacion>();
                 return _entities;
             }
             /// <summary>
@@ -27538,11 +27535,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -27685,12 +27681,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.TipoFuncion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoFuncion>().ToList<Entities.Tables.Seguridad.TipoFuncion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.TipoFuncion>().ToList<Entities.Tables.Seguridad.TipoFuncion>();
                 return _entities;
             }
             /// <summary>
@@ -27889,11 +27885,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -28038,12 +28033,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.TipoIdentificador> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoIdentificador>().ToList<Entities.Tables.Seguridad.TipoIdentificador>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.TipoIdentificador>().ToList<Entities.Tables.Seguridad.TipoIdentificador>();
                 return _entities;
             }
             /// <summary>
@@ -28256,11 +28251,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -28403,12 +28397,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.TipoMenu> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.TipoMenu>().ToList<Entities.Tables.Seguridad.TipoMenu>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.TipoMenu>().ToList<Entities.Tables.Seguridad.TipoMenu>();
                 return _entities;
             }
             /// <summary>
@@ -28607,11 +28601,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -28788,12 +28781,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.Usuario> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.Usuario>().ToList<Entities.Tables.Seguridad.Usuario>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.Usuario>().ToList<Entities.Tables.Seguridad.Usuario>();
                 return _entities;
             }
             /// <summary>
@@ -29230,11 +29223,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -29377,12 +29369,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.UsuarioRol> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.UsuarioRol>().ToList<Entities.Tables.Seguridad.UsuarioRol>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.UsuarioRol>().ToList<Entities.Tables.Seguridad.UsuarioRol>();
                 return _entities;
             }
             /// <summary>
@@ -29581,11 +29573,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -29728,12 +29719,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Seguridad.UsuarioSector> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Seguridad.UsuarioSector>().ToList<Entities.Tables.Seguridad.UsuarioSector>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Seguridad.UsuarioSector>().ToList<Entities.Tables.Seguridad.UsuarioSector>();
                 return _entities;
             }
             /// <summary>
@@ -29932,11 +29923,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -30079,12 +30069,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Sincronizacion.Configuracion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.Configuracion>().ToList<Entities.Tables.Sincronizacion.Configuracion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Sincronizacion.Configuracion>().ToList<Entities.Tables.Sincronizacion.Configuracion>();
                 return _entities;
             }
             /// <summary>
@@ -30283,11 +30273,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -30363,6 +30352,324 @@ using System.Text;
 	    /// <summary>
 	    /// 
 	    /// </summary>
+		public partial class Ejecucion : DataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					DepositarioId,
+					FechaInicio,
+					FechaFin,
+					Finalizada,
+					EsPrimeraSincronizacion
+				}
+         protected List<Entities.Tables.Sincronizacion.Ejecucion> _entities = new List<Entities.Tables.Sincronizacion.Ejecucion>();
+         protected List<IDataItem> _cacheItemList = new List<IDataItem>();
+         public WhereCollection Where = new WhereCollection();
+         public OrderByCollection OrderBy = new OrderByCollection();
+         public GroupByCollection GroupBy = new GroupByCollection();
+         public AggregateCollection Aggregate { get; set; }
+            public Ejecucion() : base()
+            {
+                base._dataItem = new Entities.Tables.Sincronizacion.Ejecucion();
+            }
+            public Ejecucion(IDataHandler dataHandler)
+                : base(dataHandler)
+            {
+                base._transaction = dataHandler.GetTransaction();
+                base._dataItem = new Entities.Tables.Sincronizacion.Ejecucion();
+            }
+            public class AggregateCollection : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositary.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Tables.Sincronizacion.Ejecucion item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// Ejecucion Add Method
+         /// </summary>
+         /// <param name='DepositarioId'></param>
+         /// <param name='FechaInicio'></param>
+         /// <param name='FechaFin'></param>
+         /// <param name='Finalizada'></param>
+         /// <param name='EsPrimeraSincronizacion'></param>
+         /// <returns>Entities.Tables.Sincronizacion.Ejecucion</returns>
+			public Entities.Tables.Sincronizacion.Ejecucion Add(Int64? DepositarioId,DateTime FechaInicio,DateTime? FechaFin,Boolean Finalizada,Boolean EsPrimeraSincronizacion) 
+			{
+			  return (Entities.Tables.Sincronizacion.Ejecucion)base.Add(new Entities.Tables.Sincronizacion.Ejecucion(DepositarioId,FechaInicio,FechaFin,Finalizada,EsPrimeraSincronizacion));
+			}
+            public new List<Entities.Tables.Sincronizacion.Ejecucion> Items()
+            {
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Sincronizacion.Ejecucion>().ToList<Entities.Tables.Sincronizacion.Ejecucion>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Sincronizacion.Ejecucion items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Sincronizacion.Ejecucion> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets Entities.Tables.Sincronizacion.Ejecucion items with parameters.
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="DepositarioId"></param>
+            /// <param name="FechaInicio"></param>
+            /// <param name="FechaFin"></param>
+            /// <param name="Finalizada"></param>
+            /// <param name="EsPrimeraSincronizacion"></param>
+            /// <returns></returns>
+            public List<Entities.Tables.Sincronizacion.Ejecucion> Items(Int64? Id,Int64? DepositarioId,DateTime? FechaInicio,DateTime? FechaFin,Boolean? Finalizada,Boolean? EsPrimeraSincronizacion)
+            {
+                this.Where.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (DepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
+                    }
+                   
+                }
+                if (FechaInicio != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaInicio, sqlEnum.OperandEnum.Equal, FechaInicio);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaInicio, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaInicio);
+                    }
+                   
+                }
+                if (FechaFin != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaFin, sqlEnum.OperandEnum.Equal, FechaFin);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.FechaFin, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, FechaFin);
+                    }
+                   
+                }
+                if (Finalizada != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Finalizada, sqlEnum.OperandEnum.Equal, Finalizada);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Finalizada, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Finalizada);
+                    }
+                   
+                }
+                if (EsPrimeraSincronizacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EsPrimeraSincronizacion, sqlEnum.OperandEnum.Equal, EsPrimeraSincronizacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EsPrimeraSincronizacion, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, EsPrimeraSincronizacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            /// <summary>
+            /// Adds an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Sincronizacion.Ejecucion Add(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                return (Entities.Tables.Sincronizacion.Ejecucion)base.Add((IDataItem)item);
+            }
+            /// <summary>
+            /// Adds or updates an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Entities.Tables.Sincronizacion.Ejecucion AddOrUpdate(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                 if (Items(item.Id).Count == 0)
+                 {
+                     return (Entities.Tables.Sincronizacion.Ejecucion)base.Add((IDataItem)item);
+                 }
+                 else
+                 {
+                     Update(item);
+                     return item;
+                 }
+             }
+            /// <summary>
+            /// Updates an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns><Int64/returns>
+            public Int64 Update(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Tables.Sincronizacion.Ejecucion with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="DepositarioId"></param>
+            /// <param name="FechaInicio"></param>
+            /// <param name="FechaFin"></param>
+            /// <param name="Finalizada"></param>
+            /// <param name="EsPrimeraSincronizacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 id,Int64? depositarioid,DateTime fechainicio,DateTime? fechafin,Boolean finalizada,Boolean esprimerasincronizacion)
+            {
+                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.Ejecucion {Id = id,DepositarioId = depositarioid,FechaInicio = fechainicio,FechaFin = fechafin,Finalizada = finalizada,EsPrimeraSincronizacion = esprimerasincronizacion});
+            }
+            /// <summary>
+            /// Deletes an instance of Entities.Tables.Sincronizacion.Ejecucion
+            /// </summary>
+            /// <param name="item"></param>
+            /// <returns></returns>
+            public Int64 Delete(Entities.Tables.Sincronizacion.Ejecucion item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// <summary>
+            /// Deletes Entities.Tables.Sincronizacion.Ejecucion with where conditions
+            /// </summary>
+            /// <returns></returns>
+            public new Int64 Delete()
+            {
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
+            }
+            /// <summary>
+            /// Deletes by Pks
+            /// </summary>
+            /// <returns></returns>
+            public Int64 Delete(Int64 id)
+            {
+                return base.DeleteItem((IDataItem) new Entities.Tables.Sincronizacion.Ejecucion {Id = id});
+            }
+            /// <summary>
+            /// Holds last Items() executed.
+            /// </summary>
+            /// <returns>Last Items()</returns>
+            public List<Entities.Tables.Sincronizacion.Ejecucion> Result
+            {
+                get{return _entities;}
+            }
+            public class WhereCollection : WhereParameter {
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand,object value)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositary.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void AddOperand(Permaquim.Depositary.sqlEnum.ConjunctionEnum Conjunction)
+                 {
+                     base.AddConjunction(Conjunction);
+                 }
+                 public void OpenParentheses()
+                 {
+                     base.OpenParentheses();
+                 }
+                 public void CloseParentheses()
+                 {
+                     base.CloseParentheses();
+                 }
+                 public void Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositary.sqlEnum.OperandEnum operand, object value)
+                 {
+                     base.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public new void Clear()
+                 {
+                     base.Clear();
+                 }
+                 public new long Count
+                 {
+                     get {
+                         return base.Count;
+                     }
+                 }
+            }
+            public class OrderByCollection : OrderByParameter {
+                 public void Add(ColumnEnum column, Permaquim.Depositary.sqlEnum.DirEnum direction = Permaquim.Depositary.sqlEnum.DirEnum.ASC)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+            }
+            public class GroupByCollection : GroupByParameter {
+                 public void Add(ColumnEnum column)
+                 {
+                     base.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+            }
+        } // class Ejecucion
+	} //namespace Permaquim.Depositary.Business.Tables.Sincronizacion
+	namespace Permaquim.Depositary.Business.Tables.Sincronizacion {
+	    /// <summary>
+	    /// 
+	    /// </summary>
 		public partial class Entidad : DataHandler
 		{
 				public enum ColumnEnum : int
@@ -30428,12 +30735,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Sincronizacion.Entidad> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.Entidad>().ToList<Entities.Tables.Sincronizacion.Entidad>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Sincronizacion.Entidad>().ToList<Entities.Tables.Sincronizacion.Entidad>();
                 return _entities;
             }
             /// <summary>
@@ -30618,11 +30925,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -30704,10 +31010,10 @@ using System.Text;
                 {
 					Id,
 					EntidadId,
-					DepositarioId,
 					Valor,
 					Fechainicio,
-					Fechafin
+					Fechafin,
+					EjecucionId
 				}
          protected List<Entities.Tables.Sincronizacion.EntidadCabecera> _entities = new List<Entities.Tables.Sincronizacion.EntidadCabecera>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -30750,23 +31056,23 @@ using System.Text;
          /// EntidadCabecera Add Method
          /// </summary>
          /// <param name='EntidadId'></param>
-         /// <param name='DepositarioId'></param>
          /// <param name='Valor'></param>
          /// <param name='Fechainicio'></param>
          /// <param name='Fechafin'></param>
+         /// <param name='EjecucionId'></param>
          /// <returns>Entities.Tables.Sincronizacion.EntidadCabecera</returns>
-			public Entities.Tables.Sincronizacion.EntidadCabecera Add(Int64 EntidadId,Int64? DepositarioId,String Valor,DateTime Fechainicio,DateTime? Fechafin) 
+			public Entities.Tables.Sincronizacion.EntidadCabecera Add(Int64 EntidadId,String Valor,DateTime Fechainicio,DateTime? Fechafin,Int64 EjecucionId) 
 			{
-			  return (Entities.Tables.Sincronizacion.EntidadCabecera)base.Add(new Entities.Tables.Sincronizacion.EntidadCabecera(EntidadId,DepositarioId,Valor,Fechainicio,Fechafin));
+			  return (Entities.Tables.Sincronizacion.EntidadCabecera)base.Add(new Entities.Tables.Sincronizacion.EntidadCabecera(EntidadId,Valor,Fechainicio,Fechafin,EjecucionId));
 			}
             public new List<Entities.Tables.Sincronizacion.EntidadCabecera> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.EntidadCabecera>().ToList<Entities.Tables.Sincronizacion.EntidadCabecera>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Sincronizacion.EntidadCabecera>().ToList<Entities.Tables.Sincronizacion.EntidadCabecera>();
                 return _entities;
             }
             /// <summary>
@@ -30792,12 +31098,12 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EntidadId"></param>
-            /// <param name="DepositarioId"></param>
             /// <param name="Valor"></param>
             /// <param name="Fechainicio"></param>
             /// <param name="Fechafin"></param>
+            /// <param name="EjecucionId"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Sincronizacion.EntidadCabecera> Items(Int64? Id,Int64? EntidadId,Int64? DepositarioId,String Valor,DateTime? Fechainicio,DateTime? Fechafin)
+            public List<Entities.Tables.Sincronizacion.EntidadCabecera> Items(Int64? Id,Int64? EntidadId,String Valor,DateTime? Fechainicio,DateTime? Fechafin,Int64? EjecucionId)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -30821,18 +31127,6 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EntidadId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, EntidadId);
-                    }
-                   
-                }
-                if (DepositarioId != null)
-                {
-                    if (this.Where.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.DepositarioId, sqlEnum.OperandEnum.Equal, DepositarioId);
-                    }
-                    else
-                    {
-                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.DepositarioId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DepositarioId);
                     }
                    
                 }
@@ -30869,6 +31163,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Fechafin, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Fechafin);
+                    }
+                   
+                }
+                if (EjecucionId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EjecucionId, sqlEnum.OperandEnum.Equal, EjecucionId);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.EjecucionId, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, EjecucionId);
                     }
                    
                 }
@@ -30913,14 +31219,14 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="EntidadId"></param>
-            /// <param name="DepositarioId"></param>
             /// <param name="Valor"></param>
             /// <param name="Fechainicio"></param>
             /// <param name="Fechafin"></param>
+            /// <param name="EjecucionId"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 entidadid,Int64? depositarioid,String valor,DateTime fechainicio,DateTime? fechafin)
+            public Int64 Update(Int64 id,Int64 entidadid,String valor,DateTime fechainicio,DateTime? fechafin,Int64 ejecucionid)
             {
-                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.EntidadCabecera {Id = id,EntidadId = entidadid,DepositarioId = depositarioid,Valor = valor,Fechainicio = fechainicio,Fechafin = fechafin});
+                return base.Update((IDataItem) new Entities.Tables.Sincronizacion.EntidadCabecera {Id = id,EntidadId = entidadid,Valor = valor,Fechainicio = fechainicio,Fechafin = fechafin,EjecucionId = ejecucionid});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Sincronizacion.EntidadCabecera
@@ -30937,11 +31243,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -31078,12 +31383,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Sincronizacion.EntidadDetalle> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Sincronizacion.EntidadDetalle>().ToList<Entities.Tables.Sincronizacion.EntidadDetalle>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Sincronizacion.EntidadDetalle>().ToList<Entities.Tables.Sincronizacion.EntidadDetalle>();
                 return _entities;
             }
             /// <summary>
@@ -31240,11 +31545,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -31393,12 +31697,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Turno.AgendaTurno> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Turno.AgendaTurno>().ToList<Entities.Tables.Turno.AgendaTurno>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Turno.AgendaTurno>().ToList<Entities.Tables.Turno.AgendaTurno>();
                 return _entities;
             }
             /// <summary>
@@ -31639,11 +31943,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -31788,12 +32091,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Turno.EsquemaDetalleTurno> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Turno.EsquemaDetalleTurno>().ToList<Entities.Tables.Turno.EsquemaDetalleTurno>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Turno.EsquemaDetalleTurno>().ToList<Entities.Tables.Turno.EsquemaDetalleTurno>();
                 return _entities;
             }
             /// <summary>
@@ -32006,11 +32309,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -32096,7 +32398,9 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					OperaSinTurno,
+					OperaDiasCorridos
 				}
          protected List<Entities.Tables.Turno.EsquemaTurno> _entities = new List<Entities.Tables.Turno.EsquemaTurno>();
          protected List<IDataItem> _cacheItemList = new List<IDataItem>();
@@ -32144,19 +32448,21 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='OperaSinTurno'></param>
+         /// <param name='OperaDiasCorridos'></param>
          /// <returns>Entities.Tables.Turno.EsquemaTurno</returns>
-			public Entities.Tables.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos) 
 			{
-			  return (Entities.Tables.Turno.EsquemaTurno)base.Add(new Entities.Tables.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Turno.EsquemaTurno)base.Add(new Entities.Tables.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,OperaSinTurno,OperaDiasCorridos));
 			}
             public new List<Entities.Tables.Turno.EsquemaTurno> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Turno.EsquemaTurno>().ToList<Entities.Tables.Turno.EsquemaTurno>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Turno.EsquemaTurno>().ToList<Entities.Tables.Turno.EsquemaTurno>();
                 return _entities;
             }
             /// <summary>
@@ -32187,8 +32493,10 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="OperaSinTurno"></param>
+            /// <param name="OperaDiasCorridos"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean? OperaSinTurno,Boolean? OperaDiasCorridos)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -32275,6 +32583,30 @@ using System.Text;
                     }
                    
                 }
+                if (OperaSinTurno != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperaSinTurno, sqlEnum.OperandEnum.Equal, OperaSinTurno);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.OperaSinTurno, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, OperaSinTurno);
+                    }
+                   
+                }
+                if (OperaDiasCorridos != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperaDiasCorridos, sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.OperaDiasCorridos, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
+                    }
+                   
+                }
                 return this.Items();
             }
             /// <summary>
@@ -32321,10 +32653,12 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="OperaSinTurno"></param>
+            /// <param name="OperaDiasCorridos"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String nombre,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String nombre,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion,Boolean operasinturno,Boolean operadiascorridos)
             {
-                return base.Update((IDataItem) new Entities.Tables.Turno.EsquemaTurno {Id = id,Nombre = nombre,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Turno.EsquemaTurno {Id = id,Nombre = nombre,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion,OperaSinTurno = operasinturno,OperaDiasCorridos = operadiascorridos});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Turno.EsquemaTurno
@@ -32341,11 +32675,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -32498,12 +32831,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Valor.Denominacion> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Valor.Denominacion>().ToList<Entities.Tables.Valor.Denominacion>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Valor.Denominacion>().ToList<Entities.Tables.Valor.Denominacion>();
                 return _entities;
             }
             /// <summary>
@@ -32772,11 +33105,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -32923,12 +33255,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Valor.Moneda> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Valor.Moneda>().ToList<Entities.Tables.Valor.Moneda>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Valor.Moneda>().ToList<Entities.Tables.Valor.Moneda>();
                 return _entities;
             }
             /// <summary>
@@ -33155,11 +33487,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -33304,12 +33635,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Valor.OrigenValor> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Valor.OrigenValor>().ToList<Entities.Tables.Valor.OrigenValor>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Valor.OrigenValor>().ToList<Entities.Tables.Valor.OrigenValor>();
                 return _entities;
             }
             /// <summary>
@@ -33522,11 +33853,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -33669,12 +33999,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Valor.RelacionMonedaTipoValor> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Valor.RelacionMonedaTipoValor>().ToList<Entities.Tables.Valor.RelacionMonedaTipoValor>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Valor.RelacionMonedaTipoValor>().ToList<Entities.Tables.Valor.RelacionMonedaTipoValor>();
                 return _entities;
             }
             /// <summary>
@@ -33873,11 +34203,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -34022,12 +34351,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Valor.Tipo> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Valor.Tipo>().ToList<Entities.Tables.Valor.Tipo>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Valor.Tipo>().ToList<Entities.Tables.Valor.Tipo>();
                 return _entities;
             }
             /// <summary>
@@ -34240,11 +34569,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -34389,12 +34717,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Visualizacion.Perfil> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Visualizacion.Perfil>().ToList<Entities.Tables.Visualizacion.Perfil>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Visualizacion.Perfil>().ToList<Entities.Tables.Visualizacion.Perfil>();
                 return _entities;
             }
             /// <summary>
@@ -34607,11 +34935,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -34754,12 +35081,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Visualizacion.PerfilItem> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Visualizacion.PerfilItem>().ToList<Entities.Tables.Visualizacion.PerfilItem>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Visualizacion.PerfilItem>().ToList<Entities.Tables.Visualizacion.PerfilItem>();
                 return _entities;
             }
             /// <summary>
@@ -34958,11 +35285,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks
@@ -35107,12 +35433,12 @@ using System.Text;
 			}
             public new List<Entities.Tables.Visualizacion.PerfilTipo> Items()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                dh.TopQuantity = this.TopQuantity;
-                _entities = dh.Items().Cast<Entities.Tables.Visualizacion.PerfilTipo>().ToList<Entities.Tables.Visualizacion.PerfilTipo>();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                this.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Tables.Visualizacion.PerfilTipo>().ToList<Entities.Tables.Visualizacion.PerfilTipo>();
                 return _entities;
             }
             /// <summary>
@@ -35325,11 +35651,10 @@ using System.Text;
             /// <returns></returns>
             public new Int64 Delete()
             {
-                DataHandler dh =  new DataHandler(this._dataItem);
-                dh.WhereParameter = this.Where;
-                dh.OrderByParameter = this.OrderBy;
-                dh.GroupByParameter = this.GroupBy;
-                return dh.Delete();
+                this.WhereParameter = this.Where;
+                this.OrderByParameter = this.OrderBy;
+                this.GroupByParameter = this.GroupBy;
+                return this.Delete();
             }
             /// <summary>
             /// Deletes by Pks

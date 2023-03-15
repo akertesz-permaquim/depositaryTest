@@ -18,78 +18,25 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=DepositarioN0006;Data Source=NB000101</ConnectionString>
   <SelectedViews />
   <SelectedStoredProcedures>
-    <string>dbo.FinalizarPrimeraSincronizacion</string>
     <string>Sincronizacion.ObtenerIdOrigen</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
-    <string>Customizador.ConstruirEntidadesyAtributos</string>
-    <string>dbo.fn_diagramobjects</string>
-    <string>dbo.sp_alterdiagram</string>
-    <string>dbo.sp_creatediagram</string>
-    <string>dbo.sp_dropdiagram</string>
-    <string>dbo.sp_helpdiagramdefinition</string>
-    <string>dbo.sp_helpdiagrams</string>
-    <string>dbo.sp_renamediagram</string>
-    <string>dbo.sp_upgraddiagrams</string>
-    <string>dbo.splitCapital</string>
-    <string>Desarrollo.ActualizarLenguajeItem</string>
-    <string>Desarrollo.GenerarTablaModelo</string>
-    <string>Desarrollo.GenerarTablaTipoModelo</string>
-    <string>Dispositivo.ObtenerDepositarios</string>
-    <string>Dispositivo.ObtenerInformacionDepositario</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
-    <string>Operacion.ObtenerDetalleTransaccion</string>
-    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
-    <string>Operacion.ObtenerEventosPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasPorDepositario</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
-    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
-    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
-    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
-    <string>Regionalizacion.ObtenerTextosLenguaje</string>
-    <string>Seguridad.ObtenerRolesPorUsuario</string>
+    <string>dbo.FinalizarPrimeraSincronizacion</string>
+    <string>dbo.IniciarPrimeraSincronizacion</string>
     <string>Sincronizacion.ObtenerIdDestino</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures>
     <MappedStoredProcedure>
       <ResultSets>
         <ResultSet>
-          <Name>Resultado</Name>
+          <Name>Result</Name>
           <ProcedureFields>
             <ProcedureField>
               <DataType>String</DataType>
-              <Name>Moneda</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>Denominacion</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Int32</DataType>
-              <Name>CantidadValidada</Name>
-              <IsNullable>true</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Int32</DataType>
-              <Name>CantidadAValidar</Name>
-              <IsNullable>true</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>ImagenDenominacion</Name>
-              <IsNullable>true</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Int64</DataType>
-              <Name>DepositarioId</Name>
+              <Name>Resultado</Name>
               <IsNullable>false</IsNullable>
             </ProcedureField>
           </ProcedureFields>
@@ -98,174 +45,26 @@
       <ProcedureParameters>
         <ProcedureParameter>
           <DataType>Int64</DataType>
-          <Name>DepositarioId</Name>
+          <Name>@DepositarioId</Name>
         </ProcedureParameter>
       </ProcedureParameters>
-      <Name>Operacion.ObtenerExistenciasPorDepositario</Name>
+      <Name>dbo.FinalizarPrimeraSincronizacion</Name>
     </MappedStoredProcedure>
     <MappedStoredProcedure>
       <ResultSets>
         <ResultSet>
-          <Name>Resultado</Name>
+          <Name>Result</Name>
           <ProcedureFields>
             <ProcedureField>
-              <DataType>Int64</DataType>
-              <Name>DepositarioId</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
               <DataType>String</DataType>
-              <Name>NumeroSerie</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>DateTime</DataType>
-              <Name>FechaUltimaSincronizacion</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Double</DataType>
-              <Name>PorcentajeOcupacionBolsa</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>IdentificadorBolsa</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Double</DataType>
-              <Name>TotalValidado</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Double</DataType>
-              <Name>TotalAValidar</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Double</DataType>
-              <Name>Total</Name>
+              <Name>Resultado</Name>
               <IsNullable>false</IsNullable>
             </ProcedureField>
           </ProcedureFields>
         </ResultSet>
       </ResultSets>
-      <ProcedureParameters>
-        <ProcedureParameter>
-          <DataType>Int64</DataType>
-          <Name>DepositarioId</Name>
-        </ProcedureParameter>
-      </ProcedureParameters>
-      <Name>Dispositivo.ObtenerInformacionDepositario</Name>
-    </MappedStoredProcedure>
-    <MappedStoredProcedure>
-      <ResultSets>
-        <ResultSet>
-          <Name>Resultado</Name>
-          <ProcedureFields>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>Moneda</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>TipoValor</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Int32</DataType>
-              <Name>ValorDeclarado</Name>
-              <IsNullable>true</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Int64</DataType>
-              <Name>DepositarioId</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-          </ProcedureFields>
-        </ResultSet>
-      </ResultSets>
-      <ProcedureParameters>
-        <ProcedureParameter>
-          <DataType>Int64</DataType>
-          <Name>DepositarioId</Name>
-        </ProcedureParameter>
-      </ProcedureParameters>
-      <Name>Operacion.ObtenerExistenciasAValidarPorDepositario</Name>
-    </MappedStoredProcedure>
-    <MappedStoredProcedure>
-      <ResultSets>
-        <ResultSet>
-          <Name>Resultado</Name>
-          <ProcedureFields>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>Moneda</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Double</DataType>
-              <Name>TotalValidado</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Double</DataType>
-              <Name>TotalAValidar</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Double</DataType>
-              <Name>Total</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>Int64</DataType>
-              <Name>DepositarioId</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-          </ProcedureFields>
-        </ResultSet>
-      </ResultSets>
-      <ProcedureParameters>
-        <ProcedureParameter>
-          <DataType>Int64</DataType>
-          <Name>DepositarioId</Name>
-        </ProcedureParameter>
-      </ProcedureParameters>
-      <Name>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</Name>
-    </MappedStoredProcedure>
-    <MappedStoredProcedure>
-      <ResultSets>
-        <ResultSet>
-          <Name>Resultado</Name>
-          <ProcedureFields>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>Clave</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>Texto</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-            <ProcedureField>
-              <DataType>String</DataType>
-              <Name>Lenguaje</Name>
-              <IsNullable>false</IsNullable>
-            </ProcedureField>
-          </ProcedureFields>
-        </ResultSet>
-      </ResultSets>
-      <ProcedureParameters>
-        <ProcedureParameter>
-          <DataType>Int64</DataType>
-          <Name>UsuarioId</Name>
-        </ProcedureParameter>
-      </ProcedureParameters>
-      <Name>Regionalizacion.ObtenerTextosLenguaje</Name>
+      <ProcedureParameters />
+      <Name>dbo.IniciarPrimeraSincronizacion</Name>
     </MappedStoredProcedure>
   </MappedStoredProcedures>
   <SelectedTables>
@@ -280,8 +79,6 @@
     <string>Banca.TipoCuenta</string>
     <string>Banca.UsuarioCuenta</string>
     <string>Biometria.HuellaDactilar</string>
-    <string>Customizador.Entidad</string>
-    <string>Customizador.EntidadAtributo</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.RelacionMonedaSucursal</string>
@@ -310,7 +107,6 @@
     <string>Geografia.Pais</string>
     <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
-    <string>Impresion.PlantillaTicket</string>
     <string>Impresion.Ticket</string>
     <string>Impresion.TipoTicket</string>
     <string>Operacion.CierreDiario</string>
@@ -344,6 +140,7 @@
     <string>Seguridad.UsuarioRol</string>
     <string>Seguridad.UsuarioSector</string>
     <string>Sincronizacion.Configuracion</string>
+    <string>Sincronizacion.Ejecucion</string>
     <string>Sincronizacion.Entidad</string>
     <string>Sincronizacion.EntidadCabecera</string>
     <string>Sincronizacion.EntidadDetalle</string>
