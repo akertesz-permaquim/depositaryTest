@@ -48,10 +48,10 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         /// <summary>
         /// Representa el turno actual
         /// </summary>
-        public static Int64 TimeoutGeneral 
-        {  get
-            { 
-                if(_timeoutGeneral == null)
+        public static Int64 TimeoutGeneral
+        { get
+            {
+                if (_timeoutGeneral == null)
                 {
                     _timeoutGeneral = Convert.ToInt64(DatabaseController.GetEnterpriseParameterValue("TIMEOUT_GENERAL"));
                 }
@@ -198,8 +198,8 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             int returnValue = 0;
             Permaquim.Depositario.Business.Relations.Dispositivo.ConfiguracionDepositario entity = new();
-            entity.Where.Add(Depositario.Business.Relations.Dispositivo.ConfiguracionDepositario.ColumnEnum.TipoId,sqlEnum.OperandEnum.Equal,0);
-            returnValue = Convert.ToInt32( entity.Items().FirstOrDefault().Valor);
+            entity.Where.Add(Depositario.Business.Relations.Dispositivo.ConfiguracionDepositario.ColumnEnum.TipoId, sqlEnum.OperandEnum.Equal, 0);
+            returnValue = Convert.ToInt32(entity.Items().FirstOrDefault().Valor);
             return returnValue;
         }
 
@@ -436,7 +436,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             _currentOperation = null;
             _currentUserBankAccount = null;
             _currentOperation = null;
-             StyleController.ResetSchema();
+            StyleController.ResetSchema();
 
         }
 
@@ -646,7 +646,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 // por lo tanto graba el evento en la tabla correspondiente
                 if (CurrentUser == null)
                 {
-                    EventController.CreateEvent(EventTypeEnum.Cambio_de_Contenedor_Sin_usuario, 
+                    EventController.CreateEvent(EventTypeEnum.Cambio_de_Contenedor_Sin_usuario,
                         RETIRO_SIN_USUARIO, RETIRO_SIN_USUARIO);
 
                 }
@@ -680,7 +680,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             return returnValue;
         }
 
-        public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor UpdateContainerIdentifier(string bagIdentifier, 
+        public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor UpdateContainerIdentifier(string bagIdentifier,
             bool requiresIdentifier)
         {
             Permaquim.Depositario.Entities.Tables.Operacion.Contenedor returnValue = new();
@@ -697,7 +697,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     FechaCreacion = CurrentContainer.FechaCreacion,
                     FechaModificacion = DateTime.Now,
                     Habilitado = CurrentContainer.Habilitado,
-                    Identificador =  requiresIdentifier == true ? bagIdentifier : String.Empty,
+                    Identificador = requiresIdentifier == true ? bagIdentifier : String.Empty,
                     Nombre = CurrentDepositary.CodigoExterno.ToString() + "-" + CurrentContainer.Id.ToString(),
                     TipoId = CurrentContainer.TipoId.Id,
                     UsuarioCreacion = CurrentContainer.UsuarioCreacion.Id,
@@ -798,7 +798,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             if (turnId > -1)
             {
                 Permaquim.Depositario.Business.Relations.Turno.AgendaTurno scheduleTurns = new();
-                scheduleTurns.Where.Add(Depositario.Business.Relations.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId, 
+                scheduleTurns.Where.Add(Depositario.Business.Relations.Turno.AgendaTurno.ColumnEnum.EsquemaDetalleTurnoId,
                     Depositario.sqlEnum.OperandEnum.Equal, turnId);
                 scheduleTurns.Items();
 
@@ -921,7 +921,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 if (scheduleTurns.Result.Count > 0)
                 {
-                    foreach(var item in scheduleTurns.Result)
+                    foreach (var item in scheduleTurns.Result)
                         arrayTurns.Add(item.Id);
                 }
 
@@ -1836,11 +1836,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                             FechaCreacion = DateTime.Now,
                             FechaModificacion = null,
                             Habilitado = true,
-                            Observaciones = "Apertura automática por inicio de sesión.",
+                            Observaciones = "Apertura automática.",
                             Secuencia = availableTurn.Secuencia,
                             SectorId = CurrentDepositary.SectorId.Id,
                             TurnoDepositarioId = availableTurn.Id,
-                            UsuarioCreacion = CurrentUser.Id,
+                            UsuarioCreacion = CurrentUser == null ? 0 : CurrentUser.Id,
                             UsuarioModificacion = null,
                             CodigoTurno = CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd")
                         });
@@ -1991,7 +1991,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     CodigoTurno = CurrentTurn.CodigoTurno
                 });
 
-
                 if (IsLastTurn(CurrentTurn))
                 {
                     ClosePendingDays();
@@ -2021,7 +2020,52 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 return null;
             }
         }
+
+        public static bool ClosePendingTurns()
+        {
+            bool returnValue = false;
+            Permaquim.Depositario.Entities.Tables.Operacion.Turno refTurn = null;
+            try
+            {
+             
+                while (refTurn == null || refTurn.Fecha < DateTime.Today)
+                {
+                    refTurn = CloseCurrentTurn();
+                }
+
+  
+                returnValue = true;
+
+            }
+            catch (Exception ex)
+            {
+                Permaquim.Depositario.Business.Tables.Auditoria.Log log = new();
+                log.Add((long)LogTypeEnum.Information, 1, DateTime.Now, ex.Message, ex.StackTrace,
+                    "Cambio de turnos abiertos", "DatabaseController.ClosePendingTurns",
+                    CurrentUser.Id);
+                returnValue = false;
+            }
+
+            return returnValue;
+        }
+    
+
         private static bool IsLastTurn(Permaquim.Depositario.Entities.Relations.Operacion.Turno turn)
+        {
+            bool returnValue = false;
+            Permaquim.Depositario.Business.Tables.Turno.AgendaTurno entities = new();
+            entities.Where.Add(Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.SectorId, Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.Id);
+            entities.Where.Add(sqlEnum.ConjunctionEnum.AND,
+                Depositario.Business.Tables.Turno.AgendaTurno.ColumnEnum.Fecha, Depositario.sqlEnum.OperandEnum.Equal, turn.Fecha);
+            entities.Items();
+            if (entities.Result.Count > 0)
+            {
+                returnValue = turn.Secuencia == entities.Result.Count;
+            }
+
+            return returnValue;
+        }
+        private static bool IsLastTurn(Permaquim.Depositario.Entities.Tables.Operacion.Turno turn)
         {
             bool returnValue = false;
             Permaquim.Depositario.Business.Tables.Turno.AgendaTurno entities = new();
@@ -2282,7 +2326,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
                 else
                 {
-                    // Se consulta los roles que tiene el usuario
+                    // Se consultan los roles que tiene el usuario
                     foreach (var usuarioRol in CurrentUser.ListOf_UsuarioRol_UsuarioId)
                     {
                         // Se obtiene el rol de la aplicación Desktop
@@ -2321,7 +2365,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
                 else
                 {
-                    // Se consulta los roles que tiene el usuario
+                    // Se consultan los roles que tiene el usuario
                     foreach (var usuarioRol in CurrentUser.ListOf_UsuarioRol_UsuarioId)
                     {
                         // Se obtiene el rol de la aplicación Desktop
@@ -2360,7 +2404,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 }
                 else
                 {
-                    // Se consulta los roles que tiene el usuario
+                    // Se consultan los roles que tiene el usuario
                     foreach (var usuarioRol in CurrentUser.ListOf_UsuarioRol_UsuarioId)
                     {
                         // Se obtiene el rol de la aplicación Desktop

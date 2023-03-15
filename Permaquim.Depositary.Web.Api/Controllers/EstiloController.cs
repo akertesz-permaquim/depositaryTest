@@ -70,6 +70,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             }
 
             return Ok(data);
+            
 
         }
 

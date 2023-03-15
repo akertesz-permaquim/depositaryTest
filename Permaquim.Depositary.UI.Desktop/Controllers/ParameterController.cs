@@ -310,6 +310,13 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 return parseResult;
             }
         }
-
+        public static string  PrinterName
+        {
+            get
+            {
+                string returnValue =  DatabaseController.GetDepositaryParameterValue("IMPRESORA_DEPOSITARIO");
+                return  returnValue.Equals(string.Empty) ? "NII Printer_DS" : returnValue;
+            }
+        }
     }
 }

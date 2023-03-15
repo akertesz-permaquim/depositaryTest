@@ -90,7 +90,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         return;
                     }
 
-                        _image = ImageFromBase64Helper.GetImageFromBase64String(_ticket.Imagen);
+                    _image = ImageFromBase64Helper.GetImageFromBase64String(_ticket.Imagen);
                     _font = new Font(_ticket.NombreFuenteCabecera, _ticket.TamanioFuenteCabecera);
                     _boldFont = new Font(_font.Name, _font.Size, FontStyle.Bold);
 
@@ -170,9 +170,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         default:
                             break;
                     }
-
-                    printDocument.Print();
-
+                    if (!PrinterController.GetDefaultPrinterName().Equals(String.Empty))
+                    {
+                        printDocument.Print();
+                    }
+                    else
+                    {
+                        FormsController.SetInformationMessage(InformationTypeEnum.Error,
+                                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_IMPRESORA_PREDETERMINADA));
+                    }
                 }
                 else
                 {
