@@ -274,29 +274,34 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
         {
             List<SeguridadEntities.FuncionRol> resultado = new();
 
-            _bRelationsRolFuncion.Where.Clear();
-            _bRelationsRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-            _bRelationsRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
-
-            _bRelationsRolFuncion.Items();
-
-            if (_bRelationsRolFuncion.Result.Count > 0)
+            using (Depositary.Business.Relations.Seguridad.RolFuncion brRolFuncion = new())
             {
-                foreach (var rolfuncion in _bRelationsRolFuncion.Result)
-                {
-                    var funcion = rolfuncion.FuncionId;
-                    if (funcion != null)
-                    {
-                        SeguridadEntities.FuncionRol funcionRol = new();
-                        funcionRol.FuncionId = funcion.Id;
-                        funcionRol.RolId = rolfuncion._RolId;
-                        funcionRol.FuncionNombre = funcion.Nombre;
-                        funcionRol.PuedeAgregar = rolfuncion.PuedeAgregar;
-                        funcionRol.PuedeModificar = rolfuncion.PuedeModificar;
-                        funcionRol.PuedeVisualizar = rolfuncion.PuedeVisualizar;
-                        funcionRol.PuedeEliminar = rolfuncion.PuedeEliminar;
+                brRolFuncion.Where.Add(Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                brRolFuncion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Seguridad.RolFuncion.ColumnEnum.RolId, Depositary.sqlEnum.OperandEnum.Equal, pRolId);
 
-                        resultado.Add(funcionRol);
+                brRolFuncion.Items();
+
+                if (brRolFuncion.Result.Count > 0)
+                {
+                    Depositary.Entities.Relations.Seguridad.Funcion? funcion;
+
+                    foreach (var rolfuncion in brRolFuncion.Result)
+                    {
+                        funcion = rolfuncion.FuncionId;
+
+                        if (funcion != null)
+                        {
+                            SeguridadEntities.FuncionRol funcionRol = new();
+                            funcionRol.FuncionId = funcion.Id;
+                            funcionRol.RolId = rolfuncion._RolId;
+                            funcionRol.FuncionNombre = funcion.Nombre;
+                            funcionRol.PuedeAgregar = rolfuncion.PuedeAgregar;
+                            funcionRol.PuedeModificar = rolfuncion.PuedeModificar;
+                            funcionRol.PuedeVisualizar = rolfuncion.PuedeVisualizar;
+                            funcionRol.PuedeEliminar = rolfuncion.PuedeEliminar;
+
+                            resultado.Add(funcionRol);
+                        }
                     }
                 }
             }

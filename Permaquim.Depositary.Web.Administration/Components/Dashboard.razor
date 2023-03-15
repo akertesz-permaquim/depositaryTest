@@ -294,6 +294,7 @@ else
             //En funcion del usuario que consulta obtenemos el perfil de visualizacion y luego las empresas a las que puede acceder
             await Task.Run(ObtenerListadoEmpresasPorPerfil);
             await Task.Run(obtenerParametrosConfiguracion);
+
             SetTimer();
             obtenerInformacion();
             StateHasChanged();
@@ -423,11 +424,11 @@ else
     void IDisposable.Dispose()
     {
         timerRecargaInformacion.Dispose();
-        dataCargaDepositarios.Clear();
-        dataCantidadTipoTransacciones.Clear();
-        dataEmpresasAccesibles.Clear();
+        dataCargaDepositarios = null;
+        dataCantidadTipoTransacciones = null;
+        dataEmpresasAccesibles = null;
         empresasSeleccionadas = null;
-        dataFunciones.Clear();
+        dataFunciones = null;
     }
 
 
