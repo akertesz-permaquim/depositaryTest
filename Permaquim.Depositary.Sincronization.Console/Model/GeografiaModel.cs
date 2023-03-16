@@ -202,7 +202,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                 if (CodigosPostales.Count > 0)
                 {
-                    Depositario.Business.Tables.Geografia.Ciudad ciudad = new();
+                    Depositario.Business.Tables.Geografia.CodigoPostal codigoPostal = new();
 
                     Int64? sincronizacionCabeceraId = null;
 
@@ -210,13 +210,12 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                     if (sincronizacionCabeceraId.HasValue)
                     {
-                        Int64? ciudadIdOrigen;
                         foreach (var item in CodigosPostales)
                         {
                             //Verifico si este registro se sincronizo anteriormente
                             idDestino = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Geografia_CodigoPostal, item.Id);
                             usuarioCreacionIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Seguridad_Usuario, item.UsuarioCreacion);
-                            ciudadIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Geografia_Ciudad, item.CiudadId);
+                            Int64? ciudadIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacion(Enumerations.EntitiesEnum.Geografia_Ciudad, item.CiudadId);
 
                             if (ciudadIdOrigen.HasValue && usuarioCreacionIdOrigen.HasValue)
                             {
@@ -237,11 +236,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 if (idDestino.HasValue)
                                 {
                                     item.Id = idDestino.Value;
-                                    ciudad.Update(item);
+                                    codigoPostal.Update(item);
                                 }
                                 else
                                 {
-                                    ciudad.Add(item);
+                                    codigoPostal.Add(item);
                                 }
 
                                 SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
@@ -253,7 +252,7 @@ namespace Permaquim.Depositary.Sincronization.Console
 
                 if (Zonas.Count > 0)
                 {
-                    Depositario.Business.Tables.Geografia.Pais pais = new();
+                    Depositario.Business.Tables.Geografia.Zona zona = new();
 
                     Int64? sincronizacionCabeceraId = null;
 
@@ -284,11 +283,11 @@ namespace Permaquim.Depositary.Sincronization.Console
                                 if (idDestino.HasValue)
                                 {
                                     item.Id = idDestino.Value;
-                                    pais.Update(item);
+                                    zona.Update(item);
                                 }
                                 else
                                 {
-                                    pais.Add(item);
+                                    zona.Add(item);
                                 }
 
                                 SynchronizationController.SaveEntitySynchronizationDetail(sincronizacionCabeceraId.Value, origenId, item.Id);
