@@ -3,6 +3,7 @@
     public class AplicacionModel
     {
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
+        public Int64? SynchronizationExecutionId { get; set; } 
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionTipoDato> TiposDatos { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.ConfiguracionValidacionDato> ValidacionesDatos { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Aplicacion.Configuracion> Configuraciones { get; set; } = new();

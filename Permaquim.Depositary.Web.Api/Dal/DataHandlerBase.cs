@@ -32,24 +32,24 @@ public class DataHandlerBase: IDataHandler, IDisposable
     /// <summary>
     /// Represents Where condition list
     /// </summary>
-    internal WhereParameterBase WhereParameter {get;set;}
+    protected WhereParameterBase WhereParameter {get;set;}
     /// <summary>
     /// Represents Order By parameters
     /// </summary>
-    internal OrderByParameterBase OrderByParameter  {get;set;}
+    protected OrderByParameterBase OrderByParameter  {get;set;}
     /// <summary>
     /// Represents Group By parameters
     /// </summary>
-    internal GroupByParameterBase GroupByParameter  {get;set;}
+    protected GroupByParameterBase GroupByParameter  {get;set;}
     /// <summary>
     /// Represents aggregate parameter
     /// </summary>
-    internal AggregateParameterBase AggregateParameter {get;set;}
+    protected AggregateParameterBase AggregateParameter {get;set;}
     /// <summary>
     /// Reflection cache data
     /// </summary>
 	#region Reflection data
-		private Type _dataItemType = null;
+		protected Type _dataItemType = null;
 		private PropertyInfo[] _properties = null;
 		private System.Attribute _objectSchemaTypeAttribute = null;
 		private System.Attribute _objectNameTypeAttribute = null;
@@ -118,7 +118,7 @@ public class DataHandlerBase: IDataHandler, IDisposable
     /// Gets IdataItem reflection information and set corresponding variables.
     /// </summary>
     /// <returns></returns>	
-   private void AnalizeIDataItem()
+   protected void AnalizeIDataItem()
     {
         if (_dataItemType == null)
         {
@@ -418,6 +418,11 @@ public class DataHandlerBase: IDataHandler, IDisposable
                  _connection.ConnectionString = DepositaryWebApi.Crypto.Decrypt(ConfigurationHandler.ConnectionString ,ConfigurationHandler.PasswordKey);
                  _connection.Open();
               }
+            else
+            {
+                 if (_connection.State == ConnectionState.Closed)
+                 _connection.Open(); 
+            }
         }
     }
     protected IDbCommand GetCommand(string query, IDbConnection connection, IDbTransaction transaction, CommandType commandType = CommandType.Text)

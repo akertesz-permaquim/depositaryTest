@@ -2,6 +2,7 @@
 {
     public class RegionalizacionModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Regionalizacion.Lenguaje> Lenguajes { get; set; }
         public List<DepositaryWebApi.Entities.Tables.Regionalizacion.LenguajeItem> LenguajeItems { get; set; }

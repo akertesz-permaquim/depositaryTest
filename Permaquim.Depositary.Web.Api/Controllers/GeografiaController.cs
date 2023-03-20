@@ -27,57 +27,79 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerGeografia([FromBody] GeografiaModel data)
         {
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroGeografiaPaisId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PAIS);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroGeografiaPaisId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_PAIS) ? data.SincroDates[ENTIDAD_PAIS] : fechaSincronizacionDefault;
-                    data.Paises = ObtenerPaisesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaPaisId.Value);
+
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroGeografiaPaisId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_PAIS);
+
+                        if (SincroGeografiaPaisId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_PAIS) ? data.SincroDates[ENTIDAD_PAIS] : fechaSincronizacionDefault;
+                            data.Paises = ObtenerPaisesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaPaisId.Value);
+                        }
+
+                        Int64? SincroGeografiaProvinciaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_PROVINCIA);
+
+                        if (SincroGeografiaProvinciaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_PROVINCIA) ? data.SincroDates[ENTIDAD_PROVINCIA] : fechaSincronizacionDefault;
+                            data.Provincias = ObtenerProvinciasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaProvinciaId.Value);
+                        }
+
+                        Int64? SincroGeografiaCiudadId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_CIUDAD);
+
+                        if (SincroGeografiaCiudadId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CIUDAD) ? data.SincroDates[ENTIDAD_CIUDAD] : fechaSincronizacionDefault;
+                            data.Ciudades = ObtenerCiudadesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaCiudadId.Value);
+                        }
+
+                        Int64? SincroGeografiaCodigoPostalId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_CODIGOPOSTAL);
+
+                        if (SincroGeografiaCodigoPostalId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CODIGOPOSTAL) ? data.SincroDates[ENTIDAD_CODIGOPOSTAL] : fechaSincronizacionDefault;
+                            data.CodigosPostales = ObtenerCodigosPostalesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaCodigoPostalId.Value);
+                        }
+
+                        Int64? SincroGeografiaZonaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_ZONA);
+
+                        if (SincroGeografiaZonaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ZONA) ? data.SincroDates[ENTIDAD_ZONA] : fechaSincronizacionDefault;
+                            data.Zonas = ObtenerZonasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaZonaId.Value);
+                        }
+
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                Int64? SincroGeografiaProvinciaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_PROVINCIA);
-
-                if (SincroGeografiaProvinciaId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_PROVINCIA) ? data.SincroDates[ENTIDAD_PROVINCIA] : fechaSincronizacionDefault;
-                    data.Provincias = ObtenerProvinciasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaProvinciaId.Value);
-                }
-
-                Int64? SincroGeografiaCiudadId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CIUDAD);
-
-                if (SincroGeografiaCiudadId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CIUDAD) ? data.SincroDates[ENTIDAD_CIUDAD] : fechaSincronizacionDefault;
-                    data.Ciudades = ObtenerCiudadesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaCiudadId.Value);
-                }
-
-                Int64? SincroGeografiaCodigoPostalId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_CODIGOPOSTAL);
-
-                if (SincroGeografiaCodigoPostalId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_CODIGOPOSTAL) ? data.SincroDates[ENTIDAD_CODIGOPOSTAL] : fechaSincronizacionDefault;
-                    data.CodigosPostales = ObtenerCodigosPostalesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaCodigoPostalId.Value);
-                }
-
-                Int64? SincroGeografiaZonaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ZONA);
-
-                if (SincroGeografiaZonaId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ZONA) ? data.SincroDates[ENTIDAD_ZONA] : fechaSincronizacionDefault;
-                    data.Zonas = ObtenerZonasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroGeografiaZonaId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
             }
             catch (Exception ex)
@@ -86,7 +108,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]

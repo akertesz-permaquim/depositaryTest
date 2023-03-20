@@ -321,7 +321,7 @@
                 }
             }
 
-            return resultado;
+            return resultado.OrderByDescending(x => x.CantidadValidada).ThenBy(x => x.Moneda).ToList();
         }
 
         public static List<MonitorEntities.ExistenciaAValidar> ObtenerExistenciasAValidarPorDepositario(Int64 pDepositarioID)
@@ -367,7 +367,7 @@
 
                 }
             }
-            return resultado;
+            return resultado.OrderByDescending(x => x.Cantidad).ToList();
 
         }
 
@@ -375,15 +375,21 @@
 
         #region Eventos
 
-        public static List<MonitorEntities.Evento> ObtenerEventosPorDepositario(Int64 pDepositarioId)
+        public static List<MonitorEntities.Evento> ObtenerEventosPorDepositario(Int64 pDepositarioId, Int64 empresaId)
         {
             List<MonitorEntities.Evento> resultado = new();
 
             using (Depositary.Business.Relations.Operacion.Evento oEvento = new())
             {
+                int CantidadEventosVisibles;
+                if (!int.TryParse(AplicacionController.ObtenerConfiguracionEmpresa("CANTIDAD_EVENTOS_VISIBLES", empresaId), out CantidadEventosVisibles))
+                {
+                    CantidadEventosVisibles = 100;
+                }
+
                 oEvento.Where.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositarioId);
                 oEvento.OrderBy.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
-
+                oEvento.TopQuantity = CantidadEventosVisibles;
                 oEvento.Items();
 
                 foreach (var evento in oEvento.Result)
@@ -457,15 +463,18 @@
                 if (depositarios.Count > 0)
                 {
                     //Levanto transacciones con un IN y con la fecha de hoy.
-                    Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new();
+                    using (Depositary.Business.Relations.Operacion.Transaccion oTransaccion = new())
+                    {
+                        oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
+                        oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
+                        oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
 
-                    oTransaccion.Where.Add(Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, pFecha);
-                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.In, depositarios);
-                    oTransaccion.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Operacion.Transaccion.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThan, pFecha.AddDays(1));
+                        oTransaccion.Items();
 
-                    oTransaccion.Items();
+                        resultado = oTransaccion.Result.Count.ToString();
+                    }
 
-                    resultado = oTransaccion.Result.Count.ToString();
+                    depositarios = null;
                 }
             }
 

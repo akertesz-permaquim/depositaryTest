@@ -25,33 +25,53 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerImpresion([FromBody] ImpresionModel data)
         {
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroImpresionTipoTicketId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOTICKET);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroImpresionTipoTicketId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOTICKET) ? data.SincroDates[ENTIDAD_TIPOTICKET] : fechaSincronizacionDefault;
-                    data.TiposTickets = ObtenerTiposTicketsBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroImpresionTipoTicketId.Value);
+
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroImpresionTipoTicketId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOTICKET);
+
+                        if (SincroImpresionTipoTicketId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOTICKET) ? data.SincroDates[ENTIDAD_TIPOTICKET] : fechaSincronizacionDefault;
+                            data.TiposTickets = ObtenerTiposTicketsBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroImpresionTipoTicketId.Value);
+                        }
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroImpresionTicketId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TICKET);
+
+                        if (SincroImpresionTicketId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TICKET) ? data.SincroDates[ENTIDAD_TICKET] : fechaSincronizacionDefault;
+                            data.Tickets = ObtenerTicketsBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroImpresionTicketId.Value);
+                        }
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroImpresionTicketId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TICKET);
-
-                if (SincroImpresionTicketId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TICKET) ? data.SincroDates[ENTIDAD_TICKET] : fechaSincronizacionDefault;
-                    data.Tickets = ObtenerTicketsBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroImpresionTicketId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
-
             }
             catch (Exception ex)
             {
@@ -59,7 +79,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]

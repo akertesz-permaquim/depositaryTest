@@ -2,6 +2,8 @@
 {
     public class AuditoriaModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
+
         public List<DepositaryWebApi.Entities.Tables.Auditoria.TipoLog> TiposLog { get; set; } = new();
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
     }

@@ -2,6 +2,7 @@
 {
     public class ValorModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Valor.Moneda> Monedas { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Valor.Denominacion> Denominaciones { get; set; } = new();

@@ -2,6 +2,7 @@
 {
     public class TransaccionModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public string CodigoExternoDepositario { get; set; }
         public List<NuevaSesion> Sesiones { get; set; }

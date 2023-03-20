@@ -2,6 +2,7 @@
 {
     public class DirectorioModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Grupo> Grupos { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Directorio.Empresa> Empresas { get; set; } = new();

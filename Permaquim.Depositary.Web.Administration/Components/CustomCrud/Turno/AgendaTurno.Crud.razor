@@ -851,12 +851,24 @@ else
             case CrudMode.Delete:
                 try
                 {
-                    AgendaTurno_entity.Habilitado = false;
-                    crud.Update(AgendaTurno_entity);
-                    summary = "El registro se ha ";
-                    actionInformation = "eliminado.";
-                    severityType = NotificationSeverity.Success;
-                    validacionesOk = true;
+                    //Validamos que no se pueda eliminar un turno del dia actual o anterior.
+                    if (TurnoController.ValidarDeshabilitadoTurno(AgendaTurno_entity.SectorId, AgendaTurno_entity.Fecha))
+                    {
+                        AgendaTurno_entity.Habilitado = false;
+                        crud.Update(AgendaTurno_entity);
+                        summary = "El registro se ha ";
+                        actionInformation = "eliminado.";
+                        severityType = NotificationSeverity.Success;
+                        validacionesOk = true;
+                    }
+                    else
+                    {
+                        summary = "Error al validar.";
+                        actionInformation = "No puede eliminar un turno si se han generado turnos en la misma fecha o anteriores.";
+                        severityType = NotificationSeverity.Error;
+                        validacionesOk = false;
+                    }
+
 
                 }
                 catch (Exception ex)
@@ -1100,7 +1112,7 @@ else
         agendaTurnoABM.EsquemaTurnoId = value;
 
         var esquemaTurnoSeleccionado = dataEsquemaTurnos.FirstOrDefault(x => x.Id == value.Value);
-        ChkDiasCorridos = !esquemaTurnoSeleccionado.OperaDiasCorridos;
+        ChkDiasCorridos = esquemaTurnoSeleccionado.OperaDiasCorridos;
 
         //Recargamos el arbol trayendo empresas en funcion de si el esquema opera con o sin turno.
         dataArbolAgenda = TurnoController.ObtenerArbolTurnos(esquemaTurnoSeleccionado.OperaSinTurno);

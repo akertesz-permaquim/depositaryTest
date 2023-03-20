@@ -25,90 +25,92 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
         #region GetEndpoints
 
-        [HttpGet]
+        [HttpPost]
         [Route("ObtenerDatosIniciales")]
         [Authorize]
-        public async Task<IActionResult> ObtenerDatosIniciales()
+        public async Task<IActionResult> ObtenerDatosIniciales([FromBody] InicializacionModel model)
         {
-            InicializacionModel model = new();
             try
             {
                 Int64 depositarioId = Int64.Parse(JwtController.GetDepositaryCode(HttpContext));
 
-
-                model.AplicacionConfiguracionTipoDato = ObtenerAplicacionTipoDato();
-                model.AplicacionConfiguracionValidacionDato = ObtenerAplicacionValidacionDato();
-                model.AplicacionConfiguracion = ObtenerAplicacionConfiguracion();
-                model.AplicacionConfiguracionEmpresa = ObtenerAplicacionConfiguracionEmpresa();
-                model.AuditoriaTipoLog = ObtenerAuditoriaTipoLog();
-                model.BancaBanco = ObtenerBancaBanco();
-                model.BancaCuenta = ObtenerBancaCuenta();
-                model.BancaTipoCuenta = ObtenerBancaTipoCuenta();
-                model.BancaUsuarioCuenta = ObtenerBancaUsuarioCuenta();
-                model.BiometriaHuellaDactilar = ObtenerBiometriaHuellaDactilar();
-                model.DirectorioEmpresa = ObtenerDirectorioEmpresa();
-                model.DirectorioGrupo = ObtenerDirectorioGrupo();
-                model.SeguridadIdentificadorUsuario = ObtenerSeguridadIdentificadorUsuario();
-                model.DirectorioRelacionMonedaSucursal = ObtenerDirectorioRelacionMonedaSucursal();
-                model.DirectorioSector = ObtenerDirectorioSector();
-                model.DirectorioSucursal = ObtenerDirectorioSucursal();
-                model.SeguridadTipoIdentificador = ObtenerSeguridadTipoIdentificador();
-                model.DispositivoComandoContadora = ObtenerDispositivoComandoContadora();
-                model.DispositivoComandoPlaca = ObtenerDispositivoComandoPlaca();
-                model.DispositivoConfiguracionDepositario = ObtenerDispositivoConfiguracionDepositario(depositarioId);
-                model.DispositivoDepositario = ObtenerDispositivoDepositario(depositarioId);
-                model.PlantillaMoneda = ObtenerDispositivoPlantillaMoneda();
-                model.PlantillaMonedaDetalle = ObtenerDispositivoPlantillaMonedaDetalle();
-                model.DispositivoDepositarioContadora = ObtenerDispositivoDepositarioContadora(depositarioId);
-                model.DispositivoDepositarioMoneda = ObtenerDispositivoDepositarioMoneda(depositarioId);
-                model.DispositivoDepositarioPlaca = ObtenerDispositivoDepositarioPlaca(depositarioId);
-                model.DispositivoMarca = ObtenerDispositivoMarca();
-                model.DispositivoModelo = ObtenerDispositivoModelo();
-                model.DispositivoTipoConfiguracionDepositario = ObtenerDispositivoTipoConfiguracionDepositario();
-                model.DispositivoTipoContadora = ObtenerDispositivoTipoContadora();
-                model.DispositivoTipoPlaca = ObtenerDispositivoTipoPlaca();
-                model.EstiloEsquema = ObtenerEstiloEsquema();
-                model.EstiloEsquemaDetalle = ObtenerEstiloEsquemaDetalle();
-                model.EstiloTipoEsquemaDetalle = ObtenerEstiloTipoEsquemaDetalle();
-                model.GeografiaCiudad = ObtenerGeografiaCiudad();
-                model.GeografiaCodigoPostal = ObtenerGeografiaCodigoPostal();
-                model.GeografiaPais = ObtenerGeografiaPais();
-                model.GeografiaProvincia = ObtenerGeografiaProvincia();
-                model.GeografiaZona = ObtenerGeografiaZona();
-                model.OperacionTipoContenedor = ObtenerOperacionTipoContenedor();
-                model.OperacionTipoEvento = ObtenerOperacionTipoEvento();
-                model.OperacionTipoTransaccion = ObtenerOperacionTipoTransaccion();
-                model.RegionalizacionLenguaje = ObtenerRegionalizacionLenguaje();
-                model.RegionalizacionLenguajeItem = ObtenerRegionalizacionLenguajeItem();
-                model.SeguridadAplicacion = ObtenerSeguridadAplicacion();
-                model.SeguridadAplicacionParametro = ObtenerSeguridadAplicacionParametro();
-                model.SeguridadAplicacionParametroValor = ObtenerSeguridadAplicacionParametroValor();
-                model.SeguridadFuncion = ObtenerSeguridadFuncion();
-                model.SeguridadMenu = ObtenerSeguridadMenu();
-                model.SeguridadRol = ObtenerSeguridadRol();
-                model.SeguridadRolFuncion = ObtenerSeguridadRolFuncion();
-                model.SeguridadTipoAplicacion = ObtenerSeguridadTipoAplicacion();
-                model.SeguridadTipoFuncion = ObtenerSeguridadTipoFuncion();
-                model.SeguridadTipoMenu = ObtenerSeguridadTipoMenu();
-                model.SeguridadUsuario = ObtenerSeguridadUsuario();
-                model.SeguridadUsuarioRol = ObtenerSeguridadUsuarioRol();
-                model.SeguridadUsuarioSector = ObtenerSeguridadUsuarioSector();
-                model.SincronizacionConfiguracion = ObtenerSincronizacionConfiguracion();
-                model.SincronizacionEntidad = ObtenerSincronizacionEntidad();
-                model.TurnoAgendaTurno = ObtenerTurnoAgendaTurno();
-                model.TurnoEsquemaDetalleTurno = ObtenerTurnoEsquemaDetalleTurno();
-                model.TurnoEsquemaTurno = ObtenerTurnoEsquemaTurno();
-                model.ValorDenominacion = ObtenerValorDenominacion();
-                model.ValorMoneda = ObtenerValorMoneda();
-                model.ValorRelacionMonedaTipoValor = ObtenerValorRelacionMonedaTipoValor();
-                model.ValorTipo = ObtenerValorTipo();
-                model.OrigenValor = ObtenerValorOrigenValor();
-                model.VisualizacionPerfil = ObtenerVisualizacionPerfil();
-                model.VisualizacionPerfilItem = ObtenerVisualizacionPerfilItem();
-                model.VisualizacionPerfilTipo = ObtenerVisualizacionPerfilTipo();
-                model.TipoTicket = ObtenerImpresionTipoTicket();
-                model.Ticket = ObtenerImpresionTicket();
-
+                if (model.SynchronizationExecutionId.HasValue)
+                {
+                    model.AplicacionConfiguracionTipoDato = ObtenerAplicacionTipoDato();
+                    model.AplicacionConfiguracionValidacionDato = ObtenerAplicacionValidacionDato();
+                    model.AplicacionConfiguracion = ObtenerAplicacionConfiguracion();
+                    model.AplicacionConfiguracionEmpresa = ObtenerAplicacionConfiguracionEmpresa();
+                    model.AuditoriaTipoLog = ObtenerAuditoriaTipoLog();
+                    model.BancaBanco = ObtenerBancaBanco();
+                    model.BancaCuenta = ObtenerBancaCuenta();
+                    model.BancaTipoCuenta = ObtenerBancaTipoCuenta();
+                    model.BancaUsuarioCuenta = ObtenerBancaUsuarioCuenta();
+                    model.BiometriaHuellaDactilar = ObtenerBiometriaHuellaDactilar();
+                    model.DirectorioEmpresa = ObtenerDirectorioEmpresa();
+                    model.DirectorioGrupo = ObtenerDirectorioGrupo();
+                    model.SeguridadIdentificadorUsuario = ObtenerSeguridadIdentificadorUsuario();
+                    model.DirectorioRelacionMonedaSucursal = ObtenerDirectorioRelacionMonedaSucursal();
+                    model.DirectorioSector = ObtenerDirectorioSector();
+                    model.DirectorioSucursal = ObtenerDirectorioSucursal();
+                    model.SeguridadTipoIdentificador = ObtenerSeguridadTipoIdentificador();
+                    model.DispositivoComandoContadora = ObtenerDispositivoComandoContadora();
+                    model.DispositivoComandoPlaca = ObtenerDispositivoComandoPlaca();
+                    model.DispositivoConfiguracionDepositario = ObtenerDispositivoConfiguracionDepositario(depositarioId);
+                    model.DispositivoDepositario = ObtenerDispositivoDepositario(depositarioId);
+                    model.PlantillaMoneda = ObtenerDispositivoPlantillaMoneda();
+                    model.PlantillaMonedaDetalle = ObtenerDispositivoPlantillaMonedaDetalle();
+                    model.DispositivoDepositarioContadora = ObtenerDispositivoDepositarioContadora(depositarioId);
+                    model.DispositivoDepositarioMoneda = ObtenerDispositivoDepositarioMoneda(depositarioId);
+                    model.DispositivoDepositarioPlaca = ObtenerDispositivoDepositarioPlaca(depositarioId);
+                    model.DispositivoMarca = ObtenerDispositivoMarca();
+                    model.DispositivoModelo = ObtenerDispositivoModelo();
+                    model.DispositivoTipoConfiguracionDepositario = ObtenerDispositivoTipoConfiguracionDepositario();
+                    model.DispositivoTipoContadora = ObtenerDispositivoTipoContadora();
+                    model.DispositivoTipoPlaca = ObtenerDispositivoTipoPlaca();
+                    model.EstiloEsquema = ObtenerEstiloEsquema();
+                    model.EstiloEsquemaDetalle = ObtenerEstiloEsquemaDetalle();
+                    model.EstiloTipoEsquemaDetalle = ObtenerEstiloTipoEsquemaDetalle();
+                    model.GeografiaCiudad = ObtenerGeografiaCiudad();
+                    model.GeografiaCodigoPostal = ObtenerGeografiaCodigoPostal();
+                    model.GeografiaPais = ObtenerGeografiaPais();
+                    model.GeografiaProvincia = ObtenerGeografiaProvincia();
+                    model.GeografiaZona = ObtenerGeografiaZona();
+                    model.OperacionTipoContenedor = ObtenerOperacionTipoContenedor();
+                    model.OperacionTipoEvento = ObtenerOperacionTipoEvento();
+                    model.OperacionTipoTransaccion = ObtenerOperacionTipoTransaccion();
+                    model.RegionalizacionLenguaje = ObtenerRegionalizacionLenguaje();
+                    model.RegionalizacionLenguajeItem = ObtenerRegionalizacionLenguajeItem();
+                    model.SeguridadAplicacion = ObtenerSeguridadAplicacion();
+                    model.SeguridadAplicacionParametro = ObtenerSeguridadAplicacionParametro();
+                    model.SeguridadAplicacionParametroValor = ObtenerSeguridadAplicacionParametroValor();
+                    model.SeguridadFuncion = ObtenerSeguridadFuncion();
+                    model.SeguridadMenu = ObtenerSeguridadMenu();
+                    model.SeguridadRol = ObtenerSeguridadRol();
+                    model.SeguridadRolFuncion = ObtenerSeguridadRolFuncion();
+                    model.SeguridadTipoAplicacion = ObtenerSeguridadTipoAplicacion();
+                    model.SeguridadTipoFuncion = ObtenerSeguridadTipoFuncion();
+                    model.SeguridadTipoMenu = ObtenerSeguridadTipoMenu();
+                    model.SeguridadUsuario = ObtenerSeguridadUsuario();
+                    model.SeguridadUsuarioRol = ObtenerSeguridadUsuarioRol();
+                    model.SeguridadUsuarioSector = ObtenerSeguridadUsuarioSector();
+                    model.SincronizacionConfiguracion = ObtenerSincronizacionConfiguracion();
+                    model.SincronizacionEntidad = ObtenerSincronizacionEntidad();
+                    model.TurnoAgendaTurno = ObtenerTurnoAgendaTurno();
+                    model.TurnoEsquemaDetalleTurno = ObtenerTurnoEsquemaDetalleTurno();
+                    model.TurnoEsquemaTurno = ObtenerTurnoEsquemaTurno();
+                    model.ValorDenominacion = ObtenerValorDenominacion();
+                    model.ValorMoneda = ObtenerValorMoneda();
+                    model.ValorRelacionMonedaTipoValor = ObtenerValorRelacionMonedaTipoValor();
+                    model.ValorTipo = ObtenerValorTipo();
+                    model.OrigenValor = ObtenerValorOrigenValor();
+                    model.VisualizacionPerfil = ObtenerVisualizacionPerfil();
+                    model.VisualizacionPerfilItem = ObtenerVisualizacionPerfilItem();
+                    model.VisualizacionPerfilTipo = ObtenerVisualizacionPerfilTipo();
+                    model.TipoTicket = ObtenerImpresionTipoTicket();
+                    model.Ticket = ObtenerImpresionTicket();
+                }
+                else
+                    return BadRequest();
             }
             catch (Exception ex)
             {

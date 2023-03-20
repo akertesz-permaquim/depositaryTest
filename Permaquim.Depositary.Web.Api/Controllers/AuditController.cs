@@ -44,5 +44,10 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         {
             Log(LogTypeEnum.Exception, exception.Message, exception.StackTrace, userId);
         }
+
+        public static void Log(string message, Int64 userId = 0)
+        {
+            Log(LogTypeEnum.Exception, message, "", userId);
+        }
     }
 }

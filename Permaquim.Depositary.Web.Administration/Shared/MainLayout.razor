@@ -10,6 +10,8 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
+@implements IDisposable
+
 <RadzenDialog />
 <RadzenNotification />
 <RadzenTooltip />
@@ -19,7 +21,7 @@
 {
     @if (licenciaValida && !licenciaExpirada)
     {
-        <RadzenHeader class="mainHeader">
+        <RadzenHeader @ref="header" class="mainHeader">
             <ChildContent>
                 <div class="row justify-content-start align-items-center">
                     <div class="col-6 d-flex align-items-center">
@@ -148,8 +150,9 @@
 
 @code
 {
-    private RadzenBody body0;
-    protected RadzenSidebar sidebar0;
+    private RadzenBody? body0;
+    private RadzenHeader? header;
+    protected RadzenSidebar? sidebar0;
     private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>();
     private List<SeguridadEntities.Menu> dataMenues = new();
     private List<Entities.TextoLenguaje> dataLenguaje;
@@ -233,6 +236,22 @@
                 StateHasChanged();
             }
         }
+    }
+
+    void IDisposable.Dispose()
+    {
+        dataMenues = null;
+        dataLenguaje = null;
+        dataUsuario = null;
+        dataEsquemaDetalle = null;
+        listaMenuesLicenciaFull = null;
+
+        if (sidebar0 != null)
+            sidebar0.Dispose();
+        if (body0 != null)
+            body0.Dispose();
+        if (header != null)
+            header.Dispose();
     }
 
 }

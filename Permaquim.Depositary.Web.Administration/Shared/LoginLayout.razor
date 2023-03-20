@@ -5,6 +5,8 @@
 @using Microsoft.AspNetCore.Identity;
 @using Permaquim.Depositary.Web.Administration.Controllers;
 
+@implements IDisposable
+
 <RadzenNotification />
 
 @try
@@ -51,7 +53,7 @@ catch (Exception ex)
     private string colorPrimarioSpinner;
     private string colorSecundarioSpinner;
 
-    private RadzenBody body0;
+    private RadzenBody? body0;
 
     protected override void OnInitialized()
     {
@@ -70,6 +72,15 @@ catch (Exception ex)
             colorSecundarioSpinner = EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorSecundarioSpinner", true);
             StateHasChanged();
         }
+    }
+
+    void IDisposable.Dispose()
+    {
+        dataEsquemaDetalle = null;
+
+        if (body0 != null)
+            body0.Dispose();
+
     }
 }
 

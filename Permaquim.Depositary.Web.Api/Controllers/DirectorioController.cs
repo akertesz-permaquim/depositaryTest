@@ -28,62 +28,81 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerDirectorio([FromBody] DirectorioModel data)
         {
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroDirectorioGrupoId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_GRUPO);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroDirectorioGrupoId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_GRUPO) ? data.SincroDates[ENTIDAD_GRUPO] : fechaSincronizacionDefault;
-                    data.Grupos = ObtenerGruposBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioGrupoId.Value);
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroDirectorioGrupoId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_GRUPO);
+
+                        if (SincroDirectorioGrupoId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_GRUPO) ? data.SincroDates[ENTIDAD_GRUPO] : fechaSincronizacionDefault;
+                            data.Grupos = ObtenerGruposBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioGrupoId.Value);
+                        }
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroDirectorioEmpresaId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_EMPRESA);
+
+                        if (SincroDirectorioEmpresaId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_EMPRESA) ? data.SincroDates[ENTIDAD_EMPRESA] : fechaSincronizacionDefault;
+                            data.Empresas = ObtenerEmpresasBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioEmpresaId.Value);
+                        }
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroDirectorioSucursalId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_SUCURSAL);
+
+                        if (SincroDirectorioSucursalId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_SUCURSAL) ? data.SincroDates[ENTIDAD_SUCURSAL] : fechaSincronizacionDefault;
+                            data.Sucursales = ObtenerSucursalesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioSucursalId.Value);
+                        }
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroDirectorioSectorId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_SECTOR);
+
+                        if (SincroDirectorioSectorId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_SECTOR) ? data.SincroDates[ENTIDAD_SECTOR] : fechaSincronizacionDefault;
+                            data.Sectores = ObtenerSectoresBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioSectorId.Value);
+                        }
+
+                        Int64? SincroDirectorioRelacionMonedaSucursalId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_RELACIONMONEDASUCURSAL);
+
+                        if (SincroDirectorioRelacionMonedaSucursalId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_RELACIONMONEDASUCURSAL) ? data.SincroDates[ENTIDAD_RELACIONMONEDASUCURSAL] : fechaSincronizacionDefault;
+                            data.RelacionesMonedasSucursales = ObtenerRelacionesMonedasSucursalesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioRelacionMonedaSucursalId.Value);
+                        }
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroDirectorioEmpresaId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_EMPRESA);
-
-                if (SincroDirectorioEmpresaId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_EMPRESA) ? data.SincroDates[ENTIDAD_EMPRESA] : fechaSincronizacionDefault;
-                    data.Empresas = ObtenerEmpresasBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioEmpresaId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
-
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroDirectorioSucursalId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_SUCURSAL);
-
-                if (SincroDirectorioSucursalId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_SUCURSAL) ? data.SincroDates[ENTIDAD_SUCURSAL] : fechaSincronizacionDefault;
-                    data.Sucursales = ObtenerSucursalesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioSucursalId.Value);
-                }
-
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroDirectorioSectorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_SECTOR);
-
-                if (SincroDirectorioSectorId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_SECTOR) ? data.SincroDates[ENTIDAD_SECTOR] : fechaSincronizacionDefault;
-                    data.Sectores = ObtenerSectoresBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioSectorId.Value);
-                }
-
-                Int64? SincroDirectorioRelacionMonedaSucursalId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_RELACIONMONEDASUCURSAL);
-
-                if (SincroDirectorioRelacionMonedaSucursalId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_RELACIONMONEDASUCURSAL) ? data.SincroDates[ENTIDAD_RELACIONMONEDASUCURSAL] : fechaSincronizacionDefault;
-                    data.RelacionesMonedasSucursales = ObtenerRelacionesMonedasSucursalesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroDirectorioRelacionMonedaSucursalId.Value);
-                }
-
             }
             catch (Exception ex)
             {
@@ -91,7 +110,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]

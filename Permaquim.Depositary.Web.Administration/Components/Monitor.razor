@@ -625,7 +625,7 @@
                                             @bind-Settings="@gridExistenciasSettings"
                                             IsLoading="@estaCargandoGridExistencias"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
-                                            Data="@dataExistenciasDepositario.Where(x => x.DepositarioId==depositario.DepositarioId).OrderByDescending(x => x.CantidadValidada).ThenBy(x => x.Moneda)">
+                                            Data="@dataExistenciasDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                                 <Columns>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaValidada" Property="ImagenDenominacion" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)" TextAlign="TextAlign.Center"
                                                           Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("ImagenDenominacion", dataCustomizacionGrillaExistencias.AtributosColumnas)>
@@ -656,7 +656,7 @@
                                             @bind-Settings="@gridExistenciasAValidarSettings"
                                             IsLoading="@estaCargandoGridExistenciasAValidar"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
-                                            Data="@dataExistenciasAValidarDepositario.Where(x => x.DepositarioId==depositario.DepositarioId).OrderByDescending(x => x.Cantidad)">
+                                            Data="@dataExistenciasAValidarDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
                                                 <Columns>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.ExistenciaAValidar" Property="ImagenTipoValor" Title="@MultilenguajeController.ObtenerTextoPorClave("IMAGEN",dataLenguaje)" TextAlign="TextAlign.Center"
                                                           Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("ImagenTipoValor", dataCustomizacionGrillaExistenciasAValidar.AtributosColumnas)>
@@ -707,7 +707,7 @@
                                             @bind-Settings="@gridEventosSettings"
                                             IsLoading="@estaCargandoGridEventos"
                                             PageSizeOptions="@(new int[]{10,20,50,100})"
-                                            Data="@dataEventosDepositario.Where(x => x.DepositarioId==depositario.DepositarioId)">
+                                            Data="@dataEventosDepositario.Where(x => x.DepositarioId==depositario.DepositarioId).Take(100)">
                                                 <Columns>
                                                     <RadzenDataGridColumn TItem="MonitorEntities.Evento" Property="EventoID" Title="@MultilenguajeController.ObtenerTextoPorClave("EVENTOID",dataLenguaje)"
                                                           Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("EventoID", dataCustomizacionGrillaEventos.AtributosColumnas)>
@@ -1038,7 +1038,7 @@ else
         //await Task.Run(() => obtenerInformacionDepositario(args.DepositarioId));
 
         estaCargandoGridDepositarios = false;
-        await Task.Run(() => cargarInformacionTab(args.DepositarioId));
+        await Task.Run(() => cargarInformacionTab(args));
 
         //await Task.Run(() => obtenerTransaccionesPorDepositario(args.DepositarioId));
     }
@@ -1118,46 +1118,46 @@ else
         estaCargandoGridTotalesGenerales = false;
     }
 
-    private void obtenerEventosPorDepositario(Int64 pDepositarioId)
+    private void obtenerEventosPorDepositario(Int64 pDepositarioId, Int64 empresaId)
     {
         dataEventosDepositario.RemoveAll(x => x.DepositarioId == pDepositarioId);
-        dataEventosDepositario.AddRange(OperacionController.ObtenerEventosPorDepositario(pDepositarioId));
+        dataEventosDepositario.AddRange(OperacionController.ObtenerEventosPorDepositario(pDepositarioId, empresaId));
         estaCargandoGridEventos = false;
     }
 
     private async Task changeTabMonitorDepositario(int index, MonitorEntities.DepositarioMonitor depositario)
     {
-        cargarInformacionTab(depositario.DepositarioId, index);
+        cargarInformacionTab(depositario, index);
     }
 
-    private async Task cargarInformacionTab(Int64 DepositarioId, int? indice = null)
+    private async Task cargarInformacionTab(MonitorEntities.DepositarioMonitor depositario, int? indice = null)
     {
-        await Task.Run(() => obtenerInformacionDepositario(DepositarioId));
+        await Task.Run(() => obtenerInformacionDepositario(depositario.DepositarioId));
         switch (indice.HasValue ? indice.Value : selectedTab)
         {
             case 0:
                 estaCargandoGridTransacciones = true;
-                await Task.Run(() => obtenerTransaccionesPorDepositario(DepositarioId));
+                await Task.Run(() => obtenerTransaccionesPorDepositario(depositario.DepositarioId));
                 break;
             case 1:
                 estaCargandoGridTransaccionesSobres = true;
-                await Task.Run(() => obtenerTransaccionesSobrePorDepositario(DepositarioId));
+                await Task.Run(() => obtenerTransaccionesSobrePorDepositario(depositario.DepositarioId));
                 break;
             case 2:
                 estaCargandoGridExistencias = true;
-                await Task.Run(() => obtenerExistenciasPorDepositario(DepositarioId));
+                await Task.Run(() => obtenerExistenciasPorDepositario(depositario.DepositarioId));
                 break;
             case 3:
                 estaCargandoGridExistenciasAValidar = true;
-                await Task.Run(() => obtenerExistenciasAValidarPorDepositario(DepositarioId));
+                await Task.Run(() => obtenerExistenciasAValidarPorDepositario(depositario.DepositarioId));
                 break;
             case 4:
                 estaCargandoGridTotalesGenerales = true;
-                await Task.Run(() => obtenerTotalesGeneralesPorDepositario(DepositarioId));
+                await Task.Run(() => obtenerTotalesGeneralesPorDepositario(depositario.DepositarioId));
                 break;
             case 5:
                 estaCargandoGridEventos = true;
-                await Task.Run(() => obtenerEventosPorDepositario(DepositarioId));
+                await Task.Run(() => obtenerEventosPorDepositario(depositario.DepositarioId, depositario.EmpresaId));
                 break;
         }
 
@@ -1236,18 +1236,19 @@ else
         gridTransaccionDetalles.Dispose();
         gridDepositarios.Dispose();
         gridTransacciones.Dispose();
-        dataEsquemaDetalle.Clear();
-        dataLenguaje.Clear();
-        dataTotalesGeneralesDepositario.Clear();
-        dataInformacionDepositario.Clear();
-        dataExistenciasAValidarDepositario.Clear();
-        dataExistenciasDepositario.Clear();
-        dataEventosDepositario.Clear();
-        dataTransaccionSobreDetalles.Clear();
-        dataTransaccionesSobreDepositario.Clear();
-        dataTransaccionDetalles.Clear();
-        dataTransaccionesDepositario.Clear();
-        dataDepositarios.Clear();
+        dataEsquemaDetalle = null;
+        dataLenguaje = null;
+        dataTotalesGeneralesDepositario = null;
+        dataInformacionDepositario = null;
+        dataExistenciasAValidarDepositario = null;
+        dataExistenciasDepositario = null;
+        dataEventosDepositario = null;
+        dataTransaccionSobreDetalles = null;
+        dataTransaccionesSobreDepositario = null;
+        dataTransaccionDetalles = null;
+        dataTransaccionesDepositario = null;
+        dataDepositarios = null;
+
     }
 
     }

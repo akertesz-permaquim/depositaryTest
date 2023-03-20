@@ -2,6 +2,7 @@
 {
     public class VisualizacionModel
     {
+        public Int64? SynchronizationExecutionId { get; set; }
         public Dictionary<string, DateTime> SincroDates { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.PerfilTipo> Tipos { get; set; } = new();
         public List<DepositaryWebApi.Entities.Tables.Visualizacion.Perfil> Perfiles { get; set; } = new();

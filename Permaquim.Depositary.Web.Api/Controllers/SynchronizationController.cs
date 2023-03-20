@@ -2,46 +2,95 @@
 {
     public static class SynchronizationController
     {
-        private static DepositaryWebApi.Business.Tables.Sincronizacion.Entidad _bTablesEntidad = new();
-        private static DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera _bTablesEntidadCabecera = new();
-        private static DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle _bTablesEntidadDetalle = new();
-        private static DepositaryWebApi.Business.Tables.Dispositivo.Depositario _bTablesDepositario = new();
+        public static Int64? IniciarEjecucionSincronizacion(Int64 EjecucionOrigenId, bool EsPrimeraSincronizacion, Int64 DepositarioId)
+        {
+            Int64? resultado = null;
+            DepositaryWebApi.Entities.Tables.Sincronizacion.Ejecucion nuevaEjecucion = new();
 
-        public static Int64? iniciarCabeceraSincronizacion(Int64 pDepositarioId, string pNombreEntidad)
+            //Generamos un registro de ejecucion para sincronizacion
+            DepositaryWebApi.Business.Tables.Sincronizacion.Ejecucion bTablesEjecucion = new();
+            nuevaEjecucion = bTablesEjecucion.Add(new DepositaryWebApi.Entities.Tables.Sincronizacion.Ejecucion()
+            {
+                DepositarioId = DepositarioId,
+                EsPrimeraSincronizacion = EsPrimeraSincronizacion,
+                FechaFin = null,
+                FechaInicio = DateTime.Now,
+                Finalizada = false
+            });
+
+            DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera nuevaCabecera = new();
+
+            //Obtenemos el Id de la entidad para la ejecucion de sincronizacion.
+            Int64? EntidadId = ObtenerIdEntidad("Sincronizacion.Ejecucion");
+
+            if (EntidadId.HasValue)
+            {
+                //Generamos la cabecera correspondiente a la ejecucion
+                DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera bTablesEntidadCabecera = new();
+
+                nuevaCabecera = bTablesEntidadCabecera.Add(new DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera()
+                {
+                    EjecucionId = nuevaEjecucion.Id,
+                    EntidadId = EntidadId.Value,
+                    Fechainicio = DateTime.Now,
+                    Valor = "Sincronizacion.Ejecucion",
+                    Fechafin = null
+                });
+
+                DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle nuevoDetalle = new();
+
+                //Generamos el detalle de la sincronizacion para tener mapeado el ID.
+                DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle bTablesEntidadDetalle = new();
+                nuevoDetalle = bTablesEntidadDetalle.Add(new DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle()
+                {
+                    DestinoId = nuevaEjecucion.Id,
+                    EntidadCabeceraId = nuevaCabecera.Id,
+                    FechaCreacion = DateTime.Now,
+                    OrigenId = EjecucionOrigenId
+                });
+
+                //Cerramos la cabecera indicando la fecha de fin.
+                nuevaCabecera.Fechafin = DateTime.Now;
+                bTablesEntidadCabecera.Update(nuevaCabecera);
+
+                resultado = nuevaEjecucion.Id;
+            }
+
+            return resultado;
+        }
+
+        public static Int64? iniciarCabeceraSincronizacion(Int64 EjecucionId, string pNombreEntidad)
         {
             Int64? resultado = null;
             //En funcion del nombre recibido buscamos la entidad y obtenemos el id
-            using (DepositaryWebApi.Business.Tables.Sincronizacion.Entidad bTablesEntidad = new())
+            DepositaryWebApi.Business.Tables.Sincronizacion.Entidad bTablesEntidad = new();
+            bTablesEntidad.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pNombreEntidad);
+            bTablesEntidad.Items();
+
+            if (bTablesEntidad.Result.Count > 0)
             {
-                bTablesEntidad.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pNombreEntidad);
-                bTablesEntidad.Items();
+                var entidadSincronizacion = bTablesEntidad.Result.FirstOrDefault();
+                //Generamos el registro de cabecera para la sincronizacion de la entidad, con fecha de inicio y sin fecha de fin.
+                DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new();
 
-                if (bTablesEntidad.Result.Count > 0)
+                DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera eSincronizacionEntidadCabecera = new();
+
+                eSincronizacionEntidadCabecera.EntidadId = entidadSincronizacion.Id;
+                eSincronizacionEntidadCabecera.Fechainicio = DateTime.Now;
+                eSincronizacionEntidadCabecera.EjecucionId = EjecucionId;
+                eSincronizacionEntidadCabecera.Valor = entidadSincronizacion.Nombre;
+
+                try
                 {
-                    var entidadSincronizacion = bTablesEntidad.Result.FirstOrDefault();
-                    //Generamos el registro de cabecera para la sincronizacion de la entidad, con fecha de inicio y sin fecha de fin.
-                    using (DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera oSincronizacionEntidadCabecera = new())
-                    {
-                        DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera eSincronizacionEntidadCabecera = new();
+                    DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera eSincronizacionNuevaEntidadCabecera = new();
 
-                        eSincronizacionEntidadCabecera.EntidadId = entidadSincronizacion.Id;
-                        eSincronizacionEntidadCabecera.Fechainicio = DateTime.Now;
-                        eSincronizacionEntidadCabecera.DepositarioId = pDepositarioId;
-                        eSincronizacionEntidadCabecera.Valor = entidadSincronizacion.Nombre;
+                    eSincronizacionNuevaEntidadCabecera = oSincronizacionEntidadCabecera.Add(eSincronizacionEntidadCabecera);
 
-                        try
-                        {
-                            DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadCabecera eSincronizacionNuevaEntidadCabecera = new();
-
-                            eSincronizacionNuevaEntidadCabecera = oSincronizacionEntidadCabecera.Add(eSincronizacionEntidadCabecera);
-
-                            resultado = eSincronizacionNuevaEntidadCabecera.Id;
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                    }
+                    resultado = eSincronizacionNuevaEntidadCabecera.Id;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
 
@@ -53,27 +102,26 @@
             //Por defecto no se pudo registrar el cierre de la sincronizacion para la entidad.
             bool resultado = false;
             //Buscamos el registro en funcion del id recibido
-            using (DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera bTablesEntidadCabecera = new())
+            DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera bTablesEntidadCabecera = new();
+
+            bTablesEntidadCabecera.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pCabeceraSincronizacionId);
+            bTablesEntidadCabecera.Items();
+
+            if (bTablesEntidadCabecera.Result.Count > 0)
             {
-                bTablesEntidadCabecera.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pCabeceraSincronizacionId);
-                bTablesEntidadCabecera.Items();
+                var entidadSincronizacionCabecera = bTablesEntidadCabecera.Result.FirstOrDefault();
 
-                if (bTablesEntidadCabecera.Result.Count > 0)
+                //Actualizamos la fecha de cierre y hacemos el update.
+                entidadSincronizacionCabecera.Fechafin = DateTime.Now;
+
+                try
                 {
-                    var entidadSincronizacionCabecera = bTablesEntidadCabecera.Result.FirstOrDefault();
-
-                    //Actualizamos la fecha de cierre y hacemos el update.
-                    entidadSincronizacionCabecera.Fechafin = DateTime.Now;
-
-                    try
-                    {
-                        bTablesEntidadCabecera.Update(entidadSincronizacionCabecera);
-                        resultado = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    bTablesEntidadCabecera.Update(entidadSincronizacionCabecera);
+                    resultado = true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
 
@@ -85,58 +133,56 @@
             //Por defecto se indica una fecha minima para no usar nulos
             DateTime fechaUltimaSincronizacion = new(1900, 1, 1);
 
-            //En funcion del nombre recibido buscamos la entidad y obtenemos el id
-            using (DepositaryWebApi.Business.Tables.Sincronizacion.Entidad bTablesEntidad = new())
+            //En funcion del depositario se buscan las instancias de sincronizacion que se registraron
+            DepositaryWebApi.Business.Relations.Sincronizacion.Ejecucion bTablesEjecucion = new();
+            bTablesEjecucion.Where.Add(DepositaryWebApi.Business.Relations.Sincronizacion.Ejecucion.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pDepositarioId);
+            bTablesEjecucion.OrderBy.Add(DepositaryWebApi.Business.Relations.Sincronizacion.Ejecucion.ColumnEnum.FechaInicio, DepositaryWebApi.sqlEnum.DirEnum.DESC);
+            bTablesEjecucion.Items();
+
+            if (bTablesEjecucion.Result.Count > 0)
             {
-                bTablesEntidad.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pNombreEntidad);
-                bTablesEntidad.Items();
+                //Obtenemos el Id de la entidad a buscar.
+                long? EntidadId = ObtenerIdEntidad(pNombreEntidad);
 
-                if (bTablesEntidad.Result.Count > 0)
+                if (EntidadId.HasValue)
                 {
-                    //Buscamos la ultima sincro que realizo el depositario en cuestion
-                    using (DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera bTablesEntidadCabecera = new())
+                    foreach (var ejecucion in bTablesEjecucion.Result)
                     {
-                        bTablesEntidadCabecera.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, bTablesEntidad.Result.FirstOrDefault().Id);
-                        bTablesEntidadCabecera.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pDepositarioId);
-                        bTablesEntidadCabecera.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Fechafin, DepositaryWebApi.sqlEnum.OperandEnum.IsNotNull, null);
-                        bTablesEntidadCabecera.OrderBy.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.ColumnEnum.Id, DepositaryWebApi.sqlEnum.DirEnum.DESC);
-                        bTablesEntidadCabecera.Items();
-
-                        if (bTablesEntidadCabecera.Result.Count > 0)
+                        foreach (var entidadCabecera in ejecucion.ListOf_EntidadCabecera_EjecucionId.Where(x => x._EntidadId == EntidadId.Value && x.Fechafin != null))
                         {
-                            fechaUltimaSincronizacion = bTablesEntidadCabecera.Result.FirstOrDefault().Fechainicio;
+                            return entidadCabecera.Fechainicio;
                         }
                     }
                 }
             }
 
             return fechaUltimaSincronizacion;
+
         }
 
         public static Int64? guardarDetalleSincronizacion(Int64 pEntidadCabeceraId, Int64 pOrigenId, Int64 pDestinoId)
         {
             Int64? resultado = null;
             //En funcion del nombre recibido buscamos la entidad y obtenemos el id
-            using (DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle oSincronizacionEntidadDetalle = new())
+            DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle oSincronizacionEntidadDetalle = new();
+
+            DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle eSincronizacionEntidadDetalle = new();
+            DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle eNuevaSincronizacionEntidadDetalle = new();
+
+            eSincronizacionEntidadDetalle.EntidadCabeceraId = pEntidadCabeceraId;
+            eSincronizacionEntidadDetalle.FechaCreacion = DateTime.Now;
+            eSincronizacionEntidadDetalle.OrigenId = pOrigenId;
+            eSincronizacionEntidadDetalle.DestinoId = pDestinoId;
+
+            try
             {
-                DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle eSincronizacionEntidadDetalle = new();
-                DepositaryWebApi.Entities.Tables.Sincronizacion.EntidadDetalle eNuevaSincronizacionEntidadDetalle = new();
+                eNuevaSincronizacionEntidadDetalle = oSincronizacionEntidadDetalle.Add(eSincronizacionEntidadDetalle);
 
-                eSincronizacionEntidadDetalle.EntidadCabeceraId = pEntidadCabeceraId;
-                eSincronizacionEntidadDetalle.FechaCreacion = DateTime.Now;
-                eSincronizacionEntidadDetalle.OrigenId = pOrigenId;
-                eSincronizacionEntidadDetalle.DestinoId = pDestinoId;
-
-                try
-                {
-                    eNuevaSincronizacionEntidadDetalle = oSincronizacionEntidadDetalle.Add(eSincronizacionEntidadDetalle);
-
-                    resultado = eNuevaSincronizacionEntidadDetalle.Id;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                resultado = eNuevaSincronizacionEntidadDetalle.Id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return resultado;
@@ -147,68 +193,21 @@
             Int64? resultado = null;
 
             //En funcion del nombre recibido buscamos la entidad y obtenemos el id con el que se guardo
-            //DepositaryWebApi.Business.Procedures.Sincronizacion.ObtenerIdDestino obtenerIdDestino = new();
+            DepositaryWebApi.Business.Procedures.Sincronizacion.ObtenerIdDestino obtenerIdDestino = new();
 
-            //try
-            //{
-            //    obtenerIdDestino.Items(pEntidadNombre, pDepositarioId, pIdOrigen);
-
-            //    if(obtenerIdDestino.Resultset.Count>0)
-            //    {
-            //        return obtenerIdDestino.Resultset.FirstOrDefault().DestinoId;
-            //    }
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    AuditController.Log(ex);
-            //    throw (ex);
-            //}
-
-            using (DepositaryWebApi.Business.Tables.Sincronizacion.Entidad bTablesEntidad = new())
+            try
             {
+                obtenerIdDestino.Items(pEntidadNombre, pIdOrigen, pDepositarioId);
 
-                bTablesEntidad.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pEntidadNombre);
-
-                bTablesEntidad.Items();
-
-                if (bTablesEntidad.Result.Count > 0)
+                if (obtenerIdDestino.Resultset.Count > 0)
                 {
-                    Int64 pEntidadId = bTablesEntidad.Result.FirstOrDefault().Id;
-
-                    using (DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera bTablesEntidadCabecera = new())
-                    {
-
-                        bTablesEntidadCabecera.Where.Add(DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pEntidadId);
-                        bTablesEntidadCabecera.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera.ColumnEnum.DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pDepositarioId);
-
-                        bTablesEntidadCabecera.Items();
-
-                        if (bTablesEntidadCabecera.Result.Count > 0)
-                        {
-                            foreach (var entidadCabecera in bTablesEntidadCabecera.Result)
-                            {
-                                var detalles = entidadCabecera.ListOf_EntidadDetalle_EntidadCabeceraId.FirstOrDefault(x => x.OrigenId == pIdOrigen);
-
-                                if (detalles != null)
-                                {
-                                    return detalles.DestinoId;
-                                }
-
-                                //using (DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle bTablesEntidadDetalle = new())
-                                //{
-                                //    bTablesEntidadDetalle.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.EntidadCabeceraId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, entidadCabecera.Id);
-                                //    bTablesEntidadDetalle.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle.ColumnEnum.OrigenId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, pIdOrigen);
-
-                                //    bTablesEntidadDetalle.Items();
-
-                                //    if (bTablesEntidadDetalle.Result.Count > 0)
-                                //        return bTablesEntidadDetalle.Result.FirstOrDefault().DestinoId;
-                                //}
-                            }
-                        }
-                    }
+                    return obtenerIdDestino.Resultset.FirstOrDefault().DestinoId;
                 }
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+                throw ex;
             }
 
             return resultado;
@@ -216,14 +215,28 @@
 
         public static long ObtenerIdDepositario(string codigoExterno)
         {
-            using (DepositaryWebApi.Business.Tables.Dispositivo.Depositario bTablesDepositario = new())
-            {
-                bTablesDepositario.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
-                    DepositaryWebApi.sqlEnum.OperandEnum.Equal, codigoExterno);
-                bTablesDepositario.Items();
+            DepositaryWebApi.Business.Tables.Dispositivo.Depositario bTablesDepositario = new();
+            bTablesDepositario.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
+                DepositaryWebApi.sqlEnum.OperandEnum.Equal, codigoExterno);
+            bTablesDepositario.Items();
 
-                return bTablesDepositario.Result.FirstOrDefault().Id;
-            }
+            return bTablesDepositario.Result.FirstOrDefault().Id;
+        }
+
+        public static long? ObtenerIdEntidad(string nombreEntidad)
+        {
+            long? resultado = null;
+
+            DepositaryWebApi.Business.Tables.Sincronizacion.Entidad bTablesEntidad = new();
+            bTablesEntidad.Where.Add(DepositaryWebApi.Business.Tables.Sincronizacion.Entidad.ColumnEnum.Nombre,
+                DepositaryWebApi.sqlEnum.OperandEnum.Equal, nombreEntidad);
+            bTablesEntidad.TopQuantity = 1;
+            bTablesEntidad.Items();
+
+            if (bTablesEntidad.Result.Count > 0)
+                resultado = bTablesEntidad.Result.FirstOrDefault().Id;
+
+            return resultado;
         }
     }
 }

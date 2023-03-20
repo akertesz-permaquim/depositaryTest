@@ -869,12 +869,15 @@ namespace Permaquim.Depositary.Sincronization.Console
                             Int64? grupoIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Directorio_Grupo, item.GrupoId);
                             Int64? estiloEsquemaIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Estilo_Esquema, item.EstiloEsquemaId);
                             Int64? lenguajeIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Regionalizacion_Lenguaje, item.LenguajeId);
+                            Int64? codigoPostalIdOrigen = SynchronizationController.ObtenerIdDestinoDetalleSincronizacionInicial(Enumerations.EntitiesEnum.Geografia_CodigoPostal, item.CodigoPostalId);
 
-                            if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue)
+                            if (grupoIdOrigen.HasValue && estiloEsquemaIdOrigen.HasValue && lenguajeIdOrigen.HasValue && codigoPostalIdOrigen.HasValue)
                             {
                                 item.GrupoId = grupoIdOrigen.Value;
 
                                 item.EstiloEsquemaId = estiloEsquemaIdOrigen.Value;
+
+                                item.CodigoPostalId = codigoPostalIdOrigen.Value;
 
                                 item.LenguajeId = lenguajeIdOrigen.Value;
 

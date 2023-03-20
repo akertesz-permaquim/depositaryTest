@@ -29,7 +29,7 @@ namespace Permaquim.Depositary.Web.Api.Security
 
             return sb.ToString();
         }
-        public static string Encrypt(string textToEncrypt, string key)
+        internal static string Encrypt(string textToEncrypt, string key)
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentException("Key must have valid value.", nameof(key));
@@ -66,8 +66,6 @@ namespace Permaquim.Depositary.Web.Api.Security
                 }
             }
         }
-
-
         public static string Decrypt(this string textToDecrypt, string key)
         {
             if (string.IsNullOrEmpty(key))

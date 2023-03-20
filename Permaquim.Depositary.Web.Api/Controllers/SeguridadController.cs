@@ -38,147 +38,168 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [Authorize]
         public async Task<IActionResult> ObtenerSeguridad([FromBody] SeguridadModel data)
         {
-            //Por defecto se indica una fecha minima para no usar nulos
-            DateTime fechaSincronizacionDefault = new(1900, 1, 1);
-
-            Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
-
             try
             {
-                //Iniciamos un registro de sincronizacion de la entidad.
-                Int64? SincroSeguridadAplicacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_APLICACION);
+                Int64 depositarioId = JwtController.GetDepositaryId(HttpContext, _configuration);
 
-                if (SincroSeguridadAplicacionId.HasValue)
+                if (data.SynchronizationExecutionId.HasValue)
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_APLICACION) ? data.SincroDates[ENTIDAD_APLICACION] : fechaSincronizacionDefault;
-                    data.Aplicaciones = ObtenerAplicacionesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadAplicacionId.Value);
+
+                    //Por defecto se indica una fecha minima para no usar nulos
+                    DateTime fechaSincronizacionDefault = new(1900, 1, 1);
+
+                    Int64? EjecucionId = SynchronizationController.obtenerIdDestinoDetalleSincronizacion("Sincronizacion.Ejecucion", depositarioId, data.SynchronizationExecutionId.Value);
+
+                    if (EjecucionId.HasValue)
+                    {
+
+                        //Iniciamos un registro de sincronizacion de la entidad.
+                        Int64? SincroSeguridadAplicacionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_APLICACION);
+
+                        if (SincroSeguridadAplicacionId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_APLICACION) ? data.SincroDates[ENTIDAD_APLICACION] : fechaSincronizacionDefault;
+                            data.Aplicaciones = ObtenerAplicacionesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadAplicacionId.Value);
+                        }
+
+                        Int64? SincroSeguridadAplicacionParametroId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_APLICACIONPARAMETRO);
+
+                        if (SincroSeguridadAplicacionParametroId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_APLICACIONPARAMETRO) ? data.SincroDates[ENTIDAD_APLICACIONPARAMETRO] : fechaSincronizacionDefault;
+                            data.AplicacionesParametros = ObtenerAplicacionesParametrosBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadAplicacionParametroId.Value);
+                        }
+
+                        Int64? SincroSeguridadAplicacionParametroValorId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_APLICACIONPARAMETROVALOR);
+
+                        if (SincroSeguridadAplicacionParametroValorId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_APLICACIONPARAMETROVALOR) ? data.SincroDates[ENTIDAD_APLICACIONPARAMETROVALOR] : fechaSincronizacionDefault;
+                            data.AplicacionesParametrosValores = ObtenerAplicacionesParametrosValoresBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadAplicacionParametroValorId.Value);
+                        }
+
+                        Int64? SincroSeguridadTipoIdentificadorId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOIDENTIFICADOR);
+
+                        if (SincroSeguridadTipoIdentificadorId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOIDENTIFICADOR) ? data.SincroDates[ENTIDAD_TIPOIDENTIFICADOR] : fechaSincronizacionDefault;
+                            data.TiposIdentificadores = ObtenerTiposIdentificadoresBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoIdentificadorId.Value);
+                        }
+
+                        Int64? SincroSeguridadIdentificadorUsuarioId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_IDENTIFICADORUSUARIO);
+
+                        if (SincroSeguridadIdentificadorUsuarioId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_IDENTIFICADORUSUARIO) ? data.SincroDates[ENTIDAD_IDENTIFICADORUSUARIO] : fechaSincronizacionDefault;
+                            data.IdentificadoresUsuarios = ObtenerIdentificadoresUsuariosBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadIdentificadorUsuarioId.Value);
+                        }
+
+                        Int64? SincroSeguridadRolId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_ROL);
+
+                        if (SincroSeguridadRolId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ROL) ? data.SincroDates[ENTIDAD_ROL] : fechaSincronizacionDefault;
+                            data.Roles = ObtenerRolesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadRolId.Value);
+                        }
+
+                        Int64? SincroSeguridadUsuarioId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_USUARIO);
+
+                        if (SincroSeguridadUsuarioId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_USUARIO) ? data.SincroDates[ENTIDAD_USUARIO] : fechaSincronizacionDefault;
+                            data.Usuarios = ObtenerUsuariosBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadUsuarioId.Value);
+                        }
+
+                        Int64? SincroSeguridadUsuarioRolId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_USUARIOROL);
+
+                        if (SincroSeguridadUsuarioRolId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_USUARIOROL) ? data.SincroDates[ENTIDAD_USUARIOROL] : fechaSincronizacionDefault;
+                            data.UsuariosRoles = ObtenerUsuariosRolesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadUsuarioRolId.Value);
+                        }
+
+                        Int64? SincroSeguridadUsuarioSectorId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_USUARIOSECTOR);
+
+                        if (SincroSeguridadUsuarioSectorId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_USUARIOSECTOR) ? data.SincroDates[ENTIDAD_USUARIOSECTOR] : fechaSincronizacionDefault;
+                            data.UsuariosSectores = ObtenerUsuariosSectoresBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadUsuarioSectorId.Value);
+                        }
+
+                        Int64? SincroSeguridadTipoAplicacionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOAPLICACION);
+
+                        if (SincroSeguridadTipoAplicacionId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOAPLICACION) ? data.SincroDates[ENTIDAD_TIPOAPLICACION] : fechaSincronizacionDefault;
+                            data.TiposAplicaciones = ObtenerTiposAplicacionesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoAplicacionId.Value);
+                        }
+
+                        Int64? SincroSeguridadTipoFuncionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOFUNCION);
+
+                        if (SincroSeguridadTipoFuncionId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOFUNCION) ? data.SincroDates[ENTIDAD_TIPOFUNCION] : fechaSincronizacionDefault;
+                            data.TiposFunciones = ObtenerTiposFuncionesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoFuncionId.Value);
+                        }
+
+                        Int64? SincroSeguridadTipoMenuId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_TIPOMENU);
+
+                        if (SincroSeguridadTipoMenuId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOMENU) ? data.SincroDates[ENTIDAD_TIPOMENU] : fechaSincronizacionDefault;
+                            data.TiposMenues = ObtenerTiposMenuesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoMenuId.Value);
+                        }
+
+                        Int64? SincroSeguridadFuncionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_FUNCION);
+
+                        if (SincroSeguridadFuncionId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_FUNCION) ? data.SincroDates[ENTIDAD_FUNCION] : fechaSincronizacionDefault;
+                            data.Funciones = ObtenerFuncionesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadFuncionId.Value);
+                        }
+
+                        Int64? SincroSeguridadRolFuncionId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_ROLFUNCION);
+
+                        if (SincroSeguridadRolFuncionId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ROLFUNCION) ? data.SincroDates[ENTIDAD_ROLFUNCION] : fechaSincronizacionDefault;
+                            data.RolesFunciones = ObtenerRolesFuncionesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadRolFuncionId.Value);
+                        }
+
+                        Int64? SincroSeguridadMenuId = SynchronizationController.iniciarCabeceraSincronizacion(EjecucionId.Value, ENTIDAD_MENU);
+
+                        if (SincroSeguridadMenuId.HasValue)
+                        {
+                            var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MENU) ? data.SincroDates[ENTIDAD_MENU] : fechaSincronizacionDefault;
+                            data.Menues = ObtenerMenuesBD(fechaDiferencial);
+                            SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadMenuId.Value);
+                        }
+                        return Ok(data);
+                    }
+                    else
+                    {
+                        AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                        return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ROW_GENERATED);
+                    }
                 }
-
-                Int64? SincroSeguridadAplicacionParametroId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_APLICACIONPARAMETRO);
-
-                if (SincroSeguridadAplicacionParametroId.HasValue)
+                else
                 {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_APLICACIONPARAMETRO) ? data.SincroDates[ENTIDAD_APLICACIONPARAMETRO] : fechaSincronizacionDefault;
-                    data.AplicacionesParametros = ObtenerAplicacionesParametrosBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadAplicacionParametroId.Value);
-                }
-
-                Int64? SincroSeguridadAplicacionParametroValorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_APLICACIONPARAMETROVALOR);
-
-                if (SincroSeguridadAplicacionParametroValorId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_APLICACIONPARAMETROVALOR) ? data.SincroDates[ENTIDAD_APLICACIONPARAMETROVALOR] : fechaSincronizacionDefault;
-                    data.AplicacionesParametrosValores = ObtenerAplicacionesParametrosValoresBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadAplicacionParametroValorId.Value);
-                }
-
-                Int64? SincroSeguridadTipoIdentificadorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOIDENTIFICADOR);
-
-                if (SincroSeguridadTipoIdentificadorId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOIDENTIFICADOR) ? data.SincroDates[ENTIDAD_TIPOIDENTIFICADOR] : fechaSincronizacionDefault;
-                    data.TiposIdentificadores = ObtenerTiposIdentificadoresBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoIdentificadorId.Value);
-                }
-
-                Int64? SincroSeguridadIdentificadorUsuarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_IDENTIFICADORUSUARIO);
-
-                if (SincroSeguridadIdentificadorUsuarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_IDENTIFICADORUSUARIO) ? data.SincroDates[ENTIDAD_IDENTIFICADORUSUARIO] : fechaSincronizacionDefault;
-                    data.IdentificadoresUsuarios = ObtenerIdentificadoresUsuariosBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadIdentificadorUsuarioId.Value);
-                }
-
-                Int64? SincroSeguridadRolId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ROL);
-
-                if (SincroSeguridadRolId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ROL) ? data.SincroDates[ENTIDAD_ROL] : fechaSincronizacionDefault;
-                    data.Roles = ObtenerRolesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadRolId.Value);
-                }
-
-                Int64? SincroSeguridadUsuarioId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_USUARIO);
-
-                if (SincroSeguridadUsuarioId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_USUARIO) ? data.SincroDates[ENTIDAD_USUARIO] : fechaSincronizacionDefault;
-                    data.Usuarios = ObtenerUsuariosBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadUsuarioId.Value);
-                }
-
-                Int64? SincroSeguridadUsuarioRolId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_USUARIOROL);
-
-                if (SincroSeguridadUsuarioRolId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_USUARIOROL) ? data.SincroDates[ENTIDAD_USUARIOROL] : fechaSincronizacionDefault;
-                    data.UsuariosRoles = ObtenerUsuariosRolesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadUsuarioRolId.Value);
-                }
-
-                Int64? SincroSeguridadUsuarioSectorId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_USUARIOSECTOR);
-
-                if (SincroSeguridadUsuarioSectorId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_USUARIOSECTOR) ? data.SincroDates[ENTIDAD_USUARIOSECTOR] : fechaSincronizacionDefault;
-                    data.UsuariosSectores = ObtenerUsuariosSectoresBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadUsuarioSectorId.Value);
-                }
-
-                Int64? SincroSeguridadTipoAplicacionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOAPLICACION);
-
-                if (SincroSeguridadTipoAplicacionId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOAPLICACION) ? data.SincroDates[ENTIDAD_TIPOAPLICACION] : fechaSincronizacionDefault;
-                    data.TiposAplicaciones = ObtenerTiposAplicacionesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoAplicacionId.Value);
-                }
-
-                Int64? SincroSeguridadTipoFuncionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOFUNCION);
-
-                if (SincroSeguridadTipoFuncionId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOFUNCION) ? data.SincroDates[ENTIDAD_TIPOFUNCION] : fechaSincronizacionDefault;
-                    data.TiposFunciones = ObtenerTiposFuncionesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoFuncionId.Value);
-                }
-
-                Int64? SincroSeguridadTipoMenuId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_TIPOMENU);
-
-                if (SincroSeguridadTipoMenuId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_TIPOMENU) ? data.SincroDates[ENTIDAD_TIPOMENU] : fechaSincronizacionDefault;
-                    data.TiposMenues = ObtenerTiposMenuesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadTipoMenuId.Value);
-                }
-
-                Int64? SincroSeguridadFuncionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_FUNCION);
-
-                if (SincroSeguridadFuncionId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_FUNCION) ? data.SincroDates[ENTIDAD_FUNCION] : fechaSincronizacionDefault;
-                    data.Funciones = ObtenerFuncionesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadFuncionId.Value);
-                }
-
-                Int64? SincroSeguridadRolFuncionId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_ROLFUNCION);
-
-                if (SincroSeguridadRolFuncionId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_ROLFUNCION) ? data.SincroDates[ENTIDAD_ROLFUNCION] : fechaSincronizacionDefault;
-                    data.RolesFunciones = ObtenerRolesFuncionesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadRolFuncionId.Value);
-                }
-
-                Int64? SincroSeguridadMenuId = SynchronizationController.iniciarCabeceraSincronizacion(depositarioId, ENTIDAD_MENU);
-
-                if (SincroSeguridadMenuId.HasValue)
-                {
-                    var fechaDiferencial = data.SincroDates.ContainsKey(ENTIDAD_MENU) ? data.SincroDates[ENTIDAD_MENU] : fechaSincronizacionDefault;
-                    data.Menues = ObtenerMenuesBD(fechaDiferencial);
-                    SynchronizationController.finalizarCabeceraSincronizacion(SincroSeguridadMenuId.Value);
+                    AuditController.Log("Depositario: " + depositarioId.ToString() + " " + Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
+                    return BadRequest(Global.Constants.ERROR_NO_SYNCHRONIZATION_ID_SENT);
                 }
             }
             catch (Exception ex)
@@ -187,7 +208,6 @@ namespace Permaquim.Depositary.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Ok(data);
         }
 
         [HttpGet]

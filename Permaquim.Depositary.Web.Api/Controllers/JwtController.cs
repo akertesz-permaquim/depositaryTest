@@ -14,19 +14,17 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             Int64? depositaryId = null;
             //if (_depositaryId == null)
             //{
-            using (DepositaryWebApi.Business.Tables.Dispositivo.Depositario bTablesDepositario = new())
+            DepositaryWebApi.Business.Tables.Dispositivo.Depositario bTablesDepositario = new();
+
+            bTablesDepositario.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
+            bTablesDepositario.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
+                DepositaryWebApi.sqlEnum.OperandEnum.Equal, GetDepositaryCode(context, configuration));
+
+            bTablesDepositario.Items();
+
+            if (bTablesDepositario.Result.Count != 0)
             {
-
-                bTablesDepositario.Where.Add(DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, true);
-                bTablesDepositario.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, DepositaryWebApi.Business.Tables.Dispositivo.Depositario.ColumnEnum.CodigoExterno,
-                    DepositaryWebApi.sqlEnum.OperandEnum.Equal, GetDepositaryCode(context, configuration));
-
-                bTablesDepositario.Items();
-
-                if (bTablesDepositario.Result.Count != 0)
-                {
-                    depositaryId = bTablesDepositario.Result.FirstOrDefault().Id;
-                }
+                depositaryId = bTablesDepositario.Result.FirstOrDefault().Id;
             }
 
             return depositaryId.Value;

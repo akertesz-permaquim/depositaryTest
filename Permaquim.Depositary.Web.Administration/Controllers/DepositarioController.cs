@@ -667,34 +667,34 @@
         {
             List<Int64> resultado = new();
 
-            Depositary.Business.Relations.Directorio.Empresa bRelationsEmpresa = new();
-            
-            bRelationsEmpresa.Where.Clear();
-            bRelationsEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-            if (pEmpresas.Count > 0)
-                bRelationsEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, pEmpresas);
-
-            bRelationsEmpresa.Items();
-
-            if (bRelationsEmpresa.Result.Count > 0)
+            using (Depositary.Business.Relations.Directorio.Empresa bRelationsEmpresa = new())
             {
-                foreach (var empresa in bRelationsEmpresa.Result)
+                bRelationsEmpresa.Where.Clear();
+                bRelationsEmpresa.Where.Add(Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                if (pEmpresas.Count > 0)
+                    bRelationsEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Relations.Directorio.Empresa.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.In, pEmpresas);
+
+                bRelationsEmpresa.Items();
+
+                if (bRelationsEmpresa.Result.Count > 0)
                 {
-                    foreach (var sucursal in empresa.ListOf_Sucursal_EmpresaId)
+                    foreach (var empresa in bRelationsEmpresa.Result)
                     {
-                        foreach (var sector in sucursal.ListOf_Sector_SucursalId)
+                        foreach (var sucursal in empresa.ListOf_Sucursal_EmpresaId)
                         {
-                            foreach (var depositario in sector.ListOf_Depositario_SectorId.Where(x => x.Habilitado == true))
+                            foreach (var sector in sucursal.ListOf_Sector_SucursalId)
                             {
-                                resultado.Add(depositario.Id);
+                                foreach (var depositario in sector.ListOf_Depositario_SectorId.Where(x => x.Habilitado == true))
+                                {
+                                    resultado.Add(depositario.Id);
+                                }
                             }
                         }
                     }
                 }
             }
-
-
             return resultado;
+
         }
 
         #endregion
