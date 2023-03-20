@@ -53,7 +53,7 @@ catch (Exception ex)
     private string colorPrimarioSpinner;
     private string colorSecundarioSpinner;
 
-    private RadzenBody body0;
+    private RadzenBody? body0;
 
     protected override void OnInitialized()
     {
@@ -77,7 +77,10 @@ catch (Exception ex)
     void IDisposable.Dispose()
     {
         dataEsquemaDetalle = null;
-        body0.Dispose();
+
+        if (body0 != null)
+            body0.Dispose();
+
     }
 }
 

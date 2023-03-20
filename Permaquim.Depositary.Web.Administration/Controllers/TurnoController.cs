@@ -1,4 +1,6 @@
-﻿namespace Permaquim.Depositary.Web.Administration.Controllers
+﻿using Permaquim.Depositary.Web.Administration.TurnoEntities;
+
+namespace Permaquim.Depositary.Web.Administration.Controllers
 {
     public static class TurnoController
     {
@@ -190,6 +192,22 @@
                     resultado = ex.Message;
                 }
             }
+
+            return resultado;
+        }
+
+        public static bool ValidarDeshabilitadoTurno(Int64 sectorId, DateTime fechaTurno)
+        {
+            bool resultado = false;
+
+            //Verificamos que el turno que se quiere deshabilitar no sea anterior o de la misma fecha respecto del turno abierto o del ultimo turno procesado.
+            Depositary.Business.Tables.Operacion.Turno oTurno = new();
+            oTurno.Where.Add(Depositary.Business.Tables.Operacion.Turno.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, sectorId);
+            oTurno.Where.Add(sqlEnum.ConjunctionEnum.AND,Depositary.Business.Tables.Operacion.Turno.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, fechaTurno);
+            oTurno.Items();
+
+            if (oTurno.Result.Count == 0)
+                resultado = true;
 
             return resultado;
         }

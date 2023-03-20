@@ -321,7 +321,7 @@
                 }
             }
 
-            return resultado;
+            return resultado.OrderByDescending(x => x.CantidadValidada).ThenBy(x => x.Moneda).ToList();
         }
 
         public static List<MonitorEntities.ExistenciaAValidar> ObtenerExistenciasAValidarPorDepositario(Int64 pDepositarioID)
@@ -367,7 +367,7 @@
 
                 }
             }
-            return resultado;
+            return resultado.OrderByDescending(x => x.Cantidad).ToList();
 
         }
 
@@ -375,15 +375,21 @@
 
         #region Eventos
 
-        public static List<MonitorEntities.Evento> ObtenerEventosPorDepositario(Int64 pDepositarioId)
+        public static List<MonitorEntities.Evento> ObtenerEventosPorDepositario(Int64 pDepositarioId, Int64 empresaId)
         {
             List<MonitorEntities.Evento> resultado = new();
 
             using (Depositary.Business.Relations.Operacion.Evento oEvento = new())
             {
+                int CantidadEventosVisibles;
+                if (!int.TryParse(AplicacionController.ObtenerConfiguracionEmpresa("CANTIDAD_EVENTOS_VISIBLES", empresaId), out CantidadEventosVisibles))
+                {
+                    CantidadEventosVisibles = 100;
+                }
+
                 oEvento.Where.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, pDepositarioId);
                 oEvento.OrderBy.Add(Depositary.Business.Relations.Operacion.Evento.ColumnEnum.Fecha, Depositary.sqlEnum.DirEnum.DESC);
-
+                oEvento.TopQuantity = CantidadEventosVisibles;
                 oEvento.Items();
 
                 foreach (var evento in oEvento.Result)

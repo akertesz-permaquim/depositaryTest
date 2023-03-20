@@ -1,6 +1,8 @@
 @page "/ReporteTransaccionesView"
 @using Permaquim.Depositary.Web.Administration.Controllers;
 
+@implements IDisposable
+
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
@@ -111,7 +113,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownContenedores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosTransaccionesView.contenedoresSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_CONTENEDORES",dataLenguaje)" Data=@dataContenedores TextProperty="NombreIdentificador" ValueProperty="ContenedorId"
-                                                    Class="w-100" />
+                                                        Class="w-100" />
                                     </div>
                                 </td>
                                 <td>
@@ -124,7 +126,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownTurnos" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosTransaccionesView.turnosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_TURNOS",dataLenguaje)" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
-                                                    Class="w-100" />
+                                                        Class="w-100" />
                                     </div>
                                 </td>
                                 <td>
@@ -137,7 +139,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownUsuarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosTransaccionesView.usuariosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_USUARIOS",dataLenguaje)" Data=@dataUsuarios TextProperty="NombreyApellido" ValueProperty="UsuarioId"
-                                                    Class="w-100" />
+                                                        Class="w-100" />
                                     </div>
                                 </td>
                             </tr>
@@ -152,7 +154,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosTransaccionesView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
-                                                    Class="w-100" />
+                                                        Class="w-100" />
                                     </div>
                                 </td>
                                 <td>
@@ -165,7 +167,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownOrigenes" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosTransaccionesView.origenesSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_ORIGENES",dataLenguaje)" Data=@dataOrigenes TextProperty="OrigenNombre" ValueProperty="OrigenId"
-                                                    Class="w-100" />
+                                                        Class="w-100" />
                                     </div>
                                 </td>
                                 <td>
@@ -211,7 +213,7 @@ else
             }
         }
         <RadzenDataGrid id="gridTransaccionesViews" @ref="@gridTransaccionesView" Render="@ReportRender" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" RowExpand="@expandirTransacion" CellRender="@transaccionCellRender" RowCollapse="@colapsarTransaccion" PageSizeOptions="@(new int[]{10,20,50,100})" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                    Data="@dataTransaccionesView.OrderByDescending(x => x.FechaTransaccion)" TItem="ResultReporte" ColumnWidth="300px" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" LogicalFilterOperator="LogicalFilterOperator.Or" s
+                    Data="@dataTransaccionesView" TItem="ResultReporte" ColumnWidth="300px" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" LogicalFilterOperator="LogicalFilterOperator.Or" s
                     @bind-Settings="@GridSettings"
                     AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)>
             <EmptyTemplate>
@@ -730,6 +732,7 @@ else
             if (parametrosTransaccionesView.codigoOperacion != string.Empty && parametrosTransaccionesView.codigoOperacion != null)
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.CodigoOperacion, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosTransaccionesView.codigoOperacion + "%");
 
+            entity.OrderBy.Add(Business.Views.Reporte.Transacciones.ColumnEnum.FechaTransaccion, sqlEnum.DirEnum.DESC);
 
             transacciones = entity.Items();
 
@@ -759,6 +762,7 @@ else
                     resultReporte.CodigoOperacion = transaccion.CodigoOperacion;
 
                     dataTransaccionesView.Add(resultReporte);
+
                 }
 
             }
@@ -785,5 +789,36 @@ else
         }
     }
 
-    #endregion
+    void IDisposable.Dispose()
+    {
+
+        DetalleTransacciones_entities = null;
+        dataTransaccionesView = null;
+        dataUsuario = null;
+        rowsTransaccionesExpandidas = null;
+        dataLenguaje = null;
+        GridSettings = null;
+        dataCustomizacionPagina = null;
+
+        empresasUsuario = null;
+        sucursalesUsuario = null;
+        sectoresUsuario = null;
+        depositariosUsuario = null;
+
+        dataEmpresasCombo = null;
+        dataSucursalesCombo = null;
+        dataSectoresCombo = null;
+        dataDepositariosCombo = null;
+
+        dataOrigenes = null;
+        dataContenedores = null;
+        dataUsuarios = null;
+        dataTurnos = null;
+
+        parametrosTransaccionesView = null;
+
+        GC.Collect(2, GCCollectionMode.Forced);
     }
+
+    #endregion
+}
