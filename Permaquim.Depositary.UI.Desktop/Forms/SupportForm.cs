@@ -323,10 +323,13 @@ namespace Permaquim.Depositary.UI.Desktop
 
         private void EscrowButton_Click(object sender, EventArgs e)
         {
-            if (!_device.StateResultProperty.DoorStateInformation.Escrow)
-                _device.OpenEscrow();
-            else
-                _device.CloseEscrow();
+            if (_device.StateResultProperty != null)
+            {
+                if (!_device.StateResultProperty.DoorStateInformation.Escrow)
+                    _device.OpenEscrow();
+                else
+                    _device.CloseEscrow();
+            }
         }
     }
 }

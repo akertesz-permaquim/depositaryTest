@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-16"?>
+<GenerationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NetVersion>Net40</NetVersion>
+  <GarbageCollectionCode />
+  <UsesExplicitGarbageCollection>false</UsesExplicitGarbageCollection>
+  <SupportedCharacters />
+  <ConnectionStringName />
+  <ChildrenPrefix />
+  <EntityDisplayName />
+  <DisableNamespaceSchema>false</DisableNamespaceSchema>
+  <MultiQuery>true</MultiQuery>
+  <UseWithNolock>false</UseWithNolock>
+  <IncludeGenerationInformation>false</IncludeGenerationInformation>
+  <SerializeEntitiesClases>true</SerializeEntitiesClases>
+  <Namespace />
+  <ShowSystemData>false</ShowSystemData>
+  <BuildRelations>true</BuildRelations>
+  <ForceNullableDatetime>false</ForceNullableDatetime>
+  <OverrideEntityDisplayName>false</OverrideEntityDisplayName>
+  <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
+  <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
+  <DbDriver>SQL</DbDriver>
+  <ConnectionString />
+  <SelectedViews />
+  <SelectedStoredProcedures />
+  <UnselectedStoredProcedures />
+  <MappedStoredProcedures />
+  <SelectedTables />
+  <SelectedTemplates />
+  <Location />
+  <UsesEncription>false</UsesEncription>
+</GenerationProject>

@@ -571,9 +571,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             entities.Where.Add(Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Habilitado,
                 Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
 
-            entities.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
-                Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Id,
-            Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
             return entities.Items();
         }
         public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor CreateContainer()
