@@ -139,6 +139,9 @@ namespace Permaquim.Depositary.UI.Desktop
 
             if (this.Visible)
             {
+                if (ParameterController.UsesShutter)
+                    _device.OpenShutter();
+
                 _device.DeviceStateChange += DeviceStateChange;
 
                 AuditController.Log(LogTypeEnum.Navigation, DEPOSITO_BILLETE, DEPOSITO_BILLETE);
@@ -164,6 +167,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 _device.DeviceStateChange -= DeviceStateChange;
                 InitializeLocals();
                 _device.RemoteCancel();
+                if (ParameterController.UsesShutter)
+                    _device.CloseShutter();
             }
             _pollingTimer.Enabled = this.Visible;
 
@@ -845,9 +850,6 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             TimeOutController.Reset();
             CancelDepositButton.Visible = false;
-            if (ParameterController.UsesShutter)
-                _device.Open();
-
             _device.StoringStart();
 
             _device.PreviousState = StatusInformation.State.PQStoring;
@@ -898,8 +900,6 @@ namespace Permaquim.Depositary.UI.Desktop
             CleanDetectedBills();
             FormsController.SetInformationMessage(InformationTypeEnum.Information,
                  MultilanguangeController.GetText(MultiLanguageEnum.FIN_DEPOSITO));
-            if (ParameterController.UsesShutter)
-                _device.Close();
 
             _operationStatus.DepositCancelled = false;
 
@@ -932,7 +932,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 _operationStatus.StackerFullCondition = true;
                 TimeOutController.Reset();
                 if (ParameterController.UsesShutter)
-                    _device.Open();
+                    _device.OpenShutter();
                 _device.StoringStart();
             }
         }

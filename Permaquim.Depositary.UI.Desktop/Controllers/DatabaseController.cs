@@ -1996,9 +1996,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     {
                         for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                         {
-                            ReportController.PrintReport(ReportTypeEnum.DailyClosing,
-                                DatabaseController.GetDailyClosingEnvelopeBagContentItems(CurrentDailyClosing.Id),
-                                DatabaseController.GetDailyClosingTransactions(CurrentDailyClosing.Id), i);
+                            if (CurrentDailyClosing != null)
+                            {
+                                ReportController.PrintReport(ReportTypeEnum.DailyClosing,
+                                    DatabaseController.GetDailyClosingEnvelopeBagContentItems(CurrentDailyClosing.Id),
+                                    DatabaseController.GetDailyClosingTransactions(CurrentDailyClosing.Id), i);
+                            }
                         }
                     }
                 }

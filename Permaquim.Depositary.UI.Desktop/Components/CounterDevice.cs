@@ -1096,7 +1096,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         #endregion
         #region IO board Commands 
-        public bool Open()
+        public bool OpenShutter()
         {
             int millisecondsTimeout = 1800;
             try
@@ -1115,7 +1115,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 return false;
             }
         }
-        public bool Close()
+        public bool CloseShutter()
         {
             int millisecondsTimeout = 1800;
             try

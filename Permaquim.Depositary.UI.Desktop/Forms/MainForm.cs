@@ -870,16 +870,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             else
             {
-                // Chequeo de cambio de fecha
-                if (DateTime.Today > DatabaseController.CurrentTurn.Fecha)
-                {
-                    if (_turnAutoClose && DatabaseController.CurrentUser != null)
-                    {
-                        _pollingTimer.Enabled= false;
-                        DatabaseController.ClosePendingTurns();
-                        _pollingTimer.Enabled = true;
-                    }
-                }
+                VerifyDayclosing();
 
                 string turnDate = string.Empty;
                 if (DatabaseController.CurrentTurn.Fecha != null)
@@ -890,6 +881,20 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
 
             TurnAndDateTimeLabel.Text += Environment.NewLine + DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
+        }
+
+        private void VerifyDayclosing()
+        {
+            // Chequeo de cambio de fecha
+            if (DateTime.Today > DatabaseController.CurrentTurn.Fecha)
+            {
+                if (_turnAutoClose)
+                {
+                    _pollingTimer.Enabled = false;
+                    DatabaseController.ClosePendingTurns();
+                    _pollingTimer.Enabled = true;
+                }
+            }
         }
 
         private void MainPanel_MouseClick(object sender, MouseEventArgs e)

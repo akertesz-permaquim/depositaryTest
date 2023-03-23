@@ -89,10 +89,10 @@ namespace Permaquim.Depositary.UI.Desktop
             switch (IoboardCommandComboBox.SelectedItem.ToString().Trim())
             {
                 case "Open":
-                    _device.Open();
+                    _device.OpenShutter();
                     break;
                 case "Close":
-                    _device.Close();
+                    _device.CloseShutter();
                     break;
                 case "UnLock":
                     _device.Unlock();
