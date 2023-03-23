@@ -571,9 +571,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             entities.Where.Add(Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Habilitado,
                 Permaquim.Depositario.sqlEnum.OperandEnum.Equal, true);
 
-            entities.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,
-                Permaquim.Depositario.Business.Relations.Valor.OrigenValor.ColumnEnum.Id,
-            Permaquim.Depositario.sqlEnum.OperandEnum.NotEqual, 0);
             return entities.Items();
         }
         public static Permaquim.Depositario.Entities.Tables.Operacion.Contenedor CreateContainer()
@@ -1999,9 +1996,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     {
                         for (int i = 0; i < ParameterController.PrintDailyClosingQuantity; i++)
                         {
-                            ReportController.PrintReport(ReportTypeEnum.DailyClosing,
-                                DatabaseController.GetDailyClosingEnvelopeBagContentItems(CurrentDailyClosing.Id),
-                                DatabaseController.GetDailyClosingTransactions(CurrentDailyClosing.Id), i);
+                            if (CurrentDailyClosing != null)
+                            {
+                                ReportController.PrintReport(ReportTypeEnum.DailyClosing,
+                                    DatabaseController.GetDailyClosingEnvelopeBagContentItems(CurrentDailyClosing.Id),
+                                    DatabaseController.GetDailyClosingTransactions(CurrentDailyClosing.Id), i);
+                            }
                         }
                     }
                 }

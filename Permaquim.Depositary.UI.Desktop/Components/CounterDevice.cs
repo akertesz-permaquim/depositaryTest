@@ -174,7 +174,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                     DiscardBuffer(_counterPort);
 
-                    Log("FUNCTION: Port " + device.CounterComPort.PortName + " should be open.");
+                    Log("FUNCTION: Port " + device.CounterComPort.PortName + " should be open. " + 
+                    _counterPort.IsOpen.ToString());
                 }
                 else
                 {
@@ -204,7 +205,8 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                     DiscardBuffer(_ioboardPort);
 
-                    Log("FUNCTION: Port " + device.IOboardComPort.PortName + " should be open.");
+                    Log("FUNCTION: Port " + device.IOboardComPort.PortName + " should be open. " +
+                    _ioboardPort.IsOpen.ToString());
                 }
                 else
                 {
@@ -713,7 +715,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
         }
         public StatesResult RemoteCancel()
         {
-            if (_counterPort != null && _counterPort.IsOpen)
+            if (_counterPort != null && _counterPort.IsOpen && _device != null)
             {
                 Log("COMMAND: RemoteCancel");
                 DiscardBuffer(_counterPort);
@@ -1094,7 +1096,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
         #endregion
         #region IO board Commands 
-        public bool Open()
+        public bool OpenShutter()
         {
             int millisecondsTimeout = 1800;
             try
@@ -1113,7 +1115,7 @@ namespace Permaquim.Depositary.UI.Desktop.Components
                 return false;
             }
         }
-        public bool Close()
+        public bool CloseShutter()
         {
             int millisecondsTimeout = 1800;
             try
@@ -1472,7 +1474,6 @@ namespace Permaquim.Depositary.UI.Desktop.Components
 
                                 DeviceErrorReceived(this, args);
                             }
-
                         }
 
                         if (statesResult.ErrorStateInformation.Jamming)

@@ -205,6 +205,9 @@ namespace Permaquim.Depositary.UI.Desktop
             _pollingTimer.Enabled = this.Visible;
             if (this.Visible)
             {
+                if (ParameterController.UsesShutter)
+                    _device.OpenShutter();
+
                 _device.DeviceStateChange += DeviceStateChange;
 
                 if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.ManualMode)
@@ -242,6 +245,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 }
 
                 InitializeLocals();
+                if (ParameterController.UsesShutter)
+                    _device.CloseShutter();
             }
 
             FormsController.SetInformationMessage(InformationTypeEnum.None, string.Empty);
@@ -642,8 +647,6 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     ButtonsPanel.Visible = false;
                     CancelDepositButton.Visible = false;
-                    if (ParameterController.UsesShutter)
-                        _device.Open();
 
                     _device.StoringStart();
                     _device.PreviousState = StatusInformation.State.PQStoring;

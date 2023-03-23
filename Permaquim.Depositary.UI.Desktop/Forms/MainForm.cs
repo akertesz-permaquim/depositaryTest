@@ -230,7 +230,32 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             AuditController.Log(LogTypeEnum.Exception, args.ErrorCode, args.ErrorDescription);
 
             //DeviceController.CounterIssue = true;
-
+            switch (args.ErrorDescription)
+            {
+                case "AbnormalDevice":
+                    if (!ParameterController.ShowsAbnormalDevice)
+                        return;
+                    break;
+                case "Jamming":
+                    if (!ParameterController.ShowsJamming)
+                        return;
+                    break;
+                case "AbnormalStorage":
+                    if (!ParameterController.ShowsAbnormalStorage)
+                        return;
+                    break;
+                case "CountingError":
+                    if (!ParameterController.ShowsCountingError)
+                        return;
+                    break;
+                case "CassetteFull":
+                    if (!ParameterController.ShowsCassetteFull)
+                        return;
+                    break;
+                default:
+                    break;
+            }
+ 
             if (_errorForm == null)
             {
                 _errorForm = new DeviceErrorForm();
@@ -248,7 +273,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             if (ConfigurationController.IsDevelopment())
                 return true;
             else
-                return File.Exists((AppDomain.CurrentDomain.BaseDirectory + @"\APP0STOL.License"));
+                return File.Exists((AppDomain.CurrentDomain.BaseDirectory + @"\APP.0.STOL.License"));
         }
 
         /// <summary>
@@ -640,7 +665,10 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private bool VerifyBagInplace()
         {
-            return _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE;
+            if (_device!= null && _device.IoBoardConnected)
+                return _device.IoBoardStatusProperty.BagState == IoBoardStatus.BAG_STATE.BAG_STATE_INPLACE;
+            else
+                return false;
         }
 
         private void VerifyPreviousFailedoperation()
@@ -842,16 +870,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             }
             else
             {
-                // Chequeo de cambio de fecha
-                if (DateTime.Today > DatabaseController.CurrentTurn.Fecha)
-                {
-                    if (_turnAutoClose && DatabaseController.CurrentUser != null)
-                    {
-                        _pollingTimer.Enabled= false;
-                        DatabaseController.ClosePendingTurns();
-                        _pollingTimer.Enabled = true;
-                    }
-                }
+                VerifyDayclosing();
 
                 string turnDate = string.Empty;
                 if (DatabaseController.CurrentTurn.Fecha != null)
@@ -862,6 +881,20 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
 
             TurnAndDateTimeLabel.Text += Environment.NewLine + DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
+        }
+
+        private void VerifyDayclosing()
+        {
+            // Chequeo de cambio de fecha
+            if (DateTime.Today > DatabaseController.CurrentTurn.Fecha)
+            {
+                if (_turnAutoClose)
+                {
+                    _pollingTimer.Enabled = false;
+                    DatabaseController.ClosePendingTurns();
+                    _pollingTimer.Enabled = true;
+                }
+            }
         }
 
         private void MainPanel_MouseClick(object sender, MouseEventArgs e)
@@ -990,6 +1023,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                         SetInformationMessage(InformationTypeEnum.Error, message);
                         AuditController.Log(LogTypeEnum.Exception, message, message);
                         EventController.CreateEvent(EventTypeEnum.Estado_Fuera_De_Servicio, message, message);
+                        Login();
                     }
                     if (ParameterController.ValidatesBagInplace)
                     {

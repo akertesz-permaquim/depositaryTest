@@ -145,7 +145,7 @@ namespace Permaquim.Depositary.UI.Desktop.Forms
             TimeOutController.Reset();
             _resetButton.Visible = false;
             if (ParameterController.UsesShutter)
-                _device.Open();
+                _device.OpenShutter();
 
             if (_device.StateResultProperty.ErrorStateInformation.AbnormalDevice)   // TODO: Unificar
             {

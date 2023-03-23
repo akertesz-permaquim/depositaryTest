@@ -90,30 +90,31 @@ namespace Permaquim.Depositary.UI.Desktop
                     DatabaseController.LogOff(true);
                     FormsController.LogOff();
                 }
-
-                if (!ConfigurationController.IsDevelopment() && _device != null)
+                if (_device != null)
                 {
-                    if (_device.StateResultProperty.DoorStateInformation.Escrow)
-                        _device.CloseEscrow();
-
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                    if (!ConfigurationController.IsDevelopment() && _device != null)
                     {
+                        if (_device.StateResultProperty.DoorStateInformation.Escrow)
+                            _device.CloseEscrow();
 
-                        _device.Sleep();
+                        if (_device.StateResultProperty.ModeStateInformation.ModeState != ModeStateInformation.Mode.Neutral_SettingMode)
+                        {
 
-                        _device.RemoteCancel();
+                            _device.Sleep();
 
-                        FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
+                            _device.RemoteCancel();
 
+                            FormsController.SetInformationMessage(InformationTypeEnum.None, String.Empty);
+
+                        }
+                        // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
+                        if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode
+                            || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.ManualMode
+                            || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.InitialMode)
+                        {
+                            _device.RemoteCancel();
+                        }
                     }
-                    // si por algun motivo el equipo se recupera de una transacción fallida, se cancela la operación.
-                    if (_device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.DepositMode
-                        || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.ManualMode
-                        || _device.StateResultProperty.ModeStateInformation.ModeState == ModeStateInformation.Mode.InitialMode)
-                    {
-                        _device.RemoteCancel();
-                    }
-
                 }
 
             }
@@ -630,7 +631,8 @@ namespace Permaquim.Depositary.UI.Desktop
                 || _device.StateResultProperty.ModeStateInformation.ModeState
                 == ModeStateInformation.Mode.ManualMode)
             {
-                _device.RemoteCancel();
+                if (_device != null)
+                    _device.RemoteCancel();
             }
         }
 
@@ -663,7 +665,7 @@ namespace Permaquim.Depositary.UI.Desktop
                 {
                     _device.Sleep();
                     _device.Sense();
-                    if (_device.StateResultProperty != null & !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                    if (_device.StateResultProperty != null && !_device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                     {
                         LoadTransactionButtons();
                     }
@@ -673,14 +675,18 @@ namespace Permaquim.Depositary.UI.Desktop
                     LoadTransactionButtons();
                 }
 
+                LoadTransactionButtons();
                 LoadReportsButton();
                 LoadOtherOperationsButton();
                 LoadBackButton();
 
-                if (!ConfigurationController.IsDevelopment() && _device != null) 
-                    _device.RemoteCancel();
+                if (!ConfigurationController.IsDevelopment() && _device != null)
+                {
+                    if(_device != null)
+                        _device.RemoteCancel();
+                }
 
-                if (_device!= null && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
+                if (_device!= null && _device.StateResultProperty != null && _device.StateResultProperty.DeviceStateInformation.EscrowBillPresent)
                 {
                     FormsController.SetInformationMessage(InformationTypeEnum.Error,
                      MultilanguangeController.GetText(MultiLanguageEnum.ESCROW_NO_VACIO));

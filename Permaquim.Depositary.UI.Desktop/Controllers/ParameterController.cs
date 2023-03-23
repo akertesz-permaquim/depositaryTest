@@ -21,7 +21,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 bool.TryParse(DatabaseController.GetEnterpriseParameterValue("USA_CUENTA_BANCARIA"), out parseResult);
                 return parseResult;
             }
-               
+
         }
         public static bool UsesValueOrigin
         {
@@ -170,7 +170,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 int.TryParse(DatabaseController.GetEnterpriseParameterValue("CANTIDAD_TICKET_DEPOSITO_SOBRE"), out parseResult);
                 return parseResult;
             }
-         }
+        }
         public static bool PrintsEnvelopeDeposit
         {
             get
@@ -179,7 +179,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 bool.TryParse(DatabaseController.GetEnterpriseParameterValue("IMPRIME_TICKET_DEPOSITO_SOBRE"), out parseResult);
                 return parseResult;
             }
-         }
+        }
         public static bool PrintsCoinDeposit
         {
             get
@@ -310,12 +310,60 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                 return parseResult;
             }
         }
-        public static string  PrinterName
+        public static string PrinterName
         {
             get
             {
-                string returnValue =  DatabaseController.GetDepositaryParameterValue("IMPRESORA_DEPOSITARIO");
-                return  returnValue.Equals(string.Empty) ? "NII Printer_DS" : returnValue;
+                string returnValue = DatabaseController.GetDepositaryParameterValue("IMPRESORA_DEPOSITARIO");
+                return returnValue.Equals(string.Empty) ? "NII Printer_DS" : returnValue;
+            }
+        }
+        public static bool ShowsAbnormalDevice
+        {
+            get
+            {
+                bool parseResult = true;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("MUESTRA_ERROR_ABNORMAL_DEVICE"), out parseResult);
+                return parseResult;
+            }
+        }
+        public static bool ShowsJamming
+        {
+            get
+            {
+                bool parseResult = true;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("MUESTRA_ERROR_JAMMING"), out parseResult);
+                return parseResult;
+            }
+        }
+
+        public static bool ShowsAbnormalStorage
+        {
+            get
+            {
+                bool parseResult = true;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("MUESTRA_ERROR_ABNORMALSTORAGE"), out parseResult);
+                return parseResult;
+            }
+        }
+
+        public static bool ShowsCountingError
+        {
+            get
+            {
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("MUESTRA_ERROR_COUNTING_ERROR"), out parseResult);
+                return parseResult;
+            }
+        }
+     
+       public static bool ShowsCassetteFull
+        {
+            get
+            {
+                bool parseResult = false;
+                bool.TryParse(DatabaseController.GetApplicationParameterValue("MUESTRA_ERROR_CASSETTE_FULL"), out parseResult);
+                return parseResult;
             }
         }
     }
