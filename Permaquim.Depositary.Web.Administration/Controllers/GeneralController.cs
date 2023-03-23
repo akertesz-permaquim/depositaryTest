@@ -60,29 +60,29 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
         public static bool ValidarCredencialesMail(string usuarioEmailEnvia, string passwordEmailEnvia, string smtpHost, int smtpPort, bool validarCertificacion)
         {
             bool resultado = false;
-            try
-            {
-                using (var client = new MailKit.Net.Smtp.SmtpClient())
-                {
-                    try
-                    {
-                        client.ServerCertificateValidationCallback = (s, c, h, e) => validarCertificacion;
-                        client.Connect(smtpHost, smtpPort, false);
-                        client.Authenticate(usuarioEmailEnvia, passwordEmailEnvia);
-                        client.Disconnect(true);
+            //try
+            //{
+            //    using (var client = new MailKit.Net.Smtp.SmtpClient())
+            //    {
+            //        try
+            //        {
+            //            client.ServerCertificateValidationCallback = (s, c, h, e) => validarCertificacion;
+            //            client.Connect(smtpHost, smtpPort, false);
+            //            client.Authenticate(usuarioEmailEnvia, passwordEmailEnvia);
+            //            client.Disconnect(true);
 
-                        resultado = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        resultado = false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                resultado = false;
-            }
+            //            resultado = true;
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            resultado = false;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    resultado = false;
+            //}
             return resultado;
 
         }
