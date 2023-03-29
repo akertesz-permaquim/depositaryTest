@@ -302,7 +302,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         TipoId = 0, // Default de tipo
                         DepositarioId = CurrentDepositary.Id,
                         FechaCreacion = DateTime.Now,
-                        Nombre = "Contenedor current",
+                        Nombre = "Contenedor Inicial",
                         UsuarioCreacion = CurrentUser == null ? 0 : CurrentUser.Id
 
                     }); ;
@@ -381,7 +381,12 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             get { return _currentUserBankAccount; }
             set { _currentUserBankAccount = value; }
         }
-
+        public static Permaquim.Depositario.Entities.Tables.Operacion.Sesion CreateSession(long userId)
+        {
+            Permaquim.Depositario.Business.Tables.Operacion.Sesion sesiones = new();
+            CurrentSession = sesiones.Add(CurrentDepositary.Id, userId, DateTime.Now, null, null);
+            return CurrentSession;
+        }
 
         public static Permaquim.Depositario.Entities.Relations.Seguridad.Usuario Login(string user, string password)
         {
@@ -1730,7 +1735,11 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             return entities.Items().Count > 0;
         }
-
+        /// <summary>
+        /// Verifica que exista un turno disponible para el depositario / sector
+        /// El turno debe ser del dia de hoy y no estar cerrado
+        /// </summary>
+        /// <returns>Turno</returns>
         public static Permaquim.Depositario.Entities.Tables.Operacion.Turno GetTurnSchedule()
         {
             // Verifica que exista un turno disponible para el depositario / sector
@@ -1738,7 +1747,6 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
             Permaquim.Depositario.Entities.Tables.Operacion.Turno? newTurn = new();
             Depositario.Business.Relations.Operacion.Turno turnoRelations = new();
-
 
             Permaquim.Depositario.Business.Tables.Operacion.Turno entities = new();
             entities.Where.Add(Depositario.Business.Tables.Operacion.Turno.ColumnEnum.Habilitado,
@@ -2099,7 +2107,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     FechaModificacion = null,
                     Nombre = CIERRE_DIARIO,
                     SesionId = CurrentSession.Id,
-                    UsuarioCreacion = CurrentUser.Id,
+                    UsuarioCreacion = CurrentUser == null ? 0: CurrentUser.Id,
                     UsuarioModificacion = null,
                     DepositarioId = CurrentDepositary.Id,
                     CodigoCierre = CurrentDepositary.CodigoExterno + "-" + DateTime.Now.ToString("yyMMdd")
@@ -2212,18 +2220,27 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static string GetEnterpriseParameterValue(string key)
         {
             string returnValue = string.Empty;
+            try
+            {
 
-            Permaquim.Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entities = new();
-            entities.Where.Add(Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave,
-                Depositario.sqlEnum.OperandEnum.Equal, key);
-            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
-                Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId,
-               Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.SucursalId.EmpresaId.Id);
-            entities.Items();
-            if (entities.Result.Count > 0)
-                return entities.Result.FirstOrDefault().Valor;
+
+                Permaquim.Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa entities = new();
+                entities.Where.Add(Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave,
+                    Depositario.sqlEnum.OperandEnum.Equal, key);
+                entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+                    Depositario.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId,
+                   Depositario.sqlEnum.OperandEnum.Equal, CurrentDepositary.SectorId.SucursalId.EmpresaId.Id);
+                entities.Items();
+                if (entities.Result.Count > 0)
+                    return entities.Result.FirstOrDefault().Valor;
+            }
+            catch (Exception ex)
+            {
+                AuditController.Log(ex);
+            }
 
             return returnValue;
+
         }
 
         public static string GetDepositaryParameterValue(string key)
@@ -2334,7 +2351,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                         {
                             if (usuarioRol.Habilitado)
                             {
-                                foreach (var relFuncion in usuarioRol.RolId.ListOf_RolFuncion_RolId)
+                                foreach (var relFuncion in usuarioRol.RolId.ListOf_RolFuncion_RolId.Where(x=> x.Habilitado == true))
                                 {
                                     if (relFuncion.FuncionId.Habilitado && relFuncion.FuncionId.Id == functionId)
                                         return true;

@@ -1,7 +1,10 @@
 {
   "profiles": {
     "Permaquim.Depositary.UI.Desktop": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "DEVELOPMENT"
+      }
     }
   }
 }
