@@ -41,20 +41,20 @@
         {
             string resultado = "";
 
-            Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa bTablesConfiguracionEmpresa = new();
-
-            bTablesConfiguracionEmpresa.Where.Clear();
-            bTablesConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, pEmpresaId);
-            bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
-            bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Equal, pClave);
-
-            bTablesConfiguracionEmpresa.Items();
-
-            if (bTablesConfiguracionEmpresa.Result.Count > 0)
+            using (Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa bTablesConfiguracionEmpresa = new())
             {
-                resultado = bTablesConfiguracionEmpresa.Result.FirstOrDefault().Valor;
-            }
+                bTablesConfiguracionEmpresa.Where.Add(Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, pEmpresaId);
+                bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+                bTablesConfiguracionEmpresa.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Tables.Aplicacion.ConfiguracionEmpresa.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Equal, pClave);
 
+                bTablesConfiguracionEmpresa.Items();
+
+                if (bTablesConfiguracionEmpresa.Result.Count > 0)
+                {
+                    resultado = bTablesConfiguracionEmpresa.Result.FirstOrDefault().Valor;
+                }
+
+            }
             return resultado;
         }
 

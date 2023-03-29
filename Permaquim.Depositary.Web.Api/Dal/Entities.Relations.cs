@@ -1470,6 +1470,340 @@ using System.Text;
 				
 			} //Class HuellaDactilar 
 } //namespace DepositaryWebApi.Entities.Relations.Biometria
+		namespace DepositaryWebApi.Entities.Relations.Customizador {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Customizador")]  // Database Schema Name
+			[DataItemAttributeObjectName("Entidad","Entidad")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class Entidad : IRelationsDataITem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string Tipo = "Tipo";
+					public const string Nombre = "Nombre";
+					public const string Esquema = "Esquema";
+					public const string HabilitarAgrupamiento = "HabilitarAgrupamiento";
+					public const string HabilitarMovilidad = "HabilitarMovilidad";
+					public const string HabilitarFiltrado = "HabilitarFiltrado";
+					public const string HabilitarColumnasOpcionales = "HabilitarColumnasOpcionales";
+					public const string HabilitarOrdenamiento = "HabilitarOrdenamiento";
+					public const string HabilitarRedimensionamiento = "HabilitarRedimensionamiento";
+					public const string HabilitarPaginado = "HabilitarPaginado";
+					public const string HabilitarAuditoria = "HabilitarAuditoria";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					Tipo,
+					Nombre,
+					Esquema,
+					HabilitarAgrupamiento,
+					HabilitarMovilidad,
+					HabilitarFiltrado,
+					HabilitarColumnasOpcionales,
+					HabilitarOrdenamiento,
+					HabilitarRedimensionamiento,
+					HabilitarPaginado,
+					HabilitarAuditoria,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public Entidad()
+                {
+                }
+                public  Entidad(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.Tipo = Tipo;
+                    this.Nombre = Nombre;
+                    this.Esquema = Esquema;
+                    this.HabilitarAgrupamiento = HabilitarAgrupamiento;
+                    this.HabilitarMovilidad = HabilitarMovilidad;
+                    this.HabilitarFiltrado = HabilitarFiltrado;
+                    this.HabilitarColumnasOpcionales = HabilitarColumnasOpcionales;
+                    this.HabilitarOrdenamiento = HabilitarOrdenamiento;
+                    this.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
+                    this.HabilitarPaginado = HabilitarPaginado;
+                    this.HabilitarAuditoria = HabilitarAuditoria;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("Tipo","Tipo")]
+             public String Tipo { get; set; }
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("Esquema","Esquema")]
+             public String Esquema { get; set; }
+             [DataItemAttributeFieldName("HabilitarAgrupamiento","HabilitarAgrupamiento")]
+             public Boolean HabilitarAgrupamiento { get; set; }
+             [DataItemAttributeFieldName("HabilitarMovilidad","HabilitarMovilidad")]
+             public Boolean HabilitarMovilidad { get; set; }
+             [DataItemAttributeFieldName("HabilitarFiltrado","HabilitarFiltrado")]
+             public Boolean HabilitarFiltrado { get; set; }
+             [DataItemAttributeFieldName("HabilitarColumnasOpcionales","HabilitarColumnasOpcionales")]
+             public Boolean HabilitarColumnasOpcionales { get; set; }
+             [DataItemAttributeFieldName("HabilitarOrdenamiento","HabilitarOrdenamiento")]
+             public Boolean HabilitarOrdenamiento { get; set; }
+             [DataItemAttributeFieldName("HabilitarRedimensionamiento","HabilitarRedimensionamiento")]
+             public Boolean HabilitarRedimensionamiento { get; set; }
+             [DataItemAttributeFieldName("HabilitarPaginado","HabilitarPaginado")]
+             public Boolean HabilitarPaginado { get; set; }
+             [DataItemAttributeFieldName("HabilitarAuditoria","HabilitarAuditoria")]
+             public Boolean HabilitarAuditoria { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioCreacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion
+             {
+                 get {
+                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
+                         {
+                             UsuarioCreacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
+                         }
+                     return UsuarioCreacion_;
+                     }
+                 set {UsuarioCreacion_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioModificacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion
+             {
+                 get {
+                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
+                         {
+                             UsuarioModificacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
+                         }
+                     return UsuarioModificacion_;
+                     }
+                 set {UsuarioModificacion_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of EntidadAtributo that have this EntidadId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Customizador.EntidadAtributo> ListOf_EntidadAtributo_EntidadId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo entities = new DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo.ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of EntidadCabecera that have this EntidadId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera> ListOf_EntidadCabecera_EntidadId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera entities = new DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+             public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
+             public override string ToString() => Nombre;
+				
+			} //Class Entidad 
+} //namespace DepositaryWebApi.Entities.Relations.Customizador
+		namespace DepositaryWebApi.Entities.Relations.Customizador {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Customizador")]  // Database Schema Name
+			[DataItemAttributeObjectName("EntidadAtributo","EntidadAtributo")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class EntidadAtributo : IRelationsDataITem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string EntidadId = "EntidadId";
+					public const string Nombre = "Nombre";
+					public const string VisibleEnGrilla = "VisibleEnGrilla";
+					public const string VisibleEnSelectorColumnas = "VisibleEnSelectorColumnas";
+					public const string Redimensionable = "Redimensionable";
+					public const string Agrupable = "Agrupable";
+					public const string Movible = "Movible";
+					public const string Ordenable = "Ordenable";
+					public const string Filtrable = "Filtrable";
+					public const string PosicionEnGrilla = "PosicionEnGrilla";
+					public const string AnchoMinimoEnGrilla = "AnchoMinimoEnGrilla";
+					public const string AnchoEnGrilla = "AnchoEnGrilla";
+					public const string Habilitado = "Habilitado";
+					public const string UsuarioCreacion = "UsuarioCreacion";
+					public const string FechaCreacion = "FechaCreacion";
+					public const string UsuarioModificacion = "UsuarioModificacion";
+					public const string FechaModificacion = "FechaModificacion";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					EntidadId,
+					Nombre,
+					VisibleEnGrilla,
+					VisibleEnSelectorColumnas,
+					Redimensionable,
+					Agrupable,
+					Movible,
+					Ordenable,
+					Filtrable,
+					PosicionEnGrilla,
+					AnchoMinimoEnGrilla,
+					AnchoEnGrilla,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public EntidadAtributo()
+                {
+                }
+                public  EntidadAtributo(DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32? PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                {
+                    this.Id = Id;
+                    this.EntidadId = EntidadId;
+                    this.Nombre = Nombre;
+                    this.VisibleEnGrilla = VisibleEnGrilla;
+                    this.VisibleEnSelectorColumnas = VisibleEnSelectorColumnas;
+                    this.Redimensionable = Redimensionable;
+                    this.Agrupable = Agrupable;
+                    this.Movible = Movible;
+                    this.Ordenable = Ordenable;
+                    this.Filtrable = Filtrable;
+                    this.PosicionEnGrilla = PosicionEnGrilla;
+                    this.AnchoMinimoEnGrilla = AnchoMinimoEnGrilla;
+                    this.AnchoEnGrilla = AnchoEnGrilla;
+                    this.Habilitado = Habilitado;
+                    this.UsuarioCreacion = UsuarioCreacion;
+                    this.FechaCreacion = FechaCreacion;
+                    this.UsuarioModificacion = UsuarioModificacion;
+                    this.FechaModificacion = FechaModificacion;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("EntidadId","EntidadId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _EntidadId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Entidad")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId
+             {
+                 get {
+                     if (EntidadId_ == null || EntidadId_.Id != _EntidadId)
+                         {
+                             EntidadId = new DepositaryWebApi.Business.Relations.Customizador.Entidad().Items(this._EntidadId).FirstOrDefault();
+                         }
+                     return EntidadId_;
+                     }
+                 set {EntidadId_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId_ = null;
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("VisibleEnGrilla","VisibleEnGrilla")]
+             public Boolean VisibleEnGrilla { get; set; }
+             [DataItemAttributeFieldName("VisibleEnSelectorColumnas","VisibleEnSelectorColumnas")]
+             public Boolean VisibleEnSelectorColumnas { get; set; }
+             [DataItemAttributeFieldName("Redimensionable","Redimensionable")]
+             public Boolean Redimensionable { get; set; }
+             [DataItemAttributeFieldName("Agrupable","Agrupable")]
+             public Boolean Agrupable { get; set; }
+             [DataItemAttributeFieldName("Movible","Movible")]
+             public Boolean Movible { get; set; }
+             [DataItemAttributeFieldName("Ordenable","Ordenable")]
+             public Boolean Ordenable { get; set; }
+             [DataItemAttributeFieldName("Filtrable","Filtrable")]
+             public Boolean Filtrable { get; set; }
+             [DataItemAttributeFieldName("PosicionEnGrilla","PosicionEnGrilla")]
+             public Int32? PosicionEnGrilla { get; set; }
+             [DataItemAttributeFieldName("AnchoMinimoEnGrilla","AnchoMinimoEnGrilla")]
+             public Int32 AnchoMinimoEnGrilla { get; set; }
+             [DataItemAttributeFieldName("AnchoEnGrilla","AnchoEnGrilla")]
+             public Int32 AnchoEnGrilla { get; set; }
+             [DataItemAttributeFieldName("Habilitado","Habilitado")]
+             public Boolean Habilitado { get; set; }
+             [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioCreacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion
+             {
+                 get {
+                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
+                         {
+                             UsuarioCreacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
+                         }
+                     return UsuarioCreacion_;
+                     }
+                 set {UsuarioCreacion_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
+             [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
+             public DateTime FechaCreacion { get; set; }
+             [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _UsuarioModificacion { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion
+             {
+                 get {
+                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
+                         {
+                             UsuarioModificacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
+                         }
+                     return UsuarioModificacion_;
+                     }
+                 set {UsuarioModificacion_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
+             [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
+             public DateTime? FechaModificacion { get; set; }
+             public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
+             public override string ToString() => Nombre;
+				
+			} //Class EntidadAtributo 
+} //namespace DepositaryWebApi.Entities.Relations.Customizador
 		namespace DepositaryWebApi.Entities.Relations.Directorio {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Directorio")]  // Database Schema Name
@@ -2790,8 +3124,8 @@ using System.Text;
 					public const string SectorId = "SectorId";
 					public const string NumeroSerie = "NumeroSerie";
 					public const string CodigoExterno = "CodigoExterno";
-					public const string TipoContenedorId = "TipoContenedorId";
 					public const string ModeloId = "ModeloId";
+					public const string TipoContenedorId = "TipoContenedorId";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -2806,8 +3140,8 @@ using System.Text;
 					SectorId,
 					NumeroSerie,
 					CodigoExterno,
-					TipoContenedorId,
 					ModeloId,
+					TipoContenedorId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -2820,7 +3154,7 @@ using System.Text;
                 public Depositario()
                 {
                 }
-                public  Depositario(String Nombre,String Descripcion,DepositaryWebApi.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,DepositaryWebApi.Entities.Relations.Operacion.TipoContenedor TipoContenedorId,DepositaryWebApi.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  Depositario(String Nombre,String Descripcion,DepositaryWebApi.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,DepositaryWebApi.Entities.Relations.Dispositivo.Modelo ModeloId,DepositaryWebApi.Entities.Relations.Operacion.TipoContenedor TipoContenedorId,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -2828,8 +3162,8 @@ using System.Text;
                     this.SectorId = SectorId;
                     this.NumeroSerie = NumeroSerie;
                     this.CodigoExterno = CodigoExterno;
-                    this.TipoContenedorId = TipoContenedorId;
                     this.ModeloId = ModeloId;
+                    this.TipoContenedorId = TipoContenedorId;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -2865,23 +3199,6 @@ using System.Text;
              public String NumeroSerie { get; set; }
              [DataItemAttributeFieldName("CodigoExterno","CodigoExterno")]
              public String CodigoExterno { get; set; }
-             [DataItemAttributeFieldName("TipoContenedorId","TipoContenedorId")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _TipoContenedorId { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("TipoContenedor")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Operacion.TipoContenedor TipoContenedorId
-             {
-                 get {
-                     if (TipoContenedorId_ == null || TipoContenedorId_.Id != _TipoContenedorId)
-                         {
-                             TipoContenedorId = new DepositaryWebApi.Business.Relations.Operacion.TipoContenedor().Items(this._TipoContenedorId).FirstOrDefault();
-                         }
-                     return TipoContenedorId_;
-                     }
-                 set {TipoContenedorId_  =  value;}
-             }
-             static DepositaryWebApi.Entities.Relations.Operacion.TipoContenedor TipoContenedorId_ = null;
              [DataItemAttributeFieldName("ModeloId","ModeloId")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
              internal Int64 _ModeloId { get; set; }
@@ -2899,6 +3216,23 @@ using System.Text;
                  set {ModeloId_  =  value;}
              }
              static DepositaryWebApi.Entities.Relations.Dispositivo.Modelo ModeloId_ = null;
+             [DataItemAttributeFieldName("TipoContenedorId","TipoContenedorId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _TipoContenedorId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("TipoContenedor")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Operacion.TipoContenedor TipoContenedorId
+             {
+                 get {
+                     if (TipoContenedorId_ == null || TipoContenedorId_.Id != _TipoContenedorId)
+                         {
+                             TipoContenedorId = new DepositaryWebApi.Business.Relations.Operacion.TipoContenedor().Items(this._TipoContenedorId).FirstOrDefault();
+                         }
+                     return TipoContenedorId_;
+                     }
+                 set {TipoContenedorId_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Operacion.TipoContenedor TipoContenedorId_ = null;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
@@ -4025,6 +4359,18 @@ using System.Text;
                          }
                 }
                  /// <summary>
+                 ///  Represents the child collection of PlantillaTicket that have this DepositarioModeloId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Impresion.PlantillaTicket> ListOf_PlantillaTicket_DepositarioModeloId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket entities = new DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket.ColumnEnum.DepositarioModeloId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
                  ///  Represents the child collection of Ticket that have this DepositarioModeloId value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -4077,7 +4423,7 @@ using System.Text;
                 public PlantillaMoneda()
                 {
                 }
-                public  PlantillaMoneda(String Nombre,String Decripcion,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  PlantillaMoneda(String Nombre,String Decripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -4099,41 +4445,11 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _UsuarioCreacion { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion
-             {
-                 get {
-                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
-                         {
-                             UsuarioCreacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
-                         }
-                     return UsuarioCreacion_;
-                     }
-                 set {UsuarioCreacion_  =  value;}
-             }
-             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
+             public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _UsuarioModificacion { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion
-             {
-                 get {
-                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
-                         {
-                             UsuarioModificacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
-                         }
-                     return UsuarioModificacion_;
-                     }
-                 set {UsuarioModificacion_  =  value;}
-             }
-             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
@@ -4207,7 +4523,7 @@ using System.Text;
                 public PlantillaMonedaDetalle()
                 {
                 }
-                public  PlantillaMonedaDetalle(DepositaryWebApi.Entities.Relations.Dispositivo.PlantillaMoneda PlantillaMonedaId,String Nombre,String Decripcion,DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,Int16 Secuencia,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  PlantillaMonedaDetalle(DepositaryWebApi.Entities.Relations.Dispositivo.PlantillaMoneda PlantillaMonedaId,String Nombre,String Decripcion,DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,Int16 Secuencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.PlantillaMonedaId = PlantillaMonedaId;
@@ -4268,41 +4584,11 @@ using System.Text;
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _UsuarioCreacion { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion
-             {
-                 get {
-                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
-                         {
-                             UsuarioCreacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
-                         }
-                     return UsuarioCreacion_;
-                     }
-                 set {UsuarioCreacion_  =  value;}
-             }
-             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
+             public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _UsuarioModificacion { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion
-             {
-                 get {
-                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
-                         {
-                             UsuarioModificacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
-                         }
-                     return UsuarioModificacion_;
-                     }
-                 set {UsuarioModificacion_  =  value;}
-             }
-             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
@@ -6000,6 +6286,176 @@ using System.Text;
 		namespace DepositaryWebApi.Entities.Relations.Impresion {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Impresion")]  // Database Schema Name
+			[DataItemAttributeObjectName("PlantillaTicket","PlantillaTicket")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
+			public class PlantillaTicket : IRelationsDataITem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string Id = "Id";
+					public const string TipoId = "TipoId";
+					public const string DepositarioModeloId = "DepositarioModeloId";
+					public const string Nombre = "Nombre";
+					public const string Descripcion = "Descripcion";
+					public const string Impresora = "Impresora";
+					public const string TextoCabecera = "TextoCabecera";
+					public const string NombreFuenteCabecera = "NombreFuenteCabecera";
+					public const string TamanioFuenteCabecera = "TamanioFuenteCabecera";
+					public const string UbicacionTextoCabecera = "UbicacionTextoCabecera";
+					public const string TextoPie = "TextoPie";
+					public const string NombreFuentePie = "NombreFuentePie";
+					public const string TamanioFuentePie = "TamanioFuentePie";
+					public const string UbicacionTextoPie = "UbicacionTextoPie";
+					public const string Imagen = "Imagen";
+					public const string UbicacionImagen = "UbicacionImagen";
+					public const string UbicacionTextoDetalle = "UbicacionTextoDetalle";
+					public const string AnchoDetalle = "AnchoDetalle";
+					public const string TamanioEntreLineas = "TamanioEntreLineas";
+					public const string AnchoReporte = "AnchoReporte";
+					public const string FactorAltoReporte = "FactorAltoReporte";
+					public const string LineasAlFinal = "LineasAlFinal";
+				}
+				public enum FieldEnum : int
+                {
+					Id,
+					TipoId,
+					DepositarioModeloId,
+					Nombre,
+					Descripcion,
+					Impresora,
+					TextoCabecera,
+					NombreFuenteCabecera,
+					TamanioFuenteCabecera,
+					UbicacionTextoCabecera,
+					TextoPie,
+					NombreFuentePie,
+					TamanioFuentePie,
+					UbicacionTextoPie,
+					Imagen,
+					UbicacionImagen,
+					UbicacionTextoDetalle,
+					AnchoDetalle,
+					TamanioEntreLineas,
+					AnchoReporte,
+					FactorAltoReporte,
+					LineasAlFinal
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public PlantillaTicket()
+                {
+                }
+                public  PlantillaTicket(DepositaryWebApi.Entities.Relations.Impresion.TipoTicket TipoId,DepositaryWebApi.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal)
+                {
+                    this.Id = Id;
+                    this.TipoId = TipoId;
+                    this.DepositarioModeloId = DepositarioModeloId;
+                    this.Nombre = Nombre;
+                    this.Descripcion = Descripcion;
+                    this.Impresora = Impresora;
+                    this.TextoCabecera = TextoCabecera;
+                    this.NombreFuenteCabecera = NombreFuenteCabecera;
+                    this.TamanioFuenteCabecera = TamanioFuenteCabecera;
+                    this.UbicacionTextoCabecera = UbicacionTextoCabecera;
+                    this.TextoPie = TextoPie;
+                    this.NombreFuentePie = NombreFuentePie;
+                    this.TamanioFuentePie = TamanioFuentePie;
+                    this.UbicacionTextoPie = UbicacionTextoPie;
+                    this.Imagen = Imagen;
+                    this.UbicacionImagen = UbicacionImagen;
+                    this.UbicacionTextoDetalle = UbicacionTextoDetalle;
+                    this.AnchoDetalle = AnchoDetalle;
+                    this.TamanioEntreLineas = TamanioEntreLineas;
+                    this.AnchoReporte = AnchoReporte;
+                    this.FactorAltoReporte = FactorAltoReporte;
+                    this.LineasAlFinal = LineasAlFinal;
+                }
+             [DataItemAttributeFieldName("Id","Id")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
+             public Int64 Id { get; set; }
+             [DataItemAttributeFieldName("TipoId","TipoId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _TipoId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("TipoTicket")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Impresion.TipoTicket TipoId
+             {
+                 get {
+                     if (TipoId_ == null || TipoId_.Id != _TipoId)
+                         {
+                             TipoId = new DepositaryWebApi.Business.Relations.Impresion.TipoTicket().Items(this._TipoId).FirstOrDefault();
+                         }
+                     return TipoId_;
+                     }
+                 set {TipoId_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Impresion.TipoTicket TipoId_ = null;
+             [DataItemAttributeFieldName("DepositarioModeloId","DepositarioModeloId")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+             internal Int64 _DepositarioModeloId { get; set; }
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
+             [PropertyAttributeForeignKeyObjectName("Modelo")]// Object name in Database
+             public DepositaryWebApi.Entities.Relations.Dispositivo.Modelo DepositarioModeloId
+             {
+                 get {
+                     if (DepositarioModeloId_ == null || DepositarioModeloId_.Id != _DepositarioModeloId)
+                         {
+                             DepositarioModeloId = new DepositaryWebApi.Business.Relations.Dispositivo.Modelo().Items(this._DepositarioModeloId).FirstOrDefault();
+                         }
+                     return DepositarioModeloId_;
+                     }
+                 set {DepositarioModeloId_  =  value;}
+             }
+             static DepositaryWebApi.Entities.Relations.Dispositivo.Modelo DepositarioModeloId_ = null;
+             [DataItemAttributeFieldName("Nombre","Nombre")]
+             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
+             public String Nombre { get; set; }
+             [DataItemAttributeFieldName("Descripcion","Descripcion")]
+             public String Descripcion { get; set; }
+             [DataItemAttributeFieldName("Impresora","Impresora")]
+             public String Impresora { get; set; }
+             [DataItemAttributeFieldName("TextoCabecera","TextoCabecera")]
+             public String TextoCabecera { get; set; }
+             [DataItemAttributeFieldName("NombreFuenteCabecera","NombreFuenteCabecera")]
+             public String NombreFuenteCabecera { get; set; }
+             [DataItemAttributeFieldName("TamanioFuenteCabecera","TamanioFuenteCabecera")]
+             public Int32 TamanioFuenteCabecera { get; set; }
+             [DataItemAttributeFieldName("UbicacionTextoCabecera","UbicacionTextoCabecera")]
+             public Int32 UbicacionTextoCabecera { get; set; }
+             [DataItemAttributeFieldName("TextoPie","TextoPie")]
+             public String TextoPie { get; set; }
+             [DataItemAttributeFieldName("NombreFuentePie","NombreFuentePie")]
+             public String NombreFuentePie { get; set; }
+             [DataItemAttributeFieldName("TamanioFuentePie","TamanioFuentePie")]
+             public Int32 TamanioFuentePie { get; set; }
+             [DataItemAttributeFieldName("UbicacionTextoPie","UbicacionTextoPie")]
+             public String UbicacionTextoPie { get; set; }
+             [DataItemAttributeFieldName("Imagen","Imagen")]
+             public String Imagen { get; set; }
+             [DataItemAttributeFieldName("UbicacionImagen","UbicacionImagen")]
+             public String UbicacionImagen { get; set; }
+             [DataItemAttributeFieldName("UbicacionTextoDetalle","UbicacionTextoDetalle")]
+             public Int32 UbicacionTextoDetalle { get; set; }
+             [DataItemAttributeFieldName("AnchoDetalle","AnchoDetalle")]
+             public Int32 AnchoDetalle { get; set; }
+             [DataItemAttributeFieldName("TamanioEntreLineas","TamanioEntreLineas")]
+             public Int32 TamanioEntreLineas { get; set; }
+             [DataItemAttributeFieldName("AnchoReporte","AnchoReporte")]
+             public Int32 AnchoReporte { get; set; }
+             [DataItemAttributeFieldName("FactorAltoReporte","FactorAltoReporte")]
+             public Int32 FactorAltoReporte { get; set; }
+             [DataItemAttributeFieldName("LineasAlFinal","LineasAlFinal")]
+             public Int32 LineasAlFinal { get; set; }
+             public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
+             public override string ToString() => Nombre;
+				
+			} //Class PlantillaTicket 
+} //namespace DepositaryWebApi.Entities.Relations.Impresion
+		namespace DepositaryWebApi.Entities.Relations.Impresion {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Impresion")]  // Database Schema Name
 			[DataItemAttributeObjectName("Ticket","Ticket")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.Table)] // Table, View,StoredProcedure,Function
 			public class Ticket : IRelationsDataITem
@@ -6342,6 +6798,18 @@ using System.Text;
              static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+                 /// <summary>
+                 ///  Represents the child collection of PlantillaTicket that have this TipoId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Impresion.PlantillaTicket> ListOf_PlantillaTicket_TipoId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket entities = new DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket.ColumnEnum.TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
                  /// <summary>
                  ///  Represents the child collection of Ticket that have this TipoId value.
                  /// </summary>
@@ -10353,18 +10821,6 @@ using System.Text;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
                  /// <summary>
-                 ///  Represents the child collection of Configuracion that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Aplicacion.Configuracion> ListOf_Configuracion_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Aplicacion.Configuracion entities = new DepositaryWebApi.Business.Relations.Aplicacion.Configuracion();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Aplicacion.Configuracion.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Configuracion that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10373,6 +10829,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Aplicacion.Configuracion entities = new DepositaryWebApi.Business.Relations.Aplicacion.Configuracion();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Aplicacion.Configuracion.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Configuracion that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Aplicacion.Configuracion> ListOf_Configuracion_UsuarioModificacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Aplicacion.Configuracion entities = new DepositaryWebApi.Business.Relations.Aplicacion.Configuracion();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Aplicacion.Configuracion.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10449,18 +10917,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of TipoLog that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Auditoria.TipoLog> ListOf_TipoLog_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Auditoria.TipoLog entities = new DepositaryWebApi.Business.Relations.Auditoria.TipoLog();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Auditoria.TipoLog.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of TipoLog that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10473,14 +10929,14 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Banco that have this UsuarioCreacion value.
+                 ///  Represents the child collection of TipoLog that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Banca.Banco> ListOf_Banco_UsuarioCreacion
+                 public List<DepositaryWebApi.Entities.Relations.Auditoria.TipoLog> ListOf_TipoLog_UsuarioCreacion
                 {
                      get {
-                             DepositaryWebApi.Business.Relations.Banca.Banco entities = new DepositaryWebApi.Business.Relations.Banca.Banco();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Banca.Banco.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             DepositaryWebApi.Business.Relations.Auditoria.TipoLog entities = new DepositaryWebApi.Business.Relations.Auditoria.TipoLog();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Auditoria.TipoLog.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10493,6 +10949,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Banca.Banco entities = new DepositaryWebApi.Business.Relations.Banca.Banco();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Banca.Banco.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Banco that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Banca.Banco> ListOf_Banco_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Banca.Banco entities = new DepositaryWebApi.Business.Relations.Banca.Banco();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Banca.Banco.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10545,18 +11013,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of UsuarioCuenta that have this UsuarioId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Banca.UsuarioCuenta> ListOf_UsuarioCuenta_UsuarioId
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Banca.UsuarioCuenta entities = new DepositaryWebApi.Business.Relations.Banca.UsuarioCuenta();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Banca.UsuarioCuenta.ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of UsuarioCuenta that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10581,6 +11037,18 @@ using System.Text;
                          }
                 }
                  /// <summary>
+                 ///  Represents the child collection of UsuarioCuenta that have this UsuarioId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Banca.UsuarioCuenta> ListOf_UsuarioCuenta_UsuarioId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Banca.UsuarioCuenta entities = new DepositaryWebApi.Business.Relations.Banca.UsuarioCuenta();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Banca.UsuarioCuenta.ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
                  ///  Represents the child collection of HuellaDactilar that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10601,6 +11069,54 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Biometria.HuellaDactilar entities = new DepositaryWebApi.Business.Relations.Biometria.HuellaDactilar();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Biometria.HuellaDactilar.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Entidad that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Customizador.Entidad> ListOf_Entidad_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Customizador.Entidad entities = new DepositaryWebApi.Business.Relations.Customizador.Entidad();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Customizador.Entidad.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Entidad that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Customizador.Entidad> ListOf_Entidad_UsuarioModificacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Customizador.Entidad entities = new DepositaryWebApi.Business.Relations.Customizador.Entidad();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Customizador.Entidad.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of EntidadAtributo that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Customizador.EntidadAtributo> ListOf_EntidadAtributo_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo entities = new DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of EntidadAtributo that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Customizador.EntidadAtributo> ListOf_EntidadAtributo_UsuarioModificacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo entities = new DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10773,18 +11289,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of ConfiguracionDepositario that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.ConfiguracionDepositario> ListOf_ConfiguracionDepositario_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.ConfiguracionDepositario entities = new DepositaryWebApi.Business.Relations.Dispositivo.ConfiguracionDepositario();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.ConfiguracionDepositario.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of ConfiguracionDepositario that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10797,14 +11301,14 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Depositario that have this UsuarioCreacion value.
+                 ///  Represents the child collection of ConfiguracionDepositario that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.Depositario> ListOf_Depositario_UsuarioCreacion
+                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.ConfiguracionDepositario> ListOf_ConfiguracionDepositario_UsuarioCreacion
                 {
                      get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.Depositario entities = new DepositaryWebApi.Business.Relations.Dispositivo.Depositario();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             DepositaryWebApi.Business.Relations.Dispositivo.ConfiguracionDepositario entities = new DepositaryWebApi.Business.Relations.Dispositivo.ConfiguracionDepositario();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.ConfiguracionDepositario.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10817,6 +11321,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Dispositivo.Depositario entities = new DepositaryWebApi.Business.Relations.Dispositivo.Depositario();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Depositario that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.Depositario> ListOf_Depositario_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Dispositivo.Depositario entities = new DepositaryWebApi.Business.Relations.Dispositivo.Depositario();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Depositario.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10845,18 +11361,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of DepositarioMoneda that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.DepositarioMoneda> ListOf_DepositarioMoneda_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda entities = new DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of DepositarioMoneda that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10865,6 +11369,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda entities = new DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of DepositarioMoneda that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.DepositarioMoneda> ListOf_DepositarioMoneda_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda entities = new DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.DepositarioMoneda.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10893,18 +11409,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Marca that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.Marca> ListOf_Marca_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.Marca entities = new DepositaryWebApi.Business.Relations.Dispositivo.Marca();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Marca.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Marca that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -10913,6 +11417,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Dispositivo.Marca entities = new DepositaryWebApi.Business.Relations.Dispositivo.Marca();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Marca.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Marca that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.Marca> ListOf_Marca_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Dispositivo.Marca entities = new DepositaryWebApi.Business.Relations.Dispositivo.Marca();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Marca.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -10937,54 +11453,6 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Dispositivo.Modelo entities = new DepositaryWebApi.Business.Relations.Dispositivo.Modelo();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.Modelo.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of PlantillaMoneda that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.PlantillaMoneda> ListOf_PlantillaMoneda_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMoneda entities = new DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMoneda();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMoneda.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of PlantillaMoneda that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.PlantillaMoneda> ListOf_PlantillaMoneda_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMoneda entities = new DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMoneda();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMoneda.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of PlantillaMonedaDetalle that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.PlantillaMonedaDetalle> ListOf_PlantillaMonedaDetalle_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMonedaDetalle entities = new DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMonedaDetalle();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMonedaDetalle.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of PlantillaMonedaDetalle that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Dispositivo.PlantillaMonedaDetalle> ListOf_PlantillaMonedaDetalle_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMonedaDetalle entities = new DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMonedaDetalle();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Dispositivo.PlantillaMonedaDetalle.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11157,18 +11625,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of CodigoPostal that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Geografia.CodigoPostal> ListOf_CodigoPostal_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Geografia.CodigoPostal entities = new DepositaryWebApi.Business.Relations.Geografia.CodigoPostal();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Geografia.CodigoPostal.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of CodigoPostal that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11177,6 +11633,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Geografia.CodigoPostal entities = new DepositaryWebApi.Business.Relations.Geografia.CodigoPostal();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Geografia.CodigoPostal.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of CodigoPostal that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Geografia.CodigoPostal> ListOf_CodigoPostal_UsuarioModificacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Geografia.CodigoPostal entities = new DepositaryWebApi.Business.Relations.Geografia.CodigoPostal();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Geografia.CodigoPostal.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11325,18 +11793,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Contenedor that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Operacion.Contenedor> ListOf_Contenedor_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Operacion.Contenedor entities = new DepositaryWebApi.Business.Relations.Operacion.Contenedor();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.Contenedor.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of Contenedor that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11345,6 +11801,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Operacion.Contenedor entities = new DepositaryWebApi.Business.Relations.Operacion.Contenedor();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.Contenedor.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Contenedor that have this UsuarioModificacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Operacion.Contenedor> ListOf_Contenedor_UsuarioModificacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Operacion.Contenedor entities = new DepositaryWebApi.Business.Relations.Operacion.Contenedor();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.Contenedor.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11397,18 +11865,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of TipoTransaccion that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Operacion.TipoTransaccion> ListOf_TipoTransaccion_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion entities = new DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of TipoTransaccion that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11417,6 +11873,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion entities = new DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of TipoTransaccion that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Operacion.TipoTransaccion> ListOf_TipoTransaccion_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion entities = new DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.TipoTransaccion.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11481,18 +11949,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of TurnoUsuario that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Operacion.TurnoUsuario> ListOf_TurnoUsuario_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Operacion.TurnoUsuario entities = new DepositaryWebApi.Business.Relations.Operacion.TurnoUsuario();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.TurnoUsuario.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of TurnoUsuario that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11505,14 +11961,14 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Lenguaje that have this UsuarioCreacion value.
+                 ///  Represents the child collection of TurnoUsuario that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Regionalizacion.Lenguaje> ListOf_Lenguaje_UsuarioCreacion
+                 public List<DepositaryWebApi.Entities.Relations.Operacion.TurnoUsuario> ListOf_TurnoUsuario_UsuarioCreacion
                 {
                      get {
-                             DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje entities = new DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             DepositaryWebApi.Business.Relations.Operacion.TurnoUsuario entities = new DepositaryWebApi.Business.Relations.Operacion.TurnoUsuario();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Operacion.TurnoUsuario.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11525,6 +11981,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje entities = new DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of Lenguaje that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Regionalizacion.Lenguaje> ListOf_Lenguaje_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje entities = new DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Regionalizacion.Lenguaje.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11649,18 +12117,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of IdentificadorUsuario that have this UsuarioId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Seguridad.IdentificadorUsuario> ListOf_IdentificadorUsuario_UsuarioId
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario entities = new DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario.ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of IdentificadorUsuario that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11681,6 +12137,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario entities = new DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of IdentificadorUsuario that have this UsuarioId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Seguridad.IdentificadorUsuario> ListOf_IdentificadorUsuario_UsuarioId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario entities = new DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.IdentificadorUsuario.ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11733,18 +12201,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of RolFuncion that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Seguridad.RolFuncion> ListOf_RolFuncion_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Seguridad.RolFuncion entities = new DepositaryWebApi.Business.Relations.Seguridad.RolFuncion();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.RolFuncion.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of RolFuncion that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11753,6 +12209,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Seguridad.RolFuncion entities = new DepositaryWebApi.Business.Relations.Seguridad.RolFuncion();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.RolFuncion.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of RolFuncion that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Seguridad.RolFuncion> ListOf_RolFuncion_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Seguridad.RolFuncion entities = new DepositaryWebApi.Business.Relations.Seguridad.RolFuncion();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.RolFuncion.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11853,6 +12321,18 @@ using System.Text;
                          }
                 }
                  /// <summary>
+                 ///  Represents the child collection of UsuarioRol that have this UsuarioId value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Seguridad.UsuarioRol> ListOf_UsuarioRol_UsuarioId
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol entities = new DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
                  ///  Represents the child collection of UsuarioRol that have this UsuarioCreacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -11873,18 +12353,6 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol entities = new DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of UsuarioRol that have this UsuarioId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Seguridad.UsuarioRol> ListOf_UsuarioRol_UsuarioId
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol entities = new DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Seguridad.UsuarioRol.ColumnEnum.UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11925,26 +12393,14 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Entidad that have this UsuarioCreacion value.
+                 ///  Represents the child collection of AgendaTurno that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Sincronizacion.Entidad> ListOf_Entidad_UsuarioCreacion
+                 public List<DepositaryWebApi.Entities.Relations.Turno.AgendaTurno> ListOf_AgendaTurno_UsuarioModificacion
                 {
                      get {
-                             DepositaryWebApi.Business.Relations.Sincronizacion.Entidad entities = new DepositaryWebApi.Business.Relations.Sincronizacion.Entidad();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Sincronizacion.Entidad.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of Entidad that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Sincronizacion.Entidad> ListOf_Entidad_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Sincronizacion.Entidad entities = new DepositaryWebApi.Business.Relations.Sincronizacion.Entidad();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Sincronizacion.Entidad.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             DepositaryWebApi.Business.Relations.Turno.AgendaTurno entities = new DepositaryWebApi.Business.Relations.Turno.AgendaTurno();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Turno.AgendaTurno.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -11961,62 +12417,14 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of AgendaTurno that have this UsuarioModificacion value.
+                 ///  Represents the child collection of Denominacion that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Turno.AgendaTurno> ListOf_AgendaTurno_UsuarioModificacion
+                 public List<DepositaryWebApi.Entities.Relations.Valor.Denominacion> ListOf_Denominacion_UsuarioModificacion
                 {
                      get {
-                             DepositaryWebApi.Business.Relations.Turno.AgendaTurno entities = new DepositaryWebApi.Business.Relations.Turno.AgendaTurno();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Turno.AgendaTurno.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of EsquemaDetalleTurno that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Turno.EsquemaDetalleTurno> ListOf_EsquemaDetalleTurno_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Turno.EsquemaDetalleTurno entities = new DepositaryWebApi.Business.Relations.Turno.EsquemaDetalleTurno();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Turno.EsquemaDetalleTurno.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of EsquemaDetalleTurno that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Turno.EsquemaDetalleTurno> ListOf_EsquemaDetalleTurno_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Turno.EsquemaDetalleTurno entities = new DepositaryWebApi.Business.Relations.Turno.EsquemaDetalleTurno();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Turno.EsquemaDetalleTurno.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of EsquemaTurno that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Turno.EsquemaTurno> ListOf_EsquemaTurno_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Turno.EsquemaTurno entities = new DepositaryWebApi.Business.Relations.Turno.EsquemaTurno();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Turno.EsquemaTurno.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of EsquemaTurno that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Turno.EsquemaTurno> ListOf_EsquemaTurno_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Turno.EsquemaTurno entities = new DepositaryWebApi.Business.Relations.Turno.EsquemaTurno();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Turno.EsquemaTurno.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             DepositaryWebApi.Business.Relations.Valor.Denominacion entities = new DepositaryWebApi.Business.Relations.Valor.Denominacion();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Valor.Denominacion.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -12033,14 +12441,14 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of Denominacion that have this UsuarioModificacion value.
+                 ///  Represents the child collection of Moneda that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Valor.Denominacion> ListOf_Denominacion_UsuarioModificacion
+                 public List<DepositaryWebApi.Entities.Relations.Valor.Moneda> ListOf_Moneda_UsuarioModificacion
                 {
                      get {
-                             DepositaryWebApi.Business.Relations.Valor.Denominacion entities = new DepositaryWebApi.Business.Relations.Valor.Denominacion();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Valor.Denominacion.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             DepositaryWebApi.Business.Relations.Valor.Moneda entities = new DepositaryWebApi.Business.Relations.Valor.Moneda();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Valor.Moneda.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -12053,18 +12461,6 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Valor.Moneda entities = new DepositaryWebApi.Business.Relations.Valor.Moneda();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Valor.Moneda.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
-                 ///  Represents the child collection of Moneda that have this UsuarioModificacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Valor.Moneda> ListOf_Moneda_UsuarioModificacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Valor.Moneda entities = new DepositaryWebApi.Business.Relations.Valor.Moneda();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Valor.Moneda.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -12189,18 +12585,6 @@ using System.Text;
                          }
                 }
                  /// <summary>
-                 ///  Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioCreacion
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo entities = new DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
-                 /// <summary>
                  ///  Represents the child collection of PerfilTipo that have this UsuarioModificacion value.
                  /// </summary>
                  [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
@@ -12209,6 +12593,18 @@ using System.Text;
                      get {
                              DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo entities = new DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo();
                              entities.Where.Add(DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
+                             return entities.Items();
+                         }
+                }
+                 /// <summary>
+                 ///  Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
+                 /// </summary>
+                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
+                 public List<DepositaryWebApi.Entities.Relations.Visualizacion.PerfilTipo> ListOf_PerfilTipo_UsuarioCreacion
+                {
+                     get {
+                             DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo entities = new DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo();
+                             entities.Where.Add(DepositaryWebApi.Business.Relations.Visualizacion.PerfilTipo.ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
                              return entities.Items();
                          }
                 }
@@ -12656,7 +13052,7 @@ using System.Text;
                 public Entidad()
                 {
                 }
-                public  Entidad(String Nombre,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
+                public  Entidad(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean Habilitado)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -12673,57 +13069,15 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Display)] //Is Display Default
              public String Nombre { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _UsuarioCreacion { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion
-             {
-                 get {
-                     if (UsuarioCreacion_ == null || UsuarioCreacion_.Id != _UsuarioCreacion)
-                         {
-                             UsuarioCreacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioCreacion).FirstOrDefault();
-                         }
-                     return UsuarioCreacion_;
-                     }
-                 set {UsuarioCreacion_  =  value;}
-             }
-             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion_ = null;
+             public Int64 UsuarioCreacion { get; set; }
              [DataItemAttributeFieldName("FechaCreacion","FechaCreacion")]
              public DateTime FechaCreacion { get; set; }
              [DataItemAttributeFieldName("UsuarioModificacion","UsuarioModificacion")]
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-             internal Int64 _UsuarioModificacion { get; set; }
-             [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
-             [PropertyAttributeForeignKeyObjectName("Usuario")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion
-             {
-                 get {
-                     if (UsuarioModificacion_ == null || UsuarioModificacion_.Id != _UsuarioModificacion)
-                         {
-                             UsuarioModificacion = new DepositaryWebApi.Business.Relations.Seguridad.Usuario().Items(this._UsuarioModificacion).FirstOrDefault();
-                         }
-                     return UsuarioModificacion_;
-                     }
-                 set {UsuarioModificacion_  =  value;}
-             }
-             static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
+             public Int64? UsuarioModificacion { get; set; }
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
-                 /// <summary>
-                 ///  Represents the child collection of EntidadCabecera that have this EntidadId value.
-                 /// </summary>
-                 [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Exclude)] //Exclude
-                 public List<DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera> ListOf_EntidadCabecera_EntidadId
-                {
-                     get {
-                             DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera entities = new DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera();
-                             entities.Where.Add(DepositaryWebApi.Business.Relations.Sincronizacion.EntidadCabecera.ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                             return entities.Items();
-                         }
-                }
              public override int GetHashCode() => (Nombre == null ? string.Empty : Nombre).GetHashCode();
              public override string ToString() => Nombre;
 				
@@ -12761,7 +13115,7 @@ using System.Text;
                 public EntidadCabecera()
                 {
                 }
-                public  EntidadCabecera(DepositaryWebApi.Entities.Relations.Sincronizacion.Entidad EntidadId,String Valor,DateTime Fechainicio,DateTime? Fechafin,DepositaryWebApi.Entities.Relations.Sincronizacion.Ejecucion EjecucionId)
+                public  EntidadCabecera(DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId,String Valor,DateTime Fechainicio,DateTime? Fechafin,DepositaryWebApi.Entities.Relations.Sincronizacion.Ejecucion EjecucionId)
                 {
                     this.Id = Id;
                     this.EntidadId = EntidadId;
@@ -12778,18 +13132,18 @@ using System.Text;
              internal Int64 _EntidadId { get; set; }
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Entidad")]// Object name in Database
-             public DepositaryWebApi.Entities.Relations.Sincronizacion.Entidad EntidadId
+             public DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId
              {
                  get {
                      if (EntidadId_ == null || EntidadId_.Id != _EntidadId)
                          {
-                             EntidadId = new DepositaryWebApi.Business.Relations.Sincronizacion.Entidad().Items(this._EntidadId).FirstOrDefault();
+                             EntidadId = new DepositaryWebApi.Business.Relations.Customizador.Entidad().Items(this._EntidadId).FirstOrDefault();
                          }
                      return EntidadId_;
                      }
                  set {EntidadId_  =  value;}
              }
-             static DepositaryWebApi.Entities.Relations.Sincronizacion.Entidad EntidadId_ = null;
+             static DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId_ = null;
              [DataItemAttributeFieldName("Valor","Valor")]
              public String Valor { get; set; }
              [DataItemAttributeFieldName("Fechainicio","Fechainicio")]
@@ -13201,6 +13555,8 @@ using System.Text;
 					public const string FechaCreacion = "FechaCreacion";
 					public const string UsuarioModificacion = "UsuarioModificacion";
 					public const string FechaModificacion = "FechaModificacion";
+					public const string OperaSinTurno = "OperaSinTurno";
+					public const string OperaDiasCorridos = "OperaDiasCorridos";
 				}
 				public enum FieldEnum : int
                 {
@@ -13210,7 +13566,9 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					OperaSinTurno,
+					OperaDiasCorridos
 				}
 	               /// <summary>
                 /// Parameterless Constructor
@@ -13218,7 +13576,7 @@ using System.Text;
                 public EsquemaTurno()
                 {
                 }
-                public  EsquemaTurno(String Nombre,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  EsquemaTurno(String Nombre,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos)
                 {
                     this.Id = Id;
                     this.Nombre = Nombre;
@@ -13227,6 +13585,8 @@ using System.Text;
                     this.FechaCreacion = FechaCreacion;
                     this.UsuarioModificacion = UsuarioModificacion;
                     this.FechaModificacion = FechaModificacion;
+                    this.OperaSinTurno = OperaSinTurno;
+                    this.OperaDiasCorridos = OperaDiasCorridos;
                 }
              [DataItemAttributeFieldName("Id","Id")]
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Pk)] //Is Primary Key
@@ -13274,6 +13634,10 @@ using System.Text;
              static DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion_ = null;
              [DataItemAttributeFieldName("FechaModificacion","FechaModificacion")]
              public DateTime? FechaModificacion { get; set; }
+             [DataItemAttributeFieldName("OperaSinTurno","OperaSinTurno")]
+             public Boolean OperaSinTurno { get; set; }
+             [DataItemAttributeFieldName("OperaDiasCorridos","OperaDiasCorridos")]
+             public Boolean OperaDiasCorridos { get; set; }
                  /// <summary>
                  ///  Represents the child collection of EsquemaDetalleTurno that have this EsquemaTurnoId value.
                  /// </summary>

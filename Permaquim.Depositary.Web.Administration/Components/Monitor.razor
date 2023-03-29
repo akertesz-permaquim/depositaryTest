@@ -1223,8 +1223,6 @@ else
     void IDisposable.Dispose()
     {
         timerRecargaInformacion.Dispose();
-        dataFunciones.Clear();
-        rowsDepositariosExpandidas.Clear();
         tabsMonitor.Dispose();
         cardInformacionDepositario.Dispose();
         gridTotalesGenerales.Dispose();
@@ -1236,6 +1234,8 @@ else
         gridTransaccionDetalles.Dispose();
         gridDepositarios.Dispose();
         gridTransacciones.Dispose();
+        dataFunciones = null;
+        rowsDepositariosExpandidas = null;
         dataEsquemaDetalle = null;
         dataLenguaje = null;
         dataTotalesGeneralesDepositario = null;
