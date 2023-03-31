@@ -17,7 +17,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == null ? String.Empty :
                  Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") + ".";
             var builder = new ConfigurationBuilder()
-                            .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                             .AddJsonFile("appsettings." + env + "json", optional: false, reloadOnChange: true);
 
 
@@ -25,13 +25,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
             return configuration.GetSection("AppSettings").GetSection(configurationEntry).Value.ToString();
         }
-        public static List<WorkerTask> GetWorkerTasks(string tasksJson)
-        {
-            string str = File.ReadAllText(tasksJson);
-
-            return JsonConvert.DeserializeObject<List<WorkerTask>>(str);
-
-        }
+        public static List<WorkerTask> GetWorkerTasks(string tasksJson) => JsonConvert.DeserializeObject<List<WorkerTask>>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "\\" + tasksJson));
     }
 
 }
