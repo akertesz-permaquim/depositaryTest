@@ -20,43 +20,20 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
-  <SelectedViews />
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=DepositarioIntegracion;Data Source=PC-SISTEMAS</ConnectionString>
+  <SelectedViews>
+    <string>Integracion.OperacionTransaccion</string>
+    <string>Integracion.OperacionTransaccionDetalle</string>
+    <string>Integracion.OperacionTransaccionSobre</string>
+    <string>Integracion.OperacionTransaccionSobreDetalle</string>
+  </SelectedViews>
   <SelectedStoredProcedures>
     <string>Sincronizacion.ObtenerIdDestino</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
     <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
-    <string>dbo.fn_diagramobjects</string>
     <string>dbo.IniciarPrimeraSincronizacion</string>
-    <string>dbo.sp_alterdiagram</string>
-    <string>dbo.sp_creatediagram</string>
-    <string>dbo.sp_dropdiagram</string>
-    <string>dbo.sp_helpdiagramdefinition</string>
-    <string>dbo.sp_helpdiagrams</string>
-    <string>dbo.sp_renamediagram</string>
-    <string>dbo.sp_upgraddiagrams</string>
-    <string>dbo.splitCapital</string>
-    <string>Desarrollo.ActualizarLenguajeItem</string>
-    <string>Desarrollo.GenerarTablaModelo</string>
-    <string>Desarrollo.GenerarTablaTipoModelo</string>
-    <string>Dispositivo.ObtenerDepositarios</string>
-    <string>Dispositivo.ObtenerInformacionDepositario</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
-    <string>Operacion.ObtenerDetalleTransaccion</string>
-    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
-    <string>Operacion.ObtenerEventosPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasPorDepositario</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
-    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
-    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
-    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
-    <string>Regionalizacion.ObtenerTextosLenguaje</string>
-    <string>Seguridad.ObtenerRolesPorUsuario</string>
     <string>Sincronizacion.ObtenerIdOrigen</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures>
@@ -318,7 +295,6 @@
     <string>Geografia.Pais</string>
     <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
-    <string>Impresion.PlantillaTicket</string>
     <string>Impresion.Ticket</string>
     <string>Impresion.TipoTicket</string>
     <string>Operacion.CierreDiario</string>
@@ -368,9 +344,10 @@
     <string>Visualizacion.PerfilItem</string>
     <string>Visualizacion.PerfilTipo</string>
   </SelectedTables>
-  <SelectedDatabase>Depositario</SelectedDatabase>
+  <SelectedDatabase>DepositarioIntegracion</SelectedDatabase>
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
+    <string>353e226c-6bf1-4079-a822-ba12163b71c9</string>
   </SelectedTemplates>
   <Location>\</Location>
   <DatasourceServer />

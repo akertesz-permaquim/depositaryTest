@@ -7,6 +7,7 @@ using Permaquim.Depositary.UI.Desktop.Helpers;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
+using static Permaquim.Depositary.UI.Desktop.Controllers.DatabaseController;
 using static Permaquim.Depositary.UI.Desktop.Global.Enumerations;
 
 namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
@@ -16,6 +17,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private int _counterReconnectRetrials = 0;
 
         private const string DEPOSITARIO_NO_INICIALIZADO = "Depositario no inicializado.";
+        private const string BASE_SIN_CONEXION = "Sin conexión con la base de datos.";
         private const string RETIRO_DE_VALORES_SIN_USUARIO = "Retiro de valores sin usuario.";
         private const string ERROR = "Error";
         private const string LOGIN = "Login";
@@ -30,6 +32,11 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private const int WEEK_DAYS = 7;
         private const string VERSION = " - Version: ";
         private const int CLOSING_COMBINATION = 3;
+        private const string ABNORMALDEVICE = "AbnormalDevice";
+        private const string JAMMING = "Jamming";
+        private const string ABNORMALSTORAGE = "AbnormalStorage";
+        private const string COUNTINGERROR = "CountingError";
+        private const string CASETTEFULL = "CassetteFull";
         private System.Windows.Forms.Timer _pollingTimer = new System.Windows.Forms.Timer();
 
         private int closingcombination = 0;
@@ -53,20 +60,21 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private bool _isLicensed = false;
 
         private bool _bagRemoved = false;
-        private bool _turnAutoClose = ParameterController.TurnAutoClose;
+        private bool _turnAutoClose = false;
 
         // Variables de información de errores 
-        private string _counterCommunicationError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA);
-        private string _ioboardCommunicationError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_PLACA);
-        private string _containerError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_CONTENEDOR);
-        private string _printerError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_IMPRESORA);
-        private string _touchScreenToStart = MultilanguangeController.GetText(MultiLanguageEnum.TOQUE_PANTALLA_PARA_INICIAR);
+        private string _counterCommunicationError = string.Empty;
+        private string _ioboardCommunicationError = string.Empty;
+        private string _containerError = string.Empty;
+        private string _printerError = string.Empty;
+        private string _touchScreenToStart = string.Empty;
+        ConnectionStatusEnum connectionStatusEnum = ConnectionStatusEnum.None;
 
 
         /// <summary>
         /// Instancias de los componentes que gestionan dispositivos
         /// </summary>
-        CounterDevice _device = new();
+        CounterDevice _device = null;
         DEXDevice? _deXDevice = null;
 
         SystemBlockingDialog _blockingDialog = null;
@@ -100,33 +108,54 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 this.Location = new Point(0, 0);
                 this.Size = new Size(screen.Width, screen.Height);
 
-                if (!DatabaseController.IsInitialized())
+                connectionStatusEnum = DatabaseController.IsInitialized();
+
+
+                switch (connectionStatusEnum)
                 {
-                    LoadDefaultStyles();
-                    InformationLabel.BackColor = Color.Red;
-                    InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
-                    Application.Exit();
-                    return;
+                    case ConnectionStatusEnum.None:
+                        break;
+                    case ConnectionStatusEnum.Connected:
+                        DatabaseController.SetDepositaryStatus(true);
+                        _device = new();
+                        _turnAutoClose = ParameterController.TurnAutoClose;
+                        // Variables de información de errores 
+                        _counterCommunicationError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_CONTADORA);
+                        _ioboardCommunicationError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_COMUNICACION_PLACA);
+                        _containerError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_CONTENEDOR);
+                        _printerError = MultilanguangeController.GetText(MultiLanguageEnum.ERROR_IMPRESORA);
+                        _touchScreenToStart = MultilanguangeController.GetText(MultiLanguageEnum.TOQUE_PANTALLA_PARA_INICIAR);
+
+                        _pollingTimer = new System.Windows.Forms.Timer()
+                        {
+                            Interval = DeviceController.GetPollingInterval(),
+                            Enabled = false
+                        };
+                        _pollingTimer.Tick += PollingTimer_Tick;
+
+                        LoadLogo();
+
+                        _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+
+                        this.DoubleBuffered = true;
+                        break;
+                    case ConnectionStatusEnum.Disconnected:
+                        LoadDefaultStyles();
+                        InformationLabel.BackColor = Color.Red;
+                        InformationLabel.Text = BASE_SIN_CONEXION;
+
+                        break;
+                    case ConnectionStatusEnum.UnInitialized:
+
+                        LoadDefaultStyles();
+                        InformationLabel.BackColor = Color.Red;
+                        InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
+                        break;
+                    default:
+                        break;
                 }
-                else
-                {
-                    DatabaseController.SetDepositaryStatus(true);
 
-                    _pollingTimer = new System.Windows.Forms.Timer()
-                    {
-                        Interval = DeviceController.GetPollingInterval(),
-                        Enabled = false
-                    };
-                    _pollingTimer.Tick += PollingTimer_Tick;
-
-                    LoadLogo();
-
-                    _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
-
-                    this.DoubleBuffered = true;
-
-
-                }
+ 
 
             }
             catch (System.Data.SqlClient.SqlException ex)
@@ -162,66 +191,74 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
         private void MainForm_Load(object sender, EventArgs e)
         {
             int retries = 1;
-            while (DatabaseController.CurrentDepositary == null)
+
+            if (connectionStatusEnum == ConnectionStatusEnum.Connected)
             {
-                LoadDefaultStyles();
-                InformationLabel.BackColor = Color.Red;
-                InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO + " (" + retries.ToString() + ")";
-                InformationLabel.Refresh();
-                retries++;
-                Thread.Sleep(5000);
-            }
-
-
-            if (DatabaseController.CurrentDepositary != null)
-            {
-
-                DatabaseController.SetDepositaryStatus(true);
-
-                _pollingTimer = new System.Windows.Forms.Timer()
+                while (DatabaseController.CurrentDepositary == null)
                 {
-                    Interval = DeviceController.GetPollingInterval(),
-                    Enabled = false
-                };
-                _pollingTimer.Tick += PollingTimer_Tick;
+                    LoadDefaultStyles();
+                    InformationLabel.BackColor = Color.Red;
+                    InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO + " (" + retries.ToString() + ")";
+                    InformationLabel.Refresh();
+                    retries++;
+                    Thread.Sleep(5000);
+                }
 
-                LoadLogo();
-
-                _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
-
-                this.DoubleBuffered = true;
-
-                LoadStyles();
-
-
-                if (CheckLicensefile())
+                if (DatabaseController.CurrentDepositary != null)
                 {
-                    if (CheckLicense())
+                    DatabaseController.SetDepositaryStatus(true);
+
+                    _pollingTimer = new System.Windows.Forms.Timer()
                     {
-                        _isLicensed = true;
-                        InitializeDevices();
-                        LoadLedImages();
-                        VerifyUserData();
-                        LoadParameters();
-                        LoadLanguageItems();
-                        SetDepositaryInformation();
-                        SetTurnAndDateTimeLabel();
+                        Interval = DeviceController.GetPollingInterval(),
+                        Enabled = false
+                    };
+                    _pollingTimer.Tick += PollingTimer_Tick;
+
+                    LoadLogo();
+
+                    _remainingTimeText = MultilanguangeController.GetText(MultiLanguageEnum.TIEMPO_RESTANTE);
+
+                    this.DoubleBuffered = true;
+
+                    LoadStyles();
+
+
+                    if (CheckLicensefile())
+                    {
+                        if (CheckLicense())
+                        {
+                            _isLicensed = true;
+                            InitializeDevices();
+                            LoadLedImages();
+                            VerifyUserData();
+                            LoadParameters();
+                            LoadLanguageItems();
+                            SetDepositaryInformation();
+                            SetTurnAndDateTimeLabel();
+                        }
+
                     }
-                        
-                }else
+                    else
+                    {
+                        _isLicensed = false;
+                        SetInformationMessage(InformationTypeEnum.Error,
+                        MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
+                        Clipboard.SetText(LicenseController.GetHardwareId());
+
+                    }
+                }
+                else
                 {
-                    _isLicensed = false;
-                    SetInformationMessage(InformationTypeEnum.Error,
-                    MultilanguangeController.GetText(MultiLanguageEnum.LICENCIA_NO_VALIDA));
-                    Clipboard.SetText(LicenseController.GetHardwareId());
-  
+                    LoadDefaultStyles();
+                    InformationLabel.BackColor = Color.Red;
+                    InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
                 }
             }
             else
             {
-                LoadDefaultStyles();
                 InformationLabel.BackColor = Color.Red;
-                InformationLabel.Text = DEPOSITARIO_NO_INICIALIZADO;
+                InformationLabel.Text = BASE_SIN_CONEXION;
             }
         }
         private void DeviceErrorEventReceived(object sender, DeviceErrorEventArgs args)
@@ -233,23 +270,23 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             //DeviceController.CounterIssue = true;
             switch (args.ErrorDescription)
             {
-                case "AbnormalDevice":
+                case ABNORMALDEVICE:
                     if (!ParameterController.ShowsAbnormalDevice)
                         return;
                     break;
-                case "Jamming":
+                case JAMMING:
                     if (!ParameterController.ShowsJamming)
                         return;
                     break;
-                case "AbnormalStorage":
+                case ABNORMALSTORAGE:
                     if (!ParameterController.ShowsAbnormalStorage)
                         return;
                     break;
-                case "CountingError":
+                case COUNTINGERROR:
                     if (!ParameterController.ShowsCountingError)
                         return;
                     break;
-                case "CassetteFull":
+                case CASETTEFULL:
                     if (!ParameterController.ShowsCassetteFull)
                         return;
                     break;
@@ -617,7 +654,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                     {
                         DeviceController.GateStatus = Global.Constants.NORMAL;
                         DeviceController.IsOutOfService = false;
-                        VerifyConnections();
                     }
                 }
             }
@@ -728,6 +764,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
         private void VerifyConnections()
         {
+
             try
             {
                 // consulta el estado de la contadora si está conectada
@@ -737,7 +774,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 {
                     _counterReconnectRetrials = 0;
                     FormsController.EnableDisableForms(true);
-                    CounterPictureBox.Image = _greenLedImageCounter;
+                    if(CounterPictureBox.Image != _greenLedImageCounter)
+                        CounterPictureBox.Image = _greenLedImageCounter;
                     DeviceController.CounterIssue = false;
                     DeviceController.CounterStatus = Global.Constants.NORMAL;
                     DeviceController.IsOutOfService = false;
@@ -758,7 +796,8 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                             FormsController.LogOff();
                         }
                     }
-                    CounterPictureBox.Image = _redLedImageCounter;
+                    if(CounterPictureBox.Image != _redLedImageCounter)
+                        CounterPictureBox.Image = _redLedImageCounter;
                     DeviceController.CounterIssue = true;
                     DeviceController.IsOutOfService = true;
                     DeviceController.CounterStatus = Global.Constants.COUNTER_DISCONNECTED;
@@ -770,14 +809,16 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 // consulta el estado de la ioboard  si está conectada
                 if (_device.IoBoardConnected)
                 {
-                    IoBoardPictureBox.Image = _greenLedImageIoboard;
+                    if(IoBoardPictureBox.Image != _greenLedImageIoboard)
+                        IoBoardPictureBox.Image = _greenLedImageIoboard;
                     DeviceController.IoBoardIssue = false;
                     DeviceController.IoBoardStatus = Global.Constants.NORMAL;
                     DeviceController.IsOutOfService = false;
                 }
                 else
                 {
-                    IoBoardPictureBox.Image = _redLedImageIoboard;
+                    if (IoBoardPictureBox.Image != _redLedImageIoboard)
+                        IoBoardPictureBox.Image = _redLedImageIoboard;
                     DeviceController.IoBoardIssue = true;
                     DeviceController.IsOutOfService = true;
                     DeviceController.IoBoardStatus = Global.Constants.IOBOARD_DISCONNECTED;

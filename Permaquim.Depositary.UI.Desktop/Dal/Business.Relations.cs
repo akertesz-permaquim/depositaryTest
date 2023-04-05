@@ -346,6 +346,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Configuracion
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Aplicacion {
@@ -692,6 +703,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionEmpresa
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Aplicacion {
@@ -987,6 +1009,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionTipoDato
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Aplicacion {
@@ -1316,6 +1349,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionValidacionDato
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Auditoria {
@@ -1628,6 +1672,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Log
 	} //namespace Permaquim.Depositario.Business.Relations.Auditoria
 	namespace Permaquim.Depositario.Business.Relations.Auditoria {
@@ -1923,6 +1978,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoLog
 	} //namespace Permaquim.Depositario.Business.Relations.Auditoria
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -2252,6 +2318,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Banco
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -2649,6 +2726,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Cuenta
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -2961,6 +3049,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoCuenta
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -3256,6 +3355,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class UsuarioCuenta
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Biometria {
@@ -3568,6 +3678,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class HuellaDactilar
 	} //namespace Permaquim.Depositario.Business.Relations.Biometria
 	namespace Permaquim.Depositario.Business.Relations.Customizador {
@@ -3589,6 +3710,7 @@ using System.Text;
 					HabilitarOrdenamiento,
 					HabilitarRedimensionamiento,
 					HabilitarPaginado,
+					RegistrosPorPagina,
 					HabilitarAuditoria,
 					Habilitado,
 					UsuarioCreacion,
@@ -3644,6 +3766,7 @@ using System.Text;
          /// <param name='HabilitarOrdenamiento'></param>
          /// <param name='HabilitarRedimensionamiento'></param>
          /// <param name='HabilitarPaginado'></param>
+         /// <param name='RegistrosPorPagina'></param>
          /// <param name='HabilitarAuditoria'></param>
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
@@ -3651,9 +3774,9 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Customizador.Entidad</returns>
-			public Entities.Relations.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32 RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Customizador.Entidad)base.Add(new Entities.Relations.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Customizador.Entidad)base.Add(new Entities.Relations.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,RegistrosPorPagina,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Customizador.Entidad> Items()
             {
@@ -3697,6 +3820,7 @@ using System.Text;
             /// <param name="HabilitarOrdenamiento"></param>
             /// <param name="HabilitarRedimensionamiento"></param>
             /// <param name="HabilitarPaginado"></param>
+            /// <param name="RegistrosPorPagina"></param>
             /// <param name="HabilitarAuditoria"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
@@ -3704,7 +3828,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Int32? RegistrosPorPagina,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -3839,6 +3963,18 @@ using System.Text;
                     }
                    
                 }
+                if (RegistrosPorPagina != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.RegistrosPorPagina, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.RegistrosPorPagina, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
+                    }
+                   
+                }
                 if (HabilitarAuditoria != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
@@ -3943,6 +4079,7 @@ using System.Text;
             /// <param name="HabilitarOrdenamiento"></param>
             /// <param name="HabilitarRedimensionamiento"></param>
             /// <param name="HabilitarPaginado"></param>
+            /// <param name="RegistrosPorPagina"></param>
             /// <param name="HabilitarAuditoria"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
@@ -3950,7 +4087,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32 RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Customizador.Entidad item = new Entities.Tables.Customizador.Entidad();
                  item.Id = Id;
@@ -3964,6 +4101,7 @@ using System.Text;
                  item.HabilitarOrdenamiento = HabilitarOrdenamiento;
                  item.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
                  item.HabilitarPaginado = HabilitarPaginado;
+                 item.RegistrosPorPagina = RegistrosPorPagina;
                  item.HabilitarAuditoria = HabilitarAuditoria;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
@@ -4016,6 +4154,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Entidad
 	} //namespace Permaquim.Depositario.Business.Relations.Customizador
 	namespace Permaquim.Depositario.Business.Relations.Customizador {
@@ -4481,6 +4630,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EntidadAtributo
 	} //namespace Permaquim.Depositario.Business.Relations.Customizador
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -4895,6 +5055,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Empresa
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -5207,6 +5378,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Grupo
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -5519,6 +5701,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class RelacionMonedaSucursal
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -5831,6 +6024,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Sector
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -6211,6 +6415,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Sucursal
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -6574,6 +6789,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ComandoContadora
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -6937,6 +7163,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ComandoPlaca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -7249,6 +7486,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionDepositario
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -7629,6 +7877,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Depositario
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -8128,6 +8387,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioContadora
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -8474,6 +8744,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioEstado
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -8786,6 +9067,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioMoneda
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -9438,6 +9730,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioPlaca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -9733,6 +10036,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Marca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -10079,6 +10393,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Modelo
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -10374,6 +10699,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PlantillaMoneda
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -10720,6 +11056,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PlantillaMonedaDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -11066,6 +11413,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoConfiguracionDepositario
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -11565,6 +11923,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoContadora
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -12234,6 +12603,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoPlaca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Estilo {
@@ -12546,6 +12926,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Esquema
 	} //namespace Permaquim.Depositario.Business.Relations.Estilo
 	namespace Permaquim.Depositario.Business.Relations.Estilo {
@@ -12926,6 +13317,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EsquemaDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Estilo
 	namespace Permaquim.Depositario.Business.Relations.Estilo {
@@ -13221,6 +13623,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoEsquemaDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Estilo
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -13550,6 +13963,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Ciudad
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -13879,6 +14303,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class CodigoPostal
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -14208,6 +14643,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Pais
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -14537,6 +14983,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Provincia
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -14849,6 +15306,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Zona
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Impresion {
@@ -15382,6 +15850,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PlantillaTicket
 	} //namespace Permaquim.Depositario.Business.Relations.Impresion
 	namespace Permaquim.Depositario.Business.Relations.Impresion {
@@ -16017,6 +16496,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Ticket
 	} //namespace Permaquim.Depositario.Business.Relations.Impresion
 	namespace Permaquim.Depositario.Business.Relations.Impresion {
@@ -16329,6 +16819,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoTicket
 	} //namespace Permaquim.Depositario.Business.Relations.Impresion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -16658,6 +17159,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class CierreDiario
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -17021,6 +17533,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Contenedor
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -17299,6 +17822,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Evento
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -17560,6 +18094,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Sesion
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -17872,6 +18417,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoContenedor
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -18184,6 +18740,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoEvento
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -18496,6 +19063,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoTransaccion
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -19046,6 +19624,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Transaccion
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -19290,6 +19879,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TransaccionDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -19517,6 +20117,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TransaccionSobre
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -19778,6 +20389,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TransaccionSobreDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -20209,6 +20831,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Turno
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -20504,6 +21137,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TurnoUsuario
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Regionalizacion {
@@ -20833,6 +21477,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Lenguaje
 	} //namespace Permaquim.Depositario.Business.Relations.Regionalizacion
 	namespace Permaquim.Depositario.Business.Relations.Regionalizacion {
@@ -21162,6 +21817,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class LenguajeItem
 	} //namespace Permaquim.Depositario.Business.Relations.Regionalizacion
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -21474,6 +22140,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Aplicacion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -21769,6 +22446,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class AplicacionParametro
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -22081,6 +22769,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class AplicacionParametroValor
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -22427,6 +23126,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Funcion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -22739,6 +23449,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class IdentificadorUsuario
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -23102,6 +23823,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Menu
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -23431,6 +24163,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Rol
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -23811,6 +24554,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class RolFuncion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -24106,6 +24860,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoAplicacion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -24401,6 +25166,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoFuncion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -24713,6 +25489,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoIdentificador
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -25008,6 +25795,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoMenu
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -25592,6 +26390,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Usuario
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -25887,6 +26696,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class UsuarioRol
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -26182,6 +27002,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class UsuarioSector
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -26477,6 +27308,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Configuracion
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -26738,6 +27580,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Ejecucion
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -27016,6 +27869,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Entidad
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -27277,6 +28141,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EntidadCabecera
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -27521,6 +28396,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EntidadDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Turno {
@@ -27867,6 +28753,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class AgendaTurno
 	} //namespace Permaquim.Depositario.Business.Relations.Turno
 	namespace Permaquim.Depositario.Business.Relations.Turno {
@@ -28179,6 +29076,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EsquemaDetalleTurno
 	} //namespace Permaquim.Depositario.Business.Relations.Turno
 	namespace Permaquim.Depositario.Business.Relations.Turno {
@@ -28195,7 +29103,9 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					OperaSinTurno,
+					OperaDiasCorridos
 				}
 			   protected List<Entities.Relations.Turno.EsquemaTurno> _cacheItemList = new List<Entities.Relations.Turno.EsquemaTurno>();
 			   protected List<Entities.Relations.Turno.EsquemaTurno> _entities = null;
@@ -28241,10 +29151,12 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='OperaSinTurno'></param>
+         /// <param name='OperaDiasCorridos'></param>
          /// <returns>Entities.Relations.Turno.EsquemaTurno</returns>
-			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos) 
 			{
-			  return (Entities.Relations.Turno.EsquemaTurno)base.Add(new Entities.Relations.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Turno.EsquemaTurno)base.Add(new Entities.Relations.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,OperaSinTurno,OperaDiasCorridos));
 			}
             public new List<Entities.Relations.Turno.EsquemaTurno> Items()
             {
@@ -28284,8 +29196,10 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="OperaSinTurno"></param>
+            /// <param name="OperaDiasCorridos"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean? OperaSinTurno,Boolean? OperaDiasCorridos)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -28372,6 +29286,30 @@ using System.Text;
                     }
                    
                 }
+                if (OperaSinTurno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperaSinTurno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaSinTurno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperaSinTurno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaSinTurno);
+                    }
+                   
+                }
+                if (OperaDiasCorridos != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperaDiasCorridos, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperaDiasCorridos, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Turno.EsquemaTurno> Result 
@@ -28400,8 +29338,10 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="OperaSinTurno"></param>
+            /// <param name="OperaDiasCorridos"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos)
             {
                  Entities.Tables.Turno.EsquemaTurno item = new Entities.Tables.Turno.EsquemaTurno();
                  item.Id = Id;
@@ -28411,6 +29351,8 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.OperaSinTurno = OperaSinTurno;
+                 item.OperaDiasCorridos = OperaDiasCorridos;
 
                 return base.Update((IDataItem)item);
             }
@@ -28457,6 +29399,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EsquemaTurno
 	} //namespace Permaquim.Depositario.Business.Relations.Turno
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -28837,6 +29790,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Denominacion
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -29166,6 +30130,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Moneda
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -29478,6 +30453,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class OrigenValor
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -29773,6 +30759,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class RelacionMonedaTipoValor
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -30085,6 +31082,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Tipo
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Visualizacion {
@@ -30397,6 +31405,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Perfil
 	} //namespace Permaquim.Depositario.Business.Relations.Visualizacion
 	namespace Permaquim.Depositario.Business.Relations.Visualizacion {
@@ -30692,6 +31711,17 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PerfilItem
 	} //namespace Permaquim.Depositario.Business.Relations.Visualizacion
 	namespace Permaquim.Depositario.Business.Relations.Visualizacion {
@@ -31004,5 +32034,16 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PerfilTipo
 	} //namespace Permaquim.Depositario.Business.Relations.Visualizacion
