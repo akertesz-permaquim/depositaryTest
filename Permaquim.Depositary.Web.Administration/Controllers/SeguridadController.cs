@@ -231,8 +231,9 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
                 if (menuesDependientes.Count > 0)
                 {
-                    foreach (var menuDependiente in menuesDependientes)
+                    for (int i = 0; i < menuesDependientes.Count; i++)
                     {
+                        var menuDependiente = menuesDependientes[i];
                         if (!resultado.Exists(x => x.MenuId == menuDependiente.DependeDe.Value))
                         {
                             _bRelationsMenu.Where.Clear();

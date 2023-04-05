@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DepositaryWebApi
 {
-    internal static class Crypto
+    internal static partial class Crypto
     {
         public static string Encrypt(string textToEncrypt,string key)
         {

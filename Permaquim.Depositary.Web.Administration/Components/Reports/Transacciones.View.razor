@@ -7,14 +7,6 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
-<RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
-    <ChildContent>
-        <div>
-            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_TRANSACCIONES",dataLenguaje)</h4>
-        </div>
-    </ChildContent>
-</RadzenBadge>
-<hr>
 
 @if (estaCargandoParametrosReporte)
 {
@@ -22,14 +14,23 @@
 }
 else
 {
-    <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
-        <HeaderTemplate>
-            <h4 class="m-0 d-flex align-items-center">
-                <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
-            </h4>
-        </HeaderTemplate>
+    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
         <ChildContent>
-            <RadzenTemplateForm TItem="parametros" Data="@parametrosTransaccionesView" @bind-Value="parametrosTransaccionesView" Submit="LoadMainEntityData">
+            <div>
+                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_TRANSACCIONES",dataLenguaje)</h4>
+            </div>
+        </ChildContent>
+    </RadzenBadge>
+    <hr>
+
+    <RadzenTemplateForm TItem="parametros" Data="@parametrosTransaccionesView" @bind-Value="parametrosTransaccionesView" Submit="LoadMainEntityData">
+        <ChildContent>
+            <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
+                <HeaderTemplate>
+                    <h4 class="m-0 d-flex align-items-center">
+                        <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
+                    </h4>
+                </HeaderTemplate>
                 <ChildContent>
                     <table class="table table-borderless w-auto" style="vertical-align: middle">
                         <tbody>
@@ -184,26 +185,26 @@ else
                             </tr>
                         </tbody>
                     </table>
-                    <div style="margin-bottom: 1rem" class="row justify-content-center">
-                        <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
-                            </RadzenButton>
-                        </div>
-                        <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
-                            </RadzenButton>
-                        </div>
-                    </div>
                 </ChildContent>
-            </RadzenTemplateForm>
+            </RadzenPanel>
+            <br />
+            <div style="margin-bottom: 1rem" class="row justify-content-center">
+                <div class="col col-md-auto">
+                    <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
+                    </RadzenButton>
+                </div>
+                <div class="col col-md-auto">
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
+                    </RadzenButton>
+                </div>
+            </div>
         </ChildContent>
-    </RadzenPanel>
+    </RadzenTemplateForm>
 }
 
 <div>
     @if (dataTransaccionesView != null)
     {
-        <br />
         <br />
         if (gridTransaccionesView != null)
         {

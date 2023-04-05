@@ -2,13 +2,11 @@
   {
     "ExecutionOrder": 1,
     "Target": "C:\\Windows\\notepad.exe",
-    "WorkerTaskType": 2,
-    "SleepTime": 10000
+    "WorkerTaskType": 2
   },
   {
     "ExecutionOrder": 1,
-    "Target": "C:\\Program Files\\Notepad++\\notepad++.exe",
-    "WorkerTaskType": 1,
-    "SleepTime": 5000
+    "Target": "http://www.google.com",
+    "WorkerTaskType": 1
   }
 ]

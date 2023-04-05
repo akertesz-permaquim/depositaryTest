@@ -5,31 +5,29 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
 
-
-<RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
-    <ChildContent>
-        <div>
-            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_TURNOS",dataLenguaje)</h4>
-        </div>
-    </ChildContent>
-</RadzenBadge>
-
-<hr>
-
 @if (estaCargandoParametrosReporte)
 {
     <div class="spinner"></div>
 }
 else
 {
-    <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
-        <HeaderTemplate>
-            <h4 class="m-0 d-flex align-items-center">
-                <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
-            </h4>
-        </HeaderTemplate>
+    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
         <ChildContent>
-            <RadzenTemplateForm TItem="parametros" Data="@parametrosTurnosView" @bind-Value="parametrosTurnosView" Submit="LoadMainEntityData">
+            <div>
+                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_TURNOS",dataLenguaje)</h4>
+            </div>
+        </ChildContent>
+    </RadzenBadge>
+    <hr>
+
+    <RadzenTemplateForm TItem="parametros" Data="@parametrosTurnosView" @bind-Value="parametrosTurnosView" Submit="LoadMainEntityData">
+        <ChildContent>
+            <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
+                <HeaderTemplate>
+                    <h4 class="m-0 d-flex align-items-center">
+                        <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
+                    </h4>
+                </HeaderTemplate>
                 <ChildContent>
                     <table class="table table-borderless w-auto" style="vertical-align: middle">
                         <tbody>
@@ -165,7 +163,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosTurnosView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
-                                                    Class="w-100" />
+                                                        Class="w-100" />
                                     </div>
                                 </td>
                                 <td>
@@ -178,7 +176,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownTurnos" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosTurnosView.turnosSeleccionados) Multiple="true" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_TURNOS",dataLenguaje)" Data=@dataTurnos TextProperty="Nombre" ValueProperty="TurnoEsquemaDetalleId"
-                                                    Class="w-100" />
+                                                        Class="w-100" />
                                     </div>
                                 </td>
                                 <td>
@@ -195,16 +193,6 @@ else
                             </tr>
                         </tbody>
                     </table>
-                    <div style="margin-bottom: 1rem" class="row justify-content-center">
-                        <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
-                            </RadzenButton>
-                        </div>
-                        <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
-                            </RadzenButton>
-                        </div>
-                    </div>
                 </ChildContent>
             </RadzenPanel>
             <br />
@@ -219,13 +207,12 @@ else
                 </div>
             </div>
         </ChildContent>
-    </RadzenPanel>
+    </RadzenTemplateForm>
 }
 
 <div>
     @if (dataTurnosView != null)
     {
-        <br />
         <br />
         if (gridTurnosView != null)
         {
@@ -325,7 +312,7 @@ else
         public DateTime Fecha { get; set; }
         public DateTime? FechaApertura { get; set; }
         public DateTime? FechaCierre { get; set; }
-        public int Secuencia {  get;  set;  }
+        public int Secuencia { get; set; }
         public string Moneda { get; set; }
         public double TotalValidado { get; set; }
         public double TotalAValidar { get; set; }

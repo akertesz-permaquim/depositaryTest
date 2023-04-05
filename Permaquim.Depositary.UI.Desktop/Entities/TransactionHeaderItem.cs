@@ -22,7 +22,5 @@ namespace Permaquim.Depositary.UI.Desktop.Entities
         public DateTime Fecha { get; set; }
         public bool Finalizada { get; set; }
         public bool EsDepositoAutomatico { get; set; }
-        public  String Origen { get; set; }
-
     }
 }

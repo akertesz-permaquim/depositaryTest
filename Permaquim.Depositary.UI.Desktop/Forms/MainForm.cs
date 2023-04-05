@@ -125,7 +125,6 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
                     this.DoubleBuffered = true;
 
-
                 }
 
             }
@@ -866,14 +865,12 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
 
             if (DatabaseController.CurrentTurn == null)
             {
-                DatabaseController.GetTurnSchedule();
-                if (DatabaseController.CurrentUser != null)
-                {
+                if(DatabaseController.CurrentUser != null)
                     TurnAndDateTimeLabel.Text += MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
-                }
             }
             else
             {
+                VerifyDayclosing();
 
                 string turnDate = string.Empty;
                 if (DatabaseController.CurrentTurn.Fecha != null)
@@ -881,10 +878,7 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
                 TurnAndDateTimeLabel.Text += DatabaseController.CurrentTurn.TurnoDepositarioId.
                 EsquemaDetalleTurnoId.Nombre + turnDate;
             }
-            if(DatabaseController.CurrentTurn != null)
-                VerifyDayclosing();
-            else
-                TurnAndDateTimeLabel.Text += MultilanguangeController.GetText(MultiLanguageEnum.SIN_TURNO);
+
 
             TurnAndDateTimeLabel.Text += Environment.NewLine + DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
         }
@@ -896,17 +890,9 @@ namespace Permaquim.Depositary.UI.Desktop // 31/5/2022
             {
                 if (_turnAutoClose)
                 {
-                    bool newSession = false;
-                    if ( DatabaseController.CurrentSession == null)
-                    {
-                        newSession = true;
-                        DatabaseController.CreateSession(0);
-                    }
                     _pollingTimer.Enabled = false;
                     DatabaseController.ClosePendingTurns();
                     _pollingTimer.Enabled = true;
-                    if(newSession)
-                        DatabaseController.LogOff(true);
                 }
             }
         }

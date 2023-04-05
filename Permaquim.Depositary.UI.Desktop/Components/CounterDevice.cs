@@ -1313,19 +1313,10 @@ namespace Permaquim.Depositary.UI.Desktop.Components
             string logDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\Logs\";
             if (!System.IO.Directory.Exists(logDirectory))
                 System.IO.Directory.CreateDirectory(logDirectory);
-            
-            string filename = string.Empty;
 
-            if (_device != null)
-            {
-                 filename = logDirectory + _device.DeviceName + "."
-                    + DateTime.Now.ToString("yyyy.MM.dd") + ".log";
-            }
-            else
-            {
-                 filename = logDirectory  + "DeviceNotInitialized."
-                       + DateTime.Now.ToString("yyyy.MM.dd") + ".log";
-            }
+            string filename = logDirectory + _device.DeviceName + "."
+                + DateTime.Now.ToString("yyyy.MM.dd") + ".log";
+
             if (_deviceLogEnabled)
             {
                 System.IO.StreamWriter file = new(filename, true);
