@@ -4296,6 +4296,7 @@ using System.Text;
 					HabilitarOrdenamiento,
 					HabilitarRedimensionamiento,
 					HabilitarPaginado,
+					RegistrosPorPagina,
 					HabilitarAuditoria,
 					Habilitado,
 					UsuarioCreacion,
@@ -4353,6 +4354,7 @@ using System.Text;
          /// <param name='HabilitarOrdenamiento'></param>
          /// <param name='HabilitarRedimensionamiento'></param>
          /// <param name='HabilitarPaginado'></param>
+         /// <param name='RegistrosPorPagina'></param>
          /// <param name='HabilitarAuditoria'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
@@ -4360,9 +4362,9 @@ using System.Text;
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Customizador.Entidad</returns>
-			public Entities.Tables.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32? RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Customizador.Entidad)base.Add(new Entities.Tables.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Customizador.Entidad)base.Add(new Entities.Tables.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,RegistrosPorPagina,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Customizador.Entidad> Items()
             {
@@ -4406,6 +4408,7 @@ using System.Text;
             /// <param name="HabilitarOrdenamiento"></param>
             /// <param name="HabilitarRedimensionamiento"></param>
             /// <param name="HabilitarPaginado"></param>
+            /// <param name="RegistrosPorPagina"></param>
             /// <param name="HabilitarAuditoria"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
@@ -4413,7 +4416,7 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Int32? RegistrosPorPagina,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -4548,6 +4551,18 @@ using System.Text;
                     }
                    
                 }
+                if (RegistrosPorPagina != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.RegistrosPorPagina, sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.RegistrosPorPagina, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
+                    }
+                   
+                }
                 if (HabilitarAuditoria != null)
                 {
                     if (this.Where.Count == 0)
@@ -4670,6 +4685,7 @@ using System.Text;
             /// <param name="HabilitarOrdenamiento"></param>
             /// <param name="HabilitarRedimensionamiento"></param>
             /// <param name="HabilitarPaginado"></param>
+            /// <param name="RegistrosPorPagina"></param>
             /// <param name="HabilitarAuditoria"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
@@ -4677,9 +4693,9 @@ using System.Text;
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,String tipo,String nombre,String esquema,Boolean habilitaragrupamiento,Boolean habilitarmovilidad,Boolean habilitarfiltrado,Boolean habilitarcolumnasopcionales,Boolean habilitarordenamiento,Boolean habilitarredimensionamiento,Boolean habilitarpaginado,Boolean habilitarauditoria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,String tipo,String nombre,String esquema,Boolean habilitaragrupamiento,Boolean habilitarmovilidad,Boolean habilitarfiltrado,Boolean habilitarcolumnasopcionales,Boolean habilitarordenamiento,Boolean habilitarredimensionamiento,Boolean habilitarpaginado,Int32? registrosporpagina,Boolean habilitarauditoria,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Customizador.Entidad {Id = id,Tipo = tipo,Nombre = nombre,Esquema = esquema,HabilitarAgrupamiento = habilitaragrupamiento,HabilitarMovilidad = habilitarmovilidad,HabilitarFiltrado = habilitarfiltrado,HabilitarColumnasOpcionales = habilitarcolumnasopcionales,HabilitarOrdenamiento = habilitarordenamiento,HabilitarRedimensionamiento = habilitarredimensionamiento,HabilitarPaginado = habilitarpaginado,HabilitarAuditoria = habilitarauditoria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Customizador.Entidad {Id = id,Tipo = tipo,Nombre = nombre,Esquema = esquema,HabilitarAgrupamiento = habilitaragrupamiento,HabilitarMovilidad = habilitarmovilidad,HabilitarFiltrado = habilitarfiltrado,HabilitarColumnasOpcionales = habilitarcolumnasopcionales,HabilitarOrdenamiento = habilitarordenamiento,HabilitarRedimensionamiento = habilitarredimensionamiento,HabilitarPaginado = habilitarpaginado,RegistrosPorPagina = registrosporpagina,HabilitarAuditoria = habilitarauditoria,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Customizador.Entidad

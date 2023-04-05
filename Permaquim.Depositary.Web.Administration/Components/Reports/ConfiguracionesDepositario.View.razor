@@ -1,0 +1,468 @@
+﻿@page "/ReporteConfiguracionesDepositarioView"
+@using Permaquim.Depositary.Web.Administration.Controllers;
+
+@inject NotificationService NotificationService
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+@if (estaCargandoParametrosReporte)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
+        <ChildContent>
+            <div>
+                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_CONFIGURACIONESDEPOSITARIO",dataLenguaje)</h4>
+            </div>
+        </ChildContent>
+    </RadzenBadge>
+    <hr>
+
+    <RadzenTemplateForm TItem="parametros" Data="@parametrosConfiguracionesDepositarioView" @bind-Value="parametrosConfiguracionesDepositarioView" Submit="LoadMainEntityData">
+        <ChildContent>
+            <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
+                <HeaderTemplate>
+                    <h4 class="m-0 d-flex align-items-center">
+                        <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
+                    </h4>
+                </HeaderTemplate>
+                <ChildContent>
+                    <table class="table table-borderless w-auto" style="vertical-align: middle">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_EMPRESAS",dataLenguaje)" Component="dropDownEmpresas" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownEmpresas" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosConfiguracionesDepositarioView.empresaSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_EMPRESA",dataLenguaje)" Data=@dataEmpresasCombo TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
+                                                    Change=@(args => OnChangeEmpresa(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SUCURSALES",dataLenguaje)" Component="dropDownSucursales" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownSucursales" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosConfiguracionesDepositarioView.sucursalSeleccionada) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SUCURSAL",dataLenguaje)" Data=@dataSucursalesCombo TextProperty="SucursalNombre" ValueProperty="SucursalId"
+                                                    Change=@(args => OnChangeSucursal(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_SECTORES",dataLenguaje)" Component="dropDownSectores" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownSectores" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosConfiguracionesDepositarioView.sectorSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_SECTOR",dataLenguaje)" Data=@dataSectoresCombo TextProperty="SectorNombre" ValueProperty="SectorId"
+                                                    Change=@(args => OnChangeSector(args)) Class="w-100" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_DEPOSITARIOS",dataLenguaje)" Component="dropDownDepositarios" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    @bind-Value=@(parametrosConfiguracionesDepositarioView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
+                                                        Class="w-100" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="font-weight:bold;align-self:center;">
+                                        <RadzenLabel Text="@MultilenguajeController.ObtenerTextoPorClave("PARAMETRO_CLAVECONFIGURACION",dataLenguaje)" Component="txtClaveConfiguracion" style="width: 100%">
+                                        </RadzenLabel>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <RadzenTextBox @bind-Value=@(parametrosConfiguracionesDepositarioView.claveConfiguracion) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_CLAVECONFIGURACION",dataLenguaje)" Name="txtClaveConfiguracion"></RadzenTextBox>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ChildContent>
+            </RadzenPanel>
+                        <br />
+            <div style="margin-bottom: 1rem" class="row justify-content-center">
+                <div class="col col-md-auto">
+                    <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
+                    </RadzenButton>
+                </div>
+                <div class="col col-md-auto">
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
+                    </RadzenButton>
+                </div>
+            </div>
+        </ChildContent>
+    </RadzenTemplateForm>
+}
+
+<div>
+    @if (dataConfiguracionesDepositarioView != null)
+    {
+        <br />
+        if (gridConfiguracionesDepositarioView != null)
+        {
+            if (dataConfiguracionesDepositarioView.Count > 0)
+            {
+                <GridExport T="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Grid="@gridConfiguracionesDepositarioView" TituloBoton="@MultilenguajeController.ObtenerTextoPorClave("BOTON_EXPORTAR_EXCEL",dataLenguaje)" NombreArchivo="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE_ARCHIVO_REPORTE_TURNOS",dataLenguaje)"></GridExport>
+            }
+        }
+        <RadzenDataGrid @ref="@gridConfiguracionesDepositarioView" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionPagina.AtributosTabla)" PageSizeOptions="@(new int[]{10,20,50,100})" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        id="gridTurnosView" Data="@dataConfiguracionesDepositarioView" Render="@ReportRender" TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or"
+                    @bind-Settings="@GridSettings"
+                    AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)>
+            <EmptyTemplate>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">@MultilenguajeController.ObtenerTextoPorClave("SIN_REGISTROS", dataLenguaje)</p>
+            </EmptyTemplate>
+            <Columns>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="DepositarioId" Title="@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("DepositarioId",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("DepositarioId",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("DepositarioId",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("DepositarioId",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("DepositarioId",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("DepositarioId",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("DepositarioId",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("DepositarioId",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("DepositarioId",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("DepositarioId",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="CodigoExterno" Title="@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CodigoExterno",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="NombreDepositario" Title="@MultilenguajeController.ObtenerTextoPorClave("DEPOSITARIO",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("NombreDepositario",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("NombreDepositario",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Empresa",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Empresa",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Empresa",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Empresa",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Empresa",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Empresa",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Empresa",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Empresa",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Empresa",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Empresa",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="Sucursal" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Sucursal",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Sucursal",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Sucursal",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Sucursal",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Sucursal",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Sucursal",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Sucursal",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Sucursal",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Sucursal",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Sucursal",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="Sector" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Sector",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Sector",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Sector",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Sector",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Sector",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Sector",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Sector",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Sector",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Sector",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Sector",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="Clave" Title="@MultilenguajeController.ObtenerTextoPorClave("CLAVE",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Clave",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Clave",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Clave",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Clave",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Clave",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Clave",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Clave",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Clave",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Clave",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Clave",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="DescripcionConfiguracion" Title="@MultilenguajeController.ObtenerTextoPorClave("DESCRIPCION",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("DescripcionConfiguracion",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Depositary.Entities.Views.Reporte.ConfiguracionesDepositario" Property="Valor" Title="@MultilenguajeController.ObtenerTextoPorClave("VALOR",dataLenguaje)" Frozen="false"
+                                  Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Valor",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Valor",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Valor",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Valor",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Valor",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Valor",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Valor",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Valor",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Valor",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Valor",dataCustomizacionPagina.AtributosColumnas)>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    }
+</div>
+<hr>
+
+<RadzenNotification />
+
+@code {
+    public class parametros
+    {
+        public Int64? empresaSeleccionada { get; set; }
+        public Int64? sucursalSeleccionada { get; set; }
+        public Int64? sectorSeleccionado { get; set; }
+        public Int64? depositarioSeleccionado { get; set; }
+        public string claveConfiguracion { get; set; }
+    }
+
+    RadzenDataGrid<Depositary.Entities.Views.Reporte.ConfiguracionesDepositario> gridConfiguracionesDepositarioView;
+
+    /// <summary>
+    /// Variables to handle main entity
+    /// </summary>
+    private List<Depositary.Entities.Views.Reporte.ConfiguracionesDepositario> dataConfiguracionesDepositarioView;
+
+    /// <summary>
+    /// Variable to save grid state
+    /// </summary>
+    private DataGridSettings GridSettings;
+
+    /// <summary>
+    /// List which stores definitions to customize grid columns
+    /// </summary>
+    private CustomizadorEntities.CustomizacionPagina dataCustomizacionPagina = new();
+
+    /// <summary>
+    /// Variables to store multilanguaje
+    /// </summary>
+    private List<Entities.TextoLenguaje> dataLenguaje;
+
+    /// <summary>
+    ///  Variable to store the user id
+    /// </summary>
+    private Depositary.Entities.Tables.Seguridad.Usuario? dataUsuario = null;
+    private List<Depositary.Entities.Tables.Estilo.EsquemaDetalle> dataEsquemaDetalle = new();
+
+    //Datasource para dropdown
+    private List<DirectorioEntities.Empresa> empresasUsuario = new();
+    private List<DirectorioEntities.Sucursal> sucursalesUsuario = new();
+    private List<DirectorioEntities.Sector> sectoresUsuario = new();
+    private List<DispositivoEntities.Depositario> depositariosUsuario = new();
+
+    private List<DirectorioEntities.Empresa> dataEmpresasCombo = new();
+    private List<DirectorioEntities.Sucursal> dataSucursalesCombo = new();
+    private List<DirectorioEntities.Sector> dataSectoresCombo = new();
+    private List<DispositivoEntities.Depositario> dataDepositariosCombo = new();
+
+    private bool estaCargandoGrillaReporte = false;
+    private bool estaCargandoParametrosReporte = true;
+
+    private parametros parametrosConfiguracionesDepositarioView = new();
+
+    protected override void OnInitialized()
+    {
+        //Verificamos si se tiene licencia full y no esta vencida para acceder a este menu:
+        if (LicenseController.ReadAdditonalLicenseInformation("TYPE") != "FULL")
+        {
+            NavManager.NavigateTo("RequerimientoLicencia/ReporteConfiguracionesDepositarioView", true);
+        }
+
+        base.OnInitialized();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+        dataUsuario = await sessionStorage.GetItemAsync<Depositary.Entities.Tables.Seguridad.Usuario?>("DataUsuario");
+        if (dataUsuario == null)
+            NavManager.NavigateTo("login", true);
+
+        dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
+        dataCustomizacionPagina = CustomizadorController.ObtenerCustomizacionPagina("Reporte", "ConfiguracionesDepositario");
+        await Task.Run(CargarCombosBusqueda);
+        estaCargandoParametrosReporte = false;
+
+        if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
+            AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "ReporteConfiguracionesDepositarioView", "", dataUsuario.Id);
+    }
+
+    #region Form events
+    void OnChangeEmpresa(object value)
+    {
+        if (value != null)
+        {
+            dataSucursalesCombo = sucursalesUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == (Int64)value).ToList();
+        }
+        else
+        {
+            dataSucursalesCombo = new();
+            parametrosConfiguracionesDepositarioView.sucursalSeleccionada = null;
+
+            dataSectoresCombo = new();
+            parametrosConfiguracionesDepositarioView.sectorSeleccionado = null;
+
+            dataDepositariosCombo = depositariosUsuario;
+            parametrosConfiguracionesDepositarioView.depositarioSeleccionado = null;
+        }
+    }
+
+    void OnChangeSucursal(object value)
+    {
+        if (value != null)
+        {
+            dataSectoresCombo = sectoresUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == (Int64)value).ToList();
+        }
+        else
+        {
+            dataSectoresCombo = new();
+            parametrosConfiguracionesDepositarioView.sectorSeleccionado = null;
+
+            if (parametrosConfiguracionesDepositarioView.empresaSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.EmpresaId == parametrosConfiguracionesDepositarioView.empresaSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
+
+            parametrosConfiguracionesDepositarioView.depositarioSeleccionado = null;
+        }
+
+    }
+
+    void OnChangeSector(object value)
+    {
+        if (value != null)
+        {
+            dataDepositariosCombo = depositariosUsuario.Where(x => x.SectorId == (Int64)value).ToList();
+        }
+        else
+        {
+            if (parametrosConfiguracionesDepositarioView.sucursalSeleccionada.HasValue)
+                dataDepositariosCombo = depositariosUsuario.Where(x => x.SucursalId == parametrosConfiguracionesDepositarioView.sucursalSeleccionada.Value).ToList();
+            else
+                dataDepositariosCombo = new();
+        }
+
+    }
+
+    void resetParametros()
+    {
+        parametrosConfiguracionesDepositarioView = new();
+        dataSectoresCombo = new();
+        dataSucursalesCombo = new();
+        dataDepositariosCombo = depositariosUsuario;
+    }
+
+    #endregion
+
+    #region Visualizacion
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void CargarCombosBusqueda()
+    {
+        empresasUsuario = ReportController.ObtenerListadoEmpresasPorPerfil(dataUsuario.Id, true);
+        dataEmpresasCombo = empresasUsuario; //El unico combo estatico es el de mayor jerarquia
+        sucursalesUsuario = ReportController.ObtenerListadoSucursalesPorPerfil(dataUsuario.Id, true);
+        sectoresUsuario = ReportController.ObtenerListadoSectoresPorPerfil(dataUsuario.Id);
+        depositariosUsuario = ReportController.ObtenerListadoDepositariosPorPerfil(dataUsuario.Id);
+        dataDepositariosCombo = depositariosUsuario; //En principio vemos todos los depositarios accesibles por perfil.
+    }
+    #endregion
+
+    #region Loading entities data
+    /// <summary>
+    /// Loads main entity data
+    /// </summary>
+    private void LoadMainEntityData()
+    {
+        //if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
+        //    AuditController.Log(AuditController.LogTypeEnum.Navigation, "Busqueda en " + "ReporteTurnosView", , dataUsuario.Id);
+
+        estaCargandoGrillaReporte = true;
+        dataConfiguracionesDepositarioView = new();
+        Depositary.Business.Views.Reporte.ConfiguracionesDepositario entity = new();
+
+        //Si no tiene empresas ni sucursales ni sectores visibles por perfil entonces le traigo siempre datasource vacio.
+        if (empresasUsuario.Count == 0 && sucursalesUsuario.Count == 0 && sectoresUsuario.Count == 0)
+        {
+            dataConfiguracionesDepositarioView = new();
+        }
+        else
+        {
+            //Construimos el where general segun las empresas/sucursales/sectores/depositarios que puede ver el usuario
+            //entity.Where.OpenParentheses();
+
+            if(sectoresUsuario.Count > 0)
+            {
+                entity.Where.OpenParentheses();
+
+                for (int i = 0; i < sectoresUsuario.Count; i++)
+                {
+                    if (i > 0)
+                        entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
+                    entity.Where.OpenParentheses();
+                    entity.Where.Add(Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
+                    var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
+                    if (sucursal != null)
+                    {
+                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
+                        var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
+                        if (empresa != null)
+                            entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                    }
+                    entity.Where.CloseParentheses();
+                }   
+
+                entity.Where.CloseParentheses();
+            }
+
+
+            //Construimos el where segun los parametros de los controles
+            if (parametrosConfiguracionesDepositarioView.empresaSeleccionada.HasValue || parametrosConfiguracionesDepositarioView.sucursalSeleccionada.HasValue || parametrosConfiguracionesDepositarioView.sectorSeleccionado.HasValue || parametrosConfiguracionesDepositarioView.depositarioSeleccionado.HasValue)
+            {
+                if(entity.Where.Count>0)
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+
+                entity.Where.OpenParentheses();
+
+                int cantidadFiltrosCustom = 0;
+
+                if (parametrosConfiguracionesDepositarioView.empresaSeleccionada.HasValue)
+                {
+                    entity.Where.Add(Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.EmpresaId, Depositary.sqlEnum.OperandEnum.Equal, parametrosConfiguracionesDepositarioView.empresaSeleccionada.Value);
+                    cantidadFiltrosCustom++;
+                }
+
+                if (parametrosConfiguracionesDepositarioView.sucursalSeleccionada.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosConfiguracionesDepositarioView.sucursalSeleccionada.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.SucursalId, Depositary.sqlEnum.OperandEnum.Equal, parametrosConfiguracionesDepositarioView.sucursalSeleccionada.Value);
+                }
+
+                if (parametrosConfiguracionesDepositarioView.sectorSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosConfiguracionesDepositarioView.sectorSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.SectorId, Depositary.sqlEnum.OperandEnum.Equal, parametrosConfiguracionesDepositarioView.sectorSeleccionado.Value);
+                }
+
+                if (parametrosConfiguracionesDepositarioView.depositarioSeleccionado.HasValue)
+                {
+                    if (cantidadFiltrosCustom > 0)
+                        entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosConfiguracionesDepositarioView.depositarioSeleccionado.Value);
+                    else
+                        entity.Where.Add(Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.DepositarioId, Depositary.sqlEnum.OperandEnum.Equal, parametrosConfiguracionesDepositarioView.depositarioSeleccionado.Value);
+                }
+
+                entity.Where.CloseParentheses();
+            }
+
+            //entity.Where.CloseParentheses();
+
+            if (parametrosConfiguracionesDepositarioView.claveConfiguracion != string.Empty && parametrosConfiguracionesDepositarioView.claveConfiguracion != null)
+                {
+                if(entity.Where.Count>0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosConfiguracionesDepositarioView.claveConfiguracion + "%");
+                else
+                                    entity.Where.Add(Depositary.Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.Clave, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosConfiguracionesDepositarioView.claveConfiguracion + "%");
+                }
+
+            entity.OrderBy.Add(Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.CodigoExterno,sqlEnum.DirEnum.ASC);
+            entity.OrderBy.Add(Business.Views.Reporte.ConfiguracionesDepositario.ColumnEnum.Clave, sqlEnum.DirEnum.ASC);
+
+            dataConfiguracionesDepositarioView = entity.Items();
+
+        }
+    }
+
+    /// <summary>
+    /// FuncionRender event
+    /// </summary>
+    /// <param name="args"></param>
+    private void ReportRender(DataGridRenderEventArgs<Depositary.Entities.Views.Reporte.ConfiguracionesDepositario> args)
+    {
+        if (args.FirstRender)
+        {
+            if (dataConfiguracionesDepositarioView != null)
+            {
+                if (dataConfiguracionesDepositarioView.Count > 0)
+                {
+                    StateHasChanged();
+                }
+            }
+        }
+    }
+    #endregion
+
+
+}

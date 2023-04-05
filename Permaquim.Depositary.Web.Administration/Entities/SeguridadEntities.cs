@@ -98,4 +98,18 @@
 
     }
 
+    public class AplicacionCombo
+    {
+        public Int64 AplicacionId { get; set; }
+        public string AplicacionNombre { get; set; }
+
+    }
+
+    public class Rol
+    {
+        public Int64 RolId { get; set; }
+        public string RolNombre { get; set; }
+
+    }
+
 }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <GenerationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <NetVersion>NetCore</NetVersion>
+  <GarbageCollectionCode />
+  <UsesExplicitGarbageCollection>false</UsesExplicitGarbageCollection>
   <SupportedCharacters> .</SupportedCharacters>
   <ConnectionStringName>Depositario</ConnectionStringName>
   <ChildrenPrefix>ListOf_</ChildrenPrefix>
@@ -37,8 +39,26 @@
     <string>dbo.sp_renamediagram</string>
     <string>dbo.sp_upgraddiagrams</string>
     <string>dbo.splitCapital</string>
+    <string>Desarrollo.ActualizarLenguajeItem</string>
+    <string>Desarrollo.GenerarTablaModelo</string>
+    <string>Desarrollo.GenerarTablaTipoModelo</string>
+    <string>Dispositivo.ObtenerDepositarios</string>
+    <string>Dispositivo.ObtenerInformacionDepositario</string>
+    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
+    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
+    <string>Operacion.ObtenerDetalleTransaccion</string>
+    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
+    <string>Operacion.ObtenerEventosPorDepositario</string>
+    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
+    <string>Operacion.ObtenerExistenciasPorDepositario</string>
     <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
     <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
+    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
+    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
+    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
+    <string>Regionalizacion.ObtenerTextosLenguaje</string>
+    <string>Seguridad.ObtenerRolesPorUsuario</string>
+    <string>Seguridad.ObtenerUsuarios</string>
     <string>Sincronizacion.ObtenerIdDestino</string>
     <string>Sincronizacion.ObtenerIdOrigen</string>
   </UnselectedStoredProcedures>

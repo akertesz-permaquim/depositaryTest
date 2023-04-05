@@ -43,7 +43,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTransaccionesView.fechaDesde) Max="@(parametrosTransaccionesView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTransaccionesView.fechaDesde) Change="@OnChanged_fechaDesdeDatePicker" Max="@(parametrosTransaccionesView.fechaHasta)" Name="fechaDesdeDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenRequiredValidator Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_REQUERIDA",dataLenguaje)" Style="position: inherit" />
                                         <RadzenCompareValidator Visible=@(parametrosTransaccionesView.fechaHasta.HasValue) Value=@(parametrosTransaccionesView.fechaHasta) Operator="CompareOperator.LessThanEqual" Component="fechaDesdeDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHADESDE_MENOR_FECHAHASTA",dataLenguaje)" Style="position: inherit" />
                                     </div>
@@ -56,7 +56,7 @@ else
                                 </td>
                                 <td colspan="2">
                                     <div>
-                                        <RadzenDatePicker @bind-Value=@(parametrosTransaccionesView.fechaHasta) Min="@(parametrosTransaccionesView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
+                                        <RadzenDatePicker @bind-Value=@(parametrosTransaccionesView.fechaHasta) Change="@OnChanged_fechaHastaDatePicker" Min="@(parametrosTransaccionesView.fechaDesde)" Name="fechaHastaDatePicker" AllowClear="true" DateFormat="dd/MM/yyyy" Class="w-100" />
                                         <RadzenRequiredValidator Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_REQUERIDA",dataLenguaje)" Style="position: inherit" />
                                         <RadzenCompareValidator Visible=@(parametrosTransaccionesView.fechaDesde.HasValue) Value=@(parametrosTransaccionesView.fechaDesde) Operator="CompareOperator.GreaterThanEqual" Component="fechaHastaDatePicker" Text="@MultilenguajeController.ObtenerTextoPorClave("VALIDACION_FECHAHASTA_MAYOR_FECHADESDE",dataLenguaje)" Style="position: inherit" />
                                     </div>
@@ -213,12 +213,12 @@ else
                 <GridExport T="ResultReporte" Grid="@gridTransaccionesView" TituloBoton="@MultilenguajeController.ObtenerTextoPorClave("BOTON_EXPORTAR_EXCEL",dataLenguaje)" NombreArchivo="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE_ARCHIVO_REPORTE_TRANSACCIONES",dataLenguaje)"></GridExport>
             }
         }
-        <RadzenDataGrid id="gridTransaccionesViews" @ref="@gridTransaccionesView" Render="@ReportRender" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" RowExpand="@expandirTransacion" CellRender="@transaccionCellRender" RowCollapse="@colapsarTransaccion" PageSizeOptions="@(new int[]{10,20,50,100})" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                    Data="@dataTransaccionesView" TItem="ResultReporte" ColumnWidth="300px" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" LogicalFilterOperator="LogicalFilterOperator.Or" s
+        <RadzenDataGrid id="gridTransaccionesViews" @ref="@gridTransaccionesView" Render="@ReportRender" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" RowExpand="@expandirTransacion" CellRender="@transaccionCellRender" RowCollapse="@colapsarTransaccion" PageSizeOptions="@(new int[]{10,20,50,100})" PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionPagina.AtributosTabla)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    Data="@dataTransaccionesView" TItem="ResultReporte" ColumnWidth="300px" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" LogicalFilterOperator="LogicalFilterOperator.Or"
                     @bind-Settings="@GridSettings"
                     AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)>
             <EmptyTemplate>
-                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">@MultilenguajeController.ObtenerTextoPorClave("SIN_REGISTROS", dataLenguaje)</p>
             </EmptyTemplate>
             <Columns>
                 <RadzenDataGridColumn TItem="ResultReporte" Property="TransaccionId" Title="@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje)" Frozen="false"
@@ -408,9 +408,9 @@ else
 
         dataEsquemaDetalle = await sessionStorage.GetItemAsync<List<Depositary.Entities.Tables.Estilo.EsquemaDetalle>>("DataEsquemaDetalle");
         dataCustomizacionPagina = CustomizadorController.ObtenerCustomizacionPagina("Reporte", "Transacciones");
-        await Task.Run(CargarCombosBusqueda);
         parametrosTransaccionesView.fechaDesde = DateTime.Today;
         parametrosTransaccionesView.fechaHasta = DateTime.Today;
+        await Task.Run(CargarCombosBusqueda);
         estaCargandoParametrosReporte = false;
 
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
@@ -498,10 +498,26 @@ else
         depositariosUsuario = ReportController.ObtenerListadoDepositariosPorPerfil(dataUsuario.Id);
         dataDepositariosCombo = depositariosUsuario; //En principio vemos todos los depositarios accesibles por perfil.
         dataUsuarios = ReportController.ObtenerUsuarios(false);
-        dataContenedores = ReportController.ObtenerContenedores(false);
+        dataContenedores = ReportController.ObtenerContenedores(false, parametrosTransaccionesView.fechaDesde, parametrosTransaccionesView.fechaHasta);
         dataOrigenes = ReportController.ObtenerOrigenes(false);
         dataTurnos = ReportController.ObtenerTurnos();
     }
+    #endregion
+
+    #region Parameter events
+
+    private void OnChanged_fechaDesdeDatePicker(DateTime? value)
+    {
+        if(value.HasValue)
+            dataContenedores = ReportController.ObtenerContenedores(false, parametrosTransaccionesView.fechaDesde, parametrosTransaccionesView.fechaHasta);
+    }
+
+    private void OnChanged_fechaHastaDatePicker(DateTime? value)
+        {
+        if(value.HasValue)
+            dataContenedores = ReportController.ObtenerContenedores(false, parametrosTransaccionesView.fechaDesde, parametrosTransaccionesView.fechaHasta);
+    }
+
     #endregion
 
     #region Grid events
@@ -549,32 +565,38 @@ else
         else
         {
             //Construimos el where general segun las empresas/sucursales/sectores/depositarios que puede ver el usuario
-            entity.Where.OpenParentheses();
+            //entity.Where.OpenParentheses();
+
+            if (sectoresUsuario.Count > 0)
+            {
             entity.Where.OpenParentheses();
 
-            for (int i = 0; i < sectoresUsuario.Count; i++)
-            {
-                if (i > 0)
-                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
-                entity.Where.OpenParentheses();
-                entity.Where.Add(Business.Views.Reporte.Transacciones.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
-                var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
-                if (sucursal != null)
+                for (int i = 0; i < sectoresUsuario.Count; i++)
                 {
-                    entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Transacciones.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
-                    var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
-                    if (empresa != null)
-                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Transacciones.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                    if (i > 0)
+                        entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
+                    entity.Where.OpenParentheses();
+                    entity.Where.Add(Business.Views.Reporte.Transacciones.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
+                    var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
+                    if (sucursal != null)
+                    {
+                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Transacciones.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
+                        var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
+                        if (empresa != null)
+                            entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Transacciones.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                    }
+                    entity.Where.CloseParentheses();
                 }
-                entity.Where.CloseParentheses();
-            }
 
             entity.Where.CloseParentheses();
+            }
+
 
             //Construimos el where segun los parametros de los controles
             if (parametrosTransaccionesView.empresaSeleccionada.HasValue || parametrosTransaccionesView.sucursalSeleccionada.HasValue || parametrosTransaccionesView.sectorSeleccionado.HasValue || parametrosTransaccionesView.depositarioSeleccionado.HasValue)
             {
-                entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+                if(entity.Where.Count>0)
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                 entity.Where.OpenParentheses();
 
@@ -613,18 +635,26 @@ else
                 entity.Where.CloseParentheses();
             }
 
-            entity.Where.CloseParentheses();
+            //entity.Where.CloseParentheses();
 
             if (parametrosTransaccionesView.fechaDesde.HasValue)
             {
                 parametrosTransaccionesView.fechaDesde = new DateTime(parametrosTransaccionesView.fechaDesde.Value.Year, parametrosTransaccionesView.fechaDesde.Value.Month, parametrosTransaccionesView.fechaDesde.Value.Day, 0, 0, 0);
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosTransaccionesView.fechaDesde.Value);
+                                
+                if(entity.Where.Count>0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosTransaccionesView.fechaDesde.Value);
+                    else
+                                        entity.Where.Add(Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosTransaccionesView.fechaDesde.Value);
             }
 
             if (parametrosTransaccionesView.fechaHasta.HasValue)
             {
                 parametrosTransaccionesView.fechaHasta = new DateTime(parametrosTransaccionesView.fechaHasta.Value.Year, parametrosTransaccionesView.fechaHasta.Value.Month, parametrosTransaccionesView.fechaHasta.Value.Day, 23, 59, 59);
+                
+                                if(entity.Where.Count>0)
                 entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosTransaccionesView.fechaHasta.Value);
+                else
+                                entity.Where.Add(Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.FechaTransaccion, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosTransaccionesView.fechaHasta.Value);
             }
 
             if (parametrosTransaccionesView.usuariosSeleccionados == null)
@@ -633,6 +663,7 @@ else
             {
                 if (parametrosTransaccionesView.usuariosSeleccionados.Count() > 0)
                 {
+                                                    if(entity.Where.Count>0)
                     entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                     entity.Where.OpenParentheses();
@@ -658,6 +689,7 @@ else
             {
                 if (parametrosTransaccionesView.contenedoresSeleccionados.Count() > 0)
                 {
+                                                                        if(entity.Where.Count>0)
                     entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                     entity.Where.OpenParentheses();
@@ -684,6 +716,7 @@ else
             {
                 if (parametrosTransaccionesView.turnosSeleccionados.Count() > 0)
                 {
+                                                                        if(entity.Where.Count>0)
                     entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                     entity.Where.OpenParentheses();
@@ -710,6 +743,7 @@ else
             {
                 if (parametrosTransaccionesView.origenesSeleccionados.Count() > 0)
                 {
+                                                                        if(entity.Where.Count>0)
                     entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                     entity.Where.OpenParentheses();
@@ -731,7 +765,13 @@ else
             }
 
             if (parametrosTransaccionesView.codigoOperacion != string.Empty && parametrosTransaccionesView.codigoOperacion != null)
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.CodigoOperacion, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosTransaccionesView.codigoOperacion + "%");
+                {
+                                                                        if(entity.Where.Count>0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.CodigoOperacion, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosTransaccionesView.codigoOperacion + "%");
+               else
+                                   entity.Where.Add(Depositary.Business.Views.Reporte.Transacciones.ColumnEnum.CodigoOperacion, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosTransaccionesView.codigoOperacion + "%");
+
+                }
 
             entity.OrderBy.Add(Business.Views.Reporte.Transacciones.ColumnEnum.FechaTransaccion, sqlEnum.DirEnum.DESC);
 

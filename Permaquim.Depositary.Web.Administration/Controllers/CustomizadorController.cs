@@ -63,6 +63,33 @@
             return resultado;
         }
 
+        public static int ObtenerPaginadoDefault(Int64 pEmpresaId, Depositary.Entities.Tables.Customizador.Entidad AtributosTabla = null)
+        {
+            int paginado = 10; //Por defecto el paginado es de 10 registros
+
+            //Primero se busca si existe un valor de paginado para la grilla en particular
+            //si no existe se busca el default de la empresa.
+
+            if (AtributosTabla!=null && AtributosTabla.RegistrosPorPagina.HasValue)
+            {
+                paginado = AtributosTabla.RegistrosPorPagina.Value;
+            }
+            else
+            {
+                int paginadoConversion = 0;
+
+                string paginadoSinConvertir = "";
+
+                paginadoSinConvertir = AplicacionController.ObtenerConfiguracionEmpresa("PAGINADO_DEFAULT", pEmpresaId);
+
+                if (int.TryParse(paginadoSinConvertir, out paginadoConversion))
+                    paginado = paginadoConversion;
+
+            }
+
+            return paginado;
+        }
+
         public static bool ObtenerPropiedadVisibilidadColumna(string Campo, List<Depositary.Entities.Tables.Customizador.EntidadAtributo> Atributos)
         {
             //Se indica en true si los atributos son 0 ya que no estaria cargada la tabla de customizador para la entidad y no se mostraria la grilla

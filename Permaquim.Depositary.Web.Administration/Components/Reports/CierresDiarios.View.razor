@@ -187,10 +187,10 @@ else
         <RadzenDataGrid @ref="@gridCierresDiariosView"
                     @bind-Settings="@GridSettings"
                     AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)
-                    FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeOptions="@(new int[]{10,20,50,100})" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionPagina.AtributosTabla)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                         id="gridCierresDiariosView" Render="@ReportRender" Data="@dataCierresDiariosView" TItem="ResultReporte" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
             <EmptyTemplate>
-                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">@MultilenguajeController.ObtenerTextoPorClave("SIN_REGISTROS", dataLenguaje)</p>
             </EmptyTemplate>
             <Columns>
                 <RadzenDataGridColumn TItem="ResultReporte" Property="CierreDiarioId" Title="@MultilenguajeController.ObtenerTextoPorClave("ID",dataLenguaje)" Frozen="false"
@@ -460,32 +460,36 @@ else
         else
         {
             //Construimos el where general segun las empresas/sucursales/sectores/depositarios que puede ver el usuario
-            entity.Where.OpenParentheses();
-            entity.Where.OpenParentheses();
+            //entity.Where.OpenParentheses();
 
-            for (int i = 0; i < sectoresUsuario.Count; i++)
+            if (sectoresUsuario.Count > 0)
             {
-                if (i > 0)
-                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
                 entity.Where.OpenParentheses();
-                entity.Where.Add(Business.Views.Reporte.CierresDiarios.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
-                var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
-                if (sucursal != null)
+                for (int i = 0; i < sectoresUsuario.Count; i++)
                 {
-                    entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.CierresDiarios.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
-                    var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
-                    if (empresa != null)
-                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.CierresDiarios.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                    if (i > 0)
+                        entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
+                    entity.Where.OpenParentheses();
+                    entity.Where.Add(Business.Views.Reporte.CierresDiarios.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
+                    var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
+                    if (sucursal != null)
+                    {
+                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.CierresDiarios.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
+                        var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
+                        if (empresa != null)
+                            entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.CierresDiarios.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                    }
+                    entity.Where.CloseParentheses();
                 }
                 entity.Where.CloseParentheses();
             }
 
-            entity.Where.CloseParentheses();
 
             //Construimos el where segun los parametros de los controles
             if (parametrosCierresDiariosView.empresaSeleccionada.HasValue || parametrosCierresDiariosView.sucursalSeleccionada.HasValue || parametrosCierresDiariosView.sectorSeleccionado.HasValue || parametrosCierresDiariosView.depositarioSeleccionado.HasValue)
             {
-                entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+                if (entity.Where.Count > 0)
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                 entity.Where.OpenParentheses();
 
@@ -524,18 +528,26 @@ else
                 entity.Where.CloseParentheses();
             }
 
-            entity.Where.CloseParentheses();
+            //entity.Where.CloseParentheses();
 
             if (parametrosCierresDiariosView.fechaDesde.HasValue)
             {
                 parametrosCierresDiariosView.fechaDesde = new DateTime(parametrosCierresDiariosView.fechaDesde.Value.Year, parametrosCierresDiariosView.fechaDesde.Value.Month, parametrosCierresDiariosView.fechaDesde.Value.Day, 0, 0, 0);
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosCierresDiariosView.fechaDesde.Value);
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosCierresDiariosView.fechaDesde.Value);
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosCierresDiariosView.fechaDesde.Value);
+
             }
 
             if (parametrosCierresDiariosView.fechaHasta.HasValue)
             {
                 parametrosCierresDiariosView.fechaHasta = new DateTime(parametrosCierresDiariosView.fechaHasta.Value.Year, parametrosCierresDiariosView.fechaHasta.Value.Month, parametrosCierresDiariosView.fechaHasta.Value.Day, 23, 59, 59);
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosCierresDiariosView.fechaHasta.Value);
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosCierresDiariosView.fechaHasta.Value);
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.Fecha, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosCierresDiariosView.fechaHasta.Value);
+
             }
 
             if (parametrosCierresDiariosView.usuariosSeleccionados == null)
@@ -544,7 +556,8 @@ else
             {
                 if (parametrosCierresDiariosView.usuariosSeleccionados.Count() > 0)
                 {
-                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+                    if (entity.Where.Count > 0)
+                        entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                     entity.Where.OpenParentheses();
 
@@ -590,7 +603,12 @@ else
             //}
 
             if (parametrosCierresDiariosView.codigoCierreDiario != string.Empty && parametrosCierresDiariosView.codigoCierreDiario != null)
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.CodigoCierreDiario, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosCierresDiariosView.codigoCierreDiario + "%");
+            {
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.CodigoCierreDiario, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosCierresDiariosView.codigoCierreDiario + "%");
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.CierresDiarios.ColumnEnum.CodigoCierreDiario, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosCierresDiariosView.codigoCierreDiario + "%");
+            }
 
             cierresDiarios = entity.Items();
 

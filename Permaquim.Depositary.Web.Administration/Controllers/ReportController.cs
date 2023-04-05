@@ -3,8 +3,6 @@
     public static class ReportController
     {
 
-        private static List<Depositary.Entities.Relations.Directorio.Sucursal> sucursales = new();
-
         #region Entidades Directorio
         public static List<DirectorioEntities.Empresa> ObtenerListadoEmpresasPorPerfil(Int64 pUsuarioId, bool filtroAscendente = false)
         {
@@ -190,6 +188,8 @@
         public static List<DirectorioEntities.Sucursal> ObtenerListadoSucursalesPorPerfil(Int64 pUsuarioId, bool filtroAscendente = false)
         {
             List<DirectorioEntities.Sucursal> resultado = new();
+
+            List<Depositary.Entities.Relations.Directorio.Sucursal> sucursales = new();
 
             var perfilVisualizacion = VisualizacionController.ObtenerPerfilVisualizacionPorUsuario(pUsuarioId);
 
@@ -610,7 +610,7 @@
 
         #region Entidades Operacion
 
-        public static List<TransaccionEntities.Contenedor> ObtenerContenedores(bool obtenerSoloHabilitados = true)
+        public static List<TransaccionEntities.Contenedor> ObtenerContenedores(bool obtenerSoloHabilitados = true, DateTime? fechaDesde = null, DateTime? fechaHasta = null)
         {
             List<TransaccionEntities.Contenedor> resultado = new();
 
@@ -619,6 +619,22 @@
 
                 if (obtenerSoloHabilitados)
                     oContenedor.Where.Add(Depositary.Business.Tables.Operacion.Contenedor.ColumnEnum.Habilitado, Depositary.sqlEnum.OperandEnum.Equal, true);
+
+                if (fechaDesde.HasValue)
+                {
+                    if(oContenedor.Where.Count>0)
+                        oContenedor.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Tables.Operacion.Contenedor.ColumnEnum.FechaApertura, sqlEnum.OperandEnum.GreaterThanOrEqual, fechaDesde.Value);
+                    else
+                        oContenedor.Where.Add(Business.Tables.Operacion.Contenedor.ColumnEnum.FechaApertura, sqlEnum.OperandEnum.GreaterThanOrEqual, fechaDesde.Value);
+                }
+
+                if (fechaHasta.HasValue)
+                {
+                    if (oContenedor.Where.Count > 0)
+                        oContenedor.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Tables.Operacion.Contenedor.ColumnEnum.FechaApertura, sqlEnum.OperandEnum.LessThanOrEqual, fechaHasta.Value);
+                    else
+                        oContenedor.Where.Add(Business.Tables.Operacion.Contenedor.ColumnEnum.FechaApertura, sqlEnum.OperandEnum.LessThanOrEqual, fechaHasta.Value);
+                }
 
                 oContenedor.Items();
 

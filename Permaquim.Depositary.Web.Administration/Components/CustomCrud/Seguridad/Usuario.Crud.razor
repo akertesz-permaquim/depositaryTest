@@ -3,6 +3,7 @@
 @inject NotificationService NotificationService
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager NavManager
+@inject DialogService DialogService
 
 @if (estaProcesando)
 {
@@ -55,11 +56,11 @@
             <hr>
             if (crudMode == CrudMode.List)
             {
-                <RadzenDataGrid @bind-Settings="@GridSettings" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirUsuario" CellRender="@usuarioCellRender" RowCollapse="@colapsarUsuario" FilterMode="FilterMode.Advanced" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                <RadzenDataGrid @bind-Settings="@GridSettings" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" PageSizeOptions="@(new int[]{10,20,50,100})" RowExpand="@expandirUsuario" CellRender="@usuarioCellRender" RowCollapse="@colapsarUsuario" FilterMode="FilterMode.Advanced" PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionPagina.AtributosTabla)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)
                 Data="@Usuario_entities" TItem="Depositary.Entities.Tables.Seguridad.Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                     <EmptyTemplate>
-                        <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                        <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">@MultilenguajeController.ObtenerTextoPorClave("SIN_REGISTROS", dataLenguaje)</p>
                     </EmptyTemplate>
                     <Columns>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" TextAlign="TextAlign.Center" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TemplateABM",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TemplateABM",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TemplateABM",dataCustomizacionPagina.AtributosColumnas)>
@@ -70,7 +71,7 @@
                             <Template Context="element">
                                 <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                                 </RadzenButton>
-                                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                                <RadzenButton Icon="delete" Disabled="@(!element.Habilitado)" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuario",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                                 </RadzenButton>
                             </Template>
                         </RadzenDataGridColumn>
@@ -582,7 +583,7 @@
     }
     else
     {
-        <p>No tiene permisos para visualizar los registros.</p>
+        <p>@MultilenguajeController.ObtenerTextoPorClave("SIN_PERMISO_VISUALIZACION",dataLenguaje)</p>
     }
 }
 else
@@ -695,6 +696,8 @@ else
     /// </summary>
     private CrudMode crudMode = CrudMode.List;
 
+    private Int64 empresaIdAnterior;
+
     /// <summary>
     ///  Variable to store the user id
     /// </summary>
@@ -804,7 +807,10 @@ else
         if (delete)
             crudMode = CrudMode.Delete;
         else
+        {
             crudMode = CrudMode.Edit;
+            empresaIdAnterior = Usuario_entity.EmpresaId;
+        }
 
         if (dataCustomizacionPagina.AtributosTabla.HabilitarAuditoria)
             AuditController.Log(AuditController.LogTypeEnum.Navigation, "Acceso a " + "SeguridadUsuarioCustomCrud", crudMode.ToString() + " Id: " + item.Id, dataUsuario.Id);
@@ -887,13 +893,86 @@ else
             case CrudMode.Edit:
                 try
                 {
-                    crud.Update(Usuario_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
-                    summary = "El registro se ha ";
-                    actionInformation = "modificado.";
-                    severityType = NotificationSeverity.Success;
+                    bool continuarOperacion = true;
+                    crud.BeginTransaction();
+
+                    //Si cambio la empresa tengo que verificar si tenia sectores asociados y que se hace con ellos
+                    if (empresaIdAnterior != Usuario_entity.EmpresaId)
+                    {
+                        bool deshabilitarSectoresUsuario;
+                        //Verificamos si tiene parametrizado deshabilitar los sectores de la empresa anterior
+                        if (!bool.TryParse(AplicacionController.ObtenerConfiguracionGeneral("DESHABILITAR_USUARIO_SECTORES_CAMBIO_EMPRESA"), out deshabilitarSectoresUsuario))
+                            deshabilitarSectoresUsuario = true;
+
+                        if (deshabilitarSectoresUsuario)
+                        {
+                            List<long> sectoresEmpresa = new();
+
+                            //Revisamos los sectores que pertenecen a la empresa
+                            Depositary.Business.Relations.Directorio.Sucursal sucursalController = new();
+                            sucursalController.Where.Add(Business.Relations.Directorio.Sucursal.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresaIdAnterior);
+                            sucursalController.Items();
+
+                            if (sucursalController.Result.Count > 0)
+                            {
+                                foreach (var sucursal in sucursalController.Result)
+                                {
+                                    sectoresEmpresa.AddRange(sucursal.ListOf_Sector_SucursalId.Select(x => x.Id).ToList());
+                                }
+                            }
+
+                            if (sectoresEmpresa.Count > 0)
+                            {
+                                //Verificamos si tiene sectores asociados a la empresa anterior
+                                Depositary.Business.Tables.Seguridad.UsuarioSector usuarioSector = new(crud);
+                                usuarioSector.Where.Add(Business.Tables.Seguridad.UsuarioSector.ColumnEnum.UsuarioId, sqlEnum.OperandEnum.Equal, Usuario_entity.Id);
+                                usuarioSector.Where.AddConjunction(sqlEnum.ConjunctionEnum.AND);
+                                usuarioSector.Where.OpenParentheses();
+
+                                foreach (var sectorEmpresa in sectoresEmpresa)
+                                {
+                                    if (usuarioSector.Where.Count > 3)
+                                        usuarioSector.Where.Add(sqlEnum.ConjunctionEnum.OR, Business.Tables.Seguridad.UsuarioSector.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectorEmpresa);
+                                    else
+                                        usuarioSector.Where.Add(Business.Tables.Seguridad.UsuarioSector.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectorEmpresa);
+
+                                }
+                                usuarioSector.Where.CloseParentheses();
+
+                                usuarioSector.Items();
+
+                                if (usuarioSector.Result.Where(x => x.Habilitado == true).Count() > 0)
+                                {
+                                    //Levantamos un dialog de confirmacion avisando que se van a deshabilitar los sectores ya asociados.
+                                    continuarOperacion = (bool)(await DialogService.Confirm(MultilenguajeController.ObtenerTextoPorClave("ADVERTENCIA_DESHABILITAR_SECTORES_USUARIO", dataLenguaje), MultilenguajeController.ObtenerTextoPorClave("TITULO_DIALOG_ADVERTENCIA", dataLenguaje), new ConfirmOptions() { OkButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR", dataLenguaje), CancelButtonText = MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR", dataLenguaje) }));
+
+                                    if (continuarOperacion)
+                                    {
+                                        foreach (var entityUsuarioSector in usuarioSector.Result.Where(x => x.Habilitado == true))
+                                        {
+                                            entityUsuarioSector.Habilitado = false;
+                                            entityUsuarioSector.FechaModificacion = DateTime.Now;
+                                            entityUsuarioSector.UsuarioModificacion = dataUsuario.Id;
+                                            usuarioSector.Update(entityUsuarioSector);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (continuarOperacion)
+                    {
+                        crud.Update(Usuario_entity, (long)SeguridadEntities.Aplicacion.AdministradorWeb);
+                        crud.EndTransaction(true);
+                        summary = "El registro se ha ";
+                        actionInformation = "modificado.";
+                        severityType = NotificationSeverity.Success;
+                    }
                 }
                 catch (Exception ex)
                 {
+                    crud.EndTransaction(false);
                     AuditController.Log(ex, dataUsuario.Id);
                     summary = "Error al procesar.";
                     actionInformation = ex.Message;
@@ -1148,5 +1227,4 @@ else
     #region Export
 
     #endregion
-
-        }
+}

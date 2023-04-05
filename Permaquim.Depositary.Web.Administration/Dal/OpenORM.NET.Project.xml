@@ -24,9 +24,11 @@
   <SelectedViews>
     <string>Operacion.VistaTransaccion</string>
     <string>Reporte.CierresDiarios</string>
+    <string>Reporte.ConfiguracionesDepositario</string>
     <string>Reporte.Contenedores</string>
     <string>Reporte.DetalleTransacciones</string>
     <string>Reporte.DetalleTransaccionesSobre</string>
+    <string>Reporte.PermisosUsuario</string>
     <string>Reporte.Transacciones</string>
     <string>Reporte.Turnos</string>
     <string>Valor.VistaDenominacion</string>
@@ -64,6 +66,7 @@
     <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
     <string>Regionalizacion.ObtenerTextosLenguaje</string>
     <string>Seguridad.ObtenerRolesPorUsuario</string>
+    <string>Seguridad.ObtenerUsuarios</string>
     <string>Sincronizacion.ObtenerIdDestino</string>
     <string>Sincronizacion.ObtenerIdOrigen</string>
   </UnselectedStoredProcedures>
@@ -380,7 +383,6 @@
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
     <string>353e226c-6bf1-4079-a822-ba12163b71c9</string>
-    <string>c6885894-f5e6-505c-bc2d-480cd6d456a1</string>
   </SelectedTemplates>
   <Location>\</Location>
   <DatasourceServer />
