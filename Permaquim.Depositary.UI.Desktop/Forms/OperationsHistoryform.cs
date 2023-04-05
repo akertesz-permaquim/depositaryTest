@@ -288,6 +288,17 @@ namespace Permaquim.Depositary.UI.Desktop
 
             OperationsHeaderGridView.Columns.Add(new()
             {
+                DataPropertyName = "Origen",
+                HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.ORIGEN_VALOR),
+                Name = "Origen",
+                Visible = ParameterController.UsesValueOrigin,
+                Width = 150,
+                CellTemplate = new DataGridViewTextBoxCell()
+
+            });
+
+            OperationsHeaderGridView.Columns.Add(new()
+            {
                 DataPropertyName = "Contenedor",
                 HeaderText = MultilanguangeController.GetText(MultiLanguageEnum.CONTENEDOR),
                 Name = "Contenedor",
@@ -553,6 +564,7 @@ namespace Permaquim.Depositary.UI.Desktop
                     Usuario = item.UsuarioId.NombreApellido,
                     UsuarioCuenta = item.CuentaId == null ? null : item.CuentaId.Numero,
                     EsDepositoAutomatico= item.EsDepositoAutomatico,
+                    Origen = item.OrigenValorId.Nombre,
                 }); ;
             }
 

@@ -22,7 +22,7 @@
                 </RadzenIcon>
                 <div class="row">
                     <div class="col-8 align-items-left d-flex">
-                        <RadzenHeading Size="H1" style="display: inline-block; vertical-align:middle" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_DASHBOARD",dataLenguaje)">
+                        <RadzenHeading Size="H1" style="display: inline-block; vertical-align:middle" Text="Dashboard depositario">
                         </RadzenHeading>
                     </div>
                     <div class="col-4 align-items-right d-flex" style="margin-top:0.5%">
@@ -31,7 +31,7 @@
                             if (dataEmpresasAccesibles.Count > 0)
                             {
                                 <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" SelectAllText="Todos"
-                                @bind-Value=@empresasSeleccionadas Multiple="true" SelectedItemsText="Items seleccionados" Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_EMPRESA",dataLenguaje)" Data=@dataEmpresasAccesibles TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
+                                @bind-Value=@empresasSeleccionadas Multiple="true" SelectedItemsText="Items seleccionados" Placeholder="Seleccione empresas" Data=@dataEmpresasAccesibles TextProperty="EmpresaNombre" ValueProperty="EmpresaId"
                                 Change=@(args => OnChangeEmpresa(args)) Disabled=@estaCargando Class="w-100" />
                             }
                         }
@@ -54,9 +54,9 @@
                                             </RadzenIcon>
                                         </div>
                                         <div class="col-sm-8">
-                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_TARJETA1_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Transacciones">
                                             </RadzenHeading>
-                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("SUBTITULO_TARJETA1_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="DEL DIA">
                                             </RadzenHeading>
                                             <RadzenHeading Size="H4" style="color: #68d5c8; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadTransaccionesAlDia">
                                             </RadzenHeading>
@@ -74,10 +74,10 @@
                                             </RadzenIcon>
                                         </div>
                                         <div class="col-sm-8">
-                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_TARJETA2_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
                                                 x|
                                             </RadzenHeading>
-                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("SUBTITULO_TARJETA2_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="CON BOLSA CASI LLENA">
                                             </RadzenHeading>
                                             @{
                                                 int parseVar;
@@ -106,9 +106,9 @@
                                             </RadzenIcon>
                                         </div>
                                         <div class="col-sm-8">
-                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_TARJETA3_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
                                             </RadzenHeading>
-                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("SUBTITULO_TARJETA3_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="EN LINEA / FUERA DE LINEA">
                                             </RadzenHeading>
                                             @{
                                                 int parseVar;
@@ -153,9 +153,9 @@
                                             </RadzenIcon>
                                         </div>
                                         <div class="col-sm-8">
-                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_TARJETA4_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="margin-bottom: 0px; text-align: right" Text="Depositarios">
                                             </RadzenHeading>
-                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="@MultilenguajeController.ObtenerTextoPorClave("SUBTITULO_TARJETA4_DASHBOARD",dataLenguaje)">
+                                            <RadzenHeading Size="H4" style="color: #88989b; font-size: 12px; margin-bottom: 0px; text-align: right" Text="FUERA DE SERVICIO">
                                             </RadzenHeading>
                                             <RadzenHeading Size="H4" style="color: darkred; font-size: 24px; margin-bottom: 0px; margin-top: 13px; text-align: right" Text="@cantidadDepositariosFueraServicio">
                                             </RadzenHeading>
@@ -165,13 +165,13 @@
                             </RadzenCard>
                         </div>
                     </div>
-                    <RadzenHeading Size="H2" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_GRAFICOS_DASHBOARD",dataLenguaje)">
+                    <RadzenHeading Size="H2" Text="Carga de trabajo segun equipo">
                     </RadzenHeading>
                     <div class="row">
                         <div class="col-md-12 col-lg-6 col-xl-6">
                             <RadzenCard>
                                 <ChildContent>
-                                    <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_GRAFICO1_DASHBOARD",dataLenguaje)">
+                                    <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Depositarios con mayor carga de transacciones">
                                     </RadzenHeading>
                                     @if (dataCargaDepositarios != null)
                                     {
@@ -205,7 +205,7 @@
                         <div class="col-md-12 col-lg-6 col-xl-6">
                             <RadzenCard>
                                 <ChildContent>
-                                    <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="@MultilenguajeController.ObtenerTextoPorClave("TITULO_GRAFICO2_DASHBOARD",dataLenguaje)">
+                                    <RadzenHeading Size="H3" style="margin-bottom: 0px; text-align: center; font-weight:bold" Text="Cantidad de transacciones por tipo">
                                     </RadzenHeading>
                                     @if (dataCantidadTipoTransacciones != null)
                                     {
@@ -261,7 +261,6 @@ else
     private Depositary.Entities.Tables.Seguridad.Rol? usuarioRol = new();
 
     private List<SeguridadEntities.FuncionRol> dataFunciones;
-    private List<long> listEmpresas;
 
     //Variables auxiliares
     private Timer timerRecargaInformacion = new Timer();
@@ -300,8 +299,6 @@ else
             obtenerInformacion();
             StateHasChanged();
         }
-
-        GC.Collect(2,GCCollectionMode.Forced);
     }
 
     private void obtenerParametrosConfiguracion()
@@ -342,13 +339,13 @@ else
         {
             if (empresasSeleccionadas.Count() > 0)
             {
-                await Task.Run(obtenerCantidadTransaccionesAlDia);
-                await Task.Run(obtenerCantidadDepositariosBolsaCasiLlena);
-                await Task.Run(obtenerCantidadDepositariosEnLinea);
-                await Task.Run(obtenerCantidadDepositariosFueraLinea); 
-                await Task.Run(obtenerCantidadDepositariosFueraServicio); 
-                await Task.Run(obtenerDepositariosConMayorCarga); 
-                await Task.Run(obtenerCantidadTransaccionesPorTipo); 
+                await Task.Run(obtenerCantidadTransaccionesAlDia); //10mb
+                await Task.Run(obtenerCantidadDepositariosBolsaCasiLlena); //10mb
+                await Task.Run(obtenerCantidadDepositariosEnLinea); //5mb
+                await Task.Run(obtenerCantidadDepositariosFueraLinea); //5mb
+                await Task.Run(obtenerCantidadDepositariosFueraServicio); //2mb
+                await Task.Run(obtenerDepositariosConMayorCarga); //2mb
+                await Task.Run(obtenerCantidadTransaccionesPorTipo); //2mb
             }
         }
         estaCargando = false;
@@ -367,7 +364,6 @@ else
                 empresas.Add(empresa.EmpresaId);
             }
             empresasSeleccionadas = empresas.AsEnumerable();
-            listEmpresas = empresasSeleccionadas.ToList();
         }
     }
 
@@ -392,37 +388,37 @@ else
 
     private void obtenerCantidadTransaccionesAlDia()
     {
-        cantidadTransaccionesAlDia = OperacionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date, listEmpresas);
+        cantidadTransaccionesAlDia = OperacionController.ObtenerCantidadTransaccionesPorDia(DateTime.Now.Date, empresasSeleccionadas.ToList());
     }
 
     private void obtenerCantidadDepositariosBolsaCasiLlena()
     {
-        cantidadDepositariosBolsaCasiLlena = DepositarioController.ObtenerCantidadDepositariosConBolsaCasiLlena(listEmpresas, dataUsuario.EmpresaId);
+        cantidadDepositariosBolsaCasiLlena = DepositarioController.ObtenerCantidadDepositariosConBolsaCasiLlena(empresasSeleccionadas.ToList(), dataUsuario.EmpresaId);
     }
 
     private void obtenerCantidadDepositariosEnLinea()
     {
-        cantidadDepositariosEnLinea = DepositarioController.ObtenerCantidadDepositariosEnLinea(listEmpresas, dataUsuario.EmpresaId);
+        cantidadDepositariosEnLinea = DepositarioController.ObtenerCantidadDepositariosEnLinea(empresasSeleccionadas.ToList(), dataUsuario.EmpresaId);
     }
 
     private void obtenerCantidadDepositariosFueraLinea()
     {
-        cantidadDepositariosFueraLinea = DepositarioController.ObtenerCantidadDepositariosFueraLinea(listEmpresas, dataUsuario.EmpresaId);
+        cantidadDepositariosFueraLinea = DepositarioController.ObtenerCantidadDepositariosFueraLinea(empresasSeleccionadas.ToList(), dataUsuario.EmpresaId);
     }
 
     private void obtenerCantidadDepositariosFueraServicio()
     {
-        cantidadDepositariosFueraServicio = DepositarioController.ObtenerCantidadDepositariosFueraServicio(listEmpresas);
+        cantidadDepositariosFueraServicio = DepositarioController.ObtenerCantidadDepositariosFueraServicio(empresasSeleccionadas.ToList());
     }
 
     private void obtenerDepositariosConMayorCarga()
     {
-        dataCargaDepositarios = DepositarioController.ObtenerDepositariosConMayorCarga(listEmpresas);
+        dataCargaDepositarios = DepositarioController.ObtenerDepositariosConMayorCarga(empresasSeleccionadas.ToList());
     }
 
     private void obtenerCantidadTransaccionesPorTipo()
     {
-        dataCantidadTipoTransacciones = OperacionController.ObtenerCantidadTipoTransacciones(listEmpresas);
+        dataCantidadTipoTransacciones = OperacionController.ObtenerCantidadTipoTransacciones(empresasSeleccionadas.ToList());
     }
 
     void IDisposable.Dispose()

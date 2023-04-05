@@ -14,7 +14,7 @@
 
 @implements IDisposable
 
-<RadzenContent @ref="container" Container="main">
+<RadzenContent Container="main">
     <ChildContent>
         <RadzenTemplateForm TItem="LoginForm" Data="@loginForm" Submit="@LoginUser">
             <ChildContent>
@@ -46,7 +46,6 @@
 
         @code
         {
-    private RadzenContent? container;
     private LoginForm loginForm = new LoginForm();
     private List<Entities.TextoLenguaje> dataLenguaje;
     private bool estaCargando { get; set; }
@@ -154,6 +153,5 @@
         dataLenguaje = null;
         loginForm = null;
         dataUsuario = null;
-        container = null;
     }
 }

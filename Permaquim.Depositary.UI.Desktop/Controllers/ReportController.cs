@@ -177,7 +177,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
                     else
                     {
                         FormsController.SetInformationMessage(InformationTypeEnum.Error,
-                                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_IMPRESORA_PREDETERMINADA));
+                            MultilanguangeController.GetText(MultiLanguageEnum.SIN_IMPRESORA_PREDETERMINADA));
                     }
                 }
                 else

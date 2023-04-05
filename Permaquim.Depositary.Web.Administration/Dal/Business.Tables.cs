@@ -398,17 +398,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Configuracion
 	} //namespace Permaquim.Depositary.Business.Tables.Aplicacion
 	namespace Permaquim.Depositary.Business.Tables.Aplicacion {
@@ -807,17 +796,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionEmpresa
 	} //namespace Permaquim.Depositary.Business.Tables.Aplicacion
 	namespace Permaquim.Depositary.Business.Tables.Aplicacion {
@@ -1168,17 +1146,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionTipoDato
 	} //namespace Permaquim.Depositary.Business.Tables.Aplicacion
 	namespace Permaquim.Depositary.Business.Tables.Aplicacion {
@@ -1561,17 +1528,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionValidacionDato
 	} //namespace Permaquim.Depositary.Business.Tables.Aplicacion
 	namespace Permaquim.Depositary.Business.Tables.Auditoria {
@@ -1938,17 +1894,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Log
 	} //namespace Permaquim.Depositary.Business.Tables.Auditoria
 	namespace Permaquim.Depositary.Business.Tables.Auditoria {
@@ -2299,17 +2244,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoLog
 	} //namespace Permaquim.Depositary.Business.Tables.Auditoria
 	namespace Permaquim.Depositary.Business.Tables.Banca {
@@ -2692,17 +2626,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Banco
 	} //namespace Permaquim.Depositary.Business.Tables.Banca
 	namespace Permaquim.Depositary.Business.Tables.Banca {
@@ -3149,17 +3072,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Cuenta
 	} //namespace Permaquim.Depositary.Business.Tables.Banca
 	namespace Permaquim.Depositary.Business.Tables.Banca {
@@ -3526,17 +3438,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoCuenta
 	} //namespace Permaquim.Depositary.Business.Tables.Banca
 	namespace Permaquim.Depositary.Business.Tables.Banca {
@@ -3887,17 +3788,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class UsuarioCuenta
 	} //namespace Permaquim.Depositary.Business.Tables.Banca
 	namespace Permaquim.Depositary.Business.Tables.Biometria {
@@ -4264,17 +4154,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class HuellaDactilar
 	} //namespace Permaquim.Depositary.Business.Tables.Biometria
 	namespace Permaquim.Depositary.Business.Tables.Customizador {
@@ -4785,17 +4664,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Entidad
 	} //namespace Permaquim.Depositary.Business.Tables.Customizador
 	namespace Permaquim.Depositary.Business.Tables.Customizador {
@@ -5306,17 +5174,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EntidadAtributo
 	} //namespace Permaquim.Depositary.Business.Tables.Customizador
 	namespace Permaquim.Depositary.Business.Tables.Directorio {
@@ -5779,17 +5636,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Empresa
 	} //namespace Permaquim.Depositary.Business.Tables.Directorio
 	namespace Permaquim.Depositary.Business.Tables.Directorio {
@@ -6156,17 +6002,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Grupo
 	} //namespace Permaquim.Depositary.Business.Tables.Directorio
 	namespace Permaquim.Depositary.Business.Tables.Directorio {
@@ -6533,17 +6368,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class RelacionMonedaSucursal
 	} //namespace Permaquim.Depositary.Business.Tables.Directorio
 	namespace Permaquim.Depositary.Business.Tables.Directorio {
@@ -6910,17 +6734,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Sector
 	} //namespace Permaquim.Depositary.Business.Tables.Directorio
 	namespace Permaquim.Depositary.Business.Tables.Directorio {
@@ -7351,17 +7164,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Sucursal
 	} //namespace Permaquim.Depositary.Business.Tables.Directorio
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -7776,17 +7578,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ComandoContadora
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -8201,17 +7992,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ComandoPlaca
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -8578,17 +8358,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionDepositario
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -9019,17 +8788,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Depositario
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -9572,17 +9330,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioContadora
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -9981,17 +9728,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioEstado
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -10358,17 +10094,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioMoneda
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -11055,17 +10780,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioPlaca
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -11416,17 +11130,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Marca
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -11825,17 +11528,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Modelo
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -12186,17 +11878,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PlantillaMoneda
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -12595,17 +12276,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PlantillaMonedaDetalle
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -13004,17 +12674,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoConfiguracionDepositario
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -13557,17 +13216,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoContadora
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Dispositivo {
@@ -14270,17 +13918,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoPlaca
 	} //namespace Permaquim.Depositary.Business.Tables.Dispositivo
 	namespace Permaquim.Depositary.Business.Tables.Estilo {
@@ -14647,17 +14284,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Esquema
 	} //namespace Permaquim.Depositary.Business.Tables.Estilo
 	namespace Permaquim.Depositary.Business.Tables.Estilo {
@@ -15088,17 +14714,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EsquemaDetalle
 	} //namespace Permaquim.Depositary.Business.Tables.Estilo
 	namespace Permaquim.Depositary.Business.Tables.Estilo {
@@ -15449,17 +15064,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoEsquemaDetalle
 	} //namespace Permaquim.Depositary.Business.Tables.Estilo
 	namespace Permaquim.Depositary.Business.Tables.Geografia {
@@ -15842,17 +15446,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Ciudad
 	} //namespace Permaquim.Depositary.Business.Tables.Geografia
 	namespace Permaquim.Depositary.Business.Tables.Geografia {
@@ -16235,17 +15828,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class CodigoPostal
 	} //namespace Permaquim.Depositary.Business.Tables.Geografia
 	namespace Permaquim.Depositary.Business.Tables.Geografia {
@@ -16628,17 +16210,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Pais
 	} //namespace Permaquim.Depositary.Business.Tables.Geografia
 	namespace Permaquim.Depositary.Business.Tables.Geografia {
@@ -17021,17 +16592,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Provincia
 	} //namespace Permaquim.Depositary.Business.Tables.Geografia
 	namespace Permaquim.Depositary.Business.Tables.Geografia {
@@ -17398,17 +16958,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Zona
 	} //namespace Permaquim.Depositary.Business.Tables.Geografia
 	namespace Permaquim.Depositary.Business.Tables.Impresion {
@@ -17983,17 +17532,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PlantillaTicket
 	} //namespace Permaquim.Depositary.Business.Tables.Impresion
 	namespace Permaquim.Depositary.Business.Tables.Impresion {
@@ -18664,17 +18202,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Ticket
 	} //namespace Permaquim.Depositary.Business.Tables.Impresion
 	namespace Permaquim.Depositary.Business.Tables.Impresion {
@@ -19041,17 +18568,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoTicket
 	} //namespace Permaquim.Depositary.Business.Tables.Impresion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -19434,17 +18950,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class CierreDiario
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -19859,17 +19364,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Contenedor
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -20204,17 +19698,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Evento
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -20533,17 +20016,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Sesion
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -20910,17 +20382,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoContenedor
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -21287,17 +20748,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoEvento
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -21664,17 +21114,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoTransaccion
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -22265,17 +21704,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Transaccion
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -22578,17 +22006,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TransaccionDetalle
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -22875,17 +22292,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TransaccionSobre
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -23204,17 +22610,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TransaccionSobreDetalle
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -23693,17 +23088,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Turno
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Operacion {
@@ -24054,17 +23438,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TurnoUsuario
 	} //namespace Permaquim.Depositary.Business.Tables.Operacion
 	namespace Permaquim.Depositary.Business.Tables.Regionalizacion {
@@ -24447,17 +23820,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Lenguaje
 	} //namespace Permaquim.Depositary.Business.Tables.Regionalizacion
 	namespace Permaquim.Depositary.Business.Tables.Regionalizacion {
@@ -24840,17 +24202,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class LenguajeItem
 	} //namespace Permaquim.Depositary.Business.Tables.Regionalizacion
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -25217,17 +24568,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Aplicacion
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -25578,17 +24918,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class AplicacionParametro
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -25955,17 +25284,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class AplicacionParametroValor
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -26364,17 +25682,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Funcion
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -26741,17 +26048,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class IdentificadorUsuario
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -27166,17 +26462,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Menu
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -27559,17 +26844,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Rol
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -28000,17 +27274,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class RolFuncion
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -28361,17 +27624,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoAplicacion
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -28722,17 +27974,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoFuncion
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -29099,17 +28340,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoIdentificador
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -29460,17 +28690,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoMenu
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -30093,17 +29312,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Usuario
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -30454,17 +29662,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class UsuarioRol
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Seguridad {
@@ -30815,17 +30012,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class UsuarioSector
 	} //namespace Permaquim.Depositary.Business.Tables.Seguridad
 	namespace Permaquim.Depositary.Business.Tables.Sincronizacion {
@@ -31176,17 +30362,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Configuracion
 	} //namespace Permaquim.Depositary.Business.Tables.Sincronizacion
 	namespace Permaquim.Depositary.Business.Tables.Sincronizacion {
@@ -31505,17 +30680,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Ejecucion
 	} //namespace Permaquim.Depositary.Business.Tables.Sincronizacion
 	namespace Permaquim.Depositary.Business.Tables.Sincronizacion {
@@ -31850,17 +31014,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Entidad
 	} //namespace Permaquim.Depositary.Business.Tables.Sincronizacion
 	namespace Permaquim.Depositary.Business.Tables.Sincronizacion {
@@ -32179,17 +31332,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EntidadCabecera
 	} //namespace Permaquim.Depositary.Business.Tables.Sincronizacion
 	namespace Permaquim.Depositary.Business.Tables.Sincronizacion {
@@ -32492,17 +31634,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EntidadDetalle
 	} //namespace Permaquim.Depositary.Business.Tables.Sincronizacion
 	namespace Permaquim.Depositary.Business.Tables.Turno {
@@ -32901,17 +32032,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class AgendaTurno
 	} //namespace Permaquim.Depositary.Business.Tables.Turno
 	namespace Permaquim.Depositary.Business.Tables.Turno {
@@ -33278,17 +32398,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EsquemaDetalleTurno
 	} //namespace Permaquim.Depositary.Business.Tables.Turno
 	namespace Permaquim.Depositary.Business.Tables.Turno {
@@ -33655,17 +32764,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EsquemaTurno
 	} //namespace Permaquim.Depositary.Business.Tables.Turno
 	namespace Permaquim.Depositary.Business.Tables.Valor {
@@ -34096,17 +33194,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Denominacion
 	} //namespace Permaquim.Depositary.Business.Tables.Valor
 	namespace Permaquim.Depositary.Business.Tables.Valor {
@@ -34489,17 +33576,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Moneda
 	} //namespace Permaquim.Depositary.Business.Tables.Valor
 	namespace Permaquim.Depositary.Business.Tables.Valor {
@@ -34866,17 +33942,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class OrigenValor
 	} //namespace Permaquim.Depositary.Business.Tables.Valor
 	namespace Permaquim.Depositary.Business.Tables.Valor {
@@ -35227,17 +34292,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class RelacionMonedaTipoValor
 	} //namespace Permaquim.Depositary.Business.Tables.Valor
 	namespace Permaquim.Depositary.Business.Tables.Valor {
@@ -35604,17 +34658,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Tipo
 	} //namespace Permaquim.Depositary.Business.Tables.Valor
 	namespace Permaquim.Depositary.Business.Tables.Visualizacion {
@@ -35981,17 +35024,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Perfil
 	} //namespace Permaquim.Depositary.Business.Tables.Visualizacion
 	namespace Permaquim.Depositary.Business.Tables.Visualizacion {
@@ -36342,17 +35374,6 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PerfilItem
 	} //namespace Permaquim.Depositary.Business.Tables.Visualizacion
 	namespace Permaquim.Depositary.Business.Tables.Visualizacion {
@@ -36719,16 +35740,5 @@ using System.Text;
                      base.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PerfilTipo
 	} //namespace Permaquim.Depositary.Business.Tables.Visualizacion
